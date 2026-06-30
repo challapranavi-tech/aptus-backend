@@ -62,7 +62,7 @@ export function loadLocalPageSectionsJson(slug: string): string | null {
   return null;
 }
 
-export function useLocalPageJsonInDev(): boolean {
+export function isLocalPageJsonInDev(): boolean {
   if (process.env.USE_LOCAL_PAGE_JSON === "false") return false;
   if (process.env.USE_LOCAL_PAGE_JSON === "true") return true;
   return process.env.NODE_ENV !== "production";
@@ -70,7 +70,7 @@ export function useLocalPageJsonInDev(): boolean {
 
 /** Build a Page from on-disk JSON when Odoo has no website.page yet (dev only). */
 export function buildLocalDevPage(slug: string): Page | null {
-  if (!useLocalPageJsonInDev()) return null;
+  if (!isLocalPageJsonInDev()) return null;
   const raw = loadLocalPageSectionsJson(slug);
   if (!raw) return null;
 

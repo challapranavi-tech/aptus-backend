@@ -16,7 +16,7 @@ import type {
   SiteConfig,
 } from "@/types";
 import { parseArch } from "./arch-parser";
-import { loadLocalPageSectionsJson, useLocalPageJsonInDev } from "./local-page-json";
+import { isLocalPageJsonInDev, loadLocalPageSectionsJson } from "./local-page-json";
 import { mapHomepageJson } from "./json-mapper";
 import { mapPageJson } from "./page-json-mapper";
 
@@ -59,7 +59,7 @@ export function mapOdooPage(
   if (homeSections && homeSections.length > 0) {
     sections = homeSections;
   } else {
-    const localJson = useLocalPageJsonInDev() ? loadLocalPageSectionsJson(slug) : null;
+    const localJson = isLocalPageJsonInDev() ? loadLocalPageSectionsJson(slug) : null;
     const caseStudiesJson =
       slug === "aptus-case-studies"
         ? (rawPage.x_case_studies_sections_json as string | false | undefined)
