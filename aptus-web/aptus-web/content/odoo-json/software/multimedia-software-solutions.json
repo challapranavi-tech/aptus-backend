@@ -1,0 +1,62 @@
+{
+  "hero": {
+    "id": "hero",
+    "visible": true,
+    "title": {
+      "accent": "Multimedia"
+    },
+    "subtitle": "Multimedia, visualization, and design software including SketchUp, V-Ray, Enscape, and more."
+  },
+  "intro": {
+    "id": "intro",
+    "visible": true,
+    "paragraphs": [
+      "Our multimedia portfolio covers rendering, visualization, PDF, and 3D design tools for architects, designers, and creative studios across the GCC."
+    ]
+  },
+  "cards": {
+    "id": "products",
+    "visible": true,
+    "eyebrow": "Products",
+    "title": {
+      "before": "Solutions in",
+      "accent": "Multimedia"
+    },
+    "align": "center",
+    "items": [
+      {
+        "title": "Bluebeam",
+        "body": "Licensed Bluebeam with sales, implementation, and support from Aptus Infotech."
+      },
+      {
+        "title": "Chaos Corona",
+        "body": "Licensed Chaos Corona with sales, implementation, and support from Aptus Infotech."
+      },
+      {
+        "title": "Enscape",
+        "body": "Licensed Enscape with sales, implementation, and support from Aptus Infotech."
+      },
+      {
+        "title": "Luminon",
+        "body": "Licensed Luminon with sales, implementation, and support from Aptus Infotech."
+      },
+      {
+        "title": "Nitro PDF",
+        "body": "Licensed Nitro PDF with sales, implementation, and support from Aptus Infotech."
+      },
+      {
+        "title": "Sketchup",
+        "body": "Licensed Sketchup with sales, implementation, and support from Aptus Infotech."
+      },
+      {
+        "title": "Twinmotion",
+        "body": "Licensed Twinmotion with sales, implementation, and support from Aptus Infotech."
+      },
+      {
+        "title": "V-Ray",
+        "body": "Licensed V-Ray with sales, implementation, and support from Aptus Infotech."
+      }
+    ]
+  },
+  "showContactCta": true
+}

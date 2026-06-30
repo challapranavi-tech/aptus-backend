@@ -1,0 +1,135 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "edms",
+    "bannerTitle": "Autodesk Construction Cloud",
+    "bannerTagline": "Streamline your construction projects with integrated design, collaboration, and project management tools",
+    "title": "Transform Your Construction Projects with Integrated Tools",
+    "paragraphs": [
+      "Autodesk Construction Cloud brings together design, collaboration, and project management tools in one unified platform, enabling teams to work smarter and more efficiently throughout the building lifecycle.",
+      "From pre-construction planning to handover documentation, our cloud-based solution helps reduce errors, improve communication, and deliver projects on time and within budget."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/09/autodesk-construction-cloud.jpeg",
+    "imageAlt": "Autodesk Construction Cloud",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Key Features of",
+        "accent": "Construction Cloud"
+      },
+      "subheading": "Discover the capabilities that make this solution industry-leading",
+      "align": "center",
+      "items": [
+        {
+          "title": "Design Collaboration",
+          "body": "Autodesk Construction Cloud brings together design, collaboration, and project management tools in one unified platform, enabling teams to work smarter and more efficiently throughout the building lifecycle.",
+          "icon": "cube"
+        },
+        {
+          "title": "Project Scheduling",
+          "body": "Discover the capabilities that make AutoCAD the industry standard",
+          "icon": "cube"
+        },
+        {
+          "title": "Cost Management",
+          "body": "Real-time collaboration between architects, engineers, and contractors with BIM model sharing and review tools.",
+          "icon": "cube"
+        },
+        {
+          "title": "Field Documentation",
+          "body": "Advanced scheduling tools with Gantt charts, resource allocation, and progress tracking for better timeline management.",
+          "icon": "cube"
+        },
+        {
+          "title": "Team Coordination",
+          "body": "Budget tracking, cost estimation, and procurement management with real-time financial dashboards.",
+          "icon": "cube"
+        },
+        {
+          "title": "Mobile Accessibility",
+          "body": "Mobile app for site inspections, photo documentation, and punch list creation with automatic syncing to project files.",
+          "icon": "cube"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Benefits of Using",
+        "accent": "Autodesk Construction Cloud"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Faster Project Delivery",
+          "body": "Autodesk Construction Cloud brings together design, collaboration, and project management tools in one unified platform, enabling teams to work smarter and more efficiently throughout the building lifecycle.",
+          "icon": "check"
+        },
+        {
+          "title": "Cost Savings",
+          "body": "Discover the capabilities that make AutoCAD the industry standard",
+          "icon": "check"
+        },
+        {
+          "title": "Improved Collaboration",
+          "body": "Real-time collaboration between architects, engineers, and contractors with BIM model sharing and review tools.",
+          "icon": "check"
+        },
+        {
+          "title": "Enhanced Safety",
+          "body": "Advanced scheduling tools with Gantt charts, resource allocation, and progress tracking for better timeline management.",
+          "icon": "check"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Autodesk Construction Cloud?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Certified Specialists",
+          "body": "Autodesk Construction Cloud brings together design, collaboration, and project management tools in one unified platform, enabling teams to work smarter and more efficiently throughout the building lifecycle.",
+          "icon": "medal"
+        },
+        {
+          "title": "Customized Workflows",
+          "body": "Discover the capabilities that make AutoCAD the industry standard",
+          "icon": "medal"
+        },
+        {
+          "title": "Dedicated Support Team",
+          "body": "Real-time collaboration between architects, engineers, and contractors with BIM model sharing and review tools.",
+          "icon": "medal"
+        },
+        {
+          "title": "Future-Ready Technology",
+          "body": "Advanced scheduling tools with Gantt charts, resource allocation, and progress tracking for better timeline management.",
+          "icon": "medal"
+        }
+      ]
+    }
+  ],
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

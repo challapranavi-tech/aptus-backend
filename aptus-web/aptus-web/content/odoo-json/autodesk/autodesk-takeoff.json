@@ -1,0 +1,131 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "autodesk",
+    "bannerTitle": "Autodesk Takeoff",
+    "bannerTagline": "Precision Estimating Software for Construction Professionals",
+    "title": "Professional Design with AutoCAD",
+    "paragraphs": [
+      "Discover the comprehensive functionality that makes Autodesk Takeoff the ideal solution for construction estimating",
+      "Measure lengths, areas, and counts directly from PDFs, DWGs, and BIM models with industry-leading accuracy.",
+      "Automatically count and classify objects in drawings, saving hours of manual counting work."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/06/Autodesk_takeoff-1024x1024.png",
+    "imageAlt": "Autodesk Takeoff",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Key Features of",
+        "accent": "Takeoff"
+      },
+      "subheading": "Discover the capabilities that make this solution industry-leading",
+      "align": "center",
+      "items": [
+        {
+          "title": "Precise Measurement Tools",
+          "body": "Discover the comprehensive functionality that makes Autodesk Takeoff the ideal solution for construction estimating",
+          "icon": "cube"
+        },
+        {
+          "title": "Automated Counting",
+          "body": "Measure lengths, areas, and counts directly from PDFs, DWGs, and BIM models with industry-leading accuracy.",
+          "icon": "cube"
+        },
+        {
+          "title": "Cloud-Based Collaboration",
+          "body": "Automatically count and classify objects in drawings, saving hours of manual counting work.",
+          "icon": "cube"
+        },
+        {
+          "title": "Integrated Calculations",
+          "body": "Share measurements and collaborate with team members in real-time with cloud synchronization.",
+          "icon": "cube"
+        },
+        {
+          "title": "Mobile Accessibility",
+          "body": "Perform calculations and generate estimates directly within the application with customizable formulas.",
+          "icon": "cube"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Benefits of Using",
+        "accent": "Autodesk Takeoff"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Save Time",
+          "body": "Discover the comprehensive functionality that makes Autodesk Takeoff the ideal solution for construction estimating",
+          "icon": "check"
+        },
+        {
+          "title": "Increase Accuracy",
+          "body": "Measure lengths, areas, and counts directly from PDFs, DWGs, and BIM models with industry-leading accuracy.",
+          "icon": "check"
+        },
+        {
+          "title": "Enhance Collaboration",
+          "body": "Automatically count and classify objects in drawings, saving hours of manual counting work.",
+          "icon": "check"
+        },
+        {
+          "title": "Improve Profitability",
+          "body": "Share measurements and collaborate with team members in real-time with cloud synchronization.",
+          "icon": "check"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Autodesk Takeoff?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Official Autodesk Gold Partner",
+          "body": "Discover the comprehensive functionality that makes Autodesk Takeoff the ideal solution for construction estimating",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Measure lengths, areas, and counts directly from PDFs, DWGs, and BIM models with industry-leading accuracy.",
+          "icon": "medal"
+        },
+        {
+          "title": "Local Presence",
+          "body": "Automatically count and classify objects in drawings, saving hours of manual counting work.",
+          "icon": "medal"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Share measurements and collaborate with team members in real-time with cloud synchronization.",
+          "icon": "medal"
+        }
+      ]
+    }
+  ],
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

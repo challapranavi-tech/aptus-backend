@@ -1,0 +1,1162 @@
+/* ETAP Homepage — high-fidelity styles extracted from etap.com reference */
+
+.etap-home {
+  /* Content theme — blue accent (replaces ETAP red on page content) */
+  --etap-accent: #3588ca;
+  --etap-accent-hover: #2d75ad;
+  --etap-accent-bright: rgb(39, 138, 202);
+  --etap-red: var(--etap-accent);
+  --etap-red-hover: var(--etap-accent-hover);
+  --etap-red-bright: var(--etap-accent-bright);
+  --etap-blue: #3588ca;
+  --aptus-primary: rgb(17, 77, 162);
+  --aptus-primary-dark: rgb(12, 55, 120);
+  --aptus-secondary: rgb(39, 138, 202);
+  --aptus-accent: rgb(17, 149, 69);
+  --aptus-border: rgba(17, 77, 162, 0.08);
+  --etap-text: #333;
+  --etap-text-dark: #3c3c3c;
+  --etap-border: #c2cacf;
+  --etap-gray-bg: #f9f9f9;
+  --etap-container: min(89pc, 1424px);
+  font-family: Arial, "Open Sans", sans-serif;
+  color: var(--etap-text);
+  background: #fff;
+  overflow-x: hidden;
+}
+
+.etap-home *,
+.etap-home *::before,
+.etap-home *::after {
+  box-sizing: border-box;
+}
+
+.etap-home .red,
+.etap-home .accent {
+  color: var(--etap-accent);
+}
+
+.etap-home .etap-container {
+  width: 100%;
+  max-width: var(--etap-container);
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* ---- Navbar ---- */
+.etap-home-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
+  background: #fff;
+  border-bottom: 1px solid var(--aptus-border);
+  box-shadow: 0 1px 4px rgba(17, 77, 162, 0.06);
+}
+
+.etap-home-nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: var(--etap-container);
+  margin: 0 auto;
+  padding: 12px 15px 18px;
+}
+
+.etap-home-nav__brand {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+  line-height: 0;
+}
+
+.etap-home-nav__brand-aptus,
+.etap-home-nav__brand-etap {
+  display: flex;
+  align-items: center;
+}
+
+.etap-home-nav__brand-aptus {
+  padding-right: 12px;
+}
+
+.etap-home-nav__brand-divider {
+  width: 1px;
+  height: 26px;
+  background: rgba(17, 77, 162, 0.18);
+  flex-shrink: 0;
+}
+
+.etap-home-nav__brand-etap {
+  padding-left: 14px;
+}
+
+.etap-home-nav__brand .aptus-logo {
+  height: 22px;
+  width: auto;
+  max-width: 76px;
+  object-fit: contain;
+  opacity: 0.95;
+}
+
+.etap-home-nav__brand .etap-logo {
+  height: 44px;
+  width: auto;
+  max-width: 148px;
+  object-fit: contain;
+}
+
+@media (min-width: 768px) {
+  .etap-home-nav__brand-divider {
+    height: 30px;
+  }
+
+  .etap-home-nav__brand-aptus {
+    padding-right: 14px;
+  }
+
+  .etap-home-nav__brand-etap {
+    padding-left: 16px;
+  }
+
+  .etap-home-nav__brand .aptus-logo {
+    height: 24px;
+    max-width: 84px;
+  }
+
+  .etap-home-nav__brand .etap-logo {
+    height: 50px;
+    max-width: 155px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .etap-home-nav__brand .aptus-logo {
+    height: 26px;
+    max-width: 88px;
+  }
+
+  .etap-home-nav__brand .etap-logo {
+    height: 56px;
+  }
+}
+
+.etap-home-nav__menu {
+  display: none;
+  align-items: center;
+  gap: 2px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 1200px) {
+  .etap-home-nav__menu {
+    display: flex;
+  }
+}
+
+.etap-home-nav__item {
+  position: relative;
+}
+
+.etap-home-nav__link {
+  display: block;
+  padding: 10px 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--etap-text-dark);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0;
+}
+
+.etap-home-nav__link:hover,
+.etap-home-nav__item.is-open > .etap-home-nav__link {
+  color: var(--aptus-secondary);
+}
+
+.etap-home-nav__dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 240px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  padding: 12px 0;
+  z-index: 1050;
+}
+
+.etap-home-nav__item.is-open > .etap-home-nav__dropdown,
+.etap-home-nav__item:hover > .etap-home-nav__dropdown {
+  display: block;
+}
+
+.etap-home-nav__mega {
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(920px, 92vw);
+  padding: 20px;
+}
+
+.etap-home-nav__mega-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) 200px;
+  gap: 20px;
+}
+
+.etap-home-nav__mega-header {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--etap-red);
+  margin: 0 0 8px;
+  padding: 0 12px;
+}
+
+.etap-home-nav__dropdown a {
+  display: block;
+  padding: 6px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--etap-text-dark);
+  text-decoration: none;
+}
+
+.etap-home-nav__dropdown a:hover {
+  color: var(--etap-red);
+  background: #f9f9f9;
+}
+
+.etap-home-nav__dropdown a[href^="/"] {
+  color: var(--aptus-primary);
+}
+
+.etap-home-nav__dropdown a[href^="/"]:hover {
+  color: var(--aptus-secondary);
+  background: rgba(39, 138, 202, 0.06);
+}
+
+.etap-home-nav__sidebar img {
+  width: 100%;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.etap-home-nav__sidebar a {
+  text-align: center;
+  font-size: 14px;
+}
+
+.etap-home-nav__ctas {
+  display: none;
+  gap: 8px;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .etap-home-nav__ctas {
+    display: flex;
+  }
+}
+
+.etap-home-nav__toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+  background: none;
+  border: 1px solid rgba(17, 77, 162, 0.2);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.etap-home-nav__toggle:hover {
+  border-color: var(--aptus-secondary);
+  background: rgba(39, 138, 202, 0.06);
+}
+
+@media (min-width: 1200px) {
+  .etap-home-nav__toggle {
+    display: none;
+  }
+}
+
+.etap-home-nav__toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--aptus-primary);
+}
+
+.etap-home-nav__mobile {
+  display: none;
+  position: fixed;
+  inset: 72px 0 0;
+  background: #fff;
+  overflow-y: auto;
+  padding: 20px;
+  z-index: 1029;
+  border-top: 1px solid var(--aptus-border);
+}
+
+.etap-home-nav__mobile-group {
+  margin-bottom: 20px;
+}
+
+.etap-home-nav__mobile-link {
+  display: block;
+  padding: 8px 0;
+  color: var(--etap-text-dark);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  transition: color 0.2s;
+}
+
+.etap-home-nav__mobile-link:hover {
+  color: var(--aptus-secondary);
+}
+
+.etap-home-nav__mobile-link[href^="/"] {
+  color: var(--aptus-primary);
+}
+
+.etap-home-nav__mobile-link[href^="/"]:hover {
+  color: var(--aptus-accent);
+}
+
+.etap-home-nav__mobile-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.etap-home-nav__mobile-ctas .btn-aptus-primary,
+.etap-home-nav__mobile-ctas .btn-aptus-secondary {
+  text-align: center;
+}
+
+.etap-home-nav__mobile.is-open {
+  display: block;
+}
+
+@media (min-width: 1200px) {
+  .etap-home-nav__mobile {
+    display: none !important;
+  }
+}
+
+.etap-home-nav__mobile-label {
+  font-weight: 700;
+  color: var(--aptus-primary);
+  margin: 0 0 8px;
+}
+
+.etap-home .btn-etap-primary {
+  background: var(--etap-red) !important;
+  border: 1px solid var(--etap-red) !important;
+  color: #fff !important;
+  font-weight: 600;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.etap-home .btn-etap-primary:hover {
+  background: var(--etap-red-hover) !important;
+  color: #fff !important;
+}
+
+.etap-home .btn-etap-info {
+  background: var(--etap-blue) !important;
+  border: 1px solid var(--etap-blue) !important;
+  color: #fff !important;
+  font-weight: 600;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.etap-home .btn-etap-default {
+  background: #fff;
+  border: 1px solid #ccc;
+  color: #333;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.etap-home .btn-etap-lg {
+  padding: 10px 24px;
+  font-size: 16px;
+}
+
+/* Aptus integration buttons — use on Aptus-owned actions */
+.etap-home .btn-aptus-primary {
+  background: var(--aptus-primary) !important;
+  border: 1px solid var(--aptus-primary) !important;
+  color: #fff !important;
+  font-weight: 600;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.3s;
+}
+
+.etap-home .btn-aptus-primary:hover {
+  background: var(--aptus-primary-dark) !important;
+  color: #fff !important;
+}
+
+.etap-home .btn-aptus-secondary {
+  background: var(--aptus-secondary) !important;
+  border: 1px solid var(--aptus-secondary) !important;
+  color: #fff !important;
+  font-weight: 600;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.etap-home .btn-aptus-accent {
+  background: var(--aptus-accent) !important;
+  border: 1px solid var(--aptus-accent) !important;
+  color: #fff !important;
+  font-weight: 600;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* ---- Hero Swiper ---- */
+.etap-home-main {
+  padding-top: 88px;
+}
+
+.etap-home-hero .swiper-main {
+  height: 550px;
+  width: 100%;
+}
+
+.etap-home-hero .swiper-main .swiper-slide {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.etap-home-hero .swiper-main .swiper-slide > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.etap-home-hero .slide-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+  text-align: left;
+}
+
+.etap-home-hero .slide-content * {
+  color: #fff;
+}
+
+.etap-home-hero .slide-content h2,
+.etap-home-hero .slide-content h2 a {
+  font-size: clamp(28px, 4vw, 54px);
+  font-weight: 600;
+  margin: 0 0 10px;
+  line-height: 1.15;
+}
+
+.etap-home-hero .slide-content h3,
+.etap-home-hero .slide-content h3 a {
+  font-size: clamp(22px, 2.5vw, 34px);
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+
+.etap-home-hero .slide-content h4 {
+  font-size: clamp(16px, 2vw, 22px);
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+
+.etap-home-hero .slide-content p {
+  font-size: clamp(14px, 1.5vw, 20px);
+  margin: 0 0 12px;
+}
+
+.etap-home-hero .demo-title,
+.etap-home-hero .demo-title a {
+  color: var(--etap-red) !important;
+  font-size: clamp(24px, 3.5vw, 46px) !important;
+  font-weight: 600;
+}
+
+.etap-home-hero .caption-logo img {
+  max-height: 105px;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.etap-home-hero .slide-content .animate-block {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.etap-home-hero .slide-content .animate-block:nth-child(1) { animation-delay: 0.2s; }
+.etap-home-hero .slide-content .animate-block:nth-child(2) { animation-delay: 0.3s; }
+.etap-home-hero .slide-content .animate-block:nth-child(3) { animation-delay: 0.4s; }
+.etap-home-hero .slide-content .animate-block:nth-child(4) { animation-delay: 0.5s; }
+.etap-home-hero .slide-content .animate-block:nth-child(5) { animation-delay: 0.6s; }
+
+.etap-home-hero .swiper-thumbs {
+  margin-top: -40px;
+  position: relative;
+  z-index: 5;
+  padding-bottom: 40px;
+}
+
+.etap-home-hero .swiper-thumbs .swiper-slide {
+  filter: grayscale(1);
+  height: 70px !important;
+  width: 180px !important;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: filter 0.3s, opacity 0.3s, box-shadow 0.3s;
+  border: 2px solid transparent;
+}
+
+.etap-home-hero .swiper-thumbs .swiper-slide-thumb-active {
+  filter: grayscale(0);
+  opacity: 1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-color: var(--etap-red);
+}
+
+.etap-home-hero .swiper-thumbs img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.etap-home-hero .swiper-main .swiper-button-prev,
+.etap-home-hero .swiper-main .swiper-button-next {
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.etap-home-hero .swiper-main .swiper-button-prev::after,
+.etap-home-hero .swiper-main .swiper-button-next::after {
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+}
+
+.etap-home-hero .swiper-main .swiper-button-prev {
+  left: 16px;
+}
+
+.etap-home-hero .swiper-main .swiper-button-next {
+  right: 16px;
+}
+
+@media (max-width: 992px) {
+  .etap-home-hero .swiper-main {
+    height: 420px;
+  }
+  .etap-home-hero .swiper-thumbs .swiper-slide {
+    width: 120px !important;
+    height: 56px !important;
+  }
+}
+
+/* ---- Intro ---- */
+.etap-home-intro {
+  padding: 0 15px 40px;
+}
+
+.etap-home-intro .page-top-title {
+  margin-top: 50px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.5;
+  font-size: clamp(28px, 4vw, 42px);
+  color: var(--etap-text-dark);
+}
+
+.etap-home-intro .subscription-button {
+  background-color: var(--etap-red);
+  color: white;
+  padding: 8px 30px;
+  font-size: 17px;
+  font-weight: 600;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+}
+
+.etap-home-intro .subscription-button:hover {
+  background-color: var(--etap-red-bright);
+  color: #fff;
+}
+
+.etap-home-intro .intro-description {
+  text-align: left;
+  margin-top: 60px;
+  max-width: var(--etap-container);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.etap-home-intro .intro-description-subtitle {
+  font-weight: 600;
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+
+.etap-home-intro .intro-description p {
+  font-size: 16px;
+  line-height: 1.75;
+  color: #555;
+}
+
+/* ---- Pricing strip ---- */
+.etap-home-pricing .ps-container {
+  max-width: 1200px;
+  margin: 30px auto 50px;
+  padding: 20px;
+  background: linear-gradient(135deg, var(--etap-gray-bg) 0%, rgba(17, 77, 162, 0.04) 100%);
+  border: 1px solid var(--aptus-border);
+}
+
+.etap-home-pricing .ps-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0 -15px;
+  padding: 12px;
+}
+
+.etap-home-pricing .ps-column {
+  padding: 0 15px;
+  flex: 1;
+  min-width: 280px;
+}
+
+.etap-home-pricing .ps-image-col img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.etap-home-pricing .release-title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #222;
+}
+
+.etap-home-pricing .arrow {
+  margin-right: 8px;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.etap-home-pricing .subscription-button:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* ---- Industries scroller ---- */
+.etap-home-industries {
+  padding: 40px 15px;
+}
+
+.etap-home-industries .solutions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  max-width: var(--etap-container);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.etap-home-industries .solutions-title {
+  font-weight: 700;
+  font-size: 36px;
+  margin: 0;
+  color: var(--etap-text-dark);
+}
+
+.etap-home-industries .solutions-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.etap-home-industries .solutions-control-btn {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #e0e0e0;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.etap-home-industries .solutions-control-btn:hover {
+  background: rgba(39, 138, 202, 0.08);
+  border-color: var(--aptus-secondary);
+}
+
+.etap-home-industries .solutions-control-btn:hover svg path {
+  stroke: var(--aptus-primary);
+}
+
+.etap-home-industries .solutions-scroll-container {
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+
+.etap-home-industries .solutions-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.etap-home-industries .solutions-grid {
+  display: flex;
+  gap: 20px;
+  padding: 10px 0;
+}
+
+.etap-home-industries .solutions-item {
+  flex: 0 0 auto;
+  width: 300px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+  border: 1px solid var(--etap-border);
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.etap-home-industries .solutions-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(17, 77, 162, 0.12);
+  border-color: rgba(39, 138, 202, 0.35);
+}
+
+.etap-home-industries .solutions-image {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+
+.etap-home-industries .solutions-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.etap-home-industries .solutions-item:hover .solutions-image img {
+  transform: scale(1.05);
+}
+
+.etap-home-industries .solutions-name {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 16px;
+  padding: 0;
+}
+
+.etap-home-industries .solutions-link {
+  color: var(--etap-text-dark);
+  text-decoration: none;
+}
+
+.etap-home-industries .solutions-link:hover {
+  color: var(--etap-red);
+}
+
+/* ---- Product grid ---- */
+.etap-home-products {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px 50px;
+}
+
+.etap-home-products .portfolio-title {
+  font-size: 36px;
+  font-weight: 600;
+  margin-top: 50px;
+  text-align: left;
+  color: var(--etap-text-dark);
+}
+
+.etap-home-products .product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.etap-home-products .product-box {
+  flex: 1 1 300px;
+  max-width: 360px;
+  border: 1px solid var(--etap-border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.etap-home-products .product-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.etap-home-products .product-image {
+  overflow: hidden;
+  height: 200px;
+}
+
+.etap-home-products .product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.etap-home-products .product-box:hover .product-image img {
+  transform: scale(1.05);
+}
+
+.etap-home-products .product-details {
+  padding: 20px;
+}
+
+.etap-home-products .product-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--etap-text-dark);
+  margin: 0 0 12px;
+}
+
+.etap-home-products .product-description {
+  font-size: 14px;
+  line-height: 1.65;
+  color: #555;
+  margin-bottom: 16px;
+}
+
+.etap-home-products .product-description a {
+  color: var(--etap-red);
+}
+
+/* ---- News / Events / Videos ---- */
+.etap-home-news {
+  background: var(--etap-gray-bg);
+  padding: 40px 0 50px;
+}
+
+.etap-home-news .news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: var(--etap-container);
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+@media (max-width: 992px) {
+  .etap-home-news .news-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.etap-home-news .panel-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--etap-text-dark);
+  margin: 0 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.etap-home-news .panel-icon {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  background-color: var(--etap-red);
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}
+
+.etap-home-news .panel-icon--news {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M18 11c0 1.66-1.34 3-3 3l-7 4v-8l7-4c1.66 0 3 1.34 3 3zM5 9v6h4l5 3V6L9 9H5z'/%3E%3C/svg%3E");
+}
+
+.etap-home-news .panel-icon--events {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2zm0 16H5V10h14v10z'/%3E%3C/svg%3E");
+}
+
+.etap-home-news .panel-icon--videos {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M8 5v14l11-7L8 5z'/%3E%3C/svg%3E");
+}
+
+.etap-home-news .list-item-date {
+  font-size: 14px;
+  color: #888;
+  margin: 0 0 4px;
+}
+
+.etap-home-news .list-item-date span {
+  color: var(--etap-red);
+}
+
+.etap-home-news .list-item-text {
+  margin: 0 0 20px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.etap-home-news .list-item-text a {
+  color: var(--etap-text-dark);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.etap-home-news .list-item-text a:hover {
+  color: var(--etap-red);
+}
+
+.etap-home-news .video-thumb {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.etap-home-news .video-thumb img {
+  width: 120px;
+  height: 68px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.etap-home-news .video-thumb h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.4;
+  color: var(--etap-text-dark);
+}
+
+.etap-home-news .video-thumb:hover h3 {
+  color: var(--etap-red);
+}
+
+/* ---- Testimonials ---- */
+.etap-home-testimonials {
+  padding: 50px 15px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.etap-home-testimonials .page-top-title {
+  text-align: center;
+  font-weight: 600;
+  font-size: 42px;
+  margin-bottom: 30px;
+  color: var(--etap-text-dark);
+}
+
+.etap-home-testimonials .carousel-inner {
+  position: relative;
+  min-height: 200px;
+}
+
+.etap-home-testimonials .quote-slide {
+  display: none;
+  animation: etapFadeIn 0.6s ease;
+}
+
+.etap-home-testimonials .quote-slide.is-active {
+  display: block;
+}
+
+@keyframes etapFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.etap-home-testimonials .quote-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+}
+
+.etap-home-testimonials .quote-logo {
+  flex: 0 0 25%;
+  text-align: center;
+}
+
+.etap-home-testimonials .quote-logo img {
+  max-width: 80%;
+  height: auto;
+}
+
+.etap-home-testimonials .quote-body {
+  flex: 1;
+  min-width: 260px;
+}
+
+.etap-home-testimonials .quote-body p {
+  font-size: 16px;
+  line-height: 1.7;
+  font-style: italic;
+  color: #555;
+}
+
+.etap-home-testimonials .quote-body small {
+  display: block;
+  margin-top: 12px;
+  font-weight: 600;
+  color: var(--etap-text-dark);
+}
+
+.etap-home-testimonials .carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+  list-style: none;
+  padding: 0;
+}
+
+.etap-home-testimonials .carousel-indicators button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid #ebebeb;
+  background: #ebebeb;
+  cursor: pointer;
+  padding: 0;
+}
+
+.etap-home-testimonials .carousel-indicators button.is-active {
+  background: var(--etap-red);
+  border-color: var(--etap-red);
+}
+
+/* ---- Learning banner ---- */
+.etap-home-learning .enews-banner {
+  width: 100%;
+  background: linear-gradient(90deg, #3588ca 0%, rgb(17, 77, 162) 100%);
+  padding: 15px 0;
+  border-radius: 5px;
+  margin: 50px auto;
+  max-width: var(--etap-container);
+}
+
+.etap-home-learning .enews-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.etap-home-learning .enews-text {
+  color: #fff;
+  font-size: 16px;
+  margin: 0;
+  flex: 1;
+  min-width: 200px;
+}
+
+.etap-home-learning .enews-button {
+  color: #fff;
+  background: transparent;
+  border: 1px solid #fff;
+  border-radius: 50px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.3s, color 0.3s;
+}
+
+.etap-home-learning .enews-button:hover {
+  background: #fff;
+  color: rgb(12, 55, 120);
+}
+
+/* GSAP reveal helper — visible by default */
+.etap-home [data-gsap-section] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 768px) {
+  .etap-home-industries .solutions-item {
+    width: 240px;
+  }
+  .etap-home-industries .solutions-image {
+    height: 150px;
+  }
+  .etap-home-industries .solutions-title {
+    font-size: 28px;
+  }
+}

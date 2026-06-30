@@ -1,0 +1,42 @@
+{
+  "hero": {
+    "id": "hero",
+    "visible": true,
+    "title": {
+      "before": "Modus",
+      "accent": "Operandi"
+    }
+  },
+  "cards": {
+    "id": "cards",
+    "visible": true,
+    "title": {
+      "before": "Company",
+      "accent": "Qualification"
+    },
+    "items": [
+      {
+        "title": "Company Qualification",
+        "body": "Aptus Infotech maintains the highest level of corporate integrity through open, honest and fair dealings, earning trust from all stakeholders."
+      },
+      {
+        "title": "Quality & Ethics",
+        "body": "Aptus conducts business legally and ethically, adhering to high quality principles with constant quality management and staff training."
+      }
+    ]
+  },
+  "text": {
+    "id": "privacy",
+    "visible": true,
+    "title": {
+      "before": "Policy on Privacy and",
+      "accent": "Confidentiality"
+    },
+    "paragraphs": [
+      "Aptus is committed to protect business and personal information obtained from clients, associates and employees. This information will solely be used to contact you about our services and products."
+    ],
+    "background": "muted"
+  },
+  "showPartnerships": true,
+  "showContactCta": true
+}

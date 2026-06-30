@@ -1,0 +1,34 @@
+{
+  "hero": {
+    "id": "hero",
+    "visible": true,
+    "title": {
+      "accent": "Electrical Software"
+    },
+    "subtitle": "Electrical design, analysis, and documentation software for power systems professionals in Oman."
+  },
+  "intro": {
+    "id": "intro",
+    "visible": true,
+    "paragraphs": [
+      "We supply specialized electrical engineering software with expert licensing guidance, deployment, and after-sales support for utilities, contractors, and consultants."
+    ]
+  },
+  "cards": {
+    "id": "products",
+    "visible": true,
+    "eyebrow": "Products",
+    "title": {
+      "before": "Solutions in",
+      "accent": "Electrical Software"
+    },
+    "align": "center",
+    "items": [
+      {
+        "title": "ETAP",
+        "body": "Licensed ETAP with sales, implementation, and support from Aptus Infotech."
+      }
+    ]
+  },
+  "showContactCta": true
+}

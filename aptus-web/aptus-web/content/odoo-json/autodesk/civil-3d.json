@@ -1,0 +1,136 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "autodesk",
+    "bannerTitle": "Autodesk Civil 3D",
+    "bannerTagline": "The industry-leading civil engineering design and documentation software for transportation, land development, and water projects",
+    "title": "Design Smarter, Faster, and More Accurately",
+    "paragraphs": [
+      "Automatically calculate material quantities and generate detailed reports directly from your 3D model, improving estimation accuracy.",
+      "Why thousands of civil engineers trust Civil 3D for their projects",
+      "As an authorized partner, we provide access to genuine Autodesk products."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/autodesk_civil_3d.png",
+    "imageAlt": "Autodesk Civil 3D",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Key Features of",
+        "accent": "Civil 3D"
+      },
+      "subheading": "Discover the capabilities that make this solution industry-leading",
+      "align": "center",
+      "items": [
+        {
+          "title": "Corridor Modeling",
+          "body": "Automatically calculate material quantities and generate detailed reports directly from your 3D model, improving estimation accuracy.",
+          "icon": "cube"
+        },
+        {
+          "title": "Parcel & Grading",
+          "body": "Why thousands of civil engineers trust Civil 3D for their projects",
+          "icon": "cube"
+        },
+        {
+          "title": "Hydrology & Hydraulics",
+          "body": "As an authorized partner, we provide access to genuine Autodesk products.",
+          "icon": "cube"
+        },
+        {
+          "title": "Survey & Data Processing",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "cube"
+        },
+        {
+          "title": "Quantity Takeoff",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "cube"
+        },
+        {
+          "title": "Automated Documentation",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "cube"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Benefits of Using",
+        "accent": "Autodesk Civil 3D"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Increased Productivity",
+          "body": "Automatically calculate material quantities and generate detailed reports directly from your 3D model, improving estimation accuracy.",
+          "icon": "check"
+        },
+        {
+          "title": "Design Consistency",
+          "body": "Why thousands of civil engineers trust Civil 3D for their projects",
+          "icon": "check"
+        },
+        {
+          "title": "Better Collaboration",
+          "body": "As an authorized partner, we provide access to genuine Autodesk products.",
+          "icon": "check"
+        },
+        {
+          "title": "Accurate Analysis",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "check"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Autodesk Civil 3D?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Official Autodesk Gold Partner",
+          "body": "Automatically calculate material quantities and generate detailed reports directly from your 3D model, improving estimation accuracy.",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Why thousands of civil engineers trust Civil 3D for their projects",
+          "icon": "medal"
+        },
+        {
+          "title": "Local Presence",
+          "body": "As an authorized partner, we provide access to genuine Autodesk products.",
+          "icon": "medal"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "medal"
+        }
+      ]
+    }
+  ],
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

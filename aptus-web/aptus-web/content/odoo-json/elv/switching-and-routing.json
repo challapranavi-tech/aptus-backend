@@ -1,0 +1,127 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Switching and Routing",
+    "bannerTagline": "Comprehensive networking solutions for modern enterprise environments",
+    "title": "Complete Network Infrastructure Solutions",
+    "paragraphs": [
+      "In a world dependent on instant data access, the efficiency of your network’s core—its switching and routing infrastructure—determines your success. Our comprehensive Switching and Routing Solutions ensure your data moves reliably, securely, and at lightning speed, whether it’s across a single office or around the globe.",
+      "Our advanced switches form the critical foundation of your Local Area Network (LAN). They intelligently manage internal communication by directing data packets to the exact device they’re intended for (using MAC addresses), eliminating congestion and maximizing bandwidth.",
+      "Routers are your network’s navigators. They connect your local network to external networks and the Internet, dynamically choosing the most efficient path for data to travel. This is vital for business continuity and global connectivity."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/unnamed.jpg",
+    "imageAlt": "Switching and Routing",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Key Networking Technologies"
+      },
+      "subheading": "Comprehensive networking solutions for modern enterprise environments",
+      "align": "center",
+      "items": [
+        {
+          "title": "Layer 2 Switching",
+          "body": "Comprehensive networking solutions for modern enterprise environments",
+          "icon": "cube"
+        },
+        {
+          "title": "Dynamic Routing Protocols",
+          "body": "In a world dependent on instant data access, the efficiency of your network’s core—its switching and routing infrastructure—determines your success. Our comprehensive Switching and Routing Solutions ensure your data moves reliably, securely, and at lightning speed, whether it’s across a single office or around the globe.",
+          "icon": "cube"
+        },
+        {
+          "title": "Security Integration",
+          "body": "Explore our comprehensive switching and routing solutions",
+          "icon": "cube"
+        },
+        {
+          "title": "WAN Optimization",
+          "body": "Implement advanced Ethernet switching with VLAN support, STP, and link aggregation for reliable local area network connectivity.",
+          "icon": "cube"
+        },
+        {
+          "title": "Cloud Connectivity",
+          "body": "Configure OSPF, BGP, and EIGRP routing protocols for efficient path selection and failover protection across multiple network paths.",
+          "icon": "cube"
+        },
+        {
+          "title": "User Authentication",
+          "body": "Incorporate firewall, VPN, and access control lists to protect your network perimeter and control traffic flows.",
+          "icon": "cube"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Switching and Routing?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Certified Expertise",
+          "body": "Comprehensive networking solutions for modern enterprise environments",
+          "icon": "medal"
+        },
+        {
+          "title": "24/7 Support",
+          "body": "In a world dependent on instant data access, the efficiency of your network’s core—its switching and routing infrastructure—determines your success. Our comprehensive Switching and Routing Solutions ensure your data moves reliably, securely, and at lightning speed, whether it’s across a single office or around the globe.",
+          "icon": "medal"
+        },
+        {
+          "title": "Customized Solutions",
+          "body": "Explore our comprehensive switching and routing solutions",
+          "icon": "medal"
+        },
+        {
+          "title": "Proactive Maintenance",
+          "body": "Implement advanced Ethernet switching with VLAN support, STP, and link aggregation for reliable local area network connectivity.",
+          "icon": "medal"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "title": {
+      "before": "What Our",
+      "accent": "Clients Say"
+    },
+    "items": [
+      {
+        "quote": "Comprehensive networking solutions for modern enterprise environments",
+        "author": "Sarah Johnson",
+        "role": ""
+      },
+      {
+        "quote": "Explore our comprehensive switching and routing solutions",
+        "author": "Michael Chen",
+        "role": ""
+      },
+      {
+        "quote": "Implement advanced Ethernet switching with VLAN support, STP, and link aggregation for reliable local area network connectivity.",
+        "author": "Jessica Williams",
+        "role": ""
+      }
+    ]
+  },
+  "showPartnerships": true,
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "hero": {
+    "id": "hero",
+    "visible": true,
+    "title": {
+      "before": "",
+      "accent": "SonicWall Next-Gen Firewall"
+    },
+    "subtitle": "SonicWall TZ and NSa series firewalls with deep packet inspection and VPN.",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "mailto:info@aptusinfotech.com"
+  },
+  "intro": {
+    "id": "intro",
+    "visible": true,
+    "title": {
+      "before": "Overview",
+      "accent": ""
+    },
+    "paragraphs": [
+      "Deploy SonicWall NGFW appliances for SMB and enterprise networks. Aptus Infotech provides sizing, procurement, configuration, and support for SonicWall firewall deployments in Oman."
+    ]
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "eyebrow": "Capabilities",
+      "title": {
+        "before": "Key",
+        "accent": "Features"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Deep Packet Inspection",
+          "body": "Inspect encrypted traffic without degrading performance."
+        },
+        {
+          "title": "VPN & Remote Access",
+          "body": "Secure SSL VPN for remote workers and site-to-site links."
+        },
+        {
+          "title": "Capture ATP",
+          "body": "Cloud-based sandboxing for unknown file analysis."
+        },
+        {
+          "title": "Wireless Integration",
+          "body": "Unified management with SonicWall access points."
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "eyebrow": "Why Aptus",
+      "title": {
+        "before": "Why Choose",
+        "accent": "Aptus Infotech"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Authorized Partner",
+          "body": "Genuine software licenses with official support channels and compliant procurement."
+        },
+        {
+          "title": "Implementation Support",
+          "body": "Guidance on deployment, licensing models, and integration with your existing workflows."
+        },
+        {
+          "title": "Local Expertise in Oman",
+          "body": "Muscat-based team providing responsive sales, technical support, and training across the GCC."
+        },
+        {
+          "title": "End-to-End Service",
+          "body": "From license procurement and renewal to rollout planning — a single trusted partner."
+        }
+      ]
+    }
+  ],
+  "showContactCta": true
+}

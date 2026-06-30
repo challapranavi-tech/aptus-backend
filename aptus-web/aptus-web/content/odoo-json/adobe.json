@@ -1,0 +1,97 @@
+{
+  "hero": {
+    "id": "hero",
+    "visible": true,
+    "variant": "software-landing",
+    "title": {
+      "before": "Adobe Solutions Partner",
+      "accent": "in Oman"
+    },
+    "tagline": "Aptus Infotech - Your trusted provider of genuine Adobe software with premium support and training",
+    "highlight": "Offers Best Rates in the Market",
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/adobe-1-e1754482117716.jpg",
+    "imageAlt": "adobe",
+    "actions": [
+      {
+        "label": "Request a Quote",
+        "href": "#form",
+        "tone": "blue"
+      },
+      {
+        "label": "Renew Subscription",
+        "href": "#form",
+        "tone": "green"
+      },
+      {
+        "label": "Browse Products",
+        "href": "#products",
+        "tone": "sky"
+      }
+    ]
+  },
+  "cardSections": [
+    {
+      "id": "products",
+      "visible": true,
+      "variant": "product-cards",
+      "title": {
+        "before": "Popular adobe Products"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Adobe Photoshop",
+          "body": "The industry-standard photo editing and graphic design software for professionals.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Adobe-Photoshop.png",
+          "imageAlt": "Adobe Photoshop",
+          "href": "/adobe-photoshop",
+          "actionLabel": "Request a Quote"
+        },
+        {
+          "title": "Adobe Illustrator",
+          "body": "Professional vector graphics software for creating logos, icons, drawings, and illustrations.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/adobe-illustrato.png",
+          "imageAlt": "Adobe Illustrator",
+          "href": "/adobe-illustrator",
+          "actionLabel": "Request a Quote"
+        },
+        {
+          "title": "Adobe InDesign",
+          "body": "Professional page layout and design software for print and digital publishing.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Adobe-InDesign.png",
+          "imageAlt": "Adobe InDesign",
+          "href": "/adobe-business-creative-solutions",
+          "actionLabel": "Request a Quote"
+        },
+        {
+          "title": "Adobe Premiere Pro",
+          "body": "Professional video editing software for film, TV, and the web with intuitive workflows.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Adobe-Premiere-Pro.png",
+          "imageAlt": "Adobe Premiere Pro",
+          "href": "/adobe-premiere-pro",
+          "actionLabel": "Request a Quote"
+        },
+        {
+          "title": "Adobe Acrobat Pro",
+          "body": "Create, edit, sign, and track PDFs with the complete PDF solution.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Adobe-Acrobat-Pro.png",
+          "imageAlt": "Adobe Acrobat Pro",
+          "href": "/adobe-acrobat-pro",
+          "actionLabel": "Request a Quote"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Get Started?",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "multimedia",
+    "bannerTitle": "Twinmotion: Real-Time Visualization for Immersive Design",
+    "bannerTagline": "Real-time 3D visualization software for architects, urban planners, and designers",
+    "title": "Create Stunning Visualizations in Real-Time",
+    "paragraphs": [
+      "In the Architecture, Engineering, and Construction (AEC) world, the ability to communicate design intent quickly and realistically is paramount. Twinmotion, powered by Unreal Engine, is a leading real-time 3D visualization software that transforms your CAD and BIM models into photorealistic images, compelling videos, and immersive virtual reality (VR) experiences in minutes, not hours.",
+      "By leveraging real-time rendering, Twinmotion allows you to instantly see changes as you adjust lighting, materials, weather, and seasonal elements. This dynamic environment encourages rapid design iteration and review, allowing you to test different creative options on the fly, saving significant time in the visualization process.",
+      "Achieve superior client communication and project win rates with features like an intuitive, drag-and-drop interface, access to a massive asset library (including Quixel Megascans), physically-based lighting (Path Tracer and Lumen), and the ability to export interactive presentations via Twinmotion Cloud. From concept design and stakeholder collaboration to compelling marketing materials, Twinmotion provides the fast, high-quality visual experience that brings your designs to life."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Twinmotion-e1759822938941-rcui8db1sqiiu8dqio6j4ev60zlc5ey1dk5gjhp4hs.png",
+    "imageAlt": "Twinmotion: Real-Time Visualization for Immersive Design",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Key Features of",
+        "accent": "Twinmotion: Real-Time Visualization for Immersive Design"
+      },
+      "subheading": "Discover the capabilities that make this solution industry-leading",
+      "align": "center",
+      "items": [
+        {
+          "title": "Real-Time Rendering",
+          "body": "Real-time 3D visualization software for architects, urban planners, and designers",
+          "icon": "cube"
+        },
+        {
+          "title": "Easy Cloud Sharing",
+          "body": "Discover why Twinmotion is the choice for visualization professionals",
+          "icon": "cube"
+        },
+        {
+          "title": "One-Click Synchronization",
+          "body": "Experience instant feedback with real-time rendering. Make changes and see them immediately, eliminating the need for time-consuming render passes.",
+          "icon": "cube"
+        },
+        {
+          "title": "Rich Asset Library",
+          "body": "Share your projects directly from Twinmotion to the cloud. Generate links that clients can view on any device, including VR headsets.",
+          "icon": "cube"
+        },
+        {
+          "title": "Immersive VR",
+          "body": "Seamlessly sync your CAD and BIM data with Twinmotion. Import models from ArchiCAD, Revit, SketchUp Pro, Rhino, and RIKCAD with a single click.",
+          "icon": "cube"
+        },
+        {
+          "title": "Environmental Controls",
+          "body": "Access hundreds of high-quality assets including furniture, trees, vehicles, people, and more. All PBR materials are physically accurate and customizable.",
+          "icon": "cube"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Benefits of Using",
+        "accent": "Twinmotion: Real-Time Visualization for Immersive Design"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Lightning Fast",
+          "body": "Real-time 3D visualization software for architects, urban planners, and designers",
+          "icon": "check"
+        },
+        {
+          "title": "Easy to Learn",
+          "body": "Discover why Twinmotion is the choice for visualization professionals",
+          "icon": "check"
+        },
+        {
+          "title": "Broad Compatibility",
+          "body": "Experience instant feedback with real-time rendering. Make changes and see them immediately, eliminating the need for time-consuming render passes.",
+          "icon": "check"
+        },
+        {
+          "title": "Stunning Visuals",
+          "body": "Share your projects directly from Twinmotion to the cloud. Generate links that clients can view on any device, including VR headsets.",
+          "icon": "check"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Twinmotion: Real-Time Visualization for Immersive Design?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Official Partner",
+          "body": "Real-time 3D visualization software for architects, urban planners, and designers",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Discover why Twinmotion is the choice for visualization professionals",
+          "icon": "medal"
+        },
+        {
+          "title": "Local Presence",
+          "body": "Experience instant feedback with real-time rendering. Make changes and see them immediately, eliminating the need for time-consuming render passes.",
+          "icon": "medal"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Share your projects directly from Twinmotion to the cloud. Generate links that clients can view on any device, including VR headsets.",
+          "icon": "medal"
+        }
+      ]
+    }
+  ],
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

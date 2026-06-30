@@ -1,0 +1,90 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Uninterruptible Power Supply - UPS",
+    "bannerTagline": "Comprehensive backup power solutions for businesses and organizations",
+    "title": "Backup power supply",
+    "paragraphs": [
+      "An uninterruptible power supply (UPS), also known as a battery backup, is an electrical apparatus that provides emergency power to a load when the input power source or mains power fails.",
+      "A UPS allows for the safe, orderly shutdown of a computer and connected equipment. The size and design of a UPS determine how long it will supply power. If an end user is working on the computer when the UPS notifies of the power loss, they have time to save any data they are working on and exit before the secondary power source (the battery) runs out.",
+      "When all power runs out, any data in your computer’s random access memory (RAM) is erased. When power surges occur, a UPS intercepts the surge so that it does not damage the computer."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/Standby-ups.png",
+    "imageAlt": "Uninterruptible Power Supply - UPS",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Uninterruptible Power Supply - UPS?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Expert Engineering",
+          "body": "Comprehensive backup power solutions for businesses and organizations",
+          "icon": "medal"
+        },
+        {
+          "title": "24/7 Support",
+          "body": "An uninterruptible power supply (UPS), also known as a battery backup, is an electrical apparatus that provides emergency power to a load when the input power source or mains power fails.",
+          "icon": "medal"
+        },
+        {
+          "title": "Customized Solutions",
+          "body": "Explore the comprehensive functionality of our power backup solutions",
+          "icon": "medal"
+        },
+        {
+          "title": "Proactive Maintenance",
+          "body": "High-quality batteries with extended runtime capability, ensuring sufficient power during prolonged outages.",
+          "icon": "medal"
+        },
+        {
+          "title": "Ready to Ensure Your Business Continuity?",
+          "body": "Delivers clean, stable power with pure sine wave output, ideal for sensitive electronic equipment and servers.",
+          "icon": "medal"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "title": {
+      "before": "What Our",
+      "accent": "Clients Say"
+    },
+    "items": [
+      {
+        "quote": "Comprehensive backup power solutions for businesses and organizations",
+        "author": "Sarah Johnson",
+        "role": ""
+      },
+      {
+        "quote": "An uninterruptible power supply (UPS), also known as a battery backup, is an electrical apparatus that provides emergency power to a load when the input power source or mains power fails.",
+        "author": "Michael Chen",
+        "role": ""
+      },
+      {
+        "quote": "Explore the comprehensive functionality of our power backup solutions",
+        "author": "Jessica Williams",
+        "role": ""
+      }
+    ]
+  },
+  "showPartnerships": true,
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

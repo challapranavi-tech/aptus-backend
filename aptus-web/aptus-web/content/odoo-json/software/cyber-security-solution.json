@@ -1,0 +1,54 @@
+{
+  "hero": {
+    "id": "hero",
+    "visible": true,
+    "title": {
+      "accent": "Cyber Security Solutions"
+    },
+    "subtitle": "Cyber security solutions from Fortinet, Sophos, Kaspersky, Palo Alto, and more."
+  },
+  "intro": {
+    "id": "intro",
+    "visible": true,
+    "paragraphs": [
+      "Protect your organization with enterprise-grade firewalls, endpoint security, and threat management solutions backed by Aptus implementation and support."
+    ]
+  },
+  "cards": {
+    "id": "products",
+    "visible": true,
+    "eyebrow": "Products",
+    "title": {
+      "before": "Solutions in",
+      "accent": "Cyber Security Solutions"
+    },
+    "align": "center",
+    "items": [
+      {
+        "title": "Fortinet",
+        "body": "Licensed Fortinet with sales, implementation, and support from Aptus Infotech."
+      },
+      {
+        "title": "Sophos",
+        "body": "Licensed Sophos with sales, implementation, and support from Aptus Infotech."
+      },
+      {
+        "title": "SonicWall Next-Gen Firewall",
+        "body": "Licensed SonicWall Next-Gen Firewall with sales, implementation, and support from Aptus Infotech."
+      },
+      {
+        "title": "Kaspersky",
+        "body": "Licensed Kaspersky with sales, implementation, and support from Aptus Infotech."
+      },
+      {
+        "title": "Antivirus and Data Security",
+        "body": "Licensed Antivirus and Data Security with sales, implementation, and support from Aptus Infotech."
+      },
+      {
+        "title": "Palo Alto",
+        "body": "Licensed Palo Alto with sales, implementation, and support from Aptus Infotech."
+      }
+    ]
+  },
+  "showContactCta": true
+}

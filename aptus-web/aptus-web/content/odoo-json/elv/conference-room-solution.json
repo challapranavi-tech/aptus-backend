@@ -1,0 +1,133 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Conference Room Solutions",
+    "bannerTagline": "Transform your meeting spaces with intelligent audiovisual technology",
+    "title": "Intelligent Audiovisual Solutions for Modern Meeting Spaces",
+    "paragraphs": [
+      "In today’s dynamic workplace, productive meetings are paramount. More and more organizations are upgrading their meeting spaces with advanced Conference Room Solutions to maximize efficiency and collaboration.",
+      "Whether you’re setting up huddle rooms for quick stand-ups or large boardrooms for executive decisions, these technologies dramatically improve the way teams connect, present, and innovate.",
+      "Experience superior meeting quality and seamless functionality with our comprehensive solutions for video conferencing, wireless presentation, and integrated control across any meeting space.",
+      "From high-definition displays and automated camera tracking to intuitive one-touch control systems, we provide end-to-end solutions that ensure every meeting is productive, engaging, and utterly effortless."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_Create_a_visually_appealing_image_for_Conf_0-673x1024.jpg",
+    "imageAlt": "Conference Room Solutions",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Key Features"
+      },
+      "subheading": "Transform your meeting spaces with intelligent audiovisual technology",
+      "align": "center",
+      "items": [
+        {
+          "title": "Video Conferencing Systems",
+          "body": "Transform your meeting spaces with intelligent audiovisual technology",
+          "icon": "cube"
+        },
+        {
+          "title": "Interactive Displays",
+          "body": "In today’s dynamic workplace, productive meetings are paramount. More and more organizations are upgrading their meeting spaces with advanced Conference Room Solutions to maximize efficiency and collaboration.",
+          "icon": "cube"
+        },
+        {
+          "title": "Audio Systems",
+          "body": "Comprehensive audiovisual solutions designed for modern workplaces",
+          "icon": "cube"
+        },
+        {
+          "title": "Wireless Presentation",
+          "body": "Enterprise-grade video conferencing solutions with HD cameras, microphones, and seamless integration with popular platforms likeZoom, Teams, and Webex.",
+          "icon": "cube"
+        },
+        {
+          "title": "Integrated Control Systems",
+          "body": "Large-format touchscreens and interactive whiteboards for collaborative presentations, brainstorming sessions, and digital signage applications.",
+          "icon": "cube"
+        },
+        {
+          "title": "Remote Management",
+          "body": "Crystal-clear sound systems including ceiling-mounted speakers, wireless microphones, and acoustic treatments for optimal voice clarity and intelligibility.",
+          "icon": "cube"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Conference Room Solutions?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Certified Professionals",
+          "body": "Transform your meeting spaces with intelligent audiovisual technology",
+          "icon": "medal"
+        },
+        {
+          "title": "End-to-End Services",
+          "body": "In today’s dynamic workplace, productive meetings are paramount. More and more organizations are upgrading their meeting spaces with advanced Conference Room Solutions to maximize efficiency and collaboration.",
+          "icon": "medal"
+        },
+        {
+          "title": "24/7 Technical Support",
+          "body": "Comprehensive audiovisual solutions designed for modern workplaces",
+          "icon": "medal"
+        },
+        {
+          "title": "Local Presence",
+          "body": "Enterprise-grade video conferencing solutions with HD cameras, microphones, and seamless integration with popular platforms likeZoom, Teams, and Webex.",
+          "icon": "medal"
+        },
+        {
+          "title": "Ready to Transform Your Meeting Experience?",
+          "body": "Large-format touchscreens and interactive whiteboards for collaborative presentations, brainstorming sessions, and digital signage applications.",
+          "icon": "medal"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "title": {
+      "before": "What Our",
+      "accent": "Clients Say"
+    },
+    "items": [
+      {
+        "quote": "Transform your meeting spaces with intelligent audiovisual technology",
+        "author": "Mohammed Al Farsi",
+        "role": ""
+      },
+      {
+        "quote": "In today’s dynamic workplace, productive meetings are paramount. More and more organizations are upgrading their meeting spaces with advanced Conference Room Solutions to maximize efficiency and collaboration.",
+        "author": "Sarah Johnson",
+        "role": ""
+      },
+      {
+        "quote": "Comprehensive audiovisual solutions designed for modern workplaces",
+        "author": "Ahmed Hassan",
+        "role": ""
+      }
+    ]
+  },
+  "showPartnerships": true,
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

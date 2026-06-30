@@ -1,0 +1,36 @@
+{
+  "hero": {
+    "id": "hero",
+    "visible": true,
+    "title": {
+      "before": "Management",
+      "accent": "Profile"
+    }
+  },
+  "team": {
+    "id": "team",
+    "visible": true,
+    "eyebrow": "Our Team",
+    "title": {
+      "before": "Our core strength is our",
+      "accent": "team"
+    },
+    "members": [
+      {
+        "name": "Rajesh Malaviya",
+        "role": "CEO & Co-Founder",
+        "bio": "Rajesh Malaviya guided Oriental Oryx (Aptus Infotech) through two decades of growth to emerge as a leader in the IT and software industry in Oman."
+      },
+      {
+        "name": "Mubin Mir",
+        "role": "Director Sales",
+        "bio": "A commerce graduate and team player with expertise in business development and long-term value creation from customers, markets, and relationships."
+      }
+    ],
+    "closingParagraphs": [
+      "We recognize our primary asset is people. Mutual respect provides the foundation for our success.",
+      "Aptus Infotech team is diverse, with employees from over 5–7 countries and a cadre of talented Omanis growing professionally in the IT industry."
+    ]
+  },
+  "showContactCta": true
+}

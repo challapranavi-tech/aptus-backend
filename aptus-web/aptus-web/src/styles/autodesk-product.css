@@ -1,0 +1,478 @@
+/* Autodesk product platform — enterprise engineering aesthetic */
+
+.autodesk-product-page {
+  --autodesk-navy: #0c1f3f;
+  --autodesk-blue: #1352a3;
+  --autodesk-accent: #1f6feb;
+  --autodesk-slate: #4a5568;
+  --autodesk-grid: #eef2f8;
+  --autodesk-border: rgba(12, 31, 63, 0.1);
+  background: #fff;
+  color: var(--autodesk-navy);
+}
+
+.autodesk-hero {
+  background: linear-gradient(135deg, #0c1f3f 0%, #123564 55%, #1a4a8c 100%);
+  color: #fff;
+  padding: 4rem 0 5rem;
+}
+
+.autodesk-hero__grid {
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .autodesk-hero__grid {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+}
+
+.autodesk-hero__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.8;
+  margin-bottom: 0.75rem;
+}
+
+.autodesk-hero__badge {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.autodesk-hero h1 {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1.1;
+  font-weight: 700;
+  margin: 0 0 1rem;
+}
+
+.autodesk-hero__subtitle {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  opacity: 0.92;
+  max-width: 38rem;
+}
+
+.autodesk-hero__cta-text {
+  margin-top: 1rem;
+  opacity: 0.85;
+}
+
+.autodesk-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.autodesk-hero__media img,
+.autodesk-hero__placeholder {
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.autodesk-hero__media img {
+  display: block;
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+}
+
+.autodesk-hero__placeholder {
+  min-height: 280px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.autodesk-section {
+  padding: 4rem 0;
+}
+
+.autodesk-section--light {
+  background: #fff;
+}
+
+.autodesk-section--grid {
+  background: var(--autodesk-grid);
+}
+
+.autodesk-section--dark {
+  background: var(--autodesk-navy);
+  color: #fff;
+}
+
+.autodesk-section--lead {
+  background: linear-gradient(180deg, #0f274d 0%, #0c1f3f 100%);
+  color: #fff;
+}
+
+.autodesk-section__header {
+  margin-bottom: 2rem;
+}
+
+.autodesk-section__header--light h2,
+.autodesk-section__header--light .autodesk-section__eyebrow {
+  color: #fff;
+}
+
+.autodesk-section__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--autodesk-blue);
+  margin-bottom: 0.5rem;
+}
+
+.autodesk-section__eyebrow--light {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.autodesk-section h2 {
+  font-size: clamp(1.6rem, 2.5vw, 2.25rem);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.autodesk-overview {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .autodesk-overview {
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: start;
+  }
+}
+
+.autodesk-overview p {
+  color: var(--autodesk-slate);
+  line-height: 1.75;
+}
+
+.autodesk-highlights {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.autodesk-highlights li {
+  padding-left: 1.25rem;
+  position: relative;
+  color: var(--autodesk-navy);
+  line-height: 1.6;
+}
+
+.autodesk-highlights li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--autodesk-accent);
+}
+
+.autodesk-card-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .autodesk-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .autodesk-card-grid--three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .autodesk-card-grid--two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.autodesk-card {
+  background: #fff;
+  border: 1px solid var(--autodesk-border);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  height: 100%;
+  box-shadow: 0 8px 24px rgba(12, 31, 63, 0.04);
+}
+
+.autodesk-card--dark {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.autodesk-card h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1.05rem;
+}
+
+.autodesk-card p {
+  margin: 0;
+  line-height: 1.65;
+  color: inherit;
+  opacity: 0.88;
+}
+
+.autodesk-card--compact {
+  padding: 1.25rem;
+}
+
+.autodesk-media-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.autodesk-media img,
+.autodesk-media iframe {
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid var(--autodesk-border);
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.autodesk-media figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--autodesk-slate);
+}
+
+.autodesk-downloads {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.autodesk-downloads a {
+  display: grid;
+  gap: 0.25rem;
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--autodesk-border);
+  background: #fff;
+  text-decoration: none;
+  color: var(--autodesk-navy);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.autodesk-downloads a:hover {
+  border-color: var(--autodesk-blue);
+  box-shadow: 0 8px 20px rgba(19, 82, 163, 0.08);
+}
+
+.autodesk-downloads span {
+  color: var(--autodesk-slate);
+  font-size: 0.9rem;
+}
+
+.autodesk-faq {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.autodesk-faq__item {
+  border: 1px solid var(--autodesk-border);
+  border-radius: 0.5rem;
+  padding: 0.25rem 1rem;
+  background: #fff;
+}
+
+.autodesk-faq__item summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0.75rem 0;
+}
+
+.autodesk-faq__item p {
+  margin: 0 0 1rem;
+  color: var(--autodesk-slate);
+  line-height: 1.7;
+}
+
+.autodesk-related {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.autodesk-related__card {
+  display: block;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--autodesk-border);
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.autodesk-related__card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(12, 31, 63, 0.08);
+}
+
+.autodesk-related__card h3 {
+  margin: 0 0 0.5rem;
+  color: var(--autodesk-blue);
+}
+
+.autodesk-related__card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--autodesk-slate);
+  line-height: 1.55;
+}
+
+.autodesk-lead-layout {
+  display: grid;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (min-width: 992px) {
+  .autodesk-lead-layout {
+    grid-template-columns: 0.9fr 1.1fr;
+  }
+}
+
+.autodesk-lead-layout p {
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.7;
+}
+
+.autodesk-lead {
+  background: #fff;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  color: var(--autodesk-navy);
+}
+
+.autodesk-lead__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.autodesk-lead__tab {
+  border: 1px solid var(--autodesk-border);
+  background: #f8fafc;
+  color: var(--autodesk-navy);
+  border-radius: 999px;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.autodesk-lead__tab.is-active {
+  background: var(--autodesk-blue);
+  border-color: var(--autodesk-blue);
+  color: #fff;
+}
+
+.autodesk-lead__grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 640px) {
+  .autodesk-lead__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.autodesk-field {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.autodesk-field span {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--autodesk-slate);
+}
+
+.autodesk-field input,
+.autodesk-field textarea {
+  width: 100%;
+  border: 1px solid var(--autodesk-border);
+  border-radius: 0.4rem;
+  padding: 0.65rem 0.75rem;
+  font: inherit;
+}
+
+.autodesk-lead__error {
+  color: #b42318;
+  font-size: 0.875rem;
+}
+
+.autodesk-lead__success {
+  background: #fff;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  color: var(--autodesk-navy);
+}
+
+.autodesk-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.4rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.autodesk-btn--primary {
+  background: var(--autodesk-accent);
+  color: #fff;
+}
+
+.autodesk-btn--secondary,
+.autodesk-btn--ghost {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #fff;
+}
+
+.autodesk-lead .autodesk-btn--primary {
+  width: 100%;
+}
+
+.autodesk-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}

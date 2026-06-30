@@ -1,0 +1,86 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Data Center Solutions",
+    "bannerTagline": "Comprehensive infrastructure solutions for modern enterprise environments",
+    "title": "Powering Your Digital Future",
+    "paragraphs": [
+      "In today’s data-driven economy, the performance and availability of your core infrastructure are non-negotiable. More and more organizations are upgrading their core IT environment with advanced Data Center Solutions to maximize application speed and ensure business continuity.",
+      "Whether you’re implementing hyper-converged infrastructure for a remote office or deploying a full cloud-ready core for a large enterprise, these technologies dramatically improve the way you store, process, and protect your critical data assets.",
+      "Experience superior agility and seamless scalability with our comprehensive solutions for compute, storage, and networking across any data center environment.",
+      "From next-generation servers and flash-optimized storage arrays to intelligent network fabrics and automated orchestration platforms, we provide end-to-end solutions that ensure every workload is optimized, protected, and utterly resilient."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_a_cinematic_photograph_of_a_futuristic_dat_0-673x1024.jpg",
+    "imageAlt": "Data Center Solutions",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Data Center Solutions?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Certified Expertise",
+          "body": "Comprehensive infrastructure solutions for modern enterprise environments",
+          "icon": "medal"
+        },
+        {
+          "title": "24/7 Support",
+          "body": "In today’s data-driven economy, the performance and availability of your core infrastructure are non-negotiable. More and more organizations are upgrading their core IT environment with advanced Data Center Solutions to maximize application speed and ensure business continuity.",
+          "icon": "medal"
+        },
+        {
+          "title": "Customized Solutions",
+          "body": "Explore the key components of our data center solutions",
+          "icon": "medal"
+        },
+        {
+          "title": "Proactive Maintenance",
+          "body": "Implement advanced virtualization technologies including VMware, Hyper-V, and Docker containers to maximize hardware utilization and simplify management.",
+          "icon": "medal"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "title": {
+      "before": "What Our",
+      "accent": "Clients Say"
+    },
+    "items": [
+      {
+        "quote": "Comprehensive infrastructure solutions for modern enterprise environments",
+        "author": "Sarah Johnson",
+        "role": ""
+      },
+      {
+        "quote": "In today’s data-driven economy, the performance and availability of your core infrastructure are non-negotiable. More and more organizations are upgrading their core IT environment with advanced Data Center Solutions to maximize application speed and ensure business continuity.",
+        "author": "Michael Chen",
+        "role": ""
+      },
+      {
+        "quote": "Explore the key components of our data center solutions",
+        "author": "Jessica Williams",
+        "role": ""
+      }
+    ]
+  },
+  "showPartnerships": true,
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

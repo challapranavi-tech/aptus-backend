@@ -1,0 +1,104 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "oracle",
+    "bannerTitle": "Oracle Aconex",
+    "bannerTagline": "The World’s Leading Construction Project Management Platform",
+    "title": "Transform Construction Project Management with Oracle Aconex",
+    "paragraphs": [
+      "The World’s Leading Construction Project Management Platform",
+      "Comprehensive tools designed specifically for the construction industry",
+      "Centralized document management with version control, markup tools, and real-time collaboration for all project stakeholders."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/imgi_8_photo-1581094794329-c8112a89af12-683x1024.png",
+    "imageAlt": "Oracle Aconex",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Key Features of",
+        "accent": "Oracle Aconex"
+      },
+      "subheading": "Discover the capabilities that make this solution industry-leading",
+      "align": "center",
+      "items": [
+        {
+          "title": "Document Control & Collaboration",
+          "body": "The World’s Leading Construction Project Management Platform",
+          "icon": "cube"
+        },
+        {
+          "title": "Risk Management & Safety",
+          "body": "Comprehensive tools designed specifically for the construction industry",
+          "icon": "cube"
+        },
+        {
+          "title": "Quality Assurance & Punch Lists",
+          "body": "Centralized document management with version control, markup tools, and real-time collaboration for all project stakeholders.",
+          "icon": "cube"
+        },
+        {
+          "title": "Project Scheduling & Progress Tracking",
+          "body": "Integrated risk register, hazard identification, inspection tracking, and safety management tools to ensure compliance and worker safety.",
+          "icon": "cube"
+        },
+        {
+          "title": "Communication Hub",
+          "body": "Defect tracking, non-conformance reports, and punch list management with automated workflows and resolution tracking.",
+          "icon": "cube"
+        },
+        {
+          "title": "Mobile Accessibility",
+          "body": "Gantt chart visualization, progress monitoring, and schedule analysis tools with real-time updates and alerts.",
+          "icon": "cube"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Benefits of Using",
+        "accent": "Oracle Aconex"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Reduced Project Delays",
+          "body": "The World’s Leading Construction Project Management Platform",
+          "icon": "check"
+        },
+        {
+          "title": "Cost Savings",
+          "body": "Comprehensive tools designed specifically for the construction industry",
+          "icon": "check"
+        },
+        {
+          "title": "Enhanced Safety",
+          "body": "Centralized document management with version control, markup tools, and real-time collaboration for all project stakeholders.",
+          "icon": "check"
+        },
+        {
+          "title": "Improved Stakeholder Alignment",
+          "body": "Integrated risk register, hazard identification, inspection tracking, and safety management tools to ensure compliance and worker safety.",
+          "icon": "check"
+        }
+      ]
+    }
+  ],
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

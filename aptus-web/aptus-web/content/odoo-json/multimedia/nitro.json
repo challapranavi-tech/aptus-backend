@@ -1,0 +1,136 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "multimedia",
+    "bannerTitle": "Nitro PDF",
+    "bannerTagline": "The complete PDF productivity solution for businesses and professionals",
+    "title": "Work Smarter with PDF",
+    "paragraphs": [
+      "Nitro PDF is the complete PDF productivity solution designed to streamline your document workflow. Create, convert, edit, sign, and share PDFs with ease, all within a single, intuitive application.",
+      "Built for business professionals, Nitro PDF offers powerful features that rival Adobe Acrobat at a fraction of the cost. With seamless integration with Microsoft Office and cloud storage services, Nitro PDF fits perfectly into your existing workflow.",
+      "Whether you’re creating contracts, collaborating on reports, or securing sensitive documents, Nitro PDF provides the tools you need to work more efficiently and productively."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/nitro-1-e1759821706606-rcuhc79ynis5zsqbybm01w3ij9hqw5sq5nwkbezi5c.png",
+    "imageAlt": "Nitro PDF",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Key Features of",
+        "accent": "Nitro PDF"
+      },
+      "subheading": "Discover the capabilities that make this solution industry-leading",
+      "align": "center",
+      "items": [
+        {
+          "title": "Create & Convert",
+          "body": "The complete PDF productivity solution for businesses and professionals",
+          "icon": "cube"
+        },
+        {
+          "title": "Edit & Review",
+          "body": "Nitro PDF is the complete PDF productivity solution designed to streamline your document workflow. Create, convert, edit, sign, and share PDFs with ease, all within a single, intuitive application.",
+          "icon": "cube"
+        },
+        {
+          "title": "eSign Documents",
+          "body": "Discover why businesses worldwide choose Nitro PDF",
+          "icon": "cube"
+        },
+        {
+          "title": "Secure & Protect",
+          "body": "Create PDFs from over 300 file formats with a single click. Convert PDFs to Word, Excel, PowerPoint, and more while preserving formatting and layout.",
+          "icon": "cube"
+        },
+        {
+          "title": "Optimize & Compress",
+          "body": "Edit text, images, and pages directly in your PDF. Add comments, annotations, and markups for collaborative review and feedback.",
+          "icon": "cube"
+        },
+        {
+          "title": "Cloud Integration",
+          "body": "Request and add legally binding electronic signatures to documents. Track signing status and manage signed documents securely.",
+          "icon": "cube"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Benefits of Using",
+        "accent": "Nitro PDF"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Save Time",
+          "body": "The complete PDF productivity solution for businesses and professionals",
+          "icon": "check"
+        },
+        {
+          "title": "Cost-Effective",
+          "body": "Nitro PDF is the complete PDF productivity solution designed to streamline your document workflow. Create, convert, edit, sign, and share PDFs with ease, all within a single, intuitive application.",
+          "icon": "check"
+        },
+        {
+          "title": "Enhance Collaboration",
+          "body": "Discover why businesses worldwide choose Nitro PDF",
+          "icon": "check"
+        },
+        {
+          "title": "Work Anywhere",
+          "body": "Create PDFs from over 300 file formats with a single click. Convert PDFs to Word, Excel, PowerPoint, and more while preserving formatting and layout.",
+          "icon": "check"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Nitro PDF?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Official Partner",
+          "body": "The complete PDF productivity solution for businesses and professionals",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Nitro PDF is the complete PDF productivity solution designed to streamline your document workflow. Create, convert, edit, sign, and share PDFs with ease, all within a single, intuitive application.",
+          "icon": "medal"
+        },
+        {
+          "title": "Local Presence",
+          "body": "Discover why businesses worldwide choose Nitro PDF",
+          "icon": "medal"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Create PDFs from over 300 file formats with a single click. Convert PDFs to Word, Excel, PowerPoint, and more while preserving formatting and layout.",
+          "icon": "medal"
+        }
+      ]
+    }
+  ],
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "hero": {
+    "id": "hero",
+    "visible": true,
+    "title": {
+      "accent": "Adobe"
+    },
+    "subtitle": "Adobe Creative Cloud and business solutions for design, video, document, and digital experience teams."
+  },
+  "intro": {
+    "id": "intro",
+    "visible": true,
+    "paragraphs": [
+      "Aptus Infotech provides Adobe licensing and support for creative and business teams — from Acrobat and Photoshop to full Creative Cloud deployments."
+    ]
+  },
+  "cards": {
+    "id": "products",
+    "visible": true,
+    "eyebrow": "Products",
+    "title": {
+      "before": "Solutions in",
+      "accent": "Adobe"
+    },
+    "align": "center",
+    "items": [
+      {
+        "title": "Adobe Business & Creative Solutions",
+        "body": "Licensed Adobe Business & Creative Solutions with sales, implementation, and support from Aptus Infotech."
+      },
+      {
+        "title": "Adobe Acrobat Pro",
+        "body": "Licensed Adobe Acrobat Pro with sales, implementation, and support from Aptus Infotech."
+      },
+      {
+        "title": "Adobe Illustrator",
+        "body": "Licensed Adobe Illustrator with sales, implementation, and support from Aptus Infotech."
+      },
+      {
+        "title": "Adobe Photoshop",
+        "body": "Licensed Adobe Photoshop with sales, implementation, and support from Aptus Infotech."
+      },
+      {
+        "title": "Adobe Premiere Pro",
+        "body": "Licensed Adobe Premiere Pro with sales, implementation, and support from Aptus Infotech."
+      }
+    ]
+  },
+  "showContactCta": true
+}

@@ -1,0 +1,133 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Thermal Scanner Solutions",
+    "bannerTagline": "Non-contact temperature measurement for enhanced safety and efficiency",
+    "title": "Advanced Thermal Imaging Technology",
+    "paragraphs": [
+      "In today’s public health-conscious environment, rapid, non-contact temperature screening is paramount. More and more organizations are implementing advanced Thermal Scanner Solutions to maximize safety and monitor entry compliance.",
+      "Whether you’re setting up a simple entry point at a corporate lobby or deploying multiple screening stations across an airport or factory, these technologies dramatically improve the way you screen, identify, and manage the health status of incoming individuals.",
+      "Experience superior accuracy and seamless integration with our comprehensive solutions for contactless thermal cameras, facial recognition integration, and real-time alert systems across any high-traffic area.",
+      "From high-precision thermal cameras and integrated metal detection to automatic access barriers and centralized data logging platforms, we provide end-to-end solutions that ensure every entry point is fast, safe, and utterly reliable."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/Thermal_Scanner-1024x1020.png",
+    "imageAlt": "Thermal Scanner Solutions",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Key Features"
+      },
+      "subheading": "Non-contact temperature measurement for enhanced safety and efficiency",
+      "align": "center",
+      "items": [
+        {
+          "title": "Precise Temperature Measurement",
+          "body": "Non-contact temperature measurement for enhanced safety and efficiency",
+          "icon": "cube"
+        },
+        {
+          "title": "High-Resolution Imaging",
+          "body": "In today’s public health-conscious environment, rapid, non-contact temperature screening is paramount. More and more organizations are implementing advanced Thermal Scanner Solutions to maximize safety and monitor entry compliance.",
+          "icon": "cube"
+        },
+        {
+          "title": "Portable Design",
+          "body": "Comprehensive thermal imaging technology for diverse applications",
+          "icon": "cube"
+        },
+        {
+          "title": "Data Storage & Analysis",
+          "body": "Accurate thermal imaging with ±0.5°C sensitivity for reliable fever detection and temperature mapping.",
+          "icon": "cube"
+        },
+        {
+          "title": "Wireless Connectivity",
+          "body": "Clear thermal imagery with up to 320×240 pixel resolution for detailed heat pattern visualization.",
+          "icon": "cube"
+        },
+        {
+          "title": "Health & Safety Compliance",
+          "body": "Lightweight, handheld units perfect for field use with long battery life and rugged construction.",
+          "icon": "cube"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Thermal Scanner Solutions?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Certified Technicians",
+          "body": "Non-contact temperature measurement for enhanced safety and efficiency",
+          "icon": "medal"
+        },
+        {
+          "title": "Turnkey Solutions",
+          "body": "In today’s public health-conscious environment, rapid, non-contact temperature screening is paramount. More and more organizations are implementing advanced Thermal Scanner Solutions to maximize safety and monitor entry compliance.",
+          "icon": "medal"
+        },
+        {
+          "title": "Priority Support",
+          "body": "Comprehensive thermal imaging technology for diverse applications",
+          "icon": "medal"
+        },
+        {
+          "title": "Regular Updates",
+          "body": "Accurate thermal imaging with ±0.5°C sensitivity for reliable fever detection and temperature mapping.",
+          "icon": "medal"
+        },
+        {
+          "title": "Ready to Enhance Your Safety Protocols?",
+          "body": "Clear thermal imagery with up to 320×240 pixel resolution for detailed heat pattern visualization.",
+          "icon": "medal"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "title": {
+      "before": "What Our",
+      "accent": "Clients Say"
+    },
+    "items": [
+      {
+        "quote": "Non-contact temperature measurement for enhanced safety and efficiency",
+        "author": "Mohammed Al Farsi",
+        "role": ""
+      },
+      {
+        "quote": "In today’s public health-conscious environment, rapid, non-contact temperature screening is paramount. More and more organizations are implementing advanced Thermal Scanner Solutions to maximize safety and monitor entry compliance.",
+        "author": "Sarah Johnson",
+        "role": ""
+      },
+      {
+        "quote": "Comprehensive thermal imaging technology for diverse applications",
+        "author": "Ahmed Hassan",
+        "role": ""
+      }
+    ]
+  },
+  "showPartnerships": true,
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

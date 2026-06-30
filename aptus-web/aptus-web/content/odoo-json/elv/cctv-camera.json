@@ -1,0 +1,91 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "CCTV Surveillance Solutions",
+    "bannerTagline": "Comprehensive video surveillance systems for enhanced security and monitoring",
+    "title": "CCTV Solutions",
+    "paragraphs": [
+      "In today’s complex world, continuous monitoring and visual verification are paramount. More and more organizations are upgrading their premises with advanced CCTV Solutions to maximize security and deter unauthorized activity.",
+      "Whether you’re installing cameras at a single entry point or deploying a fully networked system across a massive industrial complex, these technologies dramatically improve the way you observe, record, and analyze events in real-time.",
+      "Experience superior clarity and seamless coverage with our comprehensive solutions for high-definition IP cameras, network video recorders (NVRs), and video management software (VMS) across any environment.",
+      "From 4K dome and turret cameras with night vision to centralized analytics platforms and secure remote viewing applications, we provide end-to-end solutions that ensure every area is visible, documented, and utterly protected."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/CCTV-Cameras.jpg",
+    "imageAlt": "CCTV Surveillance Solutions",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "CCTV Surveillance Solutions?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Industry Expertise",
+          "body": "Comprehensive video surveillance systems for enhanced security and monitoring",
+          "icon": "medal"
+        },
+        {
+          "title": "24/7 Support",
+          "body": "In today’s complex world, continuous monitoring and visual verification are paramount. More and more organizations are upgrading their premises with advanced CCTV Solutions to maximize security and deter unauthorized activity.",
+          "icon": "medal"
+        },
+        {
+          "title": "Customized Solutions",
+          "body": "Explore the comprehensive functionality of our surveillance solutions",
+          "icon": "medal"
+        },
+        {
+          "title": "Proactive Maintenance",
+          "body": "Ultra-clear imaging with HD and 4K resolution for detailed identification and evidence collection.",
+          "icon": "medal"
+        },
+        {
+          "title": "Ready to Transform Your Hotel Operations?",
+          "body": "Advanced algorithms detect movement and unusual activity, reducing false alarms and focusing on relevant events.",
+          "icon": "medal"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "title": {
+      "before": "What Our",
+      "accent": "Clients Say"
+    },
+    "items": [
+      {
+        "quote": "Comprehensive video surveillance systems for enhanced security and monitoring",
+        "author": "Sarah Johnson",
+        "role": ""
+      },
+      {
+        "quote": "In today’s complex world, continuous monitoring and visual verification are paramount. More and more organizations are upgrading their premises with advanced CCTV Solutions to maximize security and deter unauthorized activity.",
+        "author": "Michael Chen",
+        "role": ""
+      },
+      {
+        "quote": "Explore the comprehensive functionality of our surveillance solutions",
+        "author": "Jessica Williams",
+        "role": ""
+      }
+    ]
+  },
+  "showPartnerships": true,
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

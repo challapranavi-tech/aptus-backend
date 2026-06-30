@@ -1,0 +1,46 @@
+{
+  "hero": {
+    "id": "hero",
+    "visible": true,
+    "title": {
+      "accent": "Microsoft"
+    },
+    "subtitle": "Microsoft 365, Visio, Power BI, and productivity solutions for businesses in Oman."
+  },
+  "intro": {
+    "id": "intro",
+    "visible": true,
+    "paragraphs": [
+      "From Microsoft 365 to Power BI and Visio, Aptus Infotech helps organizations license, deploy, and support the Microsoft tools their teams rely on every day."
+    ]
+  },
+  "cards": {
+    "id": "products",
+    "visible": true,
+    "eyebrow": "Products",
+    "title": {
+      "before": "Solutions in",
+      "accent": "Microsoft"
+    },
+    "align": "center",
+    "items": [
+      {
+        "title": "Microsoft 365 Apps",
+        "body": "Licensed Microsoft 365 Apps with sales, implementation, and support from Aptus Infotech."
+      },
+      {
+        "title": "Microsoft 365 Business",
+        "body": "Licensed Microsoft 365 Business with sales, implementation, and support from Aptus Infotech."
+      },
+      {
+        "title": "Microsoft Visio",
+        "body": "Licensed Microsoft Visio with sales, implementation, and support from Aptus Infotech."
+      },
+      {
+        "title": "Power BI",
+        "body": "Licensed Power BI with sales, implementation, and support from Aptus Infotech."
+      }
+    ]
+  },
+  "showContactCta": true
+}

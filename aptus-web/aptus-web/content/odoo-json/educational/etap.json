@@ -1,0 +1,192 @@
+{
+  "banner": {
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Etap-e1754305581206-r9rclz9wr9r0ta61dseoz0n57g4ef8xmog8rdjuy9s.png",
+    "imageAlt": "Etap"
+  },
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "educational",
+    "title": "ETAP",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "featureRows": [
+    {
+      "heading": "Comprehensive Electrical Power System Analysis, Design, and Operation",
+      "paragraphs": [
+        "ETAP (Electrical Transient Analyzer Program) is a leading software platform for the design, simulation, operation, and automation of electrical power systems. Trusted by engineers globally, ETAP provides an integrated suite of tools to model, analyze, and optimize power networks, ensuring their reliability, safety, and efficiency across various industries, including utilities, industrial plants, oil & gas, renewable energy, and critical infrastructure."
+      ],
+      "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/ETAP-1-e1754305634199-r9rcnd2vib7epc5wkb3rtzryjvj3nlbcccz46f429s.png",
+      "imageAlt": "ETAP",
+      "imagePosition": "below",
+      "variant": "boxed"
+    },
+    {
+      "heading": "ETAP empowers electrical engineers and power professionals to:",
+      "bullets": [
+        "Model and Design Power Systems: Create detailed one-line diagrams and intelligent models of AC and DC power systems, incorporating a vast library of electrical components and equipment.",
+        "Perform Comprehensive Electrical Analysis: Load flow, short circuit, arc flash, protection coordination, motor starting, and transient stability studies.",
+        "Optimize System Performance and Reliability: Identify bottlenecks, predict equipment behavior, and optimize system configuration.",
+        "Facilitate Digital Twin Creation: Develop a digital twin of your power system for real-time monitoring and predictive maintenance.",
+        "Ensure Compliance and Safety: Validate designs and operational procedures through accurate simulation."
+      ],
+      "variant": "boxed"
+    }
+  ],
+  "cardSections": [
+    {
+      "id": "capabilities",
+      "visible": true,
+      "variant": "icon-cards",
+      "align": "center",
+      "items": [
+        {
+          "title": "Power System Analysis",
+          "body": "",
+          "icon": "stopwatch"
+        },
+        {
+          "title": "Arc Flash Study",
+          "body": "",
+          "icon": "lightbulb"
+        },
+        {
+          "title": "Short-Circuit Analysis",
+          "body": "",
+          "icon": "cube"
+        },
+        {
+          "title": "Protection & Coordination",
+          "body": "",
+          "icon": "shield"
+        },
+        {
+          "title": "Electrical Engineering",
+          "body": "",
+          "icon": "drafting-compass"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Tailored Solutions for Your Business",
+          "body": "",
+          "icon": "check-circle"
+        },
+        {
+          "title": "Scalable for Every Business Size",
+          "body": "",
+          "icon": "check-circle"
+        },
+        {
+          "title": "Expert Installation and Ongoing Support",
+          "body": "",
+          "icon": "check-circle"
+        },
+        {
+          "title": "Powered by Cutting-Edge Technology",
+          "body": "",
+          "icon": "check-circle"
+        }
+      ]
+    }
+  ],
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/planswift.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Prokon.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/sophos.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/spectronova.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/aconex.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/etap.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/fortinet.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/kaspersky.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft.png",
+        "alt": "Microsoft"
+      },
+      {
+        "id": "lumion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/lumion.png",
+        "alt": "lumion"
+      },
+      {
+        "id": "paloalto",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/paloalto.png",
+        "alt": "paloalto"
+      },
+      {
+        "id": "vray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/v.ray_.png",
+        "alt": "v.ray"
+      },
+      {
+        "id": "twinmotion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png",
+        "alt": "twinmotion"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

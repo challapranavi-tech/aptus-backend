@@ -1,0 +1,104 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "edms",
+    "bannerTitle": "SpectroNova",
+    "bannerTagline": "A Comprehensive Project Management Information System (PMIS) for End-to-End Project Lifecycle Management",
+    "title": "Transform Project Management with SpectroNova",
+    "paragraphs": [
+      "A Comprehensive Project Management Information System (PMIS) for End-to-End Project Lifecycle Management",
+      "Comprehensive tools designed specifically for end-to-end project lifecycle management",
+      "Develop comprehensive project schedules with a built-in powerful scheduling tool that integrates with industry standards like Primavera P6 and MS Project. Track tasks, milestones, and dependencies with precision."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/imgi_8_photo-1581094794329-c8112a89af12-683x1024.png",
+    "imageAlt": "SpectroNova",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Key Features of",
+        "accent": "SpectroNova"
+      },
+      "subheading": "Discover the capabilities that make this solution industry-leading",
+      "align": "center",
+      "items": [
+        {
+          "title": "Advanced Planning & Scheduling",
+          "body": "A Comprehensive Project Management Information System (PMIS) for End-to-End Project Lifecycle Management",
+          "icon": "cube"
+        },
+        {
+          "title": "Resource & Financial Management",
+          "body": "Comprehensive tools designed specifically for end-to-end project lifecycle management",
+          "icon": "cube"
+        },
+        {
+          "title": "Issue, Risk & Change Management",
+          "body": "Develop comprehensive project schedules with a built-in powerful scheduling tool that integrates with industry standards like Primavera P6 and MS Project. Track tasks, milestones, and dependencies with precision.",
+          "icon": "cube"
+        },
+        {
+          "title": "Tendering, Bid & Subcontract Management",
+          "body": "Efficiently manage project resources, control costs, track earned value, and gain deep financial insights to ensure projects remain on budget and optimize profitability.",
+          "icon": "cube"
+        },
+        {
+          "title": "Centralized Document Hub",
+          "body": "Proactively identify, track, and mitigate project risks. Manage changes effectively through customizable processes, ensuring smooth execution and minimizing disruptions.",
+          "icon": "cube"
+        },
+        {
+          "title": "Intelligent Workflow Automation (BPM)",
+          "body": "Streamline procurement processes, manage bids, pre-qualify suppliers, and oversee subcontractor performance and payments within the system.",
+          "icon": "cube"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Benefits of Using",
+        "accent": "SpectroNova"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Reduced Project Delays",
+          "body": "A Comprehensive Project Management Information System (PMIS) for End-to-End Project Lifecycle Management",
+          "icon": "check"
+        },
+        {
+          "title": "Significant Cost Savings",
+          "body": "Comprehensive tools designed specifically for end-to-end project lifecycle management",
+          "icon": "check"
+        },
+        {
+          "title": "Enhanced Safety Compliance",
+          "body": "Develop comprehensive project schedules with a built-in powerful scheduling tool that integrates with industry standards like Primavera P6 and MS Project. Track tasks, milestones, and dependencies with precision.",
+          "icon": "check"
+        },
+        {
+          "title": "Improved Stakeholder Alignment",
+          "body": "Efficiently manage project resources, control costs, track earned value, and gain deep financial insights to ensure projects remain on budget and optimize profitability.",
+          "icon": "check"
+        }
+      ]
+    }
+  ],
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

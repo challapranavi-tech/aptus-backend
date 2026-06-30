@@ -1,0 +1,136 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "multimedia",
+    "bannerTitle": "Lumion",
+    "bannerTagline": "3D rendering software that brings your architectural visions to life",
+    "title": "Transform Your Designs into Stunning Visuals",
+    "paragraphs": [
+      "Lumion is powerful 3D rendering software that makes it easy to transform your CAD models into beautiful images, videos, and 360 panoramas. With its intuitive interface and real-time rendering capabilities, Lumion helps architects and designers communicate their vision with breathtaking visuals.",
+      "Designed for professionals who need to create high-quality visualizations quickly, Lumion seamlessly integrates with your favorite modeling software. Its vast content library and powerful effects allow you to add life, context, and emotion to your designs with just a few clicks.",
+      "Whether you’re creating architectural visualizations, urban planning projects, or landscape designs, Lumion provides the tools you need to impress clients and stakeholders with photorealistic results."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Lumion-1-e1759821833671-rcuhfingn3f6kt19a6oj6w8ayne0dwwsi5sdz2yfb4.png",
+    "imageAlt": "Lumion",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Key Features of",
+        "accent": "Lumion"
+      },
+      "subheading": "Discover the capabilities that make this solution industry-leading",
+      "align": "center",
+      "items": [
+        {
+          "title": "Real-Time Rendering",
+          "body": "3D rendering software that brings your architectural visions to life",
+          "icon": "cube"
+        },
+        {
+          "title": "Stunning Visual Effects",
+          "body": "Discover why architects worldwide choose Lumion",
+          "icon": "cube"
+        },
+        {
+          "title": "Extensive Content Library",
+          "body": "Experience the speed of real-time rendering as you make changes to your scene. See updates instantly and iterate quickly to perfect your visualization.",
+          "icon": "cube"
+        },
+        {
+          "title": "Seamless Integration",
+          "body": "Create photorealistic images and videos with advanced effects including volumetric lighting, atmospheric rain, and customizable materials.",
+          "icon": "cube"
+        },
+        {
+          "title": "360° Panoramas",
+          "body": "Access thousands of high-quality models, materials, and objects to bring your scenes to life. From furniture to vegetation, find everything you need.",
+          "icon": "cube"
+        },
+        {
+          "title": "Video Creation",
+          "body": "Work with your favorite modeling software including Revit, SketchUp, ArchiCAD, Rhino, and more. Import models with LiveSync for real-time synchronization.",
+          "icon": "cube"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Benefits of Using",
+        "accent": "Lumion"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Save Time",
+          "body": "3D rendering software that brings your architectural visions to life",
+          "icon": "check"
+        },
+        {
+          "title": "Superior Quality",
+          "body": "Discover why architects worldwide choose Lumion",
+          "icon": "check"
+        },
+        {
+          "title": "Better Communication",
+          "body": "Experience the speed of real-time rendering as you make changes to your scene. See updates instantly and iterate quickly to perfect your visualization.",
+          "icon": "check"
+        },
+        {
+          "title": "Easy to Learn",
+          "body": "Create photorealistic images and videos with advanced effects including volumetric lighting, atmospheric rain, and customizable materials.",
+          "icon": "check"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Lumion?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Official Partner",
+          "body": "3D rendering software that brings your architectural visions to life",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Discover why architects worldwide choose Lumion",
+          "icon": "medal"
+        },
+        {
+          "title": "Local Presence",
+          "body": "Experience the speed of real-time rendering as you make changes to your scene. See updates instantly and iterate quickly to perfect your visualization.",
+          "icon": "medal"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Create photorealistic images and videos with advanced effects including volumetric lighting, atmospheric rain, and customizable materials.",
+          "icon": "medal"
+        }
+      ]
+    }
+  ],
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

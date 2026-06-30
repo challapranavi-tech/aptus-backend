@@ -1,0 +1,83 @@
+{
+  "hero": {
+    "id": "hero",
+    "visible": true,
+    "title": {
+      "before": "",
+      "accent": "Palo Alto"
+    },
+    "subtitle": "Palo Alto Networks next-generation firewalls and Prisma SASE cloud security.",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "mailto:info@aptusinfotech.com"
+  },
+  "intro": {
+    "id": "intro",
+    "visible": true,
+    "title": {
+      "before": "Overview",
+      "accent": ""
+    },
+    "paragraphs": [
+      "Implement Palo Alto Networks NGFWs and cloud-delivered security with Aptus Infotech. From PA-Series appliances to Prisma Access SASE, we support enterprise security architecture in Oman."
+    ]
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "eyebrow": "Capabilities",
+      "title": {
+        "before": "Key",
+        "accent": "Features"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "App-ID Technology",
+          "body": "Identify and control applications regardless of port or protocol."
+        },
+        {
+          "title": "Threat Prevention",
+          "body": "IPS, wildfire sandboxing, and URL filtering in one platform."
+        },
+        {
+          "title": "Prisma SASE",
+          "body": "Cloud-delivered security for remote users and branch offices."
+        },
+        {
+          "title": "Panorama Management",
+          "body": "Centralized policy management across distributed firewalls."
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "eyebrow": "Why Aptus",
+      "title": {
+        "before": "Why Choose",
+        "accent": "Aptus Infotech"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Authorized Partner",
+          "body": "Genuine software licenses with official support channels and compliant procurement."
+        },
+        {
+          "title": "Implementation Support",
+          "body": "Guidance on deployment, licensing models, and integration with your existing workflows."
+        },
+        {
+          "title": "Local Expertise in Oman",
+          "body": "Muscat-based team providing responsive sales, technical support, and training across the GCC."
+        },
+        {
+          "title": "End-to-End Service",
+          "body": "From license procurement and renewal to rollout planning — a single trusted partner."
+        }
+      ]
+    }
+  ],
+  "showContactCta": true
+}

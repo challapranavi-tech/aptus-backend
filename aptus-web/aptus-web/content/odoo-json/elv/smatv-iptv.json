@@ -1,0 +1,87 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "SMATV/IPTV Solutions",
+    "bannerTagline": "Comprehensive television and entertainment systems for hotels, offices, and residential communities",
+    "title": "Delivering High-Quality Digital Entertainment",
+    "paragraphs": [
+      "In today’s hospitality and institutional environments, high-quality in-room entertainment is paramount. More and more organizations are upgrading their distribution networks with advanced SMATV/IPTV Solutions to maximize content delivery and guest experience.",
+      "Whether you’re installing satellite TV in a multi-dwelling unit (MDU) or deploying interactive television in a five-star hotel, these technologies dramatically improve the way you receive, manage, and present digital media content.",
+      "Experience superior video quality and seamless content control with our comprehensive solutions for headend reception, network distribution, and personalized guest services across any commercial venue.",
+      "From centralized satellite master antenna television (SMATV) systems and Fiber Optic distribution to customized IPTV portals and integrated billing systems, we provide end-to-end solutions that ensure every channel is clear, engaging, and utterly reliable."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/09/Lucid_Origin_Create_a_visually_striking_image_representing_SMA_2-683x1024.jpg",
+    "imageAlt": "SMATV/IPTV Solutions",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "SMATV/IPTV Solutions?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Certified Professionals",
+          "body": "Comprehensive television and entertainment systems for hotels, offices, and residential communities",
+          "icon": "medal"
+        },
+        {
+          "title": "End-to-End Service",
+          "body": "In today’s hospitality and institutional environments, high-quality in-room entertainment is paramount. More and more organizations are upgrading their distribution networks with advanced SMATV/IPTV Solutions to maximize content delivery and guest experience.",
+          "icon": "medal"
+        },
+        {
+          "title": "24/7 Technical Support",
+          "body": "Comprehensive solutions tailored to meet your business communication needs",
+          "icon": "medal"
+        },
+        {
+          "title": "Future-Ready Technology",
+          "body": "Centralized satellite reception with digital signal distribution to multiple channels and programming.",
+          "icon": "medal"
+        },
+        {
+          "title": "Ready to Upgrade Your Entertainment Systems?",
+          "body": "Internet Protocol Television with on-demand content, live streaming, and interactive channel guides.",
+          "icon": "medal"
+        },
+        {
+          "title": "Client Success Stories",
+          "body": "High-definition channel lineup with customizable packages and regional programming options.",
+          "icon": "medal"
+        },
+        {
+          "title": "Mohammed Al Farsi",
+          "body": "Individual channel access controls, parental locks, and personalized viewing preferences.",
+          "icon": "medal"
+        },
+        {
+          "title": "Mariam Al Said",
+          "body": "Viewing statistics, channel popularity analysis, and usage reports for better content management decisions.",
+          "icon": "medal"
+        },
+        {
+          "title": "Khalid Al Balushi",
+          "body": "Dedicated helpdesk and on-site technician support for system maintenance and troubleshooting.",
+          "icon": "medal"
+        }
+      ]
+    }
+  ],
+  "showPartnerships": true,
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "adobe",
+    "title": "Adobe Business & Creative Solutions",
+    "paragraphs": [
+      "Adobe offers an unparalleled suite of software and services that are the industry standard for creative professionals and a powerful asset for businesses seeking to enhance their digital presence and productivity. From visual content creation and digital document management to sophisticated marketing tools, Adobe’s solutions empower organizations to innovate, collaborate, and effectively engage with their audiences in the digital age."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/adobe-for-buisness.png",
+    "imageAlt": "Adobe Business & Creative Solutions",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [],
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "hero": {
+    "id": "hero",
+    "visible": true,
+    "title": {
+      "accent": "Quantity Takeoff"
+    },
+    "subtitle": "Quantity takeoff and construction estimating software for accurate cost planning."
+  },
+  "intro": {
+    "id": "intro",
+    "visible": true,
+    "paragraphs": [
+      "We provide quantity surveying and takeoff solutions that help estimators and contractors produce accurate bills of quantities and competitive bids."
+    ]
+  },
+  "cards": {
+    "id": "products",
+    "visible": true,
+    "eyebrow": "Products",
+    "title": {
+      "before": "Solutions in",
+      "accent": "Quantity Takeoff"
+    },
+    "align": "center",
+    "items": [
+      {
+        "title": "Autodesk Takeoff",
+        "body": "Licensed Autodesk Takeoff with sales, implementation, and support from Aptus Infotech."
+      },
+      {
+        "title": "Cubicost BM QS",
+        "body": "Licensed Cubicost BM QS with sales, implementation, and support from Aptus Infotech."
+      },
+      {
+        "title": "Planswift",
+        "body": "Licensed Planswift with sales, implementation, and support from Aptus Infotech."
+      },
+      {
+        "title": "RIB CostX",
+        "body": "Licensed RIB CostX with sales, implementation, and support from Aptus Infotech."
+      }
+    ]
+  },
+  "showContactCta": true
+}

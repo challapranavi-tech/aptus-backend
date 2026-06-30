@@ -1,0 +1,83 @@
+{
+  "hero": {
+    "id": "hero",
+    "visible": true,
+    "title": {
+      "before": "",
+      "accent": "Fortinet"
+    },
+    "subtitle": "Fortinet FortiGate next-generation firewalls and Security Fabric for enterprise protection.",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "mailto:info@aptusinfotech.com"
+  },
+  "intro": {
+    "id": "intro",
+    "visible": true,
+    "title": {
+      "before": "Overview",
+      "accent": ""
+    },
+    "paragraphs": [
+      "Secure your network perimeter and branch offices with Fortinet FortiGate NGFWs. Aptus Infotech supplies hardware, licenses, configuration, and managed support for organizations in Oman."
+    ]
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "eyebrow": "Capabilities",
+      "title": {
+        "before": "Key",
+        "accent": "Features"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "NGFW Protection",
+          "body": "Application-aware firewall, IPS, and anti-malware in one appliance."
+        },
+        {
+          "title": "SD-WAN",
+          "body": "Secure connectivity across branch offices and cloud workloads."
+        },
+        {
+          "title": "Security Fabric",
+          "body": "Unified management across FortiGate, FortiSwitch, and FortiAP."
+        },
+        {
+          "title": "Threat Intelligence",
+          "body": "FortiGuard updates for emerging threats and vulnerabilities."
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "eyebrow": "Why Aptus",
+      "title": {
+        "before": "Why Choose",
+        "accent": "Aptus Infotech"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Authorized Partner",
+          "body": "Genuine software licenses with official support channels and compliant procurement."
+        },
+        {
+          "title": "Implementation Support",
+          "body": "Guidance on deployment, licensing models, and integration with your existing workflows."
+        },
+        {
+          "title": "Local Expertise in Oman",
+          "body": "Muscat-based team providing responsive sales, technical support, and training across the GCC."
+        },
+        {
+          "title": "End-to-End Service",
+          "body": "From license procurement and renewal to rollout planning — a single trusted partner."
+        }
+      ]
+    }
+  ],
+  "showContactCta": true
+}

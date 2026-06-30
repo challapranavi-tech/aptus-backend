@@ -1,0 +1,23 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "microsoft",
+    "title": "Microsoft 365 Apps",
+    "paragraphs": [
+      "Microsoft 365 Apps (formerly Office 365 ProPlus) is the cloud-connected version of Microsoft’s essential productivity applications, including Word, Excel, PowerPoint, Outlook, OneNote, and more. Delivered as a subscription service, it provides the familiar, powerful tools that individuals and businesses rely on daily, enhanced with cloud capabilities for collaboration, security, and accessibility across all devices."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Microsoft-365-Apps-r6r9jsx6imvdvp9608zrinzq86izhn1cy6gysaefew.png",
+    "imageAlt": "Microsoft 365 Apps",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [],
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "adobe",
+    "bannerTitle": "Adobe Photoshop",
+    "bannerTagline": "The world’s best imaging and graphic design software is at the core of just about every creative project",
+    "title": "Professional Image Editing",
+    "paragraphs": [
+      "Adobe Photoshop is the definitive, industry-standard software for digital image editing and graphic design. Used globally by millions of photographers, designers, and artists, Photoshop empowers you to transform photos, craft sophisticated artwork, and bring any visual concept to life with unparalleled precision and creative freedom.",
+      "The core of Photoshop is its powerful, non-destructive architecture. By utilizing Layers, Masks, and Adjustment Layers, you can experiment, iterate, and refine every detail of your composition without permanently altering the original pixels, ensuring a flexible and efficient workflow. From basic cropping and color correction to advanced photo compositing, Photoshop offers a toolset as vast as your imagination.",
+      "Whether you are perfecting a raw photograph, designing marketing collateral, or creating an intricate digital painting, Photoshop provides the reliable, professional environment you need. Integrate seamlessly with the entire Adobe Creative Cloud ecosystem to ensure your creative vision is not just captured, but completely realized."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Adobe-Photoshop.png",
+    "imageAlt": "Adobe Photoshop",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Key Features of",
+        "accent": "Adobe Photoshop"
+      },
+      "subheading": "Discover the capabilities that make this solution industry-leading",
+      "align": "center",
+      "items": [
+        {
+          "title": "Advanced Layers",
+          "body": "Discover the capabilities that make AutoCAD the industry standard",
+          "icon": "cube"
+        },
+        {
+          "title": "AI-Powered Tools",
+          "body": "Work non-destructively with layers, layer masks, and adjustment layers to achieve professional results.",
+          "icon": "cube"
+        },
+        {
+          "title": "Digital Painting",
+          "body": "Leverage Adobe Sensei AI for features like Select Subject, Content-Aware Fill, and Neural Filters.",
+          "icon": "cube"
+        },
+        {
+          "title": "Content-Aware Tools",
+          "body": "Create stunning digital art with customizable brushes, mixer brushes, and realistic painting tools.",
+          "icon": "cube"
+        },
+        {
+          "title": "Advanced Adjustments",
+          "body": "Remove unwanted elements, scale objects, and fill gaps intelligently with Content-Aware technology.",
+          "icon": "cube"
+        },
+        {
+          "title": "Creative Cloud Integration",
+          "body": "Perfect your images with curves, levels, color balance, and professional color grading tools.",
+          "icon": "cube"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Benefits of Using",
+        "accent": "Adobe Photoshop"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "For Photographers",
+          "body": "Discover the capabilities that make AutoCAD the industry standard",
+          "icon": "check"
+        },
+        {
+          "title": "For Designers",
+          "body": "Work non-destructively with layers, layer masks, and adjustment layers to achieve professional results.",
+          "icon": "check"
+        },
+        {
+          "title": "For Artists",
+          "body": "Leverage Adobe Sensei AI for features like Select Subject, Content-Aware Fill, and Neural Filters.",
+          "icon": "check"
+        },
+        {
+          "title": "For Content Creators",
+          "body": "Create stunning digital art with customizable brushes, mixer brushes, and realistic painting tools.",
+          "icon": "check"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Adobe Photoshop?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Official Partner",
+          "body": "Discover the capabilities that make AutoCAD the industry standard",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Work non-destructively with layers, layer masks, and adjustment layers to achieve professional results.",
+          "icon": "medal"
+        },
+        {
+          "title": "Local Presence",
+          "body": "Leverage Adobe Sensei AI for features like Select Subject, Content-Aware Fill, and Neural Filters.",
+          "icon": "medal"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Create stunning digital art with customizable brushes, mixer brushes, and realistic painting tools.",
+          "icon": "medal"
+        },
+        {
+          "title": "Start Creating Today",
+          "body": "Remove unwanted elements, scale objects, and fill gaps intelligently with Content-Aware technology.",
+          "icon": "medal"
+        }
+      ]
+    }
+  ],
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

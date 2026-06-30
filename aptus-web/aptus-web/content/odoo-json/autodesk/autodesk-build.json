@@ -1,0 +1,136 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "autodesk",
+    "bannerTitle": "Autodesk Build",
+    "bannerTagline": "Field management software that helps construction teams improve quality, safety, and commissioning workflows",
+    "title": "Transform Your Field Operations",
+    "paragraphs": [
+      "Autodesk Build is a powerful field management software designed to help construction teams streamline quality, safety, and commissioning workflows. Connect field and office teams with real-time data, reduce rework, and deliver projects on time and on budget.",
+      "With Autodesk Build, you can manage checklists, track issues, and document progress directly from the job site using any device. The platform integrates seamlessly with other Autodesk Construction Cloud products, creating a unified solution for the entire project lifecycle.",
+      "Whether you’re managing quality control, safety inspections, or equipment commissioning, Autodesk Build provides the tools you need to ensure every aspect of your project meets the highest standards."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/06/Autodesk_Build-1024x1024.png",
+    "imageAlt": "Autodesk Build",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Key Features of",
+        "accent": "Build"
+      },
+      "subheading": "Discover the capabilities that make this solution industry-leading",
+      "align": "center",
+      "items": [
+        {
+          "title": "Quality Management",
+          "body": "Field management software that helps construction teams improve quality, safety, and commissioning workflows",
+          "icon": "cube"
+        },
+        {
+          "title": "Safety Management",
+          "body": "Autodesk Build is a powerful field management software designed to help construction teams streamline quality, safety, and commissioning workflows. Connect field and office teams with real-time data, reduce rework, and deliver projects on time and on budget.",
+          "icon": "cube"
+        },
+        {
+          "title": "Commissioning",
+          "body": "Discover how Autodesk Build transforms field management",
+          "icon": "cube"
+        },
+        {
+          "title": "Mobile Field App",
+          "body": "Create and execute quality control checklists, track deficiencies, and ensure work meets specifications with comprehensive quality management tools.",
+          "icon": "cube"
+        },
+        {
+          "title": "Reporting & Analytics",
+          "body": "Conduct safety inspections, track incidents, and manage corrective actions to maintain a safe work environment and comply with regulations.",
+          "icon": "cube"
+        },
+        {
+          "title": "Seamless Integration",
+          "body": "Manage equipment commissioning workflows, track system testing, and document performance to ensure systems operate as designed.",
+          "icon": "cube"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Benefits of Using",
+        "accent": "Autodesk Build"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Improved Quality",
+          "body": "Field management software that helps construction teams improve quality, safety, and commissioning workflows",
+          "icon": "check"
+        },
+        {
+          "title": "Enhanced Safety",
+          "body": "Autodesk Build is a powerful field management software designed to help construction teams streamline quality, safety, and commissioning workflows. Connect field and office teams with real-time data, reduce rework, and deliver projects on time and on budget.",
+          "icon": "check"
+        },
+        {
+          "title": "Faster Commissioning",
+          "body": "Discover how Autodesk Build transforms field management",
+          "icon": "check"
+        },
+        {
+          "title": "Better Collaboration",
+          "body": "Create and execute quality control checklists, track deficiencies, and ensure work meets specifications with comprehensive quality management tools.",
+          "icon": "check"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Autodesk Build?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Official Autodesk Gold Partner",
+          "body": "Field management software that helps construction teams improve quality, safety, and commissioning workflows",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Autodesk Build is a powerful field management software designed to help construction teams streamline quality, safety, and commissioning workflows. Connect field and office teams with real-time data, reduce rework, and deliver projects on time and on budget.",
+          "icon": "medal"
+        },
+        {
+          "title": "Local Presence",
+          "body": "Discover how Autodesk Build transforms field management",
+          "icon": "medal"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Create and execute quality control checklists, track deficiencies, and ensure work meets specifications with comprehensive quality management tools.",
+          "icon": "medal"
+        }
+      ]
+    }
+  ],
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

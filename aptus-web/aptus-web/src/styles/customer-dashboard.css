@@ -1,0 +1,4615 @@
+@charset "UTF-8";
+:root {
+  --e-global-color-primary: #1352A3;
+  --e-global-color-secondary: #67DB85;
+  --e-global-color-text: #FFFFFF;
+  --e-global-color-accent: #07111F;
+  --e-global-color-44705d8: #13934B;
+  --e-global-color-16ae55e: #248BCC;
+  --e-global-color-1f7292e: #F3F8FC;
+  --e-global-color-93edfed: #536477;
+  --e-global-typography-primary-font-family: Poppins, sans-serif;
+  --e-global-typography-primary-font-size: 16px;
+  --e-global-typography-primary-font-weight: 600;
+  --e-global-typography-secondary-font-family: Poppins, sans-serif;
+  --e-global-typography-secondary-font-weight: 400;
+  --e-global-typography-text-font-family: Poppins, sans-serif;
+  --e-global-typography-text-font-weight: 400;
+  --e-global-typography-accent-font-family: Poppins, sans-serif;
+  --e-global-typography-accent-font-weight: 500;
+  --e-global-typography-61814cf-font-family: Poppins, sans-serif;
+  --e-global-typography-61814cf-font-size: 18px;
+  --e-global-typography-61814cf-font-weight: 400;
+  --aptus-color-primary: #1352A3;
+  --aptus-color-secondary: #67DB85;
+  --aptus-color-success: #16A34A;
+  --aptus-color-danger: #DC2626;
+  --aptus-color-text: #07111F;
+  --aptus-color-muted: #536477;
+  --aptus-color-surface: #FFFFFF;
+  --aptus-color-surface-muted: #F3F8FC;
+  --aptus-font-display: Poppins, sans-serif;
+  --aptus-font-body: Poppins, sans-serif;
+  --aptus-type-xs: 0.75rem;
+  --aptus-type-sm: 0.875rem;
+  --aptus-type-md: 1rem;
+  --aptus-type-lg: clamp(1.0625rem, 1.05vw, 1.175rem);
+  --aptus-type-xl: clamp(1.18rem, 1.25vw, 1.32rem);
+  --aptus-type-2xl: clamp(1.4rem, 1.65vw, 1.75rem);
+  --aptus-type-3xl: clamp(1.8rem, 2.35vw, 2.35rem);
+  --aptus-type-4xl: clamp(2.15rem, 3.5vw, 3.15rem);
+  --aptus-type-5xl: clamp(2.65rem, 5.4vw, 4.7rem);
+  --aptus-line-tight: 1.02;
+  --aptus-line-title: 1.1;
+  --aptus-line-body: 1.7;
+  --aptus-space-1: 0.25rem;
+  --aptus-space-2: 0.5rem;
+  --aptus-space-3: 0.75rem;
+  --aptus-space-4: 1rem;
+  --aptus-space-5: 1.25rem;
+  --aptus-space-6: 1.5rem;
+  --aptus-space-8: 2rem;
+  --aptus-space-10: 2.5rem;
+  --aptus-space-12: 3rem;
+  --aptus-space-16: 4rem;
+  --aptus-space-20: 5rem;
+  --aptus-space-24: 6rem;
+  --aptus-space-32: 8rem;
+  --aptus-radius-xs: 0.375rem;
+  --aptus-radius-sm: 0.5rem;
+  --aptus-radius-md: 0.75rem;
+  --aptus-radius-lg: 1rem;
+  --aptus-radius-xl: 1.375rem;
+  --aptus-radius-2xl: 2rem;
+  --aptus-radius-pill: 999px;
+  --aptus-shadow-xs: 0 1px 2px rgba(19, 82, 163, 0.05);
+  --aptus-shadow-sm: 0 12px 30px rgba(19, 82, 163, 0.075);
+  --aptus-shadow-md: 0 18px 46px rgba(19, 82, 163, 0.105);
+  --aptus-shadow-lg: 0 28px 72px rgba(19, 82, 163, 0.135);
+  --aptus-shadow-xl: 0 38px 96px rgba(19, 82, 163, 0.17);
+  --aptus-transition-fast: 160ms cubic-bezier(0.4, 0, 0.2, 1);
+  --aptus-transition-base: all 260ms cubic-bezier(0.4, 0, 0.2, 1);
+  --aptus-breakpoint-sm: 576px;
+  --aptus-breakpoint-md: 768px;
+  --aptus-breakpoint-lg: 992px;
+  --aptus-breakpoint-xl: 1200px;
+  --aptus-breakpoint-xxl: 1400px;
+}
+
+.aptus-customer-auth,
+.aptus-customer-dashboard {
+  background: radial-gradient(circle at 8% 4%, rgba(103, 219, 133, 0.18), transparent 26%), radial-gradient(circle at 92% 8%, rgba(36, 139, 204, 0.14), transparent 30%), linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(243, 248, 252, 0.94) 44%, #eef5fb 100%);
+  color: #07111F;
+  font-family: var(--aptus-dashboard-font, Poppins, sans-serif);
+  font-size: 1rem;
+  line-height: 1.62;
+}
+
+.aptus-customer-auth {
+  min-height: auto;
+}
+
+.aptus-customer-dashboard {
+  min-height: 100vh;
+}
+.aptus-customer-auth h1,
+.aptus-customer-auth h2,
+.aptus-customer-auth h3,
+.aptus-customer-auth h4,
+.aptus-customer-auth h5,
+.aptus-customer-auth h6,
+.aptus-customer-dashboard h1,
+.aptus-customer-dashboard h2,
+.aptus-customer-dashboard h3,
+.aptus-customer-dashboard h4,
+.aptus-customer-dashboard h5,
+.aptus-customer-dashboard h6 {
+  color: #1352A3;
+  font-family: var(--aptus-dashboard-font, Poppins, sans-serif);
+  font-weight: 680;
+  letter-spacing: -0.032em;
+  line-height: 1.12;
+  margin-top: 0;
+  text-wrap: balance;
+}
+.aptus-customer-auth p,
+.aptus-customer-dashboard p {
+  margin-bottom: 0;
+  text-wrap: pretty;
+}
+.aptus-customer-auth .aptus-section__eyebrow,
+.aptus-customer-dashboard .aptus-section__eyebrow {
+  background: rgba(103, 219, 133, 0.14);
+  border: 1px solid rgba(103, 219, 133, 0.24);
+  border-radius: 999px;
+  color: #13934B;
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  text-transform: uppercase;
+}
+
+.aptus-customer-dashboard {
+  --aptus-dashboard-font: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+.aptus-customer-dashboard .aptus-navbar {
+  position: relative;
+  right: 0;
+  top: auto;
+  transform: none !important;
+  will-change: auto;
+}
+.aptus-customer-dashboard .aptus-navbar.is-hidden {
+  transform: none;
+}
+
+.aptus-auth {
+  min-height: 100vh;
+  padding-top: 128px;
+  position: relative;
+}
+
+/* Login/register use the site masthead — no legacy navbar offset */
+.aptus-customer-auth .aptus-auth {
+  min-height: auto;
+  padding-top: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.aptus-customer-auth .aptus-auth__hero {
+  align-items: flex-start;
+  min-height: auto;
+  padding: clamp(1.25rem, 2.5vw, 2rem) 0 clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.aptus-customer-auth .aptus-auth__hero--register {
+  padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.aptus-auth::before,
+.aptus-auth::after {
+  border-radius: 50%;
+  content: "";
+  filter: blur(8px);
+  opacity: 0.7;
+  pointer-events: none;
+  position: absolute;
+}
+
+.aptus-auth::before {
+  background: rgba(103, 219, 133, 0.28);
+  height: 280px;
+  left: -120px;
+  top: 18%;
+  width: 280px;
+}
+
+.aptus-auth::after {
+  background: rgba(36, 139, 204, 0.18);
+  bottom: 10%;
+  height: 340px;
+  right: -140px;
+  width: 340px;
+}
+
+.aptus-auth__hero {
+  align-items: center;
+  display: flex;
+  min-height: calc(100vh - 128px);
+  padding: clamp(3rem, 8vw, 6rem) 0;
+}
+
+.aptus-auth__hero > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.aptus-auth__intro {
+  max-width: 660px;
+}
+
+.aptus-auth__intro h1 {
+  color: #1352A3;
+  font-size: clamp(2.45rem, 5vw, 4.35rem);
+  margin-bottom: 1.25rem;
+}
+
+.aptus-auth__intro p {
+  color: rgb(57.8534653465, 69.702970297, 82.9465346535);
+  font-size: clamp(1.0625rem, 1.05vw, 1.175rem);
+  max-width: 680px;
+}
+
+.aptus-auth__trust {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 2rem;
+}
+
+.aptus-auth__trust div {
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(19, 82, 163, 0.08);
+  border-radius: 1.375rem;
+  box-shadow: 0 12px 30px rgba(19, 82, 163, 0.075);
+  padding: 1.25rem;
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 260ms cubic-bezier(0.4, 0, 0.2, 1), border-color 220ms ease, background-color 220ms ease, color 220ms ease;
+}
+
+.aptus-auth__trust div:hover {
+  box-shadow: 0 18px 46px rgba(19, 82, 163, 0.105);
+  transform: translateY(-2px);
+}
+
+.aptus-auth__trust strong {
+  color: #1352A3;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.aptus-auth__trust span {
+  color: rgb(57.8534653465, 69.702970297, 82.9465346535);
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.aptus-status {
+  background: rgba(103, 219, 133, 0.18);
+  border-radius: 999px;
+  color: #1352A3;
+  display: inline-flex;
+  font-size: 0.875rem;
+  font-weight: 800;
+  line-height: 1.2;
+  padding: 0.5rem 1rem;
+}
+
+.aptus-auth-card,
+.aptus-dashboard-card,
+.aptus-dashboard-sidebar {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.92)) padding-box, linear-gradient(135deg, rgba(19, 82, 163, 0.1), rgba(103, 219, 133, 0.18)) border-box;
+  border: 1px solid transparent;
+  border-radius: 1.35rem;
+  box-shadow: 0 18px 48px rgba(19, 82, 163, 0.08);
+}
+
+.aptus-auth-card {
+  backdrop-filter: blur(18px);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  position: relative;
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 260ms cubic-bezier(0.4, 0, 0.2, 1), border-color 220ms ease, background-color 220ms ease, color 220ms ease;
+}
+
+.aptus-auth-card:hover,
+.aptus-auth-card:focus-within {
+  box-shadow: 0 38px 96px rgba(19, 82, 163, 0.17);
+  transform: translateY(-2px);
+}
+
+.aptus-auth-card__head {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.aptus-auth-card__head img {
+  display: block;
+  margin: 0 auto 1.25rem;
+  max-height: 54px;
+  width: auto;
+}
+
+.aptus-auth-card__head span,
+.aptus-dashboard-section-head span,
+.aptus-dashboard-card--highlight > span,
+.aptus-subscription-card > div:first-child span {
+  color: #13934B;
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.aptus-auth-card__head h2 {
+  margin-bottom: 0.75rem;
+}
+
+.aptus-auth-card__head p,
+.aptus-auth-access span,
+.aptus-auth-access p,
+.aptus-auth-card__foot {
+  color: #536477;
+}
+
+.aptus-auth-access {
+  background: radial-gradient(circle at top right, rgba(103, 219, 133, 0.22), transparent 38%), rgba(19, 82, 163, 0.045);
+  border: 1px solid rgba(19, 82, 163, 0.08);
+  border-radius: 1.375rem;
+  display: grid;
+  gap: 0.25rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.25rem;
+}
+
+.aptus-auth-access span {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.aptus-auth-access strong {
+  color: #1352A3;
+  font-size: 0.875rem;
+}
+
+.aptus-auth-access p {
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.aptus-auth-card__foot {
+  font-size: 0.875rem;
+  margin: 1.25rem 0 0;
+  text-align: center;
+}
+
+.aptus-auth-alert {
+  color: #DC2626;
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  min-height: 1.25rem;
+  text-align: center;
+  transition: color 160ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.aptus-auth-alert.is-success {
+  color: rgb(17.1481081081, 127.0518918919, 57.68);
+}
+
+.aptus-field {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  text-align: left;
+}
+
+.aptus-field label,
+.aptus-field span {
+  color: #1352A3;
+  font-size: 0.875rem;
+  font-weight: 800;
+}
+
+.aptus-field .form-control {
+  border: 1px solid rgba(19, 82, 163, 0.14);
+  border-radius: 1rem;
+  min-height: 52px;
+  padding: 0.75rem 1rem;
+  transition: border-color 160ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 160ms cubic-bezier(0.4, 0, 0.2, 1), background-color 160ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.aptus-field .form-control:focus {
+  border-color: #67DB85;
+  box-shadow: 0 0 0 0.22rem rgba(103, 219, 133, 0.22);
+}
+
+.aptus-field .form-control::placeholder {
+  color: rgba(83, 100, 119, 0.72);
+}
+
+.aptus-field.is-invalid .form-control,
+.aptus-field .form-control.is-invalid {
+  background-color: rgba(220, 38, 38, 0.035);
+  border-color: rgba(220, 38, 38, 0.72);
+  box-shadow: 0 0 0 0.18rem rgba(220, 38, 38, 0.12);
+}
+
+.aptus-field__error {
+  color: #DC2626;
+  font-size: 0.75rem;
+  font-weight: 700;
+  min-height: 1rem;
+}
+
+.aptus-auth-options {
+  align-items: center;
+  color: rgb(57.8534653465, 69.702970297, 82.9465346535);
+  display: flex;
+  font-size: 0.875rem;
+  font-weight: 700;
+  gap: 0.5rem;
+  margin: 0 0 1.25rem;
+}
+
+.aptus-auth-options input {
+  accent-color: #1352A3;
+  height: 1rem;
+  width: 1rem;
+}
+
+.aptus-auth-card .btn-aptus-primary {
+  box-shadow: 0 16px 36px rgba(19, 82, 163, 0.22);
+  min-height: 52px;
+}
+
+.aptus-auth-card.is-submitting {
+  pointer-events: none;
+}
+
+.aptus-auth-card.is-submitting .btn-aptus-primary {
+  opacity: 0.82;
+}
+
+.aptus-auth-card.is-success {
+  border-color: rgba(22, 163, 74, 0.34);
+}
+
+.aptus-auth__hero--register {
+  padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.aptus-auth__intro--register {
+  margin-bottom: 1.25rem;
+  max-width: 760px;
+}
+
+.aptus-register-form {
+  max-width: 980px;
+  width: 100%;
+}
+
+.aptus-register-form__type {
+  border: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 0 0 1.5rem;
+  padding: 0;
+}
+
+.aptus-register-form__type-option {
+  align-items: center;
+  color: rgb(57.8534653465, 69.702970297, 82.9465346535);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  gap: 0.5rem;
+}
+
+.aptus-register-form__type-option input {
+  accent-color: #1352A3;
+  height: 1rem;
+  width: 1rem;
+}
+
+.aptus-register-form__identity {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 92px minmax(0, 1fr);
+  margin-bottom: 1.5rem;
+}
+
+.aptus-register-form__avatar {
+  align-items: center;
+  background: rgba(19, 82, 163, 0.06);
+  border: 1px dashed rgba(19, 82, 163, 0.18);
+  border-radius: 0.75rem;
+  color: rgba(19, 82, 163, 0.55);
+  display: flex;
+  height: 92px;
+  justify-content: center;
+  width: 92px;
+}
+
+.aptus-register-form__avatar svg {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.aptus-register-form__identity-fields {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.aptus-register-form__name {
+  margin-bottom: 0;
+}
+
+.aptus-register-form__name .form-control {
+  font-size: 1.35rem;
+  font-weight: 700;
+  min-height: 58px;
+}
+
+.aptus-register-form__contact-row {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.aptus-register-form__contact-row .aptus-field {
+  margin-bottom: 0;
+}
+
+.aptus-register-form__details {
+  border-top: 1px solid rgba(19, 82, 163, 0.1);
+  display: grid;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+  padding-top: 1.5rem;
+}
+
+.aptus-register-form__row {
+  align-items: start;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.aptus-register-form__details .aptus-field,
+.aptus-register-form__row .aptus-field {
+  margin-bottom: 0;
+}
+
+.aptus-register-form__section-label {
+  color: #1352A3;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.aptus-register-form__split {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.aptus-register-form__split .aptus-field {
+  margin-bottom: 0;
+}
+
+.aptus-register-form__portal {
+  border-top: 1px solid rgba(19, 82, 163, 0.1);
+  margin-bottom: 1.25rem;
+  padding-top: 1.25rem;
+}
+
+.aptus-register-form .form-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+.aptus-profile-card .aptus-register-form {
+  margin-top: 1rem;
+}
+
+.aptus-profile-card .aptus-profile-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  margin-top: 1.5rem;
+}
+
+.aptus-profile-card .aptus-auth-card__foot {
+  margin-bottom: 0;
+  margin-top: 1.25rem;
+}
+
+.aptus-profile-card .form-control[readonly] {
+  background-color: rgba(19, 82, 163, 0.04);
+  color: rgb(57.8534653465, 69.702970297, 82.9465346535);
+}
+
+.aptus-auth-alert.is-error {
+  color: #DC2626;
+}
+
+.aptus-auth-alert.is-error a {
+  color: #1352A3;
+  font-weight: 700;
+}
+
+.aptus-register-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.aptus-register-steps__item {
+  background: rgba(19, 82, 163, 0.06);
+  border-radius: 999px;
+  color: rgb(57.8534653465, 69.702970297, 82.9465346535);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  padding: 0.35rem 0.85rem;
+}
+
+.aptus-register-steps__item.is-active {
+  background: rgba(19, 82, 163, 0.14);
+  color: #1352A3;
+}
+
+.aptus-register-steps__item.is-complete {
+  background: rgba(22, 163, 74, 0.12);
+  color: #15803D;
+}
+
+.aptus-register-form__type--cards {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 1.25rem;
+}
+
+.aptus-register-type-card {
+  border: 1px solid rgba(19, 82, 163, 0.14);
+  border-radius: 0.85rem;
+  cursor: pointer;
+  display: grid;
+  gap: 0.35rem;
+  padding: 1rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.aptus-register-type-card input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.aptus-register-type-card.is-selected {
+  border-color: rgba(19, 82, 163, 0.45);
+  box-shadow: 0 0 0 3px rgba(19, 82, 163, 0.08);
+}
+
+.aptus-register-type-card__label {
+  color: #1352A3;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.aptus-register-type-card__hint {
+  color: rgb(57.8534653465, 69.702970297, 82.9465346535);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
+.aptus-register-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: space-between;
+  margin-top: 1.25rem;
+}
+
+.aptus-register-form__details--compact {
+  border-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+}
+
+.aptus-register-existing__panel {
+  background: rgba(19, 82, 163, 0.05);
+  border: 1px solid rgba(19, 82, 163, 0.14);
+  border-radius: 0.85rem;
+  margin-bottom: 1rem;
+  padding: 1.25rem;
+}
+
+.aptus-register-existing__panel h3 {
+  color: #1352A3;
+  font-size: 1.15rem;
+  margin: 0 0 0.75rem;
+}
+
+.aptus-register-existing__lead,
+.aptus-register-existing__hint {
+  color: rgb(57.8534653465, 69.702970297, 82.9465346535);
+  margin: 0 0 0.75rem;
+}
+
+.aptus-register-existing__account {
+  background: #fff;
+  border-radius: 0.65rem;
+  margin-bottom: 0.75rem;
+  padding: 0.85rem 1rem;
+}
+
+.aptus-register-existing__account span {
+  color: #1352A3;
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+}
+
+.aptus-register-existing__account p {
+  margin: 0.15rem 0 0;
+}
+
+.aptus-auth-card__foot a + a {
+  margin-left: 0.35rem;
+}
+
+@media (max-width: 991.98px) {
+  .aptus-register-form__type--cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .aptus-register-form__identity {
+    grid-template-columns: 1fr;
+  }
+
+  .aptus-register-form__avatar {
+    display: none;
+  }
+
+  .aptus-register-form__row,
+  .aptus-register-form__contact-row,
+  .aptus-register-form__split {
+    grid-template-columns: 1fr;
+  }
+}
+
+.aptus-dashboard-shell {
+  display: grid;
+  gap: clamp(1.5rem, 2.2vw, 2rem);
+  grid-template-columns: minmax(232px, 260px) minmax(0, 1fr);
+  margin: 0 auto;
+  max-width: 1480px;
+  min-height: 100vh;
+  padding: 1.5rem clamp(1rem, 2.6vw, 2.5rem) 3rem;
+}
+
+.aptus-dashboard-sidebar {
+  align-self: start;
+  backdrop-filter: blur(22px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  position: sticky;
+  top: 1.5rem;
+}
+
+.aptus-dashboard-user {
+  align-items: flex-start;
+  background: radial-gradient(circle at 92% 0%, rgba(103, 219, 133, 0.12), transparent 34%), rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(19, 82, 163, 0.07);
+  border-radius: 1.1rem;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: auto minmax(0, 1fr);
+  padding: 0.75rem;
+}
+
+.aptus-dashboard-user .btn {
+  grid-column: 1/-1;
+  min-height: 38px;
+  padding: 0.5rem 1rem;
+  width: 100%;
+}
+
+.aptus-dashboard-user__avatar {
+  align-items: center;
+  background: linear-gradient(135deg, #1352A3, rgb(12.610989011, 54.4263736264, 108.189010989));
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+  color: #FFFFFF;
+  display: inline-flex;
+  flex: 0 0 38px;
+  font-size: 0.78rem;
+  font-weight: 760;
+  height: 38px;
+  justify-content: center;
+  letter-spacing: 0.02em;
+  width: 38px;
+}
+
+.aptus-dashboard-user__avatar.has-image {
+  background-color: #1352A3;
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.7);
+}
+
+.aptus-dashboard-user div {
+  min-width: 0;
+  padding-top: 0.25rem;
+}
+
+.aptus-dashboard-user span:not(.aptus-dashboard-user__avatar) {
+  color: #536477;
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+}
+
+.aptus-dashboard-user strong,
+.aptus-dashboard-user p {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.aptus-dashboard-user strong {
+  color: #1352A3;
+  font-size: 0.875rem;
+  font-weight: 680;
+  line-height: 1.3;
+}
+
+.aptus-dashboard-user p {
+  color: rgb(62.0445544554, 74.7524752475, 88.9554455446);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  margin: 0.25rem 0 0;
+  text-transform: none;
+}
+
+.aptus-dashboard-nav,
+.aptus-dashboard-mobile-nav {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.aptus-dashboard-nav a,
+.aptus-dashboard-mobile-nav a {
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 0.95rem;
+  color: rgb(36.898019802, 44.4554455446, 52.901980198);
+  display: flex;
+  font-size: 0.875rem;
+  font-weight: 650;
+  gap: 0.45rem;
+  justify-content: space-between;
+  padding: 0.72rem 1rem;
+  position: relative;
+  text-align: left;
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 260ms cubic-bezier(0.4, 0, 0.2, 1), border-color 220ms ease, background-color 220ms ease, color 220ms ease;
+}
+
+.aptus-dashboard-nav a:hover,
+.aptus-dashboard-nav a:focus-visible,
+.aptus-dashboard-nav a.is-active,
+.aptus-dashboard-mobile-nav a:hover,
+.aptus-dashboard-mobile-nav a:focus-visible,
+.aptus-dashboard-mobile-nav a.is-active {
+  background: rgba(255, 255, 255, 0.86);
+  border-color: rgba(19, 82, 163, 0.08);
+  box-shadow: 0 12px 28px rgba(19, 82, 163, 0.08);
+  color: #1352A3;
+  transform: translateY(-2px);
+}
+
+.aptus-dashboard-nav a.is-active::before {
+  background: linear-gradient(180deg, #67DB85, #248BCC);
+  border-radius: 999px;
+  content: "";
+  height: 46%;
+  left: 0.5rem;
+  position: absolute;
+  top: 27%;
+  width: 3px;
+}
+
+.aptus-dashboard-sidebar__card {
+  background: radial-gradient(circle at 94% 8%, rgba(103, 219, 133, 0.1), transparent 34%), rgba(255, 255, 255, 0.66);
+  border: 1px solid rgba(19, 82, 163, 0.07);
+  border-radius: 1.1rem;
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.75rem;
+}
+
+.aptus-dashboard-sidebar__card span,
+.aptus-dashboard-table small {
+  color: #536477;
+  font-size: 0.875rem;
+}
+
+.aptus-dashboard-sidebar__card span {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.aptus-dashboard-sidebar__card strong {
+  color: #1352A3;
+  font-size: 0.875rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.aptus-dashboard-sidebar__card a {
+  color: rgb(57.8534653465, 69.702970297, 82.9465346535);
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.aptus-dashboard-sidebar__logout {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(19, 82, 163, 0.12);
+  border-radius: 1.1rem;
+  color: #1352a3;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin-top: auto;
+  padding: 0.85rem 0.75rem;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  width: 100%;
+}
+
+.aptus-dashboard-sidebar__logout:hover {
+  background: #fff;
+  border-color: rgba(19, 82, 163, 0.22);
+}
+
+.aptus-dashboard-main {
+  min-width: 0;
+}
+
+.aptus-dashboard-topbar {
+  align-items: stretch;
+  backdrop-filter: blur(20px);
+  background: radial-gradient(circle at 96% 4%, rgba(103, 219, 133, 0.12), transparent 28%), linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.9)) padding-box, linear-gradient(135deg, rgba(19, 82, 163, 0.08), rgba(103, 219, 133, 0.18)) border-box;
+  border: 1px solid transparent;
+  border-radius: 1.5rem;
+  box-shadow: 0 18px 44px rgba(19, 82, 163, 0.075);
+  display: block;
+  margin-bottom: 1.5rem;
+  padding: clamp(1.25rem, 2.2vw, 2rem);
+}
+
+.aptus-dashboard-topbar__copy {
+  max-width: 860px;
+  min-width: 0;
+}
+
+.aptus-dashboard-topbar h1 {
+  font-size: clamp(1.85rem, 2.6vw, 2.65rem);
+  font-weight: 720;
+  letter-spacing: -0.038em;
+  margin-bottom: 0.5rem;
+}
+
+.aptus-dashboard-topbar p {
+  color: rgb(57.8534653465, 69.702970297, 82.9465346535);
+  font-size: clamp(0.98rem, 1.05vw, 1.08rem);
+  line-height: 1.62;
+  margin: 0;
+  max-width: 760px;
+}
+
+.aptus-dashboard-mobile-nav {
+  display: none;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-bottom: 1.5rem;
+}
+
+.aptus-dashboard-content,
+.aptus-dashboard-grid {
+  display: grid;
+  gap: 1.25rem;
+  min-width: 0;
+}
+
+.aptus-dashboard-grid--metrics {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.aptus-dashboard-grid--split {
+  grid-template-columns: minmax(0, 1.28fr) minmax(300px, 0.72fr);
+}
+
+.aptus-overview-hero {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 1.45fr) repeat(2, minmax(220px, 0.72fr));
+}
+
+.aptus-overview-hero__primary,
+.aptus-overview-hero__insight {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(19, 82, 163, 0.075);
+  border-radius: 1.35rem;
+  box-shadow: 0 16px 42px rgba(19, 82, 163, 0.065);
+  min-width: 0;
+  padding: clamp(1.25rem, 2vw, 1.5rem);
+}
+
+.aptus-overview-hero__primary {
+  align-items: flex-start;
+  background: radial-gradient(circle at 92% 2%, rgba(103, 219, 133, 0.16), transparent 32%), linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.82));
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.aptus-overview-kicker,
+.aptus-overview-hero__insight span {
+  color: rgb(66.2356435644, 79.801980198, 94.9643564356);
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 720;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.aptus-overview-hero h2 {
+  font-size: clamp(1.42rem, 2vw, 1.95rem);
+  font-weight: 720;
+  letter-spacing: -0.035em;
+  margin-bottom: 0.5rem;
+}
+
+.aptus-overview-hero p {
+  color: rgb(53.6623762376, 64.6534653465, 76.9376237624);
+  font-size: 0.875rem;
+  line-height: 1.58;
+  margin: 0;
+}
+
+.aptus-overview-hero__insight {
+  display: grid;
+  align-content: start;
+}
+
+.aptus-overview-hero__insight strong {
+  color: #1352A3;
+  display: block;
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  font-weight: 720;
+  letter-spacing: -0.018em;
+  line-height: 1.35;
+  margin-bottom: 0.5rem;
+  overflow-wrap: anywhere;
+}
+
+.aptus-dashboard-card {
+  min-width: 0;
+  overflow: hidden;
+  padding: clamp(1.25rem, 1.8vw, 1.5rem);
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 260ms cubic-bezier(0.4, 0, 0.2, 1), border-color 220ms ease, background-color 220ms ease, color 220ms ease;
+  will-change: transform;
+}
+
+.aptus-dashboard-card:hover {
+  border-color: rgba(103, 219, 133, 0.24);
+  box-shadow: 0 22px 58px rgba(19, 82, 163, 0.105);
+  transform: translateY(-2px);
+}
+
+.aptus-dashboard-metric__top {
+  align-items: center;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.aptus-dashboard-metric__top span {
+  color: rgb(62.0445544554, 74.7524752475, 88.9554455446);
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 720;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.aptus-dashboard-metric__top em {
+  align-items: center;
+  background: rgba(103, 219, 133, 0.14);
+  border: 1px solid rgba(103, 219, 133, 0.26);
+  border-radius: 999px;
+  color: rgb(14.3301204819, 110.8698795181, 56.5662650602);
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-size: 0.68rem;
+  font-style: normal;
+  font-weight: 720;
+  min-height: 26px;
+  justify-content: center;
+  letter-spacing: 0.01em;
+  padding: 0.25rem 0.5rem;
+}
+
+.aptus-dashboard-metric__value,
+.aptus-dashboard-metric strong,
+.aptus-dashboard-card--highlight h2 {
+  color: #1352A3;
+  display: block;
+  font-size: clamp(1.48rem, 2vw, 2rem);
+  font-weight: 720;
+  letter-spacing: -0.038em;
+  line-height: 1.05;
+  margin-bottom: 0.5rem;
+  overflow-wrap: anywhere;
+}
+
+.aptus-dashboard-metric--compact .aptus-dashboard-metric__value {
+  font-size: clamp(1.22rem, 1.6vw, 1.58rem);
+  line-height: 1.16;
+}
+
+.aptus-dashboard-metric {
+  display: flex;
+  flex-direction: column;
+  min-height: 142px;
+}
+
+.aptus-dashboard-metric p,
+.aptus-dashboard-card--highlight p,
+.aptus-subscription-card p {
+  color: rgb(57.8534653465, 69.702970297, 82.9465346535);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.aptus-dashboard-card--highlight {
+  background: radial-gradient(circle at 88% 8%, rgba(103, 219, 133, 0.24), transparent 34%), linear-gradient(145deg, rgb(17.4027472527, 75.1065934066, 149.2972527473), rgb(11.0137362637, 47.532967033, 94.4862637363));
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 64px rgba(19, 82, 163, 0.18);
+  color: #FFFFFF;
+}
+
+.aptus-dashboard-card--highlight h2,
+.aptus-dashboard-card--highlight p,
+.aptus-dashboard-card--highlight > span {
+  color: #FFFFFF;
+}
+
+.aptus-dashboard-card--highlight .btn {
+  margin-top: 1.25rem;
+}
+
+.aptus-dashboard-section-head {
+  align-items: flex-start;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.aptus-dashboard-section-head h2 {
+  font-size: clamp(1.08rem, 1.35vw, 1.32rem);
+  font-weight: 720;
+  letter-spacing: -0.028em;
+  margin: 0;
+}
+
+.aptus-dashboard-section-head a {
+  color: #13934B;
+  font-size: 0.875rem;
+  font-weight: 680;
+  padding-top: 0.25rem;
+}
+
+.aptus-dashboard-table {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.aptus-dashboard-table__row {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(19, 82, 163, 0.055);
+  border-radius: 0.9rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(108px, 1fr) minmax(190px, 1.6fr) minmax(64px, 0.55fr) minmax(90px, 0.75fr) minmax(108px, 0.85fr);
+  min-height: 58px;
+  min-width: 0;
+  padding: 0.75rem 1rem;
+}
+
+.aptus-dashboard-table--renewals .aptus-dashboard-table__row {
+  grid-template-columns: minmax(190px, 1.35fr) minmax(120px, 1fr) minmax(110px, 0.85fr) minmax(104px, 0.9fr) minmax(108px, 0.85fr);
+}
+
+.aptus-dashboard-table__row:not(.aptus-dashboard-table__head) {
+  transition: background-color 160ms cubic-bezier(0.4, 0, 0.2, 1), transform 160ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.aptus-dashboard-table__row:not(.aptus-dashboard-table__head):hover {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(103, 219, 133, 0.28);
+  box-shadow: 0 12px 28px rgba(19, 82, 163, 0.055);
+  transform: translateY(-2px);
+}
+
+.aptus-dashboard-table__head {
+  background: transparent;
+  color: #536477;
+  border-color: transparent;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  min-height: auto;
+  padding-bottom: 0.25rem;
+  padding-top: 0;
+  text-transform: uppercase;
+}
+
+.aptus-dashboard-table__row > span {
+  color: rgb(45.2801980198, 54.5544554455, 64.9198019802);
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.aptus-dashboard-table strong,
+.aptus-dashboard-table small {
+  display: block;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.aptus-dashboard-table strong {
+  color: #1352A3;
+  font-size: 0.875rem;
+  font-weight: 680;
+  line-height: 1.35;
+}
+
+.aptus-dashboard-table small {
+  color: #536477;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  margin-top: 0.25rem;
+}
+
+.aptus-status {
+  border: 0;
+  margin: 0;
+}
+
+.aptus-status--delivered,
+.aptus-status--active {
+  background: rgba(22, 163, 74, 0.12);
+  color: rgb(15.9351351351, 118.0648648649, 53.6);
+}
+
+.aptus-status--renewed,
+.aptus-status--monitoring {
+  background: rgba(36, 139, 204, 0.12);
+  color: rgb(23.76, 91.74, 134.64);
+}
+
+.aptus-status--due-soon {
+  background: rgba(103, 219, 133, 0.22);
+  color: rgb(15.4975903614, 119.9024096386, 61.1746987952);
+}
+
+.aptus-status--scheduled,
+.aptus-status--planned,
+.aptus-status--confirmed {
+  background: rgba(19, 82, 163, 0.08);
+  color: #1352A3;
+}
+
+.aptus-status--action-required {
+  background: rgba(103, 219, 133, 0.2);
+  color: rgb(36.2680851064, 153.1319148936, 66.4914893617);
+}
+
+.aptus-subscription-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.aptus-subscription-card {
+  background: radial-gradient(circle at 98% 0%, rgba(103, 219, 133, 0.1), transparent 34%), rgba(255, 255, 255, 0.76);
+  border: 1px solid rgba(19, 82, 163, 0.06);
+  border-radius: 1rem;
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 260ms cubic-bezier(0.4, 0, 0.2, 1), border-color 220ms ease, background-color 220ms ease, color 220ms ease;
+  will-change: transform;
+}
+
+.aptus-subscription-card:hover {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(103, 219, 133, 0.28);
+  box-shadow: 0 14px 34px rgba(19, 82, 163, 0.06);
+  transform: translateY(-2px);
+}
+
+.aptus-subscription-card h3 {
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  font-weight: 720;
+  letter-spacing: -0.024em;
+  margin-bottom: 0.25rem;
+  overflow-wrap: anywhere;
+}
+
+.aptus-subscription-card__meta {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: space-between;
+}
+
+.aptus-subscription-card__meta strong {
+  color: #1352A3;
+}
+
+.aptus-progress {
+  background: rgba(19, 82, 163, 0.08);
+  border-radius: 999px;
+  height: 6px;
+  overflow: hidden;
+}
+
+.aptus-progress span {
+  background: linear-gradient(90deg, #67DB85, #248BCC);
+  border-radius: inherit;
+  display: block;
+  height: 100%;
+}
+
+.aptus-subscription-hero {
+  align-items: stretch;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
+}
+
+.aptus-subscription-hero h2,
+.aptus-subscription-section__head h2 {
+  font-size: clamp(1.55rem, 2.4vw, 2.25rem);
+  margin-bottom: 0.75rem;
+}
+
+.aptus-subscription-hero p,
+.aptus-subscription-section__head p {
+  color: rgb(57.8534653465, 69.702970297, 82.9465346535);
+  font-size: clamp(1.0625rem, 1.05vw, 1.175rem);
+  max-width: 760px;
+}
+
+.aptus-subscription-hero__panel {
+  background: radial-gradient(circle at 88% 10%, rgba(103, 219, 133, 0.28), transparent 40%), linear-gradient(145deg, rgba(19, 82, 163, 0.96), rgb(12.0785714286, 52.1285714286, 103.6214285714));
+  border-radius: 1.375rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  justify-content: space-between;
+  padding: 1.5rem;
+}
+
+.aptus-subscription-hero__panel span,
+.aptus-subscription-section__head span,
+.aptus-group-plan-meta span {
+  color: #67DB85;
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.aptus-subscription-hero__panel strong {
+  display: block;
+  font-size: clamp(1.4rem, 1.65vw, 1.75rem);
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+}
+
+.aptus-subscription-hero__panel p {
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 0.875rem;
+}
+
+.aptus-billing-toggle {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  display: grid;
+  gap: 0.25rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 0.75rem;
+  padding: 0.25rem;
+}
+
+.aptus-billing-toggle button {
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.875rem;
+  font-weight: 800;
+  min-height: 42px;
+  padding: 0.5rem 1rem;
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 260ms cubic-bezier(0.4, 0, 0.2, 1), border-color 220ms ease, background-color 220ms ease, color 220ms ease;
+}
+
+.aptus-billing-toggle button:hover,
+.aptus-billing-toggle button:focus-visible,
+.aptus-billing-toggle button.is-active {
+  background: #FFFFFF;
+  box-shadow: 0 12px 28px rgba(7, 17, 31, 0.16);
+  color: #1352A3;
+  transform: translateY(-2px);
+}
+
+.aptus-billing-toggle span {
+  color: #13934B;
+  display: inline;
+  font-size: 0.68rem;
+  letter-spacing: 0;
+  margin-left: 0.25rem;
+  text-transform: none;
+}
+
+.aptus-subscription-section {
+  display: grid;
+  gap: 1.5rem;
+  min-width: 0;
+}
+
+.aptus-subscription-section__head {
+  align-items: end;
+  display: flex;
+  gap: 1.25rem;
+  justify-content: space-between;
+}
+
+.aptus-subscription-section__head h2 {
+  max-width: 860px;
+}
+
+.aptus-pricing-grid {
+  align-items: stretch;
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.aptus-pricing-card {
+  background: radial-gradient(circle at 88% 8%, rgba(103, 219, 133, 0.14), transparent 34%), linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.92));
+  border: 1px solid rgba(19, 82, 163, 0.1);
+  border-radius: 2rem;
+  box-shadow: 0 18px 46px rgba(19, 82, 163, 0.105);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  min-height: 100%;
+  overflow: hidden;
+  padding: clamp(1.25rem, 2.25vw, 2rem);
+  position: relative;
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 260ms cubic-bezier(0.4, 0, 0.2, 1), border-color 220ms ease, background-color 220ms ease, color 220ms ease;
+  will-change: transform;
+}
+
+.aptus-pricing-card::before {
+  background: linear-gradient(90deg, rgba(103, 219, 133, 0.82), rgba(36, 139, 204, 0.55));
+  content: "";
+  height: 4px;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: opacity 160ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.aptus-pricing-card:hover,
+.aptus-pricing-card:focus-within,
+.aptus-pricing-card.is-selected {
+  border-color: rgba(103, 219, 133, 0.48);
+  box-shadow: 0 38px 96px rgba(19, 82, 163, 0.17);
+  transform: translateY(-6px);
+}
+
+.aptus-pricing-card:hover::before,
+.aptus-pricing-card:focus-within::before,
+.aptus-pricing-card.is-selected::before,
+.aptus-pricing-card.is-active::before,
+.aptus-pricing-card.is-recommended::before {
+  opacity: 1;
+}
+
+.aptus-pricing-card.is-recommended {
+  background: radial-gradient(circle at 84% 10%, rgba(103, 219, 133, 0.22), transparent 36%), linear-gradient(180deg, rgba(255, 255, 255, 0.995), rgba(243, 248, 252, 0.86));
+  border-color: rgba(103, 219, 133, 0.46);
+}
+
+.aptus-pricing-card.is-active {
+  box-shadow: 0 30px 84px rgba(19, 82, 163, 0.16);
+}
+
+.aptus-pricing-card.is-cycle-changing .aptus-plan-price {
+  transform: translateY(-2px);
+}
+
+.aptus-pricing-card__top {
+  align-items: flex-start;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+  min-height: 142px;
+}
+
+.aptus-pricing-card h3 {
+  font-size: clamp(1.35rem, 2.2vw, 2rem);
+  margin: 0.5rem 0 0.75rem;
+}
+
+.aptus-pricing-card p {
+  color: rgb(57.8534653465, 69.702970297, 82.9465346535);
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+.aptus-plan-badge {
+  background: rgba(103, 219, 133, 0.18);
+  border: 1px solid rgba(103, 219, 133, 0.32);
+  border-radius: 999px;
+  color: rgb(16.665060241, 128.934939759, 65.7831325301);
+  display: inline-flex;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  padding: 0.5rem 0.75rem;
+  text-transform: uppercase;
+}
+
+.aptus-plan-price {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  transition: transform 160ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.aptus-plan-price strong {
+  color: #1352A3;
+  font-size: clamp(2.25rem, 4.6vw, 3.45rem);
+  letter-spacing: -0.06em;
+  line-height: 0.98;
+}
+
+.aptus-plan-price span {
+  color: #536477;
+  font-size: 0.875rem;
+  font-weight: 800;
+}
+
+.aptus-plan-features {
+  display: grid;
+  gap: 0.75rem;
+  list-style: none;
+  margin: 0 0 auto;
+  padding: 0;
+}
+
+.aptus-plan-features li {
+  align-items: flex-start;
+  color: rgb(49.4712871287, 59.603960396, 70.9287128713);
+  display: flex;
+  font-size: 0.875rem;
+  gap: 0.75rem;
+  line-height: 1.55;
+}
+
+.aptus-plan-features li::before {
+  align-items: center;
+  background: rgba(103, 219, 133, 0.18);
+  border-radius: 50%;
+  color: #13934B;
+  content: "✓";
+  display: inline-flex;
+  flex: 0 0 22px;
+  font-size: 0.82rem;
+  font-weight: 900;
+  height: 22px;
+  justify-content: center;
+  margin-top: 0.05rem;
+  width: 22px;
+}
+
+.aptus-group-plan-meta {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.aptus-group-plan-meta div {
+  background: rgba(19, 82, 163, 0.045);
+  border: 1px solid rgba(19, 82, 163, 0.065);
+  border-radius: 1rem;
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.75rem;
+}
+
+.aptus-group-plan-meta strong {
+  color: #1352A3;
+  font-size: 0.875rem;
+  line-height: 1.35;
+}
+
+.aptus-plan-comparison {
+  padding-bottom: 1.5rem;
+}
+
+.aptus-comparison-table {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.aptus-comparison-table__row {
+  align-items: center;
+  background: rgba(19, 82, 163, 0.035);
+  border: 1px solid rgba(19, 82, 163, 0.055);
+  border-radius: 1.375rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1.05fr 0.85fr 1.2fr 0.9fr;
+  padding: 1rem 1.25rem;
+}
+
+.aptus-comparison-table__head {
+  background: transparent;
+  color: #536477;
+  font-size: 0.875rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.aptus-comparison-table__row:not(.aptus-comparison-table__head) span:first-child {
+  color: #1352A3;
+  font-weight: 900;
+}
+
+.aptus-portal-list,
+.aptus-activity-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.aptus-portal-list article,
+.aptus-activity-list article {
+  align-items: flex-start;
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(19, 82, 163, 0.055);
+  border-radius: 0.95rem;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 260ms cubic-bezier(0.4, 0, 0.2, 1), border-color 220ms ease, background-color 220ms ease, color 220ms ease;
+}
+
+.aptus-portal-list article:hover,
+.aptus-activity-list article:hover {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(103, 219, 133, 0.28);
+  box-shadow: 0 12px 28px rgba(19, 82, 163, 0.055);
+  transform: translateY(-2px);
+}
+
+.aptus-portal-list strong,
+.aptus-activity-list strong {
+  color: #1352A3;
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 680;
+  margin-bottom: 0.25rem;
+  overflow-wrap: anywhere;
+}
+
+.aptus-portal-list p,
+.aptus-activity-list p {
+  color: rgb(57.8534653465, 69.702970297, 82.9465346535);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.aptus-notification-meta {
+  color: #64748b;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.75rem;
+  gap: 0.65rem;
+  margin-top: 0.45rem;
+}
+
+.aptus-portal-list article.aptus-notification--unread {
+  background: rgba(36, 139, 204, 0.06);
+  border-color: rgba(36, 139, 204, 0.18);
+}
+
+.aptus-portal-list article.aptus-notification--read {
+  opacity: 0.72;
+}
+
+.aptus-portal-list article.aptus-notification--read strong {
+  color: #64748b;
+  font-weight: 600;
+}
+
+.aptus-notification__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.aptus-notification-count-badge {
+  align-items: center;
+  background: #e2e8f0;
+  border-radius: 6px;
+  color: #475569;
+  display: inline-flex;
+  font-size: 0.72rem;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 1;
+  min-width: 1.35rem;
+  padding: 0.18rem 0.38rem;
+}
+
+.aptus-notification-count-badge.is-active {
+  background: #248bcc;
+  color: #fff;
+}
+
+.aptus-notifications-tabs {
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.aptus-notifications-tabs button {
+  align-items: center;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #64748b;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 0.9rem;
+  font-weight: 600;
+  gap: 0.45rem;
+  margin-bottom: -1px;
+  padding: 0.55rem 0;
+  transition: color 180ms ease, border-color 180ms ease;
+}
+
+.aptus-notifications-tabs button.is-active {
+  border-bottom-color: #1a1a1a;
+  color: #1a1a1a;
+}
+
+.aptus-notifications-tabs button:hover,
+.aptus-notifications-tabs button:focus-visible {
+  color: #1a1a1a;
+}
+
+.aptus-overview-v2__card-head-action {
+  align-items: center;
+  display: flex;
+  gap: 0.65rem;
+}
+
+.aptus-overview-v2__alert--unread strong {
+  color: #1352A3;
+}
+
+.aptus-notifications-summary {
+  color: #248bcc;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.aptus-dashboard-section-foot {
+  margin-top: 1rem;
+  text-align: right;
+}
+
+.aptus-dashboard-section-foot a {
+  color: #248bcc;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.aptus-dashboard-section-foot a:hover {
+  text-decoration: underline;
+}
+
+.aptus-activity-list article {
+  justify-content: flex-start;
+}
+
+.aptus-activity-list article > span {
+  background: linear-gradient(135deg, #67DB85, #248BCC);
+  border-radius: 50%;
+  flex: 0 0 12px;
+  height: 12px;
+  margin-top: 0.35rem;
+  width: 12px;
+}
+
+.aptus-profile-card {
+  max-width: 860px;
+}
+
+.aptus-profile-photo {
+  align-items: center;
+  background: radial-gradient(circle at 96% 8%, rgba(103, 219, 133, 0.14), transparent 34%), rgba(19, 82, 163, 0.035);
+  border: 1px solid rgba(19, 82, 163, 0.075);
+  border-radius: 1.375rem;
+  display: grid;
+  gap: 1rem;
+  grid-column: 1/-1;
+  grid-template-columns: auto minmax(0, 1fr);
+  padding: 1rem;
+}
+
+.aptus-profile-photo__preview {
+  align-items: center;
+  background: linear-gradient(135deg, #1352A3, rgb(12.610989011, 54.4263736264, 108.189010989));
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+  box-shadow: 0 16px 36px rgba(19, 82, 163, 0.16);
+  color: #FFFFFF;
+  display: inline-flex;
+  flex: 0 0 76px;
+  font-size: clamp(1.18rem, 1.25vw, 1.32rem);
+  font-weight: 900;
+  height: 76px;
+  justify-content: center;
+  letter-spacing: 0.02em;
+  width: 76px;
+}
+
+.aptus-profile-photo__preview.has-image {
+  box-shadow: 0 16px 36px rgba(19, 82, 163, 0.16), inset 0 0 0 3px rgba(255, 255, 255, 0.8);
+}
+
+.aptus-profile-photo span {
+  color: #13934B;
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+}
+
+.aptus-profile-photo strong {
+  color: #1352A3;
+  display: block;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1.3;
+}
+
+.aptus-profile-photo p {
+  color: rgb(57.8534653465, 69.702970297, 82.9465346535);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin: 0.25rem 0 0.75rem;
+}
+
+.aptus-profile-photo input[type=file] {
+  height: 1px;
+  opacity: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.aptus-customer-dashboard[data-aptus-dashboard-section=profile] .aptus-dashboard-topbar {
+  margin-bottom: 1.25rem;
+  padding: clamp(1.25rem, 2vw, 1.5rem);
+}
+
+.aptus-customer-dashboard[data-aptus-dashboard-section=profile] .aptus-dashboard-topbar h1 {
+  font-size: clamp(1.7rem, 2.4vw, 2.35rem);
+}
+
+.aptus-customer-dashboard[data-aptus-dashboard-section=profile] .aptus-dashboard-topbar p {
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.aptus-customer-dashboard[data-aptus-dashboard-section=profile] .aptus-profile-card {
+  padding: clamp(1rem, 1.5vw, 1.5rem);
+}
+
+.aptus-profile-form {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.aptus-profile-form .aptus-field {
+  margin: 0;
+}
+
+.aptus-profile-form .aptus-field {
+  gap: 0.25rem;
+}
+
+.aptus-profile-form .aptus-field .form-control {
+  border-radius: 0.75rem;
+  min-height: 44px;
+  padding: 0.5rem 0.75rem;
+}
+
+.aptus-profile-form__actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  grid-column: 1/-1;
+}
+
+.aptus-profile-form__actions span {
+  color: #13934B;
+  font-weight: 800;
+}
+
+.aptus-sub-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.aptus-sub-tab {
+  align-items: flex-start;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(19, 82, 163, 0.12);
+  border-radius: 1.375rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-height: 72px;
+  min-width: 160px;
+  padding: 1rem 1.25rem;
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 260ms cubic-bezier(0.4, 0, 0.2, 1), border-color 220ms ease, background-color 220ms ease, color 220ms ease;
+}
+
+.aptus-sub-tab strong {
+  color: #1352A3;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.aptus-sub-tab > span {
+  color: #536477;
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.45;
+  text-transform: none;
+}
+
+.aptus-sub-tab:hover,
+.aptus-sub-tab:focus-visible {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(19, 82, 163, 0.2);
+  box-shadow: 0 12px 30px rgba(19, 82, 163, 0.075);
+  transform: translateY(-2px);
+}
+
+.aptus-sub-tab.is-active {
+  background: radial-gradient(circle at 92% 10%, rgba(103, 219, 133, 0.22), transparent 36%), #1352A3;
+  border-color: transparent;
+  box-shadow: 0 18px 42px rgba(19, 82, 163, 0.26);
+  transform: translateY(-2px);
+}
+
+.aptus-sub-tab.is-active strong {
+  color: #FFFFFF;
+}
+
+.aptus-sub-tab.is-active > span {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.aptus-sub-zone[hidden] {
+  display: none;
+}
+
+.aptus-sub-zone {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.aptus-product-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.aptus-product-card {
+  background: radial-gradient(circle at 88% 8%, rgba(103, 219, 133, 0.1), transparent 34%), linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.92));
+  border: 1px solid rgba(19, 82, 163, 0.1);
+  border-radius: 2rem;
+  box-shadow: 0 18px 46px rgba(19, 82, 163, 0.105);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: hidden;
+  padding: clamp(1.25rem, 2vw, 2rem);
+  position: relative;
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 260ms cubic-bezier(0.4, 0, 0.2, 1), border-color 220ms ease, background-color 220ms ease, color 220ms ease;
+  will-change: transform;
+}
+
+.aptus-product-card::before {
+  background: linear-gradient(90deg, rgba(103, 219, 133, 0.82), rgba(36, 139, 204, 0.55));
+  content: "";
+  height: 4px;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: opacity 160ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.aptus-product-card:hover,
+.aptus-product-card:focus-within {
+  border-color: rgba(103, 219, 133, 0.36);
+  box-shadow: 0 38px 96px rgba(19, 82, 163, 0.17);
+  transform: translateY(-6px);
+}
+
+.aptus-product-card:hover::before,
+.aptus-product-card:focus-within::before {
+  opacity: 1;
+}
+
+.aptus-product-card.is-subscribed {
+  background: radial-gradient(circle at 84% 10%, rgba(103, 219, 133, 0.2), transparent 36%), linear-gradient(180deg, rgba(255, 255, 255, 0.995), rgba(243, 248, 252, 0.86));
+  border-color: rgba(103, 219, 133, 0.42);
+}
+
+.aptus-product-card.is-subscribed::before {
+  opacity: 1;
+}
+
+.aptus-product-card__head {
+  align-items: flex-start;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+}
+
+.aptus-product-card__icon {
+  align-items: center;
+  background: linear-gradient(135deg, #1352A3, rgb(12.610989011, 54.4263736264, 108.189010989));
+  border-radius: 1rem;
+  color: #FFFFFF;
+  display: inline-flex;
+  flex: 0 0 46px;
+  font-size: 0.65rem;
+  font-weight: 900;
+  height: 46px;
+  justify-content: center;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  width: 46px;
+}
+
+.aptus-product-card.is-subscribed .aptus-product-card__icon {
+  background: linear-gradient(135deg, #13934B, rgb(14.3301204819, 110.8698795181, 56.5662650602));
+}
+
+.aptus-product-card__badges {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.aptus-product-badge {
+  background: rgba(19, 82, 163, 0.07);
+  border: 1px solid rgba(19, 82, 163, 0.1);
+  border-radius: 999px;
+  color: rgb(66.2356435644, 79.801980198, 94.9643564356);
+  display: inline-flex;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 0.25rem 0.75rem;
+  text-transform: uppercase;
+}
+
+.aptus-product-card__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.aptus-product-card__body h3 {
+  font-size: clamp(1.05rem, 1.4vw, 1.22rem);
+  letter-spacing: -0.025em;
+  margin-bottom: 0.5rem;
+  overflow-wrap: anywhere;
+}
+
+.aptus-product-card__body p {
+  color: rgb(57.8534653465, 69.702970297, 82.9465346535);
+  font-size: 0.875rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.aptus-product-card__usage {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.aptus-product-usage-row {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.aptus-product-usage-row span {
+  color: #536477;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.aptus-product-usage-row strong {
+  color: #1352A3;
+  font-size: 0.875rem;
+  font-weight: 900;
+}
+
+.aptus-product-card__foot {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.aptus-plan-price--sm {
+  align-items: baseline;
+  display: flex;
+  gap: 0.25rem;
+}
+
+.aptus-plan-price--sm strong {
+  color: #1352A3;
+  font-size: clamp(1.45rem, 2vw, 1.85rem);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.aptus-plan-price--sm span {
+  color: #536477;
+  font-size: 0.875rem;
+  font-weight: 800;
+}
+
+.aptus-product-renewal {
+  color: #536477;
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.aptus-plan-slots {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.aptus-plan-slots > span {
+  color: #536477;
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.aptus-plan-slot-row {
+  align-items: center;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.aptus-plan-slot {
+  background: rgba(19, 82, 163, 0.1);
+  border: 1px solid rgba(19, 82, 163, 0.12);
+  border-radius: 0.375rem;
+  flex: 1;
+  height: 22px;
+  max-width: 44px;
+  transition: background-color 160ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.aptus-pricing-card.is-active .aptus-plan-slot,
+.aptus-pricing-card.is-selected .aptus-plan-slot {
+  background: linear-gradient(135deg, #67DB85, #248BCC);
+  border-color: transparent;
+}
+
+.aptus-plan-slots--custom .aptus-plan-slot {
+  background: linear-gradient(135deg, #67DB85, #248BCC);
+  border-color: transparent;
+}
+
+.aptus-plan-slot.is-plus {
+  align-items: center;
+  background: rgba(103, 219, 133, 0.22);
+  border-color: rgba(103, 219, 133, 0.38);
+  border-radius: 50%;
+  color: rgb(16.665060241, 128.934939759, 65.7831325301);
+  display: inline-flex;
+  flex: 0 0 24px;
+  font-size: 0.88rem;
+  font-weight: 900;
+  height: 24px;
+  justify-content: center;
+  max-width: 24px;
+}
+
+.aptus-group-selector {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.aptus-group-selector-item {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(19, 82, 163, 0.1);
+  border-radius: 1.375rem;
+  cursor: pointer;
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem;
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 260ms cubic-bezier(0.4, 0, 0.2, 1), border-color 220ms ease, background-color 220ms ease, color 220ms ease;
+  will-change: transform;
+}
+
+.aptus-group-selector-item:hover {
+  background: rgba(103, 219, 133, 0.08);
+  border-color: rgba(103, 219, 133, 0.32);
+  transform: translateY(-2px);
+}
+
+.aptus-group-selector-item.is-selected {
+  background: radial-gradient(circle at 92% 8%, rgba(103, 219, 133, 0.16), transparent 32%), rgba(255, 255, 255, 0.94);
+  border-color: rgba(103, 219, 133, 0.5);
+  box-shadow: 0 12px 30px rgba(19, 82, 163, 0.075);
+}
+
+.aptus-group-selector-item.is-disabled {
+  cursor: not-allowed;
+  opacity: 0.46;
+  pointer-events: none;
+}
+
+.aptus-group-selector-item__check {
+  accent-color: #1352A3;
+  flex: 0 0 auto;
+  height: 18px;
+  pointer-events: none;
+  width: 18px;
+}
+
+.aptus-group-selector-item__icon {
+  align-items: center;
+  background: linear-gradient(135deg, #1352A3, rgb(12.610989011, 54.4263736264, 108.189010989));
+  border-radius: 0.75rem;
+  color: #FFFFFF;
+  display: inline-flex;
+  flex: 0 0 38px;
+  font-size: 0.6rem;
+  font-weight: 900;
+  height: 38px;
+  justify-content: center;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  width: 38px;
+}
+
+.aptus-group-selector-item.is-selected .aptus-group-selector-item__icon {
+  background: linear-gradient(135deg, #13934B, rgb(14.3301204819, 110.8698795181, 56.5662650602));
+}
+
+.aptus-group-selector-item__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.aptus-group-selector-item__info strong {
+  color: #1352A3;
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.aptus-group-selector-item__info span {
+  color: #536477;
+  display: block;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.aptus-group-selector-item .aptus-status {
+  flex: 0 0 auto;
+  font-size: 0.75rem;
+}
+
+.aptus-group-selector-counter {
+  align-items: baseline;
+  background: rgba(19, 82, 163, 0.055);
+  border: 1px solid rgba(19, 82, 163, 0.1);
+  border-radius: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+}
+
+.aptus-group-selector-counter strong {
+  color: #1352A3;
+  font-size: clamp(1.4rem, 1.65vw, 1.75rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.aptus-group-selector-counter span {
+  color: #536477;
+  font-size: 0.875rem;
+  font-weight: 800;
+}
+
+.aptus-group-selector-counter.is-at-limit strong {
+  color: #16A34A;
+}
+
+.aptus-group-selector-notice {
+  align-items: center;
+  background: rgba(19, 82, 163, 0.04);
+  border: 1px solid rgba(19, 82, 163, 0.1);
+  border-radius: 1.375rem;
+  display: flex;
+  font-size: 0.875rem;
+  font-weight: 700;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-top: 1.25rem;
+  padding: 1rem 1.25rem;
+}
+
+.aptus-group-selector-notice strong {
+  color: #1352A3;
+}
+
+.aptus-group-selector-notice .btn-sm {
+  font-size: 0.875rem;
+  min-height: 38px;
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+}
+
+.aptus-empty-state {
+  background: rgba(19, 82, 163, 0.03);
+  border: 1px dashed rgba(19, 82, 163, 0.18);
+  border-radius: 1.375rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.aptus-empty-state p {
+  color: #536477;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.aptus-subscription-kpis {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.aptus-lifecycle-board {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.aptus-lifecycle-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.aptus-lifecycle-card {
+  background: radial-gradient(circle at 92% 8%, rgba(103, 219, 133, 0.12), transparent 34%), rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(19, 82, 163, 0.09);
+  border-radius: 2rem;
+  box-shadow: 0 12px 30px rgba(19, 82, 163, 0.075);
+  display: grid;
+  gap: 1rem;
+  padding: clamp(1.25rem, 2vw, 1.5rem);
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 260ms cubic-bezier(0.4, 0, 0.2, 1), border-color 220ms ease, background-color 220ms ease, color 220ms ease, outline-color 160ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.aptus-lifecycle-card:hover,
+.aptus-lifecycle-card:focus-within,
+.aptus-lifecycle-card.is-highlighted {
+  border-color: rgba(103, 219, 133, 0.44);
+  box-shadow: 0 18px 46px rgba(19, 82, 163, 0.105);
+  transform: translateY(-2px);
+}
+
+.aptus-lifecycle-card.is-highlighted {
+  outline: 3px solid rgba(103, 219, 133, 0.28);
+  outline-offset: 4px;
+}
+
+.aptus-lifecycle-card__top {
+  align-items: flex-start;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
+
+.aptus-lifecycle-card__top span {
+  color: #13934B;
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+}
+
+.aptus-lifecycle-card__top h3 {
+  font-size: clamp(1.15rem, 1.5vw, 1.45rem);
+  margin-bottom: 0.25rem;
+}
+
+.aptus-lifecycle-card__top p {
+  color: rgb(57.8534653465, 69.702970297, 82.9465346535);
+  font-size: 0.875rem;
+}
+
+.aptus-lifecycle-card__meta {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.aptus-lifecycle-card__meta div {
+  background: rgba(19, 82, 163, 0.04);
+  border: 1px solid rgba(19, 82, 163, 0.06);
+  border-radius: 1rem;
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.75rem;
+}
+
+.aptus-lifecycle-card__meta span {
+  color: #536477;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.aptus-lifecycle-card__meta strong {
+  color: #1352A3;
+  font-size: 0.875rem;
+  line-height: 1.35;
+}
+
+.aptus-subscription-preferences {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.aptus-subscription-preferences span {
+  background: rgba(19, 82, 163, 0.06);
+  border-radius: 999px;
+  color: rgb(57.8534653465, 69.702970297, 82.9465346535);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.5rem 0.75rem;
+}
+
+.aptus-subscription-preferences span.is-enabled {
+  background: rgba(103, 219, 133, 0.18);
+  color: rgb(14.3301204819, 110.8698795181, 56.5662650602);
+}
+
+.aptus-lifecycle-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.aptus-lifecycle-card__actions .btn {
+  font-size: 0.875rem;
+  min-height: 40px;
+  padding: 0.5rem 1rem;
+}
+
+.aptus-dashboard-table--billing .aptus-dashboard-table__row {
+  grid-template-columns: minmax(126px, 1fr) minmax(220px, 1.6fr) minmax(88px, 0.7fr) minmax(86px, 0.7fr) minmax(112px, 0.85fr);
+}
+
+.aptus-status--paid {
+  background: rgba(22, 163, 74, 0.12);
+  color: rgb(15.9351351351, 118.0648648649, 53.6);
+}
+
+.aptus-status--pending-approval {
+  background: rgba(103, 219, 133, 0.2);
+  color: rgb(36.2680851064, 153.1319148936, 66.4914893617);
+}
+
+.aptus-status--expired,
+.aptus-status--canceled {
+  background: rgba(220, 38, 38, 0.1);
+  color: rgb(178.25, 28.75, 28.75);
+}
+
+.aptus-pricing-grid--group {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+body.aptus-checkout-open {
+  overflow: hidden;
+}
+
+body.aptus-checkout-open .preview-banner {
+  display: none;
+}
+
+.aptus-checkout-backdrop {
+  align-items: center;
+  background: rgba(7, 17, 31, 0.58);
+  box-sizing: border-box;
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: max(1rem, env(safe-area-inset-top, 0px)) max(1rem, env(safe-area-inset-right, 0px)) max(1rem, env(safe-area-inset-bottom, 0px)) max(1rem, env(safe-area-inset-left, 0px));
+  position: fixed;
+  z-index: 10000;
+}
+
+.aptus-checkout-modal {
+  background: radial-gradient(circle at 92% 2%, rgba(103, 219, 133, 0.15), transparent 28%), linear-gradient(180deg, rgba(255, 255, 255, 0.99), rgba(243, 248, 252, 0.96));
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 2rem;
+  box-shadow: 0 42px 120px rgba(7, 17, 31, 0.32);
+  box-sizing: border-box;
+  color: #07111F;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  height: min(880px, calc(100dvh - 2rem));
+  margin: auto;
+  max-height: min(880px, calc(100dvh - 2rem));
+  max-width: 1080px;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+  width: min(96vw, 1080px);
+}
+
+.aptus-checkout-close {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(19, 82, 163, 0.1);
+  border-radius: 50%;
+  color: #536477;
+  display: inline-flex;
+  font-size: 1.45rem;
+  height: 42px;
+  justify-content: center;
+  line-height: 1;
+  position: absolute;
+  right: 1.25rem;
+  top: 1.25rem;
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 260ms cubic-bezier(0.4, 0, 0.2, 1), border-color 220ms ease, background-color 220ms ease, color 220ms ease;
+  width: 42px;
+  z-index: 2;
+}
+
+.aptus-checkout-close:hover,
+.aptus-checkout-close:focus-visible {
+  border-color: rgba(103, 219, 133, 0.44);
+  color: #1352A3;
+  transform: translateY(-2px);
+}
+
+.aptus-checkout-head {
+  flex-shrink: 0;
+  padding: clamp(1.25rem, 2.2vw, 2rem) clamp(1.5rem, 3vw, 2.5rem) 0.75rem;
+}
+
+.aptus-checkout-head h2 {
+  color: #1352A3;
+  font-size: clamp(1.55rem, 2.4vw, 2.15rem);
+  letter-spacing: -0.045em;
+  margin: 0.5rem 3rem 0.25rem 0;
+}
+
+.aptus-checkout-head p {
+  color: rgb(66.2356435644, 79.801980198, 94.9643564356);
+  font-size: 1rem;
+  line-height: 1.55;
+  margin: 0;
+  max-width: 820px;
+}
+
+.aptus-checkout-stepper {
+  display: grid;
+  flex-shrink: 0;
+  gap: 0.75rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding: 0.75rem clamp(1.5rem, 3vw, 2.5rem) 1.25rem;
+}
+
+.aptus-checkout-step {
+  align-items: center;
+  color: #536477;
+  display: flex;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.aptus-checkout-step span {
+  align-items: center;
+  background: #FFFFFF;
+  border: 2px solid rgba(19, 82, 163, 0.12);
+  border-radius: 50%;
+  color: #536477;
+  display: inline-flex;
+  flex: 0 0 38px;
+  font-size: 0.875rem;
+  font-weight: 900;
+  height: 38px;
+  justify-content: center;
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 260ms cubic-bezier(0.4, 0, 0.2, 1), border-color 220ms ease, background-color 220ms ease, color 220ms ease;
+  width: 38px;
+}
+
+.aptus-checkout-step strong {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 900;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.aptus-checkout-step.is-active span,
+.aptus-checkout-step.is-complete span {
+  background: linear-gradient(135deg, #13934B, rgb(14.3301204819, 110.8698795181, 56.5662650602));
+  border-color: transparent;
+  box-shadow: 0 12px 28px rgba(19, 147, 75, 0.24);
+  color: #FFFFFF;
+}
+
+.aptus-checkout-step.is-active strong,
+.aptus-checkout-step.is-complete strong {
+  color: #1352A3;
+}
+
+.aptus-checkout-alert {
+  color: #DC2626;
+  flex-shrink: 0;
+  font-size: 0.875rem;
+  font-weight: 800;
+  margin: 0 clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.aptus-checkout-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0 clamp(1.5rem, 3vw, 2.5rem) 1.25rem;
+  scrollbar-color: rgba(19, 82, 163, 0.34) rgba(19, 82, 163, 0.06);
+}
+
+.aptus-checkout-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.aptus-checkout-panel[hidden] {
+  display: none;
+}
+
+.aptus-checkout-section-title span {
+  color: #13934B;
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+}
+
+.aptus-checkout-section-title h3 {
+  color: #1352A3;
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+
+.aptus-checkout-choice,
+.aptus-payment-method,
+.aptus-checkout-terms {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(19, 82, 163, 0.1);
+  border-radius: 1.375rem;
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem;
+  position: relative;
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 260ms cubic-bezier(0.4, 0, 0.2, 1), border-color 220ms ease, background-color 220ms ease, color 220ms ease;
+}
+
+.aptus-payment-method {
+  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+}
+
+.aptus-checkout-choice.is-selected,
+.aptus-payment-method.is-selected {
+  background: radial-gradient(circle at 96% 8%, rgba(103, 219, 133, 0.16), transparent 30%), rgba(255, 255, 255, 0.96);
+  border-color: rgba(19, 147, 75, 0.42);
+  box-shadow: 0 12px 30px rgba(19, 82, 163, 0.075);
+}
+
+.aptus-checkout-choice input,
+.aptus-payment-method input {
+  appearance: none;
+  position: absolute;
+  opacity: 0;
+}
+
+.aptus-checkout-choice__control,
+.aptus-payment-method__control {
+  align-items: center;
+  background: #FFFFFF;
+  border: 2px solid rgba(19, 82, 163, 0.16);
+  border-radius: 50%;
+  display: inline-flex;
+  flex: 0 0 22px;
+  height: 22px;
+  justify-content: center;
+  width: 22px;
+}
+
+.aptus-checkout-choice.is-selected .aptus-checkout-choice__control,
+.aptus-payment-method.is-selected .aptus-payment-method__control {
+  border-color: #13934B;
+  box-shadow: inset 0 0 0 5px #FFFFFF;
+  background: #13934B;
+}
+
+.aptus-checkout-choice > span:not(.aptus-checkout-choice__control),
+.aptus-payment-method > span:not(.aptus-payment-method__control) {
+  flex: 1;
+  min-width: 0;
+}
+
+.aptus-payment-method__content {
+  display: grid;
+  gap: 0.25rem;
+  line-height: 1.35;
+  min-width: 0;
+}
+
+.aptus-checkout-choice strong,
+.aptus-payment-method strong {
+  color: #1352A3;
+  display: block;
+  font-weight: 900;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.aptus-checkout-choice small,
+.aptus-payment-method small {
+  color: #536477;
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-top: 0.25rem;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.aptus-checkout-choice em {
+  color: #13934B;
+  font-style: normal;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.aptus-checkout-meta-grid,
+.aptus-checkout-form-grid,
+.aptus-payment-card-fields > div {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.aptus-checkout-meta-grid div {
+  background: rgba(19, 82, 163, 0.045);
+  border: 1px solid rgba(19, 82, 163, 0.08);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.aptus-checkout-meta-grid span,
+.aptus-checkout-form-grid span,
+.aptus-payment-card-fields span {
+  color: #536477;
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.aptus-checkout-meta-grid strong {
+  color: #1352A3;
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.aptus-checkout-form-grid input,
+.aptus-payment-card-fields input {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(19, 82, 163, 0.1);
+  border-radius: 1rem;
+  color: #1352A3;
+  font: inherit;
+  min-height: 52px;
+  padding: 0.75rem 1rem;
+  width: 100%;
+}
+
+.aptus-checkout-form-grid input:focus,
+.aptus-payment-card-fields input:focus {
+  border-color: rgba(19, 147, 75, 0.56);
+  box-shadow: 0 0 0 4px rgba(103, 219, 133, 0.2);
+  outline: none;
+}
+
+.aptus-payment-methods,
+.aptus-payment-card-fields {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.aptus-payment-methods {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.aptus-payment-method {
+  align-items: flex-start;
+  min-height: 92px;
+}
+
+.aptus-payment-card-fields {
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(19, 82, 163, 0.09);
+  border-radius: 1.375rem;
+  padding: 1.25rem;
+}
+
+.aptus-payment-card-fields[hidden] {
+  display: none;
+}
+
+.aptus-checkout-summary {
+  background: rgba(19, 82, 163, 0.055);
+  border: 1px solid rgba(19, 82, 163, 0.08);
+  border-radius: 1.375rem;
+  display: grid;
+  gap: 0.75rem;
+  padding: 1.25rem;
+}
+
+.aptus-checkout-summary div {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.aptus-checkout-summary span {
+  color: #536477;
+  font-weight: 700;
+}
+
+.aptus-checkout-summary strong {
+  color: #1352A3;
+  font-size: 1rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.aptus-checkout-summary__total {
+  border-top: 1px solid rgba(19, 82, 163, 0.12);
+  margin-top: 0.5rem;
+  padding-top: 0.75rem;
+}
+
+.aptus-checkout-summary__total span,
+.aptus-checkout-summary__total strong {
+  color: #1352A3;
+  font-size: clamp(1.18rem, 1.25vw, 1.32rem);
+}
+
+.aptus-checkout-terms {
+  align-items: flex-start;
+  font-weight: 800;
+}
+
+.aptus-checkout-terms input {
+  accent-color: #13934B;
+  flex: 0 0 auto;
+  height: 20px;
+  margin-top: 0.15rem;
+  width: 20px;
+}
+
+.aptus-checkout-policy {
+  background: rgba(103, 219, 133, 0.11);
+  border: 1px solid rgba(103, 219, 133, 0.42);
+  border-radius: 1.375rem;
+  padding: 1.25rem;
+}
+
+.aptus-checkout-policy strong {
+  color: rgb(13.1626506024, 101.8373493976, 51.9578313253);
+  display: block;
+  font-size: 1rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+}
+
+.aptus-checkout-policy p {
+  color: rgb(45.2801980198, 54.5544554455, 64.9198019802);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.aptus-checkout-message {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.aptus-checkout-message span {
+  color: #536477;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.aptus-checkout-message textarea {
+  background: #fff;
+  border: 1px solid rgba(19, 82, 163, 0.14);
+  border-radius: 0.85rem;
+  color: #1e293b;
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  min-height: 5.5rem;
+  padding: 0.75rem 0.9rem;
+  resize: vertical;
+  width: 100%;
+}
+
+.aptus-checkout-message textarea:focus {
+  border-color: rgba(36, 139, 204, 0.55);
+  outline: 2px solid rgba(36, 139, 204, 0.18);
+  outline-offset: 1px;
+}
+
+.aptus-checkout-actions {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.82);
+  border-top: 1px solid rgba(19, 82, 163, 0.08);
+  display: grid;
+  flex-shrink: 0;
+  gap: 0.75rem;
+  grid-template-columns: 1fr auto 1.25fr;
+  padding: 1rem clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.aptus-checkout-actions .btn {
+  min-height: 48px;
+}
+
+.aptus-checkout-actions .btn[hidden],
+.aptus-checkout-actions[hidden] {
+  display: none;
+}
+
+.aptus-checkout-actions .btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.aptus-checkout-success {
+  justify-items: center;
+  padding: 2.5rem 1.25rem;
+  text-align: center;
+}
+
+.aptus-checkout-success span {
+  align-items: center;
+  background: linear-gradient(135deg, #13934B, rgb(14.3301204819, 110.8698795181, 56.5662650602));
+  border-radius: 50%;
+  color: #FFFFFF;
+  display: inline-flex;
+  font-size: 1.8rem;
+  font-weight: 900;
+  height: 68px;
+  justify-content: center;
+  width: 68px;
+}
+
+.aptus-checkout-success h3 {
+  color: #1352A3;
+  font-size: clamp(1.4rem, 1.65vw, 1.75rem);
+  margin: 0;
+}
+
+.aptus-checkout-success p {
+  color: #536477;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 540px;
+}
+
+@media (max-width: 1199.98px) {
+  .aptus-dashboard-grid--metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .aptus-overview-hero {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .aptus-overview-hero__primary {
+    grid-column: 1/-1;
+  }
+  .aptus-subscription-kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .aptus-dashboard-topbar {
+    flex-direction: column;
+  }
+  .aptus-pricing-grid,
+  .aptus-pricing-grid--group {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .aptus-product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .aptus-group-selector {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .aptus-lifecycle-grid {
+    grid-template-columns: 1fr;
+  }
+  .aptus-lifecycle-card__meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .aptus-dashboard-grid--split {
+    grid-template-columns: 1fr;
+  }
+  .aptus-dashboard-table__row {
+    grid-template-columns: 1fr 1.35fr 0.55fr 0.75fr 0.75fr;
+  }
+  .aptus-dashboard-table--renewals .aptus-dashboard-table__row {
+    grid-template-columns: 1.1fr 0.9fr 0.75fr 0.8fr 0.8fr;
+  }
+  .aptus-dashboard-table--billing .aptus-dashboard-table__row {
+    grid-template-columns: 1fr 1.35fr 0.65fr 0.65fr 0.75fr;
+  }
+}
+@media (max-width: 991.98px) {
+  .aptus-auth {
+    padding-top: 112px;
+  }
+  .aptus-customer-auth .aptus-auth {
+    padding-top: 1.25rem;
+  }
+  .aptus-customer-auth .aptus-auth__hero {
+    padding: 1.25rem 0 1.75rem;
+  }
+  .aptus-auth__hero {
+    min-height: auto;
+  }
+  .aptus-auth__intro {
+    margin: 0 auto;
+    text-align: center;
+  }
+  .aptus-auth__intro p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .aptus-dashboard-shell {
+    grid-template-columns: 1fr;
+    max-width: 960px;
+    padding-top: 1.5rem;
+  }
+  .aptus-dashboard-sidebar {
+    display: none;
+  }
+  .aptus-dashboard-mobile-nav {
+    display: grid;
+    gap: 0.75rem;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(132px, 1fr);
+    grid-template-columns: none;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+    scrollbar-width: thin;
+  }
+  .aptus-dashboard-topbar {
+    margin-bottom: 1.5rem;
+  }
+  .aptus-overview-hero {
+    grid-template-columns: 1fr;
+  }
+  .aptus-overview-hero__primary {
+    grid-column: auto;
+  }
+  .aptus-subscription-hero {
+    grid-template-columns: 1fr;
+  }
+  .aptus-subscription-section__head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+@media (max-width: 767.98px) {
+  .aptus-auth__trust {
+    grid-template-columns: 1fr;
+  }
+  .aptus-dashboard-mobile-nav {
+    grid-auto-columns: minmax(128px, 42vw);
+  }
+  .aptus-dashboard-topbar h1 {
+    font-size: clamp(1.85rem, 9vw, 2.55rem);
+  }
+  .aptus-dashboard-topbar p {
+    font-size: 1rem;
+  }
+  .aptus-dashboard-section-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .aptus-overview-hero__primary {
+    display: grid;
+  }
+  .aptus-pricing-grid,
+  .aptus-pricing-grid--group {
+    grid-template-columns: 1fr;
+  }
+  .aptus-pricing-card__top {
+    min-height: auto;
+  }
+  .aptus-group-plan-meta {
+    grid-template-columns: 1fr;
+  }
+  .aptus-product-grid {
+    grid-template-columns: 1fr;
+  }
+  .aptus-subscription-kpis {
+    grid-template-columns: 1fr;
+  }
+  .aptus-group-selector {
+    grid-template-columns: 1fr;
+  }
+  .aptus-sub-tabs {
+    flex-direction: column;
+  }
+  .aptus-sub-tab {
+    min-width: auto;
+    width: 100%;
+  }
+  .aptus-group-selector-notice {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .aptus-group-selector-notice .btn-sm {
+    width: 100%;
+  }
+  .aptus-comparison-table,
+  .aptus-comparison-table__row {
+    display: block;
+  }
+  .aptus-comparison-table__head {
+    display: none;
+  }
+  .aptus-comparison-table__row {
+    margin-bottom: 0.75rem;
+    padding: 1.25rem;
+  }
+  .aptus-comparison-table__row span {
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+  .aptus-comparison-table__row span::before {
+    color: #536477;
+    content: attr(data-label);
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+  }
+  .aptus-dashboard-table,
+  .aptus-dashboard-table__row {
+    display: block;
+  }
+  .aptus-lifecycle-card__top {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .aptus-lifecycle-card__top .aptus-status {
+    grid-column: 1/-1;
+    justify-self: start;
+  }
+  .aptus-lifecycle-card__meta {
+    grid-template-columns: 1fr;
+  }
+  .aptus-lifecycle-card__actions .btn {
+    width: 100%;
+  }
+  .aptus-dashboard-table__head {
+    display: none;
+  }
+  .aptus-dashboard-table__row {
+    margin-bottom: 0.75rem;
+    padding: 1rem;
+  }
+  .aptus-dashboard-table__row span {
+    display: block;
+    margin-bottom: 0.5rem;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .aptus-dashboard-table__row span::before {
+    color: #536477;
+    content: attr(data-label);
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+  }
+  .aptus-checkout-backdrop {
+    align-items: stretch;
+    padding: max(0.75rem, env(safe-area-inset-top, 0px)) max(0.75rem, env(safe-area-inset-right, 0px)) max(0.75rem, env(safe-area-inset-bottom, 0px)) max(0.75rem, env(safe-area-inset-left, 0px));
+  }
+  .aptus-checkout-modal {
+    height: calc(100dvh - 1.5rem);
+    margin: 0;
+    max-height: calc(100dvh - 1.5rem);
+    width: 100%;
+  }
+  .aptus-checkout-stepper {
+    gap: 0.5rem;
+  }
+  .aptus-checkout-step {
+    justify-content: center;
+  }
+  .aptus-checkout-step strong {
+    display: none;
+  }
+  .aptus-checkout-choice {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .aptus-checkout-choice em {
+    flex-basis: 100%;
+    padding-left: calc(22px + 0.75rem);
+  }
+  .aptus-checkout-meta-grid,
+  .aptus-checkout-form-grid,
+  .aptus-payment-methods,
+  .aptus-payment-card-fields > div {
+    grid-template-columns: 1fr;
+  }
+  .aptus-checkout-actions {
+    grid-template-columns: 1fr;
+  }
+  .aptus-profile-form {
+    grid-template-columns: 1fr;
+  }
+  .aptus-profile-photo {
+    align-items: flex-start;
+    grid-template-columns: 1fr;
+  }
+  .aptus-portal-list article {
+    flex-direction: column;
+  }
+  .aptus-portal-list article,
+  .aptus-activity-list article {
+    gap: 0.75rem;
+  }
+}
+@media (max-width: 575.98px) {
+  .aptus-auth {
+    padding-top: 96px;
+  }
+  .aptus-customer-auth .aptus-auth {
+    padding-top: 1rem;
+  }
+  .aptus-customer-auth .aptus-auth__hero {
+    padding: 1rem 0 1.5rem;
+  }
+  .aptus-auth__hero {
+    padding: 2.5rem 0 3rem;
+  }
+  .aptus-dashboard-shell {
+    padding: 1rem 0.75rem 1.5rem;
+  }
+  .aptus-dashboard-grid--metrics {
+    grid-template-columns: 1fr;
+  }
+  .aptus-dashboard-topbar {
+    border-radius: 1.375rem;
+    gap: 1.25rem;
+    padding: 1.25rem;
+  }
+  .aptus-dashboard-card,
+  .aptus-subscription-card,
+  .aptus-pricing-card,
+  .aptus-product-card,
+  .aptus-subscription-hero__panel {
+    border-radius: 1.375rem;
+  }
+  .aptus-subscription-hero,
+  .aptus-subscription-section {
+    gap: 1rem;
+  }
+  .aptus-billing-toggle {
+    border-radius: 1.375rem;
+    grid-template-columns: 1fr;
+  }
+  .aptus-checkout-head,
+  .aptus-checkout-stepper,
+  .aptus-checkout-body,
+  .aptus-checkout-actions {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .aptus-checkout-close {
+    right: 0.75rem;
+    top: 0.75rem;
+  }
+  .aptus-checkout-head h2 {
+    margin-right: 2rem;
+  }
+  .aptus-dashboard-metric {
+    min-height: auto;
+  }
+  .aptus-sub-zone {
+    gap: 1rem;
+  }
+}
+
+/* Software product purchase flow */
+.aptus-software-purchase__layout {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
+}
+
+.aptus-software-category-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.aptus-software-category {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(19, 82, 163, 0.09);
+  border-radius: 1.25rem;
+  overflow: hidden;
+}
+
+.aptus-software-category__toggle {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  padding: 1rem 1.1rem;
+  text-align: left;
+  width: 100%;
+}
+
+.aptus-software-category__toggle strong {
+  color: #1352A3;
+  display: block;
+  font-size: 1rem;
+}
+
+.aptus-software-category__toggle small {
+  color: #536477;
+  display: block;
+  font-size: 0.8rem;
+}
+
+.aptus-software-category__toggle em {
+  color: #13934B;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.aptus-software-category__products {
+  border-top: 1px solid rgba(19, 82, 163, 0.08);
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem 1rem;
+}
+
+.aptus-software-product {
+  align-items: center;
+  background: rgba(19, 82, 163, 0.03);
+  border: 1px solid rgba(19, 82, 163, 0.06);
+  border-radius: 0.9rem;
+  cursor: pointer;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  padding: 0.75rem 0.85rem;
+}
+
+.aptus-software-product input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.aptus-software-product__control {
+  border: 2px solid rgba(19, 82, 163, 0.22);
+  border-radius: 0.35rem;
+  height: 1.1rem;
+  width: 1.1rem;
+}
+
+.aptus-software-product:has(input:checked) {
+  border-color: rgba(103, 219, 133, 0.55);
+  background: rgba(103, 219, 133, 0.08);
+}
+
+.aptus-software-product:has(input:checked) .aptus-software-product__control {
+  background: #13934B;
+  border-color: #13934B;
+  box-shadow: inset 0 0 0 2px #fff;
+}
+
+.aptus-software-product strong {
+  color: #1352A3;
+  display: block;
+  font-size: 0.92rem;
+}
+
+.aptus-software-product small {
+  color: #536477;
+  display: block;
+  font-size: 0.78rem;
+}
+
+.aptus-software-product__qty {
+  align-items: center;
+  display: grid;
+  gap: 0.2rem;
+  min-width: 4.5rem;
+}
+
+.aptus-software-product__qty span {
+  color: #536477;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.aptus-software-product__qty input {
+  border: 1px solid rgba(19, 82, 163, 0.14);
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  min-height: 2rem;
+  padding: 0.2rem 0.45rem;
+  width: 100%;
+}
+
+.aptus-software-purchase__order {
+  background: radial-gradient(circle at 92% 8%, rgba(103, 219, 133, 0.12), transparent 34%), rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(19, 82, 163, 0.09);
+  border-radius: 1.5rem;
+  display: grid;
+  gap: 1rem;
+  padding: 1.25rem;
+}
+
+.aptus-software-purchase__order h3,
+.aptus-software-purchase__catalog h3 {
+  color: #1352A3;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.aptus-software-order-empty {
+  color: #536477;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.aptus-software-order-list {
+  display: grid;
+  gap: 0.55rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.aptus-software-order-list li {
+  background: rgba(19, 82, 163, 0.04);
+  border-radius: 0.75rem;
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.65rem 0.75rem;
+}
+
+.aptus-software-order-list strong {
+  color: #1352A3;
+  font-size: 0.88rem;
+}
+
+.aptus-software-order-list span {
+  color: #536477;
+  font-size: 0.78rem;
+}
+
+.aptus-software-duration {
+  border: 0;
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.aptus-software-duration legend {
+  color: #536477;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+}
+
+.aptus-software-duration__option {
+  align-items: center;
+  background: rgba(19, 82, 163, 0.04);
+  border: 1px solid rgba(19, 82, 163, 0.08);
+  border-radius: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  gap: 0.55rem;
+  padding: 0.65rem 0.75rem;
+}
+
+.aptus-software-duration__option:has(input:checked) {
+  border-color: rgba(103, 219, 133, 0.55);
+  background: rgba(103, 219, 133, 0.08);
+}
+
+.aptus-software-contact {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.aptus-software-contact label {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.aptus-software-contact span {
+  color: #536477;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.aptus-software-contact input {
+  border: 1px solid rgba(19, 82, 163, 0.14);
+  border-radius: 0.65rem;
+  min-height: 2.4rem;
+  padding: 0.45rem 0.7rem;
+}
+
+.aptus-software-message {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.aptus-software-message span {
+  color: #536477;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.aptus-software-message textarea {
+  background: #fff;
+  border: 1px solid rgba(19, 82, 163, 0.14);
+  border-radius: 0.85rem;
+  color: #1e293b;
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  min-height: 5.5rem;
+  padding: 0.75rem 0.9rem;
+  resize: vertical;
+  width: 100%;
+}
+
+.aptus-software-message textarea:focus {
+  border-color: rgba(36, 139, 204, 0.55);
+  outline: 2px solid rgba(36, 139, 204, 0.18);
+  outline-offset: 1px;
+}
+
+.aptus-software-submit-alert {
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  padding: 0.65rem 0.85rem;
+}
+
+.aptus-software-submit-alert.is-error {
+  background: rgba(220, 53, 69, 0.08);
+  border: 1px solid rgba(220, 53, 69, 0.25);
+  color: #b42318;
+}
+
+.aptus-software-order-total {
+  align-items: center;
+  background: rgba(19, 82, 163, 0.05);
+  border: 1px solid rgba(19, 82, 163, 0.1);
+  border-radius: 0.85rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0.9rem;
+}
+
+.aptus-software-order-total span {
+  color: #536477;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.aptus-software-order-total strong {
+  color: #1352A3;
+  font-size: 1.05rem;
+}
+
+.aptus-software-place-order {
+  width: 100%;
+}
+
+.aptus-order-confirm-backdrop {
+  align-items: center;
+  background: rgba(7, 17, 31, 0.55);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 1rem;
+  position: fixed;
+  z-index: 1200;
+}
+
+.aptus-order-confirm-modal {
+  background: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 28px 72px rgba(19, 82, 163, 0.2);
+  display: grid;
+  gap: 0.85rem;
+  max-width: 28rem;
+  padding: 1.75rem;
+  text-align: center;
+  width: 100%;
+}
+
+.aptus-order-confirm-modal__icon {
+  align-items: center;
+  background: rgba(103, 219, 133, 0.15);
+  border-radius: 999px;
+  color: #13934B;
+  display: inline-flex;
+  font-size: 1.5rem;
+  height: 3rem;
+  justify-content: center;
+  margin: 0 auto;
+  width: 3rem;
+}
+
+.aptus-order-confirm-modal h2 {
+  color: #1352A3;
+  font-size: 1.35rem;
+  margin: 0;
+}
+
+.aptus-order-confirm-modal p {
+  color: #536477;
+  line-height: 1.6;
+  margin: 0;
+}
+
+body.aptus-order-confirm-open {
+  overflow: hidden;
+}
+
+.aptus-cancellation-confirm-modal__icon--warn {
+  background: rgba(234, 88, 12, 0.12);
+  color: #c2410c;
+}
+
+.aptus-cancellation-confirm-modal__actions {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.aptus-cancellation-confirm-modal__confirm {
+  background: #c2410c;
+  border-color: #c2410c;
+}
+
+.aptus-cancellation-confirm-modal__keep {
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+}
+
+body.aptus-payment-processing-open {
+  overflow: hidden;
+}
+
+.aptus-payment-processing {
+  align-items: center;
+  background: rgba(7, 17, 31, 0.62);
+  display: flex;
+  inset: 0;
+  justify-content: center;
+  padding: 1.25rem;
+  position: fixed;
+  z-index: 1300;
+}
+
+.aptus-payment-processing__card {
+  align-items: center;
+  background: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 28px 72px rgba(19, 82, 163, 0.22);
+  display: grid;
+  gap: 0.75rem;
+  justify-items: center;
+  max-width: 22rem;
+  padding: 2rem 1.75rem;
+  text-align: center;
+  width: 100%;
+}
+
+.aptus-payment-processing__spinner {
+  animation: aptus-payment-spin 0.85s linear infinite;
+  border: 3px solid rgba(19, 82, 163, 0.12);
+  border-radius: 999px;
+  border-top-color: #1352A3;
+  height: 2.75rem;
+  width: 2.75rem;
+}
+
+.aptus-payment-processing__card strong {
+  color: #1352A3;
+  font-size: 1.05rem;
+}
+
+.aptus-payment-processing__card p {
+  color: #536477;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+@keyframes aptus-payment-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Subscription license ID reveal */
+.aptus-license-id {
+  background: rgba(19, 82, 163, 0.04);
+  border: 1px solid rgba(19, 82, 163, 0.08);
+  border-radius: 1rem;
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.75rem 0.9rem;
+}
+
+.aptus-license-id > span {
+  color: #536477;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.aptus-license-id__value {
+  align-items: center;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+
+.aptus-license-id__value strong {
+  color: #1352A3;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+}
+
+.aptus-license-id__toggle {
+  align-items: center;
+  background: rgba(19, 82, 163, 0.06);
+  border: 1px solid rgba(19, 82, 163, 0.12);
+  border-radius: 0.55rem;
+  color: #1352A3;
+  cursor: pointer;
+  display: inline-flex;
+  height: 2rem;
+  justify-content: center;
+  width: 2rem;
+}
+
+.aptus-license-id__toggle[aria-pressed="true"] {
+  background: rgba(103, 219, 133, 0.15);
+  border-color: rgba(103, 219, 133, 0.45);
+  color: #13934B;
+}
+
+.aptus-status--submitted,
+.aptus-status--pending {
+  background: rgba(36, 139, 204, 0.12);
+  color: #248BCC;
+}
+
+.aptus-status--confirmed {
+  background: rgba(103, 219, 133, 0.18);
+  color: #13934B;
+}
+
+@media (max-width: 992px) {
+  .aptus-software-purchase__layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Odoo subscriptions panel (React) */
+.aptus-odoo-subscriptions {
+  margin-bottom: 1.5rem;
+}
+
+.aptus-odoo-subscriptions__state {
+  align-items: center;
+  color: #536477;
+  display: grid;
+  gap: 0.75rem;
+  justify-items: center;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.aptus-odoo-subscriptions__state p {
+  margin: 0;
+  max-width: 28rem;
+}
+
+.aptus-odoo-subscriptions__state--error p {
+  color: #DC2626;
+}
+
+.aptus-license-id__pending {
+  color: #536477;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-style: italic;
+  letter-spacing: normal;
+}
+
+.aptus-subscription-card {
+  margin: 0;
+}
+
+/* Orders panel (React) */
+.aptus-odoo-orders {
+  margin-bottom: 1.5rem;
+}
+
+.aptus-orders-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.aptus-orders-filters button {
+  background: #f4f7fb;
+  border: 1px solid #d8e0ea;
+  border-radius: 999px;
+  color: #334155;
+  cursor: pointer;
+  font-size: 0.82rem;
+  padding: 0.35rem 0.85rem;
+}
+
+.aptus-orders-filters button.is-active {
+  background: #248bcc;
+  border-color: #248bcc;
+  color: #fff;
+}
+
+.aptus-orders-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.aptus-order-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.aptus-order-card__head {
+  align-items: flex-start;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+}
+
+.aptus-order-card__actions {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: 0.5rem;
+}
+
+.aptus-order-card__pay {
+  font-size: 0.82rem;
+  min-width: 7.5rem;
+  padding: 0.4rem 0.85rem;
+}
+
+.aptus-order-card__hint {
+  color: #64748b;
+  font-size: 0.82rem;
+  margin: 0.5rem 0 0;
+}
+
+.aptus-order-payment-modal__quote {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin: 1rem 0 0;
+}
+
+.aptus-order-card__ref {
+  color: #64748b;
+  display: block;
+  font-size: 0.78rem;
+  margin-bottom: 0.25rem;
+}
+
+.aptus-order-card__meta {
+  color: #64748b;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.82rem;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.aptus-order-card__toggle {
+  background: none;
+  border: none;
+  color: #248bcc;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-top: 0.75rem;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.aptus-order-card__details {
+  border-top: 1px solid #e2e8f0;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+}
+
+.aptus-order-card__details ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.aptus-lifecycle-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.aptus-lifecycle-card__actions button {
+  background: #248bcc;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.82rem;
+  padding: 0.45rem 0.75rem;
+}
+
+.aptus-lifecycle-card__actions button.aptus-btn--ghost {
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+}
+
+.aptus-lifecycle-card__actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.aptus-subscription-card__feedback {
+  color: #13934b;
+  font-size: 0.85rem;
+  margin: 0.75rem 0 0;
+}
+
+/* ── Overview v2 (command-center dashboard) ── */
+
+.aptus-overview-v2 {
+  display: grid;
+  gap: 1.25rem;
+  min-width: 0;
+}
+
+.aptus-overview-v2__eyebrow {
+  color: #13934b;
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+}
+
+.aptus-overview-v2__welcome {
+  align-items: flex-start;
+  background: #fff;
+  border: 1px solid rgba(19, 82, 163, 0.08);
+  border-radius: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: clamp(1.25rem, 2vw, 1.75rem);
+}
+
+.aptus-overview-v2__welcome h2 {
+  color: #1352a3;
+  font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+  font-weight: 720;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.4rem;
+}
+
+.aptus-overview-v2__welcome p {
+  color: #5b6778;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  margin: 0;
+  max-width: 52ch;
+}
+
+.aptus-overview-v2__welcome-meta {
+  display: grid;
+  gap: 0.5rem;
+  justify-items: end;
+}
+
+.aptus-overview-v2__status-pill {
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.35rem 0.75rem;
+  text-transform: uppercase;
+}
+
+.aptus-overview-v2__status-pill--good {
+  background: rgba(19, 147, 75, 0.1);
+  color: #13934b;
+}
+
+.aptus-overview-v2__status-pill--warn {
+  background: rgba(217, 119, 6, 0.12);
+  color: #b45309;
+}
+
+.aptus-overview-v2__welcome-note {
+  color: #7a8698;
+  font-size: 0.78rem;
+}
+
+.aptus-overview-v2__layout {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: minmax(0, 1.55fr) minmax(280px, 0.95fr);
+}
+
+.aptus-overview-v2__main,
+.aptus-overview-v2__aside {
+  display: grid;
+  gap: 1.25rem;
+  min-width: 0;
+}
+
+.aptus-overview-v2__main {
+  gap: 0.75rem;
+}
+
+.aptus-overview-v2__card {
+  background: #fff;
+  border: 1px solid rgba(19, 82, 163, 0.08);
+  border-radius: 1rem;
+  min-width: 0;
+  padding: clamp(1.1rem, 1.8vw, 1.4rem);
+}
+
+.aptus-overview-v2__card--compact {
+  padding: 0.85rem 1rem;
+}
+
+.aptus-overview-v2__card--compact .aptus-overview-v2__card-head {
+  gap: 0.5rem;
+  margin-bottom: 0.55rem;
+}
+
+.aptus-overview-v2__card-head {
+  align-items: flex-start;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.aptus-overview-v2__card--compact .aptus-overview-v2__eyebrow {
+  margin-bottom: 0;
+}
+
+.aptus-overview-v2__card--compact .aptus-overview-v2__loading {
+  padding: 0.15rem 0;
+}
+
+.aptus-overview-v2__card--compact .aptus-overview-v2__empty {
+  padding: 0;
+}
+
+.aptus-overview-v2__card-head h2 {
+  color: #1352a3;
+  font-size: 1.05rem;
+  font-weight: 720;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.25rem;
+}
+
+.aptus-overview-v2__card-head p {
+  color: #7a8698;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.aptus-overview-v2__health-grid {
+  align-items: start;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.aptus-overview-v2__health-metric {
+  background: #f8fafc;
+  border: 1px solid #e8edf3;
+  border-radius: 0.75rem;
+  padding: 0.65rem 0.7rem;
+}
+
+.aptus-overview-v2__health-metric span {
+  color: #7a8698;
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.2rem;
+  text-transform: uppercase;
+}
+
+.aptus-overview-v2__health-metric strong {
+  color: #1352a3;
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 720;
+  line-height: 1.2;
+}
+
+.aptus-overview-v2__health-metric p {
+  color: #8b95a5;
+  font-size: 0.72rem;
+  line-height: 1.35;
+  margin: 0.2rem 0 0;
+}
+
+.aptus-overview-v2__health-metric--good strong {
+  color: #13934b;
+}
+
+.aptus-overview-v2__health-metric--warn strong {
+  color: #b45309;
+}
+
+.aptus-overview-v2__timeline {
+  display: grid;
+  gap: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.aptus-overview-v2__timeline li {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: 12px minmax(0, 1fr);
+  padding: 0.5rem 0;
+  position: relative;
+}
+
+.aptus-overview-v2__timeline li:not(:last-child) {
+  border-bottom: 1px solid #eef2f6;
+}
+
+.aptus-overview-v2__timeline-dot {
+  background: #1352a3;
+  border-radius: 50%;
+  height: 8px;
+  margin-top: 0.35rem;
+  width: 8px;
+}
+
+.aptus-overview-v2__timeline strong {
+  color: #1e293b;
+  display: block;
+  font-size: 0.84rem;
+  margin-bottom: 0.1rem;
+}
+
+.aptus-overview-v2__timeline p {
+  color: #64748b;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  margin: 0 0 0.15rem;
+}
+
+.aptus-overview-v2__timeline time {
+  color: #94a3b8;
+  font-size: 0.74rem;
+}
+
+.aptus-overview-v2__summary-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.aptus-overview-v2__summary-grid--orders {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.aptus-overview-v2__summary-grid--support {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 0.75rem;
+}
+
+.aptus-overview-v2__summary-grid > div {
+  background: #f8fafc;
+  border: 1px solid #e8edf3;
+  border-radius: 0.75rem;
+  padding: 0.8rem;
+}
+
+.aptus-overview-v2__summary-grid span {
+  color: #7a8698;
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.3rem;
+  text-transform: uppercase;
+}
+
+.aptus-overview-v2__summary-grid strong {
+  color: #1352a3;
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 720;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.aptus-overview-v2__support-email {
+  color: #248bcc;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.aptus-overview-v2__support-email:hover {
+  text-decoration: underline;
+}
+
+.aptus-overview-v2__alerts {
+  display: grid;
+  gap: 0.65rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.aptus-overview-v2__alerts li {
+  align-items: flex-start;
+  background: #f8fafc;
+  border: 1px solid #e8edf3;
+  border-radius: 0.75rem;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+  padding: 0.75rem;
+}
+
+.aptus-overview-v2__alerts strong {
+  color: #1e293b;
+  display: block;
+  font-size: 0.84rem;
+  margin-bottom: 0.15rem;
+}
+
+.aptus-overview-v2__alerts p {
+  color: #64748b;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  margin: 0 0 0.2rem;
+}
+
+.aptus-overview-v2__alerts time {
+  color: #94a3b8;
+  font-size: 0.72rem;
+}
+
+.aptus-overview-v2__actions {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.aptus-overview-v2__action {
+  background: #f8fafc;
+  border: 1px solid #e8edf3;
+  border-radius: 0.75rem;
+  color: inherit;
+  display: grid;
+  gap: 0.1rem;
+  padding: 0.75rem 0.85rem;
+  text-decoration: none;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.aptus-overview-v2__action:hover {
+  background: #f1f5f9;
+  border-color: rgba(19, 82, 163, 0.18);
+}
+
+.aptus-overview-v2__action strong {
+  color: #1352a3;
+  font-size: 0.84rem;
+}
+
+.aptus-overview-v2__action span {
+  color: #7a8698;
+  font-size: 0.76rem;
+}
+
+.aptus-overview-v2__snapshot {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0 0 0.85rem;
+}
+
+.aptus-overview-v2__snapshot > div {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.aptus-overview-v2__snapshot dt {
+  color: #7a8698;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.aptus-overview-v2__snapshot dd {
+  color: #1e293b;
+  font-size: 0.86rem;
+  font-weight: 600;
+  margin: 0;
+  word-break: break-word;
+}
+
+.aptus-overview-v2__link {
+  color: #248bcc;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.aptus-overview-v2__link:hover {
+  text-decoration: underline;
+}
+
+.aptus-overview-v2__btn {
+  border-radius: 0.55rem;
+  display: inline-flex;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.45rem 0.8rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.aptus-overview-v2__btn--primary {
+  background: #1352a3;
+  color: #fff;
+}
+
+.aptus-overview-v2__btn--primary:hover {
+  background: #0f4282;
+  color: #fff;
+}
+
+.aptus-overview-v2__empty,
+.aptus-overview-v2__footnote {
+  color: #7a8698;
+  font-size: 0.82rem;
+  margin: 0;
+}
+
+.aptus-overview-v2__loading {
+  align-items: center;
+  color: #7a8698;
+  display: flex;
+  font-size: 0.84rem;
+  gap: 0.65rem;
+  padding: 0.5rem 0;
+}
+
+@media (max-width: 1100px) {
+  .aptus-overview-v2__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .aptus-overview-v2__health-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .aptus-overview-v2__summary-grid--orders {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .aptus-overview-v2__welcome-meta {
+    justify-items: start;
+    width: 100%;
+  }
+
+  .aptus-overview-v2__card-head {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .aptus-overview-v2__health-grid,
+  .aptus-overview-v2__summary-grid--orders,
+  .aptus-overview-v2__summary-grid--support {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Guestroom Management System",
+    "bannerTagline": "Comprehensive solutions for modern hotel and hospitality operations",
+    "title": "Modern Guest Room Management Solutions",
+    "paragraphs": [
+      "In today’s competitive hospitality sector, personalized guest experience is paramount. More and more hotels and resorts are upgrading their rooms with advanced Guestroom Management Systems (GRMS) to maximize guest comfort and reduce energy costs.",
+      "Whether you’re managing lighting and temperature in a boutique room or integrating full-service controls across a luxury suite, these technologies dramatically improve the way you control, automate, and monitor in-room amenities.",
+      "Experience superior guest personalization and seamless system integration with our comprehensive solutions for lighting control, climate management, and digital presence indicators across every guest space.",
+      "From intelligent bedside control panels and automated energy-saving thermostats to intuitive digital door signs and central management dashboards, we provide end-to-end solutions that ensure every stay is comfortable, sustainable, and utterly personalized."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/imgi_8_photo-1581094794329-c8112a89af12-683x1024.png",
+    "imageAlt": "Guestroom Management System",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Guestroom Management System?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Hospitality Expertise",
+          "body": "Comprehensive solutions for modern hotel and hospitality operations",
+          "icon": "medal"
+        },
+        {
+          "title": "24/7 Support",
+          "body": "In today’s competitive hospitality sector, personalized guest experience is paramount. More and more hotels and resorts are upgrading their rooms with advanced Guestroom Management Systems (GRMS) to maximize guest comfort and reduce energy costs.",
+          "icon": "medal"
+        },
+        {
+          "title": "Customized Solutions",
+          "body": "Explore the comprehensive functionality of our guestroom management solutions",
+          "icon": "medal"
+        },
+        {
+          "title": "Proactive Maintenance",
+          "body": "Real-time monitoring of room availability, occupancy status, and cleaning schedules with intuitive visual dashboards.",
+          "icon": "medal"
+        },
+        {
+          "title": "Ready to Transform Your Hotel Operations?",
+          "body": "Integrated billing system that automatically calculates charges for room stays, mini-bar consumption, and additional services.",
+          "icon": "medal"
+        },
+        {
+          "title": "Client Success Stories",
+          "body": "Comprehensive booking engine with online reservation capabilities, rate management, and channel distribution integrations.",
+          "icon": "medal"
+        },
+        {
+          "title": "Sarah Johnson",
+          "body": "Integrated system for managing guest requests, maintenance issues, and service delivery with automated notifications.",
+          "icon": "medal"
+        },
+        {
+          "title": "Michael Chen",
+          "body": "Comprehensive analytics tools providing insights into occupancy rates, revenue trends, and guest preferences for better decision-making.",
+          "icon": "medal"
+        },
+        {
+          "title": "Jessica Williams",
+          "body": "Support for multiple languages and currencies to accommodate international guests and diverse hotel properties.",
+          "icon": "medal"
+        }
+      ]
+    }
+  ],
+  "showPartnerships": true,
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

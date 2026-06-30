@@ -1,0 +1,91 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Nurse Calling System",
+    "bannerTagline": "Advanced communication solutions for healthcare facilities",
+    "title": "Ensuring Immediate Patient Care and Safety",
+    "paragraphs": [
+      "In today’s healthcare environment, prompt patient response is paramount. More and more medical facilities are upgrading their communication infrastructure with advanced Nurse Calling Systems to maximize care efficiency and patient satisfaction.",
+      "Whether you’re installing a simple call bell in a clinic room or deploying a fully integrated system across a large hospital wing, these technologies dramatically improve the way you notify, respond to, and document patient needs.",
+      "Experience superior communication and seamless staff coordination with our comprehensive solutions for bedside calling, mobile alerts, and centralized reporting across any medical facility.",
+      "From patient bedside stations and waterproof pull cords to wireless staff pagers and management analytics software, we provide end-to-end solutions that ensure every call is heard, answered, and utterly effective."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/nurse.jpg",
+    "imageAlt": "Nurse Calling System",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Nurse Calling System?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Clinical Expertise",
+          "body": "Advanced communication solutions for healthcare facilities",
+          "icon": "medal"
+        },
+        {
+          "title": "24/7 Support",
+          "body": "In today’s healthcare environment, prompt patient response is paramount. More and more medical facilities are upgrading their communication infrastructure with advanced Nurse Calling Systems to maximize care efficiency and patient satisfaction.",
+          "icon": "medal"
+        },
+        {
+          "title": "Customized Solutions",
+          "body": "Explore the comprehensive functionality of our nurse call solutions",
+          "icon": "medal"
+        },
+        {
+          "title": "Proactive Maintenance",
+          "body": "Immediate notification system for patients requiring urgent assistance with visual, audible, and vibration-based alerts.",
+          "icon": "medal"
+        },
+        {
+          "title": "Ready to Enhance Your Healthcare Communications?",
+          "body": "Reliable wireless communication devices ensuring staff are always reachable regardless of location within the facility.",
+          "icon": "medal"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "title": {
+      "before": "What Our",
+      "accent": "Clients Say"
+    },
+    "items": [
+      {
+        "quote": "Advanced communication solutions for healthcare facilities",
+        "author": "Sarah Johnson",
+        "role": ""
+      },
+      {
+        "quote": "In today’s healthcare environment, prompt patient response is paramount. More and more medical facilities are upgrading their communication infrastructure with advanced Nurse Calling Systems to maximize care efficiency and patient satisfaction.",
+        "author": "Michael Chen",
+        "role": ""
+      },
+      {
+        "quote": "Explore the comprehensive functionality of our nurse call solutions",
+        "author": "Jessica Williams",
+        "role": ""
+      }
+    ]
+  },
+  "showPartnerships": true,
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "id": "hero",
+    "visible": true,
+    "title": {
+      "before": "Why",
+      "accent": "Aptus Infotech"
+    },
+    "subtitle": "Our values and expertise that set us apart as your trusted IT partner."
+  },
+  "lists": [
+    {
+      "id": "values",
+      "visible": true,
+      "eyebrow": "Our Values",
+      "items": [
+        "Passionate about client success.",
+        "Proactive and responsible.",
+        "An uncompromising integrity in everything we do."
+      ]
+    },
+    {
+      "id": "expertise",
+      "visible": true,
+      "eyebrow": "Our Expertise",
+      "items": [
+        "Proficient network designers and certified ELV implementation team.",
+        "Complete solar solutions (Aptus Solar Tech).",
+        "Experienced software sales and support team."
+      ]
+    }
+  ],
+  "showPartnerships": true,
+  "showContactCta": true
+}

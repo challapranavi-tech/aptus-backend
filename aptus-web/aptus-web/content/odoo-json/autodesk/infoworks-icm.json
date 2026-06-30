@@ -1,0 +1,84 @@
+{
+  "hero": {
+    "id": "hero",
+    "visible": true,
+    "title": {
+      "before": "",
+      "accent": "InfoWorks ICM"
+    },
+    "subtitle": "Integrated catchment modeling for urban drainage and wastewater",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "mailto:info@aptusinfotech.com"
+  },
+  "intro": {
+    "id": "intro",
+    "visible": true,
+    "title": {
+      "before": "Model",
+      "accent": "Catchments"
+    },
+    "paragraphs": [
+      "InfoWorks ICM combines hydrology and hydraulics for integrated modeling of urban drainage, rivers, and wastewater systems.",
+      "Aptus Infotech supports consultants and utilities adopting Autodesk water modeling solutions."
+    ]
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "eyebrow": "Capabilities",
+      "title": {
+        "before": "Key",
+        "accent": "Features"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Integrated Modeling",
+          "body": "Surface, sewer, and river systems in one dynamic model."
+        },
+        {
+          "title": "Flood Analysis",
+          "body": "Assess flood risk and mitigation strategies for urban areas."
+        },
+        {
+          "title": "Wastewater Networks",
+          "body": "Design and analyze foul water collection systems."
+        },
+        {
+          "title": "Scenario Testing",
+          "body": "Evaluate climate, growth, and operational scenarios."
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "eyebrow": "Why Aptus",
+      "title": {
+        "before": "Why Choose",
+        "accent": "Aptus Infotech"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Authorized Autodesk Partner",
+          "body": "Genuine licenses, official support channels, and access to current Autodesk product versions."
+        },
+        {
+          "title": "Implementation Support",
+          "body": "Guidance on deployment, collections, and integration with your existing IT and project workflows."
+        },
+        {
+          "title": "Local Expertise",
+          "body": "Muscat-based team providing responsive sales, technical support, and training across Oman."
+        },
+        {
+          "title": "End-to-End Service",
+          "body": "From license procurement and renewal to rollout planning — a single trusted partner for Autodesk."
+        }
+      ]
+    }
+  ],
+  "showContactCta": true
+}

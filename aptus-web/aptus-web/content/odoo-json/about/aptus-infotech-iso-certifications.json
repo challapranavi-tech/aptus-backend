@@ -1,0 +1,37 @@
+{
+  "hero": {
+    "id": "hero",
+    "visible": true,
+    "title": {
+      "before": "Our",
+      "accent": "Certifications"
+    },
+    "subtitle": "ORIENTAL ORYX INTERNATIONAL L.L.C (APTUS INFOTECH) adheres to the highest international standards."
+  },
+  "certifications": {
+    "id": "certifications",
+    "visible": true,
+    "eyebrow": "Standards",
+    "title": {
+      "before": "Achieving excellence through",
+      "accent": "recognized standards"
+    },
+    "intro": "Our commitment to quality, environmental responsibility, and occupational health & safety is validated by these certifications.",
+    "items": [
+      {
+        "title": "ISO 9001:2015",
+        "description": "Quality Management System (QMS) Certification"
+      },
+      {
+        "title": "ISO 14001:2015",
+        "description": "Environmental Management System (EMS) Certification"
+      },
+      {
+        "title": "ISO 45001:2018",
+        "description": "Occupational Health & Safety Management System Certification"
+      }
+    ],
+    "footerParagraph": "These certifications demonstrate our dedication to excellence and continuous improvement."
+  },
+  "showContactCta": true
+}

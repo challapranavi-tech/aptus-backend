@@ -1,0 +1,136 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "multimedia",
+    "bannerTitle": "Chaos Corona",
+    "bannerTagline": "Fast, easy, and physically-based rendering for architects and designers",
+    "title": "Render Faster, Create Better",
+    "paragraphs": [
+      "Fast, easy, and physically-based rendering for architects and designers",
+      "Discover why artists worldwide choose Chaos Corona",
+      "Experience unparalleled speed with Corona’s highly optimized rendering engine. Render complex scenes in minutes instead of hours, accelerating your workflow and productivity."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Chaos-Corona-e1759822355226-rcuht5b9runqy91tpqwu5ocl0g4d9f580e8b1jc934.jpg",
+    "imageAlt": "Chaos Corona",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Key Features of",
+        "accent": "Chaos Corona"
+      },
+      "subheading": "Discover the capabilities that make this solution industry-leading",
+      "align": "center",
+      "items": [
+        {
+          "title": "Lightning-Fast Rendering",
+          "body": "Fast, easy, and physically-based rendering for architects and designers",
+          "icon": "cube"
+        },
+        {
+          "title": "Physically-Based Materials",
+          "body": "Discover why artists worldwide choose Chaos Corona",
+          "icon": "cube"
+        },
+        {
+          "title": "Advanced Lighting",
+          "body": "Experience unparalleled speed with Corona’s highly optimized rendering engine. Render complex scenes in minutes instead of hours, accelerating your workflow and productivity.",
+          "icon": "cube"
+        },
+        {
+          "title": "Seamless Integration",
+          "body": "Create realistic materials with Corona’s advanced material system. Achieve photorealistic results with intuitive controls and a vast library of presets.",
+          "icon": "cube"
+        },
+        {
+          "title": "Intuitive Controls",
+          "body": "Bring your scenes to life with Corona’s powerful lighting tools. From natural daylight to complex studio setups, achieve perfect illumination with ease.",
+          "icon": "cube"
+        },
+        {
+          "title": "Cloud Rendering",
+          "body": "Work within your favorite 3D application with native plugins for 3ds Max, Cinema 4D, and more. No need to switch between applications or learn new interfaces.",
+          "icon": "cube"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Benefits of Using",
+        "accent": "Chaos Corona"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Save Time",
+          "body": "Fast, easy, and physically-based rendering for architects and designers",
+          "icon": "check"
+        },
+        {
+          "title": "Superior Quality",
+          "body": "Discover why artists worldwide choose Chaos Corona",
+          "icon": "check"
+        },
+        {
+          "title": "Cost-Effective",
+          "body": "Experience unparalleled speed with Corona’s highly optimized rendering engine. Render complex scenes in minutes instead of hours, accelerating your workflow and productivity.",
+          "icon": "check"
+        },
+        {
+          "title": "Easy to Learn",
+          "body": "Create realistic materials with Corona’s advanced material system. Achieve photorealistic results with intuitive controls and a vast library of presets.",
+          "icon": "check"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Chaos Corona?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Official Partner",
+          "body": "Fast, easy, and physically-based rendering for architects and designers",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Discover why artists worldwide choose Chaos Corona",
+          "icon": "medal"
+        },
+        {
+          "title": "Local Presence",
+          "body": "Experience unparalleled speed with Corona’s highly optimized rendering engine. Render complex scenes in minutes instead of hours, accelerating your workflow and productivity.",
+          "icon": "medal"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Create realistic materials with Corona’s advanced material system. Achieve photorealistic results with intuitive controls and a vast library of presets.",
+          "icon": "medal"
+        }
+      ]
+    }
+  ],
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

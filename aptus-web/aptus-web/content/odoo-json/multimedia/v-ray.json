@@ -1,0 +1,93 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "multimedia",
+    "bannerTitle": "Chaos V-Ray for SketchUp",
+    "bannerTagline": "The World’s Most Popular Rendering Solution for SketchUp",
+    "title": "Unleash Photorealistic Power in SketchUp",
+    "paragraphs": [
+      "In the world of 3D design and architectural visualization, the standard for presenting a vision is photorealism. Chaos V-Ray for SketchUp is the industry-standard rendering plugin, transforming your robust SketchUp models into stunning, lifelike images, animations, and immersive experiences with production-ready quality.",
+      "By working within V-Ray’s advanced rendering environment, you leverage the power of physically-based light and materials to accurately simulate real-world conditions. V-Ray’s Interactive Rendering and V-Ray Vision (real-time) modes allow you to make critical design changes—adjusting a camera, tweaking a texture, or repositioning a light—and see the final, high-fidelity result instantaneously, accelerating your creative flow.",
+      "From rapid design iteration and creating precise material studies to generating final, award-winning stills and animations, V-Ray provides the comprehensive, professional toolset that ensures your SketchUp designs are visualized with ultimate realism and delivered with efficiency."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/V-ray-2-1-e1759824638430-rcujgr8skouw06ep8k9zlmixpa4ea82m9qdu37oni8.png",
+    "imageAlt": "Chaos V-Ray for SketchUp",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Benefits of Using",
+        "accent": "Chaos V-Ray for SketchUp"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Faster Response Times",
+          "body": "The World’s Most Popular Rendering Solution for SketchUp",
+          "icon": "check"
+        },
+        {
+          "title": "Enhanced Patient Safety",
+          "body": "Experience the industry-standard rendering engine optimized for SketchUp",
+          "icon": "check"
+        },
+        {
+          "title": "Improved Staff Efficiency",
+          "body": "Realistic light simulation with advanced GI algorithms that accurately calculate indirect light bouncing throughout your scene for natural-looking results.",
+          "icon": "check"
+        },
+        {
+          "title": "HIPAA Compliant",
+          "body": "Create stunning materials using V-Ray’s comprehensive material system with accurate reflection, refraction, and subsurface scattering properties.",
+          "icon": "check"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Chaos V-Ray for SketchUp?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Official Partner",
+          "body": "The World’s Most Popular Rendering Solution for SketchUp",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Experience the industry-standard rendering engine optimized for SketchUp",
+          "icon": "medal"
+        },
+        {
+          "title": "Local Presence",
+          "body": "Realistic light simulation with advanced GI algorithms that accurately calculate indirect light bouncing throughout your scene for natural-looking results.",
+          "icon": "medal"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Create stunning materials using V-Ray’s comprehensive material system with accurate reflection, refraction, and subsurface scattering properties.",
+          "icon": "medal"
+        }
+      ]
+    }
+  ],
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

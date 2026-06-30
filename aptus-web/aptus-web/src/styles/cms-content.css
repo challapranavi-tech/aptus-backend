@@ -1,0 +1,130 @@
+/**
+ * Scoped styles for Odoo website.page HTML rendered inside Next.js.
+ * Keeps typography and spacing aligned with the Aptus marketing site.
+ */
+
+.aptus-cms-content {
+  color: #07111f;
+  line-height: 1.7;
+  font-family: var(--font-poppins), Poppins, sans-serif;
+  isolation: isolate;
+  overflow-x: clip;
+}
+
+/* Hide Odoo chrome when the page body still includes website header/footer blocks */
+.aptus-cms-content header[data-name="Header"],
+.aptus-cms-content footer[data-name="Footer"],
+.aptus-cms-content #o_header_standard,
+.aptus-cms-content #footer,
+.aptus-cms-content .top-bar,
+.aptus-cms-content .main-header,
+.aptus-cms-content footer.footer {
+  display: none !important;
+}
+
+/* Embed-code social links use emoji glyphs — keep them icon-sized */
+.aptus-cms-content .social-circle,
+.aptus-cms-content .social-icons a {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  max-width: 36px;
+  max-height: 36px;
+  overflow: hidden;
+  font-size: 16px !important;
+  line-height: 1 !important;
+  text-decoration: none;
+}
+
+.aptus-cms-content svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.aptus-cms-content h1,
+.aptus-cms-content h2,
+.aptus-cms-content h3,
+.aptus-cms-content h4 {
+  color: var(--aptus-primary, #1352a3);
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+.aptus-cms-content h1 {
+  font-size: clamp(1.8rem, 2.35vw, 2.35rem);
+}
+
+.aptus-cms-content h2 {
+  font-size: clamp(1.4rem, 1.65vw, 1.75rem);
+}
+
+.aptus-cms-content p {
+  margin-bottom: 1rem;
+}
+
+.aptus-cms-content img {
+  max-width: 100%;
+  height: auto;
+}
+
+.aptus-cms-content a {
+  color: var(--aptus-primary, #1352a3);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.aptus-cms-content a:hover {
+  color: var(--aptus-green, #13934b);
+}
+
+.aptus-cms-content section {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+/* Odoo Website Builder snippets — approximate Aptus spacing/colors */
+.aptus-cms-content .s_banner,
+.aptus-cms-content .s_title,
+.aptus-cms-content .s_text_block,
+.aptus-cms-content .s_features,
+.aptus-cms-content .s_cards,
+.aptus-cms-content .s_call_to_action {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.aptus-cms-content .display-1,
+.aptus-cms-content .display-2,
+.aptus-cms-content .display-3,
+.aptus-cms-content h1.display-4 {
+  color: var(--aptus-primary, #1352a3);
+  font-weight: 600;
+}
+
+.aptus-cms-content .btn-primary,
+.aptus-cms-content a.btn.btn-primary {
+  background-color: var(--aptus-primary, #1352a3);
+  border-color: var(--aptus-primary, #1352a3);
+}
+
+.aptus-cms-content .btn-primary:hover,
+.aptus-cms-content a.btn.btn-primary:hover {
+  background-color: var(--aptus-green, #13934b);
+  border-color: var(--aptus-green, #13934b);
+}
+
+.aptus-cms-content .o_colored_level {
+  border-radius: 0.5rem;
+}
+
+.aptus-cms-content .container,
+.aptus-cms-content .o_container_small {
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}

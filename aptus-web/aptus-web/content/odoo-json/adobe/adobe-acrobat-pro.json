@@ -1,0 +1,60 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "adobe",
+    "bannerTitle": "Adobe Acrobat Pro DC",
+    "bannerTagline": "The World’s Leading PDF Solution for Professionals",
+    "title": "Create, Edit & Secure PDF Documents",
+    "paragraphs": [
+      "The World’s Leading PDF Solution for Professionals",
+      "Experience the comprehensive suite of tools designed for professional workflows",
+      "Easily convert any file format to PDF or create new documents from scratch. Edit text, images, and formatting directly within your PDF files."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Adobe-Acrobat-Pro.png",
+    "imageAlt": "Adobe Acrobat Pro DC",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Adobe Acrobat Pro DC?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Official Partner",
+          "body": "The World’s Leading PDF Solution for Professionals",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Experience the comprehensive suite of tools designed for professional workflows",
+          "icon": "medal"
+        },
+        {
+          "title": "Local Presence",
+          "body": "Easily convert any file format to PDF or create new documents from scratch. Edit text, images, and formatting directly within your PDF files.",
+          "icon": "medal"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Add legally binding signatures to contracts, forms, and agreements. Collect signatures electronically and track document status in real-time.",
+          "icon": "medal"
+        }
+      ]
+    }
+  ],
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}
