@@ -1,0 +1,182 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Smart Home Solutions",
+    "bannerTagline": "Transform your living space with intelligent automation and connected technology",
+    "title": "Experience the Future of Living",
+    "paragraphs": [
+      "In today’s connected world, seamless control and energy savings are paramount. More and more homeowners are upgrading their residences with advanced Smart Home Solutions to maximize comfort, security, and efficiency.",
+      "Whether you’re automating the lighting in a single apartment or integrating climate, security, and entertainment across a large villa, these technologies dramatically improve the way you live, interact with, and manage your personal space.",
+      "Experience superior control and effortless convenience with our comprehensive solutions for lighting automation, environmental regulation, and integrated security across every part of your home.",
+      "From voice-controlled hubs and smart thermostats to intelligent door locks and centralized touch-panel interfaces, we provide end-to-end solutions that ensure every moment is comfortable, secure, and utterly effortless."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/Home-Automation-1024x683.webp",
+    "imageAlt": "Smart Home Solutions",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Powerful Features"
+      },
+      "subheading": "Discover the capabilities that make AutoCAD the industry standard",
+      "align": "center",
+      "items": [
+        {
+          "title": "Voice Control",
+          "body": "Control lights, thermostats, entertainment systems, and more using simple voice commands with Google Assistant or Amazon Alexa.",
+          "icon": "home"
+        },
+        {
+          "title": "Automated Lighting",
+          "body": "Customizable lighting scenes, schedules, and motion sensors that adjust brightness and color temperature automatically.",
+          "icon": "lightbulb"
+        },
+        {
+          "title": "Climate Control",
+          "body": "Precise temperature regulation with learning algorithms that adapt to your preferences and optimize energy usage.",
+          "icon": "temperature-low"
+        },
+        {
+          "title": "Security Integration",
+          "body": "Seamless integration with door locks, cameras, alarms, and sensors for comprehensive home security monitoring.",
+          "icon": "lock"
+        },
+        {
+          "title": "Energy Management",
+          "body": "Monitor and control energy consumption with smart plugs, outlets, and appliance monitoring for cost savings.",
+          "icon": "plug"
+        },
+        {
+          "title": "Entertainment Systems",
+          "body": "Unified control of TVs, speakers, and media players with centralized interfaces for movies, music, and streaming.",
+          "icon": "tv"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Benefits of Smart Home Technology"
+      },
+      "subheading": "Why invest in intelligent home automation for your residence",
+      "align": "center",
+      "items": [
+        {
+          "title": "Convenience & Comfort",
+          "body": "Immediate notification system for patients requiring urgent assistance with visual, audible, and vibration-based alerts.",
+          "icon": "stopwatch"
+        },
+        {
+          "title": "Energy Efficiency",
+          "body": "Reliable wireless communication devices ensuring staff are always reachable regardless of location within the facility.",
+          "icon": "user-nurse"
+        },
+        {
+          "title": "Enhanced Security",
+          "body": "Real-time dashboard displaying active calls, response times, and system status for complete situational awareness.",
+          "icon": "users"
+        },
+        {
+          "title": "Cost Savings",
+          "body": "All communications are encrypted and meet strict HIPAA requirements for patient privacy protection.",
+          "icon": "hospital"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech",
+        "accent": "for Your Smart Home?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Certified Professionals",
+          "body": "Our technicians are trained and certified by major manufacturers including Samsung SmartThings, Philips Hue, and Nest.",
+          "icon": "medal"
+        },
+        {
+          "title": "End-to-End Services",
+          "body": "We handle everything from design consultation to installation, configuration, and ongoing maintenance.",
+          "icon": "headset"
+        },
+        {
+          "title": "24/7 Technical Support",
+          "body": "Comprehensive after-sales service with emergency response and proactive system health monitoring.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Future-Ready Technology",
+          "body": "We select scalable platforms that accommodate future technologies and updates without requiring complete replacements.",
+          "icon": "mobile-alt"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our",
+      "accent": "Clients Say"
+    },
+    "subheading": "Hear from satisfied customers who have upgraded their homes with our smart technology",
+    "items": [
+      {
+        "quote": "“The smart home system has completely changed how we live. Being able to control everything from my phone is incredibly convenient, and the energy savings have been significant.”",
+        "author": "Mohammed Al Farsi",
+        "role": "Homeowner"
+      },
+      {
+        "quote": "“We installed the premium smart home package and couldn’t be happier. The security features give us peace of mind, and the voice controls make daily tasks much easier.”",
+        "author": "Sarah Johnson",
+        "role": "Family Home"
+      },
+      {
+        "quote": "“The commercial smart home solution transformed our office space. We can now monitor energy usage, control lighting remotely, and manage access for employees seamlessly.”",
+        "author": "Ahmed Hassan",
+        "role": "Office Manager"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  },
+  "midCta": {
+    "heading": "Ready to Transform Your Living Experience?",
+    "description": "Contact our smart home specialists today for a free consultation and customized solution proposal.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/URMET.png",
+        "alt": "URMET"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/FERMAX-1-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "Fermax"
+      }
+    ]
+  }
+}

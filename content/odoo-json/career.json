@@ -1,0 +1,25 @@
+{
+  "hero": {
+    "id": "hero",
+    "visible": true,
+    "variant": "career-page",
+    "title": {
+      "accent": "Join Our Team at Aptus Infotech"
+    },
+    "subtitle": "Join Our Growing Team!"
+  },
+  "intro": {
+    "id": "intro",
+    "visible": true,
+    "paragraphs": [
+      "At Aptus Infotech, we believe that our employees are the foundation of our success. We are always on the lookout for passionate, innovative, and driven individuals to join our team. If you're looking to be part of a company that encourages creativity, collaboration, and continuous growth, then Aptus Infotech might be the place for you."
+    ]
+  },
+  "contactCta": {
+    "heading": "Become a part of Aptus Infotech",
+    "showForm": true,
+    "formVariant": "career",
+    "submitLabel": "Submit Application",
+    "layout": "career"
+  }
+}

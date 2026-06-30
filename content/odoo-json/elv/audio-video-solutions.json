@@ -1,0 +1,190 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Audio Video Solutions",
+    "bannerTagline": "Professional audio and video technology for modern communication and collaboration",
+    "title": "Enhance Communication with Advanced Audio/Video Technology",
+    "paragraphs": [
+      "In today’s fast-paced world, seamless communication and security are essential for businesses and educational institutions. More and more organizations are turning to audio/video (AV) solutions to enhance their operations.",
+      "Whether you’re implementing smart PA systems for schools or video wall solutions for large venues, these technologies improve the way you connect, engage, and secure spaces.",
+      "Experience superior audio and video quality with our comprehensive solutions for meetings, conferences, and collaboration across any space.",
+      "From high-definition video conferencing to immersive audio systems, we provide end-to-end solutions that ensure seamless communication and collaboration."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Audio_3-673x1024.jpg",
+    "imageAlt": "Audio Video Solutions",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Powerful Features"
+      },
+      "subheading": "Discover the capabilities that make AutoCAD the industry standard",
+      "align": "center",
+      "items": [
+        {
+          "title": "Video Conferencing Systems",
+          "body": "High-definition video conferencing with multiple camera angles, noise cancellation, and seamless integration with popular platforms.",
+          "icon": "video"
+        },
+        {
+          "title": "Audio Enhancement Systems",
+          "body": "Advanced microphone arrays with beamforming technology and echo cancellation for crystal-clear audio in any environment.",
+          "icon": "microphone"
+        },
+        {
+          "title": "Content Sharing & Collaboration",
+          "body": "Wireless presentation systems with screen sharing, annotation tools, and multi-device connectivity for dynamic meetings.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Surveillance & Monitoring",
+          "body": "High-resolution recording with pan-tilt-zoom capabilities and remote monitoring for security and operational insights.",
+          "icon": "tv"
+        },
+        {
+          "title": "Room Booking & Scheduling",
+          "body": "Integrated calendar synchronization with room availability status and automated booking systems.",
+          "icon": "angle-double-left"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Benefits of Our Audio/Video Solutions"
+      },
+      "subheading": "Why invest in professional audio and video technology for your organization",
+      "align": "center",
+      "items": [
+        {
+          "title": "Enhanced Communication",
+          "body": "Crystal-clear audio and video quality ensures everyone can hear and see clearly, improving understanding and engagement.",
+          "icon": "comments"
+        },
+        {
+          "title": "Increased Productivity",
+          "body": "Efficient meetings and collaboration tools help teams accomplish more in less time with fewer misunderstandings.",
+          "icon": "users"
+        },
+        {
+          "title": "Remote Accessibility",
+          "body": "Enable participation from anywhere with reliable video and audio connections for distributed teams.",
+          "icon": "globe-europe"
+        },
+        {
+          "title": "Cost Efficiency",
+          "body": "Reduce travel expenses and increase ROI with high-quality virtual meetings replacing expensive in-person gatherings.",
+          "icon": "chart-line"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus",
+        "accent": "Infotech for AutoCAD?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Certified Professionals",
+          "body": "Our technicians are certified by leading manufacturers including Zoom, Poly, and Shure.",
+          "icon": "certificate"
+        },
+        {
+          "title": "End-to-End Services",
+          "body": "We handle everything from design consultation to installation, calibration, and maintenance.",
+          "icon": "screwdriver"
+        },
+        {
+          "title": "24/7 Technical Support",
+          "body": "Comprehensive after-sales service with emergency response and proactive system health monitoring.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Future-Ready Technology",
+          "body": "We select scalable platforms that accommodate future technologies and updates without requiring complete replacements.",
+          "icon": "reply-all"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "Client Success",
+      "accent": "Stories"
+    },
+    "subheading": "Hear from satisfied customers who have upgraded their meeting spaces",
+    "items": [
+      {
+        "quote": "“The new video conferencing system has completely transformed how we conduct client meetings. The image quality is exceptional and the sound clarity is remarkable.”",
+        "author": "Mohammed Al Farsi",
+        "role": "IT Director"
+      },
+      {
+        "quote": "“We installed the premium audio enhancement system in our boardroom and couldn’t be happier. The difference in voice clarity during conference calls is night and day.”",
+        "author": "Sarah Johnson",
+        "role": "Facilities Manager"
+      },
+      {
+        "quote": "“The room booking system integrated perfectly with our existing calendar software. Now scheduling meetings is much easier and more efficient.”",
+        "author": "Ahmed Hassan",
+        "role": "Operations Manager"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "description": "Our experts can help you to implement the right security system for your business.",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  },
+  "midCta": {
+    "heading": "Ready to Transform Your Meetings?",
+    "description": "Contact our audio/video specialists today for a free demonstration and customized solution proposal.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/LDA-audio-tech-rajcmtw0bg2fln77lwpbcob33b83lps3021uv2lw8e.png",
+        "alt": "LDA-audio-tech"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Extron.png",
+        "alt": "Extron"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Norden-1-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "Norden"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/zycoo-rajd0gjreyq3y3ei0sski8hp6g1p7pvyvilbdiee0e.png",
+        "alt": "zycoo"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Crown-harman-rajd2u32ovz7aly95brmb4wn8ic3o6bjj9yi1ovka6.png",
+        "alt": "Crown-harman"
+      }
+    ]
+  }
+}

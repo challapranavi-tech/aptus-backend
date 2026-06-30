@@ -1,0 +1,16 @@
+/**
+ * Page: Autodesk Civil | Civil Engineering Software | Aptus Infotech Muscat
+ * Route: /civil-3d
+ * Source: LIVE WEBSITE/software\autodesk\Autodesk Civil _ Civil Engineering Software _ Aptus Infotech Muscat.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, testimonials, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-autodesk-civil-civil-engineering-software-aptus-infotech-mus {
+    /* page root scope */
+  }
+
+
+  /* 35 inline styles detected — migrate to utilities */
+}

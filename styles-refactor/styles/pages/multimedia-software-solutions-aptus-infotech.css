@@ -1,0 +1,16 @@
+/**
+ * Page: Multimedia Software Solutions | Aptus Infotech
+ * Route: /multimedia-software-solutions
+ * Source: LIVE WEBSITE/software\multimedia\Multimedia Software Solutions _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-multimedia-software-solutions-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 40 inline styles detected — migrate to utilities */
+}

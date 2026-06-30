@@ -1,0 +1,175 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Nurse Calling System",
+    "bannerTagline": "Advanced communication solutions for healthcare facilities",
+    "title": "Ensuring Immediate Patient Care and Safety",
+    "paragraphs": [
+      "In today’s healthcare environment, prompt patient response is paramount. More and more medical facilities are upgrading their communication infrastructure with advanced Nurse Calling Systems to maximize care efficiency and patient satisfaction.",
+      "Whether you’re installing a simple call bell in a clinic room or deploying a fully integrated system across a large hospital wing, these technologies dramatically improve the way you notify, respond to, and document patient needs.",
+      "Experience superior communication and seamless staff coordination with our comprehensive solutions for bedside calling, mobile alerts, and centralized reporting across any medical facility.",
+      "From patient bedside stations and waterproof pull cords to wireless staff pagers and management analytics software, we provide end-to-end solutions that ensure every call is heard, answered, and utterly effective."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/nurse.jpg",
+    "imageAlt": "Nurse Calling System",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Key System Features"
+      },
+      "subheading": "Explore the comprehensive functionality of our nurse call solutions",
+      "align": "center",
+      "items": [
+        {
+          "title": "Patient Emergency Alerts",
+          "body": "Immediate notification system for patients requiring urgent assistance with visual, audible, and vibration-based alerts.",
+          "icon": "bell"
+        },
+        {
+          "title": "Wireless Staff Pagers",
+          "body": "Reliable wireless communication devices ensuring staff are always reachable regardless of location within the facility.",
+          "icon": "mobile-alt"
+        },
+        {
+          "title": "Central Monitoring Station",
+          "body": "Real-time dashboard displaying active calls, response times, and system status for complete situational awareness.",
+          "icon": "tv"
+        },
+        {
+          "title": "Performance Analytics",
+          "body": "Detailed reporting and analytics tools to track response times, identify bottlenecks, and optimize staff allocation.",
+          "icon": "chart-line"
+        },
+        {
+          "title": "Integrated Security",
+          "body": "Seamless integration with hospital security systems including access control and surveillance for comprehensive safety management.",
+          "icon": "shield-alt"
+        },
+        {
+          "title": "System Integration",
+          "body": "Compatibility with existing hospital infrastructure including EHR systems, nurse stations, and other medical equipment.",
+          "icon": "plug"
+        },
+        {
+          "title": "Faster Response Times",
+          "body": "Immediate notification system for patients requiring urgent assistance with visual, audible, and vibration-based alerts.",
+          "icon": "stopwatch"
+        },
+        {
+          "title": "Enhanced Patient Safety",
+          "body": "Reliable wireless communication devices ensuring staff are always reachable regardless of location within the facility.",
+          "icon": "user-nurse"
+        },
+        {
+          "title": "Improved Staff Efficiency",
+          "body": "Real-time dashboard displaying active calls, response times, and system status for complete situational awareness.",
+          "icon": "users"
+        },
+        {
+          "title": "HIPAA Compliant",
+          "body": "All communications are encrypted and meet strict HIPAA requirements for patient privacy protection.",
+          "icon": "hospital"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose",
+        "accent": "Aptus Infotech?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Clinical Expertise",
+          "body": "As an authorized partner, we provide access to genuine Autodesk products.",
+          "icon": "stethoscope"
+        },
+        {
+          "title": "24/7 Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset"
+        },
+        {
+          "title": "Customized Solutions",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "network-wired"
+        },
+        {
+          "title": "Proactive Maintenance",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "reply-all"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our",
+      "accent": "Clients Say"
+    },
+    "subheading": "Hear from healthcare providers who have transformed their operations with our solutions",
+    "items": [
+      {
+        "quote": "“The implementation of Aptus Infotech’s nurse call system has dramatically improved our response times and patient satisfaction scores across multiple departments.”",
+        "author": "Sarah Johnson",
+        "role": "Director of Nursing"
+      },
+      {
+        "quote": "“Their system seamlessly integrated with our existing EHR platform, creating a unified communication ecosystem that has reduced errors and improved documentation accuracy.”",
+        "author": "Michael Chen",
+        "role": "CEO,"
+      },
+      {
+        "quote": "“We were particularly impressed with the system’s reliability during critical situations and the excellent training provided to our staff.”",
+        "author": "Jessica Williams",
+        "role": "Operations Manager"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "description": "Our experts can help you to implement the right Nurse Calling system as per your Requirements.",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  },
+  "midCta": {
+    "heading": "Ready to Enhance Your Healthcare Communications?",
+    "description": "Contact our healthcare technology specialists to discuss how our nurse call system can improve patient safety and staff efficiency in your facility.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Fanvil.png",
+        "alt": "Fanvil"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/ascom-raje23z1629kzspo62oldqgds2gzj9cwpvbheikory.png",
+        "alt": "ascom"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/austco-raje25upjqc5n0mxv3huipzayu7pynkde4mgd2hwfi.png",
+        "alt": "austco"
+      }
+    ]
+  }
+}

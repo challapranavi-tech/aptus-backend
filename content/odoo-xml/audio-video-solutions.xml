@@ -1,0 +1,287 @@
+<t t-name="website.elv-audio-video-solutions">
+    <t t-call="website.layout">
+        <div id="wrap" class="oe_structure oe_empty">
+            <section class="s_embed_code pt0 pb0 o_colored_level" data-snippet="s_embed_code" data-name="ELV audio-video-solutions">
+                <div class="s_embed_code_embedded o_not_editable container-fluid"><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+.aptus-elv-page { font-family: 'Poppins', sans-serif; color: #1a1a2e; background: #fff; overflow-x: hidden; }
+.aptus-elv-page .container { max-width: 1200px; width: 90%; margin: 0 auto; }
+.aptus-elv-page h2 { font-size: 34px; color: #1a1a2e; margin: 0 0 10px; }
+.aptus-elv-page p { line-height: 1.7; color: #475569; }
+
+.elv-banner { position: relative; padding: 90px 0; text-align: center; color: #fff; background-size: cover; background-position: center; }
+.elv-banner::before { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, rgba(10,22,55,.88), rgba(19,82,163,.78)); }
+.elv-banner .container { position: relative; z-index: 1; }
+.elv-banner h1 { font-size: 40px; margin: 0 0 14px; color: #fff; }
+.elv-banner p { color: #e6eefb; max-width: 720px; margin: 0 auto 26px; font-size: 18px; }
+
+.elv-btn { display: inline-block; background: #1352a3; color: #fff; border: none; padding: 14px 34px; border-radius: 40px; font-size: 16px; font-weight: 600; cursor: pointer; text-decoration: none; transition: .3s; }
+.elv-btn:hover { background: #0e3d7a; transform: translateY(-2px); }
+.elv-btn--light { background: #fff; color: #1352a3; }
+
+.elv-hero { padding: 60px 0; }
+.elv-hero .container { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+.elv-hero-sidebar { flex: 0 0 220px; }
+.elv-hero-sidebar ul { list-style: none; margin: 0; padding: 0; }
+.elv-hero-sidebar a { display: block; padding: 10px 14px; color: #334155; text-decoration: none; border-radius: 8px; font-size: 14px; line-height: 1.4; transition: .2s; }
+.elv-hero-sidebar a:hover, .elv-hero-sidebar a.is-active { background: #1352a3; color: #fff; }
+.elv-hero-text { flex: 1 1 320px; }
+.elv-hero-text h2 { color: #1352a3; }
+.elv-hero-media { flex: 1 1 360px; text-align: center; }
+.elv-hero-media img { max-width: 100%; border-radius: 18px; }
+
+.elv-section { padding: 60px 0; }
+.elv-section--band { background: #f1f5fb; }
+.elv-section-head { text-align: center; max-width: 760px; margin: 0 auto 40px; }
+.elv-section-head h2 span { color: #38b6ff; }
+.elv-section-sub { color: #64748b; margin-top: 8px; }
+
+.elv-card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.elv-card-grid--value { grid-template-columns: repeat(4, 1fr); }
+.elv-card-grid--product { grid-template-columns: repeat(4, 1fr); }
+.elv-card { background: #fff; border: 1px solid #e6ecf5; border-radius: 16px; padding: 28px 24px; text-align: center; box-shadow: 0 6px 18px rgba(15,40,90,.05); transition: .3s; }
+.elv-card:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(15,40,90,.12); }
+.elv-card h3 { font-size: 18px; color: #1a1a2e; margin: 14px 0 8px; }
+.elv-card p { font-size: 14px; }
+.elv-card--value { background: #fff; }
+.elv-card-icon { display: flex; justify-content: center; }
+.elv-icon { width: 46px; height: 46px; color: #1352a3; }
+.elv-card-img img { max-height: 120px; width: auto; object-fit: contain; }
+
+.elv-midcta { background: linear-gradient(120deg, #1352a3, #0a1637); color: #fff; padding: 60px 0; text-align: center; }
+.elv-midcta h2 { color: #fff; }
+.elv-midcta p { color: #dbe6f7; max-width: 680px; margin: 0 auto 26px; }
+
+.elv-quote-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.elv-quote { background: #fff; border-radius: 16px; padding: 28px; box-shadow: 0 6px 18px rgba(15,40,90,.06); }
+.elv-quote-text { font-style: italic; color: #334155; }
+.elv-quote-author { font-weight: 700; color: #1352a3; margin-top: 14px; }
+.elv-quote-role { font-size: 13px; color: #64748b; }
+
+.elv-alliances { padding: 60px 0; text-align: center; }
+.elv-alliances h2 span { color: #38b6ff; }
+.elv-alliance-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; margin-top: 34px; }
+.elv-alliance { width: 120px; height: 80px; background: #fff; border-radius: 12px; display: flex; align-items: center; justify-content: center; padding: 12px; box-shadow: 0 5px 15px rgba(0,0,0,.07); }
+.elv-alliance img { max-width: 100%; max-height: 54px; }
+
+.elv-contact { background: #003049; color: #fff; padding: 60px 0; text-align: center; }
+.elv-contact--light { background: #e8f7f2; color: #1a1a2e; }
+.elv-contact--light h2 { color: #1a1a2e; }
+.elv-contact--light .elv-form-group label { color: #334155; }
+.elv-contact h2 { color: #fff; margin-bottom: 28px; }
+.elv-form { max-width: 800px; margin: 0 auto; }
+.elv-form-row { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 20px; }
+.elv-form-group { flex: 1; text-align: left; }
+.elv-form-group label { display: block; margin-bottom: 8px; font-weight: 500; }
+.elv-form-group input, .elv-form-group textarea { width: 100%; padding: 12px 15px; border: none; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 14px; }
+
+@media (max-width: 900px) {
+  .elv-card-grid, .elv-card-grid--value, .elv-card-grid--product, .elv-quote-grid { grid-template-columns: 1fr; }
+  .elv-banner h1 { font-size: 30px; }
+  .elv-hero-sidebar { flex: 1 1 100%; }
+}
+</style>
+<div class="aptus-elv-page aptus-elv-page--audio-video-solutions">
+        <section class="elv-banner" style="background-image:url('https://aptusinfotech.com/wp-content/uploads/2025/05/brnd-7.jpg');">
+            <div class="container">
+                <h1>Audio Video Solutions</h1>
+                <p>Professional audio and video technology for modern communication and collaboration</p>
+                <a class="elv-btn elv-btn--light" href="#Form">Request a Quote</a>
+            </div>
+        </section>
+        <section class="elv-hero">
+            <div class="container">
+                <aside class="elv-hero-sidebar" aria-label="ELV Solutions">
+                    <ul>
+                        <li><a href="/access-control-system">Access Control System</a></li>
+                        <li><a href="/thermal-scanners">Thermal Scanners</a></li>
+                        <li><a href="/cctv-camera">CCTV</a></li>
+                        <li><a href="/gate-automation">Gate Automation</a></li>
+                        <li><a href="/home-automation">Smart Homes</a></li>
+                        <li><a href="/audio-video-solutions" class="is-active">Audio/Video Solutions</a></li>
+                        <li><a href="/telephone-systems">Telephone Systems</a></li>
+                        <li><a href="/network-and-structured-cabling-solutions">Network and Structured Cabling</a></li>
+                        <li><a href="/ups">UPS</a></li>
+                        <li><a href="/smatv-iptv">SMATV/ IPTV</a></li>
+                        <li><a href="/guest-room-management">Guest Room Management</a></li>
+                        <li><a href="/nurse-calling-system">Nurse Call System</a></li>
+                        <li><a href="/rsi-queue-management">Queue Management System</a></li>
+                        <li><a href="/data-center-solutions">Data Center Solutions</a></li>
+                        <li><a href="/conference-room-solution">Conference room solution</a></li>
+                        <li><a href="/switching-and-routing">Switching and Routing</a></li>
+                    </ul>
+                </aside>
+                <div class="elv-hero-text">
+                    <h2>Enhance Communication with Advanced Audio/Video Technology</h2>
+                <p>In today’s fast-paced world, seamless communication and security are essential for businesses and educational institutions. More and more organizations are turning to audio/video (AV) solutions to enhance their operations.</p>
+                <p>Whether you’re implementing smart PA systems for schools or video wall solutions for large venues, these technologies improve the way you connect, engage, and secure spaces.</p>
+                <p>Experience superior audio and video quality with our comprehensive solutions for meetings, conferences, and collaboration across any space.</p>
+                <p>From high-definition video conferencing to immersive audio systems, we provide end-to-end solutions that ensure seamless communication and collaboration.</p>
+                    <a class="elv-btn" href="#Form">Request a Quote</a>
+                </div>
+                <div class="elv-hero-media">
+                    <img src="https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Audio_3-673x1024.jpg" alt="Audio Video Solutions" loading="lazy"/>
+                </div>
+            </div>
+        </section>
+        <section class="elv-section">
+            <div class="container">
+                <div class="elv-section-head">
+                    <h2>Powerful Features</h2>
+                    <p class="elv-section-sub">Discover the capabilities that make AutoCAD the industry standard</p>
+                </div>
+                <div class="elv-card-grid">
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 576 512" fill="currentColor" aria-hidden="true"><path d="M336.2 64H47.8C21.4 64 0 85.4 0 111.8v288.4C0 426.6 21.4 448 47.8 448h288.4c26.4 0 47.8-21.4 47.8-47.8V111.8c0-26.4-21.4-47.8-47.8-47.8zm189.4 37.7L416 177.3v157.4l109.6 75.5c21.2 14.6 50.4-.3 50.4-25.8V127.5c0-25.4-29.1-40.4-50.4-25.8z"/></svg></div>
+              <h3>Video Conferencing Systems</h3>
+              <p>High-definition video conferencing with multiple camera angles, noise cancellation, and seamless integration with popular platforms.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 352 512" fill="currentColor" aria-hidden="true"><path d="M176 352c53.02 0 96-42.98 96-96V96c0-53.02-42.98-96-96-96S80 42.98 80 96v160c0 53.02 42.98 96 96 96zm160-160h-16c-8.84 0-16 7.16-16 16v48c0 74.8-64.49 134.82-140.79 127.38C96.71 376.89 48 317.11 48 250.3V208c0-8.84-7.16-16-16-16H16c-8.84 0-16 7.16-16 16v40.16c0 89.64 63.97 169.55 152 181.69V464H96c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16h160c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16h-56v-33.77C285.71 418.47 352 344.9 352 256v-48c0-8.84-7.16-16-16-16z"/></svg></div>
+              <h3>Audio Enhancement Systems</h3>
+              <p>Advanced microphone arrays with beamforming technology and echo cancellation for crystal-clear audio in any environment.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 640 512" fill="currentColor" aria-hidden="true"><path d="M434.7 64h-85.9c-8 0-15.7 3-21.6 8.4l-98.3 90c-.1.1-.2.3-.3.4-16.6 15.6-16.3 40.5-2.1 56 12.7 13.9 39.4 17.6 56.1 2.7.1-.1.3-.1.4-.2l79.9-73.2c6.5-5.9 16.7-5.5 22.6 1 6 6.5 5.5 16.6-1 22.6l-26.1 23.9L504 313.8c2.9 2.4 5.5 5 7.9 7.7V128l-54.6-54.6c-5.9-6-14.1-9.4-22.6-9.4zM544 128.2v223.9c0 17.7 14.3 32 32 32h64V128.2h-96zm48 223.9c-8.8 0-16-7.2-16-16s7.2-16 16-16 16 7.2 16 16-7.2 16-16 16zM0 384h64c17.7 0 32-14.3 32-32V128.2H0V384zm48-63.9c8.8 0 16 7.2 16 16s-7.2 16-16 16-16-7.2-16-16c0-8.9 7.2-16 16-16zm435.9 18.6L334.6 217.5l-30 27.5c-29.7 27.1-75.2 24.5-101.7-4.4-26.9-29.4-24.8-74.9 4.4-101.7L289.1 64h-83.8c-8.5 0-16.6 3.4-22.6 9.4L128 128v223.9h18.3l90.5 81.9c27.4 22.3 67.7 18.1 90-9.3l.2-.2 17.9 15.5c15.9 13 39.4 10.5 52.3-5.4l31.4-38.6 5.4 4.4c13.7 11.1 33.9 9.1 45-4.7l9.5-11.7c11.2-13.8 9.1-33.9-4.6-45.1z"/></svg></div>
+              <h3>Content Sharing &amp; Collaboration</h3>
+              <p>Wireless presentation systems with screen sharing, annotation tools, and multi-device connectivity for dynamic meetings.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 640 512" fill="currentColor" aria-hidden="true"><path d="M592 0H48A48 48 0 0 0 0 48v320a48 48 0 0 0 48 48h240v32H112a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16H352v-32h240a48 48 0 0 0 48-48V48a48 48 0 0 0-48-48zm-16 352H64V64h512z"/></svg></div>
+              <h3>Surveillance &amp; Monitoring</h3>
+              <p>High-resolution recording with pan-tilt-zoom capabilities and remote monitoring for security and operational insights.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M223.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L319.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L393.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34zm-192 34l136 136c9.4 9.4 24.6 9.4 33.9 0l22.6-22.6c9.4-9.4 9.4-24.6 0-33.9L127.9 256l96.4-96.4c9.4-9.4 9.4-24.6 0-33.9L201.7 103c-9.4-9.4-24.6-9.4-33.9 0l-136 136c-9.5 9.4-9.5 24.6-.1 34z"/></svg></div>
+              <h3>Room Booking &amp; Scheduling</h3>
+              <p>Integrated calendar synchronization with room availability status and automated booking systems.</p>
+            </div>
+                </div>
+            </div>
+        </section>
+        <section class="elv-section elv-section--band">
+            <div class="container">
+                <div class="elv-section-head">
+                    <h2>Benefits of Our Audio/Video Solutions</h2>
+                    <p class="elv-section-sub">Why invest in professional audio and video technology for your organization</p>
+                </div>
+                <div class="elv-card-grid elv-card-grid--value">
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 576 512" fill="currentColor" aria-hidden="true"><path d="M416 192c0-88.4-93.1-160-208-160S0 103.6 0 192c0 34.3 14.1 65.9 38 92-13.4 30.2-35.5 54.2-35.8 54.5-2.2 2.3-2.8 5.7-1.5 8.7S4.8 352 8 352c36.6 0 66.9-12.3 88.7-25 32.2 15.7 70.3 25 111.3 25 114.9 0 208-71.6 208-160zm122 220c23.9-26 38-57.7 38-92 0-66.9-53.5-124.2-129.3-148.1.9 6.6 1.3 13.3 1.3 20.1 0 105.9-107.7 192-240 192-10.8 0-21.3-.8-31.7-1.9C207.8 439.6 281.8 480 368 480c41 0 79.1-9.2 111.3-25 21.8 12.7 52.1 25 88.7 25 3.2 0 6.1-1.9 7.3-4.8 1.3-2.9.7-6.3-1.5-8.7-.3-.3-22.4-24.2-35.8-54.5z"/></svg></div>
+              <h3>Enhanced Communication</h3>
+              <p>Crystal-clear audio and video quality ensures everyone can hear and see clearly, improving understanding and engagement.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 640 512" fill="currentColor" aria-hidden="true"><path d="M96 224c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm448 0c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm32 32h-64c-17.6 0-33.5 7.1-45.1 18.6 40.3 22.1 68.9 62 75.1 109.4h66c17.7 0 32-14.3 32-32v-32c0-35.3-28.7-64-64-64zm-256 0c61.9 0 112-50.1 112-112S381.9 32 320 32 208 82.1 208 144s50.1 112 112 112zm76.8 32h-8.3c-20.8 10-43.9 16-68.5 16s-47.6-6-68.5-16h-8.3C179.6 288 128 339.6 128 403.2V432c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48v-28.8c0-63.6-51.6-115.2-115.2-115.2zm-223.7-13.4C161.5 263.1 145.6 256 128 256H64c-35.3 0-64 28.7-64 64v32c0 17.7 14.3 32 32 32h65.9c6.3-47.4 34.9-87.3 75.2-109.4z"/></svg></div>
+              <h3>Increased Productivity</h3>
+              <p>Efficient meetings and collaboration tools help teams accomplish more in less time with fewer misunderstandings.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 496 512" fill="currentColor" aria-hidden="true"><path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm200 248c0 22.5-3.9 44.2-10.8 64.4h-20.3c-4.3 0-8.4-1.7-11.4-4.8l-32-32.6c-4.5-4.6-4.5-12.1.1-16.7l12.5-12.5v-8.7c0-3-1.2-5.9-3.3-8l-9.4-9.4c-2.1-2.1-5-3.3-8-3.3h-16c-6.2 0-11.3-5.1-11.3-11.3 0-3 1.2-5.9 3.3-8l9.4-9.4c2.1-2.1 5-3.3 8-3.3h32c6.2 0 11.3-5.1 11.3-11.3v-9.4c0-6.2-5.1-11.3-11.3-11.3h-36.7c-8.8 0-16 7.2-16 16v4.5c0 6.9-4.4 13-10.9 15.2l-31.6 10.5c-3.3 1.1-5.5 4.1-5.5 7.6v2.2c0 4.4-3.6 8-8 8h-16c-4.4 0-8-3.6-8-8s-3.6-8-8-8H247c-3 0-5.8 1.7-7.2 4.4l-9.4 18.7c-2.7 5.4-8.2 8.8-14.3 8.8H194c-8.8 0-16-7.2-16-16V199c0-4.2 1.7-8.3 4.7-11.3l20.1-20.1c4.6-4.6 7.2-10.9 7.2-17.5 0-3.4 2.2-6.5 5.5-7.6l40-13.3c1.7-.6 3.2-1.5 4.4-2.7l26.8-26.8c2.1-2.1 3.3-5 3.3-8 0-6.2-5.1-11.3-11.3-11.3H258l-16 16v8c0 4.4-3.6 8-8 8h-16c-4.4 0-8-3.6-8-8v-20c0-2.5 1.2-4.9 3.2-6.4l28.9-21.7c1.9-.1 3.8-.3 5.7-.3C358.3 56 448 145.7 448 256zM130.1 149.1c0-3 1.2-5.9 3.3-8l25.4-25.4c2.1-2.1 5-3.3 8-3.3 6.2 0 11.3 5.1 11.3 11.3v16c0 3-1.2 5.9-3.3 8l-9.4 9.4c-2.1 2.1-5 3.3-8 3.3h-16c-6.2 0-11.3-5.1-11.3-11.3zm128 306.4v-7.1c0-8.8-7.2-16-16-16h-20.2c-10.8 0-26.7-5.3-35.4-11.8l-22.2-16.7c-11.5-8.6-18.2-22.1-18.2-36.4v-23.9c0-16 8.4-30.8 22.1-39l42.9-25.7c7.1-4.2 15.2-6.5 23.4-6.5h31.2c10.9 0 21.4 3.9 29.6 10.9l43.2 37.1h18.3c8.5 0 16.6 3.4 22.6 9.4l17.3 17.3c3.4 3.4 8.1 5.3 12.9 5.3H423c-32.4 58.9-93.8 99.5-164.9 103.1z"/></svg></div>
+              <h3>Remote Accessibility</h3>
+              <p>Enable participation from anywhere with reliable video and audio connections for distributed teams.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M496 384H64V80c0-8.84-7.16-16-16-16H16C7.16 64 0 71.16 0 80v336c0 17.67 14.33 32 32 32h464c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16zM464 96H345.94c-21.38 0-32.09 25.85-16.97 40.97l32.4 32.4L288 242.75l-73.37-73.37c-12.5-12.5-32.76-12.5-45.25 0l-68.69 68.69c-6.25 6.25-6.25 16.38 0 22.63l22.62 22.62c6.25 6.25 16.38 6.25 22.63 0L192 237.25l73.37 73.37c12.5 12.5 32.76 12.5 45.25 0l96-96 32.4 32.4c15.12 15.12 40.97 4.41 40.97-16.97V112c.01-8.84-7.15-16-15.99-16z"/></svg></div>
+              <h3>Cost Efficiency</h3>
+              <p>Reduce travel expenses and increase ROI with high-quality virtual meetings replacing expensive in-person gatherings.</p>
+            </div>
+                </div>
+            </div>
+        </section>
+        <section class="elv-section">
+            <div class="container">
+                <div class="elv-section-head">
+                    <h2>Why Choose Aptus <span>Infotech for AutoCAD?</span></h2>
+                    
+                </div>
+                <div class="elv-card-grid elv-card-grid--value">
+            <div class="elv-card elv-card--value">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M458.622 255.92l45.985-45.005c13.708-12.977 7.316-36.039-10.664-40.339l-62.65-15.99 17.661-62.015c4.991-17.838-11.829-34.663-29.661-29.671l-61.994 17.667-15.984-62.671C337.085.197 313.765-6.276 300.99 7.228L256 53.57 211.011 7.229c-12.63-13.351-36.047-7.234-40.325 10.668l-15.984 62.671-61.995-17.667C74.87 57.907 58.056 74.738 63.046 92.572l17.661 62.015-62.65 15.99C.069 174.878-6.31 197.944 7.392 210.915l45.985 45.005-45.985 45.004c-13.708 12.977-7.316 36.039 10.664 40.339l62.65 15.99-17.661 62.015c-4.991 17.838 11.829 34.663 29.661 29.671l61.994-17.667 15.984 62.671c4.439 18.575 27.696 24.018 40.325 10.668L256 458.61l44.989 46.001c12.5 13.488 35.987 7.486 40.325-10.668l15.984-62.671 61.994 17.667c17.836 4.994 34.651-11.837 29.661-29.671l-17.661-62.015 62.65-15.99c17.987-4.302 24.366-27.367 10.664-40.339l-45.984-45.004z"/></svg></div>
+              <h3>Certified Professionals</h3>
+              <p>Our technicians are certified by leading manufacturers including Zoom, Poly, and Shure.</p>
+            </div>
+            <div class="elv-card elv-card--value">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M448 0L320 96v62.06l-83.03 83.03c6.79 4.25 13.27 9.06 19.07 14.87 5.8 5.8 10.62 12.28 14.87 19.07L353.94 192H416l96-128-64-64zM128 278.59L10.92 395.67c-14.55 14.55-14.55 38.15 0 52.71l52.7 52.7c14.56 14.56 38.15 14.56 52.71 0L233.41 384c29.11-29.11 29.11-76.3 0-105.41s-76.3-29.11-105.41 0z"/></svg></div>
+              <h3>End-to-End Services</h3>
+              <p>We handle everything from design consultation to installation, calibration, and maintenance.</p>
+            </div>
+            <div class="elv-card elv-card--value">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 640 512" fill="currentColor" aria-hidden="true"><path d="M434.7 64h-85.9c-8 0-15.7 3-21.6 8.4l-98.3 90c-.1.1-.2.3-.3.4-16.6 15.6-16.3 40.5-2.1 56 12.7 13.9 39.4 17.6 56.1 2.7.1-.1.3-.1.4-.2l79.9-73.2c6.5-5.9 16.7-5.5 22.6 1 6 6.5 5.5 16.6-1 22.6l-26.1 23.9L504 313.8c2.9 2.4 5.5 5 7.9 7.7V128l-54.6-54.6c-5.9-6-14.1-9.4-22.6-9.4zM544 128.2v223.9c0 17.7 14.3 32 32 32h64V128.2h-96zm48 223.9c-8.8 0-16-7.2-16-16s7.2-16 16-16 16 7.2 16 16-7.2 16-16 16zM0 384h64c17.7 0 32-14.3 32-32V128.2H0V384zm48-63.9c8.8 0 16 7.2 16 16s-7.2 16-16 16-16-7.2-16-16c0-8.9 7.2-16 16-16zm435.9 18.6L334.6 217.5l-30 27.5c-29.7 27.1-75.2 24.5-101.7-4.4-26.9-29.4-24.8-74.9 4.4-101.7L289.1 64h-83.8c-8.5 0-16.6 3.4-22.6 9.4L128 128v223.9h18.3l90.5 81.9c27.4 22.3 67.7 18.1 90-9.3l.2-.2 17.9 15.5c15.9 13 39.4 10.5 52.3-5.4l31.4-38.6 5.4 4.4c13.7 11.1 33.9 9.1 45-4.7l9.5-11.7c11.2-13.8 9.1-33.9-4.6-45.1z"/></svg></div>
+              <h3>24/7 Technical Support</h3>
+              <p>Comprehensive after-sales service with emergency response and proactive system health monitoring.</p>
+            </div>
+            <div class="elv-card elv-card--value">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 576 512" fill="currentColor" aria-hidden="true"><path d="M136.309 189.836L312.313 37.851C327.72 24.546 352 35.348 352 56.015v82.763c129.182 10.231 224 52.212 224 183.548 0 61.441-39.582 122.309-83.333 154.132-13.653 9.931-33.111-2.533-28.077-18.631 38.512-123.162-3.922-169.482-112.59-182.015v84.175c0 20.701-24.3 31.453-39.687 18.164L136.309 226.164c-11.071-9.561-11.086-26.753 0-36.328zm-128 36.328L184.313 378.15C199.7 391.439 224 380.687 224 359.986v-15.818l-108.606-93.785A55.96 55.96 0 0 1 96 207.998a55.953 55.953 0 0 1 19.393-42.38L224 71.832V56.015c0-20.667-24.28-31.469-39.687-18.164L8.309 189.836c-11.086 9.575-11.071 26.767 0 36.328z"/></svg></div>
+              <h3>Future-Ready Technology</h3>
+              <p>We select scalable platforms that accommodate future technologies and updates without requiring complete replacements.</p>
+            </div>
+                </div>
+            </div>
+        </section>
+        <section class="elv-midcta">
+            <div class="container">
+                <h2>Ready to Transform Your Meetings?</h2>
+                <p>Contact our audio/video specialists today for a free demonstration and customized solution proposal.</p>
+                <a class="elv-btn elv-btn--light" href="#Form">Get Your Quote Now</a>
+            </div>
+        </section>
+        <section class="elv-section elv-section--band">
+            <div class="container">
+                <div class="elv-section-head">
+                    <h2>Client Success <span>Stories</span></h2>
+                    <p class="elv-section-sub">Hear from satisfied customers who have upgraded their meeting spaces</p>
+                </div>
+                <div class="elv-quote-grid">
+            <div class="elv-quote">
+                <p class="elv-quote-text">“The new video conferencing system has completely transformed how we conduct client meetings. The image quality is exceptional and the sound clarity is remarkable.”</p>
+                <div class="elv-quote-author">Mohammed Al Farsi</div>
+                <div class="elv-quote-role">IT Director</div>
+            </div>
+            <div class="elv-quote">
+                <p class="elv-quote-text">“We installed the premium audio enhancement system in our boardroom and couldn’t be happier. The difference in voice clarity during conference calls is night and day.”</p>
+                <div class="elv-quote-author">Sarah Johnson</div>
+                <div class="elv-quote-role">Facilities Manager</div>
+            </div>
+            <div class="elv-quote">
+                <p class="elv-quote-text">“The room booking system integrated perfectly with our existing calendar software. Now scheduling meetings is much easier and more efficient.”</p>
+                <div class="elv-quote-author">Ahmed Hassan</div>
+                <div class="elv-quote-role">Operations Manager</div>
+            </div>
+                </div>
+            </div>
+        </section>
+        <section class="elv-alliances">
+            <div class="container">
+                <h2>Winning together with <span>Strategic Alliances</span></h2>
+                <div class="elv-alliance-grid">
+                <div class="elv-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/LDA-audio-tech-rajcmtw0bg2fln77lwpbcob33b83lps3021uv2lw8e.png" alt="LDA-audio-tech" loading="lazy"/></div>
+                <div class="elv-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Extron.png" alt="Extron" loading="lazy"/></div>
+                <div class="elv-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Norden-1-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png" alt="Norden" loading="lazy"/></div>
+                <div class="elv-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/zycoo-rajd0gjreyq3y3ei0sski8hp6g1p7pvyvilbdiee0e.png" alt="zycoo" loading="lazy"/></div>
+                <div class="elv-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Crown-harman-rajd2u32ovz7aly95brmb4wn8ic3o6bjj9yi1ovka6.png" alt="Crown-harman" loading="lazy"/></div>
+                </div>
+            </div>
+        </section>
+        <section class="elv-contact elv-contact--light" id="Form">
+            <div class="container">
+                <h2>Have questions? We can help</h2>
+                <form class="elv-form" action="/contactus" method="post">
+                    <div class="elv-form-row">
+                        <div class="elv-form-group"><label>First Name *</label><input type="text" name="first_name" required="required"/></div>
+                        <div class="elv-form-group"><label>Last Name *</label><input type="text" name="last_name" required="required"/></div>
+                    </div>
+                    <div class="elv-form-row">
+                        <div class="elv-form-group"><label>Email *</label><input type="email" name="email" placeholder="name@mail.com" required="required"/></div>
+                        <div class="elv-form-group"><label>Phone *</label><input type="tel" name="phone" placeholder="e.g, +968 0000 0000" required="required"/></div>
+                    </div>
+                    <div class="elv-form-group"><label>Message</label><textarea name="message" rows="4" placeholder="Message"/></div>
+                    <button type="submit" class="elv-btn">Submit Now</button>
+                </form>
+            </div>
+        </section>
+</div></div>
+            </section>
+        </div>
+    </t>
+</t>

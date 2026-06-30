@@ -1,0 +1,16 @@
+/**
+ * Page: Our Story | The Journey of Aptus Infotech
+ * Route: /our-story
+ * Source: LIVE WEBSITE/about us\Our Story _ The Journey of Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-our-story-the-journey-of-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 11 inline styles detected — migrate to utilities */
+}

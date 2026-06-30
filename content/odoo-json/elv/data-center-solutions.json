@@ -1,0 +1,157 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Data Center Solutions",
+    "bannerTagline": "Comprehensive infrastructure solutions for modern enterprise environments",
+    "title": "Powering Your Digital Future",
+    "paragraphs": [
+      "In today’s data-driven economy, the performance and availability of your core infrastructure are non-negotiable. More and more organizations are upgrading their core IT environment with advanced Data Center Solutions to maximize application speed and ensure business continuity.",
+      "Whether you’re implementing hyper-converged infrastructure for a remote office or deploying a full cloud-ready core for a large enterprise, these technologies dramatically improve the way you store, process, and protect your critical data assets.",
+      "Experience superior agility and seamless scalability with our comprehensive solutions for compute, storage, and networking across any data center environment.",
+      "From next-generation servers and flash-optimized storage arrays to intelligent network fabrics and automated orchestration platforms, we provide end-to-end solutions that ensure every workload is optimized, protected, and utterly resilient."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_a_cinematic_photograph_of_a_futuristic_dat_0-673x1024.jpg",
+    "imageAlt": "Data Center Solutions",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Comprehensive Features"
+      },
+      "subheading": "Explore the key components of our data center solutions",
+      "align": "center",
+      "items": [
+        {
+          "title": "Virtualization & Containerization",
+          "body": "Implement advanced virtualization technologies including VMware, Hyper-V, and Docker containers to maximize hardware utilization and simplify management.",
+          "icon": "database"
+        },
+        {
+          "title": "Cloud Integration Services",
+          "body": "Seamlessly integrate hybrid cloud solutions with AWS, Azure, and Google Cloud Platform to extend your infrastructure capabilities.",
+          "icon": "cloud"
+        },
+        {
+          "title": "Advanced Security Measures",
+          "body": "Implement multi-layered security protocols including firewalls, intrusion detection systems, encryption, and access control to protect sensitive data.",
+          "icon": "shield-alt"
+        },
+        {
+          "title": "High-Speed Networking",
+          "body": "Deploy optimized network architectures with high-speed switches, routers, and load balancers to ensure seamless data flow and minimal latency.",
+          "icon": "network-wired"
+        },
+        {
+          "title": "Scalable Storage Solutions",
+          "body": "Implement enterprise-grade storage solutions including SAN, NAS, and distributed file systems designed for performance, scalability, and reliability.",
+          "icon": "folder"
+        },
+        {
+          "title": "Redundant Power & Cooling",
+          "body": "Ensure continuous operation with redundant power supplies, UPS systems, and precision cooling solutions to prevent downtime and equipment failure.",
+          "icon": "power-off"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose",
+        "accent": "Aptus Infotech?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Certified Expertise",
+          "body": "Our team holds industry certifications from leading vendors like Cisco, VMware, and Microsoft.",
+          "icon": "certificate"
+        },
+        {
+          "title": "24/7 Support",
+          "body": "Round-the-clock technical support and proactive monitoring to ensure optimal performance.",
+          "icon": "headset"
+        },
+        {
+          "title": "Customized Solutions",
+          "body": "We design solutions specifically for your business needs rather than offering generic packages.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Proactive Maintenance",
+          "body": "Regular system audits and predictive maintenance to prevent issues before they occur.",
+          "icon": "mobile-alt"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our",
+      "accent": "Clients Say"
+    },
+    "subheading": "Hear from businesses that have transformed their operations with our data center solutions",
+    "items": [
+      {
+        "quote": "“Aptus Infotech helped us migrate our entire data center to a hybrid cloud environment, resulting in 40% reduction in operational costs and improved disaster recovery capabilities.”",
+        "author": "Sarah Johnson",
+        "role": "IT Director"
+      },
+      {
+        "quote": "“Their managed services freed up our internal resources while providing superior performance and security compared to our previous in-house setup.”",
+        "author": "Michael Chen",
+        "role": "CEO"
+      },
+      {
+        "quote": "“The custom-designed data center solution from Aptus has been instrumental in supporting our rapid growth and handling increased traffic loads efficiently.”",
+        "author": "Jessica Williams",
+        "role": "Operations Manager"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "description": "Our experts can help you to implement the right security system for your business.",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/WatchNet.png",
+        "alt": "WatchNet"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Tyco.png",
+        "alt": "Tyco"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Suprema.png",
+        "alt": "suprema"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Hikvision.png",
+        "alt": "Hikvision"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/ZKTeco.png",
+        "alt": "ZKT"
+      }
+    ]
+  }
+}

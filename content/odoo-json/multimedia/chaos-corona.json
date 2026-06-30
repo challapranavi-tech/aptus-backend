@@ -1,0 +1,256 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "multimedia",
+    "bannerTitle": "Chaos Corona",
+    "bannerTagline": "Fast, easy, and physically-based rendering for architects and designers",
+    "mediaInline": false,
+    "title": "Render Faster, Create Better",
+    "paragraphs": [
+      "Chaos Corona is a versatile and powerful rendering engine that delivers high-quality, photorealistic images for architecture, design, and VFX projects. With an intuitive interface and fast performance, Corona enables artists to bring their creative vision to life with ease.",
+      "Designed by artists for artists, it integrates seamlessly with major 3D applications like 3ds Max and Cinema 4D, offering physically-based rendering for realistic materials, lighting, and camera effects.",
+      "Whether producing architectural visualizations, product designs, or animated films, Chaos Corona provides advanced tools that ensure efficient workflows, complete creative control, and stunning, professional-quality results."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Chaos-Corona-e1759822355226-rcuht5b9runqy91tpqwu5ocl0g4d9f580e8basr4f4.jpg",
+    "imageAlt": "Chaos Corona",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Powerful Features"
+      },
+      "subheading": "Discover why artists worldwide choose Chaos Corona",
+      "align": "center",
+      "items": [
+        {
+          "title": "Lightning-Fast Rendering",
+          "body": "Experience unparalleled speed with Corona’s highly optimized rendering engine. Render complex scenes in minutes instead of hours, accelerating your workflow and productivity.",
+          "icon": "stopwatch",
+          "imageAlt": "Lightning-Fast Rendering"
+        },
+        {
+          "title": "Physically-Based Materials",
+          "body": "Create realistic materials with Corona’s advanced material system. Achieve photorealistic results with intuitive controls and a vast library of presets.",
+          "icon": "cube",
+          "imageAlt": "Physically-Based Materials"
+        },
+        {
+          "title": "Advanced Lighting",
+          "body": "Bring your scenes to life with Corona’s powerful lighting tools. From natural daylight to complex studio setups, achieve perfect illumination with ease.",
+          "icon": "cube",
+          "imageAlt": "Advanced Lighting"
+        },
+        {
+          "title": "Seamless Integration",
+          "body": "Work within your favorite 3D application with native plugins for 3ds Max, Cinema 4D, and more. No need to switch between applications or learn new interfaces.",
+          "icon": "cube",
+          "imageAlt": "Seamless Integration"
+        },
+        {
+          "title": "Intuitive Controls",
+          "body": "Focus on creativity, not technical settings. Corona’s user-friendly interface makes advanced rendering accessible to artists of all skill levels.",
+          "icon": "cube",
+          "imageAlt": "Intuitive Controls"
+        },
+        {
+          "title": "Cloud Rendering",
+          "body": "Scale your rendering power with Corona Cloud. Render multiple frames simultaneously and meet tight deadlines without investing in expensive hardware.",
+          "icon": "cube",
+          "imageAlt": "Cloud Rendering"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Key Benefits"
+      },
+      "subheading": "Why artists and studios choose Chaos Corona",
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Save Time",
+          "body": "Render faster and iterate more quickly. Corona’s speed and efficiency mean you can produce more work in less time.",
+          "icon": "check"
+        },
+        {
+          "title": "Superior Quality",
+          "body": "Achieve photorealistic results with minimal effort. Corona’s physically-based rendering ensures stunning, believable images.",
+          "icon": "check"
+        },
+        {
+          "title": "Cost-Effective",
+          "body": "Get professional results without breaking the bank. Corona offers the best price-to-performance ratio in the industry.",
+          "icon": "check"
+        },
+        {
+          "title": "Easy to Learn",
+          "body": "Start creating immediately with Corona’s intuitive interface and comprehensive learning resources.",
+          "icon": "graduation-cap"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Chaos Corona?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Official Partner",
+          "body": "As an authorized partner, we provide access to genuine products.",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset"
+        },
+        {
+          "title": "Local Presence",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "mobile"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Create Stunning Renders?",
+    "subheading": "Get your free Quotation of Chaos Corona today and experience the future of rendering.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Success stories from businesses using AutoCAD through Aptus Infotech",
+    "items": [
+      {
+        "quote": "Chaos Corona has completely transformed our architectural visualization workflow. The speed and quality we achieve now is incredible, and the intuitive interface means our team was productive from day one.",
+        "author": "Ahmad Al Hashmi",
+        "role": "Lead Artist, Vision Studios"
+      },
+      {
+        "quote": "I’ve tried many rendering engines, but Corona stands out for its balance of speed and quality. The physically-based materials and lighting produce stunning results with minimal tweaking.",
+        "author": "Mariam Al Shoaib",
+        "role": "3D Designer, Creative Solutions"
+      },
+      {
+        "quote": "The seamless integration with Cinema 4D and the responsive support team make Corona the perfect choice for our studio. We’ve cut our rendering time in half while improving quality.",
+        "author": "Khalida Ali",
+        "role": "Creative Director, Pixel Perfect"
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/planswift.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Prokon.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/sophos.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/spectronova.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/aconex.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/etap.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/fortinet.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/kaspersky.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft.png",
+        "alt": "Microsoft"
+      },
+      {
+        "id": "lumion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/lumion.png",
+        "alt": "lumion"
+      },
+      {
+        "id": "paloalto",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/paloalto.png",
+        "alt": "paloalto"
+      },
+      {
+        "id": "vray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/v.ray_.png",
+        "alt": "v.ray"
+      },
+      {
+        "id": "twinmotion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png",
+        "alt": "twinmotion"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

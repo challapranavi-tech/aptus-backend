@@ -1,0 +1,124 @@
+{
+  "generatedAt": "2026-06-30T07:11:33.261Z",
+  "pages": [
+    {
+      "route": "/access-control-system",
+      "slug": "access-control-system",
+      "type": "inner",
+      "heroImage": "https://aptusinfotech.com/wp-content/uploads/2025/05/Access-Control-System-1-1024x1020.png",
+      "bannerBgImage": "https://aptusinfotech.com/wp-content/uploads/2025/05/Access-Control-System-1300.png"
+    },
+    {
+      "route": "/audio-video-solutions",
+      "slug": "audio-video-solutions",
+      "type": "inner",
+      "heroImage": "https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Audio_3-673x1024.jpg",
+      "bannerBgImage": "https://aptusinfotech.com/wp-content/uploads/2025/05/brnd-7.jpg"
+    },
+    {
+      "route": "/cctv-camera",
+      "slug": "cctv-camera",
+      "type": "inner",
+      "heroImage": "https://aptusinfotech.com/wp-content/uploads/2025/05/CCTV-Cameras.jpg",
+      "bannerBgImage": "https://aptusinfotech.com/wp-content/uploads/2025/05/CCTV_banner.png"
+    },
+    {
+      "route": "/conference-room-solution",
+      "slug": "conference-room-solution",
+      "type": "inner",
+      "heroImage": "https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_Create_a_visually_appealing_image_for_Conf_0-673x1024.jpg",
+      "bannerBgImage": "https://aptusinfotech.com/wp-content/uploads/2025/08/Conference-Room-Solutions-768x512.webp"
+    },
+    {
+      "route": "/data-center-solutions",
+      "slug": "data-center-solutions",
+      "type": "inner",
+      "heroImage": "https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_a_cinematic_photograph_of_a_futuristic_dat_0-673x1024.jpg",
+      "bannerBgImage": "https://aptusinfotech.com/wp-content/uploads/2025/08/Data-Centers-Teaser-scaled.webp"
+    },
+    {
+      "route": "/elv-solutions",
+      "slug": "elv-solutions",
+      "type": "hub",
+      "heroImage": "https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_Create_a_visually_appealing_image_for_Conf_0-673x1024.jpg",
+      "gradientEnd": "#2f29f2"
+    },
+    {
+      "route": "/gate-automation",
+      "slug": "gate-automation",
+      "type": "inner",
+      "heroImage": "https://aptusinfotech.com/wp-content/uploads/2025/05/Gate.jpg",
+      "bannerBgImage": "https://aptusinfotech.com/wp-content/uploads/2025/05/Leonardo_Phoenix_10_A_modern_residential_gated_entrance_with_a_2-1-e1746969471326.jpg"
+    },
+    {
+      "route": "/guest-room-management",
+      "slug": "guest-room-management",
+      "type": "inner",
+      "heroImage": "https://aptusinfotech.com/wp-content/uploads/2025/08/imgi_8_photo-1581094794329-c8112a89af12-683x1024.png",
+      "bannerBgImage": "https://aptusinfotech.com/wp-content/uploads/2025/05/Networking.jpg"
+    },
+    {
+      "route": "/home-automation",
+      "slug": "home-automation",
+      "type": "inner",
+      "heroImage": "https://aptusinfotech.com/wp-content/uploads/2025/05/Home-Automation-1024x683.webp",
+      "bannerBgImage": "https://aptusinfotech.com/wp-content/uploads/2025/05/Smart-Homes.png"
+    },
+    {
+      "route": "/network-and-structured-cabling-solutions",
+      "slug": "network-and-structured-cabling-solutions",
+      "type": "inner",
+      "heroImage": "https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Netwo_2-673x1024.jpg",
+      "bannerBgImage": "https://aptusinfotech.com/wp-content/uploads/2025/05/Network-Structured-Cabling-Solutions.png"
+    },
+    {
+      "route": "/nurse-calling-system",
+      "slug": "nurse-calling-system",
+      "type": "inner",
+      "heroImage": "https://aptusinfotech.com/wp-content/uploads/2025/08/nurse.jpg",
+      "bannerBgImage": "https://aptusinfotech.com/wp-content/uploads/2025/08/nurse-call-system.jpg"
+    },
+    {
+      "route": "/rsi-queue-management",
+      "slug": "rsi-queue-management",
+      "type": "inner",
+      "heroImage": "https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_a_cinematic_photo_of_a_bustling_lobby_with_3.jpg",
+      "bannerBgImage": "https://aptusinfotech.com/wp-content/uploads/2025/08/Queue_Management_System_Hero_Banner_93dd9940e9-scaled-e1755593094986-1536x614.jpg"
+    },
+    {
+      "route": "/smatv-iptv",
+      "slug": "smatv-iptv",
+      "type": "inner",
+      "heroImage": "https://aptusinfotech.com/wp-content/uploads/2025/09/Lucid_Origin_Create_a_visually_striking_image_representing_SMA_2-683x1024.jpg",
+      "bannerBgImage": "https://aptusinfotech.com/wp-content/uploads/2025/08/autocad-keyfeatures-e1754468269162.jpg"
+    },
+    {
+      "route": "/switching-and-routing",
+      "slug": "switching-and-routing",
+      "type": "inner",
+      "heroImage": "https://aptusinfotech.com/wp-content/uploads/2025/08/unnamed.jpg",
+      "bannerBgImage": "https://aptusinfotech.com/wp-content/uploads/2025/08/Routing_and_Switching_Basics_for_Cyber_and_Network_Security.jpg"
+    },
+    {
+      "route": "/telephone-systems",
+      "slug": "telephone-systems",
+      "type": "inner",
+      "heroImage": "https://aptusinfotech.com/wp-content/uploads/2025/05/voip-benefits-01.jpg",
+      "bannerBgImage": "https://aptusinfotech.com/wp-content/uploads/2025/05/IPTV-Network-Television.jpg"
+    },
+    {
+      "route": "/thermal-scanners",
+      "slug": "thermal-scanners",
+      "type": "inner",
+      "heroImage": "https://aptusinfotech.com/wp-content/uploads/2025/05/Thermal_Scanner-1024x1020.png",
+      "bannerBgImage": "https://aptusinfotech.com/wp-content/uploads/2025/05/Thermal-Scanner.png"
+    },
+    {
+      "route": "/ups",
+      "slug": "ups",
+      "type": "inner",
+      "heroImage": "https://aptusinfotech.com/wp-content/uploads/2025/05/Standby-ups.png",
+      "bannerBgImage": "https://aptusinfotech.com/wp-content/uploads/2025/08/autocad-keyfeatures-e1754468269162.jpg"
+    }
+  ]
+}

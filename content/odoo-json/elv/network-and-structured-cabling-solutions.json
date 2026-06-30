@@ -1,0 +1,202 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Network & Structured Cabling Solutions",
+    "bannerTagline": "Professional network infrastructure and structured cabling services for businesses",
+    "title": "Network Infrastructure Solutions",
+    "paragraphs": [
+      "In today’s fast-paced world, seamless connectivity and security are essential for businesses and educational institutions. More and more organizations are turning to robust Network Solutions to enhance their operations.",
+      "Whether you’re implementing high-speed Wi-Fi for schools or enterprise-grade routing and switching for large offices, these technologies improve the way you connect, operate, and secure data across all spaces.",
+      "Experience superior data transmission and reliable network performance with our comprehensive solutions for local and wide area networking, cloud connectivity, and secure access across any space.",
+      "From high-capacity fiber optic infrastructure to advanced firewalls and intrusion prevention systems, we provide end-to-end solutions that ensure seamless communication and collaboration, along with robust data protection."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Netwo_2-673x1024.jpg",
+    "imageAlt": "Network & Structured Cabling Solutions",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Powerful Features"
+      },
+      "subheading": "Comprehensive network infrastructure solutions for modern businesses",
+      "align": "center",
+      "items": [
+        {
+          "title": "Structured Cabling",
+          "body": "Professional installation of Cat 6, Cat 6A, and fiber optic cabling systems following industry best practices and standards.",
+          "icon": "network-wired"
+        },
+        {
+          "title": "Wireless Networks",
+          "body": "Enterprise-grade Wi-Fi solutions with seamless roaming, centralized management, and advanced security features.",
+          "icon": "wifi"
+        },
+        {
+          "title": "Data Center Setup",
+          "body": "Complete data center infrastructure including server racks, cooling systems, and redundant power configurations.",
+          "icon": "database"
+        },
+        {
+          "title": "Network Switches & Routers",
+          "body": "Installation and configuration of enterprise networking equipment from leading manufacturers like Cisco, Juniper, and Huawei.",
+          "icon": "retweet"
+        },
+        {
+          "title": "Network Security",
+          "body": "Implementation of firewalls, VPNs, intrusion detection systems, and other security measures to protect your digital assets.",
+          "icon": "shield-alt"
+        },
+        {
+          "title": "Network Monitoring",
+          "body": "Proactive network monitoring and management services to ensure uptime, performance, and security across your entire infrastructure.",
+          "icon": "chart-line"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Benefits of Professional Cabling"
+      },
+      "subheading": "Why invest in structured cabling solutions for your business?",
+      "align": "center",
+      "items": [
+        {
+          "title": "Improved Performance",
+          "body": "High-speed data transmission with minimal latency for better productivity and faster operations.",
+          "icon": "stopwatch"
+        },
+        {
+          "title": "Future-Proof Investment",
+          "body": "Scalable infrastructure that supports current and future technologies without requiring major upgrades.",
+          "icon": "user-nurse"
+        },
+        {
+          "title": "Reduced Downtime",
+          "body": "Reliable and organizedcabling system minimizes network disruptions and costly downtime.",
+          "icon": "users"
+        },
+        {
+          "title": "Cost Efficiency",
+          "body": "Long-term savings through reduced maintenance costs and energy-efficient designs.",
+          "icon": "hospital"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech",
+        "accent": "for Your Network Needs?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Certified Professionals",
+          "body": "Our technicians are certified by leading vendors including Cisco, Juniper, and others.",
+          "icon": "certificate"
+        },
+        {
+          "title": "End-to-End Services",
+          "body": "We handle everything from design and installation to maintenance and support.",
+          "icon": "screwdriver"
+        },
+        {
+          "title": "24/7 Technical Support",
+          "body": "Comprehensive after-sales service with emergency response and proactive maintenance.",
+          "icon": "headset"
+        },
+        {
+          "title": "Local Presence",
+          "body": "With offices throughout Oman, we provide personalized service and quick response times.",
+          "icon": "retweet"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our",
+      "accent": "Clients Say"
+    },
+    "subheading": "Hear from satisfied customers who have upgraded their network infrastructure",
+    "items": [
+      {
+        "quote": "IT Director",
+        "author": "Mohammed Al Farsi",
+        "role": ""
+      },
+      {
+        "quote": "“The structured cabling solution provided by Aptus has transformed how we manage our data center. Everything is now organized and easily accessible.”",
+        "author": "Sarah Johnson",
+        "role": "Facilities Manager"
+      },
+      {
+        "quote": "“We needed a reliable wireless solution for our warehouse facility. Aptus delivered a robust system that covers the entire area with excellent performance.”",
+        "author": "Ahmed Hassan",
+        "role": "Operations Manager"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  },
+  "midCta": {
+    "heading": "Ready to Upgrade Your Network Infrastructure?",
+    "description": "Contact our network specialists today for a free site survey and customized solution proposal.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Norden-1-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "Norden"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Opterna.png",
+        "alt": "Opterna"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Panduit.png",
+        "alt": "Panduit"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Commscope-rajdgmduxeulkpxcnaamvno0vydwkd1tfievfsfp0u.png",
+        "alt": "Commscope"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/belden-rajdgo9jb2x67xumcb3w0n6y2q4mzr9a3rpueccwoe.png",
+        "alt": "belden"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/excel-rajdgq57oqzqv5rw1bx55mpv9hvdf5gqs10tcwa4by.png",
+        "alt": "excel"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/panduit-rajdgr31vl116rqivubrq4hbuvqqmukh45oau68q5q.png",
+        "alt": "panduit"
+      }
+    ]
+  }
+}

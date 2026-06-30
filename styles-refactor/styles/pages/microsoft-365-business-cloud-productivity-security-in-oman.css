@@ -1,0 +1,16 @@
+/**
+ * Page: Microsoft 365 Business: Cloud Productivity & Security in Oman
+ * Route: /microsoft-365-business
+ * Source: LIVE WEBSITE/software\microsoft\Microsoft 365 Business_ Cloud Productivity & Security in Oman.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-microsoft-365-business-cloud-productivity-security-in-oman {
+    /* page root scope */
+  }
+
+
+  /* 41 inline styles detected — migrate to utilities */
+}

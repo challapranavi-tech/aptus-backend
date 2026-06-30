@@ -1,0 +1,10 @@
+/* Testimonial carousel shell */
+.aptus-testimonials {
+  padding-block: var(--section-padding);
+}
+.aptus-testimonial-card {
+  background: #fff;
+  border-radius: var(--radius-card);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-md);
+}

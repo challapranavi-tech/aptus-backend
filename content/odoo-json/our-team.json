@@ -1,0 +1,53 @@
+{
+  "banner": {
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/team_banner-b208e690e53223aff88366fe906d37da73e490705fd5d21cd14ab0a68440b094.png",
+    "imageAlt": "Our Team"
+  },
+  "team": {
+    "id": "leadership",
+    "visible": true,
+    "variant": "leadership",
+    "title": { "before": "Management", "accent": "Profile" },
+    "members": [
+      {
+        "id": "rajesh-malaviya",
+        "name": "Rajesh Malaviya",
+        "role": "CEO & Co-Founder",
+        "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/10/Rrajesh-malaviya-e1761120536160.jpg",
+        "imageAlt": "Rajesh Malaviya",
+        "bio": "Rajesh Malaviya was responsible for guiding Oriental Oryx, (Aptus Infotech), through two decades of diversification and growth to finally emerge as one of the leaders in the IT & software industry in the Oman. With his inborn nature of wanting to know other people, his every interaction has been purposeful."
+      },
+      {
+        "id": "mubin-mir",
+        "name": "Mubin Mir",
+        "role": "Director Sales",
+        "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/10/Mubin-Mir-e1761120496118.jpg",
+        "imageAlt": "Mubin Mir",
+        "bio": "A commerce graduate from University of Madras, an absolute team player, with a genuine commitment to the task with expertise in business development; core emphasis on creation of long-term value for an organization from customers, markets, and business relationships."
+      }
+    ]
+  },
+  "text": {
+    "id": "team-culture",
+    "visible": true,
+    "variant": "culture-panel",
+    "eyebrow": "OUR TEAM",
+    "title": { "before": "Our core strength is our", "accent": "team" },
+    "paragraphs": [
+      "We recognize our primary asset is people. To be successful, Aptus must be a rewarding place to work for all our staff. We work with our clients as a team. Mutual respect provides the foundation for our success.",
+      "At Aptus Infotech, we intend for our working environment to make our employees 'feel at home'. It is a fun and stress free environment where employees are encouraged to raise their opinion and be innovative and creative to achieve personal and organizational goals which attracts, motivates and retains superior personnel and rewards performance.",
+      "Aptus Infotech team is incredibly diverse, with employees drawn from over 5-7 different countries with a wide variety experience in national, independent and international IT companies.",
+      "A critical success factor for our business is the development of the National workforce in all our locations. We have a cadre of talented Omanis who have grown professionally in the IT industry of Oman, are now able to expand their horizons and take their skills to a new level on the international stage."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/07/team-aptusinfotech.png",
+    "imageAlt": "Aptus Infotech Team",
+    "imagePosition": "below"
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "formVariant": "simple",
+    "submitLabel": "Submit Now",
+    "layout": "light"
+  }
+}

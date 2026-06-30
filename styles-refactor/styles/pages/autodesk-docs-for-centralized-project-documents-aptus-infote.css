@@ -1,0 +1,16 @@
+/**
+ * Page: Autodesk Docs for Centralized Project Documents | Aptus Infotech
+ * Route: /autodesk-docs
+ * Source: LIVE WEBSITE/software\autodesk\Autodesk Docs for Centralized Project Documents _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-autodesk-docs-for-centralized-project-documents-aptus-infote {
+    /* page root scope */
+  }
+
+
+  /* 35 inline styles detected — migrate to utilities */
+}

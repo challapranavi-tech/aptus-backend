@@ -1,0 +1,195 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Conference Room Solutions",
+    "bannerTagline": "Transform your meeting spaces with intelligent audiovisual technology",
+    "title": "Intelligent Audiovisual Solutions for Modern Meeting Spaces",
+    "paragraphs": [
+      "In today’s dynamic workplace, productive meetings are paramount. More and more organizations are upgrading their meeting spaces with advanced Conference Room Solutions to maximize efficiency and collaboration.",
+      "Whether you’re setting up huddle rooms for quick stand-ups or large boardrooms for executive decisions, these technologies dramatically improve the way teams connect, present, and innovate.",
+      "Experience superior meeting quality and seamless functionality with our comprehensive solutions for video conferencing, wireless presentation, and integrated control across any meeting space.",
+      "From high-definition displays and automated camera tracking to intuitive one-touch control systems, we provide end-to-end solutions that ensure every meeting is productive, engaging, and utterly effortless."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_Create_a_visually_appealing_image_for_Conf_0-673x1024.jpg",
+    "imageAlt": "Conference Room Solutions",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Key Features"
+      },
+      "subheading": "Comprehensive audiovisual solutions designed for modern workplaces",
+      "align": "center",
+      "items": [
+        {
+          "title": "Video Conferencing Systems",
+          "body": "Enterprise-grade video conferencing solutions with HD cameras, microphones, and seamless integration with popular platforms likeZoom, Teams, and Webex.",
+          "icon": "video"
+        },
+        {
+          "title": "Interactive Displays",
+          "body": "Large-format touchscreens and interactive whiteboards for collaborative presentations, brainstorming sessions, and digital signage applications.",
+          "icon": "tv"
+        },
+        {
+          "title": "Audio Systems",
+          "body": "Crystal-clear sound systems including ceiling-mounted speakers, wireless microphones, and acoustic treatments for optimal voice clarity and intelligibility.",
+          "icon": "volume-up"
+        },
+        {
+          "title": "Wireless Presentation",
+          "body": "Seamlessly share content from any device with wireless presentation systems, eliminating cables and simplifying meeting setup.",
+          "icon": "laptop"
+        },
+        {
+          "title": "Integrated Control Systems",
+          "body": "Centralized control panels and mobile apps for managing lighting, temperature, blinds, and audiovisual equipment with one-touch simplicity.",
+          "icon": "cogs"
+        },
+        {
+          "title": "Remote Management",
+          "body": "Proactive monitoring and remote support capabilities ensure your conference rooms are always ready for use and minimize downtime.",
+          "icon": "wifi"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Benefits of Our Solutions"
+      },
+      "subheading": "Why invest in professional conference room technology?",
+      "align": "center",
+      "items": [
+        {
+          "title": "Enhanced Collaboration",
+          "body": "Bring teams together seamlessly whether they’re in the same room or across the globe with high-quality video and audio connections.",
+          "icon": "users"
+        },
+        {
+          "title": "Time Efficiency",
+          "body": "Quick setup and reliable performance mean less time wasted on technical issues and more time spent on productive discussions.",
+          "icon": "stopwatch"
+        },
+        {
+          "title": "Global Connectivity",
+          "body": "Connect effortlessly with colleagues, partners, and clients worldwide without compromising on quality or security.",
+          "icon": "globe"
+        },
+        {
+          "title": "Professional Image",
+          "body": "Impress clients and stakeholders with modern, sophisticated meeting environments that reflect your company’s professionalism.",
+          "icon": "paint-brush"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Your Conference Room Needs?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Certified Professionals",
+          "body": "As an authorized partner, we provide access to genuine Autodesk products.",
+          "icon": "certificate"
+        },
+        {
+          "title": "End-to-End Services",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "screwdriver"
+        },
+        {
+          "title": "24/7 Technical Support",
+          "body": "Comprehensive after-sales service with emergency response and proactive maintenance.",
+          "icon": "headset"
+        },
+        {
+          "title": "Local Presence",
+          "body": "With offices throughout Oman, we provide personalized service and quick response times.",
+          "icon": "handshake"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our",
+      "accent": "Clients Say"
+    },
+    "subheading": "Success stories from businesses using AutoCAD through Aptus Infotech",
+    "items": [
+      {
+        "quote": "“The new conference room system has completely transformed how we conduct client meetings. The video quality is exceptional and the ease of use is impressive.”",
+        "author": "Mohammed Al Farsi",
+        "role": "IT Director"
+      },
+      {
+        "quote": "“We installed the executive boardroom solution and couldn’t be happier. The audio quality during video calls is crystal clear and the system is incredibly reliable.”",
+        "author": "Sarah Johnson",
+        "role": "Facilities Manager"
+      },
+      {
+        "quote": "“The training room solution has made our internal workshops much more effective. The interactive displays and easy content sharing have improved engagement significantly.”",
+        "author": "Ahmed Hassan",
+        "role": "Operations Manager"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "description": "Our experts can help you to implement the right security system for your business.",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  },
+  "midCta": {
+    "heading": "Ready to Transform Your Meeting Experience?",
+    "description": "Contact our AV specialists today for a free consultation and customized solution proposal.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/WatchNet.png",
+        "alt": "WatchNet"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Tyco.png",
+        "alt": "Tyco"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Suprema.png",
+        "alt": "suprema"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Hikvision.png",
+        "alt": "Hikvision"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/ZKTeco.png",
+        "alt": "ZKT"
+      }
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+/**
+ * Page: Aptus Case Studies | Aptus Infotech
+ * Route: /aptus-case-studies
+ * Source: LIVE WEBSITE/CASE STUDIES\Aptus Case Studies _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-aptus-case-studies-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 26 inline styles detected — migrate to utilities */
+}

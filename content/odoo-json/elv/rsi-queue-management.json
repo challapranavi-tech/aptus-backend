@@ -1,0 +1,156 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Queue Management Solutions",
+    "bannerTagline": "Streamline customer flow and enhance service efficiency withour intelligent queue management systems",
+    "title": "Optimizing Customer Flow and Experience",
+    "paragraphs": [
+      "In today’s service-focused world, the speed and quality of customer service are paramount. More and more organizations are upgrading their waiting areas with advanced Queue Management Solutions to maximize efficiency and customer satisfaction.",
+      "Whether you’re managing a complex queue in a large public sector office or simplifying service lines in a retail bank, these technologies dramatically improve the way you direct, serve, and engage with waiting visitors.",
+      "Experience superior operational control and seamless customer flow with our comprehensive solutions for virtual queuing, digital signage, and real-time analytics across any service environment.",
+      "From self-service ticket kiosks and mobile check-in applications to dynamic display boards and customizable staff dashboards, we provide end-to-end solutions that ensure every interaction is organized, personalized, and utterly efficient."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_a_cinematic_photo_of_a_bustling_lobby_with_3.jpg",
+    "imageAlt": "Queue Management Solutions",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Powerful Features"
+      },
+      "subheading": "Discover the capabilities that make our Queue Management System the ideal solution for your business",
+      "align": "center",
+      "items": [
+        {
+          "title": "Virtual Queuing",
+          "body": "Allow customers to join queues remotely via mobile app, website, or SMS, reducing physical crowding and enhancing convenience.",
+          "icon": "envira"
+        },
+        {
+          "title": "Appointment Scheduling",
+          "body": "Enable customers to book appointments in advance, ensuring dedicated service slots and minimizing wait times.",
+          "icon": "calendar-alt"
+        },
+        {
+          "title": "Digital Signage",
+          "body": "Display real-time queue status, announcements, and promotional content on digital screens to keep customers informed.",
+          "icon": "tv"
+        },
+        {
+          "title": "Real-time Analytics",
+          "body": "Monitor queue performance, staff efficiency, and customer flow with comprehensive dashboards and reports.",
+          "icon": "chart-line"
+        },
+        {
+          "title": "Multi-channel Notifications",
+          "body": "Alert customers via SMS, email, or mobile app when their turn is approaching, allowing them to wait comfortably.",
+          "icon": "bell"
+        },
+        {
+          "title": "Customizable Workflows",
+          "body": "Adapt the system to your specific business processes with configurable service types, priorities, and routing rules.",
+          "icon": "cogs"
+        },
+        {
+          "title": "Enhanced Customer Experience",
+          "body": "As an authorized partner, we provide access to genuine Autodesk products.",
+          "icon": "smile"
+        },
+        {
+          "title": "Improved Operational Efficiency",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "tachometer-alt"
+        },
+        {
+          "title": "Data-Driven Decisions",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "chart-line"
+        },
+        {
+          "title": "Enhanced Safety & Hygiene",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "shield-alt"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose",
+        "accent": "Aptus Infotech?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Customized Solutions",
+          "body": "We design and implement queue management systems tailored to your specific business requirements and workflows.",
+          "icon": "certificate"
+        },
+        {
+          "title": "Comprehensive Training",
+          "body": "Our experts provide thorough training for your staff to ensure smooth adoption and maximum utilization of the system.",
+          "icon": "graduation-cap"
+        },
+        {
+          "title": "24/7 Technical Support",
+          "body": "Our dedicated support team is available round the clock to assist with any issues and ensure uninterrupted service.",
+          "icon": "headset"
+        },
+        {
+          "title": "Continuous Updates",
+          "body": "We provide regular software updates and enhancements to keep your system current with the latest features and security.",
+          "icon": "reply"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our",
+      "accent": "Clients Say"
+    },
+    "subheading": "Get in touch with our queue management experts to discuss your requirements and find the perfect solution for your business.",
+    "items": [
+      {
+        "quote": "Aptus Infotech’s queue management system has transformed our patient experience. Wait times have decreased by 40%, and our staff can now focus on providing quality care rather than managing crowds.",
+        "author": "Dr. Ahmed Al Balushi",
+        "role": "Administrator"
+      },
+      {
+        "quote": "The virtual queuing feature has been a game-changer for our bank. Customers can now wait comfortably and receive notifications when their turn is near, resulting in much higher satisfaction scores.",
+        "author": "Fatima Al Habsi",
+        "role": "Branch Manager"
+      },
+      {
+        "quote": "The analytics provided by Aptus’s queue management system have helped us optimize staff scheduling and reduce peak-hour congestion. Our customer complaints about waiting times have virtually disappeared.",
+        "author": "Khalid Al Mawali",
+        "role": "Operations Director"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "description": "Our experts can help you to implement the right security system for your business.",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  },
+  "midCta": {
+    "heading": "Ready to Transform Your Customer Experience?",
+    "description": "Get in touch with our queue management experts to discuss your requirements and find the perfect solution for your business.",
+    "actionLabel": "Request a Quote",
+    "actionHref": "#form"
+  }
+}

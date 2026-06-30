@@ -1,0 +1,16 @@
+/**
+ * Page: Microsoft Visio Subscription in Oman | Aptus Infotech
+ * Route: /microsoft-visio
+ * Source: LIVE WEBSITE/software\microsoft\Microsoft Visio Subscription in Oman _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-microsoft-visio-subscription-in-oman-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 38 inline styles detected — migrate to utilities */
+}

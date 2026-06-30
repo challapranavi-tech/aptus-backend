@@ -1,0 +1,40 @@
+/**
+ * :root bridge — Elementor kit-9 aliases during migration.
+ * Tailwind tokens live in theme.css (@theme).
+ */
+:root {
+  --e-global-color-primary: #1352a3;
+  --e-global-color-secondary: #67db85;
+  --e-global-color-accent: #000000;
+  --e-global-color-text: #ffffff;
+  --e-global-color-green: #13934b;
+  --e-global-color-topbar: #248bcc;
+  --e-global-color-surface-tint: #24648c0f;
+  --e-global-color-body: #695b5b;
+
+  --primary-color: #1352a3;
+  --primary-color-hover: #0e3f80;
+  --secondary-color: #67db85;
+  --accent-green: #13934b;
+  --accent-green-hover: #0f7a3e;
+  --accent-blue: #248bcc;
+  --accent-sky: #38b6ff;
+  --accent-amber: #f5a623;
+
+  --color-navy: #16243a;
+  --color-navy-dark: #0f1a2b;
+  --color-text: #1f2a36;
+  --color-text-muted: #695b5b;
+  --color-background: #ffffff;
+  --color-surface-muted: #24648c0f;
+  --color-border: #e4ebe6;
+
+  --font-primary: var(--font-poppins), "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --content-max: 1300px;
+  --section-padding: 4rem;
+  --radius-card: 20px;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+}

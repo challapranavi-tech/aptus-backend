@@ -1,0 +1,16 @@
+/**
+ * Page: Aptus Infotech ISO Certifications - aptusinfotech.com
+ * Route: /aptus-infotech-iso-certifications
+ * Source: LIVE WEBSITE/about us\Aptus Infotech ISO Certifications - aptusinfotech.com.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-aptus-infotech-iso-certifications-aptusinfotech-com {
+    /* page root scope */
+  }
+
+
+  /* 12 inline styles detected — migrate to utilities */
+}

@@ -1,0 +1,272 @@
+<t t-name="website.contact-us">
+    <t t-call="website.layout">
+        <div id="wrap" class="oe_structure oe_empty">
+            <section class="s_embed_code pt0 pb0 o_colored_level" data-snippet="s_embed_code" data-name="Contact Us Content">
+                <div class="s_embed_code_embedded o_not_editable container-fluid"><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+.aptus-page { font-family: 'Poppins', sans-serif; color: #1a1a2e; }
+.aptus-page {
+            font-family: 'Poppins', sans-serif;
+            background: #ffffff;
+            color: #1a1a2e;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        
+        /* ========== PAGE STYLES ========== */
+        .page-header {
+            background: linear-gradient(135deg, #0b2b3b 0%, #1352a3 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .page-header h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        .page-header p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Contact Info Section */
+        .contact-info-section {
+            background: #f8fafc;
+            padding: 50px;
+            border-radius: 20px;
+            margin-bottom: 50px;
+        }
+        .contact-info-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+        }
+        .contact-details {
+            flex: 1;
+        }
+        .contact-details h2 {
+            font-size: 32px;
+            color: #1352a3;
+            margin-bottom: 25px;
+        }
+        .contact-detail-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .contact-icon {
+            font-size: 24px;
+            min-width: 30px;
+        }
+        .contact-text p {
+            color: #475569;
+            line-height: 1.6;
+        }
+        .contact-text a {
+            color: #475569;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .contact-text a:hover {
+            color: #1352a3;
+        }
+        .contact-map {
+            flex: 1;
+        }
+        .contact-map iframe {
+            width: 100%;
+            height: 300px;
+            border-radius: 16px;
+            border: 0;
+        }
+
+        /* Contact Form Section */
+        .contact-form-section {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            margin-bottom: 50px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        .contact-form-section h2 {
+            text-align: center;
+            font-size: 32px;
+            color: #1352a3;
+            margin-bottom: 10px;
+        }
+        .contact-form-section .subtitle {
+            text-align: center;
+            color: #475569;
+            margin-bottom: 30px;
+        }
+        .required-star {
+            color: #e53e3e;
+        }
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            flex: 1;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #1e293b;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #1352a3;
+            box-shadow: 0 0 0 3px rgba(19, 82, 163, 0.1);
+        }
+        .submit-btn {
+            background: #1352a3;
+            color: white;
+            border: none;
+            padding: 14px 50px;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            display: block;
+            margin: 0 auto;
+        }
+        .submit-btn:hover {
+            background: #0e3d7a;
+            transform: scale(1.02);
+        }
+
+        
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 900px) {
+            /* Mobile submenu fix */
+            .page-header h1 { font-size: 32px; }
+        }
+</style>
+<div class="aptus-page aptus-page--contact-us">
+<div class="page-header">
+    <div class="container">
+        <h1>Contact Us</h1>
+        <p>REACH OUT FOR EXPERT GUIDANCE AND SUPPORT</p>
+    </div>
+</div><div class="container">
+    <div class="contact-info-section">
+        <div class="contact-info-grid">
+            <div class="contact-details">
+                <h2>Company Contact Information</h2>
+                <div class="contact-detail-item">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-text">
+                        <p>1st Floor, Office No 11, Building: 19 Way No: 5205, Near AlNadha Tower, Opposite 77 Fresh Shopping Center, Ghala Muscat, Sultanate of Oman</p>
+                    </div>
+                </div>
+                <div class="contact-detail-item">
+                    <div class="contact-icon">✉️</div>
+                    <div class="contact-text">
+                        <p><a href="mailto:info@aptusinfotech.com">info@aptusinfotech.com</a></p>
+                    </div>
+                </div>
+                <div class="contact-detail-item">
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-text">
+                        <p><a href="tel:+96899418481">+968 9941 8481</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-map">
+                <iframe src="https://maps.google.com/maps?q=H9P9%2BM6%20Muscat%2C%20Oman&amp;t=m&amp;z=12&amp;output=embed&amp;iwloc=near" title="Aptus Infotech Location" loading="lazy"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="contact-form-section">
+        <h2>Send us a Message</h2>
+        <div class="subtitle">We'd love to hear from you! Fill out the form below and we'll get back to you shortly.</div>
+        
+        <form method="post" action="#">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>First Name <span class="required-star">*</span></label>
+                    <input type="text" name="first_name" placeholder="First Name" required=""/>
+                </div>
+                <div class="form-group">
+                    <label>Last Name <span class="required-star">*</span></label>
+                    <input type="text" name="last_name" placeholder="Last Name" required=""/>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>City <span class="required-star">*</span></label>
+                    <input type="text" name="city" placeholder="City" required=""/>
+                </div>
+                <div class="form-group">
+                    <label>State/Province <span class="required-star">*</span></label>
+                    <input type="text" name="state" placeholder="State/Province" required=""/>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Email Address <span class="required-star">*</span></label>
+                    <input type="email" name="email" placeholder="Email Address" required=""/>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number <span class="required-star">*</span></label>
+                    <input type="tel" name="phone" placeholder="Phone Number" required=""/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>How can we help you? <span class="required-star">*</span></label>
+                <textarea name="message" rows="4" placeholder="Please describe your inquiry or requirements..." required=""/>
+            </div>
+            <div class="form-group">
+                <label>How did you hear about us? <span class="required-star">*</span></label>
+                <select name="heard_from" required="">
+                    <option value="" disabled="" selected="">Select an option</option>
+                    <option value="Search Engine">Search Engine (Google, Bing, etc.)</option>
+                    <option value="Social Media">Social Media</option>
+                    <option value="Referrals">Referrals</option>
+                    <option value="Events">Events / Conference</option>
+                    <option value="LinkedIn">LinkedIn</option>
+                    <option value="Media">Media / Advertisement</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+    </div>
+</div>
+
+</div></div>
+            </section>
+        </div>
+    </t>
+</t>

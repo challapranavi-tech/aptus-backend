@@ -1,0 +1,16 @@
+/**
+ * Page: Company Policies | Aptus Infotech
+ * Route: /aptus-policy
+ * Source: LIVE WEBSITE/about us\Company Policies _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-company-policies-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 10 inline styles detected — migrate to utilities */
+}

@@ -1,0 +1,16 @@
+/**
+ * Page: Thermal Scanners for Safe Entry Solutions | Aptus Infotech
+ * Route: /thermal-scanners
+ * Source: LIVE WEBSITE/ELV\Thermal Scanners for Safe Entry Solutions _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-thermal-scanners-for-safe-entry-solutions-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 17 inline styles detected — migrate to utilities */
+}

@@ -1,0 +1,394 @@
+<t t-name="website.software-aec-collection">
+    <t t-call="website.layout">
+        <div id="wrap" class="oe_structure oe_empty">
+            <section class="s_embed_code pt0 pb0 o_colored_level" data-snippet="s_embed_code" data-name="Autodesk aec-collection">
+                <div class="s_embed_code_embedded o_not_editable container-fluid"><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+.aptus-sw-page { font-family: 'Poppins', sans-serif; color: #1a1a2e; background: #fff; overflow-x: hidden; }
+.aptus-sw-page .container { max-width: 1200px; width: 90%; margin: 0 auto; }
+.aptus-sw-page h2 { font-size: 34px; color: #1a1a2e; margin: 0 0 10px; }
+.aptus-sw-page p { line-height: 1.7; color: #475569; }
+
+.sw-banner { position: relative; padding: 90px 0; text-align: center; color: #fff; background-size: cover; background-position: center; }
+.sw-banner::before { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, rgba(10,22,55,.75), rgba(19,82,163,.55)); }
+.sw-banner--solid::before { background: rgba(0,0,0,.35); }
+.sw-banner--gradient::before { background: linear-gradient(135deg, rgba(19,82,163,.92) 0%, var(--sw-banner-end, #f2295b) 100%); opacity: .95; }
+.sw-banner .container { position: relative; z-index: 1; }
+.sw-banner h1 { font-size: 40px; margin: 0 0 14px; color: #fff; }
+.sw-banner p { color: #e6eefb; max-width: 720px; margin: 0 auto 26px; font-size: 18px; }
+
+.sw-btn { display: inline-block; background: #1352a3; color: #fff; border: none; padding: 14px 34px; border-radius: 40px; font-size: 16px; font-weight: 600; cursor: pointer; text-decoration: none; transition: .3s; margin: 4px; }
+.sw-btn:hover { background: #0e3d7a; transform: translateY(-2px); }
+.sw-btn--light { background: #fff; color: #1352a3; }
+.sw-btn--green { background: #67db85; color: #0a1637; }
+.sw-btn--sky { background: #38b6ff; color: #fff; }
+
+.sw-hero { padding: 60px 0; }
+.sw-hero .container { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+.sw-hero-sidebar { flex: 0 0 220px; }
+.sw-hero-sidebar ul { list-style: none; margin: 0; padding: 0; }
+.sw-hero-sidebar a { display: block; padding: 10px 14px; color: #334155; text-decoration: none; border-radius: 8px; font-size: 14px; line-height: 1.4; transition: .2s; }
+.sw-hero-sidebar a:hover, .sw-hero-sidebar a.is-active { background: #1352a3; color: #fff; }
+.sw-hero-text { flex: 1 1 320px; }
+.sw-hero-text h2 { color: #1352a3; }
+.sw-hero-media { flex: 1 1 360px; text-align: center; }
+.sw-hero-media img { max-width: 100%; border-radius: 18px; }
+
+.sw-hub-hero { position: relative; padding: 100px 0; color: #fff; background-size: cover; background-position: center; text-align: center; }
+.sw-hub-hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, rgba(10,22,55,.82), rgba(19,82,163,.65)); }
+.sw-hub-hero .container { position: relative; z-index: 1; max-width: 900px; }
+.sw-hub-hero h1 { font-size: 44px; margin: 0 0 16px; color: #fff; }
+.sw-hub-hero h1 span { color: #38b6ff; }
+.sw-hub-hero .sw-highlight { display: inline-block; background: rgba(255,255,255,.15); padding: 8px 18px; border-radius: 999px; margin-bottom: 18px; font-weight: 600; }
+.sw-hub-actions { margin-top: 28px; }
+
+.sw-section { padding: 60px 0; }
+.sw-section--band { background: #f1f5fb; }
+.sw-section-head { text-align: center; max-width: 760px; margin: 0 auto 40px; }
+.sw-section-head h2 span { color: #38b6ff; }
+.sw-section-sub { color: #64748b; margin-top: 8px; }
+
+.sw-card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.sw-card-grid--value { grid-template-columns: repeat(4, 1fr); }
+.sw-card-grid--product { grid-template-columns: repeat(4, 1fr); }
+.sw-card { background: #fff; border: 1px solid #e6ecf5; border-radius: 16px; padding: 28px 24px; text-align: center; box-shadow: 0 6px 18px rgba(15,40,90,.05); transition: .3s; height: 100%; }
+.sw-card:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(15,40,90,.12); }
+.sw-card h3 { font-size: 18px; color: #1a1a2e; margin: 14px 0 8px; }
+.sw-card p { font-size: 14px; }
+.sw-card-icon { display: flex; justify-content: center; }
+.sw-icon { width: 46px; height: 46px; color: #1352a3; }
+.sw-card-img img { max-height: 120px; width: auto; object-fit: contain; }
+.sw-card-link { text-decoration: none; color: inherit; display: block; }
+
+.sw-midcta { background: linear-gradient(120deg, #1352a3, #0a1637); color: #fff; padding: 60px 0; text-align: center; }
+.sw-midcta h2 { color: #fff; }
+
+.sw-quote-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.sw-quote { background: #fff; border-radius: 16px; padding: 28px; box-shadow: 0 6px 18px rgba(15,40,90,.06); }
+.sw-quote-text { font-style: italic; color: #334155; }
+.sw-quote-author { font-weight: 700; color: #1352a3; margin-top: 14px; }
+.sw-quote-role { font-size: 13px; color: #64748b; }
+
+.sw-alliances { padding: 60px 0; text-align: center; }
+.sw-alliances h2 span { color: #38b6ff; }
+.sw-alliance-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; margin-top: 34px; }
+.sw-alliance { width: 120px; height: 80px; background: #fff; border-radius: 12px; display: flex; align-items: center; justify-content: center; padding: 12px; box-shadow: 0 5px 15px rgba(0,0,0,.07); }
+.sw-alliance img { max-width: 100%; max-height: 54px; }
+
+.sw-contact { background: #e8f7f2; color: #1a1a2e; padding: 60px 0; text-align: center; }
+.sw-contact h2 { color: #1a1a2e; margin-bottom: 28px; }
+.sw-form { max-width: 800px; margin: 0 auto; }
+.sw-form-row { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 20px; }
+.sw-form-group { flex: 1; text-align: left; }
+.sw-form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: #334155; }
+.sw-form-group input, .sw-form-group textarea { width: 100%; padding: 12px 15px; border: none; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 14px; }
+
+@media (max-width: 900px) {
+  .sw-card-grid, .sw-card-grid--value, .sw-card-grid--product, .sw-quote-grid { grid-template-columns: 1fr; }
+  .sw-banner h1, .sw-hub-hero h1 { font-size: 30px; }
+  .sw-hero-sidebar { flex: 1 1 100%; }
+}
+</style>
+<div class="aptus-sw-page aptus-sw-page--aec-collection">
+        <section class="sw-banner sw-banner--gradient" style="--sw-banner-end:#2a29f2">
+            <div class="container">
+                <h1>Autodesk AEC Collection</h1>
+                <p>The comprehensive software suite for architecture, engineering, and construction professionals</p>
+                <a class="sw-btn sw-btn--light" href="#Form">Request a Quote</a>
+            </div>
+        </section>
+        <section class="sw-hero">
+            <div class="container">
+                <aside class="sw-hero-sidebar" aria-label="Autodesk Products">
+                    <ul>
+                        <li><a href="/autocad">AutoCAD</a></li>
+                        <li><a href="/3ds-max">3ds Max</a></li>
+                        <li><a href="/revit">Revit</a></li>
+                        <li><a href="/civil-3d">Civil 3D</a></li>
+                        <li><a href="/aec-collection" class="is-active">AEC Collection</a></li>
+                        <li><a href="/autocad-lt">AutoCAD LT</a></li>
+                        <li><a href="/bim-collaborate-pro">BIM Collaborate Pro</a></li>
+                        <li><a href="/autodesk-docs">Autodesk Docs</a></li>
+                        <li><a href="/autodesk-build">Autodesk Build</a></li>
+                        <li><a href="/autodesk-takeoff">Autodesk Takeoff</a></li>
+                        <li><a href="/navisworks">Navisworks</a></li>
+                    </ul>
+                </aside>
+                <div class="sw-hero-text">
+                    <h2>Autodesk AEC Collection</h2>
+                <p>The AEC Collection offers a complete suite of essential software tools for building design, civil infrastructure, and construction management. With up-to-date software releases and cloud-based collaboration features, teams can streamline workflows, enhance productivity, and deliver high-quality construction and engineering projects.</p>
+                <p>From conceptual modeling to detailed documentation and construction coordination, the AEC Collection supports every stage of the project lifecycle with integrated, discipline-specific workflows. It provides advanced solutions for structural engineering, MEP design, civil engineering, and construction planning—all in one cost-effective package designed to support local industry standards, improve accuracy, and optimize project performance.</p>
+                    <a class="sw-btn" href="#Form">Request a Quote</a>
+                </div>
+                <div class="sw-hero-media">
+                    <img src="https://aptusinfotech.com/wp-content/uploads/2025/08/imgi_8_photo-1581094794329-c8112a89af12-683x1024.png" alt="Autodesk AEC Collection" loading="lazy"/>
+                </div>
+            </div>
+        </section>
+        <section class="sw-section" id="features">
+            <div class="container">
+                <div class="sw-section-head">
+                    <h2>Software Included in AEC Collection</h2>
+                    <p class="sw-section-sub">Comprehensive tools for every stage of your project</p>
+                </div>
+                <div class="sw-card-grid sw-card-grid--product">
+            <div class="sw-card">
+              <div class="sw-card-img"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/Autocad.png" alt="Autocad" loading="lazy"/></div>
+              <h3>AutoCAD</h3>
+              <p>Professional 2D and 3D CAD software for drafting, design, and documentation.</p>
+
+            </div>
+            <div class="sw-card">
+              <div class="sw-card-img"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/Revit.png" alt="Revit" loading="lazy"/></div>
+              <h3>Revit</h3>
+              <p>BIM software for architectural design, MEP, and structural engineering.</p>
+
+            </div>
+            <div class="sw-card">
+              <div class="sw-card-img"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/Civil-3d-1.png" alt="Civil 3D" loading="lazy"/></div>
+              <h3>Civil 3D</h3>
+              <p>Civil engineering design and documentation software for BIM workflows.</p>
+
+            </div>
+            <div class="sw-card">
+              <div class="sw-card-img"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/Navisworks.png" alt="Navisworks" loading="lazy"/></div>
+              <h3>Navisworks</h3>
+              <p>Review and coordination software for 3D model analysis and clash detection.</p>
+
+            </div>
+            <div class="sw-card">
+              <div class="sw-card-img"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/3Dmax.png" alt="3Dmax" loading="lazy"/></div>
+              <h3>3ds Max</h3>
+              <p>3D modeling, animation, and rendering software for design visualization.</p>
+
+            </div>
+            <div class="sw-card">
+              <div class="sw-card-img"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/infraworks-1.png" alt="InfraWorks" loading="lazy"/></div>
+              <h3>InfraWorks</h3>
+              <p>Civil infrastructure design software for creating large-scale models.</p>
+
+            </div>
+            <div class="sw-card">
+              <div class="sw-card-img"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/Advance-steel.png" alt="Advance Steel" loading="lazy"/></div>
+              <h3>Advance Steel</h3>
+              <p>3D modeling software for steel detailing, design, and fabrication.</p>
+
+            </div>
+            <div class="sw-card">
+              <div class="sw-card-img"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/Robot-Structural-Analysis.png" alt="Robot-Structural-Analysis" loading="lazy"/></div>
+              <h3>Robot Structural Analysis</h3>
+              <p>Structural analysis software for structural engineers to simulate and analyze.</p>
+
+            </div>
+            <div class="sw-card">
+              <div class="sw-card-img"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/FormIt.png" alt="FormIt" loading="lazy"/></div>
+              <h3>FormIt</h3>
+              <p>Conceptual design and modeling software for early-stage design.</p>
+
+            </div>
+            <div class="sw-card">
+              <div class="sw-card-img"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/ReCap-Pro.png" alt="ReCap-Pro" loading="lazy"/></div>
+              <h3>ReCap Pro</h3>
+              <p>Reality capture software for 3D modeling from laser scans and photos.</p>
+
+            </div>
+            <div class="sw-card">
+              <div class="sw-card-img"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/Vehicle-Tracking.png" alt="Vehicle-Tracking" loading="lazy"/></div>
+              <h3>Vehicle Tracking</h3>
+              <p>Transportation analysis and simulation software for swept path analysis.</p>
+
+            </div>
+            <div class="sw-card">
+              <div class="sw-card-img"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/Structural-Bridge-Design.png" alt="Structural Bridge Design" loading="lazy"/></div>
+              <h3>Structural Bridge Design</h3>
+              <p>Bridge analysis and design software for structural engineers.</p>
+
+            </div>
+            <div class="sw-card">
+              <div class="sw-card-img"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/Fabrication-CADmep.png" alt="Fabrication-CADmep" loading="lazy"/></div>
+              <h3>Fabrication CADmep</h3>
+              <p>MEP fabrication software for detailing and manufacturing.</p>
+
+            </div>
+            <div class="sw-card">
+              <div class="sw-card-img"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/infraworks.png" alt="infraworks" loading="lazy"/></div>
+              <h3>Insight</h3>
+              <p>Building performance analysis software for energy efficiency and sustainability.</p>
+
+            </div>
+            <div class="sw-card">
+              <div class="sw-card-img"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/Arnold_.png" alt="Arnold​" loading="lazy"/></div>
+              <h3>Arnold</h3>
+              <p>Advanced Monte Carlo ray tracing renderer for high-quality 3D animation.</p>
+
+            </div>
+            <div class="sw-card">
+              <div class="sw-card-img"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/Maya.png" alt="Maya" loading="lazy"/></div>
+              <h3>Maya</h3>
+              <p>3D animation, modeling, simulation, and rendering software.</p>
+
+            </div>
+            <div class="sw-card">
+              <div class="sw-card-img"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk-Doc.png" alt="Autodesk-Doc" loading="lazy"/></div>
+              <h3>Autodesk Docs</h3>
+              <p>Manage project information in a cloud-based, common data environment.</p>
+
+            </div>
+            <div class="sw-card">
+              <div class="sw-card-img"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/Dynamo-Studio.png" alt="Dynamo Studio" loading="lazy"/></div>
+              <h3>Dynamo Studio</h3>
+              <p>Visual programming for automating Revit workflows.</p>
+
+            </div>
+            <div class="sw-card">
+              <div class="sw-card-img"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/Arnold_.png" alt="Arnold​" loading="lazy"/></div>
+              <h3>Autodesk Rendering (A360)</h3>
+              <p>Cloud-based photorealistic rendering.</p>
+
+            </div>
+            <div class="sw-card">
+              <div class="sw-card-img"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/autodesk-drive.png" alt="autodesk-drive" loading="lazy"/></div>
+              <h3>Autodesk Drive</h3>
+              <p>Secure cloud storage for design files.</p>
+
+            </div>
+                </div>
+            </div>
+        </section>
+        <section class="sw-section sw-section--band" id="benefits">
+            <div class="container">
+                <div class="sw-section-head">
+                    <h2>Benefits of the AEC Collection</h2>
+                    <p class="sw-section-sub">Why professionals choose the AEC Collection for their projects</p>
+                </div>
+                <div class="sw-card-grid sw-card-grid--value">
+            <div class="sw-card">
+              <div class="sw-card-icon"></div>
+              <h3>Comprehensive Toolset</h3>
+              <p>Access to a wide range of specialized tools for every discipline and project phase.</p>
+
+            </div>
+            <div class="sw-card">
+              <div class="sw-card-icon"></div>
+              <h3>Interoperability</h3>
+              <p>Seamless data exchange between different software tools and project stakeholders.</p>
+
+            </div>
+            <div class="sw-card">
+              <div class="sw-card-icon"><svg class="sw-icon" viewBox="0 0 640 512" fill="currentColor" aria-hidden="true"><path d="M96 224c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm448 0c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm32 32h-64c-17.6 0-33.5 7.1-45.1 18.6 40.3 22.1 68.9 62 75.1 109.4h66c17.7 0 32-14.3 32-32v-32c0-35.3-28.7-64-64-64zm-256 0c61.9 0 112-50.1 112-112S381.9 32 320 32 208 82.1 208 144s50.1 112 112 112zm76.8 32h-8.3c-20.8 10-43.9 16-68.5 16s-47.6-6-68.5-16h-8.3C179.6 288 128 339.6 128 403.2V432c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48v-28.8c0-63.6-51.6-115.2-115.2-115.2zm-223.7-13.4C161.5 263.1 145.6 256 128 256H64c-35.3 0-64 28.7-64 64v32c0 17.7 14.3 32 32 32h65.9c6.3-47.4 34.9-87.3 75.2-109.4z"/></svg></div>
+              <h3>Enhanced Collaboration</h3>
+              <p>Cloud-based workflows enable real-time collaboration across teams and locations.</p>
+
+            </div>
+            <div class="sw-card">
+              <div class="sw-card-icon"></div>
+              <h3>Cost Effective</h3>
+              <p>Significant savings compared to purchasing individual software licenses.</p>
+
+            </div>
+                </div>
+            </div>
+        </section>
+        <section class="sw-section" id="why-aptus">
+            <div class="container">
+                <div class="sw-section-head">
+                    <h2>Why Choose Aptus Infotech for <span>AutoCAD?</span></h2>
+                    
+                </div>
+                <div class="sw-card-grid sw-card-grid--value">
+            <div class="sw-card sw-card--value">
+              <div class="sw-card-icon"><svg class="sw-icon" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M223.75 130.75L154.62 15.54A31.997 31.997 0 0 0 127.18 0H16.03C3.08 0-4.5 14.57 2.92 25.18l111.27 158.96c29.72-27.77 67.52-46.83 109.56-53.39zM495.97 0H384.82c-11.24 0-21.66 5.9-27.44 15.54l-69.13 115.21c42.04 6.56 79.84 25.62 109.56 53.38L509.08 25.18C516.5 14.57 508.92 0 495.97 0zM256 160c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm92.52 157.26l-37.93 36.96 8.97 52.22c1.6 9.36-8.26 16.51-16.65 12.09L256 393.88l-46.9 24.65c-8.4 4.45-18.25-2.74-16.65-12.09l8.97-52.22-37.93-36.96c-6.82-6.64-3.05-18.23 6.35-19.59l52.43-7.64 23.43-47.52c2.11-4.28 6.19-6.39 10.28-6.39 4.11 0 8.22 2.14 10.33 6.39l23.43 47.52 52.43 7.64c9.4 1.36 13.17 12.95 6.35 19.59z"/></svg></div>
+              <h3>Official Autodesk Gold Partner</h3>
+              <p>As an authorized partner, we provide access to genuine Autodesk products.</p>
+
+            </div>
+            <div class="sw-card sw-card--value">
+              <div class="sw-card-icon"><svg class="sw-icon" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M192 208c0-17.67-14.33-32-32-32h-16c-35.35 0-64 28.65-64 64v48c0 35.35 28.65 64 64 64h16c17.67 0 32-14.33 32-32V208zm176 144c35.35 0 64-28.65 64-64v-48c0-35.35-28.65-64-64-64h-16c-17.67 0-32 14.33-32 32v112c0 17.67 14.33 32 32 32h16zM256 0C113.18 0 4.58 118.83 0 256v16c0 8.84 7.16 16 16 16h16c8.84 0 16-7.16 16-16v-16c0-114.69 93.31-208 208-208s208 93.31 208 208h-.12c.08 2.43.12 165.72.12 165.72 0 23.35-18.93 42.28-42.28 42.28H320c0-26.51-21.49-48-48-48h-32c-26.51 0-48 21.49-48 48s21.49 48 48 48h181.72c49.86 0 90.28-40.42 90.28-90.28V256C507.42 118.83 398.82 0 256 0z"/></svg></div>
+              <h3>Technical Support</h3>
+              <p>Our support team is available to assist with installation, troubleshooting, and usage questions.</p>
+
+            </div>
+            <div class="sw-card sw-card--value">
+              <div class="sw-card-icon"><svg class="sw-icon" viewBox="0 0 640 512" fill="currentColor" aria-hidden="true"><path d="M434.7 64h-85.9c-8 0-15.7 3-21.6 8.4l-98.3 90c-.1.1-.2.3-.3.4-16.6 15.6-16.3 40.5-2.1 56 12.7 13.9 39.4 17.6 56.1 2.7.1-.1.3-.1.4-.2l79.9-73.2c6.5-5.9 16.7-5.5 22.6 1 6 6.5 5.5 16.6-1 22.6l-26.1 23.9L504 313.8c2.9 2.4 5.5 5 7.9 7.7V128l-54.6-54.6c-5.9-6-14.1-9.4-22.6-9.4zM544 128.2v223.9c0 17.7 14.3 32 32 32h64V128.2h-96zm48 223.9c-8.8 0-16-7.2-16-16s7.2-16 16-16 16 7.2 16 16-7.2 16-16 16zM0 384h64c17.7 0 32-14.3 32-32V128.2H0V384zm48-63.9c8.8 0 16 7.2 16 16s-7.2 16-16 16-16-7.2-16-16c0-8.9 7.2-16 16-16zm435.9 18.6L334.6 217.5l-30 27.5c-29.7 27.1-75.2 24.5-101.7-4.4-26.9-29.4-24.8-74.9 4.4-101.7L289.1 64h-83.8c-8.5 0-16.6 3.4-22.6 9.4L128 128v223.9h18.3l90.5 81.9c27.4 22.3 67.7 18.1 90-9.3l.2-.2 17.9 15.5c15.9 13 39.4 10.5 52.3-5.4l31.4-38.6 5.4 4.4c13.7 11.1 33.9 9.1 45-4.7l9.5-11.7c11.2-13.8 9.1-33.9-4.6-45.1z"/></svg></div>
+              <h3>Local Presence</h3>
+              <p>With offices in Oman, we provide personalized service and quick response times.</p>
+
+            </div>
+            <div class="sw-card sw-card--value">
+              <div class="sw-card-icon"></div>
+              <h3>Expert Training</h3>
+              <p>Certified trainers deliver comprehensive training programs tailored to your industry needs.</p>
+
+            </div>
+                </div>
+            </div>
+        </section>
+        <section class="sw-section sw-section--band">
+            <div class="container">
+                <div class="sw-section-head">
+                    <h2>What Our Clients Say</h2>
+                    <p class="sw-section-sub">Success stories from businesses using AutoCAD through Aptus Infotech</p>
+                </div>
+                <div class="sw-quote-grid">
+            <div class="sw-quote">
+                <p class="sw-quote-text">Aptus Infotech provided us with AutoCAD licenses and comprehensive training. Their support team helped us streamline our design process, reducing project completion time by 30%.</p>
+                <div class="sw-quote-author">Yusuf Al Hashmi</div>
+                <div class="sw-quote-role">Design Manager, Construction Company</div>
+            </div>
+            <div class="sw-quote">
+                <p class="sw-quote-text">The AutoCAD toolsets from Aptus have revolutionized our workflow. The specialized tools for architecture have significantly improved our productivity and design quality.</p>
+                <div class="sw-quote-author">Mariam Al Said</div>
+                <div class="sw-quote-role">Lead Architect, Design Firm</div>
+            </div>
+            <div class="sw-quote">
+                <p class="sw-quote-text">As a small engineering firm, we needed affordable yet powerful CAD software. Aptus recommended AutoCAD LT, which perfectly meets our needs without breaking the budget.</p>
+                <div class="sw-quote-author">Khalid Al Balushi</div>
+                <div class="sw-quote-role">Owner, Engineering Consultancy</div>
+            </div>
+                </div>
+            </div>
+        </section>
+        <section class="sw-alliances">
+            <div class="container">
+                <h2>Winning together with <span>Strategic Alliances</span></h2>
+                <div class="sw-alliance-grid">
+                <div class="sw-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/planswift.png" alt="planswift" loading="lazy"/></div>
+                <div class="sw-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/Prokon.png" alt="Prokon" loading="lazy"/></div>
+                <div class="sw-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png" alt="Sketchup" loading="lazy"/></div>
+                <div class="sw-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/sophos.png" alt="sophos" loading="lazy"/></div>
+                <div class="sw-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/spectronova.png" alt="spectronova" loading="lazy"/></div>
+                <div class="sw-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/aconex.png" alt="aconex" loading="lazy"/></div>
+                <div class="sw-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png" alt="Autodesk" loading="lazy"/></div>
+                <div class="sw-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/etap.png" alt="etap" loading="lazy"/></div>
+                <div class="sw-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/fortinet.png" alt="fortinet" loading="lazy"/></div>
+                <div class="sw-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/kaspersky.png" alt="kaspersky" loading="lazy"/></div>
+                <div class="sw-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft.png" alt="Microsoft" loading="lazy"/></div>
+                <div class="sw-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/lumion.png" alt="lumion" loading="lazy"/></div>
+                <div class="sw-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/paloalto.png" alt="paloalto" loading="lazy"/></div>
+                <div class="sw-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/v.ray_.png" alt="v.ray" loading="lazy"/></div>
+                <div class="sw-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png" alt="twinmotion" loading="lazy"/></div>
+                </div>
+            </div>
+        </section>
+        <section class="sw-contact" id="Form">
+            <div class="container">
+                <h2>Have questions? We can help</h2>
+                <form class="sw-form" action="/contactus" method="post">
+                    <div class="sw-form-row">
+                        <div class="sw-form-group"><label>First Name *</label><input type="text" name="first_name" required="required"/></div>
+                        <div class="sw-form-group"><label>Last Name *</label><input type="text" name="last_name" required="required"/></div>
+                    </div>
+                    <div class="sw-form-row">
+                        <div class="sw-form-group"><label>Email *</label><input type="email" name="email" placeholder="name@mail.com" required="required"/></div>
+                        <div class="sw-form-group"><label>Phone *</label><input type="tel" name="phone" placeholder="e.g, +968 0000 0000" required="required"/></div>
+                    </div>
+                    <div class="sw-form-group"><label>Message</label><textarea name="message" rows="4" placeholder="Message"/></div>
+                    <button type="submit" class="sw-btn">Submit Now</button>
+                </form>
+            </div>
+        </section>
+</div></div>
+            </section>
+        </div>
+    </t>
+</t>

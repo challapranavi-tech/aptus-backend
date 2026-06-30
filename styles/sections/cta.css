@@ -1,0 +1,12 @@
+.aptus-cta {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding-block: var(--section-padding);
+  text-align: center;
+}
+
+.aptus-cta__title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}

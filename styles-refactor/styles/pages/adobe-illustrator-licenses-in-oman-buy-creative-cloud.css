@@ -1,0 +1,16 @@
+/**
+ * Page: Adobe Illustrator Licenses in Oman | Buy Creative Cloud
+ * Route: /adobe-illustrator
+ * Source: LIVE WEBSITE/software\adobe\Adobe Illustrator Licenses in Oman _ Buy Creative Cloud.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, testimonials, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-adobe-illustrator-licenses-in-oman-buy-creative-cloud {
+    /* page root scope */
+  }
+
+
+  /* 41 inline styles detected — migrate to utilities */
+}

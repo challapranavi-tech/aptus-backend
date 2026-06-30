@@ -1,0 +1,257 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "autodesk",
+    "bannerTitle": "Autocad LT",
+    "bannerTagline": "The affordable, lightweight CAD solution for precise 2D drafting and documentation",
+    "mediaInline": false,
+    "title": "Precision 2D Drafting for Every Project",
+    "paragraphs": [
+      "In today’s design and documentation industry, accuracy and efficiency are paramount.",
+      "More and more professionals are utilizing advanced AutoCAD LT Solutions to maximize drawing precision and accelerate production workflows.",
+      "Whether you’re creating detailed floor plans for architecture or documenting mechanical parts for manufacturing, this software dramatically improves the way you draft, annotate, and share two-dimensional designs.",
+      "Experience superior drawing speed and seamless file compatibility with our comprehensive solutions for 2D geometric drafting, layer management, and external reference (Xref) functionality across any industry.",
+      "From intuitive drafting tools and robust dimensioning features to cloud-based sharing and industry-standard DWG™ file support, we provide end-to-end solutions that ensure every drawing is precise, collaborative, and utterly reliable."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/06/Autocad_LT-1024x1024.png",
+    "imageAlt": "Autocad LT",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Powerful Features"
+      },
+      "subheading": "Discover the core capabilities that make AutoCAD LT the go-to choice for 2D drafting professionals",
+      "align": "center",
+      "items": [
+        {
+          "title": "Precise Drawing Tools",
+          "body": "Create accurate 2D designs with comprehensive drawing tools including lines, arcs, circles, and polylines. Achieve professional results every time.",
+          "icon": "cube",
+          "imageAlt": "Precise Drawing Tools"
+        },
+        {
+          "title": "DWG File Format Support",
+          "body": "Work seamlessly with the industry-standard DWG file format, ensuring compatibility with other CAD applications and stakeholders.",
+          "icon": "cube",
+          "imageAlt": "DWG File Format Support"
+        },
+        {
+          "title": "Layer Management",
+          "body": "Organize your drawings efficiently with powerful layer management tools, making complex projects easy to navigate and edit.",
+          "icon": "cube",
+          "imageAlt": "Layer Management"
+        },
+        {
+          "title": "Intuitive Interface",
+          "body": "Familiar ribbon-based interface designed for productivity, with customizable toolbars and quick access to frequently used commands.",
+          "icon": "cube",
+          "imageAlt": "Intuitive Interface"
+        },
+        {
+          "title": "Data Extraction",
+          "body": "Easily extract data from your drawings into spreadsheets or databases, streamlining documentation processes.",
+          "icon": "cube",
+          "imageAlt": "Data Extraction"
+        },
+        {
+          "title": "Cloud Connectivity",
+          "body": "Access your drawings anytime, anywhere with cloud storage integration and collaboration features.",
+          "icon": "cube",
+          "imageAlt": "Cloud Connectivity"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Key Benefits"
+      },
+      "subheading": "Why thousands of professionals trust AutoCAD LT for their daily work",
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Affordable Pricing",
+          "body": "Get professional-grade CAD software at a fraction of the cost of full AutoCAD, perfect for small businesses and individual users.",
+          "icon": "check"
+        },
+        {
+          "title": "Time Efficiency",
+          "body": "Accelerate your workflow with tools designed for speed and precision, reducing project turnaround times significantly.",
+          "icon": "check"
+        },
+        {
+          "title": "User-Friendly",
+          "body": "Intuitive interface and familiar commands make learning curve minimal, allowing you to be productive immediately.",
+          "icon": "users"
+        },
+        {
+          "title": "Reliable Performance",
+          "body": "Built on the trusted AutoCAD platform, ensuring stability and reliability for mission-critical design work.",
+          "icon": "shield"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "AutoCAD LT?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Official Autodesk Gold Partner",
+          "body": "As an authorized partner, we provide access to genuine Autodesk products.",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset"
+        },
+        {
+          "title": "Local Presence",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "mobile"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Start Your Design Journey?",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Hear from professionals who have transformed their practice with AutoCAD LT",
+    "items": [
+      {
+        "quote": "AutoCAD LT has been instrumental in helping our firm streamline our drafting process. The interface is intuitive and the tools are exactly what we need for everyday design work.",
+        "author": "Jennifer Rodriguez",
+        "role": "Senior Architect, Rodriguez Associates"
+      },
+      {
+        "quote": "As a mechanical engineer, I appreciate how AutoCAD LT handles my 2D drafting needs perfectly. It’s fast, reliable, and doesn’t break the bank like some other solutions.",
+        "author": "Michael Chen",
+        "role": "Lead Mechanical Engineer, Global Engineering Partners"
+      },
+      {
+        "quote": "The transition from traditional CAD software to AutoCAD LT was seamless. The familiar interface and powerful tools made it easy for our team to adopt quickly.",
+        "author": "Sarah Johnson",
+        "role": "Project Manager, Construction Solutions Inc."
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/planswift.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Prokon.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/sophos.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/spectronova.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/aconex.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/etap.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/fortinet.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/kaspersky.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft.png",
+        "alt": "Microsoft"
+      },
+      {
+        "id": "lumion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/lumion.png",
+        "alt": "lumion"
+      },
+      {
+        "id": "paloalto",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/paloalto.png",
+        "alt": "paloalto"
+      },
+      {
+        "id": "vray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/v.ray_.png",
+        "alt": "v.ray"
+      },
+      {
+        "id": "twinmotion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png",
+        "alt": "twinmotion"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

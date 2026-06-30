@@ -1,0 +1,16 @@
+/**
+ * Page: Aptus Infotech | Trusted IT & Engineering Software Partner
+ * Route: /
+ * Source: LIVE WEBSITE/home\Aptus Infotech _ Trusted IT & Engineering Software Partner.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, cta, testimonials, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-aptus-infotech-trusted-it-engineering-software-partner {
+    /* page root scope */
+  }
+
+
+  /* 15 inline styles detected — migrate to utilities */
+}

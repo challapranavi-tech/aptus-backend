@@ -1,0 +1,16 @@
+/**
+ * Page: Advanced Nurse Calling Systems in Oman | Aptus Infotech
+ * Route: /nurse-calling-system
+ * Source: LIVE WEBSITE/ELV\Advanced Nurse Calling Systems in Oman _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-advanced-nurse-calling-systems-in-oman-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 22 inline styles detected — migrate to utilities */
+}

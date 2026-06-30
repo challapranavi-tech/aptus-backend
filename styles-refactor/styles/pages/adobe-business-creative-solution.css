@@ -1,0 +1,16 @@
+/**
+ * Page: Adobe Business Creative Solution
+ * Route: /adobe-business-creative-solutions
+ * Source: LIVE WEBSITE/software\adobe\Adobe Business Creative Solution.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-adobe-business-creative-solution {
+    /* page root scope */
+  }
+
+
+  /* 43 inline styles detected — migrate to utilities */
+}

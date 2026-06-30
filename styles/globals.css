@@ -1,0 +1,38 @@
+/**
+ * Aptus global styles — entry point.
+ *
+ * Layer order:
+ *   1. Tailwind + design tokens
+ *   2. Base / utilities / animations
+ *   3. Layout + components + sections
+ *   4. Page-specific (about, software)
+ *
+ * Page CSS: import per-route in app/[slug]/page.tsx from styles/pages/
+ */
+@import "tailwindcss";
+
+@import "./tokens.css";
+@import "./theme.css";
+@import "./base.css";
+@import "./animations.css";
+@import "./utilities.css";
+
+@import "./layout/content.css";
+
+@import "./components/navbar.css";
+@import "./components/footer.css";
+@import "./components/buttons.css";
+@import "./components/cards.css";
+@import "./components/forms.css";
+@import "./components/modals.css";
+
+@import "./sections/hero.css";
+@import "./sections/features.css";
+@import "./sections/testimonials.css";
+@import "./sections/cta.css";
+
+@import "./about-pages.css";
+@import "./software-pages.css";
+@import "./software-product-pages.css";
+@import "./elv-product-pages.css";
+@import "./elv-pages.css";

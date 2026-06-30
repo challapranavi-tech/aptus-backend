@@ -1,0 +1,16 @@
+/**
+ * Page: Chaos Corona Rendering Software | Aptus Infotech
+ * Route: /chaos-corona
+ * Source: LIVE WEBSITE/software\multimedia\Chaos Corona Rendering Software _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-chaos-corona-rendering-software-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 38 inline styles detected — migrate to utilities */
+}

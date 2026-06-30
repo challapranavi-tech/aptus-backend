@@ -1,0 +1,221 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "microsoft",
+    "bannerTagline": "Transform Data into Actionable Insights",
+    "topBannerImage": "https://aptusinfotech.com/wp-content/uploads/2025/08/Power-BI-e1749557224148-r73oq7gjqsdfgtfamvfzcag9dfjkzkl29vpj5ko9zc.jpg",
+    "mediaInline": true,
+    "title": "Microsoft Power BI",
+    "paragraphs": [
+      "Microsoft Power BI is a powerful, interactive business intelligence (BI) and data visualization tool that empowers organizations to connect to disparate data sources, transform raw data into meaningful information, and create compelling, shareable reports and dashboards. It enables users at all levels to gain actionable insights from their data, facilitating informed decision-making and driving business performance."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Power-BI-1.jpg",
+    "imageAlt": "Microsoft Power BI",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "capabilities",
+      "visible": true,
+      "variant": "bullet-list",
+      "title": {
+        "before": "Microsoft Power BI empowers businesses and individuals to:"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Connect to Diverse Data Sources",
+          "body": "Seamlessly pull data from hundreds of sources, including cloud services (e.g., Salesforce, Google Analytics), databases (e.g., SQL Server, Oracle), Excel spreadsheets, web pages, and more, consolidating your data for a holistic view.",
+          "icon": "check"
+        },
+        {
+          "title": "Transform and Model Data",
+          "body": "Clean, shape, and combine data from various sources using Power Query. Build robust data models with relationships and custom calculations (DAX formulas) to prepare your data for deep analysis.",
+          "icon": "check"
+        },
+        {
+          "title": "Create Interactive Dashboards and Reports",
+          "body": "Design intuitive and visually engaging dashboards and reports with a wide array of customizable charts, graphs, maps, and other visualizations. Enable users to drill down, filter, and interact with data to explore insights.",
+          "icon": "check"
+        },
+        {
+          "title": "Discover Insights with AI and Natural Language",
+          "body": "Leverage AI-powered capabilities, such as Quick Insights and natural language Q&A, to automatically identify patterns, trends, and outliers in your data, even without extensive analytical skills.",
+          "icon": "check"
+        },
+        {
+          "title": "Share and Collaborate Securely",
+          "body": "Publish reports and dashboards to the Power BI service (cloud), allowing secure sharing with colleagues, clients, or the wider organization. Control access and distribute information effectively across teams and devices.",
+          "icon": "check"
+        },
+        {
+          "title": "Access Insights Anywhere, Anytime",
+          "body": "Stay connected to your data and dashboards on the go with Power BI Mobile apps for iOS, Android, and Windows, ensuring you have critical business insights at your fingertips.",
+          "icon": "check"
+        },
+        {
+          "title": "Integrate with the Microsoft Ecosystem",
+          "body": "Benefit from deep integration with other Microsoft products like Excel, Azure, and Dynamics 365, creating a unified and powerful analytics environment.",
+          "icon": "check"
+        }
+      ]
+    },
+    {
+      "id": "solutions",
+      "visible": true,
+      "variant": "icon-cards",
+      "align": "center",
+      "gridColumns": 5,
+      "items": [
+        {
+          "title": "3D Modeling",
+          "body": "",
+          "icon": "check"
+        },
+        {
+          "title": "Conceptual Design",
+          "body": "",
+          "icon": "check"
+        },
+        {
+          "title": "Architectural Visualization",
+          "body": "",
+          "icon": "check"
+        },
+        {
+          "title": "2D Documentation",
+          "body": "",
+          "icon": "check"
+        },
+        {
+          "title": "3D Warehouse",
+          "body": "",
+          "icon": "check"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech"
+      },
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Tailored Solutions for Your Business",
+          "body": "",
+          "icon": "check-circle"
+        },
+        {
+          "title": "Scalable for Every Business Size",
+          "body": "",
+          "icon": "check-circle"
+        },
+        {
+          "title": "Expert Installation and Ongoing Support",
+          "body": "",
+          "icon": "check-circle"
+        },
+        {
+          "title": "Powered by Cutting-Edge Technology",
+          "body": "",
+          "icon": "check-circle"
+        }
+      ]
+    }
+  ],
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/planswift.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Prokon.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/sophos.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/spectronova.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/aconex.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/etap.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/fortinet.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/kaspersky.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft.png",
+        "alt": "Microsoft"
+      },
+      {
+        "id": "lumion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/lumion.png",
+        "alt": "lumion"
+      },
+      {
+        "id": "paloalto",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/paloalto.png",
+        "alt": "paloalto"
+      },
+      {
+        "id": "vray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/v.ray_.png",
+        "alt": "v.ray"
+      },
+      {
+        "id": "twinmotion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png",
+        "alt": "twinmotion"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

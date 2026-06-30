@@ -1,0 +1,155 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Switching and Routing",
+    "bannerTagline": "Comprehensive networking solutions for modern enterprise environments",
+    "title": "Complete Network Infrastructure Solutions",
+    "paragraphs": [
+      "In a world dependent on instant data access, the efficiency of your network’s core—its switching and routing infrastructure—determines your success. Our comprehensive Switching and Routing Solutions ensure your data moves reliably, securely, and at lightning speed, whether it’s across a single office or around the globe.",
+      "Our advanced switches form the critical foundation of your Local Area Network (LAN). They intelligently manage internal communication by directing data packets to the exact device they’re intended for (using MAC addresses), eliminating congestion and maximizing bandwidth.",
+      "Routers are your network’s navigators. They connect your local network to external networks and the Internet, dynamically choosing the most efficient path for data to travel. This is vital for business continuity and global connectivity."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/unnamed.jpg",
+    "imageAlt": "Switching and Routing",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Key Networking Technologies"
+      },
+      "subheading": "Explore our comprehensive switching and routing solutions",
+      "align": "center",
+      "items": [
+        {
+          "title": "Layer 2 Switching",
+          "body": "Implement advanced Ethernet switching with VLAN support, STP, and link aggregation for reliable local area network connectivity.",
+          "icon": "compress-alt"
+        },
+        {
+          "title": "Dynamic Routing Protocols",
+          "body": "Configure OSPF, BGP, and EIGRP routing protocols for efficient path selection and failover protection across multiple network paths.",
+          "icon": "route"
+        },
+        {
+          "title": "Security Integration",
+          "body": "Incorporate firewall, VPN, and access control lists to protect your network perimeter and control traffic flows.",
+          "icon": "shield-alt"
+        },
+        {
+          "title": "WAN Optimization",
+          "body": "Implement MPLS, SD-WAN, and WAN optimization techniques to improve wide-area network performance and reliability.",
+          "icon": "satellite-dish"
+        },
+        {
+          "title": "Cloud Connectivity",
+          "body": "Integrate hybrid cloud connectivity with direct connections to AWS, Azure, and Google Cloud platforms.",
+          "icon": "cloud-upload-alt"
+        },
+        {
+          "title": "User Authentication",
+          "body": "Implement AAA (Authentication, Authorization, Accounting) with RADIUS, TACACS+, and LDAP for secure user access control.",
+          "icon": "user-check"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus",
+        "accent": "Infotech for AutoCAD?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Certified Expertise",
+          "body": "Our team holds industry certifications from leading vendors like Cisco, Juniper, and Aruba.",
+          "icon": "certificate"
+        },
+        {
+          "title": "24/7 Support",
+          "body": "Round-the-clock technical support and proactive monitoring to ensure optimal performance.",
+          "icon": "headset"
+        },
+        {
+          "title": "Customized Solutions",
+          "body": "We design solutions specifically for your business needs rather than offering generic packages.",
+          "icon": "code-branch"
+        },
+        {
+          "title": "Proactive Maintenance",
+          "body": "Regular system audits and predictive maintenance to prevent issues before they occur.",
+          "icon": "galactic-republic"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our",
+      "accent": "Clients Say"
+    },
+    "subheading": "Hear from businesses that have transformed their operations with our networking solutions",
+    "items": [
+      {
+        "quote": "“Aptus Infotech helped us migrate our entire network infrastructure to a hybrid cloud environment, resulting in 40% reduction in operational costs and improved disaster recovery capabilities.”",
+        "author": "Sarah Johnson",
+        "role": "IT Director"
+      },
+      {
+        "quote": "“Their managed services freed up our internal resources while providing superior performance and security compared to our previous in-house setup.”",
+        "author": "Michael Chen",
+        "role": "CEO,"
+      },
+      {
+        "quote": "“The custom-designed network solution from Aptus has been instrumental in supporting our rapid growth and handling increased traffic loads efficiently.”",
+        "author": "Jessica Williams",
+        "role": "Operations Manager"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/WatchNet.png",
+        "alt": "WatchNet"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Tyco.png",
+        "alt": "Tyco"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Suprema.png",
+        "alt": "suprema"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Hikvision.png",
+        "alt": "Hikvision"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/ZKTeco.png",
+        "alt": "ZKT"
+      }
+    ]
+  }
+}

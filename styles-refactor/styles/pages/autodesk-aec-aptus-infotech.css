@@ -1,0 +1,16 @@
+/**
+ * Page: Autodesk AEC | Aptus Infotech
+ * Route: /aec-collection
+ * Source: LIVE WEBSITE/software\autodesk\Autodesk AEC _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, cta, testimonials, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-autodesk-aec-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 40 inline styles detected — migrate to utilities */
+}

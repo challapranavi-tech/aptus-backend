@@ -1,0 +1,10 @@
+.aptus-testimonials {
+  padding-block: var(--section-padding);
+}
+
+.aptus-testimonial-card {
+  background: #fff;
+  border-radius: var(--radius-card);
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+}

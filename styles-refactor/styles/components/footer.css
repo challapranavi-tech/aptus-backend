@@ -1,0 +1,14 @@
+/* Footer — shared across all 67 pages */
+.aptus-footer {
+  background-color: var(--color-navy-dark);
+  color: rgba(255, 255, 255, 0.9);
+  padding-block: var(--spacing-2xl);
+}
+
+.aptus-footer a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+}
+.aptus-footer a:hover {
+  color: var(--accent-amber);
+}

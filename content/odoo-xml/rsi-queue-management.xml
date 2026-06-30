@@ -1,0 +1,270 @@
+<t t-name="website.elv-rsi-queue-management">
+    <t t-call="website.layout">
+        <div id="wrap" class="oe_structure oe_empty">
+            <section class="s_embed_code pt0 pb0 o_colored_level" data-snippet="s_embed_code" data-name="ELV rsi-queue-management">
+                <div class="s_embed_code_embedded o_not_editable container-fluid"><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+.aptus-elv-page { font-family: 'Poppins', sans-serif; color: #1a1a2e; background: #fff; overflow-x: hidden; }
+.aptus-elv-page .container { max-width: 1200px; width: 90%; margin: 0 auto; }
+.aptus-elv-page h2 { font-size: 34px; color: #1a1a2e; margin: 0 0 10px; }
+.aptus-elv-page p { line-height: 1.7; color: #475569; }
+
+.elv-banner { position: relative; padding: 90px 0; text-align: center; color: #fff; background-size: cover; background-position: center; }
+.elv-banner::before { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, rgba(10,22,55,.88), rgba(19,82,163,.78)); }
+.elv-banner .container { position: relative; z-index: 1; }
+.elv-banner h1 { font-size: 40px; margin: 0 0 14px; color: #fff; }
+.elv-banner p { color: #e6eefb; max-width: 720px; margin: 0 auto 26px; font-size: 18px; }
+
+.elv-btn { display: inline-block; background: #1352a3; color: #fff; border: none; padding: 14px 34px; border-radius: 40px; font-size: 16px; font-weight: 600; cursor: pointer; text-decoration: none; transition: .3s; }
+.elv-btn:hover { background: #0e3d7a; transform: translateY(-2px); }
+.elv-btn--light { background: #fff; color: #1352a3; }
+
+.elv-hero { padding: 60px 0; }
+.elv-hero .container { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+.elv-hero-sidebar { flex: 0 0 220px; }
+.elv-hero-sidebar ul { list-style: none; margin: 0; padding: 0; }
+.elv-hero-sidebar a { display: block; padding: 10px 14px; color: #334155; text-decoration: none; border-radius: 8px; font-size: 14px; line-height: 1.4; transition: .2s; }
+.elv-hero-sidebar a:hover, .elv-hero-sidebar a.is-active { background: #1352a3; color: #fff; }
+.elv-hero-text { flex: 1 1 320px; }
+.elv-hero-text h2 { color: #1352a3; }
+.elv-hero-media { flex: 1 1 360px; text-align: center; }
+.elv-hero-media img { max-width: 100%; border-radius: 18px; }
+
+.elv-section { padding: 60px 0; }
+.elv-section--band { background: #f1f5fb; }
+.elv-section-head { text-align: center; max-width: 760px; margin: 0 auto 40px; }
+.elv-section-head h2 span { color: #38b6ff; }
+.elv-section-sub { color: #64748b; margin-top: 8px; }
+
+.elv-card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.elv-card-grid--value { grid-template-columns: repeat(4, 1fr); }
+.elv-card-grid--product { grid-template-columns: repeat(4, 1fr); }
+.elv-card { background: #fff; border: 1px solid #e6ecf5; border-radius: 16px; padding: 28px 24px; text-align: center; box-shadow: 0 6px 18px rgba(15,40,90,.05); transition: .3s; }
+.elv-card:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(15,40,90,.12); }
+.elv-card h3 { font-size: 18px; color: #1a1a2e; margin: 14px 0 8px; }
+.elv-card p { font-size: 14px; }
+.elv-card--value { background: #fff; }
+.elv-card-icon { display: flex; justify-content: center; }
+.elv-icon { width: 46px; height: 46px; color: #1352a3; }
+.elv-card-img img { max-height: 120px; width: auto; object-fit: contain; }
+
+.elv-midcta { background: linear-gradient(120deg, #1352a3, #0a1637); color: #fff; padding: 60px 0; text-align: center; }
+.elv-midcta h2 { color: #fff; }
+.elv-midcta p { color: #dbe6f7; max-width: 680px; margin: 0 auto 26px; }
+
+.elv-quote-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.elv-quote { background: #fff; border-radius: 16px; padding: 28px; box-shadow: 0 6px 18px rgba(15,40,90,.06); }
+.elv-quote-text { font-style: italic; color: #334155; }
+.elv-quote-author { font-weight: 700; color: #1352a3; margin-top: 14px; }
+.elv-quote-role { font-size: 13px; color: #64748b; }
+
+.elv-alliances { padding: 60px 0; text-align: center; }
+.elv-alliances h2 span { color: #38b6ff; }
+.elv-alliance-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; margin-top: 34px; }
+.elv-alliance { width: 120px; height: 80px; background: #fff; border-radius: 12px; display: flex; align-items: center; justify-content: center; padding: 12px; box-shadow: 0 5px 15px rgba(0,0,0,.07); }
+.elv-alliance img { max-width: 100%; max-height: 54px; }
+
+.elv-contact { background: #003049; color: #fff; padding: 60px 0; text-align: center; }
+.elv-contact--light { background: #e8f7f2; color: #1a1a2e; }
+.elv-contact--light h2 { color: #1a1a2e; }
+.elv-contact--light .elv-form-group label { color: #334155; }
+.elv-contact h2 { color: #fff; margin-bottom: 28px; }
+.elv-form { max-width: 800px; margin: 0 auto; }
+.elv-form-row { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 20px; }
+.elv-form-group { flex: 1; text-align: left; }
+.elv-form-group label { display: block; margin-bottom: 8px; font-weight: 500; }
+.elv-form-group input, .elv-form-group textarea { width: 100%; padding: 12px 15px; border: none; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 14px; }
+
+@media (max-width: 900px) {
+  .elv-card-grid, .elv-card-grid--value, .elv-card-grid--product, .elv-quote-grid { grid-template-columns: 1fr; }
+  .elv-banner h1 { font-size: 30px; }
+  .elv-hero-sidebar { flex: 1 1 100%; }
+}
+</style>
+<div class="aptus-elv-page aptus-elv-page--rsi-queue-management">
+        <section class="elv-banner" style="background-image:url('https://aptusinfotech.com/wp-content/uploads/2025/08/Queue_Management_System_Hero_Banner_93dd9940e9-scaled-e1755593094986-1536x614.jpg');">
+            <div class="container">
+                <h1>Queue Management Solutions</h1>
+                <p>Streamline customer flow and enhance service efficiency withour intelligent queue management systems</p>
+                <a class="elv-btn elv-btn--light" href="#Form">Request a Quote</a>
+            </div>
+        </section>
+        <section class="elv-hero">
+            <div class="container">
+                <aside class="elv-hero-sidebar" aria-label="ELV Solutions">
+                    <ul>
+                        <li><a href="/access-control-system">Access Control System</a></li>
+                        <li><a href="/thermal-scanners">Thermal Scanners</a></li>
+                        <li><a href="/cctv-camera">CCTV</a></li>
+                        <li><a href="/gate-automation">Gate Automation</a></li>
+                        <li><a href="/home-automation">Smart Homes</a></li>
+                        <li><a href="/audio-video-solutions">Audio/Video Solutions</a></li>
+                        <li><a href="/telephone-systems">Telephone Systems</a></li>
+                        <li><a href="/network-and-structured-cabling-solutions">Network and Structured Cabling</a></li>
+                        <li><a href="/ups">UPS</a></li>
+                        <li><a href="/smatv-iptv">SMATV/ IPTV</a></li>
+                        <li><a href="/guest-room-management">Guest Room Management</a></li>
+                        <li><a href="/nurse-calling-system">Nurse Call System</a></li>
+                        <li><a href="/rsi-queue-management" class="is-active">Queue Management System</a></li>
+                        <li><a href="/data-center-solutions">Data Center Solutions</a></li>
+                        <li><a href="/conference-room-solution">Conference room solution</a></li>
+                        <li><a href="/switching-and-routing">Switching and Routing</a></li>
+                    </ul>
+                </aside>
+                <div class="elv-hero-text">
+                    <h2>Optimizing Customer Flow and Experience</h2>
+                <p>In today’s service-focused world, the speed and quality of customer service are paramount. More and more organizations are upgrading their waiting areas with advanced Queue Management Solutions to maximize efficiency and customer satisfaction.</p>
+                <p>Whether you’re managing a complex queue in a large public sector office or simplifying service lines in a retail bank, these technologies dramatically improve the way you direct, serve, and engage with waiting visitors.</p>
+                <p>Experience superior operational control and seamless customer flow with our comprehensive solutions for virtual queuing, digital signage, and real-time analytics across any service environment.</p>
+                <p>From self-service ticket kiosks and mobile check-in applications to dynamic display boards and customizable staff dashboards, we provide end-to-end solutions that ensure every interaction is organized, personalized, and utterly efficient.</p>
+                    <a class="elv-btn" href="#Form">Request a Quote</a>
+                </div>
+                <div class="elv-hero-media">
+                    <img src="https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_a_cinematic_photo_of_a_bustling_lobby_with_3.jpg" alt="Queue Management Solutions" loading="lazy"/>
+                </div>
+            </div>
+        </section>
+        <section class="elv-section">
+            <div class="container">
+                <div class="elv-section-head">
+                    <h2>Powerful Features</h2>
+                    <p class="elv-section-sub">Discover the capabilities that make our Queue Management System the ideal solution for your business</p>
+                </div>
+                <div class="elv-card-grid">
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M0 32c477.6 0 366.6 317.3 367.1 366.3L448 480h-26l-70.4-71.2c-39 4.2-124.4 34.5-214.4-37C47 300.3 52 214.7 0 32zm79.7 46c-49.7-23.5-5.2 9.2-5.2 9.2 45.2 31.2 66 73.7 90.2 119.9 31.5 60.2 79 139.7 144.2 167.7 65 28 34.2 12.5 6-8.5-28.2-21.2-68.2-87-91-130.2-31.7-60-61-118.6-144.2-158.1z"/></svg></div>
+              <h3>Virtual Queuing</h3>
+              <p>Allow customers to join queues remotely via mobile app, website, or SMS, reducing physical crowding and enhancing convenience.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg></div>
+              <h3>Appointment Scheduling</h3>
+              <p>Enable customers to book appointments in advance, ensuring dedicated service slots and minimizing wait times.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 640 512" fill="currentColor" aria-hidden="true"><path d="M592 0H48A48 48 0 0 0 0 48v320a48 48 0 0 0 48 48h240v32H112a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16H352v-32h240a48 48 0 0 0 48-48V48a48 48 0 0 0-48-48zm-16 352H64V64h512z"/></svg></div>
+              <h3>Digital Signage</h3>
+              <p>Display real-time queue status, announcements, and promotional content on digital screens to keep customers informed.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M496 384H64V80c0-8.84-7.16-16-16-16H16C7.16 64 0 71.16 0 80v336c0 17.67 14.33 32 32 32h464c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16zM464 96H345.94c-21.38 0-32.09 25.85-16.97 40.97l32.4 32.4L288 242.75l-73.37-73.37c-12.5-12.5-32.76-12.5-45.25 0l-68.69 68.69c-6.25 6.25-6.25 16.38 0 22.63l22.62 22.62c6.25 6.25 16.38 6.25 22.63 0L192 237.25l73.37 73.37c12.5 12.5 32.76 12.5 45.25 0l96-96 32.4 32.4c15.12 15.12 40.97 4.41 40.97-16.97V112c.01-8.84-7.15-16-15.99-16z"/></svg></div>
+              <h3>Real-time Analytics</h3>
+              <p>Monitor queue performance, staff efficiency, and customer flow with comprehensive dashboards and reports.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M439.39 362.29c-19.32-20.76-55.47-51.99-55.47-154.29 0-77.7-54.48-139.9-127.94-155.16V32c0-17.67-14.32-32-31.98-32s-31.98 14.33-31.98 32v20.84C118.56 68.1 64.08 130.3 64.08 208c0 102.3-36.15 133.53-55.47 154.29-6 6.45-8.66 14.16-8.61 21.71.11 16.4 12.98 32 32.1 32h383.8c19.12 0 32-15.6 32.1-32 .05-7.55-2.61-15.27-8.61-21.71zM67.53 368c21.22-27.97 44.42-74.33 44.53-159.42 0-.2-.06-.38-.06-.58 0-61.86 50.14-112 112-112s112 50.14 112 112c0 .2-.06.38-.06.58.11 85.1 23.31 131.46 44.53 159.42H67.53zM224 512c35.32 0 63.97-28.65 63.97-64H160.03c0 35.35 28.65 64 63.97 64z"/></svg></div>
+              <h3>Multi-channel Notifications</h3>
+              <p>Alert customers via SMS, email, or mobile app when their turn is approaching, allowing them to wait comfortably.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 640 512" fill="currentColor" aria-hidden="true"><path d="M512.1 191l-8.2 14.3c-3 5.3-9.4 7.5-15.1 5.4-11.8-4.4-22.6-10.7-32.1-18.6-4.6-3.8-5.8-10.5-2.8-15.7l8.2-14.3c-6.9-8-12.3-17.3-15.9-27.4h-16.5c-6 0-11.2-4.3-12.2-10.3-2-12-2.1-24.6 0-37.1 1-6 6.2-10.4 12.2-10.4h16.5c3.6-10.1 9-19.4 15.9-27.4l-8.2-14.3c-3-5.2-1.9-11.9 2.8-15.7 9.5-7.9 20.4-14.2 32.1-18.6 5.7-2.1 12.1.1 15.1 5.4l8.2 14.3c10.5-1.9 21.2-1.9 31.7 0L552 6.3c3-5.3 9.4-7.5 15.1-5.4 11.8 4.4 22.6 10.7 32.1 18.6 4.6 3.8 5.8 10.5 2.8 15.7l-8.2 14.3c6.9 8 12.3 17.3 15.9 27.4h16.5c6 0 11.2 4.3 12.2 10.3 2 12 2.1 24.6 0 37.1-1 6-6.2 10.4-12.2 10.4h-16.5c-3.6 10.1-9 19.4-15.9 27.4l8.2 14.3c3 5.2 1.9 11.9-2.8 15.7-9.5 7.9-20.4 14.2-32.1 18.6-5.7 2.1-12.1-.1-15.1-5.4l-8.2-14.3c-10.4 1.9-21.2 1.9-31.7 0zm-10.5-58.8c38.5 29.6 82.4-14.3 52.8-52.8-38.5-29.7-82.4 14.3-52.8 52.8zM386.3 286.1l33.7 16.8c10.1 5.8 14.5 18.1 10.5 29.1-8.9 24.2-26.4 46.4-42.6 65.8-7.4 8.9-20.2 11.1-30.3 5.3l-29.1-16.8c-16 13.7-34.6 24.6-54.9 31.7v33.6c0 11.6-8.3 21.6-19.7 23.6-24.6 4.2-50.4 4.4-75.9 0-11.5-2-20-11.9-20-23.6V418c-20.3-7.2-38.9-18-54.9-31.7L74 403c-10 5.8-22.9 3.6-30.3-5.3-16.2-19.4-33.3-41.6-42.2-65.7-4-10.9.4-23.2 10.5-29.1l33.3-16.8c-3.9-20.9-3.9-42.4 0-63.4L12 205.8c-10.1-5.8-14.6-18.1-10.5-29 8.9-24.2 26-46.4 42.2-65.8 7.4-8.9 20.2-11.1 30.3-5.3l29.1 16.8c16-13.7 34.6-24.6 54.9-31.7V57.1c0-11.5 8.2-21.5 19.6-23.5 24.6-4.2 50.5-4.4 76-.1 11.5 2 20 11.9 20 23.6v33.6c20.3 7.2 38.9 18 54.9 31.7l29.1-16.8c10-5.8 22.9-3.6 30.3 5.3 16.2 19.4 33.2 41.6 42.1 65.8 4 10.9.1 23.2-10 29.1l-33.7 16.8c3.9 21 3.9 42.5 0 63.5zm-117.6 21.1c59.2-77-28.7-164.9-105.7-105.7-59.2 77 28.7 164.9 105.7 105.7zm243.4 182.7l-8.2 14.3c-3 5.3-9.4 7.5-15.1 5.4-11.8-4.4-22.6-10.7-32.1-18.6-4.6-3.8-5.8-10.5-2.8-15.7l8.2-14.3c-6.9-8-12.3-17.3-15.9-27.4h-16.5c-6 0-11.2-4.3-12.2-10.3-2-12-2.1-24.6 0-37.1 1-6 6.2-10.4 12.2-10.4h16.5c3.6-10.1 9-19.4 15.9-27.4l-8.2-14.3c-3-5.2-1.9-11.9 2.8-15.7 9.5-7.9 20.4-14.2 32.1-18.6 5.7-2.1 12.1.1 15.1 5.4l8.2 14.3c10.5-1.9 21.2-1.9 31.7 0l8.2-14.3c3-5.3 9.4-7.5 15.1-5.4 11.8 4.4 22.6 10.7 32.1 18.6 4.6 3.8 5.8 10.5 2.8 15.7l-8.2 14.3c6.9 8 12.3 17.3 15.9 27.4h16.5c6 0 11.2 4.3 12.2 10.3 2 12 2.1 24.6 0 37.1-1 6-6.2 10.4-12.2 10.4h-16.5c-3.6 10.1-9 19.4-15.9 27.4l8.2 14.3c3 5.2 1.9 11.9-2.8 15.7-9.5 7.9-20.4 14.2-32.1 18.6-5.7 2.1-12.1-.1-15.1-5.4l-8.2-14.3c-10.4 1.9-21.2 1.9-31.7 0zM501.6 431c38.5 29.6 82.4-14.3 52.8-52.8-38.5-29.6-82.4 14.3-52.8 52.8z"/></svg></div>
+              <h3>Customizable Workflows</h3>
+              <p>Adapt the system to your specific business processes with configurable service types, priorities, and routing rules.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 496 512" fill="currentColor" aria-hidden="true"><path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 448c-110.3 0-200-89.7-200-200S137.7 56 248 56s200 89.7 200 200-89.7 200-200 200zm-80-216c17.7 0 32-14.3 32-32s-14.3-32-32-32-32 14.3-32 32 14.3 32 32 32zm160 0c17.7 0 32-14.3 32-32s-14.3-32-32-32-32 14.3-32 32 14.3 32 32 32zm4 72.6c-20.8 25-51.5 39.4-84 39.4s-63.2-14.3-84-39.4c-8.5-10.2-23.7-11.5-33.8-3.1-10.2 8.5-11.5 23.6-3.1 33.8 30 36 74.1 56.6 120.9 56.6s90.9-20.6 120.9-56.6c8.5-10.2 7.1-25.3-3.1-33.8-10.1-8.4-25.3-7.1-33.8 3.1z"/></svg></div>
+              <h3>Enhanced Customer Experience</h3>
+              <p>As an authorized partner, we provide access to genuine Autodesk products.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 576 512" fill="currentColor" aria-hidden="true"><path d="M288 32C128.94 32 0 160.94 0 320c0 52.8 14.25 102.26 39.06 144.8 5.61 9.62 16.3 15.2 27.44 15.2h443c11.14 0 21.83-5.58 27.44-15.2C561.75 422.26 576 372.8 576 320c0-159.06-128.94-288-288-288zm0 64c14.71 0 26.58 10.13 30.32 23.65-1.11 2.26-2.64 4.23-3.45 6.67l-9.22 27.67c-5.13 3.49-10.97 6.01-17.64 6.01-17.67 0-32-14.33-32-32S270.33 96 288 96zM96 384c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32zm48-160c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32zm246.77-72.41l-61.33 184C343.13 347.33 352 364.54 352 384c0 11.72-3.38 22.55-8.88 32H232.88c-5.5-9.45-8.88-20.28-8.88-32 0-33.94 26.5-61.43 59.9-63.59l61.34-184.01c4.17-12.56 17.73-19.45 30.36-15.17 12.57 4.19 19.35 17.79 15.17 30.36zm14.66 57.2l15.52-46.55c3.47-1.29 7.13-2.23 11.05-2.23 17.67 0 32 14.33 32 32s-14.33 32-32 32c-11.38-.01-20.89-6.28-26.57-15.22zM480 384c-17.67 0-32-14.33-32-32s14.33-32 32-32 32 14.33 32 32-14.33 32-32 32z"/></svg></div>
+              <h3>Improved Operational Efficiency</h3>
+              <p>Our support team is available to assist with installation, troubleshooting, and usage questions.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M496 384H64V80c0-8.84-7.16-16-16-16H16C7.16 64 0 71.16 0 80v336c0 17.67 14.33 32 32 32h464c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16zM464 96H345.94c-21.38 0-32.09 25.85-16.97 40.97l32.4 32.4L288 242.75l-73.37-73.37c-12.5-12.5-32.76-12.5-45.25 0l-68.69 68.69c-6.25 6.25-6.25 16.38 0 22.63l22.62 22.62c6.25 6.25 16.38 6.25 22.63 0L192 237.25l73.37 73.37c12.5 12.5 32.76 12.5 45.25 0l96-96 32.4 32.4c15.12 15.12 40.97 4.41 40.97-16.97V112c.01-8.84-7.15-16-15.99-16z"/></svg></div>
+              <h3>Data-Driven Decisions</h3>
+              <p>With offices in Oman, we provide personalized service and quick response times.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M466.5 83.7l-192-80a48.15 48.15 0 0 0-36.9 0l-192 80C27.7 91.1 16 108.6 16 128c0 198.5 114.5 335.7 221.5 380.3 11.8 4.9 25.1 4.9 36.9 0C360.1 472.6 496 349.3 496 128c0-19.4-11.7-36.9-29.5-44.3zM256.1 446.3l-.1-381 175.9 73.3c-3.3 151.4-82.1 261.1-175.8 307.7z"/></svg></div>
+              <h3>Enhanced Safety &amp; Hygiene</h3>
+              <p>Certified trainers deliver comprehensive training programs tailored to your industry needs.</p>
+            </div>
+                </div>
+            </div>
+        </section>
+        <section class="elv-section">
+            <div class="container">
+                <div class="elv-section-head">
+                    <h2>Why Choose <span>Aptus Infotech?</span></h2>
+                    
+                </div>
+                <div class="elv-card-grid elv-card-grid--value">
+            <div class="elv-card elv-card--value">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M458.622 255.92l45.985-45.005c13.708-12.977 7.316-36.039-10.664-40.339l-62.65-15.99 17.661-62.015c4.991-17.838-11.829-34.663-29.661-29.671l-61.994 17.667-15.984-62.671C337.085.197 313.765-6.276 300.99 7.228L256 53.57 211.011 7.229c-12.63-13.351-36.047-7.234-40.325 10.668l-15.984 62.671-61.995-17.667C74.87 57.907 58.056 74.738 63.046 92.572l17.661 62.015-62.65 15.99C.069 174.878-6.31 197.944 7.392 210.915l45.985 45.005-45.985 45.004c-13.708 12.977-7.316 36.039 10.664 40.339l62.65 15.99-17.661 62.015c-4.991 17.838 11.829 34.663 29.661 29.671l61.994-17.667 15.984 62.671c4.439 18.575 27.696 24.018 40.325 10.668L256 458.61l44.989 46.001c12.5 13.488 35.987 7.486 40.325-10.668l15.984-62.671 61.994 17.667c17.836 4.994 34.651-11.837 29.661-29.671l-17.661-62.015 62.65-15.99c17.987-4.302 24.366-27.367 10.664-40.339l-45.984-45.004z"/></svg></div>
+              <h3>Customized Solutions</h3>
+              <p>We design and implement queue management systems tailored to your specific business requirements and workflows.</p>
+            </div>
+            <div class="elv-card elv-card--value">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 640 512" fill="currentColor" aria-hidden="true"><path d="M622.34 153.2L343.4 67.5c-15.2-4.67-31.6-4.67-46.79 0L17.66 153.2c-23.54 7.23-23.54 38.36 0 45.59l48.63 14.94c-10.67 13.19-17.23 29.28-17.88 46.9C38.78 266.15 32 276.11 32 288c0 10.78 5.68 19.85 13.86 25.65L20.33 428.53C18.11 438.52 25.71 448 35.94 448h56.11c10.24 0 17.84-9.48 15.62-19.47L82.14 313.65C90.32 307.85 96 298.78 96 288c0-11.57-6.47-21.25-15.66-26.87.76-15.02 8.44-28.3 20.69-36.72L296.6 284.5c9.06 2.78 26.44 6.25 46.79 0l278.95-85.7c23.55-7.24 23.55-38.36 0-45.6zM352.79 315.09c-28.53 8.76-52.84 3.92-65.59 0l-145.02-44.55L128 384c0 35.35 85.96 64 192 64s192-28.65 192-64l-14.18-113.47-145.03 44.56z"/></svg></div>
+              <h3>Comprehensive Training</h3>
+              <p>Our experts provide thorough training for your staff to ensure smooth adoption and maximum utilization of the system.</p>
+            </div>
+            <div class="elv-card elv-card--value">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M192 208c0-17.67-14.33-32-32-32h-16c-35.35 0-64 28.65-64 64v48c0 35.35 28.65 64 64 64h16c17.67 0 32-14.33 32-32V208zm176 144c35.35 0 64-28.65 64-64v-48c0-35.35-28.65-64-64-64h-16c-17.67 0-32 14.33-32 32v112c0 17.67 14.33 32 32 32h16zM256 0C113.18 0 4.58 118.83 0 256v16c0 8.84 7.16 16 16 16h16c8.84 0 16-7.16 16-16v-16c0-114.69 93.31-208 208-208s208 93.31 208 208h-.12c.08 2.43.12 165.72.12 165.72 0 23.35-18.93 42.28-42.28 42.28H320c0-26.51-21.49-48-48-48h-32c-26.51 0-48 21.49-48 48s21.49 48 48 48h181.72c49.86 0 90.28-40.42 90.28-90.28V256C507.42 118.83 398.82 0 256 0z"/></svg></div>
+              <h3>24/7 Technical Support</h3>
+              <p>Our dedicated support team is available round the clock to assist with any issues and ensure uninterrupted service.</p>
+            </div>
+            <div class="elv-card elv-card--value">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M8.309 189.836L184.313 37.851C199.719 24.546 224 35.347 224 56.015v80.053c160.629 1.839 288 34.032 288 186.258 0 61.441-39.581 122.309-83.333 154.132-13.653 9.931-33.111-2.533-28.077-18.631 45.344-145.012-21.507-183.51-176.59-185.742V360c0 20.7-24.3 31.453-39.687 18.164l-176.004-152c-11.071-9.562-11.086-26.753 0-36.328z"/></svg></div>
+              <h3>Continuous Updates</h3>
+              <p>We provide regular software updates and enhancements to keep your system current with the latest features and security.</p>
+            </div>
+                </div>
+            </div>
+        </section>
+        <section class="elv-midcta">
+            <div class="container">
+                <h2>Ready to Transform Your Customer Experience?</h2>
+                <p>Get in touch with our queue management experts to discuss your requirements and find the perfect solution for your business.</p>
+                <a class="elv-btn elv-btn--light" href="#Form">Request a Quote</a>
+            </div>
+        </section>
+        <section class="elv-section elv-section--band">
+            <div class="container">
+                <div class="elv-section-head">
+                    <h2>What Our <span>Clients Say</span></h2>
+                    <p class="elv-section-sub">Get in touch with our queue management experts to discuss your requirements and find the perfect solution for your business.</p>
+                </div>
+                <div class="elv-quote-grid">
+            <div class="elv-quote">
+                <p class="elv-quote-text">Aptus Infotech’s queue management system has transformed our patient experience. Wait times have decreased by 40%, and our staff can now focus on providing quality care rather than managing crowds.</p>
+                <div class="elv-quote-author">Dr. Ahmed Al Balushi</div>
+                <div class="elv-quote-role">Administrator</div>
+            </div>
+            <div class="elv-quote">
+                <p class="elv-quote-text">The virtual queuing feature has been a game-changer for our bank. Customers can now wait comfortably and receive notifications when their turn is near, resulting in much higher satisfaction scores.</p>
+                <div class="elv-quote-author">Fatima Al Habsi</div>
+                <div class="elv-quote-role">Branch Manager</div>
+            </div>
+            <div class="elv-quote">
+                <p class="elv-quote-text">The analytics provided by Aptus’s queue management system have helped us optimize staff scheduling and reduce peak-hour congestion. Our customer complaints about waiting times have virtually disappeared.</p>
+                <div class="elv-quote-author">Khalid Al Mawali</div>
+                <div class="elv-quote-role">Operations Director</div>
+            </div>
+                </div>
+            </div>
+        </section>
+        <section class="elv-contact elv-contact--light" id="Form">
+            <div class="container">
+                <h2>Have questions? We can help</h2>
+                <form class="elv-form" action="/contactus" method="post">
+                    <div class="elv-form-row">
+                        <div class="elv-form-group"><label>First Name *</label><input type="text" name="first_name" required="required"/></div>
+                        <div class="elv-form-group"><label>Last Name *</label><input type="text" name="last_name" required="required"/></div>
+                    </div>
+                    <div class="elv-form-row">
+                        <div class="elv-form-group"><label>Email *</label><input type="email" name="email" placeholder="name@mail.com" required="required"/></div>
+                        <div class="elv-form-group"><label>Phone *</label><input type="tel" name="phone" placeholder="e.g, +968 0000 0000" required="required"/></div>
+                    </div>
+                    <div class="elv-form-group"><label>Message</label><textarea name="message" rows="4" placeholder="Message"/></div>
+                    <button type="submit" class="elv-btn">Submit Now</button>
+                </form>
+            </div>
+        </section>
+</div></div>
+            </section>
+        </div>
+    </t>
+</t>

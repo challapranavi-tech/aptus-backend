@@ -1,0 +1,16 @@
+/**
+ * Page: Nitro PDF Pro Services | Aptus Infotech
+ * Route: /nitro
+ * Source: LIVE WEBSITE/software\multimedia\Nitro PDF Pro Services _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-nitro-pdf-pro-services-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 38 inline styles detected — migrate to utilities */
+}

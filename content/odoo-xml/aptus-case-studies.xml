@@ -1,0 +1,552 @@
+<t t-name="website.aptus-case-studies">
+    <t t-call="website.layout">
+        <div id="wrap" class="oe_structure oe_empty">
+            <section class="s_embed_code pt0 pb0 o_colored_level" data-snippet="s_embed_code" data-name="Aptus Case Studies Content">
+                <div class="s_embed_code_embedded o_not_editable container-fluid"><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+.aptus-page { font-family: 'Poppins', sans-serif; color: #1a1a2e; }
+.aptus-page {
+            font-family: 'Poppins', sans-serif;
+            background: #ffffff;
+            color: #1a1a2e;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title h2 {
+            font-size: 30px;
+            font-weight: 600;
+            color: #000;
+        }
+        .section-title h2 span {
+            color: #f5a623;
+        }
+
+        /* Hero */
+        .case-studies-hero {
+            background-color: #000;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("https://aptusinfotech.com/wp-content/uploads/2025/09/case-studies-e1757592737753.jpg");
+            background-position: center;
+            background-size: cover;
+            color: #fff;
+            padding: 4rem 0 6rem;
+            text-align: center;
+        }
+        .case-studies-hero h1 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 600;
+            margin: 0 auto;
+            max-width: 900px;
+            color: #fff;
+        }
+        .case-studies-hero p {
+            color: #fff;
+            font-size: 1.1875rem;
+            line-height: 1.6;
+            margin: 1rem auto 0;
+            max-width: 760px;
+        }
+
+        /* Case study cards */
+        .case-studies-section {
+            background: rgba(36, 100, 140, 0.06);
+            padding: 2rem 0;
+        }
+        .case-studies-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .case-study-card {
+            flex: 1;
+            min-width: 220px;
+            max-width: 250px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            text-align: center;
+        }
+        .case-study-card img {
+            display: block;
+            margin: 0.5rem auto;
+            max-height: 200px;
+            object-fit: contain;
+            width: auto;
+            max-width: 90%;
+        }
+        .case-study-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.5rem;
+            margin: 0;
+        }
+        .case-study-card h3 a {
+            color: inherit;
+            text-decoration: none;
+        }
+        .case-study-card h3 a:hover {
+            color: #1352a3;
+        }
+        .case-study-card p {
+            color: #695b5b;
+            flex: 1;
+            font-size: 0.75rem;
+            line-height: 1.5;
+            padding: 0 0.5rem 0.75rem;
+            margin: 0;
+        }
+        .case-study-card .read-btn {
+            display: block;
+            background: #1352a3;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 16px;
+            margin: 0 0.5rem 0.75rem;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .case-study-card .read-btn:hover {
+            background: #0e3d7a;
+            color: #fff;
+        }
+
+        /* Icon cards (pain points / why choose) */
+        .icon-cards-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            max-width: 900px;
+            margin: 0 auto 30px;
+        }
+        .icon-card {
+            flex: 1;
+            min-width: 220px;
+            max-width: 280px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .icon-card .icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+            color: #1352a3;
+        }
+        .icon-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .icon-card p {
+            color: #695b5b;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0;
+        }
+        .closing-text {
+            text-align: center;
+            color: #695b5b;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        /* Transform CTA */
+        .transform-cta {
+            background: #248bcc;
+            color: #fff;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        .transform-cta h2 {
+            font-size: 30px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+        .transform-cta p {
+            margin-bottom: 25px;
+            opacity: 0.95;
+        }
+        .transform-cta .cta-btn {
+            display: inline-block;
+            background: #1352a3;
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+        .transform-cta .cta-btn:hover {
+            background: #0e3d7a;
+            color: #fff;
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            padding: 2rem 0;
+        }
+        .testimonials-section .eyebrow {
+            text-align: center;
+            color: #000;
+            font-size: 35px;
+            font-weight: 600;
+            margin-bottom: 0;
+        }
+        .testimonials-section .subtitle {
+            text-align: center;
+            color: #000;
+            margin-bottom: 30px;
+        }
+        .testimonials-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .testimonial-card {
+            flex: 1;
+            min-width: 240px;
+            max-width: 280px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            padding: 2rem 1rem 1rem;
+            text-align: center;
+        }
+        .testimonial-card blockquote {
+            color: #695b5b;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0 0 15px;
+            font-style: normal;
+        }
+        .testimonial-card .author {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .testimonial-card .role {
+            color: #000;
+            font-size: 14px;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        /* Partnerships */
+        .alliances-section {
+            padding: 4rem 0;
+            text-align: center;
+        }
+        .alliances-section h2 {
+            font-size: 35px;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+        .alliances-section h2 span {
+            color: #38b6ff;
+        }
+        .alliances-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+        }
+        .alliance-logo img {
+            border-radius: 15rem;
+            max-height: 80px;
+            object-fit: contain;
+            width: auto;
+        }
+
+        /* Contact Form */
+        .contact-form-section {
+            background: rgba(19, 147, 75, 0.08);
+            padding: 4rem 0;
+        }
+        .contact-form-inner {
+            background: #fff;
+            border-radius: 20px;
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .contact-form-inner h2 {
+            font-size: 25px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .contact-form-inner .subtitle {
+            text-align: center;
+            color: #000;
+            margin-bottom: 25px;
+        }
+        .contact-form {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            flex: 1;
+            min-width: 200px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #000;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 20px;
+            background: rgba(19, 147, 75, 0.06);
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            color: #000;
+        }
+        .form-group textarea {
+            resize: vertical;
+        }
+        .submit-btn {
+            background: #1352a3;
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 40px;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
+        .submit-btn:hover {
+            background: #0e3d7a;
+        }
+
+        @media (max-width: 900px) {
+            .case-studies-grid,
+            .icon-cards-grid,
+            .testimonials-grid { flex-direction: column; align-items: center; }
+            .form-row { flex-direction: column; }
+        }
+</style>
+<div class="aptus-page aptus-page--case-studies">
+
+<section class="case-studies-hero">
+    <div class="container">
+        <h1>Aptus Infotech Customer Success Stories</h1>
+        <p>Showcasing successful projects delivered by Aptus Infotech, highlighting our expertise and innovation</p>
+    </div>
+</section>
+
+<section class="case-studies-section" id="Case">
+    <div class="container">
+        <div class="section-title">
+            <h2>Real Results From <span>Real Projects</span></h2>
+        </div>
+        <div class="case-studies-grid">
+            <div class="case-study-card">
+                <a href="https://aptusinfotech.com/wp-content/uploads/2025/09/Al-Nahda-Hospital-Case-Study.pdf">
+                    <img src="https://aptusinfotech.com/wp-content/uploads/2025/09/Al-Nahda.jpg" alt="Al-Nahda" loading="lazy"/>
+                </a>
+                <h3><a href="https://aptusinfotech.com/wp-content/uploads/2025/09/Al-Nahda-Hospital-Case-Study.pdf">Al Nadha Hospital</a></h3>
+                <p>Aptus Infotech engineered a future-proof hospital network at Al Nahda—deploying MICROSENS FTTO switches, secure virtual networks/authentication, and campus-wide fiber—enabling real-time patient data, reliable Wi-Fi, PoE, and scalable, resilient connectivity across critical care and administration departments.</p>
+                <a class="read-btn" href="https://aptusinfotech.com/wp-content/uploads/2025/09/Al-Nahda-Hospital-Case-Study.pdf">Read More</a>
+            </div>
+            <div class="case-study-card">
+                <a href="https://aptusinfotech.com/wp-content/uploads/2025/09/Petroleum-Development-of-Oman-Case-Study.pdf">
+                    <img src="https://aptusinfotech.com/wp-content/uploads/2025/09/Petroleum-Development-of-Oman.png" alt="Petroleum-Development-of-Oman" loading="lazy"/>
+                </a>
+                <h3><a href="https://aptusinfotech.com/wp-content/uploads/2025/09/Petroleum-Development-of-Oman-Case-Study.pdf">Petroleum Development of Oman</a></h3>
+                <p>Aptus Infotech upgraded PDO from AutoCAD 2019 to 2025 for 100 users, delivered training, and implemented Navisworks—accelerating collaboration with AI features and Trace, enabling clash detection, reducing rework, improving takeoffs, and saving time and cost.</p>
+                <a class="read-btn" href="https://aptusinfotech.com/wp-content/uploads/2025/09/Petroleum-Development-of-Oman-Case-Study.pdf">Read More</a>
+            </div>
+            <div class="case-study-card">
+                <a href="https://aptusinfotech.com/wp-content/uploads/2025/09/Royal-Oman-Police-Case-Study.pdf">
+                    <img src="https://aptusinfotech.com/wp-content/uploads/2025/09/Royal-Police.png" alt="Royal-police-oman" loading="lazy"/>
+                </a>
+                <h3><a href="https://aptusinfotech.com/wp-content/uploads/2025/09/Royal-Oman-Police-Case-Study.pdf">Royal Oman Police</a></h3>
+                <p>Aptus Infotech accelerated ROP's digital policing by supplying, implementing, and training teams on ETAP electrical digital twin, real-time visualization tools, and Primavera P6—centralizing workflows, boosting collaboration, and enabling secure, data-driven operations across mission-critical projects securely.</p>
+                <a class="read-btn" href="https://aptusinfotech.com/wp-content/uploads/2025/09/Royal-Oman-Police-Case-Study.pdf">Read More</a>
+            </div>
+            <div class="case-study-card">
+                <a href="https://aptusinfotech.com/wp-content/uploads/2025/09/Sultan-Haitam-City-Case-Study.pdf">
+                    <img src="https://aptusinfotech.com/wp-content/uploads/2025/09/Sultan-haitham-city.png" alt="Sultan Haitam City" loading="lazy"/>
+                </a>
+                <h3><a href="https://aptusinfotech.com/wp-content/uploads/2025/09/Sultan-Haitam-City-Case-Study.pdf">Sultan Haitam City</a></h3>
+                <p>Aptus Infotech enabled Sultan Haitham City's delivery by supplying, implementing, training on Autodesk AEC and BIM Collaborate Pro—deploying a Common Data Environment to centralize data, enable model co-authoring, reduce clashes, cut rework, and accelerate execution.</p>
+                <a class="read-btn" href="https://aptusinfotech.com/wp-content/uploads/2025/09/Sultan-Haitam-City-Case-Study.pdf">Read More</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container" style="padding: 2rem 0;">
+    <div class="section-title">
+        <h2>Your Building's <span>Pain Points, Solved</span></h2>
+    </div>
+    <div class="icon-cards-grid">
+        <div class="icon-card">
+            <div class="icon">🌡️</div>
+            <h3>High Energy Costs &amp; Inefficiency</h3>
+            <p>Legacy systems waste 20-30% of energy. Facility managers struggle to track usage and respond to faults.</p>
+        </div>
+        <div class="icon-card">
+            <div class="icon">🛡️</div>
+            <h3>Security Risks &amp; Compliance Gaps</h3>
+            <p>Outdated CCTV or fire alarms leave gaps in protection. Non-compliance risks fines and reputational damage.</p>
+        </div>
+        <div class="icon-card">
+            <div class="icon">🧩</div>
+            <h3>Fragmented Systems &amp; Poor Visibility</h3>
+            <p>Disjointed ELV/BIM tools make it hard to monitor operations, predict failures, or plan maintenance.</p>
+        </div>
+    </div>
+    <p class="closing-text">Aptus Infotech integrates cutting-edge ELV hardware with BIM/Digital Twin software to unify your building's systems—reducing costs, enhancing security, and future-proofing your investment.</p>
+</section>
+
+<section class="container" style="padding: 1rem 0 2rem;">
+    <div class="section-title">
+        <h2>Why Clients Choose <span>Aptus Infotech?</span></h2>
+    </div>
+    <div class="icon-cards-grid">
+        <div class="icon-card">
+            <div class="icon">📍</div>
+            <h3>Regional Expertise</h3>
+            <p>25+ years serving GCC with local compliance knowledge.</p>
+        </div>
+        <div class="icon-card">
+            <div class="icon">🔧</div>
+            <h3>End-to-End Solutions</h3>
+            <p>From design to installation to ongoing support.</p>
+        </div>
+        <div class="icon-card">
+            <div class="icon">🏅</div>
+            <h3>Technical Rigor</h3>
+            <p>Certified engineers (ISO 9001, UL) and tech partnerships.</p>
+        </div>
+        <div class="icon-card">
+            <div class="icon">📈</div>
+            <h3>Proven ROI</h3>
+            <p>90% client retention due to measurable results.</p>
+        </div>
+    </div>
+</section>
+
+<section class="transform-cta">
+    <div class="container">
+        <h2>Ready to Transform Your Business?</h2>
+        <p>Contact our specialists to discuss how Aptus can resolve the challenges you are facing?</p>
+        <a class="cta-btn" href="#Form">Get Your Quote Now</a>
+    </div>
+</section>
+
+<section class="testimonials-section">
+    <div class="container">
+        <h2 class="eyebrow">What Our Clients Say</h2>
+        <p class="subtitle">Success stories from businesses using AutoCAD through Aptus Infotech</p>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <blockquote>"Aptus Infotech provided us with AutoCAD licenses and comprehensive training. Their support team helped us streamline our design process, reducing project completion time by 30%."</blockquote>
+                <div class="author">Yusuf Al Hashmi</div>
+                <p class="role">Design Manager,<br/>Construction Company</p>
+            </div>
+            <div class="testimonial-card">
+                <blockquote>"The AutoCAD toolsets from Aptus have revolutionized our workflow. The specialized tools for architecture have significantly improved our productivity and design quality."</blockquote>
+                <div class="author">Mariam Al Said</div>
+                <p class="role">Lead Architect,<br/>Design Firm</p>
+            </div>
+            <div class="testimonial-card">
+                <blockquote>"As a small engineering firm, we needed affordable yet powerful CAD software. Aptus recommended AutoCAD LT, which perfectly meets our needs without breaking the budget."</blockquote>
+                <div class="author">Khalid Al Balushi</div>
+                <p class="role">Owner,<br/>Engineering Consultancy</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="alliances-section">
+    <div class="container">
+        <h2>Winning together with <span>Strategic Alliances</span></h2>
+        <div class="alliances-grid">
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/WatchNet.png" alt="WatchNet" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Tyco.png" alt="Tyco" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Suprema.png" alt="suprema" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Hikvision.png" alt="Hikvision" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/ZKTeco.png" alt="ZKT" loading="lazy"/></div>
+        </div>
+    </div>
+</section>
+
+<section class="contact-form-section" id="Form">
+    <div class="container">
+        <div class="contact-form-inner">
+            <h2>Have questions? We can help</h2>
+            <div class="subtitle">Our experts can help you to implement the right security system for your business.</div>
+            <form class="contact-form" action="/contactus" method="post">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>First Name *</label>
+                        <input type="text" name="first_name" required="required"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name *</label>
+                        <input type="text" name="last_name" required="required"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" name="email" placeholder="name@mail.com" required="required"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone *</label>
+                        <input type="tel" name="phone" placeholder="e.g,+ 968 0000 0000" required="required"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea name="message" rows="4" placeholder="Message"/>
+                </div>
+                <button type="submit" class="submit-btn">Submit Now</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+</div></div>
+            </section>
+        </div>
+    </t>
+</t>

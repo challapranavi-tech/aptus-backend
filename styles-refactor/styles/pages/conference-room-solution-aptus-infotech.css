@@ -1,0 +1,16 @@
+/**
+ * Page: Conference room solution - Aptus Infotech
+ * Route: /conference-room-solution
+ * Source: LIVE WEBSITE/ELV\Conference room solution - Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, testimonials, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-conference-room-solution-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 28 inline styles detected — migrate to utilities */
+}

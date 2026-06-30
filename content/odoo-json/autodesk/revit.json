@@ -1,0 +1,256 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "autodesk",
+    "bannerTitle": "Autodesk Revit",
+    "bannerTagline": "Building Information Modeling software for architects, engineers, and construction professionals",
+    "mediaInline": false,
+    "title": "The Foundational BIM Software for Design and Construction",
+    "paragraphs": [
+      "In the modern Architecture, Engineering, and Construction (AEC) industry, data-rich and highly coordinated design is no longer optional—it’s essential. Autodesk Revit is the world’s leading Building Information Modeling (BIM) software, enabling design professionals to create intelligent 3D models and produce accurate documentation from a single, unified platform.",
+      "By working within a data-rich, parameterized environment, Revit empowers you to model building components and systems with precision, where every change you make is automatically updated across all views, sheets, and schedules. This dramatically improves how you design, collaborate, and manage information throughout the project lifecycle.",
+      "From conceptual design and visualization to creating detailed fabrication models and sharing accurate project data, Revit provides the fundamental toolset that ensures your designs are delivered coordinated, constructible, and ready for the future of building."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/06/Revit-2-1024x1024.png",
+    "imageAlt": "Autodesk Revit",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Powerful Features"
+      },
+      "subheading": "Discover the comprehensive functionality that makes Revit the ideal solution for building design and construction",
+      "align": "center",
+      "items": [
+        {
+          "title": "Parametric Modeling",
+          "body": "Create intelligent, data-rich 3D models with parametric components that adapt to design changes automatically.",
+          "icon": "cube",
+          "imageAlt": "Parametric Modeling"
+        },
+        {
+          "title": "Multi-Discipline Collaboration",
+          "body": "Work seamlessly with architects, engineers, and contractors in a single, coordinated BIM environment.",
+          "icon": "users",
+          "imageAlt": "Multi-Discipline Collaboration"
+        },
+        {
+          "title": "4D Scheduling",
+          "body": "Visualize construction sequencing and timelines by adding time as the fourth dimension to your models.",
+          "icon": "cube",
+          "imageAlt": "4D Scheduling"
+        },
+        {
+          "title": "Visualization & Rendering",
+          "body": "Create photorealistic visualizations and walk-throughs to effectively communicate design intent.",
+          "icon": "cube",
+          "imageAlt": "Visualization & Rendering"
+        },
+        {
+          "title": "Analysis & Simulation",
+          "body": "Perform energy analysis, lighting studies, and structural simulations directly within the Revit environment.",
+          "icon": "cube",
+          "imageAlt": "Analysis & Simulation"
+        },
+        {
+          "title": "Documentation & Output",
+          "body": "Generate construction documentation, schedules, and reports directly from your coordinated BIM model.",
+          "icon": "cube",
+          "imageAlt": "Documentation & Output"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Key Benefits"
+      },
+      "subheading": "How Revit improves your building design workflow and project outcomes",
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Time Savings",
+          "body": "Significantly reduce design time with parametric modeling and automated documentation generation.",
+          "icon": "check"
+        },
+        {
+          "title": "Error Reduction",
+          "body": "Minimize costly mistakes through clash detection and coordinated design reviews before construction begins.",
+          "icon": "check-circle"
+        },
+        {
+          "title": "Enhanced Collaboration",
+          "body": "Improve communication between disciplines with a single source of truth for all project stakeholders.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Innovation Enablement",
+          "body": "Explore design alternatives and visualize concepts with powerful 3D modeling and visualization tools.",
+          "icon": "check"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Revit?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Official Autodesk Gold Partner",
+          "body": "As an authorized partner, we provide access to genuine Autodesk products.",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset"
+        },
+        {
+          "title": "Local Presence",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "mobile"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Transform Your Design Workflow?",
+    "subheading": "Experience the power of Revit with our free trial. Discover why it’s the preferred choice for building professionals worldwide.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Hear from building professionals who have improved their design process with Revit",
+    "items": [
+      {
+        "quote": "Revit has completely transformed our practice. The ability to work collaboratively on a single model has eliminated so many coordination issues.",
+        "author": "Laik Al Hashmi",
+        "role": "Principal Architect, Design Collective"
+      },
+      {
+        "quote": "We’ve seen dramatic improvements in our estimating accuracy since implementing Revit. The clash detection alone has saved us countless hours of field troubleshooting.",
+        "author": "Sadia Al Said",
+        "role": "Construction Manager, Global Engineering Partners"
+      },
+      {
+        "quote": "The parametric modeling capabilities allow us to explore design alternatives quickly and efficiently. Revit is an indispensable tool for modern architecture.",
+        "author": "Naran Al Balushi",
+        "role": "Senior Structural Engineer, Engineering Inc."
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/planswift.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Prokon.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/sophos.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/spectronova.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/aconex.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/etap.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/fortinet.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/kaspersky.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft.png",
+        "alt": "Microsoft"
+      },
+      {
+        "id": "lumion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/lumion.png",
+        "alt": "lumion"
+      },
+      {
+        "id": "paloalto",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/paloalto.png",
+        "alt": "paloalto"
+      },
+      {
+        "id": "vray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/v.ray_.png",
+        "alt": "v.ray"
+      },
+      {
+        "id": "twinmotion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png",
+        "alt": "twinmotion"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

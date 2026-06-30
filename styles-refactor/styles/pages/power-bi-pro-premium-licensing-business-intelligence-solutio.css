@@ -1,0 +1,16 @@
+/**
+ * Page: Power BI Pro & Premium Licensing: Business Intelligence Solutions
+ * Route: /power-bi
+ * Source: LIVE WEBSITE/software\microsoft\Power BI Pro & Premium Licensing_ Business Intelligence Solutions.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-power-bi-pro-premium-licensing-business-intelligence-solutio {
+    /* page root scope */
+  }
+
+
+  /* 45 inline styles detected — migrate to utilities */
+}

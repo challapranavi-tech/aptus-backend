@@ -1,0 +1,16 @@
+/**
+ * Page: Get to Know Our Team | Aptus Infotech
+ * Route: /our-team
+ * Source: LIVE WEBSITE/about us\Get to Know Our Team _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-get-to-know-our-team-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 10 inline styles detected — migrate to utilities */
+}

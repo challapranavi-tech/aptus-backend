@@ -1,0 +1,216 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "adobe",
+    "bannerTagline": "Empowering Creativity and Digital Transformation",
+    "topBannerImage": "https://aptusinfotech.com/wp-content/uploads/2025/05/adobe-banner.jpg",
+    "mediaInline": true,
+    "title": "Adobe Business & Creative Solutions",
+    "paragraphs": [
+      "Adobe offers an unparalleled suite of software and services that are the industry standard for creative professionals and a powerful asset for businesses seeking to enhance their digital presence and productivity. From visual content creation and digital document management to sophisticated marketing tools, Adobe’s solutions empower organizations to innovate, collaborate, and effectively engage with their audiences in the digital age."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/adobe-for-buisness.png",
+    "imageAlt": "Adobe Business & Creative Solutions",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "capabilities",
+      "visible": true,
+      "variant": "bullet-list",
+      "title": {
+        "before": "Adobe Business & Creative Solutions empower professionals and businesses to:"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Create World-Class Digital Content (Creative Cloud)",
+          "body": "Access a comprehensive collection of industry-leading applications like Photoshop (image editing), Illustrator (vector graphics), InDesign (page layout), Premiere Pro (video editing), After Effects (motion graphics), and more. Produce stunning visuals, compelling videos, and engaging experiences across all media.",
+          "icon": "check"
+        },
+        {
+          "title": "Streamline Document Workflows (Adobe Acrobat)",
+          "body": "Efficiently create, edit, manage, and share PDF documents. Utilize features for secure e-signatures, document review, form filling, and accessibility, significantly reducing reliance on paper and streamlining administrative tasks.",
+          "icon": "check"
+        },
+        {
+          "title": "Foster Seamless Collaboration",
+          "body": "Facilitate remote and collaborative workflows with cloud-based features that allow teams to share assets, provide feedback, and work on projects together in real-time, improving efficiency and creative synergy.",
+          "icon": "check"
+        },
+        {
+          "title": "Drive Digital Experiences",
+          "body": "Leverage tools for UI/UX design (Adobe XD), web development, and digital publishing to create intuitive and engaging customer experiences across websites, mobile apps, and other digital touchpoints.",
+          "icon": "check"
+        },
+        {
+          "title": "Enhance Brand Consistency and Marketing",
+          "body": "Maintain a cohesive brand identity across all creative assets. For businesses, Adobe solutions provide the foundation for producing high-impact marketing materials and integrating with broader digital marketing strategies.",
+          "icon": "check"
+        },
+        {
+          "title": "Stay Ahead with Innovation",
+          "body": "Benefit from continuous updates, new features, and integration with emerging technologies (like AI) that keep creative and business workflows at the cutting edge.",
+          "icon": "check"
+        }
+      ]
+    },
+    {
+      "id": "solutions",
+      "visible": true,
+      "variant": "icon-cards",
+      "align": "center",
+      "gridColumns": 5,
+      "items": [
+        {
+          "title": "Creative Cloud for Teams",
+          "body": "",
+          "icon": "drafting-compass"
+        },
+        {
+          "title": "Adobe Express",
+          "body": "",
+          "icon": "robot"
+        },
+        {
+          "title": "Adobe Acrobat Pro",
+          "body": "",
+          "icon": "check"
+        },
+        {
+          "title": "Adobe Stock",
+          "body": "",
+          "icon": "check"
+        },
+        {
+          "title": "Enterprise Solutions",
+          "body": "",
+          "icon": "check"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech"
+      },
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Tailored Solutions for Your Business",
+          "body": "",
+          "icon": "check-circle"
+        },
+        {
+          "title": "Scalable for Every Business Size",
+          "body": "",
+          "icon": "check-circle"
+        },
+        {
+          "title": "Expert Installation and Ongoing Support",
+          "body": "",
+          "icon": "check-circle"
+        },
+        {
+          "title": "Powered by Cutting-Edge Technology",
+          "body": "",
+          "icon": "check-circle"
+        }
+      ]
+    }
+  ],
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/planswift.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Prokon.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/sophos.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/spectronova.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/aconex.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/etap.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/fortinet.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/kaspersky.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft.png",
+        "alt": "Microsoft"
+      },
+      {
+        "id": "lumion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/lumion.png",
+        "alt": "lumion"
+      },
+      {
+        "id": "paloalto",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/paloalto.png",
+        "alt": "paloalto"
+      },
+      {
+        "id": "vray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/v.ray_.png",
+        "alt": "v.ray"
+      },
+      {
+        "id": "twinmotion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png",
+        "alt": "twinmotion"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

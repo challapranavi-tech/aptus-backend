@@ -1,0 +1,45 @@
+{
+  "name": "aptus-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "explore:odoo": "node --env-file=.env.local scripts/explore-odoo.mjs",
+    "web": "npm --prefix aptus-web/aptus-web",
+    "cms:export-all-json": "npm --prefix aptus-web/aptus-web run cms:export-all-json",
+    "cms:seed-homepage": "npm --prefix aptus-web/aptus-web run cms:seed-homepage",
+    "cms:seed-elv": "npm --prefix aptus-web/aptus-web run cms:seed-elv",
+    "cms:seed-software": "npm --prefix aptus-web/aptus-web run cms:seed-software",
+    "cms:seed-case-studies": "npm --prefix aptus-web/aptus-web run cms:seed-case-studies",
+    "cms:seed-about-pages": "npm --prefix aptus-web/aptus-web run cms:seed-about-pages",
+    "cms:seed-software-pages": "npm --prefix aptus-web/aptus-web run cms:seed-software-pages",
+    "cms:seed-adobe-full": "npm --prefix aptus-web/aptus-web run cms:seed-adobe-full",
+    "cms:seed-autodesk-inner-pages": "npm --prefix aptus-web/aptus-web run cms:seed-autodesk-inner-pages",
+    "cms:seed-oracle-pages": "npm --prefix aptus-web/aptus-web run cms:seed-oracle-pages",
+    "cms:seed-microsoft-pages": "npm --prefix aptus-web/aptus-web run cms:seed-microsoft-pages",
+    "cms:seed-etap": "npm --prefix aptus-web/aptus-web run cms:seed-etap",
+    "extract:elv-live": "node scripts/extract-elv-live.mjs",
+    "extract:case-studies-live": "npm --prefix aptus-web/aptus-web run extract:case-studies-live",
+    "seed:elv-pages": "node --env-file=.env.local scripts/seed-elv-pages-json.mjs"
+  },
+  "dependencies": {
+    "gsap": "^3.13.0",
+    "next": "^15.3.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@tailwindcss/postcss": "^4.1.8",
+    "@types/node": "^22.15.29",
+    "@types/react": "^19.1.6",
+    "@types/react-dom": "^19.1.5",
+    "eslint": "^9.28.0",
+    "eslint-config-next": "^15.3.3",
+    "tailwindcss": "^4.1.8",
+    "typescript": "^5.8.3"
+  }
+}

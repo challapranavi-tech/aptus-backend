@@ -1,0 +1,16 @@
+/**
+ * Page: Adobe Premiere Pro Subscription in Oman - Aptus Infotech
+ * Route: /adobe-premiere-pro
+ * Source: LIVE WEBSITE/software\adobe\Adobe Premiere Pro Subscription in Oman - Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-adobe-premiere-pro-subscription-in-oman-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 41 inline styles detected — migrate to utilities */
+}

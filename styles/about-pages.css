@@ -1,0 +1,548 @@
+/* About Us inner pages — matches live Elementor kit (post-9, post-1273–1278) */
+
+@layer utilities {
+  .aptus-tint-panel {
+    background-color: #24648c0f;
+    border-radius: 20px;
+  }
+
+  .aptus-alliance-card {
+    align-items: center;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 18px 25px 0 rgb(0 0 0 / 0.1);
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    min-height: 6rem;
+    padding: 1rem;
+  }
+
+  /* Live Elementor image-carousel (swiper, ~277px slides, autoplay infinite) */
+  .aptus-alliance-marquee {
+    margin-top: 0.5rem;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .aptus-alliance-marquee__track {
+    display: flex;
+    width: max-content;
+    animation: aptus-alliance-marquee 55s linear infinite;
+    will-change: transform;
+  }
+
+  .aptus-alliance-marquee__slide {
+    flex: 0 0 auto;
+    padding: 0 0.65rem;
+    width: 17.3125rem; /* 277px — live swiper slide */
+  }
+
+  @keyframes aptus-alliance-marquee {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .aptus-alliance-marquee__track {
+      animation: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .aptus-alliance-marquee__slide {
+      width: calc(50% - 1rem);
+    }
+  }
+
+  @media (min-width: 640px) and (prefers-reduced-motion: reduce) {
+    .aptus-alliance-marquee__slide {
+      width: calc(33.333% - 1rem);
+    }
+  }
+
+  @media (min-width: 1024px) and (prefers-reduced-motion: reduce) {
+    .aptus-alliance-marquee__slide {
+      width: calc(16.666% - 1rem);
+    }
+  }
+
+  .aptus-alliance-logo {
+    height: auto;
+    max-height: 7.5rem;
+    max-width: 90%;
+    object-fit: contain;
+    width: auto;
+  }
+
+  /* Strategic Alliances block — post-1273–1276 */
+  .aptus-alliances-heading {
+    color: var(--color-brand-blue);
+    font-size: 2.1875rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+
+  .aptus-alliances-heading-accent {
+    color: #38b6ff;
+  }
+
+  .aptus-form-band {
+    background-color: #13934b14;
+  }
+
+  .aptus-form-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 2rem;
+  }
+
+  .aptus-form-input {
+    background-color: #13934b0f;
+    border: 0;
+    border-radius: 20px;
+    color: #000;
+  }
+
+  .aptus-form-label {
+    color: #695b5b;
+    display: block;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    padding-bottom: 0.625rem;
+  }
+
+  .aptus-cta-light-heading {
+    color: var(--color-brand-blue);
+    font-size: 1.5625rem;
+    font-weight: 600;
+    line-height: 1.3;
+    text-align: center;
+  }
+
+  .aptus-form-submit {
+    background-color: var(--color-brand-blue);
+    border-radius: 20px;
+    color: #fff;
+    font-size: 1.125rem;
+    font-weight: 500;
+    padding: 0.875rem 1.5rem;
+    transition: background-color 0.2s ease;
+    width: 100%;
+  }
+
+  .aptus-form-submit:hover {
+    background-color: var(--color-brand-blue-dark);
+  }
+
+  .aptus-page-heading {
+    color: var(--color-brand-blue);
+    font-size: 2.8125rem;
+    font-weight: 800;
+    line-height: 1.15;
+    text-align: center;
+  }
+
+  .aptus-section-heading {
+    color: var(--color-brand-blue);
+    font-size: 2.1875rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .aptus-pillar-icon {
+    color: var(--color-brand-blue);
+    height: 3rem;
+    transition: color 0.1s ease;
+    width: 3rem;
+  }
+
+  /* Our Team — post-1230 */
+  .aptus-team-section-title {
+    color: var(--color-brand-blue);
+    font-size: 2.375rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .aptus-team-member-name {
+    color: var(--color-brand-blue);
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .aptus-team-member-role {
+    color: #878080;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .aptus-team-member-bio {
+    color: #000;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.8;
+  }
+
+  .aptus-team-watermark {
+    color: #1352a345;
+    font-size: clamp(2.5rem, 8vw, 4.0625rem);
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .aptus-team-culture-subtitle {
+    color: var(--color-brand-blue);
+    font-size: 1.6875rem;
+    font-weight: 400;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .group:hover .aptus-pillar-icon,
+  .group:focus-within .aptus-pillar-icon {
+    color: var(--color-brand-green);
+  }
+
+  /* Centered rich-text blocks (e.g. privacy policy on Why Aptus) */
+  .text-center [data-section="rich-text"] h2 {
+    color: var(--color-brand-blue);
+    font-size: 1.875rem;
+    font-weight: 700;
+  }
+
+  .text-center [data-section="rich-text"] .rich-text-divider {
+    display: none;
+  }
+
+  .text-center [data-section="rich-text"] p {
+    color: #000;
+  }
+
+  /* Our Story flip boxes */
+  .aptus-flip-box {
+    min-height: 220px;
+    perspective: 1200px;
+  }
+
+  .aptus-flip-box__inner {
+    height: 100%;
+    min-height: 220px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    width: 100%;
+  }
+
+  .aptus-flip-box:hover .aptus-flip-box__inner,
+  .aptus-flip-box:focus-within .aptus-flip-box__inner {
+    transform: rotateY(180deg);
+  }
+
+  .aptus-flip-box__face {
+    align-items: center;
+    backface-visibility: hidden;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    inset: 0;
+    justify-content: center;
+    padding: 2rem;
+    position: absolute;
+    text-align: center;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .aptus-flip-box__front {
+    background-color: #24648c0f;
+    color: var(--color-brand-blue);
+  }
+
+  .aptus-flip-box__front h3 {
+    color: var(--color-brand-blue);
+    font-size: clamp(1.75rem, 4vw, 3.125rem);
+    font-weight: 600;
+    line-height: 1.1;
+  }
+
+  .aptus-flip-box__back {
+    background-color: #13934bcc;
+    background-position: center;
+    background-size: cover;
+    transform: rotateY(180deg);
+  }
+
+  .aptus-flip-box--tall .aptus-flip-box__inner,
+  .aptus-flip-box--tall {
+    min-height: 280px;
+  }
+
+  .aptus-flip-box__front-desc {
+    color: #000;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6;
+    margin-top: 1rem;
+    max-width: 28rem;
+  }
+
+  /* Aptus Policy — post-1274 */
+  .aptus-policy-modus-title {
+    color: var(--color-brand-blue);
+    font-size: 2.8125rem;
+    font-weight: 700;
+    line-height: 1.15;
+    text-align: center;
+  }
+
+  .aptus-policy-section-title {
+    color: var(--color-brand-blue);
+    font-size: 2.8125rem;
+    font-weight: 800;
+    line-height: 1.15;
+    text-align: center;
+  }
+
+  .aptus-policy-row-text {
+    color: #000;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.6;
+    max-width: 98%;
+  }
+
+  .aptus-policy-privacy-title {
+    color: var(--color-brand-blue);
+    font-size: 1.875rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .aptus-policy-privacy-text {
+    color: #000;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  .aptus-why-row-heading {
+    color: #000;
+    font-size: 1.5625rem;
+    font-weight: 600;
+    line-height: 1.3;
+    text-align: start;
+  }
+
+  .aptus-why-privacy-title {
+    color: var(--color-brand-blue);
+    font-size: 1.875rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  /* ISO Certifications — post-3375 */
+  .aptus-iso-hero-title {
+    color: var(--color-brand-blue);
+    font-size: 3.125rem;
+    font-weight: 600;
+    line-height: 1.15;
+    text-align: center;
+  }
+
+  .aptus-iso-subtitle {
+    color: var(--color-brand-blue);
+    font-size: 1.5625rem;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  .aptus-iso-intro-heading,
+  .aptus-iso-core-heading {
+    color: var(--color-brand-blue);
+    font-size: 1.875rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .aptus-iso-intro-text {
+    color: var(--color-brand-blue);
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  .aptus-iso-core-item {
+    color: var(--color-brand-blue);
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.25;
+    margin-top: 0.25rem;
+    text-align: center;
+  }
+
+  .aptus-iso-cert-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
+    .aptus-iso-cert-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .aptus-iso-cert-heading {
+    color: var(--color-brand-blue);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5625rem;
+    text-align: center;
+  }
+
+  .aptus-iso-download-btn {
+    background-color: var(--color-brand-blue);
+    border-radius: 0.25rem;
+    color: #fff;
+    display: inline-block;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    padding: 0.625rem 1.25rem;
+    transition: background-color 0.2s ease;
+  }
+
+  .aptus-iso-download-btn:hover {
+    background-color: var(--color-brand-blue-dark);
+  }
+
+  .aptus-iso-footer-text {
+    color: #248bcc;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  /* Career — post-3441 */
+  .aptus-career-hero-title {
+    color: var(--color-brand-blue);
+    font-size: 3.125rem;
+    font-weight: 500;
+    line-height: 1.15;
+  }
+
+  .aptus-career-tagline {
+    color: #248bcc;
+    font-size: 1.5625rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-top: 1rem;
+  }
+
+  .aptus-career-intro-text {
+    color: #000;
+    font-size: 1.375rem;
+    font-weight: 400;
+    line-height: 1.6;
+    margin-bottom: 2.125rem;
+    margin-top: 1rem;
+  }
+
+  .aptus-career-form-band {
+    background-color: #c1f2ce;
+  }
+
+  .aptus-career-form-heading {
+    color: var(--color-brand-blue);
+    font-size: 2.3125rem;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .aptus-career-form-label {
+    color: var(--color-brand-blue);
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.4;
+    padding-bottom: 0.25rem;
+  }
+
+  .aptus-career-form-input {
+    background-color: #fff;
+    border: 0;
+    border-radius: 20px;
+    color: #000;
+    font-size: 1rem;
+  }
+
+  /* Contact Us — post-3421 */
+  .aptus-contact-info-heading {
+    color: var(--color-brand-blue);
+    font-size: 1.5625rem;
+    font-weight: 500;
+    line-height: 1.3;
+    padding-top: 1rem;
+  }
+
+  .aptus-contact-info-lines {
+    color: #000;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  .aptus-contact-info-lines p + p {
+    margin-top: 0.5rem;
+  }
+
+  .aptus-contact-form-band {
+    background-color: #24648c0f;
+  }
+
+  .aptus-contact-form-title {
+    color: var(--color-brand-blue);
+    font-size: 3.4375rem;
+    font-weight: 500;
+    line-height: 1.15;
+    text-align: center;
+  }
+
+  .aptus-contact-form-subtitle {
+    color: var(--color-brand-blue);
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .aptus-flip-box__back p {
+    color: rgb(255 255 255 / 0.95);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    max-width: 28rem;
+  }
+}

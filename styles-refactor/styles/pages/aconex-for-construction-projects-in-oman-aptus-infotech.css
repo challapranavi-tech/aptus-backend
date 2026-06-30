@@ -1,0 +1,16 @@
+/**
+ * Page: Aconex for Construction Projects in Oman | Aptus Infotech
+ * Route: /aconex
+ * Source: LIVE WEBSITE/software\oracle\Aconex for Construction Projects in Oman _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-aconex-for-construction-projects-in-oman-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 41 inline styles detected — migrate to utilities */
+}

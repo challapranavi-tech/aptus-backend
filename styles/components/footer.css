@@ -1,0 +1,14 @@
+.aptus-footer {
+  background-color: var(--color-navy-dark);
+  color: rgb(255 255 255 / 0.9);
+  padding-block: var(--section-padding);
+}
+
+.aptus-footer a {
+  color: rgb(255 255 255 / 0.9);
+  text-decoration: none;
+}
+
+.aptus-footer a:hover {
+  color: var(--accent-amber);
+}

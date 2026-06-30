@@ -1,0 +1,72 @@
+{
+  "hero": {
+    "id": "hero",
+    "visible": true,
+    "variant": "software-landing",
+    "title": {
+      "before": "Professional Multimedia",
+      "accent": "Software Solutions"
+    },
+    "imageSrc": "linear-gradient(180deg, #000000 0%, #67DB85 100%)",
+    "imageAlt": "multimedia",
+    "actions": [
+      {
+        "label": "Request a Quote",
+        "href": "#form",
+        "tone": "blue"
+      },
+      {
+        "label": "Renew Subscription",
+        "href": "#form",
+        "tone": "green"
+      },
+      {
+        "label": "Browse Products",
+        "href": "#products",
+        "tone": "sky"
+      }
+    ]
+  },
+  "cardSections": [
+    {
+      "id": "products",
+      "anchorId": "products",
+      "visible": true,
+      "variant": "product-cards",
+      "title": {
+        "before": "Popular multimedia Products"
+      },
+      "align": "center",
+      "gridColumns": 3,
+      "items": [
+        {
+          "title": "Twinmotion",
+          "body": "Twinmotion is real-time 3D visualization software that allows you to create high-quality images, panoramas, and VR videos in seconds. Powered by Unreal Engine for stunning photorealistic results.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png",
+          "imageAlt": "Twinmotion",
+          "actionLabel": "Request a Quote"
+        },
+        {
+          "title": "V-Ray",
+          "body": "V-Ray is a professional rendering software known for its versatility and ability to handle any project, from real-time view development to final frame rendering. Create photorealistic images with unmatched quality.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/V-ray-e1754299498907.png",
+          "imageAlt": "V-Ray",
+          "actionLabel": "Request a Quote"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Transform Your Workflow?",
+    "subheading": "Explore our complete collection of professional multimedia software and find the perfect tools for your projects.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

@@ -1,0 +1,16 @@
+/**
+ * Page: Advanced CCTV Surveillance Systems | Aptus Infotech
+ * Route: /cctv-camera
+ * Source: LIVE WEBSITE/ELV\Advanced CCTV Surveillance Systems _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, testimonials, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-advanced-cctv-surveillance-systems-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 29 inline styles detected — migrate to utilities */
+}

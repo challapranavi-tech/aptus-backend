@@ -1,0 +1,16 @@
+/**
+ * Page: Access Control Systems in Oman | Aptus Info Tech
+ * Route: /access-control-system
+ * Source: LIVE WEBSITE/ELV\Access Control Systems in Oman _ Aptus Info Tech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-access-control-systems-in-oman-aptus-info-tech {
+    /* page root scope */
+  }
+
+
+  /* 27 inline styles detected — migrate to utilities */
+}

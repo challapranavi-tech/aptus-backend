@@ -1,0 +1,16 @@
+/**
+ * Page: Luminon
+ * Route: /luminon
+ * Source: LIVE WEBSITE/software\multimedia\Luminon.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-luminon {
+    /* page root scope */
+  }
+
+
+  /* 39 inline styles detected — migrate to utilities */
+}

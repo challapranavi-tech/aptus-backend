@@ -1,0 +1,16 @@
+/**
+ * Page: Oracle Primavera P6 Project Solutions | Aptus Infotech
+ * Route: /oracle-primavera-p6
+ * Source: LIVE WEBSITE/software\oracle\Oracle Primavera P6 Project Solutions _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-oracle-primavera-p6-project-solutions-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 42 inline styles detected — migrate to utilities */
+}

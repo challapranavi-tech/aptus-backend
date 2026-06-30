@@ -1,0 +1,16 @@
+/**
+ * Page: Why Choose Aptus Infotech | Trusted IT Partner
+ * Route: /why-aptus-infotech
+ * Source: LIVE WEBSITE/about us\Why Choose Aptus Infotech _ Trusted IT Partner.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-why-choose-aptus-infotech-trusted-it-partner {
+    /* page root scope */
+  }
+
+
+  /* 10 inline styles detected — migrate to utilities */
+}

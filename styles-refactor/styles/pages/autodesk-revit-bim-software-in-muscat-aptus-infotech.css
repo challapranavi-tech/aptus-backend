@@ -1,0 +1,16 @@
+/**
+ * Page: Autodesk Revit BIM Software in Muscat | Aptus Infotech
+ * Route: /revit
+ * Source: LIVE WEBSITE/software\autodesk\Autodesk Revit BIM Software in Muscat _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-autodesk-revit-bim-software-in-muscat-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 40 inline styles detected — migrate to utilities */
+}

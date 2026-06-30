@@ -1,0 +1,26 @@
+/* Typography — matches Elementor kit + Hello theme */
+body {
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-text);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-primary);
+  font-weight: 600;
+  color: var(--color-navy);
+  letter-spacing: -0.01em;
+}
+
+.aptus-eyebrow,
+.section-eyebrow {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--primary-color);
+  line-height: 1.4;
+}
+
+.aptus-heading-accent {
+  color: var(--accent-sky);
+}

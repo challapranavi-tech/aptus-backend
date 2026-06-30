@@ -1,0 +1,16 @@
+/**
+ * Page: Microsoft 365 Solutions in Oman | Aptus Infotech
+ * Route: /microsoft-365-apps
+ * Source: LIVE WEBSITE/software\microsoft\Microsoft 365 Solutions in Oman _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-microsoft-365-solutions-in-oman-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 42 inline styles detected — migrate to utilities */
+}

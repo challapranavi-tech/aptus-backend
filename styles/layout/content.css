@@ -1,0 +1,19 @@
+.aptus-cms-content {
+  max-width: var(--content-max);
+  margin-inline: auto;
+}
+
+.aptus-cms-content img {
+  max-width: 100%;
+  height: auto;
+}
+
+.aptus-cms-content h2 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.aptus-cms-content p {
+  margin-bottom: 1rem;
+  color: var(--color-text-muted);
+}

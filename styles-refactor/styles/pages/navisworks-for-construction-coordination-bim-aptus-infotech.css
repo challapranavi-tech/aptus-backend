@@ -1,0 +1,16 @@
+/**
+ * Page: Navisworks for Construction Coordination & BIM | Aptus Infotech
+ * Route: /navisworks
+ * Source: LIVE WEBSITE/software\autodesk\Navisworks for Construction Coordination & BIM _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, cta, testimonials, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-navisworks-for-construction-coordination-bim-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 38 inline styles detected — migrate to utilities */
+}

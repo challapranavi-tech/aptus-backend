@@ -1,0 +1,221 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "microsoft",
+    "bannerTagline": "Comprehensive Productivity, Collaboration, and Security for SMBs",
+    "topBannerImage": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft-365-Business-r6ra19r7iss7mtvr0at6crb3myfjj5dscmwsw21ea0.png",
+    "mediaInline": true,
+    "title": "Microsoft 365 Business",
+    "paragraphs": [
+      "Microsoft 365 Business (encompassing plans like Business Basic, Standard, and Premium) is an integrated suite of productivity apps and cloud services specifically tailored for small to medium-sized businesses (SMBs). Beyond just the familiar Office applications, it combines best-in-class productivity tools with intelligent cloud services, sophisticated security features, and simplified device management, enabling businesses to thrive in a modern, collaborative, and secure environment."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/06/Microsoft-365-Business-1.jpg",
+    "imageAlt": "Microsoft 365 Business",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "capabilities",
+      "visible": true,
+      "variant": "bullet-list",
+      "title": {
+        "before": "Microsoft 365 Business empowers organizations to:"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Access Essential Productivity Apps",
+          "body": "Provide the latest versions of core Microsoft 365 Apps (formerly Office apps) like Word, Excel, PowerPoint, and Outlook, ensuring employees have the familiar tools they need for daily tasks, accessible across various devices.",
+          "icon": "check"
+        },
+        {
+          "title": "Enable Professional Cloud Communication",
+          "body": "Deliver robust business-class email and calendaring with Exchange Online, secure cloud file storage and sharing with OneDrive for Business, and a unified communication and collaboration hub with Microsoft Teams (for chat, video conferencing, and integrated apps).",
+          "icon": "check"
+        },
+        {
+          "title": "oster Seamless Collaboration and Teamwork",
+          "body": "Facilitate real-time co-authoring on documents, shared workspaces through SharePoint, and instant communication via Teams, enabling teams to work together efficiently from any location.",
+          "icon": "check"
+        },
+        {
+          "title": "Enhance Security and Protect Data",
+          "body": "Incorporate advanced security features to safeguard against cyber threats like phishing and malware. Depending on the plan (especially Business Premium), it includes capabilities for device management, data loss prevention, and identity protection.",
+          "icon": "check"
+        },
+        {
+          "title": "Simplify Device and Data Management",
+          "body": "Streamline IT management with tools for mobile device management (MDM) and app management, allowing businesses to secure company data on personal and corporate devices.",
+          "icon": "check"
+        },
+        {
+          "title": "Support Remote Work and Business Continuity",
+          "body": "Provide the flexibility for employees to work securely and productively from anywhere, ensuring business operations can continue seamlessly regardless of location or external circumstances.",
+          "icon": "check"
+        },
+        {
+          "title": "Streamline IT Operations",
+          "body": "Reduce the complexity and cost of IT management with cloud-based services that simplify deployment, updates, and maintenance, allowing businesses to focus on their core objectives.",
+          "icon": "check"
+        }
+      ]
+    },
+    {
+      "id": "solutions",
+      "visible": true,
+      "variant": "icon-cards",
+      "align": "center",
+      "gridColumns": 5,
+      "items": [
+        {
+          "title": "SMB Solutions",
+          "body": "",
+          "icon": "drafting-compass"
+        },
+        {
+          "title": "Business-Class Email",
+          "body": "",
+          "icon": "robot"
+        },
+        {
+          "title": "Cloud Collaboration",
+          "body": "",
+          "icon": "check"
+        },
+        {
+          "title": "Data & Device Security",
+          "body": "",
+          "icon": "check"
+        },
+        {
+          "title": "Productivity Suite",
+          "body": "",
+          "icon": "check"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech"
+      },
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Tailored Solutions for Your Business",
+          "body": "",
+          "icon": "check-circle"
+        },
+        {
+          "title": "Scalable for Every Business Size",
+          "body": "",
+          "icon": "check-circle"
+        },
+        {
+          "title": "Expert Installation and Ongoing Support",
+          "body": "",
+          "icon": "check-circle"
+        },
+        {
+          "title": "Powered by Cutting-Edge Technology",
+          "body": "",
+          "icon": "check-circle"
+        }
+      ]
+    }
+  ],
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/planswift.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Prokon.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/sophos.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/spectronova.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/aconex.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/etap.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/fortinet.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/kaspersky.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft.png",
+        "alt": "Microsoft"
+      },
+      {
+        "id": "lumion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/lumion.png",
+        "alt": "lumion"
+      },
+      {
+        "id": "paloalto",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/paloalto.png",
+        "alt": "paloalto"
+      },
+      {
+        "id": "vray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/v.ray_.png",
+        "alt": "v.ray"
+      },
+      {
+        "id": "twinmotion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png",
+        "alt": "twinmotion"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

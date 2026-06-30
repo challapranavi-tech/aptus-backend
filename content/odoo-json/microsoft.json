@@ -1,0 +1,164 @@
+{
+  "hero": {
+    "id": "hero",
+    "visible": true,
+    "variant": "software-landing",
+    "title": {
+      "before": "Microsoft Solutions Partner",
+      "accent": "in Oman"
+    },
+    "tagline": "Aptus Infotech - Your trusted provider of Microsoft 365 Apps, Business solutions, and Power BI with premium support",
+    "highlight": "Offers Best Rates in the Market",
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft.jpeg",
+    "imageAlt": "microsoft",
+    "actions": [
+      {
+        "label": "Request a Quote",
+        "href": "#form",
+        "tone": "blue"
+      },
+      {
+        "label": "Renew Subscription",
+        "href": "#form",
+        "tone": "green"
+      },
+      {
+        "label": "Browse Products",
+        "href": "#products",
+        "tone": "sky"
+      }
+    ]
+  },
+  "cardSections": [
+    {
+      "id": "products-core",
+      "anchorId": "products",
+      "visible": true,
+      "variant": "product-cards",
+      "title": {
+        "before": "Our Core Microsoft 365 Solutions"
+      },
+      "subheading": "As a Microsoft Solutions Partner, we specialize in these essential business solutions",
+      "align": "center",
+      "gridColumns": 3,
+      "items": [
+        {
+          "title": "Microsoft 365 Apps",
+          "body": "Boost productivity with the latest Office apps, including Word, Excel, PowerPoint, and more.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft-365-Apps.png",
+          "imageAlt": "Microsoft 365 Apps",
+          "href": "/microsoft-365-apps",
+          "actionLabel": "Request a Quote"
+        },
+        {
+          "title": "Microsoft 365 Business",
+          "body": "Complete business solution with productivity tools, advanced security, and device management.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft-365-Business.png",
+          "imageAlt": "Microsoft 365 Business",
+          "href": "/microsoft-365-business",
+          "actionLabel": "Request a Quote"
+        },
+        {
+          "title": "Microsoft Power BI",
+          "body": "Transform your data into actionable insights with powerful business intelligence tools.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft-Power-BI.png",
+          "imageAlt": "Microsoft Power BI",
+          "href": "/power-bi",
+          "actionLabel": "Request a Quote"
+        }
+      ]
+    },
+    {
+      "id": "products-additional",
+      "visible": true,
+      "variant": "product-cards",
+      "title": {
+        "before": "Additional Microsoft Solutions"
+      },
+      "subheading": "Expand your capabilities with our complete range of Microsoft products and services",
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Microsoft Teams",
+          "body": "Collaboration platform with chat, video meetings, and file sharing.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft-Teams.png",
+          "imageAlt": "Microsoft Teams",
+          "actionLabel": "Request a Quote"
+        },
+        {
+          "title": "Microsoft SharePoint",
+          "body": "Content management and collaboration platform for organizations.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft-SharePoint.png",
+          "imageAlt": "Microsoft SharePoint",
+          "actionLabel": "Request a Quote"
+        },
+        {
+          "title": "Microsoft Azure",
+          "body": "Cloud computing platform for building, deploying, and managing applications.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft-Azure.png",
+          "imageAlt": "Microsoft Azure",
+          "actionLabel": "Request a Quote"
+        },
+        {
+          "title": "Microsoft SQL Server",
+          "body": "Enterprise-grade database management system for data storage and analysis.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft-SQL-Server.png",
+          "imageAlt": "Microsoft SQL Server",
+          "actionLabel": "Request a Quote"
+        },
+        {
+          "title": "Windows 10",
+          "body": "The world’s most popular operating system for business and personal use.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Windows-10.png",
+          "imageAlt": "Windows 10",
+          "actionLabel": "Request a Quote"
+        },
+        {
+          "title": "Windows Server",
+          "body": "Powerful server operating system with advanced security features.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Windows-Server.png",
+          "imageAlt": "Windows Server",
+          "actionLabel": "Request a Quote"
+        },
+        {
+          "title": "Gold Partner Status",
+          "body": "Our Gold Partner status represents our highest level of expertise and commitment to Microsoft solutions.",
+          "imageAlt": "Gold Partner Status",
+          "actionLabel": "Request a Quote"
+        },
+        {
+          "title": "Genuine Products",
+          "body": "All our Microsoft products are 100% genuine with full manufacturer support and updates.",
+          "imageAlt": "Genuine Products",
+          "actionLabel": "Request a Quote"
+        },
+        {
+          "title": "Competitive Pricing",
+          "body": "We offer the most competitive prices for Microsoft 365 solutions in the Omani market.",
+          "imageAlt": "Competitive Pricing",
+          "actionLabel": "Request a Quote"
+        },
+        {
+          "title": "Expert Team",
+          "body": "Our certified professionals provide expert advice and support for all Microsoft products.",
+          "imageAlt": "Expert Team",
+          "actionLabel": "Request a Quote"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Get Started?",
+    "subheading": "As Oman’s Autodesk Gold Partner, we’re ready to provide you with the best solutions and support",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

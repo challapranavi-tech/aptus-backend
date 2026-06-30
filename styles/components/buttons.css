@@ -1,0 +1,49 @@
+.aptus-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  color: #fff;
+  border: 0;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform var(--duration-normal) var(--ease-out-expo),
+    background-color var(--duration-normal) ease;
+}
+
+.aptus-btn:hover {
+  transform: scale(1.04);
+}
+
+.aptus-btn--primary {
+  background-color: var(--accent-green);
+}
+.aptus-btn--primary:hover {
+  background-color: var(--accent-green-hover);
+}
+
+.aptus-btn--blue {
+  background-color: var(--primary-color);
+}
+.aptus-btn--blue:hover {
+  background-color: var(--primary-color-hover);
+}
+
+.aptus-btn--sky {
+  background-color: var(--accent-sky);
+}
+
+.aptus-btn--outline {
+  background: transparent;
+  border: 2px solid currentColor;
+  color: var(--primary-color);
+}
+.aptus-btn--outline:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+  transform: none;
+}

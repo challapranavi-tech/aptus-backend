@@ -1,0 +1,194 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "SMATV/IPTV Solutions",
+    "bannerTagline": "Comprehensive television and entertainment systems for hotels, offices, and residential communities",
+    "title": "Delivering High-Quality Digital Entertainment",
+    "paragraphs": [
+      "In today’s hospitality and institutional environments, high-quality in-room entertainment is paramount. More and more organizations are upgrading their distribution networks with advanced SMATV/IPTV Solutions to maximize content delivery and guest experience.",
+      "Whether you’re installing satellite TV in a multi-dwelling unit (MDU) or deploying interactive television in a five-star hotel, these technologies dramatically improve the way you receive, manage, and present digital media content.",
+      "Experience superior video quality and seamless content control with our comprehensive solutions for headend reception, network distribution, and personalized guest services across any commercial venue.",
+      "From centralized satellite master antenna television (SMATV) systems and Fiber Optic distribution to customized IPTV portals and integrated billing systems, we provide end-to-end solutions that ensure every channel is clear, engaging, and utterly reliable."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/09/Lucid_Origin_Create_a_visually_striking_image_representing_SMA_2-683x1024.jpg",
+    "imageAlt": "SMATV/IPTV Solutions",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Powerful Features"
+      },
+      "subheading": "Comprehensive solutions tailored to meet your business communication needs",
+      "align": "center",
+      "items": [
+        {
+          "title": "SMATV Systems",
+          "body": "Centralized satellite reception with digital signal distribution to multiple channels and programming.",
+          "icon": "satellite-dish"
+        },
+        {
+          "title": "IPTV Streaming",
+          "body": "Internet Protocol Television with on-demand content, live streaming, and interactive channel guides.",
+          "icon": "wifi"
+        },
+        {
+          "title": "HD Digital Channels",
+          "body": "High-definition channel lineup with customizable packages and regional programming options.",
+          "icon": "tv"
+        },
+        {
+          "title": "User Management",
+          "body": "Individual channel access controls, parental locks, and personalized viewing preferences.",
+          "icon": "user-friends"
+        },
+        {
+          "title": "Analytics & Reporting",
+          "body": "Viewing statistics, channel popularity analysis, and usage reports for better content management decisions.",
+          "icon": "chart-bar"
+        },
+        {
+          "title": "24/7 Technical Support",
+          "body": "Dedicated helpdesk and on-site technician support for system maintenance and troubleshooting.",
+          "icon": "headset"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Benefits of Our Television Systems"
+      },
+      "subheading": "Why choose our solutions for your business communications",
+      "align": "center",
+      "items": [
+        {
+          "title": "Cost Efficiency",
+          "body": "Reduce communication expenses with affordable monthly plans and eliminate hardware maintenance costs.",
+          "icon": "dollar-sign"
+        },
+        {
+          "title": "Enhanced Guest Experience",
+          "body": "Provide premium entertainment options that keep guests satisfied and improve overall satisfaction ratings.",
+          "icon": "users"
+        },
+        {
+          "title": "Global Channel Access",
+          "body": "Access international channels and diverse programming to cater to multicultural audiences.",
+          "icon": "globe"
+        },
+        {
+          "title": "Improved Property Value",
+          "body": "Enhance property value and attract higher-paying tenants with state-of-the-art entertainment systems.",
+          "icon": "chart-line"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose",
+        "accent": "Aptus Infotech?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Certified Professionals",
+          "body": "As an authorized partner, we provide access to genuine Autodesk products.",
+          "icon": "certificate"
+        },
+        {
+          "title": "End-to-End Service",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "screwdriver"
+        },
+        {
+          "title": "24/7 Technical Support",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "headset"
+        },
+        {
+          "title": "Future-Ready Technology",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "reply-all"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "Client Success",
+      "accent": "Stories"
+    },
+    "subheading": "Hear from satisfied customers who have transformed their entertainment experience",
+    "items": [
+      {
+        "quote": "“The new television system has completely revolutionized how we entertain our guests. The channel selection is excellent and the picture quality is outstanding.”",
+        "author": "Mohammed Al Farsi",
+        "role": "Design Manager"
+      },
+      {
+        "quote": "“We implemented the premium entertainment system throughout our properties and couldn’t be happier. Guests love the variety of channels available.”",
+        "author": "Mariam Al Said",
+        "role": "Facilities Manager"
+      },
+      {
+        "quote": "“The technical support team was incredibly helpful during the installation process. They made sure everything was set up perfectly.”",
+        "author": "Khalid Al Balushi",
+        "role": "Owner"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  },
+  "midCta": {
+    "heading": "Ready to Upgrade Your Entertainment Systems?",
+    "description": "Contact our experts today for a free consultation and customized solution proposal.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/WatchNet.png",
+        "alt": "WatchNet"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Tyco.png",
+        "alt": "Tyco"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Suprema.png",
+        "alt": "suprema"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Hikvision.png",
+        "alt": "Hikvision"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/ZKTeco.png",
+        "alt": "ZKT"
+      }
+    ]
+  }
+}
