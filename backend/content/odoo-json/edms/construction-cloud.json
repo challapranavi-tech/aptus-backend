@@ -79,7 +79,7 @@
         {
           "title": "Faster Project Delivery",
           "body": "Reduce delays by up to 30% through improved coordination and streamlined workflows across all stakeholders.",
-          "icon": "clock"
+          "icon": "stopwatch"
         },
         {
           "title": "Cost Savings",
@@ -89,7 +89,7 @@
         {
           "title": "Improved Collaboration",
           "body": "Break down silos between design, engineering, and construction teams with centralized access to project information.",
-          "icon": "link"
+          "icon": "handshake"
         },
         {
           "title": "Enhanced Safety",
@@ -112,12 +112,12 @@
         {
           "title": "Certified Specialists",
           "body": "Our team consists of certified Autodesk experts with extensive experience in construction technology deployment.",
-          "icon": "medal"
+          "icon": "certificate"
         },
         {
           "title": "Customized Workflows",
           "body": "We configure the platform to match your existing processes rather than forcing you into generic templates.",
-          "icon": "tools"
+          "icon": "screwdriver"
         },
         {
           "title": "Dedicated Support Team",
@@ -127,7 +127,7 @@
         {
           "title": "Future-Ready Technology",
           "body": "We implement solutions that scale with your business growth and adapt to emerging technologies in the construction industry.",
-          "icon": "rocket"
+          "icon": "reply-all"
         }
       ]
     }

@@ -32,19 +32,19 @@
         {
           "title": "Extensive Templates",
           "body": "Get started quickly with dozens of built-in templates for flowcharts, network diagrams, floor plans, and more. Customize them to match your specific needs.",
-          "icon": "cube",
+          "icon": "project-diagram",
           "imageAlt": "Extensive Templates"
         },
         {
           "title": "Rich Shape Libraries",
           "body": "Access thousands of industry-standard shapes and stencils. Create professional diagrams with shapes that are specifically designed for your field.",
-          "icon": "cube",
+          "icon": "shapes",
           "imageAlt": "Rich Shape Libraries"
         },
         {
           "title": "Data Linking",
           "body": "Connect your diagrams to real-time data sources. Visualize complex information and automatically update diagrams when underlying data changes.",
-          "icon": "cube",
+          "icon": "database",
           "imageAlt": "Data Linking"
         },
         {
@@ -56,13 +56,13 @@
         {
           "title": "Cloud Integration",
           "body": "Save your diagrams to the cloud with OneDrive integration. Access your work from anywhere and share it with stakeholders easily.",
-          "icon": "cube",
+          "icon": "cloud-upload-alt",
           "imageAlt": "Cloud Integration"
         },
         {
           "title": "Developer Tools",
           "body": "Extend Visio’s functionality with custom solutions. Build add-ins and automate workflows with the Visio SDK and APIs.",
-          "icon": "cube",
+          "icon": "code-branch",
           "imageAlt": "Developer Tools"
         }
       ]
@@ -87,17 +87,17 @@
         {
           "title": "Time-Saving",
           "body": "Quickly transform complex information into clear visuals. Automated tools and templates help you create diagrams in minutes, not hours.",
-          "icon": "check"
+          "icon": "stopwatch"
         },
         {
           "title": "Enhanced Communication",
           "body": "Improve understanding and decision-making with visual representations of complex data and processes.",
-          "icon": "check"
+          "icon": "chart-line"
         },
         {
           "title": "Enterprise Security",
           "body": "Protect your sensitive diagrams with Microsoft’s enterprise-grade security and compliance features.",
-          "icon": "shield"
+          "icon": "shield-alt"
         }
       ]
     },
@@ -129,7 +129,7 @@
         {
           "title": "Expert Training",
           "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
-          "icon": "mobile"
+          "icon": "mobile-alt"
         }
       ]
     }

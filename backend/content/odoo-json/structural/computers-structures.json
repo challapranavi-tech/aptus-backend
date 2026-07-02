@@ -34,27 +34,27 @@
         {
           "title": "Advanced Analysis",
           "body": "Perform linear and nonlinear static and dynamic analysis with powerful finite element solvers. Analyze complex structures under various loading conditions including seismic, wind, and thermal effects.",
-          "icon": "chart-bar"
+          "icon": "rev"
         },
         {
           "title": "3D Modeling",
           "body": "Create detailed 3D structural models with intuitive modeling tools. Generate complex geometries, define material properties, and apply loads and constraints with precision.",
-          "icon": "cube"
+          "icon": "cubes"
         },
         {
           "title": "Design Optimization",
           "body": "Optimize structural elements for material efficiency and performance. Automatically size members, check against design codes, and generate cost-effective solutions.",
-          "icon": "tools"
+          "icon": "eye-dropper"
         },
         {
           "title": "Comprehensive Documentation",
           "body": "Generate detailed calculation reports, construction drawings, and material takeoffs. Automate documentation workflows to save time and reduce errors.",
-          "icon": "file"
+          "icon": "file-alt"
         },
         {
           "title": "International Design Codes",
           "body": "Stay compliant with global design standards including ACI, AISC, Eurocodes, BS, and Omani building codes. Easily switch between codes for international projects.",
-          "icon": "building"
+          "icon": "globe"
         },
         {
           "title": "BIM Integration",
@@ -138,22 +138,22 @@
         {
           "title": "45+ Years of Excellence",
           "body": "CSI has been developing structural engineering software since 1975, continuously innovating and improving.",
-          "icon": "clock"
+          "icon": "rev"
         },
         {
           "title": "Global Recognition",
           "body": "Our software is used in over 160 countries and trusted by leading engineering firms worldwide.",
-          "icon": "medal"
+          "icon": "globe"
         },
         {
           "title": "Advanced Technology",
           "body": "State-of-the-art analysis and design capabilities with cutting-edge computational methods.",
-          "icon": "layer-group"
+          "icon": "cogs"
         },
         {
           "title": "Expert Support",
           "body": "Our team of experienced engineers provides comprehensive technical support and training.",
-          "icon": "headset"
+          "icon": "user-friends"
         }
       ]
     }

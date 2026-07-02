@@ -72,7 +72,7 @@
         {
           "title": "SMB Solutions",
           "body": "",
-          "icon": "drafting-compass"
+          "icon": "ruler-combined"
         },
         {
           "title": "Business-Class Email",
@@ -82,17 +82,17 @@
         {
           "title": "Cloud Collaboration",
           "body": "",
-          "icon": "check"
+          "icon": "cloud"
         },
         {
           "title": "Data & Device Security",
           "body": "",
-          "icon": "check"
+          "icon": "unlock"
         },
         {
           "title": "Productivity Suite",
           "body": "",
-          "icon": "check"
+          "icon": "product-hunt"
         }
       ]
     },

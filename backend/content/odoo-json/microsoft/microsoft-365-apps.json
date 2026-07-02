@@ -72,27 +72,27 @@
         {
           "title": "Productivity Software",
           "body": "",
-          "icon": "check"
+          "icon": "microsoft"
         },
         {
           "title": "Cloud-based Collaboration",
           "body": "",
-          "icon": "check"
+          "icon": "cloud-upload-alt"
         },
         {
           "title": "Business Email & Calendar",
           "body": "",
-          "icon": "check"
+          "icon": "calendar-alt"
         },
         {
           "title": "Data Security",
           "body": "",
-          "icon": "check"
+          "icon": "lock"
         },
         {
           "title": "Real-Time Co-authoring",
           "body": "",
-          "icon": "check"
+          "icon": "clock"
         }
       ]
     },

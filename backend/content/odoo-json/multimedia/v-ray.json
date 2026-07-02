@@ -52,7 +52,7 @@
         {
           "title": "Cloud Collaboration",
           "body": "Render remotely using V-Ray Cloud or share scenes with colleagues through Trimble Connect for seamless collaboration.",
-          "icon": "cloud-upload"
+          "icon": "cloud-upload-alt"
         },
         {
           "title": "Extension Support",
@@ -123,7 +123,7 @@
         {
           "title": "Expert Training",
           "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
-          "icon": "mobile"
+          "icon": "mobile-alt"
         }
       ]
     }

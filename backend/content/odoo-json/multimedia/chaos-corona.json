@@ -32,19 +32,19 @@
         {
           "title": "Lightning-Fast Rendering",
           "body": "Experience unparalleled speed with Corona’s highly optimized rendering engine. Render complex scenes in minutes instead of hours, accelerating your workflow and productivity.",
-          "icon": "stopwatch",
+          "icon": "bolt",
           "imageAlt": "Lightning-Fast Rendering"
         },
         {
           "title": "Physically-Based Materials",
           "body": "Create realistic materials with Corona’s advanced material system. Achieve photorealistic results with intuitive controls and a vast library of presets.",
-          "icon": "cube",
+          "icon": "paint-brush",
           "imageAlt": "Physically-Based Materials"
         },
         {
           "title": "Advanced Lighting",
           "body": "Bring your scenes to life with Corona’s powerful lighting tools. From natural daylight to complex studio setups, achieve perfect illumination with ease.",
-          "icon": "cube",
+          "icon": "lightbulb",
           "imageAlt": "Advanced Lighting"
         },
         {
@@ -56,13 +56,13 @@
         {
           "title": "Intuitive Controls",
           "body": "Focus on creativity, not technical settings. Corona’s user-friendly interface makes advanced rendering accessible to artists of all skill levels.",
-          "icon": "cube",
+          "icon": "edit",
           "imageAlt": "Intuitive Controls"
         },
         {
           "title": "Cloud Rendering",
           "body": "Scale your rendering power with Corona Cloud. Render multiple frames simultaneously and meet tight deadlines without investing in expensive hardware.",
-          "icon": "cube",
+          "icon": "cloud",
           "imageAlt": "Cloud Rendering"
         }
       ]
@@ -82,17 +82,17 @@
         {
           "title": "Save Time",
           "body": "Render faster and iterate more quickly. Corona’s speed and efficiency mean you can produce more work in less time.",
-          "icon": "check"
+          "icon": "stopwatch"
         },
         {
           "title": "Superior Quality",
           "body": "Achieve photorealistic results with minimal effort. Corona’s physically-based rendering ensures stunning, believable images.",
-          "icon": "check"
+          "icon": "bezier-curve"
         },
         {
           "title": "Cost-Effective",
           "body": "Get professional results without breaking the bank. Corona offers the best price-to-performance ratio in the industry.",
-          "icon": "check"
+          "icon": "dollar-sign"
         },
         {
           "title": "Easy to Learn",
@@ -129,7 +129,7 @@
         {
           "title": "Expert Training",
           "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
-          "icon": "mobile"
+          "icon": "mobile-alt"
         }
       ]
     }

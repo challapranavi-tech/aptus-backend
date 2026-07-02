@@ -33,7 +33,7 @@
         {
           "title": "Advanced Markup Tools",
           "body": "Customize and save toolsets for consistent markups. Use text, shapes, clouds, and more to communicate clearly and effectively with your team.",
-          "icon": "cube",
+          "icon": "pencil-alt",
           "imageAlt": "Advanced Markup Tools"
         },
         {
@@ -45,25 +45,25 @@
         {
           "title": "OCR & Search",
           "body": "Convert scanned images into text-searchable PDFs with advanced OCR technology. Quickly find information across all your project documents.",
-          "icon": "cube",
+          "icon": "search",
           "imageAlt": "OCR & Search"
         },
         {
           "title": "Punch & Tracking",
           "body": "Create, assign, and track punch items directly in your PDFs. Link markups to data for seamless project management and reporting.",
-          "icon": "cube",
+          "icon": "list-alt",
           "imageAlt": "Punch & Tracking"
         },
         {
           "title": "Form Creation",
           "body": "Turn any PDF into an interactive form with customizable fields. Collect data electronically and integrate with your existing systems.",
-          "icon": "cube",
+          "icon": "file-export",
           "imageAlt": "Form Creation"
         },
         {
           "title": "Cross-Platform Access",
           "body": "Access your projects anywhere with Revu for iPad and Revu for Windows. Work seamlessly between devices without losing functionality.",
-          "icon": "mobile",
+          "icon": "mobile-alt",
           "imageAlt": "Cross-Platform Access"
         }
       ]
@@ -83,7 +83,7 @@
         {
           "title": "Increased Productivity",
           "body": "Complete tasks up to 10x faster with efficient markup tools and automated workflows that eliminate manual processes.",
-          "icon": "check"
+          "icon": "rocket"
         },
         {
           "title": "Improved Collaboration",
@@ -93,12 +93,12 @@
         {
           "title": "Cost Savings",
           "body": "Reduce printing and shipping costs while minimizing errors and rework that lead to budget overruns.",
-          "icon": "check"
+          "icon": "dollar-sign"
         },
         {
           "title": "Better Quality Control",
           "body": "Ensure accuracy and consistency with standardized markups and automated quality control processes.",
-          "icon": "check"
+          "icon": "check-square"
         }
       ]
     },
@@ -130,7 +130,7 @@
         {
           "title": "Expert Training",
           "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
-          "icon": "mobile"
+          "icon": "mobile-alt"
         }
       ]
     }

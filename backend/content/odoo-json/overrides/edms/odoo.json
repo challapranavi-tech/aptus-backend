@@ -101,7 +101,7 @@
         {
           "title": "Security & Compliance",
           "body": "All communications are encrypted and meet strict HIPAA requirements for patient privacy protection.",
-          "icon": "shield"
+          "icon": "shield-alt"
         }
       ]
     },

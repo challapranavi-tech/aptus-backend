@@ -72,27 +72,27 @@
         {
           "title": "3D Modeling",
           "body": "",
-          "icon": "check"
+          "icon": "stamp"
         },
         {
           "title": "Conceptual Design",
           "body": "",
-          "icon": "check"
+          "icon": "deskpro"
         },
         {
           "title": "Architectural Visualization",
           "body": "",
-          "icon": "check"
+          "icon": "lightbulb"
         },
         {
           "title": "2D Documentation",
           "body": "",
-          "icon": "check"
+          "icon": "file-alt"
         },
         {
           "title": "3D Warehouse",
           "body": "",
-          "icon": "check"
+          "icon": "building"
         }
       ]
     },
