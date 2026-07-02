@@ -1,0 +1,156 @@
+{
+  "banner": {
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/portada-1.png",
+    "imageAlt": "CYPE"
+  },
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "cubicost-group",
+    "title": "CYPE BIM Solutions",
+    "titleLevel": "h2",
+    "introRows": [
+      {
+        "paragraphs": [
+          "<strong>Aptus Infotech</strong> offers powerful <strong>CYPE software</strong>, tailored for professionals in the <strong>architecture, engineering, and construction (AEC)</strong> industry. With <strong>CYPE BIM integration</strong>, the software enhances design processes, <strong>cost management</strong>, and <strong>project coordination</strong>, streamlining workflows and improving efficiency at every stage of the construction lifecycle."
+        ],
+        "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/cropped-logo_cype_png-4-150x150.png",
+        "imageAlt": "CYPE",
+        "imagePosition": "right"
+      },
+      {
+        "paragraphs": [
+          "<strong>CYPE's diverse BIM solutions</strong> cater to all types of clients, projects, and licensing requirements, providing highly reliable analyses and precise check reports. With a presence across Europe, America, Africa, Oceania, and Asia, CYPE ensures that its solutions are in line with various country standards, offering the added security that all analyses are updated to the latest national and international design codes. This ensures that your projects are always compliant, accurate, and optimized for success."
+        ],
+        "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/cropped-logo_cype_png-4.png",
+        "imageAlt": "CYPE",
+        "imagePosition": "left"
+      }
+    ]
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "bullet-list",
+      "title": {
+        "before": "Key Features of",
+        "accent": "CYPE Software"
+      },
+      "align": "left",
+      "items": [
+        {
+          "title": "BIM Integration",
+          "body": "Seamless integration with <strong>BIM tools for construction</strong> for accurate, collaborative design.",
+          "icon": "check"
+        },
+        {
+          "title": "Structural Design",
+          "body": "Advanced tools for precise <strong>structural analysis</strong> and design.",
+          "icon": "check"
+        },
+        {
+          "title": "MEP Design",
+          "body": "Specialized <strong>MEP design software</strong> for efficient system design and integration.",
+          "icon": "check"
+        },
+        {
+          "title": "Energy Efficiency",
+          "body": "Optimize energy use with <strong>CYPE Energy</strong> software for better building performance.",
+          "icon": "check"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "bullet-list",
+      "title": {
+        "before": "Why Choose",
+        "accent": "Aptus Infotech"
+      },
+      "align": "left",
+      "items": [
+        {
+          "title": "Real-Time Tracking",
+          "body": "Track costs in real time, ensuring you stay on budget.",
+          "icon": "check"
+        },
+        {
+          "title": "Seamless Integration",
+          "body": "Easily integrates with <strong>project coordination software</strong> and other tools.",
+          "icon": "check"
+        },
+        {
+          "title": "Better Cost Control",
+          "body": "Links <strong>cost estimation</strong> directly to <strong>BIM models</strong>, ensuring accuracy.",
+          "icon": "check"
+        },
+        {
+          "title": "Scalable Solutions",
+          "body": "Adapts to your project's growth, maintaining efficiency.",
+          "icon": "check"
+        }
+      ]
+    }
+  ],
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances-grid",
+    "logos": [
+      {
+        "id": "v-ray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/V-ray-e1754299498907.png",
+        "alt": "V-Ray"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Spectronova-2.png",
+        "alt": "Spectronova"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Sketchup-e1759831191828.png",
+        "alt": "SketchUp"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Prokon-1-e1754305048112.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "primavera",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Primavera.png",
+        "alt": "Primavera"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "csi",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/CSI.png",
+        "alt": "CSI"
+      },
+      {
+        "id": "cype",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Cype.png",
+        "alt": "CYPE"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Aconex-e1754205364753.png",
+        "alt": "Aconex"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

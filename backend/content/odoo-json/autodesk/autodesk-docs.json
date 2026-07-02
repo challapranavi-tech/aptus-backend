@@ -1,0 +1,256 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "autodesk",
+    "bannerTitle": "Autodesk Docs",
+    "bannerTagline": "The ultimate collaborative documentation platform for teams and enterprises",
+    "mediaInline": false,
+    "title": "Streamline Collaboration with Powerful Documentation Tools",
+    "paragraphs": [
+      "In today’s integrated construction and design environment, version control and data accessibility are paramount. More and more project teams are adopting advanced Autodesk Docs Solutions to maximize collaboration and eliminate rework from design to handover.",
+      "Whether you’re managing 2D drawings for a small renovation or coordinating multi-discipline 3D models for a complex infrastructure project, this cloud-based platform dramatically improves the way you store, share, and approve critical project information.",
+      "Experience superior data integrity and seamless workflow automation with our comprehensive solutions for document control, automated approval workflows, and centralized issue tracking across any project phase.",
+      "From robust permission tools and unlimited cloud storage to automated versioning and direct integration with AutoCAD and Revit, we provide end-to-end solutions that ensure every team member is aligned, informed, and utterly productive."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/06/Autodesk_Doc-1024x1024.png",
+    "imageAlt": "Autodesk Docs",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Powerful Features"
+      },
+      "subheading": "Discover the capabilities that make AutoCAD the industry standard",
+      "align": "center",
+      "items": [
+        {
+          "title": "Rich Text Editor",
+          "body": "Create professional-looking documents with advanced formatting tools, tables, images, and embedded media.",
+          "icon": "pencil-alt",
+          "imageAlt": "Rich Text Editor"
+        },
+        {
+          "title": "Real-Time Collaboration",
+          "body": "Multiple users can work simultaneously on the same document with live editing, commenting, and version tracking.",
+          "icon": "users",
+          "imageAlt": "Real-Time Collaboration"
+        },
+        {
+          "title": "Centralized Document Management",
+          "body": "Organize documents in hierarchical folders with metadata tagging, search functionality, and access controls.",
+          "icon": "file",
+          "imageAlt": "Centralized Document Management"
+        },
+        {
+          "title": "Version Control",
+          "body": "Track changes over time with complete revision history, compare different versions, and restore previous states.",
+          "icon": "undo",
+          "imageAlt": "Version Control"
+        },
+        {
+          "title": "Cross-Platform Accessibility",
+          "body": "Access and edit documents from any device with web browsers or dedicated mobile apps for iOS and Android.",
+          "icon": "mobile-alt",
+          "imageAlt": "Cross-Platform Accessibility"
+        },
+        {
+          "title": "Advanced Security",
+          "body": "Enterprise-grade security with role-based permissions, audit trails, and compliance with industry standards.",
+          "icon": "lock",
+          "imageAlt": "Advanced Security"
+        },
+        {
+          "title": "Save Time & Reduce Errors",
+          "body": "Eliminate redundant tasks and minimize errors by centralizing all documentation in one accessible location.",
+          "icon": "stopwatch",
+          "imageAlt": "Save Time & Reduce Errors"
+        },
+        {
+          "title": "Enhance Team Collaboration",
+          "body": "Break down silos with real-time collaboration features that keep everyone aligned and informed.",
+          "icon": "users",
+          "imageAlt": "Enhance Team Collaboration"
+        },
+        {
+          "title": "Improve Searchability",
+          "body": "Find information instantly with powerful search capabilities and organized document structures.",
+          "icon": "search",
+          "imageAlt": "Improve Searchability"
+        },
+        {
+          "title": "Ensure Compliance",
+          "body": "Maintain regulatory compliance with audit trails, version control, and secure document management.",
+          "icon": "shield",
+          "imageAlt": "Ensure Compliance"
+        },
+        {
+          "title": "Official Autodesk Gold Partner",
+          "body": "As an authorized partner, we provide access to genuine Autodesk products.",
+          "icon": "medal",
+          "imageAlt": "Official Autodesk Gold Partner"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset",
+          "imageAlt": "Technical Support"
+        },
+        {
+          "title": "Local Presence",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "handshake",
+          "imageAlt": "Local Presence"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "mobile-alt",
+          "imageAlt": "Expert Training"
+        },
+        {
+          "title": "Alex Johnson",
+          "body": "Engineering Manager,Global Engineering Solutions",
+          "icon": "cube",
+          "imageAlt": "Alex Johnson"
+        },
+        {
+          "title": "Sarah Williams",
+          "body": "Principal Architect,Design Collective",
+          "icon": "cube",
+          "imageAlt": "Sarah Williams"
+        },
+        {
+          "title": "Michael Chen",
+          "body": "Operations Director,Manufacturing Inc.",
+          "icon": "cube",
+          "imageAlt": "Michael Chen"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Transform Your Documentation Process?",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Hear from professionals who have transformed their practice with Autodesk Docs",
+    "items": [
+      {
+        "quote": "Autodesk Docs has revolutionized how we manage our engineering documentation. The real-time collaboration features are game-changing for our distributed teams.",
+        "author": "Alex Johnson",
+        "role": "Engineering Manager, Global Engineering Solutions"
+      },
+      {
+        "quote": "As an architect, I appreciate how easy it is to organize and share construction documents with clients and contractors using Autodesk Docs.",
+        "author": "Sarah Williams",
+        "role": "Principal Architect, Design Collective"
+      },
+      {
+        "quote": "The integration with our existing Autodesk workflows made adoption seamless. Now our entire team works more efficiently together.",
+        "author": "Michael Chen",
+        "role": "Operations Director, Manufacturing Inc."
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/planswift.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Prokon.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/sophos.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/spectronova.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/aconex.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/etap.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/fortinet.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/kaspersky.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft.png",
+        "alt": "Microsoft"
+      },
+      {
+        "id": "lumion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/lumion.png",
+        "alt": "lumion"
+      },
+      {
+        "id": "paloalto",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/paloalto.png",
+        "alt": "paloalto"
+      },
+      {
+        "id": "vray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/v.ray_.png",
+        "alt": "v.ray"
+      },
+      {
+        "id": "twinmotion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png",
+        "alt": "twinmotion"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

@@ -1,0 +1,260 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "water-infrastructure",
+    "subnavLinks": [
+      { "label": "InfoDrainage", "href": "/infodrainage" },
+      { "label": "InfoWater Pro", "href": "/infowater-pro" },
+      { "label": "InfoWorks ICM", "href": "/infoworks-icm" },
+      { "label": "InfoWorks WS Pro", "href": "/infoworks-ws-pro" }
+    ],
+    "bannerTitle": "Autodesk InfoDrainage",
+    "bannerTagline": "Advanced stormwater and wastewater network design and analysis software for civil engineers and water professionals",
+    "title": "Design Efficient Drainage Systems with Confidence",
+    "paragraphs": [
+      "Autodesk InfoDrainage is the comprehensive software solution for designing, analyzing, and managing stormwater and wastewater networks. Built on the powerful ArcGIS platform, it combines advanced hydraulic modeling with geospatial intelligence to deliver accurate and efficient drainage system designs.",
+      "With InfoDrainage, you can design everything from simple residential drainage systems to complex municipal stormwater networks. The software helps you comply with regulatory requirements, optimize system performance, and reduce construction costs through intelligent design and analysis.",
+      "From rainfall analysis and system design to flood risk assessment and sustainable drainage solutions (SuDS), InfoDrainage provides all the tools you need to create resilient and effective drainage infrastructure."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/infodrainage-e1759038111608-rcep0iavkfp7w5ol88r1mo803pegvjmf6uhmwb0yek.png",
+    "imageAlt": "infodrainage",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "gridColumns": 3,
+      "title": {
+        "before": "Powerful Features"
+      },
+      "subheading": "Discover how InfoDrainage transforms drainage system design",
+      "align": "center",
+      "items": [
+        {
+          "title": "Rainfall Analysis",
+          "body": "Analyze rainfall data using multiple methods including IDF curves, historical data, and climate change projections to design for current and future conditions.",
+          "icon": "cloud-rain"
+        },
+        {
+          "title": "Hydraulic Modeling",
+          "body": "Perform advanced hydraulic analysis of drainage networks including steady-state, dynamic, and flood modeling to understand system behavior under various conditions.",
+          "icon": "project-diagram"
+        },
+        {
+          "title": "GIS Integration",
+          "body": "Leverage the full power of ArcGIS for spatial analysis, terrain modeling, and visualization of drainage networks in a geospatial context.",
+          "icon": "map-marked-alt"
+        },
+        {
+          "title": "SuDS Design",
+          "body": "Design sustainable drainage systems including green roofs, permeable pavements, and rain gardens to manage stormwater runoff and improve water quality.",
+          "icon": "leaf"
+        },
+        {
+          "title": "Flood Risk Assessment",
+          "body": "Evaluate flood risks, model flood extents, and develop mitigation strategies to protect properties and infrastructure from flooding.",
+          "icon": "water"
+        },
+        {
+          "title": "Comprehensive Reporting",
+          "body": "Generate detailed reports, plans, and calculations to support regulatory compliance and communicate design decisions to stakeholders.",
+          "icon": "file-export"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "gridColumns": 4,
+      "title": {
+        "before": "Key Benefits"
+      },
+      "subheading": "Why civil engineers and water professionals choose InfoDrainage",
+      "align": "center",
+      "items": [
+        {
+          "title": "Faster Design Process",
+          "body": "Accelerate drainage system design with intuitive tools, automated calculations, and integrated workflows that reduce design time by up to 50%.",
+          "icon": "bolt"
+        },
+        {
+          "title": "Cost Optimization",
+          "body": "Optimize pipe sizes, depths, and materials to minimize construction costs while maintaining performance and compliance with regulations.",
+          "icon": "dollar-sign"
+        },
+        {
+          "title": "Regulatory Compliance",
+          "body": "Ensure designs meet local and national regulations with built-in compliance checking and comprehensive documentation for permits and approvals.",
+          "icon": "shield-alt"
+        },
+        {
+          "title": "Improved Resilience",
+          "body": "Design drainage systems that can handle extreme weather events and changing climate conditions, ensuring long-term performance and resilience.",
+          "icon": "sync-alt"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "gridColumns": 4,
+      "title": {
+        "before": "Why Choose Autodesk InfoDrainage?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Official Autodesk Gold Partner",
+          "body": "As an authorized partner, we provide access to genuine Autodesk products.",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset"
+        },
+        {
+          "title": "Local Presence",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "mobile-alt"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Transform Your Drainage Design Process?",
+    "subheading": "Get a free Quotation of Autodesk InfoDrainage today and experience the future of storm water and wastewater network design.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#Form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Success stories from businesses using AutoCAD through Aptus Infotech",
+    "items": [
+      {
+        "quote": "InfoDrainage has revolutionized how we approach drainage design. The integrated GIS capabilities and advanced hydraulic modeling have helped us deliver more efficient and cost-effective solutions for our clients.",
+        "author": "David Martinez",
+        "role": "Principal Engineer",
+        "company": "Urban Infrastructure Group"
+      },
+      {
+        "quote": "The SuDS design tools in InfoDrainage are exceptional. We've been able to incorporate sustainable drainage solutions into our projects that not only meet regulatory requirements but also provide environmental benefits.",
+        "author": "Sarah Johnson",
+        "role": "Environmental Engineer",
+        "company": "EcoDesign Solutions"
+      },
+      {
+        "quote": "The flood risk assessment capabilities have been invaluable for our municipal clients. We can now accurately model flood scenarios and develop effective mitigation strategies to protect communities.",
+        "author": "Michael Chen",
+        "role": "Director of Public Works",
+        "company": "City Engineering Department"
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances-grid",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+        "alt": "Microsoft"
+      },
+      {
+        "id": "lumion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/lumion-rartyoocjr36ywx0w7505x2trlrpogolkosxnsvhwu.png",
+        "alt": "lumion"
+      },
+      {
+        "id": "paloalto",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/paloalto-rartyrhv4971xqsxfqcvved7jrdtbjzsl2re3mrbe6.png",
+        "alt": "paloalto"
+      },
+      {
+        "id": "vray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/v.ray_-rartysfpb38c9crka8rifw4o5596j93ix7evkwpx7y.png",
+        "alt": "v.ray"
+      },
+      {
+        "id": "twinmotion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/twinmotion-rartyubdorawwkotz9krkvnlbwzwynazlgpujgn4vi.png",
+        "alt": "twinmotion"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "description": "Our experts can help you to implement the right security system for your business.",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light",
+    "anchorId": "Form"
+  }
+}

@@ -1,83 +1,241 @@
 {
-  "hero": {
+  "softwareInnerHero": {
     "id": "hero",
     "visible": true,
-    "title": {
-      "before": "",
-      "accent": "SonicWall Next-Gen Firewall"
-    },
-    "subtitle": "SonicWall TZ and NSa series firewalls with deep packet inspection and VPN.",
-    "ctaLabel": "Request a Quote",
-    "ctaHref": "mailto:info@aptusinfotech.com"
-  },
-  "intro": {
-    "id": "intro",
-    "visible": true,
-    "title": {
-      "before": "Overview",
-      "accent": ""
-    },
+    "family": "cyber-security",
+    "subnavLinks": [
+      { "label": "Fortinet", "href": "/fortinet" },
+      { "label": "Sophos", "href": "/sophos" },
+      { "label": "SonicWall Next-Gen Firewall", "href": "/sonicwall-next-gen-firewall" },
+      { "label": "Kaspersky", "href": "/kaspersky" },
+      { "label": "Palo Alto", "href": "/palo-alto" }
+    ],
+    "bannerTitle": "Sonicwall - Advanced Network Security Firewalls",
+    "bannerTagline": "Protect your network with industry-leading firewall solutions that deliver real-time threat prevention and unmatched performance",
+    "title": "Next-Generation Firewall Protection",
     "paragraphs": [
-      "Deploy SonicWall NGFW appliances for SMB and enterprise networks. Aptus Infotech provides sizing, procurement, configuration, and support for SonicWall firewall deployments in Oman."
-    ]
+      "SonicWall firewalls provide comprehensive security for networks of all sizes, from small businesses to large enterprises. Our advanced threat prevention capabilities stop attacks before they can compromise your systems.",
+      "With real-time deep memory inspection (RTDMI) technology, SonicWall firewalls detect and block never-before-seen threats with industry-leading accuracy. Our solutions are designed to deliver high performance without compromising security.",
+      "Whether you need protection for a single location or a distributed network, SonicWall offers scalable solutions that grow with your business while providing the highest level of security against today's evolving threats."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_Create_a_digital_image_representing_Cyber_2-673x1024.jpg",
+    "imageAlt": "Cyber-security",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
   },
   "cardSections": [
     {
       "id": "features",
       "visible": true,
-      "eyebrow": "Capabilities",
+      "variant": "icon-cards",
+      "gridColumns": 3,
       "title": {
-        "before": "Key",
-        "accent": "Features"
+        "before": "Advanced Security Features"
       },
+      "subheading": "Industry-leading capabilities that set SonicWall apart",
       "align": "center",
       "items": [
         {
-          "title": "Deep Packet Inspection",
-          "body": "Inspect encrypted traffic without degrading performance."
+          "title": "Real-Time Threat Prevention",
+          "body": "RTDMI technology detects and blocks zero-day threats with industry-leading accuracy, stopping attacks before they can execute.",
+          "icon": "shield-alt"
         },
         {
-          "title": "VPN & Remote Access",
-          "body": "Secure SSL VPN for remote workers and site-to-site links."
+          "title": "High Performance",
+          "body": "Deliver security without compromise with firewalls that provide industry-leading throughput and low latency.",
+          "icon": "tachometer-alt"
+        },
+        {
+          "title": "Cloud Management",
+          "body": "Manage your entire firewall estate from a single cloud-based console with SonicWall Capture Security Center.",
+          "icon": "cloud"
+        },
+        {
+          "title": "Advanced Networking",
+          "body": "SD-WAN capabilities, high availability, and advanced routing features ensure optimal network performance.",
+          "icon": "network-wired"
         },
         {
           "title": "Capture ATP",
-          "body": "Cloud-based sandboxing for unknown file analysis."
+          "body": "Advanced threat protection sandbox that analyzes suspicious files in a cloud-based environment for zero-day threat detection.",
+          "icon": "virus-slash"
         },
         {
-          "title": "Wireless Integration",
-          "body": "Unified management with SonicWall access points."
+          "title": "Comprehensive Reporting",
+          "body": "Detailed analytics and reporting provide visibility into network activity and security events for compliance and optimization.",
+          "icon": "chart-line"
+        }
+      ]
+    },
+    {
+      "id": "why-sonicwall",
+      "visible": true,
+      "variant": "icon-cards",
+      "gridColumns": 4,
+      "title": {
+        "before": "Why Choose SonicWall?"
+      },
+      "subheading": "Key benefits that make SonicWall the preferred choice",
+      "align": "center",
+      "items": [
+        {
+          "title": "Industry-Leading Performance",
+          "body": "Deliver security without compromising network speed with our high-performance firewalls.",
+          "icon": "stopwatch"
+        },
+        {
+          "title": "Advanced Visibility",
+          "body": "Gain complete visibility into network traffic and security events with comprehensive reporting.",
+          "icon": "eye"
+        },
+        {
+          "title": "Proven Threat Prevention",
+          "body": "Stop known and unknown threats with our multi-layered security approach and real-time intelligence.",
+          "icon": "shield-virus"
+        },
+        {
+          "title": "Expert Support",
+          "body": "Access to 24/7 technical support and security services from certified experts.",
+          "icon": "headset"
         }
       ]
     },
     {
       "id": "why-aptus",
       "visible": true,
-      "eyebrow": "Why Aptus",
+      "variant": "value-cards",
       "title": {
-        "before": "Why Choose",
-        "accent": "Aptus Infotech"
+        "before": "Why Choose Aptus Infotech for Cyber Security Solutions?"
       },
       "align": "center",
+      "gridColumns": 4,
       "items": [
         {
-          "title": "Authorized Partner",
-          "body": "Genuine software licenses with official support channels and compliant procurement."
+          "title": "Official Partner",
+          "body": "As an authorized partner, we provide access to genuine products.",
+          "icon": "medal"
         },
         {
-          "title": "Implementation Support",
-          "body": "Guidance on deployment, licensing models, and integration with your existing workflows."
+          "title": "Technical Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset"
         },
         {
-          "title": "Local Expertise in Oman",
-          "body": "Muscat-based team providing responsive sales, technical support, and training across the GCC."
+          "title": "Local Presence",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "handshake"
         },
         {
-          "title": "End-to-End Service",
-          "body": "From license procurement and renewal to rollout planning — a single trusted partner."
+          "title": "Expert Training",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "mobile-alt"
         }
       ]
     }
   ],
-  "showContactCta": true
+  "midCta": {
+    "heading": "Ready to Secure Your Network?",
+    "subheading": "Protect your business with SonicWall's advanced firewall solutions. Contact us today for a personalized security assessment.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#Form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our Customers Say"
+    },
+    "subheading": "Hear from organizations that trust SonicWall for their security",
+    "items": [
+      {
+        "quote": "SonicWall firewalls have transformed our security posture. The real-time threat prevention capabilities have stopped numerous attacks that would have compromised our network.",
+        "author": "Robert Johnson",
+        "role": "IT Director",
+        "company": "Financial Services"
+      },
+      {
+        "quote": "The performance of SonicWall firewalls is unmatched. We get enterprise-grade security without any impact on network speed, which is crucial for our operations.",
+        "author": "Sarah Williams",
+        "role": "Network Manager,",
+        "company": "Healthcare Provider"
+      },
+      {
+        "quote": "The cloud management console makes it easy to manage our distributed firewall estate. SonicWall has simplified our security operations significantly.",
+        "author": "Michael Chen",
+        "role": "CISO",
+        "company": "Manufacturing Company"
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances-grid",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+        "alt": "Microsoft"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "description": "Our experts can help you to implement the right security system for your business.",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light",
+    "anchorId": "Form"
+  }
 }

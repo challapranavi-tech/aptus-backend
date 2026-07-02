@@ -1,0 +1,183 @@
+{
+  "banner": {
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/SPSS-e1754028751271-r9lrtxseor2ykl2pczp6jfjhvm1u8o3uklfqu181a8.png",
+    "imageAlt": "IBMSPSS"
+  },
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "educational",
+    "subnavLinks": [
+      { "label": "Matlab", "href": "/matlab" },
+      { "label": "Turnitin", "href": "/turnitin" },
+      { "label": "IBM SPSS Software", "href": "/ibm-spss-software" },
+      { "label": "ANSYS", "href": "/ansys" }
+    ],
+    "title": "IBM SPSS Software",
+    "titleLevel": "h2",
+    "mediaInline": true,
+    "introRows": [
+      {
+        "paragraphs": [
+          "<h2 class=\"aptus-ibm-spss-intro-heading\">Empowering Data Analysis and Predictive Insights</h2>",
+          "IBM SPSS Software, particularly IBM SPSS Statistics, is a powerful and user-friendly statistical software suite widely trusted by researchers, analysts, and organizations across diverse sectors including academia, government, healthcare, market research, and finance. It provides a comprehensive set of tools for data management, statistical analysis, and data visualization, enabling users to uncover insights, make data-driven decisions, and forecast future trends."
+        ],
+        "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/IBM-SPSS--e1754042527831.png",
+        "imageAlt": "IBM_SPSS"
+      }
+    ]
+  },
+  "cardSections": [
+    {
+      "id": "empowers",
+      "visible": true,
+      "variant": "bullet-list",
+      "title": {
+        "before": "IBM SPSS Software empowers users to:"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Perform Comprehensive Statistical Analysis",
+          "body": "Conduct a wide range of statistical procedures, from basic descriptive statistics (means, frequencies) to advanced inferential statistics (regression, ANOVA, t-tests, factor analysis, cluster analysis, non-parametric tests) with ease, allowing for deep data exploration."
+        },
+        {
+          "title": "Efficiently Prepare and Manage Data",
+          "body": "Streamline the data preparation process with robust tools for data cleaning, transformation, restructuring, and manipulation. Handle missing values, outliers, and inconsistencies to ensure data quality for accurate analysis."
+        },
+        {
+          "title": "Create Powerful Data Visualizations",
+          "body": "Generate compelling and insightful charts, graphs, and visual reports to effectively communicate findings. Customize outputs to present complex statistical results in an understandable and impactful way."
+        },
+        {
+          "title": "Uncover Predictive Insights",
+          "body": "Utilize advanced analytical capabilities to build predictive models that forecast outcomes and identify key relationships within data. This supports informed decision-making and strategic planning."
+        },
+        {
+          "title": "Benefit from an Intuitive Interface",
+          "body": "Navigate complex statistical analyses through a user-friendly, point-and-click interface, making powerful analytics accessible to users regardless of their programming background. For advanced users, a robust syntax language offers greater control and automation."
+        },
+        {
+          "title": "Integrate and Customize",
+          "body": "Extend functionality with various extensions and integration capabilities. Connect with other data sources and platforms to build a comprehensive analytical ecosystem."
+        }
+      ]
+    },
+    {
+      "id": "capabilities",
+      "visible": true,
+      "variant": "icon-cards",
+      "align": "center",
+      "gridColumns": 5,
+      "items": [
+        {
+          "title": "Statistical Analysis",
+          "body": "",
+          "icon": "chart-bar"
+        },
+        {
+          "title": "Predictive Modeling",
+          "body": "",
+          "icon": "chart-line"
+        },
+        {
+          "title": "Data Visualization",
+          "body": "",
+          "icon": "chart-pie"
+        },
+        {
+          "title": "Data Management",
+          "body": "",
+          "icon": "chart-area"
+        },
+        {
+          "title": "Research Analytics",
+          "body": "",
+          "icon": "uncharted"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "checklist",
+      "title": {
+        "before": "Why Choose Aptus Infotech"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Tailored Solutions for Your Business"
+        },
+        {
+          "title": "Scalable for Every Business Size"
+        },
+        {
+          "title": "Expert Installation and Ongoing Support"
+        },
+        {
+          "title": "Powered by Cutting-Edge Technology"
+        }
+      ]
+    }
+  ],
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "v-ray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/V-ray-e1754299498907.png",
+        "alt": "V-ray"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Spectronova-2.png",
+        "alt": "Spectronova"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Sketchup-e1759831191828.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Prokon-1-e1754305048112.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "primavera",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Primavera.png",
+        "alt": "Primavera"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "csi",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/CSI.png",
+        "alt": "CSI"
+      },
+      {
+        "id": "cype",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Cype.png",
+        "alt": "Cype"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Aconex-e1754205364753.png",
+        "alt": "Aconex"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

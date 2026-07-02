@@ -1,83 +1,239 @@
 {
-  "hero": {
+  "softwareInnerHero": {
     "id": "hero",
     "visible": true,
-    "title": {
-      "before": "",
-      "accent": "Palo Alto"
-    },
-    "subtitle": "Palo Alto Networks next-generation firewalls and Prisma SASE cloud security.",
-    "ctaLabel": "Request a Quote",
-    "ctaHref": "mailto:info@aptusinfotech.com"
-  },
-  "intro": {
-    "id": "intro",
-    "visible": true,
-    "title": {
-      "before": "Overview",
-      "accent": ""
-    },
+    "family": "cyber-security",
+    "subnavLinks": [
+      { "label": "Fortinet", "href": "/fortinet" },
+      { "label": "Sophos", "href": "/sophos" },
+      { "label": "SonicWall Next-Gen Firewall", "href": "/sonicwall-next-gen-firewall" },
+      { "label": "Kaspersky", "href": "/kaspersky" },
+      { "label": "Palo Alto", "href": "/palo-alto" }
+    ],
+    "bannerTitle": "Paloalto Leading the Future of Cybersecurity",
+    "bannerTagline": "Palo Alto Networks delivers innovative security solutions that protect organizations from cyber threats across all environments",
+    "title": "Revolutionizing Cybersecurity",
     "paragraphs": [
-      "Implement Palo Alto Networks NGFWs and cloud-delivered security with Aptus Infotech. From PA-Series appliances to Prisma Access SASE, we support enterprise security architecture in Oman."
-    ]
+      "Palo Alto Networks is the global cybersecurity leader, known for pioneering next-generation firewall technology and delivering innovative security solutions that protect organizations from cyber threats across all environments.",
+      "Our integrated platform approach provides comprehensive security from network to cloud to endpoint, enabling organizations to safely adopt new technologies and protect their digital assets with confidence.",
+      "With our AI-powered security automation and industry-leading threat intelligence, we help organizations prevent successful cyberattacks and secure their digital transformation journey."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_Create_a_detailed_image_that_represents_Se_0-673x1024.jpg",
+    "imageAlt": "Paloalto",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
   },
   "cardSections": [
     {
       "id": "features",
       "visible": true,
-      "eyebrow": "Capabilities",
+      "variant": "icon-cards",
+      "gridColumns": 3,
       "title": {
-        "before": "Key",
-        "accent": "Features"
+        "before": "Advanced Security Capabilities"
       },
       "align": "center",
       "items": [
         {
-          "title": "App-ID Technology",
-          "body": "Identify and control applications regardless of port or protocol."
+          "title": "AI-Powered Security",
+          "body": "Machine learning and AI capabilities that detect and respond to threats faster and more accurately than traditional security solutions.",
+          "icon": "brain"
         },
         {
-          "title": "Threat Prevention",
-          "body": "IPS, wildfire sandboxing, and URL filtering in one platform."
+          "title": "Zero Trust Architecture",
+          "body": "Comprehensive zero trust security model that verifies every user and device, regardless of location, before granting access.",
+          "icon": "shield-alt"
         },
         {
-          "title": "Prisma SASE",
-          "body": "Cloud-delivered security for remote users and branch offices."
+          "title": "Automated Security Operations",
+          "body": "Automate threat detection, investigation, and response to reduce manual workloads and improve security team efficiency.",
+          "icon": "sync"
         },
         {
-          "title": "Panorama Management",
-          "body": "Centralized policy management across distributed firewalls."
+          "title": "Threat Intelligence",
+          "body": "Unit 42 threat intelligence provides real-time insights into emerging threats and attacker tactics, techniques, and procedures.",
+          "icon": "chart-line"
+        },
+        {
+          "title": "Cloud-Native Security",
+          "body": "Security solutions designed specifically for cloud environments, providing protection across multi-cloud and hybrid architectures.",
+          "icon": "cloud"
+        },
+        {
+          "title": "Integrated Platform",
+          "body": "Seamless integration between security products enables sharing of threat intelligence and coordinated response across the entire attack surface.",
+          "icon": "users-cog"
+        }
+      ]
+    },
+    {
+      "id": "why-palo-alto",
+      "visible": true,
+      "variant": "icon-cards",
+      "gridColumns": 4,
+      "title": {
+        "before": "Why Choose Palo Alto Networks?"
+      },
+      "subheading": "Key benefits that make us the preferred choice",
+      "align": "center",
+      "items": [
+        {
+          "title": "Industry Leadership",
+          "body": "Recognized as a leader in multiple security categories by Gartner, Forrester, and other industry analysts.",
+          "icon": "head-side-virus"
+        },
+        {
+          "title": "Integrated Platform",
+          "body": "Single platform approach eliminates complexity and provides consistent security across all environments.",
+          "icon": "puzzle-piece"
+        },
+        {
+          "title": "Innovation Focus",
+          "body": "Continuous investment in R&D ensures our solutions stay ahead of evolving cyber threats.",
+          "icon": "rocket"
+        },
+        {
+          "title": "Global Presence",
+          "body": "Worldwide network of security experts and partners providing local support and expertise.",
+          "icon": "globe"
         }
       ]
     },
     {
       "id": "why-aptus",
       "visible": true,
-      "eyebrow": "Why Aptus",
+      "variant": "value-cards",
       "title": {
-        "before": "Why Choose",
-        "accent": "Aptus Infotech"
+        "before": "Why Choose Aptus Infotech for AutoCAD?"
       },
       "align": "center",
+      "gridColumns": 4,
       "items": [
         {
-          "title": "Authorized Partner",
-          "body": "Genuine software licenses with official support channels and compliant procurement."
+          "title": "Official Partner",
+          "body": "As an authorized partner, we provide access to genuine products.",
+          "icon": "medal"
         },
         {
-          "title": "Implementation Support",
-          "body": "Guidance on deployment, licensing models, and integration with your existing workflows."
+          "title": "Technical Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset"
         },
         {
-          "title": "Local Expertise in Oman",
-          "body": "Muscat-based team providing responsive sales, technical support, and training across the GCC."
+          "title": "Local Presence",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "handshake"
         },
         {
-          "title": "End-to-End Service",
-          "body": "From license procurement and renewal to rollout planning — a single trusted partner."
+          "title": "Expert Training",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "mobile-alt"
         }
       ]
     }
   ],
-  "showContactCta": true
+  "midCta": {
+    "heading": "Ready to Transform Your Hotel Operations?",
+    "subheading": "Contact our hospitality technology specialists to discuss how our guestroom management system can improve efficiency and guest satisfaction in your facility.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#Form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "items": [
+      {
+        "quote": "Palo Alto Networks' integrated security platform has transformed our security operations. The automation and AI capabilities have significantly improved our threat detection and response times.",
+        "author": "David Martinez",
+        "role": "CISO",
+        "company": "Global Financial Institution"
+      },
+      {
+        "quote": "The Prisma Cloud platform has given us complete visibility and control over our multi-cloud environment. It's exactly what we needed for our cloud security strategy.",
+        "author": "Sarah Johnson",
+        "role": "Cloud Security Director",
+        "company": "Tech Company"
+      },
+      {
+        "quote": "Cortex XDR has revolutionized our security operations center. The automation capabilities have reduced alert fatigue and improved our team's efficiency by 60%.",
+        "author": "Michael Chen",
+        "role": "Security Operations Manager",
+        "company": "Healthcare Provider"
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances-grid",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+        "alt": "Microsoft"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "description": "Our experts can help you to implement the right security system for your business.",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light",
+    "anchorId": "Form"
+  }
 }

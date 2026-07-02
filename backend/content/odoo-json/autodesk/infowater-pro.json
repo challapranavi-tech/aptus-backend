@@ -1,0 +1,235 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "autodesk",
+  "subnavLinks": [
+      { "label": "InfoDrainage", "href": "/infodrainage" },
+      { "label": "InfoWater Pro", "href": "/infowater-pro" },
+      { "label": "InfoWorks ICM", "href": "/infoworks-icm" },
+      { "label": "InfoWorks WS Pro", "href": "/infoworks-ws-pro" }
+    ],
+    "bannerTitle": "Autodesk InfoWater Pro",
+    "bannerTagline": "Advanced water distribution modeling and management software for water utilities and engineering firms",
+    "title": "Optimize Your Water Distribution Systems",
+    "paragraphs": [
+      "Autodesk InfoWater Pro is the industry-leading water distribution modeling and management software that helps water utilities and engineering firms design, analyze, and manage water distribution networks with confidence and precision.",
+      "Built on the powerful ArcGIS platform, InfoWater Pro combines advanced hydraulic modeling capabilities with geospatial intelligence to provide a comprehensive solution for water infrastructure planning, operations, and maintenance.",
+      "From system design and capacity analysis to water quality modeling and real-time operations support, InfoWater Pro provides the tools you need to ensure reliable, efficient, and safe water distribution for communities."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/InfoWater-Pro-e1759038345346-rcep6m946ooll2dxbrphzzllzbis43z2nd2qv77vuo.png",
+    "imageAlt": "Autodesk InfoWater Pro",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "gridColumns": 3,
+      "title": {
+        "before": "Powerful Features"
+      },
+      "subheading": "Discover how InfoWater Pro transforms water distribution management",
+      "align": "center",
+      "items": [
+        {
+          "title": "Hydraulic Modeling",
+          "body": "Perform advanced hydraulic analysis including steady-state, extended period simulation, and water quality modeling to understand system behavior under various conditions.",
+          "icon": "project-diagram"
+        },
+        {
+          "title": "GIS Integration",
+          "body": "Leverage the full power of ArcGIS for spatial analysis, data management, and visualization of water distribution networks in a geospatial context.",
+          "icon": "map-marked-alt"
+        },
+        {
+          "title": "Water Quality Analysis",
+          "body": "Model water age, source tracing, and constituent transport to ensure water quality compliance and optimize treatment strategies.",
+          "icon": "water"
+        },
+        {
+          "title": "Scenario Planning",
+          "body": "Evaluate multiple design alternatives, system improvements, and emergency scenarios to make informed decisions about infrastructure investments.",
+          "icon": "chart-line"
+        },
+        {
+          "title": "Real-Time Operations",
+          "body": "Connect with SCADA systems to monitor real-time operations, calibrate models with field data, and support operational decision-making.",
+          "icon": "sync"
+        },
+        {
+          "title": "Reporting & Visualization",
+          "body": "Generate comprehensive reports, maps, and visualizations to communicate analysis results and support regulatory compliance.",
+          "icon": "file-export"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "gridColumns": 4,
+      "title": {
+        "before": "Key Benefits"
+      },
+      "subheading": "Why water utilities and engineers choose InfoWater Pro",
+      "align": "center",
+      "items": [
+        {
+          "title": "Improved System Reliability",
+          "body": "Identify vulnerabilities and optimize system performance to ensure reliable water service for customers under all conditions.",
+          "icon": "check-circle"
+        },
+        {
+          "title": "Cost Optimization",
+          "body": "Reduce capital and operational costs through optimized system design, efficient operations, and targeted infrastructure investments.",
+          "icon": "dollar-sign"
+        },
+        {
+          "title": "Enhanced Safety & Compliance",
+          "body": "Ensure water quality standards are met and maintain regulatory compliance with comprehensive modeling and analysis tools.",
+          "icon": "shield-alt"
+        },
+        {
+          "title": "Better Decision Making",
+          "body": "Make data-driven decisions about system improvements, operations, and emergency response with powerful analysis capabilities.",
+          "icon": "users"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "gridColumns": 4,
+      "title": {
+        "before": "Why Choose Autodesk InfoWater Pro?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Official Autodesk Gold Partner",
+          "body": "As an authorized partner, we provide access to genuine Autodesk products.",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset"
+        },
+        {
+          "title": "Local Presence",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "mobile-alt"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Transform Your Water Distribution Management?",
+    "subheading": "Get a free Quotation of Autodesk InfoWater Pro today and experience the future of water distribution modeling.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#Form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Success stories from businesses using AutoCAD through Aptus Infotech",
+    "items": [
+      {
+        "quote": "InfoWater Pro has revolutionized how we manage our water distribution system. The hydraulic modeling capabilities helped us identify critical vulnerabilities and optimize our infrastructure investments.",
+        "author": "Robert Thompson",
+        "role": "Water Resources Director",
+        "company": "City Water Department"
+      },
+      {
+        "quote": "The AutoCAD toolsets from Aptus have revolutionized our workflow. The specialized tools for architecture have significantly improved our productivity and design quality.",
+        "author": "Emily Chen",
+        "role": "Senior Engineer",
+        "company": "Aqua Consulting Group"
+      },
+      {
+        "quote": "As a small engineering firm, we needed affordable yet powerful CAD software. Aptus recommended AutoCAD LT, which perfectly meets our needs without breaking the budget.",
+        "author": "Michael Rodriguez",
+        "role": "Operations Manager",
+        "company": "Regional Water Authority"
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances-grid",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+        "alt": "Microsoft"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "description": "Our experts can help you to implement the right security system for your business.",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light",
+    "anchorId": "Form"
+  }
+}

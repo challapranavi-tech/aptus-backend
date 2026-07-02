@@ -1,0 +1,251 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "multimedia",
+    "bannerTitle": "SketchUp",
+    "bannerTagline": "3D modeling software that's easy to learn and incredibly powerful",
+    "mediaInline": false,
+    "title": "Think in 3D. Create in 3D.",
+    "paragraphs": [
+      "SketchUp is the world's most popular 3D modeling software for architects, engineers, construction professionals, and designers. With its intuitive interface and powerful tools, SketchUp makes 3D modeling accessible to everyone.",
+      "From conceptual design to documentation, SketchUp streamlines your workflow with easy-to-use tools for drawing, modifying, and presenting your ideas. Its extensive 3D Warehouse library gives you access to millions of free models to enhance your projects.",
+      "Whether you're designing a skyscraper, remodeling a kitchen, or creating a video game environment, SketchUp provides the flexibility and power you need to bring your vision to life."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Sketchup-1-e1759821512916-rcuh74xag0zxsikw9jkrcl6u0r8bvmm5lcupbsd1c0.png",
+    "imageAlt": "SketchUp",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "gridColumns": 3,
+      "title": {
+        "before": "Powerful Features"
+      },
+      "subheading": "Discover why millions of users choose SketchUp",
+      "align": "center",
+      "items": [
+        {
+          "title": "Intuitive Modeling",
+          "body": "Create 3D models quickly with SketchUp's push-pull technology. Draw in 2D and push or pull surfaces to turn them into 3D forms. It's that simple.",
+          "icon": "pencil-ruler"
+        },
+        {
+          "title": "3D Warehouse",
+          "body": "Access millions of free 3D models from the world's largest library of user-created content. Find furniture, vehicles, plants, and more to populate your scenes.",
+          "icon": "cube"
+        },
+        {
+          "title": "Materials & Styles",
+          "body": "Apply realistic materials and styles to your models. Choose from hundreds of pre-made materials or create your own custom textures and finishes.",
+          "icon": "paint-roller"
+        },
+        {
+          "title": "Advanced Tools",
+          "body": "Take your models further with advanced tools for solid modeling, complex geometry, and precise measurements. Perfect for professionals who need accuracy.",
+          "icon": "layer-group"
+        },
+        {
+          "title": "Extension Warehouse",
+          "body": "Extend SketchUp's functionality with thousands of plugins and extensions. Add rendering, animation, analysis, and specialized tools for your industry.",
+          "icon": "plug"
+        },
+        {
+          "title": "Cloud Collaboration",
+          "body": "Share your models, collaborate with team members, and present your work with Trimble Connect. Work together from anywhere in the world.",
+          "icon": "cloud-upload-alt"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Key Benefits"
+      },
+      "subheading": "Why designers and creators choose SketchUp",
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Easy to Learn",
+          "body": "Start creating in minutes, not weeks. SketchUp's intuitive interface makes 3D modeling accessible to beginners and experts alike.",
+          "icon": "graduation-cap"
+        },
+        {
+          "title": "Fast & Efficient",
+          "body": "Work smarter, not harder. SketchUp's streamlined workflow helps you create and modify models quickly, saving you time and effort.",
+          "icon": "bolt"
+        },
+        {
+          "title": "Affordable",
+          "body": "Get professional 3D modeling capabilities at a fraction of the cost of other software. SketchUp offers the best value in the industry.",
+          "icon": "dollar-sign"
+        },
+        {
+          "title": "Vibrant Community",
+          "body": "Join millions of users worldwide. Access tutorials, forums, and resources to help you learn and grow as a designer.",
+          "icon": "users"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "SketchUp?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Official Partner",
+          "body": "As an authorized partner, we provide access to genuine products.",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset"
+        },
+        {
+          "title": "Local Presence",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "mobile"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Start Creating in 3D?",
+    "subheading": "Get free consultation of SketchUp today and bring your ideas to life.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#Form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Success stories from businesses using AutoCAD through Aptus Infotech",
+    "items": [
+      {
+        "quote": "SketchUp has been my go-to 3D modeling software for over a decade. Its intuitive interface and powerful tools allow me to bring my architectural visions to life quickly and efficiently.",
+        "author": "David Chen",
+        "role": "Architect, Urban Design Studio"
+      },
+      {
+        "quote": "As an interior designer, SketchUp has revolutionized how I present ideas to clients. The 3D Warehouse saves me countless hours, and the software's ease of use lets me focus on creativity rather than technical hurdles.",
+        "author": "Sarah",
+        "role": "Interior Designer, Luxe Spaces"
+      },
+      {
+        "quote": "I've tried many 3D modeling tools, but nothing compares to SketchUp's balance of power and simplicity. It's the perfect tool for both quick conceptual work and detailed final models.",
+        "author": "Michael Torres",
+        "role": "Product Designer, Innovate Labs"
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/planswift.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Prokon.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/sophos.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/spectronova.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/aconex.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/etap.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/fortinet.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/kaspersky.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft.png",
+        "alt": "Microsoft"
+      },
+      {
+        "id": "lumion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/lumion.png",
+        "alt": "lumion"
+      },
+      {
+        "id": "paloalto",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/paloalto.png",
+        "alt": "paloalto"
+      },
+      {
+        "id": "vray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/v.ray_.png",
+        "alt": "v.ray"
+      },
+      {
+        "id": "twinmotion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png",
+        "alt": "twinmotion"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

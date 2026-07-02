@@ -1,0 +1,256 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "adobe",
+    "bannerTitle": "Adobe Acrobat Pro DC",
+    "bannerTagline": "The World’s Leading PDF Solution for Professionals",
+    "mediaInline": false,
+    "title": "Create, Edit & Secure PDF Documents",
+    "paragraphs": [
+      "Adobe Acrobat Pro DC is the world’s leading PDF solution, moving your business beyond simple viewing. It empowers you to professionally edit text and images, convert files to and from PDF format, combine documents, and implement robust security features like password protection and redaction. This comprehensive toolkit streamlines your digital document workflow, saving valuable time and enhancing productivity.",
+      "As the trusted provider of software solutions in Oman, Aptus Infotech brings this powerful application to your business. We ensure you have access to the genuine software and the expert support needed to transform how you create, manage, and share professional documents."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Adobe-Acrobat-Pro.png",
+    "imageAlt": "Adobe Acrobat Pro DC",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "gridColumns": 3,
+      "title": {
+        "before": "Powerful PDF Management Tools"
+      },
+      "subheading": "Experience the comprehensive suite of tools designed for professional workflows",
+      "align": "center",
+      "items": [
+        {
+          "title": "Create & Edit PDFs",
+          "body": "Easily convert any file format to PDF or create new documents from scratch. Edit text, images, and formatting directly within your PDF files.",
+          "icon": "file-pdf",
+          "imageAlt": "Create & Edit PDFs"
+        },
+        {
+          "title": "Digital Signatures",
+          "body": "Add legally binding signatures to contracts, forms, and agreements. Collect signatures electronically and track document status in real-time.",
+          "icon": "signature",
+          "imageAlt": "Digital Signatures"
+        },
+        {
+          "title": "Advanced Security",
+          "body": "Protect sensitive information with password protection, permission controls, and redaction tools. Ensure compliance with industry standards.",
+          "icon": "shield",
+          "imageAlt": "Advanced Security"
+        },
+        {
+          "title": "Annotation & Markup",
+          "body": "Collaborate effectively with extensive annotation tools including sticky notes, highlights, stamps, and drawing markup for precise feedback.",
+          "icon": "eye-dropper",
+          "imageAlt": "Annotation & Markup"
+        },
+        {
+          "title": "Cross-Platform Access",
+          "body": "Work seamlessly across desktop, web, and mobile devices. Your documents sync automatically through Adobe Document Cloud for consistent access anywhere.",
+          "icon": "mobile-alt",
+          "imageAlt": "Cross-Platform Access"
+        },
+        {
+          "title": "Form Creation & Data Collection",
+          "body": "Create interactive forms with dropdown menus, checkboxes, and calculations. Collect data automatically and export results for analysis.",
+          "icon": "chart-bar",
+          "imageAlt": "Form Creation & Data Collection"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Why Choose Adobe Acrobat Pro?"
+      },
+      "subheading": "Transform your workflow with these powerful advantages",
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Industry Standard",
+          "body": "Used by millions of professionals worldwide across legal, business, education, and government sectors for over two decades.",
+          "icon": "check-circle"
+        },
+        {
+          "title": "Seamless Integration",
+          "body": "Works perfectly with Microsoft Office, Outlook, SharePoint, and other Adobe Creative Cloud apps for smooth workflow integration.",
+          "icon": "sync-alt"
+        },
+        {
+          "title": "Enhanced Security",
+          "body": "Ensure document integrity with advanced encryption, certificate-based signatures, and detailed audit trails for compliance requirements.",
+          "icon": "lock"
+        },
+        {
+          "title": "Collaboration Power",
+          "body": "Share documents securely, track comments, and gather feedback from multiple reviewers simultaneously with streamlined collaboration tools.",
+          "icon": "users"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Adobe Acrobat Pro?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Official Partner",
+          "body": "As an authorized partner, we provide access to genuine Adobe products.",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset"
+        },
+        {
+          "title": "Local Presence",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "mobile-alt"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Transform Your Document Workflow?",
+    "subheading": "Experience the difference Adobe Acrobat makes in managing your important documents today.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Success stories from businesses using AutoCAD through Aptus Infotech",
+    "items": [
+      {
+        "quote": "Adobe Acrobat has completely changed how we handle our legal documents. The ability to create secure, password-protected files and collect electronic signatures has saved us countless hours.",
+        "author": "Yusuf Al Hashmi",
+        "role": "Design Manager, Construction Company"
+      },
+      {
+        "quote": "As a marketing director, I rely on Acrobat to create stunning proposals and presentations. The design tools are intuitive, and sharing files with clients is incredibly easy.",
+        "author": "Mariam Al Said",
+        "role": "Lead Architect, Design Firm"
+      },
+      {
+        "quote": "The OCR feature alone has made my job so much easier. Converting scanned documents to editable text saves me hours of retyping, and the accuracy is impressive.",
+        "author": "Khalid Al Balushi",
+        "role": "Owner, Engineering Consultancy"
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/planswift.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Prokon.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/sophos.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/spectronova.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/aconex.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/etap.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/fortinet.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/kaspersky.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft.png",
+        "alt": "Microsoft"
+      },
+      {
+        "id": "lumion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/lumion.png",
+        "alt": "lumion"
+      },
+      {
+        "id": "paloalto",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/paloalto.png",
+        "alt": "paloalto"
+      },
+      {
+        "id": "vray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/v.ray_.png",
+        "alt": "v.ray"
+      },
+      {
+        "id": "twinmotion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png",
+        "alt": "twinmotion"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

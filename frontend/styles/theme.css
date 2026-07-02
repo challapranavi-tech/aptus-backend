@@ -1,0 +1,84 @@
+@theme {
+  /* Elementor kit-9 + Hello Elementor reset */
+  --color-brand-navy:       #000000;
+  --color-brand-navy-dark:  #000000;
+  --color-brand-navy-mid:   #333333;
+  --color-brand-blue:       #1352a3;
+  --color-brand-blue-dark:  #13934b;
+  --color-brand-green:      #13934b;
+  --color-brand-green-dark: #13934b;
+  --color-brand-green-light:#67db85;
+  --color-brand-orange:     #1352a3;
+  --color-brand-orange-hover: #13934b;
+  --color-brand-light:      #24648c0f;
+  --color-brand-topbar:     #248bcc;
+
+  --color-background:           #ffffff;
+  --color-foreground:           #333333;
+  --color-muted:                #24648c0f;
+  --color-muted-foreground:     #695b5b;
+  --color-border:               #e4ebe6;
+  --color-input:                #13934b0f;
+  --color-ring:                 #1352a3;
+
+  --color-primary:              #1352a3;
+  --color-primary-foreground:   #ffffff;
+  --color-primary-hover:        #13934b;
+
+  --color-secondary:            #67db85;
+  --color-secondary-foreground: #000000;
+  --color-secondary-hover:      #67db85;
+
+  --color-accent:               #000000;
+  --color-accent-foreground:    #ffffff;
+
+  --color-destructive:          #ef4444;
+  --color-destructive-foreground: #ffffff;
+  --color-success:              #13934b;
+  --color-warning:              #f59e0b;
+
+  --font-sans:    var(--font-body);
+  --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+
+  --text-xs:   0.75rem;   --text-xs--line-height:   1rem;
+  --text-sm:   0.875rem;  --text-sm--line-height:   1.25rem;
+  --text-base: 1rem;      --text-base--line-height: 1.5rem;
+  --text-lg:   1.125rem;  --text-lg--line-height:   1.75rem;
+  --text-xl:   1.25rem;   --text-xl--line-height:   1.75rem;
+  --text-2xl:  1.5rem;    --text-2xl--line-height:  2rem;
+  --text-3xl:  1.875rem;  --text-3xl--line-height:  2.25rem;
+  --text-4xl:  2.25rem;   --text-4xl--line-height:  2.5rem;
+  --text-5xl:  2.5rem;    --text-5xl--line-height:  1.2;
+  --text-6xl:  3.75rem;   --text-6xl--line-height:  1.05;
+
+  --spacing-section:    4rem;
+  --spacing-section-lg: 4rem;
+
+  --container-sm:  640px;
+  --container-md:  768px;
+  --container-lg:  1024px;
+  --container-xl:  1280px;
+  --container-2xl:  1400px;
+  --container-site: 1300px;
+  --container-narrow: 800px;
+  --container-form: 750px;
+
+  --radius-sm: 0.1875rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.625rem;
+  --radius-xl: 1.25rem;
+  --radius-full: 9999px;
+
+  --shadow-sm:  0 1px 3px 0 rgb(0 0 0 / 0.08);
+  --shadow-md:  0 4px 12px -2px rgb(0 0 0 / 0.12);
+  --shadow-lg:  0 10px 28px -4px rgb(0 0 0 / 0.16);
+  --shadow-card: 0 18px 25px 0 rgb(0 0 0 / 0.12);
+  --shadow-icon-card: 0 0 10px rgb(0 0 0 / 0.5);
+
+  --ease-out-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:     cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast:   150ms;
+  --duration-normal: 300ms;
+  --duration-slow:   1500ms;
+}

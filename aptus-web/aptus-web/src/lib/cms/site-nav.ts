@@ -258,7 +258,7 @@ export const NAV_ITEMS: SiteNavLink[] = [
         children: [
           {
             label: "Computers & Structures, Inc",
-            href: "/computers-structures-inc",
+            href: "/computers-structures",
           },
           {
             label: "Prokon",

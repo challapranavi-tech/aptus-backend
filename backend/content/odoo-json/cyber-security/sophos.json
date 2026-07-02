@@ -1,0 +1,241 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "cyber-security",
+    "subnavLinks": [
+      { "label": "Fortinet", "href": "/fortinet" },
+      { "label": "Sophos", "href": "/sophos" },
+      { "label": "SonicWall Next-Gen Firewall", "href": "/sonicwall-next-gen-firewall" },
+      { "label": "Kaspersky", "href": "/kaspersky" },
+      { "label": "Palo Alto", "href": "/palo-alto" }
+    ],
+    "bannerTitle": "Sophos",
+    "bannerTagline": "Get enterprise-grade security without the complexity. Sophos CSaaS delivers advanced threat protection, managed by experts, so you can focus on your business.",
+    "title": "Cybersecurity as a Service: Security Made Simple",
+    "paragraphs": [
+      "In today's threat landscape, traditional security solutions are no longer enough. Sophos Cybersecurity as a Service (CSaaS) combines our industry-leading security technologies with expert management to provide comprehensive protection against advanced threats.",
+      "Our CSaaS offering delivers 24/7 monitoring, threat detection, and response capabilities through a team of certified security experts. We manage your security infrastructure so you can focus on growing your business with confidence.",
+      "With flexible deployment options and predictable pricing, Sophos CSaaS scales with your business needs while providing the highest level of protection against ransomware, malware, phishing, and other cyber threats."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_Create_a_futuristic_and_sleek_digital_imag_3-673x1024.jpg",
+    "imageAlt": "sophos",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "gridColumns": 3,
+      "title": {
+        "before": "Comprehensive Protection Features"
+      },
+      "subheading": "Advanced security capabilities delivered as a service",
+      "align": "center",
+      "items": [
+        {
+          "title": "Next-Gen Firewall Protection",
+          "body": "Advanced firewall technology with deep packet inspection, application control, and intrusion prevention to secure your network perimeter.",
+          "icon": "shield-alt"
+        },
+        {
+          "title": "Endpoint Security",
+          "body": "Industry-leading endpoint protection with Intercept X technology that stops ransomware, exploits, and zero-day attacks before they can execute.",
+          "icon": "lock"
+        },
+        {
+          "title": "Email Security",
+          "body": "Advanced email filtering and protection against phishing, spam, and malicious attachments with AI-powered threat detection.",
+          "icon": "envelope-open"
+        },
+        {
+          "title": "Cloud Security",
+          "body": "Comprehensive protection for cloud environments including SaaS applications, IaaS platforms, and hybrid cloud deployments.",
+          "icon": "cloud"
+        },
+        {
+          "title": "Expert Management",
+          "body": "24/7 monitoring and management by certified security experts who proactively hunt for threats and respond to incidents.",
+          "icon": "users-cog"
+        },
+        {
+          "title": "Real-time Reporting",
+          "body": "Comprehensive dashboards and reports that provide visibility into your security posture and threat landscape.",
+          "icon": "chart-line"
+        }
+      ]
+    },
+    {
+      "id": "why-sophos",
+      "visible": true,
+      "variant": "icon-cards",
+      "gridColumns": 4,
+      "title": {
+        "before": "Why Choose Sophos?"
+      },
+      "subheading": "Transform your security approach with these key benefits",
+      "align": "center",
+      "items": [
+        {
+          "title": "Cost Effective",
+          "body": "Eliminate upfront capital expenses and reduce operational costs with predictable subscription pricing.",
+          "icon": "search-dollar"
+        },
+        {
+          "title": "Expert Team",
+          "body": "Access to certified security experts without the need to hire and train in-house staff.",
+          "icon": "user-tie"
+        },
+        {
+          "title": "Always Current",
+          "body": "Automatic updates ensure you always have the latest protection against emerging threats.",
+          "icon": "sync"
+        },
+        {
+          "title": "Scalable Solution",
+          "body": "Easily scale your security protection as your business grows without additional infrastructure.",
+          "icon": "crosshairs"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for Cyber Security Solutions?"
+      },
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Official Partner",
+          "body": "As an authorized partner, we provide access to genuine products.",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset"
+        },
+        {
+          "title": "Local Presence",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "mobile-alt"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Defeat Cyberattacks?",
+    "subheading": "Get started with Sophos Cybersecurity as a Service today. Contact us for a free security assessment and see how we can protect your business.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#Form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Success stories from businesses using AutoCAD through Aptus Infotech",
+    "items": [
+      {
+        "quote": "Sophos CSaaS transformed our security posture. The expert team caught and stopped a ransomware attack that would have cost us millions. Worth every penny!",
+        "author": "David Thompson",
+        "role": "Design Manager",
+        "company": "Construction Company"
+      },
+      {
+        "quote": "As a mid-sized business, we couldn't afford a full security team. Sophos CSaaS gave us enterprise-grade protection at a fraction of the cost.",
+        "author": "Sarah Martinez",
+        "role": "Lead Architect",
+        "company": "Design Firm"
+      },
+      {
+        "quote": "The peace of mind we have knowing experts are watching our network 24/7 is invaluable. Sophos CSaaS is the best security decision we've made.",
+        "author": "Michael Chen",
+        "role": "Owner",
+        "company": "Engineering Consultancy"
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances-grid",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+        "alt": "Microsoft"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "description": "Our experts can help you to implement the right security system for your business.",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light",
+    "anchorId": "Form"
+  }
+}

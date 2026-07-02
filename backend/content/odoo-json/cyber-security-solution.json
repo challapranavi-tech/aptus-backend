@@ -1,0 +1,187 @@
+{
+  "hero": {
+    "id": "hero",
+    "visible": true,
+    "variant": "software-landing",
+    "title": {
+      "before": "Best Cyber Security Solutions",
+      "accent": "in Oman"
+    },
+    "tagline": "Aptus Infotech - Your trusted provider of advanced security solutions from Fortinet, Sophos, Kaspersky, and Palo Alto Networks.",
+    "highlight": "Offers Best Rates in the Market",
+    "actions": [
+      {
+        "label": "Request a Quote",
+        "href": "#Form",
+        "tone": "blue"
+      },
+      {
+        "label": "Renew Subscription",
+        "href": "#Form",
+        "tone": "green"
+      },
+      {
+        "label": "Browse Products",
+        "href": "#Products",
+        "tone": "sky"
+      }
+    ]
+  },
+  "cardSections": [
+    {
+      "id": "products",
+      "anchorId": "Products",
+      "visible": true,
+      "variant": "product-cards",
+      "title": {
+        "before": "Popular Autodesk Products"
+      },
+      "subheading": "We offer industry-leading security solutions to protect your business from evolving threats",
+      "align": "center",
+      "gridColumns": 3,
+      "items": [
+        {
+          "title": "Fortinet",
+          "body": "Comprehensive security solutions powered by FortiOS, the world's most advanced security operating system.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Fortinet.png",
+          "imageAlt": "Fortinet",
+          "href": "/fortinet",
+          "hrefLabel": "Read More",
+          "actionLabel": "Request a Quote",
+          "actionHref": "#Form"
+        },
+        {
+          "title": "Sophos",
+          "body": "Next-generation cybersecurity solutions powered by deep learning AI and synchronized security.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sopos.png",
+          "imageAlt": "Sophos",
+          "href": "/sophos",
+          "hrefLabel": "Read More",
+          "actionLabel": "Request a Quote",
+          "actionHref": "#Form"
+        },
+        {
+          "title": "Kaspersky",
+          "body": "World-class cybersecurity solutions with threat intelligence and machine learning technologies.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Kaspersky.png",
+          "imageAlt": "Kaspersky",
+          "href": "/kaspersky",
+          "hrefLabel": "Read More",
+          "actionLabel": "Request a Quote",
+          "actionHref": "#Form"
+        },
+        {
+          "title": "Palo Alto Networks",
+          "body": "Industry-leading cybersecurity solutions that prevent cyberattacks with automated platforms.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Palo-Alto-Networks.png",
+          "imageAlt": "Palo Alto Networks",
+          "href": "/palo-alto",
+          "hrefLabel": "Read More",
+          "actionLabel": "Request a Quote",
+          "actionHref": "#Form"
+        },
+        {
+          "title": "Sonicwall",
+          "body": "High-performance network security appliance combining advanced threat prevention, & application intelligence.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/09/Sonicwall.png",
+          "imageAlt": "Sonicwall",
+          "href": "/sonicwall-next-gen-firewall",
+          "hrefLabel": "Read More",
+          "actionLabel": "Request a Quote",
+          "actionHref": "#Form"
+        }
+      ]
+    },
+    {
+      "id": "capabilities",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Comprehensive Security Solutions"
+      },
+      "subheading": "Protect your business with our complete range of security services",
+      "align": "center",
+      "gridColumns": 3,
+      "items": [
+        {
+          "title": "Network Security",
+          "body": "Firewalls, intrusion prevention, and secure web gateways to protect your network perimeter.",
+          "icon": "network-wired"
+        },
+        {
+          "title": "Endpoint Security",
+          "body": "Advanced protection for all devices connected to your network with threat detection and response.",
+          "icon": "laptop-code"
+        },
+        {
+          "title": "Cloud Security",
+          "body": "Secure your cloud infrastructure and applications with comprehensive cloud security solutions.",
+          "icon": "cloud"
+        },
+        {
+          "title": "Identity & Access",
+          "body": "Manage user identities and control access to critical resources with multi-factor authentication.",
+          "icon": "user-shield"
+        },
+        {
+          "title": "Email Security",
+          "body": "Protect against phishing, malware, and spam with advanced email filtering and encryption.",
+          "icon": "file-signature"
+        },
+        {
+          "title": "Threat Intelligence",
+          "body": "Stay ahead of cyber threats with real-time intelligence and proactive security measures.",
+          "icon": "search"
+        }
+      ]
+    },
+    {
+      "id": "why-choose",
+      "visible": true,
+      "variant": "value-cards",
+      "anchorId": "why-choose",
+      "title": {
+        "before": "Why Choose Aptus Infotech"
+      },
+      "subheading": "As Oman's only Autodesk Gold Partner, we deliver exceptional value and service",
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Gold Partner Status",
+          "body": "Our Gold Partner status represents the highest level of expertise and commitment to Autodesk solutions.",
+          "icon": "medal"
+        },
+        {
+          "title": "Genuine Products",
+          "body": "All our Autodesk products are 100% genuine with full manufacturer support and updates.",
+          "icon": "check-circle"
+        },
+        {
+          "title": "Competitive Pricing",
+          "body": "We offer the most competitive prices for Autodesk software in the Omani market.",
+          "icon": "hand-holding-usd"
+        },
+        {
+          "title": "Expert Team",
+          "body": "Our certified professionals provide expert advice and support for all Autodesk products.",
+          "icon": "user-friends"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Get Started?",
+    "subheading": "As Oman's Autodesk Gold Partner, we're ready to provide you with the best solutions and support",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#Form"
+  },
+  "contactCta": {
+    "heading": "Request a Quote",
+    "description": "Fill out the form below and our team will get back to you shortly",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "software-quote",
+    "layout": "light"
+  }
+}

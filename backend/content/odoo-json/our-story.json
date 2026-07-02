@@ -1,0 +1,196 @@
+{
+  "banner": {
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/about_banner-e1746943143932.jpg",
+    "imageAlt": "our-story"
+  },
+  "introRow": {
+    "title": "Our Pursuit",
+    "paragraphs": [
+      "Aptus Infotech is the premier System Integrator & Software Consultant providing consulting services, training, To the large and medium businesses. Our experience of working with different domains has given us extensive industry insight and helped us in mastering our competencies. We do a comprehensive analysis of your industry- its size, tasks you want to carry out, your challenges and subsequently map out a plan by recommending new elements to provide the right solutions that are cost effective and correspond to your business goals and IT strategy. We help streamline your business operations with wisely considered software solutions."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/award.jpg",
+    "imageAlt": "Rajesh Malaviya",
+    "imagePosition": "left",
+    "headingAsH1": true
+  },
+  "flipCards": {
+    "spotlight": {
+      "title": "We are powered by performance",
+      "icon": "info"
+    },
+    "items": [
+      {
+        "id": "mission",
+        "title": "Mission",
+        "icon": "cogs",
+        "variant": "green",
+        "description": "To provide expert services at fair prices, help you overcome your problems and eliminate the risks involved by providing effective measures and turn your project into success."
+      },
+      {
+        "id": "vision",
+        "title": "Vision",
+        "icon": "eye",
+        "variant": "green",
+        "description": "Our vision is to be recognized & respected in global IT market as a professional solution provider with constant innovation to make \"IT\" better for its clients by being their strategic business partner."
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "partner-0",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/APC.png",
+        "alt": "APC"
+      },
+      {
+        "id": "partner-1",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Vertiv.png",
+        "alt": "Vertiv"
+      },
+      {
+        "id": "partner-2",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Norden.png",
+        "alt": "Norden"
+      },
+      {
+        "id": "partner-3",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Suprema.png",
+        "alt": "Suprema"
+      },
+      {
+        "id": "partner-4",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Tyco.png",
+        "alt": "Tyco"
+      },
+      {
+        "id": "partner-5",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/FERMAX-1.png",
+        "alt": "FERMAX 1"
+      },
+      {
+        "id": "partner-6",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Microsens.png",
+        "alt": "Microsens"
+      },
+      {
+        "id": "partner-7",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/LS-Cables.png",
+        "alt": "LS Cables"
+      },
+      {
+        "id": "partner-8",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Logitech.png",
+        "alt": "Logitech"
+      },
+      {
+        "id": "partner-9",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Honeywell.png",
+        "alt": "Honeywell"
+      },
+      {
+        "id": "partner-10",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Hikvision.png",
+        "alt": "Hikvision"
+      },
+      {
+        "id": "partner-11",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Fanvil.png",
+        "alt": "Fanvil"
+      },
+      {
+        "id": "partner-12",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/FAAC.png",
+        "alt": "FAAC"
+      },
+      {
+        "id": "partner-13",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Extron.png",
+        "alt": "Extron"
+      },
+      {
+        "id": "partner-14",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/EATON.png",
+        "alt": "EATON"
+      },
+      {
+        "id": "partner-15",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/BFT.png",
+        "alt": "BFT"
+      },
+      {
+        "id": "partner-16",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/ZKTeco.png",
+        "alt": "ZKTeco"
+      },
+      {
+        "id": "partner-17",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Yealink.png",
+        "alt": "Yealink"
+      },
+      {
+        "id": "partner-18",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/WatchNet.png",
+        "alt": "WatchNet"
+      },
+      {
+        "id": "partner-19",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/URMET.png",
+        "alt": "URMET"
+      },
+      {
+        "id": "partner-20",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/TOA.png",
+        "alt": "TOA"
+      },
+      {
+        "id": "partner-21",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Schneider.png",
+        "alt": "Schneider"
+      },
+      {
+        "id": "partner-22",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/PELCO.png",
+        "alt": "PELCO"
+      },
+      {
+        "id": "partner-23",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Panduit.png",
+        "alt": "Panduit"
+      },
+      {
+        "id": "partner-24",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Nice.png",
+        "alt": "Nice"
+      },
+      {
+        "id": "partner-25",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Opterna.png",
+        "alt": "Opterna"
+      },
+      {
+        "id": "partner-26",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Axis.png",
+        "alt": "Axis"
+      },
+      {
+        "id": "partner-27",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Avigilon.png",
+        "alt": "Avigilon"
+      },
+      {
+        "id": "partner-28",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/AKCP.png",
+        "alt": "AKCP"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "layout": "light"
+  }
+}

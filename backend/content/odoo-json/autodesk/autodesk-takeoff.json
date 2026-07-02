@@ -1,0 +1,258 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "autodesk",
+    "bannerTitle": "Autodesk Takeoff",
+    "bannerTagline": "Precision Estimating Software for Construction Professionals",
+    "mediaInline": false,
+    "title": "Professional Design with AutoCAD",
+    "paragraphs": [
+      "In today’s competitive preconstruction landscape, accurate and efficient quantity takeoff is essential.",
+      "Autodesk Takeoff Solutions empower estimating teams to streamline bid preparation, improve accuracy, and accelerate the estimation process. Whether performing linear, count, or area measurements on 2D drawings or extracting quantities from complex 3D BIM models, this cloud-based software enhances how project scope is measured, visualized, and managed.",
+      "With unified 2D and 3D quantification, customizable formulas, centralized quantity tracking, and seamless data aggregation, teams gain superior estimation efficiency.",
+      "Features like automated 3D model quantity extraction, machine learning-based symbol detection, real-time version control, and direct Excel export ensure every estimate is precise, competitive, and reliable, optimizing project planning and preconstruction workflows."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/06/Autodesk_takeoff-1024x1024.png",
+    "imageAlt": "Autodesk Takeoff",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "gridColumns": 3,
+      "title": {
+        "before": "Key Features"
+      },
+      "subheading": "Discover the comprehensive functionality that makes Autodesk Takeoff the ideal solution for construction estimating",
+      "align": "center",
+      "items": [
+        {
+          "title": "Precise Measurement Tools",
+          "body": "Measure lengths, areas, and counts directly from PDFs, DWGs, and BIM models with industry-leading accuracy.",
+          "icon": "ruler-combined",
+          "imageAlt": "Precise Measurement Tools"
+        },
+        {
+          "title": "Automated Counting",
+          "body": "Automatically count and classify objects in drawings, saving hours of manual counting work.",
+          "icon": "project-diagram",
+          "imageAlt": "Automated Counting"
+        },
+        {
+          "title": "Cloud-Based Collaboration",
+          "body": "Share measurements and collaborate with team members in real-time with cloud synchronization.",
+          "icon": "cloud-download-alt",
+          "imageAlt": "Cloud-Based Collaboration"
+        },
+        {
+          "title": "Integrated Calculations",
+          "body": "Perform calculations and generate estimates directly within the application with customizable formulas.",
+          "icon": "calculator",
+          "imageAlt": "Integrated Calculations"
+        },
+        {
+          "title": "Export Capabilities",
+          "body": "Export measurements and estimates to Excel, PDF, or other formats for seamless integration with other systems.",
+          "icon": "file-export",
+          "imageAlt": "Export Capabilities"
+        },
+        {
+          "title": "Mobile Accessibility",
+          "body": "Access and review takeoffs from anywhere using the Autodesk Takeoff mobile app for iOS and Android devices.",
+          "icon": "mobile-alt",
+          "imageAlt": "Mobile Accessibility"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Key Benefits"
+      },
+      "subheading": "How Autodesk Takeoff improves your construction estimating workflow",
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Save Time",
+          "body": "Reduce takeoff time by up to 50% compared to manual methods, allowing you to focus on higher-value activities.",
+          "icon": "clock"
+        },
+        {
+          "title": "Increase Accuracy",
+          "body": "Minimize human error with automated counting and consistent measurement techniques.",
+          "icon": "dot-circle"
+        },
+        {
+          "title": "Enhance Collaboration",
+          "body": "Keep your team aligned with real-time collaboration features and shared project visibility.",
+          "icon": "users"
+        },
+        {
+          "title": "Improve Profitability",
+          "body": "Make better-informed decisions with accurate cost estimates and competitive bidding capabilities.",
+          "icon": "chart-line"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Autodesk Takeoff?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Official Autodesk Gold Partner",
+          "body": "As an authorized partner, we provide access to genuine Autodesk products.",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset"
+        },
+        {
+          "title": "Local Presence",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "mobile-alt"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Transform Your Estimating Process?",
+    "subheading": "Join thousands of construction professionals who have streamlined their bidding process with Autodesk Takeoff",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Hear from construction professionals who have improved their estimating efficiency with Autodesk Takeoff",
+    "items": [
+      {
+        "quote": "Autodesk Takeoff has revolutionized our estimating department. The ability to quickly and accurately measure from drawings has saved us countless hours each month.",
+        "author": "John Smith",
+        "role": "Estimating Manager, ABC Construction"
+      },
+      {
+        "quote": "The integration with our existing AutoCAD workflows made adoption seamless. Now our entire team works more efficiently together.",
+        "author": "Sarah Johnson",
+        "role": "Project Manager, XYZ Builders"
+      },
+      {
+        "quote": "We’ve seen a significant improvement in bid accuracy since implementing Takeoff. The automated counting feature alone has paid for itself many times over.",
+        "author": "Michael Chen",
+        "role": "Owner, Chen Construction Co."
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/planswift.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Prokon.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/sophos.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/spectronova.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/aconex.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/etap.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/fortinet.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/kaspersky.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft.png",
+        "alt": "Microsoft"
+      },
+      {
+        "id": "lumion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/lumion.png",
+        "alt": "lumion"
+      },
+      {
+        "id": "paloalto",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/paloalto.png",
+        "alt": "paloalto"
+      },
+      {
+        "id": "vray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/v.ray_.png",
+        "alt": "v.ray"
+      },
+      {
+        "id": "twinmotion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png",
+        "alt": "twinmotion"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

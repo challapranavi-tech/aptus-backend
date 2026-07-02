@@ -1,0 +1,250 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "multimedia",
+    "bannerTitle": "Chaos V-Ray for SketchUp",
+    "bannerTagline": "The World’s Most Popular Rendering Solution for SketchUp",
+    "mediaInline": false,
+    "title": "Unleash Photorealistic Power in SketchUp",
+    "paragraphs": [
+      "In the world of 3D design and architectural visualization, the standard for presenting a vision is photorealism. Chaos V-Ray for SketchUp is the industry-standard rendering plugin, transforming your robust SketchUp models into stunning, lifelike images, animations, and immersive experiences with production-ready quality.",
+      "By working within V-Ray’s advanced rendering environment, you leverage the power of physically-based light and materials to accurately simulate real-world conditions. V-Ray’s Interactive Rendering and V-Ray Vision (real-time) modes allow you to make critical design changes—adjusting a camera, tweaking a texture, or repositioning a light—and see the final, high-fidelity result instantaneously, accelerating your creative flow.",
+      "From rapid design iteration and creating precise material studies to generating final, award-winning stills and animations, V-Ray provides the comprehensive, professional toolset that ensures your SketchUp designs are visualized with ultimate realism and delivered with efficiency."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/V-ray-2-1-e1759824638430-rcujgr8skouw06ep8k9zlmixpa4ea82m9qdu37oni8.png",
+    "imageAlt": "Chaos V-Ray for SketchUp",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "gridColumns": 3,
+      "title": {
+        "before": "Powerful Rendering Features"
+      },
+      "subheading": "Experience the industry-standard rendering engine optimized for SketchUp",
+      "align": "center",
+      "items": [
+        {
+          "title": "Global Illumination",
+          "body": "Realistic light simulation with advanced GI algorithms that accurately calculate indirect light bouncing throughout your scene for natural-looking results.",
+          "icon": "sun"
+        },
+        {
+          "title": "Physically-Based Materials",
+          "body": "Create stunning materials using V-Ray’s comprehensive material system with accurate reflection, refraction, and subsurface scattering properties.",
+          "icon": "dice-two"
+        },
+        {
+          "title": "Interactive Rendering",
+          "body": "Experience real-time feedback with V-Ray’s progressive rendering mode, allowing you to see changes instantly as you adjust lights and materials.",
+          "icon": "bolt"
+        },
+        {
+          "title": "Advanced Camera Controls",
+          "body": "Precise camera control with depth of field, motion blur, and exposure settings to create professional photography-quality renders.",
+          "icon": "camera"
+        },
+        {
+          "title": "Cloud Collaboration",
+          "body": "Render remotely using V-Ray Cloud or share scenes with colleagues through Trimble Connect for seamless collaboration.",
+          "icon": "cloud-upload"
+        },
+        {
+          "title": "Extension Support",
+          "body": "Enhance your workflow with V-Ray extensions including VR panorama creation, batch rendering, and custom shader development tools.",
+          "icon": "cogs"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Benefits for Healthcare Facilities"
+      },
+      "subheading": "Why our nurse call system is trusted by leading hospitals and clinics",
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Faster Response Times",
+          "body": "Immediate notification system for patients requiring urgent assistance with visual, audible, and vibration-based alerts.",
+          "icon": "stopwatch"
+        },
+        {
+          "title": "Enhanced Patient Safety",
+          "body": "Reliable wireless communication devices ensuring staff are always reachable regardless of location within the facility.",
+          "icon": "user-nurse"
+        },
+        {
+          "title": "Improved Staff Efficiency",
+          "body": "Real-time dashboard displaying active calls, response times, and system status for complete situational awareness.",
+          "icon": "users"
+        },
+        {
+          "title": "HIPAA Compliant",
+          "body": "All communications are encrypted and meet strict HIPAA requirements for patient privacy protection.",
+          "icon": "hospital"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "V-Ray for SketchUp?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Official Partner",
+          "body": "As an authorized partner, we provide access to genuine products.",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset"
+        },
+        {
+          "title": "Local Presence",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "mobile"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Transform Your SketchUp Workflow?",
+    "subheading": "Get a free consultation and experience the difference V-Ray makes in your rendering process today.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#Form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "items": [
+      {
+        "quote": "V-Ray has completely changed how we present our architectural designs. The level of realism is unmatched, and the integration with SketchUp is seamless.",
+        "author": "Obaid Al Hashmi",
+        "role": "Senior Architect, Urban Design Studio"
+      },
+      {
+        "quote": "As an interior designer, V-Ray allows me to show clients exactly what they’re getting. The materials look real, the lighting is perfect, and my presentations have never looked better.",
+        "author": "Michael Torres",
+        "role": "Lead Interior Designer, Luxe Interiors"
+      },
+      {
+        "quote": "As a small engineering firm, we needed affordable yet powerful CAD software. Aptus recommended AutoCAD LT, which perfectly meets our needs without breaking the budget.",
+        "author": "David Chen",
+        "role": "Product Designer, Innovate Labs"
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/planswift.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Prokon.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/sophos.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/spectronova.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/aconex.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/etap.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/fortinet.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/kaspersky.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft.png",
+        "alt": "Microsoft"
+      },
+      {
+        "id": "lumion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/lumion.png",
+        "alt": "lumion"
+      },
+      {
+        "id": "paloalto",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/paloalto.png",
+        "alt": "paloalto"
+      },
+      {
+        "id": "vray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/v.ray_.png",
+        "alt": "v.ray"
+      },
+      {
+        "id": "twinmotion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png",
+        "alt": "twinmotion"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

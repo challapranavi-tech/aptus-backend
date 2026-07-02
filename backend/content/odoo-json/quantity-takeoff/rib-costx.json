@@ -1,0 +1,178 @@
+{
+  "banner": {
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/RIB_CostX-e1754301125688-r9r9dmsu1r9isc8qac1aiouwtdsb27rgw7rja8cyc0.png",
+    "imageAlt": "RIB CostX"
+  },
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "quantity-takeoff",
+    "title": "RIB CostX",
+    "bannerTagline": "Advanced Quantity Surveying and Estimating for Construction",
+    "mediaInline": true,
+    "paragraphs": [
+      "RIB CostX is a powerful and integrated software solution designed specifically for quantity surveyors, estimators, and construction professionals. It revolutionizes the process of quantity takeoff, cost estimation, and tender management by providing comprehensive 2D and 3D measurement capabilities directly linked to live-updating workbooks. This ensures accuracy, efficiency, and consistency throughout the entire pre-construction phase."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Rib-e1754305383876-r9rcgt5hakdcm5nj4cm71eo0c2p8i5lflr9sqld180.jpg",
+    "imageAlt": "RIB CostX",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "empowers",
+      "visible": true,
+      "variant": "bullet-list",
+      "title": {
+        "before": "RIB CostX empowers construction professionals to:"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Perform Intelligent 2D & 3D Quantity Takeoff",
+          "body": "Measure quantities directly from 2D drawings (PDFs, CAD files) and 3D BIM models with precision. Automatically extract quantities from BIM models, drastically reducing manual effort and potential errors."
+        },
+        {
+          "title": "Integrate Live-Linked Estimating Workbooks",
+          "body": "Connect quantities directly to customizable estimating workbooks. Any changes made to the measurements or design are automatically updated in the cost estimate, ensuring real-time accuracy and preventing discrepancies."
+        },
+        {
+          "title": "Create Detailed and Customizable Cost Plans",
+          "body": "Develop comprehensive bills of quantities (BoQs) and cost plans using flexible workbooks. Customize rates, resources, and assemblies to suit specific project requirements and company standards."
+        },
+        {
+          "title": "Streamline Reporting and Tender Management",
+          "body": "Generate professional and detailed reports, including tender breakdowns, cost analyses, and variance reports, directly from the integrated data. This supports transparent tender processes and informed decision-making."
+        },
+        {
+          "title": "Enhance BIM Workflow and Data Utilization",
+          "body": "Leverage Building Information Modeling (BIM) by extracting valuable data directly from 3D models. CostX allows for a richer, more automated takeoff process from BIM, improving the accuracy and speed of estimations."
+        },
+        {
+          "title": "Improve Collaboration and Consistency",
+          "body": "Facilitate better collaboration among estimating teams by providing a unified platform for takeoff and costing. Standardized templates and libraries ensure consistency across multiple projects."
+        },
+        {
+          "title": "Increase Accuracy and Reduce Risk",
+          "body": "Minimize the risk of errors associated with manual takeoffs and disconnected spreadsheets. The integrated nature of CostX ensures a high degree of accuracy in quantity and cost calculations, leading to more reliable bids."
+        }
+      ]
+    },
+    {
+      "id": "capabilities",
+      "visible": true,
+      "variant": "icon-cards",
+      "align": "center",
+      "gridColumns": 5,
+      "items": [
+        {
+          "title": "Quantity Surveying",
+          "body": "",
+          "icon": "sort-numeric-up"
+        },
+        {
+          "title": "Cost Estimation",
+          "body": "",
+          "icon": "search-dollar"
+        },
+        {
+          "title": "BIM Takeoff",
+          "body": "",
+          "icon": "plane-departure"
+        },
+        {
+          "title": "2D & 3D Quantification",
+          "body": "",
+          "icon": "dribbble-square"
+        },
+        {
+          "title": "Cost Management",
+          "body": "",
+          "icon": "funnel-dollar"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "checklist",
+      "title": {
+        "before": "Why Choose Aptus Infotech"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Tailored Solutions for Your Business"
+        },
+        {
+          "title": "Scalable for Every Business Size"
+        },
+        {
+          "title": "Expert Installation and Ongoing Support"
+        },
+        {
+          "title": "Powered by Cutting-Edge Technology"
+        }
+      ]
+    }
+  ],
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "v-ray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/V-ray-e1754299498907.png",
+        "alt": "V-ray"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Spectronova-2.png",
+        "alt": "Spectronova"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Sketchup-e1759831191828.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Prokon-1-e1754305048112.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "primavera",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Primavera.png",
+        "alt": "Primavera"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "csi",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/CSI.png",
+        "alt": "CSI"
+      },
+      {
+        "id": "cype",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Cype.png",
+        "alt": "Cype"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Aconex-e1754205364753.png",
+        "alt": "Aconex"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

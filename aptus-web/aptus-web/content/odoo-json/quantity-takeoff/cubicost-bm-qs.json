@@ -1,83 +1,161 @@
 {
-  "hero": {
+  "banner": {
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/07/cubicost.png",
+    "imageAlt": "CUBICOST"
+  },
+  "softwareInnerHero": {
     "id": "hero",
     "visible": true,
-    "title": {
-      "before": "",
-      "accent": "Cubicost BM/QS"
-    },
-    "subtitle": "Cubicost BIM-based quantity surveying and cost estimation for construction projects.",
-    "ctaLabel": "Request a Quote",
-    "ctaHref": "mailto:info@aptusinfotech.com"
-  },
-  "intro": {
-    "id": "intro",
-    "visible": true,
-    "title": {
-      "before": "Overview",
-      "accent": ""
-    },
+    "family": "cubicost-group",
+    "title": "Cubi Cost",
+    "bannerTagline": "Smart 5D BIM Solution for Accurate Cost Estimation and Quantity Takeoff",
+    "mediaInline": true,
     "paragraphs": [
-      "Adopt Cubicost for BIM-integrated BOQ generation, cost estimation, and change management. Aptus Infotech provides licensing and implementation support for quantity surveyors and contractors in Oman."
-    ]
+      "Aptus Infotech offers cloud-based construction solutions with Cubi Cost, a construction cost management software designed to streamline cost estimation, budgeting, and real-time construction cost tracking. Integrated with BIM models, Cubi Cost helps project teams manage the full lifecycle of a construction project, from design to completion, ensuring accurate project cost estimation with BIM and seamless collaboration."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/bim-cubicost-20200327013633-e1746357245963.jpg",
+    "imageAlt": "Cubicost BIM modules",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
   },
   "cardSections": [
     {
       "id": "features",
       "visible": true,
-      "eyebrow": "Capabilities",
+      "variant": "bullet-list",
       "title": {
-        "before": "Key",
-        "accent": "Features"
+        "before": "Key Features of",
+        "accent": "Cubi Cost"
       },
       "align": "center",
       "items": [
         {
-          "title": "BIM Integration",
-          "body": "Extract quantities directly from Revit and other BIM models."
+          "title": "Cloud-Based Cost Estimation",
+          "body": "Centralize your project data for accurate, accessible cost tracking from anywhere.",
+          "icon": "check"
         },
         {
-          "title": "BOQ Generation",
-          "body": "Automated bill of quantities aligned to measurement standards."
+          "title": "BIM Cost Management",
+          "body": "Direct integration with BIM models for real-time updates on material quantities and costs.",
+          "icon": "check"
         },
         {
-          "title": "Cost Control",
-          "body": "Track variations and update estimates as designs evolve."
+          "title": "Automated Cost Estimation for Construction",
+          "body": "Automatically generate accurate cost estimates from BIM data, reducing manual errors.",
+          "icon": "check"
         },
         {
-          "title": "Reporting",
-          "body": "Exportable reports for tendering and project controls."
+          "title": "Construction Budgeting Tools",
+          "body": "Create detailed budgets and track expenses, helping your project stay within financial parameters.",
+          "icon": "check"
+        },
+        {
+          "title": "Real-Time Collaboration",
+          "body": "Cubi Cost enables teams to collaborate in real-time, ensuring alignment with the most current data.",
+          "icon": "check"
+        }
+      ]
+    },
+    {
+      "id": "capabilities",
+      "visible": true,
+      "variant": "icon-cards",
+      "align": "center",
+      "gridColumns": 5,
+      "items": [
+        {
+          "title": "BIM Cost Management",
+          "body": "",
+          "icon": "file-invoice-dollar"
+        },
+        {
+          "title": "Quantity Takeoff",
+          "body": "",
+          "icon": "plane-departure"
+        },
+        {
+          "title": "Cost Estimation",
+          "body": "",
+          "icon": "search-dollar"
+        },
+        {
+          "title": "Construction Budgeting",
+          "body": "",
+          "icon": "dollar-sign"
+        },
+        {
+          "title": "Project Reporting",
+          "body": "",
+          "icon": "file"
         }
       ]
     },
     {
       "id": "why-aptus",
       "visible": true,
-      "eyebrow": "Why Aptus",
+      "variant": "checklist",
       "title": {
-        "before": "Why Choose",
-        "accent": "Aptus Infotech"
+        "before": "Why Choose Aptus Infotech"
       },
       "align": "center",
       "items": [
         {
-          "title": "Authorized Partner",
-          "body": "Genuine software licenses with official support channels and compliant procurement."
+          "title": "Tailored Solutions for Your Business"
         },
         {
-          "title": "Implementation Support",
-          "body": "Guidance on deployment, licensing models, and integration with your existing workflows."
+          "title": "Scalable for Every Business Size"
         },
         {
-          "title": "Local Expertise in Oman",
-          "body": "Muscat-based team providing responsive sales, technical support, and training across the GCC."
+          "title": "Expert Installation and Ongoing Support"
         },
         {
-          "title": "End-to-End Service",
-          "body": "From license procurement and renewal to rollout planning — a single trusted partner."
+          "title": "Powered by Cutting-Edge Technology"
         }
       ]
     }
   ],
-  "showContactCta": true
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "suprema-1",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Suprema.png",
+        "alt": "Suprema"
+      },
+      {
+        "id": "tyco-1",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Tyco.png",
+        "alt": "Tyco"
+      },
+      {
+        "id": "norden-1",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Norden.png",
+        "alt": "Norden"
+      },
+      {
+        "id": "norden-2",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Norden-2.png",
+        "alt": "Bosch"
+      },
+      {
+        "id": "suprema-2",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Suprema.png",
+        "alt": "Suprema"
+      },
+      {
+        "id": "tyco-2",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Tyco.png",
+        "alt": "Tyco"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
 }

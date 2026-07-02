@@ -1,0 +1,129 @@
+/**
+ * Page: Home (/)
+ * Source: post-14.css (Elementor page ID 14)
+ * UNIQUE ONLY — flip cards, key enablers, testimonial band
+ */
+@layer pages {
+  .page-home .home-hero-banner img {
+    width: 100%;
+  }
+
+  /* Feature row alternating layout */
+  .page-home .home-feature-row {
+    padding: var(--section-padding) 0;
+    max-width: var(--content-max);
+    margin-inline: auto;
+  }
+
+  .page-home .home-feature-row__eyebrow {
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+
+  .page-home .home-feature-row__title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .page-home .home-feature-row__body {
+    font-size: 1.375rem;
+    font-weight: 400;
+    color: var(--color-text);
+  }
+
+  .page-home .home-feature-row--tinted {
+    background-color: var(--color-surface-muted);
+  }
+
+  /* Services flip-box grid */
+  .page-home .home-services {
+    padding: var(--section-padding) 0;
+    max-width: var(--content-max);
+    margin-inline: auto;
+  }
+
+  .page-home .home-services__eyebrow {
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+  }
+
+  .page-home .home-services__title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .page-home .home-services__subtitle {
+    text-align: center;
+    font-size: 1.375rem;
+    color: var(--color-text);
+  }
+
+  /* Key enabler stat cards */
+  .page-home .home-stat-card {
+    background: #fff;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-enabler);
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+  }
+
+  .page-home .home-stat-card__watermark {
+    font-size: 5rem;
+    font-weight: 600;
+    color: #13934b14;
+  }
+
+  .page-home .home-stat-card__label {
+    margin-top: -2.125rem;
+    font-size: 1rem;
+    color: var(--color-text);
+  }
+
+  /* Testimonials band */
+  .page-home .home-testimonials {
+    margin-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+  }
+
+  .page-home .home-testimonials::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--color-text);
+    opacity: 0.63;
+  }
+
+  .page-home .home-testimonials__carousel {
+    position: relative;
+    width: 59%;
+    margin: -5rem auto 0;
+  }
+
+  .page-home .home-testimonial__text {
+    font-size: 1.125rem;
+  }
+
+  .page-home .home-testimonial__name {
+    font-size: 1.5625rem;
+    font-weight: 600;
+  }
+
+  .page-home .home-testimonial__title {
+    color: var(--secondary-color);
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .page-home .home-testimonial__avatar {
+    width: 94px;
+    height: 94px;
+  }
+}

@@ -1,0 +1,359 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "autodesk",
+    "bannerTitle": "Autodesk AEC Collection",
+    "bannerTagline": "The comprehensive software suite for architecture, engineering, and construction professionals",
+    "mediaInline": false,
+    "title": "Autodesk AEC Collection",
+    "paragraphs": [
+      "The AEC Collection offers a complete suite of essential software tools for building design, civil infrastructure, and construction management. With up-to-date software releases and cloud-based collaboration features, teams can streamline workflows, enhance productivity, and deliver high-quality construction and engineering projects.",
+      "From conceptual modeling to detailed documentation and construction coordination, the AEC Collection supports every stage of the project lifecycle with integrated, discipline-specific workflows. It provides advanced solutions for structural engineering, MEP design, civil engineering, and construction planning—all in one cost-effective package designed to support local industry standards, improve accuracy, and optimize project performance."
+    ],
+    "imageSrc": "/images/software/autodesk/aec-collection/imgi_8_photo-1581094794329-c8112a89af12-683x1024.png",
+    "imageAlt": "Autodesk AEC Collection",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "product-cards",
+      "gridColumns": 4,
+      "title": {
+        "before": "Software Included in AEC Collection"
+      },
+      "subheading": "Comprehensive tools for every stage of your project",
+      "align": "center",
+      "items": [
+        {
+          "title": "AutoCAD",
+          "body": "Professional 2D and 3D CAD software for drafting, design, and documentation.",
+          "icon": "cube",
+          "imageSrc": "/images/software/autodesk/aec-collection/Autocad.png",
+          "imageAlt": "Autocad"
+        },
+        {
+          "title": "Revit",
+          "body": "BIM software for architectural design, MEP, and structural engineering.",
+          "icon": "cube",
+          "imageSrc": "/images/software/autodesk/aec-collection/Revit.png",
+          "imageAlt": "Revit"
+        },
+        {
+          "title": "Civil 3D",
+          "body": "Civil engineering design and documentation software for BIM workflows.",
+          "icon": "cube",
+          "imageSrc": "/images/software/autodesk/aec-collection/Civil-3d-1.png",
+          "imageAlt": "Civil 3D"
+        },
+        {
+          "title": "Navisworks",
+          "body": "Review and coordination software for 3D model analysis and clash detection.",
+          "icon": "cube",
+          "imageSrc": "/images/software/autodesk/aec-collection/Navisworks.png",
+          "imageAlt": "Navisworks"
+        },
+        {
+          "title": "3ds Max",
+          "body": "3D modeling, animation, and rendering software for design visualization.",
+          "icon": "cube",
+          "imageSrc": "/images/software/autodesk/aec-collection/3Dmax.png",
+          "imageAlt": "3Dmax"
+        },
+        {
+          "title": "InfraWorks",
+          "body": "Civil infrastructure design software for creating large-scale models.",
+          "icon": "cube",
+          "imageSrc": "/images/software/autodesk/aec-collection/infraworks-1.png",
+          "imageAlt": "InfraWorks"
+        },
+        {
+          "title": "Advance Steel",
+          "body": "3D modeling software for steel detailing, design, and fabrication.",
+          "icon": "cube",
+          "imageSrc": "/images/software/autodesk/aec-collection/Advance-steel.png",
+          "imageAlt": "Advance Steel"
+        },
+        {
+          "title": "Robot Structural Analysis",
+          "body": "Structural analysis software for structural engineers to simulate and analyze.",
+          "icon": "cube",
+          "imageSrc": "/images/software/autodesk/aec-collection/Robot-Structural-Analysis.png",
+          "imageAlt": "Robot-Structural-Analysis"
+        },
+        {
+          "title": "FormIt",
+          "body": "Conceptual design and modeling software for early-stage design.",
+          "icon": "cube",
+          "imageSrc": "/images/software/autodesk/aec-collection/FormIt.png",
+          "imageAlt": "FormIt"
+        },
+        {
+          "title": "ReCap Pro",
+          "body": "Reality capture software for 3D modeling from laser scans and photos.",
+          "icon": "cube",
+          "imageSrc": "/images/software/autodesk/aec-collection/ReCap-Pro.png",
+          "imageAlt": "ReCap-Pro"
+        },
+        {
+          "title": "Vehicle Tracking",
+          "body": "Transportation analysis and simulation software for swept path analysis.",
+          "icon": "cube",
+          "imageSrc": "/images/software/autodesk/aec-collection/Vehicle-Tracking.png",
+          "imageAlt": "Vehicle-Tracking"
+        },
+        {
+          "title": "Structural Bridge Design",
+          "body": "Bridge analysis and design software for structural engineers.",
+          "icon": "cube",
+          "imageSrc": "/images/software/autodesk/aec-collection/Structural-Bridge-Design.png",
+          "imageAlt": "Structural Bridge Design"
+        },
+        {
+          "title": "Fabrication CADmep",
+          "body": "MEP fabrication software for detailing and manufacturing.",
+          "icon": "cube",
+          "imageSrc": "/images/software/autodesk/aec-collection/Fabrication-CADmep.png",
+          "imageAlt": "Fabrication-CADmep"
+        },
+        {
+          "title": "Insight",
+          "body": "Building performance analysis software for energy efficiency and sustainability.",
+          "icon": "cube",
+          "imageSrc": "/images/software/autodesk/aec-collection/infraworks.png",
+          "imageAlt": "infraworks"
+        },
+        {
+          "title": "Arnold",
+          "body": "Advanced Monte Carlo ray tracing renderer for high-quality 3D animation.",
+          "icon": "cube",
+          "imageSrc": "/images/software/autodesk/aec-collection/Arnold_.png",
+          "imageAlt": "Arnold​"
+        },
+        {
+          "title": "Maya",
+          "body": "3D animation, modeling, simulation, and rendering software.",
+          "icon": "cube",
+          "imageSrc": "/images/software/autodesk/aec-collection/Maya.png",
+          "imageAlt": "Maya"
+        },
+        {
+          "title": "Autodesk Docs",
+          "body": "Manage project information in a cloud-based, common data environment.",
+          "icon": "cube",
+          "imageSrc": "/images/software/autodesk/aec-collection/Autodesk-Doc.png",
+          "imageAlt": "Autodesk-Doc"
+        },
+        {
+          "title": "Dynamo Studio",
+          "body": "Visual programming for automating Revit workflows.",
+          "icon": "cube",
+          "imageSrc": "/images/software/autodesk/aec-collection/Dynamo-Studio.png",
+          "imageAlt": "Dynamo Studio"
+        },
+        {
+          "title": "Autodesk Rendering (A360)",
+          "body": "Cloud-based photorealistic rendering.",
+          "icon": "cube",
+          "imageSrc": "/images/software/autodesk/aec-collection/Arnold_.png",
+          "imageAlt": "Arnold​"
+        },
+        {
+          "title": "Autodesk Drive",
+          "body": "Secure cloud storage for design files.",
+          "icon": "cube",
+          "imageSrc": "/images/software/autodesk/aec-collection/autodesk-drive.png",
+          "imageAlt": "autodesk-drive"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Benefits of the AEC Collection"
+      },
+      "subheading": "Why professionals choose the AEC Collection for their projects",
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Comprehensive Toolset",
+          "body": "Access to a wide range of specialized tools for every discipline and project phase.",
+          "icon": "box-open"
+        },
+        {
+          "title": "Interoperability",
+          "body": "Seamless data exchange between different software tools and project stakeholders.",
+          "icon": "sync"
+        },
+        {
+          "title": "Enhanced Collaboration",
+          "body": "Cloud-based workflows enable real-time collaboration across teams and locations.",
+          "icon": "users"
+        },
+        {
+          "title": "Cost Effective",
+          "body": "Significant savings compared to purchasing individual software licenses.",
+          "icon": "search-dollar"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "AutoCAD?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Official Autodesk Gold Partner",
+          "body": "As an authorized partner, we provide access to genuine Autodesk products.",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset"
+        },
+        {
+          "title": "Local Presence",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "mobile-alt"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Transform Your Workflow?",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Success stories from businesses using AutoCAD through Aptus Infotech",
+    "items": [
+      {
+        "quote": "Aptus Infotech provided us with AutoCAD licenses and comprehensive training. Their support team helped us streamline our design process, reducing project completion time by 30%.",
+        "author": "Yusuf Al Hashmi",
+        "role": "Design Manager, Construction Company"
+      },
+      {
+        "quote": "The AutoCAD toolsets from Aptus have revolutionized our workflow. The specialized tools for architecture have significantly improved our productivity and design quality.",
+        "author": "Mariam Al Said",
+        "role": "Lead Architect, Design Firm"
+      },
+      {
+        "quote": "As a small engineering firm, we needed affordable yet powerful CAD software. Aptus recommended AutoCAD LT, which perfectly meets our needs without breaking the budget.",
+        "author": "Khalid Al Balushi",
+        "role": "Owner, Engineering Consultancy"
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/planswift.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Prokon.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/sophos.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/spectronova.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/aconex.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/etap.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/fortinet.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/kaspersky.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft.png",
+        "alt": "Microsoft"
+      },
+      {
+        "id": "lumion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/lumion.png",
+        "alt": "lumion"
+      },
+      {
+        "id": "paloalto",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/paloalto.png",
+        "alt": "paloalto"
+      },
+      {
+        "id": "vray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/v.ray_.png",
+        "alt": "v.ray"
+      },
+      {
+        "id": "twinmotion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png",
+        "alt": "twinmotion"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

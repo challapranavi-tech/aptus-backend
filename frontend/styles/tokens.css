@@ -1,0 +1,48 @@
+/**
+ * :root bridge — Elementor kit-9 (post-9.css) on aptusinfotech.com
+ */
+:root {
+  --e-global-color-primary: #1352a3;
+  --e-global-color-secondary: #67db85;
+  --e-global-color-accent: #000000;
+  --e-global-color-text: #ffffff;
+  --e-global-color-green: #13934b;
+  --e-global-color-topbar: #248bcc;
+  --e-global-color-surface-tint: #24648c0f;
+  --e-global-color-surface-tint-green: #13934b14;
+  --e-global-color-body: #695b5b;
+
+  --primary-color: #1352a3;
+  --primary-color-hover: #13934b;
+  --secondary-color: #67db85;
+  --accent-green: #13934b;
+  --accent-green-hover: #13934b;
+  --accent-blue: #248bcc;
+  --accent-sky: #248bcc;
+
+  --color-text: #333333;
+  --color-text-muted: #695b5b;
+  --color-background: #ffffff;
+  --color-surface-muted: #24648c0f;
+  --color-surface-muted-green: #13934b14;
+  --color-border: #e4ebe6;
+  --color-heading: #000000;
+
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
+  --font-primary: var(--font-poppins), "Poppins", ui-sans-serif, system-ui, sans-serif;
+
+  --content-max: 1300px;
+  --section-padding: 4rem;
+  --radius-card: 20px;
+  --radius-button: 3px;
+  --radius-icon-card: 10px;
+  --shadow-enabler: 0 18px 25px 0 rgb(0 0 0 / 0.12);
+  --shadow-icon-card: 0 0 10px rgb(0 0 0 / 0.5);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 1500ms;
+}

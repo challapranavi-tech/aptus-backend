@@ -1,0 +1,119 @@
+{
+  "banner": {
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/image-1.png",
+    "imageAlt": "Anti Virus Solutions"
+  },
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "antivirus",
+    "subnavLinks": [
+      { "label": "Antivirus and Data Security", "href": "/antivirus-and-data-security" },
+      { "label": "AutoDesk", "href": "/autodesk" },
+      { "label": "Adobe", "href": "/adobe" },
+      { "label": "SpectroNova", "href": "/spectronova" },
+      { "label": "Prokon", "href": "/prokon" },
+      { "label": "SonicWall Next-Gen Firewall", "href": "/sonicwall-next-gen-firewall" },
+      { "label": "Oracle Primavera P6", "href": "/oracle-primavera-p6" },
+      { "label": "Autodesk Construction Cloud", "href": "/construction-cloud" }
+    ],
+    "title": "Anti Virus Solutions",
+    "titleLevel": "h2",
+    "mediaInline": true,
+    "introRows": [
+      {
+        "paragraphs": [
+          "Apply strong security steps to reduce chances of data breaches. Using Anti-virus helps protect your business from extra financial loss and damage to brand trust and future income.",
+          "To stop scammers from using the health crisis for gain, Aptus Infotech teamed up with top 3 Anti-Virus providers for advanced threat defense.",
+          "Aptus Infotech now partners with the top 3 antivirus providers to guard against advanced threats during the health crisis."
+        ],
+        "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/image-1.png",
+        "imageAlt": "Anti Virus Solutions"
+      }
+    ]
+  },
+  "cardSections": [
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "checklist",
+      "title": {
+        "before": "Why Choose Aptus Infotech"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Tailored Solutions for Your Business"
+        },
+        {
+          "title": "Scalable for Every Business Size"
+        },
+        {
+          "title": "Expert Installation and Ongoing Support"
+        },
+        {
+          "title": "Powered by Cutting-Edge Technology"
+        }
+      ]
+    }
+  ],
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances-grid",
+    "logos": [
+      {
+        "id": "v-ray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/V-ray-e1754299498907.png",
+        "alt": "V-Ray"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Spectronova-2.png",
+        "alt": "Spectronova"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Sketchup-e1759831191828.png",
+        "alt": "SketchUp"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Prokon-1-e1754305048112.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "primavera",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Primavera.png",
+        "alt": "Primavera"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "csi",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/CSI.png",
+        "alt": "CSI"
+      },
+      {
+        "id": "cype",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Cype.png",
+        "alt": "CYPE"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Aconex-e1754205364753.png",
+        "alt": "Aconex"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

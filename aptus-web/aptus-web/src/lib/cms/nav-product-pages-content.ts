@@ -485,7 +485,7 @@ export const NAV_PRODUCT_PAGE_DEFS: NavProductPageDef[] = [
   },
   // Structural software
   {
-    path: "/computers-structures-inc",
+    path: "/computers-structures",
     label: "Computers & Structures, Inc.",
     category: "structural",
     description:

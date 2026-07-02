@@ -1,0 +1,172 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "quantity-takeoff",
+    "bannerTitle": "PlanSwift",
+    "bannerTagline": "Advanced Quantity Takeoff Software for Construction Professionals",
+    "mediaInline": false,
+    "title": "Revolutionize Your Quantity Takeoff Process",
+    "paragraphs": [
+      "PlainSwift is an innovative quantity takeoff software designed to streamline the estimation process for construction professionals. With its powerful measurement tools and intuitive interface, PlainSwift makes quantifying materials from digital plans faster and more accurate than ever before.",
+      "Our software supports multiple file formats including PDF, DWG, and BIM models, allowing you to perform precise takeoffs directly on digital blueprints. The automated calculations and customizable reporting features save valuable time while ensuring accuracy in your estimates.",
+      "At Aptus Infotech, we provide PlainSwift with comprehensive training and support to help construction firms in Oman optimize their estimating workflows and improve project profitability."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/20250820_1152_Futuristic-Software-Dashboard_simple_compose_01k333w9a6f2eacr1naybj8ecx.png",
+    "imageAlt": "PlanSwift",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "gridColumns": 3,
+      "title": {
+        "before": "Powerful Features"
+      },
+      "subheading": "Discover the capabilities that make PlainSwift the ultimate takeoff solution",
+      "align": "center",
+      "items": [
+        {
+          "title": "Precision Measurement Tools",
+          "body": "Perform accurate linear, area, and volume measurements with advanced digital tools.",
+          "icon": "water"
+        },
+        {
+          "title": "Multi-Format Support",
+          "body": "Import and work with various file formats including PDF, DWG, DXF, BIM models, and raster images.",
+          "icon": "file-import"
+        },
+        {
+          "title": "Advanced Layer Management",
+          "body": "Organize your takeoffs with customizable layers and color coding.",
+          "icon": "clone"
+        },
+        {
+          "title": "Assembly Libraries",
+          "body": "Create and save reusable assemblies for common construction components. Quickly apply complex measurements with a single click.",
+          "icon": "cubes"
+        },
+        {
+          "title": "Customizable Reporting",
+          "body": "Generate professional reports with customizable templates. Export data to Excel, PDF, or integrate with estimating software for seamless workflows.",
+          "icon": "file-export"
+        },
+        {
+          "title": "Cloud Collaboration",
+          "body": "Share projects with team members, track changes, and collaborate in real-time. Maintain version control and audit trails for all takeoff activities.",
+          "icon": "cloud"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Key Benefits"
+      },
+      "subheading": "Why PlainSwift is essential for construction professionals",
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Enhanced Accuracy",
+          "body": "Eliminate human error and ensure precise measurements with digital takeoff tools, reducing costly mistakes in material ordering and budgeting.",
+          "icon": "smile"
+        },
+        {
+          "title": "Time Savings",
+          "body": "Complete takeoffs up to 80% faster than manual methods. Automate repetitive tasks and focus on value-added activities.",
+          "icon": "tachometer-alt"
+        },
+        {
+          "title": "Cost Reduction",
+          "body": "Improve bid accuracy and reduce material waste. Optimize resource allocation and enhance project profitability through precise quantification.",
+          "icon": "chart-line"
+        },
+        {
+          "title": "Competitive Advantage",
+          "body": "Submit more accurate bids in less time, giving you an edge over competitors. Win more projects with professional, detailed estimates.",
+          "icon": "shield-alt"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "PlainSwift?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Authorized Partner",
+          "body": "We are the official distributor of PlainSwift in Oman, ensuring genuine software licenses and direct access to manufacturer support.",
+          "icon": "certificate"
+        },
+        {
+          "title": "Industry-Specific Training",
+          "body": "Our certified trainers provide customized training programs tailored to your specific trade and project requirements.",
+          "icon": "graduation-cap"
+        },
+        {
+          "title": "Local Technical Support",
+          "body": "Our dedicated support team provides prompt assistance in Arabic and English, ensuring minimal disruption to your workflow.",
+          "icon": "headset"
+        },
+        {
+          "title": "Regular Updates",
+          "body": "We ensure you always have the latest version of PlainSwift with the newest features and improvements to keep you ahead of the competition.",
+          "icon": "reply"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Transform Your Takeoff Process?",
+    "subheading": "Get in touch with our PlainSwift experts to discuss your requirements and find the perfect solution for your construction business.",
+    "actionLabel": "Request a Quote",
+    "actionHref": "#form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Success stories from construction professionals using PlainSwift",
+    "items": [
+      {
+        "quote": "PlainSwift has revolutionized our estimating process. We've reduced takeoff time by 75% and improved accuracy significantly. The training provided by Aptus Infotech was exceptional.",
+        "author": "Hamad Al Busaidi",
+        "role": "Estimating Manager",
+        "company": "Construction Company"
+      },
+      {
+        "quote": "As a civil engineering firm, we need precise quantities for earthwork and utilities. PlainSwift delivers exceptional accuracy and the support from Aptus has been outstanding.",
+        "author": "Aisha Al Habsi",
+        "role": "Project Director",
+        "company": "Engineering Consultancy"
+      },
+      {
+        "quote": "The assembly libraries in PlainSwift Professional have saved us countless hours on repetitive measurements. We can now complete complex takeoffs in a fraction of the time it used to take.",
+        "author": "Khalid Al Mawali",
+        "role": "Owner",
+        "company": "Electrical Contracting Firm"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

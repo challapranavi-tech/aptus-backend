@@ -1,0 +1,226 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "structural",
+    "subnavLinks": [
+      { "label": "Computers & Structures, Inc", "href": "/computers-structures" },
+      { "label": "Prokon", "href": "/prokon" }
+    ],
+    "bannerTitle": "Leading Structural Engineering Software",
+    "bannerTagline": "Computer & Structures, Inc. – Providing innovative software solutions for structural analysis and design",
+    "title": "Design with Confidence",
+    "paragraphs": [
+      "Our Structural Engineering Software provides comprehensive tools for analysis, design, and documentation of building structures. From high-rise buildings to bridges, industrial facilities to residential projects, our software helps engineers create safe, efficient, and innovative structural designs.",
+      "At Aptus Infotech, we provide industry-leading structural engineering software solutions along with expert training and support to help engineering firms in Oman deliver exceptional projects with confidence."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/20250819_1515_Structural-Engineering-Graphics_simple_compose_01k30x43w9fbm8qfjamc2fvmwh-4.png",
+    "imageAlt": "Structural Engineering Graphics",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "gridColumns": 3,
+      "title": {
+        "before": "Powerful Features"
+      },
+      "subheading": "Discover the capabilities that make our Structural Engineering Software essential for modern design",
+      "align": "center",
+      "items": [
+        {
+          "title": "Advanced Analysis",
+          "body": "Perform linear and nonlinear static and dynamic analysis with powerful finite element solvers. Analyze complex structures under various loading conditions including seismic, wind, and thermal effects.",
+          "icon": "chart-bar"
+        },
+        {
+          "title": "3D Modeling",
+          "body": "Create detailed 3D structural models with intuitive modeling tools. Generate complex geometries, define material properties, and apply loads and constraints with precision.",
+          "icon": "cube"
+        },
+        {
+          "title": "Design Optimization",
+          "body": "Optimize structural elements for material efficiency and performance. Automatically size members, check against design codes, and generate cost-effective solutions.",
+          "icon": "tools"
+        },
+        {
+          "title": "Comprehensive Documentation",
+          "body": "Generate detailed calculation reports, construction drawings, and material takeoffs. Automate documentation workflows to save time and reduce errors.",
+          "icon": "file"
+        },
+        {
+          "title": "International Design Codes",
+          "body": "Stay compliant with global design standards including ACI, AISC, Eurocodes, BS, and Omani building codes. Easily switch between codes for international projects.",
+          "icon": "building"
+        },
+        {
+          "title": "BIM Integration",
+          "body": "Seamlessly integrate with BIM workflows through interoperability with Revit, AutoCAD, and other design software. Exchange data efficiently across project teams.",
+          "icon": "plug"
+        }
+      ]
+    },
+    {
+      "id": "products",
+      "visible": true,
+      "variant": "product-cards",
+      "gridColumns": 4,
+      "title": {
+        "before": "Our Structural Engineering Softwares"
+      },
+      "subheading": "CSI develops industry-leading software for structural analysis, design, and documentation",
+      "align": "center",
+      "items": [
+        {
+          "title": "SAP2000",
+          "body": "General-purpose structural analysis and design program for all types of structures.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sap2000-1.png",
+          "imageAlt": "SAP2000",
+          "actionLabel": "Request a Quote",
+          "actionHref": "#Form"
+        },
+        {
+          "title": "ETABS",
+          "body": "Integrated building design software for structural analysis and design of buildings.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/ETABS-1-rah2lrbqce55m080evqvjed0ib75bphc3u5eyzw9e8.png",
+          "imageAlt": "ETABS",
+          "actionLabel": "Request a Quote",
+          "actionHref": "#Form"
+        },
+        {
+          "title": "SAFE",
+          "body": "Ultimate tool for designing concrete floor and foundation systems.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/SAFE-1-rah2pgstav7vemu4rhfwdgogv0x9oq77y6sd4aecuo.png",
+          "imageAlt": "SAFE",
+          "actionLabel": "Request a Quote",
+          "actionHref": "#Form"
+        },
+        {
+          "title": "CSiBridge",
+          "body": "Comprehensive software for bridge analysis, design, and rating.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Csi-bridge-1-rah2rh6dx3yy8lx00uq67geylp0j5f6jw50r2lf1jk.png",
+          "imageAlt": "CSiBridge",
+          "actionLabel": "Request a Quote",
+          "actionHref": "#Form"
+        },
+        {
+          "title": "CSiCOL",
+          "body": "Comprehensive software package for the analysis and design of columns.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/CSicol-1-rah2usjw12id733lnsbsi4ai1mo5azcgojvf0qi1lc.png",
+          "imageAlt": "CSiCOL",
+          "actionLabel": "Request a Quote",
+          "actionHref": "#Form"
+        },
+        {
+          "title": "PERFORM-3D",
+          "body": "Powerful tool for nonlinear analysis and performance-based design.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Perform-3D-1-rah2vcai0l9dywaxgiuyghb6ipyusmitr9km3joryo.png",
+          "imageAlt": "PERFORM-3D",
+          "actionLabel": "Request a Quote",
+          "actionHref": "#Form"
+        }
+      ]
+    },
+    {
+      "id": "why-csi",
+      "visible": true,
+      "variant": "value-cards",
+      "gridColumns": 4,
+      "title": {
+        "before": "Why Choose CSI Software"
+      },
+      "subheading": "Trusted by engineers worldwide for over 45 years",
+      "align": "center",
+      "items": [
+        {
+          "title": "45+ Years of Excellence",
+          "body": "CSI has been developing structural engineering software since 1975, continuously innovating and improving.",
+          "icon": "clock"
+        },
+        {
+          "title": "Global Recognition",
+          "body": "Our software is used in over 160 countries and trusted by leading engineering firms worldwide.",
+          "icon": "medal"
+        },
+        {
+          "title": "Advanced Technology",
+          "body": "State-of-the-art analysis and design capabilities with cutting-edge computational methods.",
+          "icon": "layer-group"
+        },
+        {
+          "title": "Expert Support",
+          "body": "Our team of experienced engineers provides comprehensive technical support and training.",
+          "icon": "headset"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Transform Your Engineering Workflow?",
+    "subheading": "Join thousands of engineers who rely on CSI software for their most important projects",
+    "actionLabel": "Request a Quote",
+    "actionHref": "#Form"
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances-grid",
+    "logos": [
+      {
+        "id": "v-ray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/V-ray-e1754299498907.png",
+        "alt": "V-Ray"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Spectronova-2.png",
+        "alt": "Spectronova"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Sketchup-e1759831191828.png",
+        "alt": "SketchUp"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Prokon-1-e1754305048112.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "primavera",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Primavera.png",
+        "alt": "Primavera"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "csi",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/CSI.png",
+        "alt": "CSI"
+      },
+      {
+        "id": "cype",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Cype.png",
+        "alt": "CYPE"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Aconex-e1754205364753.png",
+        "alt": "Aconex"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Send Message",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

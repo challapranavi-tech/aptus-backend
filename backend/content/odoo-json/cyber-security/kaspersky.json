@@ -1,0 +1,241 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "cyber-security",
+    "subnavLinks": [
+      { "label": "Fortinet", "href": "/fortinet" },
+      { "label": "Sophos", "href": "/sophos" },
+      { "label": "SonicWall Next-Gen Firewall", "href": "/sonicwall-next-gen-firewall" },
+      { "label": "Kaspersky", "href": "/kaspersky" },
+      { "label": "Palo Alto", "href": "/palo-alto" }
+    ],
+    "bannerTitle": "Kaspersky Advanced Cyber Security Solutions",
+    "bannerTagline": "Protect your digital world with Kaspersky's cutting-edge security technologies that defend against the most sophisticated cyber threats",
+    "title": "World-Class Cyber Protection",
+    "paragraphs": [
+      "Kaspersky is a globally recognized cybersecurity company with over 20 years of experience in protecting businesses and individuals from cyber threats. Our innovative solutions combine cutting-edge technology with expert knowledge to deliver comprehensive security.",
+      "From endpoint protection to advanced threat intelligence, Kaspersky provides a complete security ecosystem that adapts to the evolving threat landscape. Our solutions are trusted by over 400 million users and 270,000 corporate clients worldwide.",
+      "With a focus on research and development, Kaspersky continuously innovates to stay ahead of cybercriminals, providing you with the most effective protection against malware, ransomware, phishing, and other sophisticated attacks."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_Create_a_detailed_digital_security_image_w_0-673x1024.jpg",
+    "imageAlt": "Kaspersky",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "gridColumns": 3,
+      "title": {
+        "before": "Advanced Security Features"
+      },
+      "subheading": "Discover the capabilities that make AutoCAD the industry standard",
+      "align": "center",
+      "items": [
+        {
+          "title": "Real-Time Protection",
+          "body": "Continuous monitoring and scanning to detect and block threats before they can harm your systems.",
+          "icon": "shield-alt"
+        },
+        {
+          "title": "AI-Powered Detection",
+          "body": "Machine learning algorithms analyze behavior patterns to identify and stop zero-day threats.",
+          "icon": "brain"
+        },
+        {
+          "title": "Cloud-Based Security",
+          "body": "Leverage the power of cloud computing for faster threat detection and automatic updates.",
+          "icon": "cloud"
+        },
+        {
+          "title": "Anti-Ransomware",
+          "body": "Specialized protection against ransomware attacks with behavior-based detection and backup protection.",
+          "icon": "virus-slash"
+        },
+        {
+          "title": "Privacy Protection",
+          "body": "Safeguard your personal data with advanced encryption and anti-phishing technologies.",
+          "icon": "lock"
+        },
+        {
+          "title": "Network Security",
+          "body": "Comprehensive network protection with firewall, intrusion detection, and vulnerability scanning.",
+          "icon": "network-wired"
+        }
+      ]
+    },
+    {
+      "id": "why-kaspersky",
+      "visible": true,
+      "variant": "icon-cards",
+      "gridColumns": 4,
+      "title": {
+        "before": "Why Choose Kaspersky?"
+      },
+      "subheading": "Key benefits that make Kaspersky the trusted choice",
+      "align": "center",
+      "items": [
+        {
+          "title": "Industry Recognition",
+          "body": "Consistently rated #1 in independent tests for protection and performance by leading testing organizations.",
+          "icon": "medal"
+        },
+        {
+          "title": "Global Threat Research",
+          "body": "Our Global Research and Analysis Team works 24/7 to discover and analyze new threats.",
+          "icon": "microscope"
+        },
+        {
+          "title": "Trusted Worldwide",
+          "body": "Over 400 million users and 270,000 corporate clients trust Kaspersky with their security.",
+          "icon": "users"
+        },
+        {
+          "title": "Expert Support",
+          "body": "24/7 technical support from security experts to help you with any security concerns.",
+          "icon": "headset"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for AutoCAD?"
+      },
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Official Partner",
+          "body": "As an authorized partner, we provide access to genuine products.",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset"
+        },
+        {
+          "title": "Local Presence",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "mobile-alt"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Protect Your Digital World Today",
+    "subheading": "Join millions of users who trust Kaspersky for their cybersecurity needs. Get started with a free trial or contact our sales team for enterprise solutions.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#Form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Success stories from businesses using AutoCAD through Aptus Infotech",
+    "items": [
+      {
+        "quote": "Kaspersky has been our security partner for over 5 years. Their endpoint security solution has protected us from numerous attacks, and the centralized management makes administration effortless.",
+        "author": "Robert Thompson",
+        "role": "IT Director",
+        "company": "Healthcare Provider"
+      },
+      {
+        "quote": "The real-time protection and AI-powered detection in Kaspersky Total Security have given us peace of mind. It's lightweight yet incredibly effective against all types of threats.",
+        "author": "Sarah Johnson",
+        "role": "CFO",
+        "company": "Financial Services Firm"
+      },
+      {
+        "quote": "Kaspersky Security Cloud has transformed how we approach security. The adaptive protection and personalized features make it perfect for our diverse workforce.",
+        "author": "Michael Chen",
+        "role": "CTO",
+        "company": "Technology Company"
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances-grid",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+        "alt": "Microsoft"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "description": "Our experts can help you to implement the right security system for your business.",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light",
+    "anchorId": "Form"
+  }
+}

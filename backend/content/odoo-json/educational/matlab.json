@@ -1,0 +1,183 @@
+{
+  "banner": {
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Matlab-e1754114598813-r9ni3ena35i5di3vvsorl32w8joynsl9fu1yelzp2g.png",
+    "imageAlt": "Matlab"
+  },
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "educational",
+    "subnavLinks": [
+      { "label": "Matlab", "href": "/matlab" },
+      { "label": "Turnitin", "href": "/turnitin" },
+      { "label": "IBM SPSS Software", "href": "/ibm-spss-software" },
+      { "label": "ANSYS", "href": "/ansys" }
+    ],
+    "title": "MATLAB",
+    "titleLevel": "h2",
+    "mediaInline": true,
+    "introRows": [
+      {
+        "paragraphs": [
+          "<h2 class=\"aptus-matlab-intro-heading\">The Language of Technical Computing for Engineers and Scientists</h2>",
+          "MATLAB (Matrix Laboratory) is a high-performance language and interactive environment developed by MathWorks for numerical computation, visualization, and programming. It is widely used across various industries including engineering, science, finance, and research for data analysis, algorithm development, modeling, simulation, and much more."
+        ],
+        "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/Matlb-1.png",
+        "imageAlt": "Matlb"
+      }
+    ]
+  },
+  "cardSections": [
+    {
+      "id": "empowers",
+      "visible": true,
+      "variant": "bullet-list",
+      "title": {
+        "before": "MATLAB empowers engineers, scientists, and researchers to:"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Perform Advanced Numerical Computing",
+          "body": "Work efficiently with a matrix-based environment optimized for mathematical operations, linear algebra, statistics, optimization, and more. It simplifies complex numerical problems with powerful built-in functions."
+        },
+        {
+          "title": "Develop Algorithms and Models Rapidly",
+          "body": "Accelerate algorithm development and prototyping with a high-level language that supports iterative design. Combine computational, visualization, and programming tasks in a user-friendly environment."
+        },
+        {
+          "title": "Analyze and Visualize Data Effectively",
+          "body": "Explore and understand data with extensive 2D and 3D plotting capabilities. Create custom plots, animations, and interactive visualizations to gain insights from complex datasets."
+        },
+        {
+          "title": "Leverage Specialized Toolboxes",
+          "body": "Extend MATLAB's core functionality with a vast collection of specialized toolboxes for specific applications, such as Signal Processing, Control Systems, Image Processing, Machine Learning, Deep Learning, Statistics, and more."
+        },
+        {
+          "title": "Build and Deploy Applications",
+          "body": "Develop custom applications directly within MATLAB, or integrate MATLAB-based algorithms into enterprise applications, hardware, and other languages like C++, Java, and Python."
+        },
+        {
+          "title": "Model and Simulate Dynamic Systems (with Simulink)",
+          "body": "Seamlessly integrate with Simulink, a block diagram environment for multi-domain simulation and Model-Based Design, enabling the design, simulation, and analysis of dynamic and embedded systems."
+        }
+      ]
+    },
+    {
+      "id": "capabilities",
+      "visible": true,
+      "variant": "icon-cards",
+      "align": "center",
+      "gridColumns": 5,
+      "items": [
+        {
+          "title": "Numerical Computing",
+          "body": "",
+          "icon": "sort-numeric-up-alt"
+        },
+        {
+          "title": "Data Analysis",
+          "body": "",
+          "icon": "chart-bar"
+        },
+        {
+          "title": "Algorithm Development",
+          "body": "",
+          "icon": "head-side-virus"
+        },
+        {
+          "title": "Scientific Visualization",
+          "body": "",
+          "icon": "chart-pie"
+        },
+        {
+          "title": "Simulink",
+          "body": "",
+          "icon": "closed-captioning"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "checklist",
+      "title": {
+        "before": "Why Choose Aptus Infotech"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Tailored Solutions for Your Business"
+        },
+        {
+          "title": "Scalable for Every Business Size"
+        },
+        {
+          "title": "Expert Installation and Ongoing Support"
+        },
+        {
+          "title": "Powered by Cutting-Edge Technology"
+        }
+      ]
+    }
+  ],
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "v-ray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/V-ray-e1754299498907.png",
+        "alt": "V-ray"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Spectronova-2.png",
+        "alt": "Spectronova"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Sketchup-e1759831191828.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Prokon-1-e1754305048112.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "primavera",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Primavera.png",
+        "alt": "Primavera"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "csi",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/CSI.png",
+        "alt": "CSI"
+      },
+      {
+        "id": "cype",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Cype.png",
+        "alt": "Cype"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Aconex-e1754205364753.png",
+        "alt": "Aconex"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

@@ -1,0 +1,226 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "autodesk",
+    "bannerTitle": "3ds Max software for 3D modeling",
+    "bannerTagline": "Professional 3D modeling, animation, andrendering software for design visualization",
+    "mediaInline": false,
+    "title": "Create Stunning 3D Content with 3ds Max",
+    "paragraphs": [
+      "3ds Max is a professional 3D computer graphics program for making 3D animations, models, games, and images. Developed by Autodesk, it’s widely used by architects, engineers, and visualization specialists.",
+      "With powerful modeling, animation, and rendering tools, 3ds Max enables you to create photorealistic visualizations and compelling virtual reality experiences. Its flexible toolset and extensive plugin ecosystem make it the ideal choice for professionals across industries.",
+      "At Aptus Infotech, we provide genuine 3ds Max licenses along with comprehensive training and support to help you bring your creative visions to life."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/3d-683x1024.png",
+    "imageAlt": "3ds Max software for 3D modeling",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "gridColumns": 3,
+      "title": {
+        "before": "Powerful Features"
+      },
+      "subheading": "Discover the capabilities that make 3ds Max the industry standard for 3D content creation",
+      "align": "center",
+      "items": [
+        {
+          "title": "Advanced Modeling",
+          "body": "Create complex 3D models with precision using polygonal, spline, and NURBS modeling tools. Modify objects with powerful modifiers and procedural modeling techniques.",
+          "icon": "cube",
+          "imageAlt": "Advanced Modeling"
+        },
+        {
+          "title": "Animation & Rigging",
+          "body": "Bring your models to life with comprehensive animation tools. Create character rigs, animate objects, cameras, and lights with keyframe and procedural animation.",
+          "icon": "film",
+          "imageAlt": "Animation & Rigging"
+        },
+        {
+          "title": "Materials & Texturing",
+          "body": "Apply realistic materials and textures with the Slate Material Editor. Create physically accurate materials using the Autodesk Material Library.",
+          "icon": "paint-brush",
+          "imageAlt": "Materials & Texturing"
+        },
+        {
+          "title": "Rendering",
+          "body": "Produce photorealistic images with the integrated Arnold renderer. Create stunning visualizations with global illumination, caustics, and advanced lighting effects.",
+          "icon": "stroopwafel",
+          "imageAlt": "Rendering"
+        },
+        {
+          "title": "VR & Real-time",
+          "body": "Create immersive VR experiences and real-time visualizations. Export your projects to game engines and VR platforms with seamless workflows.",
+          "icon": "vr-cardboard",
+          "imageAlt": "VR & Real-time"
+        },
+        {
+          "title": "Extensibility",
+          "body": "Extend 3ds Max capabilities with thousands of plugins and scripts. Customize the interface and automate workflows with MAXScript and Python.",
+          "icon": "plug",
+          "imageAlt": "Extensibility"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Key Benefits"
+      },
+      "subheading": "How 3ds Max improves your creative workflow and project outcomes",
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Time Savings",
+          "body": "Significantly reduce production time with powerful modeling and animation tools, eliminating costly rework.",
+          "icon": "stopwatch"
+        },
+        {
+          "title": "Quality Enhancement",
+          "body": "Create professional-grade animations and visualizations that impress clients and audiences.",
+          "icon": "star"
+        },
+        {
+          "title": "Team Collaboration",
+          "body": "Work seamlessly with colleagues in a shared digital workspace with real-time collaboration features.",
+          "icon": "users"
+        },
+        {
+          "title": "Innovation Enablement",
+          "body": "Explore creative possibilities and bring your visions to life with cutting-edge 3D tools and features.",
+          "icon": "lightbulb"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Autodesk 3Ds Max?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Official Autodesk Gold Partner",
+          "body": "As an authorized partner, we provide access to genuine Autodesk products.",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset"
+        },
+        {
+          "title": "Local Presence",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "mobile-alt"
+        }
+      ]
+    }
+  ],
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/planswift.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Prokon.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/sophos.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/spectronova.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/aconex.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/etap.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/fortinet.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/kaspersky.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft.png",
+        "alt": "Microsoft"
+      },
+      {
+        "id": "lumion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/lumion.png",
+        "alt": "lumion"
+      },
+      {
+        "id": "paloalto",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/paloalto.png",
+        "alt": "paloalto"
+      },
+      {
+        "id": "vray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/v.ray_.png",
+        "alt": "v.ray"
+      },
+      {
+        "id": "twinmotion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png",
+        "alt": "twinmotion"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

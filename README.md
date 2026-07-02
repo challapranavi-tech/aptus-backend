@@ -1,78 +1,67 @@
-# Aptus Frontend
+# Aptus — monorepo
 
-Production-grade Next.js frontend scaffold for a headless Odoo CMS architecture.
+Marketing site split for independent hosting:
 
-## Architecture
+| Package | Folder | Deploy to | Role |
+|---------|--------|-----------|------|
+| **Frontend** | `frontend/` | Vercel, Netlify | Next.js UI — pages, components, styles |
+| **Backend** | `backend/` | Vercel, Railway, Render | Odoo CMS API, cache webhooks, content JSON |
 
-```
-Odoo (Content Management)
-        ↓
-       API
-        ↓
-Next.js Frontend
-        ↓
-GSAP Animations
-        ↓
-Website Visitors
-```
+Shared TypeScript types live in `shared/types/`.
 
-## Tech Stack
-
-- Next.js 15 (App Router)
-- TypeScript
-- Tailwind CSS
-- GSAP
-- ESLint
-
-## Getting Started
+## Quick start
 
 ```bash
 npm install
-cp .env.example .env.local
-npm run dev
+cp backend/.env.example backend/.env.local    # Odoo credentials
+cp frontend/.env.example frontend/.env.local  # APTUS_API_URL=http://localhost:3001
+npm run dev                                   # backend :3001 + frontend :3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+**Open http://localhost:3000** for the website. Port 3001 is the API only (not the marketing site).
 
-## Project Structure
+## Deploy
 
-```
-/app                  # App Router pages and layouts
-/components
-  /layout             # Header, Footer
-  /sections           # CMS section components + renderer
-  /ui                 # Reusable UI primitives
-  /providers          # Client-side providers (GSAP)
-/data                 # Mock CMS data layer
-/hooks                # React hooks (GSAP)
-/lib
-  /odoo               # Odoo API client (stub)
-  /gsap               # GSAP configuration helpers
-/types                # TypeScript interfaces
-/styles               # Global styles and design tokens
-/public               # Static assets
-```
+### Frontend (Vercel / Netlify)
 
-## Phase 1 Status
+- **Root directory:** `frontend`
+- **Env:** `APTUS_API_URL` → your deployed backend URL
+- **Env:** `NEXT_PUBLIC_SITE_URL`, `ODOO_IMAGE_HOST` (optional)
 
-This scaffold provides the foundation only:
+Vercel: import repo, set Root Directory to `frontend`.
 
-- Global layout with Header and Footer
-- Section renderer system (hero, features, cta, testimonials)
-- Odoo client layer (stub — integration pending)
-- GSAP helper layer (no animations yet)
-- Mock CMS data layer
-- SaaS-style Tailwind design system
+Netlify: `netlify.toml` is in `frontend/` — set base directory to `frontend` in site settings.
 
-## Environment Variables
+### Backend (Vercel / Railway / Render)
 
-See `.env.example` for required configuration.
+- **Root directory:** `backend`
+- **Env:** all `ODOO_*` vars from `backend/.env.example`
+- **Required:** `ODOO_REVALIDATE_TOKEN` (see `docs/odoo-environments.md`)
 
-## Scripts
+Point Odoo `nextjs.base_url` at this backend URL (not the frontend).
 
-| Command       | Description              |
-|---------------|--------------------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Production build       |
-| `npm run start` | Start production server |
-| `npm run lint`  | Run ESLint             |
+## API endpoints (backend)
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/health` | Health check |
+| GET | `/api/cms/site-config` | Site chrome (nav, footer) |
+| GET | `/api/cms/home` | Homepage |
+| GET | `/api/cms/pages/{slug}` | Page by slug |
+| GET | `/api/cms/slugs` | All page slugs |
+| GET | `/api/cms/case-studies` | Case studies JSON |
+| POST | `/api/revalidate` | Odoo cache bust webhook |
+
+## Content vs navigation
+
+| Concern | Source |
+|---------|--------|
+| Page body | Odoo via backend API |
+| Navigation | `backend/data/site-nav.ts` (code-owned) |
+| Layout chrome | `backend/data/mock-cms.ts` |
+
+See [docs/odoo-environments.md](docs/odoo-environments.md) for staging/prod env matrix.
+
+## Legacy
+
+`aptus-web/aptus-web/` — separate portal app (auth, orders). Not part of this split.
