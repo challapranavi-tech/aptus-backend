@@ -1,11 +1,16 @@
 import type { NextConfig } from "next";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const dir = path.dirname(fileURLToPath(import.meta.url));
 
 const odooImageHost =
   process.env.ODOO_IMAGE_HOST ??
   (process.env.ODOO_URL ? new URL(process.env.ODOO_URL).hostname : undefined);
 
 const nextConfig: NextConfig = {
-  serverExternalPackages: ["gsap"],
+  // Required for npm-workspace monorepo: trace files in ../shared and repo root.
+  outputFileTracingRoot: path.join(dir, ".."),
   async redirects() {
     return [
       { source: "/about-us", destination: "/our-story", permanent: true },
