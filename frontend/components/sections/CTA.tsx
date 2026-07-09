@@ -290,9 +290,6 @@ export function CTA({ data }: CTAProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
   const isLight = data.layout === "light";
-
-  if (isLight) return null;
-
   const isCareer = data.layout === "career";
   const isContactPage = data.layout === "contact-page";
   const isSoftwareMid = data.layout === "software-mid";
@@ -332,6 +329,8 @@ export function CTA({ data }: CTAProps) {
       }
     },
   });
+
+  if (isLight) return null;
 
   return (
     <section
