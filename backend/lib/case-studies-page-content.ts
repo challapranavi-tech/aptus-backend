@@ -11,17 +11,20 @@ function parseCaseStudiesJson(raw: string): CaseStudiesPageContent | null {
   }
 }
 
-/** Load typed case-studies JSON from disk (dev) or Odoo field string. */
+/**
+ * Load typed case-studies content.
+ * Priority: Odoo JSON (when provided) → local disk JSON (dev fallback).
+ */
 export function loadCaseStudiesPageContent(
   odooJson?: string | false | null,
 ): CaseStudiesPageContent | null {
-  const local = loadLocalPageSectionsJson("aptus-case-studies");
-  if (local) {
-    const content = parseCaseStudiesJson(local);
+  // Odoo is the source of truth — use it when available
+  if (odooJson && typeof odooJson === "string") {
+    const content = parseCaseStudiesJson(odooJson);
     if (content) return content;
   }
-  if (odooJson && typeof odooJson === "string") {
-    return parseCaseStudiesJson(odooJson);
-  }
+  // Local disk JSON — fallback for dev when not yet seeded to Odoo
+  const local = loadLocalPageSectionsJson("aptus-case-studies");
+  if (local) return parseCaseStudiesJson(local);
   return null;
 }

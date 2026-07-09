@@ -6,7 +6,7 @@
     background-position: center top;
     background-repeat: no-repeat;
     background-size: cover;
-    padding: 7rem 0 0;
+    padding: 4rem 0 0;
     position: relative;
   }
 
@@ -42,14 +42,14 @@
 
   .aptus-software-hero-title {
     color: #fff;
-    font-size: 2.5rem;
+    font-size: var(--text-5xl);
     font-weight: 600;
     line-height: 1.2;
   }
 
   .aptus-software-hero-tagline {
     color: #fff;
-    font-size: 0.9375rem;
+    font-size: var(--text-sm);
     font-weight: 300;
     letter-spacing: -0.1px;
     line-height: 1.625;
@@ -58,7 +58,7 @@
 
   .aptus-software-hero-highlight {
     color: #fff;
-    font-size: 2.125rem;
+    font-size: var(--text-4xl);
     font-weight: 600;
     line-height: 1.2;
     margin-top: 1rem;
@@ -68,7 +68,7 @@
     display: grid;
     gap: 0.75rem;
     margin-top: 2rem;
-    padding-bottom: 5rem;
+    padding-bottom: 3rem;
   }
 
   .aptus-software-page--microsoft-hub .aptus-software-hero-actions {
@@ -85,8 +85,7 @@
     border-radius: 3px;
     color: #fff;
     display: inline-flex;
-    font-family: Poppins, sans-serif;
-    font-size: 0.9375rem;
+    font-size: var(--text-sm);
     font-weight: 500;
     justify-content: center;
     line-height: 1;
@@ -120,7 +119,7 @@
 
   .aptus-software-btn-lg {
     border-radius: 5px;
-    font-size: 1.875rem;
+    font-size: var(--text-3xl);
     font-weight: 500;
     padding: 0.75rem 1.5rem;
     width: auto;
@@ -129,7 +128,7 @@
   /* ── Section headings (post-4163 f3dfbf0 / 03f0bb9) ── */
   .aptus-software-section-title {
     color: #000;
-    font-size: 1.875rem;
+    font-size: var(--text-3xl);
     font-weight: 600;
     line-height: 1.2;
     text-align: center;
@@ -143,7 +142,7 @@
   }
 
   .aptus-software-section-title--lg {
-    font-size: 2.1875rem;
+    font-size: var(--text-4xl);
   }
 
   .aptus-software-section-heading {
@@ -152,7 +151,7 @@
 
   .aptus-software-section-lead {
     color: #000;
-    font-size: 1rem;
+    font-size: var(--text-base);
     font-weight: 400;
     line-height: 1.5;
     margin-top: 0.75rem;
@@ -161,7 +160,7 @@
 
   .aptus-software-value-lead {
     color: #463c3c;
-    font-size: 1.25rem;
+    font-size: var(--text-xl);
     font-weight: 400;
     line-height: 1.4;
     margin-top: 0.75rem;
@@ -177,6 +176,7 @@
     flex-direction: column;
     height: 100%;
     margin: 5px;
+    min-width: 0;
     padding: 0.5rem 0.5rem 1rem;
     text-align: center;
   }
@@ -184,7 +184,7 @@
   .aptus-software-product-media {
     align-items: center;
     display: flex;
-    height: 8.5rem;
+    height: clamp(5.5rem, 22vw, 8.5rem);
     justify-content: center;
     margin: 0 auto;
     max-width: 70%;
@@ -192,7 +192,7 @@
 
   .aptus-software-product-title {
     color: #1352a3;
-    font-size: 1rem;
+    font-size: var(--text-base);
     font-weight: 600;
     margin-top: 0.25rem;
     padding: 0 2px;
@@ -201,7 +201,7 @@
   .aptus-software-product-body {
     color: #695b5b;
     flex: 1;
-    font-size: 1rem;
+    font-size: var(--text-base);
     line-height: 1.5;
     margin-top: -0.5625rem;
     padding: 0 2px;
@@ -233,7 +233,7 @@
 
   .aptus-software-value-title {
     color: #000;
-    font-size: 1rem;
+    font-size: var(--text-base);
     font-weight: 600;
     margin-top: 0.5rem;
     padding: 0 2px;
@@ -241,7 +241,7 @@
 
   .aptus-software-value-body {
     color: #695b5b;
-    font-size: 0.875rem;
+    font-size: var(--text-sm);
     line-height: 1.5;
     margin-top: -0.5625rem;
     padding: 0 2px;
@@ -256,7 +256,7 @@
 
   .aptus-software-icon-card__title {
     color: #000;
-    font-size: 1rem;
+    font-size: var(--text-base);
     font-weight: 600;
     margin-top: 0.5rem;
     padding: 0 2px;
@@ -264,7 +264,7 @@
 
   .aptus-software-icon-card__body {
     color: #695b5b;
-    font-size: 0.875rem;
+    font-size: var(--text-sm);
     line-height: 1.5;
     margin-top: -0.35rem;
     padding: 0 2px;
@@ -285,7 +285,7 @@
   }
 
   .aptus-software-benefits-band .aptus-software-icon-card__body {
-    font-size: 0.8125rem;
+    font-size: var(--text-sm);
   }
 
   .aptus-software-benefits-band .aptus-software-icon-card__icon {
@@ -300,12 +300,12 @@
   }
 
   .aptus-software-mid-band__inner {
-    padding: 4rem 4rem 2rem;
+    padding: 2.5rem 2rem 1.5rem;
   }
 
   .aptus-software-mid-title {
     color: #fff;
-    font-size: 2.125rem;
+    font-size: var(--text-4xl);
     font-weight: 600;
     line-height: 1.2;
     text-align: center;
@@ -313,7 +313,7 @@
 
   .aptus-software-mid-lead {
     color: #fff;
-    font-size: 1rem;
+    font-size: var(--text-base);
     line-height: 1.5;
     margin-top: 1rem;
     text-align: center;
@@ -333,7 +333,7 @@
   .aptus-software-form-heading,
   .aptus-software-page .aptus-cta-light-heading {
     color: #1352a3;
-    font-size: 2.1875rem;
+    font-size: var(--text-4xl);
     font-weight: 600;
     line-height: 1.2;
     text-align: center;
@@ -341,7 +341,7 @@
 
   .aptus-software-form-lead {
     color: #1352a3;
-    font-size: 1rem;
+    font-size: var(--text-base);
     line-height: 1.5;
     margin-top: 1rem;
     text-align: center;
@@ -409,11 +409,12 @@
 
   .aptus-software-page-banner__title {
     color: #fff;
-    font-size: 2.5rem;
+    font-size: var(--text-5xl);
     font-weight: 600;
     line-height: 1.2;
     margin: 0;
-    padding-top: 4rem;
+    padding-top: clamp(2.5rem, 8vw, 4rem);
+    text-wrap: balance;
   }
 
   .aptus-software-page--adobe .aptus-software-page-banner__title,
@@ -422,16 +423,16 @@
   .aptus-software-page--oracle .aptus-software-page-banner__title,
   .aptus-software-page--edms .aptus-software-page-banner__title,
   .aptus-software-page--educational .aptus-software-page-banner__title {
-    font-size: 2.5rem;
+    font-size: var(--text-5xl);
   }
 
   .aptus-software-container {
-    padding-inline: 10px;
+    padding-inline: var(--content-pad-x, clamp(1rem, 4vw, 1.5rem));
   }
 
   .aptus-software-page-banner__tagline {
     color: #fff;
-    font-size: 1.1875rem;
+    font-size: var(--text-lg);
     font-weight: 400;
     line-height: 1.5;
     margin: 0.75rem auto 0;
@@ -500,7 +501,7 @@
   .aptus-software-subnav__link {
     color: #1352a3;
     display: block;
-    font-size: 16px;
+    font-size: var(--text-base);
     font-weight: 600;
     line-height: 12px;
     padding: 0.5rem 0.75rem;
@@ -520,7 +521,7 @@
 
   .aptus-software-inner-hero__title {
     color: #000;
-    font-size: 2.125rem;
+    font-size: var(--text-4xl);
     font-weight: 600;
     line-height: 1.25;
     margin: 0 0 1rem;
@@ -528,7 +529,7 @@
 
   .aptus-software-inner-hero__subtitle {
     color: #000;
-    font-size: 1.875rem;
+    font-size: var(--text-3xl);
     font-weight: 600;
     line-height: 1.25;
     margin: 0 0 1rem;
@@ -611,7 +612,7 @@
 
   .aptus-software-bullet-list {
     color: #695b5b;
-    font-size: 1rem;
+    font-size: var(--text-base);
     line-height: 1.6;
     list-style: disc;
     margin: 0;
@@ -629,12 +630,12 @@
 
   .aptus-software-page--adobe .aptus-software-inner-hero__title,
   .aptus-software-page--microsoft .aptus-software-inner-hero__title {
-    font-size: 2.125rem;
+    font-size: var(--text-4xl);
   }
 
   .aptus-software-inner-hero__text {
     color: #000;
-    font-size: 1rem;
+    font-size: var(--text-base);
     line-height: 1.6;
     margin: 0 0 1rem;
   }
@@ -684,6 +685,20 @@
   @media (max-width: 767px) {
     .aptus-software-inner-hero__media img {
       height: auto;
+      max-height: min(280px, 50vw);
+      max-width: 100%;
+      width: auto;
+    }
+
+    .aptus-software-page--autodesk .aptus-software-inner-hero__media img,
+    .aptus-software-page--aconex .aptus-software-inner-hero__media img,
+    .aptus-software-page--construction-cloud .aptus-software-inner-hero__media img,
+    .aptus-software-page--odoo .aptus-software-inner-hero__media img,
+    .aptus-software-page--spectronova .aptus-software-inner-hero__media img {
+      height: auto;
+      max-height: min(280px, 55vw);
+      max-width: min(100%, 280px);
+      width: auto;
     }
 
     .aptus-software-page-banner__tagline {
@@ -695,7 +710,7 @@
     }
 
     .aptus-software-btn-lg {
-      font-size: 1.25rem;
+      font-size: var(--text-xl);
       padding: 0.625rem 1.25rem;
     }
   }
@@ -712,7 +727,7 @@
 
   .aptus-software-quote-card__quote {
     color: #695b5b;
-    font-size: 0.8125rem;
+    font-size: var(--text-sm);
     line-height: 1.6;
     margin: 0;
     padding: 0 0.5rem;
@@ -720,14 +735,14 @@
 
   .aptus-software-quote-card__author {
     color: #000;
-    font-size: 1.25rem;
+    font-size: var(--text-xl);
     font-weight: 600;
     margin: 1.25rem 0 0;
   }
 
   .aptus-software-quote-card__role {
     color: #000;
-    font-size: 0.8125rem;
+    font-size: var(--text-sm);
     font-weight: 400;
     line-height: 1.2;
     margin: 0.35rem 0 0;
@@ -762,17 +777,33 @@
   .aptus-live-container {
     margin-inline: auto;
     max-width: 1300px;
-    padding-inline: 10px;
+    padding-inline: var(--content-pad-x, clamp(1rem, 4vw, 1.5rem));
     width: 100%;
   }
 
   .aptus-software-product-grid {
     display: grid;
     gap: 0.5rem;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  @media (min-width: 400px) {
+    .aptus-software-product-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
   @media (min-width: 640px) {
+    .aptus-software-product-grid--3 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .aptus-software-product-grid--4 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
     .aptus-software-product-grid--3 {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
@@ -838,7 +869,7 @@
 
   /* ETAP — live post-2688: 25% nav | 75% content band */
   .aptus-etap-body {
-    padding: 4rem 0;
+    padding: 2.5rem 0;
   }
 
   .aptus-etap-grid {
@@ -857,7 +888,7 @@
 
   .aptus-etap-page-title {
     color: #000;
-    font-size: 25px;
+    font-size: var(--text-2xl);
     font-weight: 600;
     line-height: 1.2;
     margin: 0 0 1rem;
@@ -882,7 +913,7 @@
   }
 
   .aptus-etap-stack [data-section="feature-row"] h2 {
-    font-size: 20px;
+    font-size: var(--text-xl);
     font-weight: 600;
     line-height: 24px;
   }
@@ -890,12 +921,12 @@
   .aptus-etap-stack [data-section="feature-row"] p,
   .aptus-etap-stack [data-section="feature-row"] li {
     color: #000;
-    font-size: 1rem;
+    font-size: var(--text-base);
     line-height: 1.6;
   }
 
   .aptus-etap-stack [data-section="feature-row"]:not([data-variant="boxed"]) h2 {
-    font-size: 25px;
+    font-size: var(--text-2xl);
     margin-top: 4rem;
   }
 
@@ -964,7 +995,7 @@
   .aptus-etap-stack [data-id="capabilities"] .aptus-software-icon-card__title,
   .aptus-etap-stack [data-variant="icon-cards"] .aptus-software-icon-card__title {
     color: #248bcc;
-    font-size: 16px;
+    font-size: var(--text-base);
     font-weight: 600;
     margin-top: 0.35rem;
   }
@@ -975,7 +1006,23 @@
     max-width: none;
   }
 
+  @media (min-width: 640px) {
+    .aptus-etap-stack [data-id="capabilities"] .aptus-software-icon-grid,
+    .aptus-etap-stack [data-variant="icon-cards"] .aptus-software-icon-grid,
+    .aptus-software-icon-grid--5 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
   @media (min-width: 768px) {
+    .aptus-etap-stack [data-id="capabilities"] .aptus-software-icon-grid,
+    .aptus-etap-stack [data-variant="icon-cards"] .aptus-software-icon-grid,
+    .aptus-software-icon-grid--5 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
     .aptus-etap-stack [data-id="capabilities"] .aptus-software-icon-grid,
     .aptus-etap-stack [data-variant="icon-cards"] .aptus-software-icon-grid,
     .aptus-software-icon-grid--5 {
@@ -993,7 +1040,7 @@
   }
 
   .aptus-etap-stack [data-variant="bullet-list"] .aptus-software-section-title {
-    font-size: 25px;
+    font-size: var(--text-2xl);
     line-height: 1.2;
   }
 
@@ -1019,7 +1066,7 @@
   }
 
   .aptus-etap-stack [data-variant="checklist"] .aptus-software-section-title {
-    font-size: 25px;
+    font-size: var(--text-2xl);
     line-height: 1.2;
   }
 

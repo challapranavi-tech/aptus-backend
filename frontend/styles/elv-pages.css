@@ -8,25 +8,25 @@
   .aptus-elv-page .aptus-live-container {
     margin-inline: auto;
     max-width: 1300px;
-    padding-inline: 10px;
+    padding-inline: var(--content-pad-x, clamp(1rem, 4vw, 1.5rem));
     width: 100%;
   }
 
   /* ── Banner (post-5075 23612e3b / 729e8725 / 2d976322 / 3ec17a42) ── */
   .aptus-elv-page .aptus-software-page-banner__title {
-    font-size: 2.5rem;
-    padding-top: 4rem;
+    font-size: var(--text-5xl);
+    padding-top: clamp(2.5rem, 8vw, 4rem);
   }
 
   .aptus-elv-page .aptus-software-page-banner__tagline {
-    font-size: 1.1875rem;
+    font-size: var(--text-lg);
     line-height: 1.5;
     padding-bottom: 0;
   }
 
   .aptus-elv-page .aptus-software-page-banner__action-wrap .aptus-software-btn-lg {
     border-radius: 5px;
-    font-size: 1.875rem;
+    font-size: var(--text-3xl);
     font-weight: 500;
   }
 
@@ -38,7 +38,7 @@
   }
 
   .aptus-elv-page .aptus-software-subnav__link {
-    font-size: 12px;
+    font-size: var(--text-xs);
     font-weight: 600;
     line-height: 8px;
   }
@@ -51,7 +51,7 @@
   }
 
   .aptus-elv-page .aptus-software-inner-hero__title {
-    font-size: 2.125rem;
+    font-size: var(--text-4xl);
     font-weight: 600;
     line-height: 1.25;
   }
@@ -91,12 +91,12 @@
 
   .aptus-elv-page [data-section="features"][data-variant="icon-cards"] .aptus-software-section-title {
     color: var(--e-global-color-accent);
-    font-size: 1.875rem;
+    font-size: var(--text-3xl);
   }
 
   .aptus-elv-page [data-section="features"] .aptus-software-section-lead {
     color: var(--e-global-color-accent);
-    font-size: 1.125rem;
+    font-size: var(--text-lg);
     line-height: 1.1;
   }
 
@@ -128,10 +128,29 @@
   }
 
   .aptus-elv-page .aptus-software-mid-band__inner {
-    padding: 4rem 1rem 2rem;
+    padding: 2.5rem 1rem 1.5rem;
   }
 
   .aptus-elv-page [data-section="cta"][data-layout="light"] {
     padding-block: 2rem;
+  }
+}
+
+/* ponytail: keep ELV hero media fluid on phones despite fixed desktop heights */
+@media (max-width: 767px) {
+  .aptus-elv-page .aptus-software-inner-hero__title {
+    font-size: var(--text-3xl);
+  }
+
+  .aptus-elv-page .aptus-software-inner-hero__media img {
+    height: auto !important;
+    max-height: min(280px, 55vw) !important;
+    max-width: 100% !important;
+    width: auto !important;
+  }
+
+  .aptus-elv-page .aptus-form-card,
+  .aptus-elv-page .aptus-software-mid-band__inner {
+    padding-inline: 1rem;
   }
 }

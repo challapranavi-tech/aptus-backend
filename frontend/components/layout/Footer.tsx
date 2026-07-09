@@ -63,12 +63,12 @@ export async function Footer() {
                   unoptimized
                 />
               ) : (
-                <span className="text-xl font-bold text-black">{name}</span>
+                <span className="text-black" style={{ fontSize: 'var(--text-xl)', fontWeight: 700 }}>{name}</span>
               )}
             </Link>
 
             {footer.tagline && (
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+              <p className="mt-4 leading-relaxed text-muted-foreground" style={{ fontSize: 'var(--text-sm)' }}>
                 <strong className="font-semibold text-black">{name}</strong>{" "}
                 {footer.tagline.replace(/^Aptus Infotech\s+/i, "")}
               </p>
@@ -112,7 +112,7 @@ export async function Footer() {
           {footer.columns.map((column, index) => (
             <div key={column.title ?? index}>
               {column.title && (
-                <h3 className="mb-4 text-lg font-semibold text-black">
+                <h3 className="mb-4 text-black" style={{ fontSize: 'var(--text-xl)', fontWeight: 600 }}>
                   {column.title}
                 </h3>
               )}
@@ -121,7 +121,8 @@ export async function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-brand-blue transition-colors hover:text-brand-green"
+                      className="text-brand-blue transition-colors hover:text-brand-green"
+                      style={{ fontSize: 'var(--text-sm)' }}
                     >
                       {link.label}
                     </Link>
@@ -134,13 +135,14 @@ export async function Footer() {
           {/* ── Col 4: Reach Us ───────────────────────────── */}
           {hasReachUs && (
             <div>
-              <h3 className="mb-4 text-lg font-semibold text-black">Reach Us</h3>
+              <h3 className="mb-4 text-black" style={{ fontSize: 'var(--text-xl)', fontWeight: 600 }}>Reach Us</h3>
               <ul className="space-y-3">
                 {footer.phone && (
                   <li>
                     <a
                       href={`tel:${footer.phone.replace(/\s/g, "")}`}
-                      className="flex items-center gap-2 text-sm text-brand-blue transition-colors hover:text-brand-green"
+                      className="flex items-center gap-2 text-brand-blue transition-colors hover:text-brand-green"
+                      style={{ fontSize: 'var(--text-sm)' }}
                     >
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-brand-blue" aria-hidden="true">
                         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.24h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.86a16 16 0 0 0 6.13 6.13l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
@@ -153,7 +155,8 @@ export async function Footer() {
                   <li>
                     <a
                       href={`mailto:${footer.email}`}
-                      className="flex items-center gap-2 text-sm text-brand-blue transition-colors hover:text-brand-green"
+                      className="flex items-center gap-2 text-brand-blue transition-colors hover:text-brand-green"
+                      style={{ fontSize: 'var(--text-sm)' }}
                     >
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-brand-blue" aria-hidden="true">
                         <rect width="20" height="16" x="2" y="4" rx="2" />
@@ -164,7 +167,7 @@ export async function Footer() {
                   </li>
                 )}
                 {footer.address && (
-                  <li className="flex items-start gap-2 text-sm text-brand-blue">
+                  <li className="flex items-start gap-2 text-brand-blue" style={{ fontSize: 'var(--text-sm)' }}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0 text-brand-blue" aria-hidden="true">
                       <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
                       <circle cx="12" cy="10" r="3" />
@@ -182,7 +185,7 @@ export async function Footer() {
       {footer.copyright && (
         <div className="border-t border-border py-4">
           <Container>
-            <p className="text-center text-sm text-muted-foreground">
+            <p className="text-center text-muted-foreground" style={{ fontSize: 'var(--text-sm)' }}>
               {footer.copyright}
             </p>
           </Container>

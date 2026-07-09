@@ -66,7 +66,8 @@ export function Banner({ data }: BannerProps) {
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-brand-navy/40 px-6">
           <h1
             data-banner-animate
-            className="max-w-4xl text-center text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl"
+            className="max-w-4xl text-center leading-tight text-white"
+            style={{ fontSize: 'var(--text-4xl)', fontWeight: 600 }}
           >
             {data.heading}
           </h1>

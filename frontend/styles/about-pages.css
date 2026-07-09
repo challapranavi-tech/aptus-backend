@@ -35,7 +35,7 @@
   .aptus-alliance-marquee__slide {
     flex: 0 0 auto;
     padding: 0 0.65rem;
-    width: 17.3125rem; /* 277px — live swiper slide */
+    width: min(17.3125rem, 70vw); /* 277px desktop; shrink on narrow phones */
   }
 
   @keyframes aptus-alliance-marquee {
@@ -84,7 +84,7 @@
   /* Strategic Alliances block — post-1273–1276 */
   .aptus-alliances-heading {
     color: var(--color-brand-blue);
-    font-size: 2.1875rem;
+    font-size: var(--text-4xl);
     font-weight: 600;
     line-height: 1.2;
     margin-bottom: 2.5rem;
@@ -98,8 +98,14 @@
   .aptus-alliances-grid {
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     margin-top: 0.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .aptus-alliances-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
   }
 
   @media (min-width: 768px) {
@@ -125,7 +131,7 @@
   .aptus-form-card {
     background: #fff;
     border-radius: 20px;
-    padding: 2rem;
+    padding: clamp(1.25rem, 4vw, 2rem);
   }
 
   .aptus-form-input {
@@ -138,7 +144,7 @@
   .aptus-form-label {
     color: #695b5b;
     display: block;
-    font-size: 1rem;
+    font-size: var(--text-base);
     font-weight: 400;
     line-height: 1.5;
     padding-bottom: 0.625rem;
@@ -146,7 +152,7 @@
 
   .aptus-cta-light-heading {
     color: var(--color-brand-blue);
-    font-size: 1.5625rem;
+    font-size: var(--text-2xl);
     font-weight: 600;
     line-height: 1.3;
     text-align: center;
@@ -156,7 +162,7 @@
     background-color: var(--color-brand-blue);
     border-radius: 20px;
     color: #fff;
-    font-size: 1.125rem;
+    font-size: var(--text-lg);
     font-weight: 500;
     padding: 0.875rem 1.5rem;
     transition: background-color 0.2s ease;
@@ -169,7 +175,7 @@
 
   .aptus-page-heading {
     color: var(--color-brand-blue);
-    font-size: 2.8125rem;
+    font-size: var(--text-5xl);
     font-weight: 800;
     line-height: 1.15;
     text-align: center;
@@ -177,7 +183,7 @@
 
   .aptus-section-heading {
     color: var(--color-brand-blue);
-    font-size: 2.1875rem;
+    font-size: var(--text-4xl);
     font-weight: 600;
     line-height: 1.2;
     text-align: center;
@@ -193,7 +199,7 @@
   /* Our Team — post-1230 */
   .aptus-team-section-title {
     color: var(--color-brand-blue);
-    font-size: 2.375rem;
+    font-size: var(--text-4xl);
     font-weight: 600;
     line-height: 1.2;
     text-align: center;
@@ -201,28 +207,28 @@
 
   .aptus-team-member-name {
     color: var(--color-brand-blue);
-    font-size: 1.25rem;
+    font-size: var(--text-xl);
     font-weight: 600;
     line-height: 1.3;
   }
 
   .aptus-team-member-role {
     color: #878080;
-    font-size: 1rem;
+    font-size: var(--text-base);
     font-weight: 400;
     line-height: 1.5;
   }
 
   .aptus-team-member-bio {
     color: #000;
-    font-size: 1rem;
+    font-size: var(--text-base);
     font-weight: 400;
     line-height: 1.8;
   }
 
   .aptus-team-watermark {
     color: #1352a345;
-    font-size: clamp(2.5rem, 8vw, 4.0625rem);
+    font-size: var(--text-5xl);
     font-weight: 600;
     line-height: 1;
     text-align: center;
@@ -231,7 +237,7 @@
 
   .aptus-team-culture-subtitle {
     color: var(--color-brand-blue);
-    font-size: 1.6875rem;
+    font-size: var(--text-3xl);
     font-weight: 400;
     line-height: 1.2;
     text-align: center;
@@ -245,7 +251,7 @@
   /* Centered rich-text blocks (e.g. privacy policy on Why Aptus) */
   .text-center [data-section="rich-text"] h2 {
     color: var(--color-brand-blue);
-    font-size: 1.875rem;
+    font-size: var(--text-3xl);
     font-weight: 700;
   }
 
@@ -298,7 +304,7 @@
 
   .aptus-flip-box__front h3 {
     color: var(--color-brand-blue);
-    font-size: clamp(1.75rem, 4vw, 3.125rem);
+    font-size: var(--text-3xl);
     font-weight: 600;
     line-height: 1.1;
   }
@@ -317,7 +323,7 @@
 
   .aptus-flip-box__front-desc {
     color: #000;
-    font-size: 1rem;
+    font-size: var(--text-base);
     font-weight: 400;
     line-height: 1.6;
     margin-top: 1rem;
@@ -327,7 +333,7 @@
   /* Aptus Policy — post-1274 */
   .aptus-policy-modus-title {
     color: var(--color-brand-blue);
-    font-size: 2.8125rem;
+    font-size: var(--text-5xl);
     font-weight: 700;
     line-height: 1.15;
     text-align: center;
@@ -335,7 +341,7 @@
 
   .aptus-policy-section-title {
     color: var(--color-brand-blue);
-    font-size: 2.8125rem;
+    font-size: var(--text-5xl);
     font-weight: 800;
     line-height: 1.15;
     text-align: center;
@@ -343,7 +349,7 @@
 
   .aptus-policy-row-text {
     color: #000;
-    font-size: 1.25rem;
+    font-size: var(--text-xl);
     font-weight: 400;
     line-height: 1.6;
     max-width: 98%;
@@ -351,7 +357,7 @@
 
   .aptus-policy-privacy-title {
     color: var(--color-brand-blue);
-    font-size: 1.875rem;
+    font-size: var(--text-3xl);
     font-weight: 700;
     line-height: 1.2;
     text-align: center;
@@ -359,7 +365,7 @@
 
   .aptus-policy-privacy-text {
     color: #000;
-    font-size: 1rem;
+    font-size: var(--text-base);
     font-weight: 400;
     line-height: 1.6;
     text-align: center;
@@ -367,7 +373,7 @@
 
   .aptus-why-row-heading {
     color: #000;
-    font-size: 1.5625rem;
+    font-size: var(--text-2xl);
     font-weight: 600;
     line-height: 1.3;
     text-align: start;
@@ -375,7 +381,7 @@
 
   .aptus-why-privacy-title {
     color: var(--color-brand-blue);
-    font-size: 1.875rem;
+    font-size: var(--text-3xl);
     font-weight: 700;
     line-height: 1.2;
     text-align: center;
@@ -384,7 +390,7 @@
   /* ISO Certifications — post-3375 */
   .aptus-iso-hero-title {
     color: var(--color-brand-blue);
-    font-size: 3.125rem;
+    font-size: var(--text-5xl);
     font-weight: 600;
     line-height: 1.15;
     text-align: center;
@@ -392,7 +398,7 @@
 
   .aptus-iso-subtitle {
     color: var(--color-brand-blue);
-    font-size: 1.5625rem;
+    font-size: var(--text-2xl);
     font-weight: 400;
     line-height: 1.5;
     margin-top: 1rem;
@@ -402,7 +408,7 @@
   .aptus-iso-intro-heading,
   .aptus-iso-core-heading {
     color: var(--color-brand-blue);
-    font-size: 1.875rem;
+    font-size: var(--text-3xl);
     font-weight: 600;
     line-height: 1.2;
     text-align: center;
@@ -410,7 +416,7 @@
 
   .aptus-iso-intro-text {
     color: var(--color-brand-blue);
-    font-size: 1.25rem;
+    font-size: var(--text-xl);
     font-weight: 400;
     line-height: 1.6;
     text-align: center;
@@ -418,7 +424,7 @@
 
   .aptus-iso-core-item {
     color: var(--color-brand-blue);
-    font-size: 1.25rem;
+    font-size: var(--text-xl);
     font-weight: 400;
     line-height: 1.25;
     margin-top: 0.25rem;
@@ -439,7 +445,7 @@
 
   .aptus-iso-cert-heading {
     color: var(--color-brand-blue);
-    font-size: 1rem;
+    font-size: var(--text-base);
     font-weight: 600;
     line-height: 1.5625rem;
     text-align: center;
@@ -450,7 +456,7 @@
     border-radius: 0.25rem;
     color: #fff;
     display: inline-block;
-    font-size: 0.9375rem;
+    font-size: var(--text-sm);
     font-weight: 500;
     padding: 0.625rem 1.25rem;
     transition: background-color 0.2s ease;
@@ -462,7 +468,7 @@
 
   .aptus-iso-footer-text {
     color: #248bcc;
-    font-size: 1.25rem;
+    font-size: var(--text-xl);
     font-weight: 400;
     line-height: 1.6;
     text-align: center;
@@ -471,14 +477,14 @@
   /* Career — post-3441 */
   .aptus-career-hero-title {
     color: var(--color-brand-blue);
-    font-size: 3.125rem;
+    font-size: var(--text-5xl);
     font-weight: 500;
     line-height: 1.15;
   }
 
   .aptus-career-tagline {
     color: #248bcc;
-    font-size: 1.5625rem;
+    font-size: var(--text-2xl);
     font-weight: 600;
     line-height: 1.4;
     margin-top: 1rem;
@@ -486,7 +492,7 @@
 
   .aptus-career-intro-text {
     color: #000;
-    font-size: 1.375rem;
+    font-size: var(--text-xl);
     font-weight: 400;
     line-height: 1.6;
     margin-bottom: 2.125rem;
@@ -499,7 +505,7 @@
 
   .aptus-career-form-heading {
     color: var(--color-brand-blue);
-    font-size: 2.3125rem;
+    font-size: var(--text-4xl);
     font-weight: 600;
     line-height: 1.2;
     text-align: center;
@@ -508,7 +514,7 @@
   .aptus-career-form-label {
     color: var(--color-brand-blue);
     display: block;
-    font-size: 1.25rem;
+    font-size: var(--text-xl);
     font-weight: 500;
     line-height: 1.4;
     padding-bottom: 0.25rem;
@@ -519,13 +525,13 @@
     border: 0;
     border-radius: 20px;
     color: #000;
-    font-size: 1rem;
+    font-size: var(--text-base);
   }
 
   /* Contact Us — post-3421 */
   .aptus-contact-info-heading {
     color: var(--color-brand-blue);
-    font-size: 1.5625rem;
+    font-size: var(--text-2xl);
     font-weight: 500;
     line-height: 1.3;
     padding-top: 1rem;
@@ -533,7 +539,7 @@
 
   .aptus-contact-info-lines {
     color: #000;
-    font-size: 1.25rem;
+    font-size: var(--text-xl);
     font-weight: 400;
     line-height: 1.6;
   }
@@ -548,7 +554,7 @@
 
   .aptus-contact-form-title {
     color: var(--color-brand-blue);
-    font-size: 3.4375rem;
+    font-size: var(--text-6xl);
     font-weight: 500;
     line-height: 1.15;
     text-align: center;
@@ -556,7 +562,7 @@
 
   .aptus-contact-form-subtitle {
     color: var(--color-brand-blue);
-    font-size: 1.125rem;
+    font-size: var(--text-lg);
     font-weight: 400;
     line-height: 1.5;
     text-align: center;
@@ -564,7 +570,7 @@
 
   .aptus-flip-box__back p {
     color: rgb(255 255 255 / 0.95);
-    font-size: 0.9375rem;
+    font-size: var(--text-sm);
     line-height: 1.6;
     max-width: 28rem;
   }

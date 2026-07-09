@@ -10,4 +10,5 @@ export {
   getPageBySlug,
   getAllPageSlugs,
   getAllPages,
+  getCaseStudiesPageContent,
 } from "./cms";

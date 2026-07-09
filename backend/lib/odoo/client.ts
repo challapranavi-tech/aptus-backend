@@ -233,6 +233,20 @@ export class OdooClient {
     return buildSiteConfig(navigation, defaults.name, defaults);
   }
 
+  /**
+   * Returns the raw x_case_studies_sections_json string for the
+   * aptus-case-studies page, or false/null when not set.
+   */
+  async getCaseStudiesJson(): Promise<string | false> {
+    const rawPages = await searchRead<Pick<OdooRawPage, "x_case_studies_sections_json">>(
+      this.session,
+      "website.page",
+      [["website_id", "=", this.websiteId], ["url", "=", "/aptus-case-studies"]],
+      { fields: ["x_case_studies_sections_json"], limit: 1 },
+    );
+    return rawPages[0]?.x_case_studies_sections_json ?? false;
+  }
+
   // ── Raw accessors (for the debug route) ────────────────────────────────────
   async rawPages(): Promise<OdooRawPage[]> {
     return searchRead<OdooRawPage>(

@@ -19,7 +19,7 @@ function Row({
       <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-blue/10 text-brand-green">
         {icon}
       </span>
-      <span className="pt-2 text-base leading-relaxed text-muted-foreground">{label}</span>
+      <span className="leading-relaxed text-muted-foreground" style={{ fontSize: 'var(--text-base)' }}>{label}</span>
     </div>
   );
   return href ? (
@@ -68,11 +68,11 @@ function ContactPageInfo({ data }: { data: ContactData }) {
           </div>
 
           {data.mapEmbedUrl && (
-            <div className="overflow-hidden">
+            <div className="overflow-hidden rounded-lg">
               <iframe
                 src={data.mapEmbedUrl}
                 title="Location map"
-                className="h-80 w-full"
+                className="h-64 w-full sm:h-80"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
@@ -96,13 +96,13 @@ export function Contact({ data }: ContactProps) {
           <div className="mb-12 max-w-2xl">
             {data.eyebrow && <p className="eyebrow mb-3">{data.eyebrow}</p>}
             {data.heading && (
-              <h2 className="text-3xl font-semibold text-brand-navy sm:text-4xl">
+              <h2 className="text-brand-navy" style={{ fontSize: 'var(--text-4xl)', fontWeight: 600 }}>
                 {data.heading}
               </h2>
             )}
             <span className="mt-4 block h-1 w-14 rounded-full bg-brand-blue" />
             {data.description && (
-              <p className="mt-6 text-base leading-relaxed text-muted-foreground">
+              <p className="mt-4 leading-relaxed text-muted-foreground" style={{ fontSize: 'var(--text-base)' }}>
                 {data.description}
               </p>
             )}

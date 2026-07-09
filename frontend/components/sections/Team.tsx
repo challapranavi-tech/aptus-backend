@@ -64,10 +64,10 @@ export function Team({ data }: TeamProps) {
           <div className="mb-12 text-center">
             {data.eyebrow && <p className="eyebrow mb-3">{data.eyebrow}</p>}
             {data.heading && (
-              <h2 className="text-3xl font-semibold text-brand-navy sm:text-4xl">{data.heading}</h2>
+              <h2 className="text-brand-navy" style={{ fontSize: 'var(--text-4xl)', fontWeight: 600 }}>{data.heading}</h2>
             )}
             {data.subheading && (
-              <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground">
+              <p className="mx-auto mt-2 max-w-2xl text-muted-foreground" style={{ fontSize: 'var(--text-base)' }}>
                 {data.subheading}
               </p>
             )}
@@ -97,13 +97,13 @@ export function Team({ data }: TeamProps) {
                   )}
                   <div className="flex flex-1 flex-col justify-center p-6 text-center sm:text-left">
                     {m.name && (
-                      <h3 className="text-lg font-semibold text-brand-navy">{m.name}</h3>
+                      <h3 className="text-brand-navy" style={{ fontSize: 'var(--text-xl)', fontWeight: 600 }}>{m.name}</h3>
                     )}
                     {m.role && (
-                      <p className="mt-1 text-sm font-medium text-brand-green">{m.role}</p>
+                      <p className="mt-1 text-brand-green" style={{ fontSize: 'var(--text-sm)', fontWeight: 500 }}>{m.role}</p>
                     )}
                     {m.bio && (
-                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{m.bio}</p>
+                      <p className="mt-3 leading-relaxed text-muted-foreground" style={{ fontSize: 'var(--text-sm)' }}>{m.bio}</p>
                     )}
                   </div>
                 </div>

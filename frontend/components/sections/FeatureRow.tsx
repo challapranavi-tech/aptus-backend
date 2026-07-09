@@ -62,7 +62,7 @@ export function FeatureRow({ data }: FeatureRowProps) {
 
   const isIntro = Boolean(data.headingAsH1);
   const textColor = "text-black";
-  const textSize = isIntro ? "text-xl" : "text-base";
+  const textStyle = { fontSize: isIntro ? 'var(--text-xl)' : 'var(--text-base)' } as const;
 
   const textBlock = (
     <div
@@ -81,7 +81,8 @@ export function FeatureRow({ data }: FeatureRowProps) {
           {data.headingAsH1 ? (
             <h1
               data-feature-animate
-              className="text-[2.5rem] font-semibold leading-snug text-brand-blue"
+              className="leading-snug text-brand-blue"
+              style={{ fontSize: 'var(--text-5xl)', fontWeight: 600 }}
             >
               {data.heading}
               {data.heading && data.headingAccent && " "}
@@ -95,12 +96,8 @@ export function FeatureRow({ data }: FeatureRowProps) {
           ) : (
             <h2
               data-feature-animate
-              className={cn(
-                "font-semibold leading-snug",
-                isPanel
-                  ? "text-[25px] text-black"
-                  : "text-[1.75rem] text-brand-navy sm:text-[2.25rem]",
-              )}
+              className={cn("leading-snug", isPanel ? "text-black" : "text-brand-navy")}
+              style={{ fontSize: isPanel ? 'var(--text-xl)' : 'var(--text-4xl)', fontWeight: 600 }}
             >
               {data.heading}
               {data.heading && data.headingAccent && " "}
@@ -119,12 +116,12 @@ export function FeatureRow({ data }: FeatureRowProps) {
           key={i}
           data-feature-animate
           className={cn(
-            textSize,
             "leading-[1.8]",
             textColor,
             i === 0 ? "mt-0" : "mt-5",
             !data.heading && i === 0 && "mt-0",
           )}
+          style={textStyle}
         >
           {i === 1 && para.includes("WINNING TOGETHER") ? (
             <>
@@ -144,7 +141,8 @@ export function FeatureRow({ data }: FeatureRowProps) {
             <li
               key={i}
               data-feature-animate
-              className="flex items-start gap-3 text-base text-muted-foreground"
+              className="flex items-start gap-3 text-muted-foreground"
+              style={{ fontSize: 'var(--text-base)' }}
             >
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-green" />
               <span>{b}</span>
@@ -192,7 +190,7 @@ export function FeatureRow({ data }: FeatureRowProps) {
           height={data.media.height ?? 410}
           className={cn(
             "h-auto w-full",
-            isIntro && !imageRight && "w-[73%] max-w-[73%]",
+            isIntro && !imageRight && "w-full max-w-full lg:w-[73%] lg:max-w-[73%]",
             isBoxed && "mx-auto max-w-[500px] rounded-2xl object-cover shadow-[0_10px_25px_rgba(0,0,0,0.1)]",
             isPanel && "rounded-2xl object-cover shadow-[0_10px_30px_rgba(0,0,0,0.1)]",
             !isBoxed && !isPanel && "img-shrink object-cover",

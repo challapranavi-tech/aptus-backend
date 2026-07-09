@@ -4,3 +4,76 @@
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-card);
 }
+
+/* ── Services flip-box cards ──────────────────────────────────────────────── */
+.aptus-flip-box {
+  perspective: 1200px;
+  position: relative;
+  height: 220px;
+  cursor: pointer;
+}
+
+.aptus-flip-box--tall {
+  height: 280px;
+}
+
+.aptus-flip-box__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.aptus-flip-box:hover .aptus-flip-box__inner,
+.aptus-flip-box:focus .aptus-flip-box__inner {
+  transform: rotateY(180deg);
+}
+
+.aptus-flip-box__face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius-xl, 0.75rem);
+  overflow: hidden;
+}
+
+.aptus-flip-box__front {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: #fff;
+  border: 1px solid var(--color-border, #e2e8f0);
+  box-shadow: var(--shadow-card, 0 1px 3px rgba(0, 0, 0, 0.1));
+  text-align: center;
+}
+
+.aptus-flip-box__front h3 {
+  margin-top: 0.75rem;
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--color-brand-blue, #1d4ed8);
+}
+
+.aptus-flip-box__front-desc {
+  margin-top: 0.5rem;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--color-muted-foreground, #64748b);
+}
+
+.aptus-flip-box__back {
+  transform: rotateY(180deg);
+  background-size: cover;
+  background-position: center;
+  background-color: var(--color-brand-navy, #0f2147);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aptus-flip-box__inner {
+    transition: none;
+  }
+}

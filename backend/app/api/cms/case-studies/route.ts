@@ -1,9 +1,9 @@
-import { loadCaseStudiesPageContent } from "@/lib/case-studies-page-content";
+import { getCaseStudiesPageContent } from "@/data";
 import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const content = loadCaseStudiesPageContent();
+    const content = await getCaseStudiesPageContent();
     if (!content) {
       return NextResponse.json({ error: "Case studies content not found" }, { status: 404 });
     }

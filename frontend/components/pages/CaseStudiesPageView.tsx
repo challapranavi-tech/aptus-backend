@@ -1,4 +1,3 @@
-import { CTA } from "@/components/sections/CTA";
 import { Container } from "@/components/ui";
 import {
   CASE_STUDIES_ICONS,
@@ -188,18 +187,6 @@ export function CaseStudiesPageView({ content }: CaseStudiesPageViewProps) {
         </section>
       ) : null}
 
-      {content.showContactCta !== false && content.contactCta ? (
-        <CTA
-          data={{
-            type: "cta",
-            heading: content.contactCta.heading,
-            description: content.contactCta.subtitle,
-            showForm: content.contactCta.showForm,
-            submitLabel: content.contactCta.submitLabel,
-            layout: content.contactCta.layout ?? "light",
-          }}
-        />
-      ) : null}
     </>
   );
 }

@@ -124,7 +124,7 @@ export function Services({ data }: ServicesProps) {
           <div ref={headingRef} className="mb-12 text-center">
             {data.eyebrow && <p className="eyebrow mb-3">{data.eyebrow}</p>}
             {(data.heading || data.headingAccent) && (
-              <h2 className="text-3xl font-semibold text-brand-navy sm:text-4xl">
+              <h2 className="text-brand-navy" style={{ fontSize: 'var(--text-4xl)', fontWeight: 600 }}>
                 {data.heading}
                 {data.heading && data.headingAccent && " "}
                 {data.headingAccent && (
@@ -165,17 +165,18 @@ export function Services({ data }: ServicesProps) {
                     <ServiceFlipIcon name={item.icon} />
                   </div>
                   {item.title && (
-                    <h3 className="text-base font-bold text-brand-blue">{item.title}</h3>
+                    <h3 className="text-brand-blue" style={{ fontSize: 'var(--text-base)', fontWeight: 700 }}>{item.title}</h3>
                   )}
                   {item.description && (
-                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    <p className="mt-3 leading-relaxed text-muted-foreground" style={{ fontSize: 'var(--text-sm)' }}>
                       {item.description}
                     </p>
                   )}
                   {item.action && (
                     <Link
                       href={item.action.href}
-                      className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-green hover:text-brand-green-dark"
+                      className="mt-5 inline-flex items-center gap-1.5 text-brand-green hover:text-brand-green-dark"
+                      style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}
                     >
                       {item.action.label}
                       <svg

@@ -64,7 +64,9 @@ export function mapOdooPage(
       slug === "aptus-case-studies"
         ? (rawPage.x_case_studies_sections_json as string | false | undefined)
         : undefined;
-    const pageJsonRaw = localJson ?? caseStudiesJson ?? rawPage.x_page_sections_json;
+    // Odoo stays source-of-truth. Local JSON is only a dev fallback when Odoo
+    // has no JSON content for that page yet.
+    const pageJsonRaw = caseStudiesJson ?? rawPage.x_page_sections_json ?? localJson;
     const pageSections = mapPageJson(pageJsonRaw, { slug });
     if (pageSections && pageSections.length > 0) {
       sections = pageSections;

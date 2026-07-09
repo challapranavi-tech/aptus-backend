@@ -6,7 +6,7 @@
 }
 
 .aptus-cta__title {
-  font-size: 2rem;
+  font-size: var(--text-4xl);
   font-weight: 600;
   margin-bottom: 1rem;
 }

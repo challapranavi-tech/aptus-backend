@@ -1,9 +1,12 @@
 /**
  * data/cms.ts  —  Odoo-first CMS data layer
  *
- * When Odoo env vars are set, page content comes from Odoo (website.page JSON).
+ * Priority for every page:
+ *   1. Odoo (when configured + Odoo record has sections)
+ *   2. Local disk JSON   — fallback for pages not yet seeded to Odoo (dev only)
+ *   3. Mock              — fallback when Odoo is unconfigured
+ *
  * Layout chrome (nav, footer, top bar) is code-owned — see data/site-nav.ts.
- * Odoo website.menu is not read; nav changes require editing site-nav.ts.
  */
 
 import { OdooClient, OdooRpcError, isOdooConfigured } from "@/lib/odoo";
@@ -12,8 +15,10 @@ import {
   isLocalPageJsonInDev,
   listLocalDevPageSlugs,
 } from "@/lib/odoo/local-page-json";
+import { loadCaseStudiesPageContent } from "@/lib/case-studies-page-content";
 import { isAutodeskHiddenSlug } from "@/data/autodesk-subnav";
 import type { Page, SiteConfig } from "@/types";
+import type { CaseStudiesPageContent } from "@/types/case-studies-page";
 import {
   getAllPageSlugs as mockGetAllSlugs,
   getHomePage as mockGetHomePage,
@@ -75,13 +80,12 @@ export async function getHomePage(): Promise<Page | null> {
 export async function getPageBySlug(slug: string): Promise<Page | null> {
   if (isAutodeskHiddenSlug(slug)) return null;
 
-  // ponytail: disk JSON wins in dev so content/odoo-json edits show without Odoo re-seed
-  if (isLocalPageJsonInDev()) {
-    const local = buildLocalDevPage(slug);
-    if (local) return local;
-  }
-
   if (!isOdooConfigured()) {
+    // No Odoo — local JSON then mock
+    if (isLocalPageJsonInDev()) {
+      const local = buildLocalDevPage(slug);
+      if (local) return local;
+    }
     return mockGetPageBySlug(slug);
   }
 
@@ -89,26 +93,47 @@ export async function getPageBySlug(slug: string): Promise<Page | null> {
     const client = await getClient();
     const page = await client.getPageBySlug(slug);
     debugLog(`Mapped Page [${slug}]`, page);
-    if (page) {
+
+    // Odoo has content → use it (Odoo is the source of truth)
+    if (page && page.sections.length > 0) {
       debugLog(`Section Structure [${slug}]`, page.sections.map((s) => ({ id: s.id, type: s.type, order: s.order })));
       return page;
     }
 
+    // Odoo page exists but has no mapped sections yet (not seeded) → local JSON fallback
     const local = buildLocalDevPage(slug);
     if (local) {
       if (process.env.NODE_ENV !== "production") {
         console.warn(
-          `[cms] No Odoo website.page for /${slug} — rendering from content/odoo-json (dev fallback)`,
+          `[cms] Odoo page /${slug} has no sections — falling back to content/odoo-json`,
         );
       }
       return local;
     }
-    return null;
+
+    // Return the Odoo page even with empty sections (page record exists, just no content)
+    return page;
   } catch (err) {
     warnOdoo("getPageBySlug", err);
+    // Odoo error → local JSON
     const local = buildLocalDevPage(slug);
     if (local) return local;
     return null;
+  }
+}
+
+export async function getCaseStudiesPageContent(): Promise<CaseStudiesPageContent | null> {
+  if (!isOdooConfigured()) {
+    return loadCaseStudiesPageContent();
+  }
+
+  try {
+    const client = await getClient();
+    const odooJson = await client.getCaseStudiesJson();
+    return loadCaseStudiesPageContent(odooJson ?? undefined);
+  } catch (err) {
+    warnOdoo("getCaseStudiesPageContent", err);
+    return loadCaseStudiesPageContent();
   }
 }
 

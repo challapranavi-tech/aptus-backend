@@ -53,12 +53,12 @@ export function Hero({ data }: HeroProps) {
       <Container>
         <div ref={contentRef} className="relative z-10 max-w-2xl">
           {data.heading && (
-            <h1 className="anim-item text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
-              {data.heading}
-            </h1>
+           <h1 className="anim-item" style={{ fontSize: 'var(--text-5xl)', fontWeight: 700 }}>
+           {data.heading}
+         </h1>
           )}
           {data.subheading && (
-            <p className="anim-item mt-6 text-lg leading-relaxed text-white/75">
+            <p className="anim-item" style={{ fontSize: 'var(--text-base)' }}>
               {data.subheading}
             </p>
           )}
@@ -67,7 +67,8 @@ export function Hero({ data }: HeroProps) {
               {data.primaryAction && (
                 <Link
                   href={data.primaryAction.href}
-                  className="inline-flex items-center gap-2 rounded-none bg-brand-orange px-7 py-3.5 text-sm font-semibold text-white transition-all hover:bg-brand-orange-hover"
+                  className="inline-flex items-center gap-2 rounded-none bg-brand-orange px-7 py-3.5 text-white transition-all hover:bg-brand-orange-hover"
+                  style={{ fontSize: 'var(--text-sm)', fontWeight: 500 }}
                 >
                   {data.primaryAction.label}
                 </Link>
@@ -75,7 +76,8 @@ export function Hero({ data }: HeroProps) {
               {data.secondaryAction && (
                 <Link
                   href={data.secondaryAction.href}
-                  className="inline-flex items-center gap-2 rounded-none border border-white/30 px-7 py-3.5 text-sm font-semibold text-white transition-all hover:border-brand-orange hover:text-brand-orange"
+                  className="inline-flex items-center gap-2 rounded-none border border-white/30 px-7 py-3.5 text-white transition-all hover:border-brand-orange hover:text-brand-orange"
+                  style={{ fontSize: 'var(--text-sm)', fontWeight: 500 }}
                 >
                   {data.secondaryAction.label}
                 </Link>

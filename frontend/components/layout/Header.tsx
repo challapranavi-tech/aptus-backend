@@ -94,7 +94,7 @@ export async function Header() {
                 unoptimized
               />
             ) : (
-              <span className="text-xl font-bold text-brand-navy">{siteConfig.name}</span>
+              <span className="text-brand-navy" style={{ fontSize: 'var(--text-xl)', fontWeight: 700 }}>{siteConfig.name}</span>
             )}
           </Link>
           <NavMenu items={siteConfig.navigation} />

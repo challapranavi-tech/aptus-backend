@@ -85,14 +85,14 @@ export function Testimonials({ data }: TestimonialsProps) {
           {data.items.map((item) => (
             <div key={item.id}>
               {item.quote && (
-                <p className="text-base leading-relaxed text-white/85 sm:text-lg">{item.quote}</p>
+                <p className="leading-relaxed text-white/85" style={{ fontSize: 'var(--text-base)' }}>{item.quote}</p>
               )}
 
               <div className="mt-8">
-                {item.author && <p className="text-base font-semibold text-white">{item.author}</p>}
-                {item.role && <p className="mt-1 text-sm italic text-brand-green-light">{item.role}</p>}
+                {item.author && <p className="text-white" style={{ fontSize: 'var(--text-base)', fontWeight: 600 }}>{item.author}</p>}
+                {item.role && <p className="mt-1 italic text-brand-green-light" style={{ fontSize: 'var(--text-sm)' }}>{item.role}</p>}
                 {item.company && !item.role && (
-                  <p className="mt-1 text-sm italic text-brand-green-light">{item.company}</p>
+                  <p className="mt-1 italic text-brand-green-light" style={{ fontSize: 'var(--text-sm)' }}>{item.company}</p>
                 )}
 
                 {item.avatar && (

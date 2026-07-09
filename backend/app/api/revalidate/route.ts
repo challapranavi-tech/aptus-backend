@@ -2,7 +2,8 @@
  * POST /api/revalidate
  *
  * Called by the Odoo aptus_nextjs_sync module (or a Server Action) after any
- * website.page is saved.  Busts the ISR cache so Next.js re-fetches from Odoo.
+ * website.page is saved.  Busts the ISR cache so Next.js re-fetches from Odoo,
+ * then fans out to the frontend so its page cache is cleared too.
  *
  * Body (JSON) — single page:
  *   { "slug": "home" | "about-us" | ..., "token": "<ODOO_REVALIDATE_TOKEN>" }
@@ -31,8 +32,26 @@ type Body = {
 };
 
 function normalise(slug: string): string {
-  const s = slug.trim().replace(/^\//, "");
-  return s || "home";
+  const raw = slug.trim();
+  if (!raw) return "home";
+
+  // Accept full URLs from webhook payloads.
+  const pathLike = /^https?:\/\//i.test(raw)
+    ? (() => {
+        try {
+          return new URL(raw).pathname;
+        } catch {
+          return raw;
+        }
+      })()
+    : raw;
+
+  const clean = pathLike
+    .split(/[?#]/, 1)[0]
+    .replace(/^\/+|\/+$/g, "")
+    .toLowerCase();
+
+  return clean || "home";
 }
 
 function checkToken(token: string | undefined): NextResponse | null {
@@ -44,6 +63,31 @@ function checkToken(token: string | undefined): NextResponse | null {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   return null;
+}
+
+/**
+ * Fan-out to the frontend's revalidate endpoint so its ISR page cache is also
+ * cleared.  Fire-and-forget with a 5 s cap — a timeout is non-fatal because
+ * the frontend's ODOO_REVALIDATE TTL covers it.
+ */
+async function notifyFrontend(body: Body): Promise<void> {
+  const frontendUrl = process.env.APTUS_FRONTEND_URL?.replace(/\/$/, "");
+  if (!frontendUrl) return;
+
+  try {
+    await Promise.race([
+      fetch(`${frontendUrl}/api/revalidate`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+        // ponytail: no next: { revalidate } here — this must always hit the wire
+        cache: "no-store",
+      }),
+      new Promise<void>((resolve) => setTimeout(resolve, 5_000)),
+    ]);
+  } catch {
+    // non-fatal
+  }
 }
 
 export async function POST(req: NextRequest) {
@@ -62,8 +106,12 @@ export async function POST(req: NextRequest) {
     let revalidated: string[];
 
     if (body.all) {
-      // Revalidate the entire site tree (use sparingly — expensive)
+      // Clears every cached Odoo fetch in this backend instance
       revalidatePath("/", "layout");
+      // Also clear the auxiliary API routes that aren't path-scoped
+      revalidatePath("/api/cms/slugs");
+      revalidatePath("/api/cms/case-studies");
+      revalidatePath("/api/cms/site-config");
       revalidated = ["(all)"];
     } else {
       const raw: string[] = [
@@ -80,10 +128,21 @@ export async function POST(req: NextRequest) {
 
       revalidated = raw.map((s) => {
         const slug = normalise(s);
-        revalidatePath(slug === "home" ? "/" : `/${slug}`);
+        // Clear the backend's own API route data cache
+        revalidatePath(slug === "home" ? "/api/cms/home" : `/api/cms/pages/${slug}`);
+        // Case studies page has a separate content endpoint
+        if (slug === "aptus-case-studies") {
+          revalidatePath("/api/cms/case-studies");
+        }
         return slug;
       });
+
+      // Any page publish/unpublish affects the slug list
+      revalidatePath("/api/cms/slugs");
     }
+
+    // Fan out to frontend — awaited but capped so Odoo save isn't blocked long
+    await notifyFrontend(body);
 
     return NextResponse.json({ revalidated: true, slugs: revalidated });
   } catch (err) {

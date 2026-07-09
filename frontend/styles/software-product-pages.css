@@ -90,13 +90,13 @@
 
 .aptus-software-page--construction-cloud .aptus-software-page-banner__title {
   color: #fff;
-  font-size: 40px;
+  font-size: var(--text-5xl);
   font-weight: 600;
 }
 
 .aptus-software-page--construction-cloud .aptus-software-page-banner__tagline {
   color: #fff;
-  font-size: 19px;
+  font-size: var(--text-lg);
   font-weight: 400;
   line-height: 1.65;
   max-width: 52rem;
@@ -104,7 +104,7 @@
 }
 
 .aptus-software-page--construction-cloud .aptus-software-page-banner__action {
-  font-size: 1.875rem;
+  font-size: var(--text-3xl);
   font-weight: 500;
   margin-top: -7rem;
 }
@@ -121,13 +121,13 @@
 
 .aptus-software-page--construction-cloud .aptus-software-inner-hero__title {
   color: var(--e-global-color-primary);
-  font-size: 33px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
 .aptus-software-page--construction-cloud .aptus-software-inner-hero__text {
   color: var(--e-global-color-accent);
-  font-size: 1rem;
+  font-size: var(--text-base);
   line-height: 1.5;
 }
 
@@ -142,14 +142,14 @@
 .aptus-software-page--construction-cloud [data-id="features"] .aptus-software-section-title,
 .aptus-software-page--construction-cloud [data-id="benefits"] .aptus-software-section-title {
   color: var(--e-global-color-accent);
-  font-size: 30px;
+  font-size: var(--text-3xl);
   font-weight: 600;
 }
 
 .aptus-software-page--construction-cloud [data-id="features"] .aptus-software-section-lead,
 .aptus-software-page--construction-cloud [data-id="benefits"] .aptus-software-section-lead {
   color: #463c3c;
-  font-size: 20px;
+  font-size: var(--text-xl);
 }
 
 .aptus-software-page--construction-cloud [data-id="benefits"] {
@@ -176,12 +176,12 @@
 .aptus-software-page--construction-cloud [data-id="features"] .aptus-software-icon-card__body,
 .aptus-software-page--construction-cloud [data-id="benefits"] .aptus-software-icon-card__body {
   color: #695b5b;
-  font-size: 13px;
+  font-size: var(--text-sm);
 }
 
 .aptus-software-page--construction-cloud [data-id="why-aptus"] .aptus-software-section-title {
   color: var(--e-global-color-primary);
-  font-size: 30px;
+  font-size: var(--text-3xl);
   font-weight: 600;
 }
 
@@ -194,22 +194,22 @@
 }
 
 .aptus-software-page--construction-cloud .aptus-software-mid-band h2 {
-  font-size: 30px;
+  font-size: var(--text-3xl);
   font-weight: 600;
 }
 
 .aptus-software-page--construction-cloud [data-variant="software-quotes"] .aptus-software-section-title {
-  font-size: 35px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
 .aptus-software-page--construction-cloud [data-variant="software-quotes"] .aptus-software-section-lead {
   color: #463c3c;
-  font-size: 20px;
+  font-size: var(--text-xl);
 }
 
 .aptus-software-page--construction-cloud [data-variant="alliances-grid"] .aptus-alliances-heading {
-  font-size: 2rem;
+  font-size: var(--text-4xl);
   font-weight: 600;
   text-align: center;
 }
@@ -230,7 +230,7 @@
 }
 
 .aptus-software-page--construction-cloud .aptus-software-form-heading {
-  font-size: 25px;
+  font-size: var(--text-2xl);
   font-weight: 600;
 }
 
@@ -244,23 +244,23 @@
 }
 
 .aptus-software-page--cyber-security-solution .aptus-software-hero-title {
-  font-size: 2.125rem;
+  font-size: var(--text-4xl);
 }
 
 .aptus-software-page--cyber-security-solution .aptus-software-hero-tagline {
-  font-size: 0.9375rem;
+  font-size: var(--text-sm);
   font-weight: 300;
   letter-spacing: -0.1px;
   line-height: 1.625rem;
 }
 
 .aptus-software-page--cyber-security-solution .aptus-software-hero-highlight {
-  font-size: 2.125rem;
+  font-size: var(--text-4xl);
 }
 
 .aptus-software-page--cyber-security-solution [data-id="Products"] .aptus-software-section-title {
   color: var(--e-global-color-primary);
-  font-size: 1.875rem;
+  font-size: var(--text-3xl);
 }
 
 .aptus-software-page--cyber-security-solution [data-id="Products"] .aptus-software-section-lead {
@@ -270,13 +270,13 @@
 
 .aptus-software-page--cyber-security-solution [data-id="capabilities"] .aptus-software-section-title,
 .aptus-software-page--cyber-security-solution [data-id="why-choose"] .aptus-software-section-title {
-  font-size: 1.875rem;
+  font-size: var(--text-3xl);
 }
 
 .aptus-software-page--cyber-security-solution [data-id="capabilities"] .aptus-software-icon-card__title,
 .aptus-software-page--cyber-security-solution [data-id="why-choose"] .aptus-software-value-title {
   color: #000;
-  font-size: 1rem;
+  font-size: var(--text-base);
 }
 
 .aptus-software-page--cyber-security-solution .aptus-software-product-grid--3 {
@@ -315,7 +315,7 @@
 }
 
 .aptus-software-page--cyber-security-solution .aptus-software-form-heading {
-  font-size: 2.1875rem;
+  font-size: var(--text-4xl);
 }
 
 .aptus-software-page--enscape {
@@ -445,8 +445,7 @@
 
 .aptus-software-page--cype .aptus-software-inner-hero__title {
   color: var(--e-global-color-primary);
-  font-family: var(--font-primary);
-  font-size: 25px;
+  font-size: var(--text-2xl);
   font-weight: 600;
   line-height: 1.25;
   text-align: start;
@@ -461,8 +460,7 @@
 
 .aptus-software-page--cype .aptus-software-inner-hero__text {
   color: var(--e-global-color-accent);
-  font-family: var(--font-primary);
-  font-size: 1rem;
+  font-size: var(--text-base);
   font-weight: 400;
   line-height: 1.5;
 }
@@ -512,8 +510,7 @@
 
 .aptus-software-page--cype [data-variant="bullet-list"] .aptus-software-section-title {
   color: var(--e-global-color-accent);
-  font-family: var(--font-primary);
-  font-size: 25px;
+  font-size: var(--text-2xl);
   font-weight: 600;
   text-align: start;
 }
@@ -526,7 +523,6 @@
 
 .aptus-software-page--cype .aptus-software-bullet-list {
   color: var(--e-global-color-accent);
-  font-family: var(--font-primary);
   font-weight: 400;
   line-height: 35px;
 }
@@ -537,8 +533,7 @@
 }
 
 .aptus-software-page--cype [data-variant="alliances-grid"] .aptus-alliances-heading {
-  font-family: var(--font-primary);
-  font-size: 35px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
@@ -582,13 +577,13 @@
 
 .aptus-software-page--computers-structures .aptus-software-page-banner__title {
   color: #fff;
-  font-size: 40px;
+  font-size: var(--text-5xl);
   font-weight: 600;
 }
 
 .aptus-software-page--computers-structures .aptus-software-page-banner__tagline {
   color: #fff;
-  font-size: 19px;
+  font-size: var(--text-lg);
   font-weight: 400;
   line-height: 1.35;
 }
@@ -614,13 +609,13 @@
 
 .aptus-software-page--computers-structures .aptus-software-inner-hero__title {
   color: #1352a3;
-  font-size: 34px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
 .aptus-software-page--computers-structures .aptus-software-inner-hero__text {
   color: #333;
-  font-size: 1rem;
+  font-size: var(--text-base);
   line-height: 1.5;
 }
 
@@ -631,7 +626,7 @@
 }
 
 .aptus-software-page--computers-structures [data-variant="alliances-grid"] .aptus-alliances-heading {
-  font-size: 2rem;
+  font-size: var(--text-4xl);
   font-weight: 600;
   text-align: center;
 }
@@ -658,12 +653,12 @@
 }
 
 .aptus-software-page--ansys .aptus-software-page-banner__title {
-  font-size: 40px;
+  font-size: var(--text-5xl);
   font-weight: 600;
 }
 
 .aptus-software-page--ansys .aptus-software-page-banner__tagline {
-  font-size: 19px;
+  font-size: var(--text-lg);
   font-weight: 400;
   line-height: 1.35;
   padding-bottom: 3rem;
@@ -671,7 +666,7 @@
 
 .aptus-software-page--ansys .aptus-software-inner-hero__title {
   color: #1a6eb5;
-  font-size: 34px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
@@ -696,13 +691,13 @@
 
 .aptus-software-page--matlab .aptus-software-inner-hero__title {
   color: #1a6eb5;
-  font-size: 34px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
 .aptus-software-page--matlab .aptus-matlab-intro-heading {
   color: #1a6eb5;
-  font-size: 1.35rem;
+  font-size: var(--text-xl);
   font-weight: 600;
   line-height: 1.35;
   margin: 0 0 1rem;
@@ -730,13 +725,13 @@
 
 .aptus-software-page--turnitin .aptus-software-inner-hero__title {
   color: #1a6eb5;
-  font-size: 34px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
 .aptus-software-page--turnitin .aptus-turnitin-intro-heading {
   color: #1a6eb5;
-  font-size: 1.35rem;
+  font-size: var(--text-xl);
   font-weight: 600;
   line-height: 1.35;
   margin: 0 0 1rem;
@@ -764,13 +759,13 @@
 
 .aptus-software-page--ibm-spss-software .aptus-software-inner-hero__title {
   color: #1a6eb5;
-  font-size: 34px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
 .aptus-software-page--ibm-spss-software .aptus-ibm-spss-intro-heading {
   color: #1a6eb5;
-  font-size: 1.35rem;
+  font-size: var(--text-xl);
   font-weight: 600;
   line-height: 1.35;
   margin: 0 0 1rem;
@@ -841,8 +836,7 @@
 
 .aptus-software-page--prokon .aptus-software-inner-hero__title {
   color: var(--e-global-color-primary);
-  font-family: var(--font-primary);
-  font-size: 25px;
+  font-size: var(--text-2xl);
   font-weight: 600;
   line-height: 1.25;
   text-align: start;
@@ -868,16 +862,14 @@
 
 .aptus-software-page--prokon .aptus-software-inner-hero__text {
   color: var(--e-global-color-accent);
-  font-family: var(--font-primary);
-  font-size: 1rem;
+  font-size: var(--text-base);
   font-weight: 400;
   line-height: 1.5;
 }
 
 .aptus-software-page--prokon .aptus-prokon-intro-heading {
   color: var(--e-global-color-accent);
-  font-family: var(--font-primary);
-  font-size: 25px;
+  font-size: var(--text-2xl);
   font-weight: 600;
   line-height: 1.25;
   margin: 0 0 0.75rem;
@@ -929,7 +921,7 @@
 
 .aptus-software-page--prokon [data-id="capabilities"] .aptus-software-icon-card__title {
   color: #000;
-  font-size: 1rem;
+  font-size: var(--text-base);
   font-weight: 600;
   margin-top: 0.5rem;
 }
@@ -945,8 +937,7 @@
 
 .aptus-software-page--prokon [data-variant="checklist"] .aptus-software-section-title {
   color: var(--e-global-color-accent);
-  font-family: var(--font-primary);
-  font-size: 25px;
+  font-size: var(--text-2xl);
   font-weight: 600;
   text-align: start;
 }
@@ -961,7 +952,7 @@
 }
 
 .aptus-software-page--prokon [data-variant="alliances-grid"] .aptus-alliances-heading {
-  font-size: 25px;
+  font-size: var(--text-2xl);
   font-weight: 600;
   text-align: center;
 }
@@ -997,13 +988,13 @@
 
 .aptus-software-page--fortinet .aptus-software-page-banner__title {
   color: #fff;
-  font-size: 40px;
+  font-size: var(--text-5xl);
   font-weight: 600;
 }
 
 .aptus-software-page--fortinet .aptus-software-page-banner__tagline {
   color: #fff;
-  font-size: 19px;
+  font-size: var(--text-lg);
   font-weight: 400;
   line-height: 1.65;
   max-width: 52rem;
@@ -1011,7 +1002,7 @@
 }
 
 .aptus-software-page--fortinet .aptus-software-page-banner__action {
-  font-size: 1.875rem;
+  font-size: var(--text-3xl);
   font-weight: 500;
   margin-top: -7rem;
 }
@@ -1028,13 +1019,13 @@
 
 .aptus-software-page--fortinet .aptus-software-inner-hero__title {
   color: var(--e-global-color-primary);
-  font-size: 33px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
 .aptus-software-page--fortinet .aptus-software-inner-hero__text {
   color: var(--e-global-color-accent);
-  font-size: 1rem;
+  font-size: var(--text-base);
   line-height: 1.5;
 }
 
@@ -1049,14 +1040,14 @@
 .aptus-software-page--fortinet [data-id="features"] .aptus-software-section-title,
 .aptus-software-page--fortinet [data-id="why-fortinet"] .aptus-software-section-title {
   color: var(--e-global-color-accent);
-  font-size: 30px;
+  font-size: var(--text-3xl);
   font-weight: 600;
 }
 
 .aptus-software-page--fortinet [data-id="features"] .aptus-software-section-lead,
 .aptus-software-page--fortinet [data-id="why-fortinet"] .aptus-software-section-lead {
   color: #463c3c;
-  font-size: 20px;
+  font-size: var(--text-xl);
 }
 
 .aptus-software-page--fortinet [data-id="why-fortinet"] {
@@ -1083,7 +1074,7 @@
 .aptus-software-page--fortinet [data-id="features"] .aptus-software-icon-card__body,
 .aptus-software-page--fortinet [data-id="why-fortinet"] .aptus-software-icon-card__body {
   color: #695b5b;
-  font-size: 13px;
+  font-size: var(--text-sm);
 }
 
 .aptus-software-page--fortinet .aptus-software-mid-band {
@@ -1095,22 +1086,22 @@
 }
 
 .aptus-software-page--fortinet .aptus-software-mid-band h2 {
-  font-size: 30px;
+  font-size: var(--text-3xl);
   font-weight: 600;
 }
 
 .aptus-software-page--fortinet [data-variant="software-quotes"] .aptus-software-section-title {
-  font-size: 35px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
 .aptus-software-page--fortinet [data-variant="software-quotes"] .aptus-software-section-lead {
   color: #463c3c;
-  font-size: 20px;
+  font-size: var(--text-xl);
 }
 
 .aptus-software-page--fortinet [data-variant="alliances-grid"] .aptus-alliances-heading {
-  font-size: 2rem;
+  font-size: var(--text-4xl);
   font-weight: 600;
   text-align: center;
 }
@@ -1131,7 +1122,7 @@
 }
 
 .aptus-software-page--fortinet .aptus-software-form-heading {
-  font-size: 25px;
+  font-size: var(--text-2xl);
   font-weight: 600;
 }
 
@@ -1147,13 +1138,13 @@
 
 .aptus-software-page--sophos .aptus-software-page-banner__title {
   color: #fff;
-  font-size: 40px;
+  font-size: var(--text-5xl);
   font-weight: 600;
 }
 
 .aptus-software-page--sophos .aptus-software-page-banner__tagline {
   color: #fff;
-  font-size: 19px;
+  font-size: var(--text-lg);
   font-weight: 400;
   line-height: 1.65;
   max-width: 52rem;
@@ -1161,7 +1152,7 @@
 }
 
 .aptus-software-page--sophos .aptus-software-page-banner__action {
-  font-size: 1.875rem;
+  font-size: var(--text-3xl);
   font-weight: 500;
   margin-top: -7rem;
 }
@@ -1178,13 +1169,13 @@
 
 .aptus-software-page--sophos .aptus-software-inner-hero__title {
   color: var(--e-global-color-primary);
-  font-size: 33px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
 .aptus-software-page--sophos .aptus-software-inner-hero__text {
   color: var(--e-global-color-accent);
-  font-size: 1rem;
+  font-size: var(--text-base);
   line-height: 1.5;
 }
 
@@ -1199,14 +1190,14 @@
 .aptus-software-page--sophos [data-id="features"] .aptus-software-section-title,
 .aptus-software-page--sophos [data-id="why-sophos"] .aptus-software-section-title {
   color: var(--e-global-color-accent);
-  font-size: 30px;
+  font-size: var(--text-3xl);
   font-weight: 600;
 }
 
 .aptus-software-page--sophos [data-id="features"] .aptus-software-section-lead,
 .aptus-software-page--sophos [data-id="why-sophos"] .aptus-software-section-lead {
   color: #463c3c;
-  font-size: 20px;
+  font-size: var(--text-xl);
 }
 
 .aptus-software-page--sophos [data-id="why-sophos"] {
@@ -1233,7 +1224,7 @@
 .aptus-software-page--sophos [data-id="features"] .aptus-software-icon-card__body,
 .aptus-software-page--sophos [data-id="why-sophos"] .aptus-software-icon-card__body {
   color: #695b5b;
-  font-size: 13px;
+  font-size: var(--text-sm);
 }
 
 .aptus-software-page--sophos .aptus-software-mid-band {
@@ -1245,22 +1236,22 @@
 }
 
 .aptus-software-page--sophos .aptus-software-mid-band h2 {
-  font-size: 30px;
+  font-size: var(--text-3xl);
   font-weight: 600;
 }
 
 .aptus-software-page--sophos [data-variant="software-quotes"] .aptus-software-section-title {
-  font-size: 35px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
 .aptus-software-page--sophos [data-variant="software-quotes"] .aptus-software-section-lead {
   color: #463c3c;
-  font-size: 20px;
+  font-size: var(--text-xl);
 }
 
 .aptus-software-page--sophos [data-variant="alliances-grid"] .aptus-alliances-heading {
-  font-size: 2rem;
+  font-size: var(--text-4xl);
   font-weight: 600;
   text-align: center;
 }
@@ -1281,7 +1272,7 @@
 }
 
 .aptus-software-page--sophos .aptus-software-form-heading {
-  font-size: 25px;
+  font-size: var(--text-2xl);
   font-weight: 600;
 }
 
@@ -1297,13 +1288,13 @@
 
 .aptus-software-page--sonicwall-next-gen-firewall .aptus-software-page-banner__title {
   color: #fff;
-  font-size: 40px;
+  font-size: var(--text-5xl);
   font-weight: 600;
 }
 
 .aptus-software-page--sonicwall-next-gen-firewall .aptus-software-page-banner__tagline {
   color: #fff;
-  font-size: 19px;
+  font-size: var(--text-lg);
   font-weight: 400;
   line-height: 1.65;
   max-width: 52rem;
@@ -1311,7 +1302,7 @@
 }
 
 .aptus-software-page--sonicwall-next-gen-firewall .aptus-software-page-banner__action {
-  font-size: 1.875rem;
+  font-size: var(--text-3xl);
   font-weight: 500;
   margin-top: -7rem;
 }
@@ -1328,13 +1319,13 @@
 
 .aptus-software-page--sonicwall-next-gen-firewall .aptus-software-inner-hero__title {
   color: var(--e-global-color-primary);
-  font-size: 33px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
 .aptus-software-page--sonicwall-next-gen-firewall .aptus-software-inner-hero__text {
   color: var(--e-global-color-accent);
-  font-size: 1rem;
+  font-size: var(--text-base);
   line-height: 1.5;
 }
 
@@ -1349,14 +1340,14 @@
 .aptus-software-page--sonicwall-next-gen-firewall [data-id="features"] .aptus-software-section-title,
 .aptus-software-page--sonicwall-next-gen-firewall [data-id="why-sonicwall"] .aptus-software-section-title {
   color: var(--e-global-color-accent);
-  font-size: 30px;
+  font-size: var(--text-3xl);
   font-weight: 600;
 }
 
 .aptus-software-page--sonicwall-next-gen-firewall [data-id="features"] .aptus-software-section-lead,
 .aptus-software-page--sonicwall-next-gen-firewall [data-id="why-sonicwall"] .aptus-software-section-lead {
   color: #463c3c;
-  font-size: 20px;
+  font-size: var(--text-xl);
 }
 
 .aptus-software-page--sonicwall-next-gen-firewall [data-id="why-sonicwall"] {
@@ -1383,7 +1374,7 @@
 .aptus-software-page--sonicwall-next-gen-firewall [data-id="features"] .aptus-software-icon-card__body,
 .aptus-software-page--sonicwall-next-gen-firewall [data-id="why-sonicwall"] .aptus-software-icon-card__body {
   color: #695b5b;
-  font-size: 13px;
+  font-size: var(--text-sm);
 }
 
 .aptus-software-page--sonicwall-next-gen-firewall .aptus-software-mid-band {
@@ -1395,22 +1386,22 @@
 }
 
 .aptus-software-page--sonicwall-next-gen-firewall .aptus-software-mid-band h2 {
-  font-size: 30px;
+  font-size: var(--text-3xl);
   font-weight: 600;
 }
 
 .aptus-software-page--sonicwall-next-gen-firewall [data-variant="software-quotes"] .aptus-software-section-title {
-  font-size: 35px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
 .aptus-software-page--sonicwall-next-gen-firewall [data-variant="software-quotes"] .aptus-software-section-lead {
   color: #463c3c;
-  font-size: 20px;
+  font-size: var(--text-xl);
 }
 
 .aptus-software-page--sonicwall-next-gen-firewall [data-variant="alliances-grid"] .aptus-alliances-heading {
-  font-size: 2rem;
+  font-size: var(--text-4xl);
   font-weight: 600;
   text-align: center;
 }
@@ -1431,7 +1422,7 @@
 }
 
 .aptus-software-page--sonicwall-next-gen-firewall .aptus-software-form-heading {
-  font-size: 25px;
+  font-size: var(--text-2xl);
   font-weight: 600;
 }
 
@@ -1447,20 +1438,20 @@
 
 .aptus-software-page--kaspersky .aptus-software-page-banner__title {
   color: #fff;
-  font-size: 40px;
+  font-size: var(--text-5xl);
   font-weight: 600;
 }
 
 .aptus-software-page--kaspersky .aptus-software-page-banner__tagline {
   color: #fff;
-  font-size: 19px;
+  font-size: var(--text-lg);
   font-weight: 400;
   line-height: 1.5;
   max-width: 42rem;
 }
 
 .aptus-software-page--kaspersky .aptus-software-page-banner__action {
-  font-size: 1.875rem;
+  font-size: var(--text-3xl);
   font-weight: 500;
   margin-top: -7rem;
 }
@@ -1477,13 +1468,13 @@
 
 .aptus-software-page--kaspersky .aptus-software-inner-hero__title {
   color: var(--e-global-color-primary);
-  font-size: 33px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
 .aptus-software-page--kaspersky .aptus-software-inner-hero__text {
   color: var(--e-global-color-accent);
-  font-size: 1rem;
+  font-size: var(--text-base);
   line-height: 1.5;
 }
 
@@ -1497,14 +1488,14 @@
 .aptus-software-page--kaspersky [data-id="features"] .aptus-software-section-title,
 .aptus-software-page--kaspersky [data-id="why-kaspersky"] .aptus-software-section-title {
   color: var(--e-global-color-accent);
-  font-size: 30px;
+  font-size: var(--text-3xl);
   font-weight: 600;
 }
 
 .aptus-software-page--kaspersky [data-id="features"] .aptus-software-section-lead,
 .aptus-software-page--kaspersky [data-id="why-kaspersky"] .aptus-software-section-lead {
   color: #463c3c;
-  font-size: 20px;
+  font-size: var(--text-xl);
 }
 
 .aptus-software-page--kaspersky [data-id="why-kaspersky"] {
@@ -1531,7 +1522,7 @@
 .aptus-software-page--kaspersky [data-id="features"] .aptus-software-icon-card__body,
 .aptus-software-page--kaspersky [data-id="why-kaspersky"] .aptus-software-icon-card__body {
   color: #695b5b;
-  font-size: 13px;
+  font-size: var(--text-sm);
 }
 
 .aptus-software-page--kaspersky .aptus-software-mid-band {
@@ -1543,22 +1534,22 @@
 }
 
 .aptus-software-page--kaspersky .aptus-software-mid-band h2 {
-  font-size: 30px;
+  font-size: var(--text-3xl);
   font-weight: 600;
 }
 
 .aptus-software-page--kaspersky [data-variant="software-quotes"] .aptus-software-section-title {
-  font-size: 35px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
 .aptus-software-page--kaspersky [data-variant="software-quotes"] .aptus-software-section-lead {
   color: #463c3c;
-  font-size: 20px;
+  font-size: var(--text-xl);
 }
 
 .aptus-software-page--kaspersky [data-variant="alliances-grid"] .aptus-alliances-heading {
-  font-size: 2rem;
+  font-size: var(--text-4xl);
   font-weight: 600;
   text-align: center;
 }
@@ -1579,7 +1570,7 @@
 }
 
 .aptus-software-page--kaspersky .aptus-software-form-heading {
-  font-size: 25px;
+  font-size: var(--text-2xl);
   font-weight: 600;
 }
 
@@ -1595,13 +1586,13 @@
 
 .aptus-software-page--palo-alto .aptus-software-page-banner__title {
   color: #fff;
-  font-size: 40px;
+  font-size: var(--text-5xl);
   font-weight: 600;
 }
 
 .aptus-software-page--palo-alto .aptus-software-page-banner__tagline {
   color: #fff;
-  font-size: 19px;
+  font-size: var(--text-lg);
   font-weight: 400;
   line-height: 1.65;
   max-width: 52rem;
@@ -1609,7 +1600,7 @@
 }
 
 .aptus-software-page--palo-alto .aptus-software-page-banner__action {
-  font-size: 1.875rem;
+  font-size: var(--text-3xl);
   font-weight: 500;
   margin-top: -7rem;
 }
@@ -1626,13 +1617,13 @@
 
 .aptus-software-page--palo-alto .aptus-software-inner-hero__title {
   color: var(--e-global-color-primary);
-  font-size: 33px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
 .aptus-software-page--palo-alto .aptus-software-inner-hero__text {
   color: var(--e-global-color-accent);
-  font-size: 1rem;
+  font-size: var(--text-base);
   line-height: 1.5;
 }
 
@@ -1647,13 +1638,13 @@
 .aptus-software-page--palo-alto [data-id="features"] .aptus-software-section-title,
 .aptus-software-page--palo-alto [data-id="why-palo-alto"] .aptus-software-section-title {
   color: var(--e-global-color-accent);
-  font-size: 30px;
+  font-size: var(--text-3xl);
   font-weight: 600;
 }
 
 .aptus-software-page--palo-alto [data-id="why-palo-alto"] .aptus-software-section-lead {
   color: #463c3c;
-  font-size: 20px;
+  font-size: var(--text-xl);
 }
 
 .aptus-software-page--palo-alto [data-id="why-palo-alto"] {
@@ -1680,7 +1671,7 @@
 .aptus-software-page--palo-alto [data-id="features"] .aptus-software-icon-card__body,
 .aptus-software-page--palo-alto [data-id="why-palo-alto"] .aptus-software-icon-card__body {
   color: #695b5b;
-  font-size: 13px;
+  font-size: var(--text-sm);
 }
 
 .aptus-software-page--palo-alto .aptus-software-mid-band {
@@ -1692,17 +1683,17 @@
 }
 
 .aptus-software-page--palo-alto .aptus-software-mid-band h2 {
-  font-size: 30px;
+  font-size: var(--text-3xl);
   font-weight: 600;
 }
 
 .aptus-software-page--palo-alto [data-variant="software-quotes"] .aptus-software-section-title {
-  font-size: 35px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
 .aptus-software-page--palo-alto [data-variant="alliances-grid"] .aptus-alliances-heading {
-  font-size: 2rem;
+  font-size: var(--text-4xl);
   font-weight: 600;
   text-align: center;
 }
@@ -1723,7 +1714,7 @@
 }
 
 .aptus-software-page--palo-alto .aptus-software-form-heading {
-  font-size: 25px;
+  font-size: var(--text-2xl);
   font-weight: 600;
 }
 
@@ -1752,7 +1743,7 @@
 
 .aptus-software-page--antivirus-and-data-security .aptus-software-inner-hero__title {
   color: var(--e-global-color-primary);
-  font-size: 25px;
+  font-size: var(--text-2xl);
   font-weight: 600;
   line-height: 1.25;
   text-align: start;
@@ -1760,7 +1751,7 @@
 
 .aptus-software-page--antivirus-and-data-security .aptus-software-inner-hero__text {
   color: var(--e-global-color-accent);
-  font-size: 1rem;
+  font-size: var(--text-base);
   line-height: 1.5;
 }
 
@@ -1777,18 +1768,18 @@
 
 .aptus-software-page--antivirus-and-data-security [data-variant="checklist"] .aptus-software-section-title {
   color: var(--e-global-color-primary);
-  font-size: 25px;
+  font-size: var(--text-2xl);
   font-weight: 600;
 }
 
 .aptus-software-page--antivirus-and-data-security [data-variant="checklist"] .aptus-software-checklist strong {
   color: var(--e-global-color-accent);
-  font-size: 1rem;
+  font-size: var(--text-base);
   font-weight: 600;
 }
 
 .aptus-software-page--antivirus-and-data-security [data-variant="alliances-grid"] .aptus-alliances-heading {
-  font-size: 2rem;
+  font-size: var(--text-4xl);
   font-weight: 600;
   text-align: center;
 }
@@ -1809,7 +1800,7 @@
 }
 
 .aptus-software-page--antivirus-and-data-security .aptus-software-form-heading {
-  font-size: 25px;
+  font-size: var(--text-2xl);
   font-weight: 600;
 }
 
@@ -1829,13 +1820,13 @@
 
 .aptus-software-page--infowater-pro .aptus-software-page-banner__title {
   color: #fff;
-  font-size: 40px;
+  font-size: var(--text-5xl);
   font-weight: 600;
 }
 
 .aptus-software-page--infowater-pro .aptus-software-page-banner__tagline {
   color: #fff;
-  font-size: 19px;
+  font-size: var(--text-lg);
   font-weight: 400;
   line-height: 1.65;
   max-width: 52rem;
@@ -1843,7 +1834,7 @@
 }
 
 .aptus-software-page--infowater-pro .aptus-software-page-banner__action {
-  font-size: 1.875rem;
+  font-size: var(--text-3xl);
   font-weight: 500;
   margin-top: -7rem;
 }
@@ -1860,13 +1851,13 @@
 
 .aptus-software-page--infowater-pro .aptus-software-inner-hero__title {
   color: var(--e-global-color-primary);
-  font-size: 33px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
 .aptus-software-page--infowater-pro .aptus-software-inner-hero__text {
   color: var(--e-global-color-accent);
-  font-size: 1rem;
+  font-size: var(--text-base);
   line-height: 1.5;
 }
 
@@ -1881,14 +1872,14 @@
 .aptus-software-page--infowater-pro [data-id="features"] .aptus-software-section-title,
 .aptus-software-page--infowater-pro [data-id="benefits"] .aptus-software-section-title {
   color: var(--e-global-color-accent);
-  font-size: 30px;
+  font-size: var(--text-3xl);
   font-weight: 600;
 }
 
 .aptus-software-page--infowater-pro [data-id="features"] .aptus-software-section-lead,
 .aptus-software-page--infowater-pro [data-id="benefits"] .aptus-software-section-lead {
   color: #463c3c;
-  font-size: 20px;
+  font-size: var(--text-xl);
 }
 
 .aptus-software-page--infowater-pro [data-id="benefits"] {
@@ -1915,12 +1906,12 @@
 .aptus-software-page--infowater-pro [data-id="features"] .aptus-software-icon-card__body,
 .aptus-software-page--infowater-pro [data-id="benefits"] .aptus-software-icon-card__body {
   color: #695b5b;
-  font-size: 13px;
+  font-size: var(--text-sm);
 }
 
 .aptus-software-page--infowater-pro [data-id="why-aptus"] .aptus-software-section-title {
   color: var(--e-global-color-primary);
-  font-size: 30px;
+  font-size: var(--text-3xl);
   font-weight: 600;
 }
 
@@ -1933,22 +1924,22 @@
 }
 
 .aptus-software-page--infowater-pro .aptus-software-mid-band h2 {
-  font-size: 30px;
+  font-size: var(--text-3xl);
   font-weight: 600;
 }
 
 .aptus-software-page--infowater-pro [data-variant="software-quotes"] .aptus-software-section-title {
-  font-size: 35px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
 .aptus-software-page--infowater-pro [data-variant="software-quotes"] .aptus-software-section-lead {
   color: #463c3c;
-  font-size: 20px;
+  font-size: var(--text-xl);
 }
 
 .aptus-software-page--infowater-pro [data-variant="alliances-grid"] .aptus-alliances-heading {
-  font-size: 2rem;
+  font-size: var(--text-4xl);
   font-weight: 600;
   text-align: center;
 }
@@ -1969,7 +1960,7 @@
 }
 
 .aptus-software-page--infowater-pro .aptus-software-form-heading {
-  font-size: 25px;
+  font-size: var(--text-2xl);
   font-weight: 600;
 }
 
@@ -1989,13 +1980,13 @@
 
 .aptus-software-page--infodrainage .aptus-software-page-banner__title {
   color: #fff;
-  font-size: 40px;
+  font-size: var(--text-5xl);
   font-weight: 600;
 }
 
 .aptus-software-page--infodrainage .aptus-software-page-banner__tagline {
   color: #fff;
-  font-size: 19px;
+  font-size: var(--text-lg);
   font-weight: 400;
   line-height: 1.65;
   max-width: 52rem;
@@ -2003,7 +1994,7 @@
 }
 
 .aptus-software-page--infodrainage .aptus-software-page-banner__action {
-  font-size: 1.875rem;
+  font-size: var(--text-3xl);
   font-weight: 500;
   margin-top: -7rem;
 }
@@ -2020,13 +2011,13 @@
 
 .aptus-software-page--infodrainage .aptus-software-inner-hero__title {
   color: var(--e-global-color-primary);
-  font-size: 33px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
 .aptus-software-page--infodrainage .aptus-software-inner-hero__text {
   color: var(--e-global-color-accent);
-  font-size: 1rem;
+  font-size: var(--text-base);
   line-height: 1.5;
 }
 
@@ -2041,14 +2032,14 @@
 .aptus-software-page--infodrainage [data-id="features"] .aptus-software-section-title,
 .aptus-software-page--infodrainage [data-id="benefits"] .aptus-software-section-title {
   color: var(--e-global-color-accent);
-  font-size: 30px;
+  font-size: var(--text-3xl);
   font-weight: 600;
 }
 
 .aptus-software-page--infodrainage [data-id="features"] .aptus-software-section-lead,
 .aptus-software-page--infodrainage [data-id="benefits"] .aptus-software-section-lead {
   color: #463c3c;
-  font-size: 20px;
+  font-size: var(--text-xl);
 }
 
 .aptus-software-page--infodrainage [data-id="benefits"] {
@@ -2075,12 +2066,12 @@
 .aptus-software-page--infodrainage [data-id="features"] .aptus-software-icon-card__body,
 .aptus-software-page--infodrainage [data-id="benefits"] .aptus-software-icon-card__body {
   color: #695b5b;
-  font-size: 13px;
+  font-size: var(--text-sm);
 }
 
 .aptus-software-page--infodrainage [data-id="why-aptus"] .aptus-software-section-title {
   color: var(--e-global-color-primary);
-  font-size: 30px;
+  font-size: var(--text-3xl);
   font-weight: 600;
 }
 
@@ -2093,22 +2084,22 @@
 }
 
 .aptus-software-page--infodrainage .aptus-software-mid-band h2 {
-  font-size: 30px;
+  font-size: var(--text-3xl);
   font-weight: 600;
 }
 
 .aptus-software-page--infodrainage [data-variant="software-quotes"] .aptus-software-section-title {
-  font-size: 35px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
 .aptus-software-page--infodrainage [data-variant="software-quotes"] .aptus-software-section-lead {
   color: #463c3c;
-  font-size: 20px;
+  font-size: var(--text-xl);
 }
 
 .aptus-software-page--infodrainage [data-variant="alliances-grid"] .aptus-alliances-heading {
-  font-size: 2rem;
+  font-size: var(--text-4xl);
   font-weight: 600;
   text-align: center;
 }
@@ -2129,7 +2120,7 @@
 }
 
 .aptus-software-page--infodrainage .aptus-software-form-heading {
-  font-size: 25px;
+  font-size: var(--text-2xl);
   font-weight: 600;
 }
 
@@ -2149,13 +2140,13 @@
 
 .aptus-software-page--infoworks-icm .aptus-software-page-banner__title {
   color: #fff;
-  font-size: 40px;
+  font-size: var(--text-5xl);
   font-weight: 600;
 }
 
 .aptus-software-page--infoworks-icm .aptus-software-page-banner__tagline {
   color: #fff;
-  font-size: 19px;
+  font-size: var(--text-lg);
   font-weight: 400;
   line-height: 1.65;
   max-width: 52rem;
@@ -2163,7 +2154,7 @@
 }
 
 .aptus-software-page--infoworks-icm .aptus-software-page-banner__action {
-  font-size: 1.875rem;
+  font-size: var(--text-3xl);
   font-weight: 500;
   margin-top: -7rem;
 }
@@ -2180,13 +2171,13 @@
 
 .aptus-software-page--infoworks-icm .aptus-software-inner-hero__title {
   color: var(--e-global-color-primary);
-  font-size: 33px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
 .aptus-software-page--infoworks-icm .aptus-software-inner-hero__text {
   color: var(--e-global-color-accent);
-  font-size: 1rem;
+  font-size: var(--text-base);
   line-height: 1.5;
 }
 
@@ -2201,14 +2192,14 @@
 .aptus-software-page--infoworks-icm [data-id="features"] .aptus-software-section-title,
 .aptus-software-page--infoworks-icm [data-id="benefits"] .aptus-software-section-title {
   color: var(--e-global-color-accent);
-  font-size: 30px;
+  font-size: var(--text-3xl);
   font-weight: 600;
 }
 
 .aptus-software-page--infoworks-icm [data-id="features"] .aptus-software-section-lead,
 .aptus-software-page--infoworks-icm [data-id="benefits"] .aptus-software-section-lead {
   color: #463c3c;
-  font-size: 20px;
+  font-size: var(--text-xl);
 }
 
 .aptus-software-page--infoworks-icm [data-id="benefits"] {
@@ -2235,12 +2226,12 @@
 .aptus-software-page--infoworks-icm [data-id="features"] .aptus-software-icon-card__body,
 .aptus-software-page--infoworks-icm [data-id="benefits"] .aptus-software-icon-card__body {
   color: #695b5b;
-  font-size: 13px;
+  font-size: var(--text-sm);
 }
 
 .aptus-software-page--infoworks-icm [data-id="why-aptus"] .aptus-software-section-title {
   color: var(--e-global-color-primary);
-  font-size: 30px;
+  font-size: var(--text-3xl);
   font-weight: 600;
 }
 
@@ -2253,22 +2244,22 @@
 }
 
 .aptus-software-page--infoworks-icm .aptus-software-mid-band h2 {
-  font-size: 30px;
+  font-size: var(--text-3xl);
   font-weight: 600;
 }
 
 .aptus-software-page--infoworks-icm [data-variant="software-quotes"] .aptus-software-section-title {
-  font-size: 35px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
 .aptus-software-page--infoworks-icm [data-variant="software-quotes"] .aptus-software-section-lead {
   color: #463c3c;
-  font-size: 20px;
+  font-size: var(--text-xl);
 }
 
 .aptus-software-page--infoworks-icm [data-variant="alliances-grid"] .aptus-alliances-heading {
-  font-size: 2rem;
+  font-size: var(--text-4xl);
   font-weight: 600;
   text-align: center;
 }
@@ -2289,7 +2280,7 @@
 }
 
 .aptus-software-page--infoworks-icm .aptus-software-form-heading {
-  font-size: 25px;
+  font-size: var(--text-2xl);
   font-weight: 600;
 }
 
@@ -2309,13 +2300,13 @@
 
 .aptus-software-page--infoworks-ws-pro .aptus-software-page-banner__title {
   color: #fff;
-  font-size: 40px;
+  font-size: var(--text-5xl);
   font-weight: 600;
 }
 
 .aptus-software-page--infoworks-ws-pro .aptus-software-page-banner__tagline {
   color: #fff;
-  font-size: 19px;
+  font-size: var(--text-lg);
   font-weight: 400;
   line-height: 1.65;
   max-width: 52rem;
@@ -2323,7 +2314,7 @@
 }
 
 .aptus-software-page--infoworks-ws-pro .aptus-software-page-banner__action {
-  font-size: 1.875rem;
+  font-size: var(--text-3xl);
   font-weight: 500;
   margin-top: -7rem;
 }
@@ -2340,13 +2331,13 @@
 
 .aptus-software-page--infoworks-ws-pro .aptus-software-inner-hero__title {
   color: var(--e-global-color-primary);
-  font-size: 33px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
 .aptus-software-page--infoworks-ws-pro .aptus-software-inner-hero__text {
   color: var(--e-global-color-accent);
-  font-size: 1rem;
+  font-size: var(--text-base);
   line-height: 1.5;
 }
 
@@ -2361,14 +2352,14 @@
 .aptus-software-page--infoworks-ws-pro [data-id="features"] .aptus-software-section-title,
 .aptus-software-page--infoworks-ws-pro [data-id="benefits"] .aptus-software-section-title {
   color: var(--e-global-color-accent);
-  font-size: 30px;
+  font-size: var(--text-3xl);
   font-weight: 600;
 }
 
 .aptus-software-page--infoworks-ws-pro [data-id="features"] .aptus-software-section-lead,
 .aptus-software-page--infoworks-ws-pro [data-id="benefits"] .aptus-software-section-lead {
   color: #463c3c;
-  font-size: 20px;
+  font-size: var(--text-xl);
 }
 
 .aptus-software-page--infoworks-ws-pro [data-id="benefits"] {
@@ -2395,12 +2386,12 @@
 .aptus-software-page--infoworks-ws-pro [data-id="features"] .aptus-software-icon-card__body,
 .aptus-software-page--infoworks-ws-pro [data-id="benefits"] .aptus-software-icon-card__body {
   color: #695b5b;
-  font-size: 13px;
+  font-size: var(--text-sm);
 }
 
 .aptus-software-page--infoworks-ws-pro [data-id="why-aptus"] .aptus-software-section-title {
   color: var(--e-global-color-primary);
-  font-size: 30px;
+  font-size: var(--text-3xl);
   font-weight: 600;
 }
 
@@ -2413,22 +2404,22 @@
 }
 
 .aptus-software-page--infoworks-ws-pro .aptus-software-mid-band h2 {
-  font-size: 30px;
+  font-size: var(--text-3xl);
   font-weight: 600;
 }
 
 .aptus-software-page--infoworks-ws-pro [data-variant="software-quotes"] .aptus-software-section-title {
-  font-size: 35px;
+  font-size: var(--text-4xl);
   font-weight: 600;
 }
 
 .aptus-software-page--infoworks-ws-pro [data-variant="software-quotes"] .aptus-software-section-lead {
   color: #463c3c;
-  font-size: 20px;
+  font-size: var(--text-xl);
 }
 
 .aptus-software-page--infoworks-ws-pro [data-variant="alliances-grid"] .aptus-alliances-heading {
-  font-size: 2rem;
+  font-size: var(--text-4xl);
   font-weight: 600;
   text-align: center;
 }
@@ -2449,7 +2440,26 @@
 }
 
 .aptus-software-page--infoworks-ws-pro .aptus-software-form-heading {
-  font-size: 25px;
+  font-size: var(--text-2xl);
   font-weight: 600;
+}
+
+/* ponytail: shared mobile overrides for Elementor product fixed media widths */
+@media (max-width: 767px) {
+  [class*="aptus-software-page--"] .aptus-software-inner-hero__media img,
+  [class*="aptus-software-page--"] .aptus-software-page-banner__media img {
+    height: auto !important;
+    max-height: min(280px, 55vw) !important;
+    max-width: 100% !important;
+    width: auto !important;
+  }
+
+  [class*="aptus-software-page--"] .aptus-software-page-banner__action {
+    margin-top: 0 !important;
+  }
+
+  [class*="aptus-software-page--"] .aptus-form-card {
+    padding: 1.25rem;
+  }
 }
 

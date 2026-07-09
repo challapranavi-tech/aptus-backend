@@ -33,7 +33,7 @@ function WhyPanelRow({
           {bullets && bullets.length > 0 && (
             <ul className="mt-5 space-y-2 text-left">
               {bullets.map((b, i) => (
-                <li key={i} className="flex items-start gap-3 text-base text-black">
+                <li key={i} className="flex items-start gap-3 text-black" style={{ fontSize: 'var(--text-base)' }}>
                   <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-green" />
                   <span>{b}</span>
                 </li>

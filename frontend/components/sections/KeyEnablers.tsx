@@ -67,7 +67,7 @@ export function KeyEnablers({ data }: KeyEnablersProps) {
             <div ref={headingRef} className="lg:sticky lg:top-28">
               {data.eyebrow && <p className="eyebrow mb-3">{data.eyebrow}</p>}
               {(data.heading || data.headingAccent) && (
-                <h2 className="text-3xl font-semibold leading-tight text-brand-navy sm:text-4xl">
+                <h2 className="leading-tight text-brand-navy" style={{ fontSize: 'var(--text-4xl)', fontWeight: 600 }}>
                   {data.heading}
                   {data.heading && data.headingAccent && " "}
                   {data.headingAccent && (
@@ -78,7 +78,7 @@ export function KeyEnablers({ data }: KeyEnablersProps) {
                 </h2>
               )}
               {data.subheading && (
-                <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+                <p className="mt-4 leading-relaxed text-muted-foreground" style={{ fontSize: 'var(--text-base)' }}>
                   {data.subheading}
                 </p>
               )}
@@ -96,23 +96,23 @@ export function KeyEnablers({ data }: KeyEnablersProps) {
                 >
                   {/* Watermark number */}
                   {item.number && (
-                    <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 select-none text-7xl font-bold leading-none text-brand-blue/8">
+                    <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 select-none leading-none text-brand-blue/8" style={{ fontSize: 'var(--text-6xl)', fontWeight: 700 }}>
                       {item.number}
                     </span>
                   )}
 
                   <div className="relative flex items-start gap-4">
                     {item.number && (
-                      <span className="mt-0.5 shrink-0 text-sm font-bold text-brand-green">
+                      <span className="mt-0.5 shrink-0 text-brand-green" style={{ fontSize: 'var(--text-sm)', fontWeight: 700 }}>
                         {item.number}
                       </span>
                     )}
                     <div>
                       {item.title && (
-                        <h3 className="text-base font-semibold text-brand-blue">{item.title}</h3>
+                        <h3 className="text-brand-blue" style={{ fontSize: 'var(--text-base)', fontWeight: 600 }}>{item.title}</h3>
                       )}
                       {item.description && (
-                        <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                        <p className="mt-1 leading-relaxed text-muted-foreground" style={{ fontSize: 'var(--text-sm)' }}>
                           {item.description}
                         </p>
                       )}

@@ -807,7 +807,7 @@ export function Features({ data }: FeaturesProps) {
         {!isPillars && (data.heading || data.headingAccent || data.subheading) && (
           <div className="mx-auto mb-12 max-w-2xl text-center">
             {(data.heading || data.headingAccent) && (
-              <h2 className="text-3xl font-bold text-brand-navy sm:text-4xl">
+              <h2 className="text-brand-navy" style={{ fontSize: 'var(--text-4xl)', fontWeight: 700 }}>
                 {data.heading}
                 {data.heading && data.headingAccent && " "}
                 {data.headingAccent && (
@@ -826,7 +826,7 @@ export function Features({ data }: FeaturesProps) {
           <div
             className={cn(
               isPillars
-                ? "grid gap-8 sm:grid-cols-3"
+                ? "grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
                 : "grid gap-6 sm:grid-cols-2 lg:grid-cols-3",
             )}
           >
@@ -853,21 +853,16 @@ export function Features({ data }: FeaturesProps) {
                 )}
                 {item.title && (
                   <h3
-                    className={cn(
-                      isPillars
-                        ? "text-base font-semibold text-brand-blue"
-                        : "text-base font-bold text-brand-navy",
-                    )}
+                    className={cn(isPillars ? "text-brand-blue" : "text-brand-navy")}
+                    style={{ fontSize: 'var(--text-base)', fontWeight: 600 }}
                   >
                     {item.title}
                   </h3>
                 )}
                 {!isPillars && item.description && (
                   <p
-                    className={cn(
-                      "mt-2 text-sm leading-relaxed",
-                      isPillars ? "text-[#475569]" : "text-muted-foreground",
-                    )}
+                    className={cn("mt-2 leading-relaxed", isPillars ? "text-[#475569]" : "text-muted-foreground")}
+                    style={{ fontSize: 'var(--text-sm)' }}
                   >
                     {item.description}
                   </p>

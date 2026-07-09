@@ -36,3 +36,17 @@
 @import "./software-product-pages.css";
 @import "./elv-product-pages.css";
 @import "./elv-pages.css";
+
+/* Shared mobile safety net for Elementor-ported media / tables */
+@media (max-width: 767px) {
+  img,
+  video,
+  iframe {
+    max-width: 100%;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+}

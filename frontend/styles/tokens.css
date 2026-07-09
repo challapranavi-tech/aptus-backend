@@ -34,7 +34,8 @@
   --font-primary: var(--font-poppins), "Poppins", ui-sans-serif, system-ui, sans-serif;
 
   --content-max: 1300px;
-  --section-padding: 4rem;
+  --content-pad-x: clamp(1rem, 4vw, 1.5rem);
+  --section-padding: 2.5rem;
   --radius-card: 20px;
   --radius-button: 3px;
   --radius-icon-card: 10px;

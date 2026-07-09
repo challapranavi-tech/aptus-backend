@@ -46,10 +46,8 @@ export function RichText({ data }: RichTextProps) {
             {data.paragraphs?.map((p, i) => (
               <p
                 key={i}
-                className={cn(
-                  "text-base leading-[1.8] text-black",
-                  i === 0 ? "mt-6" : "mt-5",
-                )}
+                className={cn("leading-[1.8] text-black", i === 0 ? "mt-4" : "mt-5")}
+                style={{ fontSize: 'var(--text-base)' }}
               >
                 {p}
               </p>
@@ -84,7 +82,7 @@ export function RichText({ data }: RichTextProps) {
           <div className={cn(hasMedia && !below && (imageRight ? "lg:order-1" : "lg:order-2"))}>
             {data.eyebrow && <p className="eyebrow mb-3">{data.eyebrow}</p>}
             {(data.heading || data.headingAccent) && (
-              <h2 className="text-3xl font-semibold leading-tight text-brand-navy sm:text-4xl">
+              <h2 className="leading-tight text-brand-navy" style={{ fontSize: 'var(--text-4xl)', fontWeight: 600 }}>
                 {data.heading}
                 {data.heading && data.headingAccent && " "}
                 {data.headingAccent && (
@@ -97,7 +95,7 @@ export function RichText({ data }: RichTextProps) {
             )}
 
             {data.paragraphs?.map((p, i) => (
-              <p key={i} className="mt-5 text-base leading-relaxed text-muted-foreground">
+              <p key={i} className="mt-4 leading-relaxed text-muted-foreground" style={{ fontSize: 'var(--text-base)' }}>
                 {p}
               </p>
             ))}
@@ -105,7 +103,7 @@ export function RichText({ data }: RichTextProps) {
             {data.bullets && data.bullets.length > 0 && (
               <ul className="mt-6 space-y-3">
                 {data.bullets.map((b, i) => (
-                  <li key={i} className="flex items-start gap-3 text-base text-muted-foreground">
+                  <li key={i} className="flex items-start gap-3 text-muted-foreground" style={{ fontSize: 'var(--text-base)' }}>
                     <svg
                       className="mt-1 h-5 w-5 shrink-0 text-brand-green"
                       viewBox="0 0 24 24"

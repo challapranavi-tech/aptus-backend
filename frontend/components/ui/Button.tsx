@@ -35,9 +35,9 @@ const variantClasses: Record<ButtonVariant, string> = {
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: "h-9 px-3.5 text-sm",
-  md: "h-11 px-5 text-sm",
-  lg: "h-12 px-6 text-base",
+  sm: "h-9 px-3.5 aptus-btn--sm",
+  md: "h-11 px-5 aptus-btn--md",
+  lg: "h-12 px-6 aptus-btn--lg",
 };
 
 const baseClasses =

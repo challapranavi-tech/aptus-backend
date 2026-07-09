@@ -25,7 +25,10 @@ export function LogoGrid({ data }: LogoGridProps) {
           <div className={cn(isAlliances || isAlliancesGrid ? "mb-0" : "mb-10 text-center")}>
             {data.eyebrow && <p className="eyebrow mb-3 text-center">{data.eyebrow}</p>}
             {(data.heading || data.headingAccent) && (
-              <h2 className={cn(isAlliances || isAlliancesGrid ? "aptus-alliances-heading" : "text-3xl font-semibold text-brand-navy sm:text-4xl")}>
+              <h2
+                className={cn(isAlliances || isAlliancesGrid ? "aptus-alliances-heading" : "text-brand-navy")}
+                style={!(isAlliances || isAlliancesGrid) ? { fontSize: 'var(--text-4xl)', fontWeight: 600 } : undefined}
+              >
                 {data.heading}
                 {data.heading && data.headingAccent && " "}
                 {data.headingAccent && (

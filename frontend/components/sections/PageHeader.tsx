@@ -24,13 +24,13 @@ export function PageHeader({ data }: PageHeaderProps) {
       <Container>
         <div className="relative z-10 py-20 lg:py-28">
           {data.title && (
-            <h1 className="text-4xl font-semibold text-white sm:text-5xl">
+            <h1 className="text-white" style={{ fontSize: 'var(--text-5xl)', fontWeight: 600 }}>
               {data.title}
             </h1>
           )}
           <span className="mt-5 block h-1 w-16 rounded-full bg-brand-blue" />
           {data.subtitle && (
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/80">
+            <p className="mt-4 max-w-2xl leading-relaxed text-white/80" style={{ fontSize: 'var(--text-base)' }}>
               {data.subtitle}
             </p>
           )}

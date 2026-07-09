@@ -35,7 +35,7 @@ function formClasses(layout: CTAData["layout"]) {
     submit: cn(
       isLight || useCareerFields
         ? "aptus-form-submit"
-        : "btn-section !w-auto w-full rounded-lg px-6 py-3.5 text-lg font-medium text-white",
+        : "btn-section !w-auto w-full rounded-lg px-6 py-3.5 text-white",
     ),
   };
 }
@@ -290,6 +290,9 @@ export function CTA({ data }: CTAProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
   const isLight = data.layout === "light";
+
+  if (isLight) return null;
+
   const isCareer = data.layout === "career";
   const isContactPage = data.layout === "contact-page";
   const isSoftwareMid = data.layout === "software-mid";
@@ -420,8 +423,11 @@ export function CTA({ data }: CTAProps) {
                       ? "aptus-software-form-heading"
                     : isLight
                       ? "aptus-cta-light-heading"
-                      : "text-2xl font-semibold text-white sm:text-3xl",
+                      : "text-white",
                 )}
+                style={!isCareer && !isSoftwareMid && !isSoftwareQuote && !isLight
+                  ? { fontSize: 'var(--text-3xl)', fontWeight: 600 }
+                  : undefined}
               >
                 {data.heading}
               </h2>
@@ -430,7 +436,7 @@ export function CTA({ data }: CTAProps) {
             <p
               data-cta-animate
               className={cn(
-                "relative mx-auto mt-4 max-w-xl text-base",
+                "relative mx-auto mt-4 max-w-xl",
                 isContactPage
                   ? "aptus-contact-form-subtitle"
                   : isSoftwareMid

@@ -58,7 +58,7 @@ function SlideContent({
     >
       {slide.label && (
         <div className="anim-item mb-4 flex items-center gap-3">
-          <span className="text-sm font-semibold uppercase tracking-widest text-brand-orange">
+          <span className="uppercase tracking-widest text-brand-orange" style={{ fontSize: 'var(--text-sm)', fontWeight: 600 }}>
             {slide.label}
           </span>
           <span className="h-px w-12 bg-brand-orange" />
@@ -66,7 +66,7 @@ function SlideContent({
       )}
 
       {(slide.heading || slide.headingAccent) && (
-        <h1 className="anim-item text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-[3.5rem]">
+        <h1 className="anim-item leading-tight text-white" style={{ fontSize: 'var(--text-5xl)', fontWeight: 700 }}>
           {slide.heading && <span>{slide.heading} </span>}
           {slide.headingAccent && (
             <em className="not-italic text-brand-orange">{slide.headingAccent}</em>
@@ -77,7 +77,7 @@ function SlideContent({
       <span className="anim-item mt-5 block h-1 w-16 rounded-full bg-brand-orange" />
 
       {slide.description && (
-        <p className="anim-item mt-5 max-w-md text-base leading-relaxed text-white/80 sm:text-lg">
+        <p className="anim-item mt-5 max-w-md leading-relaxed text-white/80" style={{ fontSize: 'var(--text-base)' }}>
           {slide.description}
         </p>
       )}
@@ -86,7 +86,8 @@ function SlideContent({
         <div className="anim-item mt-8">
           <Link
             href={slide.action.href}
-            className="inline-flex items-center gap-2 rounded-none bg-brand-orange px-7 py-3.5 text-sm font-semibold text-white transition-all hover:bg-brand-orange-hover hover:gap-3"
+            className="inline-flex items-center gap-2 rounded-none bg-brand-orange px-7 py-3.5 text-white transition-all hover:bg-brand-orange-hover hover:gap-3"
+            style={{ fontSize: 'var(--text-sm)', fontWeight: 500 }}
           >
             {slide.action.label}
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -156,7 +157,7 @@ export function HeroSlider({ data }: HeroSliderProps) {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-[calc(100vh-6.25rem)] overflow-hidden"
+      className="relative min-h-[min(100svh,520px)] overflow-hidden sm:min-h-[calc(100svh-6.25rem)]"
       aria-label="Hero slideshow"
     >
       {/* ── Background image ─────────────────────────────── */}
@@ -196,7 +197,7 @@ export function HeroSlider({ data }: HeroSliderProps) {
       </div>
 
       {/* ── Content ──────────────────────────────────────── */}
-      <div className="relative z-10 flex min-h-[calc(100vh-6.25rem)] items-center">
+      <div className="relative z-10 flex min-h-[min(100svh,520px)] items-center py-16 sm:min-h-[calc(100svh-6.25rem)] sm:py-0">
         <div className="mx-auto w-full max-w-[var(--container-2xl)] px-4 sm:px-6 lg:px-8">
           <SlideContent slide={activeSlide} active={!fading} />
         </div>
@@ -208,7 +209,7 @@ export function HeroSlider({ data }: HeroSliderProps) {
           <button
             type="button"
             onClick={() => { if (timerRef.current) clearInterval(timerRef.current); goPrev(); }}
-            className="absolute left-4 top-1/2 z-20 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-sm transition-all hover:border-brand-orange hover:bg-brand-orange"
+            className="absolute left-2 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-sm transition-all hover:border-brand-orange hover:bg-brand-orange sm:left-4 sm:flex sm:h-11 sm:w-11"
             aria-label="Previous slide"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -219,7 +220,7 @@ export function HeroSlider({ data }: HeroSliderProps) {
           <button
             type="button"
             onClick={() => { if (timerRef.current) clearInterval(timerRef.current); goNext(); }}
-            className="absolute right-4 top-1/2 z-20 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-sm transition-all hover:border-brand-orange hover:bg-brand-orange"
+            className="absolute right-2 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-sm transition-all hover:border-brand-orange hover:bg-brand-orange sm:right-4 sm:flex sm:h-11 sm:w-11"
             aria-label="Next slide"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -232,7 +233,7 @@ export function HeroSlider({ data }: HeroSliderProps) {
       {/* ── Dot indicators ───────────────────────────────── */}
       {slides.length > 1 && (
         <div
-          className="absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2"
+          className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 sm:bottom-8"
           role="tablist"
           aria-label="Slide indicators"
         >
@@ -256,7 +257,7 @@ export function HeroSlider({ data }: HeroSliderProps) {
 
       {/* ── Slide counter ────────────────────────────────── */}
       {slides.length > 1 && (
-        <div className="absolute bottom-8 right-6 z-20 text-xs font-medium text-white/50">
+        <div className="absolute bottom-5 right-4 z-20 hidden text-white/50 sm:bottom-8 sm:right-6 sm:block" style={{ fontSize: 'var(--text-xs)' }}>
           {String(current + 1).padStart(2, "0")}&nbsp;/&nbsp;{String(slides.length).padStart(2, "0")}
         </div>
       )}

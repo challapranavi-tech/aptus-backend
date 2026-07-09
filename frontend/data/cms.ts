@@ -5,7 +5,6 @@
  * Local dev default: http://localhost:3001
  */
 
-import { cache } from "react";
 import type { Page, SiteConfig } from "@/types";
 import type { CaseStudiesPageContent } from "@/types/case-studies-page";
 import { SITE_NAVIGATION } from "./site-nav";
@@ -45,13 +44,13 @@ function fallbackSiteConfig(): SiteConfig {
   };
 }
 
-async function apiGet<T>(path: string, revalidate = 60): Promise<T | null> {
+async function apiGet<T>(path: string): Promise<T | null> {
   if (!apiEnabled()) return null;
 
   const url = `${apiBase()}${path}`;
   try {
     const res = await fetch(url, {
-      next: { revalidate },
+      cache: "no-store",
       signal: AbortSignal.timeout(API_TIMEOUT_MS),
     });
     if (res.status === 404) return null;
@@ -70,21 +69,18 @@ async function apiGet<T>(path: string, revalidate = 60): Promise<T | null> {
   }
 }
 
-// cache() deduplicates calls within a single server request — so generateMetadata
-// and the page component both calling getPageBySlug() with the same slug produce
-// exactly one HTTP round-trip to the backend, not two.
-export const getSiteConfig = cache(async function getSiteConfig(): Promise<SiteConfig> {
+export async function getSiteConfig(): Promise<SiteConfig> {
   const config = await apiGet<SiteConfig>("/api/cms/site-config");
   return config ?? fallbackSiteConfig();
-});
+}
 
 export async function getHomePage(): Promise<Page | null> {
   return apiGet<Page>("/api/cms/home");
 }
 
-export const getPageBySlug = cache(async function getPageBySlug(slug: string): Promise<Page | null> {
+export async function getPageBySlug(slug: string): Promise<Page | null> {
   return apiGet<Page>(`/api/cms/pages/${encodeURIComponent(slug)}`);
-});
+}
 
 export async function getAllPageSlugs(): Promise<string[]> {
   const data = await apiGet<{ slugs: string[] }>("/api/cms/slugs");
