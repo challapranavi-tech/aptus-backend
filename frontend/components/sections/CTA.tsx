@@ -1,5 +1,6 @@
 "use client";
 
+import { CareerApplicationForm } from "@/components/sections/CareerApplicationForm";
 import { SoftwareQuoteForm } from "@/components/quote/SoftwareQuoteForm";
 import { Container } from "@/components/ui";
 import { useGSAPContext } from "@/hooks/useGSAPContext";
@@ -81,67 +82,7 @@ function CtaForm({ data }: { data: CTAData }) {
   const fc = formClasses(data.layout);
 
   if (variant === "career") {
-    return (
-      <form data-cta-animate className="relative mt-8 w-full text-left" action="#" method="post">
-        <div className="grid gap-[30px] sm:grid-cols-2">
-          <label className={fc.label}>
-            First Name
-            <input type="text" name="first_name" placeholder="First Name" required className={fc.input} />
-          </label>
-          <label className={fc.label}>
-            Last Name
-            <input type="text" name="last_name" placeholder="Last Name" required className={fc.input} />
-          </label>
-          <label className={`${fc.label} sm:col-span-2`}>
-            Job Title
-            <input
-              type="text"
-              name="job_title"
-              placeholder="For Which position are you applying?"
-              required
-              className={fc.input}
-            />
-          </label>
-          <label className={fc.label}>
-            City
-            <input type="text" name="city" placeholder="City" required className={fc.input} />
-          </label>
-          <label className={fc.label}>
-            State/Province
-            <input type="text" name="state" placeholder="State/Province" required className={fc.input} />
-          </label>
-          <label className={fc.label}>
-            Email Address
-            <input type="email" name="email" placeholder="Email Address" required className={fc.input} />
-          </label>
-          <label className={fc.label}>
-            Country
-            <input type="text" name="country" placeholder="Country" required className={fc.input} />
-          </label>
-          <label className={fc.label}>
-            Phone Number
-            <input type="tel" name="phone" placeholder="Phone Number" required className={fc.input} />
-          </label>
-          <label className={`${fc.label} sm:col-span-2`}>
-            Linkedin
-            <input type="url" name="linkedin" placeholder="Profile link" required className={fc.input} />
-          </label>
-          <label className={fc.label}>
-            How did you hear about us?
-            <HeardFromSelect variant="career" className={fc.input} />
-          </label>
-          <label className={`${fc.label} sm:col-span-2`}>
-            Upload Your CV
-            <input type="file" name="cv" accept=".pdf,.doc,.docx" className={`${fc.input} py-2`} />
-          </label>
-        </div>
-        <div className="mt-8 text-center">
-          <button type="submit" className={fc.submit}>
-            {data.submitLabel ?? "Submit Application"}
-          </button>
-        </div>
-      </form>
-    );
+    return <CareerApplicationForm submitLabel={data.submitLabel} />;
   }
 
   if (variant === "software-quote") {

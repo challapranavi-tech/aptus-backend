@@ -1,21 +1,68 @@
+"use client";
+
+import { publicApiBase } from "@/lib/api-base";
 import { cn } from "@/lib/utils";
-import type { ComponentPropsWithoutRef } from "react";
+import { useState, type ComponentPropsWithoutRef, type FormEvent } from "react";
+
+type Status = "idle" | "submitting" | "success" | "error";
 
 type SoftwareQuoteFormProps = {
   submitLabel?: string;
   className?: string;
-} & Omit<ComponentPropsWithoutRef<"form">, "className" | "action" | "method" | "children">;
+} & Omit<ComponentPropsWithoutRef<"form">, "className" | "action" | "method" | "children" | "onSubmit">;
 
 export function SoftwareQuoteForm({
   submitLabel = "Submit Now",
   className,
   ...formProps
 }: SoftwareQuoteFormProps) {
+  const [status, setStatus] = useState<Status>("idle");
+  const [message, setMessage] = useState("");
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (status === "submitting") return;
+
+    const formData = new FormData(e.currentTarget);
+    const payload = Object.fromEntries(formData.entries());
+
+    setStatus("submitting");
+    setMessage("");
+
+    try {
+      const res = await fetch(`${publicApiBase()}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok) {
+        setStatus("success");
+        setMessage("Thank you! Your request has been submitted.");
+        e.currentTarget.reset();
+        return;
+      }
+
+      let msg = "Something went wrong. Please try again.";
+      try {
+        const data = await res.json();
+        if (data.error) msg = data.error;
+      } catch {
+        /* keep default */
+      }
+      setStatus("error");
+      setMessage(msg);
+    } catch {
+      setStatus("error");
+      setMessage("Network error. Please check your connection and try again.");
+    }
+  }
+
   return (
     <form
       className={cn("relative mt-8 w-full text-left", className)}
-      action="#"
-      method="post"
+      onSubmit={handleSubmit}
+      noValidate
       {...formProps}
     >
       <div className="grid gap-5 sm:grid-cols-2">
@@ -85,9 +132,21 @@ export function SoftwareQuoteForm({
         Message
         <textarea name="message" rows={4} placeholder="Message" className="aptus-form-input mt-0 w-full px-4 py-3" />
       </label>
+
+      {status === "success" && (
+        <p className="mt-5 rounded-xl bg-green-600/10 px-4 py-3 text-center text-base font-semibold text-green-800" role="status">
+          {message}
+        </p>
+      )}
+      {status === "error" && message && (
+        <p className="mt-5 rounded-xl bg-red-600/10 px-4 py-3 text-center text-base font-semibold text-red-700" role="alert">
+          {message}
+        </p>
+      )}
+
       <div className="mt-5">
-        <button type="submit" className="aptus-form-submit">
-          {submitLabel}
+        <button type="submit" className="aptus-form-submit" disabled={status === "submitting"}>
+          {status === "submitting" ? "Submitting…" : submitLabel}
         </button>
       </div>
     </form>
