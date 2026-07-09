@@ -5,6 +5,7 @@ const odooImageHost =
   (process.env.ODOO_URL ? new URL(process.env.ODOO_URL).hostname : undefined);
 
 const nextConfig: NextConfig = {
+  serverExternalPackages: ["gsap"],
   async redirects() {
     return [
       { source: "/about-us", destination: "/our-story", permanent: true },
