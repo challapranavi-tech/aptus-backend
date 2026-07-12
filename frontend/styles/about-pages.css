@@ -110,11 +110,23 @@
 
   @media (min-width: 768px) {
     .aptus-alliances-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .aptus-alliances-grid {
       grid-template-columns: repeat(5, minmax(0, 1fr));
     }
   }
 
-  @media (min-width: 1200px) {
+  @media (min-width: 1280px) {
+    .aptus-alliances-grid {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1536px) {
     .aptus-alliances-grid {
       grid-template-columns: repeat(9, minmax(0, 1fr));
     }
@@ -265,17 +277,24 @@
 
   /* Our Story flip boxes */
   .aptus-flip-box {
-    min-height: 220px;
+    min-height: 200px;
     perspective: 1200px;
   }
 
   .aptus-flip-box__inner {
     height: 100%;
-    min-height: 220px;
+    min-height: 200px;
     position: relative;
     transform-style: preserve-3d;
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     width: 100%;
+  }
+
+  @media (min-width: 640px) {
+    .aptus-flip-box,
+    .aptus-flip-box__inner {
+      min-height: 220px;
+    }
   }
 
   .aptus-flip-box:hover .aptus-flip-box__inner,
@@ -291,7 +310,7 @@
     flex-direction: column;
     inset: 0;
     justify-content: center;
-    padding: 2rem;
+    padding: clamp(1rem, 4vw, 2rem);
     position: absolute;
     text-align: center;
     -webkit-backface-visibility: hidden;
@@ -318,7 +337,14 @@
 
   .aptus-flip-box--tall .aptus-flip-box__inner,
   .aptus-flip-box--tall {
-    min-height: 280px;
+    min-height: 240px;
+  }
+
+  @media (min-width: 640px) {
+    .aptus-flip-box--tall .aptus-flip-box__inner,
+    .aptus-flip-box--tall {
+      min-height: 280px;
+    }
   }
 
   .aptus-flip-box__front-desc {
@@ -349,7 +375,7 @@
 
   .aptus-policy-row-text {
     color: #000;
-    font-size: var(--text-xl);
+    font-size: var(--text-base);
     font-weight: 400;
     line-height: 1.6;
     max-width: 98%;
@@ -398,7 +424,7 @@
 
   .aptus-iso-subtitle {
     color: var(--color-brand-blue);
-    font-size: var(--text-2xl);
+    font-size: var(--text-base);
     font-weight: 400;
     line-height: 1.5;
     margin-top: 1rem;
@@ -416,7 +442,7 @@
 
   .aptus-iso-intro-text {
     color: var(--color-brand-blue);
-    font-size: var(--text-xl);
+    font-size: var(--text-base);
     font-weight: 400;
     line-height: 1.6;
     text-align: center;
@@ -424,9 +450,9 @@
 
   .aptus-iso-core-item {
     color: var(--color-brand-blue);
-    font-size: var(--text-xl);
+    font-size: var(--text-base);
     font-weight: 400;
-    line-height: 1.25;
+    line-height: 1.6;
     margin-top: 0.25rem;
     text-align: center;
   }
@@ -437,9 +463,39 @@
     grid-template-columns: 1fr;
   }
 
+  .aptus-iso-cert-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0 0 2rem;
+    text-align: center;
+  }
+
+  @media (min-width: 640px) {
+    .aptus-iso-cert-card {
+      padding-inline: 1rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .aptus-iso-cert-card {
+      padding-inline: 2rem;
+    }
+  }
+
   @media (min-width: 768px) {
     .aptus-iso-cert-grid {
+      align-items: stretch;
       grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-rows: auto auto auto;
+    }
+
+    /* Subgrid keeps heading / image / button rows level across columns */
+    .aptus-iso-cert-card {
+      display: grid;
+      grid-row: span 3;
+      grid-template-rows: subgrid;
+      padding-bottom: 0;
     }
   }
 
@@ -449,6 +505,14 @@
     font-weight: 600;
     line-height: 1.5625rem;
     text-align: center;
+  }
+
+  .aptus-iso-cert-media {
+    margin-top: 1rem;
+  }
+
+  .aptus-iso-cert-action {
+    margin-top: 1.5rem;
   }
 
   .aptus-iso-download-btn {
@@ -468,7 +532,7 @@
 
   .aptus-iso-footer-text {
     color: #248bcc;
-    font-size: var(--text-xl);
+    font-size: var(--text-base);
     font-weight: 400;
     line-height: 1.6;
     text-align: center;
@@ -492,7 +556,7 @@
 
   .aptus-career-intro-text {
     color: #000;
-    font-size: var(--text-xl);
+    font-size: var(--text-base);
     font-weight: 400;
     line-height: 1.6;
     margin-bottom: 2.125rem;
@@ -539,9 +603,10 @@
 
   .aptus-contact-info-lines {
     color: #000;
-    font-size: var(--text-xl);
+    font-size: var(--text-base);
     font-weight: 400;
     line-height: 1.6;
+    overflow-wrap: anywhere;
   }
 
   .aptus-contact-info-lines p + p {

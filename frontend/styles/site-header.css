@@ -28,17 +28,18 @@ html {
 
 .aptus-masthead__topbar-inner {
   display: grid;
-  gap: 0;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.6fr) minmax(0, 1.6fr) minmax(0, 1.1fr);
+  gap: 0.25rem 1rem;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   margin: 0 auto;
   max-width: 1300px;
   padding-inline: var(--content-pad-x, clamp(1rem, 4vw, 1.5rem));
+  width: 100%;
 }
 
 .aptus-masthead__topbar-cell {
   font-weight: 400;
   min-width: 0;
-  padding-top: 1rem;
+  padding-block: 0.75rem 0.5rem;
 }
 
 .aptus-masthead__topbar-cell a {
@@ -61,7 +62,12 @@ html {
 
 .aptus-masthead__topbar-cell--follow {
   font-size: var(--text-sm);
-  text-align: end;
+  text-align: start;
+}
+
+.aptus-masthead__topbar-cell--social {
+  display: flex;
+  justify-content: flex-start;
 }
 
 .aptus-masthead__social {
@@ -103,26 +109,30 @@ html {
   align-items: center !important;
   display: flex !important;
   flex-direction: row !important;
-  flex-wrap: nowrap !important;
+  /* ponytail: wrap so mobile drawer can sit full-width under brand+toggler */
+  flex-wrap: wrap !important;
   gap: 0;
   justify-content: space-between !important;
   margin: 0 auto;
   max-width: 1300px;
   overflow: visible !important;
   padding: 10px var(--content-pad-x, clamp(1rem, 4vw, 1.5rem));
+  width: 100%;
 }
 
 .aptus-masthead__brand {
   display: inline-flex !important;
-  flex: 0 0 15.438%;
+  flex: 0 1 auto;
   line-height: 0;
-  max-width: 15.438%;
+  max-width: min(220px, 70%);
+  order: 1;
   text-decoration: none !important;
 }
 
 .aptus-masthead__brand img {
   display: block !important;
   height: auto;
+  max-height: 48px;
   max-width: 100%;
   width: auto;
 }
@@ -130,13 +140,14 @@ html {
 .aptus-masthead__center {
   align-items: center !important;
   display: none !important;
-  flex: 0 0 84.228%;
+  flex: 1 1 auto;
   flex-direction: row !important;
   flex-wrap: nowrap !important;
   gap: 0;
   justify-content: flex-end !important;
-  max-width: 84.228%;
+  max-width: none;
   min-width: 0;
+  order: 2;
   overflow: visible !important;
 }
 
@@ -174,7 +185,7 @@ html {
   font-weight: 600;
   gap: 4px;
   isolation: isolate;
-  padding: 13px 20px !important;
+  padding: 13px clamp(10px, 1.1vw, 20px) !important;
   position: relative;
   text-decoration: none !important;
   white-space: nowrap;
@@ -402,7 +413,9 @@ html {
   color: #000;
   cursor: pointer;
   display: inline-flex !important;
+  flex-shrink: 0;
   margin-left: auto;
+  order: 3;
   padding: 8px;
 }
 
@@ -410,7 +423,14 @@ html {
   background: #fff;
   border-top: 1px solid rgba(0, 0, 0, 0.08);
   display: none;
-  padding: 12px 16px 16px;
+  flex: 1 0 100%;
+  max-height: min(75vh, 640px);
+  order: 4;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 12px 0 16px;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
 }
 
 .aptus-masthead__mobile.is-open {
@@ -433,6 +453,8 @@ html {
 
 .aptus-masthead__mobile .aptus-masthead__link {
   display: flex !important;
+  padding-block: 12px !important;
+  white-space: normal;
   width: 100%;
 }
 
@@ -440,21 +462,54 @@ html {
   .aptus-masthead__topbar {
     display: block;
   }
+
+  .aptus-masthead__brand img {
+    max-height: 52px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .aptus-masthead__topbar-inner {
+    gap: 0;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.6fr) minmax(0, 1.6fr) minmax(0, 1.1fr);
+  }
+
+  .aptus-masthead__topbar-cell {
+    padding-top: 1rem;
+    padding-bottom: 0;
+  }
+
+  .aptus-masthead__topbar-cell--follow {
+    text-align: end;
+  }
+
+  .aptus-masthead__topbar-cell--social {
+    justify-content: flex-start;
+  }
 }
 
 @media (min-width: 1025px) {
   .aptus-masthead__nav-inner {
     align-items: stretch !important;
+    flex-wrap: nowrap !important;
   }
 
-  .aptus-masthead__brand,
+  .aptus-masthead__brand {
+    align-self: center;
+    flex: 0 0 auto;
+    max-width: min(220px, 15.438%);
+    order: 0;
+  }
+
   .aptus-masthead__toggler {
     align-self: center;
+    display: none !important;
   }
 
   .aptus-masthead__center {
     align-self: stretch;
     display: flex !important;
+    order: 0;
   }
 
   .aptus-masthead__menu {
@@ -470,21 +525,25 @@ html {
     align-items: center;
   }
 
-  .aptus-masthead__toggler {
-    display: none !important;
-  }
-
   .aptus-masthead__mobile {
     display: none !important;
   }
 }
 
-@media (max-width: 1024px) {
-  .aptus-masthead__brand {
-    flex: 0 0 50%;
-    max-width: 50%;
+@media (min-width: 1025px) and (max-width: 1279px) {
+  .aptus-masthead__link {
+    font-size: var(--text-sm);
+    padding: 13px 10px !important;
   }
+}
 
+@media (min-width: 1536px) {
+  .aptus-masthead__link {
+    padding: 13px 20px !important;
+  }
+}
+
+@media (max-width: 1024px) {
   .aptus-masthead__center {
     display: none !important;
   }

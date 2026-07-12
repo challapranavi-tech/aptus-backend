@@ -77,11 +77,8 @@ INNER_FAMILY_BY_SLUG["infowater-pro"] = "water-infrastructure";
 INNER_FAMILY_BY_SLUG["infoworks-icm"] = "water-infrastructure";
 INNER_FAMILY_BY_SLUG["infoworks-ws-pro"] = "water-infrastructure";
 
-const STACKED_INNER_SLUGS = new Set([
-  "etap",
-  "microsoft-365-apps",
-  "microsoft-365-business",
-  "power-bi",
+const STACKED_INNER_SLUGS = new Set<string>([
+  // ponytail: empty — all software inners use AutoCAD-style SectionRenderer layout
 ]);
 
 export function usesStackedSoftwareLayout(slug: string): boolean {

@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { QuoteModalProvider } from "@/components/quote/QuoteModalProvider";
 import { GSAPProvider } from "@/components/providers/GSAPProvider";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import type { Metadata, Viewport } from "next";
 
 const poppins = Poppins({
@@ -51,6 +52,7 @@ export default function RootLayout({
             <Header />
             <main className="flex-1">{children}</main>
             <Footer />
+            <WhatsAppButton />
           </QuoteModalProvider>
         </GSAPProvider>
       </body>

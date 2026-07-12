@@ -72,7 +72,7 @@ function ContactPageInfo({ data }: { data: ContactData }) {
               <iframe
                 src={data.mapEmbedUrl}
                 title="Location map"
-                className="h-64 w-full sm:h-80"
+                className="h-56 w-full sm:h-64 md:h-80"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
@@ -152,7 +152,7 @@ export function Contact({ data }: ContactProps) {
               <iframe
                 src={data.mapEmbedUrl}
                 title="Location map"
-                className="h-80 w-full"
+                className="h-56 w-full sm:h-72 md:h-80"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />

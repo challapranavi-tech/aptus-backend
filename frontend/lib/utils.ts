@@ -1,3 +1,5 @@
+export { resolveCmsImageSrc, imageStem } from "@shared/lib/cms-image";
+
 export function cn(...classes: (string | undefined | null | false)[]): string {
   return classes.filter(Boolean).join(" ");
 }

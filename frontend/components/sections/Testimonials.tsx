@@ -3,6 +3,7 @@
 import { Container } from "@/components/ui";
 import { useGSAPContext } from "@/hooks/useGSAPContext";
 import { gsap } from "@/lib/gsap";
+import { resolveCmsImageSrc } from "@/lib/utils";
 import type { Testimonials as TestimonialsData } from "@/types";
 import Image from "next/image";
 import { useRef } from "react";
@@ -74,13 +75,13 @@ export function Testimonials({ data }: TestimonialsProps) {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-brand-navy py-20 text-white"
+      className="relative overflow-hidden bg-brand-navy py-12 text-white sm:py-16 md:py-20"
       data-section="testimonials"
     >
       <div className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-brand-green/5" aria-hidden="true" />
       <div className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-brand-blue/10" aria-hidden="true" />
 
-      <div className="relative mx-auto max-w-3xl px-6 text-center">
+      <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6">
         <div className="testimonial-inner">
           {data.items.map((item) => (
             <div key={item.id}>
@@ -99,7 +100,7 @@ export function Testimonials({ data }: TestimonialsProps) {
                   <div className="mx-auto mt-6 flex justify-center">
                     <div className="relative h-16 w-16 overflow-hidden rounded-full ring-2 ring-white/20">
                       <Image
-                        src={item.avatar.src}
+                        src={resolveCmsImageSrc(item.avatar.src)}
                         alt={item.avatar.alt}
                         fill
                         className="object-cover"

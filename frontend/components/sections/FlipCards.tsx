@@ -2,13 +2,15 @@
 
 import { Container } from "@/components/ui";
 import type { FlipCards as FlipCardsData } from "@/types";
+import { resolveCmsImageSrc } from "@/lib/utils";
 
 interface FlipCardsProps {
   data: FlipCardsData;
 }
 
-const FLIP_BACK_IMAGE =
-  "https://aptusinfotech.com/wp-content/uploads/2025/05/Home-Automation.webp";
+const FLIP_BACK_IMAGE = resolveCmsImageSrc(
+  "https://aptusinfotech.com/wp-content/uploads/2025/05/Home-Automation.webp",
+);
 
 function CardIcon({ name }: { name?: string }) {
   const className = "mb-4 h-10 w-10 text-brand-green";

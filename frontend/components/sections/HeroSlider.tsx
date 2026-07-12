@@ -1,6 +1,7 @@
 "use client";
 
 import { gsap } from "@/lib/gsap";
+import { resolveCmsImageSrc } from "@/lib/utils";
 import type { HeroSlider as HeroSliderData } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -184,7 +185,7 @@ export function HeroSlider({ data }: HeroSliderProps) {
 
         {activeSlide.media && (
           <Image
-            src={activeSlide.media.src}
+            src={resolveCmsImageSrc(activeSlide.media.src)}
             alt={activeSlide.media.alt}
             fill
             className="object-cover object-center"

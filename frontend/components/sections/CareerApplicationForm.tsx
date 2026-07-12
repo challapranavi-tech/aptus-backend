@@ -182,7 +182,7 @@ export function CareerApplicationForm({ submitLabel }: Props) {
         {err("preInterviewForm")}
       </div>
 
-      <div className="grid gap-[30px] sm:grid-cols-2">
+      <div className="grid gap-[20px] sm:grid-cols-2 sm:gap-[30px]">
         <label className={LABEL}>
           Full Name *
           <input

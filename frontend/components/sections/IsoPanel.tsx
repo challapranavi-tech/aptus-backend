@@ -14,7 +14,7 @@ function CertCard({
   downloadHref,
 }: IsoPanelData["certificates"][number]) {
   return (
-    <div className="px-0 pb-8 text-center sm:px-4 lg:px-8">
+    <div className="aptus-iso-cert-card">
       {(heading || headingAccent) && (
         <h3 className="aptus-iso-cert-heading">
           {heading}
@@ -28,7 +28,7 @@ function CertCard({
         </h3>
       )}
       {media && (
-        <div className="mt-4">
+        <div className="aptus-iso-cert-media">
           <CmsImage
             src={media.src}
             alt={media.alt}
@@ -40,7 +40,7 @@ function CertCard({
         </div>
       )}
       {downloadHref && (
-        <div className="mt-6">
+        <div className="aptus-iso-cert-action">
           <Link href={downloadHref} className="aptus-iso-download-btn" target="_blank" rel="noopener noreferrer">
             Download
           </Link>

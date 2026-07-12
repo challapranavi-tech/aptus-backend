@@ -22,7 +22,7 @@ export function PageHeader({ data }: PageHeaderProps) {
         </>
       )}
       <Container>
-        <div className="relative z-10 py-20 lg:py-28">
+        <div className="relative z-10 py-14 sm:py-16 md:py-20 lg:py-28">
           {data.title && (
             <h1 className="text-white" style={{ fontSize: 'var(--text-5xl)', fontWeight: 600 }}>
               {data.title}

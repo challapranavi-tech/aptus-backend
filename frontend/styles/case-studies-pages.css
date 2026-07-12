@@ -280,4 +280,18 @@
   .aptus-case-studies-page .aptus-cs-hero p {
     line-height: 1.7;
   }
+
+  .aptus-case-studies-page .aptus-cs-partners-grid {
+    gap: 0.75rem;
+  }
+
+  .aptus-case-studies-page .aptus-cs-partners-grid img {
+    max-height: 56px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .aptus-case-studies-page .aptus-cs-partners-grid img {
+    max-height: 64px;
+  }
 }

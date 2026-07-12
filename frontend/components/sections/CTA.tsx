@@ -100,7 +100,7 @@ function CtaForm({ data }: { data: CTAData }) {
     if (isContactPage) {
       return (
         <form data-cta-animate className="relative mt-8 w-full text-left" action="#" method="post">
-          <div className="grid gap-[30px] sm:grid-cols-2">
+          <div className="grid gap-[20px] sm:grid-cols-2 sm:gap-[30px]">
             <label className={fc.label}>
               First Name
               <input type="text" name="first_name" placeholder="First Name" required className={fc.input} />

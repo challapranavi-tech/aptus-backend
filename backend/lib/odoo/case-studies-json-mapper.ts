@@ -3,6 +3,7 @@
  */
 
 import type { LogoItem, Section } from "@/types";
+import { resolveCmsImageSrc } from "@shared/lib/cms-image";
 
 interface RawTitle {
   before?: string;
@@ -93,7 +94,7 @@ function joinTitle(t?: RawTitle): string | undefined {
 function usableImg(src?: string, alt?: string) {
   if (!src || src === "false") return undefined;
   if (!/^https?:\/\//i.test(src) && !src.startsWith("/")) return undefined;
-  return { src, alt: alt ?? "" };
+  return { src: resolveCmsImageSrc(src), alt: alt ?? "" };
 }
 
 export function isCaseStudiesPageJson(data: unknown): data is RawCaseStudiesJson {
@@ -276,7 +277,11 @@ export function mapCaseStudiesPageJson(raw: string | false | undefined | null): 
       .map((logo, i) => {
         const src = logo.src;
         if (!src) return null;
-        return { id: `partner-${i}`, src, alt: logo.alt ?? "Partner" };
+        return {
+          id: `partner-${i}`,
+          src: resolveCmsImageSrc(src),
+          alt: logo.alt ?? "Partner",
+        };
       })
       .filter((x): x is LogoItem => !!x);
 

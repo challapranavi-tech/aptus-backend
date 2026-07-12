@@ -26,7 +26,7 @@
 
   .aptus-elv-page .aptus-software-page-banner__action-wrap .aptus-software-btn-lg {
     border-radius: 5px;
-    font-size: var(--text-3xl);
+    font-size: clamp(1.125rem, 2.5vw, var(--text-3xl));
     font-weight: 500;
   }
 
@@ -40,10 +40,18 @@
   .aptus-elv-page .aptus-software-subnav__link {
     font-size: var(--text-xs);
     font-weight: 600;
-    line-height: 8px;
+    line-height: 1.35;
+    padding: 0.5rem 0.5rem;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .aptus-elv-page .aptus-software-inner-hero__grid {
+      gap: 1rem;
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.35fr) minmax(0, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
     .aptus-elv-page .aptus-software-inner-hero__grid {
       gap: 1rem;
       grid-template-columns: 22.64% 43.69% minmax(0, 1fr);
@@ -67,8 +75,9 @@
   }
 
   .aptus-elv-page .aptus-software-inner-hero__media img {
-    height: 395px;
+    height: auto;
     max-height: 395px;
+    max-width: 100%;
     object-fit: contain;
     width: auto;
   }
@@ -80,7 +89,17 @@
 
     .aptus-elv-page .aptus-software-inner-hero__media img {
       height: auto;
-      max-height: 395px;
+      max-height: min(280px, 55vw);
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .aptus-elv-page .aptus-software-inner-hero__media {
+      margin-top: 2rem;
+    }
+
+    .aptus-elv-page .aptus-software-inner-hero__media img {
+      max-height: min(280px, 35vw);
     }
   }
 

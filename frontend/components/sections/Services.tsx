@@ -3,6 +3,7 @@
 import { Container } from "@/components/ui";
 import { useGSAPContext } from "@/hooks/useGSAPContext";
 import { gsap } from "@/lib/gsap";
+import { resolveCmsImageSrc } from "@/lib/utils";
 import type { Services as ServicesData } from "@/types";
 import Link from "next/link";
 import { useRef } from "react";
@@ -62,7 +63,11 @@ function ServiceFlipCard({
         </div>
         <div
           className="aptus-flip-box__face aptus-flip-box__back"
-          style={imageSrc ? { backgroundImage: `url(${imageSrc})` } : undefined}
+          style={
+            imageSrc
+              ? { backgroundImage: `url(${resolveCmsImageSrc(imageSrc)})` }
+              : undefined
+          }
           aria-hidden="true"
         />
       </div>
@@ -159,7 +164,7 @@ export function Services({ data }: ServicesProps) {
               ) : (
                 <article
                   key={item.id}
-                  className="service-card flex flex-col items-center rounded-2xl border border-border bg-white px-6 py-8 text-center shadow-[var(--shadow-card)] transition-shadow hover:shadow-[var(--shadow-md)]"
+                  className="service-card flex flex-col items-center rounded-2xl border border-border bg-white px-4 py-6 text-center shadow-[var(--shadow-card)] transition-shadow hover:shadow-[var(--shadow-md)] sm:px-6 sm:py-8"
                 >
                   <div className="mb-5 flex h-14 w-14 items-center justify-center text-brand-green">
                     <ServiceFlipIcon name={item.icon} />

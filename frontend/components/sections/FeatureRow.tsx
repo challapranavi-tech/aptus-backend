@@ -62,7 +62,7 @@ export function FeatureRow({ data }: FeatureRowProps) {
 
   const isIntro = Boolean(data.headingAsH1);
   const textColor = "text-black";
-  const textStyle = { fontSize: isIntro ? 'var(--text-xl)' : 'var(--text-base)' } as const;
+  const textStyle = { fontSize: 'var(--text-base)' } as const;
 
   const textBlock = (
     <div

@@ -60,7 +60,7 @@ export function KeyEnablers({ data }: KeyEnablersProps) {
     >
       <Container>
         {/* Two-column split — heading left | cards right */}
-        <div className="grid items-start gap-12 lg:grid-cols-[40%_1fr]">
+        <div className="grid items-start gap-8 lg:grid-cols-[40%_1fr] lg:gap-12">
 
           {/* Heading column */}
           {(data.eyebrow || data.heading || data.headingAccent || data.subheading) && (
@@ -92,7 +92,7 @@ export function KeyEnablers({ data }: KeyEnablersProps) {
               {data.items.map((item) => (
                 <div
                   key={item.id}
-                  className="enabler-item relative overflow-hidden rounded-xl border border-border bg-white px-6 py-5 shadow-[var(--shadow-card)] transition-shadow hover:shadow-[var(--shadow-md)]"
+                  className="enabler-item relative overflow-hidden rounded-xl border border-border bg-white px-4 py-5 shadow-[var(--shadow-card)] transition-shadow hover:shadow-[var(--shadow-md)] sm:px-6"
                 >
                   {/* Watermark number */}
                   {item.number && (

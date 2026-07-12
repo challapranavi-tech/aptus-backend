@@ -6,6 +6,7 @@ import {
 } from "@/data/case-studies-icons";
 import { ELV_ICONS } from "@/data/elv-icons";
 import { joinAccentTitle, renderAccentTitle } from "@/lib/render-accent-title";
+import { resolveCmsImageSrc } from "@/lib/utils";
 import type { CaseStudiesPageContent } from "@/types/case-studies-page";
 
 type CaseStudiesPageViewProps = {
@@ -61,7 +62,7 @@ export function CaseStudiesPageView({ content }: CaseStudiesPageViewProps) {
                   {item.imageSrc ? (
                     <a href={item.pdfHref} target="_blank" rel="noopener noreferrer">
                       <img
-                        src={item.imageSrc}
+                        src={resolveCmsImageSrc(item.imageSrc)}
                         alt={item.imageAlt ?? item.title}
                         className="aptus-cs-card__image"
                         loading="lazy"

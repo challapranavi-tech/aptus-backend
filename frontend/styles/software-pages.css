@@ -6,7 +6,7 @@
     background-position: center top;
     background-repeat: no-repeat;
     background-size: cover;
-    padding: 4rem 0 0;
+    padding: clamp(2.5rem, 6vw, 4rem) 0 0;
     position: relative;
   }
 
@@ -35,6 +35,7 @@
   .aptus-software-hero__inner {
     margin: 0 auto;
     max-width: 800px;
+    padding-inline: var(--content-pad-x, clamp(1rem, 4vw, 1.5rem));
     position: relative;
     text-align: center;
     z-index: 1;
@@ -81,6 +82,17 @@
     }
   }
 
+  @media (min-width: 640px) and (max-width: 767px) {
+    .aptus-software-hero-actions {
+      gap: 0.5rem;
+    }
+
+    .aptus-software-hero-actions .aptus-software-btn {
+      font-size: var(--text-xs);
+      padding-inline: 0.5rem;
+    }
+  }
+
   .aptus-software-btn {
     border-radius: 3px;
     color: #fff;
@@ -119,9 +131,9 @@
 
   .aptus-software-btn-lg {
     border-radius: 5px;
-    font-size: var(--text-3xl);
+    font-size: clamp(1.125rem, 2.5vw, var(--text-3xl));
     font-weight: 500;
-    padding: 0.75rem 1.5rem;
+    padding: 0.75rem clamp(1rem, 3vw, 1.5rem);
     width: auto;
   }
 
@@ -300,7 +312,7 @@
   }
 
   .aptus-software-mid-band__inner {
-    padding: 2.5rem 2rem 1.5rem;
+    padding: 2.5rem clamp(1rem, 3vw, 2rem) 1.5rem;
   }
 
   .aptus-software-mid-title {
@@ -503,8 +515,8 @@
     display: block;
     font-size: var(--text-base);
     font-weight: 600;
-    line-height: 12px;
-    padding: 0.5rem 0.75rem;
+    line-height: 1.35;
+    padding: 0.625rem 0.75rem;
     text-decoration: none;
     transition: background 0.15s ease, color 0.15s ease;
   }
@@ -657,29 +669,46 @@
 
   .aptus-software-page--autodesk .aptus-software-inner-hero__media img,
   .aptus-software-page--aconex .aptus-software-inner-hero__media img {
-    height: 395px;
-    max-height: none;
+    height: auto;
+    max-height: 395px;
+    max-width: 100%;
+    width: auto;
   }
 
   .aptus-software-page--construction-cloud .aptus-software-inner-hero__media img {
-    height: 228px;
-    max-height: none;
-    max-width: 221px;
-    width: 221px;
+    height: auto;
+    max-height: 228px;
+    max-width: min(221px, 100%);
+    width: auto;
   }
 
   .aptus-software-page--odoo .aptus-software-inner-hero__media img {
-    height: 280px;
+    height: auto;
     max-height: 280px;
-    max-width: 280px;
-    width: 280px;
+    max-width: min(280px, 100%);
+    width: auto;
   }
 
   .aptus-software-page--spectronova .aptus-software-inner-hero__media img {
-    height: 395px;
-    max-height: none;
-    max-width: 263px;
+    height: auto;
+    max-height: 395px;
+    max-width: min(263px, 100%);
     width: auto;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .aptus-software-inner-hero__grid {
+      gap: 1rem;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr) minmax(0, 1fr);
+    }
+
+    .aptus-software-inner-hero__grid--two-column {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .aptus-software-inner-hero__grid--inline-media {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    }
   }
 
   @media (max-width: 767px) {
@@ -1075,8 +1104,8 @@
     font-weight: 600;
   }
 
-  /* Live post-2030 density — 2rem bands, not site section-padding (4rem) */
-  .aptus-autodesk-page[class*="aptus-autodesk-page--"] .section-padding {
+  /* AutoCAD density — 2rem bands on all software pages (not site section-padding 2.5–3rem) */
+  .aptus-software-page .section-padding {
     padding-block: 2rem;
   }
 }

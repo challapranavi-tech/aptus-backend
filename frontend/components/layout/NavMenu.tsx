@@ -303,8 +303,23 @@ export function NavMenu({ items }: NavMenuProps) {
   }, [pathname]);
 
   useEffect(() => {
-    window.addEventListener("resize", resetFlyouts);
-    return () => window.removeEventListener("resize", resetFlyouts);
+    if (!mobileOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [mobileOpen]);
+
+  useEffect(() => {
+    const onResize = () => {
+      resetFlyouts();
+      if (window.matchMedia("(min-width: 1025px)").matches) {
+        setMobileOpen(false);
+      }
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, [resetFlyouts]);
 
   return (

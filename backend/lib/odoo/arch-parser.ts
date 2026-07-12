@@ -17,6 +17,7 @@
  *  - Images reference Odoo's /web/image URLs — the caller can rewrite or proxy them.
  */
 
+import { resolveCmsImageSrc } from "@shared/lib/cms-image";
 import type {
   CTA,
   Features,
@@ -74,8 +75,10 @@ function firstLinkText(html: string): string | undefined {
 function firstImgSrc(html: string, baseUrl: string): string | undefined {
   const src = attr(html, "src");
   if (!src) return undefined;
-  if (src.startsWith("http")) return src;
-  return `${baseUrl}${src.startsWith("/") ? src : `/${src}`}`;
+  const absolute = src.startsWith("http")
+    ? src
+    : `${baseUrl}${src.startsWith("/") ? src : `/${src}`}`;
+  return resolveCmsImageSrc(absolute);
 }
 
 function firstImgAlt(html: string): string {

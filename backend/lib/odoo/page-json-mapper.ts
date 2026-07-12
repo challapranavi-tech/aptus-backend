@@ -9,6 +9,7 @@ import { isSoftwareInnerSlug, softwareHeroImage } from "@/data/software-product-
 import { parseCmsPresentation } from "@/lib/design-system/presentation";
 import { isCaseStudiesPageJson, mapCaseStudiesPageJson } from "@/lib/odoo/case-studies-json-mapper";
 import type { CmsPresentationSettings, FaqItem, LogoItem, Section } from "@/types";
+import { resolveCmsImageSrc } from "@shared/lib/cms-image";
 
 interface RawTitle {
   before?: string;
@@ -259,7 +260,7 @@ interface RawPageJson {
 function usableImg(src?: string, alt?: string) {
   if (!src || src === "false") return undefined;
   if (!/^https?:\/\//i.test(src) && !src.startsWith("/")) return undefined;
-  return { src, alt: alt ?? "" };
+  return { src: resolveCmsImageSrc(src), alt: alt ?? "" };
 }
 
 function joinTitle(t?: RawTitle): string | undefined {
@@ -850,7 +851,11 @@ export function mapPageJson(
       .map((c, i) => {
         const src = c.imageSrc;
         if (!src) return null;
-        return { id: c.id ?? `cert-${i}`, src, alt: c.imageAlt ?? c.title ?? "Certificate" };
+        return {
+          id: c.id ?? `cert-${i}`,
+          src: resolveCmsImageSrc(src),
+          alt: c.imageAlt ?? c.title ?? "Certificate",
+        };
       })
       .filter((x): x is LogoItem => !!x);
 
@@ -1051,7 +1056,11 @@ export function mapPageJson(
       .map((logo, i) => {
         const src = logo.src;
         if (!src) return null;
-        return { id: logo.id ?? `partner-${i}`, src, alt: logo.alt ?? "Partner" };
+        return {
+          id: logo.id ?? `partner-${i}`,
+          src: resolveCmsImageSrc(src),
+          alt: logo.alt ?? "Partner",
+        };
       })
       .filter((x): x is LogoItem => !!x);
 

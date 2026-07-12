@@ -2444,12 +2444,12 @@
   font-weight: 600;
 }
 
-/* ponytail: shared mobile overrides for Elementor product fixed media widths */
-@media (max-width: 767px) {
+/* ponytail: shared fluid overrides for Elementor product fixed media widths */
+@media (max-width: 1023px) {
   [class*="aptus-software-page--"] .aptus-software-inner-hero__media img,
   [class*="aptus-software-page--"] .aptus-software-page-banner__media img {
     height: auto !important;
-    max-height: min(280px, 55vw) !important;
+    max-height: min(320px, 50vw) !important;
     max-width: 100% !important;
     width: auto !important;
   }
@@ -2461,5 +2461,71 @@
   [class*="aptus-software-page--"] .aptus-form-card {
     padding: 1.25rem;
   }
+
+  [class*="aptus-software-page--"] .aptus-software-mid-band__inner {
+    padding-inline: 1rem;
+  }
+
+  /* Soften 180px track floors without changing column counts */
+  [class*="aptus-software-page--"] .aptus-software-inner-hero__nav,
+  [class*="aptus-software-page--"] .aptus-software-inner-hero__copy,
+  [class*="aptus-software-page--"] .aptus-software-inner-hero__media {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  [class*="aptus-software-page--"] .aptus-software-inner-hero__media img,
+  [class*="aptus-software-page--"] .aptus-software-page-banner__media img {
+    max-height: min(280px, 55vw) !important;
+  }
+
+  [class*="aptus-software-page--"] .aptus-software-inner-hero__grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/*
+ * AutoCAD spacing baseline for every software product page.
+ * Lives here (after per-slug rules) so 4rem Elementor overrides lose on equal specificity.
+ */
+.aptus-software-page .aptus-software-inner-hero {
+  padding: 2rem 0;
+}
+
+.aptus-software-page .aptus-software-inner-hero--with-banner {
+  padding-top: 2rem;
+}
+
+.aptus-software-page .aptus-software-section {
+  padding: 2rem 0;
+}
+
+.aptus-software-page .aptus-software-mid-band__inner {
+  padding: 2.5rem 2rem 1.5rem;
+}
+
+.aptus-software-page .aptus-form-band {
+  padding: 2rem 0;
+}
+
+.aptus-software-page .section-padding {
+  padding-block: 2rem;
+}
+
+.aptus-software-page .aptus-software-value-card,
+.aptus-software-page .aptus-software-icon-card {
+  margin: 5px;
+  padding: 1rem 0.5rem 1.25rem;
+}
+
+.aptus-software-page .aptus-software-product-card {
+  margin: 5px;
+  padding: 0.5rem 0.5rem 1rem;
+}
+
+.aptus-software-page .aptus-software-bullet-panel {
+  margin-top: 1rem;
+  padding: 1.5rem 1.75rem;
 }
 

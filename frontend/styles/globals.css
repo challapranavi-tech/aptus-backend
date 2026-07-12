@@ -37,16 +37,35 @@
 @import "./elv-product-pages.css";
 @import "./elv-pages.css";
 
-/* Shared mobile safety net for Elementor-ported media / tables */
-@media (max-width: 767px) {
-  img,
-  video,
-  iframe {
-    max-width: 100%;
-  }
+/* Shared media / table safety net across breakpoints */
+img,
+video {
+  max-width: 100%;
+}
 
-  table {
+/* Next/Image fill uses absolute + height:100%; don't force height:auto on those */
+img:not([data-nimg="fill"]),
+video {
+  height: auto;
+}
+
+iframe,
+embed,
+object {
+  max-width: 100%;
+}
+
+table {
+  max-width: 100%;
+}
+
+@media (max-width: 1023px) {
+  .aptus-table-scroll,
+  [data-section] table,
+  .rich-text table,
+  article table {
     display: block;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }

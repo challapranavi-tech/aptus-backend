@@ -9,12 +9,27 @@
 .aptus-flip-box {
   perspective: 1200px;
   position: relative;
-  height: 220px;
+  height: auto;
+  min-height: 200px;
   cursor: pointer;
 }
 
+@media (min-width: 640px) {
+  .aptus-flip-box {
+    min-height: 220px;
+    height: 220px;
+  }
+}
+
 .aptus-flip-box--tall {
-  height: 280px;
+  min-height: 240px;
+}
+
+@media (min-width: 640px) {
+  .aptus-flip-box--tall {
+    height: 280px;
+    min-height: 280px;
+  }
 }
 
 .aptus-flip-box__inner {

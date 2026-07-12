@@ -107,6 +107,13 @@
     margin: -5rem auto 0;
   }
 
+  @media (max-width: 1023px) {
+    .page-home .home-testimonials__carousel {
+      margin-top: -3rem;
+      width: min(85%, 100%);
+    }
+  }
+
   @media (max-width: 767px) {
     .page-home .home-testimonials__carousel {
       margin-top: -2rem;
@@ -116,6 +123,17 @@
     .page-home .home-testimonial__avatar {
       height: 72px;
       width: 72px;
+    }
+
+    .page-home .home-feature-row,
+    .page-home .home-services {
+      padding-inline: var(--content-pad-x, 1rem);
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .page-home .home-testimonials__carousel {
+      width: min(59%, 900px);
     }
   }
 

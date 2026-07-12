@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui";
 import { getSiteConfig } from "@/data";
+import { resolveCmsImageSrc } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -48,14 +49,14 @@ export async function Footer() {
     <footer className="border-t border-border bg-white text-black" data-section="footer">
       {/* ── Main content ──────────────────────────────────── */}
       <Container>
-        <div className="grid gap-10 py-16 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 py-10 sm:grid-cols-2 sm:gap-10 sm:py-14 lg:grid-cols-4 lg:py-16">
 
           {/* ── Col 1: Brand + social ─────────────────────── */}
           <div>
             <Link href="/" className="inline-block">
               {logo ? (
                 <Image
-                  src={logo.src}
+                  src={resolveCmsImageSrc(logo.src)}
                   alt={logo.alt}
                   width={logo.width ?? 160}
                   height={logo.height ?? 44}
@@ -94,12 +95,13 @@ export async function Footer() {
 
           {/* ── Col 2: Map ────────────────────────────────── */}
           {footer.mapEmbedUrl && (
-            <div className="overflow-hidden rounded-sm">
+            <div className="aspect-video min-h-[180px] overflow-hidden rounded-sm sm:min-h-[220px]">
               <iframe
                 src={footer.mapEmbedUrl}
                 title="Office location map"
                 width="100%"
                 height="220"
+                className="h-full min-h-[180px] w-full sm:min-h-[220px]"
                 style={{ border: 0 }}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

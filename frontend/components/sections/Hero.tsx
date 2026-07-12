@@ -2,6 +2,7 @@
 
 import { Container } from "@/components/ui";
 import { gsap } from "@/lib/gsap";
+import { resolveCmsImageSrc } from "@/lib/utils";
 import type { Hero as HeroData } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -39,7 +40,7 @@ export function Hero({ data }: HeroProps) {
       {data.media && (
         <>
           <Image
-            src={data.media.src}
+            src={resolveCmsImageSrc(data.media.src)}
             alt={data.media.alt}
             fill
             className="object-cover opacity-30"

@@ -26,7 +26,7 @@ export const mockSiteConfig: SiteConfig = {
     socialLinks: [
       { platform: "facebook", href: "https://www.facebook.com/AptusITsolutions/",                                                    label: "Facebook" },
       { platform: "linkedin", href: "https://www.linkedin.com/company/aptus-infotech-llc/posts/?feedView=all",                       label: "LinkedIn" },
-      { platform: "whatsapp", href: "https://wa.me/+968%209941%208481",                                                               label: "WhatsApp" },
+      { platform: "whatsapp", href: "https://api.whatsapp.com/send?phone=96899418481",                                                               label: "WhatsApp" },
       { platform: "twitter",  href: "https://x.com/aptus_infotech",                                                                  label: "Twitter" },
     ],
   },
@@ -51,7 +51,7 @@ export const mockSiteConfig: SiteConfig = {
       { platform: "twitter",   href: "https://x.com/aptus_infotech",                                                           label: "Twitter" },
       { platform: "youtube",   href: "https://www.youtube.com/@aptusinfotech",                                                  label: "YouTube" },
       { platform: "linkedin",  href: "https://www.linkedin.com/company/aptus-infotech-llc/posts/?feedView=all",                label: "LinkedIn" },
-      { platform: "whatsapp",  href: "https://wa.me/+968%209941%208481",                                                       label: "WhatsApp" },
+      { platform: "whatsapp",  href: "https://api.whatsapp.com/send?phone=96899418481",                                                       label: "WhatsApp" },
     ],
     columns: [
       {

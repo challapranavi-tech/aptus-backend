@@ -56,6 +56,9 @@
   --spacing-section:    2.5rem;
   --spacing-section-lg: 3rem;
 
+  /* Breakpoints align with Tailwind defaults: sm 640, md 768, lg 1024, xl 1280, 2xl/xxl 1536 */
+  --breakpoint-xxl: 96rem;
+
   --container-sm:  640px;
   --container-md:  768px;
   --container-lg:  1024px;

@@ -1,4 +1,5 @@
 import { getSiteConfig } from "@/data";
+import { resolveCmsImageSrc } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { NavMenu } from "./NavMenu";
@@ -86,7 +87,7 @@ export async function Header() {
           <Link href="/" className="aptus-masthead__brand">
             {siteConfig.logo ? (
               <Image
-                src={siteConfig.logo.src}
+                src={resolveCmsImageSrc(siteConfig.logo.src)}
                 alt={siteConfig.logo.alt}
                 width={siteConfig.logo.width ?? 220}
                 height={siteConfig.logo.height ?? 52}
