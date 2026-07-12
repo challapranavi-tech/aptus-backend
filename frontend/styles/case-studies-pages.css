@@ -75,22 +75,22 @@
   height: 100%;
   margin: 5px;
   overflow: hidden;
-  text-align: center;
+  text-align: left;
 }
 
 .aptus-case-studies-page .aptus-cs-card__image {
+  background: #f3f6f9;
   display: block;
-  margin: 0 auto;
-  max-height: 200px;
+  height: 140px;
   object-fit: contain;
   padding: 0.5rem;
-  width: auto;
+  width: 100%;
 }
 
 .aptus-case-studies-page .aptus-cs-card__title {
   font-size: var(--text-base);
   font-weight: 600;
-  padding: 0.5rem;
+  padding: 0.75rem 0.75rem 0.35rem;
 }
 
 .aptus-case-studies-page .aptus-cs-card__title a {
@@ -107,11 +107,12 @@
   flex: 1;
   font-size: var(--text-xs);
   line-height: 1.5;
-  padding: 0 0.5rem 0.75rem;
+  padding: 0 0.75rem 0.75rem;
+  text-align: left;
 }
 
 .aptus-case-studies-page .aptus-cs-card__btn-wrap {
-  padding: 0 0.5rem 1rem;
+  padding: 0 0.75rem 1rem;
 }
 
 .aptus-case-studies-page .aptus-cs-btn {

@@ -40,7 +40,7 @@ export function CaseStudiesPageView({ content }: CaseStudiesPageViewProps) {
           style={
             hero.backgroundImage
               ? {
-                  backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("${hero.backgroundImage}")`,
+                  backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("${resolveCmsImageSrc(hero.backgroundImage)}")`,
                 }
               : undefined
           }
@@ -177,7 +177,7 @@ export function CaseStudiesPageView({ content }: CaseStudiesPageViewProps) {
               {partnerships.logos.map((logo) => (
                 <img
                   key={logo.alt}
-                  src={logo.src}
+                  src={resolveCmsImageSrc(logo.src)}
                   alt={logo.alt}
                   loading="lazy"
                   decoding="async"
