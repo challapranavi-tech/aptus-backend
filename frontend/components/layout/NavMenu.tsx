@@ -239,8 +239,13 @@ function MobileMenuItem({
   onClose: () => void;
   depth?: number;
 }) {
-  const hasChildren = item.children && item.children.length > 0;
-  const padding = { paddingLeft: `${depth * 1}rem` } as const;
+  const hasChildren = Boolean(item.children?.length);
+  const childActive = hasChildren && isItemActive(item, pathname);
+  const [open, setOpen] = useState(childActive);
+
+  useEffect(() => {
+    if (childActive) setOpen(true);
+  }, [childActive, pathname]);
 
   if (!hasChildren) {
     if (!item.href) return null;
@@ -248,10 +253,10 @@ function MobileMenuItem({
       <Link
         href={item.href}
         className={cn(
-          "aptus-masthead__link",
-          isItemActive(item, pathname) && "is-active",
+          "aptus-masthead__link aptus-masthead__mobile-link",
+          isDirectlyActive(item, pathname) && "is-active",
         )}
-        style={padding}
+        data-depth={depth}
         onClick={onClose}
       >
         {item.label}
@@ -260,29 +265,54 @@ function MobileMenuItem({
   }
 
   return (
-    <>
-      {item.href ? (
-        <Link href={item.href} className="aptus-masthead__link" style={padding} onClick={onClose}>
-          {item.label}
-        </Link>
-      ) : (
-        <span className="aptus-masthead__link" style={padding}>
-          {item.label}
-        </span>
-      )}
-      <ul className="aptus-masthead__mobile-list">
-        {item.children!.map((child) => (
-          <li key={child.label}>
-            <MobileMenuItem
-              item={child}
-              pathname={pathname}
-              onClose={onClose}
-              depth={depth + 1}
-            />
-          </li>
-        ))}
-      </ul>
-    </>
+    <div className="aptus-masthead__mobile-group" data-depth={depth}>
+      <div className="aptus-masthead__mobile-row">
+        {item.href ? (
+          <Link
+            href={item.href}
+            className={cn(
+              "aptus-masthead__link aptus-masthead__mobile-link",
+              isDirectlyActive(item, pathname) && "is-active",
+            )}
+            onClick={onClose}
+          >
+            {item.label}
+          </Link>
+        ) : (
+          <button
+            type="button"
+            className="aptus-masthead__link aptus-masthead__mobile-link"
+            onClick={() => setOpen((o) => !o)}
+            aria-expanded={open}
+          >
+            {item.label}
+          </button>
+        )}
+        <button
+          type="button"
+          className={cn("aptus-masthead__mobile-chevron", open && "is-open")}
+          aria-label={open ? `Collapse ${item.label}` : `Expand ${item.label}`}
+          aria-expanded={open}
+          onClick={() => setOpen((o) => !o)}
+        >
+          <NavChevron />
+        </button>
+      </div>
+      {open ? (
+        <ul className="aptus-masthead__mobile-list aptus-masthead__mobile-list--nested">
+          {item.children!.map((child) => (
+            <li key={child.label}>
+              <MobileMenuItem
+                item={child}
+                pathname={pathname}
+                onClose={onClose}
+                depth={depth + 1}
+              />
+            </li>
+          ))}
+        </ul>
+      ) : null}
+    </div>
   );
 }
 
