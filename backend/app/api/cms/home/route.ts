@@ -9,9 +9,7 @@ export async function GET() {
     }
     return NextResponse.json(page);
   } catch (err) {
-    return NextResponse.json(
-      { error: "Failed to load home page", detail: String(err) },
-      { status: 500 },
-    );
+    console.error("[cms/home] failed:", err);
+    return NextResponse.json({ error: "Failed to load home page" }, { status: 500 });
   }
 }

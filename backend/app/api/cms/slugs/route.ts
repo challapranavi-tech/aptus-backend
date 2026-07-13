@@ -6,9 +6,7 @@ export async function GET() {
     const slugs = await getAllPageSlugs();
     return NextResponse.json({ slugs });
   } catch (err) {
-    return NextResponse.json(
-      { error: "Failed to load slugs", detail: String(err) },
-      { status: 500 },
-    );
+    console.error("[cms/slugs] failed:", err);
+    return NextResponse.json({ error: "Failed to load slugs" }, { status: 500 });
   }
 }

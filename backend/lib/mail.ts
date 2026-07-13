@@ -1,5 +1,9 @@
 import nodemailer from "nodemailer";
 
+/**
+ * SMTP credentials are server-only (SMTP_HOST / SMTP_USER / SMTP_PASS).
+ * security: never expose these via NEXT_PUBLIC_* or return them in API errors.
+ */
 export function getMailTransporter() {
   const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } = process.env;
   if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) {

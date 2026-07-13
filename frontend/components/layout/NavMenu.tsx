@@ -4,13 +4,22 @@ import { cn } from "@/lib/utils";
 import type { NavigationItem } from "@/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useState,
+  type FocusEvent,
+  type KeyboardEvent,
+  type MouseEvent,
+} from "react";
 
 interface NavMenuProps {
   items: NavigationItem[];
 }
 
 const VIEWPORT_PAD = 12;
+const DESKTOP_MQ = "(min-width: 1025px)";
 
 /** Match SmartMenus collision behavior — flip/shift flyouts inside the viewport. */
 function positionFlyout(dropdown: HTMLElement) {
@@ -46,15 +55,28 @@ function scheduleFlyoutPosition(dropdown: HTMLElement) {
   requestAnimationFrame(() => positionFlyout(dropdown));
 }
 
-function onFlyoutPointer(event: { currentTarget: HTMLLIElement }) {
-  let dropdown: HTMLElement | null = event.currentTarget;
+/** Blur focused controls in sibling dropdowns so focus-within cannot keep multiple panels open. */
+function blurSiblingDropdownFocus(current: HTMLElement) {
+  const menu = current.closest(".aptus-masthead__menu");
+  if (!menu) return;
+
+  menu.querySelectorAll<HTMLElement>(".aptus-masthead__dropdown").forEach((dropdown) => {
+    if (dropdown === current || current.contains(dropdown) || dropdown.contains(current)) return;
+    const focused = dropdown.querySelector(":focus");
+    if (focused instanceof HTMLElement) focused.blur();
+  });
+}
+
+function onDropdownPointerEnter(event: MouseEvent<HTMLLIElement>) {
+  const current = event.currentTarget;
+  blurSiblingDropdownFocus(current);
+
+  let dropdown: HTMLElement | null = current;
   while (dropdown) {
     if (dropdown.classList.contains("aptus-masthead__dropdown")) {
       scheduleFlyoutPosition(dropdown);
     }
-    const parentItem: HTMLElement | null =
-      dropdown.parentElement?.closest<HTMLElement>(".aptus-masthead__dropdown") ?? null;
-    dropdown = parentItem;
+    dropdown = dropdown.parentElement?.closest<HTMLElement>(".aptus-masthead__dropdown") ?? null;
   }
 }
 
@@ -113,30 +135,36 @@ function NavDropdownItem({
     : "aptus-masthead__link";
   const chevronDirection = menuVariant === "software" ? "right" : "down";
   const active = isDirectlyActive(item, pathname);
+  const panelId = useId();
 
   if (hasChildren) {
     return (
       <li
         className="aptus-masthead__dropdown aptus-masthead__dropdown--nested"
-        onMouseEnter={onFlyoutPointer}
-        onFocusCapture={onFlyoutPointer}
+        onMouseEnter={onDropdownPointerEnter}
       >
         {item.href ? (
           <Link
             href={item.href}
             className={`${linkClass} aptus-masthead__link--parent${active ? " is-active" : ""}`}
+            aria-haspopup="menu"
+            aria-controls={panelId}
             onClick={onClose}
           >
             {item.label}
             <NavChevron direction={chevronDirection} />
           </Link>
         ) : (
-          <span className={`${linkClass} aptus-masthead__link--parent aptus-masthead__link--flyout-trigger`}>
+          <span
+            className={`${linkClass} aptus-masthead__link--parent aptus-masthead__link--flyout-trigger`}
+            aria-haspopup="menu"
+            aria-controls={panelId}
+          >
             {item.label}
             <NavChevron direction={chevronDirection} />
           </span>
         )}
-        <ul className="aptus-masthead__dropdown-panel aptus-masthead__dropdown-panel--nested">
+        <ul id={panelId} className="aptus-masthead__dropdown-panel aptus-masthead__dropdown-panel--nested" role="menu">
           {item.children!.map((child) => (
             <NavDropdownItem
               key={child.label}
@@ -170,12 +198,13 @@ function DropdownItem({
 }: {
   item: NavigationItem;
   pathname: string;
-  onClose?: () => void;
+  onClose: () => void;
 }) {
   const hasChildren = item.children && item.children.length > 0;
   const active = isDirectlyActive(item, pathname);
   const isSoftware = item.label === "Software";
   const isElv = item.label === "ELV Solutions";
+  const panelId = useId();
 
   if (!hasChildren) {
     if (!item.href) return null;
@@ -199,21 +228,19 @@ function DropdownItem({
   );
 
   return (
-    <li
-      className="aptus-masthead__dropdown"
-      onMouseEnter={onFlyoutPointer}
-      onFocusCapture={onFlyoutPointer}
-    >
+    <li className="aptus-masthead__dropdown" onMouseEnter={onDropdownPointerEnter}>
       <Link
         href={item.href ?? "#"}
         className={cn("aptus-masthead__link", active && "is-active")}
+        aria-haspopup="menu"
+        aria-controls={panelId}
         onClick={onClose}
       >
         {item.label}
         <NavChevron />
       </Link>
 
-      <ul className={panelClass} role="menu">
+      <ul id={panelId} className={panelClass} role="menu">
         {item.children!.map((child) => (
           <NavDropdownItem
             key={child.label}
@@ -319,6 +346,9 @@ function MobileMenuItem({
 export function NavMenu({ items }: NavMenuProps) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  // ponytail: CSS :hover menus stay open after click while the pointer is still over them;
+  // lock hides panels until the pointer leaves the menu (or route changes).
+  const [menuLocked, setMenuLocked] = useState(false);
 
   const resetFlyouts = useCallback(() => {
     document.querySelectorAll<HTMLElement>(".aptus-masthead__dropdown-panel").forEach((panel) => {
@@ -328,9 +358,20 @@ export function NavMenu({ items }: NavMenuProps) {
     });
   }, []);
 
+  const closeDesktopMenus = useCallback(() => {
+    setMenuLocked(true);
+    resetFlyouts();
+    const active = document.activeElement;
+    if (active instanceof HTMLElement && active.closest(".aptus-masthead__menu")) {
+      active.blur();
+    }
+  }, [resetFlyouts]);
+
   useEffect(() => {
     setMobileOpen(false);
-  }, [pathname]);
+    setMenuLocked(false);
+    resetFlyouts();
+  }, [pathname, resetFlyouts]);
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -344,7 +385,7 @@ export function NavMenu({ items }: NavMenuProps) {
   useEffect(() => {
     const onResize = () => {
       resetFlyouts();
-      if (window.matchMedia("(min-width: 1025px)").matches) {
+      if (window.matchMedia(DESKTOP_MQ).matches) {
         setMobileOpen(false);
       }
     };
@@ -352,12 +393,33 @@ export function NavMenu({ items }: NavMenuProps) {
     return () => window.removeEventListener("resize", onResize);
   }, [resetFlyouts]);
 
+  const onMenuKeyDown = (event: KeyboardEvent<HTMLUListElement>) => {
+    if (event.key !== "Escape") return;
+    closeDesktopMenus();
+  };
+
+  const onMenuBlur = (event: FocusEvent<HTMLUListElement>) => {
+    const next = event.relatedTarget;
+    if (next instanceof Node && event.currentTarget.contains(next)) return;
+    resetFlyouts();
+  };
+
   return (
     <>
       <nav aria-label="Main navigation" className="aptus-masthead__center">
-        <ul className="aptus-masthead__menu">
+        <ul
+          className={cn("aptus-masthead__menu", menuLocked && "is-locked")}
+          onMouseLeave={() => setMenuLocked(false)}
+          onKeyDown={onMenuKeyDown}
+          onBlur={onMenuBlur}
+        >
           {items.map((item) => (
-            <DropdownItem key={item.label} item={item} pathname={pathname} />
+            <DropdownItem
+              key={item.label}
+              item={item}
+              pathname={pathname}
+              onClose={closeDesktopMenus}
+            />
           ))}
         </ul>
       </nav>

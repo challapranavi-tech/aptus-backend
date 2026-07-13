@@ -61,11 +61,14 @@ html {
 }
 
 .aptus-masthead__topbar-cell--follow {
+  align-items: center;
+  display: flex;
   font-size: var(--text-sm);
   text-align: start;
 }
 
 .aptus-masthead__topbar-cell--social {
+  align-items: center;
   display: flex;
   justify-content: flex-start;
 }
@@ -74,7 +77,7 @@ html {
   align-items: center;
   display: flex;
   flex-wrap: nowrap;
-  gap: 0;
+  gap: 0.35rem;
   justify-content: flex-start;
 }
 
@@ -83,9 +86,12 @@ html {
   background: #248bcc !important;
   color: #fff !important;
   display: inline-flex;
+  flex-shrink: 0;
+  height: 2rem;
   justify-content: center;
-  padding: 0.6em;
+  padding: 0;
   text-decoration: none !important;
+  width: 2rem;
 }
 
 .aptus-masthead__social a:hover {
@@ -94,8 +100,10 @@ html {
 }
 
 .aptus-masthead__social svg {
-  height: 18px;
-  width: 18px;
+  display: block;
+  flex-shrink: 0;
+  height: 16px;
+  width: 16px;
 }
 
 /* ── Main nav row (9fcac24) ── */
@@ -253,12 +261,16 @@ html {
   list-style: none !important;
   margin: 0 !important;
   min-width: 220px;
+  opacity: 0;
   padding: 4px 0 !important;
   pointer-events: none;
   position: absolute;
   top: 100%;
-  transform: translateY(0);
-  transition: visibility 0.15s ease;
+  transform: translateY(4px);
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease,
+    visibility 0.18s ease;
   visibility: hidden;
   z-index: 1050;
 }
@@ -269,23 +281,21 @@ html {
   right: 0;
 }
 
+/* Only the hovered / keyboard-focused parent reveals its direct panel — never sibling trees */
 .aptus-masthead__dropdown:hover > .aptus-masthead__dropdown-panel,
-.aptus-masthead__dropdown:has(.aptus-masthead__dropdown-panel:hover) > .aptus-masthead__dropdown-panel,
 .aptus-masthead__dropdown:focus-within > .aptus-masthead__dropdown-panel {
-  animation: aptus-nav-fade-in 0.15s ease-out;
+  opacity: 1;
   pointer-events: auto;
+  transform: translateY(0);
   visibility: visible;
 }
 
-@keyframes aptus-nav-fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* After a link click, keep panels closed until the pointer leaves the menu */
+.aptus-masthead__menu.is-locked .aptus-masthead__dropdown-panel {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateY(4px) !important;
+  visibility: hidden !important;
 }
 
 .aptus-masthead__dropdown-panel li {
@@ -340,7 +350,8 @@ html {
 
 .aptus-masthead__dropdown-panel--software > li > a:hover,
 .aptus-masthead__dropdown-panel--software > li:hover > .aptus-masthead__link--flyout-trigger,
-.aptus-masthead__dropdown-panel--software .aptus-masthead__dropdown--nested:hover > .aptus-masthead__link--parent {
+.aptus-masthead__dropdown-panel--software .aptus-masthead__dropdown--nested:hover > .aptus-masthead__link--parent,
+.aptus-masthead__dropdown-panel--software .aptus-masthead__dropdown--nested:focus-within > .aptus-masthead__link--parent {
   background: #1352a3 !important;
   color: #fff !important;
 }
@@ -376,6 +387,7 @@ html {
   margin-left: -1px;
   min-width: 240px;
   top: 0;
+  transform: translateX(4px);
 }
 
 /* Nested flyout: open to the left when SmartMenus-style collision detects right overflow */
@@ -384,13 +396,14 @@ html {
   margin-left: 0;
   margin-right: 0;
   right: 100%;
+  transform: translateX(-4px);
 }
 
 .aptus-masthead__dropdown--nested:hover > .aptus-masthead__dropdown-panel--nested,
-.aptus-masthead__dropdown--nested:has(.aptus-masthead__dropdown-panel--nested:hover) > .aptus-masthead__dropdown-panel--nested,
 .aptus-masthead__dropdown--nested:focus-within > .aptus-masthead__dropdown-panel--nested {
-  animation: aptus-nav-fade-in 0.15s ease-out;
+  opacity: 1;
   pointer-events: auto;
+  transform: translateX(0);
   visibility: visible;
 }
 
@@ -560,11 +573,12 @@ html {
   }
 
   .aptus-masthead__topbar-cell {
-    padding-top: 1rem;
-    padding-bottom: 0;
+    align-items: center;
+    padding-block: 0.75rem;
   }
 
   .aptus-masthead__topbar-cell--follow {
+    justify-content: flex-end;
     text-align: end;
   }
 

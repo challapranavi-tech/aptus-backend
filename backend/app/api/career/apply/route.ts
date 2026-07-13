@@ -1,11 +1,17 @@
-import { corsPreflight, jsonCors } from "@/lib/api-cors";
+import { corsPreflight, jsonCors, withCors } from "@/lib/api-cors";
+import { validationError } from "@/lib/api-validate";
 import { getMailTransporter, mailFromAddress } from "@/lib/mail";
+import {
+  enforceKeyRateLimit,
+  identityKey,
+} from "@/lib/rate-limit-http";
 import {
   FORM_EXTENSIONS,
   RESUME_EXTENSIONS,
-  validateFields,
+  parseApplicationFields,
+  rejectUnknownFormKeys,
+  sanitizeFilename,
   validateFile,
-  type ApplicationFields,
 } from "@shared/lib/career-application";
 import { NextRequest } from "next/server";
 
@@ -24,7 +30,7 @@ function escapeHtml(value: string): string {
 async function fileToAttachment(file: File) {
   const buffer = Buffer.from(await file.arrayBuffer());
   return {
-    filename: file.name,
+    filename: sanitizeFilename(file.name),
     content: buffer,
     contentType: file.type || "application/octet-stream",
   };
@@ -42,25 +48,41 @@ export async function POST(req: NextRequest) {
   try {
     form = await req.formData();
   } catch {
-    return jsonCors(req, { error: "Invalid form submission." }, { status: 400 });
+    return validationError(
+      { _form: "Invalid form submission." },
+      (res) => withCors(res, req),
+    );
   }
 
-  const fields: ApplicationFields = {
-    fullName: String(form.get("fullName") ?? ""),
-    email: String(form.get("email") ?? ""),
-    phone: String(form.get("phone") ?? ""),
-    position: String(form.get("position") ?? ""),
-    experience: String(form.get("experience") ?? ""),
-    location: String(form.get("location") ?? ""),
-    coverMessage: String(form.get("coverMessage") ?? ""),
-  };
+  const unknown = rejectUnknownFormKeys(form.keys());
+  if (Object.keys(unknown).length > 0) {
+    return validationError(unknown, (res) => withCors(res, req));
+  }
+
+  const parsed = parseApplicationFields({
+    fullName: form.get("fullName"),
+    email: form.get("email"),
+    phone: form.get("phone"),
+    position: form.get("position"),
+    experience: form.get("experience"),
+    location: form.get("location"),
+    coverMessage: form.get("coverMessage") ?? undefined,
+  });
+
+  const errors = parsed.ok ? {} : { ...parsed.errors };
 
   const resume = form.get("resume");
   const preInterviewForm = form.get("preInterviewForm");
   const resumeFile = resume instanceof File ? resume : null;
   const formFile = preInterviewForm instanceof File ? preInterviewForm : null;
 
-  const errors: Record<string, string> = validateFields(fields);
+  if (resume !== null && !(resume instanceof File)) {
+    errors.resume = "Resume must be a file upload.";
+  }
+  if (preInterviewForm !== null && !(preInterviewForm instanceof File)) {
+    errors.preInterviewForm = "Pre-interview form must be a file upload.";
+  }
+
   const resumeError = validateFile(resumeFile, RESUME_EXTENSIONS, "Resume", true);
   if (resumeError) errors.resume = resumeError;
   const formError = validateFile(
@@ -72,12 +94,25 @@ export async function POST(req: NextRequest) {
   if (formError) errors.preInterviewForm = formError;
 
   if (Object.keys(errors).length > 0) {
-    return jsonCors(
-      req,
-      { error: "Please fix the highlighted fields.", errors },
-      { status: 400 },
+    return validationError(errors, (res) => withCors(res, req));
+  }
+
+  const fields = parsed.ok ? parsed.data : null;
+  if (!fields) {
+    return validationError(
+      { _form: "Validation failed." },
+      (res) => withCors(res, req),
     );
   }
+
+  // IP limit is in middleware; email caps repeat abuse from rotating IPs.
+  const emailLimited = enforceKeyRateLimit(
+    identityKey(fields.email),
+    "publicWriteIdentity",
+    "career-apply",
+    (res) => withCors(res, req),
+  );
+  if (emailLimited) return emailLimited;
 
   const transporter = getMailTransporter();
   if (!transporter) {

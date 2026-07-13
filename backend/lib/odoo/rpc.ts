@@ -41,13 +41,18 @@ export interface SearchReadOptions {
   order?: string;
 }
 
-/** Authenticated JSON-RPC session — one instance per worker lifecycle. */
+/** Authenticated JSON-RPC handle for the Odoo service account.
+ *
+ * security: This is NOT a browser/user session. It holds ODOO_API_KEY in
+ * process memory only — never serialize it into cookies, responses, or logs.
+ * Drop the cached client after rotating credentials (see invalidateOdooClientSession).
+ */
 export interface OdooRpcSession {
   url: string;
   db: string;
   uid: number;
   apiKey: string;
-  /** ISR revalidation in seconds (passed to Next.js `next.revalidate`). */
+  /** ISR revalidation in seconds (used by unstable_cache TTLs, not fetch cache). */
   revalidate: number;
 }
 
@@ -58,10 +63,16 @@ function nextId() {
 }
 
 // ─── Low-level fetch ──────────────────────────────────────────────────────────
+/**
+ * @param cacheMode
+ *   - `no-store` — required when the request body includes ODOO_API_KEY (or any
+ *     long-lived secret). Never put secret-bearing POSTs into Next.js Data Cache.
+ *   - `revalidate` — only for unauthenticated public RPC (e.g. version_info).
+ */
 async function rpcFetch<T>(
   endpoint: string,
   body: object,
-  revalidate: number,
+  cacheMode: { kind: "no-store" } | { kind: "revalidate"; seconds: number },
 ): Promise<T> {
   let response: Response;
   try {
@@ -72,7 +83,9 @@ async function rpcFetch<T>(
         Accept: "application/json",
       },
       body: JSON.stringify(body),
-      next: { revalidate },
+      ...(cacheMode.kind === "no-store"
+        ? { cache: "no-store" as const }
+        : { next: { revalidate: cacheMode.seconds } }),
       signal: AbortSignal.timeout(15_000),
     });
   } catch (err) {
@@ -139,7 +152,8 @@ export async function authenticate(
         args: [db, user, apiKey, {}],
       },
     },
-    0, // never cache auth calls
+    // security: API key is in the body — never cache this request.
+    { kind: "no-store" },
   );
 
   if (!uid) {
@@ -188,7 +202,9 @@ export async function searchRead<T>(
         ],
       },
     },
-    session.revalidate,
+    // security: execute_kw sends apiKey in the body — cache responses via
+    // unstable_cache in OdooClient, not Next fetch Data Cache.
+    { kind: "no-store" },
   );
 }
 
@@ -225,7 +241,7 @@ export async function read<T>(
         ],
       },
     },
-    session.revalidate,
+    { kind: "no-store" },
   );
 }
 
@@ -251,6 +267,7 @@ export async function getVersionInfo(url: string): Promise<OdooVersionInfo> {
         args: [],
       },
     },
-    3600,
+    // version_info is unauthenticated — safe to cache briefly.
+    { kind: "revalidate", seconds: 3600 },
   );
 }

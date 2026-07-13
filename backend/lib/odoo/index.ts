@@ -3,6 +3,7 @@ export {
   OdooRpcError,
   isOdooConfigured,
   odooConfigFromEnv,
+  ODOO_CACHE_TAG,
 } from "./client";
 
 export {

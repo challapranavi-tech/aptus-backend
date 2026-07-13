@@ -6,9 +6,7 @@ export async function GET() {
     const config = await getSiteConfig();
     return NextResponse.json(config);
   } catch (err) {
-    return NextResponse.json(
-      { error: "Failed to load site config", detail: String(err) },
-      { status: 500 },
-    );
+    console.error("[cms/site-config] failed:", err);
+    return NextResponse.json({ error: "Failed to load site config" }, { status: 500 });
   }
 }

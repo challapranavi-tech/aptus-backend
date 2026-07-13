@@ -5,7 +5,12 @@ function allowedOrigins(): string[] {
     process.env.APTUS_FRONTEND_URL,
     process.env.NEXT_PUBLIC_SITE_URL,
   ].filter(Boolean) as string[];
-  return [...new Set([...fromEnv, "http://localhost:3000"])];
+  // security: localhost is a local-dev convenience only — never auto-allow in prod.
+  const origins =
+    process.env.NODE_ENV === "production"
+      ? fromEnv
+      : [...fromEnv, "http://localhost:3000"];
+  return [...new Set(origins)];
 }
 
 function pickOrigin(request: Request): string | null {

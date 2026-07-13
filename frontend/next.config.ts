@@ -5,6 +5,8 @@ const odooImageHost =
   (process.env.ODOO_URL ? new URL(process.env.ODOO_URL).hostname : undefined);
 
 const nextConfig: NextConfig = {
+  // security: keep production bundles free of source maps that aid reverse-engineering.
+  productionBrowserSourceMaps: false,
   serverExternalPackages: ["gsap"],
   async redirects() {
     return [

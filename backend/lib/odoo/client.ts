@@ -24,9 +24,10 @@ import type {
   OdooRawPage,
   OdooRawView,
   Page,
-  Section,
   SiteConfig,
 } from "@/types";
+import { isOdooPagePublished } from "@shared/lib/object-access";
+import { unstable_cache } from "next/cache";
 import {
   buildSiteConfig,
   extractSlugs,
@@ -39,9 +40,30 @@ import {
   OdooRpcError,
   read,
   searchRead,
+  type OdooDomain,
   type OdooRpcSession,
   type OdooVersionInfo,
 } from "./rpc";
+
+/** Cache tag for all Odoo-backed CMS payloads — bust via revalidateTag("odoo"). */
+export const ODOO_CACHE_TAG = "odoo";
+
+function pageCacheTag(slug: string): string {
+  return `odoo-page-${slug}`;
+}
+
+/**
+ * Domain fragment: page must be public on this website.
+ * security: applied on every public slug/id read so drafts are not IDOR'd.
+ */
+function publishedOnWebsite(websiteId: number): OdooDomain {
+  return [
+    ["website_id", "=", websiteId],
+    "|",
+    ["is_published", "=", true],
+    ["website_published", "=", true],
+  ];
+}
 
 // ─── Config from env ──────────────────────────────────────────────────────────
 export function odooConfigFromEnv() {
@@ -151,12 +173,7 @@ export class OdooClient {
     const rawPages = await searchRead<OdooRawPage>(
       this.session,
       "website.page",
-      [
-        ["website_id", "=", this.websiteId],
-        "|",
-        ["is_published", "=", true],
-        ["website_published", "=", true],
-      ],
+      publishedOnWebsite(this.websiteId),
       { fields: PAGE_FIELDS as string[], limit: 200, order: "name asc" },
     );
 
@@ -173,22 +190,45 @@ export class OdooClient {
   /**
    * Fetches a single page by URL slug.
    * @param slug  "home" | "about-us" | etc. (without leading slash)
+   *
+   * Responses are cached with `unstable_cache` (not fetch Data Cache) so the
+   * Odoo API key never lands in Next's on-disk request cache. Bust with
+   * revalidateTag("odoo") / revalidateTag(`odoo-page-${slug}`).
    */
   async getPageBySlug(slug: string): Promise<Page | null> {
+    const websiteId = this.websiteId;
+    const ttl = this.session.revalidate;
+    return unstable_cache(
+      async () => {
+        const client = await OdooClient.create();
+        return client.loadPageBySlug(slug);
+      },
+      ["odoo-page", String(websiteId), slug],
+      { revalidate: ttl, tags: [ODOO_CACHE_TAG, pageCacheTag(slug)] },
+    )();
+  }
+
+  /**
+   * Uncached page load — used by getPageBySlug cache miss.
+   *
+   * security (OWASP API1 / object-level auth): the caller-supplied slug is an
+   * object identifier. Only return the page if it belongs to this website AND
+   * is published. Unpublished/draft pages must 404 the same as missing pages
+   * so guessing slugs cannot leak unpublished content.
+   */
+  async loadPageBySlug(slug: string): Promise<Page | null> {
     const url = slug === "home" ? "/" : `/${slug}`;
 
     const rawPages = await searchRead<OdooRawPage>(
       this.session,
       "website.page",
-      [
-        ["website_id", "=", this.websiteId],
-        ["url", "=", url],
-      ],
+      [...publishedOnWebsite(this.websiteId), ["url", "=", url]],
       { fields: PAGE_FIELDS as string[], limit: 1 },
     );
 
     const raw = rawPages[0];
-    if (!raw) return null;
+    // Defense in depth if Odoo domain operators differ by version.
+    if (!raw || !isOdooPagePublished(raw)) return null;
 
     const viewId = Array.isArray(raw.view_id) ? raw.view_id[0] : null;
     const view = viewId ? await this.fetchView(viewId) : null;
@@ -200,15 +240,23 @@ export class OdooClient {
    * Returns slugs of all published pages (used by generateStaticParams).
    */
   async getAllSlugs(): Promise<string[]> {
+    const websiteId = this.websiteId;
+    const ttl = this.session.revalidate;
+    return unstable_cache(
+      async () => {
+        const client = await OdooClient.create();
+        return client.loadAllSlugs();
+      },
+      ["odoo-slugs", String(websiteId)],
+      { revalidate: ttl, tags: [ODOO_CACHE_TAG, "odoo-slugs"] },
+    )();
+  }
+
+  async loadAllSlugs(): Promise<string[]> {
     const rawPages = await searchRead<Pick<OdooRawPage, "id" | "url" | "is_published" | "website_published" | "website_id">>(
       this.session,
       "website.page",
-      [
-        ["website_id", "=", this.websiteId],
-        "|",
-        ["is_published", "=", true],
-        ["website_published", "=", true],
-      ],
+      publishedOnWebsite(this.websiteId),
       { fields: ["id", "url", "is_published", "website_published"], limit: 200 },
     );
 
@@ -217,6 +265,19 @@ export class OdooClient {
 
   // ── Navigation ─────────────────────────────────────────────────────────────
   async getNavigation() {
+    const websiteId = this.websiteId;
+    const ttl = this.session.revalidate;
+    return unstable_cache(
+      async () => {
+        const client = await OdooClient.create();
+        return client.loadNavigation();
+      },
+      ["odoo-nav", String(websiteId)],
+      { revalidate: ttl, tags: [ODOO_CACHE_TAG, "odoo-nav"] },
+    )();
+  }
+
+  async loadNavigation() {
     const rawMenus = await searchRead<OdooRawMenu>(
       this.session,
       "website.menu",
@@ -238,16 +299,47 @@ export class OdooClient {
    * aptus-case-studies page, or false/null when not set.
    */
   async getCaseStudiesJson(): Promise<string | false> {
-    const rawPages = await searchRead<Pick<OdooRawPage, "x_case_studies_sections_json">>(
+    const websiteId = this.websiteId;
+    const ttl = this.session.revalidate;
+    return unstable_cache(
+      async () => {
+        const client = await OdooClient.create();
+        return client.loadCaseStudiesJson();
+      },
+      ["odoo-case-studies-json", String(websiteId)],
+      { revalidate: ttl, tags: [ODOO_CACHE_TAG, "odoo-case-studies"] },
+    )();
+  }
+
+  /**
+   * Case-studies JSON for the fixed public URL.
+   * security: same published + website scope as loadPageBySlug (object id = URL).
+   */
+  async loadCaseStudiesJson(): Promise<string | false> {
+    const rawPages = await searchRead<
+      Pick<OdooRawPage, "x_case_studies_sections_json" | "is_published" | "website_published">
+    >(
       this.session,
       "website.page",
-      [["website_id", "=", this.websiteId], ["url", "=", "/aptus-case-studies"]],
-      { fields: ["x_case_studies_sections_json"], limit: 1 },
+      [
+        ...publishedOnWebsite(this.websiteId),
+        ["url", "=", "/aptus-case-studies"],
+      ],
+      {
+        fields: ["x_case_studies_sections_json", "is_published", "website_published"],
+        limit: 1,
+      },
     );
-    return rawPages[0]?.x_case_studies_sections_json ?? false;
+    const raw = rawPages[0];
+    if (!raw || !isOdooPagePublished(raw)) return false;
+    return raw.x_case_studies_sections_json ?? false;
   }
 
   // ── Raw accessors (for the debug route) ────────────────────────────────────
+  /**
+   * Debug: all pages on this website (including unpublished).
+   * Only callable behind ODOO_DEBUG_TOKEN — not a public object API.
+   */
   async rawPages(): Promise<OdooRawPage[]> {
     return searchRead<OdooRawPage>(
       this.session,
@@ -266,7 +358,22 @@ export class OdooClient {
     );
   }
 
+  /**
+   * Debug: load ir.ui.view by caller-supplied id.
+   * security: object-level check — only return the view if it is linked to a
+   * website.page on this website. Prevents probing arbitrary view ids in Odoo.
+   */
   async rawView(viewId: number): Promise<OdooRawView | null> {
+    const linked = await searchRead<{ id: number }>(
+      this.session,
+      "website.page",
+      [
+        ["website_id", "=", this.websiteId],
+        ["view_id", "=", viewId],
+      ],
+      { fields: ["id"], limit: 1 },
+    );
+    if (linked.length === 0) return null;
     return this.fetchView(viewId);
   }
 }

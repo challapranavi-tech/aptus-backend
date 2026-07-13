@@ -1,5 +1,11 @@
-import { corsPreflight, jsonCors } from "@/lib/api-cors";
+import { corsPreflight, jsonCors, withCors } from "@/lib/api-cors";
+import { requireJsonContentType, validationError } from "@/lib/api-validate";
 import { getMailTransporter, mailFromAddress } from "@/lib/mail";
+import {
+  enforceKeyRateLimit,
+  identityKey,
+} from "@/lib/rate-limit-http";
+import { parseContactRequest } from "@shared/lib/contact-request";
 import { NextRequest } from "next/server";
 
 export async function OPTIONS(req: NextRequest) {
@@ -10,28 +16,37 @@ export async function POST(req: NextRequest) {
   const preflight = corsPreflight(req);
   if (preflight) return preflight;
 
-  let body: Record<string, unknown>;
-  try {
-    body = await req.json();
-  } catch {
-    return jsonCors(req, { error: "Invalid JSON body." }, { status: 400 });
+  const ctError = requireJsonContentType(req);
+  if (ctError) {
+    return validationError(ctError, (res) => withCors(res, req));
   }
 
-  const first_name = String(body.first_name ?? "").trim();
-  const last_name = String(body.last_name ?? "").trim();
-  const email = String(body.email ?? "").trim();
-  const company = String(body.company ?? "").trim();
-  const phone = String(body.phone ?? "").trim();
-  const product = String(body.product ?? "").trim();
-  const message = String(body.message ?? "").trim();
-
-  if (!first_name || !email) {
-    return jsonCors(
-      req,
-      { error: "First name and email are required." },
-      { status: 400 },
+  let raw: unknown;
+  try {
+    raw = await req.json();
+  } catch {
+    return validationError(
+      { _form: "Invalid JSON body." },
+      (res) => withCors(res, req),
     );
   }
+
+  const parsed = parseContactRequest(raw);
+  if (!parsed.ok) {
+    return validationError(parsed.errors, (res) => withCors(res, req));
+  }
+
+  const { first_name, last_name, email, company, phone, product, message } =
+    parsed.data;
+
+  // IP limit is in middleware; email caps repeat abuse from rotating IPs.
+  const emailLimited = enforceKeyRateLimit(
+    identityKey(email),
+    "publicWriteIdentity",
+    "contact",
+    (res) => withCors(res, req),
+  );
+  if (emailLimited) return emailLimited;
 
   const transporter = getMailTransporter();
   if (!transporter) {
@@ -55,8 +70,8 @@ export async function POST(req: NextRequest) {
       text: [
         `Name: ${name}`,
         `Email: ${email}`,
-        `Company: ${company || "—"}`,
-        `Phone: ${phone || "—"}`,
+        `Company: ${company}`,
+        `Phone: ${phone}`,
         `Product: ${product || "—"}`,
         "",
         message || "(no message)",

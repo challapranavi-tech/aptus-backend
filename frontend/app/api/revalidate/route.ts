@@ -15,60 +15,57 @@
  *   { "all": true, "token": "..." }
  */
 
+import { requireJsonContentType, validationError } from "@/lib/api-validate";
+import {
+  enforceKeyRateLimit,
+  identityKey,
+} from "@/lib/rate-limit-http";
+import {
+  normaliseSlug,
+  parseRevalidateRequest,
+} from "@shared/lib/revalidate-request";
+import { secureCompare } from "@shared/lib/secure-compare";
 import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
-type Body = {
-  slug?: string;
-  slugs?: string[];
-  all?: boolean;
-  token?: string;
-};
-
-function normalise(slug: string): string {
-  const raw = slug.trim();
-  if (!raw) return "home";
-
-  const pathLike = /^https?:\/\//i.test(raw)
-    ? (() => {
-        try {
-          return new URL(raw).pathname;
-        } catch {
-          return raw;
-        }
-      })()
-    : raw;
-
-  const clean = pathLike
-    .split(/[?#]/, 1)[0]
-    .replace(/^\/+|\/+$/g, "")
-    .toLowerCase();
-
-  return clean || "home";
-}
-
 function checkToken(token: string | undefined): NextResponse | null {
+  // security: shared webhook secret — never log the token or expected value.
+  // Not a browser session: reject every bad token; rotate env to revoke access.
   const expectedToken = process.env.ODOO_REVALIDATE_TOKEN;
   if (!expectedToken) {
     return NextResponse.json({ error: "Server misconfigured" }, { status: 503 });
   }
-  if (token !== expectedToken) {
+  if (!token || !secureCompare(token, expectedToken)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   return null;
 }
 
 export async function POST(req: NextRequest) {
-  let body: Body;
+  // IP limit is in middleware; token identity limits a compromised/shared secret.
+  const ctError = requireJsonContentType(req);
+  if (ctError) return validationError(ctError);
 
+  let raw: unknown;
   try {
-    body = await req.json();
+    raw = await req.json();
   } catch {
-    return NextResponse.json({ error: "Invalid JSON body" }, { status: 400 });
+    return validationError({ _form: "Invalid JSON body." });
   }
 
+  const parsed = parseRevalidateRequest(raw);
+  if (!parsed.ok) return validationError(parsed.errors);
+
+  const body = parsed.data;
   const authError = checkToken(body.token);
   if (authError) return authError;
+
+  const tokenLimited = enforceKeyRateLimit(
+    identityKey(body.token),
+    "authWriteUser",
+    "revalidate",
+  );
+  if (tokenLimited) return tokenLimited;
 
   try {
     let revalidated: string[];
@@ -77,21 +74,21 @@ export async function POST(req: NextRequest) {
       revalidatePath("/", "layout");
       revalidated = ["(all)"];
     } else {
-      const raw: string[] = [
+      const rawSlugs: string[] = [
         ...(body.slugs ?? []),
         ...(body.slug ? [body.slug] : []),
       ];
 
-      if (raw.length === 0) {
-        return NextResponse.json(
-          { error: "Provide slug, slugs, or all:true" },
-          { status: 400 },
-        );
+      const normalised: string[] = [];
+      for (const s of rawSlugs) {
+        const slug = normaliseSlug(s);
+        if (!slug) {
+          return validationError({ slug: "Invalid page slug." });
+        }
+        normalised.push(slug);
       }
 
-      revalidated = raw.map((s) => {
-        const slug = normalise(s);
-        // Frontend page paths — correct here since this IS the frontend server
+      revalidated = normalised.map((slug) => {
         revalidatePath(slug === "home" ? "/" : `/${slug}`);
         return slug;
       });
@@ -99,21 +96,20 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ revalidated: true, slugs: revalidated });
   } catch (err) {
-    return NextResponse.json(
-      { error: "Revalidation failed", detail: String(err) },
-      { status: 500 },
-    );
+    console.error("[revalidate] failed:", err);
+    return NextResponse.json({ error: "Revalidation failed" }, { status: 500 });
   }
 }
 
-// GET for local manual testing only
+// GET for local manual testing only.
+// security: query-string tokens are disabled in production (logs / Referer).
 export async function GET(req: NextRequest) {
   if (process.env.NODE_ENV === "production") {
     return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
   }
 
   const sp = req.nextUrl.searchParams;
-  const body: Body = { token: sp.get("token") ?? "" };
+  const body: Record<string, unknown> = { token: sp.get("token") ?? "" };
 
   if (sp.get("all") === "true") {
     body.all = true;

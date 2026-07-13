@@ -65,6 +65,8 @@ Apps → Update Apps List → search "Aptus Next.js Sync" → Install
 | `nextjs.base_url` | `https://your-production-site.com` (or `http://localhost:3000` for local dev) |
 | `nextjs.token` | Same value as `ODOO_REVALIDATE_TOKEN` in Next.js (generate with `openssl rand -hex 32`) |
 
+**Security:** treat `nextjs.token` / `ODOO_REVALIDATE_TOKEN` as a long-lived shared secret. Store it only in Odoo system parameters and server env vars (never in client JS, git, or query strings in production). Rotate with `openssl rand -hex 32` and update backend, frontend, and Odoo together.
+
 ---
 
 ## Option B — Server Action (zero-install, for staging/testing)

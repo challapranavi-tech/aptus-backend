@@ -9,9 +9,7 @@ export async function GET() {
     }
     return NextResponse.json(content);
   } catch (err) {
-    return NextResponse.json(
-      { error: "Failed to load case studies", detail: String(err) },
-      { status: 500 },
-    );
+    console.error("[cms/case-studies] failed:", err);
+    return NextResponse.json({ error: "Failed to load case studies" }, { status: 500 });
   }
 }

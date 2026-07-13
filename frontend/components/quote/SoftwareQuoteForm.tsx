@@ -46,7 +46,12 @@ export function SoftwareQuoteForm({
       let msg = "Something went wrong. Please try again.";
       try {
         const data = await res.json();
-        if (data.error) msg = data.error;
+        if (data.errors && typeof data.errors === "object") {
+          const parts = Object.values(data.errors as Record<string, string>);
+          if (parts.length) msg = parts.join(" ");
+        } else if (data.error) {
+          msg = data.error;
+        }
       } catch {
         /* keep default */
       }
