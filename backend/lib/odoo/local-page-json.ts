@@ -64,15 +64,27 @@ export function loadLocalPageSectionsJson(slug: string): string | null {
   return null;
 }
 
+/**
+ * Whether local disk JSON may be used when Odoo is not configured
+ * (prefer local over mock in development).
+ *
+ * security: false in production — when Odoo is unconfigured we must not
+ * accidentally serve disk drafts as the public CMS. Missing-Odoo-page
+ * fallback uses `buildLocalDevPage` directly (committed JSON only).
+ */
 export function isLocalPageJsonInDev(): boolean {
+  if (process.env.NODE_ENV === "production") return false;
   if (process.env.USE_LOCAL_PAGE_JSON === "false") return false;
   if (process.env.USE_LOCAL_PAGE_JSON === "true") return true;
-  return process.env.NODE_ENV !== "production";
+  return true;
 }
 
-/** Build a Page from on-disk JSON when Odoo has no website.page yet (dev only). */
+/**
+ * Build a Page from committed `content/odoo-json` when Odoo has no usable
+ * sections for the slug. Safe in production: callers must only use this after
+ * Odoo returned null/empty — never to override a non-empty Odoo page.
+ */
 export function buildLocalDevPage(slug: string): Page | null {
-  if (!isLocalPageJsonInDev()) return null;
   const raw = loadLocalPageSectionsJson(slug);
   if (!raw) return null;
 
@@ -126,4 +138,12 @@ export function listLocalDevPageSlugs(): string[] {
   addFromDir(JSON_ROOT);
 
   return [...slugs].filter((s) => s !== "home");
+}
+
+// ponytail: self-check — CCTV local JSON must map when Odoo has no page
+{
+  const page = buildLocalDevPage("cctv-camera");
+  if (!page?.sections?.length) {
+    throw new Error("buildLocalDevPage(cctv-camera): expected mapped sections");
+  }
 }

@@ -38,10 +38,24 @@ function getClient(): Promise<OdooClient> {
   return _clientPromise;
 }
 
+/**
+ * Drop the cached Odoo service client for this worker.
+ *
+ * security: call after rotating ODOO_API_KEY / ODOO_USER so a warm Node process
+ * cannot keep using the revoked key from an in-memory OdooRpcSession.
+ * There is no end-user logout — this is service-credential invalidation only.
+ */
+export function invalidateOdooClientSession(): void {
+  _clientPromise = null;
+}
+
 function debugLog(label: string, data: unknown) {
-  if (process.env.NEXT_PUBLIC_DEBUG_ODOO !== "true") return;
+  // security: server-only flag — never use NEXT_PUBLIC_* for debug that may
+  // dump CMS payloads (keeps the switch out of the browser bundle).
+  if (process.env.DEBUG_ODOO !== "true") return;
   if (process.env.NODE_ENV === "production") return;
   console.log(`\n[odoo:debug] ── ${label} ──`);
+  // Never log credentials; mapped page objects do not include API keys.
   console.log(JSON.stringify(data, null, 2));
 }
 
@@ -78,6 +92,7 @@ export async function getHomePage(): Promise<Page | null> {
 }
 
 export async function getPageBySlug(slug: string): Promise<Page | null> {
+  // security: hidden product slugs are denied at the data layer (object id = slug).
   if (isAutodeskHiddenSlug(slug)) return null;
 
   if (!isOdooConfigured()) {
@@ -100,7 +115,7 @@ export async function getPageBySlug(slug: string): Promise<Page | null> {
       return page;
     }
 
-    // Odoo page exists but has no mapped sections yet (not seeded) → local JSON fallback
+    // Odoo missing / empty / unpublished → committed local JSON (e.g. unseeded ELV pages)
     const local = buildLocalDevPage(slug);
     if (local) {
       if (process.env.NODE_ENV !== "production") {
@@ -115,7 +130,7 @@ export async function getPageBySlug(slug: string): Promise<Page | null> {
     return page;
   } catch (err) {
     warnOdoo("getPageBySlug", err);
-    // Odoo error → local JSON
+    // Odoo error → committed local JSON
     const local = buildLocalDevPage(slug);
     if (local) return local;
     return null;
