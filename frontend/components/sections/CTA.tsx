@@ -140,7 +140,7 @@ function CtaForm({ data }: { data: CTAData }) {
               <HeardFromSelect variant="career" className={fc.input} />
             </label>
           </div>
-          <div className="mt-8 text-center">
+          <div className="mt-8 text-start">
             <button type="submit" className={fc.submit}>
               {data.submitLabel ?? "Submit Now"}
             </button>
@@ -185,7 +185,7 @@ function CtaForm({ data }: { data: CTAData }) {
           How did you hear about us? *
           <HeardFromSelect className={fc.input} />
         </label>
-        <div className="mt-6 text-center">
+        <div className="mt-6 text-start">
           <button type="submit" className={fc.submit}>
             {data.submitLabel ?? "Send Message"}
           </button>
@@ -376,7 +376,7 @@ export function CTA({ data }: CTAProps) {
             <p
               data-cta-animate
               className={cn(
-                "relative mx-auto mt-4 max-w-xl",
+                "relative mx-auto mt-4 max-w-xl text-start",
                 isContactPage
                   ? "aptus-contact-form-subtitle"
                   : isSoftwareMid

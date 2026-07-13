@@ -13,7 +13,7 @@ const FLIP_BACK_IMAGE = resolveCmsImageSrc(
 );
 
 function CardIcon({ name }: { name?: string }) {
-  const className = "mb-4 h-10 w-10 text-brand-green";
+  const className = "mb-2 h-9 w-9 text-brand-green";
   if (name === "cogs") {
     return (
       <svg className={className} viewBox="0 0 640 512" fill="currentColor" aria-hidden="true">
@@ -69,14 +69,14 @@ export function FlipCards({ data }: FlipCardsProps) {
   const items = data.items ?? [];
 
   return (
-    <section className="section-padding bg-white" data-section="flip-cards">
+    <section className="bg-white py-3 sm:py-4" data-section="flip-cards">
       <Container>
-        <div className="aptus-tint-panel my-4 p-4 sm:p-6">
+        <div className="aptus-tint-panel my-0 p-3 sm:p-4">
           {spotlight && (
             <FlipBox title={spotlight.title} icon={spotlight.icon ?? "info"} />
           )}
           {items.length > 0 && (
-            <div className="mt-8 grid gap-6 md:grid-cols-2">
+            <div className="mt-3 grid gap-3 md:grid-cols-2">
               {items.map((item) => (
                 <FlipBox
                   key={item.id}

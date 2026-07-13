@@ -53,16 +53,16 @@ function CertCard({
 /** ISO Certifications page — post-3375 layout. */
 export function IsoPanel({ data }: IsoPanelProps) {
   return (
-    <section className="bg-white pb-16 pt-8" data-section="iso-panel">
+    <section className="bg-white pb-10 pt-6" data-section="iso-panel">
       <Container>
         {data.title && <h1 className="aptus-iso-hero-title">{data.title}</h1>}
         {data.subtitle && <p className="aptus-iso-subtitle">{data.subtitle}</p>}
 
         {(data.introHeading || data.introParagraphs?.length) && (
-          <div className="mt-8">
+          <div className="mt-6">
             {data.introHeading && <h2 className="aptus-iso-intro-heading">{data.introHeading}</h2>}
             {data.introParagraphs?.map((p, i) => (
-              <p key={i} className={cn("aptus-iso-intro-text", i === 0 ? "mt-4" : "mt-3")}>
+              <p key={i} className={cn("aptus-iso-intro-text", i === 0 ? "mt-3" : "mt-2")}>
                 {p}
               </p>
             ))}
@@ -70,7 +70,7 @@ export function IsoPanel({ data }: IsoPanelProps) {
         )}
 
         {(data.coreHeading || data.coreItems?.length) && (
-          <div className="mt-10">
+          <div className="mt-8">
             {data.coreHeading && <h2 className="aptus-iso-core-heading">{data.coreHeading}</h2>}
             {data.coreItems?.map((item, i) => (
               <p key={i} className="aptus-iso-core-item">
@@ -81,7 +81,7 @@ export function IsoPanel({ data }: IsoPanelProps) {
         )}
 
         {data.certificates.length > 0 && (
-          <div className="aptus-iso-cert-grid mt-12">
+          <div className="aptus-iso-cert-grid mt-8">
             {data.certificates.map((cert, i) => (
               <CertCard key={i} {...cert} />
             ))}
@@ -89,7 +89,7 @@ export function IsoPanel({ data }: IsoPanelProps) {
         )}
 
         {data.footerParagraphs?.map((p, i) => (
-          <p key={i} className={cn("aptus-iso-footer-text", i === 0 ? "mt-12" : "mt-4")}>
+          <p key={i} className={cn("aptus-iso-footer-text", i === 0 ? "mt-8" : "mt-3")}>
             {p}
           </p>
         ))}

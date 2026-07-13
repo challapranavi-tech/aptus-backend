@@ -62,7 +62,7 @@ export function RichText({ data }: RichTextProps) {
   return (
     <section
       className={cn(
-        "section-padding",
+        "py-3 sm:py-4",
         data.background === "light" ? "bg-brand-light" : "bg-white",
       )}
       data-section="rich-text"
@@ -70,7 +70,7 @@ export function RichText({ data }: RichTextProps) {
       <Container>
         <div
           className={cn(
-            hasMedia && !below && "grid items-center gap-10 lg:grid-cols-2 lg:gap-16",
+            hasMedia && !below && "grid items-center gap-4 lg:grid-cols-2 lg:gap-5",
           )}
         >
           {hasMedia && !below && data.media && (
@@ -82,7 +82,7 @@ export function RichText({ data }: RichTextProps) {
           <div className={cn(hasMedia && !below && (imageRight ? "lg:order-1" : "lg:order-2"))}>
             {data.eyebrow && <p className="eyebrow mb-3">{data.eyebrow}</p>}
             {(data.heading || data.headingAccent) && (
-              <h2 className="leading-tight text-brand-navy" style={{ fontSize: 'var(--text-4xl)', fontWeight: 600 }}>
+              <h2 className="text-center leading-tight text-brand-navy" style={{ fontSize: 'var(--text-4xl)', fontWeight: 600 }}>
                 {data.heading}
                 {data.heading && data.headingAccent && " "}
                 {data.headingAccent && (
@@ -91,19 +91,19 @@ export function RichText({ data }: RichTextProps) {
               </h2>
             )}
             {(data.heading || data.headingAccent) && (
-              <span className="rich-text-divider mt-5 mb-2 block h-1 w-16 rounded-full bg-brand-blue" />
+              <span className="rich-text-divider mx-auto mt-4 mb-2 block h-1 w-16 rounded-full bg-brand-blue" />
             )}
 
             {data.paragraphs?.map((p, i) => (
-              <p key={i} className="mt-4 leading-relaxed text-muted-foreground" style={{ fontSize: 'var(--text-base)' }}>
+              <p key={i} className="mt-3 text-start leading-relaxed text-black" style={{ fontSize: 'var(--text-base)' }}>
                 {p}
               </p>
             ))}
 
             {data.bullets && data.bullets.length > 0 && (
-              <ul className="mt-6 space-y-3">
+              <ul className="mt-4 space-y-2">
                 {data.bullets.map((b, i) => (
-                  <li key={i} className="flex items-start gap-3 text-muted-foreground" style={{ fontSize: 'var(--text-base)' }}>
+                  <li key={i} className="flex items-start gap-3 text-black" style={{ fontSize: 'var(--text-base)' }}>
                     <svg
                       className="mt-1 h-5 w-5 shrink-0 text-brand-green"
                       viewBox="0 0 24 24"

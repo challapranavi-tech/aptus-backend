@@ -649,7 +649,7 @@ export function Features({ data }: FeaturesProps) {
                   item.description && <p className="aptus-software-product-body">{item.description}</p>
                 )}
                 {(item.action || item.href) && (
-                  <div className="mt-4 flex flex-col gap-2">
+                  <div className="mt-4 flex flex-col items-center gap-2">
                     {item.action && (
                       <Link href={item.action.href} className="aptus-software-btn aptus-software-btn-blue">
                         {item.action.label}
@@ -816,7 +816,7 @@ export function Features({ data }: FeaturesProps) {
               </h2>
             )}
             {data.subheading && (
-              <p className="mt-4 text-muted-foreground">{data.subheading}</p>
+              <p className="mt-4 text-start text-muted-foreground">{data.subheading}</p>
             )}
             <span className="mx-auto mt-4 block h-1 w-14 rounded-full bg-brand-orange" />
           </div>
@@ -853,7 +853,10 @@ export function Features({ data }: FeaturesProps) {
                 )}
                 {item.title && (
                   <h3
-                    className={cn(isPillars ? "text-brand-blue" : "text-brand-navy")}
+                    className={cn(
+                      "text-center",
+                      isPillars ? "text-brand-blue" : "text-brand-navy",
+                    )}
                     style={{ fontSize: 'var(--text-base)', fontWeight: 600 }}
                   >
                     {item.title}
@@ -861,7 +864,10 @@ export function Features({ data }: FeaturesProps) {
                 )}
                 {!isPillars && item.description && (
                   <p
-                    className={cn("mt-2 leading-relaxed", isPillars ? "text-[#475569]" : "text-muted-foreground")}
+                    className={cn(
+                      "mt-2 text-start leading-relaxed",
+                      isPillars ? "text-[#475569]" : "text-muted-foreground",
+                    )}
                     style={{ fontSize: 'var(--text-sm)' }}
                   >
                     {item.description}

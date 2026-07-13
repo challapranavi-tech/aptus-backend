@@ -17,7 +17,7 @@
   background-size: cover;
   color: #fff;
   padding: 4rem 0 3rem;
-  text-align: center;
+  text-align: start;
 }
 
 .aptus-case-studies-page .aptus-cs-hero h1 {
@@ -27,6 +27,7 @@
   line-height: 1.2;
   margin: 0 auto;
   max-width: 900px;
+  text-align: center;
 }
 
 .aptus-case-studies-page .aptus-cs-hero p {
@@ -35,6 +36,7 @@
   line-height: 1.6;
   margin: 1rem auto 0;
   max-width: 760px;
+  text-align: start;
 }
 
 /* ── Section rhythm ── */
@@ -91,6 +93,7 @@
   font-size: var(--text-base);
   font-weight: 600;
   padding: 0.75rem 0.75rem 0.35rem;
+  text-align: center;
 }
 
 .aptus-case-studies-page .aptus-cs-card__title a {
@@ -124,7 +127,7 @@
   font-size: var(--text-sm);
   font-weight: 500;
   padding: 0.625rem 1rem;
-  text-align: center;
+  text-align: start;
   text-decoration: none;
   transition: opacity 0.2s ease;
   width: 100%;
@@ -141,7 +144,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   margin: 5px;
   padding: 1.5rem 1rem;
-  text-align: center;
+  text-align: start;
 }
 
 .aptus-case-studies-page .aptus-cs-icon {
@@ -156,6 +159,7 @@
   font-size: var(--text-base);
   font-weight: 600;
   margin: 0;
+  text-align: center;
 }
 
 .aptus-case-studies-page .aptus-cs-icon-card p {
@@ -163,6 +167,7 @@
   font-size: var(--text-sm);
   line-height: 1.5;
   margin: 0.75rem 0 0;
+  text-align: start;
 }
 
 .aptus-case-studies-page .aptus-cs-closing {
@@ -171,7 +176,7 @@
   line-height: 1.6;
   margin: 2.5rem auto 0;
   max-width: 800px;
-  text-align: center;
+  text-align: start;
 }
 
 /* ── Transform CTA band (§3393b603) ── */
@@ -186,6 +191,7 @@
   font-size: var(--text-3xl);
   font-weight: 600;
   margin: 0;
+  text-align: center;
 }
 
 .aptus-case-studies-page .aptus-cs-transform p {
@@ -194,6 +200,7 @@
   line-height: 1.5;
   margin: 1rem auto 0;
   max-width: 640px;
+  text-align: start;
 }
 
 .aptus-case-studies-page .aptus-cs-transform .aptus-cs-btn {
@@ -211,7 +218,7 @@
   flex-direction: column;
   margin: 5px;
   padding: 2rem 1rem 1.5rem;
-  text-align: center;
+  text-align: start;
 }
 
 .aptus-case-studies-page .aptus-cs-testimonial-card blockquote {
@@ -240,7 +247,7 @@
   font-size: var(--text-base);
   line-height: 1.5;
   margin: -1.5rem 0 2rem;
-  text-align: center;
+  text-align: start;
 }
 
 /* ── Partners (§7090b758) ── */

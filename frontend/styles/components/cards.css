@@ -71,6 +71,7 @@
   font-size: var(--text-base);
   font-weight: 700;
   color: var(--color-brand-blue, #1d4ed8);
+  text-align: center;
 }
 
 .aptus-flip-box__front-desc {
@@ -78,6 +79,9 @@
   font-size: var(--text-sm);
   line-height: 1.5;
   color: var(--color-muted-foreground, #64748b);
+  text-align: start;
+  align-self: stretch;
+  width: 100%;
 }
 
 .aptus-flip-box__back {

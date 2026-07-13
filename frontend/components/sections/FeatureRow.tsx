@@ -72,7 +72,7 @@ export function FeatureRow({ data }: FeatureRowProps) {
       )}
     >
       {data.eyebrow && (
-        <p data-feature-animate className="section-eyebrow mb-3">
+        <p data-feature-animate className="section-eyebrow mb-3 text-center">
           {data.eyebrow}
         </p>
       )}
@@ -81,7 +81,7 @@ export function FeatureRow({ data }: FeatureRowProps) {
           {data.headingAsH1 ? (
             <h1
               data-feature-animate
-              className="leading-snug text-brand-blue"
+              className="text-center leading-snug text-brand-blue"
               style={{ fontSize: 'var(--text-5xl)', fontWeight: 600 }}
             >
               {data.heading}
@@ -96,7 +96,7 @@ export function FeatureRow({ data }: FeatureRowProps) {
           ) : (
             <h2
               data-feature-animate
-              className={cn("leading-snug", isPanel ? "text-black" : "text-brand-navy")}
+              className={cn("text-center leading-snug", isPanel ? "text-black" : "text-brand-navy")}
               style={{ fontSize: isPanel ? 'var(--text-xl)' : 'var(--text-4xl)', fontWeight: 600 }}
             >
               {data.heading}
@@ -116,10 +116,9 @@ export function FeatureRow({ data }: FeatureRowProps) {
           key={i}
           data-feature-animate
           className={cn(
-            "leading-[1.8]",
+            "leading-[1.8] text-start",
             textColor,
-            i === 0 ? "mt-0" : "mt-5",
-            !data.heading && i === 0 && "mt-0",
+            i === 0 ? (data.heading || data.headingAccent ? "mt-3" : "mt-0") : "mt-4",
           )}
           style={textStyle}
         >
@@ -141,7 +140,7 @@ export function FeatureRow({ data }: FeatureRowProps) {
             <li
               key={i}
               data-feature-animate
-              className="flex items-start gap-3 text-muted-foreground"
+              className="flex items-start gap-3 text-black"
               style={{ fontSize: 'var(--text-base)' }}
             >
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-green" />
@@ -151,7 +150,7 @@ export function FeatureRow({ data }: FeatureRowProps) {
         </ul>
       )}
       {data.action && (
-        <div data-feature-animate className="mt-7">
+        <div data-feature-animate className="mt-5 text-center">
           <Link href={data.action.href} className="btn-section">
             {data.action.label}
             <svg
@@ -179,7 +178,7 @@ export function FeatureRow({ data }: FeatureRowProps) {
         ref={imageRef}
         className={cn(
           "relative",
-          imageRight ? "lg:order-2" : "lg:pr-8",
+          imageRight ? "lg:order-2" : "lg:pr-3",
           !imageRight && "lg:order-1",
         )}
       >
@@ -205,7 +204,7 @@ export function FeatureRow({ data }: FeatureRowProps) {
       ref={sectionRef}
       className={cn(
         "bg-white",
-        isPanel ? "py-0" : "section-padding",
+        isPanel ? "py-0" : "py-3 sm:py-4",
       )}
       data-section="feature-row"
       data-variant={data.variant ?? "default"}
@@ -213,9 +212,9 @@ export function FeatureRow({ data }: FeatureRowProps) {
       <Container>
         <div
           className={cn(
-            isBoxed && "aptus-tint-panel my-4 mb-8 p-4",
-            isPanel && "aptus-tint-panel my-4 mb-8 p-4",
-            data.media && !imageBelow && "grid items-center gap-10 lg:grid-cols-2 lg:gap-12",
+            isBoxed && "aptus-tint-panel my-1 mb-2 p-3 sm:p-4",
+            isPanel && "aptus-tint-panel my-1 mb-2 p-3 sm:p-4",
+            data.media && !imageBelow && "grid items-center gap-4 lg:grid-cols-2 lg:gap-5",
           )}
         >
           {imageBlock}

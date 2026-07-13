@@ -32,7 +32,7 @@ html {
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   margin: 0 auto;
   max-width: 1300px;
-  padding-inline: var(--content-pad-x, clamp(1rem, 4vw, 1.5rem));
+  padding-inline: var(--content-pad-x, clamp(0.75rem, 2vw, 1rem));
   width: 100%;
 }
 
@@ -124,7 +124,7 @@ html {
   margin: 0 auto;
   max-width: 1300px;
   overflow: visible !important;
-  padding: 10px var(--content-pad-x, clamp(1rem, 4vw, 1.5rem));
+  padding: 10px var(--content-pad-x, clamp(0.75rem, 2vw, 1rem));
   width: 100%;
 }
 

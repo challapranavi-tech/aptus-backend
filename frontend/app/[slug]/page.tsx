@@ -76,6 +76,7 @@ export default async function DynamicPage({ params }: PageProps) {
           elvScope?.wrapperClass,
           (softwareScope?.family === "autodesk" || softwareScope?.isInner) && "aptus-autodesk-page",
           softwareScope?.isInner && `aptus-autodesk-page--${normalized}`,
+          normalized === "our-story" && "page-our-story",
         )}
       >
         {usesStackedSoftwareLayout(normalized) ? (

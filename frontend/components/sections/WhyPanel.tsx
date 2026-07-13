@@ -59,7 +59,7 @@ export function WhyPanel({ data }: WhyPanelProps) {
         ))}
 
         {(data.privacyHeading || data.privacyMedia) && (
-          <div className="mt-8 text-center">
+          <div className="mt-8 text-start">
             {data.privacyHeading && (
               <h3 className="aptus-why-privacy-title">{data.privacyHeading}</h3>
             )}

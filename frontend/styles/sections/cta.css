@@ -2,7 +2,7 @@
   background-color: var(--primary-color);
   color: #fff;
   padding-block: var(--section-padding);
-  text-align: center;
+  text-align: left;
 }
 
 .aptus-cta__title {

@@ -81,9 +81,24 @@ export async function getHomePage(): Promise<Page | null> {
     const client = await getClient();
     const page = await client.getPageBySlug("home");
     debugLog("Mapped Page [home]", page);
-    if (page) {
+    if (page && page.sections.length > 0) {
       debugLog("Section Structure [home]", page.sections.map((s) => ({ id: s.id, type: s.type, order: s.order })));
+      return page;
     }
+
+    // ponytail: staging home (website 7 / id 226) often has JSON but is unpublished.
+    // Dev-only draft read so localhost can preview; production stays published-only.
+    if (process.env.NODE_ENV !== "production") {
+      const draft = await client.loadDraftHomePage();
+      if (draft && draft.sections.length > 0) {
+        console.warn(
+          "[cms] Using unpublished Odoo home for local preview — publish website.page `/` in Odoo to fix live",
+        );
+        debugLog("Mapped Page [home draft]", draft);
+        return draft;
+      }
+    }
+
     return page;
   } catch (err) {
     warnOdoo("getHomePage", err);

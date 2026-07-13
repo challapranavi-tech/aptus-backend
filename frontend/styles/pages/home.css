@@ -10,9 +10,17 @@
 
   /* Feature row alternating layout */
   .page-home .home-feature-row {
-    padding: var(--section-padding) 0;
+    padding: 0.75rem 0;
     max-width: var(--content-max);
     margin-inline: auto;
+  }
+
+  .page-home [data-section="feature-row"] {
+    padding-block: 0.75rem;
+  }
+
+  .page-home [data-section="feature-row"] + [data-section="feature-row"] {
+    padding-top: 0.35rem;
   }
 
   .page-home .home-feature-row__eyebrow {
@@ -38,7 +46,7 @@
 
   /* Services flip-box grid */
   .page-home .home-services {
-    padding: var(--section-padding) 0;
+    padding: 1.5rem 0;
     max-width: var(--content-max);
     margin-inline: auto;
   }
@@ -58,7 +66,7 @@
   }
 
   .page-home .home-services__subtitle {
-    text-align: center;
+    text-align: start;
     font-size: var(--text-xl);
     color: var(--color-text);
   }

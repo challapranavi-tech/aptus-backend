@@ -237,6 +237,31 @@ export class OdooClient {
   }
 
   /**
+   * Local/staging preview only: load website home (`/`) even when unpublished.
+   * security: never call from production paths — drafts must stay 404 on live.
+   */
+  async loadDraftHomePage(): Promise<Page | null> {
+    if (process.env.NODE_ENV === "production") return null;
+
+    const rawPages = await searchRead<OdooRawPage>(
+      this.session,
+      "website.page",
+      [
+        ["website_id", "=", this.websiteId],
+        ["url", "=", "/"],
+      ],
+      { fields: PAGE_FIELDS as string[], limit: 1 },
+    );
+
+    const raw = rawPages[0];
+    if (!raw) return null;
+
+    const viewId = Array.isArray(raw.view_id) ? raw.view_id[0] : null;
+    const view = viewId ? await this.fetchView(viewId) : null;
+    return mapOdooPage(raw, view, this.session.url);
+  }
+
+  /**
    * Returns slugs of all published pages (used by generateStaticParams).
    */
   async getAllSlugs(): Promise<string[]> {

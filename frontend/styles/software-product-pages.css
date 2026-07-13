@@ -211,7 +211,7 @@
 .aptus-software-page--construction-cloud [data-variant="alliances-grid"] .aptus-alliances-heading {
   font-size: var(--text-4xl);
   font-weight: 600;
-  text-align: center;
+  text-align: start;
 }
 
 .aptus-software-page--construction-cloud [data-section="logo-grid"][data-variant="alliances-grid"] {
@@ -572,7 +572,7 @@
 }
 
 .aptus-software-page--computers-structures .aptus-software-page-banner__inner {
-  text-align: center;
+  text-align: start;
 }
 
 .aptus-software-page--computers-structures .aptus-software-page-banner__title {
@@ -628,7 +628,7 @@
 .aptus-software-page--computers-structures [data-variant="alliances-grid"] .aptus-alliances-heading {
   font-size: var(--text-4xl);
   font-weight: 600;
-  text-align: center;
+  text-align: start;
 }
 
 .aptus-software-page--computers-structures [data-section="logo-grid"][data-variant="alliances-grid"] {
@@ -954,7 +954,7 @@
 .aptus-software-page--prokon [data-variant="alliances-grid"] .aptus-alliances-heading {
   font-size: var(--text-2xl);
   font-weight: 600;
-  text-align: center;
+  text-align: start;
 }
 
 .aptus-software-page--prokon [data-section="logo-grid"][data-variant="alliances-grid"] {
@@ -1103,7 +1103,7 @@
 .aptus-software-page--fortinet [data-variant="alliances-grid"] .aptus-alliances-heading {
   font-size: var(--text-4xl);
   font-weight: 600;
-  text-align: center;
+  text-align: start;
 }
 
 .aptus-software-page--fortinet [data-section="logo-grid"][data-variant="alliances-grid"] {
@@ -1253,7 +1253,7 @@
 .aptus-software-page--sophos [data-variant="alliances-grid"] .aptus-alliances-heading {
   font-size: var(--text-4xl);
   font-weight: 600;
-  text-align: center;
+  text-align: start;
 }
 
 .aptus-software-page--sophos [data-section="logo-grid"][data-variant="alliances-grid"] {
@@ -1403,7 +1403,7 @@
 .aptus-software-page--sonicwall-next-gen-firewall [data-variant="alliances-grid"] .aptus-alliances-heading {
   font-size: var(--text-4xl);
   font-weight: 600;
-  text-align: center;
+  text-align: start;
 }
 
 .aptus-software-page--sonicwall-next-gen-firewall [data-section="logo-grid"][data-variant="alliances-grid"] {
@@ -1551,7 +1551,7 @@
 .aptus-software-page--kaspersky [data-variant="alliances-grid"] .aptus-alliances-heading {
   font-size: var(--text-4xl);
   font-weight: 600;
-  text-align: center;
+  text-align: start;
 }
 
 .aptus-software-page--kaspersky [data-section="logo-grid"][data-variant="alliances-grid"] {
@@ -1695,7 +1695,7 @@
 .aptus-software-page--palo-alto [data-variant="alliances-grid"] .aptus-alliances-heading {
   font-size: var(--text-4xl);
   font-weight: 600;
-  text-align: center;
+  text-align: start;
 }
 
 .aptus-software-page--palo-alto [data-section="logo-grid"][data-variant="alliances-grid"] {
@@ -1781,7 +1781,7 @@
 .aptus-software-page--antivirus-and-data-security [data-variant="alliances-grid"] .aptus-alliances-heading {
   font-size: var(--text-4xl);
   font-weight: 600;
-  text-align: center;
+  text-align: start;
 }
 
 .aptus-software-page--antivirus-and-data-security [data-section="logo-grid"][data-variant="alliances-grid"] {
@@ -1941,7 +1941,7 @@
 .aptus-software-page--infowater-pro [data-variant="alliances-grid"] .aptus-alliances-heading {
   font-size: var(--text-4xl);
   font-weight: 600;
-  text-align: center;
+  text-align: start;
 }
 
 .aptus-software-page--infowater-pro [data-section="logo-grid"][data-variant="alliances-grid"] {
@@ -2101,7 +2101,7 @@
 .aptus-software-page--infodrainage [data-variant="alliances-grid"] .aptus-alliances-heading {
   font-size: var(--text-4xl);
   font-weight: 600;
-  text-align: center;
+  text-align: start;
 }
 
 .aptus-software-page--infodrainage [data-section="logo-grid"][data-variant="alliances-grid"] {
@@ -2261,7 +2261,7 @@
 .aptus-software-page--infoworks-icm [data-variant="alliances-grid"] .aptus-alliances-heading {
   font-size: var(--text-4xl);
   font-weight: 600;
-  text-align: center;
+  text-align: start;
 }
 
 .aptus-software-page--infoworks-icm [data-section="logo-grid"][data-variant="alliances-grid"] {
@@ -2421,7 +2421,7 @@
 .aptus-software-page--infoworks-ws-pro [data-variant="alliances-grid"] .aptus-alliances-heading {
   font-size: var(--text-4xl);
   font-weight: 600;
-  text-align: center;
+  text-align: start;
 }
 
 .aptus-software-page--infoworks-ws-pro [data-section="logo-grid"][data-variant="alliances-grid"] {

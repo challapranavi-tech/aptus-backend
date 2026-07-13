@@ -149,7 +149,7 @@ export function SoftwareQuoteForm({
         </p>
       )}
 
-      <div className="mt-5">
+      <div className="mt-5 text-center">
         <button type="submit" className="aptus-form-submit" disabled={status === "submitting"}>
           {status === "submitting" ? "Submitting…" : submitLabel}
         </button>

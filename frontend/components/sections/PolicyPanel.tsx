@@ -50,7 +50,7 @@ export function PolicyPanel({ data }: PolicyPanelProps) {
           {data.modusTitle && <h2 className="aptus-policy-modus-title">{data.modusTitle}</h2>}
 
           {data.infographic && (
-            <div className="mt-4 flex justify-center">
+            <div className="mt-4 flex justify-start">
               <CmsImage
                 src={data.infographic.src}
                 alt={data.infographic.alt}
@@ -75,7 +75,7 @@ export function PolicyPanel({ data }: PolicyPanelProps) {
           ))}
 
           {(data.privacyHeading || data.privacyParagraphs?.length) && (
-            <div className="mt-8 text-center">
+            <div className="mt-8 text-start">
               {data.privacyHeading && (
                 <h3 className="aptus-policy-privacy-title">{data.privacyHeading}</h3>
               )}

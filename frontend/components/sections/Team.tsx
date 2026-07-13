@@ -67,7 +67,7 @@ export function Team({ data }: TeamProps) {
               <h2 className="text-brand-navy" style={{ fontSize: 'var(--text-4xl)', fontWeight: 600 }}>{data.heading}</h2>
             )}
             {data.subheading && (
-              <p className="mx-auto mt-2 max-w-2xl text-muted-foreground" style={{ fontSize: 'var(--text-base)' }}>
+              <p className="mx-auto mt-2 max-w-2xl text-start text-muted-foreground" style={{ fontSize: 'var(--text-base)' }}>
                 {data.subheading}
               </p>
             )}
@@ -95,7 +95,7 @@ export function Team({ data }: TeamProps) {
                       />
                     </div>
                   )}
-                  <div className="flex flex-1 flex-col justify-center p-6 text-center sm:text-left">
+                  <div className="flex flex-1 flex-col justify-center p-6 text-start">
                     {m.name && (
                       <h3 className="text-brand-navy" style={{ fontSize: 'var(--text-xl)', fontWeight: 600 }}>{m.name}</h3>
                     )}

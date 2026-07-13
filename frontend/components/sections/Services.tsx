@@ -164,16 +164,16 @@ export function Services({ data }: ServicesProps) {
               ) : (
                 <article
                   key={item.id}
-                  className="service-card flex flex-col items-center rounded-2xl border border-border bg-white px-4 py-6 text-center shadow-[var(--shadow-card)] transition-shadow hover:shadow-[var(--shadow-md)] sm:px-6 sm:py-8"
+                  className="service-card flex flex-col items-center rounded-2xl border border-border bg-white px-4 py-6 shadow-[var(--shadow-card)] transition-shadow hover:shadow-[var(--shadow-md)] sm:px-6 sm:py-8"
                 >
                   <div className="mb-5 flex h-14 w-14 items-center justify-center text-brand-green">
                     <ServiceFlipIcon name={item.icon} />
                   </div>
                   {item.title && (
-                    <h3 className="text-brand-blue" style={{ fontSize: 'var(--text-base)', fontWeight: 700 }}>{item.title}</h3>
+                    <h3 className="text-center text-brand-blue" style={{ fontSize: 'var(--text-base)', fontWeight: 700 }}>{item.title}</h3>
                   )}
                   {item.description && (
-                    <p className="mt-3 leading-relaxed text-muted-foreground" style={{ fontSize: 'var(--text-sm)' }}>
+                    <p className="mt-3 w-full text-start leading-relaxed text-muted-foreground" style={{ fontSize: 'var(--text-sm)' }}>
                       {item.description}
                     </p>
                   )}

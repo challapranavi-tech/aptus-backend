@@ -37,6 +37,106 @@
 @import "./elv-product-pages.css";
 @import "./elv-pages.css";
 
+/*
+ * Content alignment policy (site-wide):
+ *   - Headings, section titles, eyebrows, icons, buttons → center
+ *   - Body copy / descriptions / paragraphs → left (start)
+ * Does not change layout, spacing, or responsiveness.
+ * ponytail: no broad `p { start }` — that fought Tailwind `.text-center` on attributions.
+ */
+main [data-section] {
+  text-align: start;
+}
+
+main [data-section] :is(h1, h2, h3, h4, h5, h6),
+main [data-section] .eyebrow,
+main [data-section] .section-eyebrow,
+main [data-section] .aptus-page-heading,
+main [data-section] .aptus-section-heading,
+main [data-section] .aptus-software-section-title,
+main [data-section] .aptus-software-mid-title,
+main [data-section] .aptus-cta-light-heading,
+main [data-section] .aptus-software-form-heading,
+main [data-section] .aptus-contact-form-title,
+main [data-section] .aptus-iso-hero-title,
+main [data-section] .aptus-iso-intro-heading,
+main [data-section] .aptus-iso-core-heading,
+main [data-section] .aptus-iso-cert-heading,
+main [data-section] .aptus-alliances-heading,
+main [data-section] .aptus-team-section-title,
+main [data-section] .aptus-team-member-name,
+main [data-section] .aptus-team-watermark,
+main [data-section] .aptus-policy-modus-title,
+main [data-section] .aptus-policy-section-title,
+main [data-section] .aptus-policy-privacy-title,
+main [data-section] .aptus-why-privacy-title,
+main [data-section] .aptus-career-hero-title,
+main [data-section] .aptus-software-value-title,
+main [data-section] .aptus-software-icon-card__title,
+main [data-section] .aptus-software-product-title,
+main [data-section] .home-services__eyebrow,
+main [data-section] .home-services__title,
+main [data-section] .home-feature-row__eyebrow,
+main [data-section] .home-feature-row__title,
+main [data-section] .btn-section,
+main [data-section] .aptus-software-btn,
+main [data-section] .aptus-iso-download-btn,
+main [data-section] .aptus-form-submit,
+.aptus-software-page :is(h1, h2, h3, h4, h5, h6),
+.aptus-software-page .aptus-software-section-title,
+.aptus-software-page .aptus-software-mid-title,
+.aptus-software-page .aptus-software-value-title,
+.aptus-software-page .aptus-software-icon-card__title,
+.aptus-software-page .aptus-software-form-heading,
+.aptus-software-page .aptus-software-btn {
+  text-align: center;
+}
+
+/* Body / leads beat parent `.text-center` wrappers */
+main [data-section] .text-start,
+main [data-section] .aptus-iso-intro-text,
+main [data-section] .aptus-iso-subtitle,
+main [data-section] .aptus-iso-core-item,
+main [data-section] .aptus-iso-footer-text,
+main [data-section] .aptus-flip-box__front-desc,
+main [data-section] .aptus-policy-privacy-text,
+main [data-section] .aptus-policy-row-text,
+main [data-section] .aptus-contact-form-subtitle,
+main [data-section] .aptus-software-value-body,
+main [data-section] .aptus-software-icon-card__body,
+main [data-section] .aptus-software-product-body,
+main [data-section] .aptus-software-section-lead,
+main [data-section] .aptus-software-value-lead,
+main [data-section] .aptus-software-mid-lead,
+main [data-section] .aptus-software-form-lead,
+main [data-section] .home-services__subtitle,
+main [data-section] .home-feature-row__body,
+main [data-section] .aptus-team-member-bio,
+main [data-section] .aptus-team-member-role,
+main [data-section] .aptus-hero__tagline,
+.aptus-software-page .aptus-software-value-body,
+.aptus-software-page .aptus-software-icon-card__body,
+.aptus-software-page .aptus-software-section-lead,
+.aptus-software-page .aptus-software-mid-lead,
+.aptus-software-page .aptus-software-form-lead {
+  text-align: start;
+}
+
+/* Icons stay visually centered in their slot */
+main [data-section] .aptus-software-value-icon,
+main [data-section] .aptus-software-icon-card__icon,
+.aptus-software-page .aptus-software-value-icon,
+.aptus-software-page .aptus-software-icon-card__icon {
+  display: block;
+  margin-inline: auto;
+}
+
+/* Decorative title underlines stay centered under titles */
+main [data-section] .mx-auto.mt-4.block.h-1,
+main [data-section] span.mx-auto.mt-4.block {
+  margin-inline: auto;
+}
+
 /* Shared media / table safety net across breakpoints */
 img,
 video {

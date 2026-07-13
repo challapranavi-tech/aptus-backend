@@ -15,7 +15,7 @@ export function LogoGrid({ data }: LogoGridProps) {
   return (
     <section
       className={cn(
-        isAlliances || isAlliancesGrid ? "aptus-software-section bg-white" : "section-padding bg-brand-light",
+        isAlliances || isAlliancesGrid ? "bg-white py-4 sm:py-5" : "section-padding bg-brand-light",
       )}
       data-section="logo-grid"
       data-variant={data.variant ?? "default"}

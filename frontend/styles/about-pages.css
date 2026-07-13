@@ -87,7 +87,7 @@
     font-size: var(--text-4xl);
     font-weight: 600;
     line-height: 1.2;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.25rem;
     text-align: center;
   }
 
@@ -174,11 +174,15 @@
     background-color: var(--color-brand-blue);
     border-radius: 20px;
     color: #fff;
+    display: block;
     font-size: var(--text-lg);
     font-weight: 500;
+    margin-inline: auto;
     padding: 0.875rem 1.5rem;
+    text-align: center;
     transition: background-color 0.2s ease;
-    width: 100%;
+    width: auto;
+    min-width: min(100%, 16rem);
   }
 
   .aptus-form-submit:hover {
@@ -277,13 +281,13 @@
 
   /* Our Story flip boxes */
   .aptus-flip-box {
-    min-height: 200px;
+    min-height: 160px;
     perspective: 1200px;
   }
 
   .aptus-flip-box__inner {
     height: 100%;
-    min-height: 200px;
+    min-height: 160px;
     position: relative;
     transform-style: preserve-3d;
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -293,7 +297,7 @@
   @media (min-width: 640px) {
     .aptus-flip-box,
     .aptus-flip-box__inner {
-      min-height: 220px;
+      min-height: 180px;
     }
   }
 
@@ -310,7 +314,7 @@
     flex-direction: column;
     inset: 0;
     justify-content: center;
-    padding: clamp(1rem, 4vw, 2rem);
+    padding: clamp(0.75rem, 2.5vw, 1.25rem);
     position: absolute;
     text-align: center;
     -webkit-backface-visibility: hidden;
@@ -337,23 +341,26 @@
 
   .aptus-flip-box--tall .aptus-flip-box__inner,
   .aptus-flip-box--tall {
-    min-height: 240px;
+    min-height: 200px;
   }
 
   @media (min-width: 640px) {
     .aptus-flip-box--tall .aptus-flip-box__inner,
     .aptus-flip-box--tall {
-      min-height: 280px;
+      min-height: 220px;
     }
   }
 
   .aptus-flip-box__front-desc {
+    align-self: stretch;
     color: #000;
     font-size: var(--text-base);
     font-weight: 400;
     line-height: 1.6;
-    margin-top: 1rem;
-    max-width: 28rem;
+    margin-top: 0.75rem;
+    max-width: none;
+    text-align: start;
+    width: 100%;
   }
 
   /* Aptus Policy — post-1274 */
@@ -394,7 +401,7 @@
     font-size: var(--text-base);
     font-weight: 400;
     line-height: 1.6;
-    text-align: center;
+    text-align: start;
   }
 
   .aptus-why-row-heading {
@@ -423,12 +430,12 @@
   }
 
   .aptus-iso-subtitle {
-    color: var(--color-brand-blue);
+    color: #000;
     font-size: var(--text-base);
     font-weight: 400;
     line-height: 1.5;
     margin-top: 1rem;
-    text-align: center;
+    text-align: start;
   }
 
   .aptus-iso-intro-heading,
@@ -441,20 +448,20 @@
   }
 
   .aptus-iso-intro-text {
-    color: var(--color-brand-blue);
+    color: #000;
     font-size: var(--text-base);
     font-weight: 400;
     line-height: 1.6;
-    text-align: center;
+    text-align: start;
   }
 
   .aptus-iso-core-item {
-    color: var(--color-brand-blue);
+    color: #000;
     font-size: var(--text-base);
     font-weight: 400;
     line-height: 1.6;
     margin-top: 0.25rem;
-    text-align: center;
+    text-align: start;
   }
 
   .aptus-iso-cert-grid {
@@ -531,11 +538,11 @@
   }
 
   .aptus-iso-footer-text {
-    color: #248bcc;
+    color: #000;
     font-size: var(--text-base);
     font-weight: 400;
     line-height: 1.6;
-    text-align: center;
+    text-align: start;
   }
 
   /* Career — post-3441 */
@@ -544,6 +551,7 @@
     font-size: var(--text-5xl);
     font-weight: 500;
     line-height: 1.15;
+    text-align: center;
   }
 
   .aptus-career-tagline {
@@ -552,6 +560,7 @@
     font-weight: 600;
     line-height: 1.4;
     margin-top: 1rem;
+    text-align: start;
   }
 
   .aptus-career-intro-text {
@@ -561,6 +570,7 @@
     line-height: 1.6;
     margin-bottom: 2.125rem;
     margin-top: 1rem;
+    text-align: start;
   }
 
   .aptus-career-form-band {
@@ -630,7 +640,7 @@
     font-size: var(--text-lg);
     font-weight: 400;
     line-height: 1.5;
-    text-align: center;
+    text-align: start;
   }
 
   .aptus-flip-box__back p {
@@ -638,5 +648,33 @@
     font-size: var(--text-sm);
     line-height: 1.6;
     max-width: 28rem;
+    text-align: start;
+  }
+}
+
+/* Our Story — collapse stacked section padding (same pattern as .page-home) */
+@layer pages {
+  .page-our-story [data-section="banner"] {
+    margin-bottom: 0;
+  }
+
+  .page-our-story [data-section="feature-row"],
+  .page-our-story [data-section="flip-cards"],
+  .page-our-story [data-section="logo-grid"] {
+    padding-block: 0.75rem;
+  }
+
+  .page-our-story [data-section="feature-row"] + [data-section="flip-cards"],
+  .page-our-story [data-section="flip-cards"] + [data-section="logo-grid"],
+  .page-our-story [data-section="logo-grid"] + [data-section="cta"] {
+    padding-top: 0.25rem;
+  }
+
+  .page-our-story .aptus-alliances-heading {
+    margin-bottom: 0.75rem;
+  }
+
+  .page-our-story .aptus-alliance-marquee {
+    margin-top: 0.25rem;
   }
 }
