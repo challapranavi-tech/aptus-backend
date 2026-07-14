@@ -1,5 +1,6 @@
 import { archiveApplication } from "@/lib/application-archive";
 import { corsPreflight, jsonCors, withCors } from "@/lib/api-cors";
+import { createApplicant, isOdooConfigured } from "@/lib/odoo";
 import { validationError } from "@/lib/api-validate";
 import {
   hrEmail,
@@ -245,13 +246,46 @@ export async function POST(req: NextRequest) {
     console.error("[careers/apply] failed to archive application:", err);
   }
 
+  // Best-effort push into Odoo Recruitment (hr.applicant + attachments). Never
+  // blocks the candidate: on failure we log and flag it in the HR email so the
+  // archived copy + email still reach a human. jobId comes straight from the
+  // listing and equals the Odoo hr.job id when Odoo is the live job source.
+  let odooNoteHtml = "";
+  let odooNoteText = "";
+  const jobId = Number(fields.jobId);
+  if (isOdooConfigured() && Number.isInteger(jobId) && jobId > 0) {
+    try {
+      const applicantId = await createApplicant(
+        {
+          candidateName: fields.candidateName,
+          email: fields.email,
+          phone: fields.phone,
+          jobId,
+        },
+        attachments,
+      );
+      const base = process.env.ODOO_URL?.replace(/\/$/, "") ?? "";
+      const link = `${base}/web#model=hr.applicant&id=${applicantId}&view_type=form`;
+      odooNoteHtml = `<p style="font-family:Arial,sans-serif;font-size:13px;color:#047857">Synced to Odoo Recruitment — <a href="${escapeHtml(link)}">applicant #${applicantId}</a>.</p>`;
+      odooNoteText = `\n\nSynced to Odoo Recruitment: applicant #${applicantId} (${link})`;
+      console.info("[careers/apply] created hr.applicant", applicantId);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      console.error("[careers/apply] Odoo hr.applicant create failed:", msg);
+      // ponytail: no retry queue yet — the flag below + archived copy are the
+      // safety net. Upgrade path: enqueue {fields, blob ref} for background retry.
+      odooNoteHtml = `<p style="font-family:Arial,sans-serif;font-size:13px;color:#b91c1c">⚠ Odoo sync failed — this application is NOT in Recruitment yet. All documents are attached to this email; please add it manually. (${escapeHtml(msg)})</p>`;
+      odooNoteText = `\n\n[!] Odoo sync failed (${msg}). Application NOT in Recruitment — documents are attached to this email; add it manually.`;
+    }
+  }
+
   // HR notification is required for a successful application.
   const hrResult = await sendEmail({
     to: hrEmail(),
     replyTo: fields.email,
     subject: `Career Application — ${fields.candidateName} (${fields.appliedDesignation})`,
-    text,
-    html,
+    text: text + odooNoteText,
+    html: html + odooNoteHtml,
     attachments,
   });
   if (!hrResult.ok) {

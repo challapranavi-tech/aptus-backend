@@ -22,7 +22,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!job) return { title: "Job not found" };
   return {
     title: `${job.title} — Careers at Aptus Infotech`,
-    description: job.description.slice(0, 160),
+    // Odoo returns `false` for empty text fields — guard the type before slicing
+    // so a job with no description can't throw during metadata generation (→ 500).
+    description: typeof job.description === "string" ? job.description.slice(0, 160) : "",
   };
 }
 

@@ -208,6 +208,33 @@ export async function searchRead<T>(
   );
 }
 
+// ─── create ─────────────────────────────────────────────────────────────────
+/**
+ * Calls `model.create(values)` on Odoo and returns the new record id.
+ * security: execute_kw sends apiKey in the body — never cache this request.
+ */
+export async function create(
+  session: OdooRpcSession,
+  model: string,
+  values: Record<string, unknown>,
+): Promise<number> {
+  const endpoint = `${session.url}/jsonrpc`;
+  return rpcFetch<number>(
+    endpoint,
+    {
+      jsonrpc: "2.0",
+      id: nextId(),
+      method: "call",
+      params: {
+        service: "object",
+        method: "execute_kw",
+        args: [session.db, session.uid, session.apiKey, model, "create", [values]],
+      },
+    },
+    { kind: "no-store" },
+  );
+}
+
 // ─── read ─────────────────────────────────────────────────────────────────────
 /**
  * Calls `model.read(ids, fields)` on Odoo.

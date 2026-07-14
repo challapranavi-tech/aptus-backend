@@ -50,7 +50,11 @@ async function apiGet<T>(path: string): Promise<T | null> {
   const url = `${apiBase()}${path}`;
   try {
     const res = await fetch(url, {
-      cache: "no-store",
+      // ISR, not no-store: `no-store` forces every consumer dynamic, which makes
+      // statically-generated pages (e.g. /careers/[slug]) throw "static to
+      // dynamic at runtime". CMS content is rarely-changing — revalidate like
+      // the jobs client (data/jobs.ts) instead.
+      next: { revalidate: 300 },
       signal: AbortSignal.timeout(API_TIMEOUT_MS),
     });
     if (res.status === 404) return null;

@@ -10,10 +10,19 @@ export {
   authenticate,
   searchRead,
   read,
+  create,
   getVersionInfo,
   type OdooRpcSession,
   type OdooVersionInfo,
 } from "./rpc";
+
+export {
+  createApplicant,
+  buildApplicantValues,
+  applicantStageIdFromEnv,
+  type ApplicantInput,
+  type ApplicantAttachment,
+} from "./recruitment";
 
 export {
   mapOdooPage,
