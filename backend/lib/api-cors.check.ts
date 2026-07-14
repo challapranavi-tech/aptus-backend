@@ -6,7 +6,7 @@ import assert from "node:assert";
 import { allowedOrigins } from "./api-cors";
 
 // Comma-separated list + trailing-slash normalization, prod mode (no localhost).
-process.env.NODE_ENV = "production";
+(process.env as Record<string, string>).NODE_ENV = "production";
 process.env.APTUS_FRONTEND_URL = "https://aptusinfotech.com, https://www.aptusinfotech.com/";
 delete process.env.NEXT_PUBLIC_SITE_URL;
 {
@@ -16,7 +16,7 @@ delete process.env.NEXT_PUBLIC_SITE_URL;
 }
 
 // Dev mode auto-allows localhost.
-process.env.NODE_ENV = "development";
+(process.env as Record<string, string>).NODE_ENV = "development";
 process.env.APTUS_FRONTEND_URL = "https://aptusinfotech.com";
 {
   assert.ok(allowedOrigins().includes("http://localhost:3000"), "dev should allow localhost");

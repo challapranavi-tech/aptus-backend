@@ -1,22 +1,19 @@
 import { NextResponse } from "next/server";
 
 export function allowedOrigins(): string[] {
-  // Each env var may hold a comma-separated list so one var can allow both the
-  // apex and www origins. Normalize trailing slashes — a browser `Origin` never
-  // has one, so `https://site.com/` in config would silently never match.
   const fromEnv = [process.env.APTUS_FRONTEND_URL, process.env.NEXT_PUBLIC_SITE_URL]
     .filter(Boolean)
     .flatMap((v) => (v as string).split(","))
     .map((v) => v.trim().replace(/\/$/, ""))
     .filter(Boolean);
-  // security: localhost is a local-dev convenience only — never auto-allow in prod.
+
   const origins =
-    process.env.NODE_ENV === "production"
+    process.env.NODE_ENV === "production"   // ← comparison, not assignment
       ? fromEnv
       : [...fromEnv, "http://localhost:3000"];
+
   return [...new Set(origins)];
 }
-
 function pickOrigin(request: Request): string | null {
   const origin = request.headers.get("origin");
   if (!origin) return null;
