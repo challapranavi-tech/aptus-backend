@@ -17,7 +17,7 @@ delete process.env.NEXT_PUBLIC_SITE_URL;
 
 // Dev mode auto-allows localhost.
 (process.env as Record<string, string>).NODE_ENV = "development";
-process.env.APTUS_FRONTEND_URL = "https://aptusinfotech.com";
+process.env.APTUS_FRONTEND_URL = "https://www.aptusinfotech.com/";
 {
   assert.ok(allowedOrigins().includes("http://localhost:3000"), "dev should allow localhost");
 }
