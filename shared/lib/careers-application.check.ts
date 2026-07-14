@@ -4,6 +4,7 @@
  */
 import assert from "node:assert/strict";
 import {
+  MAX_TOTAL_ATTACHMENT_BYTES,
   MAX_UPLOAD_BYTES,
   RESUME_EXTENSIONS,
   emptyApplicationFields,
@@ -160,6 +161,11 @@ assert.equal(validateFile(null, RESUME_EXTENSIONS, "Resume", false), null, "miss
 assert.ok(
   validateFile({ name: "cv.pdf", size: MAX_UPLOAD_BYTES + 1 }, RESUME_EXTENSIONS, "Resume", true),
   "oversize file flagged",
+);
+assert.ok(
+  MAX_UPLOAD_BYTES <= 4.5 * 1024 * 1024 &&
+    MAX_TOTAL_ATTACHMENT_BYTES <= 4.5 * 1024 * 1024,
+  "upload caps must stay under Vercel serverless body limit",
 );
 
 const hints = extractResumeHints(

@@ -7,6 +7,7 @@ import {
   type MailAttachment,
 } from "@/lib/mail";
 import {
+  enforceIpRateLimit,
   enforceKeyRateLimit,
   identityKey,
 } from "@/lib/rate-limit-http";
@@ -46,6 +47,15 @@ export async function OPTIONS(req: NextRequest) {
 export async function POST(req: NextRequest) {
   const preflight = corsPreflight(req);
   if (preflight) return preflight;
+
+  // Outside middleware matcher — see careers/apply. Keep IP limit in-handler.
+  const ipLimited = enforceIpRateLimit(
+    req,
+    "publicWrite",
+    "career-apply",
+    (res) => withCors(res, req),
+  );
+  if (ipLimited) return ipLimited;
 
   let form: FormData;
   try {

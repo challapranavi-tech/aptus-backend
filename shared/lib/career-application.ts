@@ -14,7 +14,8 @@ import {
   type ParseResult,
 } from "./schema";
 
-export const MAX_UPLOAD_BYTES = 5 * 1024 * 1024; // 5 MB per file
+// Match Vercel serverless body ceiling (4.5MB) with multipart headroom.
+export const MAX_UPLOAD_BYTES = 4 * 1024 * 1024; // 4 MB per file
 
 export const RESUME_EXTENSIONS = [".pdf", ".doc", ".docx"] as const;
 export const FORM_EXTENSIONS = [".pdf", ".doc", ".docx"] as const;

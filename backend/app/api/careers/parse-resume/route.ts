@@ -1,6 +1,7 @@
 import { corsPreflight, jsonCors, withCors } from "@/lib/api-cors";
 import { validationError } from "@/lib/api-validate";
 import { extractResumeText } from "@/lib/careers/extract-text";
+import { enforceIpRateLimit } from "@/lib/rate-limit-http";
 import {
   MAX_UPLOAD_BYTES,
   RESUME_EXTENSIONS,
@@ -19,6 +20,14 @@ export async function OPTIONS(req: NextRequest) {
 export async function POST(req: NextRequest) {
   const preflight = corsPreflight(req);
   if (preflight) return preflight;
+
+  const ipLimited = enforceIpRateLimit(
+    req,
+    "publicWrite",
+    "careers-parse-resume",
+    (res) => withCors(res, req),
+  );
+  if (ipLimited) return ipLimited;
 
   let form: FormData;
   try {

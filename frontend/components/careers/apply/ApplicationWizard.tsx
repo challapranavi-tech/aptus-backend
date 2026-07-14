@@ -7,6 +7,7 @@ import {
   DOC_ACCEPT,
   IMAGE_ACCEPT,
   MAX_TOTAL_ATTACHMENT_BYTES,
+  MAX_UPLOAD_BYTES,
   NA_HELPER,
   NOTICE_PERIOD_OPTIONS,
   RESUME_ACCEPT,
@@ -964,7 +965,7 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
                   accept={IMAGE_ACCEPT}
                   label="Passport-size Photograph"
                   preview
-                  hint="JPG, PNG or WEBP · up to 5 MB"
+                  hint={`JPG, PNG or WEBP · up to ${Math.round(MAX_UPLOAD_BYTES / (1024 * 1024))} MB`}
                   files={files.photograph ? [files.photograph] : []}
                   error={errors.photograph}
                   onChange={(list) =>

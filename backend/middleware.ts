@@ -10,15 +10,15 @@ import { NextRequest, NextResponse } from "next/server";
 /**
  * Path → IP rate-limit preset for public API surface.
  * /api/health is exempt so deploy probes are never throttled.
+ *
+ * Multipart upload routes (/api/careers/apply, parse-resume, /api/career/apply)
+ * are excluded from the matcher below — Edge middleware body cloning 502s ~1MB+
+ * payloads before the Node function starts. Those routes enforce IP limits
+ * themselves via enforceIpRateLimit.
  */
 function presetFor(pathname: string): RateLimitPreset | null {
   if (pathname === "/api/health") return null;
-  if (
-    pathname === "/api/contact" ||
-    pathname.startsWith("/api/career/") ||
-    pathname === "/api/careers/apply" ||
-    pathname === "/api/careers/parse-resume"
-  ) {
+  if (pathname === "/api/contact" || pathname.startsWith("/api/career/")) {
     return "publicWrite";
   }
   if (pathname === "/api/revalidate") return "authWriteIp";
@@ -65,5 +65,9 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/api/:path*"],
+  // ponytail: negative lookahead keeps multipart uploads off Edge middleware
+  // body clone (Vercel 502s ~1MB+). Ceiling: upload routes must rate-limit in-handler.
+  matcher: [
+    "/api/((?!careers/apply|careers/parse-resume|career/apply).*)",
+  ],
 };

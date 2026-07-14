@@ -9,7 +9,11 @@ import {
   sendEmail,
   type MailAttachment,
 } from "@/lib/mail";
-import { enforceKeyRateLimit, identityKey } from "@/lib/rate-limit-http";
+import {
+  enforceIpRateLimit,
+  enforceKeyRateLimit,
+  identityKey,
+} from "@/lib/rate-limit-http";
 import {
   DOC_EXTENSIONS,
   IMAGE_EXTENSIONS,
@@ -58,6 +62,16 @@ export async function OPTIONS(req: NextRequest) {
 export async function POST(req: NextRequest) {
   const preflight = corsPreflight(req);
   if (preflight) return preflight;
+
+  // IP limit lives here — this route is outside middleware so large multipart
+  // bodies are not Edge-cloned (which 502s ~1MB+ before the function starts).
+  const ipLimited = enforceIpRateLimit(
+    req,
+    "publicWrite",
+    "careers-apply",
+    (res) => withCors(res, req),
+  );
+  if (ipLimited) return ipLimited;
 
   let form: FormData;
   try {
@@ -239,8 +253,9 @@ export async function POST(req: NextRequest) {
   // Persist a durable copy before emailing so a lost/spam-filtered email never
   // means a lost application. Best-effort: a disk failure must not block the
   // email, which is still the primary delivery path.
+  let archived: string | undefined;
   try {
-    const archived = await archiveApplication(fields, attachments);
+    archived = await archiveApplication(fields, attachments);
     console.info("[careers/apply] archived application to", archived);
   } catch (err) {
     console.error("[careers/apply] failed to archive application:", err);
@@ -274,8 +289,12 @@ export async function POST(req: NextRequest) {
       console.error("[careers/apply] Odoo hr.applicant create failed:", msg);
       // ponytail: no retry queue yet — the flag below + archived copy are the
       // safety net. Upgrade path: enqueue {fields, blob ref} for background retry.
-      odooNoteHtml = `<p style="font-family:Arial,sans-serif;font-size:13px;color:#b91c1c">⚠ Odoo sync failed — this application is NOT in Recruitment yet. All documents are attached to this email; please add it manually. (${escapeHtml(msg)})</p>`;
-      odooNoteText = `\n\n[!] Odoo sync failed (${msg}). Application NOT in Recruitment — documents are attached to this email; add it manually.`;
+      // Archive path is a Blob prefix (or disk dir), not a public URL — store is private.
+      const archiveHint = archived
+        ? ` Archive: ${archived}`
+        : " (archive also failed — documents are only on this email)";
+      odooNoteHtml = `<p style="font-family:Arial,sans-serif;font-size:13px;color:#b91c1c">⚠ Odoo sync failed — this application is NOT in Recruitment yet. Documents are attached to this email; please add it manually. (${escapeHtml(msg)})${archived ? ` Fallback archive: <code>${escapeHtml(archived)}</code>` : " (archive also failed)"}</p>`;
+      odooNoteText = `\n\n[!] Odoo sync failed (${msg}). Application NOT in Recruitment — documents attached to this email.${archiveHint}`;
     }
   }
 

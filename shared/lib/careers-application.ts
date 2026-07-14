@@ -16,11 +16,13 @@ import {
   type ParseResult,
 } from "./schema";
 
-export const MAX_UPLOAD_BYTES = 5 * 1024 * 1024; // 5 MB per file
+// Vercel serverless request bodies hard-cap at 4.5MB; multipart framing eats
+// some of that. Stay under so rejects are our 413, not a silent LB 502.
+export const MAX_UPLOAD_BYTES = 4 * 1024 * 1024; // 4 MB per file
 
-// Resend caps emails at 40MB after Base64 (~33% overhead). Leave headroom for HTML.
-// ponytail: naive sum of raw bytes; upgrade if we hit edge cases with many small files.
-export const MAX_TOTAL_ATTACHMENT_BYTES = 28 * 1024 * 1024; // 28 MB total per submission
+// Whole multipart POST must fit under Vercel's 4.5MB — not Resend's higher cap.
+// ponytail: client-direct Blob upload if we ever need larger packets.
+export const MAX_TOTAL_ATTACHMENT_BYTES = 4 * 1024 * 1024; // 4 MB total per submission
 
 export const RESUME_EXTENSIONS = [".pdf", ".doc", ".docx"] as const;
 export const DOC_EXTENSIONS = [".pdf", ".doc", ".docx"] as const;
