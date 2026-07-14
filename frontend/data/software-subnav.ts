@@ -72,7 +72,6 @@ export const CYBER_SECURITY_SUBNAV_LINKS: SoftwareSubNavLink[] = [
   { label: "Sophos", href: "/sophos" },
   { label: "SonicWall Next-Gen Firewall", href: "/sonicwall-next-gen-firewall" },
   { label: "Kaspersky", href: "/kaspersky" },
-  { label: "Palo Alto", href: "/palo-alto" },
 ];
 
 /** Live sidebar on Structural Software pages (post-291 CSI + Prokon). */

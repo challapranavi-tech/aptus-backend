@@ -1,6 +1,11 @@
 import { corsPreflight, jsonCors, withCors } from "@/lib/api-cors";
 import { validationError } from "@/lib/api-validate";
-import { getMailTransporter, mailFromAddress } from "@/lib/mail";
+import {
+  hrEmail,
+  isMailConfigured,
+  sendEmail,
+  type MailAttachment,
+} from "@/lib/mail";
 import {
   enforceKeyRateLimit,
   identityKey,
@@ -17,8 +22,6 @@ import { NextRequest } from "next/server";
 
 export const runtime = "nodejs";
 
-const TO_EMAIL = process.env.CAREER_TO_EMAIL ?? "hr@aptusinfotech.com";
-
 function escapeHtml(value: string): string {
   return value
     .replace(/&/g, "&amp;")
@@ -27,7 +30,7 @@ function escapeHtml(value: string): string {
     .replace(/"/g, "&quot;");
 }
 
-async function fileToAttachment(file: File) {
+async function fileToAttachment(file: File): Promise<MailAttachment> {
   const buffer = Buffer.from(await file.arrayBuffer());
   return {
     filename: sanitizeFilename(file.name),
@@ -114,9 +117,8 @@ export async function POST(req: NextRequest) {
   );
   if (emailLimited) return emailLimited;
 
-  const transporter = getMailTransporter();
-  if (!transporter) {
-    console.error("[career/apply] SMTP env vars are not configured.");
+  if (!isMailConfigured()) {
+    console.error("[career/apply] RESEND_API_KEY is not configured.");
     return jsonCors(
       req,
       { error: "Email service is not configured. Please try again later." },
@@ -154,21 +156,19 @@ export async function POST(req: NextRequest) {
 
   const text = rows.map(([k, v]) => `${k}: ${v}`).join("\n");
 
-  try {
-    await transporter.sendMail({
-      from: mailFromAddress(),
-      to: TO_EMAIL,
-      replyTo: fields.email,
-      subject: `Career Application — ${fields.fullName} (${fields.position})`,
-      text,
-      html,
-      attachments: [
-        await fileToAttachment(resumeFile!),
-        await fileToAttachment(formFile!),
-      ],
-    });
-  } catch (err) {
-    console.error("[career/apply] send failed:", err);
+  const hrResult = await sendEmail({
+    to: hrEmail(),
+    replyTo: fields.email,
+    subject: `Career Application — ${fields.fullName} (${fields.position})`,
+    text,
+    html,
+    attachments: [
+      await fileToAttachment(resumeFile!),
+      await fileToAttachment(formFile!),
+    ],
+  });
+  if (!hrResult.ok) {
+    console.error("[career/apply] send failed:", hrResult.error);
     return jsonCors(
       req,
       { error: "Could not send your application. Please try again later." },

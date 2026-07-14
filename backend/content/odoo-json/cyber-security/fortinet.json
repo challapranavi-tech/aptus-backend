@@ -7,8 +7,7 @@
       { "label": "Fortinet", "href": "/fortinet" },
       { "label": "Sophos", "href": "/sophos" },
       { "label": "SonicWall Next-Gen Firewall", "href": "/sonicwall-next-gen-firewall" },
-      { "label": "Kaspersky", "href": "/kaspersky" },
-      { "label": "Palo Alto", "href": "/palo-alto" }
+      { "label": "Kaspersky", "href": "/kaspersky" }
     ],
     "bannerTitle": "Fortinet - Enterprise Cybersecurity Solutions",
     "bannerTagline": "Protect your digital assets with Fortinet's industry-leading security fabric platform that delivers broad, integrated, and automated protection.",

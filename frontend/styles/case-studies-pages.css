@@ -12,7 +12,7 @@
 .aptus-case-studies-page .aptus-cs-hero {
   background-color: #000;
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("https://aptusinfotech.com/wp-content/uploads/2025/09/case-studies-e1757592737753.jpg");
+    url("/images/award.jpg");
   background-position: center;
   background-size: cover;
   color: #fff;

@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { SoftwareSubNav } from "@/components/layout/SoftwareSubNav";
+import { isAutodeskHiddenSlug } from "@/data/autodesk-subnav";
 import {
   softwareSubnavForFamily,
   STRUCTURAL_SUBNAV_LINKS,
@@ -20,6 +21,10 @@ function subnavLabel(family?: string): string {
   return `${family ?? "Software"} products`;
 }
 
+function withoutHidden(links: SoftwareSubNavLink[]): SoftwareSubNavLink[] {
+  return links.filter((l) => !isAutodeskHiddenSlug(l.href.replace(/^\//, "")));
+}
+
 export function SoftwareInnerHeroNav({
   family,
   links,
@@ -28,9 +33,16 @@ export function SoftwareInnerHeroNav({
   links?: SoftwareSubNavLink[];
 }) {
   const pathname = usePathname();
-  const fromData = links?.length ? links : softwareSubnavForFamily(family);
-  const resolved =
-    fromData?.length ? fromData : STRUCTURAL_PATHS.has(pathname) ? STRUCTURAL_SUBNAV_LINKS : [];
+  // Family registry wins when present so sidebars stay in sync with header nav.
+  const familyLinks = softwareSubnavForFamily(family);
+  const fromData = familyLinks?.length ? familyLinks : links?.length ? links : undefined;
+  const resolved = withoutHidden(
+    fromData?.length
+      ? fromData
+      : STRUCTURAL_PATHS.has(pathname)
+        ? [...STRUCTURAL_SUBNAV_LINKS]
+        : [],
+  );
 
   if (!resolved.length) return null;
 

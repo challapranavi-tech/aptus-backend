@@ -7,8 +7,7 @@
       { "label": "Fortinet", "href": "/fortinet" },
       { "label": "Sophos", "href": "/sophos" },
       { "label": "SonicWall Next-Gen Firewall", "href": "/sonicwall-next-gen-firewall" },
-      { "label": "Kaspersky", "href": "/kaspersky" },
-      { "label": "Palo Alto", "href": "/palo-alto" }
+      { "label": "Kaspersky", "href": "/kaspersky" }
     ],
     "bannerTitle": "Sophos",
     "bannerTagline": "Get enterprise-grade security without the complexity. Sophos CSaaS delivers advanced threat protection, managed by experts, so you can focus on your business.",

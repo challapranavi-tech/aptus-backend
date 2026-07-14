@@ -1,0 +1,39 @@
+{
+  "jobs": [
+    {
+      "id": "1",
+      "title": "Junior Accountant",
+      "department": "Finance & Administration",
+      "location": "Muscat, Oman",
+      "jobType": "Full-time",
+      "publishedAt": "2026-07-14",
+      "description": "We are seeking a motivated and detail-oriented Junior Accountant to join our finance team. The ideal candidate will have 3–5 years of accounting experience, a strong educational background in finance or accounting, and excellent English communication skills. This role is suited for someone who is a quick learner, proactive, takes ownership of their work, and thrives in a fast-paced, dynamic environment.",
+      "responsibilities": [
+        "Record and maintain accurate financial transactions and accounting records.",
+        "Prepare journal entries, account reconciliations, and financial reports.",
+        "Assist with month-end and year-end closing activities.",
+        "Process accounts payable and accounts receivable transactions.",
+        "Support bank reconciliations and monitor cash flow.",
+        "Ensure compliance with company policies and accounting standards.",
+        "Assist with audits and provide supporting documentation when required.",
+        "Collaborate with internal departments to resolve accounting-related issues.",
+        "Perform other accounting and administrative duties as assigned."
+      ],
+      "requirements": [
+        "Bachelor's degree in Accounting, Finance, or a related field.",
+        "3–5 years of relevant accounting experience.",
+        "Strong knowledge of accounting principles and financial reporting.",
+        "Excellent English communication skills, both written and verbal.",
+        "Proficient in Microsoft Excel and accounting software.",
+        "Strong analytical skills with high attention to detail.",
+        "Ability to work independently and manage multiple priorities in a fast-paced environment.",
+        "Preferred: Quick learner with the ability to adapt to new systems and processes.",
+        "Preferred: Proactive and self-motivated with a positive attitude.",
+        "Preferred: Takes ownership of assigned tasks and consistently delivers high-quality work.",
+        "Preferred: Adaptable to changing business needs and work environments.",
+        "Preferred: Strong organizational, time management, and problem-solving skills.",
+        "Preferred: Team player with a collaborative mindset and a commitment to continuous improvement."
+      ]
+    }
+  ]
+}

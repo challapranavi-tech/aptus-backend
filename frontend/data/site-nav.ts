@@ -14,7 +14,7 @@ export const SITE_NAVIGATION: NavigationItem[] = [
       { label: "Why Aptus Infotech", href: "/why-aptus-infotech" },
       { label: "Winning together", href: "/winning-together" },
       { label: "Aptus Infotech ISO Certifications", href: "/aptus-infotech-iso-certifications" },
-      { label: "Career", href: "/career" },
+      { label: "Career", href: "/careers" },
       { label: "Contact Us", href: "/contact-us" },
     ],
   },
@@ -118,7 +118,6 @@ export const SITE_NAVIGATION: NavigationItem[] = [
           { label: "SonicWall Next-Gen Firewall", href: "/sonicwall-next-gen-firewall" },
           { label: "Kaspersky", href: "/kaspersky" },
           { label: "Antivirus and Data Security", href: "/antivirus-and-data-security" },
-          { label: "Palo Alto", href: "/palo-alto" },
         ],
       },
       {

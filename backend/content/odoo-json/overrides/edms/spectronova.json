@@ -11,7 +11,7 @@
       "SpectroNova, powered by Aptus Infotech, is an advanced and integrated Project Management Information System (PMIS) meticulously designed to empower organizations in effectively managing, tracking, and controlling complex projects, programs, and portfolios.",
       "Building on over 25 years of industry experience, SpectroNova provides a robust, centralized platform that offers real-time visibility and control across every phase of a project lifecycle, from initial capital planning and project delivery to cost control and facilities management."
     ],
-    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/imgi_8_photo-1581094794329-c8112a89af12-683x1024.png",
+    "imageSrc": "/images/imgi_8_photo-1581094794329-c8112a89af12-683x1024.png",
     "imageAlt": "SpectroNova",
     "ctaLabel": "Request a Quote",
     "ctaHref": "#Form"
@@ -131,7 +131,7 @@
     "heading": "Ready to Transform Your Projects?",
     "subheading": "Contact our specialists today for a free consultation and customized solution proposal.",
     "actionLabel": "Get Your Quote Now",
-    "actionHref": "#form"
+    "actionHref": "#Form"
   },
   "testimonials": {
     "visible": true,
@@ -164,79 +164,29 @@
     "variant": "alliances",
     "logos": [
       {
-        "id": "planswift",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/planswift.png",
-        "alt": "planswift"
+        "id": "watchnet",
+        "src": "/images/WatchNet-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "WatchNet"
       },
       {
-        "id": "prokon",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Prokon.png",
-        "alt": "Prokon"
+        "id": "tyco",
+        "src": "/images/Tyco-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "Tyco"
       },
       {
-        "id": "sketchup",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png",
-        "alt": "Sketchup"
+        "id": "suprema",
+        "src": "/images/Suprema-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "Suprema"
       },
       {
-        "id": "sophos",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/sophos.png",
-        "alt": "sophos"
+        "id": "hikvision",
+        "src": "/images/Hikvision-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "Hikvision"
       },
       {
-        "id": "spectronova",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/spectronova.png",
-        "alt": "spectronova"
-      },
-      {
-        "id": "aconex",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/aconex.png",
-        "alt": "aconex"
-      },
-      {
-        "id": "autodesk",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png",
-        "alt": "Autodesk"
-      },
-      {
-        "id": "etap",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/etap.png",
-        "alt": "etap"
-      },
-      {
-        "id": "fortinet",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/fortinet.png",
-        "alt": "fortinet"
-      },
-      {
-        "id": "kaspersky",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/kaspersky.png",
-        "alt": "kaspersky"
-      },
-      {
-        "id": "microsoft",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft.png",
-        "alt": "Microsoft"
-      },
-      {
-        "id": "lumion",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/lumion.png",
-        "alt": "lumion"
-      },
-      {
-        "id": "paloalto",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/paloalto.png",
-        "alt": "paloalto"
-      },
-      {
-        "id": "vray",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/v.ray_.png",
-        "alt": "v.ray"
-      },
-      {
-        "id": "twinmotion",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png",
-        "alt": "twinmotion"
+        "id": "zkteco",
+        "src": "/images/ZKTeco-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "ZKTeco"
       }
     ]
   },

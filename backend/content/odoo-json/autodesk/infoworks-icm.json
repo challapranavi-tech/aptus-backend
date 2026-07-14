@@ -17,7 +17,7 @@
       "With InfoWorks ICM, you can model rainfall-runoff, river flow, urban drainage, and wastewater systems in an integrated environment. The software combines 1D and 2D hydraulic modeling capabilities with advanced water quality analysis to provide a complete picture of water infrastructure performance.",
       "From master planning and system design to operational management and flood risk assessment, InfoWorks ICM provides the tools you need to make informed decisions about water infrastructure investments and operations."
     ],
-    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Infoworks-icm-2-e1759038439492-rcep92lx6ewg3f8yxudc0373d3e31juo0p194ghn9c.png",
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Infoworks-icm-2-e1759038439492-rcep92lx6ewg3f8yxudc0373d3e31juo0p19859dv0.png",
     "imageAlt": "Autodesk InfoWorks ICM",
     "ctaLabel": "Request a Quote",
     "ctaHref": "#Form"
@@ -111,7 +111,7 @@
       "align": "center",
       "items": [
         {
-          "title": "Official Autodesk Silver Partner",
+          "title": "Official Autodesk Gold Partner",
           "body": "As an authorized partner, we provide access to genuine Autodesk products.",
           "icon": "medal"
         },
@@ -136,7 +136,7 @@
   "midCta": {
     "heading": "Ready to Transform Your Water Infrastructure Modeling?",
     "subheading": "Get a free trial of Autodesk InfoWorks ICM today and experience the future of integrated catchment modeling.",
-    "actionLabel": "Talk to an Expert Now",
+    "actionLabel": "Get Your Quote Now",
     "actionHref": "#Form"
   },
   "testimonials": {

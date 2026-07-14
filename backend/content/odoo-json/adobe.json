@@ -9,7 +9,7 @@
     },
     "tagline": "Aptus Infotech - Your trusted provider of genuine Adobe software with premium support and training",
     "highlight": "Offers Best Rates in the Market",
-    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/adobe-1-e1754482117716.jpg",
+    "imageSrc": "/images/adobe-banner.jpg",
     "imageAlt": "adobe",
     "actions": [
       {
@@ -45,7 +45,7 @@
         {
           "title": "Adobe Photoshop",
           "body": "The industry-standard photo editing and graphic design software for professionals.",
-          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Adobe-Photoshop.png",
+          "imageSrc": "/images/Adobe-Photoshop-r9ux9ptekmncb59x5ayyj5z7br5cws01wyrcoqrsyu.png",
           "imageAlt": "Adobe Photoshop",
           "href": "/adobe-photoshop",
           "actionLabel": "Request a Quote",
@@ -54,7 +54,7 @@
         {
           "title": "Adobe Illustrator",
           "body": "Professional vector graphics software for creating logos, icons, drawings, and illustrations.",
-          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Adobe-Illustrator-1.png",
+          "imageSrc": "/images/Adobe-Illustrator-1.png",
           "imageAlt": "Adobe Illustrator",
           "href": "/adobe-illustrator",
           "actionLabel": "Request a Quote",
@@ -63,7 +63,7 @@
         {
           "title": "Adobe InDesign",
           "body": "Professional page layout and design software for print and digital publishing.",
-          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Adobe-InDesign.png",
+          "imageSrc": "/images/Adobe-InDesign.png",
           "imageAlt": "Adobe InDesign",
           "href": "/adobe-business-creative-solutions",
           "actionLabel": "Request a Quote",
@@ -72,7 +72,7 @@
         {
           "title": "Adobe After Effects",
           "body": "Create cinematic movie titles, intros, and transitions with professional video editing software.",
-          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Adobe-After-Effects.png",
+          "imageSrc": "/images/Adobe-After-Effects.png",
           "imageAlt": "Adobe After Effects",
           "actionLabel": "Request a Quote",
           "actionHref": "#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6IjQzODciLCJ0b2dnbGUiOmZhbHNlfQ%3D%3D"
@@ -80,7 +80,7 @@
         {
           "title": "Adobe Premiere Pro",
           "body": "Professional video editing software for film, TV, and the web with intuitive workflows.",
-          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Adobe-Premiere-Pro.png",
+          "imageSrc": "/images/Adobe-Premiere-Pro.png",
           "imageAlt": "Adobe Premiere Pro",
           "href": "/adobe-premiere-pro",
           "actionLabel": "Request a Quote",
@@ -89,7 +89,7 @@
         {
           "title": "Adobe Acrobat Pro",
           "body": "Create, edit, sign, and track PDFs with the complete PDF solution.",
-          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Adobe-Acrobat-Pro.png",
+          "imageSrc": "/images/Adobe-Acrobat-Pro.png",
           "imageAlt": "Adobe Acrobat Pro",
           "href": "/adobe-acrobat-pro",
           "actionLabel": "Request a Quote",
@@ -98,7 +98,7 @@
         {
           "title": "Adobe Audition",
           "body": "Professional audio workstation for mixing, finishing, and precision editing.",
-          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Adobe-Audition.png",
+          "imageSrc": "/images/Adobe-Audition.png",
           "imageAlt": "Adobe Audition",
           "actionLabel": "Request a Quote",
           "actionHref": "#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6IjQzODciLCJ0b2dnbGUiOmZhbHNlfQ%3D%3D"
@@ -106,7 +106,7 @@
         {
           "title": "Adobe XD",
           "body": "Vector design tool for web and mobile apps, from wireframe to prototype.",
-          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Adobe-XD.png",
+          "imageSrc": "/images/Adobe-XD.png",
           "imageAlt": "Adobe XD",
           "actionLabel": "Request a Quote",
           "actionHref": "#elementor-action%3Aaction%3Dpopup%3Aopen%26settings%3DeyJpZCI6IjQzODciLCJ0b2dnbGUiOmZhbHNlfQ%3D%3D"
@@ -126,22 +126,22 @@
       "items": [
         {
           "title": "Gold Partner Status",
-          "body": "Our Gold Partner status represents the highest level of expertise and commitment to Autodesk solutions.",
+          "body": "Our Gold Partner status represents the highest level of expertise and commitment to Adobe solutions.",
           "icon": "medal"
         },
         {
           "title": "Genuine Products",
-          "body": "All our Autodesk products are 100% genuine with full manufacturer support and updates.",
+          "body": "All our Adobe products are 100% genuine with full manufacturer support and updates.",
           "icon": "check-circle"
         },
         {
           "title": "Competitive Pricing",
-          "body": "We offer the most competitive prices for Autodesk software in the Omani market.",
+          "body": "We offer the most competitive prices for Adobe software in the Omani market.",
           "icon": "dollar-sign"
         },
         {
           "title": "Expert Team",
-          "body": "Our certified professionals provide expert advice and support for all Autodesk products.",
+          "body": "Our certified professionals provide expert advice and support for all Adobe products.",
           "icon": "users"
         }
       ]
@@ -151,7 +151,7 @@
     "heading": "Ready to Get Started?",
     "subheading": "As Oman’s Adobe Partner, we’re ready to provide you with the best solutions and support",
     "actionLabel": "Get Your Quote Now",
-    "actionHref": "#form"
+    "actionHref": "#Form"
   },
   "partnerships": {
     "heading": "Winning together with",

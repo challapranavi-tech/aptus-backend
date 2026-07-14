@@ -154,6 +154,20 @@
       "heroImage": "https://aptusinfotech.com/wp-content/uploads/2025/05/autodesk_civil_3d.png"
     },
     {
+      "route": "/cubicost-bm-qs",
+      "slug": "cubicost-bm-qs",
+      "family": "quantity-takeoff",
+      "type": "inner",
+      "heroImage": "https://aptusinfotech.com/wp-content/uploads/2025/05/bim-cubicost-20200327013633-e1746357245963.jpg"
+    },
+    {
+      "route": "/cyber-security-solution",
+      "slug": "cyber-security-solution",
+      "family": "cyber-security",
+      "type": "hub",
+      "heroImage": "linear-gradient(180deg, #000000 0%, #2962f2 100%)"
+    },
+    {
       "route": "/construction-cloud",
       "slug": "construction-cloud",
       "family": "edms",
@@ -175,6 +189,34 @@
       "family": "educational",
       "type": "inner",
       "heroImage": "https://aptusinfotech.com/wp-content/uploads/2025/08/etap.png"
+    },
+    {
+      "route": "/infodrainage",
+      "slug": "infodrainage",
+      "family": "autodesk",
+      "type": "inner",
+      "heroImage": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/infodrainage-e1759038111608-rcep0iavkfp7w5ol88r1mo803pegvjmf6uhmwb0yek.png"
+    },
+    {
+      "route": "/infowater-pro",
+      "slug": "infowater-pro",
+      "family": "autodesk",
+      "type": "inner",
+      "heroImage": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/InfoWater-Pro-e1759038345346-rcep6m946ooll2dxbrphzzllzbis43z2nd2r01nyss.png"
+    },
+    {
+      "route": "/infoworks-icm",
+      "slug": "infoworks-icm",
+      "family": "autodesk",
+      "type": "inner",
+      "heroImage": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Infoworks-icm-2-e1759038439492-rcep92lx6ewg3f8yxudc0373d3e31juo0p19859dv0.png"
+    },
+    {
+      "route": "/infoworks-ws-pro",
+      "slug": "infoworks-ws-pro",
+      "family": "autodesk",
+      "type": "inner",
+      "heroImage": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Infoworks-ws-pro-1-e1759038208543-rcep31h7q5n1od6hdvfos9s65n0qw07roa8ij0i9po.png"
     },
     {
       "route": "/luminon",
@@ -250,6 +292,13 @@
       "family": "oracle",
       "type": "inner",
       "heroImage": "https://aptusinfotech.com/wp-content/uploads/2025/08/Oracle-Primavera.png"
+    },
+    {
+      "route": "/palo-alto",
+      "slug": "palo-alto",
+      "family": "cyber-security",
+      "type": "inner",
+      "heroImage": "https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_Create_a_detailed_image_that_represents_Se_0-673x1024.jpg"
     },
     {
       "route": "/power-bi",

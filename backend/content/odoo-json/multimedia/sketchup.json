@@ -12,7 +12,7 @@
       "From conceptual design to documentation, SketchUp streamlines your workflow with easy-to-use tools for drawing, modifying, and presenting your ideas. Its extensive 3D Warehouse library gives you access to millions of free models to enhance your projects.",
       "Whether you're designing a skyscraper, remodeling a kitchen, or creating a video game environment, SketchUp provides the flexibility and power you need to bring your vision to life."
     ],
-    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Sketchup-1-e1759821512916-rcuh74xag0zxsikw9jkrcl6u0r8bvmm5lcupbsd1c0.png",
+    "imageSrc": "/images/Sketchup-1-e1759821512916-rcuh74xag0zxsikw9jkrcl6u0r8bvmm5lcupjanx32.png",
     "imageAlt": "SketchUp",
     "ctaLabel": "Request a Quote",
     "ctaHref": "#Form"
@@ -140,7 +140,7 @@
     "title": {
       "before": "What Our Clients Say"
     },
-    "subheading": "Success stories from businesses using AutoCAD through Aptus Infotech",
+    "subheading": "Success stories from businesses using SketchUp through Aptus Infotech",
     "items": [
       {
         "quote": "SketchUp has been my go-to 3D modeling software for over a decade. Its intuitive interface and powerful tools allow me to bring my architectural visions to life quickly and efficiently.",

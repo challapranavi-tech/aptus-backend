@@ -30,9 +30,16 @@ next-env.d.ts
 # temp scratch files
 tmp-*
 
+# archived career applications — contains applicant PII, never commit
+backend/data/applications/
+data/applications/
+
 # reference / download folders — not source code
 LIVE WEBSITE/
 LIVE WEBSITE.zip
+aptus old.zip
+_zip_extract/
+_wayback/
 assets/
 assets.zip
 categorized_assets/

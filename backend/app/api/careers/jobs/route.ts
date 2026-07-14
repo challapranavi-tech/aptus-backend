@@ -1,0 +1,35 @@
+import { jsonCors, withCors } from "@/lib/api-cors";
+import { getAllJobs } from "@/lib/careers/jobs";
+import { filterJobs } from "@shared/lib/career-jobs";
+import { NextRequest, NextResponse } from "next/server";
+
+export const runtime = "nodejs";
+
+export async function OPTIONS(req: NextRequest) {
+  return withCors(new NextResponse(null, { status: 204 }), req);
+}
+
+// security: cap free-text filter params so a crafted query can't drive
+// pathological in-memory scans or oversized inputs (input validation at the
+// boundary). Numeric bounds for page/pageSize are enforced in filterJobs.
+function clamp(value: string | null, max = 120): string | undefined {
+  if (!value) return undefined;
+  return value.slice(0, max);
+}
+
+export async function GET(req: NextRequest) {
+  const sp = req.nextUrl.searchParams;
+  const jobs = await getAllJobs();
+
+  const result = filterJobs(jobs, {
+    q: clamp(sp.get("q")),
+    department: clamp(sp.get("department")),
+    location: clamp(sp.get("location")),
+    page: sp.get("page") ? Number(sp.get("page")) : undefined,
+    pageSize: sp.get("pageSize") ? Number(sp.get("pageSize")) : undefined,
+  });
+
+  return jsonCors(req, result, {
+    headers: { "Cache-Control": "public, max-age=60, s-maxage=300" },
+  });
+}

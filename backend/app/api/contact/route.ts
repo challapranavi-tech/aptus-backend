@@ -1,6 +1,6 @@
 import { corsPreflight, jsonCors, withCors } from "@/lib/api-cors";
 import { requireJsonContentType, validationError } from "@/lib/api-validate";
-import { getMailTransporter, mailFromAddress } from "@/lib/mail";
+import { isMailConfigured, sendEmail } from "@/lib/mail";
 import {
   enforceKeyRateLimit,
   identityKey,
@@ -48,9 +48,8 @@ export async function POST(req: NextRequest) {
   );
   if (emailLimited) return emailLimited;
 
-  const transporter = getMailTransporter();
-  if (!transporter) {
-    console.error("[contact] SMTP env vars are not configured.");
+  if (!isMailConfigured()) {
+    console.error("[contact] RESEND_API_KEY is not configured.");
     return jsonCors(
       req,
       { error: "Email service is not configured. Please try again later." },
@@ -61,24 +60,22 @@ export async function POST(req: NextRequest) {
   const to = process.env.CONTACT_TO_EMAIL ?? "info@aptusinfotech.com";
   const name = [first_name, last_name].filter(Boolean).join(" ");
 
-  try {
-    await transporter.sendMail({
-      from: mailFromAddress(),
-      to,
-      replyTo: email,
-      subject: `New quote request from ${name}`,
-      text: [
-        `Name: ${name}`,
-        `Email: ${email}`,
-        `Company: ${company}`,
-        `Phone: ${phone}`,
-        `Product: ${product || "—"}`,
-        "",
-        message || "(no message)",
-      ].join("\n"),
-    });
-  } catch (err) {
-    console.error("[contact] send failed:", err);
+  const result = await sendEmail({
+    to,
+    replyTo: email,
+    subject: `New quote request from ${name}`,
+    text: [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Company: ${company}`,
+      `Phone: ${phone}`,
+      `Product: ${product || "—"}`,
+      "",
+      message || "(no message)",
+    ].join("\n"),
+  });
+  if (!result.ok) {
+    console.error("[contact] send failed:", result.error);
     return jsonCors(req, { error: "Failed to send." }, { status: 502 });
   }
 

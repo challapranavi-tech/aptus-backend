@@ -7,8 +7,7 @@
       { "label": "Fortinet", "href": "/fortinet" },
       { "label": "Sophos", "href": "/sophos" },
       { "label": "SonicWall Next-Gen Firewall", "href": "/sonicwall-next-gen-firewall" },
-      { "label": "Kaspersky", "href": "/kaspersky" },
-      { "label": "Palo Alto", "href": "/palo-alto" }
+      { "label": "Kaspersky", "href": "/kaspersky" }
     ],
     "bannerTitle": "Paloalto Leading the Future of Cybersecurity",
     "bannerTagline": "Palo Alto Networks delivers innovative security solutions that protect organizations from cyber threats across all environments",
@@ -104,7 +103,7 @@
       "visible": true,
       "variant": "value-cards",
       "title": {
-        "before": "Why Choose Aptus Infotech for AutoCAD?"
+        "before": "Why Choose Aptus Infotech for Palo Alto?"
       },
       "align": "center",
       "gridColumns": 4,
@@ -133,8 +132,8 @@
     }
   ],
   "midCta": {
-    "heading": "Ready to Transform Your Hotel Operations?",
-    "subheading": "Contact our hospitality technology specialists to discuss how our guestroom management system can improve efficiency and guest satisfaction in your facility.",
+    "heading": "Ready to Strengthen Your Cybersecurity?",
+    "subheading": "Contact our security specialists today to discuss how Palo Alto Networks can protect your organization.",
     "actionLabel": "Get Your Quote Now",
     "actionHref": "#Form"
   },

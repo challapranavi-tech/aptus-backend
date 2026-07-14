@@ -46,6 +46,64 @@ Standard: OWASP (ASVS / API / LLM Top 10 where applicable).
 | AI/LLM features | **N/A / OK** | None present (`HAS_AI_FEATURES = false`). |
 | Future guardrails | **Documented** | `shared/lib/ai-prompt-policy.ts` — roles, delimiters, never put user text in system prompt. |
 
+## 5. Careers feature pass (job listing, resume upload, application submission)
+
+New public surface handling PII (name, DOB, passport number, salary, uploaded documents). Reviewed against OWASP API Top 10.
+
+### 5.1 Rate limiting
+
+| Endpoint | Preset | Notes |
+|----------|--------|-------|
+| `GET /api/careers/jobs` (+ `/[slug]`) | `publicRead` (120/min/IP) | Read-only listing; generous so multi-step applicants aren't throttled. Response `Cache-Control` reduces load. |
+| `POST /api/careers/parse-resume` | `publicWrite` (8 / 15 min / IP) | Upload endpoint; tighter IP cap. |
+| `POST /api/careers/apply` | `publicWrite` (IP) **+** `publicWriteIdentity` (3 / 15 min / email) | Submission; strictest. Email cap survives IP rotation. |
+| 429 shape | `Retry-After` + `X-RateLimit-Limit/Remaining/Reset` | via `rateLimitHeaders`, CORS-aware in middleware. |
+
+Middleware (`backend/middleware.ts`) matches both `/api/career/` (legacy) and `/api/careers/*` (new). Thresholds chosen so a legitimate applicant completing the 6-step form (one submit, a few resume-parse calls) stays well under limits.
+
+### 5.2 Input validation & sanitization
+
+| Check | Status | Notes |
+|-------|--------|-------|
+| Schema validation at API boundary | **OK** | `parseApplicationFields` (server) re-validates the full payload — client validation is UX only. |
+| Query/path params | **OK** | Job filter params length-clamped (`jobs/route.ts`); slug is matched against published jobs only. |
+| Type/length/format constraints | **OK** | email/phone regex, length caps, numeric team size / experience patterns, date fields. |
+| Allowlist fields | **OK** | `noticePeriod` ∈ fixed set — rejected server-side if off-list. |
+| Reject unknown fields | **OK** | `rejectUnknownFormKeys` (dynamic `educationDoc_*` explicitly allowlisted). |
+| **File type by content** | **OK (added)** | `shared/lib/file-signature.ts` sniffs magic bytes (PDF/OLE/ZIP/JPEG/PNG/WEBP); a spoofed `.pdf` that is really an executable/image is rejected in `apply` + `parse-resume`. |
+| Max file size | **OK** | 5 MB/file enforced client + server (`validateFile`). |
+| Filename path traversal | **OK** | `sanitizeFilename` strips path separators + control chars, allowlists chars, caps length. |
+| Error responses | **OK** | Per-field messages via `validationError`; sniffed type is **not** leaked to the client; no stack traces. |
+
+**Remediation applied:** added content/magic-byte validation; added `noticePeriod` allowlist; added query-param length clamps. (Passport copy is now mandatory for all candidates; nationality field removed.)
+
+### 5.3 Secrets & API keys
+
+| Check | Status | Notes |
+|-------|--------|-------|
+| Resume parsing keys | **N/A / OK** | Parsing is **stdlib-only** (`zlib` + regex) — no third-party service, no key, no browser-side secret. |
+| Upload/storage keys | **N/A** | Files are streamed to HR via existing SMTP; no object-storage bucket/keys introduced. |
+| Client bundle exposure | **OK** | Browser uses only `NEXT_PUBLIC_API_URL`; Odoo/SMTP creds stay server-side. |
+
+### 5.4 IDOR
+
+| Resource | Status | Notes |
+|----------|--------|-------|
+| Job detail by slug | **OK** | Odoo fetch filtered to `website_published = true`; unpublished jobs 404 like missing ones. |
+| Uploaded documents | **N/A (by design)** | No file-retrieval endpoint exists — uploads are emailed to HR, never persisted behind a guessable URL, so there is no cross-applicant read surface to exploit. |
+| Application status | **N/A** | No status/read-back endpoint. |
+
+If a recruiter dashboard or document storage is added later, each `GET by id` must enforce a server-side ownership/role check before returning attachments.
+
+### 5.5 Session & logout
+
+**N/A** for the applicant flow — it is fully anonymous (no login, no cookies, no tokens). No change to the site's existing session posture. A future recruiter-review area must invalidate tokens server-side on logout and reject revoked/expired sessions.
+
+### 5.6 Broader review (careers-specific)
+
+- **Database:** unchanged — no app DB; applicant PII transits to Odoo/HR email only. Recommend a dedicated least-privilege Odoo user if `hr.applicant` writes are added.
+- **Prompt injection:** **N/A** — resume auto-fill uses regex extraction, not an LLM. Resume text is never interpolated into any model prompt. If an LLM parser is adopted, treat resume text as untrusted (structured roles + delimiters + output validation) per `ai-prompt-policy.ts`.
+
 ## Summary
 
-No traditional database to lock down; Odoo is the data plane. Secrets hygiene and rate limits are in place. No AI surface today. Highest residual risk under scale is process-local rate limiting — upgrade path noted in code.
+No traditional database to lock down; Odoo is the data plane. Secrets hygiene and rate limits are in place. No AI surface today. The new careers flow adds public upload/submission endpoints — hardened with content-based file validation, allowlist + length-bounded input validation, tiered rate limits, and no persisted-document retrieval surface (no IDOR). Highest residual risk under scale remains process-local rate limiting — upgrade path (shared store) noted in code.

@@ -2,8 +2,8 @@ import type { NavigationItem } from "@/types";
 
 /** Vertical sidebar on Autodesk product pages — matches live site sibling nav. */
 
-/** Slugs hidden from nav, hub cards, and direct page access. (empty — live site serves all inner pages) */
-export const AUTODESK_HIDDEN_SLUGS = new Set<string>();
+/** Slugs hidden from nav, hub cards, and direct page access. */
+export const AUTODESK_HIDDEN_SLUGS = new Set<string>(["palo-alto"]);
 
 export function isAutodeskHiddenSlug(slug: string): boolean {
   return AUTODESK_HIDDEN_SLUGS.has(slug);

@@ -1,4 +1,5 @@
 import map from "./cms-image-map.json";
+import aliasesJson from "./cms-image-aliases.json";
 
 type CmsImageMap = {
   exact: Record<string, string>;
@@ -6,6 +7,7 @@ type CmsImageMap = {
 };
 
 const IMAGE_MAP = map as CmsImageMap;
+const ALIASES = (aliasesJson as { aliases: Record<string, string> }).aliases;
 
 /** Normalize WP/Elementor filename noise to a stable stem. */
 export function imageStem(filename: string): string {
@@ -20,7 +22,7 @@ export function imageStem(filename: string): string {
 
 /**
  * Map dead aptusinfotech.com/wp-content/uploads URLs (and bare /images/basenames)
- * onto local public/images files — including Elementor-hashed mirrors.
+ * onto local public/images files — including Elementor-hashed mirrors and curated aliases.
  */
 export function resolveCmsImageSrc(src: string): string {
   if (!src) return src;
@@ -42,9 +44,11 @@ export function resolveCmsImageSrc(src: string): string {
   if (!file) return src;
   const key = file.toLowerCase();
   const mapped =
-    IMAGE_MAP.exact[key] ?? IMAGE_MAP.stem[imageStem(file)] ?? undefined;
+    IMAGE_MAP.exact[key] ??
+    IMAGE_MAP.stem[imageStem(file)] ??
+    ALIASES[key] ??
+    undefined;
   if (mapped) return mapped;
-  // Last resort: keep absolute WP (still 404) only when we have no local guess.
-  if (src.startsWith("/")) return src;
-  return `/images/${file}`;
+  // No local file — keep original (often dead lander now; prefer adding an alias).
+  return src;
 }

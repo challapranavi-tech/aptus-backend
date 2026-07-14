@@ -13,7 +13,12 @@ import { NextRequest, NextResponse } from "next/server";
  */
 function presetFor(pathname: string): RateLimitPreset | null {
   if (pathname === "/api/health") return null;
-  if (pathname === "/api/contact" || pathname.startsWith("/api/career/")) {
+  if (
+    pathname === "/api/contact" ||
+    pathname.startsWith("/api/career/") ||
+    pathname === "/api/careers/apply" ||
+    pathname === "/api/careers/parse-resume"
+  ) {
     return "publicWrite";
   }
   if (pathname === "/api/revalidate") return "authWriteIp";
@@ -23,7 +28,7 @@ function presetFor(pathname: string): RateLimitPreset | null {
 }
 
 function needsCors(pathname: string): boolean {
-  return pathname === "/api/contact" || pathname.startsWith("/api/career/");
+  return pathname === "/api/contact" || pathname.startsWith("/api/career");
 }
 
 export function middleware(request: NextRequest) {

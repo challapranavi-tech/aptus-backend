@@ -30,9 +30,20 @@ async function rpc(service, method, args) {
   return json.result;
 }
 
+/**
+ * Mirror backend/lib/odoo/local-page-json.ts precedence: an override in
+ * content/odoo-json/overrides/** always wins over the family/root file,
+ * regardless of the manifest's hub/inner "type". Prevents seeding a stale
+ * base JSON when the real content lives in an override.
+ */
 function jsonPathForPage(page) {
-  if (page.type === "hub") return path.join(JSON_ROOT, `${page.slug}.json`);
-  return path.join(JSON_ROOT, page.family, `${page.slug}.json`);
+  const candidates = [
+    path.join(JSON_ROOT, "overrides", page.family, `${page.slug}.json`),
+    path.join(JSON_ROOT, page.family, `${page.slug}.json`),
+    path.join(JSON_ROOT, "overrides", `${page.slug}.json`),
+    path.join(JSON_ROOT, `${page.slug}.json`),
+  ];
+  return candidates.find((p) => fs.existsSync(p)) ?? candidates[1];
 }
 
 const manifest = JSON.parse(fs.readFileSync(MANIFEST, "utf8"));
