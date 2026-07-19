@@ -18,6 +18,46 @@ export interface ResumeHints {
   autoFilledKeys: string[];
 }
 
+const NAME_SKIP =
+  /^(curriculum\s*vitae|resume|cv|biodata|profile|personal\s*details|contact|objective|summary|experience|education|skills)\b/i;
+
+function looksLikeName(line: string): boolean {
+  if (NAME_SKIP.test(line) || EMAIL_LINE.test(line) || /\d{3,}/.test(line))
+    return false;
+  if (!/^[A-Za-z][A-Za-z .'-]{1,60}$/.test(line)) return false;
+  const words = line.split(/\s+/).filter(Boolean);
+  return words.length >= 2 && words.length <= 5;
+}
+
+function pickPhone(cleaned: string): string | undefined {
+  // Prefer an explicit international number (+cc …) over bare digit runs
+  // (which often match year ranges like 2016-2020).
+  const intl = cleaned.match(/\+\d{1,3}[\s().-]*\d(?:[\s().-]*\d){6,13}/);
+  if (intl) {
+    const phone = intl[0].replace(/\s+/g, " ").trim();
+    if (PHONE_RE.test(phone) || phone.replace(/\D/g, "").length >= 8)
+      return phone;
+  }
+  const bare = cleaned.match(
+    /(?:\b(?:tel|phone|mobile|mob|cell)\b[:\s]*)(\+?\d[\d\s().-]{7,18}\d)/i,
+  );
+  if (bare) {
+    const phone = bare[1].replace(/\s+/g, " ").trim();
+    if (phone.replace(/\D/g, "").length >= 8) return phone;
+  }
+  const fallback = cleaned.match(
+    /(?:\+?\d{1,3}[\s().-]*)?(?:\d[\s().-]*){7,14}/,
+  );
+  if (fallback) {
+    const phone = fallback[0].replace(/\s+/g, " ").trim();
+    const digits = phone.replace(/\D/g, "");
+    // Reject pure year-looking spans (e.g. 2016-2020 → 20162020).
+    if (/^20\d{6}$/.test(digits) || /^19\d{6}$/.test(digits)) return undefined;
+    if (PHONE_RE.test(phone) || digits.length >= 8) return phone;
+  }
+  return undefined;
+}
+
 export function extractResumeHints(text: string): ResumeHints {
   const cleaned = text.replace(/\u0000/g, " ").replace(/\s+/g, " ").trim();
   const autoFilledKeys: string[] = [];
@@ -29,28 +69,28 @@ export function extractResumeHints(text: string): ResumeHints {
     autoFilledKeys.push("email");
   }
 
-  const phoneMatch = cleaned.match(
-    /(?:\+?\d{1,3}[\s().-]*)?(?:\d[\s().-]*){7,14}/,
-  );
-  if (phoneMatch) {
-    const phone = phoneMatch[0].replace(/\s+/g, " ").trim();
-    if (PHONE_RE.test(phone) || phone.replace(/\D/g, "").length >= 8) {
-      hints.phone = phone;
-      autoFilledKeys.push("phone");
-    }
+  const phone = pickPhone(cleaned);
+  if (phone) {
+    hints.phone = phone;
+    autoFilledKeys.push("phone");
   }
 
-  // First non-empty line that looks like a name (2–4 words, letters).
+  // Name: labeled line, then first header-looking line (PDF text is often sparse).
   const lines = text
     .split(/\r?\n/)
     .map((l) => l.trim())
     .filter(Boolean);
-  for (const line of lines.slice(0, 8)) {
-    if (EMAIL_LINE.test(line) || /\d{5,}/.test(line)) continue;
-    if (/^[A-Za-z][A-Za-z .'-]{2,60}$/.test(line)) {
-      const words = line.split(/\s+/);
-      if (words.length >= 2 && words.length <= 4) {
-        hints.fullName = line;
+  const labeled = cleaned.match(
+    /\b(?:full\s*)?name\s*[:\-]\s*([A-Za-z][A-Za-z'-]*(?:\s+[A-Za-z][A-Za-z'-]*){1,4})(?=\s*(?:$|[|,]|\b(?:email|phone|mobile|mob|tel|cell|address)\b))/i,
+  );
+  if (labeled && looksLikeName(labeled[1].trim())) {
+    hints.fullName = labeled[1].trim();
+    autoFilledKeys.push("fullName");
+  } else {
+    for (const line of lines.slice(0, 12)) {
+      const stripped = line.replace(/^(?:full\s*)?name\s*[:\-]\s*/i, "").trim();
+      if (looksLikeName(stripped)) {
+        hints.fullName = stripped;
         autoFilledKeys.push("fullName");
         break;
       }

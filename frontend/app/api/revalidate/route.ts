@@ -33,7 +33,13 @@ function checkToken(token: string | undefined): NextResponse | null {
   // Not a browser session: reject every bad token; rotate env to revoke access.
   const expectedToken = process.env.ODOO_REVALIDATE_TOKEN;
   if (!expectedToken) {
-    return NextResponse.json({ error: "Server misconfigured" }, { status: 503 });
+    return NextResponse.json(
+      {
+        error: "Server misconfigured",
+        hint: "Set ODOO_REVALIDATE_TOKEN on the frontend (must match backend + Odoo nextjs.token).",
+      },
+      { status: 503 },
+    );
   }
   if (!token || !secureCompare(token, expectedToken)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

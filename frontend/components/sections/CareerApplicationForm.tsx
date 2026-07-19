@@ -70,7 +70,7 @@ export function CareerApplicationForm({ submitLabel }: Props) {
     if (status === "uploading") return;
     if (!validate()) {
       setStatus("error");
-      setMessage("Please fix the highlighted fields and try again.");
+      setMessage("PPlease review and correct the highlighted fields before submitting.");
       return;
     }
 
@@ -97,7 +97,7 @@ export function CareerApplicationForm({ submitLabel }: Props) {
       if (xhr.status >= 200 && xhr.status < 300) {
         setStatus("success");
         setMessage(
-          "Thank you! Your application has been submitted. Our HR team will be in touch.",
+          "Thank you for your application! We've received it successfully. Our HR team will review your application and contact you if your profile is shortlisted.",
         );
         setFields(EMPTY);
         setResume(null);

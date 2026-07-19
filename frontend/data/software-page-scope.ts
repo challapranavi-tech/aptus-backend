@@ -2,6 +2,7 @@ import { isSoftwareInnerSlug, SOFTWARE_FAMILIES } from "@/data/software-product-
 
 const SOFTWARE_HUB_SLUGS = new Set([
   "software",
+  "software-solutions",
   "autodesk",
   "adobe",
   "microsoft",

@@ -67,10 +67,15 @@ Clean staging data **before** clone, not after launch:
 
 ## Checklist (launch)
 
-- [ ] Vercel Production `ODOO_URL` / `ODOO_DB` point at production Odoo
+- [ ] Vercel Production `ODOO_URL` / `ODOO_DB` point at production Odoo (or staging if intentionally staging-backed)
 - [ ] Vercel Preview scopes use staging Odoo only
+- [ ] Frontend `APTUS_API_URL` + `NEXT_PUBLIC_API_URL` = **backend** HTTPS URL (never `localhost`, never `…/odoo/website`)
 - [ ] `ODOO_REVALIDATE_TOKEN` set in Vercel Production (and staging if webhooks enabled)
 - [ ] Odoo `nextjs.token` matches Vercel for each instance
 - [ ] Odoo `nextjs.base_url` matches the Vercel URL for that instance
+- [ ] Backend `APTUS_FRONTEND_URL` = live frontend URL (revalidate fan-out)
+- [ ] Private Vercel Blob linked on **backend** (`BLOB_READ_WRITE_TOKEN`) for career applies
+- [ ] Probe `GET https://<backend>/api/health` → `"ready": true` and all `checks` true
 - [ ] TD-007 duplicate pages resolved on source DB before clone
 - [ ] Editors told: page content in Odoo; navigation in `data/site-nav.ts` (PR required)
+- [ ] Website pages **published** in Odoo (unpublished → empty CMS → local fallback or 404)

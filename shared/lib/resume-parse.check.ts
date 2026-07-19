@@ -31,4 +31,17 @@ assert.equal(h2.experienceYears, "5", "experience 'Experience: 5 years' extracte
 const h3 = extractResumeHints("");
 assert.equal(h3.autoFilledKeys.length, 0, "no hints from empty text");
 
+// Labeled name + skip CV title; phone via Mobile: label.
+const h4 = extractResumeHints(
+  [
+    "CURRICULUM VITAE",
+    "Name: Priya Sharma",
+    "Mobile: +968 9123 4567",
+    "priya@example.com",
+  ].join("\n"),
+);
+assert.equal(h4.fullName, "Priya Sharma", "labeled name preferred over CV title");
+assert.ok(h4.phone?.includes("968"), "labeled mobile extracted");
+assert.equal(h4.email, "priya@example.com");
+
 console.log("resume-parse self-check passed");

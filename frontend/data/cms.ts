@@ -20,10 +20,26 @@ function apiBase(): string {
   return (process.env.APTUS_API_URL ?? DEFAULT_API).replace(/\/$/, "");
 }
 
+function isLocalhostUrl(url: string): boolean {
+  return /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(url);
+}
+
+/**
+ * Vercel + localhost API = every page 404s. Fail loud so the deploy is fixable
+ * instead of looking like "missing content".
+ */
+function assertDeployableApiBase(url: string): void {
+  if (process.env.VERCEL !== "1") return;
+  if (!isLocalhostUrl(url)) return;
+  throw new Error(
+    `[cms] APTUS_API_URL is localhost (${url}). In Vercel → Settings → Environment Variables set APTUS_API_URL and NEXT_PUBLIC_API_URL to your deployed backend HTTPS URL (not Odoo /odoo/website).`,
+  );
+}
+
 /** Skip localhost fetches during `next build` — use APTUS_API_URL with a deployed backend for SSG. */
 function apiEnabled(): boolean {
   const url = apiBase();
-  const isLocalhost = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(url);
+  const isLocalhost = isLocalhostUrl(url);
   if (process.env.NEXT_PHASE === "phase-production-build" && isLocalhost) {
     return false;
   }
@@ -47,35 +63,46 @@ function fallbackSiteConfig(): SiteConfig {
 async function apiGet<T>(path: string): Promise<T | null> {
   if (!apiEnabled()) return null;
 
-  const url = `${apiBase()}${path}`;
+  const base = apiBase();
+  assertDeployableApiBase(base);
+
+  const url = `${base}${path}`;
   try {
     const res = await fetch(url, {
-      // ISR, not no-store: `no-store` forces every consumer dynamic, which makes
-      // statically-generated pages (e.g. /careers/[slug]) throw "static to
-      // dynamic at runtime". CMS content is rarely-changing — revalidate like
-      // the jobs client (data/jobs.ts) instead.
-      next: { revalidate: 300 },
+      // ponytail: in dev, no-store avoids sticky 404 when backend/Odoo is slow on first hit
+      ...(process.env.NODE_ENV === "production"
+        ? { next: { revalidate: 300 } }
+        : { cache: "no-store" as RequestCache }),
       signal: AbortSignal.timeout(API_TIMEOUT_MS),
     });
+
+    // Genuine missing page — safe to treat as notFound() (and cache briefly).
     if (res.status === 404) return null;
+
+    // Transient backend/Odoo failure — throw so Next does NOT cache a 404 for 300s.
     if (!res.ok) {
-      if (process.env.NODE_ENV !== "production") {
-        console.warn(`[cms] ${url} → ${res.status}`);
-      }
-      return null;
+      throw new Error(`[cms] ${url} → HTTP ${res.status}`);
     }
+
     return (await res.json()) as T;
   } catch (err) {
-    if (process.env.NODE_ENV !== "production") {
-      console.warn(`[cms] ${url} failed:`, err);
-    }
-    return null;
+    if (err instanceof Error && err.message.startsWith("[cms]")) throw err;
+    // Timeout / network / JSON — also must not become a sticky notFound().
+    throw new Error(
+      `[cms] ${url} failed: ${err instanceof Error ? err.message : String(err)}`,
+    );
   }
 }
 
 export async function getSiteConfig(): Promise<SiteConfig> {
-  const config = await apiGet<SiteConfig>("/api/cms/site-config");
-  return config ?? fallbackSiteConfig();
+  try {
+    const config = await apiGet<SiteConfig>("/api/cms/site-config");
+    return config ?? fallbackSiteConfig();
+  } catch (err) {
+    // Chrome must still render if CMS is down.
+    console.error(err);
+    return fallbackSiteConfig();
+  }
 }
 
 export async function getHomePage(): Promise<Page | null> {
@@ -87,13 +114,26 @@ export async function getPageBySlug(slug: string): Promise<Page | null> {
 }
 
 export async function getAllPageSlugs(): Promise<string[]> {
-  const data = await apiGet<{ slugs: string[] }>("/api/cms/slugs");
-  return data?.slugs ?? [];
+  try {
+    const data = await apiGet<{ slugs: string[] }>("/api/cms/slugs");
+    return data?.slugs ?? [];
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
 }
 
 export async function getAllPages(): Promise<Page[]> {
   const slugs = await getAllPageSlugs();
-  const pages = await Promise.all(slugs.map((slug) => getPageBySlug(slug)));
+  const pages = await Promise.all(
+    slugs.map(async (slug) => {
+      try {
+        return await getPageBySlug(slug);
+      } catch {
+        return null;
+      }
+    }),
+  );
   return pages.filter((p): p is Page => p !== null);
 }
 

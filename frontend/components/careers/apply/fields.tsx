@@ -36,14 +36,18 @@ export function FieldWrap({
   className,
 }: FieldWrapProps) {
   return (
-    <div className={cn("aptus-field", className)} data-invalid={error ? "true" : undefined}>
+    <div
+      className={cn("aptus-field", className)}
+      data-invalid={error ? "true" : undefined}
+      data-autofilled={autoFilled ? "true" : undefined}
+    >
       <label htmlFor={htmlFor}>
         {label}
         {required && <span aria-hidden="true"> *</span>}
-        {autoFilled && <AutoFillBadge />}
       </label>
-      {help && <p className="aptus-field__help">{help}</p>}
+      {autoFilled && <AutoFillBadge />}
       {children}
+      {help && <p className="aptus-field__help">{help}</p>}
       {error && (
         <p className="aptus-field__error" role="alert">
           {error}

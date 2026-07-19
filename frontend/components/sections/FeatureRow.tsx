@@ -192,7 +192,7 @@ export function FeatureRow({ data }: FeatureRowProps) {
             isIntro && !imageRight && "w-full max-w-full lg:w-[73%] lg:max-w-[73%]",
             isBoxed && "mx-auto max-w-[500px] rounded-2xl object-cover shadow-[0_10px_25px_rgba(0,0,0,0.1)]",
             isPanel && "rounded-2xl object-cover shadow-[0_10px_30px_rgba(0,0,0,0.1)]",
-            !isBoxed && !isPanel && "img-shrink object-cover",
+            !isBoxed && !isPanel && "img-shrink rounded-2xl object-cover lg:h-[420px]",
           )}
           sizes="(max-width: 1024px) 100vw, 50vw"
         />
@@ -214,7 +214,7 @@ export function FeatureRow({ data }: FeatureRowProps) {
           className={cn(
             isBoxed && "aptus-tint-panel my-1 mb-2 p-3 sm:p-4",
             isPanel && "aptus-tint-panel my-1 mb-2 p-3 sm:p-4",
-            data.media && !imageBelow && "grid items-center gap-4 lg:grid-cols-2 lg:gap-5",
+            data.media && !imageBelow && "grid items-start gap-4 lg:grid-cols-2 lg:gap-5",
           )}
         >
           {imageBlock}

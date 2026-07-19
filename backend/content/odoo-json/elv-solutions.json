@@ -248,7 +248,33 @@
       }
     ]
   },
-  "showPartnerships": true,
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Norden-1-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "Norden"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/EATON.png",
+        "alt": "EATON"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Vertiv.png",
+        "alt": "Vertiv"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Coral-rajdmogeyz54e94l9wk2y4mypcj2653jlhrirzgcxa.png",
+        "alt": "Coral"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/infosec-rajdoxajaq7s4pv65vhzwk8lshgmk40gklva1s4i26.png",
+        "alt": "infosec"
+      }
+    ]
+  },
   "contactCta": {
     "heading": "Have questions? We can help",
     "description": "Our experts can help you to implement the right ELV Solution for your business.",

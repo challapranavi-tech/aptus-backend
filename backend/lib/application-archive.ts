@@ -60,6 +60,12 @@ export async function archiveApplication(
   if (process.env.BLOB_READ_WRITE_TOKEN?.trim()) {
     return archiveToBlob(folder, json, attachments, names);
   }
+  // Vercel FS is read-only — disk archive always fails there without Blob.
+  if (process.env.VERCEL === "1") {
+    throw new Error(
+      "BLOB_READ_WRITE_TOKEN missing on Vercel — link a private Blob store for career application archives.",
+    );
+  }
   return archiveToDisk(folder, json, attachments, names);
 }
 

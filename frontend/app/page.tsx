@@ -7,13 +7,22 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const page = await getHomePage();
-  if (!page) return { title: "Home" };
-  return buildPageMetadata(page);
+  try {
+    const page = await getHomePage();
+    if (!page) return { title: "Home" };
+    return buildPageMetadata(page);
+  } catch {
+    return { title: "Home" };
+  }
 }
 
 export default async function HomePage() {
-  const page = await getHomePage();
+  let page = null;
+  try {
+    page = await getHomePage();
+  } catch (err) {
+    console.error(err);
+  }
 
   if (!page) {
     return (

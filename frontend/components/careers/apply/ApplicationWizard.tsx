@@ -13,14 +13,10 @@ import {
   RESUME_ACCEPT,
   RESUME_EXTENSIONS,
   emptyApplicationFields,
-  validateBasic,
-  validateEducation,
   validateFile,
   validateImageFile,
-  validatePreInterview,
   type ApplicationFields,
   type EducationEntry,
-  type NamedYear,
   type OrgTenure,
 } from "@shared/lib/careers-application";
 import type { CareerJob } from "@shared/lib/career-jobs";
@@ -29,18 +25,188 @@ import { useMemo, useRef, useState } from "react";
 import { FileDropzone } from "./FileDropzone";
 import { SelectField, TextAreaField, TextField } from "./fields";
 
+/**
+ * 4-step flow:
+ *   1. basics     – Resume + personal info
+ *   2. experience – Orgs, qualifications, CTC, passport
+ *   3. documents  – Passport, photo, optional employment docs
+ *   4. review     – Summary + submit
+ *
+ * UI-only state (first/last name, country code, dynamic orgs) is mapped onto
+ * CAREER_FORM_KEYS on submit — never send unknown FormData keys.
+ */
 const STEPS = [
-  { key: "basic", label: "Basic Info", sub: "Your details" },
-  { key: "resume", label: "Resume", sub: "Upload & auto-fill" },
-  { key: "pre", label: "Pre-Interview", sub: "Background" },
-  { key: "education", label: "Education", sub: "Qualifications" },
-  { key: "attachments", label: "Attachments", sub: "Documents" },
-  { key: "review", label: "Review", sub: "Submit" },
+  { key: "basics", label: "Your Details", sub: "Resume & personal info" },
+  { key: "experience", label: "Experience", sub: "Work history & details" },
+  { key: "documents", label: "Documents", sub: "Upload required files" },
+  { key: "review", label: "Review", sub: "Submit application" },
 ] as const;
+
+export const COUNTRY_CODES = [
+  { label: "🇴🇲 Oman (+968)", value: "+968", digits: 8 },
+  { label: "🇮🇳 India (+91)", value: "+91", digits: 10 },
+  { label: "🇦🇪 UAE (+971)", value: "+971", digits: 9 },
+  { label: "🇸🇦 Saudi Arabia (+966)", value: "+966", digits: 9 },
+  { label: "🇬🇧 UK (+44)", value: "+44", digits: 10 },
+  { label: "🇺🇸 US (+1)", value: "+1", digits: 10 },
+  { label: "🇵🇭 Philippines (+63)", value: "+63", digits: 10 },
+  { label: "🇵🇰 Pakistan (+92)", value: "+92", digits: 10 },
+  { label: "🇧🇩 Bangladesh (+880)", value: "+880", digits: 10 },
+  { label: "🇳🇵 Nepal (+977)", value: "+977", digits: 10 },
+];
+
+const DISPOSABLE_DOMAINS = new Set([
+  "mailinator.com",
+  "guerrillamail.com",
+  "10minutemail.com",
+  "throwaway.email",
+  "yopmail.com",
+  "trashmail.com",
+  "fakeinbox.com",
+  "sharklasers.com",
+  "tempmail.com",
+  "dispostable.com",
+  "maildrop.cc",
+  "getairmail.com",
+  "mailnull.com",
+  "spamgourmet.com",
+  "trashmail.me",
+  "discard.email",
+  "getnada.com",
+  "tempr.email",
+  "spamex.com",
+  "airmail.cc",
+  "spam4.me",
+]);
+
+const NA = "Not Applicable";
+
+function validateEmailAddress(email: string): string | null {
+  const t = email.trim().toLowerCase();
+  if (!t) return "Email is required.";
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(t))
+    return "Enter a valid email address (e.g. name@example.com).";
+  const [local, domain] = t.split("@");
+  if (DISPOSABLE_DOMAINS.has(domain))
+    return "Disposable email addresses are not accepted.";
+  if (/[^aeiou\d._+\-]{8,}/i.test(local))
+    return "This email looks invalid. Please enter a real address.";
+  return null;
+}
+
+function validatePhoneNumber(phone: string, countryCode: string): string | null {
+  const digits = phone.replace(/\D/g, "");
+  if (!digits) return "Phone number is required.";
+  const rule = COUNTRY_CODES.find((c) => c.value === countryCode);
+  if (rule && digits.length !== rule.digits) {
+    const name = rule.label.split(" ")[1];
+    return `${name} numbers must be exactly ${rule.digits} digits (got ${digits.length}).`;
+  }
+  if (!rule && (digits.length < 7 || digits.length > 15))
+    return "Enter a valid phone number (7–15 digits).";
+  return null;
+}
+
+/** Parse DD-MM-YYYY into a local Date (or null). */
+function parseDMY(value: string): Date | null {
+  const m = value.trim().match(/^(\d{2})-(\d{2})-(\d{4})$/);
+  if (!m) return null;
+  const dd = Number(m[1]);
+  const mm = Number(m[2]);
+  const yyyy = Number(m[3]);
+  const d = new Date(yyyy, mm - 1, dd);
+  if (
+    Number.isNaN(d.getTime()) ||
+    d.getFullYear() !== yyyy ||
+    d.getMonth() !== mm - 1 ||
+    d.getDate() !== dd
+  ) {
+    return null;
+  }
+  return d;
+}
+
+function pad2(n: number): string {
+  return String(n).padStart(2, "0");
+}
+
+function todayDMY(): string {
+  const d = new Date();
+  return `${pad2(d.getDate())}-${pad2(d.getMonth() + 1)}-${d.getFullYear()}`;
+}
+
+/** Accept ISO from legacy defaults and normalize to DD-MM-YYYY. */
+function toDMY(value: string): string {
+  if (!value) return "";
+  if (parseDMY(value)) return value.trim();
+  const iso = value.trim().match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (iso) return `${iso[3]}-${iso[2]}-${iso[1]}`;
+  return value.trim();
+}
+
+function validateDateDMY(
+  value: string,
+  label: string,
+  opts?: { allowTodayOrPast?: boolean; mustBeFuture?: boolean; minAge?: number },
+): string | null {
+  if (!value) return `${label} is required.`;
+  const date = parseDMY(value);
+  if (!date) return `${label} must be DD-MM-YYYY.`;
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  if (opts?.allowTodayOrPast && date > today)
+    return `${label} cannot be in the future.`;
+  if (opts?.mustBeFuture && date <= today)
+    return `${label} must be a future date.`;
+  if (opts?.minAge !== undefined) {
+    const cutoff = new Date(today);
+    cutoff.setFullYear(today.getFullYear() - opts.minAge);
+    if (date > cutoff) return `You must be at least ${opts.minAge} years old.`;
+  }
+  return null;
+}
+
+/** First token → first name; remaining → last name.
+ *  "Anagha R Senan" (middle initial) → First: Anagha, Last: Senan. */
+function splitPersonName(full: string): { first: string; last: string } {
+  const parts = full.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return { first: "", last: "" };
+  if (parts.length === 1) return { first: parts[0], last: "" };
+  if (parts.length >= 3 && /^[A-Za-z]\.?$/.test(parts[1])) {
+    return { first: parts[0], last: parts.slice(2).join(" ") };
+  }
+  return { first: parts[0], last: parts.slice(1).join(" ") };
+}
+
+interface OrgEntry extends OrgTenure {
+  id: string;
+}
+
+const emptyOrg = (): OrgEntry => ({
+  id: Math.random().toString(36).slice(2),
+  name: "",
+  designation: "",
+  duration: "",
+  totalYears: "",
+});
+
+function tenureOnly(org: OrgTenure): OrgTenure {
+  return {
+    name: org.name,
+    designation: org.designation,
+    duration: org.duration,
+    totalYears: org.totalYears,
+  };
+}
+
+function naOrg(): OrgTenure {
+  return { name: NA, designation: NA, duration: NA, totalYears: "0" };
+}
 
 interface FileState {
   resume: File | null;
-  educationalCertificates: File[];
   passportCopy: File | null;
   photograph: File | null;
   appointmentLetter: File | null;
@@ -51,7 +217,6 @@ interface FileState {
 
 const EMPTY_FILES: FileState = {
   resume: null,
-  educationalCertificates: [],
   passportCopy: null,
   photograph: null,
   appointmentLetter: null,
@@ -62,78 +227,457 @@ const EMPTY_FILES: FileState = {
 
 type Errors = Record<string, string>;
 
+/**
+ * DD-MM-YYYY text field (matches other inputs). Optional calendar control is an
+ * icon-sized overlay — never a second full-width <input type="date"> (browser
+ * locale would show mm/dd/yyyy and break the grid).
+ */
+function DateField({
+  id,
+  label,
+  required,
+  help,
+  value,
+  error,
+  onChange,
+  autoFilled,
+}: {
+  id: string;
+  label: string;
+  required?: boolean;
+  help?: string;
+  value: string; // DD-MM-YYYY
+  error?: string;
+  onChange: (v: string) => void;
+  autoFilled?: boolean;
+}) {
+  const display = toDMY(value);
+  const isoForPicker = (() => {
+    const d = parseDMY(display);
+    if (!d) return "";
+    return `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
+  })();
+
+  const formatTyped = (raw: string) => {
+    const digits = raw.replace(/\D/g, "").slice(0, 8);
+    if (digits.length <= 2) return digits;
+    if (digits.length <= 4) return `${digits.slice(0, 2)}-${digits.slice(2)}`;
+    return `${digits.slice(0, 2)}-${digits.slice(2, 4)}-${digits.slice(4)}`;
+  };
+
+  return (
+    <div
+      className="aptus-field"
+      data-invalid={error ? "true" : undefined}
+      data-autofilled={autoFilled ? "true" : undefined}
+    >
+      <label htmlFor={id}>
+        {label}
+        {required && <span aria-hidden="true"> *</span>}
+      </label>
+      {autoFilled && (
+        <span className="aptus-field__badge" title="Pre-filled from your resume">
+          Auto-filled — review
+        </span>
+      )}
+      <div className="aptus-apply__date">
+        <input
+          id={id}
+          type="text"
+          inputMode="numeric"
+          placeholder="DD-MM-YYYY"
+          autoComplete="bday"
+          maxLength={10}
+          value={display}
+          aria-invalid={error ? true : undefined}
+          onChange={(e) => onChange(formatTyped(e.target.value))}
+        />
+        <label className="aptus-apply__date-cal" title="Open calendar">
+          <span className="aptus-apply__date-cal-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
+              <rect x="3" y="5" width="18" height="16" rx="2" />
+              <path d="M3 10h18M8 3v4M16 3v4" />
+            </svg>
+          </span>
+          <input
+            type="date"
+            aria-label={`${label} calendar`}
+            value={isoForPicker}
+            onChange={(e) => {
+              const raw = e.target.value;
+              if (!raw) {
+                onChange("");
+                return;
+              }
+              const [y, m, d] = raw.split("-");
+              onChange(`${d}-${m}-${y}`);
+            }}
+          />
+        </label>
+      </div>
+      {help && <p className="aptus-field__help">{help}</p>}
+      {error && (
+        <p className="aptus-field__error" role="alert">
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
+
+/** Split dial-code from a resume phone into local digits for the country select. */
+function splitPhone(
+  rawPhone: string,
+  fallbackCode: string,
+): { countryCode: string; local: string } {
+  const compact = rawPhone.replace(/[\s().-]/g, "");
+  const withPlus = compact.startsWith("+") ? compact : `+${compact}`;
+  const byCode = [...COUNTRY_CODES].sort(
+    (a, b) => b.value.length - a.value.length,
+  );
+  for (const c of byCode) {
+    if (withPlus.startsWith(c.value)) {
+      const local = withPlus.slice(c.value.length).replace(/\D/g, "");
+      if (local.length >= 6) return { countryCode: c.value, local };
+    }
+  }
+  // Digits-only: try matching known CC prefixes (e.g. 9198… → +91).
+  const digits = compact.replace(/\D/g, "");
+  for (const c of byCode) {
+    const cc = c.value.slice(1);
+    if (digits.startsWith(cc) && digits.length === cc.length + c.digits) {
+      return { countryCode: c.value, local: digits.slice(cc.length) };
+    }
+  }
+  return {
+    countryCode: fallbackCode,
+    local: digits,
+  };
+}
+
+function OrgBlock({
+  index,
+  org,
+  errors,
+  onChange,
+  onRemove,
+}: {
+  index: number;
+  org: OrgEntry;
+  errors: Errors;
+  onChange: (patch: Partial<OrgTenure>) => void;
+  onRemove?: () => void;
+}) {
+  const label = index === 0 ? "Current Organization" : `Previous Organization ${index}`;
+  const pfx = `org_${org.id}`;
+
+  return (
+    <fieldset className="aptus-apply__group" style={{ position: "relative" }}>
+      <legend style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+        <span
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "1.5rem",
+            height: "1.5rem",
+            borderRadius: "50%",
+            background: "var(--aptus-blue, #24648c)",
+            color: "#fff",
+            fontSize: "0.75rem",
+            fontWeight: 700,
+            flexShrink: 0,
+          }}
+        >
+          {index + 1}
+        </span>
+        {label}
+      </legend>
+      <p className="aptus-field__help">{NA_HELPER}</p>
+
+      {onRemove && (
+        <button
+          type="button"
+          onClick={onRemove}
+          aria-label={`Remove ${label}`}
+          style={{
+            position: "absolute",
+            top: "0.75rem",
+            right: "0.75rem",
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            color: "#dc2626",
+            fontSize: "1.1rem",
+            lineHeight: 1,
+            padding: "0.25rem",
+          }}
+        >
+          ✕
+        </button>
+      )}
+
+      <div className="aptus-apply__grid aptus-apply__grid--2">
+        <TextField
+          id={`${pfx}-name`}
+          label="Organization Name"
+          required
+          value={org.name}
+          error={errors[`${pfx}-name`]}
+          onChange={(v) => onChange({ name: v })}
+        />
+        <TextField
+          id={`${pfx}-designation`}
+          label="Designation / Role"
+          required
+          value={org.designation}
+          error={errors[`${pfx}-designation`]}
+          onChange={(v) => onChange({ designation: v })}
+        />
+        <TextField
+          id={`${pfx}-duration`}
+          label="Duration"
+          placeholder="e.g. 2020–2024 or Present"
+          required
+          value={org.duration}
+          error={errors[`${pfx}-duration`]}
+          onChange={(v) => onChange({ duration: v })}
+        />
+        <TextField
+          id={`${pfx}-totalYears`}
+          label="Total Years"
+          inputMode="numeric"
+          placeholder="e.g. 3.5"
+          required
+          value={org.totalYears}
+          error={errors[`${pfx}-totalYears`]}
+          onChange={(v) => onChange({ totalYears: v })}
+        />
+      </div>
+    </fieldset>
+  );
+}
+
+function DocSectionHeader({
+  title,
+  color,
+}: {
+  title: string;
+  color: string;
+}) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "0.6rem",
+        padding: "0.6rem 1rem",
+        borderRadius: "0.5rem",
+        background: color,
+        marginBottom: "1rem",
+        marginTop: "1.5rem",
+      }}
+    >
+      <strong style={{ fontSize: "1rem", letterSpacing: "0.01em" }}>{title}</strong>
+    </div>
+  );
+}
+
 export function ApplicationWizard({ job }: { job: CareerJob }) {
   const [step, setStep] = useState(0);
   const [maxStep, setMaxStep] = useState(0);
+
   const [values, setValues] = useState<ApplicationFields>(() =>
     emptyApplicationFields({
       appliedDesignation: job.title,
       position: job.title,
       jobSlug: job.slug,
       jobId: job.id,
+      applicationDate: todayDMY(),
     }),
   );
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [countryCode, setCountryCode] = useState("+968");
+  const [orgs, setOrgs] = useState<OrgEntry[]>([emptyOrg()]);
+
   const [files, setFiles] = useState<FileState>(EMPTY_FILES);
   const [autoFilled, setAutoFilled] = useState<Set<string>>(new Set());
   const [errors, setErrors] = useState<Errors>({});
+
   const [submitState, setSubmitState] = useState<
     "idle" | "submitting" | "success" | "error"
   >("idle");
   const [progress, setProgress] = useState(0);
   const [submitError, setSubmitError] = useState("");
   const [showSummary, setShowSummary] = useState(false);
+
   const topRef = useRef<HTMLDivElement>(null);
   const summaryRef = useRef<HTMLDivElement>(null);
 
   const setValue = (key: keyof ApplicationFields, v: string) => {
     setValues((prev) => ({ ...prev, [key]: v }));
-    if (errors[key]) setErrors((prev) => ({ ...prev, [key]: "" }));
+    if (errors[key]) setErrors((p) => ({ ...p, [key]: "" }));
     if (autoFilled.has(key)) {
-      setAutoFilled((prev) => {
-        const next = new Set(prev);
-        next.delete(key);
-        return next;
+      setAutoFilled((p) => {
+        const n = new Set(p);
+        n.delete(key);
+        return n;
       });
     }
   };
 
-  const setOrg = (
-    key: "currentOrg" | "previousOrg1" | "previousOrg2",
-    patch: Partial<OrgTenure>,
-  ) => {
-    setValues((prev) => ({ ...prev, [key]: { ...prev[key], ...patch } }));
+  const updateOrg = (index: number, patch: Partial<OrgTenure>) => {
+    setOrgs((prev) => prev.map((o, i) => (i === index ? { ...o, ...patch } : o)));
+    const pfx = `org_${orgs[index]?.id}`;
+    const cleared: Errors = {};
+    Object.keys(patch).forEach((k) => {
+      cleared[`${pfx}-${k}`] = "";
+    });
+    setErrors((p) => ({ ...p, ...cleared }));
+  };
+
+  const addOrg = () => setOrgs((prev) => [...prev, emptyOrg()]);
+  const removeOrg = (index: number) =>
+    setOrgs((prev) => prev.filter((_, i) => i !== index));
+
+  const updateEducation = (i: number, patch: Partial<EducationEntry>) => {
+    setValues((prev) => ({
+      ...prev,
+      educationEntries: prev.educationEntries.map((e, idx) =>
+        idx === i ? { ...e, ...patch } : e,
+      ),
+    }));
+  };
+  const addEducation = () => {
+    setValues((prev) => ({
+      ...prev,
+      educationEntries: [
+        ...prev.educationEntries,
+        { name: "", institution: "", year: "" },
+      ],
+    }));
+    setFiles((p) => ({ ...p, educationDocs: [...p.educationDocs, null] }));
+  };
+  const removeEducation = (i: number) => {
+    setValues((prev) => ({
+      ...prev,
+      educationEntries: prev.educationEntries.filter((_, idx) => idx !== i),
+    }));
+    setFiles((p) => ({
+      ...p,
+      educationDocs: p.educationDocs.filter((_, idx) => idx !== i),
+    }));
   };
 
   const validateStep = (index: number): Errors => {
-    switch (STEPS[index].key) {
-      case "basic":
-        return validateBasic(values);
-      case "resume": {
-        const e = validateFile(files.resume, RESUME_EXTENSIONS, "Resume", true);
-        return e ? { resume: e } : {};
-      }
-      case "pre":
-        return validatePreInterview(values);
-      case "education": {
-        const errs = validateEducation(values);
-        if (!files.educationDocs[0]) {
-          errs.educationDoc_0 = "Supporting document is required.";
-        }
-        return errs;
-      }
-      case "attachments": {
-        const errs: Errors = {};
-        if (files.educationalCertificates.length === 0)
-          errs.educationalCertificates = "Upload at least one educational certificate.";
-        if (!files.passportCopy)
-          errs.passportCopy = "Passport copy is required.";
-        const photoErr = validateImageFile(files.photograph, "Photograph", true);
-        if (photoErr) errs.photograph = photoErr;
-        return errs;
-      }
-      default:
-        return {};
+    const errs: Errors = {};
+
+    if (STEPS[index].key === "basics") {
+      if (!firstName.trim()) errs.firstName = "First name is required.";
+      else if (firstName.trim().length < 2) errs.firstName = "At least 2 characters.";
+      if (!lastName.trim()) errs.lastName = "Last name is required.";
+      else if (lastName.trim().length < 2) errs.lastName = "At least 2 characters.";
+
+      const emailErr = validateEmailAddress(values.email);
+      if (emailErr) errs.email = emailErr;
+
+      const phoneErr = validatePhoneNumber(values.phone, countryCode);
+      if (phoneErr) errs.phone = phoneErr;
+
+      if (!values.currentLocation.trim())
+        errs.currentLocation = "Current Location is required.";
+
+      const dobErr = validateDateDMY(values.dateOfBirth, "Date of Birth", {
+        allowTodayOrPast: true,
+        minAge: 18,
+      });
+      if (dobErr) errs.dateOfBirth = dobErr;
+
+      const resumeErr = validateFile(files.resume, RESUME_EXTENSIONS, "Resume", true);
+      if (resumeErr) errs.resume = resumeErr;
     }
+
+    if (STEPS[index].key === "experience") {
+      const appDateErr = validateDateDMY(
+        toDMY(values.applicationDate),
+        "Date of Application",
+        { allowTodayOrPast: true },
+      );
+      if (appDateErr) errs.applicationDate = appDateErr;
+
+      if (!values.passportNumber.trim())
+        errs.passportNumber = "Passport number is required.";
+      const passportErr = validateDateDMY(
+        values.passportValidity,
+        "Passport Validity",
+        { mustBeFuture: true },
+      );
+      if (passportErr) errs.passportValidity = passportErr;
+
+      if (!values.totalYearsExperience.trim())
+        errs.totalYearsExperience = "Required.";
+
+      orgs.forEach((org) => {
+        const pfx = `org_${org.id}`;
+        if (!org.name.trim()) errs[`${pfx}-name`] = "Organization name is required.";
+        if (!org.designation.trim())
+          errs[`${pfx}-designation`] = "Designation is required.";
+        if (!org.duration.trim()) errs[`${pfx}-duration`] = "Duration is required.";
+        if (!org.totalYears.trim())
+          errs[`${pfx}-totalYears`] = "Total years is required.";
+      });
+
+      if (!values.noticePeriod) errs.noticePeriod = "Please select a notice period.";
+      else if (
+        !NOTICE_PERIOD_OPTIONS.includes(
+          values.noticePeriod as (typeof NOTICE_PERIOD_OPTIONS)[number],
+        )
+      ) {
+        errs.noticePeriod = "Select a valid notice period.";
+      }
+      if (!values.currentCtc.trim()) errs.currentCtc = "Required.";
+      if (!values.expectedCtc.trim()) errs.expectedCtc = "Required.";
+
+      if (!values.reportsTo.trim()) errs.reportsTo = "Reports To is required.";
+      if (!values.teamSize.trim()) errs.teamSize = "Team Size is required.";
+      else if (!/^\d{1,4}$/.test(values.teamSize.trim()))
+        errs.teamSize = "Enter a valid team size.";
+
+      values.educationEntries.forEach((e, i) => {
+        if (i === 0 || e.name || e.institution || e.year) {
+          if (!e.name.trim())
+            errs[`educationEntries.${i}.name`] = "Qualification is required.";
+          if (!e.institution.trim())
+            errs[`educationEntries.${i}.institution`] = "Institution is required.";
+          if (!e.year.trim())
+            errs[`educationEntries.${i}.year`] = "Year is required.";
+        }
+      });
+      if (!files.educationDocs[0])
+        errs.educationDoc_0 = "Supporting document is required.";
+    }
+
+    if (STEPS[index].key === "documents") {
+      if (!files.passportCopy) errs.passportCopy = "Passport copy is required.";
+      const photoErr = validateImageFile(files.photograph, "Photograph", true);
+      if (photoErr) errs.photograph = photoErr;
+
+      const checks: Array<[string, File | null]> = [
+        ["passportCopy", files.passportCopy],
+        ["photograph", files.photograph],
+        ["appointmentLetter", files.appointmentLetter],
+        ["relievingLetter", files.relievingLetter],
+        ["latestPayslip", files.latestPayslip],
+      ];
+      checks.forEach(([key, f]) => {
+        if (f && f.size > MAX_UPLOAD_BYTES)
+          errs[key] = `Must be under ${MAX_UPLOAD_BYTES / (1024 * 1024)} MB.`;
+      });
+    }
+
+    return errs;
   };
 
   const scrollTop = () =>
@@ -146,23 +690,10 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
     scrollTop();
   };
 
-  // Real-time validation: on blur, re-check the current step and surface the
-  // error for just the blurred scalar field (field id === error key). Nested
-  // groups (org/cert/education) validate on Continue.
-  const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
-    const id = (e.target as HTMLElement).id;
-    if (!id) return;
-    const stepErrors = validateStep(step);
-    if (id in stepErrors || errors[id]) {
-      setErrors((prev) => ({ ...prev, [id]: stepErrors[id] ?? "" }));
-    }
-  };
-
   const blockWithErrors = (e: Errors) => {
     setErrors(e);
     setShowSummary(true);
     scrollTop();
-    // Move focus to the summary so screen readers announce the failure.
     requestAnimationFrame(() => summaryRef.current?.focus());
   };
 
@@ -178,7 +709,14 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
 
   const back = () => goTo(Math.max(step - 1, 0));
 
-  // ── Resume auto-fill ──────────────────────────────────────────────────
+  const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
+    const id = (e.target as HTMLElement).id;
+    if (!id) return;
+    const stepErrors = validateStep(step);
+    if (id in stepErrors || errors[id])
+      setErrors((prev) => ({ ...prev, [id]: stepErrors[id] ?? "" }));
+  };
+
   const [parsing, setParsing] = useState(false);
   const [parseNote, setParseNote] = useState<string | null>(null);
 
@@ -187,6 +725,15 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
     setFiles((p) => ({ ...p, resume: file }));
     setErrors((p) => ({ ...p, resume: "" }));
     if (!file) return;
+
+    if (file.size > MAX_UPLOAD_BYTES) {
+      setErrors((p) => ({
+        ...p,
+        resume: `Resume must be under ${MAX_UPLOAD_BYTES / (1024 * 1024)} MB.`,
+      }));
+      return;
+    }
+
     setParsing(true);
     setParseNote(null);
     try {
@@ -199,18 +746,14 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
       const data = (await res.json()) as { hints?: ResumeHints };
       const hints = data.hints;
       if (hints && hints.autoFilledKeys.length > 0) {
-        // Auto-fill is best-effort; apply silently rather than promise a result.
         applyHints(hints);
-        setParseNote(null);
       } else {
         setParseNote(
-          "We couldn't read details automatically — no problem, just fill the fields manually.",
+          "Couldn't auto-read your resume — fill in the fields below manually.",
         );
       }
     } catch {
-      setParseNote(
-        "Auto-fill is unavailable right now — please continue and fill the fields manually.",
-      );
+      setParseNote("Auto-fill unavailable — please fill in the fields manually.");
     } finally {
       setParsing(false);
     }
@@ -218,113 +761,72 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
 
   const applyHints = (hints: ResumeHints) => {
     const filled = new Set(autoFilled);
-    setValues((prev) => {
-      const nextV = { ...prev };
-      if (hints.fullName && !prev.fullName) {
-        nextV.fullName = hints.fullName;
-        nextV.candidateName = hints.fullName;
+    const looksReal = (s: string) => {
+      const t = s.trim();
+      if (t.length < 2) return false;
+      // Reject placeholder / mock junk candidates sometimes leave in resumes.
+      if (/^(n\/?a|na|nil|none|test|xxx+|asdf|qwer|mock|sample|dummy)$/i.test(t))
+        return false;
+      return true;
+    };
+
+    // Only fill empty fields — never invent values when the parser found nothing.
+    if (hints.fullName?.trim() && looksReal(hints.fullName) && !firstName.trim()) {
+      const { first, last } = splitPersonName(hints.fullName);
+      if (looksReal(first)) {
+        setFirstName(first);
+        setLastName(looksReal(last) ? last : "");
         filled.add("fullName");
-        filled.add("candidateName");
+        filled.add("firstName");
+        if (looksReal(last)) filled.add("lastName");
       }
-      if (hints.email && !prev.email) {
-        nextV.email = hints.email;
-        filled.add("email");
-      }
-      if (hints.phone && !prev.phone) {
-        nextV.phone = hints.phone;
+    }
+
+    let localPhone: string | undefined;
+    if (hints.phone) {
+      const split = splitPhone(hints.phone, countryCode);
+      if (split.local.length >= 7) {
+        setCountryCode(split.countryCode);
+        localPhone = split.local;
         filled.add("phone");
       }
-      if (hints.experienceYears && !prev.totalYearsExperience) {
-        nextV.totalYearsExperience = hints.experienceYears;
+    }
+
+    setValues((prev) => {
+      const next = { ...prev };
+      if (hints.fullName?.trim() && looksReal(hints.fullName) && !prev.fullName.trim()) {
+        next.fullName = hints.fullName.trim();
+        next.candidateName = hints.fullName.trim();
+      }
+      if (hints.email && !prev.email.trim()) {
+        next.email = hints.email;
+        filled.add("email");
+      }
+      if (localPhone && !prev.phone.trim()) {
+        next.phone = localPhone;
+      }
+      if (
+        hints.experienceYears &&
+        !prev.totalYearsExperience.trim() &&
+        /^\d{1,2}(?:\.\d)?$/.test(hints.experienceYears)
+      ) {
+        next.totalYearsExperience = hints.experienceYears;
         filled.add("totalYearsExperience");
       }
-      // Prefer a single auto-fill entry; extras stay available via "+ Add".
-      if (hints.education?.length && prev.educationEntries.every((x) => !x.name)) {
-        const e = hints.education[0];
-        nextV.educationEntries = [
-          {
-            name: e.name,
-            institution: e.institution ?? "",
-            year: e.year ?? "",
-          },
-        ];
-        filled.add("educationEntries");
-      }
-      return nextV;
+      // Education parse is too noisy — leave Academic Details empty for the candidate.
+      return next;
     });
     setAutoFilled(filled);
   };
 
-  // ── Education entries (Step D — at least one; can add more) ───────────
-  const updateEducation = (i: number, patch: Partial<EducationEntry>) => {
-    setValues((prev) => {
-      const list = prev.educationEntries.map((e, idx) =>
-        idx === i ? { ...e, ...patch } : e,
-      );
-      return { ...prev, educationEntries: list };
-    });
-    setErrors((p) => ({
-      ...p,
-      educationEntries: "",
-      [`educationEntries.${i}.name`]: "",
-      [`educationEntries.${i}.institution`]: "",
-      [`educationEntries.${i}.year`]: "",
-      ...(i === 0 ? { educationDoc_0: "" } : {}),
-    }));
-  };
-  const addEducation = () => {
-    setValues((prev) => ({
-      ...prev,
-      educationEntries: [...prev.educationEntries, { name: "", institution: "", year: "" }],
-    }));
-    setFiles((p) => ({ ...p, educationDocs: [...p.educationDocs, null] }));
-  };
-  const removeEducation = (i: number) => {
-    // Keep at least one entry.
-    if (values.educationEntries.length <= 1) return;
-    setValues((prev) => ({
-      ...prev,
-      educationEntries: prev.educationEntries.filter((_, idx) => idx !== i),
-    }));
-    setFiles((p) => ({
-      ...p,
-      educationDocs: p.educationDocs.filter((_, idx) => idx !== i),
-    }));
-  };
-
-  // ── Certifications (Step C) ───────────────────────────────────────────
-  const updateCert = (i: number, patch: Partial<NamedYear>) => {
-    setValues((prev) => ({
-      ...prev,
-      certifications: prev.certifications.map((c, idx) =>
-        idx === i ? { ...c, ...patch } : c,
-      ),
-    }));
-  };
-  const addCert = () =>
-    setValues((prev) => ({
-      ...prev,
-      certifications: [...prev.certifications, { name: "", year: "" }],
-    }));
-  const removeCert = (i: number) =>
-    setValues((prev) => ({
-      ...prev,
-      certifications: prev.certifications.filter((_, idx) => idx !== i),
-    }));
-
-  // ── Submit (Step F) ───────────────────────────────────────────────────
   const submit = () => {
-    // Re-validate every gated step before final submission.
     const all: Errors = {
       ...validateStep(0),
       ...validateStep(1),
       ...validateStep(2),
-      ...validateStep(3),
-      ...validateStep(4),
     };
     if (Object.keys(all).length > 0) {
-      // jump to the earliest failing step, then surface its summary
-      for (let i = 0; i < STEPS.length; i++) {
+      for (let i = 0; i < STEPS.length - 1; i++) {
         if (Object.keys(validateStep(i)).length > 0) {
           goTo(i);
           break;
@@ -334,11 +836,8 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
       return;
     }
 
-    // Mirror the server's total-attachment cap so oversized submissions fail
-    // fast with a clear message instead of a slow upload ending in a 413.
-    const totalUploadBytes = [
+    const totalBytes = [
       files.resume,
-      ...files.educationalCertificates,
       files.passportCopy,
       files.photograph,
       files.appointmentLetter,
@@ -346,40 +845,94 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
       files.latestPayslip,
       ...files.educationDocs,
     ].reduce((n, f) => n + (f?.size ?? 0), 0);
-    if (totalUploadBytes > MAX_TOTAL_ATTACHMENT_BYTES) {
-      const limitMb = Math.floor(MAX_TOTAL_ATTACHMENT_BYTES / (1024 * 1024));
-      const totalMb = (totalUploadBytes / (1024 * 1024)).toFixed(1);
-      goTo(4);
+
+    if (totalBytes > MAX_TOTAL_ATTACHMENT_BYTES) {
+      const lim = Math.floor(MAX_TOTAL_ATTACHMENT_BYTES / (1024 * 1024));
+      const tot = (totalBytes / (1024 * 1024)).toFixed(1);
+      goTo(2);
       blockWithErrors({
-        _form: `Your files total ${totalMb} MB, over the ${limitMb} MB limit. Please reduce file sizes or remove optional documents and try again.`,
+        _form: `Files total ${tot} MB — over the ${lim} MB limit. Remove optional docs or reduce file sizes.`,
       });
       return;
     }
 
+    const fullName = `${firstName.trim()} ${lastName.trim()}`.trim();
+    const phoneE164 = `${countryCode}${values.phone.replace(/\D/g, "")}`;
+
     const body = new FormData();
+    body.append("fullName", fullName);
+    body.append("candidateName", fullName);
+    body.append("phone", phoneE164);
+
+    // API expects exactly three org slots; pad extras with Not Applicable.
+    body.append(
+      "currentOrg",
+      JSON.stringify(tenureOnly(orgs[0] ?? emptyOrg())),
+    );
+    body.append(
+      "previousOrg1",
+      JSON.stringify(orgs[1] ? tenureOnly(orgs[1]) : naOrg()),
+    );
+    body.append(
+      "previousOrg2",
+      JSON.stringify(orgs[2] ? tenureOnly(orgs[2]) : naOrg()),
+    );
+
     const flat: Array<keyof ApplicationFields> = [
-      "fullName", "email", "phone", "applicationDate",
-      "appliedDesignation", "candidateName", "totalYearsExperience", "dateOfBirth",
-      "professionalQualification", "professionalQualificationYear", "graduation",
-      "graduationYear", "reportsTo", "teamSize", "currentLocation", "familyDetails",
-      "currentCtc", "expectedCtc", "noticePeriod", "passportNumber",
-      "passportValidity", "drivingLicense", "position", "experience", "location",
-      "jobSlug", "jobId",
+      "email",
+      "appliedDesignation",
+      "totalYearsExperience",
+      "reportsTo",
+      "teamSize",
+      "currentLocation",
+      "familyDetails",
+      "currentCtc",
+      "expectedCtc",
+      "noticePeriod",
+      "passportNumber",
+      "drivingLicense",
+      "position",
+      "experience",
+      "location",
+      "jobSlug",
+      "jobId",
     ];
-    for (const k of flat) body.append(k, String(values[k] ?? ""));
-    body.append("currentOrg", JSON.stringify(values.currentOrg));
-    body.append("previousOrg1", JSON.stringify(values.previousOrg1));
-    body.append("previousOrg2", JSON.stringify(values.previousOrg2));
-    body.append("certifications", JSON.stringify(values.certifications));
+    for (const k of flat) {
+      if (k === "experience") {
+        body.append(k, values.totalYearsExperience);
+        continue;
+      }
+      if (k === "location") {
+        body.append(k, values.currentLocation);
+        continue;
+      }
+      body.append(k, String(values[k] ?? ""));
+    }
+
+    // API still expects legacy qualification fields — derive from Academic Details.
+    const edu0 = values.educationEntries[0];
+    const edu1 = values.educationEntries[1] ?? edu0;
+    body.append("graduation", edu0?.name ?? "");
+    body.append("graduationYear", edu0?.year ?? "");
+    body.append("professionalQualification", edu1?.name ?? "");
+    body.append("professionalQualificationYear", edu1?.year ?? "");
+
+    body.append("certifications", JSON.stringify([{ name: "", year: "" }]));
     body.append("educationEntries", JSON.stringify(values.educationEntries));
+    body.append("applicationDate", toDMY(values.applicationDate));
+    body.append("dateOfBirth", toDMY(values.dateOfBirth));
+    body.append("passportValidity", toDMY(values.passportValidity));
 
     if (files.resume) body.append("resume", files.resume);
-    for (const c of files.educationalCertificates)
-      body.append("educationalCertificates", c);
+    for (const d of files.educationDocs) {
+      if (d) body.append("educationalCertificates", d);
+    }
     if (files.passportCopy) body.append("passportCopy", files.passportCopy);
     if (files.photograph) body.append("photograph", files.photograph);
-    if (files.appointmentLetter) body.append("appointmentLetter", files.appointmentLetter);
-    if (files.relievingLetter) body.append("relievingLetter", files.relievingLetter);
+    if (files.appointmentLetter)
+      body.append("appointmentLetter", files.appointmentLetter);
+    if (files.relievingLetter)
+      body.append("relievingLetter", files.relievingLetter);
     if (files.latestPayslip) body.append("latestPayslip", files.latestPayslip);
     files.educationDocs.forEach((f, i) => {
       if (f) body.append(`educationDoc_${i}`, f);
@@ -392,7 +945,8 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `${publicApiBase()}/api/careers/apply`);
     xhr.upload.onprogress = (ev) => {
-      if (ev.lengthComputable) setProgress(Math.round((ev.loaded / ev.total) * 100));
+      if (ev.lengthComputable)
+        setProgress(Math.round((ev.loaded / ev.total) * 100));
     };
     xhr.onload = () => {
       if (xhr.status >= 200 && xhr.status < 300) {
@@ -400,11 +954,13 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
         scrollTop();
         return;
       }
-      let msg = "Something went wrong submitting your application.";
+      let msg = "Something went wrong. Please try again.";
       let serverErrors: Errors | undefined;
       try {
         const data = JSON.parse(xhr.responseText);
         if (data.error) msg = data.error;
+        // Temporary server debug field from careers/apply 502 path.
+        if (data.debug) msg = `${msg} (${data.debug})`;
         if (data.errors) serverErrors = data.errors;
       } catch {
         /* keep default */
@@ -415,7 +971,7 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
     };
     xhr.onerror = () => {
       setSubmitState("error");
-      setSubmitError("Network error. Your details are safe — please retry.");
+      setSubmitError("Network error — your details are safe. Please retry.");
     };
     xhr.send(body);
   };
@@ -424,19 +980,26 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
     () => Math.round(((step + 1) / STEPS.length) * 100),
     [step],
   );
+  const selectedCountry = COUNTRY_CODES.find((c) => c.value === countryCode);
 
   if (submitState === "success") {
     return (
       <div className="aptus-apply__panel aptus-apply__result">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#047857" strokeWidth="2" aria-hidden="true">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#047857"
+          strokeWidth="2"
+          aria-hidden="true"
+        >
           <circle cx="12" cy="12" r="10" />
           <path d="M8 12l3 3 5-6" />
         </svg>
-        <h2>Application submitted</h2>
+        <h2>Application submitted!</h2>
         <p className="aptus-apply__hint">
-          Thank you, {values.candidateName || values.fullName}. Your application for{" "}
-          <strong>{job.title}</strong> has been received. Our HR team will review it and
-          reach out at <strong>{values.email}</strong> with next steps.
+          Thank you, <strong>{firstName || values.candidateName}</strong>. Your
+          application for <strong>{job.title}</strong> has been received. Our HR
+          team will review it and reach out at <strong>{values.email}</strong>.
         </p>
         <div className="mt-4 flex justify-center gap-3">
           <Button href="/careers" variant="secondary">
@@ -449,7 +1012,6 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
 
   return (
     <div ref={topRef}>
-      {/* Step indicator */}
       <div className="aptus-apply__steps" role="tablist" aria-label="Application steps">
         {STEPS.map((s, i) => (
           <button
@@ -471,12 +1033,13 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
         aria-valuenow={step + 1}
         aria-valuemin={1}
         aria-valuemax={STEPS.length}
+        aria-label={`Step ${step + 1} of ${STEPS.length}`}
       >
         <div style={{ width: `${pct}%` }} />
       </div>
 
       <div className="aptus-apply__panel" onBlur={handleBlur}>
-        {showSummary && (
+        {showSummary && Object.values(errors).some(Boolean) && (
           <div
             ref={summaryRef}
             className="aptus-banner aptus-banner--error"
@@ -486,7 +1049,7 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
             <strong>Please fix the following before continuing:</strong>
             <ul className="mt-1 list-disc pl-5">
               {[...new Set(Object.values(errors).filter(Boolean))]
-                .slice(0, 8)
+                .slice(0, 6)
                 .map((msg, i) => (
                   <li key={i}>{msg}</li>
                 ))}
@@ -494,267 +1057,313 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
           </div>
         )}
 
-        {/* ── Step A ── */}
-        {STEPS[step].key === "basic" && (
+        {STEPS[step].key === "basics" && (
           <>
-            <h2>Basic Information</h2>
-            <p className="aptus-apply__hint">Let&apos;s start with how we can reach you.</p>
+            <h2>Your Details</h2>
+            <p className="aptus-apply__hint">
+              Upload your resume first — we&apos;ll try to fill in the fields
+              automatically.
+            </p>
+
+            <div style={{ marginBottom: "1.5rem" }}>
+              <FileDropzone
+                accept={RESUME_ACCEPT}
+                label={`Resume (PDF, DOC, DOCX · max ${MAX_UPLOAD_BYTES / (1024 * 1024)} MB)`}
+                files={files.resume ? [files.resume] : []}
+                error={errors.resume}
+                onChange={handleResume}
+                validate={(f) => {
+                  const e = validateFile(f, RESUME_EXTENSIONS, "Resume", true);
+                  if (e) return e;
+                  if (f.size > MAX_UPLOAD_BYTES)
+                    return `Resume must be under ${MAX_UPLOAD_BYTES / (1024 * 1024)} MB.`;
+                  return null;
+                }}
+              />
+              {parsing && (
+                <p
+                  className="aptus-apply__hint"
+                  aria-live="polite"
+                  style={{ marginTop: "0.5rem" }}
+                >
+                  Reading your resume…
+                </p>
+              )}
+              {parseNote && (
+                <div
+                  className="aptus-banner aptus-banner--success"
+                  role="status"
+                  style={{ marginTop: "0.75rem" }}
+                >
+                  {parseNote}
+                </div>
+              )}
+              {autoFilled.size > 0 && !parsing && (
+                <p
+                  className="aptus-apply__hint"
+                  style={{ marginTop: "0.5rem", color: "#047857" }}
+                >
+                  We pre-filled some fields from your resume — check them below.
+                </p>
+              )}
+            </div>
+
             <div className="aptus-apply__grid aptus-apply__grid--2">
               <TextField
-                id="fullName"
-                label="Full Name"
+                id="firstName"
+                label="First Name"
                 required
-                value={values.fullName}
-                autoFilled={autoFilled.has("fullName")}
-                error={errors.fullName}
+                value={firstName}
+                autoFilled={autoFilled.has("firstName")}
+                error={errors.firstName}
                 onChange={(v) => {
-                  setValue("fullName", v);
-                  setValue("candidateName", v);
+                  setFirstName(v);
+                  const full = `${v.trim()} ${lastName.trim()}`.trim();
+                  setValue("fullName", full);
+                  setValue("candidateName", full);
+                  if (errors.firstName)
+                    setErrors((p) => ({ ...p, firstName: "" }));
+                  if (autoFilled.has("firstName")) {
+                    setAutoFilled((p) => {
+                      const n = new Set(p);
+                      n.delete("firstName");
+                      return n;
+                    });
+                  }
                 }}
               />
               <TextField
-                id="email"
-                label="Email"
-                type="email"
-                inputMode="email"
+                id="lastName"
+                label="Last Name"
                 required
-                placeholder="you@example.com"
-                value={values.email}
-                autoFilled={autoFilled.has("email")}
-                error={errors.email}
-                onChange={(v) => setValue("email", v)}
+                value={lastName}
+                autoFilled={autoFilled.has("lastName")}
+                error={errors.lastName}
+                onChange={(v) => {
+                  setLastName(v);
+                  const full = `${firstName.trim()} ${v.trim()}`.trim();
+                  setValue("fullName", full);
+                  setValue("candidateName", full);
+                  if (errors.lastName)
+                    setErrors((p) => ({ ...p, lastName: "" }));
+                  if (autoFilled.has("lastName")) {
+                    setAutoFilled((p) => {
+                      const n = new Set(p);
+                      n.delete("lastName");
+                      return n;
+                    });
+                  }
+                }}
               />
-              <TextField
-                id="phone"
-                label="Phone Number"
-                type="tel"
-                inputMode="tel"
-                required
-                placeholder="+968 0000 0000"
-                help="Include country code, e.g. +968."
-                value={values.phone}
-                autoFilled={autoFilled.has("phone")}
-                error={errors.phone}
-                onChange={(v) => setValue("phone", v)}
-              />
-            </div>
-          </>
-        )}
 
-        {/* ── Step B ── */}
-        {STEPS[step].key === "resume" && (
-          <>
-            <h2>Resume Upload</h2>
-            <p className="aptus-apply__hint">
-              Upload your resume and we&apos;ll try to pre-fill the next steps for you.
-            </p>
-            <FileDropzone
-              accept={RESUME_ACCEPT}
-              label="Resume (PDF, DOC, DOCX)"
-              files={files.resume ? [files.resume] : []}
-              error={errors.resume}
-              onChange={handleResume}
-              validate={(f) => validateFile(f, RESUME_EXTENSIONS, "Resume", true)}
-            />
-            {parsing && (
-              <p className="aptus-apply__hint" aria-live="polite">
-                Reading your resume…
-              </p>
-            )}
-            {parseNote && (
-              <div className="aptus-banner aptus-banner--success" role="status">
-                {parseNote}
+              <div className="sm:col-span-2">
+                <TextField
+                  id="email"
+                  label="Email Address"
+                  type="email"
+                  inputMode="email"
+                  required
+                  placeholder="you@example.com"
+                  help="Use a personal or work email — disposable addresses are blocked."
+                  value={values.email}
+                  autoFilled={autoFilled.has("email")}
+                  error={errors.email}
+                  onChange={(v) => setValue("email", v)}
+                />
               </div>
-            )}
-          </>
-        )}
 
-        {/* ── Step C ── */}
-        {STEPS[step].key === "pre" && (
-          <>
-            <h2>Pre-Interview Details</h2>
-            <p className="aptus-apply__hint">
-              Please provide your professional background. Fields marked optional still
-              require a value — type &quot;Not Applicable&quot; where relevant.
-            </p>
+              <div className="sm:col-span-2">
+                <div
+                  className="aptus-field"
+                  data-invalid={errors.phone ? "true" : undefined}
+                  data-autofilled={autoFilled.has("phone") ? "true" : undefined}
+                >
+                  <label htmlFor="phone">
+                    Phone Number <span aria-hidden="true">*</span>
+                  </label>
+                  {autoFilled.has("phone") && (
+                    <span className="aptus-field__badge" title="Pre-filled from your resume">
+                      Auto-filled — review
+                    </span>
+                  )}
+                  <div className="aptus-apply__phone">
+                    <select
+                      id="countryCode"
+                      value={countryCode}
+                      onChange={(e) => {
+                        setCountryCode(e.target.value);
+                        setValue("phone", "");
+                        setErrors((p) => ({ ...p, phone: "" }));
+                      }}
+                      aria-label="Country code"
+                    >
+                      {COUNTRY_CODES.map((c) => (
+                        <option key={c.value} value={c.value}>
+                          {c.label}
+                        </option>
+                      ))}
+                    </select>
+                    <input
+                      id="phone"
+                      type="tel"
+                      inputMode="tel"
+                      placeholder={
+                        selectedCountry
+                          ? `${selectedCountry.digits}-digit number`
+                          : "Phone number"
+                      }
+                      value={values.phone}
+                      aria-invalid={errors.phone ? true : undefined}
+                      onChange={(e) =>
+                        setValue(
+                          "phone",
+                          e.target.value.replace(/[^\d\s\-]/g, ""),
+                        )
+                      }
+                    />
+                  </div>
+                  {errors.phone && (
+                    <p className="aptus-field__error" role="alert">
+                      {errors.phone}
+                    </p>
+                  )}
+                  {selectedCountry && !errors.phone && (
+                    <p className="aptus-field__help">
+                      Enter {selectedCountry.digits} digits — no country code
+                      prefix needed
+                    </p>
+                  )}
+                </div>
+              </div>
 
-            <div className="aptus-apply__grid aptus-apply__grid--2">
               <TextField
-                id="applicationDate"
-                label="Date of Application"
-                type="date"
+                id="currentLocation"
+                label="Current Location"
                 required
-                value={values.applicationDate}
-                error={errors.applicationDate}
-                onChange={(v) => setValue("applicationDate", v)}
+                placeholder="City, Country"
+                value={values.currentLocation}
+                error={errors.currentLocation}
+                onChange={(v) => setValue("currentLocation", v)}
               />
-              <TextField
-                id="appliedDesignation"
-                label="Applied Designation"
-                required
-                value={values.appliedDesignation}
-                error={errors.appliedDesignation}
-                onChange={(v) => setValue("appliedDesignation", v)}
-              />
-              <TextField
-                id="candidateName"
-                label="Name of the Candidate"
-                required
-                value={values.candidateName}
-                autoFilled={autoFilled.has("candidateName")}
-                error={errors.candidateName}
-                onChange={(v) => setValue("candidateName", v)}
-              />
-              <TextField
-                id="totalYearsExperience"
-                label="Total Years of Experience"
-                inputMode="numeric"
-                required
-                value={values.totalYearsExperience}
-                autoFilled={autoFilled.has("totalYearsExperience")}
-                error={errors.totalYearsExperience}
-                onChange={(v) => setValue("totalYearsExperience", v)}
-              />
-              <TextField
+
+              <DateField
                 id="dateOfBirth"
                 label="Date of Birth"
-                type="date"
                 required
                 value={values.dateOfBirth}
                 error={errors.dateOfBirth}
                 onChange={(v) => setValue("dateOfBirth", v)}
               />
             </div>
+          </>
+        )}
 
-            {(
-              [
-                ["currentOrg", "Current Organization"],
-                ["previousOrg1", "Immediate Previous Organization"],
-                ["previousOrg2", "Previous Organization"],
-              ] as Array<["currentOrg" | "previousOrg1" | "previousOrg2", string]>
-            ).map(([key, title]) => (
-              <fieldset key={key} className="aptus-apply__group">
-                <legend>{title}</legend>
-                <p className="aptus-field__help">{NA_HELPER}</p>
-                <div className="aptus-apply__grid aptus-apply__grid--2">
-                  <TextField
-                    id={`${key}-name`}
-                    label="Organization Name"
-                    required
-                    value={values[key].name}
-                    error={errors[`${title}.name`]}
-                    onChange={(v) => setOrg(key, { name: v })}
-                  />
-                  <TextField
-                    id={`${key}-designation`}
-                    label="Designation"
-                    required
-                    value={values[key].designation}
-                    error={errors[`${title}.designation`]}
-                    onChange={(v) => setOrg(key, { designation: v })}
-                  />
-                  <TextField
-                    id={`${key}-duration`}
-                    label="Duration (Year–Year)"
-                    placeholder="2020–2024"
-                    required
-                    value={values[key].duration}
-                    error={errors[`${title}.duration`]}
-                    onChange={(v) => setOrg(key, { duration: v })}
-                  />
-                  <TextField
-                    id={`${key}-totalYears`}
-                    label="Total Years"
-                    inputMode="numeric"
-                    required
-                    value={values[key].totalYears}
-                    error={errors[`${title}.totalYears`]}
-                    onChange={(v) => setOrg(key, { totalYears: v })}
-                  />
-                </div>
-              </fieldset>
+        {STEPS[step].key === "experience" && (
+          <>
+            <h2>Professional Experience</h2>
+            <p className="aptus-apply__hint">
+              Add your current role. Use &quot;Not Applicable&quot; if you&apos;re
+              a fresher. Click <strong>+ Add Organization</strong> only if you
+              have previous experience to add.
+            </p>
+
+            {orgs.map((org, i) => (
+              <OrgBlock
+                key={org.id}
+                index={i}
+                org={org}
+                errors={errors}
+                onChange={(patch) => updateOrg(i, patch)}
+                onRemove={i > 0 ? () => removeOrg(i) : undefined}
+              />
             ))}
 
-            <fieldset className="aptus-apply__group">
-              <legend>Qualifications</legend>
-              <div className="aptus-apply__grid aptus-apply__grid--2">
-                <TextField
-                  id="professionalQualification"
-                  label="Professional Qualification"
-                  required
-                  value={values.professionalQualification}
-                  error={errors.professionalQualification}
-                  onChange={(v) => setValue("professionalQualification", v)}
-                />
-                <TextField
-                  id="professionalQualificationYear"
-                  label="Year"
-                  inputMode="numeric"
-                  required
-                  value={values.professionalQualificationYear}
-                  error={errors.professionalQualificationYear}
-                  onChange={(v) => setValue("professionalQualificationYear", v)}
-                />
-                <TextField
-                  id="graduation"
-                  label="Graduation"
-                  required
-                  value={values.graduation}
-                  error={errors.graduation}
-                  onChange={(v) => setValue("graduation", v)}
-                />
-                <TextField
-                  id="graduationYear"
-                  label="Year"
-                  inputMode="numeric"
-                  required
-                  value={values.graduationYear}
-                  error={errors.graduationYear}
-                  onChange={(v) => setValue("graduationYear", v)}
-                />
-              </div>
+            <button
+              type="button"
+              className="aptus-add-btn"
+              onClick={addOrg}
+              style={{ marginBottom: "1.5rem" }}
+            >
+              + Add Organization
+            </button>
 
-              <p className="aptus-field__help" style={{ marginTop: "0.75rem" }}>
-                Certifications (add up to your relevant ones)
+            <fieldset className="aptus-apply__group">
+              <legend>Academic Details</legend>
+              <p className="aptus-apply__hint">
+                Add at least one qualification. A supporting document is required
+                for the first entry.
               </p>
-              {values.certifications.map((c, i) => (
+              {values.educationEntries.map((e, i) => (
                 <div key={i} className="aptus-repeat-entry">
-                  {values.certifications.length > 1 && (
+                  {values.educationEntries.length > 1 && (
                     <button
                       type="button"
                       className="aptus-repeat-remove"
-                      aria-label="Remove certification"
-                      onClick={() => removeCert(i)}
+                      aria-label="Remove entry"
+                      onClick={() => removeEducation(i)}
                     >
                       ✕
                     </button>
                   )}
-                  {/* <div className="aptus-apply__grid aptus-apply__grid--2">
+                  <div className="aptus-apply__grid aptus-apply__grid--3">
                     <TextField
-                      id={`cert-name-${i}`}
-                      label="Certification"
-                      value={c.name}
-                      error={errors[`certifications.${i}.name`]}
-                      onChange={(v) => updateCert(i, { name: v })}
+                      id={`edu-name-${i}`}
+                      label="Qualification"
+                      required
+                      value={e.name}
+                      error={errors[`educationEntries.${i}.name`]}
+                      onChange={(v) => updateEducation(i, { name: v })}
                     />
                     <TextField
-                      id={`cert-year-${i}`}
+                      id={`edu-inst-${i}`}
+                      label="Institution"
+                      required
+                      value={e.institution}
+                      error={errors[`educationEntries.${i}.institution`]}
+                      onChange={(v) => updateEducation(i, { institution: v })}
+                    />
+                    <TextField
+                      id={`edu-year-${i}`}
                       label="Year"
                       inputMode="numeric"
-                      value={c.year}
-                      error={errors[`certifications.${i}.year`]}
-                      onChange={(v) => updateCert(i, { year: v })}
+                      required
+                      value={e.year}
+                      error={errors[`educationEntries.${i}.year`]}
+                      onChange={(v) => updateEducation(i, { year: v })}
                     />
-                  </div> */}
+                  </div>
+                  <FileDropzone
+                    accept={`${DOC_ACCEPT},${IMAGE_ACCEPT}`}
+                    label={
+                      i === 0
+                        ? "Supporting document"
+                        : "Supporting document (optional)"
+                    }
+                    files={
+                      files.educationDocs[i]
+                        ? [files.educationDocs[i] as File]
+                        : []
+                    }
+                    error={i === 0 ? errors.educationDoc_0 : undefined}
+                    onChange={(list) =>
+                      setFiles((p) => ({
+                        ...p,
+                        educationDocs: p.educationDocs.map((d, idx) =>
+                          idx === i ? list[0] ?? null : d,
+                        ),
+                      }))
+                    }
+                  />
                 </div>
               ))}
-              <button type="button" className="aptus-add-btn" onClick={addCert}>
-                + Add certification
+              <button type="button" className="aptus-add-btn" onClick={addEducation}>
+                + Add Academic Details
               </button>
             </fieldset>
 
             <fieldset className="aptus-apply__group">
               <legend>Present Team Structure</legend>
+              <p className="aptus-field__help">{NA_HELPER}</p>
               <div className="aptus-apply__grid aptus-apply__grid--2">
                 <TextField
                   id="reportsTo"
@@ -763,6 +1372,14 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
                   value={values.reportsTo}
                   error={errors.reportsTo}
                   onChange={(v) => setValue("reportsTo", v)}
+                />
+                <DateField
+                  id="applicationDate"
+                  label="Date of Application"
+                  required
+                  value={toDMY(values.applicationDate)}
+                  error={errors.applicationDate}
+                  onChange={(v) => setValue("applicationDate", v)}
                 />
                 <TextField
                   id="teamSize"
@@ -773,236 +1390,175 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
                   error={errors.teamSize}
                   onChange={(v) => setValue("teamSize", v)}
                 />
+                <TextField
+                  id="totalYearsExperience"
+                  label="Total Years of Experience"
+                  inputMode="numeric"
+                  required
+                  placeholder="e.g. 5 or 2.5"
+                  value={values.totalYearsExperience}
+                  autoFilled={autoFilled.has("totalYearsExperience")}
+                  error={errors.totalYearsExperience}
+                  onChange={(v) => setValue("totalYearsExperience", v)}
+                />
+                <TextField
+                  id="currentCtc"
+                  label="Current CTC (OMR)"
+                  inputMode="numeric"
+                  required
+                  value={values.currentCtc}
+                  error={errors.currentCtc}
+                  onChange={(v) => setValue("currentCtc", v)}
+                />
+                <TextField
+                  id="expectedCtc"
+                  label="Expected CTC (OMR)"
+                  inputMode="numeric"
+                  required
+                  value={values.expectedCtc}
+                  error={errors.expectedCtc}
+                  onChange={(v) => setValue("expectedCtc", v)}
+                />
+                <TextField
+                  id="passportNumber"
+                  label="Passport Number"
+                  required
+                  value={values.passportNumber}
+                  error={errors.passportNumber}
+                  onChange={(v) => setValue("passportNumber", v)}
+                />
+                <DateField
+                  id="passportValidity"
+                  label="Passport Validity"
+                  required
+                  value={values.passportValidity}
+                  error={errors.passportValidity}
+                  onChange={(v) => setValue("passportValidity", v)}
+                />
+                <SelectField
+                  id="noticePeriod"
+                  label="Notice Period"
+                  required
+                  options={NOTICE_PERIOD_OPTIONS}
+                  value={values.noticePeriod}
+                  error={errors.noticePeriod}
+                  onChange={(v) => setValue("noticePeriod", v)}
+                />
+                <TextField
+                  id="drivingLicense"
+                  label="Driving License"
+                  placeholder="Optional"
+                  value={values.drivingLicense}
+                  error={errors.drivingLicense}
+                  onChange={(v) => setValue("drivingLicense", v)}
+                />
               </div>
+              <TextAreaField
+                id="familyDetails"
+                label="Family Details (optional)"
+                className="mt-4"
+                value={values.familyDetails}
+                error={errors.familyDetails}
+                onChange={(v) => setValue("familyDetails", v)}
+              />
             </fieldset>
-
-            <div className="aptus-apply__grid aptus-apply__grid--2" style={{ marginTop: "1rem" }}>
-              { <TextField
-                id="currentLocation"
-                label="Current Location"
-                 required
-                value={values.currentLocation}
-                error={errors.currentLocation}
-                onChange={(v) => setValue("currentLocation", v)}
-              /> }
-              <SelectField
-                id="noticePeriod"
-                label="Notice Period"
-                required
-                options={NOTICE_PERIOD_OPTIONS}
-                value={values.noticePeriod}
-                error={errors.noticePeriod}
-                onChange={(v) => setValue("noticePeriod", v)}
-              />
-              <TextField
-                id="currentCtc"
-                label="Current CTC"
-                inputMode="numeric"
-                required
-                value={values.currentCtc}
-                error={errors.currentCtc}
-                onChange={(v) => setValue("currentCtc", v)}
-              />
-              <TextField
-                id="expectedCtc"
-                label="Expected CTC"
-                inputMode="numeric"
-                required
-                // help="Payslip is attached separately in Attachments."
-                value={values.expectedCtc}
-                error={errors.expectedCtc}
-                onChange={(v) => setValue("expectedCtc", v)}
-              />
-              <TextField
-                id="passportNumber"
-                label="Passport Number"
-                required
-                value={values.passportNumber}
-                error={errors.passportNumber}
-                onChange={(v) => setValue("passportNumber", v)}
-              />
-              <TextField
-                id="passportValidity"
-                label="Passport Validity "
-                placeholder="YYYY-MM-DD "
-                required
-                value={values.passportValidity}
-                error={errors.passportValidity}
-                onChange={(v) => setValue("passportValidity", v)}
-              />
-              <TextField
-                id="drivingLicense"
-                label="Driving License (optional)"
-                value={values.drivingLicense}
-                error={errors.drivingLicense}
-                onChange={(v) => setValue("drivingLicense", v)}
-              />
-            </div>
-
-            <TextAreaField
-              id="familyDetails"
-              label="Family Details (optional)"
-              className="mt-4"
-              value={values.familyDetails}
-              error={errors.familyDetails}
-              onChange={(v) => setValue("familyDetails", v)}
-            />
           </>
         )}
 
-        {/* ── Step D ── */}
-        {STEPS[step].key === "education" && (
+        {STEPS[step].key === "documents" && (
           <>
-            <h2>Education &amp; Certifications</h2>
+            <h2>Documents</h2>
             <p className="aptus-apply__hint">
-              Add at least one qualification or certificate. You can attach a supporting
-              document for each entry. Extra entries are optional via &quot;+ Add another&quot;.
+              Max {MAX_UPLOAD_BYTES / (1024 * 1024)} MB per file.
             </p>
-            {errors.educationEntries && (
-              <div className="aptus-banner aptus-banner--error" role="alert">
-                {errors.educationEntries}
-              </div>
-            )}
-            {values.educationEntries.map((e, i) => (
-              <div key={i} className="aptus-repeat-entry">
-                {values.educationEntries.length > 1 && (
-                  <button
-                    type="button"
-                    className="aptus-repeat-remove"
-                    aria-label="Remove entry"
-                    onClick={() => removeEducation(i)}
-                  >
-                    ✕
-                  </button>
-                )}
-                <div className="aptus-apply__grid aptus-apply__grid--3">
-                  <TextField
-                    id={`edu-name-${i}`}
-                    label="Qualification / Certificate"
-                    required
-                    value={e.name}
-                    autoFilled={i === 0 && autoFilled.has("educationEntries")}
-                    error={errors[`educationEntries.${i}.name`]}
-                    onChange={(v) => updateEducation(i, { name: v })}
-                  />
-                  <TextField
-                    id={`edu-inst-${i}`}
-                    label="Institution"
-                    required
-                    value={e.institution}
-                    error={errors[`educationEntries.${i}.institution`]}
-                    onChange={(v) => updateEducation(i, { institution: v })}
-                  />
-                  <TextField
-                    id={`edu-year-${i}`}
-                    label="Year"
-                    inputMode="numeric"
-                    required
-                    value={e.year}
-                    error={errors[`educationEntries.${i}.year`]}
-                    onChange={(v) => updateEducation(i, { year: v })}
-                  />
-                </div>
+
+            <DocSectionHeader title="Required Documents" color="#fef3c7" />
+
+            <div style={{ marginBottom: "1rem" }}>
+              <FileDropzone
+                accept={`${DOC_ACCEPT},${IMAGE_ACCEPT}`}
+                label="Passport Copy *"
+                files={files.passportCopy ? [files.passportCopy] : []}
+                error={errors.passportCopy}
+                onChange={(list) =>
+                  setFiles((p) => ({
+                    ...p,
+                    passportCopy: list[0] ?? null,
+                  }))
+                }
+                validate={(f) =>
+                  f.size > MAX_UPLOAD_BYTES
+                    ? `Must be under ${MAX_UPLOAD_BYTES / (1024 * 1024)} MB.`
+                    : null
+                }
+              />
+            </div>
+
+            <div style={{ marginBottom: "1.5rem" }}>
+              <FileDropzone
+                accept={IMAGE_ACCEPT}
+                label="Passport-size Photograph *"
+                preview
+                hint={`JPG, PNG or WEBP · up to ${MAX_UPLOAD_BYTES / (1024 * 1024)} MB`}
+                files={files.photograph ? [files.photograph] : []}
+                error={errors.photograph}
+                onChange={(list) =>
+                  setFiles((p) => ({
+                    ...p,
+                    photograph: list[0] ?? null,
+                  }))
+                }
+                validate={(f) => validateImageFile(f, "Photograph", true)}
+              />
+            </div>
+
+            <DocSectionHeader title="Optional Documents" color="#ede9fe" />
+            <p
+              className="aptus-apply__hint"
+              style={{ marginTop: "-0.5rem", marginBottom: "1rem" }}
+            >
+              These speed up your review but are not required.
+            </p>
+
+            {(
+              [
+                ["appointmentLetter", "Appointment Letter"],
+                ["relievingLetter", "Relieving Letter"],
+                ["latestPayslip", "Latest Payslip"],
+              ] as Array<[keyof FileState, string]>
+            ).map(([key, label]) => (
+              <div key={key} style={{ marginBottom: "0.75rem" }}>
                 <FileDropzone
                   accept={`${DOC_ACCEPT},${IMAGE_ACCEPT}`}
-                  label={
-                    i === 0
-                      ? "Supporting document"
-                      : "Supporting document (optional)"
+                  label={label}
+                  files={
+                    (files[key] as File | null) ? [files[key] as File] : []
                   }
-                  files={files.educationDocs[i] ? [files.educationDocs[i] as File] : []}
-                  error={i === 0 ? errors.educationDoc_0 : undefined}
+                  error={errors[key]}
                   onChange={(list) =>
-                    setFiles((p) => ({
-                      ...p,
-                      educationDocs: p.educationDocs.map((d, idx) =>
-                        idx === i ? list[0] ?? null : d,
-                      ),
-                    }))
+                    setFiles((p) => ({ ...p, [key]: list[0] ?? null }))
+                  }
+                  validate={(f) =>
+                    f.size > MAX_UPLOAD_BYTES
+                      ? `Must be under ${MAX_UPLOAD_BYTES / (1024 * 1024)} MB.`
+                      : null
                   }
                 />
               </div>
             ))}
-            <button type="button" className="aptus-add-btn" onClick={addEducation}>
-              + Add another
-            </button>
           </>
         )}
 
-        {/* ── Step E ── */}
-        {STEPS[step].key === "attachments" && (
-          <>
-            <h2>Attachments</h2>
-            <p className="aptus-apply__hint">Upload the required documents below.</p>
-
-            <fieldset className="aptus-apply__group">
-              <legend>Required</legend>
-              <FileDropzone
-                accept={`${DOC_ACCEPT},${IMAGE_ACCEPT}`}
-                label="Educational Certificate(s)"
-                multiple
-                files={files.educationalCertificates}
-                error={errors.educationalCertificates}
-                onChange={(list) =>
-                  setFiles((p) => ({ ...p, educationalCertificates: list }))
-                }
-              />
-
-              <div className="mt-4">
-                <FileDropzone
-                  accept={`${DOC_ACCEPT},${IMAGE_ACCEPT}`}
-                  label="Passport Copy"
-                  files={files.passportCopy ? [files.passportCopy] : []}
-                  error={errors.passportCopy}
-                  onChange={(list) =>
-                    setFiles((p) => ({ ...p, passportCopy: list[0] ?? null }))
-                  }
-                />
-              </div>
-
-              <div className="mt-4">
-                <FileDropzone
-                  accept={IMAGE_ACCEPT}
-                  label="Passport-size Photograph"
-                  preview
-                  hint={`JPG, PNG or WEBP · up to ${Math.round(MAX_UPLOAD_BYTES / (1024 * 1024))} MB`}
-                  files={files.photograph ? [files.photograph] : []}
-                  error={errors.photograph}
-                  onChange={(list) =>
-                    setFiles((p) => ({ ...p, photograph: list[0] ?? null }))
-                  }
-                  validate={(f) => validateImageFile(f, "Photograph", true)}
-                />
-              </div>
-            </fieldset>
-
-            <fieldset className="aptus-apply__group">
-              <legend>Optional</legend>
-              {(
-                [
-                  ["appointmentLetter", "Appointment Letter"],
-                  ["relievingLetter", "Relieving Letter"],
-                  ["latestPayslip", "Latest Payslip"],
-                ] as Array<[keyof FileState, string]>
-              ).map(([key, label]) => (
-                <div key={key} className="mt-3">
-                  <FileDropzone
-                    accept={`${DOC_ACCEPT},${IMAGE_ACCEPT}`}
-                    label={label}
-                    files={(files[key] as File | null) ? [files[key] as File] : []}
-                    onChange={(list) =>
-                      setFiles((p) => ({ ...p, [key]: list[0] ?? null }))
-                    }
-                  />
-                </div>
-              ))}
-            </fieldset>
-          </>
-        )}
-
-        {/* ── Step F ── */}
         {STEPS[step].key === "review" && (
-          <ReviewStep values={values} files={files} onEdit={goTo} />
+          <ReviewStep
+            firstName={firstName}
+            lastName={lastName}
+            countryCode={countryCode}
+            orgs={orgs}
+            values={values}
+            files={files}
+            onEdit={goTo}
+          />
         )}
 
         {submitState === "submitting" && (
@@ -1022,7 +1578,6 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
         )}
       </div>
 
-      {/* Footer nav */}
       <div className="aptus-apply__nav">
         <Button
           type="button"
@@ -1033,8 +1588,14 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
           Back
         </Button>
         {STEPS[step].key === "review" ? (
-          <Button type="button" onClick={submit} disabled={submitState === "submitting"}>
-            {submitState === "submitting" ? "Submitting…" : "Submit Application"}
+          <Button
+            type="button"
+            onClick={submit}
+            disabled={submitState === "submitting"}
+          >
+            {submitState === "submitting"
+              ? "Submitting…"
+              : "Submit Application"}
           </Button>
         ) : (
           <Button type="button" onClick={next}>
@@ -1046,7 +1607,6 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
   );
 }
 
-// ── Review step ───────────────────────────────────────────────────────────
 function Row({ label, value }: { label: string; value: string }) {
   return (
     <div className="aptus-review-row">
@@ -1057,93 +1617,109 @@ function Row({ label, value }: { label: string; value: string }) {
 }
 
 function ReviewStep({
+  firstName,
+  lastName,
+  countryCode,
+  orgs,
   values,
   files,
   onEdit,
 }: {
+  firstName: string;
+  lastName: string;
+  countryCode: string;
+  orgs: OrgEntry[];
   values: ApplicationFields;
   files: FileState;
   onEdit: (step: number) => void;
 }) {
   const fileName = (f: File | null) => (f ? f.name : "—");
+  const country = COUNTRY_CODES.find((c) => c.value === countryCode);
+
   return (
     <>
       <h2>Review &amp; Submit</h2>
       <p className="aptus-apply__hint">
-        Please review your details. Use Edit to jump back to any step.
+        Check your details before submitting. Use Edit to go back.
       </p>
 
       <div className="aptus-review-group">
         <div className="aptus-review-group__head">
-          <h3>Basic Information</h3>
-          <button type="button" onClick={() => onEdit(0)}>Edit</button>
+          <h3>Personal Information</h3>
+          <button type="button" onClick={() => onEdit(0)}>
+            Edit
+          </button>
         </div>
         <dl>
-          <Row label="Full Name" value={values.fullName} />
+          <Row label="Name" value={`${firstName} ${lastName}`.trim()} />
           <Row label="Email" value={values.email} />
-          <Row label="Phone" value={values.phone} />
-        </dl>
-      </div>
-
-      <div className="aptus-review-group">
-        <div className="aptus-review-group__head">
-          <h3>Pre-Interview</h3>
-          <button type="button" onClick={() => onEdit(2)}>Edit</button>
-        </div>
-        <dl>
-          <Row label="Applied Designation" value={values.appliedDesignation} />
-          <Row label="Date of Application" value={values.applicationDate} />
-          <Row label="Total Experience" value={values.totalYearsExperience} />
-          <Row label="Date of Birth" value={values.dateOfBirth} />
           <Row
-            label="Current Organization"
-            value={`${values.currentOrg.name} — ${values.currentOrg.designation}`}
+            label="Phone"
+            value={`${countryCode} ${values.phone}${country ? ` (${country.label.split(" ")[1]})` : ""}`}
           />
+          <Row label="Location" value={values.currentLocation} />
+          <Row label="Date of Birth" value={values.dateOfBirth} />
+        </dl>
+      </div>
+
+      <div className="aptus-review-group">
+        <div className="aptus-review-group__head">
+          <h3>Experience</h3>
+          <button type="button" onClick={() => onEdit(1)}>
+            Edit
+          </button>
+        </div>
+        <dl>
+          {orgs.map((org, i) => (
+            <Row
+              key={org.id}
+              label={
+                i === 0 ? "Current Organization" : `Previous Organization ${i}`
+              }
+              value={`${org.name} — ${org.designation} (${org.duration})`}
+            />
+          ))}
+          <Row label="Total Experience" value={values.totalYearsExperience} />
+          <Row label="Reports To" value={values.reportsTo} />
+          <Row label="Team Size" value={values.teamSize} />
           <Row label="Notice Period" value={values.noticePeriod} />
-          <Row label="Current / Expected CTC" value={`${values.currentCtc} / ${values.expectedCtc}`} />
-          <Row label="Passport Number" value={values.passportNumber} />
-          <Row label="Driving License" value={values.drivingLicense} />
-          <Row label="Family Details" value={values.familyDetails} />
-        </dl>
-      </div>
-
-      <div className="aptus-review-group">
-        <div className="aptus-review-group__head">
-          <h3>Education</h3>
-          <button type="button" onClick={() => onEdit(3)}>Edit</button>
-        </div>
-        <dl>
-          {values.educationEntries
-            .filter((e) => e.name)
-            .map((e, i) => (
-              <Row
-                key={i}
-                label={e.name}
-                value={`${e.institution} (${e.year})`}
-              />
-            ))}
-        </dl>
-      </div>
-
-      <div className="aptus-review-group">
-        <div className="aptus-review-group__head">
-          <h3>Attachments</h3>
-          <button type="button" onClick={() => onEdit(4)}>Edit</button>
-        </div>
-        <dl>
-          <Row label="Resume" value={fileName(files.resume)} />
           <Row
-            label="Certificates"
+            label="Current / Expected CTC (OMR)"
+            value={`${values.currentCtc} / ${values.expectedCtc}`}
+          />
+          <Row label="Passport Number" value={values.passportNumber} />
+          <Row label="Passport Validity" value={values.passportValidity} />
+        </dl>
+      </div>
+
+      <div className="aptus-review-group">
+        <div className="aptus-review-group__head">
+          <h3>Education &amp; Documents</h3>
+          <button type="button" onClick={() => onEdit(1)}>
+            Edit
+          </button>
+        </div>
+        <dl>
+          <Row
+            label="Education"
             value={
-              files.educationalCertificates.length
-                ? files.educationalCertificates.map((f) => f.name).join(", ")
-                : "—"
+              values.educationEntries
+                .filter((e) => e.name)
+                .map((e) => `${e.name} — ${e.institution} (${e.year})`)
+                .join("; ") || "—"
             }
           />
+          <Row label="Resume" value={fileName(files.resume)} />
           <Row label="Passport Copy" value={fileName(files.passportCopy)} />
           <Row label="Photograph" value={fileName(files.photograph)} />
-          <Row label="Appointment Letter" value={fileName(files.appointmentLetter)} />
-          <Row label="Relieving Letter" value={fileName(files.relievingLetter)} />
+          <Row
+            label="Appointment Letter"
+            value={fileName(files.appointmentLetter)}
+          />
+          <Row
+            label="Relieving Letter"
+            value={fileName(files.relievingLetter)}
+          />
           <Row label="Latest Payslip" value={fileName(files.latestPayslip)} />
         </dl>
       </div>

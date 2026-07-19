@@ -465,10 +465,77 @@
 .aptus-apply__grid {
   display: grid;
   gap: 1rem;
+  align-items: start;
+}
+.aptus-apply__grid > * {
+  min-width: 0;
 }
 @media (min-width: 640px) {
-  .aptus-apply__grid--2 { grid-template-columns: repeat(2, 1fr); }
-  .aptus-apply__grid--3 { grid-template-columns: repeat(3, 1fr); }
+  .aptus-apply__grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .aptus-apply__grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  /* Label + year pairs: main field flexes, year stays a fixed narrow column */
+  .aptus-apply__grid--year {
+    grid-template-columns: minmax(0, 1fr) 7.5rem;
+  }
+}
+.aptus-apply__phone {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+.aptus-apply__phone select {
+  width: auto;
+  max-width: 11.5rem;
+  flex-shrink: 0;
+}
+.aptus-apply__phone input {
+  flex: 1;
+  min-width: 0;
+}
+.aptus-apply__date {
+  position: relative;
+  display: block;
+}
+.aptus-apply__date > input[type="text"] {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding-right: 2.75rem;
+}
+.aptus-apply__date-cal {
+  position: absolute;
+  top: 50%;
+  right: 0.55rem;
+  transform: translateY(-50%);
+  width: 2rem;
+  height: 2rem;
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  cursor: pointer;
+}
+.aptus-apply__date-cal:hover {
+  color: var(--aptus-blue, #24648c);
+}
+.aptus-apply__date-cal-icon {
+  display: flex;
+  pointer-events: none;
+}
+/* Icon hit-target only — never stretch like .aptus-field input { width: 100% } */
+.aptus-apply__date-cal input[type="date"] {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  margin: 0;
+  padding: 0 !important;
+  border: 0 !important;
+  opacity: 0;
+  cursor: pointer;
 }
 .aptus-apply__group {
   border: 1px solid var(--careers-border);
@@ -485,23 +552,32 @@
 }
 
 /* Fields */
-.aptus-field label {
+.aptus-field {
+  position: relative;
+}
+.aptus-field > label {
   display: block;
   font-weight: 500;
   color: #0f172a;
   margin-bottom: 0.35rem;
   font-size: 0.92rem;
+  min-height: 1.35rem;
+  line-height: 1.35rem;
+  padding-right: 0.25rem;
 }
 .aptus-field .aptus-field__help {
   color: var(--careers-muted);
   font-size: 0.8rem;
-  margin-top: -0.15rem;
-  margin-bottom: 0.35rem;
+  margin-top: 0.35rem;
+  margin-bottom: 0;
+  min-height: 0;
 }
 .aptus-field input,
 .aptus-field select,
 .aptus-field textarea {
   width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   border: 1px solid var(--careers-border);
   border-radius: 12px;
   padding: 0.7rem 0.85rem;
@@ -526,17 +602,26 @@
   margin-top: 0.3rem;
 }
 .aptus-field__badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  margin-left: 0.5rem;
+  margin: 0;
   padding: 0.1rem 0.5rem;
   border-radius: 999px;
   background: #fff7e6;
   color: #b45309;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 600;
-  vertical-align: middle;
+  line-height: 1.2;
+  max-width: 45%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
 }
 
 /* Nationality toggle */

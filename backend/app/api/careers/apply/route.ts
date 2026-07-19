@@ -103,9 +103,8 @@ export async function POST(req: NextRequest) {
   const resumeErr = validateFile(resume, RESUME_EXTENSIONS, "Resume", true);
   if (resumeErr) errors.resume = resumeErr;
 
-  if (certificates.length === 0) {
-    errors.educationalCertificates = "At least one educational certificate is required.";
-  } else {
+  // Certificates are optional — education supporting docs cover academics.
+  if (certificates.length > 0) {
     for (const c of certificates) {
       const e = validateFile(c, CERT_EXTENSIONS, "Educational certificate", true);
       if (e) errors.educationalCertificates = e;
@@ -311,7 +310,13 @@ export async function POST(req: NextRequest) {
     console.error("[careers/apply] HR email failed:", hrResult.error);
     return jsonCors(
       req,
-      { error: "Could not send your application. Please try again later." },
+      {
+        error: "Could not send your application. Please try again later.",
+        // ponytail: TEMPORARY debug field — exposes the raw Resend error to the
+        // browser so we can diagnose the 502 without Vercel log access. REMOVE
+        // once the sender-domain / Resend config is fixed (leaks internal detail).
+        debug: hrResult.error,
+      },
       { status: 502 },
     );
   }

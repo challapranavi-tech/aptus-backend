@@ -18,7 +18,183 @@
       }
     ]
   },
-  "cardSections": [],
+  "introRow": {
+    "heading": "Your Premier Software Solutions Provider",
+    "paragraphs": [
+      "Aptus Infotech is a leading provider of premium software solutions designed to help businesses streamline operations, enhance productivity, and drive growth. With over 25 years of experience in the IT industry, we have successfully delivered cutting-edge software solutions to clients across various sectors.",
+      "As an authorized partner of industry-leading software brands, we offer genuine licenses, expert implementation, and comprehensive support for all our software solutions. Our team of certified professionals works closely with clients to understand their unique challenges and recommend the most suitable software for their specific needs.",
+      "From consultation and licensing to implementation and training, we provide end-to-end services that ensure our clients get the maximum value from their software investments."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/imgi_8_photo-1581094794329-c8112a89af12-683x1024.png",
+    "imageAlt": "Aptus Infotech software solutions",
+    "imagePosition": "right"
+  },
+  "cardSections": [
+    {
+      "id": "software-collection",
+      "anchorId": "Software",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Our Software Solutions"
+      },
+      "subheading": "Premium software solutions from industry-leading brands",
+      "align": "center",
+      "gridColumns": 3,
+      "items": [
+        {
+          "title": "Autodesk",
+          "body": "Comprehensive design and engineering software for architecture, engineering, and construction professionals.",
+          "icon": "cube",
+          "actionLabel": "Request a Quote",
+          "actionHref": "/autodesk"
+        },
+        {
+          "title": "Electrical Software",
+          "body": "Specialized software for electrical design, analysis, and documentation of electrical systems.",
+          "icon": "bolt",
+          "actionLabel": "Request a Quote",
+          "actionHref": "/etap"
+        },
+        {
+          "title": "Adobe",
+          "body": "Creative cloud software for graphic design, video editing, web development, and photography.",
+          "icon": "paint-brush",
+          "actionLabel": "Request a Quote",
+          "actionHref": "/adobe"
+        },
+        {
+          "title": "Oracle",
+          "body": "Database management and enterprise software solutions to manage and analyze critical business data.",
+          "icon": "database",
+          "actionLabel": "Request a Quote",
+          "actionHref": "/oracle-primavera-p6"
+        },
+        {
+          "title": "Microsoft",
+          "body": "Productivity and business software including Office 365, Windows Server, and Azure cloud services.",
+          "icon": "microsoft",
+          "actionLabel": "Request a Quote",
+          "actionHref": "/microsoft"
+        },
+        {
+          "title": "Multimedia",
+          "body": "Professional multimedia software for video editing, animation, and visual effects creation.",
+          "icon": "camera",
+          "actionLabel": "Request a Quote",
+          "actionHref": "/multimedia-software-solutions"
+        },
+        {
+          "title": "Quantity Takeoff",
+          "body": "Specialized software for construction cost estimation and material quantity calculation.",
+          "icon": "ruler-combined",
+          "actionLabel": "Request a Quote",
+          "actionHref": "#Form"
+        },
+        {
+          "title": "Structural Software",
+          "body": "Advanced software for structural analysis, design, and documentation of building structures.",
+          "icon": "building",
+          "actionLabel": "Request a Quote",
+          "actionHref": "#Form"
+        },
+        {
+          "title": "Cyber Security Solutions",
+          "body": "Comprehensive security software to protect your digital assets from cyber threats and vulnerabilities.",
+          "icon": "shield",
+          "actionLabel": "Request a Quote",
+          "actionHref": "/cyber-security-solution"
+        },
+        {
+          "title": "Educational Software",
+          "body": "Innovative software solutions for educational institutions to enhance teaching and learning experiences.",
+          "icon": "graduation-cap",
+          "actionLabel": "Request a Quote",
+          "actionHref": "#Form"
+        },
+        {
+          "title": "Educational Documents Management",
+          "body": "Document management systems designed specifically for educational institutions to handle academic records.",
+          "icon": "file-alt",
+          "actionLabel": "Request a Quote",
+          "actionHref": "#Form"
+        }
+      ]
+    },
+    {
+      "id": "our-process",
+      "anchorId": "process",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Our Process"
+      },
+      "subheading": "How we deliver exceptional software solutions",
+      "align": "center",
+      "gridColumns": 5,
+      "items": [
+        {
+          "title": "Consultation",
+          "body": "We analyze your business needs and objectives to recommend the most suitable software solutions.",
+          "icon": "user-friends"
+        },
+        {
+          "title": "Licensing",
+          "body": "We help you procure the appropriate licenses at competitive prices with flexible options.",
+          "icon": "certificate"
+        },
+        {
+          "title": "Implementation",
+          "body": "Our technical team ensures smooth installation and integration with your existing systems.",
+          "icon": "cogs"
+        },
+        {
+          "title": "Training",
+          "body": "We provide comprehensive training to ensure your team can effectively use the software.",
+          "icon": "graduation-cap"
+        },
+        {
+          "title": "Support",
+          "body": "Our support team is always available to assist with any issues or questions.",
+          "icon": "headset"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose",
+        "accent": "Aptus Infotech"
+      },
+      "subheading": "Experience the advantages of partnering with us for your software needs",
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Authorized Partners",
+          "body": "We are authorized partners of all software brands we offer, ensuring genuine licenses and manufacturer support.",
+          "icon": "certificate"
+        },
+        {
+          "title": "Expert Consultation",
+          "body": "Our certified consultants provide expert advice to help you select the right software for your specific needs.",
+          "icon": "users"
+        },
+        {
+          "title": "Implementation Support",
+          "body": "We provide comprehensive implementation services to ensure smooth integration with your existing systems.",
+          "icon": "cogs"
+        },
+        {
+          "title": "Training & Support",
+          "body": "Our training programs ensure your team can effectively use the software, with ongoing support when needed.",
+          "icon": "headset"
+        }
+      ]
+    }
+  ],
   "midCta": {
     "heading": "Ready to Transform Your Business?",
     "subheading": "Contact us today for a consultation and discover how our software solutions can drive your business forward.",

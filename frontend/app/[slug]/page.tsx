@@ -27,13 +27,13 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const page = await getPageBySlug(formatSlug(slug));
-
-  if (!page) {
+  try {
+    const page = await getPageBySlug(formatSlug(slug));
+    if (!page) return { title: slug };
+    return buildPageMetadata(page);
+  } catch {
     return { title: slug };
   }
-
-  return buildPageMetadata(page);
 }
 
 export default async function DynamicPage({ params }: PageProps) {

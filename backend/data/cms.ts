@@ -70,6 +70,7 @@ function warnOdoo(fn: string, err: unknown) {
   }
 }
 
+/** Layout chrome (nav, footer, top bar) is frontend-owned — never from Odoo. */
 export async function getSiteConfig(): Promise<SiteConfig> {
   return mockGetSiteConfig();
 }
