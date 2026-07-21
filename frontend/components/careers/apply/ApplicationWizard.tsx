@@ -21,7 +21,7 @@ import {
 } from "@shared/lib/careers-application";
 import type { CareerJob } from "@shared/lib/career-jobs";
 import type { ResumeHints } from "@shared/lib/resume-parse";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { FileDropzone } from "./FileDropzone";
 import { SelectField, TextAreaField, TextField } from "./fields";
 
@@ -516,6 +516,35 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
   const topRef = useRef<HTMLDivElement>(null);
   const summaryRef = useRef<HTMLDivElement>(null);
 
+  // scrollTop defined early so useEffect below can reference it.
+  const scrollTop = () =>
+    topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  // ── Re-validate all steps whenever the review step becomes active ────────────
+  // Catches the case where a user navigated back via the step tabs or the
+  // "Edit" buttons, cleared a required field, and jumped back to review
+  // without going through "Continue" (which calls validateStep). Without this,
+  // every browser can reach Submit with a step that was cleared after it was
+  // originally validated.
+  useEffect(() => {
+    if (STEPS[step].key !== "review") return;
+    const stepErrs = [0, 1, 2].map((i) => validateStep(i));
+    const all: Errors = Object.assign({}, ...stepErrs);
+    if (Object.keys(all).length > 0) {
+      const firstBad = stepErrs.findIndex((e) => Object.keys(e).length > 0);
+      setStep(firstBad >= 0 ? firstBad : 0);
+      setMaxStep((m) => Math.max(m, firstBad >= 0 ? firstBad : 0));
+      setErrors(all);
+      setShowSummary(true);
+      scrollTop();
+      requestAnimationFrame(() => summaryRef.current?.focus());
+    } else {
+      setErrors({});
+      setShowSummary(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step]);
+
   const setValue = (key: keyof ApplicationFields, v: string) => {
     setValues((prev) => ({ ...prev, [key]: v }));
     if (errors[key]) setErrors((p) => ({ ...p, [key]: "" }));
@@ -680,10 +709,30 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
     return errs;
   };
 
-  const scrollTop = () =>
-    topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-
   const goTo = (index: number) => {
+    // When jumping TO the review step (step 3) via tab or Edit button,
+    // re-run every step's validation so any data cleared after passing
+    // "Continue" is caught before the user can hit Submit.
+    if (index === STEPS.length - 1) {
+      const all: Errors = {
+        ...validateStep(0),
+        ...validateStep(1),
+        ...validateStep(2),
+      };
+      if (Object.keys(all).length > 0) {
+        for (let i = 0; i < STEPS.length - 1; i++) {
+          if (Object.keys(validateStep(i)).length > 0) {
+            setStep(i);
+            setMaxStep((m) => Math.max(m, i));
+            setErrors(all);
+            setShowSummary(true);
+            scrollTop();
+            requestAnimationFrame(() => summaryRef.current?.focus());
+            return;
+          }
+        }
+      }
+    }
     setStep(index);
     setMaxStep((m) => Math.max(m, index));
     setShowSummary(false);
@@ -707,7 +756,16 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
     goTo(Math.min(step + 1, STEPS.length - 1));
   };
 
-  const back = () => goTo(Math.max(step - 1, 0));
+  const back = () => {
+    // When going back from ANY step, validate the current step first so
+    // errors introduced by editing are not silently abandoned.
+    const e = validateStep(step);
+    if (Object.keys(e).length > 0) {
+      blockWithErrors(e);
+      return;
+    }
+    goTo(Math.max(step - 1, 0));
+  };
 
   const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
     const id = (e.target as HTMLElement).id;
