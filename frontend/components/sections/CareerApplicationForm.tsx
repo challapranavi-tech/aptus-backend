@@ -70,7 +70,7 @@ export function CareerApplicationForm({ submitLabel }: Props) {
     if (status === "uploading") return;
     if (!validate()) {
       setStatus("error");
-      setMessage("PPlease review and correct the highlighted fields before submitting.");
+      setMessage("Please review and correct the highlighted fields before submitting.");
       return;
     }
 

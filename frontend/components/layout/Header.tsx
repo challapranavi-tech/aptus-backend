@@ -1,7 +1,5 @@
 import { getSiteConfig } from "@/data";
-import { resolveCmsImageSrc } from "@/lib/utils";
-import Image from "next/image";
-import Link from "next/link";
+import { MastheadBrand } from "./MastheadBrand";
 import { NavMenu } from "./NavMenu";
 
 function SocialIcon({ platform }: { platform: string }) {
@@ -84,20 +82,7 @@ export async function Header() {
 
       <div className="aptus-masthead__nav">
         <div className="aptus-masthead__nav-inner">
-          <Link href="/" className="aptus-masthead__brand">
-            {siteConfig.logo ? (
-              <Image
-                src={resolveCmsImageSrc(siteConfig.logo.src)}
-                alt={siteConfig.logo.alt}
-                width={siteConfig.logo.width ?? 220}
-                height={siteConfig.logo.height ?? 52}
-                priority
-                unoptimized
-              />
-            ) : (
-              <span className="text-brand-navy" style={{ fontSize: 'var(--text-xl)', fontWeight: 700 }}>{siteConfig.name}</span>
-            )}
-          </Link>
+          <MastheadBrand name={siteConfig.name} logo={siteConfig.logo ?? null} />
           <NavMenu items={siteConfig.navigation} />
         </div>
       </div>

@@ -9,8 +9,8 @@
  *   const config = await client.getSiteConfig(defaults);
  *
  * Environment variables required:
- *   ODOO_URL      – base URL  e.g. https://aptusinfotech-staging-33910464.dev.odoo.com
- *   ODOO_DB       – database  e.g. aptusinfotech-staging-33910464
+ *   ODOO_URL      – base URL  e.g. https://aptusinfotech-staging-35193445.dev.odoo.com
+ *   ODOO_DB       – database  e.g. aptusinfotech-staging-35193445
  *   ODOO_USER     – login     e.g. admin@aptusinfotech.com
  *   ODOO_API_KEY  – API key   (Odoo → Preferences → Account Security → API Keys)
  *
@@ -84,7 +84,7 @@ export function isOdooConfigured(): boolean {
 }
 
 // ─── Website.page fields we always fetch ─────────────────────────────────────
-const PAGE_FIELDS: (keyof OdooRawPage)[] = [
+const PAGE_FIELDS_CORE: (keyof OdooRawPage)[] = [
   "id",
   "name",
   "url",
@@ -98,10 +98,70 @@ const PAGE_FIELDS: (keyof OdooRawPage)[] = [
   "website_id",
   "date_publish",
   "write_date",
+];
+
+/** Custom CMS JSON fields — may be absent on a fresh staging DB. */
+const PAGE_FIELDS_CMS: (keyof OdooRawPage)[] = [
   "x_homepage_sections_json",
   "x_page_sections_json",
   "x_case_studies_sections_json",
 ];
+
+// ponytail: cache resolved field list so a missing x_* field doesn't 404 every page.
+// Ceiling: one failed search_read per missing field on cold start; upgrade = install fields in Odoo.
+let _pageFields: string[] | null = null;
+let _cmsFieldsWarned = false;
+
+function isInvalidFieldError(err: unknown): string | null {
+  if (!(err instanceof OdooRpcError)) return null;
+  const m = err.message.match(/Invalid field '([^']+)'/);
+  return m?.[1] ?? null;
+}
+
+async function resolvePageFields(session: OdooRpcSession): Promise<string[]> {
+  if (_pageFields) return _pageFields;
+
+  const fields = [...PAGE_FIELDS_CORE] as string[];
+  const missing: string[] = [];
+
+  for (const field of PAGE_FIELDS_CMS) {
+    try {
+      await searchRead(session, "website.page", [], {
+        fields: ["id", field],
+        limit: 1,
+      });
+      fields.push(field);
+    } catch (err) {
+      if (isInvalidFieldError(err) === field) {
+        missing.push(field);
+        continue;
+      }
+      throw err;
+    }
+  }
+
+  if (missing.length && !_cmsFieldsWarned && process.env.NODE_ENV !== "production") {
+    _cmsFieldsWarned = true;
+    console.warn(
+      `[odoo] website.page missing CMS fields (${missing.join(", ")}). ` +
+        `Create Text fields on website.page in Odoo, or rely on content/odoo-json fallbacks.`,
+    );
+  }
+
+  _pageFields = fields;
+  return fields;
+}
+
+/** Drop cached PAGE_FIELDS resolution (call with invalidateOdooClientSession). */
+export function invalidatePageFieldCache(): void {
+  _pageFields = null;
+  _cmsFieldsWarned = false;
+}
+
+/** True once resolvePageFields has run and the field is present on website.page. */
+export function cmsPageFieldAvailable(field: string): boolean {
+  return _pageFields?.includes(field) ?? false;
+}
 
 const MENU_FIELDS: (keyof OdooRawMenu)[] = [
   "id",
@@ -170,11 +230,12 @@ export class OdooClient {
    * `fallbackSections` are used when arch parsing produces no sections.
    */
   async getAllPages(): Promise<Page[]> {
+    const fields = await resolvePageFields(this.session);
     const rawPages = await searchRead<OdooRawPage>(
       this.session,
       "website.page",
       publishedOnWebsite(this.websiteId),
-      { fields: PAGE_FIELDS as string[], limit: 200, order: "name asc" },
+      { fields, limit: 200, order: "name asc" },
     );
 
     const pages: Page[] = [];
@@ -218,12 +279,13 @@ export class OdooClient {
    */
   async loadPageBySlug(slug: string): Promise<Page | null> {
     const url = slug === "home" ? "/" : `/${slug}`;
+    const fields = await resolvePageFields(this.session);
 
     const rawPages = await searchRead<OdooRawPage>(
       this.session,
       "website.page",
       [...publishedOnWebsite(this.websiteId), ["url", "=", url]],
-      { fields: PAGE_FIELDS as string[], limit: 1 },
+      { fields, limit: 1 },
     );
 
     const raw = rawPages[0];
@@ -243,6 +305,7 @@ export class OdooClient {
   async loadDraftHomePage(): Promise<Page | null> {
     if (process.env.NODE_ENV === "production") return null;
 
+    const fields = await resolvePageFields(this.session);
     const rawPages = await searchRead<OdooRawPage>(
       this.session,
       "website.page",
@@ -250,7 +313,7 @@ export class OdooClient {
         ["website_id", "=", this.websiteId],
         ["url", "=", "/"],
       ],
-      { fields: PAGE_FIELDS as string[], limit: 1 },
+      { fields, limit: 1 },
     );
 
     const raw = rawPages[0];
@@ -341,6 +404,9 @@ export class OdooClient {
    * security: same published + website scope as loadPageBySlug (object id = URL).
    */
   async loadCaseStudiesJson(): Promise<string | false> {
+    const fields = await resolvePageFields(this.session);
+    if (!fields.includes("x_case_studies_sections_json")) return false;
+
     const rawPages = await searchRead<
       Pick<OdooRawPage, "x_case_studies_sections_json" | "is_published" | "website_published">
     >(
@@ -366,11 +432,12 @@ export class OdooClient {
    * Only callable behind ODOO_DEBUG_TOKEN — not a public object API.
    */
   async rawPages(): Promise<OdooRawPage[]> {
+    const fields = await resolvePageFields(this.session);
     return searchRead<OdooRawPage>(
       this.session,
       "website.page",
       [["website_id", "=", this.websiteId]],
-      { fields: PAGE_FIELDS as string[], limit: 200 },
+      { fields, limit: 200 },
     );
   }
 

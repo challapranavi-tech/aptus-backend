@@ -20,7 +20,10 @@ export const dynamicParams = true;
 
 export async function generateStaticParams() {
   const slugs = await getAllPageSlugs();
-  return slugs.map((slug) => ({ slug }));
+  // /autodesk and /adobe are dedicated App Router replicas, not CMS [slug].
+  return slugs
+    .filter((slug) => slug !== "autodesk" && slug !== "adobe")
+    .map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({

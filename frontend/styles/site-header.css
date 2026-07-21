@@ -128,13 +128,35 @@ html {
   width: 100%;
 }
 
-.aptus-masthead__brand {
+.aptus-masthead__brand-row {
+  align-items: center;
   display: inline-flex !important;
   flex: 0 1 auto;
-  line-height: 0;
+  gap: 0;
   max-width: min(220px, 70%);
   order: 1;
+  overflow: visible !important;
+}
+
+/* /autodesk only — room for Aptus + Autodesk; do not clip partner mark */
+.aptus-masthead__brand-row--partner {
+  gap: 14px;
+  max-width: none !important;
+  min-width: 0;
+  width: auto !important;
+}
+
+.aptus-masthead__brand {
+  display: inline-flex !important;
+  flex: 0 0 auto;
+  line-height: 0;
+  max-width: min(220px, 70%);
   text-decoration: none !important;
+}
+
+.aptus-masthead__brand-row--partner .aptus-masthead__brand {
+  flex: 0 0 auto;
+  max-width: 220px;
 }
 
 .aptus-masthead__brand img {
@@ -143,6 +165,30 @@ html {
   max-height: 48px;
   max-width: 100%;
   width: auto;
+}
+
+.aptus-masthead__brand-divider {
+  align-self: center;
+  background: #c8c8c8;
+  flex: 0 0 1px;
+  height: 28px;
+  width: 1px;
+}
+
+.aptus-masthead__partner-logo {
+  align-items: center;
+  color: #000 !important;
+  display: inline-flex !important;
+  flex: 0 0 auto !important;
+  line-height: 0;
+  text-decoration: none !important;
+}
+
+.aptus-masthead__partner-logo svg {
+  display: block !important;
+  flex-shrink: 0;
+  height: 18px;
+  width: 160px;
 }
 
 .aptus-masthead__center {
@@ -564,6 +610,11 @@ html {
   .aptus-masthead__brand img {
     max-height: 52px;
   }
+
+  .aptus-masthead__partner-logo svg {
+    height: 20px;
+    width: 180px;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -593,11 +644,21 @@ html {
     flex-wrap: nowrap !important;
   }
 
-  .aptus-masthead__brand {
+  .aptus-masthead__brand-row {
     align-self: center;
     flex: 0 0 auto;
     max-width: min(220px, 15.438%);
     order: 0;
+  }
+
+  .aptus-masthead__brand-row--partner {
+    max-width: none !important;
+  }
+
+  .aptus-masthead__brand {
+    align-self: center;
+    flex: 0 0 auto;
+    max-width: min(220px, 100%);
   }
 
   .aptus-masthead__toggler {

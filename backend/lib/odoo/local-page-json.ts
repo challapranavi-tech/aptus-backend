@@ -4,6 +4,7 @@
  */
 import fs from "fs";
 import path from "path";
+import { mapHomepageJson } from "./json-mapper";
 import { mapPageJson } from "./page-json-mapper";
 import type { Page } from "@/types";
 
@@ -80,6 +81,27 @@ export function isLocalPageJsonInDev(): boolean {
 }
 
 /**
+ * Build home from content/odoo-json/home.json (homepage schema, not page-json).
+ * Dev fallback when Odoo lacks x_homepage_sections_json.
+ */
+export function buildLocalHomePage(): Page | null {
+  const file = path.join(JSON_ROOT, "home.json");
+  if (!fs.existsSync(file)) return null;
+
+  const raw = fs.readFileSync(file, "utf8");
+  const sections = mapHomepageJson(raw);
+  if (!sections?.length) return null;
+
+  return {
+    id: "local:home",
+    slug: "home",
+    title: "Home",
+    seo: {},
+    sections,
+  };
+}
+
+/**
  * Build a Page from committed `content/odoo-json` when Odoo has no usable
  * sections for the slug. Safe in production: callers must only use this after
  * Odoo returned null/empty — never to override a non-empty Odoo page.
@@ -145,5 +167,9 @@ export function listLocalDevPageSlugs(): string[] {
   const page = buildLocalDevPage("cctv-camera");
   if (!page?.sections?.length) {
     throw new Error("buildLocalDevPage(cctv-camera): expected mapped sections");
+  }
+  const home = buildLocalHomePage();
+  if (!home?.sections?.length) {
+    throw new Error("buildLocalHomePage: expected mapped sections from home.json");
   }
 }

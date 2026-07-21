@@ -515,6 +515,7 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
 
   const topRef = useRef<HTMLDivElement>(null);
   const summaryRef = useRef<HTMLDivElement>(null);
+  const submittingRef = useRef(false);
 
   // scrollTop defined early so useEffect below can reference it.
   const scrollTop = () =>
@@ -794,13 +795,8 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
   };
 
   const back = () => {
-    // When going back from ANY step, validate the current step first so
-    // errors introduced by editing are not silently abandoned.
-    const e = validateStep(step);
-    if (Object.keys(e).length > 0) {
-      blockWithErrors(e);
-      return;
-    }
+    // Allow leaving an incomplete step — validate only on Continue / Submit.
+    setErrors({});
     goTo(Math.max(step - 1, 0));
   };
 
@@ -916,6 +912,8 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
   };
 
   const submit = () => {
+    if (submittingRef.current) return;
+
     const all: Errors = {
       ...validateStep(0),
       ...validateStep(1),
@@ -1034,17 +1032,20 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
       if (f) body.append(`educationDoc_${i}`, f);
     });
 
+    submittingRef.current = true;
     setSubmitState("submitting");
     setProgress(0);
     setSubmitError("");
 
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `${publicApiBase()}/api/careers/apply`);
+    xhr.timeout = 120_000;
     xhr.upload.onprogress = (ev) => {
       if (ev.lengthComputable)
         setProgress(Math.round((ev.loaded / ev.total) * 100));
     };
     xhr.onload = () => {
+      submittingRef.current = false;
       if (xhr.status >= 200 && xhr.status < 300) {
         setSubmitState("success");
         scrollTop();
@@ -1080,8 +1081,16 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
       setSubmitError(msg);
     };
     xhr.onerror = () => {
+      submittingRef.current = false;
       setSubmitState("error");
       setSubmitError("Network error — your details are safe. Please retry.");
+    };
+    xhr.ontimeout = () => {
+      submittingRef.current = false;
+      setSubmitState("error");
+      setSubmitError(
+        "The request timed out — your details are safe. Please try again.",
+      );
     };
     xhr.send(body);
   };

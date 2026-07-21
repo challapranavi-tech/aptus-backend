@@ -16,6 +16,10 @@ export interface ApplicantInput {
   email: string;
   phone?: string;
   jobId: number;
+  /** Full application details (HTML) → hr.applicant.applicant_notes */
+  notesHtml?: string;
+  /** Parsed expected CTC → salary_expected when finite */
+  salaryExpected?: number;
 }
 
 export interface ApplicantAttachment {
@@ -34,14 +38,28 @@ export function buildApplicantValues(
     email_from: input.email,
     partner_phone: input.phone ?? "",
     job_id: input.jobId,
-    // ponytail: no cover-letter field — this Odoo build has no `description` on
-    // hr.applicant. The cover message still rides in the HR email + archive.
-    // Upgrade path: post it to the applicant chatter via message_post.
+    // Full wizard payload — Odoo has no per-field map for our form; notes hold it.
+    ...(input.notesHtml?.trim()
+      ? { applicant_notes: input.notesHtml.trim() }
+      : {}),
+    ...(typeof input.salaryExpected === "number" &&
+    Number.isFinite(input.salaryExpected)
+      ? { salary_expected: input.salaryExpected }
+      : {}),
     // ponytail: omit stage_id unless ODOO_APPLICANT_STAGE_ID is set — Odoo then
     // assigns the pipeline's default first stage. Stage numbering differs per
     // instance, so pinning a literal id (the old code hardcoded 1) is fragile.
     ...(stageId ? { stage_id: stageId } : {}),
   };
+}
+
+/** First number in a CTC string ("OMR 1,200" → 1200), else undefined. */
+export function parseSalaryExpected(raw: string | undefined): number | undefined {
+  if (!raw?.trim()) return undefined;
+  const m = raw.replace(/,/g, "").match(/(\d+(?:\.\d+)?)/);
+  if (!m) return undefined;
+  const n = Number(m[1]);
+  return Number.isFinite(n) ? n : undefined;
 }
 
 /** Parse ODOO_APPLICANT_STAGE_ID into a positive integer, or undefined. */

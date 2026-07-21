@@ -9,9 +9,10 @@
  * Layout chrome (nav, footer, top bar) is code-owned — see data/site-nav.ts.
  */
 
-import { OdooClient, OdooRpcError, isOdooConfigured } from "@/lib/odoo";
+import { OdooClient, OdooRpcError, isOdooConfigured, invalidatePageFieldCache, cmsPageFieldAvailable } from "@/lib/odoo";
 import {
   buildLocalDevPage,
+  buildLocalHomePage,
   isLocalPageJsonInDev,
   listLocalDevPageSlugs,
 } from "@/lib/odoo/local-page-json";
@@ -47,6 +48,7 @@ function getClient(): Promise<OdooClient> {
  */
 export function invalidateOdooClientSession(): void {
   _clientPromise = null;
+  invalidatePageFieldCache();
 }
 
 function debugLog(label: string, data: unknown) {
@@ -76,12 +78,27 @@ export async function getSiteConfig(): Promise<SiteConfig> {
 }
 
 export async function getHomePage(): Promise<Page | null> {
-  if (!isOdooConfigured()) return mockGetHomePage();
+  if (!isOdooConfigured()) {
+    return (isLocalPageJsonInDev() && buildLocalHomePage()) || mockGetHomePage();
+  }
 
   try {
     const client = await getClient();
     const page = await client.getPageBySlug("home");
     debugLog("Mapped Page [home]", page);
+
+    // Fresh staging DBs lack x_homepage_sections_json — arch parse is a stub.
+    // Prefer committed home.json in dev until the Odoo Text field exists + is seeded.
+    if (isLocalPageJsonInDev() && !cmsPageFieldAvailable("x_homepage_sections_json")) {
+      const local = buildLocalHomePage();
+      if (local) {
+        console.warn(
+          "[cms] Odoo website.page has no x_homepage_sections_json — using content/odoo-json/home.json",
+        );
+        return local;
+      }
+    }
+
     if (page && page.sections.length > 0) {
       debugLog("Section Structure [home]", page.sections.map((s) => ({ id: s.id, type: s.type, order: s.order })));
       return page;
@@ -100,9 +117,21 @@ export async function getHomePage(): Promise<Page | null> {
       }
     }
 
+    if (isLocalPageJsonInDev()) {
+      const local = buildLocalHomePage();
+      if (local) {
+        console.warn("[cms] Home has no Odoo sections — using content/odoo-json/home.json");
+        return local;
+      }
+    }
+
     return page;
   } catch (err) {
     warnOdoo("getHomePage", err);
+    if (isLocalPageJsonInDev()) {
+      const local = buildLocalHomePage();
+      if (local) return local;
+    }
     return null;
   }
 }

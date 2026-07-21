@@ -18,18 +18,27 @@ function clamp(value: string | null, max = 120): string | undefined {
 }
 
 export async function GET(req: NextRequest) {
-  const sp = req.nextUrl.searchParams;
-  const jobs = await getAllJobs();
+  try {
+    const sp = req.nextUrl.searchParams;
+    const jobs = await getAllJobs();
 
-  const result = filterJobs(jobs, {
-    q: clamp(sp.get("q")),
-    department: clamp(sp.get("department")),
-    location: clamp(sp.get("location")),
-    page: sp.get("page") ? Number(sp.get("page")) : undefined,
-    pageSize: sp.get("pageSize") ? Number(sp.get("pageSize")) : undefined,
-  });
+    const result = filterJobs(jobs, {
+      q: clamp(sp.get("q")),
+      department: clamp(sp.get("department")),
+      location: clamp(sp.get("location")),
+      page: sp.get("page") ? Number(sp.get("page")) : undefined,
+      pageSize: sp.get("pageSize") ? Number(sp.get("pageSize")) : undefined,
+    });
 
-  return jsonCors(req, result, {
-    headers: { "Cache-Control": "public, max-age=60, s-maxage=300" },
-  });
+    return jsonCors(req, result, {
+      headers: { "Cache-Control": "public, max-age=60, s-maxage=300" },
+    });
+  } catch (err) {
+    console.error("[careers/jobs]", err);
+    return jsonCors(
+      req,
+      { error: "Unable to load jobs from Odoo." },
+      { status: 503 },
+    );
+  }
 }

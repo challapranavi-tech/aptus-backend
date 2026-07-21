@@ -26,6 +26,7 @@ import {
   enforceKeyRateLimit,
   identityKey,
 } from "@/lib/rate-limit-http";
+import { invalidateOdooClientSession } from "@/data";
 import { ODOO_CACHE_TAG } from "@/lib/odoo/client";
 import {
   normaliseSlug,
@@ -115,7 +116,9 @@ export async function POST(req: NextRequest) {
   try {
     let revalidated: string[];
 
-    // Bust OdooClient unstable_cache entries (API key never stored in fetch cache).
+    // Bust OdooClient unstable_cache + in-memory field/session probes
+    // (e.g. after creating x_* CMS fields on a fresh staging DB).
+    invalidateOdooClientSession();
     revalidateTag(ODOO_CACHE_TAG);
 
     if (body.all) {

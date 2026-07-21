@@ -59,11 +59,14 @@ export async function POST(req: NextRequest) {
 
   const to = process.env.CONTACT_TO_EMAIL ?? "info@aptusinfotech.com";
   const name = [first_name, last_name].filter(Boolean).join(" ");
+  const isQuote = Boolean(product && product !== "Others");
 
   const result = await sendEmail({
     to,
     replyTo: email,
-    subject: `New quote request from ${name}`,
+    subject: isQuote
+      ? `New quote request from ${name}`
+      : `New contact message from ${name}`,
     text: [
       `Name: ${name}`,
       `Email: ${email}`,

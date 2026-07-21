@@ -7,6 +7,7 @@
 import {
   EMAIL_RE,
   PHONE_RE,
+  hasAllowedExtension,
   parseObject,
   sanitizeFilename,
   sanitizeText,
@@ -166,13 +167,7 @@ export function parseApplicationFields(
   };
 }
 
-export function hasAllowedExtension(
-  fileName: string,
-  allowed: readonly string[],
-): boolean {
-  const lower = fileName.toLowerCase();
-  return allowed.some((ext) => lower.endsWith(ext));
-}
+export { hasAllowedExtension };
 
 /** Validates a single upload for presence, type and size. */
 export function validateFile(

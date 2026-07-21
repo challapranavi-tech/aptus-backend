@@ -1,6 +1,7 @@
 "use client";
 
 import { CareerApplicationForm } from "@/components/sections/CareerApplicationForm";
+import { ContactLeadForm } from "@/components/contact/ContactLeadForm";
 import { SoftwareQuoteForm } from "@/components/quote/SoftwareQuoteForm";
 import { Container } from "@/components/ui";
 import { useGSAPContext } from "@/hooks/useGSAPContext";
@@ -41,42 +42,6 @@ function formClasses(layout: CTAData["layout"]) {
   };
 }
 
-function HeardFromSelect({
-  required = true,
-  className,
-  variant = "default",
-}: {
-  required?: boolean;
-  className: string;
-  variant?: "default" | "career";
-}) {
-  if (variant === "career") {
-    return (
-      <select name="heard_from" required={required} className={className} defaultValue="Media">
-        <option value="Media">Media</option>
-        <option value="Referals">Referals</option>
-        <option value="Social Media">Social Media</option>
-        <option value="Events">Events</option>
-      </select>
-    );
-  }
-
-  return (
-    <select name="heard_from" required={required} className={className} defaultValue="">
-      <option value="" disabled>
-        Select an option
-      </option>
-      <option value="Search Engine">Search Engine</option>
-      <option value="Social Media">Social Media</option>
-      <option value="Referrals">Referrals</option>
-      <option value="Events">Events</option>
-      <option value="LinkedIn">LinkedIn</option>
-      <option value="Media">Media</option>
-      <option value="Other">Other</option>
-    </select>
-  );
-}
-
 function CtaForm({ data }: { data: CTAData }) {
   const variant = data.formVariant ?? "simple";
   const fc = formClasses(data.layout);
@@ -95,135 +60,28 @@ function CtaForm({ data }: { data: CTAData }) {
   }
 
   if (variant === "contact") {
-    const isContactPage = data.layout === "contact-page";
-
-    if (isContactPage) {
-      return (
-        <form data-cta-animate className="relative mt-8 w-full text-left" action="#" method="post">
-          <div className="grid gap-[20px] sm:grid-cols-2 sm:gap-[30px]">
-            <label className={fc.label}>
-              First Name
-              <input type="text" name="first_name" placeholder="First Name" required className={fc.input} />
-            </label>
-            <label className={fc.label}>
-              Last Name
-              <input type="text" name="last_name" placeholder="Last Name" required className={fc.input} />
-            </label>
-            <label className={fc.label}>
-              City
-              <input type="text" name="city" placeholder="City" required className={fc.input} />
-            </label>
-            <label className={fc.label}>
-              Country
-              <input type="text" name="country" placeholder="STATE/PROVINCE" required className={fc.input} />
-            </label>
-            <label className={fc.label}>
-              Email Address
-              <input type="email" name="email" placeholder="EMAIL ADDRESS" required className={fc.input} />
-            </label>
-            <label className={fc.label}>
-              Phone Number
-              <input type="tel" name="phone" placeholder="Phone Number" required className={fc.input} />
-            </label>
-            <label className={`${fc.label} sm:col-span-2`}>
-              How can we help you?
-              <textarea
-                name="message"
-                rows={4}
-                placeholder="Your Query"
-                required
-                className={fc.input}
-              />
-            </label>
-            <label className={fc.label}>
-              How did you hear about us?
-              <HeardFromSelect variant="career" className={fc.input} />
-            </label>
-          </div>
-          <div className="mt-8 text-start">
-            <button type="submit" className={fc.submit}>
-              {data.submitLabel ?? "Submit Now"}
-            </button>
-          </div>
-        </form>
-      );
-    }
-
     return (
-      <form data-cta-animate className="relative mx-auto mt-8 max-w-2xl text-left" action="#" method="post">
-        <div className="grid gap-4 sm:grid-cols-2">
-          <label className={fc.label}>
-            First Name *
-            <input type="text" name="first_name" required className={fc.input} />
-          </label>
-          <label className={fc.label}>
-            Last Name *
-            <input type="text" name="last_name" required className={fc.input} />
-          </label>
-          <label className={fc.label}>
-            City *
-            <input type="text" name="city" required className={fc.input} />
-          </label>
-          <label className={fc.label}>
-            State/Province *
-            <input type="text" name="state" required className={fc.input} />
-          </label>
-          <label className={fc.label}>
-            Email *
-            <input type="email" name="email" required className={fc.input} />
-          </label>
-          <label className={fc.label}>
-            Phone *
-            <input type="tel" name="phone" required className={fc.input} />
-          </label>
-        </div>
-        <label className={`mt-4 ${fc.label}`}>
-          How can we help you? *
-          <textarea name="message" rows={4} required className={fc.input} />
-        </label>
-        <label className={`mt-4 ${fc.label}`}>
-          How did you hear about us? *
-          <HeardFromSelect className={fc.input} />
-        </label>
-        <div className="mt-6 text-start">
-          <button type="submit" className={fc.submit}>
-            {data.submitLabel ?? "Send Message"}
-          </button>
-        </div>
-      </form>
+      <ContactLeadForm
+        variant={data.layout === "contact-page" ? "contact-page" : "contact"}
+        submitLabel={
+          data.submitLabel ??
+          (data.layout === "contact-page" ? "Submit Now" : "Send Message")
+        }
+        labelClassName={fc.label}
+        inputClassName={fc.input}
+        submitClassName={fc.submit}
+      />
     );
   }
 
   return (
-    <form data-cta-animate className="relative mt-8 w-full text-left" action="/contact-us" method="get">
-      <div className="grid gap-5 sm:grid-cols-2">
-        <label className={fc.label}>
-          First Name *
-          <input type="text" name="first_name" required className={fc.input} />
-        </label>
-        <label className={fc.label}>
-          Last Name *
-          <input type="text" name="last_name" required className={fc.input} />
-        </label>
-        <label className={fc.label}>
-          Email *
-          <input type="email" name="email" placeholder="name@mail.com" required className={fc.input} />
-        </label>
-        <label className={fc.label}>
-          Phone *
-          <input type="tel" name="phone" placeholder="e.g,+ 968 0000 0000" required className={fc.input} />
-        </label>
-      </div>
-      <label className={`mt-5 block ${fc.label}`}>
-        Message
-        <textarea name="message" rows={4} placeholder="Message" className={fc.input} />
-      </label>
-      <div className="mt-5">
-        <button type="submit" className={fc.submit}>
-          {data.submitLabel ?? "Submit Now"}
-        </button>
-      </div>
-    </form>
+    <ContactLeadForm
+      variant="simple"
+      submitLabel={data.submitLabel ?? "Submit Now"}
+      labelClassName={fc.label}
+      inputClassName={fc.input}
+      submitClassName={fc.submit}
+    />
   );
 }
 

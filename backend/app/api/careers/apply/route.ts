@@ -1,6 +1,6 @@
 import { archiveApplication } from "@/lib/application-archive";
 import { corsPreflight, jsonCors, withCors } from "@/lib/api-cors";
-import { createApplicant, isOdooConfigured } from "@/lib/odoo";
+import { createApplicant, isOdooConfigured, parseSalaryExpected } from "@/lib/odoo";
 import { validationError } from "@/lib/api-validate";
 import {
   hrEmail,
@@ -25,7 +25,12 @@ import {
   validateImageFile,
   type ApplicationFields,
 } from "@shared/lib/careers-application";
-import { validateFileContent } from "@shared/lib/file-signature";
+import {
+  FILE_CONTENT_PROBE_BYTES,
+  mimeForFileKind,
+  sniffFileKind,
+  validateFileContent,
+} from "@shared/lib/file-signature";
 import { NextRequest } from "next/server";
 
 export const runtime = "nodejs";
@@ -42,10 +47,12 @@ function escapeHtml(value: string): string {
 
 async function fileToAttachment(file: File): Promise<MailAttachment> {
   const buffer = Buffer.from(await file.arrayBuffer());
+  const kind = sniffFileKind(buffer.subarray(0, FILE_CONTENT_PROBE_BYTES));
   return {
     filename: sanitizeFilename(file.name),
     content: buffer,
-    contentType: file.type || "application/octet-stream",
+    contentType:
+      mimeForFileKind(kind) || file.type || "application/octet-stream",
   };
 }
 
@@ -171,17 +178,23 @@ export async function POST(req: NextRequest) {
     ];
     for (const [file, exts, label, key] of contentTargets) {
       if (!file) continue;
-      const header = new Uint8Array(await file.slice(0, 16).arrayBuffer());
+      const header = new Uint8Array(
+        await file.slice(0, FILE_CONTENT_PROBE_BYTES).arrayBuffer(),
+      );
       const e = validateFileContent(file.name, header, exts, label);
       if (e) errors[key] = e;
     }
     for (const c of certificates) {
-      const header = new Uint8Array(await c.slice(0, 16).arrayBuffer());
+      const header = new Uint8Array(
+        await c.slice(0, FILE_CONTENT_PROBE_BYTES).arrayBuffer(),
+      );
       const e = validateFileContent(c.name, header, CERT_EXTENSIONS, "Educational certificate");
       if (e) errors.educationalCertificates = e;
     }
     for (let i = 0; i < eduDocs.length; i++) {
-      const header = new Uint8Array(await eduDocs[i].file.slice(0, 16).arrayBuffer());
+      const header = new Uint8Array(
+        await eduDocs[i].file.slice(0, FILE_CONTENT_PROBE_BYTES).arrayBuffer(),
+      );
       const e = validateFileContent(
         eduDocs[i].file.name,
         header,
@@ -208,6 +221,16 @@ export async function POST(req: NextRequest) {
     (res) => withCors(res, req),
   );
   if (emailLimited) return emailLimited;
+
+  // Odoo Recruitment is the source of truth for applicants — refuse if unset.
+  if (!isOdooConfigured()) {
+    console.error("[careers/apply] Odoo is not configured.");
+    return jsonCors(
+      req,
+      { error: "Applications are temporarily unavailable. Please try again later." },
+      { status: 503 },
+    );
+  }
 
   if (!isMailConfigured()) {
     console.error("[careers/apply] RESEND_API_KEY is not configured.");
@@ -279,66 +302,73 @@ export async function POST(req: NextRequest) {
     fileCount: attachments.length,
   });
 
-  // Best-effort push into Odoo Recruitment (hr.applicant + attachments). Never
-  // blocks the candidate: on failure we log and flag it in the HR email so the
-  // archived copy + email still reach a human. jobId comes straight from the
-  // listing and equals the Odoo hr.job id when Odoo is the live job source.
+  // Odoo Recruitment is required — jobId must be a real published hr.job id.
   let odooNoteHtml = "";
   let odooNoteText = "";
+  let odooSynced = false;
   const jobId = Number(fields.jobId);
 
-  // Hard guard: do not attempt Odoo push if minimum required fields are empty.
-  // After the validation above this should never happen — but defence-in-depth
-  // ensures Odoo never receives a record with a blank partner_name (which Odoo
-  // silently accepts, creating an anonymous applicant invisible in normal views).
-  const odooReady =
-    isOdooConfigured() &&
-    Number.isInteger(jobId) &&
-    jobId > 0 &&
-    fields.candidateName.trim().length > 0 &&
-    fields.email.trim().length > 0;
-
-  if (!odooReady && isOdooConfigured()) {
-    const missing: string[] = [];
-    if (!fields.candidateName.trim()) missing.push("candidateName");
-    if (!fields.email.trim()) missing.push("email");
-    if (!Number.isInteger(jobId) || jobId <= 0) missing.push("jobId");
-    console.error(
-      "[careers/apply] Odoo push skipped — missing required fields:",
-      missing.join(", "),
+  if (
+    !Number.isInteger(jobId) ||
+    jobId <= 0 ||
+    !fields.candidateName.trim() ||
+    !fields.email.trim()
+  ) {
+    console.error("[careers/apply] Odoo push refused — invalid jobId or identity");
+    return jsonCors(
+      req,
+      {
+        error:
+          "This job is not available for applications. Please choose a published role from Careers.",
+      },
+      { status: 400 },
     );
-    odooNoteHtml = `<p style="font-family:Arial,sans-serif;font-size:13px;color:#b91c1c">⚠ Odoo sync skipped — missing required fields (${missing.map(escapeHtml).join(", ")}). Please add manually.</p>`;
-    odooNoteText = `\n\n[!] Odoo sync skipped — missing: ${missing.join(", ")}. Please add manually.`;
   }
 
-  if (odooReady) {
-    try {
-      const applicantId = await createApplicant(
-        {
-          candidateName: fields.candidateName,
-          email: fields.email,
-          phone: fields.phone,
-          jobId,
-        },
-        attachments,
-      );
-      const base = process.env.ODOO_URL?.replace(/\/$/, "") ?? "";
-      const link = `${base}/web#model=hr.applicant&id=${applicantId}&view_type=form`;
-      odooNoteHtml = `<p style="font-family:Arial,sans-serif;font-size:13px;color:#047857">Synced to Odoo Recruitment — <a href="${escapeHtml(link)}">applicant #${applicantId}</a>.</p>`;
-      odooNoteText = `\n\nSynced to Odoo Recruitment: applicant #${applicantId} (${link})`;
-      console.info("[careers/apply] created hr.applicant", applicantId);
-    } catch (err) {
-      const msg = err instanceof Error ? err.message : String(err);
-      console.error("[careers/apply] Odoo hr.applicant create failed:", msg);
-      // ponytail: no retry queue yet — the flag below + archived copy are the
-      // safety net. Upgrade path: enqueue {fields, blob ref} for background retry.
-      // Archive path is a Blob prefix (or disk dir), not a public URL — store is private.
-      const archiveHint = archived
-        ? ` Archive: ${archived}`
-        : " (archive also failed — documents are only on this email)";
-      odooNoteHtml = `<p style="font-family:Arial,sans-serif;font-size:13px;color:#b91c1c">⚠ Odoo sync failed — this application is NOT in Recruitment yet. Documents are attached to this email; please add it manually. (${escapeHtml(msg)})${archived ? ` Fallback archive: <code>${escapeHtml(archived)}</code>` : " (archive also failed)"}</p>`;
-      odooNoteText = `\n\n[!] Odoo sync failed (${msg}). Application NOT in Recruitment — documents attached to this email.${archiveHint}`;
-    }
+  try {
+    const applicantId = await createApplicant(
+      {
+        candidateName: fields.candidateName,
+        email: fields.email,
+        phone: fields.phone,
+        jobId,
+        notesHtml: html,
+        salaryExpected: parseSalaryExpected(fields.expectedCtc),
+      },
+      attachments,
+    );
+    odooSynced = true;
+    const base = process.env.ODOO_URL?.replace(/\/$/, "") ?? "";
+    const link = `${base}/web#model=hr.applicant&id=${applicantId}&view_type=form`;
+    odooNoteHtml = `<p style="font-family:Arial,sans-serif;font-size:13px;color:#047857">Synced to Odoo Recruitment — <a href="${escapeHtml(link)}">applicant #${applicantId}</a>.</p>`;
+    odooNoteText = `\n\nSynced to Odoo Recruitment: applicant #${applicantId} (${link})`;
+    console.info("[careers/apply] created hr.applicant", applicantId);
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error("[careers/apply] Odoo hr.applicant create failed:", msg);
+    // Still notify HR with attachments so nothing is silently lost.
+    await sendEmail({
+      to: hrEmail(),
+      replyTo: fields.email,
+      subject: `Career Application (ODOO FAILED) — ${fields.candidateName} (${fields.appliedDesignation})`,
+      text:
+        text +
+        `\n\n[!] Odoo sync failed (${msg}). Application NOT in Recruitment.` +
+        (archived ? ` Archive: ${archived}` : ""),
+      html:
+        html +
+        `<p style="font-family:Arial,sans-serif;font-size:13px;color:#b91c1c">⚠ Odoo sync failed — application is NOT in Recruitment. (${escapeHtml(msg)})${archived ? ` Archive: <code>${escapeHtml(archived)}</code>` : ""}</p>`,
+      attachments,
+    }).catch(() => undefined);
+
+    return jsonCors(
+      req,
+      {
+        error:
+          "We could not save your application to our recruitment system. Please try again in a few minutes.",
+      },
+      { status: 502 },
+    );
   }
 
   // HR notification is required for a successful application.
@@ -352,15 +382,21 @@ export async function POST(req: NextRequest) {
   });
   if (!hrResult.ok) {
     console.error("[careers/apply] HR email failed:", hrResult.error);
+    // Odoo already has the applicant — accept to avoid duplicate Odoo records on retry.
+    if (odooSynced || archived) {
+      console.warn(
+        "[careers/apply] accepting application despite HR email failure (archive=%s odoo=%s)",
+        Boolean(archived),
+        odooSynced,
+      );
+      return jsonCors(req, {
+        ok: true,
+        warning: "email_pending",
+      });
+    }
     return jsonCors(
       req,
-      {
-        error: "Could not send your application. Please try again later.",
-        // ponytail: TEMPORARY debug field — exposes the raw Resend error to the
-        // browser so we can diagnose the 502 without Vercel log access. REMOVE
-        // once the sender-domain / Resend config is fixed (leaks internal detail).
-        debug: hrResult.error,
-      },
+      { error: "Could not send your application. Please try again later." },
       { status: 502 },
     );
   }
@@ -431,6 +467,9 @@ function applicationRows(f: ApplicationFields): Array<[string, string]> {
         .join("; ") || "—",
     ],
     ["Applied For (Job)", f.appliedDesignation],
+    ...(f.coverMessage?.trim()
+      ? ([["Cover Message", f.coverMessage.trim()]] as Array<[string, string]>)
+      : []),
   ];
 }
 

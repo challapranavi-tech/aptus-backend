@@ -74,5 +74,14 @@ assert.equal(
   null,
   "valid file (case-insensitive ext) passes",
 );
+assert.ok(
+  validateFile(
+    { name: "malware.exe.pdf", size: 1024 },
+    RESUME_EXTENSIONS,
+    "Resume",
+    true,
+  ),
+  "compound dangerous extension rejected",
+);
 
 console.log("career-application self-check passed");

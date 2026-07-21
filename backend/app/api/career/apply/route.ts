@@ -19,6 +19,13 @@ import {
   sanitizeFilename,
   validateFile,
 } from "@shared/lib/career-application";
+import { MAX_TOTAL_ATTACHMENT_BYTES } from "@shared/lib/careers-application";
+import {
+  FILE_CONTENT_PROBE_BYTES,
+  mimeForFileKind,
+  sniffFileKind,
+  validateFileContent,
+} from "@shared/lib/file-signature";
 import { NextRequest } from "next/server";
 
 export const runtime = "nodejs";
@@ -33,10 +40,12 @@ function escapeHtml(value: string): string {
 
 async function fileToAttachment(file: File): Promise<MailAttachment> {
   const buffer = Buffer.from(await file.arrayBuffer());
+  const kind = sniffFileKind(buffer.subarray(0, FILE_CONTENT_PROBE_BYTES));
   return {
     filename: sanitizeFilename(file.name),
     content: buffer,
-    contentType: file.type || "application/octet-stream",
+    contentType:
+      mimeForFileKind(kind) || file.type || "application/octet-stream",
   };
 }
 
@@ -105,6 +114,28 @@ export async function POST(req: NextRequest) {
     true,
   );
   if (formError) errors.preInterviewForm = formError;
+
+  // security: magic-byte + OOXML probe — extension/MIME alone are spoofable.
+  if (Object.keys(errors).length === 0) {
+    for (const [file, exts, label, key] of [
+      [resumeFile, RESUME_EXTENSIONS, "Resume", "resume"],
+      [formFile, FORM_EXTENSIONS, "Pre-interview form", "preInterviewForm"],
+    ] as const) {
+      if (!file) continue;
+      const header = new Uint8Array(
+        await file.slice(0, FILE_CONTENT_PROBE_BYTES).arrayBuffer(),
+      );
+      const e = validateFileContent(file.name, header, exts, label);
+      if (e) errors[key] = e;
+    }
+  }
+
+  if (Object.keys(errors).length === 0 && resumeFile && formFile) {
+    const total = resumeFile.size + formFile.size;
+    if (total > MAX_TOTAL_ATTACHMENT_BYTES) {
+      errors._form = `Your uploaded files total ${(total / (1024 * 1024)).toFixed(1)} MB, over the ${(MAX_TOTAL_ATTACHMENT_BYTES / (1024 * 1024)).toFixed(1)} MB limit.`;
+    }
+  }
 
   if (Object.keys(errors).length > 0) {
     return validationError(errors, (res) => withCors(res, req));

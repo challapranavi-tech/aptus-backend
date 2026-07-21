@@ -12,12 +12,21 @@ export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ slug: string }> },
 ) {
-  const { slug } = await params;
-  const job = await getJobBySlug(slug);
-  if (!job) {
-    return jsonCors(req, { error: "Job not found." }, { status: 404 });
+  try {
+    const { slug } = await params;
+    const job = await getJobBySlug(slug);
+    if (!job) {
+      return jsonCors(req, { error: "Job not found." }, { status: 404 });
+    }
+    return jsonCors(req, { job }, {
+      headers: { "Cache-Control": "public, max-age=60, s-maxage=300" },
+    });
+  } catch (err) {
+    console.error("[careers/jobs/slug]", err);
+    return jsonCors(
+      req,
+      { error: "Unable to load job from Odoo." },
+      { status: 503 },
+    );
   }
-  return jsonCors(req, { job }, {
-    headers: { "Cache-Control": "public, max-age=60, s-maxage=300" },
-  });
 }

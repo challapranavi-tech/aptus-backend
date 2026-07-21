@@ -8,7 +8,7 @@ import {
   validateFile,
 } from "@shared/lib/careers-application";
 import { extractResumeHints } from "@shared/lib/resume-parse";
-import { validateFileContent } from "@shared/lib/file-signature";
+import { validateFileContent, FILE_CONTENT_PROBE_BYTES } from "@shared/lib/file-signature";
 import { NextRequest } from "next/server";
 
 export const runtime = "nodejs";
@@ -54,7 +54,9 @@ export async function POST(req: NextRequest) {
 
   // security: confirm the bytes match a resume type before parsing untrusted
   // file content (defence in depth against spoofed extensions/MIME).
-  const header = new Uint8Array(await file!.slice(0, 16).arrayBuffer());
+  const header = new Uint8Array(
+    await file!.slice(0, FILE_CONTENT_PROBE_BYTES).arrayBuffer(),
+  );
   const contentErr = validateFileContent(file!.name, header, RESUME_EXTENSIONS, "Resume");
   if (contentErr) {
     return validationError({ resume: contentErr }, (res) => withCors(res, req));

@@ -124,8 +124,8 @@ async function rpcFetch<T>(
  * Authenticates against Odoo and returns a session object.
  * Use the returned session with `searchRead`, `read`, etc.
  *
- * @param url      - Base URL e.g. "https://aptusinfotech-staging-33910464.dev.odoo.com"
- * @param db       - Database name e.g. "aptusinfotech-staging-33910464"
+ * @param url      - Base URL e.g. "https://aptusinfotech-staging-35193445.dev.odoo.com"
+ * @param db       - Database name e.g. "aptusinfotech-staging-35193445"
  * @param user     - Login email or username
  * @param apiKey   - API key (from Preferences → Account Security → API Keys)
  * @param revalidate - ISR cache TTL in seconds (default 60)

@@ -94,6 +94,25 @@ export function sanitizeFilename(name: string): string {
   return base || "upload.bin";
 }
 
+/**
+ * Intermediate extensions that must never appear before an allowlisted final
+ * extension (blocks malware.exe.pdf / photo.svg.jpg style compound names).
+ */
+const COMPOUND_DANGEROUS_EXT =
+  /\.(?:exe|bat|cmd|com|scr|dll|msi|js|mjs|cjs|vbs|ps1|sh|php|asp|aspx|jsp|html?|svg|jar|pif|hta|wsf|cpl)$/i;
+
+/** True when the final extension is allowlisted and no dangerous mid-extension is present. */
+export function hasAllowedExtension(
+  fileName: string,
+  allowed: readonly string[],
+): boolean {
+  const lower = fileName.toLowerCase();
+  const matched = allowed.find((ext) => lower.endsWith(ext.toLowerCase()));
+  if (!matched) return false;
+  const stem = lower.slice(0, -matched.length);
+  return !COMPOUND_DANGEROUS_EXT.test(stem);
+}
+
 function parseString(
   key: string,
   raw: unknown,

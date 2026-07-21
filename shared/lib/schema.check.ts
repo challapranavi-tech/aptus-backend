@@ -54,6 +54,7 @@ assert.equal(
   false,
 );
 
+// Unknown keys are stripped in preprocess (CTA city/heard_from mapping).
 assert.equal(
   parseContactRequest({
     first_name: "A",
@@ -63,8 +64,38 @@ assert.equal(
     phone: "+96812345678",
     extra: "nope",
   }).ok,
-  false,
+  true,
 );
+
+// Trailing-space product values normalize to allowlist.
+const spaced = parseContactRequest({
+  first_name: "A",
+  last_name: "B",
+  email: "a@b.co",
+  company: "C",
+  phone: "+96812345678",
+  product: "Civil 3D ",
+});
+assert.equal(spaced.ok, true);
+if (spaced.ok) assert.equal(spaced.data.product, "Civil 3D");
+
+// Contact-page CTA fields map into company/message (unknown keys stripped).
+const lead = parseContactRequest({
+  first_name: "Sam",
+  last_name: "Lee",
+  email: "sam@example.com",
+  phone: "+96812345678",
+  city: "Muscat",
+  country: "Oman",
+  message: "Hello",
+  heard_from: "LinkedIn",
+});
+assert.equal(lead.ok, true);
+if (lead.ok) {
+  assert.equal(lead.data.company, "Muscat, Oman");
+  assert.equal(lead.data.product, "Others");
+  assert.ok(lead.data.message.includes("Heard from: LinkedIn"));
+}
 
 // Career fields.
 const career = parseApplicationFields({

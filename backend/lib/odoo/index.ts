@@ -4,6 +4,8 @@ export {
   isOdooConfigured,
   odooConfigFromEnv,
   ODOO_CACHE_TAG,
+  invalidatePageFieldCache,
+  cmsPageFieldAvailable,
 } from "./client";
 
 export {
@@ -20,6 +22,7 @@ export {
   createApplicant,
   buildApplicantValues,
   applicantStageIdFromEnv,
+  parseSalaryExpected,
   type ApplicantInput,
   type ApplicantAttachment,
 } from "./recruitment";

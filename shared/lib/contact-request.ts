@@ -97,15 +97,42 @@ function preprocessContactBody(input: unknown): unknown {
   if (typeof input !== "object" || input === null || Array.isArray(input)) {
     return input;
   }
-  const body = { ...(input as Record<string, unknown>) };
-  if (typeof body.product === "string") {
-    const p = body.product.trim();
-    body.product = p === "Select Product" || p === "" ? undefined : p;
+  const raw = input as Record<string, unknown>;
+  const trim = (k: string) =>
+    typeof raw[k] === "string" ? (raw[k] as string).trim() : "";
+
+  // CTA contact/simple forms send city/country/state/heard_from instead of
+  // company/product — map into the quote schema so one API serves both.
+  const city = trim("city");
+  const region = trim("country") || trim("state");
+  const heard = trim("heard_from");
+  let company = trim("company");
+  if (!company) {
+    company = [city, region].filter(Boolean).join(", ") || "Website inquiry";
   }
-  if (typeof body.message === "string" && !body.message.trim()) {
-    body.message = undefined;
+
+  let product: string | undefined = trim("product");
+  if (!product || product === "Select Product") product = undefined;
+  // Contact/simple CTAs omit product; quote form may leave the placeholder.
+  // Default so allowlist + inbound mail subject stay consistent.
+  if (product === undefined) product = "Others";
+
+  let message = trim("message");
+  if (heard) {
+    message = [message, `Heard from: ${heard}`].filter(Boolean).join("\n");
   }
-  return body;
+  if (!message) message = "";
+
+  // Drop unknown keys (city/country/…) before rejectUnknown parse.
+  return {
+    first_name: raw.first_name,
+    last_name: raw.last_name,
+    email: raw.email,
+    company,
+    phone: raw.phone,
+    product,
+    message: message || undefined,
+  };
 }
 
 export function parseContactRequest(input: unknown): ParseResult<ContactRequest> {

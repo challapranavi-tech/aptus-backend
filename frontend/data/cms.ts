@@ -5,16 +5,17 @@
  * Local dev default: http://localhost:3001
  */
 
+import { cache } from "react";
 import type { Page, SiteConfig } from "@/types";
 import type { CaseStudiesPageContent } from "@/types/case-studies-page";
 import { SITE_NAVIGATION } from "./site-nav";
 import { filterSiteNavigation } from "./autodesk-subnav";
 
 const DEFAULT_API = "http://localhost:3001";
-// Odoo cold-start auth takes ~7 s; 5 s caused a race where the timeout fired
-// before auth completed → frontend received null → notFound() → 404 flash on
-// first page load after a backend restart. 15 s gives ample headroom.
-const API_TIMEOUT_MS = 15_000;
+// Cold /api/cms/home can take ~13 s (Odoo auth + page + draft fallback) and
+// first-hit Next compile adds more. 15 s aborted that race; metadata + page
+// both call getHomePage so React cache() keeps it to one fetch per request.
+const API_TIMEOUT_MS = 30_000;
 
 function apiBase(): string {
   return (process.env.APTUS_API_URL ?? DEFAULT_API).replace(/\/$/, "");
@@ -94,7 +95,7 @@ async function apiGet<T>(path: string): Promise<T | null> {
   }
 }
 
-export async function getSiteConfig(): Promise<SiteConfig> {
+export const getSiteConfig = cache(async (): Promise<SiteConfig> => {
   try {
     const config = await apiGet<SiteConfig>("/api/cms/site-config");
     return config ?? fallbackSiteConfig();
@@ -103,15 +104,15 @@ export async function getSiteConfig(): Promise<SiteConfig> {
     console.error(err);
     return fallbackSiteConfig();
   }
-}
+});
 
-export async function getHomePage(): Promise<Page | null> {
+export const getHomePage = cache(async (): Promise<Page | null> => {
   return apiGet<Page>("/api/cms/home");
-}
+});
 
-export async function getPageBySlug(slug: string): Promise<Page | null> {
+export const getPageBySlug = cache(async (slug: string): Promise<Page | null> => {
   return apiGet<Page>(`/api/cms/pages/${encodeURIComponent(slug)}`);
-}
+});
 
 export async function getAllPageSlugs(): Promise<string[]> {
   try {
@@ -137,6 +138,8 @@ export async function getAllPages(): Promise<Page[]> {
   return pages.filter((p): p is Page => p !== null);
 }
 
-export async function loadCaseStudiesPageContent(): Promise<CaseStudiesPageContent | null> {
-  return apiGet<CaseStudiesPageContent>("/api/cms/case-studies");
-}
+export const loadCaseStudiesPageContent = cache(
+  async (): Promise<CaseStudiesPageContent | null> => {
+    return apiGet<CaseStudiesPageContent>("/api/cms/case-studies");
+  },
+);

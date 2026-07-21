@@ -9,6 +9,8 @@
  * (ponytail: no AV here; add ClamAV/managed scanning before persisting files).
  */
 
+import { hasAllowedExtension } from "./schema";
+
 export type FileKind =
   | "pdf"
   | "ole-doc" // legacy .doc / .xls (OLE2 compound file)
@@ -16,7 +18,12 @@ export type FileKind =
   | "jpeg"
   | "png"
   | "webp"
+  | "svg"
+  | "executable"
   | "unknown";
+
+/** Bytes to read for magic + light OOXML probes (Content_Types is usually first). */
+export const FILE_CONTENT_PROBE_BYTES = 8192;
 
 function startsWith(buf: Uint8Array, sig: number[], offset = 0): boolean {
   if (buf.length < offset + sig.length) return false;
@@ -24,6 +31,34 @@ function startsWith(buf: Uint8Array, sig: number[], offset = 0): boolean {
     if (buf[offset + i] !== sig[i]) return false;
   }
   return true;
+}
+
+function latin1Slice(buf: Uint8Array, max = FILE_CONTENT_PROBE_BYTES): string {
+  const n = Math.min(buf.length, max);
+  let s = "";
+  for (let i = 0; i < n; i++) s += String.fromCharCode(buf[i]!);
+  return s;
+}
+
+/** True when a ZIP probe looks like a Word OOXML package (not a random .zip/.jar). */
+export function looksLikeOoxmlWord(buf: Uint8Array): boolean {
+  const sample = latin1Slice(buf);
+  return (
+    sample.includes("[Content_Types].xml") &&
+    (sample.includes("word/") || sample.includes("word\\"))
+  );
+}
+
+function isSvgPayload(buf: Uint8Array): boolean {
+  // Skip UTF-8 BOM + leading whitespace, then look for <svg / <?xml … <svg.
+  let i = 0;
+  if (buf.length >= 3 && buf[0] === 0xef && buf[1] === 0xbb && buf[2] === 0xbf)
+    i = 3;
+  while (i < buf.length && (buf[i]! === 0x20 || buf[i]! <= 0x0d)) i++;
+  const head = latin1Slice(buf.subarray(i), 256).toLowerCase();
+  if (head.startsWith("<svg")) return true;
+  if (head.startsWith("<?xml") && head.includes("<svg")) return true;
+  return false;
 }
 
 /** Detect a file kind from its leading bytes. Pass at least the first 16 bytes. */
@@ -42,7 +77,32 @@ export function sniffFileKind(buf: Uint8Array): FileKind {
     return "png";
   if (startsWith(buf, [0x52, 0x49, 0x46, 0x46]) && startsWith(buf, [0x57, 0x45, 0x42, 0x50], 8))
     return "webp"; // RIFF....WEBP
+  // PE / DOS MZ — never accept as a document/image.
+  if (startsWith(buf, [0x4d, 0x5a])) return "executable";
+  // ELF
+  if (startsWith(buf, [0x7f, 0x45, 0x4c, 0x46])) return "executable";
+  if (isSvgPayload(buf)) return "svg";
   return "unknown";
+}
+
+/** Stable Content-Type from sniffed kind (ignore browser-supplied MIME). */
+export function mimeForFileKind(kind: FileKind): string | null {
+  switch (kind) {
+    case "pdf":
+      return "application/pdf";
+    case "ole-doc":
+      return "application/msword";
+    case "zip":
+      return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+    case "jpeg":
+      return "image/jpeg";
+    case "png":
+      return "image/png";
+    case "webp":
+      return "image/webp";
+    default:
+      return null;
+  }
 }
 
 /** Kinds we consider valid content for a given declared extension. */
@@ -61,6 +121,9 @@ const EXT_TO_KINDS: Record<string, FileKind[]> = {
  * Returns an error string when the file's actual bytes don't match its declared
  * extension, else null. `allowedExts` scopes which extensions are acceptable at
  * this call site (defence in depth alongside the extension allowlist).
+ *
+ * Pass ~8 KB (`FILE_CONTENT_PROBE_BYTES`) so OOXML packages can be distinguished
+ * from arbitrary ZIP/JAR files renamed to `.docx`.
  */
 export function validateFileContent(
   fileName: string,
@@ -68,17 +131,32 @@ export function validateFileContent(
   allowedExts: readonly string[],
   label: string,
 ): string | null {
+  if (!hasAllowedExtension(fileName, allowedExts)) {
+    return `${label} must be one of: ${allowedExts.join(", ")}`;
+  }
+
   const lower = fileName.toLowerCase();
-  const ext = allowedExts.find((e) => lower.endsWith(e));
+  const ext = allowedExts.find((e) => lower.endsWith(e.toLowerCase()));
   if (!ext) return `${label} must be one of: ${allowedExts.join(", ")}`;
 
   const expected = EXT_TO_KINDS[ext];
   if (!expected) return null; // unknown mapping — extension check already passed
 
   const kind = sniffFileKind(headerBytes);
+  if (kind === "svg" || kind === "executable") {
+    return `${label} content does not match its file type.`;
+  }
   if (!expected.includes(kind)) {
     // Do not leak the sniffed kind to the client — keep the message generic.
     return `${label} content does not match its file type.`;
   }
+
+  // .docx (and OOXML-saved .doc) must look like Word packages, not a bare ZIP/JAR.
+  if (kind === "zip" && (ext === ".docx" || ext === ".doc")) {
+    if (!looksLikeOoxmlWord(headerBytes)) {
+      return `${label} content does not match its file type.`;
+    }
+  }
+
   return null;
 }

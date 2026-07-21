@@ -1,0 +1,56 @@
+/*
+  ArtifaktElement / ArtifaktLegend font-face rules, copied as-is from the
+  captured page (6315a9595fe305d8.css / main.767159f4.css). These load from
+  Autodesk's own font CDN (swc.autodesk.com).
+
+  IMPORTANT — licensing: Artifakt is Autodesk's proprietary brand typeface.
+  Hot-linking these URLs works today, but you don't have a license to serve
+  or embed the font files yourself outside an Autodesk-approved context.
+  For production use in your own product, either:
+    a) get explicit sign-off from Autodesk/your design system team, or
+    b) swap in a licensed look-alike (e.g. a geometric grotesk like Inter,
+       or a self-hosted equivalent) — the whole component set already falls
+       back to system sans-serif via the --ad-font-body / --ad-font-display
+       CSS variables in autodesk.module.css, so no other code changes are
+       required.
+*/
+
+@font-face {
+  font-family: "ArtifaktElement";
+  src: url("https://swc.autodesk.com/pharmacopeia/fonts/ArtifaktElement/v1.0/WOFF2/Artifakt%20Element%20Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ArtifaktElement";
+  src: url("https://swc.autodesk.com/pharmacopeia/fonts/ArtifaktElement/v1.0/WOFF2/Artifakt%20Element%20Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ArtifaktElement";
+  src: url("https://swc.autodesk.com/pharmacopeia/fonts/ArtifaktElement/v1.0/WOFF2/Artifakt%20Element%20Semi%20Bold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ArtifaktElement";
+  src: url("https://swc.autodesk.com/pharmacopeia/fonts/ArtifaktElement/v1.0/WOFF2/Artifakt%20Element%20Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ArtifaktLegend";
+  src: url("https://swc.autodesk.com/pharmacopeia/fonts/ArtifaktLegend/v1.0/WOFF2/Artifakt%20Legend%20Extra%20Bold.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}

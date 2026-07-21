@@ -163,6 +163,15 @@ assert.ok(
   "oversize file flagged",
 );
 assert.ok(
+  validateFile(
+    { name: "malware.exe.pdf", size: 1024 },
+    RESUME_EXTENSIONS,
+    "Resume",
+    true,
+  ),
+  "compound dangerous extension rejected",
+);
+assert.ok(
   MAX_UPLOAD_BYTES <= 4.5 * 1024 * 1024 &&
     MAX_TOTAL_ATTACHMENT_BYTES <= 4.5 * 1024 * 1024,
   "upload caps must stay under Vercel serverless body limit",

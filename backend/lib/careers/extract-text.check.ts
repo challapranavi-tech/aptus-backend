@@ -7,10 +7,15 @@ import zlib from "node:zlib";
 import { extractResumeText } from "./extract-text";
 
 /** Build a minimal stored-method (uncompressed) ZIP with one entry. */
-function makeZip(name: string, content: string): Buffer {
+function makeZip(
+  name: string,
+  content: string,
+  declaredUncompSize?: number,
+): Buffer {
   const nameBuf = Buffer.from(name, "utf8");
   const data = Buffer.from(content, "utf8");
   const crc = zlib.crc32 ? zlib.crc32(data) : 0;
+  const size = declaredUncompSize ?? data.length;
 
   const local = Buffer.alloc(30);
   local.writeUInt32LE(0x04034b50, 0);
@@ -19,7 +24,7 @@ function makeZip(name: string, content: string): Buffer {
   local.writeUInt16LE(0, 8); // stored
   local.writeUInt32LE(crc, 14);
   local.writeUInt32LE(data.length, 18);
-  local.writeUInt32LE(data.length, 22);
+  local.writeUInt32LE(size, 22);
   local.writeUInt16LE(nameBuf.length, 26);
   local.writeUInt16LE(0, 28);
 
@@ -33,7 +38,7 @@ function makeZip(name: string, content: string): Buffer {
   cen.writeUInt16LE(0, 10); // stored
   cen.writeUInt32LE(crc, 16);
   cen.writeUInt32LE(data.length, 20);
-  cen.writeUInt32LE(data.length, 24);
+  cen.writeUInt32LE(size, 24);
   cen.writeUInt16LE(nameBuf.length, 28);
   cen.writeUInt32LE(0, 42); // local header offset
   const cenRecord = Buffer.concat([cen, nameBuf]);
@@ -66,6 +71,11 @@ async function main() {
 
   // Corrupt input never throws.
   assert.equal(await extractResumeText("x.docx", Buffer.from("not a zip")), "");
+
+  // Declared uncompressed size over the inflate cap → empty (zip-bomb guard).
+  const bombXml = "x";
+  const bomb = makeZip("word/document.xml", bombXml, 3 * 1024 * 1024);
+  assert.equal(await extractResumeText("bomb.docx", bomb), "");
 
   console.log("extract-text self-check passed");
 }

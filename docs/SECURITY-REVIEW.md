@@ -70,12 +70,14 @@ Middleware (`backend/middleware.ts`) matches both `/api/career/` (legacy) and `/
 | Type/length/format constraints | **OK** | email/phone regex, length caps, numeric team size / experience patterns, date fields. |
 | Allowlist fields | **OK** | `noticePeriod` ∈ fixed set — rejected server-side if off-list. |
 | Reject unknown fields | **OK** | `rejectUnknownFormKeys` (dynamic `educationDoc_*` explicitly allowlisted). |
-| **File type by content** | **OK (added)** | `shared/lib/file-signature.ts` sniffs magic bytes (PDF/OLE/ZIP/JPEG/PNG/WEBP); a spoofed `.pdf` that is really an executable/image is rejected in `apply` + `parse-resume`. |
-| Max file size | **OK** | 5 MB/file enforced client + server (`validateFile`). |
+| **File type by content** | **OK (hardened)** | `shared/lib/file-signature.ts` sniffs magic bytes (PDF/OLE/OOXML/JPEG/PNG/WEBP); rejects MZ/ELF executables + SVG; `.docx` must look like Word OOXML (not a bare ZIP/JAR). Applied on `/api/careers/apply`, `parse-resume`, and legacy `/api/career/apply`. |
+| Max file size | **OK** | Careers: 800 KB/file + 4.5 MB total. Legacy career: 4 MB/file + 4.5 MB total. |
+| Double extensions | **OK (added)** | `hasAllowedExtension` rejects compound names like `malware.exe.pdf` / `x.svg.png`. |
+| Zip bomb / inflate | **OK (added)** | `extract-text.ts` caps inflate output at 2 MB and refuses declared oversized `document.xml`. |
 | Filename path traversal | **OK** | `sanitizeFilename` strips path separators + control chars, allowlists chars, caps length. |
 | Error responses | **OK** | Per-field messages via `validationError`; sniffed type is **not** leaked to the client; no stack traces. |
 
-**Remediation applied:** added content/magic-byte validation; added `noticePeriod` allowlist; added query-param length clamps. (Passport copy is now mandatory for all candidates; nationality field removed.)
+**Remediation applied:** content/magic-byte validation (all upload routes); OOXML probe for `.docx`; compound-extension reject; inflate caps on resume parse; `noticePeriod` allowlist; query-param length clamps. (Passport copy is now mandatory for all candidates; nationality field removed.)
 
 ### 5.3 Secrets & API keys
 

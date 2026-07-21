@@ -9,6 +9,7 @@
 import {
   EMAIL_RE,
   PHONE_RE,
+  hasAllowedExtension,
   parseObject,
   sanitizeFilename,
   sanitizeText,
@@ -563,13 +564,7 @@ export function validateFields(
   };
 }
 
-export function hasAllowedExtension(
-  fileName: string,
-  allowed: readonly string[],
-): boolean {
-  const lower = fileName.toLowerCase();
-  return allowed.some((ext) => lower.endsWith(ext));
-}
+export { hasAllowedExtension };
 
 export function validateFile(
   file: { name: string; size: number; type?: string } | null | undefined,

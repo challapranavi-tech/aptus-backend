@@ -1,0 +1,482 @@
+/* Autodesk Popular products — black rail + expand / 3D flip (live homepage) */
+
+.section {
+  --pg-radius: 16px;
+  --pg-card-w: 420px;
+  --pg-card-w-open: 420px;
+  --pg-gap: 24px;
+  --pg-font: ArtifaktElement, "Artifakt Element", Arial, sans-serif;
+  --pg-black: #000;
+  --pg-white: #fff;
+  --pg-gray-100: #f5f5f5;
+  --pg-gray-200: #e5e5e5;
+  --pg-gray-600: #a8a8a0;
+  --pg-blue: #0696d7;
+  --pg-flip-dur: 0.6s;
+  --pg-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  position: relative;
+  background-color: #000;
+  background-image: url("https://damassets.autodesk.net/content/dam/autodesk/dotcom-next/icons/autodesk-logo-partial-wireframe.svg");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: cover;
+  padding: clamp(2rem, 8vh, 4rem) 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 700ms var(--pg-ease), transform 700ms var(--pg-ease);
+}
+
+.sectionIn {
+  opacity: 1;
+  transform: none;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 48px;
+  position: relative;
+  z-index: 1;
+}
+
+.headRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  gap: 16px;
+}
+
+.title {
+  font-size: clamp(1.75rem, 1.5rem + 1vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin: 0;
+  font-family: ArtifaktLegend, var(--pg-font);
+}
+
+.viewAll {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  /* Beat .adRoot a { color: inherit } (dark text on black) */
+  color: #fff !important;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding: 10px 20px;
+  min-height: 44px;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  background: transparent;
+  font-family: var(--pg-font);
+  transition: background 280ms var(--pg-ease), color 280ms var(--pg-ease),
+    transform 280ms var(--pg-ease);
+}
+.viewAll:hover {
+  background: #fff;
+  color: #000 !important;
+  transform: translateY(-1px);
+}
+.viewAll:focus-visible {
+  outline: 2px solid #ffff00;
+  outline-offset: 2px;
+}
+
+.scroller {
+  display: flex;
+  gap: var(--pg-gap);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px 4px 16px;
+}
+.scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.navBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: #111;
+  cursor: pointer;
+  transition: background 280ms var(--pg-ease), opacity 280ms var(--pg-ease),
+    transform 280ms var(--pg-ease);
+}
+
+.navBtn:hover:not(:disabled) {
+  transform: scale(1.04);
+}
+
+.navBtn:focus-visible {
+  outline: 2px solid #ffff00;
+  outline-offset: 2px;
+}
+
+.navBtnDisabled,
+.navBtn:disabled {
+  background: rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.55);
+  cursor: default;
+  opacity: 1;
+}
+
+/* ── SLIDE (expands when open, like live accordion flip) ───────────── */
+.slide {
+  flex: 0 0 var(--pg-card-w);
+  width: var(--pg-card-w);
+  scroll-snap-align: start;
+  perspective: 1400px;
+  transition: flex-basis var(--pg-flip-dur) var(--pg-ease), width var(--pg-flip-dur) var(--pg-ease);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.sectionIn .slide {
+  opacity: 1;
+  transform: none;
+  transition:
+    flex-basis var(--pg-flip-dur) var(--pg-ease),
+    width var(--pg-flip-dur) var(--pg-ease),
+    opacity 500ms var(--pg-ease) calc(var(--i, 0) * 45ms),
+    transform 500ms var(--pg-ease) calc(var(--i, 0) * 45ms);
+}
+
+.slideExpanded {
+  flex-basis: var(--pg-card-w-open);
+  width: var(--pg-card-w-open);
+}
+
+.flipOuter {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 788 / 1050;
+  transform-style: preserve-3d;
+  transition: transform var(--pg-flip-dur) var(--pg-ease);
+  border-radius: var(--pg-radius);
+}
+
+.isFlipped {
+  transform: rotateY(180deg);
+}
+
+.front,
+.back {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--pg-radius);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+}
+
+.front {
+  background: #111;
+  border: 2px solid transparent;
+  padding: 0;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  outline: none;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 280ms var(--pg-ease), box-shadow 280ms var(--pg-ease),
+    transform 280ms var(--pg-ease);
+}
+.front:hover {
+  border-color: #ffff00;
+  box-shadow: 0 0 0 1px #ffff00, 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+.front:focus-visible {
+  border-color: #ffff00;
+  box-shadow: 0 0 0 1px #ffff00;
+}
+
+.thumb {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s var(--pg-ease);
+}
+.front:hover .thumb {
+  transform: scale(1.06);
+}
+
+.frontGradient {
+  position: absolute;
+  inset: 35% 0 0;
+  background: linear-gradient(
+    177deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.2) 35%,
+    rgba(0, 0, 0, 0.88) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.frontContent {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 18px;
+  pointer-events: none;
+}
+
+.iconRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.productName {
+  font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.35rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+  margin: 0;
+  font-family: var(--pg-font);
+}
+
+.credit {
+  font-size: 0.625rem;
+  color: rgba(255, 255, 255, 0.55);
+  display: block;
+  margin-top: 4px;
+}
+
+.promoCorner {
+  position: absolute;
+  right: 14px;
+  bottom: 18px;
+}
+.promoTag {
+  width: 22px;
+  height: 22px;
+  color: #ffff00;
+}
+
+/* Back face */
+.back {
+  background: #fff;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 0 1px var(--pg-gray-200);
+}
+
+.collapseBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--pg-gray-200);
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: #000;
+  transition: border-color 0.15s, background 0.15s, transform 0.15s;
+}
+.collapseBtn:hover {
+  background: var(--pg-gray-100);
+  border-color: #aaa;
+  transform: rotate(-12deg);
+}
+.collapseBtn:focus-visible {
+  outline: 2px solid var(--pg-blue);
+  outline-offset: 2px;
+}
+.collapseBtn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.backContent {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 22px 18px 16px;
+  gap: 12px;
+}
+
+.backIconWrap .icon {
+  width: 40px;
+  height: 40px;
+}
+
+.backBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.backName {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+  line-height: 1.25;
+  font-family: var(--pg-font);
+}
+
+.backDesc {
+  font-size: 0.8125rem;
+  color: #3d3d3d;
+  line-height: 1.5;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-family: var(--pg-font);
+}
+
+.backFooter {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.priceRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.priceRow .promoTag {
+  width: 16px;
+  height: 16px;
+}
+
+.price {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+  font-family: var(--pg-font);
+}
+
+.btnContained {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 4px;
+  background: #000;
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-family: var(--pg-font);
+  text-decoration: none;
+  border: 1.5px solid #000;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+}
+.btnContained:hover {
+  background: #222;
+  transform: translateY(-1px);
+}
+
+.btnOutlined {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 4px;
+  background: transparent;
+  color: #000;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-family: var(--pg-font);
+  border: 1.5px solid #000;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.15s;
+}
+.btnOutlined:hover {
+  background: var(--pg-gray-100);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section,
+  .slide,
+  .flipOuter,
+  .thumb,
+  .front {
+    transition: none !important;
+  }
+  .section,
+  .sectionIn .slide {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .container {
+    padding: 0 32px;
+  }
+  .section {
+    --pg-card-w: 360px;
+    --pg-card-w-open: 360px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
+  .section {
+    --pg-card-w: min(78vw, 320px);
+    --pg-card-w-open: min(78vw, 320px);
+  }
+  .title {
+    font-size: 1.5rem;
+  }
+}
