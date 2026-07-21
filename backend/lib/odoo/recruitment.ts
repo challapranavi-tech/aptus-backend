@@ -9,7 +9,7 @@
  * logs + flags it in the HR email rather than failing the candidate.
  */
 import { odooConfigFromEnv } from "./client";
-import { authenticate, create, type OdooRpcSession } from "./rpc";
+import { authenticate, create, OdooRpcError, type OdooRpcSession } from "./rpc";
 
 export interface ApplicantInput {
   candidateName: string;
@@ -51,8 +51,44 @@ export function applicantStageIdFromEnv(): number | undefined {
 }
 
 /**
+ * Sleep for `ms` milliseconds. Used for retry back-off.
+ */
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/**
+ * Retry an async operation with exponential back-off when Odoo returns 429.
+ * Max 3 attempts total: immediate → 1 s → 2 s.
+ */
+async function withOdooRetry<T>(fn: () => Promise<T>, label: string): Promise<T> {
+  const MAX_RETRIES = 3;
+  const BASE_DELAY_MS = 1000;
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      return await fn();
+    } catch (err) {
+      const isRateLimit =
+        err instanceof OdooRpcError && err.httpStatus === 429;
+      if (isRateLimit && attempt < MAX_RETRIES) {
+        const delay = BASE_DELAY_MS * Math.pow(2, attempt - 1); // 1s, 2s
+        console.warn(
+          `[odoo/recruitment] ${label} — 429 rate limit, retrying in ${delay}ms (attempt ${attempt}/${MAX_RETRIES})`,
+        );
+        await sleep(delay);
+        continue;
+      }
+      throw err;
+    }
+  }
+  // Unreachable — TypeScript needs this.
+  throw new Error(`[odoo/recruitment] ${label} — all retries exhausted`);
+}
+
+/**
  * Create an hr.applicant (+ ir.attachment per file). Returns the applicant id.
  * Throws on any Odoo error — the caller decides how to degrade.
+ * Retries up to 3 times with exponential back-off on HTTP 429 responses.
  */
 export async function createApplicant(
   input: ApplicantInput,
@@ -67,22 +103,35 @@ export async function createApplicant(
     cfg.revalidate,
   );
 
-  const applicantId = await create(
-    session,
-    "hr.applicant",
-    buildApplicantValues(input, applicantStageIdFromEnv()),
+  const applicantId = await withOdooRetry(
+    () =>
+      create(
+        session,
+        "hr.applicant",
+        buildApplicantValues(input, applicantStageIdFromEnv()),
+      ),
+    `create hr.applicant for ${input.email}`,
   );
   if (!applicantId) throw new Error("Odoo returned no applicant id after create");
 
+  // Upload attachments sequentially with a small gap between each to avoid
+  // burst-triggering Odoo's rate limiter when multiple applicants submit at once.
   for (const a of attachments) {
-    await create(session, "ir.attachment", {
-      name: a.filename,
-      res_model: "hr.applicant",
-      res_id: applicantId,
-      type: "binary",
-      datas: a.content.toString("base64"),
-      mimetype: a.contentType ?? "application/octet-stream",
-    });
+    await withOdooRetry(
+      () =>
+        create(session, "ir.attachment", {
+          name: a.filename,
+          res_model: "hr.applicant",
+          res_id: applicantId,
+          type: "binary",
+          datas: a.content.toString("base64"),
+          mimetype: a.contentType ?? "application/octet-stream",
+        }),
+      `attach ${a.filename} to applicant #${applicantId}`,
+    );
+    // 200 ms gap between attachment uploads — enough to stay under Odoo's
+    // burst limit without meaningfully slowing down the submission.
+    await sleep(200);
   }
 
   return applicantId;
