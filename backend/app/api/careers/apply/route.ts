@@ -238,7 +238,7 @@ export async function POST(req: NextRequest) {
     0,
   );
   if (totalAttachmentBytes > MAX_TOTAL_ATTACHMENT_BYTES) {
-    const limitMb = Math.floor(MAX_TOTAL_ATTACHMENT_BYTES / (1024 * 1024));
+    const limitMb = "4.5";
     const totalMb = (totalAttachmentBytes / (1024 * 1024)).toFixed(1);
     return jsonCors(
       req,
