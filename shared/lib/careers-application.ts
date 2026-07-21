@@ -16,13 +16,17 @@ import {
   type ParseResult,
 } from "./schema";
 
-// Vercel serverless request bodies hard-cap at 4.5MB; multipart framing eats
-// some of that. Stay under so rejects are our 413, not a silent LB 502.
+// Per-file cap for multi-document packs. Keep room for several files under the
+// submission total below.
 export const MAX_UPLOAD_BYTES = 4 * 1024 * 1024; // 4 MB per file
 
-// Whole multipart POST must fit under Vercel's 4.5MB — not Resend's higher cap.
-// ponytail: client-direct Blob upload if we ever need larger packets.
-export const MAX_TOTAL_ATTACHMENT_BYTES = 4 * 1024 * 1024; // 4 MB total per submission
+// App-level total for multi-document submissions (resume + passport + photo +
+// edu docs + optional employment letters). Resend can handle this; Vercel
+// Functions still hard-cap the *incoming request body* at 4.5 MB on every plan
+// — upgrading does not lift it. Submissions over ~4.5 MB through this multipart
+// route will 413 at the edge until client→Blob upload (we already archive via
+// @vercel/blob). ponytail: bump toward 20 MB once Blob client upload lands.
+export const MAX_TOTAL_ATTACHMENT_BYTES = 8 * 1024 * 1024; // 8 MB total per submission
 
 export const RESUME_EXTENSIONS = [".pdf", ".doc", ".docx"] as const;
 export const DOC_EXTENSIONS = [".pdf", ".doc", ".docx"] as const;
@@ -213,11 +217,6 @@ const IMAGE_MIME_OK = new Set([
   "",
 ]);
 
-function requireFilled(value: string | undefined, label: string): string | null {
-  if (!value || !value.trim()) return `${label} is required.`;
-  return null;
-}
-
 function parseOrg(
   raw: unknown,
   label: string,
@@ -360,15 +359,88 @@ export function validateBasic(
   return parsed.ok ? {} : parsed.errors;
 }
 
+// ── Date validation helpers ────────────────────────────────────────────────────
+// Accepted formats from the wizard: DD-MM-YYYY (typed input) and YYYY-MM-DD
+// (ISO, from legacy defaults). Both are normalised to DD-MM-YYYY in the frontend
+// before submission, but the backend must handle either defensively.
+
+/** Return true if the string is a structurally valid date in DD-MM-YYYY or YYYY-MM-DD. */
+export function isValidDateString(value: string): boolean {
+  const t = value.trim();
+  // DD-MM-YYYY
+  const dmy = t.match(/^(\d{2})-(\d{2})-(\d{4})$/);
+  if (dmy) {
+    const dd = Number(dmy[1]);
+    const mm = Number(dmy[2]);
+    const yyyy = Number(dmy[3]);
+    const d = new Date(yyyy, mm - 1, dd);
+    return (
+      !Number.isNaN(d.getTime()) &&
+      d.getFullYear() === yyyy &&
+      d.getMonth() === mm - 1 &&
+      d.getDate() === dd
+    );
+  }
+  // YYYY-MM-DD (ISO)
+  const iso = t.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (iso) {
+    const yyyy = Number(iso[1]);
+    const mm = Number(iso[2]);
+    const dd = Number(iso[3]);
+    const d = new Date(yyyy, mm - 1, dd);
+    return (
+      !Number.isNaN(d.getTime()) &&
+      d.getFullYear() === yyyy &&
+      d.getMonth() === mm - 1 &&
+      d.getDate() === dd
+    );
+  }
+  return false;
+}
+
+/** Return true if the date is strictly in the past or today. */
+export function isDatePastOrToday(value: string): boolean {
+  const t = value.trim();
+  let date: Date | null = null;
+  const dmy = t.match(/^(\d{2})-(\d{2})-(\d{4})$/);
+  if (dmy) date = new Date(Number(dmy[3]), Number(dmy[2]) - 1, Number(dmy[1]));
+  const iso = t.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (iso) date = new Date(Number(iso[1]), Number(iso[2]) - 1, Number(iso[3]));
+  if (!date || Number.isNaN(date.getTime())) return false;
+  const today = new Date();
+  today.setHours(23, 59, 59, 999);
+  return date <= today;
+}
+
+/** Return true if the date is strictly in the future. */
+export function isDateFuture(value: string): boolean {
+  const t = value.trim();
+  let date: Date | null = null;
+  const dmy = t.match(/^(\d{2})-(\d{2})-(\d{4})$/);
+  if (dmy) date = new Date(Number(dmy[3]), Number(dmy[2]) - 1, Number(dmy[1]));
+  const iso = t.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (iso) date = new Date(Number(iso[1]), Number(iso[2]) - 1, Number(iso[3]));
+  if (!date || Number.isNaN(date.getTime())) return false;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return date > today;
+}
+
 /** Step C client validation. */
 export function validatePreInterview(
   fields: Partial<ApplicationFields>,
 ): Record<string, string> {
   const errors: Record<string, string> = {};
+
+  // requireFilled already trims and checks for empty — but we also reject
+  // strings that are purely whitespace (e.g. "   ") at the API boundary.
   const req = (key: keyof ApplicationFields, label: string) => {
-    const e = requireFilled(fields[key] as string | undefined, label);
-    if (e) errors[key] = e;
+    const raw = fields[key] as string | undefined;
+    if (!raw || !raw.trim()) {
+      errors[key] = `${label} is required.`;
+    }
   };
+
   req("applicationDate", "Date of Application");
   req("appliedDesignation", "Applied Designation");
   req("candidateName", "Name of the Candidate");
@@ -384,18 +456,69 @@ export function validatePreInterview(
   // familyDetails & drivingLicense are optional.
   req("currentCtc", "Current CTC");
   req("expectedCtc", "Expected CTC");
+
   // security: allowlist — reject anything outside the known notice periods.
   if (!fields.noticePeriod || !fields.noticePeriod.trim()) {
     errors.noticePeriod = "Notice Period is required.";
-  } else if (!NOTICE_PERIOD_OPTIONS.includes(fields.noticePeriod as (typeof NOTICE_PERIOD_OPTIONS)[number])) {
+  } else if (
+    !NOTICE_PERIOD_OPTIONS.includes(
+      fields.noticePeriod as (typeof NOTICE_PERIOD_OPTIONS)[number],
+    )
+  ) {
     errors.noticePeriod = "Select a valid notice period.";
   }
+
   req("passportNumber", "Passport Number");
   req("passportValidity", "Passport Validity");
 
+  // ── Date format + logic validation (runs only if field is present) ──────────
+  // These fire at the API boundary regardless of browser/devtools manipulation.
+  const dob = String(fields.dateOfBirth ?? "").trim();
+  if (dob && !errors.dateOfBirth) {
+    if (!isValidDateString(dob)) {
+      errors.dateOfBirth = "Date of Birth must be a valid date (DD-MM-YYYY).";
+    } else if (!isDatePastOrToday(dob)) {
+      errors.dateOfBirth = "Date of Birth cannot be in the future.";
+    } else {
+      // Minimum age 16 check — defence against clearly bogus dates.
+      const dmyMatch = dob.match(/^(\d{2})-(\d{2})-(\d{4})$/);
+      const isoMatch = dob.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      const birthYear = dmyMatch
+        ? Number(dmyMatch[3])
+        : isoMatch
+          ? Number(isoMatch[1])
+          : 0;
+      if (birthYear > 0 && new Date().getFullYear() - birthYear < 16) {
+        errors.dateOfBirth = "Applicant must be at least 16 years old.";
+      }
+    }
+  }
+
+  const appDate = String(fields.applicationDate ?? "").trim();
+  if (appDate && !errors.applicationDate) {
+    if (!isValidDateString(appDate)) {
+      errors.applicationDate = "Date of Application must be a valid date (DD-MM-YYYY).";
+    } else if (!isDatePastOrToday(appDate)) {
+      errors.applicationDate = "Date of Application cannot be in the future.";
+    }
+  }
+
+  const passValidity = String(fields.passportValidity ?? "").trim();
+  if (passValidity && !errors.passportValidity) {
+    if (!isValidDateString(passValidity)) {
+      errors.passportValidity = "Passport Validity must be a valid date (DD-MM-YYYY).";
+    } else if (!isDateFuture(passValidity)) {
+      errors.passportValidity = "Passport Validity must be a future date.";
+    }
+  }
+
+  // ── Org blocks ──────────────────────────────────────────────────────────────
   const c = parseOrg(fields.currentOrg ?? EMPTY_ORG, "Current Organization");
   Object.assign(errors, c.errors);
-  const p1 = parseOrg(fields.previousOrg1 ?? EMPTY_ORG, "Immediate Previous Organization");
+  const p1 = parseOrg(
+    fields.previousOrg1 ?? EMPTY_ORG,
+    "Immediate Previous Organization",
+  );
   Object.assign(errors, p1.errors);
   const p2 = parseOrg(fields.previousOrg2 ?? EMPTY_ORG, "Previous Organization");
   Object.assign(errors, p2.errors);
@@ -403,14 +526,22 @@ export function validatePreInterview(
   const certs = parseNamedYearList(fields.certifications ?? [], "certifications");
   Object.assign(errors, certs.errors);
 
+  // ── Format checks (fire even when the field is non-empty) ──────────────────
   if (fields.teamSize && !/^\d{1,4}$/.test(String(fields.teamSize).trim())) {
-    errors.teamSize = "Enter a valid team size.";
+    errors.teamSize = "Team size must be a number (e.g. 5).";
   }
   if (
     fields.totalYearsExperience &&
     !/^[\w\s.+-]{1,40}$/.test(String(fields.totalYearsExperience).trim())
   ) {
     errors.totalYearsExperience = "Enter years of experience (e.g. 5 or 3-5).";
+  }
+  if (
+    fields.passportNumber &&
+    !/^[A-Z0-9]{5,20}$/i.test(String(fields.passportNumber).trim())
+  ) {
+    errors.passportNumber =
+      "Passport number must be 5–20 alphanumeric characters.";
   }
 
   return errors;
