@@ -260,6 +260,25 @@ export async function POST(req: NextRequest) {
     console.error("[careers/apply] failed to archive application:", err);
   }
 
+  // Structured log — always runs so every application is traceable in server
+  // logs even if Odoo or email fail. Never logs raw file content.
+  console.info("[careers/apply] application received", {
+    candidateName: fields.candidateName,
+    email: fields.email,
+    appliedDesignation: fields.appliedDesignation,
+    totalYearsExperience: fields.totalYearsExperience,
+    currentLocation: fields.currentLocation,
+    teamSize: fields.teamSize,
+    reportsTo: fields.reportsTo,
+    currentCtc: fields.currentCtc,
+    expectedCtc: fields.expectedCtc,
+    noticePeriod: fields.noticePeriod,
+    passportNumber: fields.passportNumber ? "provided" : "MISSING",
+    dateOfBirth: fields.dateOfBirth ? "provided" : "MISSING",
+    jobId: fields.jobId,
+    fileCount: attachments.length,
+  });
+
   // Best-effort push into Odoo Recruitment (hr.applicant + attachments). Never
   // blocks the candidate: on failure we log and flag it in the HR email so the
   // archived copy + email still reach a human. jobId comes straight from the
@@ -267,7 +286,32 @@ export async function POST(req: NextRequest) {
   let odooNoteHtml = "";
   let odooNoteText = "";
   const jobId = Number(fields.jobId);
-  if (isOdooConfigured() && Number.isInteger(jobId) && jobId > 0) {
+
+  // Hard guard: do not attempt Odoo push if minimum required fields are empty.
+  // After the validation above this should never happen — but defence-in-depth
+  // ensures Odoo never receives a record with a blank partner_name (which Odoo
+  // silently accepts, creating an anonymous applicant invisible in normal views).
+  const odooReady =
+    isOdooConfigured() &&
+    Number.isInteger(jobId) &&
+    jobId > 0 &&
+    fields.candidateName.trim().length > 0 &&
+    fields.email.trim().length > 0;
+
+  if (!odooReady && isOdooConfigured()) {
+    const missing: string[] = [];
+    if (!fields.candidateName.trim()) missing.push("candidateName");
+    if (!fields.email.trim()) missing.push("email");
+    if (!Number.isInteger(jobId) || jobId <= 0) missing.push("jobId");
+    console.error(
+      "[careers/apply] Odoo push skipped — missing required fields:",
+      missing.join(", "),
+    );
+    odooNoteHtml = `<p style="font-family:Arial,sans-serif;font-size:13px;color:#b91c1c">⚠ Odoo sync skipped — missing required fields (${missing.map(escapeHtml).join(", ")}). Please add manually.</p>`;
+    odooNoteText = `\n\n[!] Odoo sync skipped — missing: ${missing.join(", ")}. Please add manually.`;
+  }
+
+  if (odooReady) {
     try {
       const applicantId = await createApplicant(
         {
