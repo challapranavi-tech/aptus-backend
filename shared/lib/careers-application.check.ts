@@ -63,7 +63,7 @@ const filled = emptyApplicationFields({
   currentCtc: "1000",
   expectedCtc: "1200",
   noticePeriod: "30 days",
-  passportNumber: "A123",
+  passportNumber: "A12345678",
   passportValidity: "2030-01-01",
   drivingLicense: "Not Applicable",
   educationEntries: [{ name: "B.Tech", institution: "SQU", year: "2017" }],

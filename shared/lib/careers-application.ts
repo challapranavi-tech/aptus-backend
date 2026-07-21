@@ -16,17 +16,14 @@ import {
   type ParseResult,
 } from "./schema";
 
-// Per-file cap for multi-document packs. Keep room for several files under the
-// submission total below.
-export const MAX_UPLOAD_BYTES = 4 * 1024 * 1024; // 4 MB per file
+// Per-file cap: 0.8 MB (800 KB). Lets applicants upload up to 5 files while
+// keeping the total well under Vercel’s 4.5 MB serverless body hard-cap.
+export const MAX_UPLOAD_BYTES = 800 * 1024; // 0.8 MB (800 KB) per file
 
-// App-level total for multi-document submissions (resume + passport + photo +
-// edu docs + optional employment letters). Resend can handle this; Vercel
-// Functions still hard-cap the *incoming request body* at 4.5 MB on every plan
-// — upgrading does not lift it. Submissions over ~4.5 MB through this multipart
-// route will 413 at the edge until client→Blob upload (we already archive via
-// @vercel/blob). ponytail: bump toward 20 MB once Blob client upload lands.
-export const MAX_TOTAL_ATTACHMENT_BYTES = 8 * 1024 * 1024; // 8 MB total per submission
+// Whole multipart POST must fit under Vercel's 4.5 MB hard cap. 5 files at
+// 0.8 MB each = 4.0 MB, comfortably within this limit including framing overhead.
+// ponytail: raise only after client→Blob upload — upgrading Vercel does not lift 4.5 MB.
+export const MAX_TOTAL_ATTACHMENT_BYTES = Math.round(4.5 * 1024 * 1024); // 4.5 MB total
 
 export const RESUME_EXTENSIONS = [".pdf", ".doc", ".docx"] as const;
 export const DOC_EXTENSIONS = [".pdf", ".doc", ".docx"] as const;
@@ -536,12 +533,10 @@ export function validatePreInterview(
   ) {
     errors.totalYearsExperience = "Enter years of experience (e.g. 5 or 3-5).";
   }
-  if (
-    fields.passportNumber &&
-    !/^[A-Z0-9]{5,20}$/i.test(String(fields.passportNumber).trim())
-  ) {
+  const passNum = String(fields.passportNumber ?? "").trim();
+  if (passNum && !/^[A-Z0-9]{6,15}$/i.test(passNum)) {
     errors.passportNumber =
-      "Passport number must be 5–20 alphanumeric characters.";
+      "Please enter a valid passport number (ICAO standard: 6–15 uppercase letters and digits only, e.g. A12345678).";
   }
 
   return errors;
@@ -591,7 +586,7 @@ export function validateFile(
     return `${label} must be one of: ${allowed.join(", ")}`;
   }
   if (file.size > MAX_UPLOAD_BYTES) {
-    return `${label} must be smaller than ${Math.round(MAX_UPLOAD_BYTES / (1024 * 1024))} MB.`;
+    return `${label} exceeds the limit. Each file must be under 0.8 MB (800 KB).`;
   }
   if (file.type && !mimeOk.has(file.type)) {
     return `${label} has an unsupported file type.`;
