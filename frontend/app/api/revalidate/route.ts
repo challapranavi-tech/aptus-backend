@@ -78,6 +78,7 @@ export async function POST(req: NextRequest) {
 
     if (body.all) {
       revalidatePath("/", "layout");
+      revalidatePath("/careers");
       revalidated = ["(all)"];
     } else {
       const rawSlugs: string[] = [
@@ -95,7 +96,14 @@ export async function POST(req: NextRequest) {
       }
 
       revalidated = normalised.map((slug) => {
-        revalidatePath(slug === "home" ? "/" : `/${slug}`);
+        if (slug === "home") {
+          revalidatePath("/");
+        } else if (slug === "careers" || slug.startsWith("careers/")) {
+          revalidatePath("/careers");
+          revalidatePath(`/${slug}`);
+        } else {
+          revalidatePath(`/${slug}`);
+        }
         return slug;
       });
     }

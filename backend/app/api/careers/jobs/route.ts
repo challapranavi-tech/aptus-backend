@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
     });
 
     return jsonCors(req, result, {
-      headers: { "Cache-Control": "public, max-age=60, s-maxage=300" },
+      headers: { "Cache-Control": "private, no-store, max-age=0, must-revalidate" },
     });
   } catch (err) {
     console.error("[careers/jobs]", err);

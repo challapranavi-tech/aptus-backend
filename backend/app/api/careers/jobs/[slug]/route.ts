@@ -19,7 +19,7 @@ export async function GET(
       return jsonCors(req, { error: "Job not found." }, { status: 404 });
     }
     return jsonCors(req, { job }, {
-      headers: { "Cache-Control": "public, max-age=60, s-maxage=300" },
+      headers: { "Cache-Control": "private, no-store, max-age=0, must-revalidate" },
     });
   } catch (err) {
     console.error("[careers/jobs/slug]", err);

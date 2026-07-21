@@ -3,9 +3,12 @@
  * Mirrors the CMS client (data/cms.ts) so SSR/SEO share one API base.
  */
 import type { CareerJob, JobListResult } from "@shared/lib/career-jobs";
+import { unstable_noStore as noStore } from "next/cache";
 
 const DEFAULT_API = "http://localhost:3001";
 const API_TIMEOUT_MS = 15_000;
+
+export const CAREERS_JOBS_CACHE_TAG = "careers-jobs";
 
 function apiBase(): string {
   return (process.env.APTUS_API_URL ?? DEFAULT_API).replace(/\/$/, "");
@@ -24,8 +27,10 @@ async function apiGet<T>(path: string): Promise<T | null> {
   if (!apiEnabled()) return null;
   const url = `${apiBase()}${path}`;
   try {
+    // ponytail: no-store — job publish/unpublish must show on /careers immediately.
+    // ISR page cache is still busted via revalidatePath('/careers').
     const res = await fetch(url, {
-      next: { revalidate: 300 },
+      cache: "no-store",
       signal: AbortSignal.timeout(API_TIMEOUT_MS),
     });
     if (res.status === 404) return null;
@@ -42,6 +47,7 @@ async function apiGet<T>(path: string): Promise<T | null> {
 export async function getJobList(
   params: Record<string, string | number | undefined> = {},
 ): Promise<JobListResult | null> {
+  noStore();
   const sp = new URLSearchParams();
   for (const [k, v] of Object.entries(params)) {
     if (v !== undefined && v !== "") sp.set(k, String(v));
@@ -51,6 +57,7 @@ export async function getJobList(
 }
 
 export async function getJob(slug: string): Promise<CareerJob | null> {
+  noStore();
   const data = await apiGet<{ job: CareerJob }>(
     `/api/careers/jobs/${encodeURIComponent(slug)}`,
   );

@@ -116,7 +116,9 @@ export function CareersListing({ initial, initialFilters }: Props) {
       else setLoading(true);
       setFailed(false);
       try {
-        const res = await fetch(`${publicApiBase()}/api/careers/jobs?${sp.toString()}`);
+        const res = await fetch(`${publicApiBase()}/api/careers/jobs?${sp.toString()}`, {
+          cache: "no-store",
+        });
         if (!res.ok) throw new Error("bad status");
         const data = (await res.json()) as JobListResult;
         setTotal(data.total);
@@ -134,11 +136,17 @@ export function CareersListing({ initial, initialFilters }: Props) {
     [q, department, location],
   );
 
+  // Always refresh once on mount so a stale SSR empty list cannot hide new Odoo jobs.
+  useEffect(() => {
+    fetchJobs({ page: 1, append: false });
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- mount-only refresh
+  }, []);
+
   // Refetch (page 1) when filters/search change — debounced for search input.
   useEffect(() => {
     if (firstRender.current) {
       firstRender.current = false;
-      if (initial) return; // already have SSR data for empty filters
+      return;
     }
     if (debounce.current) clearTimeout(debounce.current);
     debounce.current = setTimeout(() => {
@@ -157,7 +165,7 @@ export function CareersListing({ initial, initialFilters }: Props) {
     return () => {
       if (debounce.current) clearTimeout(debounce.current);
     };
-  }, [q, department, location, fetchJobs, initial]);
+  }, [q, department, location, fetchJobs]);
 
   const loadMore = () => {
     const nextPage = page + 1;
