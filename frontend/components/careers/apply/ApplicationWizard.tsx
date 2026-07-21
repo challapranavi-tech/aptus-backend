@@ -545,6 +545,39 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step]);
 
+  // Called after any file state change to warn immediately if the running
+  // total would exceed MAX_TOTAL_ATTACHMENT_BYTES. Prevents the 413 on submit.
+  // educationDocs cover educationalCertificates FormData keys (same files).
+  const checkTotalAfterChange = (nextFiles: Partial<FileState>) => {
+    const merged = { ...files, ...nextFiles };
+    const total = [
+      merged.resume,
+      merged.passportCopy,
+      merged.photograph,
+      merged.appointmentLetter,
+      merged.relievingLetter,
+      merged.latestPayslip,
+      ...(merged.educationDocs ?? []),
+    ].reduce((n, f) => n + (f?.size ?? 0), 0);
+    if (total > MAX_TOTAL_ATTACHMENT_BYTES) {
+      const tot = (total / (1024 * 1024)).toFixed(1);
+      setErrors((p) => ({
+        ...p,
+        _form: `Your files total ${tot} MB which exceeds the 4.5 MB limit. Remove or compress some files before submitting.`,
+      }));
+      setShowSummary(true);
+      scrollTop();
+    } else {
+      setErrors((p) => {
+        if (p._form?.includes("4.5 MB limit")) {
+          const { _form: _, ...rest } = p;
+          return rest;
+        }
+        return p;
+      });
+    }
+  };
+
   const setValue = (key: keyof ApplicationFields, v: string) => {
     setValues((prev) => ({ ...prev, [key]: v }));
     if (errors[key]) setErrors((p) => ({ ...p, [key]: "" }));
@@ -638,6 +671,10 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
 
       if (!values.passportNumber.trim())
         errs.passportNumber = "Passport number is required.";
+      else if (!/^[A-Z0-9]{6,15}$/i.test(values.passportNumber.trim())) {
+        errs.passportNumber =
+          "Please enter a valid passport number (ICAO standard: 6–15 uppercase letters and digits only, e.g. A12345678).";
+      }
       const passportErr = validateDateDMY(
         values.passportValidity,
         "Passport Validity",
@@ -702,7 +739,7 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
       ];
       checks.forEach(([key, f]) => {
         if (f && f.size > MAX_UPLOAD_BYTES)
-          errs[key] = `Must be under ${MAX_UPLOAD_BYTES / (1024 * 1024)} MB.`;
+          errs[key] = "Each file must be under 0.8 MB (800 KB).";
       });
     }
 
@@ -781,13 +818,14 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
   const handleResume = async (list: File[]) => {
     const file = list[0] ?? null;
     setFiles((p) => ({ ...p, resume: file }));
+    checkTotalAfterChange({ resume: file });
     setErrors((p) => ({ ...p, resume: "" }));
     if (!file) return;
 
     if (file.size > MAX_UPLOAD_BYTES) {
       setErrors((p) => ({
         ...p,
-        resume: `Resume must be under ${MAX_UPLOAD_BYTES / (1024 * 1024)} MB.`,
+        resume: "Resume must be under 0.8 MB (800 KB).",
       }));
       return;
     }
@@ -905,7 +943,7 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
     ].reduce((n, f) => n + (f?.size ?? 0), 0);
 
     if (totalBytes > MAX_TOTAL_ATTACHMENT_BYTES) {
-      const lim = Math.floor(MAX_TOTAL_ATTACHMENT_BYTES / (1024 * 1024));
+      const lim = "4.5";
       const tot = (totalBytes / (1024 * 1024)).toFixed(1);
       goTo(2);
       blockWithErrors({
@@ -1016,10 +1054,24 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
       let serverErrors: Errors | undefined;
       try {
         const data = JSON.parse(xhr.responseText);
-        if (data.error) msg = data.error;
         // Temporary server debug field from careers/apply 502 path.
-        if (data.debug) msg = `${msg} (${data.debug})`;
-        if (data.errors) serverErrors = data.errors;
+        if (data.debug) msg = `${data.error ?? msg} (${data.debug})`;
+        else if (data.error) msg = data.error;
+        if (data.errors && typeof data.errors === "object") {
+          serverErrors = data.errors as Errors;
+          const fieldMessages = Object.entries(serverErrors)
+            .filter(([k]) => k !== "_form")
+            .map(([, v]) => v)
+            .filter(Boolean);
+          const formMsg = (serverErrors._form as string | undefined) ?? "";
+          if (fieldMessages.length > 0) {
+            msg = formMsg
+              ? `${formMsg} Please fix: ${fieldMessages.slice(0, 3).join(" · ")}${fieldMessages.length > 3 ? ` · (+${fieldMessages.length - 3} more)` : ""}`
+              : `Please fix the following: ${fieldMessages.slice(0, 3).join(" · ")}${fieldMessages.length > 3 ? ` · (+${fieldMessages.length - 3} more)` : ""}`;
+          } else if (formMsg) {
+            msg = formMsg;
+          }
+        }
       } catch {
         /* keep default */
       }
@@ -1126,7 +1178,7 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
             <div style={{ marginBottom: "1.5rem" }}>
               <FileDropzone
                 accept={RESUME_ACCEPT}
-                label={`Resume (PDF, DOC, DOCX · max ${MAX_UPLOAD_BYTES / (1024 * 1024)} MB)`}
+                label="Resume (PDF, DOC, DOCX · max 0.8 MB)"
                 files={files.resume ? [files.resume] : []}
                 error={errors.resume}
                 onChange={handleResume}
@@ -1134,7 +1186,7 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
                   const e = validateFile(f, RESUME_EXTENSIONS, "Resume", true);
                   if (e) return e;
                   if (f.size > MAX_UPLOAD_BYTES)
-                    return `Resume must be under ${MAX_UPLOAD_BYTES / (1024 * 1024)} MB.`;
+                    return "Resume must be under 0.8 MB (800 KB).";
                   return null;
                 }}
               />
@@ -1403,14 +1455,13 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
                         : []
                     }
                     error={i === 0 ? errors.educationDoc_0 : undefined}
-                    onChange={(list) =>
-                      setFiles((p) => ({
-                        ...p,
-                        educationDocs: p.educationDocs.map((d, idx) =>
-                          idx === i ? list[0] ?? null : d,
-                        ),
-                      }))
-                    }
+                    onChange={(list) => {
+                      const updated = files.educationDocs.map((d, idx) =>
+                        idx === i ? list[0] ?? null : d,
+                      );
+                      setFiles((p) => ({ ...p, educationDocs: updated }));
+                      checkTotalAfterChange({ educationDocs: updated });
+                    }}
                   />
                 </div>
               ))}
@@ -1481,9 +1532,11 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
                   id="passportNumber"
                   label="Passport Number"
                   required
+                  placeholder="e.g. A12345678"
+                  help="6–15 uppercase letters and digits, no spaces (ICAO standard)."
                   value={values.passportNumber}
                   error={errors.passportNumber}
-                  onChange={(v) => setValue("passportNumber", v)}
+                  onChange={(v) => setValue("passportNumber", v.toUpperCase())}
                 />
                 <DateField
                   id="passportValidity"
@@ -1527,7 +1580,7 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
           <>
             <h2>Documents</h2>
             <p className="aptus-apply__hint">
-              Max {MAX_UPLOAD_BYTES / (1024 * 1024)} MB per file.
+              Max 0.8 MB (800 KB) per file.
             </p>
 
             <DocSectionHeader title="Required Documents" color="#fef3c7" />
@@ -1538,15 +1591,14 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
                 label="Passport Copy *"
                 files={files.passportCopy ? [files.passportCopy] : []}
                 error={errors.passportCopy}
-                onChange={(list) =>
-                  setFiles((p) => ({
-                    ...p,
-                    passportCopy: list[0] ?? null,
-                  }))
-                }
+                onChange={(list) => {
+                  const passportCopy = list[0] ?? null;
+                  setFiles((p) => ({ ...p, passportCopy }));
+                  checkTotalAfterChange({ passportCopy });
+                }}
                 validate={(f) =>
                   f.size > MAX_UPLOAD_BYTES
-                    ? `Must be under ${MAX_UPLOAD_BYTES / (1024 * 1024)} MB.`
+                    ? "Each file must be under 0.8 MB (800 KB)."
                     : null
                 }
               />
@@ -1557,15 +1609,14 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
                 accept={IMAGE_ACCEPT}
                 label="Passport-size Photograph *"
                 preview
-                hint={`JPG, PNG or WEBP · up to ${MAX_UPLOAD_BYTES / (1024 * 1024)} MB`}
+                hint="JPG, PNG or WEBP · up to 0.8 MB (800 KB)"
                 files={files.photograph ? [files.photograph] : []}
                 error={errors.photograph}
-                onChange={(list) =>
-                  setFiles((p) => ({
-                    ...p,
-                    photograph: list[0] ?? null,
-                  }))
-                }
+                onChange={(list) => {
+                  const photograph = list[0] ?? null;
+                  setFiles((p) => ({ ...p, photograph }));
+                  checkTotalAfterChange({ photograph });
+                }}
                 validate={(f) => validateImageFile(f, "Photograph", true)}
               />
             </div>
@@ -1593,12 +1644,15 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
                     (files[key] as File | null) ? [files[key] as File] : []
                   }
                   error={errors[key]}
-                  onChange={(list) =>
-                    setFiles((p) => ({ ...p, [key]: list[0] ?? null }))
-                  }
+                  onChange={(list) => {
+                    const next = list[0] ?? null;
+                    const update = { [key]: next } as Partial<FileState>;
+                    setFiles((p) => ({ ...p, ...update }));
+                    checkTotalAfterChange(update);
+                  }}
                   validate={(f) =>
                     f.size > MAX_UPLOAD_BYTES
-                      ? `Must be under ${MAX_UPLOAD_BYTES / (1024 * 1024)} MB.`
+                      ? "Each file must be under 0.8 MB (800 KB)."
                       : null
                   }
                 />

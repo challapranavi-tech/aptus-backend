@@ -75,14 +75,18 @@ export function FileDropzone({
   const inputRef = useRef<HTMLInputElement>(null);
   const [drag, setDrag] = useState(false);
   const [localError, setLocalError] = useState<string | null>(null);
+  const [sizeAlert, setSizeAlert] = useState<string | null>(null);
 
   const accept_exts = accept.split(",").map((s) => s.trim().toLowerCase());
 
   const check = (file: File): string | null => {
     const okExt = accept_exts.some((e) => file.name.toLowerCase().endsWith(e));
-    if (!okExt) return `${file.name}: type must be ${accept_exts.join(", ")}`;
-    if (file.size > MAX_UPLOAD_BYTES)
-      return `${file.name}: must be under ${Math.round(MAX_UPLOAD_BYTES / (1024 * 1024))} MB`;
+    if (!okExt)
+      return `"${file.name}" cannot be uploaded. Accepted types: ${accept_exts.join(", ")}.`;
+    if (file.size > MAX_UPLOAD_BYTES) {
+      const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
+      return `"${file.name}" is ${sizeMb} MB — each file must be under 0.8 MB (800 KB). Please compress or resize it before uploading.`;
+    }
     return validate?.(file) ?? null;
   };
 
@@ -91,19 +95,49 @@ export function FileDropzone({
     for (const f of list) {
       const err = check(f);
       if (err) {
-        setLocalError(err);
+        // Size errors get the prominent banner; type errors get the subtle hint.
+        if (f.size > MAX_UPLOAD_BYTES) {
+          setSizeAlert(err);
+          setLocalError(null);
+        } else {
+          setLocalError(err);
+          setSizeAlert(null);
+        }
         return;
       }
     }
     setLocalError(null);
+    setSizeAlert(null);
     onChange(multiple ? [...files, ...list] : [list[0]]);
   };
 
   const shownError = error ?? localError ?? undefined;
+  const shownSizeAlert = sizeAlert ?? undefined;
 
   return (
-    <div className="aptus-field" data-invalid={shownError ? "true" : undefined}>
+    <div className="aptus-field" data-invalid={(shownError || shownSizeAlert) ? "true" : undefined}>
       {label && <label htmlFor={inputId}>{label}</label>}
+      {shownSizeAlert && (
+        <div
+          role="alert"
+          style={{
+            background: "#fff1f2",
+            border: "1.5px solid #fca5a5",
+            borderRadius: "8px",
+            padding: "10px 14px",
+            marginBottom: "8px",
+            color: "#b91c1c",
+            fontWeight: 600,
+            fontSize: "0.92rem",
+            display: "flex",
+            alignItems: "flex-start",
+            gap: "8px",
+          }}
+        >
+          <span aria-hidden="true" style={{ fontSize: "1.1rem", lineHeight: 1.3 }}>⚠</span>
+          <span>{shownSizeAlert}</span>
+        </div>
+      )}
       <div
         className="aptus-dropzone"
         data-drag={drag || undefined}
@@ -136,7 +170,7 @@ export function FileDropzone({
           <strong>Click to upload</strong> or drag and drop
         </div>
         <div className="aptus-dropzone__hint">
-          {hint ?? `${accept_exts.join(", ")} · up to ${Math.round(MAX_UPLOAD_BYTES / (1024 * 1024))} MB`}
+          {hint ?? `${accept_exts.join(", ")} · max 0.8 MB (800 KB) per file`}
         </div>
         <input
           id={inputId}
