@@ -191,6 +191,20 @@ html {
   width: 160px;
 }
 
+.aptus-masthead__partner-logo img {
+  display: block !important;
+  flex-shrink: 0;
+  height: 18px;
+  width: auto;
+}
+
+/* Adobe wordmark — match Aptus logo height (or slightly larger) */
+.aptus-masthead__partner-logo--adobe img {
+  height: 35px !important;
+  max-height: 35px;
+  width: auto !important;
+}
+
 .aptus-masthead__center {
   align-items: center !important;
   display: none !important;
@@ -614,6 +628,17 @@ html {
   .aptus-masthead__partner-logo svg {
     height: 20px;
     width: 180px;
+  }
+
+  .aptus-masthead__partner-logo img {
+    height: 20px;
+    width: auto;
+  }
+
+  .aptus-masthead__partner-logo--adobe img {
+    height: 40px !important;
+    max-height: 40px;
+    width: auto !important;
   }
 }
 

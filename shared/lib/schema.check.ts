@@ -8,7 +8,10 @@ import { parseContactRequest } from "./contact-request";
 import { parseApplicationFields, validateFile } from "./career-application";
 import { normaliseSlug, parseRevalidateRequest } from "./revalidate-request";
 import {
+  PERSON_NAME_RE,
+  meaningfulTextError,
   parseObject,
+  personNameError,
   sanitizeFilename,
   sanitizeText,
   validationErrorPayload,
@@ -29,6 +32,23 @@ if (!unknown.ok) assert.ok(unknown.errors.b);
 // Control chars stripped from single-line.
 assert.equal(sanitizeText("a\nb\rc", "singleLine"), "abc");
 assert.equal(sanitizeFilename("../../etc/passwd.pdf"), "passwd.pdf");
+
+// Person names: letters ok; punctuation-only junk rejected.
+assert.equal(personNameError("Ada"), null);
+assert.equal(personNameError("Mary-Jane"), null);
+assert.equal(personNameError("O’Brien"), null);
+assert.ok(personNameError("....."));
+assert.ok(personNameError("?/"));
+assert.ok(personNameError("..."));
+assert.ok(!PERSON_NAME_RE.test("....."));
+assert.ok(PERSON_NAME_RE.test("Anagha R"));
+assert.equal(meaningfulTextError("Muscat", "Location"), null);
+assert.equal(meaningfulTextError("Not Applicable", "Reports To"), null);
+assert.equal(meaningfulTextError("5", "Years"), null);
+assert.ok(meaningfulTextError("/////", "Organization"));
+assert.ok(meaningfulTextError("../.", "Qualification"));
+assert.ok(meaningfulTextError("''", "Year"));
+assert.ok(meaningfulTextError("/", "Reports To"));
 
 // Contact: happy path + bad email + unknown field.
 const contactOk = parseContactRequest({

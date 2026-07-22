@@ -18,10 +18,19 @@ npm-debug.log*
 .pnpm-debug.log*
 yarn-error.log*
 
-# env files — never commit secrets
-.env*
-!.env.example
-!.env.production.example
+# playwright
+frontend/test-results/
+frontend/playwright-report/
+frontend/blob-report/
+frontend/playwright/.cache/
+
+# env files — never commit secrets (keep checked-in *.example templates only)
+.env
+.env.*
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.*.example
 
 # typescript
 *.tsbuildinfo
@@ -29,6 +38,7 @@ next-env.d.ts
 
 # temp scratch files
 tmp-*
+scripts/.tmp*
 
 # archived career applications — contains applicant PII, never commit
 backend/data/applications/

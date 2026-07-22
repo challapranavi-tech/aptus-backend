@@ -8,9 +8,12 @@
 
 import {
   EMAIL_RE,
+  PERSON_NAME_RE,
   PHONE_RE,
   hasAllowedExtension,
+  meaningfulTextError,
   parseObject,
+  personNameError,
   sanitizeFilename,
   sanitizeText,
   type ObjectSchema,
@@ -238,10 +241,14 @@ function parseOrg(
     duration: sanitizeText(String(o.duration ?? "")),
     totalYears: sanitizeText(String(o.totalYears ?? "")),
   };
-  if (!org.name) errors[`${label}.name`] = `${label}: organization name is required.`;
-  if (!org.designation) errors[`${label}.designation`] = `${label}: designation is required.`;
-  if (!org.duration) errors[`${label}.duration`] = `${label}: duration is required.`;
-  if (!org.totalYears) errors[`${label}.totalYears`] = `${label}: total years is required.`;
+  const nameErr = meaningfulTextError(org.name, `${label}: organization name`);
+  if (nameErr) errors[`${label}.name`] = nameErr;
+  const desErr = meaningfulTextError(org.designation, `${label}: designation`);
+  if (desErr) errors[`${label}.designation`] = desErr;
+  const durErr = meaningfulTextError(org.duration, `${label}: duration`);
+  if (durErr) errors[`${label}.duration`] = durErr;
+  const yrsErr = meaningfulTextError(org.totalYears, `${label}: total years`);
+  if (yrsErr) errors[`${label}.totalYears`] = yrsErr;
   return { org, errors };
 }
 
@@ -268,8 +275,10 @@ function parseNamedYearList(
   });
   list.forEach((row, i) => {
     if (!row.name && !row.year) return;
-    if (!row.name) errors[`${key}.${i}.name`] = "Certification name is required.";
-    if (!row.year) errors[`${key}.${i}.year`] = "Year is required.";
+    const nameErr = meaningfulTextError(row.name, "Certification name");
+    if (nameErr) errors[`${key}.${i}.name`] = nameErr;
+    const yearErr = meaningfulTextError(row.year, "Year");
+    if (yearErr) errors[`${key}.${i}.year`] = yearErr;
   });
   return { list, errors };
 }
@@ -307,9 +316,12 @@ function parseEducationList(
   // At least one entry required; every present entry must be complete.
   // Extra rows are allowed via "+ Add".
   list.forEach((row, i) => {
-    if (!row.name) errors[`educationEntries.${i}.name`] = "Qualification / Certificate is required.";
-    if (!row.institution) errors[`educationEntries.${i}.institution`] = "Institution is required.";
-    if (!row.year) errors[`educationEntries.${i}.year`] = "Year is required.";
+    const nameErr = meaningfulTextError(row.name, "Qualification / Certificate");
+    if (nameErr) errors[`educationEntries.${i}.name`] = nameErr;
+    const instErr = meaningfulTextError(row.institution, "Institution");
+    if (instErr) errors[`educationEntries.${i}.institution`] = instErr;
+    const yearErr = meaningfulTextError(row.year, "Year");
+    if (yearErr) errors[`educationEntries.${i}.year`] = yearErr;
   });
   return { list, errors };
 }
@@ -320,7 +332,16 @@ const basicSchema: ObjectSchema<{
   phone: string;
 }> = {
   fields: {
-    fullName: { type: "string", required: true, min: 1, max: 120, label: "Full Name" },
+    fullName: {
+      type: "string",
+      required: true,
+      min: 2,
+      max: 120,
+      pattern: PERSON_NAME_RE,
+      patternMessage:
+        "Full Name can only include letters, spaces, hyphens, and apostrophes.",
+      label: "Full Name",
+    },
     email: {
       type: "string",
       required: true,
@@ -430,18 +451,17 @@ export function validatePreInterview(
 ): Record<string, string> {
   const errors: Record<string, string> = {};
 
-  // requireFilled already trims and checks for empty — but we also reject
-  // strings that are purely whitespace (e.g. "   ") at the API boundary.
+  // reject empty / whitespace / punctuation-only junk at the API boundary
   const req = (key: keyof ApplicationFields, label: string) => {
-    const raw = fields[key] as string | undefined;
-    if (!raw || !raw.trim()) {
-      errors[key] = `${label} is required.`;
-    }
+    const err = meaningfulTextError(String(fields[key] ?? ""), label);
+    if (err) errors[key] = err;
   };
 
   req("applicationDate", "Date of Application");
   req("appliedDesignation", "Applied Designation");
   req("candidateName", "Name of the Candidate");
+  const nameErr = personNameError(fields.candidateName ?? "", "Name of the Candidate");
+  if (nameErr && !errors.candidateName) errors.candidateName = nameErr;
   req("totalYearsExperience", "Total Years of Experience");
   req("dateOfBirth", "Date of Birth");
   req("professionalQualification", "Professional Qualification");

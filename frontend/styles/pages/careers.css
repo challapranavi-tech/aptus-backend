@@ -152,9 +152,14 @@
   transform: translateY(-2px);
   border-color: #cfe0f3;
 }
+.aptus-job-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
 .aptus-job-card__tag {
   display: inline-block;
-  align-self: flex-start;
   padding: 0.25rem 0.65rem;
   border-radius: 999px;
   background: var(--color-surface-muted-green, #13934b14);
@@ -162,6 +167,14 @@
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.01em;
+}
+.aptus-job-card__id {
+  flex-shrink: 0;
+  color: var(--careers-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
 }
 .aptus-job-card__title {
   margin-top: 0.75rem;

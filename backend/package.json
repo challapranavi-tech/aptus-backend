@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start --port 3001",
     "lint": "next lint",
+    "test:integration": "vitest run",
     "explore:odoo": "node --env-file=.env.local scripts/explore-odoo.mjs",
     "extract:elv-live": "node scripts/extract-elv-live.mjs",
     "seed:elv-pages": "node --env-file=.env.local scripts/seed-elv-pages-json.mjs"
@@ -29,6 +30,7 @@
     "@types/react": "^19.1.6",
     "eslint": "^9.28.0",
     "eslint-config-next": "^15.3.3",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
   }
 }

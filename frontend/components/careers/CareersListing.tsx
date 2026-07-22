@@ -20,7 +20,10 @@ const ICON_TYPE = "M20 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 
 function JobCard({ job }: { job: CareerJob }) {
   return (
     <article className="aptus-job-card">
-      <span className="aptus-job-card__tag">{job.department}</span>
+      <div className="aptus-job-card__header">
+        <span className="aptus-job-card__tag">{job.department}</span>
+        <span className="aptus-job-card__id">JOB_ID_{job.id}</span>
+      </div>
       <h3 className="aptus-job-card__title">
         <Link href={`/careers/${job.slug}`}>{job.title}</Link>
       </h3>

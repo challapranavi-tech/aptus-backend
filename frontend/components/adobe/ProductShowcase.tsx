@@ -1,28 +1,19 @@
 'use client';
 
 import styles from "@/styles/adobe/adobe.module.css";
-import { DeadLink } from "./DeadLink";
+import { AdobeLink } from "./DeadLink";
+import { ADOBE_ROUTES, type AdobeRoute } from "./routes";
 
-const INDUSTRIES = [
-  { label: 'Architecture',                       videoSrc: 'https://help.autodesk.com/videos/4eb81b90-25cc-11f0-bf10-1b9f804ebd10/video.mp4' },
-  { label: 'Construction',                        videoSrc: 'https://help.autodesk.com/videos/4f006f30-25cc-11f0-bf10-1b9f804ebd10/video.mp4' },
-  { label: 'Industrial machinery',               videoSrc: 'https://help.autodesk.com/videos/22e18810-2cf9-11f0-82f8-5f8707fab031/video.mp4' },
-  { label: '3D Animation',                        videoSrc: 'https://help.autodesk.com/videos/4ea66850-25cc-11f0-bf10-1b9f804ebd10/video.mp4' },
-  { label: 'Advanced manufacturing',             videoSrc: 'https://help.autodesk.com/videos/4f403750-25cc-11f0-bf10-1b9f804ebd10/video.mp4' },
-  { label: 'Building engineering',               videoSrc: 'https://help.autodesk.com/videos/4edc1e50-25cc-11f0-bf10-1b9f804ebd10/video.mp4' },
-  { label: 'Visual effects',                     videoSrc: 'https://help.autodesk.com/videos/4f8dbb10-25cc-11f0-bf10-1b9f804ebd10/video.mp4' },
-  { label: 'Consumer products',                  videoSrc: 'https://help.autodesk.com/videos/4f1297a0-25cc-11f0-bf10-1b9f804ebd10/video.mp4' },
-  { label: 'Building products and fabrication',  videoSrc: 'https://help.autodesk.com/videos/e12d4f80-2cf8-11f0-82f8-5f8707fab031/video.mp4' },
-  { label: 'Water infrastructure',               videoSrc: 'https://help.autodesk.com/videos/230bf370-2cf9-11f0-82f8-5f8707fab031/video.mp4' },
-  { label: 'Transportation',                     videoSrc: 'https://help.autodesk.com/videos/23062710-2cf9-11f0-82f8-5f8707fab031/video.mp4' },
-  { label: 'Production',                         videoSrc: 'https://help.autodesk.com/videos/4f525fc0-25cc-11f0-bf10-1b9f804ebd10/video.mp4' },
-  { label: 'Manufacturing production',           videoSrc: 'https://help.autodesk.com/videos/22fcb130-2cf9-11f0-82f8-5f8707fab031/video.mp4' },
-  { label: 'Automotive and mobility',            videoSrc: 'https://help.autodesk.com/videos/4eca4400-25cc-11f0-bf10-1b9f804ebd10/video.mp4' },
-  { label: 'Game development',                   videoSrc: 'https://help.autodesk.com/videos/4f2ed230-25cc-11f0-bf10-1b9f804ebd10/video.mp4' },
-  { label: 'Explore more industries →',          videoSrc: null },
-];
-
-const PRODUCTS = [
+const PRODUCTS: {
+  icon: string;
+  iconAlt: string;
+  eyebrow: string;
+  videoSrc: string;
+  poster: string;
+  heading: string;
+  body: string;
+  href: AdobeRoute;
+}[] = [
   {
     icon: '/adobe-assets/creative-cloud.svg',
     iconAlt: 'Adobe Creative Cloud',
@@ -31,6 +22,7 @@ const PRODUCTS = [
     poster: 'https://www.adobe.com/upp-shared/media_123c15ca5b250c113b7f1027f0513ea6226f725cc.png?width=2000&format=webply&optimize=medium',
     heading: 'Create with the top tools.',
     body: 'Do it all with industry-leading apps for design, photo, video, and creative AI.',
+    href: ADOBE_ROUTES.business,
   },
   {
     icon: '/adobe-assets/firefly-appicon-256.svg',
@@ -40,6 +32,7 @@ const PRODUCTS = [
     poster: 'https://www.adobe.com/upp-shared/media_182beb06b779224bc280f16b61d7e49d21fe49b1b.png?width=2000&format=webply&optimize=medium',
     heading: 'Generate stunning content easily.',
     body: 'Quickly create and edit images, video, and audio with creative AI.',
+    href: ADOBE_ROUTES.business,
   },
   {
     icon: '/adobe-assets/acrobat-pro.svg',
@@ -49,6 +42,7 @@ const PRODUCTS = [
     poster: 'https://www.adobe.com/upp-shared/media_1d243344be7183a3379b1c3c6ae6d023587ccdd18.png?width=2000&format=webply&optimize=medium',
     heading: 'Do it all in less time.',
     body: 'Create, edit, and share PDFs. Make edits and create presentations with AI.',
+    href: ADOBE_ROUTES.acrobat,
   },
   {
     icon: '/adobe-assets/experience-cloud-logo.svg',
@@ -58,6 +52,7 @@ const PRODUCTS = [
     poster: 'https://www.adobe.com/upp-shared/media_1f42c38b1bfa9847b0a51aae46ad3d988f261f566.png?width=2000&format=webply&optimize=medium',
     heading: 'Orchestrate customer experiences.',
     body: 'Deliver business impact, move faster, and personalize at scale.',
+    href: ADOBE_ROUTES.business,
   },
   {
     icon: '/adobe-assets/creative-cloud.svg',
@@ -67,60 +62,47 @@ const PRODUCTS = [
     poster: 'https://www.adobe.com/upp-shared/media_196fcd7a65634001581d6dede382ee51d1608c74f.png?width=2000&format=webply&optimize=medium',
     heading: 'Students and teachers save big.',
     body: 'Save a bundle on our biggest bundle of top industry creative tools.',
+    href: ADOBE_ROUTES.business,
   },
 ];
 
 export function ProductShowcase() {
   return (
     <section className={styles.carouselSection} aria-label="Adobe products">
-      {/* Elastic product-category carousel */}
-      <div className={styles.elasticCarouselContainer}>
-        {PRODUCTS.map((p, i) => (
-          <DeadLink key={i}  className={styles.elasticCarouselItem} tabIndex={0}>
-            <div className={styles.elasticItemHeader}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={p.icon} alt={p.iconAlt} loading="lazy" />
-              <p className={styles.eyebrow}>{p.eyebrow}</p>
-            </div>
+      <div className={styles.elasticCarousel}>
+        <div className={styles.elasticCarouselContainer}>
+          {PRODUCTS.map((p, i) => (
+            <AdobeLink key={i} href={p.href} className={styles.elasticCarouselItem}>
+              <div className={styles.elasticItemHeader}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={p.icon} alt={p.iconAlt} loading="lazy" />
+                <p className={styles.eyebrow}>{p.eyebrow}</p>
+              </div>
 
-            <div className={styles.elasticItemMedia}>
-              <video
-                playsInline
-                muted
-                loop
-                autoPlay
-                preload="metadata"
-                poster={p.poster}
-                tabIndex={-1}
-              >
-                <source src={p.videoSrc} type="video/mp4" />
-              </video>
-            </div>
+              <div className={styles.elasticItemMedia}>
+                <video
+                  playsInline
+                  muted
+                  loop
+                  autoPlay
+                  preload="metadata"
+                  poster={p.poster}
+                  tabIndex={-1}
+                >
+                  <source src={p.videoSrc} type="video/mp4" />
+                </video>
+              </div>
 
-            <div className={styles.elasticItemFooter}>
-              <h3>{p.heading}</h3>
-              <p className={styles.bodyMd}>{p.body}</p>
-            </div>
-          </DeadLink>
-        ))}
-      </div>
-
-      {/* Industry pill strip — from Autodesk Embla carousel data */}
-      <div className={styles.pillStrip}>
-        <div
-          className={styles.pillScroller}
-          role="list"
-          aria-label="Explore by industry"
-        >
-          {INDUSTRIES.map((ind, i) => (
-            <DeadLink
-              key={i}
-              
-              role="listitem"
-              className={`${styles.pill} ${ind.videoSrc === null ? styles.pillCta : ''}`}
-            >
-              {ind.label}
-            </DeadLink>
+              <div className={styles.elasticItemFooter}>
+                <h3>{p.heading}</h3>
+                <p className={styles.bodyMd}>{p.body}</p>
+                <span className={styles.elasticItemArrow} aria-hidden>
+                  <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </span>
+              </div>
+            </AdobeLink>
           ))}
         </div>
       </div>

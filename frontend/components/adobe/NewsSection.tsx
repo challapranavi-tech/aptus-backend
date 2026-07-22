@@ -1,44 +1,50 @@
 import styles from "@/styles/adobe/adobe.module.css";
-import { DeadLink } from "./DeadLink";
+import { AdobeLink } from "./DeadLink";
+import { ADOBE_ROUTES, type AdobeRoute } from "./routes";
 
-const NEWS_ITEMS = [
+const NEWS_ITEMS: { heading: string; body: string; href: AdobeRoute }[] = [
   {
-    heading: 'Introducing Adobe Brand Visibility.',
+    heading: "Introducing Adobe Brand Visibility.",
     body: "Get to know Adobe's new unified GEO platform for enterprise brands.",
-    linkLabel: 'Read story',
+    href: ADOBE_ROUTES.business,
   },
   {
-    heading: 'Explore new ways to share information with PDF Spaces.',
+    heading: "Explore new ways to share information with PDF Spaces.",
     body: "Today in Acrobat, we're introducing a new way to share information, one designed to engage, inform and move the people who matter most.",
-    linkLabel: 'Read story',
+    href: ADOBE_ROUTES.acrobat,
   },
   {
-    heading: 'How Adobe transformed its email marketing.',
+    heading: "How Adobe transformed its email marketing.",
     body: "The Adobe Journey Optimizer real-time approach to campaign orchestration has overhauled how Adobe's marketers work. The platform lets them push the envelope in how they create and roll out campaigns.",
-    linkLabel: 'Read story',
+    href: ADOBE_ROUTES.business,
   },
 ];
 
 export function NewsSection() {
   return (
-    <section className={styles.newsSection} aria-label="Adobe News">
-      <div className={styles.newsHeadline}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/adobe-assets/b-app-experiencecloud.svg" alt="" className={styles.newsHeadlineIcon} loading="lazy" />
-        <h2>Adobe News</h2>
-      </div>
-
+    <div className={styles.newsSection}>
       <div className={styles.newsGrid}>
+        <div className={styles.newsHeadline}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/adobe-assets/b-app-experiencecloud.svg"
+            alt=""
+            className={styles.newsHeadlineIcon}
+            loading="lazy"
+          />
+          <h2>Adobe News</h2>
+        </div>
+        <div className={styles.newsHeadlineSpacer} aria-hidden />
+        <div className={styles.newsHeadlineSpacer} aria-hidden />
+
         {NEWS_ITEMS.map((item, i) => (
-          <div key={i} className={styles.newsItem}>
-            <h3 className={styles.heading5}>{item.heading}</h3>
+          <AdobeLink key={i} href={item.href} className={styles.newsItem}>
+            <h3>{item.heading}</h3>
             <p className={styles.bodyMd}>{item.body}</p>
-            <DeadLink  className={`${styles.standaloneLink} ${styles.standaloneLinkDark}`}>
-              {item.linkLabel}
-            </DeadLink>
-          </div>
+            <span className={styles.standaloneLink}>Learn more</span>
+          </AdobeLink>
         ))}
       </div>
-    </section>
+    </div>
   );
 }

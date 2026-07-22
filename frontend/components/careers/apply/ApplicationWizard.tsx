@@ -21,6 +21,7 @@ import {
 } from "@shared/lib/careers-application";
 import type { CareerJob } from "@shared/lib/career-jobs";
 import type { ResumeHints } from "@shared/lib/resume-parse";
+import { PERSON_NAME_RE, meaningfulTextError, personNameError } from "@shared/lib/schema";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { FileDropzone } from "./FileDropzone";
 import { SelectField, TextAreaField, TextField } from "./fields";
@@ -638,10 +639,10 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
     const errs: Errors = {};
 
     if (STEPS[index].key === "basics") {
-      if (!firstName.trim()) errs.firstName = "First name is required.";
-      else if (firstName.trim().length < 2) errs.firstName = "At least 2 characters.";
-      if (!lastName.trim()) errs.lastName = "Last name is required.";
-      else if (lastName.trim().length < 2) errs.lastName = "At least 2 characters.";
+      const firstErr = personNameError(firstName, "First name");
+      if (firstErr) errs.firstName = firstErr;
+      const lastErr = personNameError(lastName, "Last name");
+      if (lastErr) errs.lastName = lastErr;
 
       const emailErr = validateEmailAddress(values.email);
       if (emailErr) errs.email = emailErr;
@@ -649,8 +650,11 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
       const phoneErr = validatePhoneNumber(values.phone, countryCode);
       if (phoneErr) errs.phone = phoneErr;
 
-      if (!values.currentLocation.trim())
-        errs.currentLocation = "Current Location is required.";
+      const locErr = meaningfulTextError(
+        values.currentLocation,
+        "Current Location",
+      );
+      if (locErr) errs.currentLocation = locErr;
 
       const dobErr = validateDateDMY(values.dateOfBirth, "Date of Birth", {
         allowTodayOrPast: true,
@@ -683,17 +687,22 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
       );
       if (passportErr) errs.passportValidity = passportErr;
 
-      if (!values.totalYearsExperience.trim())
-        errs.totalYearsExperience = "Required.";
+      const yearsErr = meaningfulTextError(
+        values.totalYearsExperience,
+        "Total years of experience",
+      );
+      if (yearsErr) errs.totalYearsExperience = yearsErr;
 
       orgs.forEach((org) => {
         const pfx = `org_${org.id}`;
-        if (!org.name.trim()) errs[`${pfx}-name`] = "Organization name is required.";
-        if (!org.designation.trim())
-          errs[`${pfx}-designation`] = "Designation is required.";
-        if (!org.duration.trim()) errs[`${pfx}-duration`] = "Duration is required.";
-        if (!org.totalYears.trim())
-          errs[`${pfx}-totalYears`] = "Total years is required.";
+        const nameErr = meaningfulTextError(org.name, "Organization name");
+        if (nameErr) errs[`${pfx}-name`] = nameErr;
+        const desErr = meaningfulTextError(org.designation, "Designation");
+        if (desErr) errs[`${pfx}-designation`] = desErr;
+        const durErr = meaningfulTextError(org.duration, "Duration");
+        if (durErr) errs[`${pfx}-duration`] = durErr;
+        const totErr = meaningfulTextError(org.totalYears, "Total years");
+        if (totErr) errs[`${pfx}-totalYears`] = totErr;
       });
 
       if (!values.noticePeriod) errs.noticePeriod = "Please select a notice period.";
@@ -704,22 +713,25 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
       ) {
         errs.noticePeriod = "Select a valid notice period.";
       }
-      if (!values.currentCtc.trim()) errs.currentCtc = "Required.";
-      if (!values.expectedCtc.trim()) errs.expectedCtc = "Required.";
+      const curCtcErr = meaningfulTextError(values.currentCtc, "Current CTC");
+      if (curCtcErr) errs.currentCtc = curCtcErr;
+      const expCtcErr = meaningfulTextError(values.expectedCtc, "Expected CTC");
+      if (expCtcErr) errs.expectedCtc = expCtcErr;
 
-      if (!values.reportsTo.trim()) errs.reportsTo = "Reports To is required.";
+      const reportsErr = meaningfulTextError(values.reportsTo, "Reports To");
+      if (reportsErr) errs.reportsTo = reportsErr;
       if (!values.teamSize.trim()) errs.teamSize = "Team Size is required.";
       else if (!/^\d{1,4}$/.test(values.teamSize.trim()))
         errs.teamSize = "Enter a valid team size.";
 
       values.educationEntries.forEach((e, i) => {
         if (i === 0 || e.name || e.institution || e.year) {
-          if (!e.name.trim())
-            errs[`educationEntries.${i}.name`] = "Qualification is required.";
-          if (!e.institution.trim())
-            errs[`educationEntries.${i}.institution`] = "Institution is required.";
-          if (!e.year.trim())
-            errs[`educationEntries.${i}.year`] = "Year is required.";
+          const qErr = meaningfulTextError(e.name, "Qualification");
+          if (qErr) errs[`educationEntries.${i}.name`] = qErr;
+          const iErr = meaningfulTextError(e.institution, "Institution");
+          if (iErr) errs[`educationEntries.${i}.institution`] = iErr;
+          const yErr = meaningfulTextError(e.year, "Year");
+          if (yErr) errs[`educationEntries.${i}.year`] = yErr;
         }
       });
       if (!files.educationDocs[0])
@@ -859,7 +871,7 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
       // Reject placeholder / mock junk candidates sometimes leave in resumes.
       if (/^(n\/?a|na|nil|none|test|xxx+|asdf|qwer|mock|sample|dummy)$/i.test(t))
         return false;
-      return true;
+      return PERSON_NAME_RE.test(t);
     };
 
     // Only fill empty fields — never invent values when the parser found nothing.

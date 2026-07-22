@@ -16,6 +16,11 @@
     "start:frontend": "npm run start -w frontend",
     "start:backend": "npm run start -w backend",
     "lint": "npm run lint -w frontend && npm run lint -w backend",
+    "test:checks": "node scripts/run-checks.mjs",
+    "test:integration": "npm run test:integration -w backend",
+    "test:e2e": "npm run test:e2e -w frontend",
+    "test": "npm run test:checks && npm run test:integration",
+    "test:all": "npm test && npm run test:e2e",
     "web": "npm --prefix aptus-web/aptus-web",
     "cms:export-all-json": "npm --prefix aptus-web/aptus-web run cms:export-all-json",
     "cms:seed-homepage": "npm --prefix aptus-web/aptus-web run cms:seed-homepage",
@@ -36,6 +41,7 @@
     "npm": ">=10.0.0"
   },
   "devDependencies": {
-    "concurrently": "^9.1.2"
+    "concurrently": "^9.1.2",
+    "tsx": "^4.20.3"
   }
 }

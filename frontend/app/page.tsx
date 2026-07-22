@@ -21,7 +21,12 @@ export default async function HomePage() {
   try {
     page = await getHomePage();
   } catch (err) {
-    console.error(err);
+    // warn (not error): Next.js surfaces console.error as a red overlay even
+    // when we recover with the empty-state UI below (e.g. backend restarting).
+    console.warn(
+      "[home] CMS unavailable — showing empty state.",
+      err instanceof Error ? err.message : err,
+    );
   }
 
   if (!page) {

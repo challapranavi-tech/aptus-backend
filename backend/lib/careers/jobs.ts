@@ -9,28 +9,15 @@ import {
 } from "@shared/lib/career-jobs";
 import { odooConfigFromEnv } from "@/lib/odoo";
 import { authenticate, searchRead } from "@/lib/odoo";
+import { stripJobHtml } from "./strip-job-html";
 
 interface OdooHrJob {
   id: number;
   name: string;
-  department_id?: [number, string] | false;
   address_id?: [number, string] | false;
   website_description?: string | false;
   description?: string | false;
   write_date?: string;
-}
-
-function stripHtml(html: string): string {
-  return html
-    .replace(/<\s*br\s*\/?>/gi, "\n")
-    .replace(/<\/(p|div|li|h[1-6])>/gi, "\n")
-    .replace(/<[^>]+>/g, "")
-    .replace(/&nbsp;/gi, " ")
-    .replace(/&amp;/gi, "&")
-    .replace(/&lt;/gi, "<")
-    .replace(/&gt;/gi, ">")
-    .replace(/\n{3,}/g, "\n\n")
-    .trim();
 }
 
 function normalizeOdooJob(r: OdooHrJob): CareerJob {
@@ -40,10 +27,11 @@ function normalizeOdooJob(r: OdooHrJob): CareerJob {
     id,
     slug: slugifyJobTitle(r.name, id),
     title: r.name,
-    department: Array.isArray(r.department_id) ? r.department_id[1] : "General",
-    location: Array.isArray(r.address_id) ? r.address_id[1] : "Oman",
+    // ponytail: Odoo address_id holds the team label (e.g. SOFTWARE); city is Muscat until multi-office exists.
+    department: Array.isArray(r.address_id) ? r.address_id[1] : "General",
+    location: "Muscat",
     jobType: DEFAULT_JOB_TYPE,
-    description: stripHtml(html),
+    description: stripJobHtml(html),
     responsibilities: [],
     requirements: [],
     publishedAt: r.write_date,
@@ -72,7 +60,6 @@ async function loadOdooJobs(): Promise<CareerJob[]> {
       fields: [
         "id",
         "name",
-        "department_id",
         "address_id",
         "website_description",
         "description",

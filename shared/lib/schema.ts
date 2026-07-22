@@ -312,6 +312,38 @@ export function parseQuery<T extends Record<string, unknown>>(
 export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const PHONE_RE = /^\+?[\d\s().-]{7,30}$/;
 export const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+/** Letters (any script), marks, spaces, hyphen, apostrophe — rejects `.?/…` junk. */
+export const PERSON_NAME_RE = /^(?=.*\p{L})[\p{L}\p{M}'’\- ]{2,120}$/u;
+
+/** At least one letter or digit — rejects punctuation-only junk like `/////`, `../.`, `''`. */
+export const MEANINGFUL_TEXT_RE = /[\p{L}\p{N}]/u;
+
+/** Null when valid; otherwise a short field error for first/last/full name. */
+export function personNameError(
+  value: string,
+  label = "Name",
+): string | null {
+  const v = value.trim().replace(/\s+/g, " ");
+  if (!v) return `${label} is required.`;
+  if (v.length < 2) return "At least 2 characters.";
+  if (!PERSON_NAME_RE.test(v)) {
+    return `${label} can only include letters, spaces, hyphens, and apostrophes.`;
+  }
+  return null;
+}
+
+/** Null when the value has real content; rejects empty / whitespace / symbol-only. */
+export function meaningfulTextError(
+  value: string,
+  label: string,
+): string | null {
+  const v = value.trim();
+  if (!v) return `${label} is required.`;
+  if (!MEANINGFUL_TEXT_RE.test(v)) {
+    return `${label} must include letters or numbers.`;
+  }
+  return null;
+}
 
 /** Standard validation error payload (no stack / internals). */
 export function validationErrorPayload(errors: FieldErrors) {

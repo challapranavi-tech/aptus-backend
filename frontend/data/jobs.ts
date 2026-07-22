@@ -33,14 +33,19 @@ async function apiGet<T>(path: string): Promise<T | null> {
       cache: "no-store",
       signal: AbortSignal.timeout(API_TIMEOUT_MS),
     });
+    // Genuine missing job — safe for notFound().
     if (res.status === 404) return null;
-    if (!res.ok) return null;
+    // Transient backend/Odoo failure — throw so the detail page does NOT fake a 404.
+    if (!res.ok) {
+      throw new Error(`[careers] ${url} → HTTP ${res.status}`);
+    }
     return (await res.json()) as T;
   } catch (err) {
-    if (process.env.NODE_ENV !== "production") {
-      console.warn(`[careers] ${url} failed:`, err);
-    }
-    return null;
+    if (err instanceof Error && err.message.startsWith("[careers]")) throw err;
+    // Timeout / network / JSON — also must not become notFound().
+    throw new Error(
+      `[careers] ${url} failed: ${err instanceof Error ? err.message : String(err)}`,
+    );
   }
 }
 
@@ -53,11 +58,20 @@ export async function getJobList(
     if (v !== undefined && v !== "") sp.set(k, String(v));
   }
   const qs = sp.toString();
-  return apiGet<JobListResult>(`/api/careers/jobs${qs ? `?${qs}` : ""}`);
+  try {
+    return await apiGet<JobListResult>(`/api/careers/jobs${qs ? `?${qs}` : ""}`);
+  } catch (err) {
+    // Listing SSR soft-fails — CareersListing retries client-side.
+    if (process.env.NODE_ENV !== "production") {
+      console.warn(err);
+    }
+    return null;
+  }
 }
 
 export async function getJob(slug: string): Promise<CareerJob | null> {
   noStore();
+  // Transient API failure throws (do not fake notFound). Genuine 404 → null.
   const data = await apiGet<{ job: CareerJob }>(
     `/api/careers/jobs/${encodeURIComponent(slug)}`,
   );

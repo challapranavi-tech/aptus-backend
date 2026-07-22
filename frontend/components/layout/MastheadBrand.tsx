@@ -30,15 +30,18 @@ function AutodeskWordmark({ className }: { className?: string }) {
   );
 }
 
-/** Aptus brand mark; on /autodesk also shows Autodesk wordmark beside it. */
+/** Aptus brand mark; partner wordmark on /autodesk or /adobe only. */
 export function MastheadBrand({ name, logo }: MastheadBrandProps) {
   const pathname = usePathname();
   const showAutodesk = pathname === "/autodesk" || pathname.startsWith("/autodesk/");
+  // Exact /adobe only — not /adobe-photoshop etc.
+  const showAdobe = pathname === "/adobe" || pathname === "/adobe/";
+  const showPartner = showAutodesk || showAdobe;
 
   return (
     <div
       className={
-        showAutodesk
+        showPartner
           ? "aptus-masthead__brand-row aptus-masthead__brand-row--partner"
           : "aptus-masthead__brand-row"
       }
@@ -65,6 +68,26 @@ export function MastheadBrand({ name, logo }: MastheadBrandProps) {
           <span className="aptus-masthead__brand-divider" aria-hidden="true" />
           <Link href="/autodesk" className="aptus-masthead__partner-logo" aria-label="Autodesk">
             <AutodeskWordmark />
+          </Link>
+        </>
+      ) : null}
+
+      {showAdobe ? (
+        <>
+          <span className="aptus-masthead__brand-divider" aria-hidden="true" />
+          <Link
+            href="/adobe"
+            className="aptus-masthead__partner-logo aptus-masthead__partner-logo--adobe"
+            aria-label="Adobe"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/adobe-assets/adobe-logo-black.svg"
+              alt=""
+              width={190}
+              height={45}
+              decoding="async"
+            />
           </Link>
         </>
       ) : null}

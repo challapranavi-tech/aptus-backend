@@ -1,23 +1,19 @@
-"use client";
+import Link from "next/link";
+import type { ComponentProps, ReactNode } from "react";
 
-import type { AnchorHTMLAttributes, ReactNode } from "react";
-
-type DeadLinkProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> & {
+type AdobeLinkProps = Omit<ComponentProps<typeof Link>, "href"> & {
+  href: string;
   children: ReactNode;
 };
 
-/** Visual link only — no navigation (Adobe replica CTAs). */
-export function DeadLink({ children, onClick, ...rest }: DeadLinkProps) {
+/** Real navigation link for /adobe CTAs and product cards. */
+export function AdobeLink({ href, children, ...rest }: AdobeLinkProps) {
   return (
-    <a
-      href="#"
-      {...rest}
-      onClick={(e) => {
-        e.preventDefault();
-        onClick?.(e);
-      }}
-    >
+    <Link href={href} {...rest}>
       {children}
-    </a>
+    </Link>
   );
 }
+
+/** @deprecated use AdobeLink — kept so older imports keep working during edit */
+export const DeadLink = AdobeLink;
