@@ -44,12 +44,12 @@ scripts/.tmp*
 backend/data/applications/
 data/applications/
 
-# reference / download folders — not source code
+# reference / download folders — not source code (root only; keep frontend/public/assets)
+/assets/
+/assets.zip
 LIVE WEBSITE/
 LIVE WEBSITE.zip
 aptus old.zip
 _zip_extract/
 _wayback/
-assets/
-assets.zip
-categorized_assets/
+/categorized_assets/
