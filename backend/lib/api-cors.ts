@@ -1,19 +1,39 @@
 import { NextResponse } from "next/server";
 
+/** www ↔ apex are the same site for CORS — editors often set only one in env. */
+function withWwwAliases(origin: string): string[] {
+  try {
+    const u = new URL(origin);
+    const host = u.hostname;
+    const alt = host.startsWith("www.")
+      ? host.slice(4)
+      : `www.${host}`;
+    const port = u.port ? `:${u.port}` : "";
+    return [
+      `${u.protocol}//${host}${port}`,
+      `${u.protocol}//${alt}${port}`,
+    ];
+  } catch {
+    return [origin];
+  }
+}
+
 export function allowedOrigins(): string[] {
   const fromEnv = [process.env.APTUS_FRONTEND_URL, process.env.NEXT_PUBLIC_SITE_URL]
     .filter(Boolean)
     .flatMap((v) => (v as string).split(","))
     .map((v) => v.trim().replace(/\/$/, ""))
-    .filter(Boolean);
+    .filter(Boolean)
+    .flatMap(withWwwAliases);
 
   const origins =
-    process.env.NODE_ENV === "production"   // ← comparison, not assignment
+    process.env.NODE_ENV === "production"
       ? fromEnv
       : [...fromEnv, "http://localhost:3000"];
 
   return [...new Set(origins)];
 }
+
 function pickOrigin(request: Request): string | null {
   const origin = request.headers.get("origin");
   if (!origin) return null;
@@ -24,7 +44,7 @@ export function corsPreflight(request: Request): NextResponse | null {
   if (request.method !== "OPTIONS") return null;
   const origin = pickOrigin(request);
   const headers: Record<string, string> = {
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
     "Access-Control-Max-Age": "86400",
   };

@@ -11,8 +11,31 @@ process.env.APTUS_FRONTEND_URL = "https://aptusinfotech.com, https://www.aptusin
 delete process.env.NEXT_PUBLIC_SITE_URL;
 {
   const o = allowedOrigins();
-  assert.deepStrictEqual(o, ["https://aptusinfotech.com", "https://www.aptusinfotech.com"]);
+  assert.deepStrictEqual(
+    new Set(o),
+    new Set(["https://aptusinfotech.com", "https://www.aptusinfotech.com"]),
+  );
   assert.ok(!o.includes("http://localhost:3000"), "prod must not auto-allow localhost");
+}
+
+// Single env host must allow both www and apex (careers fetch fails otherwise).
+process.env.APTUS_FRONTEND_URL = "https://www.aptusinfotech.com/";
+{
+  const o = allowedOrigins();
+  assert.ok(o.includes("https://www.aptusinfotech.com"));
+  assert.ok(
+    o.includes("https://aptusinfotech.com"),
+    "apex must be allowed when only www is configured",
+  );
+}
+
+process.env.APTUS_FRONTEND_URL = "https://aptusinfotech.com";
+{
+  const o = allowedOrigins();
+  assert.ok(
+    o.includes("https://www.aptusinfotech.com"),
+    "www alias when only apex set",
+  );
 }
 
 // Dev mode auto-allows localhost.
