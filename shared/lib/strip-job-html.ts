@@ -1,4 +1,7 @@
-/** Strip Odoo job HTML to readable plain text (no indent/blank-line bloat). */
+/**
+ * Strip Odoo job HTML (or already-plain API text) to readable plain text.
+ * Collapses indent/blank-line bloat that `white-space: pre-line` would paint as gaps.
+ */
 export function stripJobHtml(html: string): string {
   // ponytail: \u0001 marks list-item starts so soft-wrap join won't glue bullets.
   return html

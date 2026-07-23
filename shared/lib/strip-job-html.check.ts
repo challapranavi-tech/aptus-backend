@@ -1,6 +1,6 @@
 /**
  * Runnable self-check for Odoo job HTML → plain text.
- * Run: npx --yes tsx backend/lib/careers/strip-job-html.check.ts
+ * Run: npx --yes tsx shared/lib/strip-job-html.check.ts
  */
 import assert from "node:assert/strict";
 import { stripJobHtml } from "./strip-job-html";
@@ -33,5 +33,11 @@ assert.ok(text.includes("MCA"), "keeps second list item");
 assert.match(text, /• B\.Tech\n• MCA/, "list items stay on separate lines");
 assert.ok(!/^\s+$/m.test(text), "no whitespace-only non-empty lines");
 assert.ok(!/\n{2,}/.test(text), "no blank lines remain");
+
+// Already-plain bloated API text (stale backend) must still collapse.
+const bloatedPlain = "Lead role.\n\n\n                        Next line\n\nEnd.";
+const plain = stripJobHtml(bloatedPlain);
+assert.ok(!/\n{2,}/.test(plain), "plain bloated text collapses blank lines");
+assert.ok(!/ {2,}/.test(plain), "plain bloated text collapses indent runs");
 
 console.log("stripJobHtml self-check passed");

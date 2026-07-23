@@ -35,7 +35,7 @@
 
   --content-max: 1300px;
   --content-pad-x: clamp(0.75rem, 2vw, 1rem);
-  --section-padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  /* Section band density lives on --spacing-section in theme.css (one knob). */
   --radius-card: 20px;
   --radius-button: 3px;
   --radius-icon-card: 10px;

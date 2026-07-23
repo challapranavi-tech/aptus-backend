@@ -3,7 +3,12 @@
  * Run: npx --yes tsx shared/lib/career-jobs.check.ts
  */
 import assert from "node:assert/strict";
-import { filterJobs, slugifyJobTitle, type CareerJob } from "./career-jobs";
+import {
+  filterJobs,
+  normalizeCareerJob,
+  slugifyJobTitle,
+  type CareerJob,
+} from "./career-jobs";
 
 const jobs: CareerJob[] = [
   {
@@ -57,5 +62,11 @@ const empty = filterJobs(jobs, { q: "zzz-no-match" });
 assert.equal(empty.total, 0);
 
 assert.equal(slugifyJobTitle("Software Engineer!", 9), "software-engineer-9");
+
+const bloated = normalizeCareerJob({
+  ...jobs[0],
+  description: "Lead role.\n\n\n                        Next line\n\nEnd.",
+});
+assert.ok(!/\n{2,}/.test(bloated.description), "normalizeCareerJob collapses blank lines");
 
 console.log("career-jobs self-check passed");

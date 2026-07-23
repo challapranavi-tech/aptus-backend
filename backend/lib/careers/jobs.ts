@@ -9,7 +9,7 @@ import {
 } from "@shared/lib/career-jobs";
 import { odooConfigFromEnv } from "@/lib/odoo";
 import { authenticate, searchRead } from "@/lib/odoo";
-import { stripJobHtml } from "./strip-job-html";
+import { stripJobHtml } from "@shared/lib/strip-job-html";
 
 interface OdooHrJob {
   id: number;
@@ -44,6 +44,12 @@ async function loadOdooJobs(): Promise<CareerJob[]> {
     throw new Error("Odoo is not configured for careers jobs");
   }
 
+  console.info("[careers/jobs] odoo", {
+    db: cfg.db,
+    url: cfg.url.replace(/\/$/, ""),
+    filter: "website_published=true",
+  });
+
   const session = await authenticate(
     cfg.url,
     cfg.db,
@@ -70,7 +76,13 @@ async function loadOdooJobs(): Promise<CareerJob[]> {
     },
   );
 
-  return rows.map(normalizeOdooJob);
+  const jobs = rows.map(normalizeOdooJob);
+  console.info("[careers/jobs] fetched", {
+    db: cfg.db,
+    count: jobs.length,
+    titles: jobs.map((j) => `${j.id}:${j.title}`),
+  });
+  return jobs;
 }
 
 /** Published website jobs from Odoo only. */

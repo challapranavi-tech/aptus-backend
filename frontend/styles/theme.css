@@ -53,8 +53,10 @@
   --text-5xl:  clamp(1.875rem, 2vw + 1.25rem, 2.5rem);   --text-5xl--line-height:  1.2;
   --text-6xl:  clamp(2.5rem, 3vw + 1.5rem, 3.75rem);     --text-6xl--line-height:  1.05;
 
+  /* One section-density knob — utilities (.section-padding) and .aptus-section share it. */
   --spacing-section:    1.75rem;
   --spacing-section-lg: 2rem;
+  --section-padding:    var(--spacing-section);
 
   /* Breakpoints align with Tailwind defaults: sm 640, md 768, lg 1024, xl 1280, 2xl/xxl 1536 */
   --breakpoint-xxl: 96rem;

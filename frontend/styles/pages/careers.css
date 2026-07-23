@@ -305,7 +305,7 @@
 
 /* ── Job detail ───────────────────────────────────────────────────────── */
 .aptus-jobdetail {
-  padding: clamp(1.5rem, 4vw, 3rem) 0 4rem;
+  padding: clamp(1.25rem, 3vw, 2.25rem) 0 3rem;
 }
 .aptus-jobdetail__back {
   display: inline-flex;
@@ -344,17 +344,19 @@
   gap: 0.4rem;
 }
 .aptus-jobdetail__section {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 .aptus-jobdetail__section h2 {
   color: #0f172a;
   font-size: 1.25rem;
   font-weight: 600;
-  margin-bottom: 0.6rem;
+  margin: 0 0 0.5rem;
 }
 .aptus-jobdetail__section p {
   color: #475467;
-  line-height: 1.7;
+  line-height: 1.65;
+  margin: 0;
+  /* Newlines from stripJobHtml; blank-line collapse is enforced in shared/lib/strip-job-html.ts */
   white-space: pre-line;
 }
 .aptus-jobdetail__list {

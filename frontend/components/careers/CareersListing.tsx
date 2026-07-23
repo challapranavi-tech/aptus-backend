@@ -2,7 +2,12 @@
 
 import { publicApiBase } from "@/lib/api-base";
 import { Button, Container } from "@/components/ui";
-import { JOB_PAGE_SIZE, type CareerJob, type JobListResult } from "@shared/lib/career-jobs";
+import {
+  JOB_PAGE_SIZE,
+  normalizeCareerJob,
+  type CareerJob,
+  type JobListResult,
+} from "@shared/lib/career-jobs";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -124,13 +129,21 @@ export function CareersListing({ initial, initialFilters }: Props) {
         });
         if (!res.ok) throw new Error("bad status");
         const data = (await res.json()) as JobListResult;
+        const jobs = data.jobs.map(normalizeCareerJob);
+        // Never keep SSR leftovers when the live API responds — Odoo is source of truth.
         setTotal(data.total);
         setDepartments(data.departments);
         setLocations(data.locations);
-        setJobs((prev) => (opts.append ? [...prev, ...data.jobs] : data.jobs));
+        setJobs((prev) => (opts.append ? [...prev, ...jobs] : jobs));
       } catch {
+        // No mock/fallback jobs — show empty openings state when the backend is unreachable.
         setFailed(true);
-        if (!opts.append) setJobs([]);
+        if (!opts.append) {
+          setJobs([]);
+          setTotal(0);
+          setDepartments([]);
+          setLocations([]);
+        }
       } finally {
         setLoading(false);
         setLoadingMore(false);
@@ -213,7 +226,7 @@ export function CareersListing({ initial, initialFilters }: Props) {
   );
 
   return (
-    <Container size="site" className="pb-16">
+    <Container size="site" className="pb-10">
       <div className="aptus-careers-toolbar">
         <div className="aptus-careers-search">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -271,7 +284,7 @@ export function CareersListing({ initial, initialFilters }: Props) {
         <>
           {failed && (
             <div className="aptus-banner aptus-banner--error" role="alert">
-              We couldn&apos;t load jobs just now.{" "}
+              We couldn&apos;t load openings from the server.{" "}
               <button
                 type="button"
                 className="underline"
@@ -281,7 +294,8 @@ export function CareersListing({ initial, initialFilters }: Props) {
               </button>
             </div>
           )}
-          <EmptyState searching={hasFilters} />
+          {/* Never invent roles when the API fails — empty openings only. */}
+          <EmptyState searching={hasFilters && !failed} />
         </>
       ) : (
         <>

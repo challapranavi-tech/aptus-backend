@@ -2498,8 +2498,9 @@
   padding: 2rem 0;
 }
 
+/* Software pages stay at the large section token (not a magic 2rem). */
 .aptus-software-page .section-padding {
-  padding-block: 2rem;
+  padding-block: var(--spacing-section-lg);
 }
 
 .aptus-software-page .aptus-software-value-card,

@@ -2,7 +2,11 @@
  * Server-side careers data — fetches jobs from @aptus/backend over HTTP.
  * Mirrors the CMS client (data/cms.ts) so SSR/SEO share one API base.
  */
-import type { CareerJob, JobListResult } from "@shared/lib/career-jobs";
+import {
+  normalizeCareerJob,
+  type CareerJob,
+  type JobListResult,
+} from "@shared/lib/career-jobs";
 import { unstable_noStore as noStore } from "next/cache";
 
 const DEFAULT_API = "http://localhost:3001";
@@ -59,12 +63,26 @@ export async function getJobList(
   }
   const qs = sp.toString();
   try {
-    return await apiGet<JobListResult>(`/api/careers/jobs${qs ? `?${qs}` : ""}`);
+    const data = await apiGet<JobListResult>(
+      `/api/careers/jobs${qs ? `?${qs}` : ""}`,
+    );
+    if (!data) return null;
+    const normalized: JobListResult = {
+      ...data,
+      jobs: data.jobs.map(normalizeCareerJob),
+    };
+    console.info("[careers/jobs] ssr", {
+      api: apiBase(),
+      total: normalized.total,
+      titles: normalized.jobs.map((j) => `${j.id}:${j.title}`),
+    });
+    return normalized;
   } catch (err) {
-    // Listing SSR soft-fails — CareersListing retries client-side.
-    if (process.env.NODE_ENV !== "production") {
-      console.warn(err);
-    }
+    // Listing SSR soft-fails to null (no mock) — CareersListing retries client-side.
+    console.warn("[careers/jobs] ssr failed (no mock fallback)", {
+      api: apiBase(),
+      err: err instanceof Error ? err.message : String(err),
+    });
     return null;
   }
 }
@@ -75,7 +93,7 @@ export async function getJob(slug: string): Promise<CareerJob | null> {
   const data = await apiGet<{ job: CareerJob }>(
     `/api/careers/jobs/${encodeURIComponent(slug)}`,
   );
-  return data?.job ?? null;
+  return data?.job ? normalizeCareerJob(data.job) : null;
 }
 
 export async function getAllJobSlugs(): Promise<string[]> {

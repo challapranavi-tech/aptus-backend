@@ -1,6 +1,7 @@
 /**
  * Job listing types + filter helpers (shared by jobs API and careers UI).
  */
+import { stripJobHtml } from "./strip-job-html";
 
 export const JOB_PAGE_SIZE = 12;
 
@@ -45,6 +46,15 @@ export function slugifyJobTitle(title: string, id: string | number): string {
     .replace(/^-+|-+$/g, "")
     .slice(0, 80);
   return `${base || "job"}-${id}`;
+}
+
+/** Normalize job text from API — collapses blank-line bloat even if a stale backend lags. */
+export function normalizeCareerJob(job: CareerJob): CareerJob {
+  return {
+    ...job,
+    description:
+      typeof job.description === "string" ? stripJobHtml(job.description) : "",
+  };
 }
 
 export function filterJobs(

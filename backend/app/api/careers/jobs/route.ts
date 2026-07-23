@@ -30,11 +30,18 @@ export async function GET(req: NextRequest) {
       pageSize: sp.get("pageSize") ? Number(sp.get("pageSize")) : undefined,
     });
 
+    console.info("[careers/jobs] api", {
+      total: result.total,
+      page: result.page,
+      titles: result.jobs.map((j) => `${j.id}:${j.title}`),
+    });
+
     return jsonCors(req, result, {
       headers: { "Cache-Control": "private, no-store, max-age=0, must-revalidate" },
     });
   } catch (err) {
-    console.error("[careers/jobs]", err);
+    // Fail closed: 503 with no job payload — frontend must show empty openings, never mocks.
+    console.error("[careers/jobs] api error", err);
     return jsonCors(
       req,
       { error: "Unable to load jobs from Odoo." },
