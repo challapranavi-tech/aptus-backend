@@ -24,6 +24,10 @@ import type { ResumeHints } from "@shared/lib/resume-parse";
 import { PERSON_NAME_RE, meaningfulTextError, personNameError } from "@shared/lib/schema";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { FileDropzone } from "./FileDropzone";
+import {
+  APPLY_STEP_ERROR_HEADING,
+  formatApplySubmitErrors,
+} from "./apply-alerts";
 import { SelectField, TextAreaField, TextField } from "./fields";
 
 /**
@@ -1096,9 +1100,10 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
             .filter(Boolean);
           const formMsg = (serverErrors._form as string | undefined) ?? "";
           if (fieldMessages.length > 0) {
-            msg = formMsg
-              ? `${formMsg} Please fix: ${fieldMessages.slice(0, 3).join(" · ")}${fieldMessages.length > 3 ? ` · (+${fieldMessages.length - 3} more)` : ""}`
-              : `Please fix the following: ${fieldMessages.slice(0, 3).join(" · ")}${fieldMessages.length > 3 ? ` · (+${fieldMessages.length - 3} more)` : ""}`;
+            msg = formatApplySubmitErrors(
+              fieldMessages.map(String),
+              formMsg,
+            );
           } else if (formMsg) {
             msg = formMsg;
           }
@@ -1195,7 +1200,7 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
             role="alert"
             tabIndex={-1}
           >
-            <strong>Please fix the following before continuing:</strong>
+            <strong>{APPLY_STEP_ERROR_HEADING}</strong>
             <ul className="mt-1 list-disc pl-5">
               {[...new Set(Object.values(errors).filter(Boolean))]
                 .slice(0, 6)

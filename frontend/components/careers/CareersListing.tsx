@@ -284,13 +284,13 @@ export function CareersListing({ initial, initialFilters }: Props) {
         <>
           {failed && (
             <div className="aptus-banner aptus-banner--error" role="alert">
-              We couldn&apos;t load openings from the server.{" "}
+              Openings couldn&apos;t be loaded right now.{" "}
               <button
                 type="button"
                 className="underline"
                 onClick={() => fetchJobs({ page: 1, append: false })}
               >
-                Retry
+                Try again
               </button>
             </div>
           )}
