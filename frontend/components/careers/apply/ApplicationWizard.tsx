@@ -514,6 +514,16 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
   const [submitError, setSubmitError] = useState("");
   const [showSummary, setShowSummary] = useState(false);
 
+  // Drop the submit banner once the applicant has cleared every field error
+  // (e.g. by replacing a rejected file). Text fields clear via setValue;
+  // file dropzones clear via clearFileError.
+  useEffect(() => {
+    if (submitState === "error" && !Object.values(errors).some(Boolean)) {
+      setSubmitError("");
+      setSubmitState("idle");
+    }
+  }, [errors, submitState]);
+
   const topRef = useRef<HTMLDivElement>(null);
   const summaryRef = useRef<HTMLDivElement>(null);
   const submittingRef = useRef(false);
@@ -590,6 +600,14 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
         return n;
       });
     }
+  };
+
+  const clearFileError = (key: string) => {
+    setErrors((p) => {
+      if (!(key in p) || !p[key]) return p;
+      const { [key]: _removed, ...rest } = p;
+      return rest;
+    });
   };
 
   const updateOrg = (index: number, patch: Partial<OrgTenure>) => {
@@ -827,7 +845,7 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
     const file = list[0] ?? null;
     setFiles((p) => ({ ...p, resume: file }));
     checkTotalAfterChange({ resume: file });
-    setErrors((p) => ({ ...p, resume: "" }));
+    clearFileError("resume");
     if (!file) return;
 
     if (file.size > MAX_UPLOAD_BYTES) {
@@ -1482,6 +1500,7 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
                       );
                       setFiles((p) => ({ ...p, educationDocs: updated }));
                       checkTotalAfterChange({ educationDocs: updated });
+                      clearFileError(`educationDoc_${i}`);
                     }}
                   />
                 </div>
@@ -1616,6 +1635,7 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
                   const passportCopy = list[0] ?? null;
                   setFiles((p) => ({ ...p, passportCopy }));
                   checkTotalAfterChange({ passportCopy });
+                  clearFileError("passportCopy");
                 }}
                 validate={(f) =>
                   f.size > MAX_UPLOAD_BYTES
@@ -1637,6 +1657,7 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
                   const photograph = list[0] ?? null;
                   setFiles((p) => ({ ...p, photograph }));
                   checkTotalAfterChange({ photograph });
+                  clearFileError("photograph");
                 }}
                 validate={(f) => validateImageFile(f, "Photograph", true)}
               />
@@ -1670,6 +1691,7 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
                     const update = { [key]: next } as Partial<FileState>;
                     setFiles((p) => ({ ...p, ...update }));
                     checkTotalAfterChange(update);
+                    clearFileError(key);
                   }}
                   validate={(f) =>
                     f.size > MAX_UPLOAD_BYTES

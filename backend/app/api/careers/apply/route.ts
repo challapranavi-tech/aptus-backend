@@ -16,6 +16,7 @@ import {
 } from "@/lib/rate-limit-http";
 import {
   DOC_EXTENSIONS,
+  DOC_OR_IMAGE_MIME_OK,
   IMAGE_EXTENSIONS,
   RESUME_EXTENSIONS,
   parseApplicationFields,
@@ -113,7 +114,13 @@ export async function POST(req: NextRequest) {
   // Certificates are optional — education supporting docs cover academics.
   if (certificates.length > 0) {
     for (const c of certificates) {
-      const e = validateFile(c, CERT_EXTENSIONS, "Educational certificate", true);
+      const e = validateFile(
+        c,
+        CERT_EXTENSIONS,
+        "Educational certificate",
+        true,
+        DOC_OR_IMAGE_MIME_OK,
+      );
       if (e) errors.educationalCertificates = e;
     }
   }
@@ -123,6 +130,7 @@ export async function POST(req: NextRequest) {
     [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS],
     "Passport copy",
     true, // passport copy is mandatory for all candidates
+    DOC_OR_IMAGE_MIME_OK,
   );
   if (passportErr) errors.passportCopy = passportErr;
 
@@ -135,7 +143,13 @@ export async function POST(req: NextRequest) {
     [latestPayslip, "latestPayslip", "Latest payslip"],
   ];
   for (const [file, key, label] of optionalDocs) {
-    const e = validateFile(file, [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS], label, false);
+    const e = validateFile(
+      file,
+      [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS],
+      label,
+      false,
+      DOC_OR_IMAGE_MIME_OK,
+    );
     if (e) errors[key] = e;
   }
 
@@ -147,6 +161,7 @@ export async function POST(req: NextRequest) {
     [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS],
     "Supporting document",
     true,
+    DOC_OR_IMAGE_MIME_OK,
   );
   if (edu0Err) errors.educationDoc_0 = edu0Err;
   else if (edu0) eduDocs.push({ file: edu0, label: "Education supporting document 1" });
@@ -159,6 +174,7 @@ export async function POST(req: NextRequest) {
       [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS],
       `Education document ${i + 1}`,
       false,
+      DOC_OR_IMAGE_MIME_OK,
     );
     if (e) errors[`educationDoc_${i}`] = e;
     else eduDocs.push({ file: f, label: `Education supporting document ${i + 1}` });

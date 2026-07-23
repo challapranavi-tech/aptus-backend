@@ -4,6 +4,9 @@
  */
 import assert from "node:assert/strict";
 import {
+  DOC_EXTENSIONS,
+  DOC_OR_IMAGE_MIME_OK,
+  IMAGE_EXTENSIONS,
   MAX_TOTAL_ATTACHMENT_BYTES,
   MAX_UPLOAD_BYTES,
   RESUME_EXTENSIONS,
@@ -170,6 +173,37 @@ assert.ok(
     true,
   ),
   "compound dangerous extension rejected",
+);
+assert.ok(
+  validateFile(
+    { name: "slip.png", size: 1024, type: "image/png" },
+    [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS],
+    "Latest payslip",
+    false,
+  ),
+  "image MIME rejected when mimeOk defaults to docs-only",
+);
+assert.equal(
+  validateFile(
+    { name: "slip.png", size: 1024, type: "image/png" },
+    [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS],
+    "Latest payslip",
+    false,
+    DOC_OR_IMAGE_MIME_OK,
+  ),
+  null,
+  "image MIME accepted with DOC_OR_IMAGE_MIME_OK",
+);
+assert.equal(
+  validateFile(
+    { name: "letter.jpeg", size: 1024, type: "image/jpeg" },
+    [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS],
+    "Relieving letter",
+    false,
+    DOC_OR_IMAGE_MIME_OK,
+  ),
+  null,
+  "jpeg MIME accepted with DOC_OR_IMAGE_MIME_OK",
 );
 assert.ok(
   MAX_UPLOAD_BYTES <= 4.5 * 1024 * 1024 &&

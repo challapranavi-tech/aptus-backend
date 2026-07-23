@@ -218,6 +218,12 @@ const IMAGE_MIME_OK = new Set([
   "",
 ]);
 
+/** Fields that accept either a document or an image (passport, optional employment docs, education supporting docs). */
+export const DOC_OR_IMAGE_MIME_OK = new Set([
+  ...DOC_MIME_OK,
+  ...IMAGE_MIME_OK,
+]);
+
 function parseOrg(
   raw: unknown,
   label: string,
