@@ -28,7 +28,7 @@ export function fileFrom(
   type: string,
 ): File {
   // ponytail: File ctor missing on some Vercel/Node builds; Blob+name is enough for FormData
-  const blob = new Blob([bytes], { type });
+  const blob = new Blob([new Uint8Array(bytes)], { type });
   return Object.assign(blob, { name, lastModified: Date.now() }) as unknown as File;
 }
 

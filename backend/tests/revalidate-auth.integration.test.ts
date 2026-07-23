@@ -24,6 +24,7 @@ vi.mock("@/data", async (importOriginal) => {
 
 import { GET, POST } from "@/app/api/revalidate/route";
 import { GET as odooGET } from "@/app/api/odoo/route";
+import { setNodeEnv } from "./helpers/set-env";
 
 function revalidateReq(
   body: unknown,
@@ -47,7 +48,7 @@ describe("POST /api/revalidate auth + contract", () => {
     vi.clearAllMocks();
     process.env.ODOO_REVALIDATE_TOKEN = "test-revalidate-secret";
     process.env.APTUS_FRONTEND_URL = "https://frontend.test.example";
-    process.env.NODE_ENV = "test";
+    setNodeEnv("test");
     vi.stubGlobal("fetch", mocks.fetch);
   });
 
@@ -101,7 +102,7 @@ describe("POST /api/revalidate auth + contract", () => {
   });
 
   it("GET is disabled in production", async () => {
-    process.env.NODE_ENV = "production";
+    setNodeEnv("production");
     const res = await GET(
       new NextRequest(
         "http://localhost:3001/api/revalidate?slug=home&token=test-revalidate-secret",
@@ -115,7 +116,7 @@ describe("GET /api/odoo debug auth", () => {
   beforeEach(() => {
     __resetRateLimitStoreForTests();
     process.env.ODOO_DEBUG_TOKEN = "debug-secret";
-    process.env.NODE_ENV = "development";
+    setNodeEnv("development");
     delete process.env.ODOO_URL;
     delete process.env.ODOO_DB;
     delete process.env.ODOO_USER;
@@ -123,7 +124,7 @@ describe("GET /api/odoo debug auth", () => {
   });
 
   it("returns 403 in production", async () => {
-    process.env.NODE_ENV = "production";
+    setNodeEnv("production");
     const res = await odooGET(
       new NextRequest("http://localhost:3001/api/odoo?model=status", {
         headers: { "x-debug-token": "debug-secret" },

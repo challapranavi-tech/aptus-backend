@@ -12,6 +12,7 @@ import {
   jpegBytes,
   pdfBytes,
 } from "./helpers/careers-form";
+import { setNodeEnv } from "./helpers/set-env";
 
 const mocks = vi.hoisted(() => ({
   createApplicant: vi.fn(),
@@ -66,7 +67,7 @@ describe("POST /api/careers/apply", () => {
     process.env.ODOO_URL = "https://odoo.test.example";
     process.env.RESEND_API_KEY = "re_test";
     delete process.env.VERCEL;
-    process.env.NODE_ENV = "test";
+    setNodeEnv("test");
   });
 
   it("accepts a valid application (Odoo + mail + archive)", async () => {

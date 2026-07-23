@@ -17,6 +17,7 @@ vi.mock("@/lib/mail", async (importOriginal) => {
 });
 
 import { OPTIONS, POST } from "@/app/api/contact/route";
+import { setNodeEnv } from "./helpers/set-env";
 
 function contactReq(
   body: unknown,
@@ -52,7 +53,7 @@ describe("POST /api/contact", () => {
     mocks.sendEmail.mockResolvedValue({ ok: true, id: "msg_1" });
     process.env.RESEND_API_KEY = "re_test";
     process.env.APTUS_FRONTEND_URL = "http://localhost:3000";
-    process.env.NODE_ENV = "test";
+    setNodeEnv("test");
   });
 
   it("accepts a valid contact / quote lead", async () => {
