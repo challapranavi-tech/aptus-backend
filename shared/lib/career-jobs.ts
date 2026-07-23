@@ -57,6 +57,23 @@ export function normalizeCareerJob(job: CareerJob): CareerJob {
   };
 }
 
+/**
+ * Pick the job body editors actually maintain on hr.job.
+ * Recruitment form edits land in `description`. `website_description` often
+ * still holds Odoo's sample Software Programmer HTML (Belgium / sales-cycle demo)
+ * and must not shadow a real Description when both are set.
+ */
+export function pickHrJobDescriptionHtml(
+  websiteDescription: string | false | undefined,
+  description: string | false | undefined,
+): string {
+  const internal =
+    typeof description === "string" ? description.trim() : "";
+  const website =
+    typeof websiteDescription === "string" ? websiteDescription.trim() : "";
+  return internal || website || "";
+}
+
 export function filterJobs(
   jobs: CareerJob[],
   filters: JobFilters,

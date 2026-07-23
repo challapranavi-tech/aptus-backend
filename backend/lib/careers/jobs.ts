@@ -4,6 +4,7 @@
  */
 import {
   DEFAULT_JOB_TYPE,
+  pickHrJobDescriptionHtml,
   slugifyJobTitle,
   type CareerJob,
 } from "@shared/lib/career-jobs";
@@ -22,7 +23,7 @@ interface OdooHrJob {
 
 function normalizeOdooJob(r: OdooHrJob): CareerJob {
   const id = String(r.id);
-  const html = (r.website_description || r.description || "") as string;
+  const html = pickHrJobDescriptionHtml(r.website_description, r.description);
   return {
     id,
     slug: slugifyJobTitle(r.name, id),

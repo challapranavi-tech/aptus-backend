@@ -6,6 +6,7 @@ import assert from "node:assert/strict";
 import {
   filterJobs,
   normalizeCareerJob,
+  pickHrJobDescriptionHtml,
   slugifyJobTitle,
   type CareerJob,
 } from "./career-jobs";
@@ -68,5 +69,21 @@ const bloated = normalizeCareerJob({
   description: "Lead role.\n\n\n                        Next line\n\nEnd.",
 });
 assert.ok(!/\n{2,}/.test(bloated.description), "normalizeCareerJob collapses blank lines");
+
+const real =
+  "We are looking for a Software Programmer to design, develop, test, and maintain high-quality software applications.";
+const demo =
+  "Valid work permit for Belgium. Lead the entire sales cycle. Google Adwords experience.";
+assert.equal(
+  pickHrJobDescriptionHtml(demo, real),
+  real,
+  "Recruitment description wins over website demo HTML",
+);
+assert.equal(
+  pickHrJobDescriptionHtml(demo, ""),
+  demo,
+  "website used when internal description empty",
+);
+assert.equal(pickHrJobDescriptionHtml(false, false), "");
 
 console.log("career-jobs self-check passed");
