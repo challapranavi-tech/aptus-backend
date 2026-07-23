@@ -8,7 +8,7 @@ Which Odoo instance each deployment talks to, and who owns the secrets.
 
 | Instance | Purpose | Typical `ODOO_URL` |
 |----------|---------|-------------------|
-| **Staging** | Editor testing, content seeding, dev | `aptusinfotech-staging-*.dev.odoo.com` |
+| **Staging** | Editor testing, content seeding, dev | `https://aptusinfotech-staging-*.dev.odoo.com` (host only — never `/odoo`) |
 | **Production** | Live site content (when provisioned) | TBD — separate Odoo.com database or on-prem |
 
 Local dev uses staging values from `.env.example` → `.env.local`.

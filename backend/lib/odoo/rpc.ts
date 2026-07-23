@@ -62,6 +62,19 @@ function nextId() {
   return ++_id;
 }
 
+/**
+ * Normalize ODOO_URL to the JSON-RPC host.
+ * Editors often paste the browser login URL (`…/odoo` or `…/web`), which makes
+ * `{base}/jsonrpc` hit the web client (400 CSRF) and takes down CMS + careers.
+ * Also trims whitespace from env-var paste mistakes.
+ */
+export function normalizeOdooBaseUrl(raw: string): string {
+  let u = raw.trim().replace(/\/+$/, "");
+  // Strip web-client path + anything after it (…/odoo, …/odoo/…, …/web/login).
+  u = u.replace(/\/(?:odoo|web)(?:\/.*)?$/i, "");
+  return u.replace(/\/+$/, "");
+}
+
 // ─── Low-level fetch ──────────────────────────────────────────────────────────
 /**
  * @param cacheMode
@@ -137,7 +150,7 @@ export async function authenticate(
   apiKey: string,
   revalidate = 60,
 ): Promise<OdooRpcSession> {
-  const base = url.replace(/\/$/, "");
+  const base = normalizeOdooBaseUrl(url);
   const endpoint = `${base}/jsonrpc`;
 
   const uid = await rpcFetch<number | false>(
@@ -281,7 +294,7 @@ export interface OdooVersionInfo {
 }
 
 export async function getVersionInfo(url: string): Promise<OdooVersionInfo> {
-  const base = url.replace(/\/$/, "");
+  const base = normalizeOdooBaseUrl(url);
   return rpcFetch<OdooVersionInfo>(
     `${base}/jsonrpc`,
     {

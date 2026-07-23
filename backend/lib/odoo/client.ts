@@ -9,7 +9,8 @@
  *   const config = await client.getSiteConfig(defaults);
  *
  * Environment variables required:
- *   ODOO_URL      – base URL  e.g. https://aptusinfotech-staging-35193445.dev.odoo.com
+ *   ODOO_URL      – base host  e.g. https://aptusinfotech-staging-35193445.dev.odoo.com
+ *                 (no /odoo — that is the web UI path and breaks JSON-RPC)
  *   ODOO_DB       – database  e.g. aptusinfotech-staging-35193445
  *   ODOO_USER     – login     e.g. admin@aptusinfotech.com
  *   ODOO_API_KEY  – API key   (Odoo → Preferences → Account Security → API Keys)
@@ -37,6 +38,7 @@ import {
 import {
   authenticate,
   getVersionInfo,
+  normalizeOdooBaseUrl,
   OdooRpcError,
   read,
   searchRead,
@@ -67,11 +69,12 @@ function publishedOnWebsite(websiteId: number): OdooDomain {
 
 // ─── Config from env ──────────────────────────────────────────────────────────
 export function odooConfigFromEnv() {
+  const rawUrl = process.env.ODOO_URL ?? "";
   return {
-    url: process.env.ODOO_URL ?? "",
-    db: process.env.ODOO_DB ?? "",
-    user: process.env.ODOO_USER ?? "",
-    apiKey: process.env.ODOO_API_KEY ?? "",
+    url: normalizeOdooBaseUrl(rawUrl),
+    db: (process.env.ODOO_DB ?? "").trim(),
+    user: (process.env.ODOO_USER ?? "").trim(),
+    apiKey: (process.env.ODOO_API_KEY ?? "").trim(),
     revalidate: Number(process.env.ODOO_REVALIDATE ?? "60"),
     websiteId: Number(process.env.ODOO_WEBSITE_ID ?? "1"),
   };

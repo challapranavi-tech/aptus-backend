@@ -1,6 +1,11 @@
 import { archiveApplication } from "@/lib/application-archive";
 import { corsPreflight, jsonCors, withCors } from "@/lib/api-cors";
-import { createApplicant, isOdooConfigured, parseSalaryExpected } from "@/lib/odoo";
+import {
+  createApplicant,
+  isOdooConfigured,
+  odooConfigFromEnv,
+  parseSalaryExpected,
+} from "@/lib/odoo";
 import { validationError } from "@/lib/api-validate";
 import {
   hrEmail,
@@ -354,7 +359,7 @@ export async function POST(req: NextRequest) {
       attachments,
     );
     odooSynced = true;
-    const base = process.env.ODOO_URL?.replace(/\/$/, "") ?? "";
+    const base = odooConfigFromEnv().url;
     const link = `${base}/web#model=hr.applicant&id=${applicantId}&view_type=form`;
     odooNoteHtml = `<p style="font-family:Arial,sans-serif;font-size:13px;color:#047857">Synced to Odoo Recruitment — <a href="${escapeHtml(link)}">applicant #${applicantId}</a>.</p>`;
     odooNoteText = `\n\nSynced to Odoo Recruitment: applicant #${applicantId} (${link})`;

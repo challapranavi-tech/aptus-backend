@@ -14,6 +14,7 @@ export {
   read,
   create,
   getVersionInfo,
+  normalizeOdooBaseUrl,
   type OdooRpcSession,
   type OdooVersionInfo,
 } from "./rpc";
