@@ -29,7 +29,11 @@ export function allowedOrigins(): string[] {
   const origins =
     process.env.NODE_ENV === "production"
       ? fromEnv
-      : [...fromEnv, "http://localhost:3000"];
+      : [
+          ...fromEnv,
+          "http://localhost:3000",
+          "http://127.0.0.1:3000",
+        ];
 
   return [...new Set(origins)];
 }

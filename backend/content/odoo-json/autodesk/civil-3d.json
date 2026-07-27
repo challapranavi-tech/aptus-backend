@@ -253,6 +253,8 @@
     "showForm": true,
     "submitLabel": "Submit Now",
     "formVariant": "simple",
-    "layout": "light"
+    "layout": "light",
+    "category": "software",
+    "productName": "Civil 3D"
   }
 }

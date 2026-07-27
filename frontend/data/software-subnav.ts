@@ -98,6 +98,7 @@ export const SOFTWARE_SUBNAV_BY_FAMILY: Record<string, SoftwareSubNavLink[]> = {
   oracle: ORACLE_SUBNAV_LINKS,
   edms: EDMS_SUBNAV_LINKS,
   educational: EDUCATIONAL_SUBNAV_LINKS,
+  electrical: ELECTRICAL_SOFTWARE_SUBNAV_LINKS,
   elv: ELV_SUBNAV_LINKS,
   "cubicost-group": CUBICOST_GROUP_SUBNAV_LINKS,
   structural: STRUCTURAL_SUBNAV_LINKS,

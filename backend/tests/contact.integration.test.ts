@@ -42,6 +42,7 @@ const validBody = {
   company: "Analytical Engines",
   phone: "+968 1234 5678",
   product: "Revit",
+  qty: "3",
   message: "Quote please",
 };
 
@@ -53,6 +54,9 @@ describe("POST /api/contact", () => {
     mocks.sendEmail.mockResolvedValue({ ok: true, id: "msg_1" });
     process.env.RESEND_API_KEY = "re_test";
     process.env.APTUS_FRONTEND_URL = "http://localhost:3000";
+    process.env.CONTACT_TO_EMAIL = "info@aptusinfotech.com";
+    delete process.env.SOFTWARE_SALES_EMAIL;
+    delete process.env.ELV_SALES_EMAIL;
     setNodeEnv("test");
   });
 
@@ -64,6 +68,56 @@ describe("POST /api/contact", () => {
     const arg = mocks.sendEmail.mock.calls[0][0];
     expect(arg.subject).toMatch(/quote request/i);
     expect(arg.replyTo).toBe("ada@example.com");
+    expect(arg.to).toBe("info@aptusinfotech.com");
+    expect(arg.text).toContain("Product Category: Software");
+    expect(arg.text).toContain("QTY: 3");
+    expect(arg.text).toContain("Source: Website – Request Quote");
+  });
+
+  it("routes ELV products to ELV_SALES_EMAIL", async () => {
+    process.env.ELV_SALES_EMAIL = "elv@aptusinfotech.com";
+    process.env.SOFTWARE_SALES_EMAIL = "software@aptusinfotech.com";
+    const res = await POST(
+      contactReq({
+        ...validBody,
+        product: "CCTV Surveillance Solutions",
+        category: "elv",
+      }),
+    );
+    expect(res.status).toBe(200);
+    const arg = mocks.sendEmail.mock.calls[0][0];
+    expect(arg.to).toBe("elv@aptusinfotech.com");
+    expect(arg.text).toContain("Product Category: ELV");
+    expect(arg.subject).toMatch(/ELV/);
+  });
+
+  it("honours explicit category override over product keywords", async () => {
+    process.env.SOFTWARE_SALES_EMAIL = "software@aptusinfotech.com";
+    process.env.ELV_SALES_EMAIL = "elv@aptusinfotech.com";
+    const res = await POST(
+      contactReq({
+        ...validBody,
+        product: "Revit",
+        category: "elv",
+      }),
+    );
+    expect(res.status).toBe(200);
+    expect(mocks.sendEmail.mock.calls[0][0].to).toBe("elv@aptusinfotech.com");
+  });
+
+  it("falls back to CONTACT_TO_EMAIL when category inbox unset", async () => {
+    process.env.CONTACT_TO_EMAIL = "fallback@aptusinfotech.com";
+    const res = await POST(
+      contactReq({
+        ...validBody,
+        product: "Access Control Systems",
+        category: "elv",
+      }),
+    );
+    expect(res.status).toBe(200);
+    expect(mocks.sendEmail.mock.calls[0][0].to).toBe(
+      "fallback@aptusinfotech.com",
+    );
   });
 
   it("returns 400 for a bad email", async () => {

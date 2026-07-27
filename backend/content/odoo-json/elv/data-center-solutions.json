@@ -125,7 +125,9 @@
     "showForm": true,
     "submitLabel": "Submit Now",
     "formVariant": "simple",
-    "layout": "light"
+    "layout": "light",
+    "category": "elv",
+    "productName": "Data Center Solutions"
   },
   "partnerships": {
     "heading": "Winning together with",

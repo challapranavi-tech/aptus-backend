@@ -1,5 +1,6 @@
 "use client";
 
+import { QuoteProductSelect } from "@/components/quote/QuoteProductSelect";
 import { publicApiBase } from "@/lib/api-base";
 import { cn } from "@/lib/utils";
 import { useState, type ComponentPropsWithoutRef, type FormEvent } from "react";
@@ -9,21 +10,40 @@ type Status = "idle" | "submitting" | "success" | "error";
 type SoftwareQuoteFormProps = {
   submitLabel?: string;
   className?: string;
+  /** Routes the lead (software vs ELV inbox). */
+  category?: "software" | "elv";
+  /** Dropdown label, e.g. "Adobe Product". */
+  productLabel?: string;
+  /** Family-specific product options. */
+  products?: string[];
+  /** Prefills the product select when opening from a product page. */
+  defaultProduct?: string;
 } & Omit<ComponentPropsWithoutRef<"form">, "className" | "action" | "method" | "children" | "onSubmit">;
 
 export function SoftwareQuoteForm({
   submitLabel = "Submit Now",
   className,
+  category = "software",
+  productLabel = "Product",
+  products = [],
+  defaultProduct,
   ...formProps
 }: SoftwareQuoteFormProps) {
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
 
+  const selectDefault =
+    defaultProduct && products.includes(defaultProduct)
+      ? defaultProduct
+      : "Select Product";
+
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (status === "submitting") return;
 
-    const formData = new FormData(e.currentTarget);
+    // Capture before await — React nulls e.currentTarget after the handler yields.
+    const form = e.currentTarget;
+    const formData = new FormData(form);
     const payload = Object.fromEntries(formData.entries());
 
     setStatus("submitting");
@@ -38,8 +58,10 @@ export function SoftwareQuoteForm({
 
       if (res.ok) {
         setStatus("success");
-        setMessage("Thank you! Your request has been submitted.");
-        e.currentTarget.reset();
+        setMessage(
+          "Thank you! Your quote request has been submitted. Our team will contact you shortly.",
+        );
+        form.reset();
         return;
       }
 
@@ -70,6 +92,7 @@ export function SoftwareQuoteForm({
       noValidate
       {...formProps}
     >
+      <input type="hidden" name="category" value={category} />
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="aptus-form-label">
           First Name *
@@ -99,28 +122,24 @@ export function SoftwareQuoteForm({
             className="aptus-form-input mt-0 w-full px-4 py-3"
           />
         </label>
+        <QuoteProductSelect
+          key={`${category}:${productLabel}:${selectDefault}:${products.join("|")}`}
+          label={productLabel}
+          products={products}
+          defaultValue={selectDefault}
+        />
         <label className="aptus-form-label">
-          Autodesk Product
-          <select name="product" className="aptus-form-input mt-0 w-full px-4 py-3" defaultValue="Select Product">
-            <option value="Select Product">Select Product</option>
-            <option value="AutoCAD - including specialized toolsets AD">AutoCAD - including specialized toolsets AD</option>
-            <option value="Civil 3D">Civil 3D</option>
-            <option value="Architecture Engineering & Construction Collection IC">
-              Architecture Engineering &amp; Construction Collection IC
-            </option>
-            <option value="AutoCAD LT">AutoCAD LT</option>
-            <option value="BIM Collaborate Pro CLOUD">BIM Collaborate Pro CLOUD</option>
-            <option value="3ds Max">3ds Max</option>
-            <option value="Build - 550 CLOUD">Build - 550 CLOUD</option>
-            <option value="Docs CLOUD">Docs CLOUD</option>
-            <option value="BIM Collaborate CLOUD">BIM Collaborate CLOUD</option>
-            <option value="BIM 360 Build - Packs CLOUD">BIM 360 Build - Packs CLOUD</option>
-            <option value="InfraWorks">InfraWorks</option>
-            <option value="Navisworks Manage">Navisworks Manage</option>
-            <option value="Revit">Revit</option>
-            <option value="InfoWater Pro">InfoWater Pro</option>
-            <option value="Others">Others</option>
-          </select>
+          QTY *
+          <input
+            type="number"
+            name="qty"
+            min={1}
+            step={1}
+            inputMode="numeric"
+            placeholder="1"
+            required
+            className="aptus-form-input mt-0 w-full px-4 py-3"
+          />
         </label>
         <label className="aptus-form-label">
           Phone *

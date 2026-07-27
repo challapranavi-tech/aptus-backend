@@ -3,12 +3,14 @@
 import { CareerApplicationForm } from "@/components/sections/CareerApplicationForm";
 import { ContactLeadForm } from "@/components/contact/ContactLeadForm";
 import { SoftwareQuoteForm } from "@/components/quote/SoftwareQuoteForm";
+import { quoteContextFromPathname } from "@/components/quote/quote-modal-utils";
 import { Container } from "@/components/ui";
 import { useGSAPContext } from "@/hooks/useGSAPContext";
 import { gsap } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 import type { CTA as CTAData } from "@/types";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useRef } from "react";
 
 interface CTAProps {
@@ -45,6 +47,8 @@ function formClasses(layout: CTAData["layout"]) {
 function CtaForm({ data }: { data: CTAData }) {
   const variant = data.formVariant ?? "simple";
   const fc = formClasses(data.layout);
+  const pathname = usePathname() ?? "/";
+  const quote = quoteContextFromPathname(pathname);
 
   if (variant === "career") {
     return <CareerApplicationForm submitLabel={data.submitLabel} />;
@@ -55,6 +59,10 @@ function CtaForm({ data }: { data: CTAData }) {
       <SoftwareQuoteForm
         data-cta-animate
         submitLabel={data.submitLabel ?? "Submit Now"}
+        category={data.category ?? quote.category}
+        productLabel={quote.productLabel}
+        products={quote.products}
+        defaultProduct={data.productName ?? quote.defaultProduct}
       />
     );
   }
@@ -81,6 +89,8 @@ function CtaForm({ data }: { data: CTAData }) {
       labelClassName={fc.label}
       inputClassName={fc.input}
       submitClassName={fc.submit}
+      category={data.category}
+      productName={data.productName}
     />
   );
 }

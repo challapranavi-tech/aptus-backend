@@ -155,7 +155,9 @@
     "showForm": true,
     "submitLabel": "Submit Now",
     "formVariant": "simple",
-    "layout": "light"
+    "layout": "light",
+    "category": "elv",
+    "productName": "Gate Automation Solutions"
   },
   "midCta": {
     "heading": "Ready to Secure Your Property?",

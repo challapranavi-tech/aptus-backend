@@ -123,7 +123,9 @@
     "showForm": true,
     "submitLabel": "Submit Now",
     "formVariant": "simple",
-    "layout": "light"
+    "layout": "light",
+    "category": "elv",
+    "productName": "Switching and Routing"
   },
   "partnerships": {
     "heading": "Winning together with",

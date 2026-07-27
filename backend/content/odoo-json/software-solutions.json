@@ -10,13 +10,7 @@
     "tagline": "Empowering businesses with cutting-edge software solutions from industry-leading brands",
     "imageSrc": "linear-gradient(180deg, #000000 0%, #5429F2 100%)",
     "imageAlt": "software",
-    "actions": [
-      {
-        "label": "Request a Quote",
-        "href": "#Form",
-        "tone": "blue"
-      }
-    ]
+    "actions": []
   },
   "introRow": {
     "heading": "Your Premier Software Solutions Provider",

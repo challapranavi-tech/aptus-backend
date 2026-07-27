@@ -240,6 +240,8 @@
     "showForm": true,
     "submitLabel": "Submit Now",
     "formVariant": "quote",
-    "layout": "light"
+    "layout": "light",
+    "category": "software",
+    "productName": "Adobe"
   }
 }

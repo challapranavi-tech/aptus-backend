@@ -156,7 +156,9 @@
     "showForm": true,
     "submitLabel": "Submit Now",
     "formVariant": "simple",
-    "layout": "light"
+    "layout": "light",
+    "category": "elv",
+    "productName": "SMATV/IPTV Solutions"
   },
   "midCta": {
     "heading": "Ready to Upgrade Your Entertainment Systems?",

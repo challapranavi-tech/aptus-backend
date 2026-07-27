@@ -27,12 +27,15 @@ frontend/playwright/.cache/
 # env files — never commit secrets (keep checked-in *.example templates only)
 .env
 .env.*
-**/.env
-**/.env.*
 .env.local
+.env.production
 .env.*.local
-**/.env.local
-**/.env.*.local
+backend/.env.local
+backend/.env.production
+backend/.env.*.local
+frontend/.env.local
+frontend/.env.production
+frontend/.env.*.local
 !**/.env.example
 !**/.env.*.example
 

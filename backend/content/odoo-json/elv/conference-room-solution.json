@@ -157,7 +157,9 @@
     "showForm": true,
     "submitLabel": "Submit Now",
     "formVariant": "simple",
-    "layout": "light"
+    "layout": "light",
+    "category": "elv",
+    "productName": "Conference Room Solutions"
   },
   "midCta": {
     "heading": "Ready to Transform Your Meeting Experience?",

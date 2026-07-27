@@ -4,7 +4,10 @@
  */
 import assert from "node:assert/strict";
 import { parseCmsSlug } from "./cms-slug";
-import { parseContactRequest } from "./contact-request";
+import {
+  detectContactCategory,
+  parseContactRequest,
+} from "./contact-request";
 import { parseApplicationFields, validateFile } from "./career-application";
 import { normaliseSlug, parseRevalidateRequest } from "./revalidate-request";
 import {
@@ -116,6 +119,11 @@ if (lead.ok) {
   assert.equal(lead.data.product, "Others");
   assert.ok(lead.data.message.includes("Heard from: LinkedIn"));
 }
+
+assert.equal(detectContactCategory("Revit", null), "software");
+assert.equal(detectContactCategory("CCTV Surveillance Solutions", null), "elv");
+assert.equal(detectContactCategory("Revit", "elv"), "elv");
+assert.equal(detectContactCategory("Access Control Systems", "software"), "software");
 
 // Career fields.
 const career = parseApplicationFields({

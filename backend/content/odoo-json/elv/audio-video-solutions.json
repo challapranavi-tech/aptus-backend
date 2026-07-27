@@ -152,7 +152,9 @@
     "showForm": true,
     "submitLabel": "Submit Now",
     "formVariant": "simple",
-    "layout": "light"
+    "layout": "light",
+    "category": "elv",
+    "productName": "Audio Video Solutions"
   },
   "midCta": {
     "heading": "Ready to Transform Your Meetings?",

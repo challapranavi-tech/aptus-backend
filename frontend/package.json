@@ -14,6 +14,9 @@
     "npm": ">=10.0.0"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.3.1",
+    "@fortawesome/free-brands-svg-icons": "^7.3.1",
+    "@fortawesome/react-fontawesome": "^3.5.0",
     "gsap": "^3.13.0",
     "next": "^15.3.3",
     "react": "^19.1.0",

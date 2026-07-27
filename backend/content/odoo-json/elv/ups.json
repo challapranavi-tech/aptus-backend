@@ -90,7 +90,7 @@
           "icon": "screwdriver"
         }
       ]
-    },  
+    },
     {
       "id": "why-aptus",
       "visible": true,
@@ -156,7 +156,9 @@
     "showForm": true,
     "submitLabel": "Submit Now",
     "formVariant": "simple",
-    "layout": "light"
+    "layout": "light",
+    "category": "elv",
+    "productName": "Uninterruptible Power Supply - UPS"
   },
   "midCta": {
     "heading": "Ready to Ensure Your Business Continuity?",

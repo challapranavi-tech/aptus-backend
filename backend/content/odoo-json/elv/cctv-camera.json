@@ -140,7 +140,9 @@
     "showForm": true,
     "submitLabel": "Submit Now",
     "formVariant": "simple",
-    "layout": "light"
+    "layout": "light",
+    "category": "elv",
+    "productName": "CCTV Surveillance Solutions"
   },
   "midCta": {
     "heading": "Ready to Transform Your Hotel Operations?",

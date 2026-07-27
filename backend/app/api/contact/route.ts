@@ -1,4 +1,8 @@
 import { corsPreflight, jsonCors, withCors } from "@/lib/api-cors";
+import {
+  formatMuscatDateTime,
+  resolveContactRouting,
+} from "@/lib/contact-routing";
 import { requireJsonContentType, validationError } from "@/lib/api-validate";
 import { isMailConfigured, sendEmail } from "@/lib/mail";
 import {
@@ -36,7 +40,7 @@ export async function POST(req: NextRequest) {
     return validationError(parsed.errors, (res) => withCors(res, req));
   }
 
-  const { first_name, last_name, email, company, phone, product, message } =
+  const { first_name, last_name, email, company, phone, product, qty, message, category } =
     parsed.data;
 
   // IP limit is in middleware; email caps repeat abuse from rotating IPs.
@@ -57,22 +61,29 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const to = process.env.CONTACT_TO_EMAIL ?? "info@aptusinfotech.com";
+  const routing = resolveContactRouting({
+    product,
+    categoryHint: category,
+  });
   const name = [first_name, last_name].filter(Boolean).join(" ");
   const isQuote = Boolean(product && product !== "Others");
 
   const result = await sendEmail({
-    to,
+    to: routing.to,
     replyTo: email,
     subject: isQuote
-      ? `New quote request from ${name}`
+      ? `New quote request from ${name} (${routing.categoryLabel})`
       : `New contact message from ${name}`,
     text: [
-      `Name: ${name}`,
+      `Customer Name: ${name}`,
+      `Company Name: ${company}`,
       `Email: ${email}`,
-      `Company: ${company}`,
       `Phone: ${phone}`,
-      `Product: ${product || "—"}`,
+      `Product Name: ${product || "—"}`,
+      `QTY: ${qty || "—"}`,
+      `Product Category: ${routing.categoryLabel}`,
+      `Date & Time: ${formatMuscatDateTime()}`,
+      `Source: Website – Request Quote`,
       "",
       message || "(no message)",
     ].join("\n"),

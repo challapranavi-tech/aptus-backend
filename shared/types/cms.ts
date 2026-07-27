@@ -487,6 +487,10 @@ export interface CTA {
   formVariant?: "simple" | "contact" | "career" | "software-quote";
   /** `light` = pale green band + white form card (live About pages). */
   layout?: "dark" | "light" | "career" | "contact-page" | "software-mid";
+  /** Quote routing hint for /api/contact (software | elv). */
+  category?: "software" | "elv";
+  /** Prefills / hidden product name on simple quote CTAs. */
+  productName?: string;
 }
 
 // testimonials

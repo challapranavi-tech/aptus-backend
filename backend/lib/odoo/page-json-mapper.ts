@@ -190,6 +190,8 @@ interface RawContactCta {
   submitLabel?: string;
   formVariant?: "simple" | "contact" | "career" | "software-quote";
   layout?: "dark" | "light" | "career";
+  category?: "software" | "elv";
+  productName?: string;
 }
 interface RawBanner {
   imageSrc?: string;
@@ -1099,6 +1101,8 @@ export function mapPageJson(
         showForm: cta?.showForm ?? data.showContactCta,
         submitLabel: cta?.submitLabel ?? "Submit Now",
         formVariant: cta?.formVariant ?? "simple",
+        category: cta?.category,
+        productName: cta?.productName,
         layout:
           cta?.layout ??
           (isContactPage

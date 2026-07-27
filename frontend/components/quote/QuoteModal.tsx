@@ -1,13 +1,15 @@
 "use client";
 
 import { SoftwareQuoteForm } from "@/components/quote/SoftwareQuoteForm";
+import type { QuoteModalContext } from "@/components/quote/quote-modal-utils";
 
 type QuoteModalProps = {
   open: boolean;
   onClose: () => void;
+  context: QuoteModalContext;
 };
 
-export function QuoteModal({ open, onClose }: QuoteModalProps) {
+export function QuoteModal({ open, onClose, context }: QuoteModalProps) {
   if (!open) return null;
 
   return (
@@ -31,7 +33,14 @@ export function QuoteModal({ open, onClose }: QuoteModalProps) {
           </p>
         </div>
         <div className="aptus-quote-modal__body">
-          <SoftwareQuoteForm className="mt-0" />
+          <SoftwareQuoteForm
+            key={`${context.family}:${context.defaultProduct ?? ""}`}
+            className="mt-0"
+            category={context.category}
+            productLabel={context.productLabel}
+            products={context.products}
+            defaultProduct={context.defaultProduct}
+          />
         </div>
       </div>
     </div>

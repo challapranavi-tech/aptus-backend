@@ -248,6 +248,8 @@
     "showForm": true,
     "submitLabel": "Submit Now",
     "formVariant": "simple",
-    "layout": "light"
+    "layout": "light",
+    "category": "software",
+    "productName": "Autodesk BIM Collaborate Pro"
   }
 }

@@ -234,8 +234,11 @@
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgb(0 0 0 / 0.5);
+    display: flex;
+    flex-direction: column;
     height: 100%;
     margin: 5px;
+    min-height: 100%;
     padding: 1rem 0.5rem 1.25rem;
     text-align: center;
   }
@@ -281,11 +284,19 @@
 
   .aptus-software-icon-card__body {
     color: #695b5b;
+    flex: 1 1 auto;
     font-size: var(--text-sm);
     line-height: 1.5;
     margin-top: -0.35rem;
     padding: 0 2px;
     text-align: start;
+  }
+
+  .aptus-software-icon-card .aptus-software-btn {
+    align-self: stretch;
+    flex-shrink: 0;
+    margin-top: auto;
+    width: auto;
   }
 
   .aptus-software-benefits-band {
@@ -855,6 +866,7 @@
   }
 
   .aptus-software-icon-grid {
+    align-items: stretch;
     display: grid;
     gap: 0.5rem;
     grid-template-columns: repeat(1, minmax(0, 1fr));

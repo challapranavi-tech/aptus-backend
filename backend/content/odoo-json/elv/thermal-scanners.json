@@ -156,7 +156,9 @@
     "showForm": true,
     "submitLabel": "Submit Now",
     "formVariant": "simple",
-    "layout": "light"
+    "layout": "light",
+    "category": "elv",
+    "productName": "Thermal Scanner Solutions"
   },
   "midCta": {
     "heading": "Ready to Enhance Your Safety Protocols?",

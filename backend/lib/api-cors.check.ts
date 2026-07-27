@@ -38,11 +38,12 @@ process.env.APTUS_FRONTEND_URL = "https://aptusinfotech.com";
   );
 }
 
-// Dev mode auto-allows localhost.
+// Dev mode auto-allows localhost + 127.0.0.1.
 (process.env as Record<string, string>).NODE_ENV = "development";
 process.env.APTUS_FRONTEND_URL = "https://www.aptusinfotech.com/";
 {
   assert.ok(allowedOrigins().includes("http://localhost:3000"), "dev should allow localhost");
+  assert.ok(allowedOrigins().includes("http://127.0.0.1:3000"), "dev should allow 127.0.0.1");
 }
 
 console.log("api-cors.check: OK");

@@ -156,7 +156,9 @@
     "showForm": true,
     "submitLabel": "Submit Now",
     "formVariant": "simple",
-    "layout": "light"
+    "layout": "light",
+    "category": "elv",
+    "productName": "Access Control Systems"
   },
   "midCta": {
     "heading": "Ready to Secure Your Premises?",

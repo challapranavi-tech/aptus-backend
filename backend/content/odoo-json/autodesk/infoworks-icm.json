@@ -4,10 +4,22 @@
     "visible": true,
     "family": "water-infrastructure",
     "subnavLinks": [
-      { "label": "InfoDrainage", "href": "/infodrainage" },
-      { "label": "InfoWater Pro", "href": "/infowater-pro" },
-      { "label": "InfoWorks ICM", "href": "/infoworks-icm" },
-      { "label": "InfoWorks WS Pro", "href": "/infoworks-ws-pro" }
+      {
+        "label": "InfoDrainage",
+        "href": "/infodrainage"
+      },
+      {
+        "label": "InfoWater Pro",
+        "href": "/infowater-pro"
+      },
+      {
+        "label": "InfoWorks ICM",
+        "href": "/infoworks-icm"
+      },
+      {
+        "label": "InfoWorks WS Pro",
+        "href": "/infoworks-ws-pro"
+      }
     ],
     "bannerTitle": "Autodesk InfoWorks ICM",
     "bannerTagline": "Advanced integrated catchment modeling software for water and wastewater infrastructure planning and management",
@@ -241,6 +253,8 @@
     "submitLabel": "Submit Now",
     "formVariant": "simple",
     "layout": "light",
-    "anchorId": "Form"
+    "anchorId": "Form",
+    "category": "software",
+    "productName": "Autodesk InfoWorks ICM"
   }
 }

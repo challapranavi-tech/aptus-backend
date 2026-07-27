@@ -9,6 +9,9 @@ type Status = "idle" | "submitting" | "success" | "error";
 
 export type ContactLeadVariant = "contact-page" | "contact" | "simple";
 
+const QUOTE_SUCCESS =
+  "Thank you! Your quote request has been submitted. Our team will contact you shortly.";
+
 type ContactLeadFormProps = {
   variant: ContactLeadVariant;
   submitLabel?: string;
@@ -16,6 +19,10 @@ type ContactLeadFormProps = {
   inputClassName: string;
   submitClassName: string;
   className?: string;
+  /** Quote routing hint → hidden category field. */
+  category?: "software" | "elv";
+  /** Prefills hidden product on simple quote CTAs. */
+  productName?: string;
 };
 
 /**
@@ -29,10 +36,13 @@ export function ContactLeadForm({
   inputClassName,
   submitClassName,
   className,
+  category,
+  productName,
 }: ContactLeadFormProps) {
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
   const submittingRef = useRef(false);
+  const isQuoteContext = Boolean(category || productName);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -54,7 +64,11 @@ export function ContactLeadForm({
 
       if (res.ok) {
         setStatus("success");
-        setMessage("Thank you! Your message has been sent.");
+        setMessage(
+          isQuoteContext
+            ? QUOTE_SUCCESS
+            : "Thank you! Your message has been sent.",
+        );
         form.reset();
         return;
       }
@@ -258,6 +272,8 @@ export function ContactLeadForm({
       onSubmit={handleSubmit}
       noValidate
     >
+      {category ? <input type="hidden" name="category" value={category} /> : null}
+      {productName ? <input type="hidden" name="product" value={productName} /> : null}
       <div className="grid gap-5 sm:grid-cols-2">
         <label className={labelClassName}>
           First Name *
@@ -284,6 +300,28 @@ export function ContactLeadForm({
             name="phone"
             placeholder="e.g,+ 968 0000 0000"
             required
+            className={inputClassName}
+          />
+        </label>
+        <label className={labelClassName}>
+          QTY *
+          <input
+            type="number"
+            name="qty"
+            min={1}
+            step={1}
+            inputMode="numeric"
+            placeholder="1"
+            required
+            className={inputClassName}
+          />
+        </label>
+        <label className={`${labelClassName} sm:col-span-2`}>
+          Company
+          <input
+            type="text"
+            name="company"
+            placeholder="Company Name"
             className={inputClassName}
           />
         </label>

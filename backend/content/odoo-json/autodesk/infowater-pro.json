@@ -3,11 +3,23 @@
     "id": "hero",
     "visible": true,
     "family": "autodesk",
-  "subnavLinks": [
-      { "label": "InfoDrainage", "href": "/infodrainage" },
-      { "label": "InfoWater Pro", "href": "/infowater-pro" },
-      { "label": "InfoWorks ICM", "href": "/infoworks-icm" },
-      { "label": "InfoWorks WS Pro", "href": "/infoworks-ws-pro" }
+    "subnavLinks": [
+      {
+        "label": "InfoDrainage",
+        "href": "/infodrainage"
+      },
+      {
+        "label": "InfoWater Pro",
+        "href": "/infowater-pro"
+      },
+      {
+        "label": "InfoWorks ICM",
+        "href": "/infoworks-icm"
+      },
+      {
+        "label": "InfoWorks WS Pro",
+        "href": "/infoworks-ws-pro"
+      }
     ],
     "bannerTitle": "Autodesk InfoWater Pro",
     "bannerTagline": "Advanced water distribution modeling and management software for water utilities and engineering firms",
@@ -230,6 +242,8 @@
     "submitLabel": "Submit Now",
     "formVariant": "simple",
     "layout": "light",
-    "anchorId": "Form"
+    "anchorId": "Form",
+    "category": "software",
+    "productName": "InfoWater Pro"
   }
 }
