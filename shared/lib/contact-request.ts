@@ -1,7 +1,12 @@
 import {
   EMAIL_RE,
+  MEANINGFUL_TEXT_RE,
+  PERSON_NAME_RE,
   PHONE_RE,
+  meaningfulTextError,
   parseObject,
+  personNameError,
+  type FieldErrors,
   type ObjectSchema,
   type ParseResult,
 } from "./schema";
@@ -90,15 +95,21 @@ const contactSchema: ObjectSchema<ContactRequest> = {
     first_name: {
       type: "string",
       required: true,
-      min: 1,
+      min: 2,
       max: 100,
+      pattern: PERSON_NAME_RE,
+      patternMessage:
+        "First name can only include letters, spaces, hyphens, and apostrophes.",
       label: "First name",
     },
     last_name: {
       type: "string",
       required: true,
-      min: 1,
+      min: 2,
       max: 100,
+      pattern: PERSON_NAME_RE,
+      patternMessage:
+        "Last name can only include letters, spaces, hyphens, and apostrophes.",
       label: "Last name",
     },
     email: {
@@ -115,6 +126,8 @@ const contactSchema: ObjectSchema<ContactRequest> = {
       required: true,
       min: 1,
       max: 200,
+      pattern: MEANINGFUL_TEXT_RE,
+      patternMessage: "Company must include letters or numbers.",
       label: "Company",
     },
     phone: {
@@ -156,6 +169,33 @@ const contactSchema: ObjectSchema<ContactRequest> = {
     },
   },
 };
+
+/** Client-side quote field checks (matches API rules for core contact fields). */
+export function validateQuoteContactFields(
+  raw: Record<string, FormDataEntryValue | string | undefined>,
+): FieldErrors {
+  const str = (key: string) => String(raw[key] ?? "").trim();
+  const errors: FieldErrors = {};
+
+  const first = personNameError(str("first_name"), "First name");
+  if (first) errors.first_name = first;
+
+  const last = personNameError(str("last_name"), "Last name");
+  if (last) errors.last_name = last;
+
+  const email = str("email");
+  if (!email) errors.email = "Email is required.";
+  else if (!EMAIL_RE.test(email)) errors.email = "Enter a valid email address.";
+
+  const company = meaningfulTextError(str("company"), "Company");
+  if (company) errors.company = company;
+
+  const phone = str("phone");
+  if (!phone) errors.phone = "Phone is required.";
+  else if (!PHONE_RE.test(phone)) errors.phone = "Enter a valid phone number.";
+
+  return errors;
+}
 
 const ELV_KEYWORDS = [
   "cctv",

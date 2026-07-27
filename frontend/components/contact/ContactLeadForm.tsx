@@ -2,6 +2,8 @@
 
 import { publicApiBase } from "@/lib/api-base";
 import { cn } from "@/lib/utils";
+import { validateQuoteContactFields } from "@shared/lib/contact-request";
+import type { FieldErrors } from "@shared/lib/schema";
 import { useRef, useState, type FormEvent } from "react";
 import { HeardFromSelect } from "./HeardFromSelect";
 
@@ -25,6 +27,15 @@ type ContactLeadFormProps = {
   productName?: string;
 };
 
+function FieldError({ message }: { message?: string }) {
+  if (!message) return null;
+  return (
+    <span className="mt-1 block text-sm font-medium text-red-600" role="alert">
+      {message}
+    </span>
+  );
+}
+
 /**
  * Contact / product CTA leads → POST /api/contact.
  * Maps city/country/heard_from into the shared contact schema on the server.
@@ -41,17 +52,38 @@ export function ContactLeadForm({
 }: ContactLeadFormProps) {
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
+  const [errors, setErrors] = useState<FieldErrors>({});
   const submittingRef = useRef(false);
   const isQuoteContext = Boolean(category || productName);
+
+  function clearField(name: string) {
+    if (!errors[name]) return;
+    setErrors((prev) => {
+      const next = { ...prev };
+      delete next[name];
+      return next;
+    });
+  }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (submittingRef.current) return;
-    submittingRef.current = true;
 
     const form = e.currentTarget;
     const payload = Object.fromEntries(new FormData(form).entries());
 
+    if (variant === "simple") {
+      const fieldErrors = validateQuoteContactFields(payload);
+      if (Object.keys(fieldErrors).length) {
+        setErrors(fieldErrors);
+        setStatus("error");
+        setMessage("Please fix the highlighted fields.");
+        return;
+      }
+    }
+
+    submittingRef.current = true;
+    setErrors({});
     setStatus("submitting");
     setMessage("");
 
@@ -77,7 +109,9 @@ export function ContactLeadForm({
       try {
         const data = await res.json();
         if (data.errors && typeof data.errors === "object") {
-          const parts = Object.values(data.errors as Record<string, string>);
+          const apiErrors = data.errors as FieldErrors;
+          setErrors(apiErrors);
+          const parts = Object.values(apiErrors);
           if (parts.length) msg = parts.join(" ");
         } else if (data.error) {
           msg = data.error;
@@ -277,31 +311,57 @@ export function ContactLeadForm({
       <div className="grid gap-5 sm:grid-cols-2">
         <label className={labelClassName}>
           First Name *
-          <input type="text" name="first_name" required className={inputClassName} />
+          <input
+            type="text"
+            name="first_name"
+            autoComplete="given-name"
+            required
+            aria-invalid={errors.first_name ? true : undefined}
+            onChange={() => clearField("first_name")}
+            className={cn(inputClassName, errors.first_name && "border-red-500 ring-1 ring-red-500")}
+          />
+          <FieldError message={errors.first_name} />
         </label>
         <label className={labelClassName}>
           Last Name *
-          <input type="text" name="last_name" required className={inputClassName} />
+          <input
+            type="text"
+            name="last_name"
+            autoComplete="family-name"
+            required
+            aria-invalid={errors.last_name ? true : undefined}
+            onChange={() => clearField("last_name")}
+            className={cn(inputClassName, errors.last_name && "border-red-500 ring-1 ring-red-500")}
+          />
+          <FieldError message={errors.last_name} />
         </label>
         <label className={labelClassName}>
           Email *
           <input
             type="email"
             name="email"
+            autoComplete="email"
             placeholder="name@mail.com"
             required
-            className={inputClassName}
+            aria-invalid={errors.email ? true : undefined}
+            onChange={() => clearField("email")}
+            className={cn(inputClassName, errors.email && "border-red-500 ring-1 ring-red-500")}
           />
+          <FieldError message={errors.email} />
         </label>
         <label className={labelClassName}>
           Phone *
           <input
             type="tel"
             name="phone"
+            autoComplete="tel"
             placeholder="e.g,+ 968 0000 0000"
             required
-            className={inputClassName}
+            aria-invalid={errors.phone ? true : undefined}
+            onChange={() => clearField("phone")}
+            className={cn(inputClassName, errors.phone && "border-red-500 ring-1 ring-red-500")}
           />
+          <FieldError message={errors.phone} />
         </label>
         <label className={labelClassName}>
           QTY *
@@ -316,14 +376,19 @@ export function ContactLeadForm({
             className={inputClassName}
           />
         </label>
-        <label className={`${labelClassName} sm:col-span-2`}>
-          Company
+        <label className={labelClassName}>
+          Company *
           <input
             type="text"
             name="company"
+            autoComplete="organization"
             placeholder="Company Name"
-            className={inputClassName}
+            required
+            aria-invalid={errors.company ? true : undefined}
+            onChange={() => clearField("company")}
+            className={cn(inputClassName, errors.company && "border-red-500 ring-1 ring-red-500")}
           />
+          <FieldError message={errors.company} />
         </label>
       </div>
       <label className={`mt-5 block ${labelClassName}`}>

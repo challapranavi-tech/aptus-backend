@@ -7,6 +7,7 @@ import { parseCmsSlug } from "./cms-slug";
 import {
   detectContactCategory,
   parseContactRequest,
+  validateQuoteContactFields,
 } from "./contact-request";
 import { parseApplicationFields, validateFile } from "./career-application";
 import { normaliseSlug, parseRevalidateRequest } from "./revalidate-request";
@@ -77,13 +78,38 @@ assert.equal(
   false,
 );
 
+assert.deepEqual(
+  Object.keys(
+    validateQuoteContactFields({
+      first_name: "",
+      last_name: "...",
+      email: "bad",
+      company: "////",
+      phone: "12",
+    }),
+  ).sort(),
+  ["company", "email", "first_name", "last_name", "phone"],
+);
+assert.equal(
+  Object.keys(
+    validateQuoteContactFields({
+      first_name: "Ada",
+      last_name: "Lovelace",
+      email: "ada@example.com",
+      company: "Analytical Engines",
+      phone: "+968 1234 5678",
+    }),
+  ).length,
+  0,
+);
+
 // Unknown keys are stripped in preprocess (CTA city/heard_from mapping).
 assert.equal(
   parseContactRequest({
-    first_name: "A",
-    last_name: "B",
+    first_name: "Ada",
+    last_name: "Bo",
     email: "a@b.co",
-    company: "C",
+    company: "Co",
     phone: "+96812345678",
     extra: "nope",
   }).ok,
@@ -92,10 +118,10 @@ assert.equal(
 
 // Trailing-space product values normalize to allowlist.
 const spaced = parseContactRequest({
-  first_name: "A",
-  last_name: "B",
+  first_name: "Ada",
+  last_name: "Bo",
   email: "a@b.co",
-  company: "C",
+  company: "Co",
   phone: "+96812345678",
   product: "Civil 3D ",
 });
