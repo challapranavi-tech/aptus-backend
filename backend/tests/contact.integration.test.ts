@@ -113,6 +113,8 @@ describe("POST /api/contact", () => {
 
   it("does not create CRM for plain contact (no quote product)", async () => {
     mocks.isOdooConfigured.mockReturnValue(true);
+    process.env.SOFTWARE_SALES_EMAIL = "software@aptusinfotech.com";
+    process.env.CONTACT_TO_EMAIL = "info@aptusinfotech.com";
     const res = await POST(
       contactReq({
         first_name: "Ada",
@@ -127,6 +129,20 @@ describe("POST /api/contact", () => {
     expect(res.status).toBe(200);
     expect(mocks.createCrmLead).not.toHaveBeenCalled();
     expect(mocks.sendEmail).toHaveBeenCalledOnce();
+    expect(mocks.sendEmail.mock.calls[0][0].to).toBe("info@aptusinfotech.com");
+    expect(mocks.sendEmail.mock.calls[0][0].subject).toMatch(/contact message/i);
+  });
+
+  it("routes software quotes to SOFTWARE_SALES_EMAIL", async () => {
+    process.env.SOFTWARE_SALES_EMAIL = "software@aptusinfotech.com";
+    process.env.ELV_SALES_EMAIL = "elv@aptusinfotech.com";
+    process.env.CONTACT_TO_EMAIL = "info@aptusinfotech.com";
+    const res = await POST(contactReq(validBody));
+    expect(res.status).toBe(200);
+    expect(mocks.sendEmail.mock.calls[0][0].to).toBe(
+      "software@aptusinfotech.com",
+    );
+    expect(mocks.sendEmail.mock.calls[0][0].subject).toMatch(/quote request/i);
   });
 
   it("still succeeds when crm.lead create fails", async () => {

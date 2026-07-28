@@ -9,33 +9,47 @@ export type ContactRouting = {
   to: string;
 };
 
+function isQuoteProduct(product: string): boolean {
+  const p = product.trim();
+  return Boolean(p) && p !== "Others" && p !== "Select Product";
+}
+
 /**
- * Map detected category → sales inbox.
- * Falls back to CONTACT_TO_EMAIL so leads are never dropped when a
- * category-specific inbox is unset.
+ * Inbox routing:
+ *   Contact Us (no real product) → CONTACT_TO_EMAIL
+ *   Software quote               → SOFTWARE_SALES_EMAIL (fallback CONTACT_TO_EMAIL)
+ *   ELV quote                    → ELV_SALES_EMAIL (fallback CONTACT_TO_EMAIL)
  */
 export function resolveContactRouting(input: {
   product: string;
   categoryHint?: string | null;
 }): ContactRouting {
-  const category = detectContactCategory(input.product, input.categoryHint);
-  const fallback =
+  const contactTo =
     process.env.CONTACT_TO_EMAIL?.trim() || "info@aptusinfotech.com";
   const software = process.env.SOFTWARE_SALES_EMAIL?.trim();
   const elv = process.env.ELV_SALES_EMAIL?.trim();
 
+  if (!isQuoteProduct(input.product ?? "")) {
+    return {
+      category: "software",
+      categoryLabel: "Contact",
+      to: contactTo,
+    };
+  }
+
+  const category = detectContactCategory(input.product, input.categoryHint);
   if (category === "elv") {
     return {
       category,
       categoryLabel: "ELV",
-      to: elv || fallback,
+      to: elv || contactTo,
     };
   }
 
   return {
     category,
     categoryLabel: "Software",
-    to: software || fallback,
+    to: software || contactTo,
   };
 }
 
