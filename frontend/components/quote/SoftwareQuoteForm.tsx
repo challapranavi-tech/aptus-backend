@@ -49,6 +49,20 @@ export function SoftwareQuoteForm({
       ? defaultProduct
       : "Select Product";
 
+  function clearField(name: string) {
+    if (!errors[name]) return;
+    const next = { ...errors };
+    delete next[name];
+    setErrors(next);
+    if (!Object.keys(next).length) {
+      setMessage("");
+      setStatus("idle");
+    }
+  }
+
+  const inputError = (name: string) =>
+    errors[name] ? "aptus-form-input--error" : undefined;
+
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (status === "submitting") return;
@@ -62,7 +76,7 @@ export function SoftwareQuoteForm({
     if (Object.keys(fieldErrors).length) {
       setErrors(fieldErrors);
       setStatus("error");
-      setMessage("Please fix the highlighted fields.");
+      setMessage("Please fill highlighted fields.");
       return;
     }
 
@@ -92,8 +106,10 @@ export function SoftwareQuoteForm({
         if (data.errors && typeof data.errors === "object") {
           const apiErrors = data.errors as FieldErrors;
           setErrors(apiErrors);
-          const parts = Object.values(apiErrors);
-          if (parts.length) msg = parts.join(" ");
+          const fieldKeys = Object.keys(apiErrors).filter((k) => k !== "_form");
+          msg = fieldKeys.length
+            ? "Please fill highlighted fields."
+            : (apiErrors._form ?? msg);
         } else if (data.error) {
           msg = data.error;
         }
@@ -106,15 +122,6 @@ export function SoftwareQuoteForm({
       setStatus("error");
       setMessage("Network error. Please check your connection and try again.");
     }
-  }
-
-  function clearField(name: string) {
-    if (!errors[name]) return;
-    setErrors((prev) => {
-      const next = { ...prev };
-      delete next[name];
-      return next;
-    });
   }
 
   return (
@@ -135,10 +142,7 @@ export function SoftwareQuoteForm({
             required
             aria-invalid={errors.first_name ? true : undefined}
             onChange={() => clearField("first_name")}
-            className={cn(
-              "aptus-form-input mt-0 w-full px-4 py-3",
-              errors.first_name && "border-red-500 ring-1 ring-red-500",
-            )}
+            className={cn("aptus-form-input mt-0 w-full px-4 py-3", inputError("first_name"))}
           />
           <FieldError message={errors.first_name} />
         </label>
@@ -151,10 +155,7 @@ export function SoftwareQuoteForm({
             required
             aria-invalid={errors.last_name ? true : undefined}
             onChange={() => clearField("last_name")}
-            className={cn(
-              "aptus-form-input mt-0 w-full px-4 py-3",
-              errors.last_name && "border-red-500 ring-1 ring-red-500",
-            )}
+            className={cn("aptus-form-input mt-0 w-full px-4 py-3", inputError("last_name"))}
           />
           <FieldError message={errors.last_name} />
         </label>
@@ -168,10 +169,7 @@ export function SoftwareQuoteForm({
             required
             aria-invalid={errors.email ? true : undefined}
             onChange={() => clearField("email")}
-            className={cn(
-              "aptus-form-input mt-0 w-full px-4 py-3",
-              errors.email && "border-red-500 ring-1 ring-red-500",
-            )}
+            className={cn("aptus-form-input mt-0 w-full px-4 py-3", inputError("email"))}
           />
           <FieldError message={errors.email} />
         </label>
@@ -185,10 +183,7 @@ export function SoftwareQuoteForm({
             required
             aria-invalid={errors.company ? true : undefined}
             onChange={() => clearField("company")}
-            className={cn(
-              "aptus-form-input mt-0 w-full px-4 py-3",
-              errors.company && "border-red-500 ring-1 ring-red-500",
-            )}
+            className={cn("aptus-form-input mt-0 w-full px-4 py-3", inputError("company"))}
           />
           <FieldError message={errors.company} />
         </label>
@@ -207,9 +202,13 @@ export function SoftwareQuoteForm({
             step={1}
             inputMode="numeric"
             placeholder="1"
+            defaultValue={1}
             required
-            className="aptus-form-input mt-0 w-full px-4 py-3"
+            aria-invalid={errors.qty ? true : undefined}
+            onChange={() => clearField("qty")}
+            className={cn("aptus-form-input mt-0 w-full px-4 py-3", inputError("qty"))}
           />
+          <FieldError message={errors.qty} />
         </label>
         <label className="aptus-form-label">
           Phone *
@@ -221,10 +220,7 @@ export function SoftwareQuoteForm({
             required
             aria-invalid={errors.phone ? true : undefined}
             onChange={() => clearField("phone")}
-            className={cn(
-              "aptus-form-input mt-0 w-full px-4 py-3",
-              errors.phone && "border-red-500 ring-1 ring-red-500",
-            )}
+            className={cn("aptus-form-input mt-0 w-full px-4 py-3", inputError("phone"))}
           />
           <FieldError message={errors.phone} />
         </label>

@@ -62,6 +62,7 @@ const contactOk = parseContactRequest({
   company: "Analytical Engines",
   phone: "+968 1234 5678",
   product: "Revit",
+  qty: "2",
   message: "Hello",
 });
 assert.equal(contactOk.ok, true);
@@ -78,6 +79,44 @@ assert.equal(
   false,
 );
 
+// Stricter email/phone — reject short TLD and too-few digits.
+assert.equal(
+  parseContactRequest({
+    first_name: "Ada",
+    last_name: "Lovelace",
+    email: "a@b.c",
+    company: "Co",
+    phone: "+968 1234 5678",
+    product: "Revit",
+    qty: "1",
+  }).ok,
+  false,
+);
+assert.equal(
+  parseContactRequest({
+    first_name: "Ada",
+    last_name: "Lovelace",
+    email: "ada@example.com",
+    company: "Co",
+    phone: "123",
+    product: "Revit",
+    qty: "1",
+  }).ok,
+  false,
+);
+assert.equal(
+  parseContactRequest({
+    first_name: "Ada",
+    last_name: "Lovelace",
+    email: "ada@example.com",
+    company: "Co",
+    phone: "+968 1234 5678",
+    product: "Revit",
+    qty: "0",
+  }).ok,
+  false,
+);
+
 assert.deepEqual(
   Object.keys(
     validateQuoteContactFields({
@@ -86,9 +125,10 @@ assert.deepEqual(
       email: "bad",
       company: "////",
       phone: "12",
+      qty: "",
     }),
   ).sort(),
-  ["company", "email", "first_name", "last_name", "phone"],
+  ["company", "email", "first_name", "last_name", "phone", "qty"],
 );
 assert.equal(
   Object.keys(
@@ -98,6 +138,7 @@ assert.equal(
       email: "ada@example.com",
       company: "Analytical Engines",
       phone: "+968 1234 5678",
+      qty: "1",
     }),
   ).length,
   0,
@@ -111,6 +152,7 @@ assert.equal(
     email: "a@b.co",
     company: "Co",
     phone: "+96812345678",
+    qty: "1",
     extra: "nope",
   }).ok,
   true,
@@ -124,6 +166,7 @@ const spaced = parseContactRequest({
   company: "Co",
   phone: "+96812345678",
   product: "Civil 3D ",
+  qty: "1",
 });
 assert.equal(spaced.ok, true);
 if (spaced.ok) assert.equal(spaced.data.product, "Civil 3D");

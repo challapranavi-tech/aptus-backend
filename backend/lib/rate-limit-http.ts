@@ -1,6 +1,6 @@
 import {
   clientIp,
-  consumePreset,
+  consumePresetAsync,
   rateLimitHeaders,
   type RateLimitPreset,
   type RateLimitResult,
@@ -25,26 +25,26 @@ export function tooManyRequests(
 }
 
 /** IP-based limit. Returns 429 response or null when allowed. */
-export function enforceIpRateLimit(
+export async function enforceIpRateLimit(
   request: Request,
   preset: RateLimitPreset,
   scope: string,
   cors?: (response: NextResponse) => NextResponse,
-): NextResponse | null {
+): Promise<NextResponse | null> {
   const ip = clientIp(request.headers);
-  const result = consumePreset(`ip:${scope}:${ip}`, preset);
+  const result = await consumePresetAsync(`ip:${scope}:${ip}`, preset);
   if (result.ok) return null;
   return tooManyRequests(result, cors);
 }
 
 /** Identity / auth-key limit (email hash, token hash, user id, …). */
-export function enforceKeyRateLimit(
+export async function enforceKeyRateLimit(
   key: string,
   preset: RateLimitPreset,
   scope: string,
   cors?: (response: NextResponse) => NextResponse,
-): NextResponse | null {
-  const result = consumePreset(`id:${scope}:${key}`, preset);
+): Promise<NextResponse | null> {
+  const result = await consumePresetAsync(`id:${scope}:${key}`, preset);
   if (result.ok) return null;
   return tooManyRequests(result, cors);
 }

@@ -118,13 +118,13 @@ export function buildCareersForm(options?: {
       : (options?.educationDoc0 ??
         fileFrom("degree.pdf", pdfBytes(), "application/pdf"));
 
-  if (resume) form.set("resume", resume);
-  if (passport) form.set("passportCopy", passport);
-  if (photo) form.set("photograph", photo);
-  if (edu0) form.set("educationDoc_0", edu0);
+  if (resume) form.set("resume", resume, resume.name);
+  if (passport) form.set("passportCopy", passport, passport.name);
+  if (photo) form.set("photograph", photo, photo.name);
+  if (edu0) form.set("educationDoc_0", edu0, edu0.name);
 
   for (const [key, file] of options?.extraFiles ?? []) {
-    form.append(key, file);
+    form.append(key, file, file.name);
   }
   return form;
 }

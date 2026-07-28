@@ -58,12 +58,17 @@ export function ContactLeadForm({
 
   function clearField(name: string) {
     if (!errors[name]) return;
-    setErrors((prev) => {
-      const next = { ...prev };
-      delete next[name];
-      return next;
-    });
+    const next = { ...errors };
+    delete next[name];
+    setErrors(next);
+    if (!Object.keys(next).length) {
+      setMessage("");
+      setStatus("idle");
+    }
   }
+
+  const inputError = (name: string) =>
+    errors[name] ? "aptus-form-input--error" : undefined;
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -77,7 +82,7 @@ export function ContactLeadForm({
       if (Object.keys(fieldErrors).length) {
         setErrors(fieldErrors);
         setStatus("error");
-        setMessage("Please fix the highlighted fields.");
+        setMessage("Please fill highlighted fields.");
         return;
       }
     }
@@ -111,8 +116,10 @@ export function ContactLeadForm({
         if (data.errors && typeof data.errors === "object") {
           const apiErrors = data.errors as FieldErrors;
           setErrors(apiErrors);
-          const parts = Object.values(apiErrors);
-          if (parts.length) msg = parts.join(" ");
+          const fieldKeys = Object.keys(apiErrors).filter((k) => k !== "_form");
+          msg = fieldKeys.length
+            ? "Please fill highlighted fields."
+            : (apiErrors._form ?? msg);
         } else if (data.error) {
           msg = data.error;
         }
@@ -318,7 +325,7 @@ export function ContactLeadForm({
             required
             aria-invalid={errors.first_name ? true : undefined}
             onChange={() => clearField("first_name")}
-            className={cn(inputClassName, errors.first_name && "border-red-500 ring-1 ring-red-500")}
+            className={cn(inputClassName, inputError("first_name"))}
           />
           <FieldError message={errors.first_name} />
         </label>
@@ -331,7 +338,7 @@ export function ContactLeadForm({
             required
             aria-invalid={errors.last_name ? true : undefined}
             onChange={() => clearField("last_name")}
-            className={cn(inputClassName, errors.last_name && "border-red-500 ring-1 ring-red-500")}
+            className={cn(inputClassName, inputError("last_name"))}
           />
           <FieldError message={errors.last_name} />
         </label>
@@ -345,7 +352,7 @@ export function ContactLeadForm({
             required
             aria-invalid={errors.email ? true : undefined}
             onChange={() => clearField("email")}
-            className={cn(inputClassName, errors.email && "border-red-500 ring-1 ring-red-500")}
+            className={cn(inputClassName, inputError("email"))}
           />
           <FieldError message={errors.email} />
         </label>
@@ -359,7 +366,7 @@ export function ContactLeadForm({
             required
             aria-invalid={errors.phone ? true : undefined}
             onChange={() => clearField("phone")}
-            className={cn(inputClassName, errors.phone && "border-red-500 ring-1 ring-red-500")}
+            className={cn(inputClassName, inputError("phone"))}
           />
           <FieldError message={errors.phone} />
         </label>
@@ -372,9 +379,13 @@ export function ContactLeadForm({
             step={1}
             inputMode="numeric"
             placeholder="1"
+            defaultValue={1}
             required
-            className={inputClassName}
+            aria-invalid={errors.qty ? true : undefined}
+            onChange={() => clearField("qty")}
+            className={cn(inputClassName, inputError("qty"))}
           />
+          <FieldError message={errors.qty} />
         </label>
         <label className={labelClassName}>
           Company *
@@ -386,7 +397,7 @@ export function ContactLeadForm({
             required
             aria-invalid={errors.company ? true : undefined}
             onChange={() => clearField("company")}
-            className={cn(inputClassName, errors.company && "border-red-500 ring-1 ring-red-500")}
+            className={cn(inputClassName, inputError("company"))}
           />
           <FieldError message={errors.company} />
         </label>

@@ -5,6 +5,8 @@ import { __resetRateLimitStoreForTests } from "@shared/lib/rate-limit";
 const mocks = vi.hoisted(() => ({
   sendEmail: vi.fn(),
   isMailConfigured: vi.fn(() => true),
+  createCrmLead: vi.fn(),
+  isOdooConfigured: vi.fn(() => false),
 }));
 
 vi.mock("@/lib/mail", async (importOriginal) => {
@@ -13,6 +15,15 @@ vi.mock("@/lib/mail", async (importOriginal) => {
     ...actual,
     isMailConfigured: mocks.isMailConfigured,
     sendEmail: mocks.sendEmail,
+  };
+});
+
+vi.mock("@/lib/odoo", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@/lib/odoo")>();
+  return {
+    ...actual,
+    createCrmLead: mocks.createCrmLead,
+    isOdooConfigured: mocks.isOdooConfigured,
   };
 });
 
@@ -52,6 +63,8 @@ describe("POST /api/contact", () => {
     vi.clearAllMocks();
     mocks.isMailConfigured.mockReturnValue(true);
     mocks.sendEmail.mockResolvedValue({ ok: true, id: "msg_1" });
+    mocks.isOdooConfigured.mockReturnValue(false);
+    mocks.createCrmLead.mockResolvedValue(101);
     process.env.RESEND_API_KEY = "re_test";
     process.env.APTUS_FRONTEND_URL = "http://localhost:3000";
     process.env.CONTACT_TO_EMAIL = "info@aptusinfotech.com";
@@ -63,8 +76,11 @@ describe("POST /api/contact", () => {
   it("accepts a valid contact / quote lead", async () => {
     const res = await POST(contactReq(validBody));
     expect(res.status).toBe(200);
-    await expect(res.json()).resolves.toEqual({ ok: true });
+    const body = await res.json();
+    expect(body.ok).toBe(true);
+    expect(body.quoteRef).toMatch(/^Q-/);
     expect(mocks.sendEmail).toHaveBeenCalledOnce();
+    expect(mocks.createCrmLead).not.toHaveBeenCalled();
     const arg = mocks.sendEmail.mock.calls[0][0];
     expect(arg.subject).toMatch(/quote request/i);
     expect(arg.replyTo).toBe("ada@example.com");
@@ -72,6 +88,62 @@ describe("POST /api/contact", () => {
     expect(arg.text).toContain("Product Category: Software");
     expect(arg.text).toContain("QTY: 3");
     expect(arg.text).toContain("Source: Website – Request Quote");
+    expect(arg.text).toContain(`Quote Ref: ${body.quoteRef}`);
+  });
+
+  it("creates a crm.lead when Odoo is configured", async () => {
+    mocks.isOdooConfigured.mockReturnValue(true);
+    const res = await POST(contactReq(validBody));
+    expect(res.status).toBe(200);
+    expect(mocks.createCrmLead).toHaveBeenCalledOnce();
+    expect(mocks.createCrmLead).toHaveBeenCalledWith(
+      expect.objectContaining({
+        firstName: "Ada",
+        lastName: "Lovelace",
+        company: "Analytical Engines",
+        email: "ada@example.com",
+        phone: "+968 1234 5678",
+        product: "Revit",
+        qty: "3",
+        categoryLabel: "Software",
+        message: "Quote please",
+      }),
+    );
+  });
+
+  it("does not create CRM for plain contact (no quote product)", async () => {
+    mocks.isOdooConfigured.mockReturnValue(true);
+    const res = await POST(
+      contactReq({
+        first_name: "Ada",
+        last_name: "Lovelace",
+        email: "ada@example.com",
+        company: "Analytical Engines",
+        phone: "+968 1234 5678",
+        product: "Others",
+        message: "Just saying hi",
+      }),
+    );
+    expect(res.status).toBe(200);
+    expect(mocks.createCrmLead).not.toHaveBeenCalled();
+    expect(mocks.sendEmail).toHaveBeenCalledOnce();
+  });
+
+  it("still succeeds when crm.lead create fails", async () => {
+    mocks.isOdooConfigured.mockReturnValue(true);
+    mocks.createCrmLead.mockRejectedValue(new Error("access denied"));
+    const res = await POST(contactReq(validBody));
+    expect(res.status).toBe(200);
+    const body = await res.json();
+    expect(body.ok).toBe(true);
+    expect(body.quoteRef).toMatch(/^Q-/);
+    // sales quote + CRM failure alert
+    expect(mocks.sendEmail).toHaveBeenCalledTimes(2);
+    const alert = mocks.sendEmail.mock.calls[1][0];
+    expect(alert.subject).toContain(
+      `CRM Lead creation failed for Quote #${body.quoteRef}`,
+    );
+    expect(alert.to).toBe("info@aptusinfotech.com");
   });
 
   it("routes ELV products to ELV_SALES_EMAIL", async () => {
@@ -120,10 +192,37 @@ describe("POST /api/contact", () => {
     );
   });
 
+  it("rejects oversized JSON bodies", async () => {
+    const huge = JSON.stringify({
+      ...validBody,
+      message: "x".repeat(40_000),
+    });
+    const headers = new Headers({
+      "content-type": "application/json",
+      "content-length": String(huge.length),
+      "x-forwarded-for": "203.0.113.99",
+    });
+    const res = await POST(
+      new NextRequest("http://localhost:3001/api/contact", {
+        method: "POST",
+        headers,
+        body: huge,
+      }),
+    );
+    expect(res.status).toBe(413);
+    expect(mocks.sendEmail).not.toHaveBeenCalled();
+  });
+
   it("returns 400 for a bad email", async () => {
     const res = await POST(
       contactReq({ ...validBody, email: "not-an-email" }),
     );
+    expect(res.status).toBe(400);
+    expect(mocks.sendEmail).not.toHaveBeenCalled();
+  });
+
+  it("returns 400 for qty zero", async () => {
+    const res = await POST(contactReq({ ...validBody, qty: "0" }));
     expect(res.status).toBe(400);
     expect(mocks.sendEmail).not.toHaveBeenCalled();
   });

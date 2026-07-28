@@ -3,14 +3,20 @@ import {
   formatMuscatDateTime,
   resolveContactRouting,
 } from "@/lib/contact-routing";
+import { reportCrmLeadFailure } from "@/lib/crm-failure";
+import { newQuoteRef } from "@/lib/crm-pending";
 import { requireJsonContentType, validationError } from "@/lib/api-validate";
 import { isMailConfigured, sendEmail } from "@/lib/mail";
+import { createCrmLead, isOdooConfigured } from "@/lib/odoo";
 import {
   enforceKeyRateLimit,
   identityKey,
 } from "@/lib/rate-limit-http";
 import { parseContactRequest } from "@shared/lib/contact-request";
 import { NextRequest } from "next/server";
+
+/** Reject multi-MB JSON abuse before parse (quote forms are a few KB). */
+const MAX_CONTACT_BODY_BYTES = 32 * 1024;
 
 export async function OPTIONS(req: NextRequest) {
   return corsPreflight(req) ?? new Response(null, { status: 405 });
@@ -25,9 +31,26 @@ export async function POST(req: NextRequest) {
     return validationError(ctError, (res) => withCors(res, req));
   }
 
+  const contentLength = Number(req.headers.get("content-length") ?? "0");
+  if (contentLength > MAX_CONTACT_BODY_BYTES) {
+    return jsonCors(
+      req,
+      { error: "Request body too large." },
+      { status: 413 },
+    );
+  }
+
   let raw: unknown;
   try {
-    raw = await req.json();
+    const text = await req.text();
+    if (text.length > MAX_CONTACT_BODY_BYTES) {
+      return jsonCors(
+        req,
+        { error: "Request body too large." },
+        { status: 413 },
+      );
+    }
+    raw = JSON.parse(text) as unknown;
   } catch {
     return validationError(
       { _form: "Invalid JSON body." },
@@ -44,7 +67,7 @@ export async function POST(req: NextRequest) {
     parsed.data;
 
   // IP limit is in middleware; email caps repeat abuse from rotating IPs.
-  const emailLimited = enforceKeyRateLimit(
+  const emailLimited = await enforceKeyRateLimit(
     identityKey(email),
     "publicWriteIdentity",
     "contact",
@@ -67,14 +90,28 @@ export async function POST(req: NextRequest) {
   });
   const name = [first_name, last_name].filter(Boolean).join(" ");
   const isQuote = Boolean(product && product !== "Others");
+  const quoteRef = newQuoteRef();
+
+  const crmInput = {
+    firstName: first_name,
+    lastName: last_name,
+    company,
+    email,
+    phone,
+    product,
+    qty,
+    categoryLabel: routing.categoryLabel,
+    message,
+  };
 
   const result = await sendEmail({
     to: routing.to,
     replyTo: email,
     subject: isQuote
-      ? `New quote request from ${name} (${routing.categoryLabel})`
-      : `New contact message from ${name}`,
+      ? `New quote request ${quoteRef} from ${name} (${routing.categoryLabel})`
+      : `New contact message ${quoteRef} from ${name}`,
     text: [
+      `Quote Ref: ${quoteRef}`,
       `Customer Name: ${name}`,
       `Company Name: ${company}`,
       `Email: ${email}`,
@@ -93,5 +130,22 @@ export async function POST(req: NextRequest) {
     return jsonCors(req, { error: "Failed to send." }, { status: 502 });
   }
 
-  return jsonCors(req, { ok: true });
+  // Quote requests only — plain contact CTAs must not create Odoo CRM records.
+  if (isQuote && isOdooConfigured()) {
+    try {
+      const leadId = await createCrmLead(crmInput);
+      console.info(
+        `[contact] crm.lead #${leadId} created quoteRef=${quoteRef}`,
+      );
+    } catch (err) {
+      await reportCrmLeadFailure({
+        quoteRef,
+        input: crmInput,
+        alertTo: routing.to,
+        error: err,
+      });
+    }
+  }
+
+  return jsonCors(req, { ok: true, quoteRef });
 }

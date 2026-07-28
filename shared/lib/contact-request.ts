@@ -147,10 +147,11 @@ const contactSchema: ObjectSchema<ContactRequest> = {
     },
     qty: {
       type: "string",
-      required: false,
+      required: true,
+      min: 1,
       max: 10,
-      pattern: /^\d{1,10}$/,
-      patternMessage: "Enter a valid quantity.",
+      pattern: /^[1-9]\d{0,9}$/,
+      patternMessage: "Enter a quantity of 1 or more.",
       label: "QTY",
     },
     message: {
@@ -193,6 +194,10 @@ export function validateQuoteContactFields(
   const phone = str("phone");
   if (!phone) errors.phone = "Phone is required.";
   else if (!PHONE_RE.test(phone)) errors.phone = "Enter a valid phone number.";
+
+  const qty = str("qty");
+  if (!qty) errors.qty = "QTY is required.";
+  else if (!/^[1-9]\d{0,9}$/.test(qty)) errors.qty = "Enter a quantity of 1 or more.";
 
   return errors;
 }
@@ -293,7 +298,13 @@ function preprocessContactBody(input: unknown): unknown {
   if (product === undefined) product = "Others";
 
   const qtyRaw = trim("qty");
-  const qty = /^\d{1,10}$/.test(qtyRaw) ? qtyRaw : undefined;
+  // Contact-page CTAs omit qty (product defaults to Others) — fill 1.
+  // Quote forms must send a real qty ≥ 1 (invalid values fail schema).
+  const qty = /^[1-9]\d{0,9}$/.test(qtyRaw)
+    ? qtyRaw
+    : !qtyRaw && product === "Others"
+      ? "1"
+      : qtyRaw || undefined;
 
   let message = trim("message");
   if (heard) {

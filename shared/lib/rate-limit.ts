@@ -1,9 +1,12 @@
 /**
- * Fixed-window rate limiter (in-memory).
+ * Fixed-window rate limiter.
  *
- * ponytail: process-local Map — fine for a single Node/Edge isolate; multi-instance
- * deploys need a shared store (e.g. Upstash) so counters stay consistent across replicas.
+ * Uses Upstash Redis when UPSTASH_REDIS_REST_URL + UPSTASH_REDIS_REST_TOKEN
+ * are set (shared across Vercel instances). Falls back to process-local
+ * memory for local dev and tests.
  */
+
+import { Redis } from "@upstash/redis";
 
 export type RateLimitResult = {
   ok: boolean;
@@ -39,15 +42,43 @@ export type RateLimitPreset = keyof typeof RATE_LIMITS;
 
 type Bucket = { count: number; resetAt: number };
 
-// ponytail: unbounded growth if unique keys explode — prune expired entries periodically.
+// ponytail: memory fallback only — production on Vercel must set Upstash env.
 const store = new Map<string, Bucket>();
 let opsSincePrune = 0;
+let warnedMissingRedis = false;
 
 function prune(now: number) {
   for (const [key, bucket] of store) {
     if (bucket.resetAt <= now) store.delete(key);
   }
   opsSincePrune = 0;
+}
+
+function redisEnvConfigured(): boolean {
+  return Boolean(
+    process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN,
+  );
+}
+
+let _redis: Redis | null | undefined;
+
+function getRedis(): Redis | null {
+  if (_redis !== undefined) return _redis;
+  if (!redisEnvConfigured()) {
+    if (process.env.VERCEL === "1" && !warnedMissingRedis) {
+      warnedMissingRedis = true;
+      console.warn(
+        "[rate-limit] UPSTASH_REDIS_REST_URL/TOKEN unset — in-memory counters are not shared across instances",
+      );
+    }
+    _redis = null;
+    return null;
+  }
+  _redis = new Redis({
+    url: process.env.UPSTASH_REDIS_REST_URL!,
+    token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+  });
+  return _redis;
 }
 
 /**
@@ -81,6 +112,32 @@ export function clientIp(headers: Headers, fallback = "unknown"): string {
   return fallback;
 }
 
+function resultFromCount(
+  count: number,
+  policy: RateLimitPolicy,
+  resetAt: number,
+  now: number,
+): RateLimitResult {
+  const retryAfterSec = Math.max(1, Math.ceil((resetAt - now) / 1000));
+  if (count > policy.limit) {
+    return {
+      ok: false,
+      limit: policy.limit,
+      remaining: 0,
+      resetAt,
+      retryAfterSec,
+    };
+  }
+  return {
+    ok: true,
+    limit: policy.limit,
+    remaining: Math.max(0, policy.limit - count),
+    resetAt,
+    retryAfterSec,
+  };
+}
+
+/** Sync in-memory consume — used by checks/tests and as Redis fallback. */
 export function consume(
   key: string,
   policy: RateLimitPolicy,
@@ -96,24 +153,43 @@ export function consume(
   }
 
   if (bucket.count >= policy.limit) {
-    const retryAfterSec = Math.max(1, Math.ceil((bucket.resetAt - now) / 1000));
-    return {
-      ok: false,
-      limit: policy.limit,
-      remaining: 0,
-      resetAt: bucket.resetAt,
-      retryAfterSec,
-    };
+    return resultFromCount(policy.limit + 1, policy, bucket.resetAt, now);
   }
 
   bucket.count += 1;
-  return {
-    ok: true,
-    limit: policy.limit,
-    remaining: Math.max(0, policy.limit - bucket.count),
-    resetAt: bucket.resetAt,
-    retryAfterSec: Math.max(1, Math.ceil((bucket.resetAt - now) / 1000)),
-  };
+  return resultFromCount(bucket.count, policy, bucket.resetAt, now);
+}
+
+async function consumeRedis(
+  redis: Redis,
+  key: string,
+  policy: RateLimitPolicy,
+  now: number,
+): Promise<RateLimitResult> {
+  const redisKey = `rl:${key}`;
+  const count = await redis.incr(redisKey);
+  let ttl = await redis.pttl(redisKey);
+  // New key or missing TTL — start / refresh the fixed window.
+  if (count === 1 || ttl < 0) {
+    await redis.pexpire(redisKey, policy.windowMs);
+    ttl = policy.windowMs;
+  }
+  const resetAt = now + Math.max(ttl, 0);
+  return resultFromCount(count, policy, resetAt, now);
+}
+
+/**
+ * Prefer shared Redis when configured; otherwise process-local memory.
+ * Callers on Vercel should await this (not sync consume).
+ */
+export async function consumeAsync(
+  key: string,
+  policy: RateLimitPolicy,
+  now = Date.now(),
+): Promise<RateLimitResult> {
+  const redis = getRedis();
+  if (!redis) return consume(key, policy, now);
+  return consumeRedis(redis, key, policy, now);
 }
 
 export function consumePreset(
@@ -122,6 +198,14 @@ export function consumePreset(
   now = Date.now(),
 ): RateLimitResult {
   return consume(key, RATE_LIMITS[preset], now);
+}
+
+export async function consumePresetAsync(
+  key: string,
+  preset: RateLimitPreset,
+  now = Date.now(),
+): Promise<RateLimitResult> {
+  return consumeAsync(key, RATE_LIMITS[preset], now);
 }
 
 /** Standard rate-limit response headers (RFC-ish + common X-RateLimit-*). */
@@ -144,8 +228,10 @@ export function identityKey(raw: string): string {
   return (h >>> 0).toString(36);
 }
 
-/** Test-only: clear buckets between assertions. */
+/** Test-only: clear memory buckets between assertions. */
 export function __resetRateLimitStoreForTests() {
   store.clear();
   opsSincePrune = 0;
+  _redis = undefined;
+  warnedMissingRedis = false;
 }

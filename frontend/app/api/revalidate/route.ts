@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
   const authError = checkToken(body.token);
   if (authError) return authError;
 
-  const tokenLimited = enforceKeyRateLimit(
+  const tokenLimited = await enforceKeyRateLimit(
     identityKey(body.token),
     "authWriteUser",
     "revalidate",

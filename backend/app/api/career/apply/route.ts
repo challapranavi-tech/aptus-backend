@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
   if (preflight) return preflight;
 
   // Outside middleware matcher — see careers/apply. Keep IP limit in-handler.
-  const ipLimited = enforceIpRateLimit(
+  const ipLimited = await enforceIpRateLimit(
     req,
     "publicWrite",
     "career-apply",
@@ -150,7 +150,7 @@ export async function POST(req: NextRequest) {
   }
 
   // IP limit is in middleware; email caps repeat abuse from rotating IPs.
-  const emailLimited = enforceKeyRateLimit(
+  const emailLimited = await enforceKeyRateLimit(
     identityKey(fields.email),
     "publicWriteIdentity",
     "career-apply",

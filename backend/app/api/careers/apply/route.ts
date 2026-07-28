@@ -78,7 +78,7 @@ export async function POST(req: NextRequest) {
 
   // IP limit lives here — this route is outside middleware so large multipart
   // bodies are not Edge-cloned (which 502s ~1MB+ before the function starts).
-  const ipLimited = enforceIpRateLimit(
+  const ipLimited = await enforceIpRateLimit(
     req,
     "publicWrite",
     "careers-apply",
@@ -235,7 +235,7 @@ export async function POST(req: NextRequest) {
     return validationError({ _form: "Validation failed." }, (res) => withCors(res, req));
   }
 
-  const emailLimited = enforceKeyRateLimit(
+  const emailLimited = await enforceKeyRateLimit(
     identityKey(fields.email),
     "publicWriteIdentity",
     "careers-apply",
@@ -304,23 +304,13 @@ export async function POST(req: NextRequest) {
     console.error("[careers/apply] failed to archive application:", err);
   }
 
-  // Structured log — always runs so every application is traceable in server
-  // logs even if Odoo or email fail. Never logs raw file content.
+  // Structured log — no PII (email/name/passport live in the archive + Odoo).
   console.info("[careers/apply] application received", {
-    candidateName: fields.candidateName,
-    email: fields.email,
     appliedDesignation: fields.appliedDesignation,
-    totalYearsExperience: fields.totalYearsExperience,
-    currentLocation: fields.currentLocation,
-    teamSize: fields.teamSize,
-    reportsTo: fields.reportsTo,
-    currentCtc: fields.currentCtc,
-    expectedCtc: fields.expectedCtc,
-    noticePeriod: fields.noticePeriod,
-    passportNumber: fields.passportNumber ? "provided" : "MISSING",
-    dateOfBirth: fields.dateOfBirth ? "provided" : "MISSING",
     jobId: fields.jobId,
     fileCount: attachments.length,
+    passportNumber: fields.passportNumber ? "provided" : "MISSING",
+    dateOfBirth: fields.dateOfBirth ? "provided" : "MISSING",
   });
 
   // Odoo Recruitment is required — jobId must be a real published hr.job id.

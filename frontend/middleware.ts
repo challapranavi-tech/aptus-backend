@@ -1,6 +1,6 @@
 import {
   clientIp,
-  consumePreset,
+  consumePresetAsync,
   rateLimitHeaders,
 } from "@shared/lib/rate-limit";
 import { NextRequest, NextResponse } from "next/server";
@@ -9,7 +9,7 @@ import { NextRequest, NextResponse } from "next/server";
  * Frontend API surface is only /api/revalidate (shared-secret webhook).
  * security: IP rate limit at the edge so abuse is stopped before the handler.
  */
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   if (request.method === "OPTIONS") {
     return NextResponse.next();
   }
@@ -19,7 +19,10 @@ export function middleware(request: NextRequest) {
   }
 
   const ip = clientIp(request.headers);
-  const result = consumePreset(`mw:ip:/api/revalidate:${ip}`, "authWriteIp");
+  const result = await consumePresetAsync(
+    `mw:ip:/api/revalidate:${ip}`,
+    "authWriteIp",
+  );
 
   if (!result.ok) {
     return NextResponse.json(

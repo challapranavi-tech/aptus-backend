@@ -153,6 +153,13 @@
     color: #000;
   }
 
+  /* Visible over border:0 — Tailwind border-* alone is invisible here. */
+  .aptus-form-input.aptus-form-input--error {
+    border: 2px solid #dc2626;
+    background-color: #fef2f2;
+    box-shadow: 0 0 0 1px #dc2626;
+  }
+
   .aptus-form-label {
     color: #695b5b;
     display: block;

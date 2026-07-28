@@ -309,8 +309,11 @@ export function parseQuery<T extends Record<string, unknown>>(
   return parseObject(obj, schema);
 }
 
-export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-export const PHONE_RE = /^\+?[\d\s().-]{7,30}$/;
+/** Local@labels… + final TLD ≥2 letters (rejects a@b.c). */
+export const EMAIL_RE =
+  /^[a-z0-9](?:[a-z0-9._%+-]{0,62}[a-z0-9])?@(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$/i;
+/** Digits 8–15 after stripping; allows common spacing/punctuation. */
+export const PHONE_RE = /^\+?(?=[\d\s().-]{8,30}$)(?=(?:\D*\d){8,15}\D*$)[\d\s().-]+$/;
 export const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 /** Letters (any script), marks, spaces, hyphen, apostrophe — rejects `.?/…` junk. */
 export const PERSON_NAME_RE = /^(?=.*\p{L})[\p{L}\p{M}'’\- ]{2,120}$/u;

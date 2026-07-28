@@ -1,7 +1,7 @@
 import { withCors } from "@/lib/api-cors";
 import {
   clientIp,
-  consumePreset,
+  consumePresetAsync,
   rateLimitHeaders,
   type RateLimitPreset,
 } from "@shared/lib/rate-limit";
@@ -21,7 +21,9 @@ function presetFor(pathname: string): RateLimitPreset | null {
   if (pathname === "/api/contact" || pathname.startsWith("/api/career/")) {
     return "publicWrite";
   }
-  if (pathname === "/api/revalidate") return "authWriteIp";
+  if (pathname === "/api/revalidate" || pathname === "/api/crm/retry") {
+    return "authWriteIp";
+  }
   if (pathname === "/api/odoo") return "debug";
   if (pathname.startsWith("/api/")) return "publicRead";
   return null;
@@ -31,7 +33,7 @@ function needsCors(pathname: string): boolean {
   return pathname === "/api/contact" || pathname.startsWith("/api/career");
 }
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   if (request.method === "OPTIONS") {
     return NextResponse.next();
   }
@@ -41,7 +43,7 @@ export function middleware(request: NextRequest) {
   if (!preset) return NextResponse.next();
 
   const ip = clientIp(request.headers);
-  const result = consumePreset(`mw:ip:${pathname}:${ip}`, preset);
+  const result = await consumePresetAsync(`mw:ip:${pathname}:${ip}`, preset);
 
   if (!result.ok) {
     const denied = NextResponse.json(

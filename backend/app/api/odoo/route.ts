@@ -71,7 +71,7 @@ export async function GET(req: NextRequest) {
   const blocked = guard(providedToken);
   if (blocked) return blocked;
 
-  const tokenLimited = enforceKeyRateLimit(
+  const tokenLimited = await enforceKeyRateLimit(
     identityKey(providedToken!),
     "debug",
     "odoo-debug",

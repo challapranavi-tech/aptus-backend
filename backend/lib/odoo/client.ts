@@ -86,6 +86,37 @@ export function isOdooConfigured(): boolean {
   return Boolean(url && db && user && apiKey);
 }
 
+/**
+ * Cached service JSON-RPC session (API key auth).
+ * Reused across CRM / recruitment writes in the same worker.
+ * Cleared via invalidateOdooServiceSession() on credential rotate / auth failure.
+ */
+let _serviceSessionPromise: Promise<OdooRpcSession> | null = null;
+
+export async function getOdooServiceSession(): Promise<OdooRpcSession> {
+  if (!isOdooConfigured()) {
+    throw new OdooRpcError(
+      "Odoo is not configured. Set ODOO_URL, ODOO_DB, ODOO_USER and ODOO_API_KEY.",
+      undefined,
+      -1,
+    );
+  }
+  if (!_serviceSessionPromise) {
+    _serviceSessionPromise = (async () => {
+      const cfg = odooConfigFromEnv();
+      return authenticate(cfg.url, cfg.db, cfg.user, cfg.apiKey, cfg.revalidate);
+    })().catch((err) => {
+      _serviceSessionPromise = null;
+      throw err;
+    });
+  }
+  return _serviceSessionPromise;
+}
+
+export function invalidateOdooServiceSession(): void {
+  _serviceSessionPromise = null;
+}
+
 // ─── Website.page fields we always fetch ─────────────────────────────────────
 const PAGE_FIELDS_CORE: (keyof OdooRawPage)[] = [
   "id",

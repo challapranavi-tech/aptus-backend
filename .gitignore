@@ -38,6 +38,13 @@ frontend/.env.production
 frontend/.env.*.local
 !**/.env.example
 !**/.env.*.example
+# Override: production example may hold live values — keep local only.
+.env.production.example
+**/.env.production.example
+
+# local scratch / backups
+.data/
+*.bak
 
 # typescript
 *.tsbuildinfo
@@ -50,6 +57,8 @@ scripts/.tmp*
 # archived career applications — contains applicant PII, never commit
 backend/data/applications/
 data/applications/
+backend/data/crm-pending/
+data/crm-pending/
 
 # reference / download folders — not source code (root only; keep frontend/public/assets)
 /assets/

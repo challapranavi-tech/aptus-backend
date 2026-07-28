@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
   const preflight = corsPreflight(req);
   if (preflight) return preflight;
 
-  const ipLimited = enforceIpRateLimit(
+  const ipLimited = await enforceIpRateLimit(
     req,
     "publicWrite",
     "careers-parse-resume",

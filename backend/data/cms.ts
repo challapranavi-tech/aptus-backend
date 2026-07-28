@@ -9,7 +9,7 @@
  * Layout chrome (nav, footer, top bar) is code-owned — see data/site-nav.ts.
  */
 
-import { OdooClient, OdooRpcError, isOdooConfigured, invalidatePageFieldCache, cmsPageFieldAvailable } from "@/lib/odoo";
+import { OdooClient, OdooRpcError, isOdooConfigured, invalidatePageFieldCache, cmsPageFieldAvailable, invalidateOdooServiceSession } from "@/lib/odoo";
 import {
   buildLocalDevPage,
   buildLocalHomePage,
@@ -48,6 +48,7 @@ function getClient(): Promise<OdooClient> {
  */
 export function invalidateOdooClientSession(): void {
   _clientPromise = null;
+  invalidateOdooServiceSession();
   invalidatePageFieldCache();
 }
 

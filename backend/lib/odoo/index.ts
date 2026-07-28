@@ -3,6 +3,8 @@ export {
   OdooRpcError,
   isOdooConfigured,
   odooConfigFromEnv,
+  getOdooServiceSession,
+  invalidateOdooServiceSession,
   ODOO_CACHE_TAG,
   invalidatePageFieldCache,
   cmsPageFieldAvailable,
@@ -27,6 +29,12 @@ export {
   type ApplicantInput,
   type ApplicantAttachment,
 } from "./recruitment";
+
+export {
+  createCrmLead,
+  buildCrmLeadValues,
+  type CrmLeadInput,
+} from "./crm";
 
 export {
   mapOdooPage,

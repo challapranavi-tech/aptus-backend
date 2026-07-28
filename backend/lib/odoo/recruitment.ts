@@ -128,7 +128,7 @@ export async function createApplicant(
         "hr.applicant",
         buildApplicantValues(input, applicantStageIdFromEnv()),
       ),
-    `create hr.applicant for ${input.email}`,
+    `create hr.applicant`,
   );
   if (!applicantId) throw new Error("Odoo returned no applicant id after create");
 

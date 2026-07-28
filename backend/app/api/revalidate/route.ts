@@ -106,7 +106,7 @@ export async function POST(req: NextRequest) {
   // IP limit is in middleware; token identity limits a compromised/shared secret.
   // security: ODOO_REVALIDATE_TOKEN is a site-wide admin capability (not per-slug
   // ACLs). Any valid token may bust any slug — there are no per-user page owners.
-  const tokenLimited = enforceKeyRateLimit(
+  const tokenLimited = await enforceKeyRateLimit(
     identityKey(body.token),
     "authWriteUser",
     "revalidate",
