@@ -56,6 +56,12 @@ export async function GET() {
     checks,
     // Host only — never echo credentials. Helps confirm which instance is wired.
     odooHost: normalizedUrl || null,
+    // Confirm the Vercel project actually redeployed latest main (CRM quote sync).
+    build: {
+      commit: process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ?? "local",
+      /** Present only on deploys that create CRM opportunities for quotes. */
+      crmQuoteSync: true,
+    },
     hints: ready
       ? odooUrlHadUiPath
         ? [
