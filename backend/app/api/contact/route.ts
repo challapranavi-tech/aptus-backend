@@ -15,6 +15,9 @@ import {
 import { parseContactRequest } from "@shared/lib/contact-request";
 import { NextRequest } from "next/server";
 
+/** Allow email + Odoo CRM create on Vercel (default hobby limit is too short). */
+export const maxDuration = 60;
+
 /** Reject multi-MB JSON abuse before parse (quote forms are a few KB). */
 const MAX_CONTACT_BODY_BYTES = 32 * 1024;
 
@@ -131,9 +134,11 @@ export async function POST(req: NextRequest) {
   }
 
   // Quote requests only — plain contact CTAs must not create Odoo CRM records.
+  let crmSynced = false;
   if (isQuote && isOdooConfigured()) {
     try {
       const leadId = await createCrmLead(crmInput);
+      crmSynced = true;
       console.info(
         `[contact] crm.lead #${leadId} created quoteRef=${quoteRef}`,
       );
@@ -147,5 +152,5 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  return jsonCors(req, { ok: true, quoteRef });
+  return jsonCors(req, { ok: true, quoteRef, crmSynced });
 }

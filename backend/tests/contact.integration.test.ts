@@ -95,6 +95,8 @@ describe("POST /api/contact", () => {
     mocks.isOdooConfigured.mockReturnValue(true);
     const res = await POST(contactReq(validBody));
     expect(res.status).toBe(200);
+    const body = await res.json();
+    expect(body.crmSynced).toBe(true);
     expect(mocks.createCrmLead).toHaveBeenCalledOnce();
     expect(mocks.createCrmLead).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -153,6 +155,7 @@ describe("POST /api/contact", () => {
     const body = await res.json();
     expect(body.ok).toBe(true);
     expect(body.quoteRef).toMatch(/^Q-/);
+    expect(body.crmSynced).toBe(false);
     // sales quote + CRM failure alert
     expect(mocks.sendEmail).toHaveBeenCalledTimes(2);
     const alert = mocks.sendEmail.mock.calls[1][0];

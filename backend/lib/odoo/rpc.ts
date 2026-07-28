@@ -89,6 +89,8 @@ async function rpcFetch<T>(
 ): Promise<T> {
   let response: Response;
   try {
+    // Writes / auth can be slow on Odoo Online from Vercel cold starts.
+    const timeoutMs = cacheMode.kind === "no-store" ? 45_000 : 15_000;
     response = await fetch(endpoint, {
       method: "POST",
       headers: {
@@ -99,7 +101,7 @@ async function rpcFetch<T>(
       ...(cacheMode.kind === "no-store"
         ? { cache: "no-store" as const }
         : { next: { revalidate: cacheMode.seconds } }),
-      signal: AbortSignal.timeout(15_000),
+      signal: AbortSignal.timeout(timeoutMs),
     });
   } catch (err) {
     throw new OdooRpcError(
