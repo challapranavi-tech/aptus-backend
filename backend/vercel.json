@@ -1,13 +1,6 @@
 {
-  "buildCommand": "npm run build",
-  "installCommand": "npm install",
   "framework": "nextjs",
-  "outputDirectory": ".next",
-  "build": {
-    "env": {
-      "NODE_VERSION": "20"
-    }
-  },
+  "installCommand": "cd .. && npm install",
   "crons": [
     {
       "path": "/api/crm/retry",
