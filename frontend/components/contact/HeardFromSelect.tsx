@@ -2,12 +2,16 @@ type HeardFromSelectProps = {
   required?: boolean;
   className: string;
   variant?: "default" | "career";
+  "aria-invalid"?: boolean;
+  onChange?: () => void;
 };
 
 export function HeardFromSelect({
   required = true,
   className,
   variant = "default",
+  "aria-invalid": ariaInvalid,
+  onChange,
 }: HeardFromSelectProps) {
   if (variant === "career") {
     return (
@@ -16,6 +20,8 @@ export function HeardFromSelect({
         required={required}
         className={className}
         defaultValue="Media"
+        aria-invalid={ariaInvalid}
+        onChange={onChange}
       >
         <option value="Media">Media</option>
         <option value="Referals">Referals</option>
@@ -31,6 +37,8 @@ export function HeardFromSelect({
       required={required}
       className={className}
       defaultValue=""
+      aria-invalid={ariaInvalid}
+      onChange={onChange}
     >
       <option value="" disabled>
         Select an option

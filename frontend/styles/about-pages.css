@@ -609,6 +609,13 @@
     font-size: var(--text-base);
   }
 
+  /* Same visible error treatment as .aptus-form-input (career/contact share this class). */
+  .aptus-career-form-input.aptus-form-input--error {
+    border: 2px solid #dc2626;
+    background-color: #fef2f2;
+    box-shadow: 0 0 0 1px #dc2626;
+  }
+
   /* Contact Us — post-3421 */
   .aptus-contact-info-heading {
     color: var(--color-brand-blue);

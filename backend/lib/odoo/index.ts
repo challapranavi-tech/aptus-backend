@@ -15,6 +15,8 @@ export {
   searchRead,
   read,
   create,
+  write,
+  executeKw,
   getVersionInfo,
   normalizeOdooBaseUrl,
   type OdooRpcSession,
@@ -33,8 +35,25 @@ export {
 export {
   createCrmLead,
   buildCrmLeadValues,
+  nextRequestQuoteRef,
+  ensureRequestQuoteSequence,
+  quoteReferenceField,
+  REQUEST_QUOTE_SEQUENCE,
   type CrmLeadInput,
 } from "./crm";
+
+export {
+  registerWebsiteEnquiry,
+  nextWebsiteEnquiryRef,
+  upsertPartnerEnquiry,
+  buildPartnerEnquiryValues,
+  enquiryReferenceField,
+  enquiryCategoryIdFromEnv,
+  resolveWebsiteEnquiryCategoryId,
+  WEBSITE_ENQUIRY_SEQUENCE,
+  WEBSITE_ENQUIRY_CATEGORY_NAME,
+  type PartnerEnquiryResult,
+} from "./enquiry";
 
 export {
   mapOdooPage,

@@ -1,13 +1,25 @@
 /**
  * lib/odoo/crm.ts
  *
- * Creates crm.lead records from website quote / contact submissions.
+ * Creates crm.lead records from website Request Quote submissions.
  * Reuses the shared API-key JSON-RPC client (rpc.ts).
  *
- * Callers treat this as best-effort: on failure the contact route logs and
- * still returns success if the sales email was sent.
+ * Quote refs come from Odoo ir.sequence `request.quote` (e.g. RQ-2026-000001).
+ * Callers treat CRM create as best-effort after the sales email is sent.
  */
 import type { OdooRpcSession } from "./rpc";
+
+/** Odoo ir.sequence code for Request Quote (provisioned in Studio / Settings). */
+export const REQUEST_QUOTE_SEQUENCE = "request.quote";
+
+/**
+ * Optional Studio/char field on crm.lead for the quote ref.
+ * Default empty — ref is always stored in description (+ name).
+ */
+export function quoteReferenceField(): string | undefined {
+  const f = process.env.ODOO_QUOTE_REF_FIELD?.trim();
+  return f || undefined;
+}
 
 export type CrmLeadInput = {
   firstName: string;
@@ -19,7 +31,108 @@ export type CrmLeadInput = {
   qty?: string;
   categoryLabel?: string;
   message?: string;
+  /** Odoo sequence value (RQ-…) or JS fallback. */
+  quoteRef?: string;
 };
+
+async function withAuthRetry<T>(fn: (session: OdooRpcSession) => Promise<T>): Promise<T> {
+  const {
+    getOdooServiceSession,
+    invalidateOdooServiceSession,
+    isOdooConfigured,
+  } = await import("./client");
+  const { OdooRpcError } = await import("./rpc");
+
+  if (!isOdooConfigured()) {
+    throw new Error("Odoo is not configured");
+  }
+
+  try {
+    return await fn(await getOdooServiceSession());
+  } catch (err) {
+    const unauthorized =
+      err instanceof OdooRpcError &&
+      (err.httpStatus === 401 || /access|denied|auth/i.test(err.message));
+    if (!unauthorized) throw err;
+    invalidateOdooServiceSession();
+    return fn(await getOdooServiceSession());
+  }
+}
+
+/**
+ * Ensure sequence code `request.quote` exists.
+ * Staging has a sequence with prefix RQ-%(year)s- but blank code — set it.
+ */
+export async function ensureRequestQuoteSequence(
+  session: OdooRpcSession,
+): Promise<void> {
+  const { create, searchRead, write } = await import("./rpc");
+
+  const byCode = await searchRead<{ id: number }>(
+    session,
+    "ir.sequence",
+    [["code", "=", REQUEST_QUOTE_SEQUENCE]],
+    { fields: ["id"], limit: 1 },
+  );
+  if (byCode[0]?.id) return;
+
+  // Existing Studio sequence often has no code (code=false).
+  const byPrefix = await searchRead<{ id: number; code: string | false }>(
+    session,
+    "ir.sequence",
+    [
+      "|",
+      ["prefix", "=like", "RQ-%"],
+      "|",
+      ["name", "ilike", "request quote"],
+      ["name", "ilike", "requst quote"],
+    ],
+    { fields: ["id", "code"], limit: 1 },
+  );
+  if (byPrefix[0]?.id) {
+    if (!byPrefix[0].code) {
+      await write(session, "ir.sequence", byPrefix[0].id, {
+        code: REQUEST_QUOTE_SEQUENCE,
+      });
+    }
+    return;
+  }
+
+  const id = await create(session, "ir.sequence", {
+    name: "Request Quote",
+    code: REQUEST_QUOTE_SEQUENCE,
+    prefix: "RQ-%(year)s-",
+    padding: 6,
+    implementation: "standard",
+  });
+  if (!id) {
+    throw new Error(`Failed to create ir.sequence ${REQUEST_QUOTE_SEQUENCE}`);
+  }
+}
+
+/**
+ * Next value from ir.sequence `request.quote` (e.g. RQ-2026-000001).
+ * Never invents a JS fallback — caller decides.
+ */
+export async function nextRequestQuoteRef(): Promise<string> {
+  return withAuthRetry(async (session) => {
+    const { executeKw } = await import("./rpc");
+    await ensureRequestQuoteSequence(session);
+    const raw = await executeKw<string | false | null>(
+      session,
+      "ir.sequence",
+      "next_by_code",
+      [REQUEST_QUOTE_SEQUENCE],
+    );
+    const ref = typeof raw === "string" ? raw.trim() : "";
+    if (!ref) {
+      throw new Error(
+        `Odoo sequence ${REQUEST_QUOTE_SEQUENCE} returned an empty reference`,
+      );
+    }
+    return ref;
+  });
+}
 
 /** Pure crm.lead field map — unit-tested in crm.check.ts. */
 export function buildCrmLeadValues(
@@ -30,20 +143,26 @@ export function buildCrmLeadValues(
     .filter(Boolean)
     .join(" ");
   const product = (input.product ?? "").trim();
+  const quoteRef = (input.quoteRef ?? "").trim();
   const isQuoteProduct =
     Boolean(product) && product !== "Others" && product !== "Select Product";
 
   const description = [
+    quoteRef ? `Quote Ref: ${quoteRef}` : null,
     `Client Message: ${input.message?.trim() || "—"}`,
     `Product: ${product || "—"}`,
     `QTY: ${input.qty?.trim() || "—"}`,
     `Category: ${input.categoryLabel?.trim() || "—"}`,
     `Source: Website – Request Quote`,
-  ].join(", ");
+  ]
+    .filter(Boolean)
+    .join(", ");
 
   const values: Record<string, unknown> = {
     name: isQuoteProduct
-      ? `Request a Quote – ${product}`
+      ? quoteRef
+        ? `Request a Quote – ${product} (${quoteRef})`
+        : `Request a Quote – ${product}`
       : `Website contact – ${contactName || input.company}`,
     contact_name: contactName,
     partner_name: input.company.trim(),
@@ -53,6 +172,11 @@ export function buildCrmLeadValues(
     // Opportunity shows in CRM Pipeline → New. type "lead" only appears under Leads.
     type: "opportunity",
   };
+
+  const refField = quoteReferenceField();
+  if (refField && quoteRef) {
+    values[refField] = quoteRef;
+  }
 
   // Optional pin (production teams/stages differ). Unset = Odoo defaults + unassigned.
   const teamId = Number(process.env.ODOO_CRM_TEAM_ID ?? "");

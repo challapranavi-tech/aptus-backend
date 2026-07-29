@@ -7,7 +7,11 @@ import { reportCrmLeadFailure } from "@/lib/crm-failure";
 import { newQuoteRef } from "@/lib/crm-pending";
 import { requireJsonContentType, validationError } from "@/lib/api-validate";
 import { isMailConfigured, sendEmail } from "@/lib/mail";
-import { createCrmLead, isOdooConfigured } from "@/lib/odoo";
+import {
+  createCrmLead,
+  isOdooConfigured,
+  nextRequestQuoteRef,
+} from "@/lib/odoo";
 import {
   enforceKeyRateLimit,
   identityKey,
@@ -93,7 +97,24 @@ export async function POST(req: NextRequest) {
   });
   const name = [first_name, last_name].filter(Boolean).join(" ");
   const isQuote = Boolean(product && product !== "Others");
-  const quoteRef = newQuoteRef();
+
+  // Quote requests: Odoo sequence request.quote (RQ-…). Fallback to JS Q-… if Odoo down.
+  // Non-quote /api/contact traffic keeps the local Q-… ref (no CRM).
+  let quoteRef: string;
+  if (isQuote && isOdooConfigured()) {
+    try {
+      quoteRef = await nextRequestQuoteRef();
+      console.info(`[contact] Odoo quoteRef=${quoteRef}`);
+    } catch (err) {
+      quoteRef = newQuoteRef();
+      console.error(
+        `[contact] request.quote sequence failed; using JS fallback quoteRef=${quoteRef}:`,
+        err instanceof Error ? err.message : err,
+      );
+    }
+  } else {
+    quoteRef = newQuoteRef();
+  }
 
   const crmInput = {
     firstName: first_name,
@@ -105,6 +126,7 @@ export async function POST(req: NextRequest) {
     qty,
     categoryLabel: routing.categoryLabel,
     message,
+    quoteRef,
   };
 
   const result = await sendEmail({
@@ -150,6 +172,14 @@ export async function POST(req: NextRequest) {
         error: err,
       });
     }
+  } else if (!isQuote) {
+    console.info(
+      `[contact] CRM skipped (not a quote product) quoteRef=${quoteRef} product=${product || "—"}`,
+    );
+  } else {
+    console.warn(
+      `[contact] CRM skipped (Odoo not configured) quoteRef=${quoteRef}`,
+    );
   }
 
   return jsonCors(req, { ok: true, quoteRef, crmSynced });

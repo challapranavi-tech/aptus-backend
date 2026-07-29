@@ -18,7 +18,11 @@ import { NextRequest, NextResponse } from "next/server";
  */
 function presetFor(pathname: string): RateLimitPreset | null {
   if (pathname === "/api/health") return null;
-  if (pathname === "/api/contact" || pathname.startsWith("/api/career/")) {
+  if (
+    pathname === "/api/contact" ||
+    pathname === "/api/enquiry" ||
+    pathname.startsWith("/api/career/")
+  ) {
     return "publicWrite";
   }
   if (pathname === "/api/revalidate" || pathname === "/api/crm/retry") {
@@ -30,7 +34,11 @@ function presetFor(pathname: string): RateLimitPreset | null {
 }
 
 function needsCors(pathname: string): boolean {
-  return pathname === "/api/contact" || pathname.startsWith("/api/career");
+  return (
+    pathname === "/api/contact" ||
+    pathname === "/api/enquiry" ||
+    pathname.startsWith("/api/career")
+  );
 }
 
 export async function middleware(request: NextRequest) {

@@ -3,7 +3,9 @@
  * Run: npx --yes tsx backend/lib/odoo/crm.check.ts
  */
 import assert from "node:assert/strict";
-import { buildCrmLeadValues } from "./crm";
+import { buildCrmLeadValues, REQUEST_QUOTE_SEQUENCE } from "./crm";
+
+assert.equal(REQUEST_QUOTE_SEQUENCE, "request.quote");
 
 const quote = buildCrmLeadValues({
   firstName: "Ada",
@@ -15,9 +17,10 @@ const quote = buildCrmLeadValues({
   qty: "2",
   categoryLabel: "Software",
   message: "Need licenses",
+  quoteRef: "RQ-2026-000001",
 });
 
-assert.equal(quote.name, "Request a Quote – Revit");
+assert.equal(quote.name, "Request a Quote – Revit (RQ-2026-000001)");
 assert.equal(quote.contact_name, "Ada Lovelace");
 assert.equal(quote.partner_name, "Analytical Engines");
 assert.equal(quote.email_from, "ada@example.com");
@@ -26,8 +29,22 @@ assert.equal(quote.type, "opportunity");
 assert.equal(quote.user_id, false);
 assert.equal(
   quote.description,
-  "Client Message: Need licenses, Product: Revit, QTY: 2, Category: Software, Source: Website – Request Quote",
+  "Quote Ref: RQ-2026-000001, Client Message: Need licenses, Product: Revit, QTY: 2, Category: Software, Source: Website – Request Quote",
 );
+
+process.env.ODOO_QUOTE_REF_FIELD = "x_studio_quote_ref";
+const withField = buildCrmLeadValues({
+  firstName: "Ada",
+  lastName: "Lovelace",
+  company: "Co",
+  email: "ada@example.com",
+  phone: "+968 1234 5678",
+  product: "Revit",
+  qty: "1",
+  quoteRef: "RQ-2026-000002",
+});
+assert.equal(withField.x_studio_quote_ref, "RQ-2026-000002");
+delete process.env.ODOO_QUOTE_REF_FIELD;
 
 const contact = buildCrmLeadValues({
   firstName: "Sam",

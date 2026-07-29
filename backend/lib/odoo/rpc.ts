@@ -223,6 +223,44 @@ export async function searchRead<T>(
   );
 }
 
+// ─── execute_kw ───────────────────────────────────────────────────────────────
+/**
+ * Generic `execute_kw(model, method, args, kwargs)`.
+ * Prefer typed helpers (searchRead / create / write) for common ops.
+ * security: API key is in the body — never cache this request.
+ */
+export async function executeKw<T>(
+  session: OdooRpcSession,
+  model: string,
+  method: string,
+  args: unknown[] = [],
+  kwargs: Record<string, unknown> = {},
+): Promise<T> {
+  const endpoint = `${session.url}/jsonrpc`;
+  return rpcFetch<T>(
+    endpoint,
+    {
+      jsonrpc: "2.0",
+      id: nextId(),
+      method: "call",
+      params: {
+        service: "object",
+        method: "execute_kw",
+        args: [
+          session.db,
+          session.uid,
+          session.apiKey,
+          model,
+          method,
+          args,
+          kwargs,
+        ],
+      },
+    },
+    { kind: "no-store" },
+  );
+}
+
 // ─── create ─────────────────────────────────────────────────────────────────
 /**
  * Calls `model.create(values)` on Odoo and returns the new record id.
@@ -233,21 +271,21 @@ export async function create(
   model: string,
   values: Record<string, unknown>,
 ): Promise<number> {
-  const endpoint = `${session.url}/jsonrpc`;
-  return rpcFetch<number>(
-    endpoint,
-    {
-      jsonrpc: "2.0",
-      id: nextId(),
-      method: "call",
-      params: {
-        service: "object",
-        method: "execute_kw",
-        args: [session.db, session.uid, session.apiKey, model, "create", [values]],
-      },
-    },
-    { kind: "no-store" },
-  );
+  return executeKw<number>(session, model, "create", [values]);
+}
+
+// ─── write ──────────────────────────────────────────────────────────────────
+/**
+ * Calls `model.write([id], values)` on Odoo.
+ * security: execute_kw sends apiKey in the body — never cache this request.
+ */
+export async function write(
+  session: OdooRpcSession,
+  model: string,
+  id: number,
+  values: Record<string, unknown>,
+): Promise<boolean> {
+  return executeKw<boolean>(session, model, "write", [[id], values]);
 }
 
 // ─── read ─────────────────────────────────────────────────────────────────────

@@ -3,6 +3,7 @@
 import { publicApiBase } from "@/lib/api-base";
 import { cn } from "@/lib/utils";
 import { validateQuoteContactFields } from "@shared/lib/contact-request";
+import { validateEnquiryFields } from "@shared/lib/enquiry-request";
 import type { FieldErrors } from "@shared/lib/schema";
 import { useRef, useState, type FormEvent } from "react";
 import { HeardFromSelect } from "./HeardFromSelect";
@@ -13,6 +14,9 @@ export type ContactLeadVariant = "contact-page" | "contact" | "simple";
 
 const QUOTE_SUCCESS =
   "Thank you! Your quote request has been submitted. Our team will contact you shortly.";
+
+const ENQUIRY_SUCCESS =
+  "Thank you for contacting Aptus Infotech. Your enquiry has been submitted successfully. Our team will get back to you shortly.";
 
 type ContactLeadFormProps = {
   variant: ContactLeadVariant;
@@ -37,8 +41,8 @@ function FieldError({ message }: { message?: string }) {
 }
 
 /**
- * Contact / product CTA leads → POST /api/contact.
- * Maps city/country/heard_from into the shared contact schema on the server.
+ * Contact Us → POST /api/enquiry (enquiry email).
+ * Product / quote CTAs → POST /api/contact (quote email). Keep workflows separate.
  */
 export function ContactLeadForm({
   variant,
@@ -54,6 +58,7 @@ export function ContactLeadForm({
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<FieldErrors>({});
   const submittingRef = useRef(false);
+  const isEnquiryForm = variant === "contact-page" || variant === "contact";
   const isQuoteContext = Boolean(category || productName);
 
   function clearField(name: string) {
@@ -87,13 +92,24 @@ export function ContactLeadForm({
       }
     }
 
+    if (isEnquiryForm) {
+      const fieldErrors = validateEnquiryFields(payload);
+      if (Object.keys(fieldErrors).length) {
+        setErrors(fieldErrors);
+        setStatus("error");
+        setMessage("Please fill highlighted fields.");
+        return;
+      }
+    }
+
     submittingRef.current = true;
     setErrors({});
     setStatus("submitting");
     setMessage("");
 
     try {
-      const res = await fetch(`${publicApiBase()}/api/contact`, {
+      const endpoint = isEnquiryForm ? "/api/enquiry" : "/api/contact";
+      const res = await fetch(`${publicApiBase()}${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -102,9 +118,11 @@ export function ContactLeadForm({
       if (res.ok) {
         setStatus("success");
         setMessage(
-          isQuoteContext
-            ? QUOTE_SUCCESS
-            : "Thank you! Your message has been sent.",
+          isEnquiryForm
+            ? ENQUIRY_SUCCESS
+            : isQuoteContext
+              ? QUOTE_SUCCESS
+              : "Thank you! Your message has been sent.",
         );
         form.reset();
         return;
@@ -183,8 +201,11 @@ export function ContactLeadForm({
               name="first_name"
               placeholder="First Name"
               required
-              className={inputClassName}
+              aria-invalid={errors.first_name ? true : undefined}
+              onChange={() => clearField("first_name")}
+              className={cn(inputClassName, inputError("first_name"))}
             />
+            <FieldError message={errors.first_name} />
           </label>
           <label className={labelClassName}>
             Last Name
@@ -193,8 +214,11 @@ export function ContactLeadForm({
               name="last_name"
               placeholder="Last Name"
               required
-              className={inputClassName}
+              aria-invalid={errors.last_name ? true : undefined}
+              onChange={() => clearField("last_name")}
+              className={cn(inputClassName, inputError("last_name"))}
             />
+            <FieldError message={errors.last_name} />
           </label>
           <label className={labelClassName}>
             City
@@ -203,8 +227,11 @@ export function ContactLeadForm({
               name="city"
               placeholder="City"
               required
-              className={inputClassName}
+              aria-invalid={errors.city ? true : undefined}
+              onChange={() => clearField("city")}
+              className={cn(inputClassName, inputError("city"))}
             />
+            <FieldError message={errors.city} />
           </label>
           <label className={labelClassName}>
             Country
@@ -213,8 +240,11 @@ export function ContactLeadForm({
               name="country"
               placeholder="STATE/PROVINCE"
               required
-              className={inputClassName}
+              aria-invalid={errors.country ? true : undefined}
+              onChange={() => clearField("country")}
+              className={cn(inputClassName, inputError("country"))}
             />
+            <FieldError message={errors.country} />
           </label>
           <label className={labelClassName}>
             Email Address
@@ -223,8 +253,11 @@ export function ContactLeadForm({
               name="email"
               placeholder="EMAIL ADDRESS"
               required
-              className={inputClassName}
+              aria-invalid={errors.email ? true : undefined}
+              onChange={() => clearField("email")}
+              className={cn(inputClassName, inputError("email"))}
             />
+            <FieldError message={errors.email} />
           </label>
           <label className={labelClassName}>
             Phone Number
@@ -233,8 +266,11 @@ export function ContactLeadForm({
               name="phone"
               placeholder="Phone Number"
               required
-              className={inputClassName}
+              aria-invalid={errors.phone ? true : undefined}
+              onChange={() => clearField("phone")}
+              className={cn(inputClassName, inputError("phone"))}
             />
+            <FieldError message={errors.phone} />
           </label>
           <label className={`${labelClassName} sm:col-span-2`}>
             How can we help you?
@@ -243,12 +279,21 @@ export function ContactLeadForm({
               rows={4}
               placeholder="Your Query"
               required
-              className={inputClassName}
+              aria-invalid={errors.message ? true : undefined}
+              onChange={() => clearField("message")}
+              className={cn(inputClassName, inputError("message"))}
             />
+            <FieldError message={errors.message} />
           </label>
           <label className={labelClassName}>
             How did you hear about us?
-            <HeardFromSelect variant="career" className={inputClassName} />
+            <HeardFromSelect
+              variant="career"
+              className={cn(inputClassName, inputError("heard_from"))}
+              aria-invalid={errors.heard_from ? true : undefined}
+              onChange={() => clearField("heard_from")}
+            />
+            <FieldError message={errors.heard_from} />
           </label>
         </div>
         {feedback}
@@ -268,36 +313,103 @@ export function ContactLeadForm({
         <div className="grid gap-4 sm:grid-cols-2">
           <label className={labelClassName}>
             First Name *
-            <input type="text" name="first_name" required className={inputClassName} />
+            <input
+              type="text"
+              name="first_name"
+              required
+              aria-invalid={errors.first_name ? true : undefined}
+              onChange={() => clearField("first_name")}
+              className={cn(inputClassName, inputError("first_name"))}
+            />
+            <FieldError message={errors.first_name} />
           </label>
           <label className={labelClassName}>
             Last Name *
-            <input type="text" name="last_name" required className={inputClassName} />
+            <input
+              type="text"
+              name="last_name"
+              required
+              aria-invalid={errors.last_name ? true : undefined}
+              onChange={() => clearField("last_name")}
+              className={cn(inputClassName, inputError("last_name"))}
+            />
+            <FieldError message={errors.last_name} />
           </label>
           <label className={labelClassName}>
             City *
-            <input type="text" name="city" required className={inputClassName} />
+            <input
+              type="text"
+              name="city"
+              required
+              aria-invalid={errors.city ? true : undefined}
+              onChange={() => clearField("city")}
+              className={cn(inputClassName, inputError("city"))}
+            />
+            <FieldError message={errors.city} />
           </label>
           <label className={labelClassName}>
             State/Province *
-            <input type="text" name="state" required className={inputClassName} />
+            <input
+              type="text"
+              name="state"
+              required
+              aria-invalid={errors.state || errors.country ? true : undefined}
+              onChange={() => {
+                clearField("state");
+                clearField("country");
+              }}
+              className={cn(
+                inputClassName,
+                inputError("state") || inputError("country"),
+              )}
+            />
+            <FieldError message={errors.state || errors.country} />
           </label>
           <label className={labelClassName}>
             Email *
-            <input type="email" name="email" required className={inputClassName} />
+            <input
+              type="email"
+              name="email"
+              required
+              aria-invalid={errors.email ? true : undefined}
+              onChange={() => clearField("email")}
+              className={cn(inputClassName, inputError("email"))}
+            />
+            <FieldError message={errors.email} />
           </label>
           <label className={labelClassName}>
             Phone *
-            <input type="tel" name="phone" required className={inputClassName} />
+            <input
+              type="tel"
+              name="phone"
+              required
+              aria-invalid={errors.phone ? true : undefined}
+              onChange={() => clearField("phone")}
+              className={cn(inputClassName, inputError("phone"))}
+            />
+            <FieldError message={errors.phone} />
           </label>
         </div>
         <label className={`mt-4 ${labelClassName}`}>
           How can we help you? *
-          <textarea name="message" rows={4} required className={inputClassName} />
+          <textarea
+            name="message"
+            rows={4}
+            required
+            aria-invalid={errors.message ? true : undefined}
+            onChange={() => clearField("message")}
+            className={cn(inputClassName, inputError("message"))}
+          />
+          <FieldError message={errors.message} />
         </label>
         <label className={`mt-4 ${labelClassName}`}>
           How did you hear about us? *
-          <HeardFromSelect className={inputClassName} />
+          <HeardFromSelect
+            className={cn(inputClassName, inputError("heard_from"))}
+            aria-invalid={errors.heard_from ? true : undefined}
+            onChange={() => clearField("heard_from")}
+          />
+          <FieldError message={errors.heard_from} />
         </label>
         {feedback}
         <div className="mt-6 text-start">{submitBtn}</div>

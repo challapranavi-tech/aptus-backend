@@ -7,6 +7,7 @@ const mocks = vi.hoisted(() => ({
   isMailConfigured: vi.fn(() => true),
   createCrmLead: vi.fn(),
   isOdooConfigured: vi.fn(() => false),
+  nextRequestQuoteRef: vi.fn(),
 }));
 
 vi.mock("@/lib/mail", async (importOriginal) => {
@@ -24,6 +25,7 @@ vi.mock("@/lib/odoo", async (importOriginal) => {
     ...actual,
     createCrmLead: mocks.createCrmLead,
     isOdooConfigured: mocks.isOdooConfigured,
+    nextRequestQuoteRef: mocks.nextRequestQuoteRef,
   };
 });
 
@@ -65,6 +67,7 @@ describe("POST /api/contact", () => {
     mocks.sendEmail.mockResolvedValue({ ok: true, id: "msg_1" });
     mocks.isOdooConfigured.mockReturnValue(false);
     mocks.createCrmLead.mockResolvedValue(101);
+    mocks.nextRequestQuoteRef.mockResolvedValue("RQ-2026-000001");
     process.env.RESEND_API_KEY = "re_test";
     process.env.APTUS_FRONTEND_URL = "http://localhost:3000";
     process.env.CONTACT_TO_EMAIL = "info@aptusinfotech.com";
@@ -78,7 +81,9 @@ describe("POST /api/contact", () => {
     expect(res.status).toBe(200);
     const body = await res.json();
     expect(body.ok).toBe(true);
+    // Odoo off → JS fallback Q-…
     expect(body.quoteRef).toMatch(/^Q-/);
+    expect(mocks.nextRequestQuoteRef).not.toHaveBeenCalled();
     expect(mocks.sendEmail).toHaveBeenCalledOnce();
     expect(mocks.createCrmLead).not.toHaveBeenCalled();
     const arg = mocks.sendEmail.mock.calls[0][0];
@@ -97,6 +102,8 @@ describe("POST /api/contact", () => {
     expect(res.status).toBe(200);
     const body = await res.json();
     expect(body.crmSynced).toBe(true);
+    expect(body.quoteRef).toBe("RQ-2026-000001");
+    expect(mocks.nextRequestQuoteRef).toHaveBeenCalledOnce();
     expect(mocks.createCrmLead).toHaveBeenCalledOnce();
     expect(mocks.createCrmLead).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -109,7 +116,14 @@ describe("POST /api/contact", () => {
         qty: "3",
         categoryLabel: "Software",
         message: "Quote please",
+        quoteRef: "RQ-2026-000001",
       }),
+    );
+    expect(mocks.sendEmail.mock.calls[0][0].text).toContain(
+      "Quote Ref: RQ-2026-000001",
+    );
+    expect(mocks.sendEmail.mock.calls[0][0].subject).toContain(
+      "RQ-2026-000001",
     );
   });
 
@@ -154,7 +168,7 @@ describe("POST /api/contact", () => {
     expect(res.status).toBe(200);
     const body = await res.json();
     expect(body.ok).toBe(true);
-    expect(body.quoteRef).toMatch(/^Q-/);
+    expect(body.quoteRef).toBe("RQ-2026-000001");
     expect(body.crmSynced).toBe(false);
     // sales quote + CRM failure alert
     expect(mocks.sendEmail).toHaveBeenCalledTimes(2);
@@ -163,6 +177,20 @@ describe("POST /api/contact", () => {
       `CRM Lead creation failed for Quote #${body.quoteRef}`,
     );
     expect(alert.to).toBe("info@aptusinfotech.com");
+  });
+
+  it("falls back to JS quoteRef when Odoo sequence fails", async () => {
+    mocks.isOdooConfigured.mockReturnValue(true);
+    mocks.nextRequestQuoteRef.mockRejectedValue(
+      new Error("Odoo sequence request.quote returned an empty reference"),
+    );
+    const res = await POST(contactReq(validBody));
+    expect(res.status).toBe(200);
+    const body = await res.json();
+    expect(body.quoteRef).toMatch(/^Q-/);
+    expect(mocks.createCrmLead).toHaveBeenCalledWith(
+      expect.objectContaining({ quoteRef: body.quoteRef }),
+    );
   });
 
   it("routes ELV products to ELV_SALES_EMAIL", async () => {
