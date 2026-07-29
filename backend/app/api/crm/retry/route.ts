@@ -4,8 +4,8 @@
  * Auth: Authorization Bearer CRON_SECRET (Vercel cron) or
  * X-Cron-Token matching CRON_SECRET or ODOO_REVALIDATE_TOKEN.
  *
- * ponytail: vercel.json cron is daily (`0 0 * * *`) — Hobby forbids
- * sub-daily schedules and rejects the deploy. On Pro, tighten to `*/15 * * * *`.
+ * ponytail: vercel.json cron is daily (0 0 * * *) — Hobby forbids
+ * sub-daily schedules and rejects the deploy. On Pro, use every-15-min cron.
  */
 import { jsonCors, corsPreflight } from "@/lib/api-cors";
 import { retryPendingCrmLeads } from "@/lib/crm-pending";
