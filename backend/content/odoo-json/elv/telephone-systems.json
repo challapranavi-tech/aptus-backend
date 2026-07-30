@@ -8,7 +8,7 @@
     "title": "Modern Telecommunications Solutions",
     "paragraphs": [
       "IP PBX Telephone Systems in Muscat, Oman provides a comprehensive support to your business. Employees and team can seamlessly communicate with each other over Voice over IP Telephone (VoIP) or through traditional PABX phone systems.",
-      "PBX Telephone Systems or IP-based telephone systems allows business in Oman to reduce over head cost by forming private internal network within the office space. It also improves efficiency and internal communications. With work from home becoming a popular options.",
+      "PBX Telephone Systems or IP-based telephone systems allows business in Oman to reduce overhead cost by forming private internal network within the office space. It also improves efficiency and internal communications. With work from home becoming a popular option.",
       "VoIP telephone systems allows businesses to adapt employees who are now working from home. Mitel IP telephony diverse range of solutions ensures end-to-end communications streamlining video conferencing, online meetings, screen-sharing and even remote call center."
     ],
     "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/voip-benefits-01.jpg",
@@ -54,7 +54,7 @@
         },
         {
           "title": "Call Analytics & Reporting",
-          "body": "Why choose our solutions for your business communications",
+          "body": "Detailed call analytics, reporting tools, and performance metrics to optimize your communication strategy.",
           "icon": "chart-line"
         }
       ]
@@ -96,8 +96,8 @@
       "visible": true,
       "variant": "value-cards",
       "title": {
-        "before": "Why Choose Aptus Infotech",
-        "accent": "Telephone Systems?"
+        "before": "Why Choose",
+        "accent": "Aptus Infotech?"
       },
       "align": "center",
       "items": [
@@ -136,17 +136,20 @@
       {
         "quote": "“The new telephone system has completely revolutionized how we conduct client meetings. The image quality is exceptional and the sound clarity is remarkable.”",
         "author": "Mohammed Al Farsi",
-        "role": "IT Director"
+        "role": "IT Director",
+        "company": "Corporate Office"
       },
       {
         "quote": "“We implemented the premium audio enhancement system in our boardroom and couldn’t be happier. The difference in voice clarity during conference calls is night and day.”",
         "author": "Sarah Johnson",
-        "role": "Facilities Manager"
+        "role": "Facilities Manager",
+        "company": "Retail Chain"
       },
       {
         "quote": "“The room booking system integrated perfectly with our existing calendar software. Now scheduling meetings is much easier and more efficient.”",
         "author": "Ahmed Hassan",
-        "role": "Operations Manager"
+        "role": "Operations Manager",
+        "company": "Logistics Company"
       }
     ]
   },
@@ -172,24 +175,24 @@
     "variant": "alliances",
     "logos": [
       {
-        "src": "./Telephone Systems - aptusinfotech.com_files/WatchNet-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/WatchNet.png",
         "alt": "WatchNet"
       },
       {
-        "src": "./Telephone Systems - aptusinfotech.com_files/Tyco-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Tyco.png",
         "alt": "Tyco"
       },
       {
-        "src": "./Telephone Systems - aptusinfotech.com_files/Suprema-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
-        "alt": "suprema"
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Suprema.png",
+        "alt": "Suprema"
       },
       {
-        "src": "./Telephone Systems - aptusinfotech.com_files/Hikvision-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Hikvision.png",
         "alt": "Hikvision"
       },
       {
-        "src": "./Telephone Systems - aptusinfotech.com_files/ZKTeco-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
-        "alt": "ZKT"
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/ZKTeco.png",
+        "alt": "ZKTeco"
       }
     ]
   }

@@ -114,7 +114,7 @@
                 <div class="elv-hero-text">
                     <h2>Modern Telecommunications Solutions</h2>
                 <p>IP PBX Telephone Systems in Muscat, Oman provides a comprehensive support to your business. Employees and team can seamlessly communicate with each other over Voice over IP Telephone (VoIP) or through traditional PABX phone systems.</p>
-                <p>PBX Telephone Systems or IP-based telephone systems allows business in Oman to reduce over head cost by forming private internal network within the office space. It also improves efficiency and internal communications. With work from home becoming a popular options.</p>
+                <p>PBX Telephone Systems or IP-based telephone systems allows business in Oman to reduce overhead cost by forming private internal network within the office space. It also improves efficiency and internal communications. With work from home becoming a popular option.</p>
                 <p>VoIP telephone systems allows businesses to adapt employees who are now working from home. Mitel IP telephony diverse range of solutions ensures end-to-end communications streamlining video conferencing, online meetings, screen-sharing and even remote call center.</p>
                     <a class="elv-btn" href="#Form">Request a Quote</a>
                 </div>
@@ -158,7 +158,7 @@
             <div class="elv-card">
               <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M496 384H64V80c0-8.84-7.16-16-16-16H16C7.16 64 0 71.16 0 80v336c0 17.67 14.33 32 32 32h464c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16zM464 96H345.94c-21.38 0-32.09 25.85-16.97 40.97l32.4 32.4L288 242.75l-73.37-73.37c-12.5-12.5-32.76-12.5-45.25 0l-68.69 68.69c-6.25 6.25-6.25 16.38 0 22.63l22.62 22.62c6.25 6.25 16.38 6.25 22.63 0L192 237.25l73.37 73.37c12.5 12.5 32.76 12.5 45.25 0l96-96 32.4 32.4c15.12 15.12 40.97 4.41 40.97-16.97V112c.01-8.84-7.15-16-15.99-16z"/></svg></div>
               <h3>Call Analytics &amp; Reporting</h3>
-              <p>Why choose our solutions for your business communications</p>
+              <p>Detailed call analytics, reporting tools, and performance metrics to optimize your communication strategy.</p>
             </div>
                 </div>
             </div>
@@ -241,16 +241,19 @@
                 <p class="elv-quote-text">“The new telephone system has completely revolutionized how we conduct client meetings. The image quality is exceptional and the sound clarity is remarkable.”</p>
                 <div class="elv-quote-author">Mohammed Al Farsi</div>
                 <div class="elv-quote-role">IT Director</div>
+                <div class="elv-quote-company">Corporate Office</div>
             </div>
             <div class="elv-quote">
                 <p class="elv-quote-text">“We implemented the premium audio enhancement system in our boardroom and couldn’t be happier. The difference in voice clarity during conference calls is night and day.”</p>
                 <div class="elv-quote-author">Sarah Johnson</div>
                 <div class="elv-quote-role">Facilities Manager</div>
+                <div class="elv-quote-company">Retail Chain</div>
             </div>
             <div class="elv-quote">
                 <p class="elv-quote-text">“The room booking system integrated perfectly with our existing calendar software. Now scheduling meetings is much easier and more efficient.”</p>
                 <div class="elv-quote-author">Ahmed Hassan</div>
                 <div class="elv-quote-role">Operations Manager</div>
+                <div class="elv-quote-company">Logistics Company</div>
             </div>
                 </div>
             </div>
@@ -259,11 +262,11 @@
             <div class="container">
                 <h2>Winning together with <span>Strategic Alliances</span></h2>
                 <div class="elv-alliance-grid">
-                <div class="elv-alliance"><img src="./Telephone Systems - aptusinfotech.com_files/WatchNet-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png" alt="WatchNet" loading="lazy"/></div>
-                <div class="elv-alliance"><img src="./Telephone Systems - aptusinfotech.com_files/Tyco-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png" alt="Tyco" loading="lazy"/></div>
-                <div class="elv-alliance"><img src="./Telephone Systems - aptusinfotech.com_files/Suprema-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png" alt="suprema" loading="lazy"/></div>
-                <div class="elv-alliance"><img src="./Telephone Systems - aptusinfotech.com_files/Hikvision-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png" alt="Hikvision" loading="lazy"/></div>
-                <div class="elv-alliance"><img src="./Telephone Systems - aptusinfotech.com_files/ZKTeco-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png" alt="ZKT" loading="lazy"/></div>
+                <div class="elv-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/WatchNet.png" alt="WatchNet" loading="lazy"/></div>
+                <div class="elv-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Tyco.png" alt="Tyco" loading="lazy"/></div>
+                <div class="elv-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Suprema.png" alt="Suprema" loading="lazy"/></div>
+                <div class="elv-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Hikvision.png" alt="Hikvision" loading="lazy"/></div>
+                <div class="elv-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/ZKTeco.png" alt="ZKTeco" loading="lazy"/></div>
                 </div>
             </div>
         </section>
