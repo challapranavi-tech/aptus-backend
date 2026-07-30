@@ -25,7 +25,11 @@ function presetFor(pathname: string): RateLimitPreset | null {
   ) {
     return "publicWrite";
   }
-  if (pathname === "/api/revalidate" || pathname === "/api/crm/retry") {
+  if (
+    pathname === "/api/revalidate" ||
+    pathname === "/api/crm/retry" ||
+    pathname === "/api/cms/seed-page"
+  ) {
     return "authWriteIp";
   }
   if (pathname === "/api/odoo") return "debug";
