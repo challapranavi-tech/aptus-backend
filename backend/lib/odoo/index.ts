@@ -47,12 +47,20 @@ export {
   nextWebsiteEnquiryRef,
   upsertPartnerEnquiry,
   buildPartnerEnquiryValues,
+  backfillWebsiteEnquiryFields,
   enquiryReferenceField,
+  enquirySourceField,
+  enquirySourceValue,
   enquiryCategoryIdFromEnv,
   resolveWebsiteEnquiryCategoryId,
+  resolvePartnerEnquiryFields,
+  resolveWebsiteEnquirySourcePartnerId,
   WEBSITE_ENQUIRY_SEQUENCE,
   WEBSITE_ENQUIRY_CATEGORY_NAME,
+  WEBSITE_ENQUIRY_SOURCE_PARTNER_NAME,
   type PartnerEnquiryResult,
+  type PartnerEnquiryFieldMap,
+  type BackfillWebsiteEnquiryResult,
 } from "./enquiry";
 
 export {

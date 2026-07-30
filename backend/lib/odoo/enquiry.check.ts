@@ -9,14 +9,23 @@ import {
   enquiryCategoryIdFromEnv,
   enquiryReferenceField,
   enquirySourceField,
+  ENQUIRY_REF_FIELD_CANDIDATES,
+  ENQUIRY_SOURCE_CHAR_CANDIDATES,
+  ENQUIRY_SOURCE_M2M_CANDIDATES,
   WEBSITE_ENQUIRY_CATEGORY_NAME,
   WEBSITE_ENQUIRY_SEQUENCE,
+  WEBSITE_ENQUIRY_SOURCE_PARTNER_NAME,
 } from "./enquiry";
 
 assert.equal(WEBSITE_ENQUIRY_SEQUENCE, "website.enquiry");
 assert.equal(WEBSITE_ENQUIRY_CATEGORY_NAME, "Website Enquiry");
+assert.equal(WEBSITE_ENQUIRY_SOURCE_PARTNER_NAME, "Contact Form");
 assert.equal(enquiryReferenceField(), "x_studio_x_enquiry_reference");
+assert.equal(enquirySourceField(), "x_studio_x_website_enquiry");
 assert.equal(enquiryCategoryIdFromEnv(), undefined);
+assert.ok(ENQUIRY_REF_FIELD_CANDIDATES.includes("x_enquiry_reference"));
+assert.ok(ENQUIRY_SOURCE_CHAR_CANDIDATES.includes("x_studio_x_website_enquiry"));
+assert.ok(ENQUIRY_SOURCE_M2M_CANDIDATES.includes("x_studio_x_website_enquiries"));
 
 const values = buildPartnerEnquiryValues(
   {
@@ -41,10 +50,7 @@ assert.equal(values.x_studio_x_enquiry_reference, "ENQ-2026-000001");
 assert.equal(values.ref, "ENQ-2026-000001");
 assert.equal(values.x_enquiry_reference, undefined);
 assert.deepEqual(values.category_id, [[4, 42]]);
-assert.deepEqual(
-  (values[enquirySourceField()] as unknown) ?? undefined,
-  undefined,
-);
+assert.equal(values[enquirySourceField()], undefined);
 
 const valuesWithSource = buildPartnerEnquiryValues(
   {
@@ -58,10 +64,20 @@ const valuesWithSource = buildPartnerEnquiryValues(
     message: "Need help",
   },
   "ENQ-2026-000002",
-  { categoryIds: [42], websiteEnquirySourceValue: "Contact Form" },
+  {
+    categoryIds: [42],
+    websiteEnquirySourceValue: "Contact Form",
+    websiteEnquirySourcePartnerId: 77,
+    refFields: ["x_studio_x_enquiry_reference", "x_enquiry_reference"],
+    sourceCharFields: ["x_studio_x_website_enquiry"],
+    sourceM2mFields: ["x_studio_x_website_enquiries"],
+  },
 );
 
-assert.equal(valuesWithSource[enquirySourceField()], "Contact Form");
+assert.equal(valuesWithSource.x_studio_x_enquiry_reference, "ENQ-2026-000002");
+assert.equal(valuesWithSource.x_enquiry_reference, "ENQ-2026-000002");
+assert.equal(valuesWithSource.x_studio_x_website_enquiry, "Contact Form");
+assert.deepEqual(valuesWithSource.x_studio_x_website_enquiries, [[4, 77]]);
 assert.ok(String(values.comment).includes("Enquiry Reference"));
 assert.ok(String(values.comment).includes("Country"));
 assert.ok(String(values.comment).includes("Oman"));
