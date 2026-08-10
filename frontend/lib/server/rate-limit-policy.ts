@@ -62,24 +62,26 @@ const POLICIES = {
   /** Credential stuffing target. Also limited per email address at the route. */
   authLogin: {
     name: "auth_login",
-    ip: [rule("sustained", 10, 15 * MINUTE), rule("daily", 50, DAY)],
+    // Alpha: raised from 10/50 so QA can iterate without waiting out IP locks.
+    ip: [rule("sustained", 40, 15 * MINUTE), rule("daily", 200, DAY)],
   },
 
   authRegister: {
     name: "auth_register",
-    ip: [rule("sustained", 5, 15 * MINUTE), rule("daily", 20, DAY)],
+    // Alpha: raised from 5/20 — failed deploys + form retries burned the old quota fast.
+    ip: [rule("sustained", 30, 15 * MINUTE), rule("daily", 100, DAY)],
   },
 
   /** Account-existence oracle — worth limiting tightly to slow enumeration. */
   authIdentify: {
     name: "auth_identify",
-    ip: [rule("sustained", 10, 15 * MINUTE), rule("daily", 40, DAY)],
+    ip: [rule("sustained", 40, 15 * MINUTE), rule("daily", 150, DAY)],
   },
 
   /** Sends email/SMS on every call, so abuse costs real money. */
   authOtpSend: {
     name: "auth_otp_send",
-    ip: [rule("sustained", 5, 15 * MINUTE), rule("daily", 15, DAY)],
+    ip: [rule("sustained", 20, 15 * MINUTE), rule("daily", 60, DAY)],
   },
 
   /** OTP verification — guessing is also capped per session inside the route. */
