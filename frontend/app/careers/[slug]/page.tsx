@@ -68,10 +68,17 @@ export default async function JobDetailPage({ params }: PageProps) {
                 </span>
               </div>
 
-              {job.description && (
+              {(job.descriptionHtml || job.description) && (
                 <div className="aptus-jobdetail__section">
                   <h2>About the role</h2>
-                  <p>{job.description}</p>
+                  {job.descriptionHtml ? (
+                    <div
+                      className="aptus-jobdetail__html"
+                      dangerouslySetInnerHTML={{ __html: job.descriptionHtml }}
+                    />
+                  ) : (
+                    <p>{job.description}</p>
+                  )}
                 </div>
               )}
 

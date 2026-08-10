@@ -14,10 +14,11 @@
     "jsx": "preserve",
     "incremental": true,
     "plugins": [{ "name": "next" }],
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
       "@/types": ["../shared/types"],
-      "@/types/*": ["../shared/types/*"],
+      "@/types/*": ["./types/*", "../shared/types/*"],
       "@shared/*": ["../shared/*"]
     }
   },

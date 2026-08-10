@@ -1,58 +1,58 @@
 {
-  "banner": {
-    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/image-1.png",
-    "imageAlt": "Anti Virus Solutions"
-  },
   "softwareInnerHero": {
     "id": "hero",
     "visible": true,
-    "family": "antivirus",
+    "family": "cyber-security",
     "subnavLinks": [
       { "label": "Antivirus and Data Security", "href": "/antivirus-and-data-security" },
-      { "label": "AutoDesk", "href": "/autodesk" },
-      { "label": "Adobe", "href": "/adobe" },
-      { "label": "SpectroNova", "href": "/spectronova" },
-      { "label": "Prokon", "href": "/prokon" },
+      { "label": "Fortinet", "href": "/fortinet" },
+      { "label": "Sophos", "href": "/sophos" },
       { "label": "SonicWall Next-Gen Firewall", "href": "/sonicwall-next-gen-firewall" },
-      { "label": "Oracle Primavera P6", "href": "/oracle-primavera-p6" },
-      { "label": "Autodesk Construction Cloud", "href": "/construction-cloud" }
+      { "label": "Kaspersky", "href": "/kaspersky" }
     ],
-    "title": "Anti Virus Solutions",
-    "titleLevel": "h2",
-    "mediaInline": true,
-    "introRows": [
-      {
-        "paragraphs": [
-          "Apply strong security steps to reduce chances of data breaches. Using Anti-virus helps protect your business from extra financial loss and damage to brand trust and future income.",
-          "To stop scammers from using the health crisis for gain, Aptus Infotech teamed up with top 3 Anti-Virus providers for advanced threat defense.",
-          "Aptus Infotech now partners with the top 3 antivirus providers to guard against advanced threats during the health crisis."
-        ],
-        "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/image-1.png",
-        "imageAlt": "Anti Virus Solutions"
-      }
-    ]
+    "bannerTitle": "Anti Virus Solutions",
+    "bannerTagline": "Protect your business from data breaches, financial loss, and brand damage with enterprise antivirus from Aptus Infotech.",
+    "title": "Advanced Threat Defense for Every Business",
+    "paragraphs": [
+      "Apply strong security steps to reduce the chance of data breaches. Antivirus protection helps shield your business from financial loss, brand damage, and lost future income.",
+      "Aptus Infotech partners with leading antivirus providers to deliver advanced threat defense — stopping malware, ransomware, and phishing before they reach your systems.",
+      "From small offices to large enterprises, we help you choose, deploy, and support the right antivirus and data-security stack for Oman."
+    ],
+    "imageSrc": "/images/Kaspersky.png",
+    "imageAlt": "Anti Virus Solutions",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
   },
   "cardSections": [
     {
       "id": "why-aptus",
       "visible": true,
-      "variant": "checklist",
+      "variant": "value-cards",
       "title": {
         "before": "Why Choose Aptus Infotech"
       },
       "align": "center",
+      "gridColumns": 4,
       "items": [
         {
-          "title": "Tailored Solutions for Your Business"
+          "title": "Tailored Solutions",
+          "body": "Security packages matched to your industry, size, and risk profile.",
+          "icon": "puzzle-piece"
         },
         {
-          "title": "Scalable for Every Business Size"
+          "title": "Scalable for Every Size",
+          "body": "From a handful of endpoints to company-wide protection that grows with you.",
+          "icon": "chart-line"
         },
         {
-          "title": "Expert Installation and Ongoing Support"
+          "title": "Expert Install & Support",
+          "body": "Local deployment, configuration, and ongoing support from our Muscat team.",
+          "icon": "headset"
         },
         {
-          "title": "Powered by Cutting-Edge Technology"
+          "title": "Cutting-Edge Technology",
+          "body": "Partnered with top antivirus vendors for real-time threat intelligence.",
+          "icon": "shield-alt"
         }
       ]
     }
@@ -63,9 +63,24 @@
     "variant": "alliances-grid",
     "logos": [
       {
-        "id": "v-ray",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/V-ray-e1754299498907.png",
-        "alt": "V-Ray"
+        "id": "fortinet",
+        "src": "/images/Fortinet-rae1hbkmi2kzhxbt0p2254mnt7cjtpflktkpxfqixy.png",
+        "alt": "Fortinet"
+      },
+      {
+        "id": "sophos",
+        "src": "/images/Sopos.png",
+        "alt": "Sophos"
+      },
+      {
+        "id": "kaspersky",
+        "src": "/images/Kaspersky.png",
+        "alt": "Kaspersky"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Autodesk.png",
+        "alt": "Autodesk"
       },
       {
         "id": "spectronova",
@@ -81,26 +96,6 @@
         "id": "prokon",
         "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Prokon-1-e1754305048112.png",
         "alt": "Prokon"
-      },
-      {
-        "id": "primavera",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Primavera.png",
-        "alt": "Primavera"
-      },
-      {
-        "id": "autodesk",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Autodesk.png",
-        "alt": "Autodesk"
-      },
-      {
-        "id": "csi",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/CSI.png",
-        "alt": "CSI"
-      },
-      {
-        "id": "cype",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Cype.png",
-        "alt": "CYPE"
       },
       {
         "id": "aconex",

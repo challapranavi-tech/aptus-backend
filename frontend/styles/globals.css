@@ -36,6 +36,7 @@
 @import "./software-product-pages.css";
 @import "./elv-product-pages.css";
 @import "./elv-pages.css";
+@import "./components/side-link-nav.css";
 
 /*
  * Content alignment policy (site-wide):

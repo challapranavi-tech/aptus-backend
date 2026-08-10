@@ -35,11 +35,13 @@ export {
 export {
   createCrmLead,
   buildCrmLeadValues,
+  crmTeamConfig,
   nextRequestQuoteRef,
   ensureRequestQuoteSequence,
   quoteReferenceField,
   REQUEST_QUOTE_SEQUENCE,
   type CrmLeadInput,
+  type ContactCategory,
 } from "./crm";
 
 export {

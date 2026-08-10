@@ -33,6 +33,7 @@ function normalizeOdooJob(r: OdooHrJob): CareerJob {
     location: "Muscat",
     jobType: DEFAULT_JOB_TYPE,
     description: stripJobHtml(html),
+    descriptionHtml: html,
     responsibilities: [],
     requirements: [],
     publishedAt: r.write_date,

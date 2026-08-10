@@ -39,14 +39,14 @@ assert.equal(
     categoryHint: "elv",
   }).to,
   "elv@example.com",
-  "ELV quote → ELV_SALES_EMAIL",
+  "elv quote → ELV_SALES_EMAIL (internal key unchanged)",
 );
 assert.equal(
   resolveContactRouting({
     product: "CCTV Surveillance Solutions",
     categoryHint: "elv",
   }).categoryLabel,
-  "ELV",
+  "Infra",
 );
 
 delete process.env.SOFTWARE_SALES_EMAIL;

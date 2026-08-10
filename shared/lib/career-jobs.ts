@@ -1,6 +1,7 @@
 /**
  * Job listing types + filter helpers (shared by jobs API and careers UI).
  */
+import { sanitizeJobHtml } from "./sanitize-job-html";
 import { stripJobHtml } from "./strip-job-html";
 
 export const JOB_PAGE_SIZE = 12;
@@ -16,7 +17,10 @@ export interface CareerJob {
   department: string;
   location: string;
   jobType: string;
+  /** Plain text for cards / search (HTML stripped). */
   description: string;
+  /** Sanitized HTML for the job detail page (from Odoo description fields). */
+  descriptionHtml?: string;
   responsibilities: string[];
   requirements: string[];
   publishedAt?: string;
@@ -50,10 +54,20 @@ export function slugifyJobTitle(title: string, id: string | number): string {
 
 /** Normalize job text from API — collapses blank-line bloat even if a stale backend lags. */
 export function normalizeCareerJob(job: CareerJob): CareerJob {
+  const rawHtml =
+    typeof job.descriptionHtml === "string" && job.descriptionHtml.trim()
+      ? job.descriptionHtml
+      : typeof job.description === "string"
+        ? job.description
+        : "";
+  const descriptionHtml = sanitizeJobHtml(rawHtml);
   return {
     ...job,
     description:
-      typeof job.description === "string" ? stripJobHtml(job.description) : "",
+      typeof job.description === "string"
+        ? stripJobHtml(job.description)
+        : stripJobHtml(descriptionHtml),
+    descriptionHtml: descriptionHtml || undefined,
   };
 }
 

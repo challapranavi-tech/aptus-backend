@@ -1,0 +1,88 @@
+/* Shared side link nav — software inner pages, ELV, stacked layout, portal */
+
+.aptus-software-inner-hero__nav,
+.aptus-etap-nav {
+  min-width: 0;
+}
+
+.aptus-software-subnav__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.aptus-software-subnav__link {
+  align-items: center;
+  color: #1352a3 !important;
+  display: flex;
+  font-size: var(--text-base, 1rem);
+  font-weight: 600;
+  gap: 0.5rem;
+  justify-content: space-between;
+  line-height: 1.35;
+  padding: 0.625rem 0.75rem;
+  text-decoration: none !important;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.aptus-software-subnav__link:hover,
+.aptus-software-subnav__link:focus-visible,
+.aptus-software-subnav__link.is-active {
+  background: #1352a3 !important;
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
+.aptus-software-subnav__link.is-active {
+  color: #fff !important;
+}
+
+.aptus-software-subnav--horizontal .aptus-software-subnav__list {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0.35rem;
+}
+
+.aptus-software-subnav--horizontal .aptus-software-subnav__link {
+  font-size: 0.78rem;
+  padding: 0.55rem 0.75rem;
+  white-space: nowrap;
+}
+
+/* Site-wide inner page scopes */
+.aptus-software-page .aptus-software-subnav__link,
+.aptus-elv-page .aptus-software-subnav__link,
+.aptus-autodesk-page .aptus-software-subnav__link,
+.aptus-etap-nav .aptus-software-subnav__link {
+  border-radius: 0;
+}
+
+.aptus-software-subnav__link.is-active .aptus-notification-count-badge.is-active {
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+}
+
+/* Portal dashboard */
+.aptus-portal-v3 .aptus-dashboard-sidebar {
+  background: #fff;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.aptus-portal-v3 .aptus-dashboard-sidebar .aptus-software-subnav {
+  flex: 1;
+}
+
+.aptus-portal-v3 .aptus-dashboard-mobile-nav .aptus-software-subnav__list {
+  overflow-x: auto;
+  padding-bottom: 0.15rem;
+  scrollbar-width: thin;
+}
+
+.aptus-customer-dashboard .aptus-software-subnav__link {
+  font-size: 0.875rem;
+}

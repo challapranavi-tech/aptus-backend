@@ -106,18 +106,21 @@
     line-height: 1;
     padding: 12px 24px;
     text-align: center;
+    text-decoration: none;
     transition: all 1.5s ease;
     width: 100%;
   }
 
   .aptus-software-btn:hover,
   .aptus-software-btn:focus-visible {
+    color: #fff;
     opacity: 1;
   }
 
   .aptus-software-btn-blue:hover,
   .aptus-software-btn-blue:focus-visible {
     background-color: #13934b;
+    color: #fff;
   }
 
   .aptus-software-btn-blue {
@@ -192,6 +195,7 @@
     height: 100%;
     margin: 5px;
     min-width: 0;
+    overflow: hidden;
     padding: 0.5rem 0.5rem 1rem;
     text-align: start;
   }
@@ -203,6 +207,7 @@
     justify-content: center;
     margin: 0 auto;
     max-width: 70%;
+    overflow: hidden;
   }
 
   .aptus-software-product-title {
@@ -353,6 +358,12 @@
     color: #1352a3;
     width: auto;
     padding: 0.75rem 1.5rem;
+  }
+
+  .aptus-software-mid-band .aptus-software-btn-blue:hover,
+  .aptus-software-mid-band .aptus-software-btn-blue:focus-visible {
+    background-color: #f3f4f6;
+    color: #1352a3;
   }
 
   .aptus-software-section[data-id="why-aptus"] .aptus-software-section-title {
@@ -519,36 +530,6 @@
     .aptus-software-inner-hero__grid--two-column {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-  }
-
-  .aptus-software-subnav__list {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .aptus-software-subnav__link {
-    color: #1352a3;
-    display: block;
-    font-size: var(--text-base);
-    font-weight: 600;
-    line-height: 1.35;
-    padding: 0.625rem 0.75rem;
-    text-decoration: none;
-    transition: background 0.15s ease, color 0.15s ease;
-  }
-
-  .aptus-software-subnav__link:hover,
-  .aptus-software-subnav__link.is-active {
-    background: #1352a3;
-    color: #fff;
-  }
-
-  .aptus-software-subnav__link.is-active {
-    color: #fff;
   }
 
   .aptus-software-inner-hero__title {
@@ -913,9 +894,9 @@
   }
 
   .aptus-software-product-media img {
-    height: 136px;
-    margin-inline: auto;
-    max-width: 70%;
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
     object-fit: contain;
     width: auto;
   }

@@ -15,6 +15,8 @@
 
   --color-background:           #ffffff;
   --color-foreground:           #333333;
+  /* base.css headings — without this, h1–h6 inherit body grey and darken software heroes */
+  --color-heading:              #000000;
   --color-muted:                #24648c0f;
   --color-muted-foreground:     #695b5b;
   --color-border:               #e4ebe6;

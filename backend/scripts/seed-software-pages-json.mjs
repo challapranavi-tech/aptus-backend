@@ -17,6 +17,7 @@ const DB = process.env.ODOO_DB ?? "";
 const USER = process.env.ODOO_USER ?? "";
 const KEY = process.env.ODOO_API_KEY ?? "";
 const FIELD = process.env.ODOO_CMS_PAGE_JSON_FIELD?.trim() || "x_page_sections_json";
+const WEBSITE_ID = Number(process.env.ODOO_WEBSITE_ID ?? 7);
 
 let id = 0;
 async function rpc(service, method, args) {
@@ -64,18 +65,20 @@ for (const page of manifest.pages) {
   const jsonString = fs.readFileSync(filePath, "utf8");
   JSON.parse(jsonString);
 
+  // security: must match this website's record — a duplicate on another
+  // website (e.g. an old "My Website" copy) must never receive live content.
   const rows = await rpc("object", "execute_kw", [
     DB,
     uid,
     KEY,
     "website.page",
     "search_read",
-    [[["url", "=", page.route]], ["id", "url"]],
+    [[["url", "=", page.route], ["website_id", "=", WEBSITE_ID]], ["id", "url"]],
     { limit: 1, order: "id desc" },
   ]);
 
   if (!rows[0]) {
-    console.warn(`Skip (Odoo missing): ${page.route}`);
+    console.warn(`Skip (Odoo missing on website ${WEBSITE_ID}): ${page.route}`);
     missing++;
     continue;
   }

@@ -634,8 +634,9 @@ export function Features({ data }: FeaturesProps) {
                     <CmsImage
                       src={item.media.src}
                       alt={item.media.alt}
-                      width={120}
-                      height={136}
+                      width={160}
+                      height={120}
+                      className="aptus-software-product-media__img"
                     />
                   </div>
                 )}

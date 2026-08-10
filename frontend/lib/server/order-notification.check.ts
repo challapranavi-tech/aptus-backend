@@ -1,0 +1,164 @@
+import assert from "node:assert/strict";
+import {
+  formatLicenseAvailableEmail,
+  formatPasswordChangedEmail,
+  formatPasswordResetEmail,
+  formatPasswordResetOtpEmail,
+  formatPurchaseRequestSubmittedEmail,
+  formatRegistrationSuccessfulEmail,
+  formatBankTransferCustomerEmail,
+  formatCancellationEmail,
+  formatLicenseExpiredEmail,
+  formatEmailVerificationEmail,
+  formatNewDeviceLoginEmail,
+  formatPaymentFailedEmail,
+  formatRefundRequestedEmail,
+  formatRefundProcessedEmail,
+  formatEnquiryThankYouEmail,
+} from "./order-notification";
+
+const registration = formatRegistrationSuccessfulEmail({
+  customerName: "Ada",
+  email: "ada@example.com",
+  portalUrl: "https://example.com",
+});
+assert.match(registration.subject, /Account Has Been Created/);
+assert.match(registration.body, /ada@example.com/);
+
+const reset = formatPasswordResetEmail({
+  customerName: "Ada",
+  portalUrl: "https://example.com",
+});
+assert.match(reset.subject, /Password Has Been Changed/);
+
+const changed = formatPasswordChangedEmail({
+  customerName: "Ada",
+  email: "ada@example.com",
+  dateTime: "2026-08-09",
+  device: "Chrome",
+  location: "Muscat",
+  secureAccountUrl: "https://example.com/login",
+  portalUrl: "https://example.com",
+});
+assert.match(changed.subject, /Password Has Been Changed/);
+
+const otp = formatPasswordResetOtpEmail({
+  customerName: "Ada",
+  otp: "123456",
+  otpValidityMinutes: 10,
+  resetUrl: "https://example.com/register",
+  portalUrl: "https://example.com",
+});
+assert.match(otp.subject, /Password Reset OTP/);
+assert.match(otp.body, /123456/);
+
+const submitted = formatPurchaseRequestSubmittedEmail({
+  customerName: "Ada",
+  reference: "SO-9",
+  products: ["AutoCAD"],
+  duration: "1year",
+  portalUrl: "https://example.com",
+  bankTransferReference: "APT-20260803-0001",
+  totalAmount: "OMR 554.400",
+});
+assert.match(submitted.subject, /Payment Verification in Progress/);
+assert.match(submitted.body, /SO-9/);
+assert.match(submitted.body, /What Happens Next/);
+
+const pending = formatBankTransferCustomerEmail({
+  customerName: "Ada",
+  reference: "SO-9",
+  bankTransferReference: "BT-1",
+  products: ["AutoCAD"],
+  totalAmount: "OMR 100",
+  portalUrl: "https://example.com",
+});
+assert.match(pending.subject, /Payment Verification in Progress/);
+
+const license = formatLicenseAvailableEmail({
+  customerName: "Ada",
+  productName: "AutoCAD",
+  licenseKey: "ABC-123",
+  expiryDate: "1 Jan 2027",
+  downloadUrl: "https://example.com/dl",
+  portalUrl: "https://example.com",
+});
+assert.match(license.subject, /Payment Verified/);
+assert.match(license.body, /ABC-123/);
+assert.match(license.body, /https:\/\/example.com\/dl/);
+
+const cancelled = formatCancellationEmail({
+  customerName: "Ada",
+  productName: "AutoCAD",
+  reference: "SO-1",
+  effectiveDate: "2026-08-05",
+  portalUrl: "https://example.com",
+});
+assert.match(cancelled.subject, /Subscription Cancelled/);
+assert.match(cancelled.body, /AutoCAD/);
+
+const expired = formatLicenseExpiredEmail({
+  customerName: "Ada",
+  productName: "AutoCAD",
+  expiryDate: "1 Aug 2026",
+  portalUrl: "https://example.com",
+});
+assert.match(expired.subject, /License Expired/);
+
+const verify = formatEmailVerificationEmail({
+  customerName: "Ada",
+  verifyUrl: "https://example.com/api/auth/verify-email?token=abc",
+  expiresInMinutes: 30,
+});
+assert.match(verify.subject, /verify your email/i);
+assert.match(verify.body, /token=abc/);
+
+const device = formatNewDeviceLoginEmail({
+  customerName: "Ada",
+  ip: "1.2.3.4",
+  timestamp: "2026-08-05T00:00:00.000Z",
+  portalUrl: "https://example.com",
+});
+assert.match(device.subject, /New Device Login/);
+assert.match(device.body, /1\.2\.3\.4/);
+
+const failed = formatPaymentFailedEmail({
+  customerName: "Ada",
+  reference: "SO-9",
+  amount: "10.00 OMR",
+  portalUrl: "https://example.com",
+});
+assert.match(failed.subject, /Payment Not Received/);
+
+const thankYou = formatEnquiryThankYouEmail({
+  customerName: "Ada",
+  enquiryId: "ENQ-1",
+  productName: "AutoCAD",
+  enquiryDate: "2026-08-09",
+  enquirySummary: "Need pricing",
+  portalUrl: "https://example.com",
+});
+assert.match(thankYou.subject, /Thank You for Contacting/);
+assert.match(thankYou.body, /ENQ-1/);
+
+const refundReq = formatRefundRequestedEmail({
+  customerName: "Ada",
+  refundReference: "REF-1",
+  orderReference: "SO-9",
+  productName: "AutoCAD",
+  portalUrl: "https://example.com",
+});
+assert.match(refundReq.subject, /Refund Request Received/);
+
+const refundDone = formatRefundProcessedEmail({
+  customerName: "Ada",
+  refundReference: "REF-1",
+  orderReference: "SO-9",
+  productName: "AutoCAD",
+  amount: "10.00 OMR",
+  paymentMethod: "Stripe",
+  estimatedArrival: "5-7 business days",
+});
+assert.match(refundDone.subject, /Refund Processed/);
+
+console.log("order-notification.check: ok");

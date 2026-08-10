@@ -68,6 +68,7 @@ export const WATER_INFRASTRUCTURE_SUBNAV_LINKS: SoftwareSubNavLink[] = [
 
 /** Live sidebar on Cyber Security product pages (post-2786 Fortinet et al.). */
 export const CYBER_SECURITY_SUBNAV_LINKS: SoftwareSubNavLink[] = [
+  { label: "Antivirus and Data Security", href: "/antivirus-and-data-security" },
   { label: "Fortinet", href: "/fortinet" },
   { label: "Sophos", href: "/sophos" },
   { label: "SonicWall Next-Gen Firewall", href: "/sonicwall-next-gen-firewall" },

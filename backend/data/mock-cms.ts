@@ -21,7 +21,7 @@ export const mockSiteConfig: SiteConfig = {
     height: 846,
   },
   topBar: {
-    phone: "+968 24238998",
+    phone: "+968 9941 8481",
     email: "info@aptusinfotech.com",
     socialLinks: [
       { platform: "facebook", href: "https://www.facebook.com/AptusITsolutions/",                                                    label: "Facebook" },

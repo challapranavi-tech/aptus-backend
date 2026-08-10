@@ -37,13 +37,6 @@
     z-index: 1;
   }
 
-  .aptus-elv-page .aptus-software-subnav__link {
-    font-size: var(--text-xs);
-    font-weight: 600;
-    line-height: 1.35;
-    padding: 0.5rem 0.5rem;
-  }
-
   @media (min-width: 768px) and (max-width: 1023px) {
     .aptus-elv-page .aptus-software-inner-hero__grid {
       gap: 1rem;

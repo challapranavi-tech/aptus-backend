@@ -7,7 +7,10 @@
  * Quote refs come from Odoo ir.sequence `request.quote` (e.g. RQ-2026-000001).
  * Callers treat CRM create as best-effort after the sales email is sent.
  */
+import type { ContactCategory } from "@shared/lib/contact-request";
 import type { OdooRpcSession } from "./rpc";
+
+export type { ContactCategory };
 
 /** Odoo ir.sequence code for Request Quote (provisioned in Studio / Settings). */
 export const REQUEST_QUOTE_SEQUENCE = "request.quote";
@@ -29,11 +32,91 @@ export type CrmLeadInput = {
   phone: string;
   product?: string;
   qty?: string;
+  /** Drives company_id; categoryLabel is just the display text. Undefined = plain
+   *  contact message (never reaches createCrmLead — see app/api/contact/route.ts). */
+  category?: ContactCategory;
   categoryLabel?: string;
   message?: string;
   /** Odoo sequence value (RQ-…) or JS fallback. */
   quoteRef?: string;
 };
+
+/**
+ * Multi-company routing: Software pages → SOFTWARE company, ELV/Infrastructure
+ * pages → INFRA company. Page/category decides this server-side — never a
+ * frontend field — so a lead can't be filed under the wrong company by mistake.
+ *
+ * Exhaustive + fail-loud on purpose: an unrecognized category (typo, a new
+ * ContactCategory added without updating this map, env var not set) must
+ * throw, not silently fall through to SOFTWARE. createCrmLead()'s caller
+ * (app/api/contact/route.ts) already catches + alerts via
+ * reportCrmLeadFailure on any throw here, so this can't misfile a lead
+ * without anyone noticing — it just skips company_id and pages ops instead.
+ */
+function companyIdForCategory(category?: ContactCategory): number | undefined {
+  if (category === undefined) return undefined;
+
+  const envVar: Record<ContactCategory, string> = {
+    software: "ODOO_SOFTWARE_COMPANY_ID",
+    elv: "ODOO_ELV_COMPANY_ID",
+  };
+  const varName = envVar[category];
+  if (!varName) {
+    throw new Error(`companyIdForCategory: unrecognized category "${category}"`);
+  }
+
+  const raw = process.env[varName];
+  const id = Number(raw);
+  if (!raw || !Number.isInteger(id) || id <= 0) {
+    throw new Error(
+      `companyIdForCategory: ${varName} is not set to a valid company id (got "${raw ?? ""}"). ` +
+        `Set it in the environment or a lead for category "${category}" cannot be routed.`,
+    );
+  }
+  return id;
+}
+
+/**
+ * Resolve the Odoo sales-team ID and stage ID for a given category.
+ * Separate from companyIdForCategory: company_id must be exact (fail loud),
+ * but team/stage are just pipeline placement — safe to leave unset and let
+ * Odoo assign its default team.
+ *
+ * Priority:
+ *   1. Category-specific env  (ODOO_CRM_SOFTWARE_TEAM_ID / ODOO_CRM_ELV_TEAM_ID)
+ *   2. Legacy catch-all env   (ODOO_CRM_TEAM_ID) — pre-category-routing deployments
+ *   3. Unset → Odoo assigns the default team
+ */
+export function crmTeamConfig(category?: ContactCategory): {
+  teamId: number | undefined;
+  stageId: number | undefined;
+} {
+  function positiveInt(raw: string | undefined): number | undefined {
+    const n = Number(raw?.trim() ?? "");
+    return Number.isInteger(n) && n > 0 ? n : undefined;
+  }
+
+  if (category === "elv") {
+    return {
+      teamId:
+        positiveInt(process.env.ODOO_CRM_ELV_TEAM_ID) ??
+        positiveInt(process.env.ODOO_CRM_TEAM_ID),
+      stageId:
+        positiveInt(process.env.ODOO_CRM_ELV_STAGE_ID) ??
+        positiveInt(process.env.ODOO_CRM_STAGE_ID),
+    };
+  }
+
+  // "software" or undefined — default path
+  return {
+    teamId:
+      positiveInt(process.env.ODOO_CRM_SOFTWARE_TEAM_ID) ??
+      positiveInt(process.env.ODOO_CRM_TEAM_ID),
+    stageId:
+      positiveInt(process.env.ODOO_CRM_SOFTWARE_STAGE_ID) ??
+      positiveInt(process.env.ODOO_CRM_STAGE_ID),
+  };
+}
 
 async function withAuthRetry<T>(fn: (session: OdooRpcSession) => Promise<T>): Promise<T> {
   const {
@@ -178,11 +261,15 @@ export function buildCrmLeadValues(
     values[refField] = quoteRef;
   }
 
-  // Optional pin (production teams/stages differ). Unset = Odoo defaults + unassigned.
-  const teamId = Number(process.env.ODOO_CRM_TEAM_ID ?? "");
-  const stageId = Number(process.env.ODOO_CRM_STAGE_ID ?? "");
-  if (Number.isInteger(teamId) && teamId > 0) values.team_id = teamId;
-  if (Number.isInteger(stageId) && stageId > 0) values.stage_id = stageId;
+  // Software pages → SOFTWARE company; ELV/Infrastructure pages → INFRA company.
+  // Page already tells us the category — no frontend company picker needed.
+  const companyId = companyIdForCategory(input.category);
+  if (companyId) values.company_id = companyId;
+
+  // Route to the correct Odoo sales team/stage based on category (software vs ELV).
+  const { teamId, stageId } = crmTeamConfig(input.category);
+  if (teamId) values.team_id = teamId;
+  if (stageId) values.stage_id = stageId;
 
   // Omit user_id so Sales Team / New is visible; false breaks some Odoo DBs.
   const unassign = process.env.ODOO_CRM_UNASSIGN !== "0";

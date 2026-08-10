@@ -1,5 +1,6 @@
 import { SocialIcon } from "@/components/SocialIcon";
 import { getSiteConfig } from "@/data";
+import { HeaderAuthActions } from "./HeaderAuthActions";
 import { MastheadBrand } from "./MastheadBrand";
 import { NavMenu } from "./NavMenu";
 
@@ -54,6 +55,9 @@ export async function Header() {
         <div className="aptus-masthead__nav-inner">
           <MastheadBrand name={siteConfig.name} logo={siteConfig.logo ?? null} />
           <NavMenu items={siteConfig.navigation} />
+          <div className="aptus-masthead__auth">
+            <HeaderAuthActions />
+          </div>
         </div>
       </div>
     </header>

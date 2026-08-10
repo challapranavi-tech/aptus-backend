@@ -7,7 +7,7 @@ const odooImageHost =
 const nextConfig: NextConfig = {
   // security: keep production bundles free of source maps that aid reverse-engineering.
   productionBrowserSourceMaps: false,
-  serverExternalPackages: ["gsap"],
+  serverExternalPackages: ["gsap", "nodemailer"],
   async redirects() {
     return [
       { source: "/about-us", destination: "/our-story", permanent: true },

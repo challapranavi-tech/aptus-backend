@@ -168,6 +168,41 @@
       "heroImage": "linear-gradient(180deg, #000000 0%, #2962f2 100%)"
     },
     {
+      "route": "/antivirus-and-data-security",
+      "slug": "antivirus-and-data-security",
+      "family": "cyber-security",
+      "type": "inner",
+      "heroImage": "https://aptusinfotech.com/wp-content/uploads/2025/09/Antivirus.png"
+    },
+    {
+      "route": "/fortinet",
+      "slug": "fortinet",
+      "family": "cyber-security",
+      "type": "inner",
+      "heroImage": "/images/Fortinet-rae1hbkmi2kzhxbt0p2254mnt7cjtpflktkpxfqixy.png"
+    },
+    {
+      "route": "/kaspersky",
+      "slug": "kaspersky",
+      "family": "cyber-security",
+      "type": "inner",
+      "heroImage": "/images/Kaspersky.png"
+    },
+    {
+      "route": "/sophos",
+      "slug": "sophos",
+      "family": "cyber-security",
+      "type": "inner",
+      "heroImage": "/images/Sopos.png"
+    },
+    {
+      "route": "/sonicwall-next-gen-firewall",
+      "slug": "sonicwall-next-gen-firewall",
+      "family": "cyber-security",
+      "type": "inner",
+      "heroImage": "https://aptusinfotech.com/wp-content/uploads/2025/09/Sonicwall.png"
+    },
+    {
       "route": "/construction-cloud",
       "slug": "construction-cloud",
       "family": "edms",

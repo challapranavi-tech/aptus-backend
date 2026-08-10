@@ -65,8 +65,16 @@ export function mapOdooPage(
         ? (rawPage.x_case_studies_sections_json as string | false | undefined)
         : undefined;
     // Odoo stays source-of-truth. Local JSON is only a dev fallback when Odoo
-    // has no JSON content for that page yet.
-    const pageJsonRaw = caseStudiesJson ?? rawPage.x_page_sections_json ?? localJson;
+    // has no JSON content for that page yet. Odoo empty Char/Text is often
+    // `false` (not null/undefined) — treat that as missing so local can win.
+    const odooPageJson =
+      typeof caseStudiesJson === "string" && caseStudiesJson.trim()
+        ? caseStudiesJson
+        : typeof rawPage.x_page_sections_json === "string" &&
+            rawPage.x_page_sections_json.trim()
+          ? rawPage.x_page_sections_json
+          : null;
+    const pageJsonRaw = odooPageJson ?? localJson;
     const pageSections = mapPageJson(pageJsonRaw, { slug });
     if (pageSections && pageSections.length > 0) {
       sections = pageSections;

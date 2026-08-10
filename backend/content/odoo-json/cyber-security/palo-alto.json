@@ -4,6 +4,7 @@
     "visible": true,
     "family": "cyber-security",
     "subnavLinks": [
+      { "label": "Antivirus and Data Security", "href": "/antivirus-and-data-security" },
       { "label": "Fortinet", "href": "/fortinet" },
       { "label": "Sophos", "href": "/sophos" },
       { "label": "SonicWall Next-Gen Firewall", "href": "/sonicwall-next-gen-firewall" },

@@ -1,7 +1,9 @@
 import { corsPreflight, jsonCors, withCors } from "@/lib/api-cors";
+import { formatMuscatDateTime } from "@/lib/contact-routing";
 import {
   contactEnquiryInbox,
   formatContactEnquiryEmail,
+  formatEnquiryThankYouEmail,
 } from "@/lib/enquiry-email";
 import { requireJsonContentType, validationError } from "@/lib/api-validate";
 import { isMailConfigured, sendEmail } from "@/lib/mail";
@@ -145,6 +147,27 @@ export async function POST(req: NextRequest) {
   console.info(
     `[enquiry] sent enquiryRef=${enquiryRef ?? "none"} odooSynced=${odooSynced} to=${to}`,
   );
+
+  const customerName = [data.first_name, data.last_name].filter(Boolean).join(" ");
+  const thankYou = formatEnquiryThankYouEmail({
+    customerName,
+    enquiryId: enquiryRef?.trim() || "Pending",
+    productName: "General Enquiry",
+    enquiryDate: formatMuscatDateTime(),
+    enquirySummary: data.message,
+  });
+  const thankYouResult = await sendEmail({
+    to: data.email,
+    subject: thankYou.subject,
+    text: thankYou.text,
+  });
+  if (!thankYouResult.ok) {
+    console.warn(
+      `[enquiry] customer thank-you failed enquiryRef=${enquiryRef ?? "none"}:`,
+      thankYouResult.error,
+    );
+  }
+
   return jsonCors(req, {
     ok: true,
     enquiryRef,

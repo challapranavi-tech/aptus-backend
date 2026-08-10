@@ -3,6 +3,9 @@ import {
   type ContactCategory,
 } from "@shared/lib/contact-request";
 
+// Re-export so callers (route.ts) don't need a second @shared import.
+export type { ContactCategory };
+
 export type ContactRouting = {
   category: ContactCategory;
   categoryLabel: string;
@@ -18,7 +21,9 @@ function isQuoteProduct(product: string): boolean {
  * Inbox routing:
  *   Contact Us (no real product) → CONTACT_TO_EMAIL
  *   Software quote               → SOFTWARE_SALES_EMAIL (fallback CONTACT_TO_EMAIL)
- *   ELV quote                    → ELV_SALES_EMAIL (fallback CONTACT_TO_EMAIL)
+ *   elv quote (UI label: Infra)  → ELV_SALES_EMAIL (fallback CONTACT_TO_EMAIL)
+ *
+ * ponytail: keep category key "elv" (env vars / Odoo IDs); only categoryLabel is "Infra".
  */
 export function resolveContactRouting(input: {
   product: string;
@@ -41,7 +46,7 @@ export function resolveContactRouting(input: {
   if (category === "elv") {
     return {
       category,
-      categoryLabel: "ELV",
+      categoryLabel: "Infra",
       to: elv || contactTo,
     };
   }

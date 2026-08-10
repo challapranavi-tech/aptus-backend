@@ -1,5 +1,5 @@
 /**
- * Run every assert-based *.check.ts (shared + backend).
+ * Run every assert-based *.check.ts (shared + backend + frontend).
  * Exit non-zero on the first failure.
  */
 import { spawnSync } from "node:child_process";
@@ -10,7 +10,9 @@ import { fileURLToPath } from "node:url";
 
 const require = createRequire(import.meta.url);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const roots = [path.join(root, "shared"), path.join(root, "backend")];
+// security: frontend/lib/server/*.check.ts covers auth, payments, and rate
+// limiting — those checks must actually run, not just exist on disk.
+const roots = [path.join(root, "shared"), path.join(root, "backend"), path.join(root, "frontend")];
 const tsxCli = require.resolve("tsx/cli");
 
 function walk(dir, out = []) {
@@ -33,10 +35,12 @@ if (checks.length === 0) {
 console.log(`run-checks: ${checks.length} file(s)`);
 for (const file of checks) {
   const rel = path.relative(root, file);
-  // Backend checks import @shared/* — need backend/tsconfig paths.
+  // Backend/frontend checks import @/* and @shared/* — need their own tsconfig paths.
   const cwd = rel.startsWith(`backend${path.sep}`)
     ? path.join(root, "backend")
-    : root;
+    : rel.startsWith(`frontend${path.sep}`)
+      ? path.join(root, "frontend")
+      : root;
   // Invoke via node + tsx/cli so paths with spaces work on Windows.
   const result = spawnSync(process.execPath, [tsxCli, file], {
     cwd,

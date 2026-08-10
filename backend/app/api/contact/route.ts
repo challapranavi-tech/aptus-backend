@@ -3,6 +3,7 @@ import {
   formatMuscatDateTime,
   resolveContactRouting,
 } from "@/lib/contact-routing";
+import { formatEnquiryThankYouEmail } from "@/lib/enquiry-email";
 import { reportCrmLeadFailure } from "@/lib/crm-failure";
 import { newQuoteRef } from "@/lib/crm-pending";
 import { requireJsonContentType, validationError } from "@/lib/api-validate";
@@ -116,6 +117,10 @@ export async function POST(req: NextRequest) {
     quoteRef = newQuoteRef();
   }
 
+  console.info(
+    `[contact] routing category=${routing.category} categoryLabel=${routing.categoryLabel} to=${routing.to} quoteRef=${quoteRef}`,
+  );
+
   const crmInput = {
     firstName: first_name,
     lastName: last_name,
@@ -124,6 +129,7 @@ export async function POST(req: NextRequest) {
     phone,
     product,
     qty,
+    category: routing.category,
     categoryLabel: routing.categoryLabel,
     message,
     quoteRef,
@@ -162,7 +168,7 @@ export async function POST(req: NextRequest) {
       const leadId = await createCrmLead(crmInput);
       crmSynced = true;
       console.info(
-        `[contact] crm.lead #${leadId} created quoteRef=${quoteRef}`,
+        `[contact] crm.lead #${leadId} created quoteRef=${quoteRef} category=${routing.category} categoryLabel=${routing.categoryLabel}`,
       );
     } catch (err) {
       await reportCrmLeadFailure({
@@ -179,6 +185,25 @@ export async function POST(req: NextRequest) {
   } else {
     console.warn(
       `[contact] CRM skipped (Odoo not configured) quoteRef=${quoteRef}`,
+    );
+  }
+
+  const thankYou = formatEnquiryThankYouEmail({
+    customerName: name,
+    enquiryId: quoteRef,
+    productName: product || routing.categoryLabel || "General Enquiry",
+    enquiryDate: formatMuscatDateTime(),
+    enquirySummary: message || "(no message)",
+  });
+  const thankYouResult = await sendEmail({
+    to: email,
+    subject: thankYou.subject,
+    text: thankYou.text,
+  });
+  if (!thankYouResult.ok) {
+    console.warn(
+      `[contact] customer thank-you failed quoteRef=${quoteRef}:`,
+      thankYouResult.error,
     );
   }
 

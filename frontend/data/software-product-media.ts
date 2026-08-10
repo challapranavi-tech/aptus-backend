@@ -24,7 +24,7 @@ export const SOFTWARE_PRODUCT_HERO_IMAGES: Record<string, string> = {
   "adobe-premiere-pro": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Adobe-Premiere-Pro-e1754203244778-r9padyg632qmicbizv5ox2ipm3ndcyqmoyifgq9s00.png",
   "aec-collection": "https://aptusinfotech.com/wp-content/uploads/2025/08/imgi_8_photo-1581094794329-c8112a89af12-683x1024.png",
   "ansys": "https://aptusinfotech.com/wp-content/uploads/2025/05/ansys-e1754114536571.png",
-  "antivirus-and-data-security": "https://aptusinfotech.com/wp-content/uploads/2025/05/image-1.png",
+  "antivirus-and-data-security": "/images/Kaspersky.png",
   "audio-video-solutions": "https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Audio_3-673x1024.jpg",
   "autocad": "https://aptusinfotech.com/wp-content/uploads/2025/08/imgi_8_photo-1581094794329-c8112a89af12-683x1024.png",
   "autocad-lt": "https://aptusinfotech.com/wp-content/uploads/2025/06/Autocad_LT-1024x1024.png",

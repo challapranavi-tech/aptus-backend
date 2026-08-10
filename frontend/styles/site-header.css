@@ -728,6 +728,95 @@ html {
   }
 }
 
+/* Customer portal login / avatar in masthead */
+.aptus-masthead__auth {
+  align-items: center;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 0.75rem;
+  margin-inline-start: 0.5rem;
+}
+
+.aptus-masthead__auth .aptus-masthead__link {
+  color: var(--aptus-color-primary, #1352a3);
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.aptus-header-user {
+  align-items: center;
+  display: flex;
+  gap: 0.65rem;
+}
+
+.aptus-header-cart {
+  align-items: center;
+  color: var(--aptus-color-primary, #1352a3);
+  display: inline-flex;
+  justify-content: center;
+  position: relative;
+  text-decoration: none;
+}
+
+.aptus-header-cart:hover {
+  color: var(--aptus-color-primary-dark, #0e3f7d);
+}
+
+.aptus-header-cart__badge {
+  align-items: center;
+  background: #13934b;
+  border-radius: 999px;
+  color: #fff;
+  display: inline-flex;
+  font-size: 0.65rem;
+  font-weight: 800;
+  height: 1.1rem;
+  justify-content: center;
+  min-width: 1.1rem;
+  padding: 0 0.25rem;
+  position: absolute;
+  right: -0.45rem;
+  top: -0.35rem;
+}
+
+.aptus-header-user__avatar-wrap {
+  display: inline-flex;
+  line-height: 0;
+  text-decoration: none;
+}
+
+.aptus-header-user__avatar {
+  align-items: center;
+  background: var(--aptus-color-primary, #1352a3);
+  border-radius: 999px;
+  color: #fff;
+  display: inline-flex;
+  font-size: 0.75rem;
+  font-weight: 700;
+  height: 2rem;
+  justify-content: center;
+  overflow: hidden;
+  width: 2rem;
+}
+
+.aptus-header-user__avatar.has-image {
+  background-position: center;
+  background-size: cover;
+  color: transparent;
+}
+
+.aptus-header-user__logout {
+  background: transparent;
+  border: 1px solid var(--aptus-color-border, #e5e7eb);
+  border-radius: 0.375rem;
+  color: var(--aptus-color-text, #000);
+  cursor: pointer;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.35rem 0.7rem;
+}
+
 @media (max-width: 1024px) {
   .aptus-masthead__center {
     display: none !important;

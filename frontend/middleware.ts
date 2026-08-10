@@ -3,21 +3,78 @@ import {
   consumePresetAsync,
   rateLimitHeaders,
 } from "@shared/lib/rate-limit";
+import { REFRESH_COOKIE, SESSION_COOKIE } from "@/lib/cookie-names";
+import { verifyAccessToken, verifyRefreshToken } from "@/lib/server/jwt";
+import { getRefreshRecord } from "@/lib/server/refresh-tokens";
+import { enforceApiRateLimit, identifyUser } from "@/lib/server/rate-limit-guard";
 import { NextRequest, NextResponse } from "next/server";
 
 /**
- * Frontend API surface is only /api/revalidate (shared-secret webhook).
- * security: IP rate limit at the edge so abuse is stopped before the handler.
+ * Frontend middleware:
+ *  - /api/revalidate — shared-secret webhook IP limit (existing Aptus behaviour)
+ *  - other /api/* — portal sliding-window rate limits
+ *  - /portal/* — JWT refresh/session cookie gate (crypto + live KV refresh record)
  */
 export async function middleware(request: NextRequest) {
+  const traceId = request.headers.get("x-trace-id") ?? crypto.randomUUID();
+  const { pathname } = request.nextUrl;
+
   if (request.method === "OPTIONS") {
     return NextResponse.next();
   }
 
-  if (request.nextUrl.pathname !== "/api/revalidate") {
-    return NextResponse.next();
+  if (pathname.startsWith("/api")) {
+    if (pathname === "/api/revalidate") {
+      return handleRevalidate(request, traceId);
+    }
+    return handlePortalApi(request, pathname, traceId);
   }
 
+  const response = NextResponse.next();
+  response.headers.set("x-trace-id", traceId);
+
+  if (!pathname.startsWith("/portal")) {
+    return response;
+  }
+
+  const refreshCookie = request.cookies.get(REFRESH_COOKIE)?.value;
+  const refreshClaims = refreshCookie ? await verifyRefreshToken(refreshCookie) : null;
+  const liveRefresh =
+    refreshClaims && (await getRefreshRecord(refreshClaims.jti)) ? refreshClaims : null;
+
+  const legacyCookie = request.cookies.get(SESSION_COOKIE)?.value;
+  const validLegacy = legacyCookie ? await verifyAccessToken(legacyCookie) : null;
+
+  if (liveRefresh || validLegacy) {
+    return response;
+  }
+
+  const loginUrl = new URL("/login", request.url);
+  loginUrl.searchParams.set("next", pathname);
+  const redirect = NextResponse.redirect(loginUrl);
+  redirect.headers.set("x-trace-id", traceId);
+  if (refreshCookie) {
+    redirect.cookies.set(REFRESH_COOKIE, "", {
+      path: "/",
+      maxAge: 0,
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+    });
+  }
+  if (legacyCookie) {
+    redirect.cookies.set(SESSION_COOKIE, "", {
+      path: "/",
+      maxAge: 0,
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+    });
+  }
+  return redirect;
+}
+
+async function handleRevalidate(request: NextRequest, traceId: string) {
   const ip = clientIp(request.headers);
   const result = await consumePresetAsync(
     `mw:ip:/api/revalidate:${ip}`,
@@ -35,6 +92,7 @@ export async function middleware(request: NextRequest) {
   }
 
   const response = NextResponse.next();
+  response.headers.set("x-trace-id", traceId);
   response.headers.set("X-RateLimit-Limit", String(result.limit));
   response.headers.set("X-RateLimit-Remaining", String(result.remaining));
   response.headers.set(
@@ -44,6 +102,35 @@ export async function middleware(request: NextRequest) {
   return response;
 }
 
+async function handlePortalApi(
+  request: NextRequest,
+  pathname: string,
+  traceId: string,
+) {
+  const userId = await identifyUser({
+    headers: request.headers,
+    cookieValue: (name) => request.cookies.get(name)?.value,
+  });
+
+  const outcome = await enforceApiRateLimit(request, pathname, {
+    userId,
+    traceId,
+  });
+
+  if (!outcome.ok) {
+    return outcome.response;
+  }
+
+  const response = NextResponse.next();
+  response.headers.set("x-trace-id", traceId);
+  for (const [key, value] of Object.entries(outcome.headers)) {
+    response.headers.set(key, value);
+  }
+  return response;
+}
+
 export const config = {
-  matcher: ["/api/:path*"],
+  matcher: ["/portal/:path*", "/api/:path*"],
+  // Node crypto + getJwtPublicKey (fs/env) — Edge cannot verify RS256 with our jwt.ts.
+  runtime: "nodejs",
 };

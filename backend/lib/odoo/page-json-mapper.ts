@@ -6,7 +6,7 @@
 import { elvHeroImage, isElvHubSlug, isElvInnerSlug } from "@/data/elv-product-media";
 import { softwareSubnavForFamily } from "@/data/software-subnav";
 import { isSoftwareInnerSlug, softwareHeroImage } from "@/data/software-product-media";
-import { parseCmsPresentation } from "@/lib/design-system/presentation";
+import { parseCmsPresentation } from "@shared/lib/design-system/presentation";
 import { isCaseStudiesPageJson, mapCaseStudiesPageJson } from "@/lib/odoo/case-studies-json-mapper";
 import type { CmsPresentationSettings, FaqItem, LogoItem, Section } from "@/types";
 import { resolveCmsImageSrc } from "@shared/lib/cms-image";

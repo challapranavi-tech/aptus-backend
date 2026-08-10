@@ -359,6 +359,35 @@
   /* Newlines from stripJobHtml; blank-line collapse is enforced in shared/lib/strip-job-html.ts */
   white-space: pre-line;
 }
+.aptus-jobdetail__html {
+  color: #475467;
+  line-height: 1.65;
+}
+.aptus-jobdetail__html p,
+.aptus-jobdetail__html ul,
+.aptus-jobdetail__html ol {
+  margin: 0 0 0.75rem;
+}
+.aptus-jobdetail__html ul,
+.aptus-jobdetail__html ol {
+  padding-left: 1.25rem;
+}
+.aptus-jobdetail__html li {
+  margin: 0.25rem 0;
+}
+.aptus-jobdetail__html h1,
+.aptus-jobdetail__html h2,
+.aptus-jobdetail__html h3,
+.aptus-jobdetail__html h4 {
+  color: #0f172a;
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 1rem 0 0.4rem;
+}
+.aptus-jobdetail__html a {
+  color: var(--careers-green, #0d9488);
+  text-decoration: underline;
+}
 .aptus-jobdetail__list {
   list-style: none;
   padding: 0;

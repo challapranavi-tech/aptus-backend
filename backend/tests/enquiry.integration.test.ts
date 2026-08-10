@@ -85,12 +85,16 @@ describe("POST /api/enquiry", () => {
     expect(body.odooSynced).toBe(true);
     expect(body.quoteRef).toBeUndefined();
     expect(mocks.registerWebsiteEnquiry).toHaveBeenCalledOnce();
-    expect(mocks.sendEmail).toHaveBeenCalledOnce();
+    expect(mocks.sendEmail).toHaveBeenCalledTimes(2);
     const arg = mocks.sendEmail.mock.calls[0][0];
     expect(arg.to).toBe("info@aptusinfotech.com");
     expect(arg.subject).toBe("New Website Enquiry - ENQ-2026-000001");
     expect(arg.text).toContain("Enquiry Reference: ENQ-2026-000001");
     expect(arg.text).toContain("Source: Website Contact Form");
+    expect(mocks.sendEmail.mock.calls[1][0].to).toBe("ada@example.com");
+    expect(mocks.sendEmail.mock.calls[1][0].subject).toBe(
+      "Thank You for Contacting Aptus Infotech",
+    );
   });
 
   it("accepts state as Country alias", async () => {
@@ -126,10 +130,11 @@ describe("POST /api/enquiry", () => {
     expect(body.ok).toBe(true);
     expect(body.odooSynced).toBe(false);
     expect(body.enquiryRef).toBeNull();
-    expect(mocks.sendEmail).toHaveBeenCalledOnce();
+    expect(mocks.sendEmail).toHaveBeenCalledTimes(2);
     expect(mocks.sendEmail.mock.calls[0][0].text).toContain(
       "Enquiry Reference: (unavailable — Odoo sync failed)",
     );
+    expect(mocks.sendEmail.mock.calls[1][0].to).toBe("ada@example.com");
   });
 
   it("still emails when Odoo is not configured", async () => {
@@ -140,7 +145,8 @@ describe("POST /api/enquiry", () => {
     expect(body.ok).toBe(true);
     expect(body.odooSynced).toBe(false);
     expect(mocks.registerWebsiteEnquiry).not.toHaveBeenCalled();
-    expect(mocks.sendEmail).toHaveBeenCalledOnce();
+    expect(mocks.sendEmail).toHaveBeenCalledTimes(2);
+    expect(mocks.sendEmail.mock.calls[1][0].to).toBe("ada@example.com");
   });
 
   it("returns 502 when Resend fails after Odoo succeeds", async () => {

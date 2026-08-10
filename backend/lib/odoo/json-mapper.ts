@@ -11,7 +11,7 @@
  * Pure structural mapping — no business logic, no hard-coded copy.
  */
 
-import { parseCmsPresentation } from "@/lib/design-system/presentation";
+import { parseCmsPresentation } from "@shared/lib/design-system/presentation";
 import type { CmsPresentationSettings, MediaAsset, Section } from "@/types";
 
 // ─── Wire shape of the Odoo JSON (only the fields we consume) ─────────────────

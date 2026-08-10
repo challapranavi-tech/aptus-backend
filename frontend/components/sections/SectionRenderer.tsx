@@ -1,4 +1,4 @@
-import { cmsPresentationClasses, cmsPresentationDataAttrs } from "@/lib/design-system/presentation";
+import { cmsPresentationClasses, cmsPresentationDataAttrs } from "@shared/lib/design-system/presentation";
 import type { Section, SectionType } from "@/types";
 import type { ComponentType } from "react";
 import { Banner } from "./Banner";

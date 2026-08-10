@@ -25,6 +25,8 @@ const PAGES = [
   { slug: "cctv-camera", file: "elv/cctv-camera.json" },
   { slug: "aptus-case-studies", file: "case-studies/aptus-case-studies.json", caseStudies: true },
   { slug: "luminon", file: "multimedia/luminon.json" },
+  { slug: "chaos-corona", file: "multimedia/chaos-corona.json" },
+  { slug: "cubicost-bm-qs", file: "quantity-takeoff/cubicost-bm-qs.json" },
   { slug: "ansys", file: "educational/ansys.json" },
   { slug: "ibm-spss-software", file: "educational/ibm-spss-software.json" },
   { slug: "matlab", file: "educational/matlab.json" },

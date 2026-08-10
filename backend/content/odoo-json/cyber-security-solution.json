@@ -38,7 +38,7 @@
       },
       "subheading": "We offer industry-leading security solutions to protect your business from evolving threats",
       "align": "center",
-      "gridColumns": 3,
+      "gridColumns": 4,
       "items": [
         {
           "title": "Fortinet",
@@ -71,10 +71,10 @@
           "actionHref": "#Form"
         },
         {
-          "title": "Sonicwall",
-          "body": "High-performance network security appliance combining advanced threat prevention, & application intelligence.",
-          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/09/Sonicwall.png",
-          "imageAlt": "Sonicwall",
+          "title": "SonicWall",
+          "body": "High-performance network security combining advanced threat prevention and application intelligence.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_Create_a_digital_image_representing_Cyber_2-673x1024.jpg",
+          "imageAlt": "SonicWall",
           "href": "/sonicwall-next-gen-firewall",
           "hrefLabel": "Read More",
           "actionLabel": "Request a Quote",

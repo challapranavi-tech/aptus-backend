@@ -84,7 +84,7 @@ describe("POST /api/contact", () => {
     // Odoo off → JS fallback Q-…
     expect(body.quoteRef).toMatch(/^Q-/);
     expect(mocks.nextRequestQuoteRef).not.toHaveBeenCalled();
-    expect(mocks.sendEmail).toHaveBeenCalledOnce();
+    expect(mocks.sendEmail).toHaveBeenCalledTimes(2);
     expect(mocks.createCrmLead).not.toHaveBeenCalled();
     const arg = mocks.sendEmail.mock.calls[0][0];
     expect(arg.subject).toMatch(/quote request/i);
@@ -94,6 +94,9 @@ describe("POST /api/contact", () => {
     expect(arg.text).toContain("QTY: 3");
     expect(arg.text).toContain("Source: Website – Request Quote");
     expect(arg.text).toContain(`Quote Ref: ${body.quoteRef}`);
+    const thankYou = mocks.sendEmail.mock.calls[1][0];
+    expect(thankYou.to).toBe("ada@example.com");
+    expect(thankYou.subject).toBe("Thank You for Contacting Aptus Infotech");
   });
 
   it("creates a crm.lead when Odoo is configured", async () => {
@@ -144,9 +147,10 @@ describe("POST /api/contact", () => {
     );
     expect(res.status).toBe(200);
     expect(mocks.createCrmLead).not.toHaveBeenCalled();
-    expect(mocks.sendEmail).toHaveBeenCalledOnce();
+    expect(mocks.sendEmail).toHaveBeenCalledTimes(2);
     expect(mocks.sendEmail.mock.calls[0][0].to).toBe("info@aptusinfotech.com");
     expect(mocks.sendEmail.mock.calls[0][0].subject).toMatch(/contact message/i);
+    expect(mocks.sendEmail.mock.calls[1][0].to).toBe("ada@example.com");
   });
 
   it("routes software quotes to SOFTWARE_SALES_EMAIL", async () => {
@@ -170,8 +174,8 @@ describe("POST /api/contact", () => {
     expect(body.ok).toBe(true);
     expect(body.quoteRef).toBe("RQ-2026-000001");
     expect(body.crmSynced).toBe(false);
-    // sales quote + CRM failure alert
-    expect(mocks.sendEmail).toHaveBeenCalledTimes(2);
+    // sales quote + CRM failure alert + customer thank-you
+    expect(mocks.sendEmail).toHaveBeenCalledTimes(3);
     const alert = mocks.sendEmail.mock.calls[1][0];
     expect(alert.subject).toContain(
       `CRM Lead creation failed for Quote #${body.quoteRef}`,
@@ -193,6 +197,34 @@ describe("POST /api/contact", () => {
     );
   });
 
+  it("passes software category to createCrmLead", async () => {
+    mocks.isOdooConfigured.mockReturnValue(true);
+    process.env.SOFTWARE_SALES_EMAIL = "software@aptusinfotech.com";
+    process.env.ELV_SALES_EMAIL = "elv@aptusinfotech.com";
+    const res = await POST(contactReq(validBody));
+    expect(res.status).toBe(200);
+    expect(mocks.createCrmLead).toHaveBeenCalledWith(
+      expect.objectContaining({ category: "software" }),
+    );
+  });
+
+  it("passes elv category to createCrmLead for ELV quotes", async () => {
+    mocks.isOdooConfigured.mockReturnValue(true);
+    process.env.ELV_SALES_EMAIL = "elv@aptusinfotech.com";
+    process.env.SOFTWARE_SALES_EMAIL = "software@aptusinfotech.com";
+    const res = await POST(
+      contactReq({
+        ...validBody,
+        product: "CCTV Surveillance Solutions",
+        category: "elv",
+      }),
+    );
+    expect(res.status).toBe(200);
+    expect(mocks.createCrmLead).toHaveBeenCalledWith(
+      expect.objectContaining({ category: "elv", categoryLabel: "Infra" }),
+    );
+  });
+
   it("routes ELV products to ELV_SALES_EMAIL", async () => {
     process.env.ELV_SALES_EMAIL = "elv@aptusinfotech.com";
     process.env.SOFTWARE_SALES_EMAIL = "software@aptusinfotech.com";
@@ -206,8 +238,8 @@ describe("POST /api/contact", () => {
     expect(res.status).toBe(200);
     const arg = mocks.sendEmail.mock.calls[0][0];
     expect(arg.to).toBe("elv@aptusinfotech.com");
-    expect(arg.text).toContain("Product Category: ELV");
-    expect(arg.subject).toMatch(/ELV/);
+    expect(arg.text).toContain("Product Category: Infra");
+    expect(arg.subject).toMatch(/Infra/);
   });
 
   it("honours explicit category override over product keywords", async () => {

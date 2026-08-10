@@ -86,4 +86,13 @@ assert.equal(
 );
 assert.equal(pickHrJobDescriptionHtml(false, false), "");
 
+const htmlJob = normalizeCareerJob({
+  ...jobs[0],
+  description: "<p>Build <strong>products</strong></p><script>x()</script>",
+  descriptionHtml: "<p>Build <strong>products</strong></p><script>x()</script>",
+});
+assert.ok(htmlJob.descriptionHtml?.includes("<strong>"), "keeps formatting tags");
+assert.ok(!htmlJob.descriptionHtml?.includes("<script"), "strips script tags");
+assert.ok(htmlJob.description.includes("Build"), "plain description still set");
+
 console.log("career-jobs self-check passed");
