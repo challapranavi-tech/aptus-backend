@@ -286,10 +286,19 @@ export function CartCheckoutPanel() {
       // cleared once OrderPaymentModal reports a successful payment submission (onPaid).
 
       // Go straight into bank transfer — no intermediate "order confirmed" screen.
+      // Prefer the just-submitted cart lines: Odoo LEAD rows historically dropped qty to 1.
       if (data.reference) {
         const placed = await fetchPlacedOrder(data.reference);
         if (placed) {
-          setPaymentOrder(placed);
+          setPaymentOrder({
+            ...placed,
+            duration: cart.duration,
+            items: cart.items.map((item) => ({
+              ...item,
+              duration: resolveLineDuration(item, cart.duration),
+            })),
+            amountDue: pricing?.total ?? placed.amountDue,
+          });
         } else {
           setError(
             `Order ${data.reference} was created. Open Orders to complete payment if the payment window does not appear.`,

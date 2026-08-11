@@ -54,6 +54,8 @@ export type PortalOrder = {
   /** Reference the customer is asked to quote on their bank transfer (e.g. APT-20260803-0001). */
   bankTransferReference?: string;
   paymentProofFileName?: string;
+  /** Blob / storage key from savePaymentProofFile (`<orderId>/<timestamp>-<file>`). */
+  paymentProofStorageKey?: string;
   paymentProofUrl?: string;
   paymentProofUploadedAt?: string;
   paymentProofOdooAttachmentId?: number;

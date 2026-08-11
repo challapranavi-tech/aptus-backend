@@ -228,7 +228,10 @@ export async function POST(request: NextRequest) {
 
     const leadId = await promoteCartLeadToProductOrder({
       partnerId: profile.partnerId,
-      productNames,
+      items: orderPayload.items.map((item) => ({
+        productName: item.productName,
+        quantity: item.quantity,
+      })),
       description: notification.body,
       existingLeadId,
     });

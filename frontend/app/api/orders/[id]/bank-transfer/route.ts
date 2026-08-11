@@ -1,4 +1,3 @@
-import fs from "fs";
 import { NextRequest } from "next/server";
 import { writeAudit } from "@/lib/server/audit-log";
 import { resolveProfile } from "@/lib/server/auth-service";
@@ -21,7 +20,7 @@ import {
   formatPurchaseRequestSubmittedEmail,
 } from "@/lib/server/order-notification";
 import { createPortalNotification } from "@/lib/server/portal-notifications";
-import { savePaymentProofFile } from "@/lib/server/payment-proof-storage";
+import { savePaymentProofFile, readPaymentProofBuffer } from "@/lib/server/payment-proof-storage";
 import {
   deriveBankTransferReference,
   isAllowedPaymentProofFile,
@@ -209,7 +208,8 @@ export async function POST(request: NextRequest, context: RouteContext) {
         }
       }
 
-      const base64Content = fs.readFileSync(stored.filePath).toString("base64");
+      const proofBufferForOdoo = await readPaymentProofBuffer(stored.storageKey);
+      const base64Content = proofBufferForOdoo ? proofBufferForOdoo.toString("base64") : "";
 
       if (saleOrderId) {
         odooAttachmentId =
@@ -261,31 +261,25 @@ export async function POST(request: NextRequest, context: RouteContext) {
       );
     }
   } else {
-    order = upsertPortalOrderSnapshot({
-      ...order,
-      saleOrderId: saleOrderId ?? order.saleOrderId,
-      paymentStatus: "pending_verification",
-      paymentMethod: "Bank Transfer",
-      amountDue: totalAmount ?? order.amountDue,
-      bankTransferReference,
-      paymentProofFileName: stored.fileName,
-      paymentProofUrl: `/api/orders/${encodeURIComponent(order.id)}/payment-proof`,
-      paymentProofUploadedAt: new Date().toISOString(),
-      paymentProofOdooAttachmentId: odooAttachmentId,
-    });
+    // Demo: no Odoo — status is recorded only on the local snapshot below.
   }
 
   order = {
     ...order,
+    saleOrderId: saleOrderId ?? order.saleOrderId,
     paymentStatus: "pending_verification",
     paymentMethod: "Bank Transfer",
     amountDue: totalAmount ?? order.amountDue,
     bankTransferReference,
     paymentProofFileName: stored.fileName,
+    paymentProofStorageKey: stored.storageKey,
     paymentProofUrl: `/api/orders/${encodeURIComponent(order.id)}/payment-proof`,
     paymentProofUploadedAt: order.paymentProofUploadedAt ?? new Date().toISOString(),
     paymentProofOdooAttachmentId: odooAttachmentId ?? order.paymentProofOdooAttachmentId,
   };
+
+  // Persist storage key (and demo status) so /payment-proof can find the blob without scanning disk.
+  order = upsertPortalOrderSnapshot(order);
 
   const updated = order;
 
@@ -298,6 +292,7 @@ export async function POST(request: NextRequest, context: RouteContext) {
       reference: updated.reference,
       bankTransferReference,
       proofFileName: stored.fileName,
+      storageKey: stored.storageKey,
       saleOrderId,
     },
   });
@@ -330,12 +325,7 @@ export async function POST(request: NextRequest, context: RouteContext) {
     odooLink: saleOrderId ? getOdooSaleOrderLink(saleOrderId) : null,
   });
 
-  let proofBuffer: Buffer | null = null;
-  try {
-    proofBuffer = fs.readFileSync(stored.filePath);
-  } catch {
-    proofBuffer = null;
-  }
+  const proofBuffer = await readPaymentProofBuffer(stored.storageKey).catch(() => null);
 
   const [customerResult, adminResult] = await Promise.all([
     sendPortalEmail({ to: profile.email, subject: customerEmail.subject, body: customerEmail.body }),

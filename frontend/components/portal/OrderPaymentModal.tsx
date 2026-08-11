@@ -342,7 +342,9 @@ export function OrderPaymentModal({ order, open, onClose, onPaid }: OrderPayment
                   </div>
                   <div>
                     <span>Products selected</span>
-                    <strong>{order.items.length}</strong>
+                    <strong>
+                      {order.items.reduce((sum, item) => sum + Math.max(0, item.quantity), 0)}
+                    </strong>
                   </div>
                 </div>
               </section>

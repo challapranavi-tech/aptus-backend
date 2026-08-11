@@ -15,10 +15,52 @@ export function subscriptionLeadName(productName: string): string {
   return `Portal subscription: ${productName.trim()}`;
 }
 
-export function productOrderLeadName(productNames: string[]): string {
-  const preview = productNames.slice(0, 3).join(", ");
-  const suffix = productNames.length > 3 ? ` +${productNames.length - 3} more` : "";
+type LeadNameItem = string | { productName: string; quantity?: number };
+
+function leadNameLabel(item: LeadNameItem): string {
+  if (typeof item === "string") return item.trim();
+  const name = item.productName.trim();
+  if (!name) return "";
+  const qty = Math.min(999, Math.max(1, Math.floor(item.quantity ?? 1)));
+  return qty > 1 ? `${name} ×${qty}` : name;
+}
+
+/** CRM opportunity title for a portal software order (qty encoded when > 1). */
+export function productOrderLeadName(items: LeadNameItem[]): string {
+  const labels = items.map(leadNameLabel).filter(Boolean);
+  const preview = labels.slice(0, 3).join(", ");
+  const suffix = labels.length > 3 ? ` +${labels.length - 3} more` : "";
   return `Portal software order: ${preview}${suffix}`;
+}
+
+/**
+ * Reverse of productOrderLeadName — recovers per-line quantities from the CRM title.
+ * "Portal software order: Prokon ×4" → [{ productName: "Prokon", quantity: 4 }]
+ */
+export function parseProductOrderLeadItems(
+  leadName: string,
+): Array<{ productName: string; quantity: number }> {
+  const raw = leadName
+    .replace(/^Portal software order:\s*/i, "")
+    .replace(/\s*\+\d+\s*more\s*$/i, "")
+    .trim();
+  if (!raw) return [];
+
+  return raw
+    .split(",")
+    .map((part) => {
+      const chunk = part.trim();
+      if (!chunk) return null;
+      const match = chunk.match(/^(.*?)\s*[×x]\s*(\d+)\s*$/);
+      if (match) {
+        return {
+          productName: match[1].trim(),
+          quantity: Math.min(999, Math.max(1, Number(match[2]) || 1)),
+        };
+      }
+      return { productName: chunk, quantity: 1 };
+    })
+    .filter((item): item is { productName: string; quantity: number } => Boolean(item?.productName));
 }
 
 const CART_LEAD_PREFIX = "Added to Cart";
@@ -113,7 +155,7 @@ async function createPortalCrmLead(
 
 export async function createProductOrderLead(input: {
   partnerId: number;
-  productNames: string[];
+  items: Array<{ productName: string; quantity: number }>;
   description: string;
 }): Promise<number> {
   const client = getOdooClient();
@@ -121,7 +163,7 @@ export async function createProductOrderLead(input: {
 
   return createPortalCrmLead(client, {
     partnerId: input.partnerId,
-    name: productOrderLeadName(input.productNames),
+    name: productOrderLeadName(input.items),
     description: input.description,
     routing: "software",
   });
@@ -306,7 +348,7 @@ export async function closeCartCrmLead(input: {
  */
 export async function promoteCartLeadToProductOrder(input: {
   partnerId: number;
-  productNames: string[];
+  items: Array<{ productName: string; quantity: number }>;
   description: string;
   existingLeadId?: number;
 }): Promise<number> {
@@ -321,14 +363,14 @@ export async function promoteCartLeadToProductOrder(input: {
   if (!leadId) {
     return createProductOrderLead({
       partnerId: input.partnerId,
-      productNames: input.productNames,
+      items: input.items,
       description: input.description,
     });
   }
 
   const ctx = await getPartnerOdooContextForCrm(input.partnerId, "software");
   const stageId = await resolvePortalSoftwareOrderStageId(client, ctx.teamId);
-  const name = productOrderLeadName(input.productNames);
+  const name = productOrderLeadName(input.items);
 
   const values: Record<string, unknown> = {
     name,

@@ -312,6 +312,7 @@ export function upsertPortalOrderSnapshot(order: PortalOrder): PortalOrder {
       paymentMethod: order.paymentMethod ?? existing.paymentMethod,
       bankTransferReference: order.bankTransferReference ?? existing.bankTransferReference,
       paymentProofFileName: order.paymentProofFileName ?? existing.paymentProofFileName,
+      paymentProofStorageKey: order.paymentProofStorageKey ?? existing.paymentProofStorageKey,
       paymentProofUrl: order.paymentProofUrl ?? existing.paymentProofUrl,
       paymentProofUploadedAt: order.paymentProofUploadedAt ?? existing.paymentProofUploadedAt,
       paymentProofOdooAttachmentId:

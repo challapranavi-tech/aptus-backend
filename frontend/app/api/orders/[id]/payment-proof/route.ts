@@ -3,12 +3,12 @@ import { resolveProfile } from "@/lib/server/auth-service";
 import { isAdminClaims } from "@/lib/server/admin-auth";
 import { getSessionFromRequestOrRefresh, jsonError } from "@/lib/server/http";
 import { getOdooClient } from "@/lib/server/odoo/client";
-import { readPaymentProofFile } from "@/lib/server/payment-proof-storage";
+import { readPaymentProofBuffer } from "@/lib/server/payment-proof-storage";
 import { resolveOrderForPartner } from "@/lib/server/resolve-order";
 
 type RouteContext = { params: Promise<{ id: string }> };
 
-/** Streams payment proof from Odoo attachment (preferred) or local upload buffer. */
+/** Streams payment proof from Odoo attachment (preferred) or Blob / in-memory buffer. */
 export async function GET(request: NextRequest, context: RouteContext) {
   const claims = await getSessionFromRequestOrRefresh(request);
   if (!claims) {
@@ -60,7 +60,7 @@ export async function GET(request: NextRequest, context: RouteContext) {
           });
         }
       } catch {
-        /* fall through to local */
+        /* fall through to blob / memory */
       }
     }
   }
@@ -69,21 +69,11 @@ export async function GET(request: NextRequest, context: RouteContext) {
     return jsonError("Payment proof not found", 404);
   }
 
-  const storeDir = order.id;
-  const files = order.paymentProofFileName;
-  const fs = await import("fs");
-  const path = await import("path");
-  const dir = path.join(process.cwd(), ".data", "payment-proofs", storeDir);
-  let matchKey = `${storeDir}/${files}`;
-  try {
-    const entries = fs.readdirSync(dir);
-    const match = entries.find((entry) => entry.endsWith(files));
-    if (match) matchKey = `${storeDir}/${match}`;
-  } catch {
-    /* fall through */
-  }
+  // Prefer the key written at upload time; fall back for older orders.
+  const storageKey =
+    order.paymentProofStorageKey ?? `${order.id}/${order.paymentProofFileName}`;
 
-  const buffer = readPaymentProofFile(matchKey);
+  const buffer = await readPaymentProofBuffer(storageKey).catch(() => null);
   if (!buffer) {
     return jsonError("Payment proof not found", 404);
   }

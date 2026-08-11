@@ -9,6 +9,7 @@ import {
   parseSaleOrderPaymentMeta,
 } from "./payment-meta";
 import { getRelatedPartnerIds } from "./partner-context";
+import { parseProductOrderLeadItems } from "./leads";
 import { fetchPartnerSubscriptions, saleOrderHasIssuedLicense } from "./subscriptions";
 
 type OdooSaleOrderRow = {
@@ -211,8 +212,21 @@ async function mapSaleOrderRow(
 }
 
 function mapLeadRow(lead: OdooCrmLeadRow, partnerId: number): PortalOrder {
-  const productName = lead.name.replace(/^Portal software order:\s*/i, "");
   const paymentMeta = parseSaleOrderPaymentMeta(lead.description);
+  const parsedItems = parseProductOrderLeadItems(lead.name);
+  const items: OrderLineItem[] = parsedItems.length
+    ? parsedItems.map((item) => ({
+        category: "Software",
+        productName: item.productName,
+        quantity: item.quantity,
+      }))
+    : [
+        {
+          category: "Software",
+          productName: lead.name.replace(/^Portal software order:\s*/i, ""),
+          quantity: 1,
+        },
+      ];
 
   const base: PortalOrder = {
     id: `odoo-lead-${lead.id}`,
@@ -221,7 +235,7 @@ function mapLeadRow(lead: OdooCrmLeadRow, partnerId: number): PortalOrder {
     partnerId,
     status: normalizeOrderStatus(mapLeadToStatus(lead)),
     duration: "1year",
-    items: [{ category: "Software", productName, quantity: 1 }],
+    items,
     leadId: lead.id,
     paymentStatus: paymentMeta.paymentStatus,
     createdAt: lead.create_date,
