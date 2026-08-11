@@ -119,7 +119,8 @@ function paymentMetaFromCrmStage(
   base: ReturnType<typeof parseSaleOrderPaymentMeta>,
 ): ReturnType<typeof parseSaleOrderPaymentMeta> & { licenseIssued?: boolean } {
   const stage = (stageName ?? "").toLowerCase();
-  if (stage.includes("license issued")) {
+  // "Won" is the pipeline's license-done stage when no dedicated "License Issued" exists.
+  if (stage.includes("license issued") || stage.includes("won")) {
     return { ...base, paymentStatus: base.paymentStatus === "failed" ? "failed" : "paid", licenseIssued: true };
   }
   if (stage.includes("payment confirmation")) {

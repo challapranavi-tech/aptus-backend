@@ -46,5 +46,9 @@ assert.equal(
   getOrderDisplayStatus(order({ paymentStatus: "paid", licenseIssued: true })),
   "License Issued",
 );
+assert.equal(
+  getOrderDisplayStatus(order({ paymentStatus: "paid", crmStage: "Won" })),
+  "License Issued",
+);
 
 console.log("purchase-workflow.check: ok");

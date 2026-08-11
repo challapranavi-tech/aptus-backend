@@ -21,7 +21,7 @@ function crmStageHint(order: PortalOrder): string {
  * Portal-facing status mirrors the purchase CRM journey:
  * Portal Purchase → Payment Verification Pending
  * Payment Confirmation → Payment Verified
- * License Issued → License Issued
+ * License Issued / Won → License Issued
  */
 export function getOrderDisplayStatus(order: PortalOrder): OrderDisplayStatus {
   const status = normalizeOrderStatus(order.status);
@@ -31,7 +31,11 @@ export function getOrderDisplayStatus(order: PortalOrder): OrderDisplayStatus {
     return "Rejected";
   }
 
-  if (order.licenseIssued || stage.includes("license issued")) {
+  if (
+    order.licenseIssued ||
+    stage.includes("license issued") ||
+    stage.includes("won")
+  ) {
     return "License Issued";
   }
 

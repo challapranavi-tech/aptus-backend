@@ -59,6 +59,25 @@ assert.equal(
   ),
   "Payment Verified",
 );
+assert.equal(
+  getOrderDisplayStatus(
+    order({
+      paymentStatus: "paid",
+      status: "Completed",
+      crmStage: "Won",
+    }),
+  ),
+  "License Issued",
+);
+assert.equal(
+  getOrderDisplayStatus(
+    order({
+      paymentStatus: "paid",
+      crmStage: "License Issued",
+    }),
+  ),
+  "License Issued",
+);
 
 assert.equal(
   isOrdersPageOrder(order({ paymentStatus: "pending_verification" })),

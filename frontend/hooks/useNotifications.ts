@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { authFetch } from "@/lib/access-token";
-import { listenPortalDataChanged, scopeMatches } from "@/lib/portal-data-events";
+import { listenPortalDataChanged, notifyPortalDataChanged, scopeMatches } from "@/lib/portal-data-events";
 import { invalidatePortalSharedFetch, portalSharedGet } from "@/lib/portal-shared-fetch";
 import type { NotificationsResponse, PortalNotification } from "@/types/notifications";
 
@@ -61,6 +61,8 @@ export function useNotifications() {
         invalidatePortalSharedFetch("/api/notifications");
         if (!response.ok) {
           void load({ silent: true });
+        } else {
+          notifyPortalDataChanged("notifications");
         }
       } catch {
         void load({ silent: true });

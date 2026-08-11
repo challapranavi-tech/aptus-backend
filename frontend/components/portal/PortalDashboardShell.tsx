@@ -15,6 +15,12 @@ import { PortalNavIcon } from "./PortalNavIcon";
 import { SoftwareSubNav } from "@/components/layout/SoftwareSubNav";
 import type { SoftwareSubNavLink } from "@/data/software-subnav";
 import { useAuth } from "@/context/AuthProvider";
+import {
+  PORTAL_CART_EVENT,
+  portalCartCount,
+  readPortalCart,
+  type PortalCartState,
+} from "@/lib/portal-cart";
 import { getPortalUserFromStorage } from "@/lib/portal-session";
 import { useNotifications } from "@/hooks/useNotifications";
 import { NotificationCountBadge } from "./NotificationCountBadge";
@@ -41,6 +47,7 @@ type NavItem = {
 const NAV: NavItem[] = [
   { section: "dashboard", href: "/portal/dashboard", label: "Dashboard", title: "Dashboard" },
   { section: "products", href: "/portal/products", label: "Products", title: "Products" },
+  { section: "cart", href: "/portal/cart", label: "Cart", title: "Shopping Cart" },
   {
     section: "subscriptions",
     href: "/portal/subscriptions",
@@ -57,6 +64,45 @@ const NAV: NavItem[] = [
 
 const PORTAL_NAV_LINKS: SoftwareSubNavLink[] = NAV.map(({ label, href }) => ({ label, href }));
 
+function usePortalCartCount(): number {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const sync = (cart?: PortalCartState) => {
+      setCount(portalCartCount(cart ?? readPortalCart()));
+    };
+    sync();
+    const onStorage = (event: StorageEvent) => {
+      if (event.key === "aptus:portal-cart") sync();
+    };
+    const onCart = (event: Event) => {
+      sync((event as CustomEvent<PortalCartState>).detail);
+    };
+    window.addEventListener("storage", onStorage);
+    window.addEventListener(PORTAL_CART_EVENT, onCart);
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener(PORTAL_CART_EVENT, onCart);
+    };
+  }, []);
+
+  return count;
+}
+
+function navTrailingBadge(
+  link: SoftwareSubNavLink,
+  unreadNotificationCount: number,
+  cartCount: number,
+) {
+  if (link.href === "/portal/notifications") {
+    return <NotificationCountBadge count={unreadNotificationCount} active />;
+  }
+  if (link.href === "/portal/cart") {
+    return <NotificationCountBadge count={cartCount} active />;
+  }
+  return null;
+}
+
 export function PortalDashboardShell({
   section,
   children,
@@ -64,14 +110,12 @@ export function PortalDashboardShell({
   section: Section;
   children?: React.ReactNode;
 }) {
-  const current =
-    section === "cart"
-      ? { section: "cart" as const, href: "/portal/cart", label: "Cart", title: "Shopping Cart" }
-      : NAV.find((item) => item.section === section) ?? NAV[0];
+  const current = NAV.find((item) => item.section === section) ?? NAV[0];
 
   const { user } = useAuth();
   const { notifications } = useNotifications();
   const unreadNotificationCount = notifications.filter((notification) => !notification.read).length;
+  const cartCount = usePortalCartCount();
   const [avatarDataUrl, setAvatarDataUrl] = useState<string | undefined>();
 
   useEffect(() => {
@@ -112,11 +156,7 @@ export function PortalDashboardShell({
             links={PORTAL_NAV_LINKS}
             label="Customer portal"
             matchPrefix
-            renderTrailing={(link) =>
-              link.href === "/portal/notifications" ? (
-                <NotificationCountBadge count={unreadNotificationCount} active />
-              ) : null
-            }
+            renderTrailing={(link) => navTrailingBadge(link, unreadNotificationCount, cartCount)}
           />
         </aside>
 
@@ -154,11 +194,7 @@ export function PortalDashboardShell({
               label="Customer portal quick navigation"
               matchPrefix
               horizontal
-              renderTrailing={(link) =>
-                link.href === "/portal/notifications" ? (
-                  <NotificationCountBadge count={unreadNotificationCount} active />
-                ) : null
-              }
+              renderTrailing={(link) => navTrailingBadge(link, unreadNotificationCount, cartCount)}
             />
           </div>
 

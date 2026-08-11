@@ -97,9 +97,12 @@ export function sanitizeFilename(name: string): string {
 /**
  * Intermediate extensions that must never appear before an allowlisted final
  * extension (blocks malware.exe.pdf / photo.svg.jpg style compound names).
+ *
+ * ponytail: omit `com` — it collides with hostnames in browser screenshot names
+ * (`…_supabase.com.jpeg`). Real DOS .com uploads still fail magic-byte sniffing.
  */
 const COMPOUND_DANGEROUS_EXT =
-  /\.(?:exe|bat|cmd|com|scr|dll|msi|js|mjs|cjs|vbs|ps1|sh|php|asp|aspx|jsp|html?|svg|jar|pif|hta|wsf|cpl)$/i;
+  /\.(?:exe|bat|cmd|scr|dll|msi|js|mjs|cjs|vbs|ps1|sh|php|asp|aspx|jsp|html?|svg|jar|pif|hta|wsf|cpl)$/i;
 
 /** True when the final extension is allowlisted and no dangerous mid-extension is present. */
 export function hasAllowedExtension(

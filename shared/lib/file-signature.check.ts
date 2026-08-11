@@ -87,5 +87,20 @@ assert.ok(
   validateFileContent("evil.pdf", svg, [".pdf"], "Resume"),
   "svg-as-pdf rejected",
 );
+// Browser screenshots often embed the site hostname before .jpeg.
+assert.equal(
+  validateFileContent(
+    "Screenshot_30-7-2026_152022_supabase.com.jpeg",
+    jpeg,
+    [".pdf", ".jpg", ".jpeg", ".png"],
+    "Payment proof",
+  ),
+  null,
+  "hostname-in-filename jpeg accepted",
+);
+assert.ok(
+  validateFileContent("malware.exe.jpeg", jpeg, [".jpeg"], "Payment proof"),
+  "exe mid-extension still rejected",
+);
 
 console.log("file-signature self-check passed");

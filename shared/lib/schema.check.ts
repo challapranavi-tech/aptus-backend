@@ -16,6 +16,7 @@ import {
   meaningfulTextError,
   parseObject,
   personNameError,
+  hasAllowedExtension,
   sanitizeFilename,
   sanitizeText,
   validationErrorPayload,
@@ -219,5 +220,15 @@ assert.equal(parseCmsSlug("about-us").ok, true);
 assert.equal(parseCmsSlug("../x").ok, false);
 
 assert.equal(validationErrorPayload({ email: "bad" }).error, "Validation failed.");
+
+const proofExts = [".pdf", ".jpg", ".jpeg", ".png"] as const;
+assert.equal(
+  hasAllowedExtension("Screenshot_30-7-2026_152022_supabase.com.jpeg", proofExts),
+  true,
+  "hostname .com before .jpeg is not a compound executable",
+);
+assert.equal(hasAllowedExtension("slip.jpeg", proofExts), true);
+assert.equal(hasAllowedExtension("malware.exe.pdf", proofExts), false);
+assert.equal(hasAllowedExtension("photo.svg.jpg", proofExts), false);
 
 console.log("schema.check: ok");

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNotifications } from "@/hooks/useNotifications";
 import { formatShortDate } from "@/lib/overview-data";
 import type { PortalNotificationStatus } from "@/types/notifications";
@@ -56,6 +56,8 @@ export function NotificationsPanel({ limit }: NotificationsPanelProps) {
   const { notifications, loading, error, markRead } = useNotifications();
   const [filter, setFilter] = useState<NotificationFilter>("all");
   const isPreview = Boolean(limit);
+  // Full notifications page: mark unread as read once they are on screen — no Click CTA.
+  const markingRef = useRef(false);
 
   const filtered = useMemo(() => {
     if (filter === "unread") {
@@ -66,6 +68,18 @@ export function NotificationsPanel({ limit }: NotificationsPanelProps) {
 
   const visible = limit ? filtered.slice(0, limit) : filtered;
   const unreadCount = notifications.filter((notification) => !notification.read).length;
+
+  useEffect(() => {
+    if (isPreview || loading || markingRef.current) return;
+    const unreadIds = notifications
+      .filter((notification) => !notification.read)
+      .map((notification) => notification.id);
+    if (!unreadIds.length) return;
+    markingRef.current = true;
+    void markRead(unreadIds).finally(() => {
+      markingRef.current = false;
+    });
+  }, [isPreview, loading, notifications, markRead]);
 
   return (
     <section className="aptus-dashboard-card" aria-label="Account notifications">
@@ -133,17 +147,6 @@ export function NotificationsPanel({ limit }: NotificationsPanelProps) {
               className={
                 notification.read ? "aptus-notification--read" : "aptus-notification--unread"
               }
-              role="button"
-              tabIndex={0}
-              onClick={() => {
-                if (!notification.read) void markRead([notification.id]);
-              }}
-              onKeyDown={(event) => {
-                if ((event.key === "Enter" || event.key === " ") && !notification.read) {
-                  event.preventDefault();
-                  void markRead([notification.id]);
-                }
-              }}
             >
               <div className="aptus-notification__body">
                 <strong>{notification.title}</strong>

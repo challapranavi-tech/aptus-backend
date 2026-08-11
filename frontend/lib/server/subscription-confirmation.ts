@@ -183,7 +183,8 @@ export async function notifyPurchaseApprovedIfNeeded(
     order.paymentStatus === "paid" ||
     order.status === "Completed" ||
     stage.includes("payment confirmation") ||
-    stage.includes("license issued");
+    stage.includes("license issued") ||
+    stage.includes("won");
 
   if (!paymentVerified) {
     return { notified: false, emailSent: false };
@@ -191,7 +192,7 @@ export async function notifyPurchaseApprovedIfNeeded(
 
   // If the license is already issued, the License Issued email covers this step —
   // do not also send Payment Verified for the same moment.
-  if (order.licenseIssued || stage.includes("license issued")) {
+  if (order.licenseIssued || stage.includes("license issued") || stage.includes("won")) {
     await claimOrderEmail(order, "purchase_approved");
     return { notified: false, emailSent: false };
   }
@@ -363,7 +364,8 @@ export async function maybeNotifyWorkflowFromOdoo(
       order.paymentStatus === "paid" ||
       order.status === "Completed" ||
       stage.includes("payment confirmation") ||
-      stage.includes("license issued")
+      stage.includes("license issued") ||
+      stage.includes("won")
     ) {
       await notifyPurchaseApprovedIfNeeded(order, triggeredBy);
     }
