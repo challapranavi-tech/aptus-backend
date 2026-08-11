@@ -47,6 +47,20 @@ export function cartFingerprint(cart: Pick<StoredPortalCart, "duration" | "items
   return JSON.stringify({ duration: cart.duration, items });
 }
 
+/**
+ * True when the stored cart is the one this order was prepared from, so its lines
+ * may be used for the purchase. Guards against paying an older order (which owns
+ * its lines already) while a fresh, unrelated cart exists.
+ */
+export function cartBelongsToOrder(
+  cart: Pick<StoredPortalCart, "items" | "crmLeadId"> | null | undefined,
+  order: { leadId?: number; saleOrderId?: number },
+): boolean {
+  return Boolean(
+    cart?.items.length && order.leadId && cart.crmLeadId === order.leadId && !order.saleOrderId,
+  );
+}
+
 async function readIndex(): Promise<string[]> {
   const raw = await kvGet<string[]>(INDEX_KEY);
   return Array.isArray(raw) ? raw.filter((id) => typeof id === "string" && id.length > 0) : [];

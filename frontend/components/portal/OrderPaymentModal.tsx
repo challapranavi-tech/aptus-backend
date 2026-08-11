@@ -437,10 +437,6 @@ export function OrderPaymentModal({ order, open, onClose, onPaid }: OrderPayment
                       <strong>{formatOmanAmount(pricing.subscriptionFee)}</strong>
                     </div>
                     <div>
-                      <span>Aptus platform fee</span>
-                      <strong>{formatOmanAmount(pricing.platformFee)}</strong>
-                    </div>
-                    <div>
                       <span>VAT (5%)</span>
                       <strong>{formatOmanAmount(pricing.vat)}</strong>
                     </div>
@@ -511,10 +507,6 @@ export function OrderPaymentModal({ order, open, onClose, onPaid }: OrderPayment
                     <div>
                       <span>Subtotal</span>
                       <strong>{formatOmanAmount(pricing.subscriptionFee)}</strong>
-                    </div>
-                    <div>
-                      <span>Aptus platform fee</span>
-                      <strong>{formatOmanAmount(pricing.platformFee)}</strong>
                     </div>
                     <div>
                       <span>VAT (5%)</span>

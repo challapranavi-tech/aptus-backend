@@ -17,7 +17,6 @@ export { ELV_PURCHASE_CATALOG, SOFTWARE_PURCHASE_CATALOG, getProductCardMeta, ge
 
 export type OrderPricing = {
   subscriptionFee: number;
-  platformFee: number;
   vat: number;
   total: number;
   /** True when every selected line has a guide price. */
@@ -40,20 +39,17 @@ export function estimateOrderPricing(order: PortalOrder): OrderPricing | null {
   if (subscriptionFee <= 0) {
     return {
       subscriptionFee: 0,
-      platformFee: 0,
       vat: 0,
       total: 0,
       complete: false,
     };
   }
 
-  const platformFee = subscriptionFee * 0.1;
-  const vat = (subscriptionFee + platformFee) * 0.05;
-  const total = subscriptionFee + platformFee + vat;
+  const vat = subscriptionFee * 0.05;
+  const total = subscriptionFee + vat;
 
   return {
     subscriptionFee,
-    platformFee,
     vat,
     total,
     complete: pricedLines === order.items.length,

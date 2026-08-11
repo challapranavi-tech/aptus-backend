@@ -12,6 +12,7 @@ import {
   claimNotificationSend as claimOdooNotificationSend,
 } from "./odoo/notifications";
 import { isDemoMode } from "./config";
+import { writeJsonStore } from "./json-file-store";
 import { kvGet, kvSet } from "./kv-store";
 
 const DATA_DIR = path.join(process.cwd(), ".data");
@@ -34,8 +35,7 @@ function readStore(): NotificationsStore {
 }
 
 function writeStore(store: NotificationsStore): void {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
-  fs.writeFileSync(NOTIFICATIONS_FILE, JSON.stringify(store, null, 2), "utf8");
+  writeJsonStore(NOTIFICATIONS_FILE, store);
 }
 
 function readIdsKey(partnerId: number): string {

@@ -105,20 +105,17 @@ export function estimateCartPricing(cart: PortalCartState): OrderPricing | null 
   if (subscriptionFee <= 0) {
     return {
       subscriptionFee: 0,
-      platformFee: 0,
       vat: 0,
       total: 0,
       complete: false,
     };
   }
 
-  const platformFee = subscriptionFee * 0.1;
-  const vat = (subscriptionFee + platformFee) * 0.05;
-  const total = subscriptionFee + platformFee + vat;
+  const vat = subscriptionFee * 0.05;
+  const total = subscriptionFee + vat;
 
   return {
     subscriptionFee,
-    platformFee,
     vat,
     total,
     complete: pricedLines === cart.items.length,

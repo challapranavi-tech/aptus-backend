@@ -19,7 +19,13 @@ import {
   formatBankTransferAdminEmail,
   formatPurchaseRequestSubmittedEmail,
 } from "@/lib/server/order-notification";
+import { promoteCartLeadToProductOrder } from "@/lib/server/odoo/leads";
 import { createPortalNotification } from "@/lib/server/portal-notifications";
+import {
+  cartBelongsToOrder,
+  clearStoredPortalCart,
+  getStoredPortalCart,
+} from "@/lib/server/portal-cart-store";
 import { savePaymentProofFile, readPaymentProofBuffer } from "@/lib/server/payment-proof-storage";
 import {
   deriveBankTransferReference,
@@ -49,11 +55,13 @@ type BankTransferStep =
   | "resolve_order"
   | "claim_lock"
   | "store_proof"
+  | "promote_lead"
   | "create_sale_order"
   | "read_proof_buffer"
   | "attach_odoo_proof"
   | "mark_payment_pending"
   | "persist_snapshot"
+  | "clear_cart"
   | "notify";
 
 function logBankTransferError(
@@ -214,6 +222,20 @@ export async function POST(request: NextRequest, context: RouteContext) {
     );
   }
 
+  // Until payment, the CRM record is still the cart journey, whose title carries no
+  // quantities — the stored cart is the authoritative line source. Only trust it when
+  // it belongs to this very order, so paying an older order never picks up a new cart.
+  const cart = await getStoredPortalCart(claims.sub);
+  const cartMatchesOrder = cartBelongsToOrder(cart, order);
+  if (cartMatchesOrder && cart) {
+    order = { ...order, duration: cart.duration, items: cart.items };
+    logger.info("bank-transfer using stored cart lines", {
+      orderId: order.id,
+      leadId: order.leadId,
+      itemCount: cart.items.length,
+    });
+  }
+
   const bankTransferReference = order.bankTransferReference ?? deriveBankTransferReference(order);
   const pricing = estimateOrderPricing(order);
   const totalAmount = order.amountDue ?? pricing?.total;
@@ -254,6 +276,27 @@ export async function POST(request: NextRequest, context: RouteContext) {
 
   if (!isDemoMode()) {
     try {
+      // First purchase write of the whole flow: the proof is stored, so the cart
+      // journey may now become a software order in CRM.
+      if (order.leadId) {
+        logger.info("bank-transfer promoting CRM lead to software order", {
+          orderId: order.id,
+          leadId: order.leadId,
+        });
+        await promoteCartLeadToProductOrder({
+          partnerId: profile.partnerId,
+          items: order.items.map((item) => ({
+            productName: item.productName,
+            quantity: item.quantity,
+          })),
+          existingLeadId: order.leadId,
+        }).catch((error: unknown) => {
+          throw Object.assign(error instanceof Error ? error : new Error(String(error)), {
+            failedOperation: "promote_lead" as const,
+          });
+        });
+      }
+
       if (!saleOrderId) {
         try {
           logger.info("bank-transfer creating sale order", { orderId: order.id });
@@ -385,6 +428,15 @@ export async function POST(request: NextRequest, context: RouteContext) {
     logger.info("bank-transfer demo mode — skipping Odoo sync", { orderId: order.id });
   }
 
+  // The cart survives every failed attempt above so the customer can retry; it is
+  // only spent once the order is genuinely recorded.
+  if (cartMatchesOrder) {
+    const orderId = order.id;
+    await clearStoredPortalCart(claims.sub).catch((error: unknown) => {
+      logBankTransferError("clear_cart", orderId, error);
+    });
+  }
+
   order = {
     ...order,
     saleOrderId: saleOrderId ?? order.saleOrderId,
@@ -400,12 +452,18 @@ export async function POST(request: NextRequest, context: RouteContext) {
   };
 
   // Persist storage key (and demo status) so /payment-proof can find the blob without scanning disk.
-  order = upsertPortalOrderSnapshot(order);
-  logger.info("bank-transfer snapshot persisted", {
-    orderId: order.id,
-    storageKey: stored.storageKey,
-    paymentStatus: order.paymentStatus,
-  });
+  try {
+    order = upsertPortalOrderSnapshot(order);
+    logger.info("bank-transfer snapshot persisted", {
+      orderId: order.id,
+      storageKey: stored.storageKey,
+      paymentStatus: order.paymentStatus,
+    });
+  } catch (error) {
+    // Odoo already holds the proof — a local snapshot failure must not make the
+    // customer retry (that would duplicate the attachment).
+    logBankTransferError("persist_snapshot", order.id, error);
+  }
 
   const updated = order;
 
@@ -423,70 +481,81 @@ export async function POST(request: NextRequest, context: RouteContext) {
     },
   });
 
-  const productLines = updated.items.map(
-    (item) => `${item.category} — ${item.productName} × ${item.quantity}`,
-  );
-  const totalAmountLabel = totalAmount != null ? formatOmanAmount(totalAmount) : "To be confirmed";
-  const portalUrl = getPortalBaseUrl();
+  // Best-effort from here on: the proof is recorded in Odoo, so notification
+  // failures are logged but never turned into an error for the customer.
+  try {
+    const productLines = updated.items.map(
+      (item) => `${item.category} — ${item.productName} × ${item.quantity}`,
+    );
+    const totalAmountLabel =
+      totalAmount != null ? formatOmanAmount(totalAmount) : "To be confirmed";
+    const portalUrl = getPortalBaseUrl();
 
-  const customerEmail = formatPurchaseRequestSubmittedEmail({
-    customerName: profile.name,
-    reference: updated.reference,
-    bankTransferReference,
-    products: updated.items.map((item) => item.productName),
-    duration: updated.duration,
-    totalAmount: totalAmountLabel,
-    portalUrl,
-  });
-
-  const adminEmail = formatBankTransferAdminEmail({
-    customerName: profile.name,
-    company: profile.company,
-    email: profile.email,
-    phone: profile.phone,
-    reference: updated.reference,
-    bankTransferReference,
-    products: productLines,
-    totalAmount: totalAmountLabel,
-    odooLink: saleOrderId ? getOdooSaleOrderLink(saleOrderId) : null,
-  });
-
-  const proofBuffer = await readPaymentProofBuffer(stored.storageKey).catch((error) => {
-    logBankTransferError("notify", updated.id, error, { phase: "read_proof_for_email" });
-    return null;
-  });
-
-  const [customerResult, adminResult] = await Promise.all([
-    sendPortalEmail({ to: profile.email, subject: customerEmail.subject, body: customerEmail.body }),
-    sendPortalEmail({
-      to: getOrderNotificationEmail(),
-      subject: adminEmail.subject,
-      body: adminEmail.body,
-      replyTo: profile.email,
-      attachments: proofBuffer
-        ? [{ filename: stored.fileName, content: proofBuffer, contentType: stored.contentType }]
-        : undefined,
-    }),
-  ]);
-
-  if (!customerResult.sent || !adminResult.sent) {
-    logger.warn("Bank transfer notification email(s) not sent", {
-      orderId: updated.id,
-      customerSent: customerResult.sent,
-      adminSent: adminResult.sent,
-    });
-  }
-
-  if (customerResult.sent && profile.partnerId) {
-    await createPortalNotification({
-      partnerId: profile.partnerId,
-      actorId: claims.sub,
-      title: "Order received",
-      detail: `Your order ${updated.reference} is awaiting payment verification (2-3 business days).`,
-      status: "Action Required",
-      type: "purchase_submitted",
+    const customerEmail = formatPurchaseRequestSubmittedEmail({
+      customerName: profile.name,
       reference: updated.reference,
+      bankTransferReference,
+      products: updated.items.map((item) => item.productName),
+      duration: updated.duration,
+      totalAmount: totalAmountLabel,
+      portalUrl,
     });
+
+    const adminEmail = formatBankTransferAdminEmail({
+      customerName: profile.name,
+      company: profile.company,
+      email: profile.email,
+      phone: profile.phone,
+      reference: updated.reference,
+      bankTransferReference,
+      products: productLines,
+      totalAmount: totalAmountLabel,
+      odooLink: saleOrderId ? getOdooSaleOrderLink(saleOrderId) : null,
+    });
+
+    const proofBuffer = await readPaymentProofBuffer(stored.storageKey).catch((error) => {
+      logBankTransferError("notify", updated.id, error, { phase: "read_proof_for_email" });
+      return null;
+    });
+
+    const [customerResult, adminResult] = await Promise.all([
+      sendPortalEmail({
+        to: profile.email,
+        subject: customerEmail.subject,
+        body: customerEmail.body,
+      }),
+      sendPortalEmail({
+        to: getOrderNotificationEmail(),
+        subject: adminEmail.subject,
+        body: adminEmail.body,
+        replyTo: profile.email,
+        attachments: proofBuffer
+          ? [{ filename: stored.fileName, content: proofBuffer, contentType: stored.contentType }]
+          : undefined,
+      }),
+    ]);
+
+    if (!customerResult.sent || !adminResult.sent) {
+      logger.warn("Bank transfer notification email(s) not sent", {
+        orderId: updated.id,
+        customerSent: customerResult.sent,
+        adminSent: adminResult.sent,
+      });
+    }
+
+    if (customerResult.sent && profile.partnerId) {
+      await createPortalNotification({
+        partnerId: profile.partnerId,
+        actorId: claims.sub,
+        title: "Order received",
+        detail: `Your order ${updated.reference} is awaiting payment verification (2-3 business days).`,
+        status: "Action Required",
+        type: "purchase_submitted",
+        reference: updated.reference,
+      });
+    }
+  } catch (error) {
+    logBankTransferError("notify", updated.id, error);
   }
 
   logger.info("bank-transfer submission complete", {

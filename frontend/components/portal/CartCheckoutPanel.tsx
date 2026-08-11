@@ -35,10 +35,9 @@ import {
   type PortalCartItem,
   type PortalCartState,
 } from "@/lib/portal-cart";
-import { notifyPortalDataChanged } from "@/lib/portal-data-events";
 import { OrderPaymentModal } from "./OrderPaymentModal";
 import { ProductPurchaseOptions } from "./ProductPurchaseOptions";
-import type { OrdersResponse, PortalOrder } from "@/types/orders";
+import type { PortalOrder } from "@/types/orders";
 
 function CheckIcon() {
   return (
@@ -231,19 +230,6 @@ export function CartCheckoutPanel() {
     });
   }
 
-  // /api/orders/place only returns a reference, so re-read the order from the list
-  // endpoint OrdersPanel already uses rather than adding a single-order GET route.
-  async function fetchPlacedOrder(reference: string): Promise<PortalOrder | null> {
-    try {
-      const response = await authFetch("/api/orders");
-      if (!response.ok) return null;
-      const data = (await response.json().catch(() => ({}))) as Partial<OrdersResponse>;
-      return data.orders?.find((order) => order.reference === reference) ?? null;
-    } catch {
-      return null;
-    }
-  }
-
   async function submitOrder() {
     if (!cart.items.length) {
       setError("Your cart is empty.");
@@ -272,38 +258,28 @@ export function CartCheckoutPanel() {
         message?: string;
         error?: string;
         reference?: string;
+        order?: PortalOrder;
       };
       if (!response.ok) {
         setError(data.error ?? "Could not submit your order. Please try again.");
         return;
       }
 
-      notifyPortalDataChanged("orders");
-
-      // Keep the local cart intact until payment is actually confirmed: the order is
-      // already recorded server-side as "pending", but the customer must still be able
-      // to go back, adjust their selection, and retry without losing it. The cart is
-      // cleared once OrderPaymentModal reports a successful payment submission (onPaid).
-
-      // Go straight into bank transfer — no intermediate "order confirmed" screen.
-      // Prefer the just-submitted cart lines: Odoo LEAD rows historically dropped qty to 1.
-      if (data.reference) {
-        const placed = await fetchPlacedOrder(data.reference);
-        if (placed) {
-          setPaymentOrder({
-            ...placed,
-            duration: cart.duration,
-            items: cart.items.map((item) => ({
-              ...item,
-              duration: resolveLineDuration(item, cart.duration),
-            })),
-            amountDue: pricing?.total ?? placed.amountDue,
-          });
-        } else {
-          setError(
-            `Order ${data.reference} was created. Open Orders to complete payment if the payment window does not appear.`,
-          );
-        }
+      // Nothing is purchased yet — /api/orders/place only prepares the order to pay
+      // for. The cart stays intact so the customer can go back or retry a failed
+      // payment; it is cleared once the payment step reports success (onPaid).
+      if (data.order) {
+        setPaymentOrder({
+          ...data.order,
+          duration: cart.duration,
+          items: cart.items.map((item) => ({
+            ...item,
+            duration: resolveLineDuration(item, cart.duration),
+          })),
+          amountDue: pricing?.total ?? data.order.amountDue,
+        });
+      } else {
+        setError("Could not open the payment step. Please try again.");
       }
     } catch {
       setError("Could not submit your order. Please try again.");
@@ -474,10 +450,6 @@ export function CartCheckoutPanel() {
                 <div>
                   <dt>Subtotal</dt>
                   <dd>{formatOmanAmount(pricing.subscriptionFee)}</dd>
-                </div>
-                <div>
-                  <dt>Platform fee (10%)</dt>
-                  <dd>{formatOmanAmount(pricing.platformFee)}</dd>
                 </div>
                 <div>
                   <dt>VAT (5%)</dt>

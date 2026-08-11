@@ -349,7 +349,8 @@ export async function closeCartCrmLead(input: {
 export async function promoteCartLeadToProductOrder(input: {
   partnerId: number;
   items: Array<{ productName: string; quantity: number }>;
-  description: string;
+  /** Omit to keep the notes the cart journey already wrote (checkout details). */
+  description?: string;
   existingLeadId?: number;
 }): Promise<number> {
   const client = getOdooClient();
@@ -364,7 +365,7 @@ export async function promoteCartLeadToProductOrder(input: {
     return createProductOrderLead({
       partnerId: input.partnerId,
       items: input.items,
-      description: input.description,
+      description: input.description ?? "",
     });
   }
 
@@ -374,11 +375,11 @@ export async function promoteCartLeadToProductOrder(input: {
 
   const values: Record<string, unknown> = {
     name,
-    description: input.description,
     probability: 30,
     active: true,
     type: "opportunity",
   };
+  if (input.description?.trim()) values.description = input.description;
   if (ctx.email) values.email_from = ctx.email;
   if (ctx.name) values.contact_name = ctx.name;
   if (ctx.companyId) values.company_id = ctx.companyId;
@@ -386,7 +387,7 @@ export async function promoteCartLeadToProductOrder(input: {
   if (stageId) values.stage_id = stageId;
 
   await client.write("crm.lead", [leadId], values);
-  if (input.description.trim()) {
+  if (input.description?.trim()) {
     await persistCrmLeadNotes(
       client,
       leadId,

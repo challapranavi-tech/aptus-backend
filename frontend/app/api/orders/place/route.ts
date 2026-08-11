@@ -2,29 +2,28 @@ import { NextRequest, NextResponse } from "next/server";
 import { estimateOrderPricing } from "@/lib/order-pricing";
 import { writeAudit } from "@/lib/server/audit-log";
 import { resolveProfile } from "@/lib/server/auth-service";
-import { getOrderNotificationEmail, isDemoMode } from "@/lib/server/config";
+import { isDemoMode } from "@/lib/server/config";
 import { getSessionFromRequestOrRefresh, jsonError, jsonOk } from "@/lib/server/http";
 import { logger } from "@/lib/server/logger";
-import { sendPortalEmail } from "@/lib/server/mail-service";
-import { promoteCartLeadToProductOrder } from "@/lib/server/odoo/leads";
-import { createPortalSaleOrderWithLines } from "@/lib/server/odoo/sales";
+import { upsertCartCrmLead } from "@/lib/server/odoo/leads";
 import {
   formatOrderNotificationEmail,
   type ProductOrderPayload,
 } from "@/lib/server/order-notification";
-import {
-  buildOrderIdempotencyKey,
-  claimOrderIdempotency,
-  createPortalOrder,
-  rememberOrderIdempotency,
-  releaseOrderIdempotency,
-} from "@/lib/server/portal-orders";
-import { clearStoredPortalCart, getStoredPortalCart } from "@/lib/server/portal-cart-store";
+import { createPortalOrder } from "@/lib/server/portal-orders";
+import { getStoredPortalCart, saveStoredPortalCart } from "@/lib/server/portal-cart-store";
 import { placeOrderSchema, validationErrorResponse } from "@/lib/server/validation";
+import type { PortalOrder } from "@/types/orders";
 
-const DUPLICATE_SUBMITTED_MESSAGE =
-  "Your request has been submitted successfully. Our team will review your request and provide confirmation within 48 hours.";
-
+/**
+ * Checkout step — prepares the order the customer is about to pay for.
+ *
+ * Deliberately writes NO purchase state: no sale order, no promotion of the CRM
+ * record to a software order, no notification to the sales inbox, and the cart
+ * is left intact. Those side effects belong to the payment step
+ * (POST /api/orders/[id]/bank-transfer) and only run once payment proof is
+ * accepted, so a failed payment leaves nothing behind to clean up.
+ */
 export async function POST(request: NextRequest) {
   const claims = await getSessionFromRequestOrRefresh(request);
   if (!claims) {
@@ -64,146 +63,41 @@ export async function POST(request: NextRequest) {
     customerMessage: parsed.data.customerMessage,
   };
 
-  const estimatedPricing = estimateOrderPricing({
-    id: "",
-    reference: "",
+  const now = new Date().toISOString();
+  const pendingOrder: Omit<PortalOrder, "id" | "reference"> = {
     actorId: claims.sub,
     partnerId: profile.partnerId ?? 0,
     status: "Submitted",
     duration: parsed.data.duration,
     items: parsed.data.items,
-    createdAt: "",
-    updatedAt: "",
-  });
-  const amountDue = estimatedPricing?.total;
+    paymentStatus: "pending",
+    customerMessage: parsed.data.customerMessage,
+    createdAt: now,
+    updatedAt: now,
+  };
+  const amountDue = estimateOrderPricing({
+    ...pendingOrder,
+    id: "",
+    reference: "",
+  })?.total;
 
-  const reference = `ORD-${Date.now()}`;
-  const notification = formatOrderNotificationEmail(profile, orderPayload, reference);
-  const notifyEmail = getOrderNotificationEmail();
-  const actorId = claims.sub;
-  const customerEmail = profile.email;
-
-  async function clearCustomerCart(): Promise<void> {
-    await clearStoredPortalCart(actorId);
-  }
-
-  const idempotencyKey = profile.partnerId
-    ? buildOrderIdempotencyKey({
-        partnerId: profile.partnerId,
-        duration: orderPayload.duration,
-        items: orderPayload.items,
-      })
-    : buildOrderIdempotencyKey({
-        partnerId: 0,
-        duration: orderPayload.duration,
-        items: orderPayload.items,
-      });
-
-  let claimedIdempotency = false;
-  if (profile.partnerId) {
-    const claim = await claimOrderIdempotency(profile.partnerId, idempotencyKey);
-    if (claim.outcome === "duplicate") {
-      await clearCustomerCart();
-      return jsonOk({
-        ok: true,
-        mode: isDemoMode() ? "demo" : "live",
-        reference: claim.reference,
-        duplicate: true,
-        message: DUPLICATE_SUBMITTED_MESSAGE,
-        notificationSent: false,
-      });
-    }
-    if (claim.outcome === "in_progress") {
-      return jsonOk({
-        ok: true,
-        mode: isDemoMode() ? "demo" : "live",
-        reference: `ORD-PENDING`,
-        duplicate: true,
-        message: DUPLICATE_SUBMITTED_MESSAGE,
-        notificationSent: false,
-      });
-    }
-    claimedIdempotency = true;
-  }
-
-  async function dispatchNotification(): Promise<boolean> {
-    const result = await sendPortalEmail({
-      to: notifyEmail,
-      subject: notification.subject,
-      body: notification.body,
-      replyTo: customerEmail,
-    });
-    if (result.sent) {
-      writeAudit({
-        action: "notification.email",
-        actorId,
-        metadata: {
-          subject: notification.subject,
-          to: notifyEmail,
-          channel: result.channel,
-          reference,
-        },
-      });
-    }
-    return result.sent;
-  }
+  // Checkout details (contact, message, product lines) are recorded on the cart
+  // journey now so sales keep them even if the customer never pays.
+  const checkoutNotes = formatOrderNotificationEmail(profile, orderPayload, "Pending payment").body;
 
   if (isDemoMode()) {
-    try {
-      logger.info("Order placed in demo mode (no Odoo writes)", {
-        action: "order.place",
-        actorId: claims.sub,
-        reference,
-        itemCount: orderPayload.items.length,
-      });
-
-      writeAudit({
-        action: "order.place",
-        actorId: claims.sub,
-        metadata: {
-          mode: "demo",
-          reference,
-          notifyEmail,
-          subject: notification.subject,
-          body: notification.body,
-          duration: orderPayload.duration,
-          itemCount: orderPayload.items.length,
-        },
-      });
-
-      const notificationSent = await dispatchNotification();
-      await clearCustomerCart();
-
-      if (profile.partnerId) {
-        createPortalOrder({
-          actorId: claims.sub,
-          partnerId: profile.partnerId,
-          reference,
-          duration: orderPayload.duration,
-          items: orderPayload.items,
-          idempotencyKey,
-          status: "Submitted",
-          amountDue,
-          paymentStatus: "pending",
-          customerMessage: orderPayload.customerMessage,
-        });
-        await rememberOrderIdempotency(profile.partnerId, idempotencyKey, reference);
-      }
-
-      return jsonOk({
-        ok: true,
-        mode: "demo",
-        reference,
-        message: DUPLICATE_SUBMITTED_MESSAGE,
-        notificationSent,
-        notifyEmail,
-      });
-    } catch (error) {
-      if (claimedIdempotency && profile.partnerId) {
-        await releaseOrderIdempotency(profile.partnerId, idempotencyKey);
-      }
-      throw error;
-    }
+    const order = createPortalOrder({
+      actorId: claims.sub,
+      partnerId: profile.partnerId ?? 0,
+      reference: `ORD-${Date.now()}`,
+      duration: orderPayload.duration,
+      items: orderPayload.items,
+      status: "Submitted",
+      amountDue,
+      paymentStatus: "pending",
+      customerMessage: orderPayload.customerMessage,
+    });
+    return jsonOk({ ok: true, mode: "demo", reference: order.reference, order });
   }
 
   if (!profile.partnerId) {
@@ -211,63 +105,41 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const productNames = orderPayload.items.map((item) => item.productName);
-    const existingCart = await getStoredPortalCart(claims.sub);
-    const existingLeadId = existingCart?.crmLeadId;
+    const cart = await getStoredPortalCart(claims.sub);
 
-    logger.info("Submitting portal order to Odoo", {
+    // Refreshes the existing "Added to Cart" opportunity (or opens one) — still a
+    // cart record, not a purchase. Promotion happens after payment.
+    const leadId = await upsertCartCrmLead({
+      partnerId: profile.partnerId,
+      productNames: orderPayload.items.map((item) => item.productName),
+      description: checkoutNotes,
+      existingLeadId: cart?.crmLeadId,
+    });
+    // Keep the server cart in step with what is being paid for and tie it to this
+    // lead: the payment step reads these lines (quantities included) when it
+    // finally records the purchase.
+    await saveStoredPortalCart(claims.sub, {
+      duration: orderPayload.duration,
+      items: orderPayload.items,
+      partnerId: profile.partnerId,
+      crmLeadId: leadId,
+    });
+
+    const order: PortalOrder = {
+      ...pendingOrder,
+      id: `odoo-lead-${leadId}`,
+      reference: `LEAD-${leadId}`,
+      leadId,
+      amountDue,
+    };
+
+    logger.info("Checkout prepared — awaiting payment", {
       action: "order.place",
       actorId: claims.sub,
       partnerId: profile.partnerId,
-      reference,
-      duration: orderPayload.duration,
+      leadId,
       itemCount: orderPayload.items.length,
-      products: productNames,
-      existingLeadId: existingLeadId ?? null,
     });
-
-    const leadId = await promoteCartLeadToProductOrder({
-      partnerId: profile.partnerId,
-      items: orderPayload.items.map((item) => ({
-        productName: item.productName,
-        quantity: item.quantity,
-      })),
-      description: notification.body,
-      existingLeadId,
-    });
-
-    let saleOrderId: number | undefined;
-    try {
-      saleOrderId = await createPortalSaleOrderWithLines({
-        partnerId: profile.partnerId,
-        duration: orderPayload.duration,
-        lines: orderPayload.items.map((item) => ({
-          productName: item.productName,
-          quantity: item.quantity,
-          category: item.category,
-          duration: item.duration ?? orderPayload.duration,
-          purchaseType: item.purchaseType ?? "new",
-          packageId: item.packageId,
-          levelId: item.levelId,
-        })),
-        notes: notification.body,
-        orderReference: reference,
-      });
-      logger.info("Portal sale order created", {
-        action: "order.place",
-        actorId: claims.sub,
-        leadId,
-        saleOrderId,
-      });
-    } catch (error) {
-      const message = error instanceof Error ? error.message : "sale order creation failed";
-      logger.warn("Portal sale order creation failed (CRM opportunity still created)", {
-        action: "order.place",
-        actorId: claims.sub,
-        leadId,
-        error: message,
-      });
-    }
 
     writeAudit({
       action: "order.place",
@@ -275,42 +147,21 @@ export async function POST(request: NextRequest) {
       targetId: String(leadId),
       metadata: {
         mode: "live",
-        reference,
-        notifyEmail,
-        subject: notification.subject,
+        stage: "awaiting_payment",
+        reference: order.reference,
         leadId,
-        saleOrderId,
         duration: orderPayload.duration,
         itemCount: orderPayload.items.length,
       },
     });
 
-    const finalReference = saleOrderId ? `SO-${saleOrderId}` : `LEAD-${leadId}`;
-    const notificationSent = await dispatchNotification();
-    await clearCustomerCart();
-
-    await rememberOrderIdempotency(profile.partnerId, idempotencyKey, finalReference);
-
-    return jsonOk({
-      ok: true,
-      mode: "live",
-      reference: finalReference,
-      leadId,
-      saleOrderId,
-      message: DUPLICATE_SUBMITTED_MESSAGE,
-      notificationSent,
-      notifyEmail,
-    });
+    return jsonOk({ ok: true, mode: "live", reference: order.reference, leadId, order });
   } catch (error) {
-    if (claimedIdempotency) {
-      await releaseOrderIdempotency(profile.partnerId, idempotencyKey);
-    }
-    const message = error instanceof Error ? error.message : "Failed to place order";
-    logger.error("Order placement failed", {
+    const message = error instanceof Error ? error.message : "Failed to prepare checkout";
+    logger.error("Checkout preparation failed", {
       action: "order.place",
       actorId: claims.sub,
       partnerId: profile.partnerId,
-      reference,
       error: message,
     });
     return jsonError(message, 500);

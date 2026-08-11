@@ -7,6 +7,7 @@ import type {
   PortalOrder,
   PortalOrderStatus,
 } from "@/types/orders";
+import { writeJsonStore } from "./json-file-store";
 import { kvDel, kvGet, kvSet, kvSetNx } from "./kv-store";
 
 const DATA_DIR = path.join(process.cwd(), ".data");
@@ -34,8 +35,7 @@ function readStore(): OrdersStore {
 }
 
 function writeStore(store: OrdersStore): void {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
-  fs.writeFileSync(ORDERS_FILE, JSON.stringify(store, null, 2), "utf8");
+  writeJsonStore(ORDERS_FILE, store);
 }
 
 export function buildOrderIdempotencyKey(input: {
