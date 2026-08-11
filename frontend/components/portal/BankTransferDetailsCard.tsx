@@ -39,21 +39,27 @@ export function BankTransferDetailsCard({
   paymentReference?: string | null;
 }) {
   const rows: FieldRow[] = [
-    { label: "Company Name", value: details.companyName },
-    { label: "Bank Name", value: details.bankName },
     { label: "Account Name", value: details.accountName },
     { label: "Account No.", value: details.accountNumber },
-    { label: "IBAN", value: details.iban },
+    { label: "Currency", value: details.currency },
+    { label: "Bank Name", value: details.bankName },
+    ...(details.branch ? [{ label: "Branch Name", value: details.branch }] : []),
     { label: "SWIFT/BIC", value: details.swiftBic },
-    ...(details.branch ? [{ label: "Branch", value: details.branch }] : []),
+    ...(details.iban ? [{ label: "IBAN", value: details.iban }] : []),
+    ...(details.companyName && details.companyName !== details.accountName
+      ? [{ label: "Company Name", value: details.companyName }]
+      : []),
   ];
 
   const copyActions = [
+    details.accountName
+      ? { label: "Copy Account Name", value: details.accountName }
+      : null,
     details.accountNumber
       ? { label: "Copy Account Number", value: details.accountNumber }
       : null,
-    details.iban ? { label: "Copy IBAN", value: details.iban } : null,
     details.swiftBic ? { label: "Copy SWIFT", value: details.swiftBic } : null,
+    details.iban ? { label: "Copy IBAN", value: details.iban } : null,
     paymentReference?.trim()
       ? { label: "Copy Order ID", value: paymentReference.trim() }
       : null,

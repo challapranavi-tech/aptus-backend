@@ -1,6 +1,7 @@
 "use client";
 
 import { publicApiBase } from "@/lib/api-base";
+import { normalizePhone } from "@/lib/phone";
 import { cn } from "@/lib/utils";
 import { validateQuoteContactFields } from "@shared/lib/contact-request";
 import { validateEnquiryFields } from "@shared/lib/enquiry-request";
@@ -81,6 +82,9 @@ export function ContactLeadForm({
 
     const form = e.currentTarget;
     const payload = Object.fromEntries(new FormData(form).entries());
+    if (typeof payload.phone === "string") {
+      payload.phone = normalizePhone(payload.phone);
+    }
 
     if (variant === "simple") {
       const fieldErrors = validateQuoteContactFields(payload);

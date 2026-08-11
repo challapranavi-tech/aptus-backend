@@ -24,6 +24,7 @@ import {
   resolveLineDuration,
   type CartCheckoutStep,
 } from "@/lib/portal-cart-checkout";
+import { normalizePhone } from "@/lib/phone";
 import {
   clearPortalCartEverywhere,
   persistPortalCartToServer,
@@ -111,26 +112,6 @@ function CheckoutStepper({ activeStep }: { activeStep: number }) {
   );
 }
 
-/**
- * Strip duplicate country-code prefix from a phone number.
- * If the stored value already starts with "+968" and the user types
- * "+968..." again, collapse it to a single prefix.
- * Works for any country code length (1–4 digits). Loops so a paste that
- * already contains the prefix 2+ times (autofill quirks) collapses fully
- * in one pass, not just one keystroke's worth.
- */
-export function normalizePhone(raw: string): string {
-  let value = raw.trim();
-  for (;;) {
-    const prefixMatch = /^(\+\d{1,4})(.*)$/.exec(value);
-    if (!prefixMatch) return value;
-    const prefix = prefixMatch[1]; // e.g. "+968"
-    const rest = prefixMatch[2].trim(); // everything after the prefix
-    if (!rest.startsWith(prefix)) return value;
-    value = prefix + rest.slice(prefix.length);
-  }
-}
-
 type CheckoutForm = {
   contactName: string;
   contactEmail: string;
@@ -179,7 +160,7 @@ export function CartCheckoutPanel() {
       ...prev,
       contactName: user.name || prev.contactName,
       contactEmail: user.email || prev.contactEmail,
-      contactPhone: user.phone || prev.contactPhone,
+      contactPhone: normalizePhone(user.phone || prev.contactPhone),
       company: user.company || prev.company,
       taxId: user.taxId || prev.taxId,
       country: user.country || prev.country || "Oman",
@@ -283,7 +264,7 @@ export function CartCheckoutPanel() {
           })),
           contactName: checkout.contactName.trim() || undefined,
           contactEmail: checkout.contactEmail.trim() || undefined,
-          contactPhone: checkout.contactPhone.trim() || undefined,
+          contactPhone: normalizePhone(checkout.contactPhone) || undefined,
           customerMessage: checkout.customerMessage.trim() || undefined,
         }),
       });
@@ -297,9 +278,12 @@ export function CartCheckoutPanel() {
         return;
       }
 
-      setCart({ duration: "1year", items: [] });
-      await clearPortalCartEverywhere();
       notifyPortalDataChanged("orders");
+
+      // Keep the local cart intact until payment is actually confirmed: the order is
+      // already recorded server-side as "pending", but the customer must still be able
+      // to go back, adjust their selection, and retry without losing it. The cart is
+      // cleared once OrderPaymentModal reports a successful payment submission (onPaid).
 
       // Go straight into bank transfer — no intermediate "order confirmed" screen.
       if (data.reference) {
@@ -666,6 +650,8 @@ export function CartCheckoutPanel() {
         open={paymentOrder !== null}
         onPaid={() => {
           paymentDoneRef.current = true;
+          setCart({ duration: "1year", items: [] });
+          void clearPortalCartEverywhere();
         }}
         onClose={() => {
           setPaymentOrder(null);

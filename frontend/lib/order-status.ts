@@ -85,6 +85,22 @@ export function orderStatusClass(displayStatus: OrderDisplayStatus): string {
   }
 }
 
+/** Dashboard "Recent Orders" row label — must not claim payment proof was submitted
+ * ("Pending verification") for an order that merely reached the payment step. */
+export function orderRowStatusLabel(displayStatus: OrderDisplayStatus): string {
+  if (displayStatus === "License issued" || displayStatus === "Completed") return "License issued";
+  if (displayStatus === "Rejected") return "Rejected";
+  if (displayStatus === "Pending verification") return "Pending verification";
+  if (displayStatus === "Approved") return "Approved";
+  return "Awaiting payment";
+}
+
+export function orderRowStatusTone(displayStatus: OrderDisplayStatus): string {
+  if (displayStatus === "License issued" || displayStatus === "Completed") return "completed";
+  if (displayStatus === "Rejected") return "rejected";
+  return "processing";
+}
+
 export function orderStatusHint(displayStatus: OrderDisplayStatus): string | null {
   switch (displayStatus) {
     case "Submitted":

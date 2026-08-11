@@ -1,5 +1,12 @@
 import { z } from "zod";
+import { normalizePhone } from "@/lib/phone";
 import { formatCustomerMessageForOdooOptional } from "@/lib/portal-customer-message";
+
+const optionalPhoneSchema = z
+  .string()
+  .max(32)
+  .optional()
+  .transform((v) => (v == null ? v : normalizePhone(v) || undefined));
 
 export const loginSchema = z.object({
   email: z
@@ -31,7 +38,8 @@ export const checkIdentificationSchema = z
       .string({ error: "Identification is required" })
       .min(3, "Enter a valid CR number or mobile number")
       .max(32)
-      .trim(),
+      .trim()
+      .transform((v) => (v.startsWith("+") ? normalizePhone(v) : v)),
     pendingEmail: z
       .string()
       .email("Invalid email address")
@@ -107,7 +115,7 @@ export const registerSchema = z
         "Password must contain uppercase, lowercase, and a number",
       ),
     contactType: z.enum(["person", "company"]).optional(),
-    phone: z.string().max(32).optional(),
+    phone: optionalPhoneSchema,
     street: z.string().max(128).optional(),
     street2: z.string().max(128).optional(),
     city: z.string().max(64).optional(),
@@ -141,7 +149,7 @@ export const registerSchema = z
 export const profileUpdateSchema = z.object({
   name: z.string().min(2).max(128).trim(),
   contactType: z.enum(["person", "company"]).optional(),
-  phone: z.string().max(32).optional(),
+  phone: optionalPhoneSchema,
   street: z.string().max(128).optional(),
   street2: z.string().max(128).optional(),
   city: z.string().max(64).optional(),
@@ -200,7 +208,7 @@ export const placeOrderSchema = z.object({
     .max(50),
   contactName: z.string().max(128).trim().optional(),
   contactEmail: z.string().email().max(254).trim().optional(),
-  contactPhone: z.string().max(32).trim().optional(),
+  contactPhone: optionalPhoneSchema,
   customerMessage: z
     .string()
     .max(2000)

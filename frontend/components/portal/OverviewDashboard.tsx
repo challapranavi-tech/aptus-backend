@@ -6,7 +6,11 @@ import { useNotifications } from "@/hooks/useNotifications";
 import { useOrders } from "@/hooks/useOrders";
 import { useSubscriptions } from "@/hooks/useSubscriptions";
 import { estimateOrderPricing, formatOmanAmount } from "@/lib/order-pricing";
-import { getOrderDisplayStatus } from "@/lib/order-status";
+import {
+  getOrderDisplayStatus,
+  orderRowStatusLabel,
+  orderRowStatusTone,
+} from "@/lib/order-status";
 import { buildAccountHealth, formatShortDate } from "@/lib/overview-data";
 import { PortalNavIcon } from "./PortalNavIcon";
 
@@ -17,18 +21,6 @@ function LoadingBlock({ label }: { label: string }) {
       <p>{label}</p>
     </div>
   );
-}
-
-function orderRowStatusLabel(displayStatus: ReturnType<typeof getOrderDisplayStatus>): string {
-  if (displayStatus === "License issued" || displayStatus === "Completed") return "License issued";
-  if (displayStatus === "Rejected") return "Rejected";
-  return "Pending verification";
-}
-
-function orderRowStatusTone(displayStatus: ReturnType<typeof getOrderDisplayStatus>): string {
-  if (displayStatus === "License issued" || displayStatus === "Completed") return "completed";
-  if (displayStatus === "Rejected") return "rejected";
-  return "processing";
 }
 
 function StatCard({

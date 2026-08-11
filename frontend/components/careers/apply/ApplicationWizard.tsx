@@ -1,6 +1,7 @@
 "use client";
 
 import { publicApiBase } from "@/lib/api-base";
+import { toE164, toLocalPhoneDigits } from "@/lib/phone";
 import { Button } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import {
@@ -985,7 +986,11 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
     }
 
     const fullName = `${firstName.trim()} ${lastName.trim()}`.trim();
-    const phoneE164 = `${countryCode}${values.phone.replace(/\D/g, "")}`;
+    const phoneE164 = toE164(
+      countryCode,
+      values.phone,
+      COUNTRY_CODES.find((c) => c.value === countryCode)?.digits,
+    );
 
     const body = new FormData();
     body.append("fullName", fullName);
@@ -1371,7 +1376,11 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
                       onChange={(e) =>
                         setValue(
                           "phone",
-                          e.target.value.replace(/[^\d\s\-]/g, ""),
+                          toLocalPhoneDigits(
+                            e.target.value,
+                            countryCode,
+                            selectedCountry?.digits,
+                          ),
                         )
                       }
                     />

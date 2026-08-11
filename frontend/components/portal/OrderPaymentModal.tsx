@@ -8,6 +8,8 @@ import {
   estimateOrderPricing,
   formatOmanAmount,
 } from "@/lib/order-pricing";
+import { cartLineUnitPrice, lineConfigSummary } from "@/lib/portal-cart-checkout";
+import { normalizePhone } from "@/lib/phone";
 import { notifyPortalDataChanged } from "@/lib/portal-data-events";
 import { BankTransferDetailsCard } from "./BankTransferDetailsCard";
 import { PaymentMethodPicker } from "./PaymentMethodPicker";
@@ -80,7 +82,7 @@ export function OrderPaymentModal({ order, open, onClose, onPaid }: OrderPayment
       company: user?.company ?? "",
       contact: user?.name ?? "",
       email: user?.email ?? "",
-      phone: user?.phone ?? "",
+      phone: normalizePhone(user?.phone ?? ""),
       address: user?.location ?? "Muscat, Oman",
     });
   }, [open, user]);
@@ -319,14 +321,19 @@ export function OrderPaymentModal({ order, open, onClose, onPaid }: OrderPayment
                   <h3>Review order</h3>
                 </div>
                 <ul className="aptus-software-order-list">
-                  {order.items.map((item) => (
-                    <li key={`${item.category}-${item.productName}`}>
-                      <strong>{item.productName}</strong>
-                      <span>
-                        {item.category} · Qty {item.quantity} · {durationLabel(order.duration)}
-                      </span>
-                    </li>
-                  ))}
+                  {order.items.map((item) => {
+                    const unit = cartLineUnitPrice(item, order.duration);
+                    return (
+                      <li key={`${item.category}-${item.productName}`}>
+                        <strong>{item.productName}</strong>
+                        <span>
+                          {item.category} · Qty {item.quantity} ·{" "}
+                          {lineConfigSummary(item, order.duration)}
+                          {unit > 0 ? ` · ${formatOmanAmount(unit)} each` : ""}
+                        </span>
+                      </li>
+                    );
+                  })}
                 </ul>
                 <div className="aptus-checkout-meta-grid">
                   <div>
@@ -389,7 +396,10 @@ export function OrderPaymentModal({ order, open, onClose, onPaid }: OrderPayment
                       name="softwareBillingPhone"
                       value={billing.phone}
                       onChange={(event) =>
-                        setBilling((current) => ({ ...current, phone: event.target.value }))
+                        setBilling((current) => ({
+                          ...current,
+                          phone: normalizePhone(event.target.value),
+                        }))
                       }
                     />
                   </label>
@@ -480,17 +490,34 @@ export function OrderPaymentModal({ order, open, onClose, onPaid }: OrderPayment
                   <h3>Review and submit</h3>
                 </div>
                 <ul className="aptus-software-order-list">
-                  {order.items.map((item) => (
-                    <li key={`${item.category}-${item.productName}`}>
-                      <strong>{item.productName}</strong>
-                      <span>
-                        {item.category} · Qty {item.quantity} · {durationLabel(order.duration)}
-                      </span>
-                    </li>
-                  ))}
+                  {order.items.map((item) => {
+                    const unit = cartLineUnitPrice(item, order.duration);
+                    return (
+                      <li key={`${item.category}-${item.productName}`}>
+                        <strong>{item.productName}</strong>
+                        <span>
+                          {item.category} · Qty {item.quantity} ·{" "}
+                          {lineConfigSummary(item, order.duration)}
+                          {unit > 0 ? ` · ${formatOmanAmount(unit)} each` : ""}
+                        </span>
+                      </li>
+                    );
+                  })}
                 </ul>
                 {pricing && totalDue != null ? (
                   <div className="aptus-checkout-summary">
+                    <div>
+                      <span>Subtotal</span>
+                      <strong>{formatOmanAmount(pricing.subscriptionFee)}</strong>
+                    </div>
+                    <div>
+                      <span>Aptus platform fee</span>
+                      <strong>{formatOmanAmount(pricing.platformFee)}</strong>
+                    </div>
+                    <div>
+                      <span>VAT (5%)</span>
+                      <strong>{formatOmanAmount(pricing.vat)}</strong>
+                    </div>
                     <div className="aptus-checkout-summary__total">
                       <span>Grand total</span>
                       <strong>{formatOmanAmount(totalDue)}</strong>

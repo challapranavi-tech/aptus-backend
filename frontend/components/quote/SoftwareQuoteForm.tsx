@@ -2,6 +2,7 @@
 
 import { QuoteProductSelect } from "@/components/quote/QuoteProductSelect";
 import { publicApiBase } from "@/lib/api-base";
+import { normalizePhone } from "@/lib/phone";
 import { cn } from "@/lib/utils";
 import { validateQuoteContactFields } from "@shared/lib/contact-request";
 import type { FieldErrors } from "@shared/lib/schema";
@@ -71,6 +72,9 @@ export function SoftwareQuoteForm({
     const form = e.currentTarget;
     const formData = new FormData(form);
     const payload = Object.fromEntries(formData.entries());
+    if (typeof payload.phone === "string") {
+      payload.phone = normalizePhone(payload.phone);
+    }
 
     const fieldErrors = validateQuoteContactFields(payload);
     if (Object.keys(fieldErrors).length) {

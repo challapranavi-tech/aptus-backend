@@ -3,6 +3,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, Suspense, useEffect, useState } from "react";
 import { AuthCardFoot } from "@/components/auth/AuthCardFoot";
+import { toE164, toLocalPhoneDigits } from "@/lib/phone";
 import type { UserType } from "@/types/profile";
 
 type RegisterStep =
@@ -21,19 +22,19 @@ const USER_TYPE_OPTIONS: Array<{ value: UserType; label: string; hint: string }>
 ];
 
 const COUNTRY_CODES = [
-  { code: "+968", label: "🇴🇲 +968", country: "Oman" },
-  { code: "+966", label: "🇸🇦 +966", country: "Saudi Arabia" },
-  { code: "+971", label: "🇦🇪 +971", country: "UAE" },
-  { code: "+974", label: "🇶🇦 +974", country: "Qatar" },
-  { code: "+973", label: "🇧🇭 +973", country: "Bahrain" },
-  { code: "+965", label: "🇰🇼 +965", country: "Kuwait" },
-  { code: "+91", label: "🇮🇳 +91", country: "India" },
-  { code: "+92", label: "🇵🇰 +92", country: "Pakistan" },
-  { code: "+880", label: "🇧🇩 +880", country: "Bangladesh" },
-  { code: "+63", label: "🇵🇭 +63", country: "Philippines" },
-  { code: "+94", label: "🇱🇰 +94", country: "Sri Lanka" },
-  { code: "+44", label: "🇬🇧 +44", country: "UK" },
-  { code: "+1", label: "🇺🇸 +1", country: "USA/Canada" },
+  { code: "+968", label: "🇴🇲 +968", country: "Oman", digits: 8 },
+  { code: "+966", label: "🇸🇦 +966", country: "Saudi Arabia", digits: 9 },
+  { code: "+971", label: "🇦🇪 +971", country: "UAE", digits: 9 },
+  { code: "+974", label: "🇶🇦 +974", country: "Qatar", digits: 8 },
+  { code: "+973", label: "🇧🇭 +973", country: "Bahrain", digits: 8 },
+  { code: "+965", label: "🇰🇼 +965", country: "Kuwait", digits: 8 },
+  { code: "+91", label: "🇮🇳 +91", country: "India", digits: 10 },
+  { code: "+92", label: "🇵🇰 +92", country: "Pakistan", digits: 10 },
+  { code: "+880", label: "🇧🇩 +880", country: "Bangladesh", digits: 10 },
+  { code: "+63", label: "🇵🇭 +63", country: "Philippines", digits: 10 },
+  { code: "+94", label: "🇱🇰 +94", country: "Sri Lanka", digits: 9 },
+  { code: "+44", label: "🇬🇧 +44", country: "UK", digits: 10 },
+  { code: "+1", label: "🇺🇸 +1", country: "USA/Canada", digits: 10 },
 ];
 
 function validateName(value: string): string | null {
@@ -165,6 +166,7 @@ function PhoneWithCountryCode({
   onBlur?: () => void;
   readOnly?: boolean;
 }) {
+  const localLength = COUNTRY_CODES.find((c) => c.code === countryCode)?.digits;
   return (
     <div>
       <div className="aptus-register-phone">
@@ -190,7 +192,7 @@ function PhoneWithCountryCode({
           placeholder="Enter number"
           value={phoneValue}
           onChange={(e) => {
-            const val = e.target.value.replace(/[^\d]/g, "");
+            const val = toLocalPhoneDigits(e.target.value, countryCode, localLength);
             onPhoneChange(val);
           }}
           onBlur={onBlur}
@@ -304,9 +306,10 @@ function RegisterWizard() {
 
     setLoading(true);
     try {
+      const localLength = COUNTRY_CODES.find((c) => c.code === countryCode)?.digits;
       const checkIdentifier = isCompany
         ? identifier.trim()
-        : `${countryCode}${identifier.trim()}`;
+        : toE164(countryCode, identifier, localLength);
 
       const response = await fetch("/api/auth/check-identification", {
         method: "POST",
@@ -455,7 +458,8 @@ function RegisterWizard() {
 
     setLoading(true);
     try {
-      const fullPhone = `${countryCode}${phone}`;
+      const localLength = COUNTRY_CODES.find((c) => c.code === countryCode)?.digits;
+      const fullPhone = toE164(countryCode, phone, localLength);
       const response = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

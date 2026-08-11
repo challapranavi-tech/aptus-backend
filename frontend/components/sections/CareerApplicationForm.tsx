@@ -12,6 +12,7 @@ import {
   type ApplicationFields,
 } from "@shared/lib/career-application";
 import { publicApiBase } from "@/lib/api-base";
+import { normalizePhone } from "@/lib/phone";
 import { cn } from "@/lib/utils";
 import { useRef, useState } from "react";
 
@@ -210,7 +211,7 @@ export function CareerApplicationForm({ submitLabel }: Props) {
           <input
             type="tel"
             value={fields.phone}
-            onChange={(e) => setField("phone", e.target.value)}
+            onChange={(e) => setField("phone", normalizePhone(e.target.value))}
             placeholder="+968 0000 0000"
             className={INPUT}
           />

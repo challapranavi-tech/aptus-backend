@@ -9,70 +9,61 @@ export type BankTransferDetails = {
   iban: string;
   swiftBic: string;
   branch?: string;
+  currency: string;
 };
 
-// ponytail: dev-only sandbox account for local checkout UI — never used in production.
-const DEV_BANK_TRANSFER_FIXTURE: BankTransferDetails = {
-  companyName: "Aptus Infotech LLC",
-  bankName: "Test Bank of Oman",
-  accountName: "Aptus Infotech LLC",
-  accountNumber: "123456789012345",
-  iban: "OM1200012345678901234567",
-  swiftBic: "TBOMOMMX",
-  branch: "Muscat Main Branch",
+/** Aptus Bank Muscat account — env vars override when set. */
+const DEFAULT_BANK_TRANSFER_DETAILS: BankTransferDetails = {
+  companyName: "ORIENTAL ORX INTER (APTUS INFOTECH)",
+  bankName: "Bank Muscat",
+  accountName: "ORIENTAL ORX INTER (APTUS INFOTECH)",
+  accountNumber: "0342-00229626-0015",
+  iban: "",
+  swiftBic: "BMUSOMRXXXX",
+  branch: "MBD South, Ruwi, Sultanate of Oman",
+  currency: "OMR",
 };
 
 function readConfiguredBankTransferDetails(): BankTransferDetails | null {
-  const companyName = process.env.BANK_TRANSFER_COMPANY_NAME?.trim();
   const bankName = process.env.BANK_TRANSFER_BANK_NAME?.trim();
   const accountName = process.env.BANK_TRANSFER_ACCOUNT_NAME?.trim();
   const accountNumber = process.env.BANK_TRANSFER_ACCOUNT_NUMBER?.trim();
-  const iban = process.env.BANK_TRANSFER_IBAN?.trim();
   const swiftBic = process.env.BANK_TRANSFER_SWIFT?.trim();
 
-  if (!companyName || !bankName || !accountName || !accountNumber || !iban || !swiftBic) {
+  // ponytail: IBAN optional — production Bank Muscat account has none published yet
+  if (!bankName || !accountName || !accountNumber || !swiftBic) {
     return null;
   }
+
+  const companyName =
+    process.env.BANK_TRANSFER_COMPANY_NAME?.trim() || accountName;
 
   return {
     companyName,
     bankName,
     accountName,
     accountNumber,
-    iban,
+    iban: process.env.BANK_TRANSFER_IBAN?.trim() || "",
     swiftBic,
     branch: process.env.BANK_TRANSFER_BRANCH?.trim() || undefined,
+    currency: process.env.BANK_TRANSFER_CURRENCY?.trim() || "OMR",
   };
 }
 
 /**
  * Company bank account customers are instructed to transfer payment to.
- * Production requires every BANK_TRANSFER_* variable. In non-production, a sandbox
- * fixture is returned when env vars are missing so checkout can be tested locally.
+ * Prefers BANK_TRANSFER_* env vars; falls back to the Aptus Bank Muscat defaults.
  */
-export function getBankTransferDetails(): BankTransferDetails | null {
+export function getBankTransferDetails(): BankTransferDetails {
   const configured = readConfiguredBankTransferDetails();
   if (configured) return configured;
 
-  if (process.env.NODE_ENV !== "production") {
-    logger.warn("Using dev bank transfer fixture — set BANK_TRANSFER_* env vars for real account details", {
-      action: "bank_transfer.dev_fixture",
+  if (process.env.NODE_ENV === "production") {
+    logger.info("Using default Bank Muscat transfer details (BANK_TRANSFER_* unset)", {
+      action: "bank_transfer.default_details",
     });
-    return DEV_BANK_TRANSFER_FIXTURE;
   }
-
-  logger.error("Bank transfer details are not configured", {
-    action: "bank_transfer.not_configured",
-    missing: [
-      "BANK_TRANSFER_COMPANY_NAME",
-      "BANK_TRANSFER_BANK_NAME",
-      "BANK_TRANSFER_ACCOUNT_NAME",
-      "BANK_TRANSFER_ACCOUNT_NUMBER",
-      "BANK_TRANSFER_IBAN",
-      "BANK_TRANSFER_SWIFT",
-    ],
-  });
-  return null;
+  return DEFAULT_BANK_TRANSFER_DETAILS;
 }
 
 /**

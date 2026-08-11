@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import { authFetch } from "@/lib/access-token";
 import { useAuth } from "@/context/AuthProvider";
+import { normalizePhone } from "@/lib/phone";
 import type { ClientProfile } from "@/types/profile";
 
 type FormState = {
@@ -22,7 +23,7 @@ type FormState = {
 function toFormState(profile: ClientProfile): FormState {
   return {
     name: profile.name ?? "",
-    phone: profile.phone ?? "",
+    phone: normalizePhone(profile.phone ?? ""),
     street: profile.street ?? "",
     street2: profile.street2 ?? "",
     city: profile.city ?? "",
@@ -123,12 +124,14 @@ export function ProfilePanel() {
             id="profile_phone"
             className="form-control"
             type="tel"
-            value={isCompany ? form.phone : (user.phone ?? "")}
+            value={isCompany ? form.phone : normalizePhone(user.phone ?? "")}
             readOnly={!isCompany}
             aria-readonly={!isCompany ? "true" : undefined}
             title={!isCompany ? "Phone number is unique and cannot be changed" : undefined}
             onChange={
-              isCompany ? (e) => updateField("phone", e.target.value) : undefined
+              isCompany
+                ? (e) => updateField("phone", normalizePhone(e.target.value))
+                : undefined
             }
           />
         </div>

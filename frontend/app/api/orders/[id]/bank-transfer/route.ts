@@ -24,7 +24,6 @@ import { createPortalNotification } from "@/lib/server/portal-notifications";
 import { savePaymentProofFile } from "@/lib/server/payment-proof-storage";
 import {
   deriveBankTransferReference,
-  getBankTransferDetails,
   isAllowedPaymentProofFile,
   PAYMENT_PROOF_MAX_BYTES,
 } from "@/lib/server/bank-transfer";
@@ -65,14 +64,6 @@ export async function POST(request: NextRequest, context: RouteContext) {
   }
 
   const { id } = await context.params;
-
-  if (!getBankTransferDetails()) {
-    return jsonError(
-      "Bank transfer is temporarily unavailable. Please contact support.",
-      503,
-      "BANK_TRANSFER_UNAVAILABLE",
-    );
-  }
 
   let formData: FormData;
   try {
