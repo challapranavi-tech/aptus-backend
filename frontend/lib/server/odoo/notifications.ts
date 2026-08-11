@@ -103,7 +103,13 @@ export async function fetchPartnerNotifications(
       });
     }
 
-    if (order.status === "Submitted") {
+    // Only show "submitted" notification after the customer has uploaded payment proof.
+    // Before that (paymentStatus === "pending"), the order is awaiting payment — not yet
+    // submitted for review, so no notification should appear yet.
+    if (
+      order.status === "Submitted" &&
+      order.paymentStatus !== "pending"
+    ) {
       notifications.push({
         id: `odoo-notif-order-submitted-${order.reference}`,
         partnerId,

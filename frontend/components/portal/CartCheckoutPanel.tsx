@@ -111,6 +111,26 @@ function CheckoutStepper({ activeStep }: { activeStep: number }) {
   );
 }
 
+/**
+ * Strip duplicate country-code prefix from a phone number.
+ * If the stored value already starts with "+968" and the user types
+ * "+968..." again, collapse it to a single prefix.
+ * Works for any country code length (1–4 digits). Loops so a paste that
+ * already contains the prefix 2+ times (autofill quirks) collapses fully
+ * in one pass, not just one keystroke's worth.
+ */
+export function normalizePhone(raw: string): string {
+  let value = raw.trim();
+  for (;;) {
+    const prefixMatch = /^(\+\d{1,4})(.*)$/.exec(value);
+    if (!prefixMatch) return value;
+    const prefix = prefixMatch[1]; // e.g. "+968"
+    const rest = prefixMatch[2].trim(); // everything after the prefix
+    if (!rest.startsWith(prefix)) return value;
+    value = prefix + rest.slice(prefix.length);
+  }
+}
+
 type CheckoutForm = {
   contactName: string;
   contactEmail: string;
@@ -537,7 +557,10 @@ export function CartCheckoutPanel() {
                   <input
                     value={checkout.contactPhone}
                     onChange={(event) =>
-                      setCheckout((prev) => ({ ...prev, contactPhone: event.target.value }))
+                      setCheckout((prev) => ({
+                        ...prev,
+                        contactPhone: normalizePhone(event.target.value),
+                      }))
                     }
                   />
                 </label>

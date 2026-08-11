@@ -68,7 +68,34 @@ export async function POST(request: NextRequest) {
   if (result.status === "success") {
     const claims = claimsFromProfile(result.profile);
     const rememberSession = remember !== false;
-    const tokens = await issueAuthTokens(claims, { remember: rememberSession });
+    let tokens: Awaited<ReturnType<typeof issueAuthTokens>>;
+    try {
+      tokens = await issueAuthTokens(claims, { remember: rememberSession });
+    } catch (error) {
+      // Keys "set" in Vercel can still be unusable (quotes, stripped newlines, wrong PEM).
+      const message = error instanceof Error ? error.message : String(error);
+      const code = /JWT_PRIVATE_KEY|JWT_PUBLIC_KEY|PEM|DECODER|sign/i.test(message)
+        ? "LOGIN_JWT_MISCONFIGURED"
+        : "LOGIN_TOKEN_UNAVAILABLE";
+      logger.error("Login token issuance failed", {
+        action: "auth.login",
+        ip,
+        error: message,
+        code,
+      });
+      writeAudit({
+        action: "auth.login_failed",
+        ip,
+        metadata: { reason: "token_issue_error", error: message, code },
+      });
+      return jsonError(
+        code === "LOGIN_JWT_MISCONFIGURED"
+          ? "Sign-in is misconfigured on the server (JWT keys). Contact support."
+          : "Unable to complete sign-in right now. Please try again.",
+        503,
+        code,
+      );
+    }
     const actorId = result.profile.portalAccountId ?? result.profile.id;
 
     writeAudit({

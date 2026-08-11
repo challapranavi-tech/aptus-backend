@@ -1168,7 +1168,7 @@ export async function exportCustomerAccountData(
         lastLoginAt: account.lastLoginAt,
         profile: account.profile,
       },
-      auditLog: readAuditForUser(portalAccountId),
+      auditLog: await readAuditForUser(portalAccountId),
     };
   }
 
@@ -1187,7 +1187,7 @@ export async function exportCustomerAccountData(
       lastLoginAt: meta?.x_portal_last_login,
       profile,
     },
-    auditLog: readAuditForUser(portalAccountId),
+    auditLog: await readAuditForUser(portalAccountId),
   };
 }
 

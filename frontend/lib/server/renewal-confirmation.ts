@@ -1,10 +1,8 @@
-import fs from "fs";
-import path from "path";
 import { randomUUID } from "crypto";
 import { writeAudit } from "./audit-log";
 import { sendPortalEmail } from "./mail-service";
 import { logger } from "./logger";
-import { kvSetNx } from "./kv-store";
+import { kvGet, kvSet, kvSetNx } from "./kv-store";
 import {
   formatLicenseExpiredEmail,
   formatRenewalConfirmationEmail,
@@ -18,10 +16,11 @@ import { resolveCustomerContact } from "./auth-service";
 import type { PortalRenewalRequest } from "@/types/renewals";
 import type { SubscriptionItem } from "@/types/subscriptions";
 
-const DATA_DIR = path.join(process.cwd(), ".data");
-const REMINDERS_FILE = path.join(DATA_DIR, "renewal-reminders-sent.json");
 /** Keep claims through the full reminder window (90d) plus buffer. */
 const REMINDER_CLAIM_TTL_SEC = 120 * 24 * 60 * 60;
+// Reminder records stored in KV: TTL slightly longer than the window so they
+// survive long enough to deduplicate the full reminder cycle.
+const REMINDER_RECORD_TTL_SEC = REMINDER_CLAIM_TTL_SEC + 7 * 24 * 60 * 60;
 
 export const RENEWAL_REMINDER_DAYS = [90, 60, 30, 15, 7, 3, 1] as const;
 
@@ -41,19 +40,37 @@ function getPortalBaseUrl(): string {
   return (process.env.PORTAL_BASE_URL?.trim() || "https://aptusinfotech.com").replace(/\/$/, "");
 }
 
-function readRemindersStore(): RemindersStore {
-  if (!fs.existsSync(REMINDERS_FILE)) return { records: [] };
-  try {
-    const parsed = JSON.parse(fs.readFileSync(REMINDERS_FILE, "utf8")) as RemindersStore;
-    return { records: Array.isArray(parsed.records) ? parsed.records : [] };
-  } catch {
-    return { records: [] };
-  }
+function remindersStoreKey(partnerId: number): string {
+  return `aptus:renewal-reminders:${partnerId}`;
 }
 
-function writeRemindersStore(store: RemindersStore): void {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
-  fs.writeFileSync(REMINDERS_FILE, JSON.stringify(store, null, 2), "utf8");
+async function readRemindersStore(partnerId: number): Promise<RemindersStore> {
+  try {
+    const stored = await kvGet<RemindersStore>(remindersStoreKey(partnerId));
+    if (stored && Array.isArray(stored.records)) return stored;
+  } catch {
+    // fall through to empty store
+  }
+  return { records: [] };
+}
+
+/**
+ * Best-effort persistence — this runs as a side effect of GET /api/subscriptions,
+ * so a transient KV outage must degrade to "reminder not recorded" rather than
+ * failing the whole subscriptions request.
+ */
+async function writeRemindersStore(partnerId: number, store: RemindersStore): Promise<void> {
+  // Trim to last 2000 records to keep KV value small
+  const trimmed = { records: store.records.slice(-2000) };
+  try {
+    await kvSet(remindersStoreKey(partnerId), trimmed, REMINDER_RECORD_TTL_SEC);
+  } catch (err) {
+    logger.warn("Failed to persist renewal reminder records", {
+      action: "renewal.reminder_store",
+      partnerId,
+      error: err instanceof Error ? err.message : String(err),
+    });
+  }
 }
 
 function subscriptionKey(subscription: SubscriptionItem): string {
@@ -63,7 +80,6 @@ function subscriptionKey(subscription: SubscriptionItem): string {
       : subscription.orderId != null
         ? `order-${subscription.orderId}`
         : `product-${subscription.productName.toLowerCase()}`;
-  // Include term end date so a renewed license can receive a fresh reminder cycle
   const term = subscription.renewalDateIso?.trim();
   return term ? `${base}:${term}` : base;
 }
@@ -142,7 +158,7 @@ export async function maybeSendRenewalReminders(
   const customer = await resolveCustomer(partnerId);
   if (!customer) return;
 
-  const store = readRemindersStore();
+  const store = await readRemindersStore(partnerId);
   const portalUrl = getPortalBaseUrl();
   let dirty = false;
 
@@ -158,7 +174,6 @@ export async function maybeSendRenewalReminders(
     const reminderDay = reminderDayDue(daysLeft, sentDays);
     if (reminderDay == null) continue;
 
-    // Atomic claim so concurrent /api/subscriptions polls cannot double-send
     const claimed = await kvSetNx(
       reminderClaimKey(partnerId, key, reminderDay),
       new Date().toISOString(),
@@ -213,8 +228,7 @@ export async function maybeSendRenewalReminders(
   }
 
   if (dirty) {
-    store.records = store.records.slice(-2000);
-    writeRemindersStore(store);
+    await writeRemindersStore(partnerId, store);
   }
 }
 
@@ -223,9 +237,7 @@ const EXPIRED_SENTINEL_DAY = -1;
 
 /**
  * Event 10 — License Expired. Sent exactly once per license term, after the license
- * has passed its expiry date and renewal reminders (Event 8) have stopped. No further
- * renewal reminders fire once this has been sent — restarting only after a new renewal
- * creates a fresh expiry date (new subscriptionKey / renewalDateIso combination clears dedupe).
+ * has passed its expiry date and renewal reminders (Event 8) have stopped.
  */
 export async function maybeSendLicenseExpiredEmails(
   subscriptions: SubscriptionItem[],
@@ -234,7 +246,7 @@ export async function maybeSendLicenseExpiredEmails(
   const customer = await resolveCustomer(partnerId);
   if (!customer) return;
 
-  const store = readRemindersStore();
+  const store = await readRemindersStore(partnerId);
   const portalUrl = getPortalBaseUrl();
 
   for (const subscription of subscriptions) {
@@ -242,7 +254,7 @@ export async function maybeSendLicenseExpiredEmails(
 
     const renewalIso = subscription.renewalDateIso ?? "";
     const daysLeft = daysUntilExpiry(renewalIso);
-    if (daysLeft != null && daysLeft >= 0) continue; // not actually past expiry yet
+    if (daysLeft != null && daysLeft >= 0) continue;
 
     const key = subscriptionKey(subscription);
     if (wasReminderSent(partnerId, key, EXPIRED_SENTINEL_DAY, store.records)) continue;
@@ -300,8 +312,7 @@ export async function maybeSendLicenseExpiredEmails(
     }
   }
 
-  store.records = store.records.slice(-2000);
-  writeRemindersStore(store);
+  await writeRemindersStore(partnerId, store);
 }
 
 /** Notify customer after backend confirms a renewal request (not on submit). */

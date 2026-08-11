@@ -144,6 +144,14 @@ export function CustomerLoginForm() {
         return;
       }
 
+      if (response.status >= 500) {
+        setPasswordError("");
+        setMessage(
+          data.error ?? "Sign-in is temporarily unavailable. Please try again in a moment.",
+        );
+        return;
+      }
+
       if (response.status === 429) {
         setMessage(data.error ?? "Too many attempts. Please wait a moment and try again.");
         return;

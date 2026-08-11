@@ -1,6 +1,6 @@
-import fs from "fs";
-import path from "path";
 import { randomUUID } from "crypto";
+import { kvGet, kvSet } from "./kv-store";
+import { logger } from "./logger";
 
 export type AuditAction =
   | "auth.login"
@@ -42,8 +42,9 @@ export type AuditEntry = {
   createdAt: string;
 };
 
-const DATA_DIR = path.join(process.cwd(), ".data");
-const AUDIT_FILE = path.join(DATA_DIR, "audit-log.jsonl");
+const AUDIT_KEY_PREFIX = "aptus:audit:user:";
+const AUDIT_TTL_SEC = 90 * 24 * 60 * 60; // 90 days
+const AUDIT_MAX_ENTRIES = 500;
 
 type GlobalStore = typeof globalThis & {
   __aptusAuditBuffer?: AuditEntry[];
@@ -51,9 +52,36 @@ type GlobalStore = typeof globalThis & {
 
 const globalStore = globalThis as GlobalStore;
 
-function appendToDisk(entry: AuditEntry): void {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
-  fs.appendFileSync(AUDIT_FILE, `${JSON.stringify(entry)}\n`, "utf8");
+// Read-modify-write on a JSON blob races when two writeAudit() calls for the
+// same user fire close together (common — e.g. order.place + notification.email
+// in one request), since neither is awaited. Chain onto any in-flight write for
+// the same key so this process appends in order instead of one clobbering the
+// other.
+// ponytail: this only serializes within one server instance — concurrent writes
+// from different serverless instances can still race. Upgrade path: an atomic
+// list append (e.g. Redis LPUSH/LTRIM) instead of a get+set blob.
+const pendingWrites = new Map<string, Promise<void>>();
+
+/** Fire-and-forget async KV write — never blocks the request. */
+async function appendToKv(entry: AuditEntry): Promise<void> {
+  const key = entry.actorId ? `${AUDIT_KEY_PREFIX}${entry.actorId}` : null;
+  if (!key) return;
+
+  const previous = pendingWrites.get(key) ?? Promise.resolve();
+  const next = previous.catch(() => undefined).then(async () => {
+    const existing = (await kvGet<AuditEntry[]>(key)) ?? [];
+    const updated = [...existing, entry].slice(-AUDIT_MAX_ENTRIES);
+    await kvSet(key, updated, AUDIT_TTL_SEC);
+  });
+  pendingWrites.set(key, next);
+
+  try {
+    await next;
+  } catch (err) {
+    logger.error("[AUDIT LOG KV FAILURE]", { error: String(err), action: entry.action });
+  } finally {
+    if (pendingWrites.get(key) === next) pendingWrites.delete(key);
+  }
 }
 
 export function writeAudit(entry: Omit<AuditEntry, "id" | "createdAt">): AuditEntry {
@@ -63,35 +91,25 @@ export function writeAudit(entry: Omit<AuditEntry, "id" | "createdAt">): AuditEn
     createdAt: new Date().toISOString(),
   };
 
+  // In-memory buffer for same-request reads (e.g. admin panel)
   if (!globalStore.__aptusAuditBuffer) {
     globalStore.__aptusAuditBuffer = [];
   }
   globalStore.__aptusAuditBuffer.push(full);
-  if (globalStore.__aptusAuditBuffer.length > 500) {
+  if (globalStore.__aptusAuditBuffer.length > AUDIT_MAX_ENTRIES) {
     globalStore.__aptusAuditBuffer.shift();
   }
 
-  try {
-    appendToDisk(full);
-  } catch (err) {
-    console.error("[AUDIT LOG FAILURE]", err);
-  }
+  // Async KV write — do not await, never throws into caller
+  void appendToKv(full);
 
   return full;
 }
 
-export function readAuditForUser(userId: string, limit = 100): AuditEntry[] {
-  if (!fs.existsSync(AUDIT_FILE)) return [];
+export async function readAuditForUser(userId: string, limit = 100): Promise<AuditEntry[]> {
   try {
-    const lines = fs.readFileSync(AUDIT_FILE, "utf8").trim().split("\n").filter(Boolean);
-    const entries: AuditEntry[] = [];
-    for (let i = lines.length - 1; i >= 0 && entries.length < limit; i--) {
-      const entry = JSON.parse(lines[i]) as AuditEntry;
-      if (entry.actorId === userId || entry.targetId === userId) {
-        entries.push(entry);
-      }
-    }
-    return entries;
+    const entries = (await kvGet<AuditEntry[]>(`${AUDIT_KEY_PREFIX}${userId}`)) ?? [];
+    return entries.slice(-limit).reverse();
   } catch {
     return [];
   }

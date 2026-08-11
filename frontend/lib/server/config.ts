@@ -1,6 +1,12 @@
 import fs from "fs";
 import path from "path";
-import { generateKeyPairSync, createHash, scryptSync } from "crypto";
+import {
+  createHash,
+  createPrivateKey,
+  createPublicKey,
+  generateKeyPairSync,
+  scryptSync,
+} from "crypto";
 
 export type OdooConfig = {
   baseUrl: string;
@@ -112,9 +118,32 @@ function loadDevKeyPair(): KeyPair {
   return devKeyPair;
 }
 
+/** Normalize PEM pasted into Vercel (literal \n, wrapping quotes, CR). */
+function normalizePemEnv(raw: string | undefined): string | null {
+  if (!raw) return null;
+  let value = raw.trim();
+  if (
+    (value.startsWith('"') && value.endsWith('"')) ||
+    (value.startsWith("'") && value.endsWith("'"))
+  ) {
+    value = value.slice(1, -1).trim();
+  }
+  value = value.replace(/\\n/g, "\n").replace(/\r\n/g, "\n").trim();
+  return value || null;
+}
+
 export function getJwtPrivateKey(): string {
-  const fromEnv = process.env.JWT_PRIVATE_KEY?.replace(/\\n/g, "\n");
-  if (fromEnv) return fromEnv;
+  const fromEnv = normalizePemEnv(process.env.JWT_PRIVATE_KEY);
+  if (fromEnv) {
+    try {
+      createPrivateKey(fromEnv);
+    } catch {
+      throw new Error(
+        "JWT_PRIVATE_KEY is set but is not a valid PEM private key (check quotes/newlines; do not paste the public key)",
+      );
+    }
+    return fromEnv;
+  }
   if (process.env.NODE_ENV === "production") {
     throw new Error("JWT_PRIVATE_KEY must be set in production");
   }
@@ -122,8 +151,17 @@ export function getJwtPrivateKey(): string {
 }
 
 export function getJwtPublicKey(): string {
-  const fromEnv = process.env.JWT_PUBLIC_KEY?.replace(/\\n/g, "\n");
-  if (fromEnv) return fromEnv;
+  const fromEnv = normalizePemEnv(process.env.JWT_PUBLIC_KEY);
+  if (fromEnv) {
+    try {
+      createPublicKey(fromEnv);
+    } catch {
+      throw new Error(
+        "JWT_PUBLIC_KEY is set but is not a valid PEM public key (check quotes/newlines)",
+      );
+    }
+    return fromEnv;
+  }
   if (process.env.NODE_ENV === "production") {
     throw new Error("JWT_PUBLIC_KEY must be set in production");
   }
