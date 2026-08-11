@@ -162,8 +162,14 @@ export function syncLegacyPortalSession(
 
 export function clearLegacyPortalSession(): void {
   if (typeof window === "undefined") return;
+  const had =
+    Boolean(window.localStorage.getItem(LEGACY_SESSION_KEY)) ||
+    Boolean(window.sessionStorage.getItem(LEGACY_SESSION_KEY));
   window.localStorage.removeItem(LEGACY_SESSION_KEY);
   window.sessionStorage.removeItem(LEGACY_SESSION_KEY);
+  if (had) {
+    window.dispatchEvent(new CustomEvent("aptus:session-changed"));
+  }
 }
 
 export function getAccessToken(): string | null {

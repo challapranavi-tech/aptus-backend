@@ -15,14 +15,13 @@ import {
   type PortalCartState,
 } from "@/lib/portal-cart";
 import { invalidatePortalSharedFetch } from "@/lib/portal-shared-fetch";
-import { getPortalUserFromStorage, profileToPortalUser, type PortalUser } from "@/lib/portal-session";
+import { profileToPortalUser, type PortalUser } from "@/lib/portal-session";
 
 const CART_PATH = "/portal/cart";
 
 /**
- * Cart always points at the portal cart route.
- * Middleware + PortalAuthGuard enforce auth; linking to /login while me is pending
- * was racing valid sessions onto the login page.
+ * Full document navigation to cart — Next soft-nav can reuse a cached
+ * middleware redirect to /login from before the session was established.
  */
 function HeaderCartLink({ showBadge }: { showBadge: boolean }) {
   const [count, setCount] = useState(0);
@@ -47,7 +46,7 @@ function HeaderCartLink({ showBadge }: { showBadge: boolean }) {
   }, []);
 
   return (
-    <Link
+    <a
       href={CART_PATH}
       className="aptus-header-cart"
       aria-label={
@@ -68,7 +67,7 @@ function HeaderCartLink({ showBadge }: { showBadge: boolean }) {
       {showBadge && count > 0 ? (
         <span className="aptus-header-cart__badge">{count > 99 ? "99+" : count}</span>
       ) : null}
-    </Link>
+    </a>
   );
 }
 
@@ -80,7 +79,7 @@ export function HeaderAuthActions() {
       const result = await fetchAuthMeShared();
       if (!result.ok) {
         setUser(null);
-        if (result.status === 401) {
+        if (result.status === 401 || result.status === 403) {
           clearLegacyPortalSession();
         }
         return;
@@ -90,12 +89,6 @@ export function HeaderAuthActions() {
     } catch {
       setUser(null);
     }
-  }, []);
-
-  useEffect(() => {
-    // Optimistic paint from storage (hydration-safe) before me resolves.
-    const stored = getPortalUserFromStorage();
-    if (stored) setUser(stored);
   }, []);
 
   useEffect(() => {
@@ -129,8 +122,6 @@ export function HeaderAuthActions() {
     }
   };
 
-  // Cart always goes to /portal/cart (middleware gates guests). Never link to
-  // /login while me is pending — that race sent valid sessions to Sign In.
   if (!user) {
     return (
       <div className="aptus-header-user">

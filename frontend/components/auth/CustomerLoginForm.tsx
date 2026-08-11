@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import {
+  clearAccessToken,
+  clearLegacyPortalSession,
   setAccessToken,
   syncLegacyPortalSession,
   type LegacySessionUser,
@@ -62,8 +64,16 @@ export function CustomerLoginForm() {
         const result = await fetchAuthMeShared();
         if (cancelled) return;
         if (result.ok) {
-          router.replace(safeNextPath(window.location.search));
+          // Hard nav avoids a stale Next soft-nav cache of middleware's
+          // /portal/* → /login redirect (header looked logged-in on /login).
+          window.location.replace(safeNextPath(window.location.search));
           return;
+        }
+        // Stale localStorage can show Logout/avatar while JWT/cookies are dead.
+        if (result.status === 401 || result.status === 403) {
+          clearAccessToken();
+          clearLegacyPortalSession();
+          window.dispatchEvent(new CustomEvent("aptus:session-changed"));
         }
       } catch {
         /* stay on login */
@@ -74,7 +84,7 @@ export function CustomerLoginForm() {
     return () => {
       cancelled = true;
     };
-  }, [router]);
+  }, []);
 
   function handleEmailChange(e: ChangeEvent<HTMLInputElement>) {
     const val = e.target.value;
@@ -137,14 +147,30 @@ export function CustomerLoginForm() {
       if (response.ok) {
         invalidateAuthMeCache();
         invalidatePortalSharedFetch();
-        if (data.accessToken && data.expiresIn) {
-          setAccessToken(data.accessToken, data.expiresIn);
+        if (!data.accessToken || !data.expiresIn) {
+          setMessage("Sign-in succeeded but no session token was returned. Contact support.");
+          return;
         }
+        setAccessToken(data.accessToken, data.expiresIn);
         if (data.user && typeof data.user === "object") {
           syncLegacyPortalSession(data.user as LegacySessionUser, remember);
         }
+        // Confirm /me accepts the new token before leaving login (catches JWT/Upstash misconfig).
+        invalidateAuthMeCache();
+        const me = await fetchAuthMeShared();
+        if (!me.ok) {
+          clearAccessToken();
+          clearLegacyPortalSession();
+        setMessage(
+          me.status === 401 || me.status === 403
+            ? "Your password was accepted but the session could not start. This usually means a stale cookie — clear this site's cookies and sign in again."
+            : "Sign-in could not load your profile. Please try again.",
+        );
+          return;
+        }
         await syncPortalCartWithServer();
-        router.push(safeNextPath(window.location.search));
+        // Hard nav so a cached middleware redirect cannot bounce back to /login.
+        window.location.assign(safeNextPath(window.location.search));
         return;
       }
 

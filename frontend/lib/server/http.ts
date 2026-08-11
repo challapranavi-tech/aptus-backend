@@ -64,6 +64,14 @@ export async function issueAuthTokens(
     },
     { refreshMaxAgeSec },
   );
+  // Catch mismatched JWT_PRIVATE_KEY / JWT_PUBLIC_KEY at issue time (login 200 +
+  // immediate /me 401), instead of letting the browser look "half logged in".
+  const verified = await verifyAccessToken(tokens.accessToken);
+  if (!verified) {
+    throw new Error(
+      "JWT_PRIVATE_KEY and JWT_PUBLIC_KEY do not form a matching pair (token signed but not verifiable)",
+    );
+  }
   await registerRefreshToken(
     tokens.refreshJti,
     claims.sub,

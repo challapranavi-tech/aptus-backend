@@ -53,24 +53,11 @@ export async function middleware(request: NextRequest) {
   loginUrl.searchParams.set("next", pathname);
   const redirect = NextResponse.redirect(loginUrl);
   redirect.headers.set("x-trace-id", traceId);
-  if (refreshCookie) {
-    redirect.cookies.set(REFRESH_COOKIE, "", {
-      path: "/",
-      maxAge: 0,
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-    });
-  }
-  if (legacyCookie) {
-    redirect.cookies.set(SESSION_COOKIE, "", {
-      path: "/",
-      maxAge: 0,
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-    });
-  }
+  // Soft-nav RSC cache must not reuse this redirect after the user signs in
+  // (stale /portal/cart → /login is what left the header logged-in on /login).
+  redirect.headers.set("Cache-Control", "no-store, must-revalidate");
+  // Do not clear cookies here — a missing KV row / transient lookup must not
+  // destroy a still-valid refresh JWT; /api/auth/me and logout clear when needed.
   return redirect;
 }
 

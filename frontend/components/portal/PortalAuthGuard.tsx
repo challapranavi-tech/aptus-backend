@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useAuth } from "@/context/AuthProvider";
 import { clearLegacyPortalSession } from "@/lib/access-token";
@@ -8,21 +8,21 @@ import { clearLegacyPortalSession } from "@/lib/access-token";
 const PROTECTED_PREFIX = "/portal";
 
 /**
- * Gate portal routes on AuthProvider (single /api/auth/me), not a second me check.
- * Renders nothing while auth is resolving so we never bounce a valid session to login.
+ * Gate portal routes on AuthProvider (single /api/auth/me).
+ * Confirmed unauthenticated → hard navigate to login (avoids soft-nav redirect cache).
+ * Renders nothing while auth is resolving.
  */
 export function PortalAuthGuard({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const router = useRouter();
   const { user, ready } = useAuth();
   const isProtected = pathname.startsWith(PROTECTED_PREFIX);
 
   useEffect(() => {
-    if (!isProtected || !ready) return;
-    if (user) return;
+    if (!isProtected || !ready || user) return;
     clearLegacyPortalSession();
-    router.replace(`/login?next=${encodeURIComponent(pathname)}`);
-  }, [isProtected, ready, user, pathname, router]);
+    // Hard nav: Next soft-nav can replay a cached middleware redirect loop.
+    window.location.replace(`/login?next=${encodeURIComponent(pathname)}`);
+  }, [isProtected, ready, user, pathname]);
 
   if (!isProtected) {
     return <>{children}</>;
