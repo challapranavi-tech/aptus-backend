@@ -85,30 +85,68 @@ export function deriveBankTransferReference(order: {
   return `APT-${y}${m}${d}-${seq}`;
 }
 
-export const PAYMENT_PROOF_MAX_BYTES = 10 * 1024 * 1024; // 10 MB
+export const PAYMENT_PROOF_MAX_BYTES = 4 * 1024 * 1024; // 4 MB — Vercel request body limit is ~4.5 MB
 
 export const PAYMENT_PROOF_ALLOWED_MIME_TYPES = [
   "application/pdf",
   "image/jpeg",
   "image/jpg",
+  "image/pjpeg",
+  "image/x-jpeg",
   "image/png",
 ];
 
-export const PAYMENT_PROOF_ALLOWED_EXTENSIONS = ["pdf", "jpg", "jpeg", "png"];
+export const PAYMENT_PROOF_ALLOWED_EXTENSIONS = ["pdf", "jpg", "jpeg", "jfif", "png"];
 
 export function getFileExtension(fileName: string): string {
   const parts = fileName.trim().toLowerCase().split(".");
-  return parts.length > 1 ? parts[parts.length - 1] : "";
+  return parts.length > 1 ? parts[parts.length - 1]! : "";
 }
 
+function normalizeProofMime(type: string): string {
+  return (type || "").toLowerCase().split(";")[0]!.trim();
+}
+
+/**
+ * Accept PDF/JPG/PNG by extension, or by MIME when the browser strips/omits the
+ * filename (common with some mobile share sheets → name "blob" / empty).
+ */
 export function isAllowedPaymentProofFile(file: { type: string; name: string }): boolean {
   const extension = getFileExtension(file.name);
-  const mime = (file.type || "").toLowerCase();
+  const mime = normalizeProofMime(file.type);
   const mimeOk = PAYMENT_PROOF_ALLOWED_MIME_TYPES.includes(mime);
   const extensionOk = PAYMENT_PROOF_ALLOWED_EXTENSIONS.includes(extension);
-  // Browsers often send application/octet-stream (or empty) for PDFs — trust extension too.
-  // Server still sniffs magic bytes before persisting.
-  return extensionOk && (mimeOk || mime === "" || mime === "application/octet-stream");
+  if (extensionOk) {
+    return mimeOk || mime === "" || mime === "application/octet-stream";
+  }
+  // Mime-only fallback when the browser omitted a real extension (name "blob" / empty).
+  // Do not accept evil.exe renamed with an image MIME.
+  const bareName = !(file.name || "").includes(".");
+  return bareName && mimeOk;
+}
+
+/** Ensure the stored name has an extension validateFileContent can map. */
+export function ensurePaymentProofFileName(file: { name: string; type: string }): string {
+  const raw = (file.name || "").trim() || "payment-proof";
+  if (PAYMENT_PROOF_ALLOWED_EXTENSIONS.includes(getFileExtension(raw))) {
+    // Normalize .jfif → .jpg for storage/sniff mapping.
+    if (getFileExtension(raw) === "jfif") {
+      return `${raw.slice(0, -5)}.jpg`;
+    }
+    return raw;
+  }
+  const mime = normalizeProofMime(file.type);
+  if (mime === "application/pdf") return `${raw.replace(/\.[^.]+$/, "") || "payment-proof"}.pdf`;
+  if (mime === "image/png") return `${raw.replace(/\.[^.]+$/, "") || "payment-proof"}.png`;
+  if (
+    mime === "image/jpeg" ||
+    mime === "image/jpg" ||
+    mime === "image/pjpeg" ||
+    mime === "image/x-jpeg"
+  ) {
+    return `${raw.replace(/\.[^.]+$/, "") || "payment-proof"}.jpg`;
+  }
+  return raw;
 }
 
 /** Strip anything that isn't safe for a filesystem path segment. */

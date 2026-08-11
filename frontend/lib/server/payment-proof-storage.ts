@@ -1,5 +1,5 @@
-import { validateFileContent, FILE_CONTENT_PROBE_BYTES } from "@shared/lib/file-signature";
-import { sanitizeFileName } from "./bank-transfer";
+import { validateFileContent, FILE_CONTENT_PROBE_BYTES, sniffFileKind, mimeForFileKind } from "@shared/lib/file-signature";
+import { ensurePaymentProofFileName, sanitizeFileName } from "./bank-transfer";
 
 // ---------------------------------------------------------------------------
 // Vercel Blob storage for payment proofs (PRIVATE store).
@@ -39,7 +39,7 @@ export async function savePaymentProofFile(
   file: File,
 ): Promise<StoredPaymentProof> {
   const safeOrderId = sanitizeOrderId(orderId);
-  const originalName = file.name || "payment-proof.pdf";
+  const originalName = ensurePaymentProofFileName(file);
   const safeName = sanitizeFileName(originalName);
   const storedName = `${Date.now()}-${safeName}`;
   const storageKey = `${safeOrderId}/${storedName}`;
@@ -56,7 +56,9 @@ export async function savePaymentProofFile(
     throw new Error(contentError);
   }
 
-  const contentType = file.type || "application/octet-stream";
+  // Prefer sniffed MIME over browser-supplied type (phones often lie or omit it).
+  const sniffed = mimeForFileKind(sniffFileKind(buffer.subarray(0, FILE_CONTENT_PROBE_BYTES)));
+  const contentType = sniffed || file.type || "application/octet-stream";
   // Always cache in-process so the same request can re-read without another round-trip.
   localStore.set(storageKey, { buffer, contentType, fileName: originalName });
 

@@ -9,7 +9,10 @@ import {
   parseSaleOrderPaymentMeta,
 } from "./payment-meta";
 import { getRelatedPartnerIds } from "./partner-context";
-import { parseProductOrderLeadItems } from "./leads";
+import {
+  advancePurchaseCrmLeadStage,
+  parseProductOrderLeadItems,
+} from "./leads";
 import { fetchPartnerSubscriptions, saleOrderHasIssuedLicense } from "./subscriptions";
 
 type OdooSaleOrderRow = {
@@ -101,9 +104,28 @@ function mapSaleOrderToStatus(order: OdooSaleOrderRow): PortalOrderStatus {
 function mapLeadToStatus(lead: OdooCrmLeadRow): PortalOrderStatus {
   const stageName = Array.isArray(lead.stage_id) ? lead.stage_id[1].toLowerCase() : "";
   if (!lead.active || stageName.includes("lost")) return "Rejected";
-  if (stageName.includes("won")) return "Approved";
+  if (stageName.includes("license issued") || stageName.includes("won")) return "Completed";
+  if (stageName.includes("payment confirmation")) return "Completed";
   if (stageName.includes("approved")) return "Approved";
   return "Submitted";
+}
+
+function crmStageName(lead: OdooCrmLeadRow): string | undefined {
+  return Array.isArray(lead.stage_id) ? lead.stage_id[1] : undefined;
+}
+
+function paymentMetaFromCrmStage(
+  stageName: string | undefined,
+  base: ReturnType<typeof parseSaleOrderPaymentMeta>,
+): ReturnType<typeof parseSaleOrderPaymentMeta> & { licenseIssued?: boolean } {
+  const stage = (stageName ?? "").toLowerCase();
+  if (stage.includes("license issued")) {
+    return { ...base, paymentStatus: base.paymentStatus === "failed" ? "failed" : "paid", licenseIssued: true };
+  }
+  if (stage.includes("payment confirmation")) {
+    return { ...base, paymentStatus: base.paymentStatus === "failed" ? "failed" : "paid" };
+  }
+  return base;
 }
 
 function normalizeOrderStatus(status: PortalOrderStatus): PortalOrderStatus {
@@ -131,7 +153,7 @@ function parseLineItem(lineName: string): OrderLineItem {
 
 function applyPaymentMeta(
   order: PortalOrder,
-  meta: ReturnType<typeof parseSaleOrderPaymentMeta>,
+  meta: ReturnType<typeof parseSaleOrderPaymentMeta> & { licenseIssued?: boolean },
   amountTotal?: number,
 ): PortalOrder {
   let status = normalizeOrderStatus(order.status);
@@ -149,6 +171,7 @@ function applyPaymentMeta(
     amountPaid: meta.amountPaid,
     paidAt: meta.paidAt,
     rejectReason: meta.rejectReason,
+    licenseIssued: meta.licenseIssued ?? order.licenseIssued,
     amountDue: amountTotal != null && amountTotal > 0 ? amountTotal : order.amountDue,
     paymentProofUrl:
       meta.paymentProofOdooAttachmentId != null || meta.paymentProofFileName
@@ -203,16 +226,18 @@ async function mapSaleOrderRow(
     duration,
     items,
     saleOrderId: saleOrder.id,
+    licenseIssued: hasLicense,
     amountDue: typeof saleOrder.amount_total === "number" ? saleOrder.amount_total : undefined,
     createdAt,
     updatedAt: createdAt,
   };
 
-  return applyPaymentMeta(base, paymentMeta, saleOrder.amount_total);
+  return applyPaymentMeta(base, { ...paymentMeta, licenseIssued: hasLicense }, saleOrder.amount_total);
 }
 
 function mapLeadRow(lead: OdooCrmLeadRow, partnerId: number): PortalOrder {
-  const paymentMeta = parseSaleOrderPaymentMeta(lead.description);
+  const stage = crmStageName(lead);
+  const paymentMeta = paymentMetaFromCrmStage(stage, parseSaleOrderPaymentMeta(lead.description));
   const parsedItems = parseProductOrderLeadItems(lead.name);
   const items: OrderLineItem[] = parsedItems.length
     ? parsedItems.map((item) => ({
@@ -237,6 +262,8 @@ function mapLeadRow(lead: OdooCrmLeadRow, partnerId: number): PortalOrder {
     duration: "1year",
     items,
     leadId: lead.id,
+    crmStage: stage,
+    licenseIssued: paymentMeta.licenseIssued,
     paymentStatus: paymentMeta.paymentStatus,
     createdAt: lead.create_date,
     updatedAt: lead.create_date,
@@ -348,6 +375,8 @@ function dedupePortalOrders(orders: PortalOrder[]): PortalOrder[] {
 
     if (match) {
       if (match.leadId == null) match.leadId = order.leadId;
+      if (!match.crmStage && order.crmStage) match.crmStage = order.crmStage;
+      if (order.licenseIssued) match.licenseIssued = true;
       continue;
     }
     kept.push(order);
@@ -417,6 +446,7 @@ async function markLicensedOrdersCompleted(
     return applyPaymentMeta(order, {
       paymentStatus: "paid",
       paymentMethod: order.paymentMethod ?? "License issued",
+      licenseIssued: true,
     });
   });
 }
@@ -526,6 +556,7 @@ export async function markPartnerOrderPaymentPaid(input: {
   bankTransferReference?: string;
   attachmentId?: number;
   fileName?: string;
+  leadId?: number;
 }): Promise<PortalOrder | null> {
   const client = getOdooClient();
   if (!client) throw new Error("Odoo is not configured");
@@ -562,7 +593,25 @@ export async function markPartnerOrderPaymentPaid(input: {
   );
   const partnerId = Array.isArray(rows[0]?.partner_id) ? rows[0].partner_id[0] : null;
   if (!partnerId) return null;
-  return resolvePartnerOrder(partnerId, `odoo-so-${input.saleOrderId}`);
+
+  const order = await resolvePartnerOrder(partnerId, `odoo-so-${input.saleOrderId}`);
+  const leadId = order?.leadId ?? input.leadId;
+  if (leadId) {
+    await advancePurchaseCrmLeadStage({
+      leadId,
+      stage: "payment_confirmation",
+    }).catch((error: unknown) => {
+      logger.warn("Failed to advance CRM to Payment Confirmation", {
+        action: "crm.lead.advance_stage",
+        leadId,
+        error: error instanceof Error ? error.message : String(error),
+      });
+    });
+  }
+
+  return leadId && order
+    ? { ...order, leadId, crmStage: order.crmStage ?? "Payment Confirmation" }
+    : order;
 }
 
 export async function markPartnerOrderPaymentRejected(input: {

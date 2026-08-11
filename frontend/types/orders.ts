@@ -39,6 +39,10 @@ export type PortalOrder = {
   items: OrderLineItem[];
   leadId?: number;
   saleOrderId?: number;
+  /** True once Software Team has issued a license key (or CRM is at License Issued). */
+  licenseIssued?: boolean;
+  /** Live CRM stage name when known — portal status mirrors this when present. */
+  crmStage?: string;
   createdAt: string;
   updatedAt: string;
   idempotencyKey?: string;

@@ -80,7 +80,7 @@ export function summarizeOrders(orders: PortalOrder[]): OrdersSummary {
     approved: orders.filter((order) => getOrderDisplayStatus(order) === "Approved").length,
     completed: orders.filter((order) => {
       const display = getOrderDisplayStatus(order);
-      return display === "License issued" || display === "Completed";
+      return display === "License Issued" || display === "Completed";
     }).length,
     rejected: orders.filter((order) => getOrderDisplayStatus(order) === "Rejected").length,
   };
@@ -146,11 +146,13 @@ function orderActivityTitle(order: PortalOrder): string {
       return "Purchase request submitted";
     case "Approved":
       return "Order approved";
-    case "Pending verification":
-      return "Pending verification";
-    case "License issued":
+    case "Payment Verification Pending":
+      return "Payment Verification Pending";
+    case "Payment Verified":
+      return "Payment Verified";
+    case "License Issued":
     case "Completed":
-      return "License issued";
+      return "License Issued";
     case "Rejected":
       return "Rejected";
     default:

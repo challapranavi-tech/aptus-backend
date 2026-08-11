@@ -4,6 +4,7 @@ import {
   formatPasswordChangedEmail,
   formatPasswordResetEmail,
   formatPasswordResetOtpEmail,
+  formatPurchaseApprovedEmail,
   formatPurchaseRequestSubmittedEmail,
   formatRegistrationSuccessfulEmail,
   formatBankTransferCustomerEmail,
@@ -75,6 +76,18 @@ const pending = formatBankTransferCustomerEmail({
 });
 assert.match(pending.subject, /Payment Verification in Progress/);
 
+const paymentVerified = formatPurchaseApprovedEmail({
+  customerName: "Ada",
+  reference: "SO-9",
+  products: ["AutoCAD"],
+  duration: "1year",
+  portalUrl: "https://example.com",
+});
+assert.equal(paymentVerified.subject, "Payment Verified");
+assert.match(paymentVerified.body, /successfully verified/i);
+assert.match(paymentVerified.body, /2–3 business days/);
+assert.doesNotMatch(paymentVerified.body, /License Key/);
+
 const license = formatLicenseAvailableEmail({
   customerName: "Ada",
   productName: "AutoCAD",
@@ -83,7 +96,7 @@ const license = formatLicenseAvailableEmail({
   downloadUrl: "https://example.com/dl",
   portalUrl: "https://example.com",
 });
-assert.match(license.subject, /Payment Verified/);
+assert.match(license.subject, /License Issued/);
 assert.match(license.body, /ABC-123/);
 assert.match(license.body, /https:\/\/example.com\/dl/);
 

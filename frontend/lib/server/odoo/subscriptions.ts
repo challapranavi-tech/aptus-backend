@@ -308,10 +308,9 @@ export async function fetchPartnerSubscriptions(
 
     const licenseKey = extractLicenseKey(line, licenseField);
     const hasLicense = Boolean(licenseKey);
-    const isActiveSub = isActiveSubscriptionState(order.subscription_state);
 
-    // Default portal view: active subscriptions + any confirmed line that already has a license.
-    if (!includeInactive && !isActiveSub && !hasLicense) continue;
+    // License keys only — nothing shows in Licenses until Software Team issues them.
+    if (!hasLicense) continue;
 
     const renewalIso = resolveRenewalDateIso(order);
     const endIso = odooDateToIso(order.end_date);

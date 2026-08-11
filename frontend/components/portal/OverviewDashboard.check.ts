@@ -1,21 +1,20 @@
 /**
- * Self-check: the Dashboard "Recent Orders" badge must not claim a payment was
- * submitted ("Pending verification") for an order that only reached the payment
- * step but hasn't had proof uploaded yet (status "Submitted" / paymentStatus "pending").
+ * Dashboard row labels must not claim payment proof was
+ * submitted ("Payment Verification Pending") for an order that only reached the payment
+ * step (Submitted / Awaiting payment).
  */
 import assert from "node:assert/strict";
 import { orderRowStatusLabel, orderRowStatusTone } from "../../lib/order-status";
 
 assert.equal(orderRowStatusLabel("Submitted"), "Awaiting payment");
-assert.notEqual(orderRowStatusLabel("Submitted"), "Pending verification");
+assert.notEqual(orderRowStatusLabel("Submitted"), "Payment Verification Pending");
 assert.equal(orderRowStatusLabel("Approved"), "Approved");
-assert.equal(orderRowStatusLabel("Pending verification"), "Pending verification");
-assert.equal(orderRowStatusLabel("License issued"), "License issued");
-assert.equal(orderRowStatusLabel("Completed"), "License issued");
+assert.equal(orderRowStatusLabel("Payment Verification Pending"), "Payment Verification Pending");
+assert.equal(orderRowStatusLabel("Payment Verified"), "Payment Verified");
+assert.equal(orderRowStatusLabel("License Issued"), "License Issued");
+assert.equal(orderRowStatusLabel("Completed"), "License Issued");
 assert.equal(orderRowStatusLabel("Rejected"), "Rejected");
 
-assert.equal(orderRowStatusTone("Submitted"), "processing");
-assert.equal(orderRowStatusTone("License issued"), "completed");
-assert.equal(orderRowStatusTone("Rejected"), "rejected");
+assert.equal(orderRowStatusTone("License Issued"), "completed");
 
 console.log("OverviewDashboard.check: ok");

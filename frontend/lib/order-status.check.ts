@@ -23,11 +23,17 @@ function order(partial: Partial<PortalOrder>): PortalOrder {
 
 assert.equal(
   getOrderDisplayStatus(order({ paymentStatus: "pending_verification", status: "Submitted" })),
-  "Pending verification",
+  "Payment Verification Pending",
 );
 assert.equal(
   getOrderDisplayStatus(order({ paymentStatus: "paid", status: "Approved" })),
-  "License issued",
+  "Payment Verified",
+);
+assert.equal(
+  getOrderDisplayStatus(
+    order({ paymentStatus: "paid", status: "Completed", licenseIssued: true }),
+  ),
+  "License Issued",
 );
 assert.equal(
   getOrderDisplayStatus(order({ paymentStatus: "failed", status: "Approved" })),
@@ -35,12 +41,34 @@ assert.equal(
 );
 assert.equal(getOrderDisplayStatus(order({ status: "Rejected" })), "Rejected");
 assert.equal(getOrderDisplayStatus(order({ status: "Approved" })), "Approved");
+assert.equal(
+  getOrderDisplayStatus(
+    order({
+      paymentStatus: "pending",
+      crmStage: "Portal Purchase",
+    }),
+  ),
+  "Payment Verification Pending",
+);
+assert.equal(
+  getOrderDisplayStatus(
+    order({
+      paymentStatus: "pending",
+      crmStage: "Payment Confirmation",
+    }),
+  ),
+  "Payment Verified",
+);
 
 assert.equal(
   isOrdersPageOrder(order({ paymentStatus: "pending_verification" })),
   true,
 );
 assert.equal(isOrdersPageOrder(order({ paymentStatus: "paid" })), true);
+assert.equal(
+  isOrdersPageOrder(order({ paymentStatus: "paid", licenseIssued: true })),
+  true,
+);
 assert.equal(isOrdersPageOrder(order({ status: "Submitted" })), false);
 
 assert.equal(

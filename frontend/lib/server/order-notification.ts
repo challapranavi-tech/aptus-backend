@@ -387,6 +387,7 @@ export function formatCartAddedSalesEmail(input: {
   linePrices: Array<{ productName: string; unitPrice: number; lineTotal: number }>;
   estimatedTotal: number | null;
   addedAt: string;
+  crmReference?: string;
 }): { subject: string; body: string } {
   const productLines = input.items.map((item) => {
     const priced = input.linePrices.find((row) => row.productName === item.productName);
@@ -399,8 +400,8 @@ export function formatCartAddedSalesEmail(input: {
 
   const totalNote =
     input.estimatedTotal != null && input.estimatedTotal > 0
-      ? `Cart Value: ${input.estimatedTotal.toFixed(3)} OMR`
-      : "Cart Value: —";
+      ? `Estimated Value: ${input.estimatedTotal.toFixed(3)} OMR`
+      : "Estimated Value: —";
 
   return {
     subject: `New Abandoned Cart Lead - Customer Follow-up Required`,
@@ -413,14 +414,14 @@ export function formatCartAddedSalesEmail(input: {
       "",
       "Lead Details",
       `Customer Name: ${input.customer.name}`,
-      `Email: ${input.customer.email}`,
+      `Customer Email: ${input.customer.email}`,
       `Phone: ${input.customer.phone || "—"}`,
       `Company: ${input.customer.company || "—"}`,
-      `Products in Cart:`,
+      `Products Added:`,
       ...productLines,
       totalNote,
       `Date & Time: ${input.addedAt}`,
-      `Abandoned Since: ${input.addedAt}`,
+      input.crmReference ? `CRM Reference: ${input.crmReference}` : "",
       "",
       "Recommended Actions",
       "1. Contact the customer via email or phone.",
@@ -433,7 +434,9 @@ export function formatCartAddedSalesEmail(input: {
       "Thank you,",
       "Website Notification System",
       "Aptus Infotech",
-    ].join("\n"),
+    ]
+      .filter(Boolean)
+      .join("\n"),
   };
 }
 
@@ -567,8 +570,8 @@ export function formatOrderNotificationEmail(
 // ─── SCENARIO: Payment Verified — License Ready ───────────────────────────────
 
 /**
- * Customer email — sent after Finance/CRM verifies payment and the license is ready.
- * Matches Word doc scenario "Payment Verified – Your Software License & Invoice".
+ * Customer email — sent after Finance/CRM verifies payment (license still being prepared).
+ * Matches workflow Step 3: Payment Verified.
  */
 export function formatPurchaseApprovedEmail(input: {
   customerName: string;
@@ -579,60 +582,34 @@ export function formatPurchaseApprovedEmail(input: {
   orderDate?: string;
   invoiceNumber?: string;
   invoiceDate?: string;
-  licenseKeys?: string[];
-  licenseType?: string;
-  licenseValidity?: string;
-  downloadLink?: string;
-  activationGuideLink?: string;
-  installationGuideLink?: string;
-  documentationLink?: string;
-  invoiceDownloadLink?: string;
-  supportPortalLink?: string;
 }): { subject: string; body: string } {
   const productLines = input.products.map((product) => `  - ${product}`);
-  const keyLines = input.licenseKeys?.map((key) => `  ${key}`) ?? ["  (To be provided by your account manager)"];
 
   return {
-    subject: `Payment Verified – Your Software License & Invoice`,
+    subject: "Payment Verified",
     body: [
       `Dear ${input.customerName},`,
       "",
-      "We're pleased to inform you that your payment has been successfully verified.",
+      "Payment has been successfully verified.",
       "",
-      "Thank you for your purchase and for choosing Aptus Infotech. Your order has now been processed, and your software license is ready for use.",
+      "Thank you for your payment.",
+      "Your software license is now being prepared.",
+      "Your license will be issued within 2–3 business days.",
       "",
       "Order Summary",
       `Order Number: ${input.reference}`,
-      `Order Date: ${input.orderDate ?? "—"}`,
+      input.orderDate ? `Order Date: ${input.orderDate}` : "",
       "Payment Status: Verified",
-      input.invoiceNumber ? `Invoice Number: ${input.invoiceNumber}` : "",
-      input.invoiceDate ? `Invoice Date: ${input.invoiceDate}` : "",
-      "",
-      "Your Software License",
       "Product(s):",
       ...productLines,
-      "License Key(s):",
-      ...keyLines,
-      input.licenseType ? `License Type: ${input.licenseType}` : "",
-      input.licenseValidity ? `Validity: ${input.licenseValidity}` : "",
       "",
-      "Quick Access",
-      input.downloadLink ? `Download Software: ${input.downloadLink}` : "",
-      input.activationGuideLink ? `License Activation Guide: ${input.activationGuideLink}` : "",
-      input.installationGuideLink ? `Installation Guide: ${input.installationGuideLink}` : "",
-      input.documentationLink ? `Product Documentation: ${input.documentationLink}` : "",
-      input.invoiceDownloadLink ? `Invoice: ${input.invoiceDownloadLink}` : "",
-      input.supportPortalLink
-        ? `Support Portal: ${input.supportPortalLink}`
-        : `Support Portal: ${input.portalUrl}/portal/subscriptions`,
+      `Track your order: ${input.portalUrl}/portal/products`,
       "",
       "Need Assistance?",
-      "If you have any questions regarding installation, activation, licensing, or your purchase, our support team is happy to assist.",
-      "",
       "Support Email: info@aptusinfotech.com",
       "Support Phone: +968 9941 8481",
       "",
-      "Thank you for choosing Aptus Infotech. We appreciate your business and look forward to supporting your success.",
+      "Thank you for choosing Aptus Infotech.",
       "",
       "Warm regards,",
       "Aptus Infotech Team",
@@ -873,29 +850,33 @@ export function formatLicenseAvailableEmail(input: {
   productName: string;
   licenseKey: string;
   expiryDate?: string;
+  activationDate?: string;
   downloadUrl?: string;
+  activationInstructions?: string;
   portalUrl: string;
 }): { subject: string; body: string } {
   return {
-    subject: `Payment Verified – Your Software License & Invoice`,
+    subject: "License Issued",
     body: [
       `Dear ${input.customerName},`,
       "",
-      "We're pleased to inform you that your payment has been successfully verified.",
+      "Your software license has been issued successfully.",
       "",
-      "Thank you for your purchase and for choosing Aptus Infotech. Your order has now been processed, and your software license is ready for use.",
+      "License Details",
+      `Product Name: ${input.productName}`,
+      `License Key / Subscription Details: ${input.licenseKey}`,
+      input.activationDate ? `Issue / Activation Date: ${input.activationDate}` : "",
+      input.expiryDate ? `Expiry Date: ${input.expiryDate}` : "",
+      input.downloadUrl ? `Download Link: ${input.downloadUrl}` : "",
       "",
-      "Your Software License",
-      `Product: ${input.productName}`,
-      `License Key: ${input.licenseKey}`,
-      input.expiryDate ? `Validity: ${input.expiryDate}` : "",
-      input.downloadUrl ? `Download Software: ${input.downloadUrl}` : "",
+      "Activation Instructions",
+      input.activationInstructions?.trim() ||
+        "Sign in to the Aptus Customer Portal → Licenses to view your license key and follow the product activation steps provided with your software.",
       "",
-      `Support Portal: ${input.portalUrl}/portal/subscriptions`,
-      "",
-      "Need Assistance?",
+      "Support Information",
       "Support Email: info@aptusinfotech.com",
       "Support Phone: +968 9941 8481",
+      `Support Portal: ${input.portalUrl}/portal/subscriptions`,
       "",
       "Thank you for choosing Aptus Infotech.",
       "",

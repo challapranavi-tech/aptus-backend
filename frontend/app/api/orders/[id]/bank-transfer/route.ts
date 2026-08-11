@@ -20,7 +20,7 @@ import {
   formatPurchaseRequestSubmittedEmail,
 } from "@/lib/server/order-notification";
 import { promoteCartLeadToProductOrder } from "@/lib/server/odoo/leads";
-import { createPortalNotification } from "@/lib/server/portal-notifications";
+import { createPortalNotification, claimNotificationSend } from "@/lib/server/portal-notifications";
 import {
   cartBelongsToOrder,
   clearStoredPortalCart,
@@ -112,7 +112,11 @@ export async function POST(request: NextRequest, context: RouteContext) {
     logger.info("bank-transfer formData parsed", { orderId: routeOrderId });
   } catch (error) {
     logBankTransferError("parse_formdata", routeOrderId, error);
-    return jsonError("Invalid upload — expected multipart form data", 400);
+    return jsonError(
+      "Upload failed — the file may be too large (max 4 MB) or the request was incomplete. Try a smaller JPEG/PNG or a PDF.",
+      400,
+      "INVALID_UPLOAD",
+    );
   }
 
   const confirmed = formData.get("confirmed") === "true";
@@ -145,7 +149,7 @@ export async function POST(request: NextRequest, context: RouteContext) {
   }
 
   if (file.size > PAYMENT_PROOF_MAX_BYTES) {
-    return jsonError("File is too large. Maximum size is 10 MB.", 400, "FILE_TOO_LARGE");
+    return jsonError("File is too large. Maximum size is 4 MB.", 400, "FILE_TOO_LARGE");
   }
 
   if (!isAllowedPaymentProofFile({ type: file.type, name: file.name })) {
@@ -491,6 +495,15 @@ export async function POST(request: NextRequest, context: RouteContext) {
       totalAmount != null ? formatOmanAmount(totalAmount) : "To be confirmed";
     const portalUrl = getPortalBaseUrl();
 
+    // Once-only per order reference — retries / double-submit must not re-email.
+    const claimRef = updated.reference;
+    const canNotifyCustomer =
+      !profile.partnerId ||
+      (await claimNotificationSend(profile.partnerId, claimRef, "purchase_submitted"));
+    const canNotifySales =
+      !profile.partnerId ||
+      (await claimNotificationSend(profile.partnerId, `sales:${claimRef}`, "order"));
+
     const customerEmail = formatPurchaseRequestSubmittedEmail({
       customerName: profile.name,
       reference: updated.reference,
@@ -519,27 +532,33 @@ export async function POST(request: NextRequest, context: RouteContext) {
     });
 
     const [customerResult, adminResult] = await Promise.all([
-      sendPortalEmail({
-        to: profile.email,
-        subject: customerEmail.subject,
-        body: customerEmail.body,
-      }),
-      sendPortalEmail({
-        to: getOrderNotificationEmail(),
-        subject: adminEmail.subject,
-        body: adminEmail.body,
-        replyTo: profile.email,
-        attachments: proofBuffer
-          ? [{ filename: stored.fileName, content: proofBuffer, contentType: stored.contentType }]
-          : undefined,
-      }),
+      canNotifyCustomer
+        ? sendPortalEmail({
+            to: profile.email,
+            subject: customerEmail.subject,
+            body: customerEmail.body,
+          })
+        : Promise.resolve({ sent: false, channel: "none" as const }),
+      canNotifySales
+        ? sendPortalEmail({
+            to: getOrderNotificationEmail(),
+            subject: adminEmail.subject,
+            body: adminEmail.body,
+            replyTo: profile.email,
+            attachments: proofBuffer
+              ? [{ filename: stored.fileName, content: proofBuffer, contentType: stored.contentType }]
+              : undefined,
+          })
+        : Promise.resolve({ sent: false, channel: "none" as const }),
     ]);
 
-    if (!customerResult.sent || !adminResult.sent) {
+    if ((canNotifyCustomer && !customerResult.sent) || (canNotifySales && !adminResult.sent)) {
       logger.warn("Bank transfer notification email(s) not sent", {
         orderId: updated.id,
         customerSent: customerResult.sent,
         adminSent: adminResult.sent,
+        canNotifyCustomer,
+        canNotifySales,
       });
     }
 
@@ -547,7 +566,7 @@ export async function POST(request: NextRequest, context: RouteContext) {
       await createPortalNotification({
         partnerId: profile.partnerId,
         actorId: claims.sub,
-        title: "Order received",
+        title: "Payment Verification Pending",
         detail: `Your order ${updated.reference} is awaiting payment verification (2-3 business days).`,
         status: "Action Required",
         type: "purchase_submitted",

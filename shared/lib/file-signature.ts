@@ -113,6 +113,7 @@ const EXT_TO_KINDS: Record<string, FileKind[]> = {
   ".docx": ["zip"],
   ".jpg": ["jpeg"],
   ".jpeg": ["jpeg"],
+  ".jfif": ["jpeg"],
   ".png": ["png"],
   ".webp": ["webp"],
 };

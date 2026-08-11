@@ -90,17 +90,33 @@ export async function fetchPartnerNotifications(
 
     if (order.paymentStatus === "paid" || order.status === "Completed") {
       const products = order.items.map((item) => item.productName).join(", ");
-      notifications.push({
-        id: `odoo-notif-order-paid-${order.reference}`,
-        partnerId,
-        title: "Purchased",
-        detail: `Your order ${order.reference} has been successfully processed. ${products || "Your products"} ${order.items.length === 1 ? "is" : "are"} now active in your account.`,
-        status: "Confirmed",
-        type: "purchase_approved",
-        reference: order.reference,
-        read: false,
-        createdAt: order.updatedAt || order.createdAt,
-      });
+      if (order.licenseIssued) {
+        notifications.push({
+          id: `odoo-notif-order-licensed-${order.reference}`,
+          partnerId,
+          title: "License Issued",
+          detail:
+            "Your software license has been issued successfully. You can now view your license details in your customer portal.",
+          status: "Confirmed",
+          type: "license_available",
+          reference: order.reference,
+          read: false,
+          createdAt: order.updatedAt || order.createdAt,
+        });
+      } else {
+        notifications.push({
+          id: `odoo-notif-order-paid-${order.reference}`,
+          partnerId,
+          title: "Payment Verified",
+          detail:
+            "Your payment has been verified successfully. Your software license will be issued within 2–3 business days.",
+          status: "Confirmed",
+          type: "purchase_approved",
+          reference: order.reference,
+          read: false,
+          createdAt: order.updatedAt || order.createdAt,
+        });
+      }
     }
 
     // Only show "submitted" notification after the customer has uploaded payment proof.
@@ -189,8 +205,9 @@ export async function fetchPartnerNotifications(
     notifications.push({
       id: `odoo-notif-license-${reference}`,
       partnerId,
-      title: "License Available",
-      detail: `Your ${item.productName} license is ready in Subscriptions.`,
+      title: "License Issued",
+      detail:
+        "Your software license has been issued successfully. You can now view your license details in your customer portal.",
       status: "Confirmed",
       type: "license_available",
       reference,

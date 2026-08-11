@@ -16,6 +16,7 @@ import {
   markNotificationSent,
 } from "./portal-notifications";
 import { resolveCustomerContact } from "./auth-service";
+import { advancePurchaseCrmLeadStage } from "./odoo/leads";
 import type { PortalOrder } from "@/types/orders";
 import type { PortalNotificationType } from "@/types/notifications";
 import type { SubscriptionItem } from "@/types/subscriptions";
@@ -170,14 +171,28 @@ export async function notifyOrderApprovedIfNeeded(
 }
 
 /**
- * Notify customer after Finance/CRM verifies payment (portal status → Purchased).
+ * Notify customer after Finance/CRM verifies payment (portal status → Payment Verified).
  * Deduped via KV so Odoo-driven fetch sync and admin verify-payment share one email.
  */
 export async function notifyPurchaseApprovedIfNeeded(
   order: PortalOrder,
   triggeredBy?: string,
 ): Promise<{ notified: boolean; emailSent: boolean }> {
-  if (order.paymentStatus !== "paid" && order.status !== "Completed") {
+  const stage = (order.crmStage ?? "").toLowerCase();
+  const paymentVerified =
+    order.paymentStatus === "paid" ||
+    order.status === "Completed" ||
+    stage.includes("payment confirmation") ||
+    stage.includes("license issued");
+
+  if (!paymentVerified) {
+    return { notified: false, emailSent: false };
+  }
+
+  // If the license is already issued, the License Issued email covers this step —
+  // do not also send Payment Verified for the same moment.
+  if (order.licenseIssued || stage.includes("license issued")) {
+    await claimOrderEmail(order, "purchase_approved");
     return { notified: false, emailSent: false };
   }
 
@@ -208,8 +223,9 @@ export async function notifyPurchaseApprovedIfNeeded(
   const notification = await createPortalNotification({
     partnerId: order.partnerId,
     actorId: customer.actorId,
-    title: "Purchased",
-    detail: `Your order ${order.reference} has been successfully processed. ${products.join(", ") || "Your products"} ${products.length === 1 ? "is" : "are"} now active.`,
+    title: "Payment Verified",
+    detail:
+      "Your payment has been verified successfully. Your software license will be issued within 2–3 business days.",
     status: "Confirmed",
     type: "purchase_approved",
     reference: order.reference,
@@ -342,7 +358,13 @@ export async function maybeNotifyWorkflowFromOdoo(
     if (order.status === "Approved" && order.paymentStatus !== "paid" && order.paymentStatus !== "failed") {
       await notifyOrderApprovedIfNeeded(order, triggeredBy);
     }
-    if (order.paymentStatus === "paid" || order.status === "Completed") {
+    const stage = (order.crmStage ?? "").toLowerCase();
+    if (
+      order.paymentStatus === "paid" ||
+      order.status === "Completed" ||
+      stage.includes("payment confirmation") ||
+      stage.includes("license issued")
+    ) {
       await notifyPurchaseApprovedIfNeeded(order, triggeredBy);
     }
     if (order.status === "Rejected" || order.paymentStatus === "failed") {
@@ -384,7 +406,7 @@ function licenseReference(item: SubscriptionItem): string {
 
 /**
  * When Odoo issues a license key on a sale order line, email the customer once
- * (deduped via KV) so they don't need to contact support.
+ * (deduped via KV), advance CRM to License Issued, and create a portal notification.
  */
 export async function maybeNotifyLicensesAvailable(
   subscriptions: SubscriptionItem[],
@@ -397,22 +419,63 @@ export async function maybeNotifyLicensesAvailable(
   const customer = await resolveCustomerContact(partnerId, triggeredBy);
   if (!customer) return;
 
+  const advancedLeadIds = new Set<number>();
+  let ordersBySaleId: Map<number, PortalOrder> | null = null;
+
+  async function leadIdForSaleOrder(saleOrderId: number): Promise<number | null> {
+    if (!ordersBySaleId) {
+      try {
+        const { fetchPartnerOrders } = await import("./odoo/orders");
+        const orders = await fetchPartnerOrders(partnerId);
+        ordersBySaleId = new Map(
+          orders
+            .filter((order) => order.saleOrderId != null)
+            .map((order) => [order.saleOrderId!, order]),
+        );
+      } catch {
+        ordersBySaleId = new Map();
+      }
+    }
+    return ordersBySaleId.get(saleOrderId)?.leadId ?? null;
+  }
+
   for (const item of withKeys) {
     const reference = licenseReference(item);
     if (!(await claimNotificationSend(partnerId, reference, "license_available"))) {
       continue;
     }
 
+    if (item.orderId != null) {
+      const leadId = await leadIdForSaleOrder(item.orderId);
+      if (leadId != null && !advancedLeadIds.has(leadId)) {
+        advancedLeadIds.add(leadId);
+        await advancePurchaseCrmLeadStage({
+          leadId,
+          stage: "license_issued",
+        }).catch((error: unknown) => {
+          logger.warn("Failed to advance CRM to License Issued", {
+            action: "crm.lead.advance_stage",
+            partnerId,
+            leadId,
+            orderId: item.orderId,
+            error: error instanceof Error ? error.message : String(error),
+          });
+        });
+      }
+    }
+
     const emailContent = formatLicenseAvailableEmail({
       customerName: customer.name,
       productName: item.productName,
-      licenseKey: item.licenseKey,
+      licenseKey: item.licenseKey!,
       expiryDate:
         item.expiryDate && item.expiryDate !== "—"
           ? item.expiryDate
           : item.renewalDate && item.renewalDate !== "—"
             ? item.renewalDate
             : undefined,
+      activationDate:
+        item.purchaseDate && item.purchaseDate !== "—" ? item.purchaseDate : undefined,
       downloadUrl: item.downloadUrl,
       portalUrl: getPortalBaseUrl(),
     });
@@ -426,8 +489,9 @@ export async function maybeNotifyLicensesAvailable(
     const notification = await createPortalNotification({
       partnerId,
       actorId: customer.actorId,
-      title: "License Available",
-      detail: `Your ${item.productName} license is ready in Subscriptions.`,
+      title: "License Issued",
+      detail:
+        "Your software license has been issued successfully. You can now view your license details in your customer portal.",
       status: "Confirmed",
       type: "license_available",
       reference,
@@ -461,7 +525,7 @@ export async function maybeNotifyLicensesAvailable(
       });
     }
 
-    logger.info("License available notification sent", {
+    logger.info("License issued notification sent", {
       action: "license.available_notify",
       partnerId,
       reference,

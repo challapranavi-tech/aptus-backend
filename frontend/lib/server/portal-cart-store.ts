@@ -1,6 +1,8 @@
 import { kvDel, kvGet, kvSet } from "./kv-store";
 
 export const CART_REMINDER_INTERVAL_MS = 15 * 24 * 60 * 60 * 1000;
+/** Max reminders while cart stays in Added to Cart (15d × 2 ≈ 1 month). */
+export const CART_REMINDER_MAX_COUNT = 2;
 
 export type StoredPortalCartItem = {
   category: string;
@@ -17,6 +19,8 @@ export type StoredPortalCart = {
   items: StoredPortalCartItem[];
   updatedAt: string;
   nextReminderAt: string | null;
+  /** How many cart reminder emails have been sent for this cart journey. */
+  reminderCount?: number;
   partnerId?: number;
   /** Odoo crm.lead id for the active cart journey (one record). */
   crmLeadId?: number;
@@ -102,16 +106,20 @@ export async function saveStoredPortalCart(
 
   const now = new Date().toISOString();
   const existing = await getStoredPortalCart(actorId);
-  const nextReminderAt =
-    !existing || cartFingerprint(existing) !== cartFingerprint(input)
-      ? new Date(Date.now() + CART_REMINDER_INTERVAL_MS).toISOString()
-      : existing.nextReminderAt;
+  const contentsChanged =
+    !existing || cartFingerprint(existing) !== cartFingerprint(input);
+  const nextReminderAt = contentsChanged
+    ? new Date(Date.now() + CART_REMINDER_INTERVAL_MS).toISOString()
+    : existing.nextReminderAt;
+  // Fresh cart contents reset the reminder window (new 1-month / 2-email cycle).
+  const reminderCount = contentsChanged ? 0 : (existing?.reminderCount ?? 0);
 
   const cart: StoredPortalCart = {
     duration: input.duration,
     items: input.items,
     updatedAt: now,
     nextReminderAt,
+    reminderCount,
     partnerId: input.partnerId ?? existing?.partnerId,
     crmLeadId: input.crmLeadId ?? existing?.crmLeadId,
     crmNotifiedFingerprint:
@@ -146,8 +154,14 @@ export async function listStoredPortalCartActorIds(): Promise<string[]> {
 export async function markCartReminderSent(actorId: string): Promise<void> {
   const cart = await getStoredPortalCart(actorId);
   if (!cart?.items.length) return;
+  const reminderCount = (cart.reminderCount ?? 0) + 1;
   await kvSet(cartKey(actorId), {
     ...cart,
-    nextReminderAt: new Date(Date.now() + CART_REMINDER_INTERVAL_MS).toISOString(),
+    reminderCount,
+    // After the 2nd reminder, stop scheduling further sends.
+    nextReminderAt:
+      reminderCount >= CART_REMINDER_MAX_COUNT
+        ? null
+        : new Date(Date.now() + CART_REMINDER_INTERVAL_MS).toISOString(),
   });
 }

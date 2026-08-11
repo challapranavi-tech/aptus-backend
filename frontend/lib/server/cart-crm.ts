@@ -52,6 +52,7 @@ function buildCartDescription(input: {
     linePrices,
     estimatedTotal: pricing?.total ?? null,
     addedAt: input.addedAt,
+    crmReference: input.cart.crmLeadId ? `LEAD-${input.cart.crmLeadId}` : undefined,
   }).body;
 }
 
@@ -136,6 +137,7 @@ export async function syncCartCrmJourney(input: {
     linePrices,
     estimatedTotal: pricing?.total ?? null,
     addedAt,
+    crmReference: leadId ? `LEAD-${leadId}` : undefined,
   });
 
   const notifyEmail = getOrderNotificationEmail();

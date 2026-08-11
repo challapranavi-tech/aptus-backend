@@ -14,18 +14,32 @@ assert.equal(
   "Portal software order: AutoCAD, Revit, Civil 3D +1 more",
 );
 
-// Stage routing: the purchase step lands on Portal Software Order, never Won.
-// resolvePipelineStageIdByHints filters is_won out in its domain, so Won is not a candidate here.
+// Stage routing: purchase submit → Portal Purchase; never Won.
 const openStages = [
   { id: 1, name: "New" },
   { id: 2, name: "Added to Cart" },
-  { id: 3, name: "Portal Software Order" },
+  { id: 3, name: "Portal Purchase" },
+  { id: 4, name: "Payment Confirmation" },
+  { id: 5, name: "License Issued" },
+  { id: 6, name: "Portal Software Order" },
 ];
-assert.equal(pickStageIdByHints(openStages, ["portal software order"]), 3);
+assert.equal(pickStageIdByHints(openStages, ["portal purchase", "portal software order"]), 3);
+assert.equal(pickStageIdByHints(openStages, ["payment confirmation"]), 4);
+assert.equal(pickStageIdByHints(openStages, ["license issued"]), 5);
 assert.equal(pickStageIdByHints(openStages, ["added to cart"]), 2);
-// No matching stage means "leave the lead where it is" — must not fall back to New.
 assert.equal(pickStageIdByHints(openStages, ["nonexistent stage"]), null);
-assert.equal(pickStageIdByHints([{ id: 9, name: "New" }], ["portal software order"]), null);
+assert.equal(pickStageIdByHints([{ id: 9, name: "New" }], ["portal purchase"]), null);
+// Legacy pipeline name still resolves when Portal Purchase is absent.
+assert.equal(
+  pickStageIdByHints(
+    [
+      { id: 1, name: "New" },
+      { id: 6, name: "Portal Software Order" },
+    ],
+    ["portal purchase", "portal software order"],
+  ),
+  6,
+);
 
 const cartMail = formatCartAddedSalesEmail({
   customer: {

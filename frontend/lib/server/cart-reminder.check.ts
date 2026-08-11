@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { formatCartReminderEmail } from "./order-notification";
-import { CART_REMINDER_INTERVAL_MS } from "./portal-cart-store";
+import { CART_REMINDER_INTERVAL_MS, CART_REMINDER_MAX_COUNT } from "./portal-cart-store";
 
 const mail = formatCartReminderEmail({
   customerName: "Test User",
@@ -10,8 +10,9 @@ const mail = formatCartReminderEmail({
 });
 
 assert.equal(CART_REMINDER_INTERVAL_MS, 15 * 24 * 60 * 60 * 1000);
-assert.match(mail.subject, /Complete your purchase/i);
-assert.match(mail.body, /Continue purchase:/);
+assert.equal(CART_REMINDER_MAX_COUNT, 2);
+assert.match(mail.subject, /left something in your cart/i);
+assert.match(mail.body, /Complete Your Purchase:/);
 assert.match(mail.body, /portal\/products#cart/);
 assert.match(mail.body, /AutoCAD \(Autodesk\) × 1/);
 

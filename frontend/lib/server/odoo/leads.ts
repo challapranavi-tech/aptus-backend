@@ -181,15 +181,119 @@ async function resolveCartStageId(
 }
 
 /**
- * Stage for a completed portal purchase. Never Won — the order still needs Software Team
- * review and payment verification. Null means "leave the lead where it is" rather than
- * dropping it back to New.
+ * Stage after payment proof: Portal Purchase (awaiting finance verification).
+ * Falls back to the legacy "Portal Software Order" name. Never Won.
+ * Null means leave the lead where it is rather than dropping it back to New.
  */
-async function resolvePortalSoftwareOrderStageId(
+async function resolvePortalPurchaseStageId(
   client: OdooClient,
   teamId?: number,
 ): Promise<number | null> {
-  return resolvePipelineStageIdByHints(client, ["portal software order"], teamId);
+  return resolvePipelineStageIdByHints(
+    client,
+    ["portal purchase", "portal software order"],
+    teamId,
+  );
+}
+
+/** Finance verified payment — license not issued yet. */
+async function resolvePaymentConfirmationStageId(
+  client: OdooClient,
+  teamId?: number,
+): Promise<number | null> {
+  return resolvePipelineStageIdByHints(client, ["payment confirmation"], teamId);
+}
+
+/** Software team issued the license. Prefer dedicated stage; Won is last resort. */
+async function resolveLicenseIssuedStageId(
+  client: OdooClient,
+  teamId?: number,
+): Promise<number | null> {
+  return (
+    (await resolvePipelineStageIdByHints(client, ["license issued"], teamId)) ??
+    (await resolvePipelineStageIdByHints(client, ["won"], teamId))
+  );
+}
+
+export type PurchaseCrmStage =
+  | "portal_purchase"
+  | "payment_confirmation"
+  | "license_issued";
+
+/** Advance the single purchase CRM opportunity to the next workflow stage. */
+export async function advancePurchaseCrmLeadStage(input: {
+  leadId: number;
+  stage: PurchaseCrmStage;
+  probability?: number;
+}): Promise<boolean> {
+  const client = getOdooClient();
+  if (!client) return false;
+
+  const rows = await client.read<{
+    team_id: [number, string] | false;
+    active: boolean;
+    stage_id: [number, string] | false;
+  }>("crm.lead", [input.leadId], ["team_id", "active", "stage_id"]);
+  const lead = rows[0];
+  if (!lead?.active) return false;
+
+  const teamId = Array.isArray(lead.team_id) ? lead.team_id[0] : undefined;
+  const stageId =
+    input.stage === "portal_purchase"
+      ? await resolvePortalPurchaseStageId(client, teamId)
+      : input.stage === "payment_confirmation"
+        ? await resolvePaymentConfirmationStageId(client, teamId)
+        : await resolveLicenseIssuedStageId(client, teamId);
+
+  if (!stageId) {
+    logger.warn("Purchase CRM stage not found in pipeline — leaving lead unchanged", {
+      action: "crm.lead.advance_stage",
+      leadId: input.leadId,
+      stage: input.stage,
+    });
+    return false;
+  }
+
+  const currentId = Array.isArray(lead.stage_id) ? lead.stage_id[0] : null;
+  if (currentId === stageId) return true;
+
+  const probability =
+    input.probability ??
+    (input.stage === "portal_purchase" ? 30 : input.stage === "payment_confirmation" ? 70 : 100);
+
+  await client.write("crm.lead", [input.leadId], {
+    stage_id: stageId,
+    probability,
+    active: true,
+    type: "opportunity",
+  });
+
+  logger.info("Advanced purchase CRM opportunity stage", {
+    action: "crm.lead.advance_stage",
+    leadId: input.leadId,
+    stage: input.stage,
+    stageId,
+  });
+  return true;
+}
+
+/** True while the cart CRM opportunity is still in the Added to Cart journey. */
+export async function isCartCrmLeadInAddedToCartStage(leadId: number): Promise<boolean> {
+  const client = getOdooClient();
+  if (!client) return false;
+
+  const rows = await client.read<{
+    name: string;
+    active: boolean;
+    stage_id: [number, string] | false;
+  }>("crm.lead", [leadId], ["name", "active", "stage_id"]);
+  const lead = rows[0];
+  if (!lead?.active || !lead.name?.startsWith(CART_LEAD_PREFIX)) return false;
+
+  const stage = Array.isArray(lead.stage_id) ? lead.stage_id[1].toLowerCase() : "";
+  if (stage.includes("won") || stage.includes("lost")) return false;
+  if (!stage) return true;
+  return stage.includes("added to cart") || stage.includes("new");
 }
 
 /** Open cart-journey opportunity for this partner (one record per purchase journey). */
@@ -370,7 +474,7 @@ export async function promoteCartLeadToProductOrder(input: {
   }
 
   const ctx = await getPartnerOdooContextForCrm(input.partnerId, "software");
-  const stageId = await resolvePortalSoftwareOrderStageId(client, ctx.teamId);
+  const stageId = await resolvePortalPurchaseStageId(client, ctx.teamId);
   const name = productOrderLeadName(input.items);
 
   const values: Record<string, unknown> = {
@@ -398,7 +502,7 @@ export async function promoteCartLeadToProductOrder(input: {
     );
   }
 
-  logger.info("Promoted cart CRM opportunity to portal software order", {
+  logger.info("Promoted cart CRM opportunity to Portal Purchase", {
     action: "crm.lead.cart_promote",
     leadId,
     partnerId: input.partnerId,

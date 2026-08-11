@@ -107,6 +107,7 @@ export async function POST(request: NextRequest, context: RouteContext) {
     bankTransferReference: existing.bankTransferReference,
     attachmentId: existing.paymentProofOdooAttachmentId,
     fileName: existing.paymentProofFileName,
+    leadId: existing.leadId,
   });
 
   if (!updated) {

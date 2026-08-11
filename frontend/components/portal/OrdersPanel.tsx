@@ -13,11 +13,9 @@ import { notifyPortalDataChanged } from "@/lib/portal-data-events";
 import type { PortalOrder } from "@/types/orders";
 import type { OrderDisplayStatus } from "@/lib/order-status";
 
-const STATUS_FILTERS: Array<"all" | "Pending verification" | "License issued"> = [
-  "all",
-  "Pending verification",
-  "License issued",
-];
+const STATUS_FILTERS: Array<
+  "all" | "Payment Verification Pending" | "Payment Verified" | "License Issued"
+> = ["all", "Payment Verification Pending", "Payment Verified", "License Issued"];
 
 function durationLabel(duration: PortalOrder["duration"]): string {
   return duration === "3year" ? "3 Years" : "1 Year";
@@ -39,11 +37,13 @@ type OrdersPanelProps = {
 };
 
 export function OrdersPanel({ orders, loading, error, limit }: OrdersPanelProps) {
-  const [filter, setFilter] = useState<"all" | "Pending verification" | "License issued">("all");
+  const [filter, setFilter] = useState<
+    "all" | "Payment Verification Pending" | "Payment Verified" | "License Issued"
+  >("all");
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [payOrder, setPayOrder] = useState<PortalOrder | null>(null);
 
-  // Only payment-submitted (pending verification) and licensed/completed orders
+  // Payment proof submitted through license issued
   const pageOrders = orders.filter(isOrdersPageOrder);
   const filtered = pageOrders.filter((order) => matchesFilter(order, filter));
   const visible = limit ? filtered.slice(0, limit) : filtered;
@@ -54,7 +54,7 @@ export function OrdersPanel({ orders, loading, error, limit }: OrdersPanelProps)
         <div>
           <h2>Software purchase requests</h2>
           <p>
-            Track payments awaiting verification and licenses that have been issued.
+            Track payment verification, payment confirmed, and licenses that have been issued.
           </p>
         </div>
       </div>

@@ -35,7 +35,7 @@ export function PaymentProofUpload({
       return;
     }
     if (candidate.size > PAYMENT_PROOF_MAX_BYTES) {
-      setLocalError("File is too large. Maximum size is 10 MB.");
+      setLocalError("File is too large. Maximum size is 4 MB.");
       return;
     }
     setLocalError(null);
@@ -81,7 +81,7 @@ export function PaymentProofUpload({
         {!file ? (
           <div className="aptus-proof-dropzone__empty">
             <strong>Click to upload or drag and drop</strong>
-            <small>PDF, JPG, JPEG or PNG — max 10 MB</small>
+            <small>PDF, JPG, JPEG or PNG — max 4 MB</small>
           </div>
         ) : (
           <div className="aptus-proof-dropzone__file">
