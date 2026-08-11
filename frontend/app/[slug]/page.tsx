@@ -19,11 +19,24 @@ interface PageProps {
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
-  const slugs = await getAllPageSlugs();
-  // /autodesk and /adobe are dedicated App Router replicas, not CMS [slug].
-  return slugs
-    .filter((slug) => slug !== "autodesk" && slug !== "adobe")
-    .map((slug) => ({ slug }));
+  const slugs = (await getAllPageSlugs()).filter(
+    // /autodesk and /adobe are dedicated App Router replicas, not CMS [slug].
+    (slug) => slug !== "autodesk" && slug !== "adobe",
+  );
+
+  // Warm + gate: only prerender pages that respond before the CMS timeout.
+  // One slow Odoo page (e.g. /spectronova) must not abort the whole Vercel build.
+  // Skipped slugs stay live via dynamicParams on first request.
+  // ponytail: serial probes — parallel stampedes Odoo and creates more timeouts.
+  const out: { slug: string }[] = [];
+  for (const slug of slugs) {
+    try {
+      if (await getPageBySlug(slug)) out.push({ slug });
+    } catch (err) {
+      console.error(`[cms] skip static generation for /${slug}:`, err);
+    }
+  }
+  return out;
 }
 
 export async function generateMetadata({
@@ -47,7 +60,18 @@ export default async function DynamicPage({ params }: PageProps) {
     notFound();
   }
 
-  const page = await getPageBySlug(normalized);
+  let page;
+  try {
+    page = await getPageBySlug(normalized);
+  } catch (err) {
+    console.error(`[cms] /${normalized} load failed:`, err);
+    // Build safety net if a slug still entered the static set and then timed out.
+    // Runtime: rethrow so we do not bake a sticky fake 404 over a transient Odoo blip.
+    if (process.env.NEXT_PHASE === "phase-production-build") {
+      notFound();
+    }
+    throw err;
+  }
 
   if (!page) {
     notFound();
