@@ -2,15 +2,16 @@ import { validateFileContent, FILE_CONTENT_PROBE_BYTES } from "@shared/lib/file-
 import { sanitizeFileName } from "./bank-transfer";
 
 // ---------------------------------------------------------------------------
-// Vercel Blob storage for payment proofs.
-// Requires: BLOB_READ_WRITE_TOKEN env var (set in Vercel dashboard).
-// On local / serverless without that token, falls back to an in-memory Map so
-// the app still runs — files are lost on restart / cold start, which is fine
-// for local testing; production must set the token (disk is read-only on Vercel).
+// Vercel Blob storage for payment proofs (PRIVATE store).
+// Requires: BLOB_READ_WRITE_TOKEN (auto-injected when a private Blob store is
+// linked). Bank slips are PII — put/get must use private access (public access
+// against a private store caused the alpha UPLOAD_FAILED 500s).
+// Local / no token: in-memory Map (lost on cold start; fine for local tests).
+// On Vercel without a token, fail loud — disk is read-only there.
 // ---------------------------------------------------------------------------
 
 export type StoredPaymentProof = {
-  /** Blob URL (or in-memory key on local fallback). */
+  /** Blob URL (or in-memory key on local fallback). Private URLs are not fetchable. */
   filePath: string;
   /** Relative id used to fetch the file back via the protected download route. */
   storageKey: string;
@@ -22,8 +23,14 @@ export type StoredPaymentProof = {
 // In-memory fallback / same-process cache (no Blob token, or just after put).
 const localStore = new Map<string, { buffer: Buffer; contentType: string; fileName: string }>();
 
+const BLOB_PREFIX = "payment-proofs";
+
 function isBlobConfigured(): boolean {
   return Boolean(process.env.BLOB_READ_WRITE_TOKEN?.trim());
+}
+
+function blobPathname(storageKey: string): string {
+  return `${BLOB_PREFIX}/${storageKey}`;
 }
 
 /** Saves an uploaded proof file to Vercel Blob (or in-memory when no token). */
@@ -55,9 +62,9 @@ export async function savePaymentProofFile(
 
   if (isBlobConfigured()) {
     const { put } = await import("@vercel/blob");
-    // Stable pathname so head(storageKey) round-trips; download route is auth-gated.
-    const blob = await put(`payment-proofs/${storageKey}`, buffer, {
-      access: "public",
+    // Stable pathname so get(storageKey) round-trips; download route is auth-gated.
+    const blob = await put(blobPathname(storageKey), buffer, {
+      access: "private",
       addRandomSuffix: false,
       contentType,
     });
@@ -68,6 +75,14 @@ export async function savePaymentProofFile(
       contentType,
       size: buffer.byteLength,
     };
+  }
+
+  // Vercel FS is read-only — without Blob the upload would vanish on cold start.
+  if (process.env.VERCEL === "1") {
+    localStore.delete(storageKey);
+    throw new Error(
+      "BLOB_READ_WRITE_TOKEN missing on Vercel — link a private Blob store for payment proofs.",
+    );
   }
 
   return {
@@ -87,25 +102,13 @@ export async function readPaymentProofBuffer(storageKey: string): Promise<Buffer
   if (!isBlobConfigured()) return null;
 
   try {
-    const { head } = await import("@vercel/blob");
-    const meta = await head(`payment-proofs/${storageKey}`).catch(() => null);
-    if (!meta) return null;
-
-    const res = await fetch(meta.url);
-    if (!res.ok) return null;
-    return Buffer.from(await res.arrayBuffer());
-  } catch {
-    return null;
-  }
-}
-
-/** Public Blob URL for a stored proof, or null when not on Blob / not found. */
-export async function getPaymentProofUrl(storageKey: string): Promise<string | null> {
-  if (!isBlobConfigured()) return null;
-  try {
-    const { head } = await import("@vercel/blob");
-    const meta = await head(`payment-proofs/${storageKey}`).catch(() => null);
-    return meta?.url ?? null;
+    const { get } = await import("@vercel/blob");
+    const result = await get(blobPathname(storageKey), {
+      access: "private",
+      useCache: false,
+    });
+    if (!result?.stream) return null;
+    return Buffer.from(await new Response(result.stream).arrayBuffer());
   } catch {
     return null;
   }

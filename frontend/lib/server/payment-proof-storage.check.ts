@@ -1,5 +1,6 @@
 /**
- * Self-check: payment-proof storage no longer touches the filesystem.
+ * Self-check: payment-proof storage no longer touches the filesystem,
+ * and production Blob writes must use private access (see source).
  * Run: npx --yes tsx frontend/lib/server/payment-proof-storage.check.ts
  */
 import assert from "node:assert/strict";
@@ -10,6 +11,7 @@ import { savePaymentProofFile, readPaymentProofBuffer } from "./payment-proof-st
 async function main() {
   // Without BLOB_READ_WRITE_TOKEN, save must use in-memory fallback (no .data writes).
   delete process.env.BLOB_READ_WRITE_TOKEN;
+  delete process.env.VERCEL;
 
   const pdfHeader = Buffer.from("%PDF-1.4 minimal");
   const file = new File([pdfHeader], "proof.pdf", { type: "application/pdf" });
@@ -27,6 +29,19 @@ async function main() {
   assert.equal(buffer!.subarray(0, 5).toString("utf8"), "%PDF-");
 
   assert.equal(await readPaymentProofBuffer("missing/key"), null);
+
+  // Guard against regressing put/get to public access (breaks private Blob stores).
+  const source = fs.readFileSync(path.join(__dirname, "payment-proof-storage.ts"), "utf8");
+  assert.match(source, /put\([\s\S]*?access:\s*"private"/);
+  assert.match(source, /get\([\s\S]*?access:\s*"private"/);
+  assert.equal(/\baccess:\s*"public"/.test(source), false);
+
+  // On Vercel without a Blob token, save must fail loud (not pretend success).
+  process.env.VERCEL = "1";
+  await assert.rejects(
+    () => savePaymentProofFile("odoo-lead-1225", file),
+    /BLOB_READ_WRITE_TOKEN missing on Vercel/,
+  );
 
   console.log("payment-proof-storage.check: ok");
 }
