@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { authFetch } from "@/lib/access-token";
 import { listenPortalDataChanged, scopeMatches } from "@/lib/portal-data-events";
+import { invalidatePortalSharedFetch, portalSharedGet } from "@/lib/portal-shared-fetch";
 import type { NotificationsResponse, PortalNotification } from "@/types/notifications";
 
 type LoadOptions = {
@@ -20,16 +21,21 @@ export function useNotifications() {
     }
     setError(null);
     try {
-      const response = await authFetch("/api/notifications");
-      const data = (await response.json().catch(() => ({}))) as NotificationsResponse & {
-        error?: string;
-      };
-      if (!response.ok) {
+      const result = await portalSharedGet<PortalNotification[]>("/api/notifications", async (response) => {
+        const data = (await response.json().catch(() => ({}))) as NotificationsResponse & {
+          error?: string;
+        };
+        if (!response.ok) {
+          return { ok: false, error: data.error ?? "Failed to load notifications" };
+        }
+        return { ok: true, data: data.notifications ?? [] };
+      });
+      if (!result.ok) {
         if (!options?.silent) setNotifications([]);
-        setError(data.error ?? "Failed to load notifications");
+        setError(result.error);
         return;
       }
-      setNotifications(data.notifications ?? []);
+      setNotifications(result.data);
     } catch {
       if (!options?.silent) setNotifications([]);
       setError("Failed to load notifications");
@@ -52,6 +58,7 @@ export function useNotifications() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ ids }),
         });
+        invalidatePortalSharedFetch("/api/notifications");
         if (!response.ok) {
           void load({ silent: true });
         }
@@ -69,6 +76,7 @@ export function useNotifications() {
   useEffect(() => {
     const onVisible = () => {
       if (document.visibilityState === "visible") {
+        invalidatePortalSharedFetch("/api/notifications");
         load({ silent: true }).catch(() => {
           /* handled inside load */
         });

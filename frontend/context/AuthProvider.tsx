@@ -9,15 +9,18 @@ import {
   useState,
 } from "react";
 import {
-  authFetch,
   clearAccessToken,
   clearLegacyPortalSession,
   loginViaApi,
   logoutViaApi,
-  setAccessToken,
   syncLegacyPortalSession,
 } from "@/lib/access-token";
+import { fetchAuthMeShared, invalidateAuthMeCache } from "@/lib/auth-me-client";
 import { syncPortalCartWithServer } from "@/lib/portal-cart";
+import {
+  invalidatePortalSharedFetch,
+  warmPortalListCaches,
+} from "@/lib/portal-shared-fetch";
 import type { ClientProfile } from "@/types/profile";
 
 type AuthContextValue = {
@@ -36,26 +39,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const refreshUser = useCallback(async () => {
     try {
-      const response = await authFetch("/api/auth/me");
-      if (!response.ok) {
+      const result = await fetchAuthMeShared();
+      if (!result.ok) {
         setUser(null);
-        if (response.status === 401) {
+        if (result.status === 401) {
           clearLegacyPortalSession();
         }
         return;
       }
-      const data = (await response.json()) as {
-        user?: ClientProfile;
-        accessToken?: string;
-        expiresIn?: number;
-      };
-      if (data.accessToken && data.expiresIn) {
-        setAccessToken(data.accessToken, data.expiresIn);
-      }
-      if (data.user) {
-        syncLegacyPortalSession(data.user, true, { silent: true });
-      }
-      setUser(data.user ?? null);
+      syncLegacyPortalSession(result.user, true, { silent: true });
+      setUser(result.user);
+      warmPortalListCaches();
     } catch {
       setUser(null);
       clearLegacyPortalSession();
@@ -69,14 +63,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const login = useCallback(async (email: string, password: string) => {
     const result = await loginViaApi(email, password);
     if (!result.ok) return result.error;
+    invalidateAuthMeCache();
+    invalidatePortalSharedFetch();
     setUser(result.user as ClientProfile);
     await syncPortalCartWithServer();
+    warmPortalListCaches();
     return null;
   }, []);
 
   const logout = useCallback(async () => {
     await logoutViaApi();
     clearAccessToken();
+    invalidateAuthMeCache();
+    invalidatePortalSharedFetch();
     setUser(null);
   }, []);
 

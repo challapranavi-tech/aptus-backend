@@ -1,9 +1,15 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { ChangeEvent, FormEvent, useState } from "react";
-import { setAccessToken, syncLegacyPortalSession, type LegacySessionUser } from "@/lib/access-token";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import {
+  setAccessToken,
+  syncLegacyPortalSession,
+  type LegacySessionUser,
+} from "@/lib/access-token";
+import { fetchAuthMeShared, invalidateAuthMeCache } from "@/lib/auth-me-client";
 import { syncPortalCartWithServer } from "@/lib/portal-cart";
+import { invalidatePortalSharedFetch } from "@/lib/portal-shared-fetch";
 import { safeNextPath } from "@/lib/safe-next-path";
 import { AuthCardFoot } from "@/components/auth/AuthCardFoot";
 
@@ -46,6 +52,29 @@ export function CustomerLoginForm() {
   const [loading, setLoading] = useState(false);
   const [needsVerification, setNeedsVerification] = useState(false);
   const [resendState, setResendState] = useState<"idle" | "sending" | "sent">("idle");
+  // Avoid flashing the form when a valid session already exists (e.g. cart race → login).
+  const [checkingSession, setCheckingSession] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      try {
+        const result = await fetchAuthMeShared();
+        if (cancelled) return;
+        if (result.ok) {
+          router.replace(safeNextPath(window.location.search));
+          return;
+        }
+      } catch {
+        /* stay on login */
+      } finally {
+        if (!cancelled) setCheckingSession(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [router]);
 
   function handleEmailChange(e: ChangeEvent<HTMLInputElement>) {
     const val = e.target.value;
@@ -106,6 +135,8 @@ export function CustomerLoginForm() {
       const data = await response.json().catch(() => ({}));
 
       if (response.ok) {
+        invalidateAuthMeCache();
+        invalidatePortalSharedFetch();
         if (data.accessToken && data.expiresIn) {
           setAccessToken(data.accessToken, data.expiresIn);
         }
@@ -201,7 +232,19 @@ export function CustomerLoginForm() {
   }
 
   return (
-    <form className="aptus-auth-card" onSubmit={handleSubmit} noValidate>
+    <form
+      className="aptus-auth-card"
+      onSubmit={handleSubmit}
+      noValidate
+      aria-busy={checkingSession || undefined}
+    >
+      {checkingSession ? (
+        <div className="aptus-auth-card__head" role="status" aria-live="polite">
+          <h2>Sign in to your portal</h2>
+          <p>Checking your session…</p>
+        </div>
+      ) : (
+        <>
       <div className="aptus-auth-card__head">
         <h2>Sign in to your portal</h2>
         <p>
@@ -334,6 +377,8 @@ export function CustomerLoginForm() {
       </button>
 
       <AuthCardFoot variant="login" />
+        </>
+      )}
     </form>
   );
 }

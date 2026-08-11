@@ -1,3 +1,5 @@
+import { invalidatePortalSharedFetchForScope } from "./portal-shared-fetch";
+
 export type PortalDataScope = "orders" | "subscriptions" | "notifications" | "all";
 
 export const PORTAL_DATA_CHANGED_EVENT = "aptus:portal-data-changed";
@@ -6,6 +8,7 @@ export function notifyPortalDataChanged(scope: PortalDataScope = "all"): void {
   if (typeof window === "undefined") {
     return;
   }
+  invalidatePortalSharedFetchForScope(scope);
   window.dispatchEvent(
     new CustomEvent(PORTAL_DATA_CHANGED_EVENT, { detail: { scope } }),
   );

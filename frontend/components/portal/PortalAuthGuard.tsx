@@ -1,61 +1,34 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { authFetch, clearLegacyPortalSession } from "@/lib/access-token";
+import { useEffect } from "react";
+import { useAuth } from "@/context/AuthProvider";
+import { clearLegacyPortalSession } from "@/lib/access-token";
 
 const PROTECTED_PREFIX = "/portal";
 
-async function hasApiSession(): Promise<boolean> {
-  try {
-    const response = await authFetch("/api/auth/me");
-    return response.ok;
-  } catch {
-    return false;
-  }
-}
-
+/**
+ * Gate portal routes on AuthProvider (single /api/auth/me), not a second me check.
+ * Renders nothing while auth is resolving so we never bounce a valid session to login.
+ */
 export function PortalAuthGuard({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const [allowed, setAllowed] = useState(() => !pathname.startsWith(PROTECTED_PREFIX));
+  const { user, ready } = useAuth();
+  const isProtected = pathname.startsWith(PROTECTED_PREFIX);
 
   useEffect(() => {
-    if (!pathname.startsWith(PROTECTED_PREFIX)) {
-      setAllowed(true);
-      return;
-    }
+    if (!isProtected || !ready) return;
+    if (user) return;
+    clearLegacyPortalSession();
+    router.replace(`/login?next=${encodeURIComponent(pathname)}`);
+  }, [isProtected, ready, user, pathname, router]);
 
-    let cancelled = false;
-
-    hasApiSession()
-      .then((ok) => {
-        if (cancelled) return;
-        if (!ok) {
-          clearLegacyPortalSession();
-          const next = encodeURIComponent(pathname);
-          router.replace(`/login?next=${next}`);
-          setAllowed(false);
-          return;
-        }
-        setAllowed(true);
-      })
-      .catch(() => {
-        if (cancelled) return;
-        clearLegacyPortalSession();
-        const next = encodeURIComponent(pathname);
-        router.replace(`/login?next=${next}`);
-        setAllowed(false);
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [pathname, router]);
-
-  if (!allowed) {
+  if (!isProtected) {
+    return <>{children}</>;
+  }
+  if (!ready || !user) {
     return null;
   }
-
   return <>{children}</>;
 }

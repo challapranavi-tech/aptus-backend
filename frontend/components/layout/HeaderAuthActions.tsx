@@ -3,23 +3,28 @@
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import {
-  authFetch,
   clearLegacyPortalSession,
   logoutViaApi,
-  setAccessToken,
   syncLegacyPortalSession,
 } from "@/lib/access-token";
+import { fetchAuthMeShared, invalidateAuthMeCache } from "@/lib/auth-me-client";
 import {
   PORTAL_CART_EVENT,
   portalCartCount,
   readPortalCart,
   type PortalCartState,
 } from "@/lib/portal-cart";
-import { profileToPortalUser, type PortalUser } from "@/lib/portal-session";
+import { invalidatePortalSharedFetch } from "@/lib/portal-shared-fetch";
+import { getPortalUserFromStorage, profileToPortalUser, type PortalUser } from "@/lib/portal-session";
 
 const CART_PATH = "/portal/cart";
 
-function HeaderCartLink({ authenticated }: { authenticated: boolean }) {
+/**
+ * Cart always points at the portal cart route.
+ * Middleware + PortalAuthGuard enforce auth; linking to /login while me is pending
+ * was racing valid sessions onto the login page.
+ */
+function HeaderCartLink({ showBadge }: { showBadge: boolean }) {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -43,16 +48,16 @@ function HeaderCartLink({ authenticated }: { authenticated: boolean }) {
 
   return (
     <Link
-      href={authenticated ? CART_PATH : `/login?next=${encodeURIComponent(CART_PATH)}`}
+      href={CART_PATH}
       className="aptus-header-cart"
       aria-label={
-        authenticated
+        showBadge
           ? count > 0
             ? `Cart with ${count} items`
             : "Cart"
-          : "Sign in to view your cart"
+          : "Shopping cart"
       }
-      title={authenticated ? "Shopping cart" : "Sign in to view your cart"}
+      title="Shopping cart"
     >
       <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden focusable="false">
         <path
@@ -60,7 +65,7 @@ function HeaderCartLink({ authenticated }: { authenticated: boolean }) {
           d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM7.2 14h9.45c.75 0 1.41-.41 1.75-1.03l3.24-5.88A1 1 0 0 0 20.76 6H6.21l-.94-2H2v2h2l3.6 7.59-1.35 2.44C5.52 17.37 6.48 19 8 19h12v-2H8l1.2-2z"
         />
       </svg>
-      {authenticated && count > 0 ? (
+      {showBadge && count > 0 ? (
         <span className="aptus-header-cart__badge">{count > 99 ? "99+" : count}</span>
       ) : null}
     </Link>
@@ -72,35 +77,32 @@ export function HeaderAuthActions() {
 
   const refresh = useCallback(async () => {
     try {
-      const response = await authFetch("/api/auth/me");
-      if (!response.ok) {
+      const result = await fetchAuthMeShared();
+      if (!result.ok) {
         setUser(null);
-        if (response.status === 401) {
+        if (result.status === 401) {
           clearLegacyPortalSession();
         }
         return;
       }
-      const data = (await response.json()) as {
-        user?: Parameters<typeof profileToPortalUser>[0];
-        accessToken?: string;
-        expiresIn?: number;
-      };
-      if (data.accessToken && data.expiresIn) {
-        setAccessToken(data.accessToken, data.expiresIn);
-      }
-      if (data.user) {
-        syncLegacyPortalSession(data.user, true, { silent: true });
-        setUser(profileToPortalUser(data.user));
-      } else {
-        setUser(null);
-      }
+      syncLegacyPortalSession(result.user, true, { silent: true });
+      setUser(profileToPortalUser(result.user));
     } catch {
       setUser(null);
     }
   }, []);
 
   useEffect(() => {
-    const onSessionChange = () => void refresh();
+    // Optimistic paint from storage (hydration-safe) before me resolves.
+    const stored = getPortalUserFromStorage();
+    if (stored) setUser(stored);
+  }, []);
+
+  useEffect(() => {
+    const onSessionChange = () => {
+      invalidateAuthMeCache();
+      void refresh();
+    };
     void refresh();
     window.addEventListener("storage", onSessionChange);
     window.addEventListener("aptus:session-changed", onSessionChange);
@@ -115,18 +117,24 @@ export function HeaderAuthActions() {
   const handleLogout = async () => {
     try {
       await logoutViaApi();
+      invalidateAuthMeCache();
+      invalidatePortalSharedFetch();
       setUser(null);
       window.location.href = "/login";
     } catch {
+      invalidateAuthMeCache();
+      invalidatePortalSharedFetch();
       setUser(null);
       window.location.href = "/login";
     }
   };
 
+  // Cart always goes to /portal/cart (middleware gates guests). Never link to
+  // /login while me is pending — that race sent valid sessions to Sign In.
   if (!user) {
     return (
       <div className="aptus-header-user">
-        <HeaderCartLink authenticated={false} />
+        <HeaderCartLink showBadge={false} />
         <Link href="/login" className="aptus-masthead__link">
           Login
         </Link>
@@ -136,7 +144,7 @@ export function HeaderAuthActions() {
 
   return (
     <div className="aptus-header-user">
-      <HeaderCartLink authenticated />
+      <HeaderCartLink showBadge />
       <Link
         href="/portal/profile"
         className="aptus-header-user__avatar-wrap"

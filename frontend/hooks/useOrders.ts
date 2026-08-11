@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { authFetch } from "@/lib/access-token";
+import { invalidatePortalSharedFetch, portalSharedGet } from "@/lib/portal-shared-fetch";
 import { listenPortalDataChanged, scopeMatches } from "@/lib/portal-data-events";
 import type { OrdersResponse, PortalOrder, PortalOrderStatus } from "@/types/orders";
 
@@ -20,16 +20,21 @@ export function useOrders(statusFilter?: PortalOrderStatus | "all") {
     }
     setError(null);
     try {
-      const response = await authFetch("/api/orders");
-      const data = (await response.json().catch(() => ({}))) as OrdersResponse & {
-        error?: string;
-      };
-      if (!response.ok) {
+      const result = await portalSharedGet<PortalOrder[]>("/api/orders", async (response) => {
+        const data = (await response.json().catch(() => ({}))) as OrdersResponse & {
+          error?: string;
+        };
+        if (!response.ok) {
+          return { ok: false, error: data.error ?? "Failed to load orders" };
+        }
+        return { ok: true, data: data.orders ?? [] };
+      });
+      if (!result.ok) {
         setOrders([]);
-        setError(data.error ?? "Failed to load orders");
+        setError(result.error);
         return;
       }
-      setOrders(data.orders ?? []);
+      setOrders(result.data);
     } catch {
       setOrders([]);
       setError("Failed to load orders");
@@ -45,6 +50,7 @@ export function useOrders(statusFilter?: PortalOrderStatus | "all") {
   useEffect(() => {
     const onVisible = () => {
       if (document.visibilityState === "visible") {
+        invalidatePortalSharedFetch("/api/orders");
         load({ silent: true }).catch(() => {
           /* handled inside load */
         });

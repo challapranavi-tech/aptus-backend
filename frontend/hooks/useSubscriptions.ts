@@ -1,8 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { authFetch } from "@/lib/access-token";
 import { listenPortalDataChanged, scopeMatches } from "@/lib/portal-data-events";
+import { invalidatePortalSharedFetch, portalSharedGet } from "@/lib/portal-shared-fetch";
 import type { SubscriptionItem, SubscriptionsResponse } from "@/types/subscriptions";
 
 type LoadOptions = {
@@ -20,16 +20,24 @@ export function useSubscriptions() {
     }
     setError(null);
     try {
-      const response = await authFetch("/api/subscriptions");
-      const data = (await response.json().catch(() => ({}))) as SubscriptionsResponse & {
-        error?: string;
-      };
-      if (!response.ok) {
+      const result = await portalSharedGet<SubscriptionItem[]>(
+        "/api/subscriptions",
+        async (response) => {
+          const data = (await response.json().catch(() => ({}))) as SubscriptionsResponse & {
+            error?: string;
+          };
+          if (!response.ok) {
+            return { ok: false, error: data.error ?? "Failed to load subscriptions" };
+          }
+          return { ok: true, data: data.subscriptions ?? [] };
+        },
+      );
+      if (!result.ok) {
         setSubscriptions([]);
-        setError(data.error ?? "Failed to load subscriptions");
+        setError(result.error);
         return;
       }
-      setSubscriptions(data.subscriptions ?? []);
+      setSubscriptions(result.data);
     } catch {
       setSubscriptions([]);
       setError("Failed to load subscriptions");
@@ -45,6 +53,7 @@ export function useSubscriptions() {
   useEffect(() => {
     const onVisible = () => {
       if (document.visibilityState === "visible") {
+        invalidatePortalSharedFetch("/api/subscriptions");
         load({ silent: true }).catch(() => {
           /* handled inside load */
         });
