@@ -1,4 +1,5 @@
 import { resolveCustomerContact } from "./auth-service";
+import { getPortalBaseUrl } from "./config";
 import { writeAudit } from "./audit-log";
 import { logger } from "./logger";
 import { sendPortalEmail } from "./mail-service";
@@ -11,10 +12,6 @@ import {
   markCartReminderSent,
   type StoredPortalCart,
 } from "./portal-cart-store";
-
-function getPortalBaseUrl(): string {
-  return (process.env.PORTAL_BASE_URL?.trim() || "https://aptusinfotech.com").replace(/\/$/, "");
-}
 
 function isReminderDue(cart: StoredPortalCart): boolean {
   if (!cart.nextReminderAt) return false;

@@ -2,7 +2,7 @@
 
 import { config } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBagShopping, faHeadset, faKey } from "@fortawesome/free-solid-svg-icons";
+import { faBagShopping, faHeadset, faKey, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { faFileLines, faMoneyBill1 } from "@fortawesome/free-regular-svg-icons";
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
@@ -26,7 +26,8 @@ export type PortalNavIconName =
   | "download"
   | "bell"
   | "chevron"
-  | "purchase";
+  | "purchase"
+  | "logout";
 
 /** Matches FA kit-style `byPrefixAndName.fas|far[...]` lookups. */
 const byPrefixAndName = {
@@ -34,6 +35,7 @@ const byPrefixAndName = {
     "bag-shopping": faBagShopping,
     key: faKey,
     headset: faHeadset,
+    "right-from-bracket": faRightFromBracket,
   },
   far: {
     "money-bill-1": faMoneyBill1,
@@ -52,6 +54,7 @@ const FA_ICONS: Partial<Record<PortalNavIconName, IconDefinition>> = {
   subscriptions: byPrefixAndName.far["money-bill-1"],
   products: byPrefixAndName.far["money-bill-1"],
   invoices: byPrefixAndName.far["file-lines"],
+  logout: byPrefixAndName.fas["right-from-bracket"],
 };
 
 const PATHS: Partial<Record<PortalNavIconName, string>> = {

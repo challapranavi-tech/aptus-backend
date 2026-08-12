@@ -160,6 +160,12 @@ table {
   max-width: 100%;
 }
 
+/* ISO download CTA — beat link `color: inherit` / layer order */
+main [data-section="iso-panel"] a.aptus-iso-download-btn,
+main [data-section] a.aptus-iso-download-btn {
+  color: #ffffff !important;
+}
+
 @media (max-width: 1023px) {
   .aptus-table-scroll,
   [data-section] table,

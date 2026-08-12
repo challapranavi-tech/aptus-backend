@@ -1,20 +1,21 @@
 import { writeAudit } from "./audit-log";
 import { resolveCustomerContact } from "./auth-service";
+import { getPortalBaseUrl } from "./config";
 import { logger } from "./logger";
 import { sendPortalEmail } from "./mail-service";
 import { formatRefundProcessedEmail, formatRefundRequestedEmail } from "./order-notification";
-import { createPortalNotification } from "./portal-notifications";
+import { claimNotificationSend, createPortalNotification } from "./portal-notifications";
 import type { PortalRefundRequest } from "@/types/refunds";
-
-function getPortalBaseUrl(): string {
-  return (process.env.PORTAL_BASE_URL?.trim() || "https://aptusinfotech.com").replace(/\/$/, "");
-}
 
 /** Event 15 — Refund Requested (customer confirmation, sent right after submission). */
 export async function notifyRefundRequested(refund: PortalRefundRequest): Promise<void> {
   try {
     const customer = await resolveCustomerContact(refund.partnerId, refund.actorId);
     if (!customer?.email) return;
+
+    if (!(await claimNotificationSend(refund.partnerId, refund.reference, "refund_requested"))) {
+      return;
+    }
 
     const mail = formatRefundRequestedEmail({
       customerName: customer.name,
@@ -69,6 +70,11 @@ export async function notifyRefundProcessed(
   try {
     const customer = await resolveCustomerContact(refund.partnerId, refund.actorId);
     if (!customer?.email) return;
+
+    const processedRef = `${refund.reference}-processed`;
+    if (!(await claimNotificationSend(refund.partnerId, processedRef, "refund_processed"))) {
+      return;
+    }
 
     const mail = formatRefundProcessedEmail({
       customerName: customer.name,

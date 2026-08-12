@@ -2,6 +2,8 @@
 
 import { cn } from "@/lib/utils";
 import type { NavigationItem } from "@/types";
+import { clearLegacyPortalSession, syncLegacyPortalSession } from "@/lib/access-token";
+import { fetchAuthMeShared, invalidateAuthMeCache } from "@/lib/auth-me-client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -343,6 +345,58 @@ function MobileMenuItem({
   );
 }
 
+/** Login in the hamburger only when signed out (desktop Login stays in the auth strip). */
+function MobileNavAuthLink({ onClose }: { onClose: () => void }) {
+  const [signedIn, setSignedIn] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    const sync = async () => {
+      try {
+        const result = await fetchAuthMeShared();
+        if (cancelled) return;
+        if (!result.ok) {
+          setSignedIn(false);
+          if (result.status === 401 || result.status === 403) clearLegacyPortalSession();
+          return;
+        }
+        syncLegacyPortalSession(result.user, true, { silent: true });
+        setSignedIn(true);
+      } catch {
+        if (!cancelled) setSignedIn(false);
+      }
+    };
+    const onSessionChange = () => {
+      invalidateAuthMeCache();
+      void sync();
+    };
+    void sync();
+    window.addEventListener("storage", onSessionChange);
+    window.addEventListener("aptus:session-changed", onSessionChange);
+    window.addEventListener("aptus:portal-ready", onSessionChange);
+    return () => {
+      cancelled = true;
+      window.removeEventListener("storage", onSessionChange);
+      window.removeEventListener("aptus:session-changed", onSessionChange);
+      window.removeEventListener("aptus:portal-ready", onSessionChange);
+    };
+  }, []);
+
+  if (signedIn !== false) return null;
+
+  return (
+    <li className="aptus-masthead__mobile-auth">
+      <Link
+        href="/login"
+        className="aptus-masthead__link aptus-masthead__mobile-link"
+        onClick={onClose}
+      >
+        Login
+      </Link>
+    </li>
+  );
+}
+
 export function NavMenu({ items }: NavMenuProps) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -451,6 +505,7 @@ export function NavMenu({ items }: NavMenuProps) {
               />
             </li>
           ))}
+          <MobileNavAuthLink onClose={() => setMobileOpen(false)} />
         </ul>
       </div>
     </>

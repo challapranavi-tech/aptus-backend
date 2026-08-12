@@ -747,6 +747,14 @@ export function Features({ data }: FeaturesProps) {
           : isIconCards && data.gridColumns === 3
             ? "aptus-software-icon-grid--3"
             : undefined;
+    const valueGridClass =
+      isValueCards && data.gridColumns === 5
+        ? "aptus-software-value-grid--5"
+        : isValueCards && data.gridColumns === 4
+          ? "aptus-software-value-grid--4"
+          : isValueCards && data.gridColumns === 3
+            ? "aptus-software-value-grid--3"
+            : undefined;
     const cardClass = isIconCards ? "aptus-software-icon-card" : "aptus-software-value-card";
     const iconClass = isIconCards ? "aptus-software-icon-card__icon" : "aptus-software-value-icon";
     const titleClass = isIconCards ? "aptus-software-icon-card__title" : "aptus-software-value-title";
@@ -775,7 +783,7 @@ export function Features({ data }: FeaturesProps) {
             leadMuted={isValueCards}
             align={data.align}
           />
-          <div className={cn(gridClass, iconGridClass)}>
+          <div className={cn(gridClass, iconGridClass, valueGridClass)}>
             {data.items?.map((item) => (
               <article key={item.id} className={`feature-card ${cardClass}`}>
                 {item.icon && (
@@ -832,7 +840,7 @@ export function Features({ data }: FeaturesProps) {
           <div
             className={cn(
               isPillars
-                ? "grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+                ? "grid grid-cols-1 gap-8 md:grid-cols-3"
                 : "grid gap-6 sm:grid-cols-2 lg:grid-cols-3",
             )}
           >

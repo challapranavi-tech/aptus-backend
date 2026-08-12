@@ -1,26 +1,28 @@
 import { randomUUID } from "crypto";
 import { writeAudit } from "./audit-log";
-import { sendPortalEmail } from "./mail-service";
+import { resolveCustomerContact } from "./auth-service";
+import { getOrderNotificationEmail, getPortalBaseUrl } from "./config";
+import { fetchPartnerSubscriptions } from "./odoo/subscriptions";
 import { logger } from "./logger";
-import { kvGet, kvSet, kvSetNx } from "./kv-store";
+import { kvDel, kvGet, kvSet, kvSetNx } from "./kv-store";
 import {
   formatLicenseExpiredEmail,
+  formatLicenseExpiredInternalEmail,
   formatRenewalConfirmationEmail,
   formatRenewalReminderEmail,
 } from "./order-notification";
 import {
   createPortalNotification,
-  claimNotificationSend,
 } from "./portal-notifications";
-import { resolveCustomerContact } from "./auth-service";
+import { sendPortalEmail } from "./mail-service";
 import type { PortalRenewalRequest } from "@/types/renewals";
 import type { SubscriptionItem } from "@/types/subscriptions";
 
-/** Keep claims through the full reminder window (90d) plus buffer. */
+/** Keep interval claims through the full reminder window (90d) plus buffer. */
 const REMINDER_CLAIM_TTL_SEC = 120 * 24 * 60 * 60;
-// Reminder records stored in KV: TTL slightly longer than the window so they
-// survive long enough to deduplicate the full reminder cycle.
 const REMINDER_RECORD_TTL_SEC = REMINDER_CLAIM_TTL_SEC + 7 * 24 * 60 * 60;
+/** Expired is once-per-license-term — outlive any subscription term. */
+const LICENSE_EXPIRED_CLAIM_TTL_SEC = 3 * 365 * 24 * 60 * 60;
 
 export const RENEWAL_REMINDER_DAYS = [90, 60, 30, 15, 7, 3, 1] as const;
 
@@ -36,10 +38,6 @@ type RemindersStore = {
   records: ReminderRecord[];
 };
 
-function getPortalBaseUrl(): string {
-  return (process.env.PORTAL_BASE_URL?.trim() || "https://aptusinfotech.com").replace(/\/$/, "");
-}
-
 function remindersStoreKey(partnerId: number): string {
   return `aptus:renewal-reminders:${partnerId}`;
 }
@@ -54,13 +52,7 @@ async function readRemindersStore(partnerId: number): Promise<RemindersStore> {
   return { records: [] };
 }
 
-/**
- * Best-effort persistence — this runs as a side effect of GET /api/subscriptions,
- * so a transient KV outage must degrade to "reminder not recorded" rather than
- * failing the whole subscriptions request.
- */
 async function writeRemindersStore(partnerId: number, store: RemindersStore): Promise<void> {
-  // Trim to last 2000 records to keep KV value small
   const trimmed = { records: store.records.slice(-2000) };
   try {
     await kvSet(remindersStoreKey(partnerId), trimmed, REMINDER_RECORD_TTL_SEC);
@@ -73,15 +65,14 @@ async function writeRemindersStore(partnerId: number, store: RemindersStore): Pr
   }
 }
 
-function subscriptionKey(subscription: SubscriptionItem): string {
-  const base =
-    subscription.lineId != null
-      ? `line-${subscription.lineId}`
-      : subscription.orderId != null
-        ? `order-${subscription.orderId}`
-        : `product-${subscription.productName.toLowerCase()}`;
-  const term = subscription.renewalDateIso?.trim();
-  return term ? `${base}:${term}` : base;
+/**
+ * Stable dedupe identity — lineId when Odoo provides it (never include renewal
+ * date; end_date corrections must not reset sent flags).
+ */
+export function subscriptionDedupeKey(subscription: SubscriptionItem): string {
+  if (subscription.lineId != null) return `line-${subscription.lineId}`;
+  if (subscription.orderId != null) return `order-${subscription.orderId}`;
+  return `product-${subscription.productName.toLowerCase()}`;
 }
 
 /** Calendar days from local today to the renewal date (YYYY-MM-DD). */
@@ -94,10 +85,7 @@ export function daysUntilExpiry(renewalDateIso: string, now = Date.now()): numbe
   return Math.round((endUtc - startUtc) / 86_400_000);
 }
 
-/**
- * Pick the single schedule slot to fire for this poll.
- * Exact day match only — never catch up earlier buckets (that caused 5-minute spam).
- */
+/** Exact day match only — never catch up earlier buckets. */
 export function reminderDayDue(
   daysLeft: number,
   sentDays: ReadonlySet<number>,
@@ -142,6 +130,14 @@ function reminderClaimKey(partnerId: number, key: string, reminderDay: number): 
   return `aptus:renewal-reminder:${partnerId}:${key}:${reminderDay}`;
 }
 
+function licenseExpiredClaimKey(partnerId: number, key: string): string {
+  return `aptus:license-expired:${partnerId}:${key}`;
+}
+
+function licenseExpiredInternalClaimKey(partnerId: number, key: string): string {
+  return `aptus:license-expired-internal:${partnerId}:${key}`;
+}
+
 async function resolveCustomer(partnerId: number, actorId?: string): Promise<{
   email: string;
   name: string;
@@ -154,12 +150,13 @@ async function resolveCustomer(partnerId: number, actorId?: string): Promise<{
 export async function maybeSendRenewalReminders(
   subscriptions: SubscriptionItem[],
   partnerId: number,
-): Promise<void> {
+): Promise<number> {
   const customer = await resolveCustomer(partnerId);
-  if (!customer) return;
+  if (!customer) return 0;
 
   const store = await readRemindersStore(partnerId);
   const portalUrl = getPortalBaseUrl();
+  let sentCount = 0;
   let dirty = false;
 
   for (const subscription of subscriptions) {
@@ -169,16 +166,13 @@ export async function maybeSendRenewalReminders(
     const daysLeft = daysUntilExpiry(renewalIso);
     if (daysLeft == null || daysLeft <= 0) continue;
 
-    const key = subscriptionKey(subscription);
+    const key = subscriptionDedupeKey(subscription);
     const sentDays = sentReminderDays(partnerId, key, store.records);
     const reminderDay = reminderDayDue(daysLeft, sentDays);
     if (reminderDay == null) continue;
 
-    const claimed = await kvSetNx(
-      reminderClaimKey(partnerId, key, reminderDay),
-      new Date().toISOString(),
-      REMINDER_CLAIM_TTL_SEC,
-    );
+    const claimKey = reminderClaimKey(partnerId, key, reminderDay);
+    const claimed = await kvSetNx(claimKey, new Date().toISOString(), REMINDER_CLAIM_TTL_SEC);
     if (!claimed) continue;
 
     const emailContent = formatRenewalReminderEmail({
@@ -195,6 +189,18 @@ export async function maybeSendRenewalReminders(
       body: emailContent.body,
     });
 
+    if (!result.sent) {
+      await kvDel(claimKey);
+      logger.warn("Renewal reminder email not sent", {
+        action: "renewal.reminder",
+        partnerId,
+        productName: subscription.productName,
+        reminderDay,
+        error: result.error,
+      });
+      continue;
+    }
+
     store.records.push({
       id: randomUUID(),
       partnerId,
@@ -203,51 +209,45 @@ export async function maybeSendRenewalReminders(
       sentAt: new Date().toISOString(),
     });
     dirty = true;
+    sentCount += 1;
 
-    if (result.sent) {
-      writeAudit({
-        action: "notification.email",
-        actorId: customer.actorId,
-        metadata: {
-          type: "renewal_reminder",
-          reminderDay,
-          productName: subscription.productName,
-          to: customer.email,
-          channel: result.channel,
-        },
-      });
-    } else {
-      logger.warn("Renewal reminder email not sent", {
-        action: "renewal.reminder",
-        partnerId,
-        productName: subscription.productName,
+    writeAudit({
+      action: "notification.email",
+      actorId: customer.actorId,
+      metadata: {
+        type: "renewal_reminder",
         reminderDay,
-        error: result.error,
-      });
-    }
+        productName: subscription.productName,
+        to: customer.email,
+        channel: result.channel,
+      },
+    });
   }
 
   if (dirty) {
     await writeRemindersStore(partnerId, store);
   }
+
+  return sentCount;
 }
 
-/** Sentinel reminderDay used to dedupe the single post-expiry email (Event 10) in the same store. */
 const EXPIRED_SENTINEL_DAY = -1;
 
 /**
- * Event 10 — License Expired. Sent exactly once per license term, after the license
- * has passed its expiry date and renewal reminders (Event 8) have stopped.
+ * License expired — sent exactly once per license when status first becomes Expired.
+ * Atomic KV claim before send; unrelated email flows must not call this.
  */
 export async function maybeSendLicenseExpiredEmails(
   subscriptions: SubscriptionItem[],
   partnerId: number,
-): Promise<void> {
+): Promise<number> {
   const customer = await resolveCustomer(partnerId);
-  if (!customer) return;
+  if (!customer) return 0;
 
   const store = await readRemindersStore(partnerId);
   const portalUrl = getPortalBaseUrl();
+  let sentCount = 0;
+  let dirty = false;
 
   for (const subscription of subscriptions) {
     if (subscription.status !== "Expired") continue;
@@ -256,8 +256,12 @@ export async function maybeSendLicenseExpiredEmails(
     const daysLeft = daysUntilExpiry(renewalIso);
     if (daysLeft != null && daysLeft >= 0) continue;
 
-    const key = subscriptionKey(subscription);
+    const key = subscriptionDedupeKey(subscription);
     if (wasReminderSent(partnerId, key, EXPIRED_SENTINEL_DAY, store.records)) continue;
+
+    const claimKey = licenseExpiredClaimKey(partnerId, key);
+    const claimed = await kvSetNx(claimKey, new Date().toISOString(), LICENSE_EXPIRED_CLAIM_TTL_SEC);
+    if (!claimed) continue;
 
     const emailContent = formatLicenseExpiredEmail({
       customerName: customer.name,
@@ -272,6 +276,17 @@ export async function maybeSendLicenseExpiredEmails(
       body: emailContent.body,
     });
 
+    if (!result.sent) {
+      await kvDel(claimKey);
+      logger.warn("License expired email not sent", {
+        action: "license.expired_notify",
+        partnerId,
+        productName: subscription.productName,
+        error: result.error,
+      });
+      continue;
+    }
+
     store.records.push({
       id: randomUUID(),
       partnerId,
@@ -279,40 +294,67 @@ export async function maybeSendLicenseExpiredEmails(
       reminderDay: EXPIRED_SENTINEL_DAY,
       sentAt: new Date().toISOString(),
     });
+    dirty = true;
+    sentCount += 1;
 
-    if (result.sent) {
-      writeAudit({
-        action: "notification.email",
-        actorId: customer.actorId,
-        metadata: {
-          type: "license_expired",
-          productName: subscription.productName,
-          to: customer.email,
-          channel: result.channel,
-        },
-      });
-      await createPortalNotification({
-        partnerId,
-        actorId: customer.actorId,
-        title: "License expired",
-        detail: `Your ${subscription.productName} license expired on ${
-          subscription.expiryDate ?? subscription.renewalDate
-        }. Renew to restore access.`,
-        status: "Expired",
+    writeAudit({
+      action: "notification.email",
+      actorId: customer.actorId,
+      metadata: {
         type: "license_expired",
-        reference: key,
-      });
-    } else {
-      logger.warn("License expired email not sent", {
-        action: "license.expired_notify",
-        partnerId,
         productName: subscription.productName,
-        error: result.error,
+        to: customer.email,
+        channel: result.channel,
+      },
+    });
+
+    await createPortalNotification({
+      partnerId,
+      actorId: customer.actorId,
+      title: "License expired",
+      detail: `Your ${subscription.productName} license expired on ${
+        subscription.expiryDate ?? subscription.renewalDate
+      }. Renew to restore access.`,
+      status: "Expired",
+      type: "license_expired",
+      reference: key,
+    });
+
+    const internalClaimKey = licenseExpiredInternalClaimKey(partnerId, key);
+    if (await kvSetNx(internalClaimKey, new Date().toISOString(), LICENSE_EXPIRED_CLAIM_TTL_SEC)) {
+      const internalMail = formatLicenseExpiredInternalEmail({
+        customerName: customer.name,
+        customerEmail: customer.email,
+        productName: subscription.productName,
+        expiryDate: subscription.expiryDate ?? subscription.renewalDate,
+        subscriptionKey: key,
       });
+      const internalResult = await sendPortalEmail({
+        to: getOrderNotificationEmail(),
+        subject: internalMail.subject,
+        body: internalMail.body,
+        replyTo: customer.email,
+      });
+      if (internalResult.sent) {
+        writeAudit({
+          action: "notification.email",
+          actorId: customer.actorId,
+          metadata: {
+            type: "license_expired_internal",
+            productName: subscription.productName,
+            to: getOrderNotificationEmail(),
+            channel: internalResult.channel,
+          },
+        });
+      }
     }
   }
 
-  await writeRemindersStore(partnerId, store);
+  if (dirty) {
+    await writeRemindersStore(partnerId, store);
+  }
+
+  return sentCount;
 }
 
 /** Notify customer after backend confirms a renewal request (not on submit). */
@@ -329,6 +371,7 @@ export async function notifyRenewalConfirmedIfNeeded(
     return { notified: false, emailSent: false };
   }
 
+  const { claimNotificationSend } = await import("./portal-notifications");
   if (!(await claimNotificationSend(request.partnerId, request.reference, "renewal"))) {
     return { notified: false, emailSent: false };
   }
@@ -408,6 +451,37 @@ export async function maybeNotifyConfirmedRenewals(
       previousMap.get(request.reference),
     );
   }
+}
+
+/** Daily cron entry — renewal reminders + expired alerts for all Odoo partners. */
+export async function processAllSubscriptionReminders(): Promise<{
+  partners: number;
+  remindersSent: number;
+  expiredSent: number;
+}> {
+  const { listPartnerIdsWithSubscriptions } = await import("./odoo/subscriptions");
+  const { maybeNotifyLicensesAvailable } = await import("./subscription-confirmation");
+
+  const partnerIds = await listPartnerIdsWithSubscriptions();
+  let remindersSent = 0;
+  let expiredSent = 0;
+
+  for (const partnerId of partnerIds) {
+    try {
+      const subscriptions = await fetchPartnerSubscriptions(partnerId, { includeInactive: true });
+      remindersSent += await maybeSendRenewalReminders(subscriptions, partnerId);
+      expiredSent += await maybeSendLicenseExpiredEmails(subscriptions, partnerId);
+      await maybeNotifyLicensesAvailable(subscriptions, partnerId);
+    } catch (error) {
+      logger.warn("Subscription reminder cron failed for partner", {
+        action: "cron.subscription_reminders",
+        partnerId,
+        error: error instanceof Error ? error.message : String(error),
+      });
+    }
+  }
+
+  return { partners: partnerIds.length, remindersSent, expiredSent };
 }
 
 export const RENEWAL_SUBMITTED_MESSAGE =

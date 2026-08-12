@@ -1,13 +1,7 @@
 import { NextRequest } from "next/server";
 import { resolveProfile } from "@/lib/server/auth-service";
 import { isDemoMode } from "@/lib/server/config";
-import { fetchPartnerRenewalRequests } from "@/lib/server/odoo/renewal-requests";
 import { fetchPartnerSubscriptions } from "@/lib/server/odoo/subscriptions";
-import {
-  maybeNotifyConfirmedRenewals,
-  maybeSendLicenseExpiredEmails,
-  maybeSendRenewalReminders,
-} from "@/lib/server/renewal-confirmation";
 import { maybeNotifyLicensesAvailable } from "@/lib/server/subscription-confirmation";
 import { getSessionFromRequestOrRefresh, jsonError, jsonOk } from "@/lib/server/http";
 import { logger } from "@/lib/server/logger";
@@ -40,12 +34,18 @@ export async function GET(request: NextRequest) {
       includeInactive: request.nextUrl.searchParams.get("includeInactive") === "true",
     });
 
-    await maybeSendRenewalReminders(subscriptions, partnerId);
-    await maybeSendLicenseExpiredEmails(subscriptions, partnerId);
-    await maybeNotifyLicensesAvailable(subscriptions, partnerId, claims.sub);
-
-    const renewalRequests = await fetchPartnerRenewalRequests(partnerId);
-    await maybeNotifyConfirmedRenewals(renewalRequests, renewalRequests, claims.sub);
+    // License-issued email only — idempotent via claimNotificationSend; renewal/expired
+    // emails run on /api/cron/subscription-reminders instead.
+    try {
+      await maybeNotifyLicensesAvailable(subscriptions, partnerId, claims.sub);
+    } catch (sideEffectError) {
+      logger.warn("License notification side-effect failed", {
+        action: "subscriptions.list.license_notify",
+        partnerId,
+        error:
+          sideEffectError instanceof Error ? sideEffectError.message : String(sideEffectError),
+      });
+    }
 
     logger.info("Subscriptions loaded for portal user", {
       action: "subscriptions.list",

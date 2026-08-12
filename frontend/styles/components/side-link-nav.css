@@ -75,12 +75,21 @@
 
 .aptus-portal-v3 .aptus-dashboard-sidebar .aptus-software-subnav {
   flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+.aptus-portal-v3 .aptus-dashboard-mobile-nav .aptus-software-subnav {
+  display: block;
+  min-width: 0;
 }
 
 .aptus-portal-v3 .aptus-dashboard-mobile-nav .aptus-software-subnav__list {
-  overflow-x: auto;
+  flex-wrap: nowrap;
   padding-bottom: 0.15rem;
-  scrollbar-width: thin;
 }
 
 .aptus-customer-dashboard .aptus-software-subnav__link {

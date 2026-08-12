@@ -616,6 +616,11 @@ html {
   color: #1352a3 !important;
 }
 
+.aptus-masthead__mobile-auth .aptus-masthead__mobile-link {
+  color: #1352a3 !important;
+  font-weight: 700;
+}
+
 @media (min-width: 768px) {
   .aptus-masthead__topbar {
     display: block;
@@ -735,6 +740,42 @@ html {
   flex: 0 0 auto;
   gap: 0.75rem;
   margin-inline-start: 0.5rem;
+  /* Sit after brand on mobile, before hamburger (toggler is order 3). */
+  order: 2;
+}
+
+@media (max-width: 1024px) {
+  .aptus-masthead__auth {
+    /* Push cart / avatar / logout to the right, next to the hamburger. */
+    margin-inline-start: auto;
+    min-width: 0;
+  }
+
+  /* Login lives in the hamburger list on small screens */
+  .aptus-header-user__login {
+    display: none !important;
+  }
+
+  .aptus-masthead__brand-row:not(.aptus-masthead__brand-row--partner) {
+    max-width: min(160px, 42vw);
+  }
+
+  .aptus-masthead__brand img {
+    max-height: 36px;
+  }
+
+  .aptus-header-user {
+    gap: 0.4rem;
+  }
+
+  .aptus-header-user__logout {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .aptus-masthead__toggler {
+    margin-left: 0.35rem;
+  }
 }
 
 .aptus-masthead__auth .aptus-masthead__link {

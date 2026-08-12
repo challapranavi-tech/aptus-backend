@@ -1,5 +1,5 @@
 import { writeAudit } from "./audit-log";
-import { getOrderNotificationEmail } from "./config";
+import { getOrderNotificationEmail, getPortalBaseUrl } from "./config";
 import {
   formatLicenseAvailableEmail,
   formatOrderApprovedEmail,
@@ -20,10 +20,6 @@ import { advancePurchaseCrmLeadStage } from "./odoo/leads";
 import type { PortalOrder } from "@/types/orders";
 import type { PortalNotificationType } from "@/types/notifications";
 import type { SubscriptionItem } from "@/types/subscriptions";
-
-function getPortalBaseUrl(): string {
-  return (process.env.PORTAL_BASE_URL?.trim() || "https://aptusinfotech.com").replace(/\/$/, "");
-}
 
 /**
  * Stable claim id so LEAD + linked SO for the same purchase share one email.

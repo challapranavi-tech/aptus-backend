@@ -2,8 +2,11 @@ import fs from "fs";
 import path from "path";
 import { logger } from "./logger";
 
-/** Serverless filesystems (Vercel) are read-only outside /tmp. */
-const READ_ONLY_FS_CODES = new Set(["EROFS", "EACCES", "EPERM"]);
+/**
+ * Serverless filesystems (Vercel) are read-only outside /tmp.
+ * Vercel often surfaces mkdir under /var/task as ENOENT rather than EROFS.
+ */
+const READ_ONLY_FS_CODES = new Set(["EROFS", "EACCES", "EPERM", "ENOENT"]);
 
 /**
  * Writes a local JSON cache under .data. These files mirror state whose source

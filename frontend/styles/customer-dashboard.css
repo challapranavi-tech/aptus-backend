@@ -6088,14 +6088,18 @@ body.aptus-payment-processing-open {
 .aptus-portal-v3.aptus-customer-dashboard {
   background: #f0f2f7;
   color: #1e293b;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 .aptus-portal-v3 .aptus-dashboard-shell {
   grid-template-columns: 260px minmax(0, 1fr);
   gap: 0;
-  max-width: none;
+  max-width: 100%;
   min-height: 100vh;
+  min-width: 0;
   padding: 0;
+  width: 100%;
 }
 
 .aptus-portal-v3 .aptus-dashboard-sidebar {
@@ -6104,6 +6108,41 @@ body.aptus-payment-processing-open {
   padding: 1.5rem 1rem;
   position: sticky;
   top: 0;
+}
+
+.aptus-portal-v3 .aptus-dashboard-sidebar__logout {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  color: #b91c1c;
+  margin-top: auto;
+}
+
+.aptus-portal-v3 .aptus-dashboard-sidebar__logout:hover:not(:disabled) {
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+.aptus-portal-v3 .aptus-dashboard-sidebar__logout:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.aptus-portal-v3__icon-btn.aptus-portal-v3__logout-btn {
+  color: #b91c1c;
+  display: none;
+}
+
+.aptus-portal-v3__icon-btn.aptus-portal-v3__logout-btn:hover:not(:disabled),
+.aptus-portal-v3__icon-btn.aptus-portal-v3__logout-btn:focus-visible:not(:disabled) {
+  background: #fef2f2;
+  border-color: #fecaca;
+  color: #991b1b;
+}
+
+.aptus-portal-v3__icon-btn.aptus-portal-v3__logout-btn:disabled {
+  cursor: wait;
+  opacity: 0.7;
 }
 
 .aptus-portal-v3__user {
@@ -6118,7 +6157,10 @@ body.aptus-payment-processing-open {
 
 .aptus-portal-v3 .aptus-dashboard-main {
   background: #f0f2f7;
+  max-width: 100%;
   min-height: 100vh;
+  min-width: 0;
+  overflow-x: clip;
   padding: 1.75rem clamp(1.25rem, 2.5vw, 2.5rem) 2.5rem;
 }
 
@@ -6129,6 +6171,12 @@ body.aptus-payment-processing-open {
   gap: 1rem;
   justify-content: space-between;
   margin-bottom: 1.75rem;
+  min-width: 0;
+}
+
+.aptus-portal-v3__header-copy {
+  min-width: 0;
+  flex: 1 1 12rem;
 }
 
 .aptus-portal-v3__header h1 {
@@ -6153,13 +6201,16 @@ body.aptus-payment-processing-open {
 
 .aptus-portal-v3__icon-btn {
   align-items: center;
+  appearance: none;
   background: #fff;
   border: 1px solid #e2e8f0;
   border-radius: 50%;
   color: #475569;
+  cursor: pointer;
   display: inline-flex;
   height: 42px;
   justify-content: center;
+  padding: 0;
   position: relative;
   text-decoration: none;
   width: 42px;
@@ -6255,12 +6306,15 @@ body.aptus-payment-processing-open {
 .aptus-overview-v3 {
   display: grid;
   gap: 1.5rem;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .aptus-overview-v3__stats {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  min-width: 0;
 }
 
 .aptus-overview-v3__stat {
@@ -6344,6 +6398,7 @@ body.aptus-payment-processing-open {
   display: grid;
   gap: 1.25rem;
   grid-template-columns: minmax(0, 1.65fr) minmax(280px, 0.85fr);
+  min-width: 0;
 }
 
 .aptus-overview-v3__card {
@@ -6351,6 +6406,8 @@ body.aptus-payment-processing-open {
   border: 1px solid #e2e8f0;
   border-radius: 1rem;
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+  max-width: 100%;
+  min-width: 0;
   padding: 1.25rem 1.35rem;
 }
 
@@ -6383,12 +6440,14 @@ body.aptus-payment-processing-open {
 }
 
 .aptus-overview-v3__table-wrap {
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
   overflow-x: auto;
 }
 
 .aptus-overview-v3__table {
   border-collapse: collapse;
-  min-width: 100%;
+  min-width: 36rem;
   width: 100%;
 }
 
@@ -6398,6 +6457,7 @@ body.aptus-payment-processing-open {
   font-size: 0.84rem;
   padding: 0.85rem 0.65rem;
   text-align: left;
+  white-space: nowrap;
 }
 
 .aptus-overview-v3__table th {
@@ -6506,7 +6566,19 @@ body.aptus-payment-processing-open {
   border: 1px solid #e2e8f0;
   border-radius: 0.85rem;
   margin-bottom: 1.25rem;
+  max-width: 100%;
+  min-width: 0;
   padding: 0.5rem;
+}
+
+.aptus-portal-v3 .aptus-dashboard-mobile-nav .aptus-software-subnav {
+  display: block;
+  min-width: 0;
+}
+
+.aptus-portal-v3 .aptus-dashboard-mobile-nav .aptus-software-subnav__list {
+  flex-wrap: nowrap;
+  padding-bottom: 0.15rem;
 }
 
 .aptus-portal-invoices__list {
@@ -6570,31 +6642,86 @@ body.aptus-payment-processing-open {
   }
 
   .aptus-overview-v3__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
 @media (max-width: 991.98px) {
   .aptus-portal-v3 .aptus-dashboard-shell {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .aptus-portal-v3 .aptus-dashboard-sidebar {
     display: none;
   }
 
+  /* Sign-out icon beside notifications (sidebar logout is hidden on small screens) */
+  .aptus-portal-v3__icon-btn.aptus-portal-v3__logout-btn {
+    display: inline-flex;
+  }
+
+  /* Horizontal side-menu tabs: scroll on the nav, not the page */
   .aptus-portal-v3 .aptus-dashboard-mobile-nav {
-    display: grid;
-    gap: 0.5rem;
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(128px, 1fr);
+    display: block;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .aptus-portal-v3 .aptus-dashboard-mobile-nav .aptus-software-subnav {
+    -webkit-overflow-scrolling: touch;
+    display: block;
+    max-width: 100%;
+    min-width: 0;
     overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+  }
+
+  .aptus-portal-v3 .aptus-dashboard-mobile-nav .aptus-software-subnav__list {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.35rem;
+    max-width: none;
+    min-width: max-content;
+    padding-bottom: 0.15rem;
+    width: max-content;
+  }
+
+  .aptus-portal-v3 .aptus-dashboard-main {
+    padding: 1.25rem 1rem 2rem;
   }
 }
 
 @media (max-width: 640px) {
   .aptus-overview-v3__stats {
     grid-template-columns: 1fr;
+  }
+
+  .aptus-overview-v3__stat {
+    min-height: 84px;
+    padding: 1rem;
+  }
+
+  .aptus-overview-v3__card {
+    padding: 1rem;
+  }
+
+  .aptus-portal-v3__header {
+    margin-bottom: 1.15rem;
+  }
+
+  .aptus-portal-v3__header h1 {
+    font-size: clamp(1.35rem, 6.5vw, 1.75rem);
+  }
+
+  .aptus-portal-v3__header-actions {
+    flex-shrink: 0;
+  }
+
+  .aptus-portal-v3 .aptus-dashboard-main {
+    padding: 1rem 0.75rem 1.75rem;
   }
 
   .aptus-portal-v3__user-name {

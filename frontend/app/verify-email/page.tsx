@@ -68,15 +68,24 @@ function VerifyEmailClient() {
                       Sign in
                     </Link>
                   ) : token ? (
-                    <form onSubmit={handleVerify}>
-                      <button
-                        type="submit"
-                        className="btn btn-aptus-primary"
-                        disabled={status === "loading"}
-                      >
-                        {status === "loading" ? "Verifying…" : "Verify email"}
-                      </button>
-                    </form>
+                    <>
+                      <form onSubmit={handleVerify}>
+                        <button
+                          type="submit"
+                          className="btn btn-aptus-primary"
+                          disabled={status === "loading"}
+                        >
+                          {status === "loading" ? "Verifying…" : "Verify email"}
+                        </button>
+                      </form>
+                      {status === "error" ? (
+                        <p className="aptus-auth-card__hint">
+                          Link expired?{" "}
+                          <Link href="/login?registered=1&verify=1">Request a new verification email</Link>{" "}
+                          from the sign-in page.
+                        </p>
+                      ) : null}
+                    </>
                   ) : (
                     <Link className="btn btn-aptus-primary" href="/login">
                       Back to sign in

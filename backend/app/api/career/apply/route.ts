@@ -1,5 +1,6 @@
 import { corsPreflight, jsonCors, withCors } from "@/lib/api-cors";
 import { validationError } from "@/lib/api-validate";
+import { getPublishedJobById } from "@/lib/careers/jobs";
 import {
   hrEmail,
   isMailConfigured,
@@ -29,6 +30,9 @@ import {
 import { NextRequest } from "next/server";
 
 export const runtime = "nodejs";
+
+const JOB_UNAVAILABLE =
+  "This job is not available for applications. Please choose a published role from Careers.";
 
 function escapeHtml(value: string): string {
   return value
@@ -89,6 +93,7 @@ export async function POST(req: NextRequest) {
     experience: form.get("experience"),
     location: form.get("location"),
     coverMessage: form.get("coverMessage") ?? undefined,
+    jobId: form.get("jobId"),
   });
 
   const errors = parsed.ok ? {} : { ...parsed.errors };
@@ -149,6 +154,39 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  const jobId = Number(fields.jobId);
+  if (!Number.isInteger(jobId) || jobId <= 0) {
+    return validationError(
+      { jobId: JOB_UNAVAILABLE },
+      (res) => withCors(res, req),
+    );
+  }
+
+  let publishedJob;
+  try {
+    publishedJob = await getPublishedJobById(jobId);
+  } catch (err) {
+    console.error("[career/apply] published-job lookup failed:", err);
+    return jsonCors(
+      req,
+      {
+        error:
+          "Applications are temporarily unavailable. Please try again later.",
+      },
+      { status: 503 },
+    );
+  }
+  if (!publishedJob) {
+    console.warn("[career/apply] rejected unpublished/unknown jobId", jobId);
+    return validationError(
+      { jobId: JOB_UNAVAILABLE },
+      (res) => withCors(res, req),
+    );
+  }
+
+  // Canonical title — free-text position must not invent unpublished roles.
+  fields.position = publishedJob.title;
+
   // IP limit is in middleware; email caps repeat abuse from rotating IPs.
   const emailLimited = await enforceKeyRateLimit(
     identityKey(fields.email),
@@ -166,6 +204,11 @@ export async function POST(req: NextRequest) {
       { status: 500 },
     );
   }
+
+  console.info("[career/apply] application received", {
+    position: fields.position,
+    jobId,
+  });
 
   const rows: Array<[string, string]> = [
     ["Full Name", fields.fullName],

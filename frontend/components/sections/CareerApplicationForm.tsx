@@ -14,7 +14,8 @@ import {
 import { publicApiBase } from "@/lib/api-base";
 import { normalizePhone } from "@/lib/phone";
 import { cn } from "@/lib/utils";
-import { useRef, useState } from "react";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 type Status = "idle" | "uploading" | "success" | "error";
 
@@ -25,6 +26,11 @@ interface Props {
   submitLabel?: string;
 }
 
+interface JobOption {
+  id: string;
+  title: string;
+}
+
 const EMPTY: ApplicationFields = {
   fullName: "",
   email: "",
@@ -33,10 +39,15 @@ const EMPTY: ApplicationFields = {
   experience: "",
   location: "",
   coverMessage: "",
+  jobId: "",
 };
 
 export function CareerApplicationForm({ submitLabel }: Props) {
   const [fields, setFields] = useState<ApplicationFields>(EMPTY);
+  const [jobs, setJobs] = useState<JobOption[]>([]);
+  const [jobsStatus, setJobsStatus] = useState<"loading" | "ready" | "empty" | "error">(
+    "loading",
+  );
   const [resume, setResume] = useState<File | null>(null);
   const [formFile, setFormFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -46,9 +57,48 @@ export function CareerApplicationForm({ submitLabel }: Props) {
   const resumeRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch(
+          `${publicApiBase()}/api/careers/jobs?pageSize=200`,
+          { cache: "no-store" },
+        );
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = (await res.json()) as { jobs?: JobOption[] };
+        if (cancelled) return;
+        const list = (data.jobs ?? []).map((j) => ({
+          id: String(j.id),
+          title: j.title,
+        }));
+        setJobs(list);
+        setJobsStatus(list.length ? "ready" : "empty");
+      } catch {
+        if (!cancelled) {
+          setJobs([]);
+          setJobsStatus("error");
+        }
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const setField = (key: keyof ApplicationFields, value: string) => {
     setFields((prev) => ({ ...prev, [key]: value }));
     if (errors[key]) setErrors((prev) => ({ ...prev, [key]: "" }));
+  };
+
+  const selectJob = (jobId: string) => {
+    const job = jobs.find((j) => j.id === jobId);
+    setFields((prev) => ({
+      ...prev,
+      jobId,
+      position: job?.title ?? "",
+    }));
+    setErrors((prev) => ({ ...prev, jobId: "", position: "" }));
   };
 
   const validate = (): boolean => {
@@ -69,6 +119,13 @@ export function CareerApplicationForm({ submitLabel }: Props) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (status === "uploading") return;
+    if (jobsStatus !== "ready") {
+      setStatus("error");
+      setMessage(
+        "No published roles are available right now. Please browse open positions on Careers.",
+      );
+      return;
+    }
     if (!validate()) {
       setStatus("error");
       setMessage("Please review and correct the highlighted fields before submitting.");
@@ -114,6 +171,7 @@ export function CareerApplicationForm({ submitLabel }: Props) {
         const data = JSON.parse(xhr.responseText);
         if (data.errors) serverErrors = data.errors;
         if (data.error) msg = data.error;
+        if (serverErrors?.jobId) msg = serverErrors.jobId;
       } catch {
         /* keep default message */
       }
@@ -219,14 +277,37 @@ export function CareerApplicationForm({ submitLabel }: Props) {
         </label>
         <label className={LABEL}>
           Position Applying For *
-          <input
-            type="text"
-            value={fields.position}
-            onChange={(e) => setField("position", e.target.value)}
-            placeholder="e.g. Software Engineer"
+          <select
+            value={fields.jobId ?? ""}
+            onChange={(e) => selectJob(e.target.value)}
             className={INPUT}
-          />
-          {err("position")}
+            disabled={jobsStatus !== "ready"}
+          >
+            <option value="">
+              {jobsStatus === "loading"
+                ? "Loading open roles…"
+                : jobsStatus === "empty"
+                  ? "No published roles right now"
+                  : jobsStatus === "error"
+                    ? "Could not load roles"
+                    : "Select a published role"}
+            </option>
+            {jobs.map((j) => (
+              <option key={j.id} value={j.id}>
+                {j.title}
+              </option>
+            ))}
+          </select>
+          {err("jobId") || err("position")}
+          {(jobsStatus === "empty" || jobsStatus === "error") && (
+            <span className="mt-1 block text-sm text-black/70">
+              Browse open positions on{" "}
+              <Link href="/careers" className="underline">
+                Careers
+              </Link>
+              .
+            </span>
+          )}
         </label>
         <label className={LABEL}>
           Years of Experience *
@@ -316,7 +397,7 @@ export function CareerApplicationForm({ submitLabel }: Props) {
         <button
           type="submit"
           className="aptus-form-submit"
-          disabled={status === "uploading"}
+          disabled={status === "uploading" || jobsStatus !== "ready"}
         >
           {status === "uploading"
             ? "Submitting…"

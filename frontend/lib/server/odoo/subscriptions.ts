@@ -40,6 +40,27 @@ function getConfirmedSaleOrderStates(): string[] {
   return ["sale", "done"];
 }
 
+/** Distinct portal customer partner ids with confirmed sale orders (cron scheduler). */
+export async function listPartnerIdsWithSubscriptions(): Promise<number[]> {
+  const client = getOdooClient();
+  if (!client) return [];
+
+  const orders = await client.searchRead<{ partner_id: [number, string] | false }>(
+    "sale.order",
+    [["state", "in", getConfirmedSaleOrderStates()]],
+    ["partner_id"],
+    500,
+  );
+
+  const partnerIds = new Set<number>();
+  for (const order of orders) {
+    if (Array.isArray(order.partner_id)) {
+      partnerIds.add(order.partner_id[0]);
+    }
+  }
+  return [...partnerIds];
+}
+
 function isInactiveSubscriptionState(state: string | false | null | undefined): boolean {
   if (!state || typeof state !== "string") return true;
   const inactive = ["6_churn", "4_paused", "1_draft", "churn", "paused", "draft"];

@@ -193,6 +193,28 @@ export function getOrderNotificationEmail(): string {
   );
 }
 
+/**
+ * Public portal origin for outbound email links (verify-email, orders, renewals).
+ * Resolution order: PORTAL_BASE_URL → NEXT_PUBLIC_SITE_URL → VERCEL_URL → localhost (dev).
+ * Do not default to aptusinfotech.com on Vercel — that domain may be parked until DNS is live.
+ */
+export function getPortalBaseUrl(): string {
+  const explicit = process.env.PORTAL_BASE_URL?.trim();
+  if (explicit) return explicit.replace(/\/$/, "");
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (siteUrl) return siteUrl.replace(/\/$/, "");
+
+  const vercelHost = process.env.VERCEL_URL?.trim();
+  if (vercelHost) return `https://${vercelHost.replace(/\/$/, "")}`;
+
+  if (process.env.NODE_ENV !== "production") {
+    return "http://localhost:3000";
+  }
+
+  return "https://aptusinfotech.com";
+}
+
 export function getStripeConfig(): { secretKey: string; webhookSecret: string } | null {
   const secretKey = process.env.STRIPE_SECRET_KEY ?? "";
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET ?? "";

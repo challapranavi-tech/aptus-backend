@@ -2,9 +2,9 @@ import fs from "fs";
 import path from "path";
 import { randomUUID } from "crypto";
 import type { PortalRenewalRequest, RenewalRequestStatus } from "@/types/renewals";
+import { writeJsonStore } from "./json-file-store";
 
-const DATA_DIR = path.join(process.cwd(), ".data");
-const RENEWALS_FILE = path.join(DATA_DIR, "portal-renewal-requests.json");
+const RENEWALS_FILE = path.join(process.cwd(), ".data", "portal-renewal-requests.json");
 
 type RenewalsStore = {
   requests: PortalRenewalRequest[];
@@ -21,8 +21,7 @@ function readStore(): RenewalsStore {
 }
 
 function writeStore(store: RenewalsStore): void {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
-  fs.writeFileSync(RENEWALS_FILE, JSON.stringify(store, null, 2), "utf8");
+  writeJsonStore(RENEWALS_FILE, store);
 }
 
 export function createRenewalRequest(input: {

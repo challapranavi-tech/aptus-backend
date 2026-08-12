@@ -1,3 +1,59 @@
+/* Site footer — Tailwind layout in Footer.tsx; keep logo/overflow constraints here
+   so globals `img { height: auto }` can't blow past the viewport. */
+
+[data-section="footer"] {
+  overflow-x: clip;
+}
+
+[data-section="footer"] .aptus-footer-brand {
+  min-width: 0;
+  max-width: 100%;
+}
+
+[data-section="footer"] .aptus-footer-logo-link {
+  display: inline-block;
+  max-width: 100%;
+}
+
+[data-section="footer"] .aptus-footer-logo {
+  display: block !important;
+  height: auto !important;
+  max-height: 2rem;
+  max-width: min(100%, 9.5rem);
+  width: auto !important;
+}
+
+[data-section="footer"] .aptus-footer-map {
+  min-height: 180px;
+}
+
+[data-section="footer"] .aptus-footer-col-text {
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 640px) {
+  [data-section="footer"] .aptus-footer-logo {
+    max-height: 2.35rem;
+    max-width: min(100%, 11rem);
+  }
+
+  [data-section="footer"] .aptus-footer-map {
+    min-height: 220px;
+  }
+}
+
+@media (min-width: 1024px) {
+  [data-section="footer"] .aptus-footer-logo {
+    max-height: 2.75rem;
+    max-width: min(100%, 13rem);
+  }
+
+  [data-section="footer"] .aptus-footer-map {
+    min-height: 260px;
+  }
+}
+
+/* Legacy class kept for any leftover markup */
 .aptus-footer {
   background-color: var(--color-navy-dark);
   color: rgb(255 255 255 / 0.9);

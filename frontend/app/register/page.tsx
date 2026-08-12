@@ -37,10 +37,10 @@ const COUNTRY_CODES = [
   { code: "+1", label: "🇺🇸 +1", country: "USA/Canada", digits: 10 },
 ];
 
-function validateName(value: string): string | null {
-  if (!value.trim()) return "Name is required.";
-  if (/^\s|\s$/.test(value)) return "Name must not start or end with a space.";
-  if (/[,.\?\/\\;:'"!@#$%^&*()\[\]{}<>|`~]/.test(value)) return "Name must not contain special characters.";
+function validateName(value: string, label = "Name"): string | null {
+  if (!value.trim()) return `${label} is required.`;
+  if (/^\s|\s$/.test(value)) return `${label} must not start or end with a space.`;
+  if (/[,.\?\/\\;:'"!@#$%^&*()\[\]{}<>|`~]/.test(value)) return `${label} must not contain special characters.`;
   return null;
 }
 
@@ -224,8 +224,10 @@ function RegisterWizard() {
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordError, setNewPasswordError] = useState("");
 
-  const [name, setName] = useState("");
-  const [nameError, setNameError] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [firstNameError, setFirstNameError] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [lastNameError, setLastNameError] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [companyNameError, setCompanyNameError] = useState("");
   const [region, setRegion] = useState("");
@@ -255,7 +257,11 @@ function RegisterWizard() {
     const companyParam = searchParams.get("company");
 
     if (emailParam) setEmail(emailParam);
-    if (nameParam) setName(nameParam);
+    if (nameParam) {
+      const [first = "", ...rest] = nameParam.trim().split(/\s+/);
+      setFirstName(first);
+      setLastName(rest.join(" "));
+    }
     if (phoneParam) setPhone(phoneParam);
     if (crParam) setCrNumber(crParam);
     if (companyParam) setCompanyName(companyParam);
@@ -279,21 +285,23 @@ function RegisterWizard() {
   function resetError() { setError(""); }
 
   function validateRegisterForm(): boolean {
-    const nErr = validateName(name);
+    const fnErr = validateName(firstName, "First name");
+    const lnErr = validateName(lastName, "Last name");
     const eErr = validateEmail(email);
     const pErr = validatePhone(phone);
     const pwErr = validatePassword(password);
     const crErr = isCompany ? validateCr(crNumber) : null;
     const coErr = isCompany && !companyName.trim() ? "Company name is required." : null;
 
-    setNameError(nErr ?? "");
+    setFirstNameError(fnErr ?? "");
+    setLastNameError(lnErr ?? "");
     setEmailError(eErr ?? "");
     setPhoneError(pErr ?? "");
     setPasswordError(pwErr ?? "");
     if (crErr !== undefined) setCrError(crErr ?? "");
     if (coErr !== undefined) setCompanyNameError(coErr ?? "");
 
-    return !nErr && !eErr && !pErr && !pwErr && !crErr && !coErr;
+    return !fnErr && !lnErr && !eErr && !pErr && !pwErr && !crErr && !coErr;
   }
 
   async function handleCheckIdentification(e: FormEvent) {
@@ -466,7 +474,7 @@ function RegisterWizard() {
         credentials: "include",
         body: JSON.stringify({
           userType,
-          name,
+          name: `${firstName.trim()} ${lastName.trim()}`.trim(),
           companyName: isCompany ? companyName : undefined,
           region,
           email,
@@ -737,18 +745,35 @@ function RegisterWizard() {
                 <form onSubmit={handleRegister}>
                   <div className="aptus-register-form__details aptus-register-form__details--compact">
 
-                    <div className="aptus-field">
-                      <label htmlFor="register_name">Name</label>
-                      <input
-                        id="register_name"
-                        className={`form-control${nameError ? " is-invalid" : ""}`}
-                        type="text"
-                        required
-                        value={name}
-                        onChange={(e) => { setName(e.target.value); if (nameError) setNameError(validateName(e.target.value) ?? ""); }}
-                        onBlur={() => setNameError(validateName(name) ?? "")}
-                      />
-                      {nameError && <small className="aptus-field__error" role="alert">{nameError}</small>}
+                    <div className="aptus-register-form__row">
+                      <div className="aptus-field">
+                        <label htmlFor="register_first_name">First name</label>
+                        <input
+                          id="register_first_name"
+                          className={`form-control${firstNameError ? " is-invalid" : ""}`}
+                          type="text"
+                          autoComplete="given-name"
+                          required
+                          value={firstName}
+                          onChange={(e) => { setFirstName(e.target.value); if (firstNameError) setFirstNameError(validateName(e.target.value, "First name") ?? ""); }}
+                          onBlur={() => setFirstNameError(validateName(firstName, "First name") ?? "")}
+                        />
+                        {firstNameError && <small className="aptus-field__error" role="alert">{firstNameError}</small>}
+                      </div>
+                      <div className="aptus-field">
+                        <label htmlFor="register_last_name">Last name</label>
+                        <input
+                          id="register_last_name"
+                          className={`form-control${lastNameError ? " is-invalid" : ""}`}
+                          type="text"
+                          autoComplete="family-name"
+                          required
+                          value={lastName}
+                          onChange={(e) => { setLastName(e.target.value); if (lastNameError) setLastNameError(validateName(e.target.value, "Last name") ?? ""); }}
+                          onBlur={() => setLastNameError(validateName(lastName, "Last name") ?? "")}
+                        />
+                        {lastNameError && <small className="aptus-field__error" role="alert">{lastNameError}</small>}
+                      </div>
                     </div>
 
                     {isCompany && (

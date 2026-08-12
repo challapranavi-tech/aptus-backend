@@ -165,4 +165,32 @@
   .aptus-elv-page .aptus-software-mid-band__inner {
     padding-inline: 1rem;
   }
+
+  .aptus-elv-page .aptus-software-value-card,
+  .aptus-elv-page .aptus-software-icon-card {
+    margin: 0;
+  }
+
+  .aptus-elv-page .aptus-software-icon-card__icon {
+    height: 4.5rem;
+    width: 4.5rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .aptus-elv-page .aptus-software-value-grid--4,
+  .aptus-elv-page [data-id="why-elv"] .aptus-software-icon-grid,
+  .aptus-elv-page [data-id="why-choose"] .aptus-software-value-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .aptus-elv-page .aptus-software-value-title,
+  .aptus-elv-page .aptus-software-icon-card__title {
+    font-size: 0.8125rem;
+  }
+
+  .aptus-elv-page .aptus-software-value-body,
+  .aptus-elv-page .aptus-software-icon-card__body {
+    font-size: 0.75rem;
+  }
 }

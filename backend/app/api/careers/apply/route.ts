@@ -1,5 +1,6 @@
 import { archiveApplication } from "@/lib/application-archive";
 import { corsPreflight, jsonCors, withCors } from "@/lib/api-cors";
+import { getPublishedJobById } from "@/lib/careers/jobs";
 import {
   createApplicant,
   isOdooConfigured,
@@ -262,6 +263,54 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  // jobId must be a real website_published hr.job — reject before archive/email.
+  const jobId = Number(fields.jobId);
+  if (
+    !Number.isInteger(jobId) ||
+    jobId <= 0 ||
+    !fields.candidateName.trim() ||
+    !fields.email.trim()
+  ) {
+    console.error("[careers/apply] refused — invalid jobId or identity");
+    return jsonCors(
+      req,
+      {
+        error:
+          "This job is not available for applications. Please choose a published role from Careers.",
+      },
+      { status: 400 },
+    );
+  }
+
+  let publishedJob;
+  try {
+    publishedJob = await getPublishedJobById(jobId);
+  } catch (err) {
+    console.error("[careers/apply] published-job lookup failed:", err);
+    return jsonCors(
+      req,
+      {
+        error:
+          "Applications are temporarily unavailable. Please try again later.",
+      },
+      { status: 503 },
+    );
+  }
+  if (!publishedJob) {
+    console.warn("[careers/apply] rejected unpublished/unknown jobId", jobId);
+    return jsonCors(
+      req,
+      {
+        error:
+          "This job is not available for applications. Please choose a published role from Careers.",
+      },
+      { status: 400 },
+    );
+  }
+
+  // Canonical title from Odoo — ignore client-supplied designation spoofing.
+  fields.appliedDesignation = publishedJob.title;
+
   const html = buildEmailHtml(fields);
   const text = buildEmailText(fields);
 
@@ -313,28 +362,9 @@ export async function POST(req: NextRequest) {
     dateOfBirth: fields.dateOfBirth ? "provided" : "MISSING",
   });
 
-  // Odoo Recruitment is required — jobId must be a real published hr.job id.
   let odooNoteHtml = "";
   let odooNoteText = "";
   let odooSynced = false;
-  const jobId = Number(fields.jobId);
-
-  if (
-    !Number.isInteger(jobId) ||
-    jobId <= 0 ||
-    !fields.candidateName.trim() ||
-    !fields.email.trim()
-  ) {
-    console.error("[careers/apply] Odoo push refused — invalid jobId or identity");
-    return jsonCors(
-      req,
-      {
-        error:
-          "This job is not available for applications. Please choose a published role from Careers.",
-      },
-      { status: 400 },
-    );
-  }
 
   try {
     const applicantId = await createApplicant(

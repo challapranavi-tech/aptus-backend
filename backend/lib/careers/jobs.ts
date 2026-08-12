@@ -96,3 +96,49 @@ export async function getJobBySlug(slug: string): Promise<CareerJob | null> {
   const jobs = await getAllJobs();
   return jobs.find((j) => j.slug === slug) ?? null;
 }
+
+/**
+ * Single published job by numeric id — used by apply APIs so unpublished /
+ * archived / deleted roles cannot accept applications even if the client
+ * still has a stale jobId.
+ */
+export async function getPublishedJobById(
+  id: number,
+): Promise<CareerJob | null> {
+  if (!Number.isInteger(id) || id <= 0) return null;
+
+  const cfg = odooConfigFromEnv();
+  if (!cfg.url || !cfg.db || !cfg.user || !cfg.apiKey) {
+    throw new Error("Odoo is not configured for careers jobs");
+  }
+
+  const session = await authenticate(
+    cfg.url,
+    cfg.db,
+    cfg.user,
+    cfg.apiKey,
+    cfg.revalidate,
+  );
+
+  const rows = await searchRead<OdooHrJob>(
+    session,
+    "hr.job",
+    [
+      ["id", "=", id],
+      ["website_published", "=", true],
+    ],
+    {
+      fields: [
+        "id",
+        "name",
+        "address_id",
+        "website_description",
+        "description",
+        "write_date",
+      ],
+      limit: 1,
+    },
+  );
+
+  return rows[0] ? normalizeOdooJob(rows[0]) : null;
+}

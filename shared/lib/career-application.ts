@@ -35,6 +35,7 @@ export const CAREER_FORM_KEYS = [
   "experience",
   "location",
   "coverMessage",
+  "jobId",
   "resume",
   "preInterviewForm",
 ] as const;
@@ -47,6 +48,8 @@ export interface ApplicationFields {
   experience: string;
   location: string;
   coverMessage?: string;
+  /** Published Odoo hr.job id — required at the API; selects the open role. */
+  jobId?: string;
 }
 
 export const REQUIRED_TEXT_FIELDS: Array<{
@@ -69,6 +72,7 @@ const careerSchema: ObjectSchema<{
   experience: string;
   location: string;
   coverMessage: string;
+  jobId: string;
 }> = {
   fields: {
     fullName: {
@@ -125,6 +129,16 @@ const careerSchema: ObjectSchema<{
       sanitize: "multiline",
       label: "Cover Message",
     },
+    jobId: {
+      type: "string",
+      required: true,
+      min: 1,
+      max: 20,
+      pattern: /^[1-9]\d{0,18}$/,
+      patternMessage:
+        "This job is not available for applications. Please choose a published role from Careers.",
+      label: "Position Applying For",
+    },
   },
 };
 
@@ -141,6 +155,7 @@ export function validateFields(
       experience: fields.experience,
       location: fields.location,
       coverMessage: fields.coverMessage,
+      jobId: fields.jobId,
     },
     { ...careerSchema, rejectUnknown: false },
   );
@@ -163,6 +178,7 @@ export function parseApplicationFields(
       experience: parsed.data.experience,
       location: parsed.data.location,
       coverMessage: parsed.data.coverMessage || undefined,
+      jobId: parsed.data.jobId,
     },
   };
 }

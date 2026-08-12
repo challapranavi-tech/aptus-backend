@@ -2,9 +2,9 @@ import fs from "fs";
 import path from "path";
 import { randomUUID } from "crypto";
 import type { PortalRefundRequest, RefundStatus } from "@/types/refunds";
+import { writeJsonStore } from "./json-file-store";
 
-const DATA_DIR = path.join(process.cwd(), ".data");
-const REFUNDS_FILE = path.join(DATA_DIR, "portal-refunds.json");
+const REFUNDS_FILE = path.join(process.cwd(), ".data", "portal-refunds.json");
 
 type RefundsStore = {
   refunds: PortalRefundRequest[];
@@ -21,8 +21,7 @@ function readStore(): RefundsStore {
 }
 
 function writeStore(store: RefundsStore): void {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
-  fs.writeFileSync(REFUNDS_FILE, JSON.stringify(store, null, 2), "utf8");
+  writeJsonStore(REFUNDS_FILE, store);
 }
 
 function buildReference(): string {

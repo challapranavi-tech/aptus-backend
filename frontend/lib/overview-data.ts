@@ -67,6 +67,23 @@ function isActiveSubscription(subscription: SubscriptionItem): boolean {
   return ACTIVE_SUBSCRIPTION_STATUSES.has(subscription.status);
 }
 
+/**
+ * Active Licenses quick-card count.
+ * CRM can mark an order License Issued before a serial lands on sale.order.line
+ * (so /api/subscriptions is still empty). Prefer keyed active subscriptions when
+ * present; otherwise count License Issued orders so the card matches Recent Orders.
+ */
+export function countActiveLicenses(
+  orders: PortalOrder[],
+  subscriptions: SubscriptionItem[],
+): number {
+  const fromSubscriptions = subscriptions.filter(isActiveSubscription).length;
+  const fromOrders = orders.filter(
+    (order) => getOrderDisplayStatus(order) === "License Issued",
+  ).length;
+  return Math.max(fromSubscriptions, fromOrders);
+}
+
 export function profileCompletionPercent(user: ClientProfile): number {
   const fields = [user.name, user.email, user.phone, user.city, user.country, user.company];
   const filled = fields.filter((value) => Boolean(String(value ?? "").trim())).length;
@@ -99,7 +116,7 @@ export function buildAccountHealth(
   const actionRequired = notifications.filter(
     (notification) => isActionRequiredNotification(notification.status) && !notification.read,
   ).length;
-  const activeSubscriptions = subscriptions.filter(isActiveSubscription).length;
+  const activeSubscriptions = countActiveLicenses(orders, subscriptions);
   const renewalsDue = subscriptions.filter((subscription) => subscription.status === "Expiring Soon").length;
   const pendingRequests = pendingOrders + actionRequired;
 

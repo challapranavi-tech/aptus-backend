@@ -6,11 +6,21 @@ interface RichTextProps {
   data: RichTextData;
 }
 
+/** Prefer "Our core strength is" / "our team" even if CMS still stores the old split. */
+function cultureSubtitleLines(heading?: string, accent?: string): string[] {
+  const full = [heading, accent].filter(Boolean).join(" ").replace(/\s+/g, " ").trim();
+  if (!full) return [];
+  const match = full.match(/^(our\s+core\s+strength\s+is)\s+(.+)$/i);
+  if (match) return [match[1], match[2]];
+  return [heading, accent].filter(Boolean) as string[];
+}
+
 export function RichText({ data }: RichTextProps) {
   const isCulturePanel = data.variant === "culture-panel";
   const below = data.imagePosition === "below";
   const imageRight = !below && data.imagePosition !== "left";
   const hasMedia = Boolean(data.media);
+  const cultureLines = isCulturePanel ? cultureSubtitleLines(data.heading, data.headingAccent) : [];
 
   const mediaBlock =
     hasMedia && data.media ? (
@@ -37,10 +47,11 @@ export function RichText({ data }: RichTextProps) {
         <Container>
           <div className="aptus-tint-panel my-4 p-4 sm:p-6">
             {data.eyebrow && <h2 className="aptus-team-watermark">{data.eyebrow}</h2>}
-            {(data.heading || data.headingAccent) && (
+            {cultureLines.length > 0 && (
               <div className="aptus-team-culture-subtitle mt-4 font-semibold uppercase">
-                {data.heading && <p>{data.heading}</p>}
-                {data.headingAccent && <p>{data.headingAccent}</p>}
+                {cultureLines.map((line) => (
+                  <p key={line}>{line}</p>
+                ))}
               </div>
             )}
             {data.paragraphs?.map((p, i) => (

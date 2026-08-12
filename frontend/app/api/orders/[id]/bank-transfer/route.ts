@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import { writeAudit } from "@/lib/server/audit-log";
 import { resolveProfile } from "@/lib/server/auth-service";
-import { getOdooSaleOrderLink, getOrderNotificationEmail, isDemoMode } from "@/lib/server/config";
+import { getOdooSaleOrderLink, getOrderNotificationEmail, getPortalBaseUrl, isDemoMode } from "@/lib/server/config";
 import { getSessionFromRequestOrRefresh, jsonError, jsonOk } from "@/lib/server/http";
 import { getClientIp, logger } from "@/lib/server/logger";
 import { sendPortalEmail } from "@/lib/server/mail-service";
@@ -41,10 +41,6 @@ import {
   upsertPortalOrderSnapshot,
 } from "@/lib/server/portal-orders";
 import type { PortalOrder } from "@/types/orders";
-
-function getPortalBaseUrl(): string {
-  return (process.env.PORTAL_BASE_URL?.trim() || "https://aptusinfotech.com").replace(/\/$/, "");
-}
 
 type RouteContext = { params: Promise<{ id: string }> };
 

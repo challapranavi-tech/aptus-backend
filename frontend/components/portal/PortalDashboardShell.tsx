@@ -82,11 +82,12 @@ export function PortalDashboardShell({
 }) {
   const current = NAV.find((item) => item.section === section) ?? NAV[0];
 
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const { notifications } = useNotifications();
   const unreadNotificationCount = notifications.filter((notification) => !notification.read).length;
   const cartCount = usePortalCartCount();
   const [avatarDataUrl, setAvatarDataUrl] = useState<string | undefined>();
+  const [loggingOut, setLoggingOut] = useState(false);
 
   useEffect(() => {
     const stored = getPortalUserFromStorage();
@@ -94,6 +95,16 @@ export function PortalDashboardShell({
   }, [user?.id]);
 
   const firstName = user?.name?.split(" ")[0] ?? "Customer";
+
+  const handleLogout = async () => {
+    if (loggingOut) return;
+    setLoggingOut(true);
+    try {
+      await logout();
+    } finally {
+      window.location.href = "/login";
+    }
+  };
 
   return (
     <div
@@ -128,6 +139,18 @@ export function PortalDashboardShell({
             matchPrefix
             renderTrailing={(link) => navTrailingBadge(link, unreadNotificationCount, cartCount)}
           />
+
+          <button
+            type="button"
+            className="aptus-dashboard-sidebar__logout"
+            data-aptus-logout="true"
+            disabled={loggingOut}
+            onClick={() => {
+              void handleLogout();
+            }}
+          >
+            {loggingOut ? "Signing out…" : "Logout"}
+          </button>
         </aside>
 
         <section className="aptus-dashboard-main">
@@ -155,6 +178,19 @@ export function PortalDashboardShell({
                 <PortalNavIcon name="bell" className="aptus-portal-v3__header-icon" />
                 {unreadNotificationCount > 0 ? <span className="aptus-portal-v3__bell-dot" /> : null}
               </Link>
+              <button
+                type="button"
+                className="aptus-portal-v3__icon-btn aptus-portal-v3__logout-btn"
+                data-aptus-logout="true"
+                aria-label={loggingOut ? "Signing out" : "Logout"}
+                title="Logout"
+                disabled={loggingOut}
+                onClick={() => {
+                  void handleLogout();
+                }}
+              >
+                <PortalNavIcon name="logout" className="aptus-portal-v3__header-icon" />
+              </button>
             </div>
           </header>
 

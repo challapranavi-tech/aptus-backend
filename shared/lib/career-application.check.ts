@@ -14,7 +14,7 @@ import {
 
 // Missing required fields -> one error per required field.
 const empty = validateFields({});
-assert.ok(Object.keys(empty).length >= 6, "all required fields flagged");
+assert.ok(Object.keys(empty).length >= 7, "all required fields flagged");
 
 // Invalid email is rejected.
 assert.ok(
@@ -38,9 +38,36 @@ assert.deepEqual(
     position: "Engineer",
     experience: "5",
     location: "Muscat, Oman",
+    jobId: "42",
   }),
   {},
   "valid fields pass",
+);
+
+// Free-text position without a published job id is rejected.
+assert.ok(
+  validateFields({
+    fullName: "Jane Doe",
+    email: "jane@example.com",
+    phone: "+96812345678",
+    position: "procurement",
+    experience: "8",
+    location: "Muscat",
+  }).jobId,
+  "missing jobId flagged",
+);
+
+assert.ok(
+  validateFields({
+    fullName: "Jane Doe",
+    email: "jane@example.com",
+    phone: "+96812345678",
+    position: "procurement",
+    experience: "8",
+    location: "Muscat",
+    jobId: "0",
+  }).jobId,
+  "non-positive jobId flagged",
 );
 
 const parsed = parseApplicationFields({
@@ -50,9 +77,22 @@ const parsed = parseApplicationFields({
   position: "Engineer",
   experience: "5",
   location: "Muscat",
+  jobId: "42",
   unexpected: "x",
 });
 assert.equal(parsed.ok, false, "unknown fields rejected");
+
+const parsedOk = parseApplicationFields({
+  fullName: "Jane Doe",
+  email: "Jane@Example.com",
+  phone: "+96812345678",
+  position: "Engineer",
+  experience: "5",
+  location: "Muscat",
+  jobId: "42",
+});
+assert.equal(parsedOk.ok, true, "valid payload with jobId parses");
+if (parsedOk.ok) assert.equal(parsedOk.data.jobId, "42");
 
 assert.ok(
   Object.keys(rejectUnknownFormKeys(["fullName", "hack"])).includes("hack"),

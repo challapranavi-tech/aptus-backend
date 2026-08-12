@@ -1,5 +1,5 @@
 import { randomUUID } from "crypto";
-import { DEFAULT_USER_ROLE, isDemoMode, isTestOtpEnabled } from "./config";
+import { DEFAULT_USER_ROLE, getPortalBaseUrl, isDemoMode, isTestOtpEnabled } from "./config";
 import { checkPartnerPortalAccess } from "./odoo/partner-access";
 import {
   createPartner,
@@ -43,10 +43,6 @@ import type { SessionClaims } from "./jwt";
 
 function odooString(value: string | false | undefined): string {
   return typeof value === "string" ? value : "";
-}
-
-function getPortalBaseUrl(): string {
-  return (process.env.PORTAL_BASE_URL?.trim() || "https://aptusinfotech.com").replace(/\/$/, "");
 }
 
 async function resolveRecoveryCustomerName(session: {

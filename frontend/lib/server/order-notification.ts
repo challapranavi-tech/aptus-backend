@@ -1084,6 +1084,35 @@ export function formatLicenseExpiredEmail(input: {
   };
 }
 
+/** Internal alert — customer license expired without renewal (sales follow-up). */
+export function formatLicenseExpiredInternalEmail(input: {
+  customerName: string;
+  customerEmail: string;
+  productName: string;
+  expiryDate: string;
+  subscriptionKey: string;
+}): { subject: string; body: string } {
+  return {
+    subject: `[Aptus Portal] Customer license expired — ${input.productName}`,
+    body: [
+      "Dear Sales Team,",
+      "",
+      "A customer subscription has expired without renewal.",
+      "",
+      "Customer Details",
+      `  Name: ${input.customerName}`,
+      `  Email: ${input.customerEmail}`,
+      "",
+      "License Details",
+      `  Product: ${input.productName}`,
+      `  Expiry date: ${input.expiryDate}`,
+      `  Subscription key: ${input.subscriptionKey}`,
+      "",
+      "Suggested action: Reach out to the customer about renewal options.",
+    ].join("\n"),
+  };
+}
+
 export function formatRenewalConfirmationEmail(input: {
   customerName: string;
   productName: string;

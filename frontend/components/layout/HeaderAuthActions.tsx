@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import {
   clearLegacyPortalSession,
-  logoutViaApi,
   syncLegacyPortalSession,
 } from "@/lib/access-token";
 import { fetchAuthMeShared, invalidateAuthMeCache } from "@/lib/auth-me-client";
@@ -14,7 +13,6 @@ import {
   readPortalCart,
   type PortalCartState,
 } from "@/lib/portal-cart";
-import { invalidatePortalSharedFetch } from "@/lib/portal-shared-fetch";
 import { profileToPortalUser, type PortalUser } from "@/lib/portal-session";
 
 const CART_PATH = "/portal/cart";
@@ -107,26 +105,11 @@ export function HeaderAuthActions() {
     };
   }, [refresh]);
 
-  const handleLogout = async () => {
-    try {
-      await logoutViaApi();
-      invalidateAuthMeCache();
-      invalidatePortalSharedFetch();
-      setUser(null);
-      window.location.href = "/login";
-    } catch {
-      invalidateAuthMeCache();
-      invalidatePortalSharedFetch();
-      setUser(null);
-      window.location.href = "/login";
-    }
-  };
-
   if (!user) {
     return (
       <div className="aptus-header-user">
         <HeaderCartLink showBadge={false} />
-        <Link href="/login" className="aptus-masthead__link">
+        <Link href="/login" className="aptus-masthead__link aptus-header-user__login">
           Login
         </Link>
       </div>
@@ -153,16 +136,6 @@ export function HeaderAuthActions() {
           </span>
         )}
       </Link>
-      <button
-        type="button"
-        onClick={() => {
-          void handleLogout();
-        }}
-        data-aptus-logout="true"
-        className="aptus-header-user__logout"
-      >
-        Logout
-      </button>
     </div>
   );
 }

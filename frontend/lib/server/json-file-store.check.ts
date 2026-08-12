@@ -22,8 +22,8 @@ try {
   writeJsonStore(target, { ok: true });
   assert.deepEqual(JSON.parse(fs.readFileSync(target, "utf8")), { ok: true });
 
-  // Read-only serverless FS — skipped, not thrown.
-  for (const code of ["EROFS", "EACCES", "EPERM"]) {
+  // Read-only serverless FS (Vercel mkdir often returns ENOENT) — skipped, not thrown.
+  for (const code of ["EROFS", "EACCES", "EPERM", "ENOENT"]) {
     failWith(code);
     writeJsonStore(target, { ok: true });
   }

@@ -1,16 +1,13 @@
 import { writeAudit } from "./audit-log";
 import { resolveCustomerContact } from "./auth-service";
+import { getPortalBaseUrl } from "./config";
 import { formatCancellationEmail } from "./order-notification";
 import { sendPortalEmail } from "./mail-service";
 import { logger } from "./logger";
-import { createPortalNotification } from "./portal-notifications";
+import { claimNotificationSend, createPortalNotification } from "./portal-notifications";
 
 export const CANCELLATION_SUCCESS_MESSAGE =
   "Your subscription has been cancelled. The related CRM opportunity has been marked as lost.";
-
-function getPortalBaseUrl(): string {
-  return (process.env.PORTAL_BASE_URL?.trim() || "https://aptusinfotech.com").replace(/\/$/, "");
-}
 
 /**
  * Event 9 — Subscription / License Cancelled. Best-effort, never blocks the
@@ -25,6 +22,14 @@ export async function notifyCancellationEmail(input: {
   try {
     const customer = await resolveCustomerContact(input.partnerId, input.actorId);
     if (!customer?.email) return;
+
+    const reference = input.reference ?? input.productName;
+    if (
+      input.partnerId &&
+      !(await claimNotificationSend(input.partnerId, reference, "cancellation"))
+    ) {
+      return;
+    }
 
     const mail = formatCancellationEmail({
       customerName: customer.name,

@@ -20,6 +20,7 @@ const mocks = vi.hoisted(() => ({
   archiveApplication: vi.fn(),
   isOdooConfigured: vi.fn(() => true),
   isMailConfigured: vi.fn(() => true),
+  getPublishedJobById: vi.fn(),
 }));
 
 vi.mock("@/lib/odoo", async (importOriginal) => {
@@ -45,6 +46,10 @@ vi.mock("@/lib/application-archive", () => ({
   archiveApplication: mocks.archiveApplication,
 }));
 
+vi.mock("@/lib/careers/jobs", () => ({
+  getPublishedJobById: mocks.getPublishedJobById,
+}));
+
 import { POST } from "@/app/api/careers/apply/route";
 
 function req(form: FormData, ip = "203.0.113.10") {
@@ -55,6 +60,19 @@ function req(form: FormData, ip = "203.0.113.10") {
   });
 }
 
+const publishedJob = {
+  id: "42",
+  slug: "engineer-42",
+  title: "Engineer",
+  department: "SOFTWARE",
+  location: "Muscat",
+  jobType: "Full-time",
+  description: "",
+  descriptionHtml: "",
+  responsibilities: [],
+  requirements: [],
+};
+
 describe("POST /api/careers/apply", () => {
   beforeEach(() => {
     __resetRateLimitStoreForTests();
@@ -64,6 +82,7 @@ describe("POST /api/careers/apply", () => {
     mocks.createApplicant.mockResolvedValue(99);
     mocks.sendEmail.mockResolvedValue({ ok: true, id: "mail_1" });
     mocks.archiveApplication.mockResolvedValue("archive://test");
+    mocks.getPublishedJobById.mockResolvedValue(publishedJob);
     process.env.ODOO_URL = "https://odoo.test.example";
     process.env.RESEND_API_KEY = "re_test";
     delete process.env.VERCEL;
@@ -158,6 +177,35 @@ describe("POST /api/careers/apply", () => {
     );
     expect(res.status).toBe(400);
     expect(mocks.createApplicant).not.toHaveBeenCalled();
+    expect(mocks.getPublishedJobById).not.toHaveBeenCalled();
+  });
+
+  it("returns 400 when job is not website_published", async () => {
+    mocks.getPublishedJobById.mockResolvedValue(null);
+    const res = await POST(req(buildCareersForm()));
+    expect(res.status).toBe(400);
+    const body = await res.json();
+    expect(body.error).toMatch(/not available for applications/i);
+    expect(mocks.createApplicant).not.toHaveBeenCalled();
+    expect(mocks.sendEmail).not.toHaveBeenCalled();
+  });
+
+  it("uses the published job title in the HR email subject", async () => {
+    mocks.getPublishedJobById.mockResolvedValue({
+      ...publishedJob,
+      title: "Senior Engineer",
+    });
+    const res = await POST(
+      req(
+        buildCareersForm({
+          fields: { appliedDesignation: "spoofed-title", jobId: "42" },
+        }),
+      ),
+    );
+    expect(res.status).toBe(200);
+    const subject = mocks.sendEmail.mock.calls[0]?.[0]?.subject as string;
+    expect(subject).toContain("Senior Engineer");
+    expect(subject).not.toContain("spoofed-title");
   });
 
   it("rate-limits by email identity (429)", async () => {
