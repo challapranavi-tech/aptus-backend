@@ -19,8 +19,26 @@ export type SaleOrderPaymentMeta = {
 };
 
 function readTagged(text: string, key: string): string | undefined {
-  const match = text.match(new RegExp(`(?:^|\\s)${key}=([^\\s\\]]+)`, "i"));
-  return match?.[1]?.trim().replace(/\+/g, " ") || undefined;
+  // Allow HTML boundaries (`>key=`) — Odoo CRM description is often HTML.
+  const match = text.match(new RegExp(`(?:^|[\\s>])${key}=([^\\s\\]<]+)`, "i"));
+  let value = match?.[1]?.trim().replace(/\+/g, " ");
+  if (!value) return undefined;
+  // Strip accidental HTML suffix from values like `123</p>`.
+  value = value.replace(/<.*$/u, "").trim();
+  return value || undefined;
+}
+
+function readAttachmentMeta(text: string): {
+  paymentProofFileName?: string;
+  paymentProofOdooAttachmentId?: number;
+} {
+  const paymentProofFileName = readTagged(text, "file");
+  const raw = readTagged(text, "attachment_id");
+  const id = raw != null ? Number(raw) : NaN;
+  return {
+    paymentProofFileName,
+    paymentProofOdooAttachmentId: Number.isFinite(id) ? id : undefined,
+  };
 }
 
 /**
@@ -42,6 +60,7 @@ export function parseSaleOrderPaymentMeta(
   const subscriptionState =
     typeof hints?.subscriptionState === "string" ? hints.subscriptionState : "";
   const orderState = typeof hints?.orderState === "string" ? hints.orderState : "";
+  const proof = readAttachmentMeta(text);
 
   if (
     text.includes(PAYMENT_REJECTED_TAG) ||
@@ -79,12 +98,7 @@ export function parseSaleOrderPaymentMeta(
       bankTransferReference: readTagged(text, "ref"),
       paymentMethod: readTagged(text, "method"),
       paymentIntentId: readTagged(text, "intent"),
-      paymentProofFileName: readTagged(text, "file"),
-      paymentProofOdooAttachmentId: (() => {
-        const raw = readTagged(text, "attachment_id");
-        const id = raw != null ? Number(raw) : NaN;
-        return Number.isFinite(id) ? id : undefined;
-      })(),
+      ...proof,
       amountPaid: Number.isFinite(amountPaid) ? amountPaid : undefined,
       paidAt: readTagged(text, "paid_at"),
     };
@@ -92,6 +106,7 @@ export function parseSaleOrderPaymentMeta(
 
   // Finance confirmed in Odoo without portal admin: fully invoiced, active
   // subscription, or a license/serial already issued on the order lines.
+  // Keep file/attachment_id from the note so Invoices can still list the proof.
   const subscriptionActive =
     subscriptionState === "progress" ||
     subscriptionState.endsWith("_progress") ||
@@ -101,6 +116,7 @@ export function parseSaleOrderPaymentMeta(
       paymentStatus: "paid",
       bankTransferReference: readTagged(text, "ref"),
       paymentMethod: readTagged(text, "method") ?? (hints?.hasLicense ? "License issued" : "Odoo"),
+      ...proof,
     };
   }
 
@@ -109,18 +125,15 @@ export function parseSaleOrderPaymentMeta(
       readTagged(text, "ref") ??
       text.match(/ref(?:erence)?\s+([A-Z0-9-]+)/i)?.[1] ??
       text.match(/Reference:\s*([A-Z0-9-]+)/i)?.[1];
-    const attachmentRaw = readTagged(text, "attachment_id");
-    const attachmentId = attachmentRaw != null ? Number(attachmentRaw) : NaN;
     return {
       paymentStatus: "pending_verification",
       bankTransferReference: ref,
       paymentMethod: readTagged(text, "method") ?? "Bank Transfer",
-      paymentProofFileName: readTagged(text, "file"),
-      paymentProofOdooAttachmentId: Number.isFinite(attachmentId) ? attachmentId : undefined,
+      ...proof,
     };
   }
 
-  return { paymentStatus: "pending" };
+  return { paymentStatus: "pending", ...proof };
 }
 
 export function formatPaymentPendingNote(input: {

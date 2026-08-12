@@ -56,4 +56,33 @@ assert.equal(
   "issued license must win over a leftover pending tag",
 );
 
+const pendingWithProof = formatPaymentPendingNote({
+  bankTransferReference: "APT-20260811-5713",
+  attachmentId: 99,
+  fileName: "Screenshot_30-7-2026_152022_supabase.com.jpeg",
+});
+const pendingProofMeta = parseSaleOrderPaymentMeta(pendingWithProof);
+assert.equal(pendingProofMeta.paymentProofOdooAttachmentId, 99);
+assert.equal(
+  pendingProofMeta.paymentProofFileName,
+  "Screenshot_30-7-2026_152022_supabase.com.jpeg",
+);
+
+// Invoiced / licensed shortcuts must keep attachment tags for the Invoices page.
+const invoicedWithProof = parseSaleOrderPaymentMeta(pendingWithProof, {
+  invoiceStatus: "invoiced",
+});
+assert.equal(invoicedWithProof.paymentStatus, "paid");
+assert.equal(invoicedWithProof.paymentProofOdooAttachmentId, 99);
+assert.equal(
+  invoicedWithProof.paymentProofFileName,
+  "Screenshot_30-7-2026_152022_supabase.com.jpeg",
+);
+
+const htmlNote =
+  "<p>[Payment Verification Pending] ref=APT-1 attachment_id=77 file=proof.pdf</p>";
+const htmlMeta = parseSaleOrderPaymentMeta(htmlNote);
+assert.equal(htmlMeta.paymentProofOdooAttachmentId, 77);
+assert.equal(htmlMeta.paymentProofFileName, "proof.pdf");
+
 console.log("payment-meta.check: ok");

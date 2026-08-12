@@ -14,6 +14,8 @@ import {
   parseProductOrderLeadItems,
 } from "./leads";
 import { fetchPartnerSubscriptions, saleOrderHasIssuedLicense } from "./subscriptions";
+import { listOdooAttachments } from "./attachments";
+import { getCrmLeadNotesFieldName } from "./crm-lead-notes";
 
 type OdooSaleOrderRow = {
   id: number;
@@ -161,13 +163,17 @@ function applyPaymentMeta(
   if (meta.paymentStatus === "paid") status = "Completed";
   if (meta.paymentStatus === "failed") status = "Rejected";
 
+  const paymentProofFileName = meta.paymentProofFileName ?? order.paymentProofFileName;
+  const paymentProofOdooAttachmentId =
+    meta.paymentProofOdooAttachmentId ?? order.paymentProofOdooAttachmentId;
+
   return {
     ...order,
     paymentStatus: meta.paymentStatus,
-    bankTransferReference: meta.bankTransferReference,
-    paymentMethod: meta.paymentMethod,
-    paymentProofFileName: meta.paymentProofFileName,
-    paymentProofOdooAttachmentId: meta.paymentProofOdooAttachmentId,
+    bankTransferReference: meta.bankTransferReference ?? order.bankTransferReference,
+    paymentMethod: meta.paymentMethod ?? order.paymentMethod,
+    paymentProofFileName,
+    paymentProofOdooAttachmentId,
     paymentIntentId: meta.paymentIntentId,
     amountPaid: meta.amountPaid,
     paidAt: meta.paidAt,
@@ -175,11 +181,50 @@ function applyPaymentMeta(
     licenseIssued: meta.licenseIssued ?? order.licenseIssued,
     amountDue: amountTotal != null && amountTotal > 0 ? amountTotal : order.amountDue,
     paymentProofUrl:
-      meta.paymentProofOdooAttachmentId != null || meta.paymentProofFileName
+      paymentProofOdooAttachmentId != null || paymentProofFileName
         ? `/api/orders/${encodeURIComponent(order.id)}/payment-proof`
-        : undefined,
+        : order.paymentProofUrl,
     status,
   };
+}
+
+/** When note tags were wiped, recover the uploaded proof from ir.attachment. */
+async function enrichPaymentProofFromAttachments(order: PortalOrder): Promise<PortalOrder> {
+  if (order.paymentProofOdooAttachmentId != null || order.paymentProofFileName?.trim()) {
+    return order;
+  }
+  if (order.paymentStatus !== "pending_verification" && order.paymentStatus !== "paid") {
+    return order;
+  }
+
+  const resModel = order.saleOrderId != null ? "sale.order" : order.leadId != null ? "crm.lead" : null;
+  const resId = order.saleOrderId ?? order.leadId;
+  if (!resModel || resId == null) return order;
+
+  try {
+    const attachments = await listOdooAttachments(resModel, resId, 20);
+    const proof =
+      attachments.find(
+        (item) => item.mimetype.startsWith("image/") || item.mimetype === "application/pdf",
+      ) ?? attachments[0];
+    if (!proof) return order;
+    return {
+      ...order,
+      paymentProofOdooAttachmentId: proof.id,
+      paymentProofFileName: proof.name,
+      paymentProofUploadedAt: proof.createDate || order.paymentProofUploadedAt,
+      paymentProofUrl: `/api/orders/${encodeURIComponent(order.id)}/payment-proof`,
+    };
+  } catch (error) {
+    logger.warn("Failed to list payment proof attachments", {
+      action: "orders.payment_proof",
+      orderId: order.id,
+      resModel,
+      resId,
+      error: error instanceof Error ? error.message : String(error),
+    });
+    return order;
+  }
 }
 
 async function mapSaleOrderRow(
@@ -236,9 +281,15 @@ async function mapSaleOrderRow(
   return applyPaymentMeta(base, { ...paymentMeta, licenseIssued: hasLicense }, saleOrder.amount_total);
 }
 
-function mapLeadRow(lead: OdooCrmLeadRow, partnerId: number): PortalOrder {
+function mapLeadRow(lead: OdooCrmLeadRow & Record<string, unknown>, partnerId: number): PortalOrder {
   const stage = crmStageName(lead);
-  const paymentMeta = paymentMetaFromCrmStage(stage, parseSaleOrderPaymentMeta(lead.description));
+  const notesField = getCrmLeadNotesFieldName();
+  const notesText =
+    typeof lead[notesField] === "string" ? (lead[notesField] as string) : "";
+  const descriptionText = typeof lead.description === "string" ? lead.description : "";
+  // Payment tags are written to the CRM notes field (often description); parse both.
+  const noteBlob = [notesText, descriptionText].filter(Boolean).join("\n\n");
+  const paymentMeta = paymentMetaFromCrmStage(stage, parseSaleOrderPaymentMeta(noteBlob));
   const parsedItems = parseProductOrderLeadItems(lead.name);
   const items: OrderLineItem[] = parsedItems.length
     ? parsedItems.map((item) => ({
@@ -282,14 +333,24 @@ export async function fetchPartnerOrders(partnerId: number): Promise<PortalOrder
   const merged = new Map<string, PortalOrder>();
 
   try {
-    const leads = await client.searchRead<OdooCrmLeadRow>(
+    const notesField = getCrmLeadNotesFieldName();
+    const leadFields = [
+      "name",
+      "stage_id",
+      "probability",
+      "active",
+      "create_date",
+      "description",
+      ...(notesField !== "description" ? [notesField] : []),
+    ];
+    const leads = await client.searchRead<OdooCrmLeadRow & Record<string, unknown>>(
       "crm.lead",
       [
         ["partner_id", "in", partnerIds],
         ["name", "ilike", "Portal software order"],
         ["active", "in", [true, false]],
       ],
-      ["name", "stage_id", "probability", "active", "create_date", "description"],
+      leadFields,
       50,
     );
 
@@ -339,12 +400,15 @@ export async function fetchPartnerOrders(partnerId: number): Promise<PortalOrder
   }
 
   return markLicensedOrdersCompleted(
-    dedupePortalOrders([...merged.values()])
-      .map((order) => ({
-        ...order,
-        status: normalizeOrderStatus(order.status),
-      }))
-      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()),
+    await Promise.all(
+      dedupePortalOrders([...merged.values()])
+        .map((order) => ({
+          ...order,
+          status: normalizeOrderStatus(order.status),
+        }))
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        .map((order) => enrichPaymentProofFromAttachments(order)),
+    ),
     partnerId,
   );
 }
@@ -378,6 +442,31 @@ function dedupePortalOrders(orders: PortalOrder[]): PortalOrder[] {
       if (match.leadId == null) match.leadId = order.leadId;
       if (!match.crmStage && order.crmStage) match.crmStage = order.crmStage;
       if (order.licenseIssued) match.licenseIssued = true;
+      // Lead often holds the payment-proof tags when SO create was delayed/failed.
+      if (!match.paymentProofFileName && order.paymentProofFileName) {
+        match.paymentProofFileName = order.paymentProofFileName;
+      }
+      if (match.paymentProofOdooAttachmentId == null && order.paymentProofOdooAttachmentId != null) {
+        match.paymentProofOdooAttachmentId = order.paymentProofOdooAttachmentId;
+      }
+      if (!match.paymentProofUploadedAt && order.paymentProofUploadedAt) {
+        match.paymentProofUploadedAt = order.paymentProofUploadedAt;
+      }
+      if (
+        !match.paymentProofUrl &&
+        (match.paymentProofFileName || match.paymentProofOdooAttachmentId != null)
+      ) {
+        match.paymentProofUrl = `/api/orders/${encodeURIComponent(match.id)}/payment-proof`;
+      }
+      if (
+        (order.paymentStatus === "pending_verification" || order.paymentStatus === "paid") &&
+        match.paymentStatus === "pending"
+      ) {
+        match.paymentStatus = order.paymentStatus;
+        match.paymentMethod = match.paymentMethod ?? order.paymentMethod;
+        match.bankTransferReference =
+          match.bankTransferReference ?? order.bankTransferReference;
+      }
       continue;
     }
     kept.push(order);
@@ -447,6 +536,9 @@ async function markLicensedOrdersCompleted(
     return applyPaymentMeta(order, {
       paymentStatus: "paid",
       paymentMethod: order.paymentMethod ?? "License issued",
+      paymentProofFileName: order.paymentProofFileName,
+      paymentProofOdooAttachmentId: order.paymentProofOdooAttachmentId,
+      bankTransferReference: order.bankTransferReference,
       licenseIssued: true,
     });
   });
@@ -512,20 +604,29 @@ export async function resolvePartnerOrder(
         ? row.partner_id
         : null;
     if (soPartner != null && !partnerIds.includes(soPartner)) return null;
-    return mapSaleOrderRow(row, partnerId);
+    return enrichPaymentProofFromAttachments(await mapSaleOrderRow(row, partnerId));
   }
 
   if (parts.leadId != null) {
-    const rows = await client.read<OdooCrmLeadRow & { partner_id?: [number, string] | false }>(
-      "crm.lead",
-      [parts.leadId],
-      ["name", "stage_id", "probability", "active", "create_date", "description", "partner_id"],
-    );
+    const notesField = getCrmLeadNotesFieldName();
+    const leadFields = [
+      "name",
+      "stage_id",
+      "probability",
+      "active",
+      "create_date",
+      "description",
+      "partner_id",
+      ...(notesField !== "description" ? [notesField] : []),
+    ];
+    const rows = await client.read<
+      OdooCrmLeadRow & { partner_id?: [number, string] | false } & Record<string, unknown>
+    >("crm.lead", [parts.leadId], leadFields);
     const lead = rows[0];
     if (!lead) return null;
     const leadPartner = Array.isArray(lead.partner_id) ? lead.partner_id[0] : null;
     if (leadPartner != null && !partnerIds.includes(leadPartner)) return null;
-    return mapLeadRow(lead, partnerId);
+    return enrichPaymentProofFromAttachments(mapLeadRow(lead, partnerId));
   }
 
   const all = await fetchPartnerOrders(partnerId);

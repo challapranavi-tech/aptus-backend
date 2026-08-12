@@ -186,17 +186,18 @@ function mapSubscriptionStatus(
   hasLicense: boolean,
 ): SubscriptionStatus {
   if (isCancelledSubscriptionState(state)) return "Cancelled";
+
+  // Calendar end date wins over Odoo "progress" — finance often leaves state active
+  // after the license term ends.
+  if (isPastEndDate(endDateIso)) return "Expired";
+
   if (isActiveSubscriptionState(state)) {
     if (isExpiringSoon(endDateIso)) return "Expiring Soon";
     return "Active";
   }
   // Confirmed sale with a license but no subscription lifecycle → treat as issued/active.
   if (hasLicense && (!state || isInactiveSubscriptionState(state))) {
-    if (endDateIso) {
-      const end = new Date(`${endDateIso}T23:59:59`);
-      if (!Number.isNaN(end.getTime()) && end.getTime() < Date.now()) return "Expired";
-      if (isExpiringSoon(endDateIso)) return "Expiring Soon";
-    }
+    if (isExpiringSoon(endDateIso)) return "Expiring Soon";
     return "Active";
   }
   return "Expired";
@@ -214,14 +215,31 @@ function isCancelledSubscriptionState(state: string | false | null | undefined):
 
 const EXPIRING_SOON_DAYS = Number(process.env.SUBSCRIPTION_EXPIRING_DAYS ?? 30);
 
-function isExpiringSoon(endDateIso: string): boolean {
-  if (!endDateIso) return false;
-  const end = new Date(`${endDateIso}T23:59:59`);
-  if (Number.isNaN(end.getTime())) return false;
-  const now = new Date();
-  if (end.getTime() < now.getTime()) return false;
-  const msUntil = end.getTime() - now.getTime();
-  return msUntil <= EXPIRING_SOON_DAYS * 24 * 60 * 60 * 1000;
+function endOfExpiryDay(endDateIso: string): number {
+  if (!endDateIso) return Number.NaN;
+  return Date.parse(`${endDateIso}T23:59:59.999`);
+}
+
+function isPastEndDate(endDateIso: string, nowMs = Date.now()): boolean {
+  const end = endOfExpiryDay(endDateIso);
+  if (Number.isNaN(end)) return false;
+  return end < nowMs;
+}
+
+function isExpiringSoon(endDateIso: string, nowMs = Date.now()): boolean {
+  if (!endDateIso || isPastEndDate(endDateIso, nowMs)) return false;
+  const end = endOfExpiryDay(endDateIso);
+  if (Number.isNaN(end)) return false;
+  return end - nowMs <= EXPIRING_SOON_DAYS * 24 * 60 * 60 * 1000;
+}
+
+/** Exported for self-check — same rules as portal subscription cards. */
+export function subscriptionDisplayStatus(
+  state: string | false | null | undefined,
+  endDateIso: string,
+  hasLicense = false,
+): SubscriptionStatus {
+  return mapSubscriptionStatus(state, endDateIso, hasLicense);
 }
 
 function m2oLabel(value: [number, string] | false | null | undefined): string {
