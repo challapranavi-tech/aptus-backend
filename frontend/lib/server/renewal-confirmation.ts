@@ -356,7 +356,7 @@ export async function notifyRenewalConfirmedIfNeeded(
     actorId: customer.actorId,
     title: "Renewal confirmed",
     detail: `Your renewal for ${request.productName} (${request.reference}) has been confirmed. Your subscription is now active.`,
-    status: "Confirmed",
+    status: "License Issued",
     type: "renewal",
     reference: request.reference,
   });

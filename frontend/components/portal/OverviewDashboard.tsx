@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useAuth } from "@/context/AuthProvider";
 import { useNotifications } from "@/hooks/useNotifications";
 import { useOrders } from "@/hooks/useOrders";
+import { usePortalCartCount } from "@/hooks/usePortalCartCount";
 import { useSubscriptions } from "@/hooks/useSubscriptions";
 import { estimateOrderPricing, formatOmanAmount } from "@/lib/order-pricing";
 import {
@@ -58,6 +59,7 @@ export function OverviewDashboard() {
   const { allOrders, loading: ordersLoading } = useOrders();
   const { subscriptions, loading: subscriptionsLoading } = useSubscriptions();
   const { notifications, loading: notificationsLoading } = useNotifications();
+  const cartCount = usePortalCartCount();
 
   if (!ready || !user) {
     return <LoadingBlock label="Loading your workspace…" />;
@@ -104,10 +106,10 @@ export function OverviewDashboard() {
             />
             <StatCard
               tone="purple"
-              icon="purchase"
-              value={subscriptions.length}
-              label="Subscription & Renews"
-              href="/portal/subscriptions"
+              icon="box"
+              value={cartCount}
+              label="Cart"
+              href="/portal/cart"
             />
           </div>
 
@@ -179,9 +181,9 @@ export function OverviewDashboard() {
                     <PortalNavIcon name="support" />
                     Raise Support Ticket
                   </Link>
-                  <Link href="/portal/subscriptions" className="aptus-overview-v3__action">
-                    <PortalNavIcon name="purchase" />
-                    Subscription and Renew
+                  <Link href="/portal/cart" className="aptus-overview-v3__action">
+                    <PortalNavIcon name="box" />
+                    Cart
                   </Link>
                   <Link href="/portal/invoices" className="aptus-overview-v3__action">
                     <PortalNavIcon name="invoices" />

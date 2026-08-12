@@ -80,7 +80,7 @@ export async function fetchPartnerNotifications(
         partnerId,
         title: "Payment Verification Pending",
         detail: `We received your payment proof for ${order.reference}. Finance will confirm within 2–3 business days.`,
-        status: "Action Required",
+        status: "Payment Verification Pending",
         type: "order",
         reference: order.reference,
         read: false,
@@ -89,7 +89,6 @@ export async function fetchPartnerNotifications(
     }
 
     if (order.paymentStatus === "paid" || order.status === "Completed") {
-      const products = order.items.map((item) => item.productName).join(", ");
       if (order.licenseIssued) {
         notifications.push({
           id: `odoo-notif-order-licensed-${order.reference}`,
@@ -97,7 +96,7 @@ export async function fetchPartnerNotifications(
           title: "License Issued",
           detail:
             "Your software license has been issued successfully. You can now view your license details in your customer portal.",
-          status: "Confirmed",
+          status: "License Issued",
           type: "license_available",
           reference: order.reference,
           read: false,
@@ -110,7 +109,7 @@ export async function fetchPartnerNotifications(
           title: "Payment Verified",
           detail:
             "Your payment has been verified successfully. Your software license will be issued within 2–3 business days.",
-          status: "Confirmed",
+          status: "Payment Verified",
           type: "purchase_approved",
           reference: order.reference,
           read: false,
@@ -172,7 +171,7 @@ export async function fetchPartnerNotifications(
   for (const renewal of renewals) {
     const status: PortalNotificationStatus =
       renewal.status === "Approved"
-        ? "Confirmed"
+        ? "License Issued"
         : renewal.status === "Rejected"
           ? "Rejected"
           : "Submitted";
@@ -208,7 +207,7 @@ export async function fetchPartnerNotifications(
       title: "License Issued",
       detail:
         "Your software license has been issued successfully. You can now view your license details in your customer portal.",
-      status: "Confirmed",
+      status: "License Issued",
       type: "license_available",
       reference,
       read: false,

@@ -2,6 +2,7 @@ import type { PortalNotification, PortalNotificationType } from "@/types/notific
 import type { PortalOrder } from "@/types/orders";
 import type { ClientProfile } from "@/types/profile";
 import type { SubscriptionItem } from "@/types/subscriptions";
+import { isActionRequiredNotification } from "@/lib/notification-status";
 import { getOrderDisplayStatus } from "@/lib/order-status";
 
 export type OverviewActivity = {
@@ -96,7 +97,7 @@ export function buildAccountHealth(
     (order) => order.status === "Submitted" || order.status === "Under Review",
   ).length;
   const actionRequired = notifications.filter(
-    (notification) => notification.status === "Action Required" && !notification.read,
+    (notification) => isActionRequiredNotification(notification.status) && !notification.read,
   ).length;
   const activeSubscriptions = subscriptions.filter(isActiveSubscription).length;
   const renewalsDue = subscriptions.filter((subscription) => subscription.status === "Expiring Soon").length;
@@ -119,7 +120,7 @@ export function getAccountStatusMessage(
   notifications: PortalNotification[],
 ): string {
   const actionRequired = notifications.filter(
-    (notification) => notification.status === "Action Required" && !notification.read,
+    (notification) => isActionRequiredNotification(notification.status) && !notification.read,
   ).length;
   const pendingOrders = orders.filter(
     (order) => order.status === "Submitted" || order.status === "Under Review",

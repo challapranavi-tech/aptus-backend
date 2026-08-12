@@ -4,6 +4,7 @@ import {
   getProductCardMeta,
   getPurchaseProductImage,
   portalProductDetailHref,
+  portalProductsHref,
   productSlugFromHref,
   lookupPurchaseProductBySlug,
   type SoftwarePurchaseCategory,
@@ -13,7 +14,14 @@ import { cartLineUnitPrice } from "@/lib/portal-cart-checkout";
 import type { PortalOrder } from "@/types/orders";
 
 export type { SoftwarePurchaseCategory, SoftwarePurchaseProduct };
-export { ELV_PURCHASE_CATALOG, SOFTWARE_PURCHASE_CATALOG, getProductCardMeta, getPurchaseProductImage, portalProductDetailHref };
+export {
+  ELV_PURCHASE_CATALOG,
+  SOFTWARE_PURCHASE_CATALOG,
+  getProductCardMeta,
+  getPurchaseProductImage,
+  portalProductDetailHref,
+  portalProductsHref,
+};
 
 export type OrderPricing = {
   subscriptionFee: number;

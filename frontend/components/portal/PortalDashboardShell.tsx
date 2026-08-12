@@ -15,14 +15,9 @@ import { PortalNavIcon } from "./PortalNavIcon";
 import { SoftwareSubNav } from "@/components/layout/SoftwareSubNav";
 import type { SoftwareSubNavLink } from "@/data/software-subnav";
 import { useAuth } from "@/context/AuthProvider";
-import {
-  PORTAL_CART_EVENT,
-  portalCartCount,
-  readPortalCart,
-  type PortalCartState,
-} from "@/lib/portal-cart";
 import { getPortalUserFromStorage } from "@/lib/portal-session";
 import { useNotifications } from "@/hooks/useNotifications";
+import { usePortalCartCount } from "@/hooks/usePortalCartCount";
 import { NotificationCountBadge } from "./NotificationCountBadge";
 
 type Section =
@@ -63,31 +58,6 @@ const NAV: NavItem[] = [
 ];
 
 const PORTAL_NAV_LINKS: SoftwareSubNavLink[] = NAV.map(({ label, href }) => ({ label, href }));
-
-function usePortalCartCount(): number {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    const sync = (cart?: PortalCartState) => {
-      setCount(portalCartCount(cart ?? readPortalCart()));
-    };
-    sync();
-    const onStorage = (event: StorageEvent) => {
-      if (event.key === "aptus:portal-cart") sync();
-    };
-    const onCart = (event: Event) => {
-      sync((event as CustomEvent<PortalCartState>).detail);
-    };
-    window.addEventListener("storage", onStorage);
-    window.addEventListener(PORTAL_CART_EVENT, onCart);
-    return () => {
-      window.removeEventListener("storage", onStorage);
-      window.removeEventListener(PORTAL_CART_EVENT, onCart);
-    };
-  }, []);
-
-  return count;
-}
 
 function navTrailingBadge(
   link: SoftwareSubNavLink,

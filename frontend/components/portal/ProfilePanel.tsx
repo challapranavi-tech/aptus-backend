@@ -56,6 +56,10 @@ export function ProfilePanel() {
     );
   }
 
+  const isCompany = user.contactType === "company";
+  const phoneLocked = !isCompany;
+  const phoneValue = phoneLocked ? normalizePhone(user.phone ?? "") : form.phone;
+
   function updateField<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((current) => (current ? { ...current, [key]: value } : current));
   }
@@ -67,11 +71,14 @@ export function ProfilePanel() {
     setMessage("");
     setError("");
 
+    // Identity fields stay out of the PATCH body: person phone + company CR/taxId.
+    const payload = isCompany ? form : { ...form, phone: undefined };
+
     try {
       const response = await authFetch("/api/auth/profile", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
       const data = await response.json().catch(() => ({}));
 
@@ -88,8 +95,6 @@ export function ProfilePanel() {
       setSaving(false);
     }
   }
-
-  const isCompany = user.contactType === "company";
 
   return (
     <section className="aptus-dashboard-card aptus-profile-card">
@@ -113,8 +118,9 @@ export function ProfilePanel() {
             className="form-control"
             type="email"
             value={user.email}
-            readOnly
-            aria-readonly="true"
+            disabled
+            aria-disabled="true"
+            title="Email cannot be changed"
           />
         </div>
 
@@ -124,14 +130,14 @@ export function ProfilePanel() {
             id="profile_phone"
             className="form-control"
             type="tel"
-            value={isCompany ? form.phone : normalizePhone(user.phone ?? "")}
-            readOnly={!isCompany}
-            aria-readonly={!isCompany ? "true" : undefined}
-            title={!isCompany ? "Phone number is unique and cannot be changed" : undefined}
+            value={phoneValue}
+            disabled={phoneLocked}
+            readOnly={phoneLocked}
+            aria-disabled={phoneLocked ? "true" : undefined}
+            aria-readonly={phoneLocked ? "true" : undefined}
+            title={phoneLocked ? "Phone number is unique and cannot be changed" : undefined}
             onChange={
-              isCompany
-                ? (e) => updateField("phone", normalizePhone(e.target.value))
-                : undefined
+              phoneLocked ? undefined : (e) => updateField("phone", normalizePhone(e.target.value))
             }
           />
         </div>
@@ -202,18 +208,22 @@ export function ProfilePanel() {
           />
         </div>
 
-        <div className="aptus-field">
-          <label htmlFor="profile_cr">CR number</label>
-          <input
-            id="profile_cr"
-            className="form-control"
-            type="text"
-            value={user.taxId ?? ""}
-            readOnly
-            aria-readonly="true"
-            title="CR number is unique and cannot be changed"
-          />
-        </div>
+        {isCompany ? (
+          <div className="aptus-field">
+            <label htmlFor="profile_cr">CR number</label>
+            <input
+              id="profile_cr"
+              className="form-control"
+              type="text"
+              value={user.taxId ?? ""}
+              disabled
+              readOnly
+              aria-disabled="true"
+              aria-readonly="true"
+              title="CR number is unique and cannot be changed"
+            />
+          </div>
+        ) : null}
 
         <div className="aptus-field">
           <label htmlFor="profile_website">Website</label>

@@ -568,7 +568,7 @@ export async function POST(request: NextRequest, context: RouteContext) {
         actorId: claims.sub,
         title: "Payment Verification Pending",
         detail: `Your order ${updated.reference} is awaiting payment verification (2-3 business days).`,
-        status: "Action Required",
+        status: "Payment Verification Pending",
         type: "purchase_submitted",
         reference: updated.reference,
       });

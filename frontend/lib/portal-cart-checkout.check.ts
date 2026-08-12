@@ -52,16 +52,25 @@ assert.equal(
   "3 Years · Renew",
 );
 
-// Renewal product configured with packages (Revit) adds the package to price + summary.
-const revitBase = cartLineUnitPrice({ category: "Autodesk", productName: "Revit", quantity: 1 }, "1year");
-const revitEnterprise = cartLineUnitPrice(
-  { category: "Autodesk", productName: "Revit", quantity: 1, packageId: "enterprise" },
+// Plain renewal (Revit): duration + type only — no package tier.
+assert.equal(
+  lineConfigSummary({ category: "Autodesk", productName: "Revit", quantity: 1, purchaseType: "new" }, "1year"),
+  "Annual · New Purchase",
+);
+
+// Renewal with packages (Build) adds the package to price + summary.
+const buildBase = cartLineUnitPrice({ category: "Autodesk", productName: "Autodesk Build", quantity: 1 }, "1year");
+const buildUnlimited = cartLineUnitPrice(
+  { category: "Autodesk", productName: "Autodesk Build", quantity: 1, packageId: "unlimited" },
   "1year",
 );
-assert.ok(revitEnterprise > revitBase);
+assert.ok(buildUnlimited > buildBase);
 assert.equal(
-  lineConfigSummary({ category: "Autodesk", productName: "Revit", quantity: 1, packageId: "enterprise" }, "1year"),
-  "Annual · New Purchase · Enterprise",
+  lineConfigSummary(
+    { category: "Autodesk", productName: "Autodesk Build", quantity: 1, packageId: "unlimited" },
+    "1year",
+  ),
+  "Annual · New Purchase · Unlimited",
 );
 
 // Levels product ignores duration/purchaseType and prices by level instead.
@@ -86,5 +95,25 @@ assert.equal(
   cartLineUnitPrice({ ...bundleItem, duration: "3year", purchaseType: "renew" }, "3year"),
 );
 assert.equal(lineConfigSummary(bundleItem), "Bundle");
+
+// Single-bundle Microsoft SKUs also hide subscription/level/package (qty only).
+assert.equal(
+  lineConfigSummary({
+    category: "Microsoft",
+    productName: "Microsoft 365 Apps",
+    quantity: 2,
+    duration: "3year",
+    purchaseType: "renew",
+  }),
+  "Bundle",
+);
+assert.equal(
+  lineConfigSummary({
+    category: "Microsoft",
+    productName: "(NCE) Microsoft 365 Business Standard",
+    quantity: 1,
+  }),
+  "Bundle",
+);
 
 console.log("portal-cart-checkout.check: ok");

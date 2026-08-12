@@ -605,9 +605,12 @@
   margin-top: 1.25rem;
 }
 
-.aptus-profile-card .form-control[readonly] {
+.aptus-profile-card .form-control[readonly],
+.aptus-profile-card .form-control:disabled {
   background-color: rgba(19, 82, 163, 0.04);
   color: rgb(57.8534653465, 69.702970297, 82.9465346535);
+  cursor: not-allowed;
+  opacity: 1;
 }
 
 .aptus-auth-alert.is-error {
@@ -6617,6 +6620,7 @@ body.aptus-payment-processing-open {
   gap: 0.4rem;
   margin-bottom: -0.35rem;
   padding: 0;
+  text-decoration: none;
 }
 
 .aptus-product-detail__back:hover {

@@ -35,12 +35,74 @@ export type ProductConfig = RenewalProductConfig | LevelsProductConfig | BundleP
 const DEFAULT_CONFIG: RenewalProductConfig = { kind: "renewal" };
 
 function normalizeName(label: string): string {
-  return label.trim().toLowerCase();
+  // Strip leading "(NCE)" / similar vendor prefixes from Odoo-style titles.
+  return label
+    .trim()
+    .toLowerCase()
+    .replace(/^\([^)]*\)\s*/, "");
 }
+
+const BUNDLE: ProductConfig = { kind: "bundle" };
+
+// Single Bundle (qty only — no subscription duration, license type, level, or package).
+// Includes portal short names plus Odoo / product-detailing title aliases.
+const BUNDLE_NAMES = [
+  // Oracle / Primavera
+  "oracle primavera p6",
+  "primavera p6 professional project management",
+  "primavera p6 professional project management - application user perpetual",
+  "oracle primavera p6 professional project management",
+  "primavera p6 enterprise project portfolio management",
+  "primavera p6 enterprise project portfolio management - application user perpetual",
+  "oracle primavera p6 enterprise project portfolio management",
+  "oracle primavera p6 enterprise project portfolio management (eppm)",
+  "software update license & support",
+  "oracle software update license & support",
+  // Microsoft — portal catalog short names
+  "microsoft 365 apps",
+  "microsoft 365 business",
+  "microsoft visio",
+  "power bi",
+  // Microsoft — detailing titles / SKUs
+  "microsoft 365 e3",
+  "office 365 e1 (no teams)",
+  "microsoft office 365 e1 (no teams)",
+  "exchange online kiosk",
+  "microsoft exchange online kiosk",
+  "microsoft teams essentials",
+  "planner and project plan 3",
+  "microsoft planner and project plan 3",
+  "microsoft defender for office 365 (plan 1)",
+  "visio plan 2",
+  "microsoft visio plan 2",
+  "copilot for microsoft 365",
+  "microsoft teams rooms pro without audio conferencing",
+  "microsoft teams rooms pro (without audio conferencing)",
+  "planner plan 1",
+  "microsoft planner plan 1",
+  "power bi pro",
+  "microsoft power bi pro",
+  "microsoft 365 business standard",
+  "microsoft 365 business basic",
+  "microsoft 365 apps for business",
+  "power bi premium per user",
+  "microsoft power bi premium per user",
+  "microsoft power bi premium per user (ppu)",
+  "windows 11 pro (perpetual commercial 0004)",
+  "windows 11 pro commercial perpetual",
+  "office ltsc standard 2024 commercial perpetual",
+  "microsoft office ltsc standard 2024",
+  "project professional 2024 commercial perpetual",
+  "microsoft project professional 2024",
+  "windows server 2025 standard",
+  "windows server 2025 standard - 16 core license pack",
+] as const;
 
 // ponytail: seat/level price multipliers are placeholder guide-pricing (source docs list
 // tier names only, no price breaks) — swap for real Odoo pricelist lookups once available.
 const PRODUCT_CONFIGS: Record<string, ProductConfig> = {
+  ...Object.fromEntries(BUNDLE_NAMES.map((name) => [name, BUNDLE])),
+
   // ── Products with Levels (Level 1–5, no Subscription/License Type/Package) ──
   "adobe acrobat pro": {
     kind: "levels",
@@ -59,29 +121,26 @@ const PRODUCT_CONFIGS: Record<string, ProductConfig> = {
     ],
   },
 
-  // ── Single Bundle products (perpetual license — quantity only, no subscription) ──
-  // Per source doc: Primavera P6 is sold as an "Application User Perpetual" license.
-  // Microsoft 365 Apps/Business, Visio, and Power BI remain named-user annual/3-year
-  // subscriptions (source doc: NCE named-user terms) so they keep the default renewal config.
-  "oracle primavera p6": { kind: "bundle" },
-
-  // ── Software with Renewals + Package tiers ──
-  revit: {
-    kind: "renewal",
-    packages: [
-      { id: "single-user", label: "Single-User", priceMultiplier: 1 },
-      { id: "team-studio", label: "Team Studio", priceMultiplier: 2.2 },
-      { id: "enterprise", label: "Enterprise", priceMultiplier: 4 },
-    ],
-  },
+  // ── Software with Renewals: duration (1y/3y) + license type (new/renew) + qty ──
+  // Most Autodesk commercial SKUs use DEFAULT_CONFIG (plain renewal). Only products
+  // that also expose a package/seat/sheet tier are listed below.
   "bim collaborate pro": {
     kind: "renewal",
-    // Source doc lists tiers Single/10/25/50/100/500/1000.
     packages: [
       { id: "single", label: "Single", priceMultiplier: 1 },
       { id: "10", label: "10 Users", priceMultiplier: 9 },
       { id: "25", label: "25 Users", priceMultiplier: 20 },
-      { id: "50", label: "50 Users", priceMultiplier: 38 },
+      { id: "100", label: "100 Users", priceMultiplier: 70 },
+      { id: "500", label: "500 Users", priceMultiplier: 320 },
+      { id: "1000", label: "1000 Users", priceMultiplier: 600 },
+    ],
+  },
+  "bim collaborate": {
+    kind: "renewal",
+    packages: [
+      { id: "single", label: "Single", priceMultiplier: 1 },
+      { id: "10", label: "10 Users", priceMultiplier: 9 },
+      { id: "25", label: "25 Users", priceMultiplier: 20 },
       { id: "100", label: "100 Users", priceMultiplier: 70 },
       { id: "500", label: "500 Users", priceMultiplier: 320 },
       { id: "1000", label: "1000 Users", priceMultiplier: 600 },
@@ -90,7 +149,17 @@ const PRODUCT_CONFIGS: Record<string, ProductConfig> = {
   "autodesk docs": {
     kind: "renewal",
     packages: [
-      { id: "single", label: "Single User", priceMultiplier: 1 },
+      { id: "single", label: "Single", priceMultiplier: 1 },
+      { id: "10", label: "10 Users", priceMultiplier: 9 },
+      { id: "25", label: "25 Users", priceMultiplier: 20 },
+      { id: "100", label: "100 Users", priceMultiplier: 70 },
+      { id: "500", label: "500 Users", priceMultiplier: 320 },
+    ],
+  },
+  docs: {
+    kind: "renewal",
+    packages: [
+      { id: "single", label: "Single", priceMultiplier: 1 },
       { id: "10", label: "10 Users", priceMultiplier: 9 },
       { id: "25", label: "25 Users", priceMultiplier: 20 },
       { id: "100", label: "100 Users", priceMultiplier: 70 },
@@ -105,34 +174,12 @@ const PRODUCT_CONFIGS: Record<string, ProductConfig> = {
       { id: "unlimited", label: "Unlimited", priceMultiplier: 10 },
     ],
   },
-  "3ds max": {
+  build: {
     kind: "renewal",
     packages: [
-      { id: "standard-commercial", label: "Standard Commercial", priceMultiplier: 1 },
-      { id: "indie", label: "3ds Max Indie", priceMultiplier: 0.5 },
-      { id: "flex", label: "Autodesk Flex", priceMultiplier: 0.4 },
-    ],
-  },
-  navisworks: {
-    kind: "renewal",
-    packages: [
-      { id: "manage", label: "Manage", priceMultiplier: 1 },
-      { id: "simulate", label: "Simulate", priceMultiplier: 0.7 },
-    ],
-  },
-  infodrainage: {
-    kind: "renewal",
-    packages: [
-      { id: "single-user", label: "Single-User", priceMultiplier: 1 },
-      { id: "team-design", label: "Team Design", priceMultiplier: 2.2 },
-      { id: "enterprise", label: "Enterprise", priceMultiplier: 4 },
-    ],
-  },
-  "infoworks icm": {
-    kind: "renewal",
-    packages: [
-      { id: "standard", label: "Standard", priceMultiplier: 1 },
-      { id: "ultimate", label: "Ultimate", priceMultiplier: 1.8 },
+      { id: "550", label: "550 Sheets", priceMultiplier: 1 },
+      { id: "5000", label: "5000 Sheets", priceMultiplier: 6 },
+      { id: "unlimited", label: "Unlimited", priceMultiplier: 10 },
     ],
   },
 };

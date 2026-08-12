@@ -164,6 +164,12 @@ export function portalProductDetailHref(product: SoftwarePurchaseProduct): strin
   return `/portal/products/${productSlugFromHref(product.href)}`;
 }
 
+/** Products list, optionally pre-selecting a category pill (e.g. Microsoft, Autodesk). */
+export function portalProductsHref(categoryId?: string): string {
+  if (!categoryId) return "/portal/products";
+  return `/portal/products?category=${encodeURIComponent(categoryId)}`;
+}
+
 export function lookupPurchaseProductBySlug(
   slug: string,
 ): { product: SoftwarePurchaseProduct; category: SoftwarePurchaseCategory } | undefined {

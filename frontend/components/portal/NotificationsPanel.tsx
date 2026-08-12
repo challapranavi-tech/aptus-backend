@@ -1,30 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useNotifications } from "@/hooks/useNotifications";
+import {
+  notificationStatusClass,
+  notificationStatusLabel,
+} from "@/lib/notification-status";
 import { formatShortDate } from "@/lib/overview-data";
-import type { PortalNotificationStatus } from "@/types/notifications";
-import { NotificationCountBadge } from "./NotificationCountBadge";
-
-type NotificationFilter = "all" | "unread";
-
-const FILTERS: NotificationFilter[] = ["all", "unread"];
-
-function statusClass(status: PortalNotificationStatus): string {
-  switch (status) {
-    case "Confirmed":
-      return "aptus-status--confirmed";
-    case "Submitted":
-      return "aptus-status--submitted";
-    case "Rejected":
-      return "aptus-status--expired";
-    case "Action Required":
-      return "aptus-status--pending";
-    default:
-      return "aptus-status--pending";
-  }
-}
 
 function typeLabel(type: string): string {
   switch (type) {
@@ -54,20 +37,11 @@ type NotificationsPanelProps = {
 
 export function NotificationsPanel({ limit }: NotificationsPanelProps) {
   const { notifications, loading, error, markRead } = useNotifications();
-  const [filter, setFilter] = useState<NotificationFilter>("all");
   const isPreview = Boolean(limit);
   // Full notifications page: mark unread as read once they are on screen — no Click CTA.
   const markingRef = useRef(false);
 
-  const filtered = useMemo(() => {
-    if (filter === "unread") {
-      return notifications.filter((notification) => !notification.read);
-    }
-    return notifications;
-  }, [filter, notifications]);
-
-  const visible = limit ? filtered.slice(0, limit) : filtered;
-  const unreadCount = notifications.filter((notification) => !notification.read).length;
+  const visible = limit ? notifications.slice(0, limit) : notifications;
 
   useEffect(() => {
     if (isPreview || loading || markingRef.current) return;
@@ -94,28 +68,6 @@ export function NotificationsPanel({ limit }: NotificationsPanelProps) {
         </div>
       </div>
 
-      {!isPreview ? (
-        <div className="aptus-notifications-tabs" role="tablist" aria-label="Filter notifications">
-          {FILTERS.map((item) => {
-            const isActive = filter === item;
-            const count = item === "all" ? notifications.length : unreadCount;
-            return (
-              <button
-                key={item}
-                type="button"
-                role="tab"
-                aria-selected={isActive}
-                className={isActive ? "is-active" : ""}
-                onClick={() => setFilter(item)}
-              >
-                {item === "all" ? "All" : "Unread"}
-                <NotificationCountBadge count={count} active={isActive} />
-              </button>
-            );
-          })}
-        </div>
-      ) : null}
-
       {loading ? (
         <div className="aptus-odoo-subscriptions__state" role="status" aria-live="polite">
           <div className="aptus-payment-processing__spinner" aria-hidden="true" />
@@ -131,11 +83,7 @@ export function NotificationsPanel({ limit }: NotificationsPanelProps) {
 
       {!loading && !error && visible.length === 0 ? (
         <div className="aptus-odoo-subscriptions__state">
-          <p>
-            {filter === "all"
-              ? "No account alerts right now."
-              : "No unread notifications."}
-          </p>
+          <p>No account alerts right now.</p>
         </div>
       ) : null}
 
@@ -159,8 +107,10 @@ export function NotificationsPanel({ limit }: NotificationsPanelProps) {
                   {notification.reference ? <span>Ref: {notification.reference}</span> : null}
                 </div>
               </div>
-              <mark className={`aptus-status ${statusClass(notification.status)}`}>
-                {notification.status}
+              <mark
+                className={`aptus-status ${notificationStatusClass(notification.status, notification.type)}`}
+              >
+                {notificationStatusLabel(notification.status, notification.type)}
               </mark>
             </article>
           ))}

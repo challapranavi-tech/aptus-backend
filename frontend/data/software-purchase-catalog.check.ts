@@ -4,6 +4,7 @@ import {
   getPurchaseProductImage,
   lookupPurchaseProductBySlug,
   portalProductDetailHref,
+  portalProductsHref,
   productSlugFromHref,
 } from "./software-purchase-catalog";
 
@@ -31,5 +32,11 @@ const autocad = lookupPurchaseProductBySlug("autocad");
 assert.ok(autocad?.product.name.toLowerCase().includes("autocad"));
 assert.equal(productSlugFromHref(autocad!.product.href), "autocad");
 assert.match(portalProductDetailHref(autocad!.product), /^\/portal\/products\/autocad$/);
+
+assert.equal(portalProductsHref(), "/portal/products");
+assert.equal(portalProductsHref("microsoft"), "/portal/products?category=microsoft");
+const powerBi = lookupPurchaseProductBySlug("power-bi");
+assert.ok(powerBi);
+assert.equal(portalProductsHref(powerBi!.category.id), "/portal/products?category=microsoft");
 
 console.log("software-purchase-catalog.check: ok");

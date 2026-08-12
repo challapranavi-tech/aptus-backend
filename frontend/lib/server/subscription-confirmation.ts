@@ -227,7 +227,7 @@ export async function notifyPurchaseApprovedIfNeeded(
     title: "Payment Verified",
     detail:
       "Your payment has been verified successfully. Your software license will be issued within 2–3 business days.",
-    status: "Confirmed",
+    status: "Payment Verified",
     type: "purchase_approved",
     reference: order.reference,
   });
@@ -494,7 +494,7 @@ export async function maybeNotifyLicensesAvailable(
       title: "License Issued",
       detail:
         "Your software license has been issued successfully. You can now view your license details in your customer portal.",
-      status: "Confirmed",
+      status: "License Issued",
       type: "license_available",
       reference,
     });

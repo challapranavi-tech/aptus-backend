@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useAuth } from "@/context/AuthProvider";
 import { getProductConfig } from "@/data/product-options";
@@ -41,14 +42,28 @@ type Selection = {
 
 export function SoftwarePurchasePanel() {
   const { user, ready: authReady } = useAuth();
+  const searchParams = useSearchParams();
   const catalog = SOFTWARE_PURCHASE_CATALOG;
-  const [activeCategoryId, setActiveCategoryId] = useState(catalog[0]?.id ?? "");
+  const categoryFromUrl = searchParams.get("category");
+  const [activeCategoryId, setActiveCategoryId] = useState(() => {
+    if (categoryFromUrl && catalog.some((category) => category.id === categoryFromUrl)) {
+      return categoryFromUrl;
+    }
+    return catalog[0]?.id ?? "";
+  });
   const [cartDuration, setCartDuration] = useState<Duration>("1year");
   const [selections, setSelections] = useState<Record<SelectionKey, Selection>>({});
   const [hydrated, setHydrated] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const pillsRef = useRef<HTMLDivElement>(null);
   const persistTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    if (!categoryFromUrl) return;
+    if (catalog.some((category) => category.id === categoryFromUrl)) {
+      setActiveCategoryId(categoryFromUrl);
+    }
+  }, [categoryFromUrl, catalog]);
 
   function applyCartState(cart: ReturnType<typeof readPortalCart>) {
     setCartDuration(cart.duration);

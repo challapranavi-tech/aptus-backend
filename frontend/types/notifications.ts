@@ -1,13 +1,18 @@
 export type PortalNotificationStatus =
   | "Submitted"
-  | "Confirmed"
   | "Approved"
-  | "Action Required"
+  | "Payment Verification Pending"
+  | "Payment Verified"
+  | "License Issued"
   | "Rejected"
   | "Cancelled"
   | "Expired"
   | "Failed"
-  | "Processed";
+  | "Processed"
+  /** @deprecated Prefer Payment Verified / License Issued — kept for stored notifications. */
+  | "Confirmed"
+  /** @deprecated Prefer Payment Verification Pending — kept for stored notifications. */
+  | "Action Required";
 
 export type PortalNotificationType =
   | "order"

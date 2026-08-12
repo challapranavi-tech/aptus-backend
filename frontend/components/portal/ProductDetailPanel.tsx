@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useAuth } from "@/context/AuthProvider";
 import { getProductConfig } from "@/data/product-options";
@@ -10,6 +9,7 @@ import {
   formatOmanAmount,
   getProductCardMeta,
   getPurchaseProductImage,
+  portalProductsHref,
   type SoftwarePurchaseCategory,
   type SoftwarePurchaseProduct,
 } from "@/lib/order-pricing";
@@ -48,8 +48,8 @@ type ProductDetailPanelProps = {
 };
 
 export function ProductDetailPanel({ product, category }: ProductDetailPanelProps) {
-  const router = useRouter();
   const { user, ready: authReady } = useAuth();
+  const productsHref = portalProductsHref(category.id);
   const meta = getProductCardMeta(product, category.label);
   const imageSrc = getPurchaseProductImage(product.href);
   const config = useMemo(() => getProductConfig(product.name), [product.name]);
@@ -151,29 +151,19 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
 
   return (
     <div className="aptus-product-detail">
-      <button
-        type="button"
-        className="aptus-product-detail__back"
-        onClick={() => {
-          if (typeof window !== "undefined" && window.history.length > 1) {
-            router.back();
-          } else {
-            router.push("/portal/products");
-          }
-        }}
-      >
+      <Link href={productsHref} className="aptus-product-detail__back">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
           <path d="M19 12H5M11 18l-6-6 6-6" />
         </svg>
         Back to products
-      </button>
+      </Link>
 
       <nav className="aptus-product-detail__breadcrumb" aria-label="Breadcrumb">
         <Link href="/portal/dashboard">Home</Link>
         <span aria-hidden="true">›</span>
-        <Link href="/portal/products">Products</Link>
+        <Link href={productsHref}>Products</Link>
         <span aria-hidden="true">›</span>
-        <span>{category.label}</span>
+        <Link href={productsHref}>{category.label}</Link>
         <span aria-hidden="true">›</span>
         <span className="is-current">{product.name}</span>
       </nav>
