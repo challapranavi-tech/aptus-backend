@@ -7,16 +7,19 @@ import {
   formatPurchaseApprovedEmail,
   formatPurchaseRequestSubmittedEmail,
   formatRegistrationSuccessfulEmail,
+  formatBankTransferAdminEmail,
   formatBankTransferCustomerEmail,
   formatCancellationEmail,
   formatLicenseExpiredEmail,
   formatEmailVerificationEmail,
   formatNewDeviceLoginEmail,
+  formatOrderNotificationEmail,
   formatPaymentFailedEmail,
   formatRefundRequestedEmail,
   formatRefundProcessedEmail,
   formatEnquiryThankYouEmail,
 } from "./order-notification";
+import type { ClientProfile } from "./types";
 
 const registration = formatRegistrationSuccessfulEmail({
   customerName: "Ada",
@@ -173,5 +176,52 @@ const refundDone = formatRefundProcessedEmail({
   estimatedArrival: "5-7 business days",
 });
 assert.match(refundDone.subject, /Refund Processed/);
+
+const doubledPhone = "+968+96899999994";
+const doubledProfile: ClientProfile = {
+  id: "p1",
+  email: "ada@example.com",
+  name: "Ada",
+  initials: "A",
+  role: "Customer",
+  company: "Aptus",
+  phone: doubledPhone,
+  location: "",
+  accountManager: "",
+  supportTier: "",
+  customerSince: "",
+  billingCycle: "",
+  paymentTerms: "",
+  partnerId: 1,
+};
+const verifyPayment = formatOrderNotificationEmail(
+  doubledProfile,
+  {
+    duration: "1year",
+    items: [{ category: "Structural Software", productName: "Prokon", quantity: 1 }],
+    contact: {
+      name: "Ada",
+      email: "ada@example.com",
+      phone: doubledPhone,
+      company: "Aptus",
+    },
+  },
+  "ORD-1",
+);
+assert.match(verifyPayment.body, /Customer Phone: \+96899999994/);
+assert.doesNotMatch(verifyPayment.body, /\+968\+968/);
+
+const bankAdmin = formatBankTransferAdminEmail({
+  customerName: "Ada",
+  company: "Aptus",
+  email: "ada@example.com",
+  phone: doubledPhone,
+  reference: "SO-9",
+  bankTransferReference: "BT-1",
+  products: ["Prokon"],
+  totalAmount: "OMR 100",
+});
+assert.match(bankAdmin.body, /Phone: \+96899999994/);
+assert.doesNotMatch(bankAdmin.body, /\+968\+968/);
 
 console.log("order-notification.check: ok");

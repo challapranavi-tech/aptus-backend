@@ -137,6 +137,21 @@
     .page-home .home-services {
       padding-inline: var(--content-pad-x, 1rem);
     }
+
+    .page-home .home-feature-row__title,
+    .page-home .home-services__title {
+      font-size: var(--text-3xl);
+      overflow-wrap: anywhere;
+    }
+
+    .page-home .home-feature-row__body,
+    .page-home .home-services__subtitle {
+      font-size: var(--text-base);
+    }
+
+    .page-home .home-stat-card__watermark {
+      font-size: var(--text-4xl);
+    }
   }
 
   @media (min-width: 1536px) {

@@ -140,7 +140,8 @@ main [data-section] span.mx-auto.mt-4.block {
 
 /* Shared media / table safety net across breakpoints */
 img,
-video {
+video,
+svg {
   max-width: 100%;
 }
 
@@ -160,6 +161,36 @@ table {
   max-width: 100%;
 }
 
+/* Site-wide: nothing should blow past the viewport */
+html,
+body,
+#__next,
+main,
+.aptus-site {
+  max-width: 100%;
+}
+
+main,
+[data-section],
+.aptus-live-container,
+.aptus-software-container,
+.aptus-cms-content {
+  min-width: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  max-width: 100%;
+}
+
+pre,
+code {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
 /* ISO download CTA — beat link `color: inherit` / layer order */
 main [data-section="iso-panel"] a.aptus-iso-download-btn,
 main [data-section] a.aptus-iso-download-btn {
@@ -174,5 +205,46 @@ main [data-section] a.aptus-iso-download-btn {
     display: block;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+  }
+
+  /* Inner product pages: stack nav / copy / media instead of a cramped 3-col */
+  .aptus-software-inner-hero__grid,
+  .aptus-etap-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .aptus-software-hero-actions .aptus-software-btn {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .aptus-form-card,
+  .aptus-software-mid-band__inner {
+    padding-inline: 1rem;
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    padding-bottom: 4.5rem; /* room for WhatsApp FAB */
+  }
+
+  h1, h2, h3 {
+    overflow-wrap: anywhere;
+  }
+
+  .aptus-software-btn,
+  .aptus-software-btn-lg {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .aptus-software-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .aptus-software-hero-actions .aptus-software-btn {
+    width: 100%;
   }
 }

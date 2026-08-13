@@ -120,7 +120,7 @@ export function HeaderAuthActions() {
     <div className="aptus-header-user">
       <HeaderCartLink showBadge />
       <Link
-        href="/portal/profile"
+        href="/portal/dashboard"
         className="aptus-header-user__avatar-wrap"
         title={`${user.name} — ${user.company}`}
       >

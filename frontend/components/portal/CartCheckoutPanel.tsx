@@ -354,7 +354,7 @@ export function CartCheckoutPanel() {
                           : productInitials(item.productName);
                         return (
                           <tr key={`${item.category}-${item.productName}`}>
-                            <td>
+                            <td data-label="Product">
                               <div className="aptus-cart-table__product">
                                 <span className="aptus-cart-table__media" aria-hidden="true">
                                   {imageSrc ? (
@@ -370,7 +370,7 @@ export function CartCheckoutPanel() {
                                 </div>
                               </div>
                             </td>
-                            <td>
+                            <td data-label="Configuration">
                               {config.kind === "bundle" ? (
                                 <span className="aptus-cart-table__term">Bundle</span>
                               ) : (
@@ -397,7 +397,7 @@ export function CartCheckoutPanel() {
                                 />
                               )}
                             </td>
-                            <td>
+                            <td data-label="Qty">
                               <select
                                 className="aptus-cart-table__qty"
                                 value={item.quantity}
@@ -417,13 +417,13 @@ export function CartCheckoutPanel() {
                                 ))}
                               </select>
                             </td>
-                            <td className="aptus-cart-table__num">
+                            <td className="aptus-cart-table__num" data-label="Price">
                               {unit > 0 ? formatOmanAmount(unit) : "Quote"}
                             </td>
-                            <td className="aptus-cart-table__num">
+                            <td className="aptus-cart-table__num" data-label="Total">
                               {lineTotal > 0 ? formatOmanAmount(lineTotal) : "—"}
                             </td>
-                            <td>
+                            <td data-label="Remove">
                               <button
                                 type="button"
                                 className="aptus-cart-table__remove"

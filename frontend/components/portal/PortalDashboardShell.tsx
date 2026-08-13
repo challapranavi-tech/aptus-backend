@@ -115,7 +115,7 @@ export function PortalDashboardShell({
     >
       <main className="aptus-dashboard-shell">
         <aside className="aptus-dashboard-sidebar" aria-label="Customer dashboard navigation">
-          <Link href="/portal/profile" className="aptus-dashboard-user aptus-portal-v3__user" aria-label="Your profile">
+          <Link href="/portal/dashboard" className="aptus-dashboard-user aptus-portal-v3__user" aria-label="Dashboard">
             {avatarDataUrl ? (
               <span
                 className="aptus-dashboard-user__avatar has-image"

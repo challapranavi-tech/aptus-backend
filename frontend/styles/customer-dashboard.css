@@ -5656,7 +5656,9 @@ body.aptus-payment-processing-open {
 }
 
 .aptus-cart-table-wrap {
+  max-width: 100%;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .aptus-cart-table {
@@ -6052,11 +6054,15 @@ body.aptus-payment-processing-open {
 
 @media (max-width: 900px) {
   .aptus-cart-checkout__layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .aptus-cart-summary {
     position: static;
+  }
+
+  .aptus-cart-checkout__main {
+    padding: 1rem;
   }
 
   .aptus-cart-table {
@@ -6065,11 +6071,123 @@ body.aptus-payment-processing-open {
 
   .aptus-cart-table__options {
     grid-template-columns: 1fr;
-    min-width: 8.5rem;
+    min-width: 0;
   }
 
   .aptus-cart-table__hide-sm {
     display: none;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .aptus-cart-table-wrap {
+    overflow: visible;
+  }
+
+  .aptus-cart-table,
+  .aptus-cart-table tbody,
+  .aptus-cart-table tr,
+  .aptus-cart-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .aptus-cart-table thead {
+    display: none;
+  }
+
+  .aptus-cart-table tr {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.85rem;
+    margin-bottom: 0.75rem;
+    padding: 0.85rem 0.85rem 0.75rem;
+    position: relative;
+  }
+
+  .aptus-cart-table tr:last-child {
+    margin-bottom: 0;
+  }
+
+  .aptus-cart-table th,
+  .aptus-cart-table td,
+  .aptus-cart-table th:first-child,
+  .aptus-cart-table td:first-child,
+  .aptus-cart-table th:nth-child(2),
+  .aptus-cart-table td:nth-child(2),
+  .aptus-cart-table th:nth-child(3),
+  .aptus-cart-table td:nth-child(3),
+  .aptus-cart-table th:nth-child(4),
+  .aptus-cart-table td:nth-child(4),
+  .aptus-cart-table th:nth-child(5),
+  .aptus-cart-table td:nth-child(5),
+  .aptus-cart-table th:last-child,
+  .aptus-cart-table td:last-child,
+  .aptus-cart-table tbody td:nth-child(n + 3) {
+    border: 0;
+    padding: 0.35rem 0;
+    text-align: left;
+    width: auto;
+  }
+
+  .aptus-cart-table td + td:not([data-label="Remove"]) {
+    border-top: 1px solid #eef2f6;
+    margin-top: 0.35rem;
+    padding-top: 0.55rem;
+  }
+
+  .aptus-cart-table td[data-label]::before {
+    color: #64748b;
+    content: attr(data-label);
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.3rem;
+    text-transform: uppercase;
+  }
+
+  .aptus-cart-table td[data-label="Product"]::before {
+    display: none;
+  }
+
+  .aptus-cart-table td[data-label="Product"] {
+    padding-right: 2.25rem;
+  }
+
+  .aptus-cart-table td[data-label="Remove"] {
+    position: absolute;
+    right: 0.45rem;
+    top: 0.45rem;
+    width: auto;
+  }
+
+  .aptus-cart-table td[data-label="Remove"]::before {
+    display: none;
+  }
+
+  .aptus-cart-table__product strong,
+  .aptus-cart-table__product span {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+  }
+
+  .aptus-cart-table__qty {
+    max-width: 5rem;
+  }
+
+  .aptus-cart-table__num {
+    text-align: left;
+    white-space: normal;
+  }
+
+  .aptus-cart-stepper {
+    padding: 0.75rem;
+  }
+
+  .aptus-cart-stepper__line {
+    width: 1.25rem;
   }
 }
 
@@ -6115,7 +6233,7 @@ body.aptus-payment-processing-open {
   border: 1px solid #e2e8f0;
   border-radius: 0.75rem;
   color: #b91c1c;
-  margin-top: auto;
+  margin-top: 0.25rem;
 }
 
 .aptus-portal-v3 .aptus-dashboard-sidebar__logout:hover:not(:disabled) {
@@ -6709,15 +6827,29 @@ body.aptus-payment-processing-open {
   }
 
   .aptus-portal-v3__header {
+    flex-wrap: nowrap;
+    gap: 0.5rem;
     margin-bottom: 1.15rem;
   }
 
+  .aptus-portal-v3__header-copy {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
   .aptus-portal-v3__header h1 {
-    font-size: clamp(1.35rem, 6.5vw, 1.75rem);
+    font-size: clamp(1.25rem, 6vw, 1.6rem);
+    overflow-wrap: anywhere;
   }
 
   .aptus-portal-v3__header-actions {
     flex-shrink: 0;
+    gap: 0.4rem;
+  }
+
+  .aptus-portal-v3__icon-btn {
+    height: 36px;
+    width: 36px;
   }
 
   .aptus-portal-v3 .aptus-dashboard-main {

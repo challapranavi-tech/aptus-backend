@@ -74,7 +74,7 @@
 }
 
 .aptus-portal-v3 .aptus-dashboard-sidebar .aptus-software-subnav {
-  flex: 1;
+  flex: 0 1 auto;
   min-height: 0;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;

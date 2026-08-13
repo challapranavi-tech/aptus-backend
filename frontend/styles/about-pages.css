@@ -507,7 +507,7 @@
     }
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     .aptus-iso-cert-grid {
       align-items: stretch;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -676,6 +676,22 @@
     line-height: 1.6;
     max-width: 28rem;
     text-align: start;
+  }
+
+  @media (max-width: 767px) {
+    .aptus-page-heading,
+    .aptus-section-heading,
+    .aptus-alliances-heading,
+    .aptus-policy-modus-title,
+    .aptus-policy-section-title,
+    .aptus-career-hero-title,
+    .aptus-iso-hero-title {
+      overflow-wrap: anywhere;
+    }
+
+    .aptus-flip-box__front h3 {
+      font-size: var(--text-xl);
+    }
   }
 }
 
