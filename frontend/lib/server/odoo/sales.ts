@@ -56,6 +56,7 @@ export type PortalOrderLine = {
   purchaseType?: "new" | "renew";
   packageId?: string;
   levelId?: string;
+  serialNumber?: string;
 };
 
 /** Draft sales order with multiple product lines from the portal checkout. */
@@ -86,6 +87,7 @@ export async function createPortalSaleOrderWithLines(input: {
         purchaseType: line.purchaseType,
         packageId: line.packageId,
         levelId: line.levelId,
+        serialNumber: line.serialNumber,
       },
       input.duration,
     );

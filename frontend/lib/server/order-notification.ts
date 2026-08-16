@@ -8,15 +8,8 @@
  * these functions, then injected as typed input fields.
  */
 
-import { normalizePhone } from "@/lib/phone";
 import { lineConfigSummary } from "@/lib/portal-cart-checkout";
 import type { ClientProfile } from "./types";
-
-/** Collapse "+968+968…" so emails never show a doubled dial code. */
-function displayPhone(raw?: string | null): string {
-  const value = raw?.trim();
-  return value ? normalizePhone(value) : "—";
-}
 
 export type OrderLineItem = {
   category: string;
@@ -27,6 +20,7 @@ export type OrderLineItem = {
   purchaseType?: "new" | "renew";
   packageId?: string;
   levelId?: string;
+  serialNumber?: string;
 };
 
 export type ProductOrderPayload = {
@@ -422,7 +416,7 @@ export function formatCartAddedSalesEmail(input: {
       "Lead Details",
       `Customer Name: ${input.customer.name}`,
       `Customer Email: ${input.customer.email}`,
-      `Phone: ${displayPhone(input.customer.phone)}`,
+      `Phone: ${input.customer.phone || "—"}`,
       `Company: ${input.customer.company || "—"}`,
       `Products Added:`,
       ...productLines,
@@ -544,7 +538,7 @@ export function formatOrderNotificationEmail(
       `Customer Name: ${profile.name}`,
       `Company: ${profile.company || order.contact.company || "—"}`,
       `Customer Email: ${profile.email}`,
-      `Customer Phone: ${displayPhone(profile.phone || order.contact.phone)}`,
+      `Customer Phone: ${profile.phone || order.contact.phone || "—"}`,
       "Products Purchased:",
       ...productLines,
       `Order Value: ${orderAmount}`,
@@ -822,7 +816,7 @@ export function formatBankTransferAdminEmail(input: {
       `  Name: ${input.customerName}`,
       `  Company: ${input.company || "—"}`,
       `  Email: ${input.email}`,
-      `  Phone: ${displayPhone(input.phone)}`,
+      `  Phone: ${input.phone || "—"}`,
       "",
       "Products",
       ...productLines,
@@ -1024,7 +1018,7 @@ export function formatSubscriptionRequestEmail(input: {
       `  Name: ${input.customerName}`,
       `  Company: ${input.company || "—"}`,
       `  Email: ${input.email}`,
-      `  Phone: ${displayPhone(input.phone)}`,
+      `  Phone: ${input.phone || "—"}`,
       "",
       "Subscription",
       `  Product: ${input.productName}`,

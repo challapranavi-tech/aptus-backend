@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { normalizePhone } from "@/lib/phone";
+import { renewalSerialRequired } from "@/lib/portal-cart-checkout";
 import { formatCustomerMessageForOdooOptional } from "@/lib/portal-customer-message";
 
 const optionalPhoneSchema = z
@@ -171,53 +172,66 @@ export type ResetPasswordInput = z.infer<typeof resetPasswordSchema>;
 export type RegisterInputValidated = z.infer<typeof registerSchema>;
 export type ProfileUpdateValidated = z.infer<typeof profileUpdateSchema>;
 
-export const portalCartSchema = z.object({
-  duration: z.enum(["1year", "3year"]),
-  items: z
-    .array(
-      z.object({
-        category: z.string().min(1).max(64).trim(),
-        productName: z.string().min(1).max(128).trim(),
-        quantity: z.number().int().min(1).max(999),
-        duration: z.enum(["1year", "3year"]).optional(),
-        purchaseType: z.enum(["new", "renew"]).optional(),
-        packageId: z.string().max(64).trim().optional(),
-        levelId: z.string().max(64).trim().optional(),
-      }),
-    )
-    .max(50),
+const portalCartLineSchema = z.object({
+  category: z.string().min(1).max(64).trim(),
+  productName: z.string().min(1).max(128).trim(),
+  quantity: z.number().int().min(1).max(999),
+  duration: z.enum(["1year", "3year"]).optional(),
+  purchaseType: z.enum(["new", "renew"]).optional(),
+  packageId: z.string().max(64).trim().optional(),
+  levelId: z.string().max(64).trim().optional(),
+  serialNumber: z.string().max(128).trim().optional(),
 });
+
+function validateRenewalSerialNumbers(
+  items: Array<z.infer<typeof portalCartLineSchema>>,
+  ctx: z.RefinementCtx,
+): void {
+  items.forEach((item, index) => {
+    if (
+      renewalSerialRequired({
+        category: item.category,
+        productName: item.productName,
+        quantity: item.quantity,
+        purchaseType: item.purchaseType,
+      }) &&
+      !item.serialNumber?.trim()
+    ) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "Serial number is required for renewals",
+        path: ["items", index, "serialNumber"],
+      });
+    }
+  });
+}
+
+export const portalCartSchema = z
+  .object({
+    duration: z.enum(["1year", "3year"]),
+    items: z.array(portalCartLineSchema).max(50),
+  })
+  .superRefine((value, ctx) => validateRenewalSerialNumbers(value.items, ctx));
 
 export type PortalCartValidated = z.infer<typeof portalCartSchema>;
 
-export const placeOrderSchema = z.object({
-  duration: z.enum(["1year", "3year"]),
-  items: z
-    .array(
-      z.object({
-        category: z.string().min(1).max(64).trim(),
-        productName: z.string().min(1).max(128).trim(),
-        quantity: z.number().int().min(1).max(999),
-        duration: z.enum(["1year", "3year"]).optional(),
-        purchaseType: z.enum(["new", "renew"]).optional(),
-        packageId: z.string().max(64).trim().optional(),
-        levelId: z.string().max(64).trim().optional(),
-      }),
-    )
-    .min(1, "Select at least one product")
-    .max(50),
-  contactName: z.string().max(128).trim().optional(),
-  contactEmail: z.string().email().max(254).trim().optional(),
-  contactPhone: optionalPhoneSchema,
-  customerMessage: z
-    .string()
-    .max(2000)
-    .optional()
-    .transform((value) => formatCustomerMessageForOdooOptional(value)),
-  paymentIntentId: z.string().max(128).trim().optional(),
-  amountPaid: z.number().positive().optional(),
-  paymentMethod: z.string().max(128).trim().optional(),
-});
+export const placeOrderSchema = z
+  .object({
+    duration: z.enum(["1year", "3year"]),
+    items: z.array(portalCartLineSchema).min(1, "Select at least one product").max(50),
+    contactName: z.string().max(128).trim().optional(),
+    contactEmail: z.string().email().max(254).trim().optional(),
+    contactPhone: optionalPhoneSchema,
+    customerMessage: z
+      .string()
+      .max(2000)
+      .optional()
+      .transform((value) => formatCustomerMessageForOdooOptional(value)),
+    paymentIntentId: z.string().max(128).trim().optional(),
+    amountPaid: z.number().positive().optional(),
+    paymentMethod: z.string().max(128).trim().optional(),
+  })
+  .superRefine((value, ctx) => validateRenewalSerialNumbers(value.items, ctx));
 
 export type PlaceOrderValidated = z.infer<typeof placeOrderSchema>;
 

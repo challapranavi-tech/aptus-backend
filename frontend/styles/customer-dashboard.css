@@ -7244,6 +7244,42 @@ body.aptus-payment-processing-open {
   margin: 0 0 1.25rem;
 }
 
+.aptus-product-detail__serial {
+  margin-bottom: 1.25rem;
+}
+
+.aptus-product-detail__serial label {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.aptus-product-detail__serial label > span {
+  color: #475569;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.aptus-product-detail__serial input {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  color: #0f172a;
+  font-size: 0.875rem;
+  padding: 0.55rem 0.75rem;
+  width: 100%;
+}
+
+.aptus-product-detail__serial input:focus {
+  border-color: #248bcc;
+  outline: 2px solid rgba(36, 139, 204, 0.15);
+  outline-offset: 0;
+}
+
+.aptus-product-detail__serial-error {
+  color: #dc2626;
+  font-size: 0.78rem;
+  margin: 0.35rem 0 0;
+}
+
 .aptus-product-detail__qty {
   align-items: center;
   display: flex;

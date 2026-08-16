@@ -62,11 +62,14 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
     config.kind === "levels" ? config.levels[0]?.id : undefined,
   );
   const [quantity, setQuantity] = useState(1);
+  const [serialNumber, setSerialNumber] = useState("");
+  const [serialError, setSerialError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<(typeof DETAIL_TABS)[number]>("Overview");
   const [message, setMessage] = useState<string | null>(null);
   const [hydrated, setHydrated] = useState(false);
   const persistTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  const showSerialNumber = config.kind === "renewal" && purchaseType === "renew";
   const draftItem: OrderLineItem = {
     category: category.label,
     productName: product.name,
@@ -75,6 +78,9 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
     purchaseType,
     packageId,
     levelId,
+    ...(showSerialNumber && serialNumber.trim()
+      ? { serialNumber: serialNumber.trim() }
+      : {}),
   };
   const unit = cartLineUnitPrice(draftItem, duration);
   const bullets = featureBullets(product.name);
@@ -102,6 +108,7 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
         if (existing.purchaseType) setPurchaseType(existing.purchaseType);
         if (existing.packageId) setPackageId(existing.packageId);
         if (existing.levelId) setLevelId(existing.levelId);
+        if (existing.serialNumber) setSerialNumber(existing.serialNumber);
       }
       setHydrated(true);
     }
@@ -112,7 +119,22 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
     };
   }, [authReady, user?.id, category.label, product.name]);
 
+  function handlePurchaseTypeChange(nextPurchaseType: PurchaseType) {
+    setPurchaseType(nextPurchaseType);
+    if (nextPurchaseType === "new") {
+      setSerialNumber("");
+      setSerialError(null);
+    }
+  }
+
   function addToCart() {
+    if (showSerialNumber && !serialNumber.trim()) {
+      setSerialError("Serial number is required for renewals.");
+      setMessage(null);
+      return;
+    }
+    setSerialError(null);
+
     const existing = readPortalCart();
     const key = `${category.label}::${product.name}`;
     const selections = Object.fromEntries(
@@ -138,6 +160,7 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
       void persistPortalCartToServer(cart);
     }
     setQuantity(1);
+    setSerialNumber("");
     setMessage(`${product.name} added to cart.`);
   }
 
@@ -267,11 +290,37 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
                 packageId={packageId}
                 levelId={levelId}
                 onDurationChange={setDuration}
-                onPurchaseTypeChange={setPurchaseType}
+                onPurchaseTypeChange={handlePurchaseTypeChange}
                 onPackageChange={setPackageId}
                 onLevelChange={setLevelId}
                 packageLayout="cards"
               />
+
+              {showSerialNumber ? (
+                <div className="aptus-product-detail__serial">
+                  <label htmlFor="product-serial-number">
+                    <span>Serial number</span>
+                    <input
+                      id="product-serial-number"
+                      type="text"
+                      value={serialNumber}
+                      required
+                      aria-required="true"
+                      aria-invalid={serialError ? true : undefined}
+                      placeholder="Enter your existing license serial"
+                      onChange={(event) => {
+                        setSerialNumber(event.target.value);
+                        if (serialError) setSerialError(null);
+                      }}
+                    />
+                  </label>
+                  {serialError ? (
+                    <p className="aptus-product-detail__serial-error" role="alert">
+                      {serialError}
+                    </p>
+                  ) : null}
+                </div>
+              ) : null}
 
               <div className="aptus-product-detail__qty">
                 <span>Quantity</span>

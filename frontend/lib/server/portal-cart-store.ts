@@ -12,6 +12,7 @@ export type StoredPortalCartItem = {
   purchaseType?: "new" | "renew";
   packageId?: string;
   levelId?: string;
+  serialNumber?: string;
 };
 
 export type StoredPortalCart = {
@@ -47,6 +48,7 @@ export function cartFingerprint(cart: Pick<StoredPortalCart, "duration" | "items
       purchaseType: item.purchaseType,
       packageId: item.packageId,
       levelId: item.levelId,
+      serialNumber: item.serialNumber,
     }));
   return JSON.stringify({ duration: cart.duration, items });
 }

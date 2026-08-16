@@ -55,6 +55,7 @@ export function buildOrderIdempotencyKey(input: {
         purchaseType: item.purchaseType ?? "new",
         packageId: item.packageId ?? "",
         levelId: item.levelId ?? "",
+        serialNumber: item.serialNumber ?? "",
       }))
       .sort((a, b) => `${a.category}:${a.productName}`.localeCompare(`${b.category}:${b.productName}`)),
   });

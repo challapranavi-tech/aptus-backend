@@ -51,6 +51,19 @@ assert.equal(
   lineConfigSummary({ category: "Autodesk", productName: "AutoCAD", quantity: 1, purchaseType: "renew" }, "3year"),
   "3 Years · Renew",
 );
+assert.equal(
+  lineConfigSummary(
+    {
+      category: "Autodesk",
+      productName: "AutoCAD",
+      quantity: 1,
+      purchaseType: "renew",
+      serialNumber: "ABC-123",
+    },
+    "1year",
+  ),
+  "Annual · Renew · Serial: ABC-123",
+);
 
 // Plain renewal (Revit): duration + type only — no package tier.
 assert.equal(

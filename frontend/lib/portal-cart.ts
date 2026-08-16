@@ -38,6 +38,7 @@ export function readPortalCart(): PortalCartState {
           purchaseType: item.purchaseType === "renew" ? "renew" : item.purchaseType === "new" ? "new" : undefined,
           packageId: typeof item.packageId === "string" ? item.packageId : undefined,
           levelId: typeof item.levelId === "string" ? item.levelId : undefined,
+          serialNumber: typeof item.serialNumber === "string" ? item.serialNumber.trim() : undefined,
         })),
     };
   } catch {
@@ -76,6 +77,7 @@ export function mergePortalCarts(local: PortalCartState, remote: PortalCartState
       purchaseType: item.purchaseType ?? prev?.purchaseType,
       packageId: item.packageId ?? prev?.packageId,
       levelId: item.levelId ?? prev?.levelId,
+      serialNumber: item.serialNumber ?? prev?.serialNumber,
     });
   }
   return {
@@ -112,6 +114,7 @@ export function cartSignature(cart: PortalCartState): string {
         item.purchaseType ?? "",
         item.packageId ?? "",
         item.levelId ?? "",
+        item.serialNumber ?? "",
       ].join("\u0000"),
     )
     .sort();
