@@ -32,6 +32,50 @@ export type AccountHealth = {
 
 const ACTIVE_SUBSCRIPTION_STATUSES = new Set(["Active", "Expiring Soon"]);
 
+export type RenewalReminderItem = SubscriptionItem & {
+  daysLeft: number;
+};
+
+/** Calendar days from local today to the renewal date (YYYY-MM-DD). */
+export function daysUntilRenewal(renewalDateIso: string, now = Date.now()): number | null {
+  const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(renewalDateIso.trim());
+  if (!match) return null;
+  const endUtc = Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
+  const nowDate = new Date(now);
+  const startUtc = Date.UTC(nowDate.getFullYear(), nowDate.getMonth(), nowDate.getDate());
+  return Math.round((endUtc - startUtc) / 86_400_000);
+}
+
+export function formatRenewalReminderLabel(daysLeft: number): string {
+  if (daysLeft <= 0) return "Expires today";
+  if (daysLeft === 1) return "Expires in 1 day";
+  return `Expires in ${daysLeft} days`;
+}
+
+/** Upcoming license renewals for the dashboard reminder card (soonest first). */
+export function getUpcomingRenewalReminders(
+  subscriptions: SubscriptionItem[],
+  withinDays = 90,
+  limit = 5,
+  now = Date.now(),
+): RenewalReminderItem[] {
+  return subscriptions
+    .filter((subscription) =>
+      subscription.status === "Expiring Soon" || subscription.status === "Active",
+    )
+    .map((subscription) => {
+      const iso = subscription.renewalDateIso ?? subscription.renewalDate;
+      const daysLeft = daysUntilRenewal(iso, now);
+      return daysLeft === null ? null : { ...subscription, daysLeft };
+    })
+    .filter(
+      (subscription): subscription is RenewalReminderItem =>
+        subscription !== null && subscription.daysLeft >= 0 && subscription.daysLeft <= withinDays,
+    )
+    .sort((a, b) => a.daysLeft - b.daysLeft || a.productName.localeCompare(b.productName))
+    .slice(0, limit);
+}
+
 export function getGreeting(): string {
   const hour = new Date().getHours();
   if (hour < 12) return "Good morning";

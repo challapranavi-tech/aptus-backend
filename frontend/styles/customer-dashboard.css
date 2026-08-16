@@ -6647,17 +6647,86 @@ body.aptus-payment-processing-open {
   border-color: #cbd5e1;
 }
 
-.aptus-overview-v3__renewal-product {
-  color: #0f172a;
-  font-size: 0.95rem;
-  font-weight: 700;
-  margin: 0.75rem 0 0.25rem;
+.aptus-overview-v3__reminder-list {
+  display: grid;
+  gap: 0.65rem;
 }
 
-.aptus-overview-v3__renewal-date {
+.aptus-overview-v3__reminder {
+  align-items: center;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  color: inherit;
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  text-decoration: none;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.aptus-overview-v3__reminder:hover {
+  background: #fff;
+  border-color: #cbd5e1;
+}
+
+.aptus-overview-v3__reminder--urgent {
+  background: #fff7ed;
+  border-color: #fed7aa;
+}
+
+.aptus-overview-v3__reminder--urgent:hover {
+  background: #fff;
+  border-color: #fdba74;
+}
+
+.aptus-overview-v3__reminder-icon {
+  align-items: center;
+  color: #248bcc;
+  display: flex;
+  flex: 0 0 18px;
+  justify-content: center;
+}
+
+.aptus-overview-v3__reminder--urgent .aptus-overview-v3__reminder-icon {
+  color: #ea580c;
+}
+
+.aptus-overview-v3__reminder-icon svg {
+  height: 18px;
+  width: 18px;
+}
+
+.aptus-overview-v3__reminder-body {
+  display: grid;
+  flex: 1;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.aptus-overview-v3__reminder-body strong {
+  color: #0f172a;
+  font-size: 0.875rem;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.aptus-overview-v3__reminder-body span {
   color: #64748b;
-  font-size: 0.84rem;
-  margin: 0 0 0.85rem;
+  font-size: 0.78rem;
+}
+
+.aptus-overview-v3__reminder-badge {
+  background: #ffedd5;
+  border-radius: 999px;
+  color: #c2410c;
+  flex: 0 0 auto;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.22rem 0.55rem;
+  white-space: nowrap;
 }
 
 .aptus-overview-v3__empty,

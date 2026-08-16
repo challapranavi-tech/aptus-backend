@@ -12,7 +12,12 @@ import {
   orderRowStatusLabel,
   orderRowStatusTone,
 } from "@/lib/order-status";
-import { buildAccountHealth, formatShortDate } from "@/lib/overview-data";
+import {
+  buildAccountHealth,
+  formatRenewalReminderLabel,
+  formatShortDate,
+  getUpcomingRenewalReminders,
+} from "@/lib/overview-data";
 import { PortalNavIcon } from "./PortalNavIcon";
 
 function LoadingBlock({ label }: { label: string }) {
@@ -68,13 +73,7 @@ export function OverviewDashboard() {
   const loading = ordersLoading || subscriptionsLoading || notificationsLoading;
   const health = buildAccountHealth(user, allOrders, subscriptions, notifications);
   const recentOrders = allOrders.slice(0, 5);
-  const nextRenewal = subscriptions
-    .filter((item) => item.status === "Expiring Soon" || item.status === "Active")
-    .sort((a, b) => {
-      const aTime = Date.parse(a.renewalDateIso ?? a.renewalDate) || Number.MAX_SAFE_INTEGER;
-      const bTime = Date.parse(b.renewalDateIso ?? b.renewalDate) || Number.MAX_SAFE_INTEGER;
-      return aTime - bTime;
-    })[0];
+  const renewalReminders = getUpcomingRenewalReminders(subscriptions);
 
   return (
     <div className="aptus-overview-v3">
@@ -174,6 +173,53 @@ export function OverviewDashboard() {
             </section>
 
             <aside className="aptus-overview-v3__aside">
+              <section
+                className="aptus-overview-v3__card aptus-overview-v3__reminders"
+                aria-label="Upcoming license renewals"
+              >
+                <div className="aptus-overview-v3__card-head">
+                  <h2>Upcoming Renewals</h2>
+                  {renewalReminders.length > 0 ? (
+                    <Link href="/portal/subscriptions" className="aptus-overview-v3__link">
+                      View all
+                    </Link>
+                  ) : null}
+                </div>
+
+                {renewalReminders.length === 0 ? (
+                  <p className="aptus-overview-v3__empty">No license renewals due in the next 90 days.</p>
+                ) : (
+                  <div className="aptus-overview-v3__reminder-list">
+                    {renewalReminders.map((subscription) => {
+                      const renewalIso = subscription.renewalDateIso ?? subscription.renewalDate;
+                      const urgent = subscription.daysLeft <= 30;
+
+                      return (
+                        <Link
+                          key={`${subscription.productName}-${renewalIso}-${subscription.lineId ?? subscription.orderId ?? ""}`}
+                          href="/portal/subscriptions"
+                          className={`aptus-overview-v3__reminder${urgent ? " aptus-overview-v3__reminder--urgent" : ""}`}
+                        >
+                          <span className="aptus-overview-v3__reminder-icon" aria-hidden="true">
+                            <PortalNavIcon name="key" />
+                          </span>
+                          <span className="aptus-overview-v3__reminder-body">
+                            <strong>{subscription.productName}</strong>
+                            <span>
+                              {formatRenewalReminderLabel(subscription.daysLeft)} ·{" "}
+                              {formatShortDate(renewalIso)}
+                            </span>
+                          </span>
+                          {urgent ? (
+                            <span className="aptus-overview-v3__reminder-badge">Due soon</span>
+                          ) : null}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+              </section>
+
               <section className="aptus-overview-v3__card aptus-overview-v3__quick-actions" aria-label="Quick actions">
                 <h2>Quick Actions</h2>
                 <div className="aptus-overview-v3__actions">
@@ -191,19 +237,6 @@ export function OverviewDashboard() {
                   </Link>
                 </div>
               </section>
-
-              {nextRenewal ? (
-                <section className="aptus-overview-v3__card aptus-overview-v3__renewal" aria-label="Upcoming license renewal">
-                  <h2>Upcoming License Renewal</h2>
-                  <p className="aptus-overview-v3__renewal-product">{nextRenewal.productName}</p>
-                  <p className="aptus-overview-v3__renewal-date">
-                    Expires {formatShortDate(nextRenewal.renewalDateIso ?? nextRenewal.renewalDate)}
-                  </p>
-                  <Link href="/portal/subscriptions" className="aptus-overview-v3__renew-link">
-                    Renew Now →
-                  </Link>
-                </section>
-              ) : null}
             </aside>
           </div>
         </>
