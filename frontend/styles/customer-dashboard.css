@@ -4562,6 +4562,76 @@ body.aptus-payment-processing-open {
   width: 100%;
 }
 
+.aptus-portal-products-table-wrap {
+  -webkit-overflow-scrolling: touch;
+  margin-top: 1rem;
+  overflow-x: auto;
+}
+
+.aptus-portal-products-table {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-collapse: collapse;
+  border-radius: 0.85rem;
+  min-width: 40rem;
+  overflow: hidden;
+  width: 100%;
+}
+
+.aptus-portal-products-table th,
+.aptus-portal-products-table td {
+  border-bottom: 1px solid #eef2f6;
+  font-size: 0.875rem;
+  padding: 0.85rem 1rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.aptus-portal-products-table thead th {
+  background: #f8fafc;
+  color: #64748b;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.aptus-portal-products-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.aptus-portal-products-table tbody td strong {
+  color: #0f172a;
+}
+
+.aptus-portal-products-table__product {
+  background: #fafbfd;
+  color: #0f172a;
+  font-weight: 700;
+  min-width: 9rem;
+  vertical-align: top;
+}
+
+.aptus-portal-products-table__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.aptus-portal-products-included {
+  margin-top: 2rem;
+}
+
+.aptus-portal-products-included h3 {
+  color: #0f172a;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem;
+}
+
+.aptus-portal-products-table--included {
+  min-width: 52rem;
+}
+
 .aptus-featured-card {
   background: #fff;
   border: 1px solid rgba(15, 23, 42, 0.08);

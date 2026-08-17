@@ -8,7 +8,8 @@ import {
   productSlugFromHref,
 } from "./software-purchase-catalog";
 
-assert.ok(SOFTWARE_PURCHASE_CATALOG.length > 0);
+const products = SOFTWARE_PURCHASE_CATALOG.flatMap((category) => category.products);
+assert.equal(products.length, 8, "portal catalog must expose exactly 8 products");
 
 for (const category of SOFTWARE_PURCHASE_CATALOG) {
   for (const product of category.products) {
@@ -20,13 +21,7 @@ for (const category of SOFTWARE_PURCHASE_CATALOG) {
   }
 }
 
-const info = SOFTWARE_PURCHASE_CATALOG.flatMap((c) => c.products).find(
-  (p) => p.name === "InfoDrainage",
-);
-assert.equal(info?.partNumber, "C68Q1-WW3740-L562");
-assert.equal(info?.price1Year, 520);
 assert.ok(getPurchaseProductImage("/autocad")?.includes("/assets/autodesk/"));
-assert.ok(getPurchaseProductImage("/adobe-photoshop"));
 
 const autocad = lookupPurchaseProductBySlug("autocad");
 assert.ok(autocad?.product.name.toLowerCase().includes("autocad"));
@@ -34,9 +29,9 @@ assert.equal(productSlugFromHref(autocad!.product.href), "autocad");
 assert.match(portalProductDetailHref(autocad!.product), /^\/portal\/products\/autocad$/);
 
 assert.equal(portalProductsHref(), "/portal/products");
-assert.equal(portalProductsHref("microsoft"), "/portal/products?category=microsoft");
-const powerBi = lookupPurchaseProductBySlug("power-bi");
-assert.ok(powerBi);
-assert.equal(portalProductsHref(powerBi!.category.id), "/portal/products?category=microsoft");
+assert.equal(portalProductsHref("autodesk"), "/portal/products?category=autodesk");
+const revit = lookupPurchaseProductBySlug("revit");
+assert.ok(revit);
+assert.equal(portalProductsHref(revit!.category.id), "/portal/products?category=autodesk");
 
 console.log("software-purchase-catalog.check: ok");

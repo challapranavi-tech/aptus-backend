@@ -8,12 +8,11 @@ import { getProductConfig } from "@/data/product-options";
 import {
   SOFTWARE_PURCHASE_CATALOG,
   formatOmanAmount,
-  getProductCardMeta,
-  getPurchaseProductImage,
   portalProductDetailHref,
   type SoftwarePurchaseCategory,
   type SoftwarePurchaseProduct,
 } from "@/lib/order-pricing";
+import { getProductDetailContent } from "@/data/product-detail-content";
 import { cartLineUnitPrice } from "@/lib/portal-cart-checkout";
 import {
   persistPortalCartToServer,
@@ -202,76 +201,106 @@ export function SoftwarePurchasePanel() {
         ) : null}
       </div>
 
-      <div className="aptus-featured-solutions__grid">
-        {(activeCategory?.products ?? []).map((product) => {
-          const meta = getProductCardMeta(product, activeCategory!.label);
-          const key = selectionKey(activeCategory!.label, product.name);
-          const selected = selections[key];
-          const inCart = Boolean(selected);
-          const config = getProductConfig(product.name);
-          const unit = cartLineUnitPrice(
-            selected ?? {
-              category: activeCategory!.label,
-              productName: product.name,
-              quantity: 1,
-              packageId: config.kind !== "bundle" ? config.packages?.[0]?.id : undefined,
-              levelId: config.kind === "levels" ? config.levels[0]?.id : undefined,
-            },
-            "1year",
-          );
-          const imageSrc = getPurchaseProductImage(product.href);
-          return (
-            <article key={`${activeCategory!.id}-${product.href}`} className="aptus-featured-card">
-              <div className="aptus-featured-card__top">
-                <div className="aptus-featured-card__media">
-                  {imageSrc ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={imageSrc}
-                      alt=""
-                      className="aptus-featured-card__img"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <span className="aptus-featured-card__icon" aria-hidden="true">
-                      {meta.initials}
-                    </span>
-                  )}
-                </div>
-                <mark className="aptus-featured-card__badge">{meta.badge}</mark>
-              </div>
-              <div className="aptus-featured-card__title-row">
-                <h3>{product.name}</h3>
-              </div>
-              <p className="aptus-featured-card__vendor">{activeCategory!.label}</p>
-              <p className="aptus-featured-card__desc">{meta.description}</p>
-              <div className="aptus-featured-card__foot">
-                <strong className="aptus-featured-card__price">
-                  {unit
-                    ? config.kind === "renewal"
-                      ? `${formatOmanAmount(unit)}/year`
-                      : formatOmanAmount(unit)
-                    : "Quote on request"}
-                </strong>
-                <div className="aptus-featured-card__actions">
-                  <button
-                    type="button"
-                    className="aptus-featured-card__btn aptus-featured-card__btn--primary"
-                    onClick={() => addToCart(activeCategory!, product)}
-                  >
-                    {inCart ? "Add another" : "Add to Cart"}
-                  </button>
-                  <Link
-                    href={portalProductDetailHref(product)}
-                    className="aptus-featured-card__btn aptus-featured-card__btn--secondary"
-                  >
-                    Learn More
-                  </Link>
-                </div>
-              </div>
-            </article>
-          );
-        })}
+      <div className="aptus-portal-products-table-wrap">
+        <table className="aptus-portal-products-table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Product</th>
+              <th scope="col">Product No.</th>
+              <th scope="col">Annual Price</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {(activeCategory?.products ?? []).map((product, index) => {
+              const key = selectionKey(activeCategory!.label, product.name);
+              const selected = selections[key];
+              const inCart = Boolean(selected);
+              const config = getProductConfig(product.name);
+              const unit = cartLineUnitPrice(
+                selected ?? {
+                  category: activeCategory!.label,
+                  productName: product.name,
+                  quantity: 1,
+                  packageId: config.kind !== "bundle" ? config.packages?.[0]?.id : undefined,
+                  levelId: config.kind === "levels" ? config.levels[0]?.id : undefined,
+                },
+                "1year",
+              );
+
+              return (
+                <tr key={`${activeCategory!.id}-${product.href}`}>
+                  <td>{index + 1}</td>
+                  <td>
+                    <strong>{product.name}</strong>
+                  </td>
+                  <td>{product.partNumber ?? "—"}</td>
+                  <td>
+                    {unit
+                      ? config.kind === "renewal"
+                        ? `${formatOmanAmount(unit)}/year`
+                        : formatOmanAmount(unit)
+                      : "Quote on request"}
+                  </td>
+                  <td>
+                    <div className="aptus-portal-products-table__actions">
+                      <button
+                        type="button"
+                        className="aptus-featured-card__btn aptus-featured-card__btn--primary"
+                        onClick={() => addToCart(activeCategory!, product)}
+                      >
+                        {inCart ? "Add another" : "Add to Cart"}
+                      </button>
+                      <Link
+                        href={portalProductDetailHref(product)}
+                        className="aptus-featured-card__btn aptus-featured-card__btn--secondary"
+                      >
+                        View details
+                      </Link>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="aptus-portal-products-included">
+        <h3>What&apos;s Included — all products</h3>
+        <div className="aptus-portal-products-table-wrap">
+          <table className="aptus-portal-products-table aptus-portal-products-table--included">
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Included Component</th>
+                <th scope="col">Description</th>
+                <th scope="col">Delivery Method</th>
+              </tr>
+            </thead>
+            <tbody>
+              {(activeCategory?.products ?? []).flatMap((product) => {
+                const included = getProductDetailContent(product.name)?.whatsIncluded ?? [];
+                const tableBlock = included.find((block) => block.type === "table");
+                if (!tableBlock || tableBlock.type !== "table") return [];
+
+                return tableBlock.rows.map((row, rowIndex) => (
+                  <tr key={`${product.href}-${rowIndex}`}>
+                    {rowIndex === 0 ? (
+                      <td className="aptus-portal-products-table__product" rowSpan={tableBlock.rows.length}>
+                        {product.name}
+                      </td>
+                    ) : null}
+                    <td>{row[0] ?? "—"}</td>
+                    <td>{row[1] ?? "—"}</td>
+                    <td>{row[2] ?? "—"}</td>
+                  </tr>
+                ));
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
   );

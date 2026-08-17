@@ -26,7 +26,14 @@ import { ProductPurchaseOptions } from "./ProductPurchaseOptions";
 
 type Duration = PortalOrder["duration"];
 
-const DETAIL_TABS = ["Overview", "Features", "Specifications"] as const;
+const DETAIL_TABS = [
+  { id: "overview", label: "Overview" },
+  { id: "keyFeatures", label: "Key Features" },
+  { id: "whatsIncluded", label: "What's Included" },
+  { id: "subscriptionLicensing", label: "Subscription and Licensing Options" },
+] as const;
+
+type DetailTabId = (typeof DETAIL_TABS)[number]["id"];
 
 function featureBullets(productName: string): string[] {
   const lower = productName.toLowerCase();
@@ -64,7 +71,7 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
   const [quantity, setQuantity] = useState(1);
   const [serialNumber, setSerialNumber] = useState("");
   const [serialError, setSerialError] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<(typeof DETAIL_TABS)[number]>("Overview");
+  const [activeTab, setActiveTab] = useState<DetailTabId>("overview");
   const [message, setMessage] = useState<string | null>(null);
   const [hydrated, setHydrated] = useState(false);
   const persistTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -85,12 +92,7 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
   const unit = cartLineUnitPrice(draftItem, duration);
   const bullets = featureBullets(product.name);
   const detailContent = useMemo(() => getProductDetailContent(product.name), [product.name]);
-  const activeBlocks =
-    activeTab === "Overview"
-      ? detailContent?.overview
-      : activeTab === "Features"
-        ? detailContent?.features
-        : detailContent?.specifications;
+  const activeBlocks = detailContent?.[activeTab];
   const hasActiveBlocks = Boolean(activeBlocks?.length);
 
   useEffect(() => {
@@ -213,14 +215,14 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
           <div className="aptus-product-detail__tabs" role="tablist" aria-label="Product information">
             {DETAIL_TABS.map((tab) => (
               <button
-                key={tab}
+                key={tab.id}
                 type="button"
                 role="tab"
-                aria-selected={activeTab === tab}
-                className={activeTab === tab ? "is-active" : undefined}
-                onClick={() => setActiveTab(tab)}
+                aria-selected={activeTab === tab.id}
+                className={activeTab === tab.id ? "is-active" : undefined}
+                onClick={() => setActiveTab(tab.id)}
               >
-                {tab}
+                {tab.label}
               </button>
             ))}
           </div>
@@ -228,11 +230,12 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
           <div className="aptus-product-detail__tab-panel" role="tabpanel">
             {hasActiveBlocks ? (
               <ProductDetailBlocks blocks={activeBlocks!} />
-            ) : activeTab === "Overview" ? (
+            ) : activeTab === "overview" ? (
               <p>{meta.description}</p>
             ) : (
               <p>
-                {activeTab} details for {product.name} are available from our sales team.{" "}
+                {DETAIL_TABS.find((tab) => tab.id === activeTab)?.label ?? "Product"} details for{" "}
+                {product.name} are available from our sales team.{" "}
                 <a href="mailto:info@aptusinfotech.com">Contact info@aptusinfotech.com</a> or call{" "}
                 <a href="tel:+96899418481">+968 9941 8481</a>.
               </p>

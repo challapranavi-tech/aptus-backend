@@ -44,6 +44,8 @@ const GUIDE_PRICES: Record<string, { price1Year: number; price3Year: number }> =
   "3ds max": { price1Year: 390, price3Year: 980 },
   "aec collection": { price1Year: 620, price3Year: 1550 },
   navisworks: { price1Year: 410, price3Year: 1025 },
+  "navisworks manage": { price1Year: 410, price3Year: 1025 },
+  "autocad revit lt suite": { price1Year: 520, price3Year: 1300 },
   "bim collaborate pro": { price1Year: 240, price3Year: 600 },
   "autodesk docs": { price1Year: 180, price3Year: 450 },
   "autodesk build": { price1Year: 220, price3Year: 550 },
@@ -100,6 +102,7 @@ const PRODUCT_PART_NUMBERS: Record<string, string> = {
   "autodesk build": "C4DM1-WW3740-L562",
   "autodesk takeoff": "C40M1-NS9048-V432",
   navisworks: "507Q1-WW3740-L562",
+  "navisworks manage": "507Q1-WW3740-L562",
   infodrainage: "C68Q1-WW3740-L562",
   "infowater pro": "C69Q1-WW3740-L562",
   "infoworks icm": "C6AQ1-WW3740-L562",
@@ -312,13 +315,67 @@ export function buildSoftwarePurchaseCatalog(): SoftwarePurchaseCategory[] {
   }));
 }
 
-export const SOFTWARE_PURCHASE_CATALOG = buildSoftwarePurchaseCatalog();
+export const SOFTWARE_PURCHASE_CATALOG: SoftwarePurchaseCategory[] = [
+  {
+    id: "autodesk",
+    label: "Autodesk",
+    hint: "Design, BIM, and construction tools",
+    href: "/autodesk",
+    products: [
+      {
+        name: "AutoCAD",
+        href: "/autocad",
+        partNumber: partNumberFor("AutoCAD"),
+        ...guidePrice("AutoCAD"),
+      },
+      {
+        name: "Civil 3D",
+        href: "/civil-3d",
+        partNumber: partNumberFor("Civil 3D"),
+        ...guidePrice("Civil 3D"),
+      },
+      {
+        name: "AEC Collection",
+        href: "/aec-collection",
+        partNumber: partNumberFor("AEC Collection"),
+        ...guidePrice("AEC Collection"),
+      },
+      {
+        name: "AutoCAD LT",
+        href: "/autocad-lt",
+        partNumber: partNumberFor("AutoCAD LT"),
+        ...guidePrice("AutoCAD LT"),
+      },
+      {
+        name: "AutoCAD Revit LT Suite",
+        href: "/autocad-revit-lt-suite",
+        partNumber: partNumberFor("AutoCAD Revit LT Suite"),
+        ...guidePrice("AutoCAD Revit LT Suite"),
+      },
+      {
+        name: "3ds Max",
+        href: "/3ds-max",
+        partNumber: partNumberFor("3ds Max"),
+        ...guidePrice("3ds Max"),
+      },
+      {
+        name: "Navisworks Manage",
+        href: "/navisworks",
+        partNumber: partNumberFor("Navisworks Manage"),
+        ...guidePrice("Navisworks Manage"),
+      },
+      {
+        name: "Revit",
+        href: "/revit",
+        partNumber: partNumberFor("Revit"),
+        ...guidePrice("Revit"),
+      },
+    ],
+  },
+];
 
-// ponytail: keep portal catalog locked to Software tab category count
-if (SOFTWARE_PURCHASE_CATALOG.length !== 11) {
-  throw new Error(
-    `SOFTWARE_PURCHASE_CATALOG out of sync with Software tab (${SOFTWARE_PURCHASE_CATALOG.length} categories)`,
-  );
+if (SOFTWARE_PURCHASE_CATALOG.flatMap((category) => category.products).length !== 8) {
+  throw new Error("Portal product catalog must contain exactly 8 products");
 }
 
 export function lookupGuidePrice(
