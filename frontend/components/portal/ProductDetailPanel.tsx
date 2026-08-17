@@ -4,7 +4,10 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useAuth } from "@/context/AuthProvider";
 import { getProductConfig } from "@/data/product-options";
-import { getProductDetailContent } from "@/data/product-detail-content";
+import {
+  getProductDetailContent,
+  type ProductDetailBlock,
+} from "@/data/product-detail-content";
 import {
   formatOmanAmount,
   getProductCardMeta,
@@ -13,6 +16,7 @@ import {
   type SoftwarePurchaseCategory,
   type SoftwarePurchaseProduct,
 } from "@/lib/order-pricing";
+import { lookupPortalSku } from "@/data/software-purchase-catalog";
 import { cartLineUnitPrice } from "@/lib/portal-cart-checkout";
 import {
   persistPortalCartToServer,
@@ -31,6 +35,7 @@ const DETAIL_TABS = [
   { id: "keyFeatures", label: "Key Features" },
   { id: "whatsIncluded", label: "What's Included" },
   { id: "subscriptionLicensing", label: "Subscription and Licensing Options" },
+  { id: "priceDetails", label: "Price Details" },
 ] as const;
 
 type DetailTabId = (typeof DETAIL_TABS)[number]["id"];
@@ -47,6 +52,43 @@ function featureBullets(productName: string): string[] {
     return ["Business productivity", "Cloud sync", "Security & compliance", "Ongoing updates"];
   }
   return ["Licensed software", "Vendor support", "Updates included", "Aptus account management"];
+}
+
+function priceDetailBlocks(productName: string): ProductDetailBlock[] {
+  const rows: Array<[string, string, string]> = [
+    ["Commercial New", "Annual (12 months)", "new", "1year"],
+    ["Commercial New", "3 Years (36 months)", "new", "3year"],
+    ["Renewal Subscription", "Annual (12 months)", "renew", "1year"],
+    ["Renewal Subscription", "3 Years (36 months)", "renew", "3year"],
+  ].map(([license, term, purchaseType, duration]) => {
+    const sku = lookupPortalSku(
+      productName,
+      duration as "1year" | "3year",
+      purchaseType as "new" | "renew",
+    );
+    return [license, term, sku ? formatOmanAmount(sku.price) : "Quote on request"];
+  });
+
+  if (rows.every((row) => row[2] === "Quote on request")) {
+    return [
+      {
+        type: "p",
+        text: "Pricing for this product is available on request. Contact the Aptus sales team for a quotation.",
+      },
+    ];
+  }
+
+  return [
+    {
+      type: "p",
+      text: "Prices are in Omani Rial (OMR) and exclude 5% VAT. Choose duration and license type in the buy card to match the price below.",
+    },
+    {
+      type: "table",
+      headers: ["License type", "Term", "Price"],
+      rows,
+    },
+  ];
 }
 
 type ProductDetailPanelProps = {
@@ -92,7 +134,8 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
   const unit = cartLineUnitPrice(draftItem, duration);
   const bullets = featureBullets(product.name);
   const detailContent = useMemo(() => getProductDetailContent(product.name), [product.name]);
-  const activeBlocks = detailContent?.[activeTab];
+  const priceBlocks = useMemo(() => priceDetailBlocks(product.name), [product.name]);
+  const activeBlocks = activeTab === "priceDetails" ? priceBlocks : detailContent?.[activeTab];
   const hasActiveBlocks = Boolean(activeBlocks?.length);
 
   useEffect(() => {
@@ -280,9 +323,9 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
                   ? "One-time bundle price · Includes support & updates"
                   : config.kind === "levels"
                     ? `${config.levels.find((level) => level.id === levelId)?.label ?? config.levels[0]?.label ?? "Level 1"} · Includes support & updates`
-                    : duration === "3year"
-                      ? "3 Years subscription · Includes support & updates"
-                      : "Annual subscription · Includes support & updates"}
+                    : `${purchaseType === "renew" ? "Renewal" : "Commercial New"} · ${
+                        duration === "3year" ? "3 Years (36 months)" : "Annual (12 months)"
+                      } · Includes support & updates`}
               </p>
 
               <ProductPurchaseOptions

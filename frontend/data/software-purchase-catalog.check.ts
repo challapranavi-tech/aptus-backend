@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import {
   SOFTWARE_PURCHASE_CATALOG,
   getPurchaseProductImage,
+  lookupPortalSku,
   lookupPurchaseProductBySlug,
   portalProductDetailHref,
   portalProductsHref,
@@ -25,6 +26,11 @@ assert.ok(getPurchaseProductImage("/autocad")?.includes("/assets/autodesk/"));
 
 const autocad = lookupPurchaseProductBySlug("autocad");
 assert.ok(autocad?.product.name.toLowerCase().includes("autocad"));
+assert.equal(autocad?.product.partNumber, "C1RK1-WW1762-L158");
+assert.equal(autocad?.product.price1Year, 752.7);
+assert.equal(lookupPortalSku("AutoCAD", "3year", "renew")?.partNumber, "C1RK1-008819-L706");
+assert.equal(lookupPortalSku("AutoCAD", "3year", "renew")?.price, 2146.16);
+assert.equal(lookupPortalSku("AutoCAD LT", "3year", "renew")?.price, 561.63);
 assert.equal(productSlugFromHref(autocad!.product.href), "autocad");
 assert.match(portalProductDetailHref(autocad!.product), /^\/portal\/products\/autocad$/);
 

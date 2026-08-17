@@ -90,7 +90,11 @@ export function cartLineUnitPrice(item: OrderLineItem, cartDuration: LineDuratio
     return base * (level?.priceMultiplier ?? 1) * (pkg?.priceMultiplier ?? 1);
   }
 
-  const base = lookupGuidePrice(item.productName, resolveLineDuration(item, cartDuration));
+  const base = lookupGuidePrice(
+    item.productName,
+    resolveLineDuration(item, cartDuration),
+    item.purchaseType === "renew" ? "renew" : "new",
+  );
   const pkg = resolveLinePackage(item, config);
   return base * (pkg?.priceMultiplier ?? 1);
 }

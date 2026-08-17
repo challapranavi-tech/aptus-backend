@@ -4,6 +4,7 @@ import { getPartnerOdooContext, resolveCrmRouting } from "./partner-context";
 import { formatPaymentPendingNote } from "./payment-meta";
 import { getCrmLeadNotesFieldName } from "./crm-lead-notes";
 import { lineConfigSummary } from "@/lib/portal-cart-checkout";
+import { lookupPortalSku } from "@/data/software-purchase-catalog";
 
 export function isRecoverableSaleOrderCreateError(error: unknown): boolean {
   const message = error instanceof Error ? error.message : String(error);
@@ -91,6 +92,12 @@ export async function createPortalSaleOrderWithLines(input: {
       },
       input.duration,
     );
+    const sku = lookupPortalSku(
+      line.productName,
+      line.duration ?? input.duration,
+      line.purchaseType === "renew" ? "renew" : "new",
+    );
+    const skuSuffix = sku?.partNumber ? ` [${sku.partNumber}]` : "";
     orderLines.push([
       0,
       0,
@@ -98,10 +105,10 @@ export async function createPortalSaleOrderWithLines(input: {
         ? {
             product_id: productId,
             product_uom_qty: line.quantity,
-            name: `${label} (${summary})`,
+            name: `${label}${skuSuffix} (${summary})`,
           }
         : {
-            name: `${label} (${summary})`,
+            name: `${label}${skuSuffix} (${summary})`,
             product_uom_qty: line.quantity,
           },
     ]);

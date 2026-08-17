@@ -5,7 +5,7 @@ import type { NavigationItem } from "@/types";
 export type SoftwarePurchaseProduct = {
   name: string;
   href: string;
-  /** Vendor / master-list part number shown as Product No. on cards. */
+  /** Vendor SKU — used for Odoo/backend matching, not shown in portal UI. */
   partNumber?: string;
   /** Estimated OMR unit price when known; omit for quote-on-request. */
   price1Year?: number;
@@ -20,7 +20,7 @@ export type SoftwarePurchaseCategory = {
   products: SoftwarePurchaseProduct[];
 };
 
-/** Optional guide prices for known SKUs (keyed by normalized product label). */
+/** Fallback annual/3-year prices. The 8 portal Autodesk products use PORTAL_SKUS below for New vs Renewal × Annual vs 3-Year part numbers and prices. */
 const GUIDE_PRICES: Record<string, { price1Year: number; price3Year: number }> = {
   "adobe photoshop": { price1Year: 95, price3Year: 240 },
   photoshop: { price1Year: 95, price3Year: 240 },
@@ -37,15 +37,15 @@ const GUIDE_PRICES: Record<string, { price1Year: number; price3Year: number }> =
   "microsoft visio": { price1Year: 85, price3Year: 215 },
   visio: { price1Year: 85, price3Year: 215 },
   "power bi": { price1Year: 95, price3Year: 240 },
-  autocad: { price1Year: 420, price3Year: 1050 },
-  "autocad lt": { price1Year: 280, price3Year: 700 },
-  revit: { price1Year: 480, price3Year: 1200 },
-  "civil 3d": { price1Year: 460, price3Year: 1150 },
-  "3ds max": { price1Year: 390, price3Year: 980 },
-  "aec collection": { price1Year: 620, price3Year: 1550 },
-  navisworks: { price1Year: 410, price3Year: 1025 },
-  "navisworks manage": { price1Year: 410, price3Year: 1025 },
-  "autocad revit lt suite": { price1Year: 520, price3Year: 1300 },
+  autocad: { price1Year: 752.7, price3Year: 2258.1 },
+  "autocad lt": { price1Year: 196.86, price3Year: 590.58 },
+  revit: { price1Year: 1080.8, price3Year: 3242.4 },
+  "civil 3d": { price1Year: 1032.55, price3Year: 3097.65 },
+  "3ds max": { price1Year: 721.82, price3Year: 2165.46 },
+  "aec collection": { price1Year: 1322.05, price3Year: 3966.15 },
+  navisworks: { price1Year: 1019.04, price3Year: 3057.12 },
+  "navisworks manage": { price1Year: 1019.04, price3Year: 3057.12 },
+  "autocad revit lt suite": { price1Year: 245.11, price3Year: 735.33 },
   "bim collaborate pro": { price1Year: 240, price3Year: 600 },
   "autodesk docs": { price1Year: 180, price3Year: 450 },
   "autodesk build": { price1Year: 220, price3Year: 550 },
@@ -90,19 +90,24 @@ const GUIDE_PRICES: Record<string, { price1Year: number; price3Year: number }> =
  * Part numbers from "Software Master List" (annual new SKU where available).
  * Products not on that sheet keep a stable demo APT-* code so every card has a Product No.
  */
+/**
+ * Part numbers from "Software Master List" (annual new SKU where available).
+ * Products not on that sheet keep a stable demo APT-* code so every card has a Product No.
+ */
 const PRODUCT_PART_NUMBERS: Record<string, string> = {
   autocad: "C1RK1-WW1762-L158",
-  "3ds max": "128Q1-WW3740-L562",
-  revit: "829Q1-WW3740-L562",
-  "civil 3d": "237Q1-WW3740-L562",
+  "3ds max": "128S1-WW3740-L562",
+  revit: "829S1-WW3740-L562",
+  "civil 3d": "237S1-WW3740-L562",
   "aec collection": "02HI1-WW8500-L937",
-  "autocad lt": "057Q1-WW6525-L347",
+  "autocad lt": "057S1-WW6525-L347",
+  "autocad revit lt suite": "834S1-WW3740-L562",
   "bim collaborate pro": "C1GJ1-NS5025-V662",
   "autodesk docs": "C1DJ1-NS5025-V662",
   "autodesk build": "C4DM1-WW3740-L562",
   "autodesk takeoff": "C40M1-NS9048-V432",
-  navisworks: "507Q1-WW3740-L562",
-  "navisworks manage": "507Q1-WW3740-L562",
+  navisworks: "507S1-WW3740-L562",
+  "navisworks manage": "507S1-WW3740-L562",
   infodrainage: "C68Q1-WW3740-L562",
   "infowater pro": "C69Q1-WW3740-L562",
   "infoworks icm": "C6AQ1-WW3740-L562",
@@ -119,7 +124,121 @@ const PRODUCT_PART_NUMBERS: Record<string, string> = {
   "power bi": "CFQ7TTC0LHSF:0001",
 };
 
+type PortalSkuRow = {
+  partNumber: string;
+  price: number;
+};
+
+type PortalSkuMatrix = {
+  new: { "1year": PortalSkuRow; "3year": PortalSkuRow };
+  renew: { "1year": PortalSkuRow; "3year": PortalSkuRow };
+};
+
+/** Official Autodesk SKU matrix for the 8 portal products (New vs Renewal × Annual vs 3-Year). */
+const PORTAL_SKUS: Record<string, PortalSkuMatrix> = {
+  autocad: {
+    new: {
+      "1year": { partNumber: "C1RK1-WW1762-L158", price: 752.7 },
+      "3year": { partNumber: "C1RK1-WW3611-L802", price: 2258.1 },
+    },
+    renew: {
+      "1year": { partNumber: "C1RK1-002900-L983", price: 752.7 },
+      "3year": { partNumber: "C1RK1-008819-L706", price: 2146.16 },
+    },
+  },
+  "civil 3d": {
+    new: {
+      "1year": { partNumber: "237S1-WW3740-L562", price: 1032.55 },
+      "3year": { partNumber: "237S1-WW7407-L592", price: 3097.65 },
+    },
+    renew: {
+      "1year": { partNumber: "237I1-006845-L846", price: 1032.55 },
+      "3year": { partNumber: "237I1-007738-L882", price: 3097.65 },
+    },
+  },
+  "aec collection": {
+    new: {
+      "1year": { partNumber: "02HI1-WW8500-L937", price: 1322.05 },
+      "3year": { partNumber: "02HI1-WW6361-L257", price: 3966.15 },
+    },
+    renew: {
+      "1year": { partNumber: "02HI1-005995-L403", price: 1322.05 },
+      "3year": { partNumber: "02HI1-005947-L614", price: 3966.15 },
+    },
+  },
+  "autocad lt": {
+    new: {
+      "1year": { partNumber: "057S1-WW6525-L347", price: 196.86 },
+      "3year": { partNumber: "057S1-WW9153-L317", price: 590.58 },
+    },
+    renew: {
+      "1year": { partNumber: "057I1-006845-L846", price: 196.86 },
+      "3year": { partNumber: "057I1-007738-L882", price: 561.63 },
+    },
+  },
+  "autocad revit lt suite": {
+    new: {
+      "1year": { partNumber: "834S1-WW3740-L562", price: 245.11 },
+      "3year": { partNumber: "834S1-WW7407-L592", price: 735.33 },
+    },
+    renew: {
+      "1year": { partNumber: "834F1-006845-L846", price: 245.11 },
+      "3year": { partNumber: "834H1-007738-L882", price: 735.33 },
+    },
+  },
+  "3ds max": {
+    new: {
+      "1year": { partNumber: "128S1-WW3740-L562", price: 721.82 },
+      "3year": { partNumber: "128S1-WW7407-L592", price: 2165.46 },
+    },
+    renew: {
+      "1year": { partNumber: "128F1-001355-L890", price: 721.82 },
+      "3year": { partNumber: "128H1-008730-L479", price: 2165.46 },
+    },
+  },
+  "navisworks manage": {
+    new: {
+      "1year": { partNumber: "507S1-WW3740-L562", price: 1019.04 },
+      "3year": { partNumber: "507S1-WW7407-L592", price: 3057.12 },
+    },
+    renew: {
+      "1year": { partNumber: "507H1-001355-L890", price: 1019.04 },
+      "3year": { partNumber: "507H1-008730-L479", price: 3057.12 },
+    },
+  },
+  navisworks: {
+    new: {
+      "1year": { partNumber: "507S1-WW3740-L562", price: 1019.04 },
+      "3year": { partNumber: "507S1-WW7407-L592", price: 3057.12 },
+    },
+    renew: {
+      "1year": { partNumber: "507H1-001355-L890", price: 1019.04 },
+      "3year": { partNumber: "507H1-008730-L479", price: 3057.12 },
+    },
+  },
+  revit: {
+    new: {
+      "1year": { partNumber: "829S1-WW3740-L562", price: 1080.8 },
+      "3year": { partNumber: "829S1-WW7407-L592", price: 3242.4 },
+    },
+    renew: {
+      "1year": { partNumber: "829I1-001355-L890", price: 1080.8 },
+      "3year": { partNumber: "829I1-008730-L479", price: 3242.4 },
+    },
+  },
+};
+
+export function lookupPortalSku(
+  productName: string,
+  duration: "1year" | "3year",
+  purchaseType: "new" | "renew" = "new",
+): PortalSkuRow | undefined {
+  return PORTAL_SKUS[normalizeName(productName)]?.[purchaseType]?.[duration];
+}
+
 function partNumberFor(label: string): string {
+  const sku = lookupPortalSku(label, "1year", "new");
+  if (sku) return sku.partNumber;
   const fromSheet = PRODUCT_PART_NUMBERS[normalizeName(label)];
   if (fromSheet) return fromSheet;
   // ponytail: sheet coverage is Autodesk/Adobe/MS/Oracle only; demo codes until master list expands
@@ -381,7 +500,10 @@ if (SOFTWARE_PURCHASE_CATALOG.flatMap((category) => category.products).length !=
 export function lookupGuidePrice(
   productName: string,
   duration: "1year" | "3year",
+  purchaseType: "new" | "renew" = "new",
 ): number {
+  const sku = lookupPortalSku(productName, duration, purchaseType);
+  if (sku) return sku.price;
   const prices = GUIDE_PRICES[normalizeName(productName)];
   if (!prices) return 0;
   return duration === "3year" ? prices.price3Year : prices.price1Year;

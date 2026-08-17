@@ -1,6 +1,6 @@
 /**
  * Portal product detail tab content — 8 Autodesk products.
- * Tabs: Overview · Key Features · What's Included · Subscription and Licensing Options
+ * Tabs: Overview · Key Features · What's Included · Subscription and Licensing Options · Price Details
  */
 
 export type ProductDetailBlock =
