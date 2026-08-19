@@ -9,7 +9,7 @@ const mail = formatCartReminderEmail({
   continueUrl: "https://example.com/portal/products#cart",
 });
 
-assert.equal(CART_REMINDER_INTERVAL_MS, 15 * 24 * 60 * 60 * 1000);
+assert.equal(CART_REMINDER_INTERVAL_MS, 7 * 24 * 60 * 60 * 1000);
 assert.equal(CART_REMINDER_MAX_COUNT, 2);
 assert.match(mail.subject, /left something in your cart/i);
 assert.match(mail.body, /Complete Your Purchase:/);

@@ -1,7 +1,7 @@
 import { kvDel, kvGet, kvSet } from "./kv-store";
 
-export const CART_REMINDER_INTERVAL_MS = 15 * 24 * 60 * 60 * 1000;
-/** Max reminders while cart stays in Added to Cart (15d × 2 ≈ 1 month). */
+/** Customer reminder interval: every 7 days, max 2 times (days 7 and 14). */
+export const CART_REMINDER_INTERVAL_MS = 7 * 24 * 60 * 60 * 1000;
 export const CART_REMINDER_MAX_COUNT = 2;
 /** 2 business days ≈ 2 × 24 h. The cron runs daily so the email fires on the next run after the deadline. */
 export const CART_SALES_FOLLOWUP_MS = 2 * 24 * 60 * 60 * 1000;

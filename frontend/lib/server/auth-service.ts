@@ -1191,19 +1191,31 @@ export async function exportCustomerAccountData(
 export async function resolveCustomerContact(
   partnerId?: number,
   actorId?: string,
-): Promise<{ email: string; name: string; actorId: string } | null> {
+): Promise<{ email: string; name: string; actorId: string; phone: string; company: string } | null> {
   if (actorId) {
     if (isDemoMode()) {
       const account = await getDemoAccountById(actorId);
       if (account) {
-        return { email: account.email, name: account.profile.name, actorId: account.id };
+        return {
+          email: account.email,
+          name: account.profile.name,
+          actorId: account.id,
+          phone: account.profile.phone ?? "",
+          company: account.profile.company ?? "",
+        };
       }
     } else {
       const found = await findPartnerByPortalAccountId(actorId);
       if (found) {
         const profile = await readPartnerProfile(found.id);
         if (profile) {
-          return { email: profile.email, name: profile.name, actorId };
+          return {
+            email: profile.email,
+            name: profile.name,
+            actorId,
+            phone: profile.phone ?? "",
+            company: profile.company ?? "",
+          };
         }
       }
     }
@@ -1217,6 +1229,8 @@ export async function resolveCustomerContact(
         email: profile.email,
         name: profile.name,
         actorId: meta?.x_portal_account_id || actorId || `partner-${partnerId}`,
+        phone: profile.phone ?? "",
+        company: profile.company ?? "",
       };
     }
   }

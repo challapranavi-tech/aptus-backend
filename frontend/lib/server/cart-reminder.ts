@@ -150,15 +150,22 @@ async function maybeSendSalesFollowUpForActor(actorId: string): Promise<boolean>
     crmReference: cart.crmLeadId ? `LEAD-${cart.crmLeadId}` : undefined,
   });
 
-  // Override subject to make it clear this is the 2-day follow-up, not immediate
-  const subject = `Follow-up Required: Cart Abandoned (2 Business Days) – ${mail.subject.replace(/^New Abandoned Cart Lead - /, "")}`;
+  const subject = `Sales Lead Follow-up: No Purchase After 2 Business Days – ${customer?.name ?? actorId}`;
+  const prefixLine =
+    "This customer added products to their cart 2 business days ago and has not yet completed a purchase. Please reach out.";
+  const body = `${prefixLine}\n\n${mail.body}`;
 
   const notifyEmail = getOrderNotificationEmail();
   const result = await sendPortalEmail({
     to: notifyEmail,
     subject,
-    body: `2-business-day follow-up — no purchase made since cart was saved.\n\n${mail.body}`,
-    html: mail.html,
+    body,
+    html: mail.html
+      ? mail.html.replace(
+          ">Hello Sales Team,",
+          `>${prefixLine}<br/><br/>Hello Sales Team,`,
+        )
+      : undefined,
   });
 
   if (!result.sent) {
@@ -177,10 +184,12 @@ async function maybeSendSalesFollowUpForActor(actorId: string): Promise<boolean>
     metadata: {
       type: "cart_sales_followup",
       to: notifyEmail,
-      subject,
-      channel: result.channel,
-      itemCount: cart.items.length,
-      leadId: cart.crmLeadId ?? null,
+    subject,
+    channel: result.channel,
+    itemCount: cart.items.length,
+    leadId: cart.crmLeadId ?? null,
+    customerName: customer?.name ?? actorId,
+    customerPhone: customer?.phone ?? "",
     },
   });
   return true;
