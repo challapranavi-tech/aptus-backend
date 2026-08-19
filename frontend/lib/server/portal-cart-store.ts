@@ -3,8 +3,8 @@ import { kvDel, kvGet, kvSet } from "./kv-store";
 /** Customer reminder interval: every 7 days, max 2 times (days 7 and 14). */
 export const CART_REMINDER_INTERVAL_MS = 7 * 24 * 60 * 60 * 1000;
 export const CART_REMINDER_MAX_COUNT = 2;
-/** 2 business days ≈ 2 × 24 h. The cron runs daily so the email fires on the next run after the deadline. */
-export const CART_SALES_FOLLOWUP_MS = 2 * 24 * 60 * 60 * 1000;
+/** 1 business day = 24 h. The cron runs daily so the email fires on the next run after the deadline. */
+export const CART_SALES_FOLLOWUP_MS = 1 * 24 * 60 * 60 * 1000;
 
 export type StoredPortalCartItem = {
   category: string;
