@@ -119,6 +119,7 @@ assert.match(orderMail.body, /SO-99/);
 assert.match(orderMail.body, /AutoCAD/);
 assert.match(orderMail.body, /Annual/);
 assert.match(orderMail.body, /New Purchase/);
+assert.match(orderMail.body, /C1RK1-WW1762-L158/);
 
 const customerMail = formatPurchaseRequestSubmittedEmail({
   customerName: "Ada Lovelace",

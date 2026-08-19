@@ -9,6 +9,7 @@
  */
 
 import { lineConfigSummary } from "@/lib/portal-cart-checkout";
+import { lookupPortalSku } from "@/data/software-purchase-catalog";
 import type { ClientProfile } from "./types";
 
 export type OrderLineItem = {
@@ -48,7 +49,14 @@ function formatOrderProductLine(
   item: OrderLineItem,
   fallbackDuration: ProductOrderPayload["duration"],
 ): string {
-  return `  - ${item.category} / ${item.productName} × ${item.quantity} (${lineConfigSummary(item, fallbackDuration)})`;
+  const duration = item.duration ?? fallbackDuration;
+  const sku = lookupPortalSku(
+    item.productName,
+    duration,
+    item.purchaseType === "renew" ? "renew" : "new",
+  );
+  const skuNote = sku?.partNumber ? `; Part number: ${sku.partNumber}` : "";
+  return `  - ${item.category} / ${item.productName} × ${item.quantity} (${lineConfigSummary(item, fallbackDuration)}${skuNote})`;
 }
 
 // ─── SCENARIO: New User Registration ─────────────────────────────────────────
