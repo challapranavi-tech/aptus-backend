@@ -1,15 +1,18 @@
 import { resolveCustomerContact } from "./auth-service";
-import { getPortalBaseUrl } from "./config";
+import { getOrderNotificationEmail, getPortalBaseUrl } from "./config";
 import { writeAudit } from "./audit-log";
 import { logger } from "./logger";
 import { sendPortalEmail } from "./mail-service";
-import { formatCartReminderEmail } from "./order-notification";
+import { formatCartAddedSalesEmail, formatCartReminderEmail } from "./order-notification";
 import { isCartCrmLeadInAddedToCartStage } from "./odoo/leads";
+import { estimateOrderPricing } from "@/lib/order-pricing";
+import { cartLineUnitPrice } from "@/lib/portal-cart-checkout";
 import {
   CART_REMINDER_MAX_COUNT,
   getStoredPortalCart,
   listStoredPortalCartActorIds,
   markCartReminderSent,
+  markSalesFollowUpSent,
   type StoredPortalCart,
 } from "./portal-cart-store";
 
@@ -84,14 +87,117 @@ export async function maybeSendCartReminderForActor(
   return true;
 }
 
-export async function processAllCartReminders(): Promise<{ sent: number; checked: number }> {
+function isSalesFollowUpDue(cart: StoredPortalCart): boolean {
+  if (cart.salesFollowUpSent) return false;
+  if (!cart.salesFollowUpAt) return false;
+  return Date.now() >= new Date(cart.salesFollowUpAt).getTime();
+}
+
+/**
+ * Sends the internal sales-team follow-up email when a cart has been sitting
+ * for 2 business days without a completed purchase.
+ */
+async function maybeSendSalesFollowUpForActor(actorId: string): Promise<boolean> {
+  const cart = await getStoredPortalCart(actorId);
+  if (!cart?.items.length || !isSalesFollowUpDue(cart)) return false;
+
+  // Skip if the CRM opportunity has already moved past "Added to Cart"
+  // (meaning a purchase was made or the lead was handled).
+  if (cart.crmLeadId) {
+    const stillInCart = await isCartCrmLeadInAddedToCartStage(cart.crmLeadId).catch(() => true);
+    if (!stillInCart) {
+      logger.info("Sales follow-up skipped — CRM left Added to Cart", {
+        action: "cart.sales_followup",
+        actorId,
+        leadId: cart.crmLeadId,
+      });
+      await markSalesFollowUpSent(actorId);
+      return false;
+    }
+  }
+
+  const customer = await resolveCustomerContact(cart.partnerId, actorId);
+
+  const linePrices = cart.items.map((item) => {
+    const unitPrice = cartLineUnitPrice(item, cart.duration);
+    return { productName: item.productName, unitPrice, lineTotal: unitPrice * item.quantity };
+  });
+  const pricing = estimateOrderPricing({
+    id: "",
+    reference: "",
+    actorId,
+    partnerId: cart.partnerId ?? 0,
+    status: "Submitted",
+    duration: cart.duration,
+    items: cart.items,
+    createdAt: "",
+    updatedAt: "",
+  });
+
+  const addedAt = new Date(cart.updatedAt).toUTCString();
+  const mail = formatCartAddedSalesEmail({
+    customer: {
+      name: customer?.name ?? `Customer (${actorId})`,
+      company: customer?.company ?? "",
+      email: customer?.email ?? "",
+      phone: customer?.phone ?? "",
+    },
+    duration: cart.duration,
+    items: cart.items,
+    linePrices,
+    estimatedTotal: pricing?.total ?? null,
+    addedAt,
+    crmReference: cart.crmLeadId ? `LEAD-${cart.crmLeadId}` : undefined,
+  });
+
+  // Override subject to make it clear this is the 2-day follow-up, not immediate
+  const subject = `Follow-up Required: Cart Abandoned (2 Business Days) – ${mail.subject.replace(/^New Abandoned Cart Lead - /, "")}`;
+
+  const notifyEmail = getOrderNotificationEmail();
+  const result = await sendPortalEmail({
+    to: notifyEmail,
+    subject,
+    body: `2-business-day follow-up — no purchase made since cart was saved.\n\n${mail.body}`,
+    html: mail.html,
+  });
+
+  if (!result.sent) {
+    logger.warn("Sales follow-up email not sent", {
+      action: "cart.sales_followup",
+      actorId,
+      error: result.error,
+    });
+    return false;
+  }
+
+  await markSalesFollowUpSent(actorId);
+  writeAudit({
+    action: "notification.email",
+    actorId,
+    metadata: {
+      type: "cart_sales_followup",
+      to: notifyEmail,
+      subject,
+      channel: result.channel,
+      itemCount: cart.items.length,
+      leadId: cart.crmLeadId ?? null,
+    },
+  });
+  return true;
+}
+
+export async function processAllCartReminders(): Promise<{ sent: number; checked: number; salesFollowUps: number }> {
   const actorIds = await listStoredPortalCartActorIds();
   let sent = 0;
+  let salesFollowUps = 0;
   for (const actorId of actorIds) {
     const cart = await getStoredPortalCart(actorId);
     if (await maybeSendCartReminderForActor(actorId, cart?.partnerId)) {
       sent += 1;
     }
+    if (await maybeSendSalesFollowUpForActor(actorId)) {
+      salesFollowUps += 1;
+    }
   }
-  return { sent, checked: actorIds.length };
+  return { sent, checked: actorIds.length, salesFollowUps };
 }

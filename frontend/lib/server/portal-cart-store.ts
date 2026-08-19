@@ -3,6 +3,8 @@ import { kvDel, kvGet, kvSet } from "./kv-store";
 export const CART_REMINDER_INTERVAL_MS = 15 * 24 * 60 * 60 * 1000;
 /** Max reminders while cart stays in Added to Cart (15d × 2 ≈ 1 month). */
 export const CART_REMINDER_MAX_COUNT = 2;
+/** 2 business days ≈ 2 × 24 h. The cron runs daily so the email fires on the next run after the deadline. */
+export const CART_SALES_FOLLOWUP_MS = 2 * 24 * 60 * 60 * 1000;
 
 export type StoredPortalCartItem = {
   category: string;
@@ -27,6 +29,14 @@ export type StoredPortalCart = {
   crmLeadId?: number;
   /** Fingerprint last emailed to sales for cart-add notifications. */
   crmNotifiedFingerprint?: string;
+  /**
+   * ISO timestamp after which the sales-team follow-up email should fire
+   * (if no purchase has been made). Set to 2 business days after cart creation.
+   * Cleared once the follow-up has been sent.
+   */
+  salesFollowUpAt?: string | null;
+  /** True once the 2-business-day sales follow-up email has been sent for this cart. */
+  salesFollowUpSent?: boolean;
 };
 
 const INDEX_KEY = "portal-cart:index";
@@ -116,6 +126,15 @@ export async function saveStoredPortalCart(
   // Fresh cart contents reset the reminder window (new 1-month / 2-email cycle).
   const reminderCount = contentsChanged ? 0 : (existing?.reminderCount ?? 0);
 
+  // On first cart creation (no existing record) schedule a sales follow-up email
+  // 2 business days later. Reset if the customer changes the cart contents.
+  const salesFollowUpAt = !existing
+    ? new Date(Date.now() + CART_SALES_FOLLOWUP_MS).toISOString()
+    : contentsChanged
+      ? new Date(Date.now() + CART_SALES_FOLLOWUP_MS).toISOString()
+      : existing.salesFollowUpAt;
+  const salesFollowUpSent = contentsChanged ? false : (existing?.salesFollowUpSent ?? false);
+
   const cart: StoredPortalCart = {
     duration: input.duration,
     items: input.items,
@@ -126,6 +145,8 @@ export async function saveStoredPortalCart(
     crmLeadId: input.crmLeadId ?? existing?.crmLeadId,
     crmNotifiedFingerprint:
       input.crmNotifiedFingerprint ?? existing?.crmNotifiedFingerprint,
+    salesFollowUpAt,
+    salesFollowUpSent,
   };
 
   await kvSet(cartKey(actorId), cart);
@@ -151,6 +172,12 @@ export async function clearStoredPortalCart(actorId: string): Promise<void> {
 
 export async function listStoredPortalCartActorIds(): Promise<string[]> {
   return readIndex();
+}
+
+export async function markSalesFollowUpSent(actorId: string): Promise<void> {
+  const cart = await getStoredPortalCart(actorId);
+  if (!cart?.items.length) return;
+  await kvSet(cartKey(actorId), { ...cart, salesFollowUpAt: null, salesFollowUpSent: true });
 }
 
 export async function markCartReminderSent(actorId: string): Promise<void> {
