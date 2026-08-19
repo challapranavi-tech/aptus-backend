@@ -145,6 +145,7 @@ export async function syncCartCrmJourney(input: {
     to: notifyEmail,
     subject: mail.subject,
     body: mail.body,
+    html: mail.html,
     replyTo: input.profile.email,
   });
 

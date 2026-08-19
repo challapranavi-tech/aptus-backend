@@ -57,6 +57,7 @@ const cartMail = formatCartAddedSalesEmail({
       quantity: 2,
       duration: "3year",
       purchaseType: "renew",
+      serialNumber: "123-456-789",
     },
   ],
   linePrices: [{ productName: "AutoCAD", unitPrice: 100, lineTotal: 200 }],
@@ -67,11 +68,16 @@ const cartMail = formatCartAddedSalesEmail({
 assert.match(cartMail.subject, /Abandoned Cart Lead/i);
 assert.match(cartMail.body, /has not completed the purchase/i);
 assert.match(cartMail.body, /AutoCAD/);
-assert.match(cartMail.body, /× 2/);
+assert.match(cartMail.body, /Quantity: 2/);
 assert.match(cartMail.body, /3 Years/);
 assert.match(cartMail.body, /Renew/);
+assert.match(cartMail.body, /Part number:/);
+assert.match(cartMail.body, /Serial number: 123-456-789/);
 assert.match(cartMail.body, /Ada Lovelace/);
 assert.match(cartMail.body, /Analytical Engines LLC/);
+assert.match(cartMail.html, /<table/);
+assert.match(cartMail.html, /Part number/);
+assert.match(cartMail.html, /123-456-789/);
 
 const profile: ClientProfile = {
   id: "p1",
@@ -101,6 +107,7 @@ const orderMail = formatOrderNotificationEmail(
         quantity: 1,
         duration: "1year",
         purchaseType: "new",
+        serialNumber: "SN-AUTO-001",
       },
     ],
     contact: {
@@ -119,7 +126,10 @@ assert.match(orderMail.body, /SO-99/);
 assert.match(orderMail.body, /AutoCAD/);
 assert.match(orderMail.body, /Annual/);
 assert.match(orderMail.body, /New Purchase/);
-assert.match(orderMail.body, /C1RK1-WW1762-L158/);
+assert.match(orderMail.body, /Part number: C1RK1-WW1762-L158/);
+assert.match(orderMail.body, /Serial number: SN-AUTO-001/);
+assert.match(orderMail.html, /<table/);
+assert.match(orderMail.html, /C1RK1-WW1762-L158/);
 
 const customerMail = formatPurchaseRequestSubmittedEmail({
   customerName: "Ada Lovelace",
