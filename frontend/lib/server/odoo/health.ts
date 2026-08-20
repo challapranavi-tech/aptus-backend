@@ -1,6 +1,7 @@
 import { getOdooConfig, isOdooConfigured } from "../config";
 import { getOdooClient } from "./client";
 import { logger } from "../logger";
+import { PARTNER_PORTAL_FIELDS } from "./partners";
 
 export type OdooConnectionStatus = {
   configured: boolean;
@@ -9,6 +10,11 @@ export type OdooConnectionStatus = {
   baseUrl: string | null;
   database: string | null;
   message: string;
+  /** Portal Char fields on res.partner visible to the API user. */
+  portalFields?: {
+    present: string[];
+    missing: string[];
+  };
 };
 
 export async function getOdooConnectionStatus(): Promise<OdooConnectionStatus> {
@@ -31,13 +37,41 @@ export async function getOdooConnectionStatus(): Promise<OdooConnectionStatus> {
       throw new Error("Odoo client unavailable despite valid configuration");
     }
     await client.searchRead("res.partner", [["id", ">", 0]], ["name"], 1);
+
+    let portalFields: OdooConnectionStatus["portalFields"];
+    try {
+      const fieldsGet = await client.call<Record<string, unknown>>(
+        "res.partner",
+        "fields_get",
+        [PARTNER_PORTAL_FIELDS as unknown as string[]],
+        { attributes: ["type", "string"] },
+      );
+      const present = PARTNER_PORTAL_FIELDS.filter((name) => Boolean(fieldsGet?.[name]));
+      const missing = PARTNER_PORTAL_FIELDS.filter((name) => !fieldsGet?.[name]);
+      portalFields = { present: [...present], missing: [...missing] };
+    } catch (fieldError) {
+      logger.warn("Odoo portal fields_get failed", {
+        action: "odoo.health.portal_fields",
+        error: fieldError instanceof Error ? fieldError.message : String(fieldError),
+      });
+      portalFields = {
+        present: [],
+        missing: [...PARTNER_PORTAL_FIELDS],
+      };
+    }
+
+    const missingCount = portalFields.missing.length;
     return {
       configured: true,
       connected: true,
       mode: "live",
       baseUrl,
       database: db,
-      message: "Connected to Odoo staging.",
+      message:
+        missingCount === 0
+          ? "Connected to Odoo staging."
+          : `Connected, but ${missingCount} portal field(s) missing for the API user: ${portalFields.missing.join(", ")}`,
+      portalFields,
     };
   } catch (error) {
     logger.error("Odoo health check failed", {

@@ -117,9 +117,15 @@ export class OdooClient {
     }
 
     if (json.error) {
+      const data = json.error.data as
+        | { message?: string; name?: string; debug?: string; arguments?: unknown[] }
+        | undefined;
       const msg =
-        json.error.data?.message ?? json.error.message ?? "Unknown Odoo RPC error";
-      throw new Error(msg);
+        data?.message ?? json.error.message ?? "Unknown Odoo RPC error";
+      const detail = [data?.name, Array.isArray(data?.arguments) ? data.arguments.join(", ") : ""]
+        .filter(Boolean)
+        .join(" | ");
+      throw new Error(detail ? `${msg} (${detail})` : msg);
     }
 
     return json.result as T;
