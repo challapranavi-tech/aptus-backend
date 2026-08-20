@@ -10,10 +10,14 @@ export type OdooConnectionStatus = {
   baseUrl: string | null;
   database: string | null;
   message: string;
+  /** Login used by ODOO_USER (no secrets). */
+  apiUser?: string | null;
   /** Portal Char fields on res.partner visible to the API user. */
   portalFields?: {
     present: string[];
     missing: string[];
+    /** Raw rows found by name like x_portal_% (debug). */
+    seenInOdoo?: Array<{ name: string; model: string }>;
   };
 };
 
@@ -29,7 +33,7 @@ export async function getOdooConnectionStatus(): Promise<OdooConnectionStatus> {
     };
   }
 
-  const { baseUrl, db } = getOdooConfig();
+  const { baseUrl, db, user } = getOdooConfig();
   const client = getOdooClient();
 
   try {
@@ -40,42 +44,46 @@ export async function getOdooConnectionStatus(): Promise<OdooConnectionStatus> {
 
     let portalFields: OdooConnectionStatus["portalFields"];
     try {
-      // Prefer ir.model.fields (registry truth for this DB) over fields_get, which can
-      // hide fields the API user cannot access via group restrictions.
-      const fieldRows = await client.searchRead<{ name: string }>(
+      const seenRows = await client.searchRead<{ name: string; model: string }>(
         "ir.model.fields",
-        [
-          ["model", "=", "res.partner"],
-          ["name", "in", [...PARTNER_PORTAL_FIELDS]],
-        ],
-        ["name"],
-        PARTNER_PORTAL_FIELDS.length,
+        [["name", "like", "x_portal_"]],
+        ["name", "model"],
+        20,
       );
-      const found = new Set(fieldRows.map((row) => row.name));
+      const seenInOdoo = seenRows.map((row) => ({
+        name: row.name,
+        model: row.model,
+      }));
+      const found = new Set(
+        seenRows
+          .filter((row) => row.model === "res.partner")
+          .map((row) => row.name),
+      );
+
+      // Cross-check model field registry as seen by this API user.
+      const fieldsGet = await client.call<Record<string, unknown>>(
+        "res.partner",
+        "fields_get",
+        [],
+        { attributes: ["type"] },
+      );
+      for (const name of PARTNER_PORTAL_FIELDS) {
+        if (fieldsGet?.[name]) found.add(name);
+      }
+
       const present = PARTNER_PORTAL_FIELDS.filter((name) => found.has(name));
       const missing = PARTNER_PORTAL_FIELDS.filter((name) => !found.has(name));
-      portalFields = { present: [...present], missing: [...missing] };
+      portalFields = { present: [...present], missing: [...missing], seenInOdoo };
     } catch (fieldError) {
       logger.warn("Odoo portal fields lookup failed", {
         action: "odoo.health.portal_fields",
         error: fieldError instanceof Error ? fieldError.message : String(fieldError),
       });
-      try {
-        const fieldsGet = await client.call<Record<string, unknown>>(
-          "res.partner",
-          "fields_get",
-          [[...PARTNER_PORTAL_FIELDS]],
-          { attributes: ["type", "string"] },
-        );
-        const present = PARTNER_PORTAL_FIELDS.filter((name) => Boolean(fieldsGet?.[name]));
-        const missing = PARTNER_PORTAL_FIELDS.filter((name) => !fieldsGet?.[name]);
-        portalFields = { present: [...present], missing: [...missing] };
-      } catch {
-        portalFields = {
-          present: [],
-          missing: [...PARTNER_PORTAL_FIELDS],
-        };
-      }
+      portalFields = {
+        present: [],
+        missing: [...PARTNER_PORTAL_FIELDS],
+        seenInOdoo: [],
+      };
     }
 
     const missingCount = portalFields.missing.length;
@@ -85,6 +93,7 @@ export async function getOdooConnectionStatus(): Promise<OdooConnectionStatus> {
       mode: "live",
       baseUrl,
       database: db,
+      apiUser: user || null,
       message:
         missingCount === 0
           ? "Connected to Odoo staging."
@@ -104,6 +113,7 @@ export async function getOdooConnectionStatus(): Promise<OdooConnectionStatus> {
       mode: "live",
       baseUrl,
       database: db,
+      apiUser: user || null,
       message: "Unable to reach Odoo right now. Please try again shortly.",
     };
   }
