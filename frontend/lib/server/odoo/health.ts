@@ -17,7 +17,11 @@ export type OdooConnectionStatus = {
     present: string[];
     missing: string[];
     /** Raw rows found by name like x_portal_% (debug). */
-    seenInOdoo?: Array<{ name: string; model: string }>;
+    seenInOdoo?: Array<{
+      name: string;
+      model: string;
+      modelId?: [number, string] | null;
+    }>;
   };
 };
 
@@ -44,19 +48,37 @@ export async function getOdooConnectionStatus(): Promise<OdooConnectionStatus> {
 
     let portalFields: OdooConnectionStatus["portalFields"];
     try {
-      const seenRows = await client.searchRead<{ name: string; model: string }>(
+      const seenRows = await client.searchRead<{
+        name: string;
+        model: string | false;
+        model_id: [number, string] | false;
+      }>(
         "ir.model.fields",
         [["name", "like", "x_portal_"]],
-        ["name", "model"],
+        ["name", "model", "model_id"],
         20,
       );
       const seenInOdoo = seenRows.map((row) => ({
         name: row.name,
-        model: row.model,
+        model:
+          typeof row.model === "string" && row.model
+            ? row.model
+            : Array.isArray(row.model_id)
+              ? row.model_id[1]
+              : String(row.model ?? ""),
+        modelId: Array.isArray(row.model_id) ? row.model_id : null,
       }));
       const found = new Set(
         seenRows
-          .filter((row) => row.model === "res.partner")
+          .filter((row) => {
+            const modelName =
+              typeof row.model === "string" && row.model
+                ? row.model
+                : Array.isArray(row.model_id)
+                  ? String(row.model_id[1] ?? "")
+                  : "";
+            return modelName === "res.partner" || /res\.partner/i.test(modelName);
+          })
           .map((row) => row.name),
       );
 
