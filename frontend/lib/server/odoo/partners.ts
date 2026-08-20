@@ -329,18 +329,38 @@ function odooChar(value: string | false | undefined): string | null {
 export async function setPartnerPasswordHash(partnerId: number, hash: string): Promise<void> {
   const client = getOdooClient();
   if (!client) throw new Error("Odoo not configured");
-  await client.write("res.partner", [partnerId], { x_portal_password_hash: hash });
+  try {
+    await client.write("res.partner", [partnerId], { x_portal_password_hash: hash });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    if (/x_portal_password_hash/i.test(message)) {
+      throw new Error(
+        "Odoo is missing writable Contact field x_portal_password_hash for the API user. " +
+          "Create/fix that Char field on res.partner (Technical → Fields), then retry.",
+      );
+    }
+    throw error;
+  }
 }
 
 export async function getPartnerPasswordHash(partnerId: number): Promise<string | null> {
   const client = getOdooClient();
   if (!client) return null;
-  const rows = await client.read<{ x_portal_password_hash: string | false }>(
-    "res.partner",
-    [partnerId],
-    ["x_portal_password_hash"],
-  );
-  return odooChar(rows[0]?.x_portal_password_hash);
+  try {
+    const rows = await client.read<{ x_portal_password_hash: string | false }>(
+      "res.partner",
+      [partnerId],
+      ["x_portal_password_hash"],
+    );
+    return odooChar(rows[0]?.x_portal_password_hash);
+  } catch (error) {
+    // Missing/inaccessible custom field must not crash login with a generic 503.
+    const message = error instanceof Error ? error.message : String(error);
+    if (/x_portal_password_hash/i.test(message)) {
+      return null;
+    }
+    throw error;
+  }
 }
 
 export async function updatePartnerPortalMeta(
