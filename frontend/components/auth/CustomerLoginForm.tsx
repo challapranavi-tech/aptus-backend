@@ -14,6 +14,7 @@ import { syncPortalCartWithServer } from "@/lib/portal-cart";
 import { invalidatePortalSharedFetch } from "@/lib/portal-shared-fetch";
 import { safeNextPath } from "@/lib/safe-next-path";
 import { AuthCardFoot } from "@/components/auth/AuthCardFoot";
+import Link from "next/link";
 
 type LoginPrefill = {
   email: string;
@@ -274,8 +275,8 @@ export function CustomerLoginForm() {
       <div className="aptus-auth-card__head">
         <h2>Sign in to your portal</h2>
         <p>
-          Sign in with your registered email and password. New customers are guided to registration
-          automatically.
+          Sign in with your registered email and password. New here?{" "}
+          <Link href="/register">Create an account</Link>.
         </p>
       </div>
 
