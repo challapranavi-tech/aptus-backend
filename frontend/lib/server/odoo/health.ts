@@ -40,24 +40,42 @@ export async function getOdooConnectionStatus(): Promise<OdooConnectionStatus> {
 
     let portalFields: OdooConnectionStatus["portalFields"];
     try {
-      const fieldsGet = await client.call<Record<string, unknown>>(
-        "res.partner",
-        "fields_get",
-        [PARTNER_PORTAL_FIELDS as unknown as string[]],
-        { attributes: ["type", "string"] },
+      // Prefer ir.model.fields (registry truth for this DB) over fields_get, which can
+      // hide fields the API user cannot access via group restrictions.
+      const fieldRows = await client.searchRead<{ name: string }>(
+        "ir.model.fields",
+        [
+          ["model", "=", "res.partner"],
+          ["name", "in", [...PARTNER_PORTAL_FIELDS]],
+        ],
+        ["name"],
+        PARTNER_PORTAL_FIELDS.length,
       );
-      const present = PARTNER_PORTAL_FIELDS.filter((name) => Boolean(fieldsGet?.[name]));
-      const missing = PARTNER_PORTAL_FIELDS.filter((name) => !fieldsGet?.[name]);
+      const found = new Set(fieldRows.map((row) => row.name));
+      const present = PARTNER_PORTAL_FIELDS.filter((name) => found.has(name));
+      const missing = PARTNER_PORTAL_FIELDS.filter((name) => !found.has(name));
       portalFields = { present: [...present], missing: [...missing] };
     } catch (fieldError) {
-      logger.warn("Odoo portal fields_get failed", {
+      logger.warn("Odoo portal fields lookup failed", {
         action: "odoo.health.portal_fields",
         error: fieldError instanceof Error ? fieldError.message : String(fieldError),
       });
-      portalFields = {
-        present: [],
-        missing: [...PARTNER_PORTAL_FIELDS],
-      };
+      try {
+        const fieldsGet = await client.call<Record<string, unknown>>(
+          "res.partner",
+          "fields_get",
+          [[...PARTNER_PORTAL_FIELDS]],
+          { attributes: ["type", "string"] },
+        );
+        const present = PARTNER_PORTAL_FIELDS.filter((name) => Boolean(fieldsGet?.[name]));
+        const missing = PARTNER_PORTAL_FIELDS.filter((name) => !fieldsGet?.[name]);
+        portalFields = { present: [...present], missing: [...missing] };
+      } catch {
+        portalFields = {
+          present: [],
+          missing: [...PARTNER_PORTAL_FIELDS],
+        };
+      }
     }
 
     const missingCount = portalFields.missing.length;
