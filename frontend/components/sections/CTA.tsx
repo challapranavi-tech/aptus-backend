@@ -144,16 +144,27 @@ export function CTA({ data }: CTAProps) {
   // would have no quote entry point — render a bottom Request Quote button instead.
   if (isLight) {
     const quoteLabel =
-      data.action?.label &&
-      data.action.label !== "Contact Us" &&
-      data.action.label.trim()
-        ? data.action.label
-        : "Request a Quote";
+      data.formVariant === "software-quote" ||
+      data.heading?.trim().toLowerCase() === "request a quote"
+        ? "Request a Quote"
+        : data.action?.label &&
+            data.action.label !== "Contact Us" &&
+            data.action.label.trim()
+          ? data.action.label
+          : "Request a Quote";
     const quoteHref =
       data.action?.href?.startsWith("#") ||
       data.action?.href?.toLowerCase().includes("popup")
         ? (data.action.href as string)
         : "#form";
+    const heading =
+      data.heading?.trim().toLowerCase() === "have questions? we can help"
+        ? "Request a Quote"
+        : (data.heading ?? "Request a Quote");
+    const description =
+      data.description?.toLowerCase().includes("fill out the form")
+        ? "Tell us what you need and our sales team will get back to you shortly."
+        : data.description;
 
     return (
       <section
@@ -168,14 +179,12 @@ export function CTA({ data }: CTAProps) {
             ref={innerRef}
             className="aptus-software-mid-band__inner relative text-center"
           >
-            {data.heading && (
-              <h2 data-cta-animate className="aptus-software-mid-title">
-                {data.heading}
-              </h2>
-            )}
-            {data.description && (
+            <h2 data-cta-animate className="aptus-software-mid-title">
+              {heading}
+            </h2>
+            {description && (
               <p data-cta-animate className="aptus-software-mid-lead">
-                {data.description}
+                {description}
               </p>
             )}
             <div data-cta-animate className="mt-8">

@@ -1,10 +1,7 @@
 "use client";
 
 import { Container, CmsImage } from "@/components/ui";
-import {
-  isTopRequestQuoteCta,
-  quoteFamilyHint,
-} from "@/components/quote/quote-modal-utils";
+import { quoteFamilyHint } from "@/components/quote/quote-modal-utils";
 import { ELV_ICONS } from "@/data/elv-icons";
 import { AUTODESK_ICONS } from "@/data/autodesk-icons";
 import { gsap } from "@/lib/gsap";
@@ -653,10 +650,9 @@ export function Features({ data }: FeaturesProps) {
                 ) : (
                   item.description && <p className="aptus-software-product-body">{item.description}</p>
                 )}
-                {((item.action && !isTopRequestQuoteCta(item.action.label)) ||
-                  item.href) && (
+                {(item.action || item.href) && (
                   <div className="mt-auto flex flex-col items-center gap-2 pt-4">
-                    {item.action && !isTopRequestQuoteCta(item.action.label) && (
+                    {item.action && (
                       <Link href={item.action.href} className="aptus-software-btn aptus-software-btn-blue">
                         {item.action.label}
                       </Link>
@@ -797,9 +793,7 @@ export function Features({ data }: FeaturesProps) {
                 )}
                 {item.title && <h3 className={titleClass}>{item.title}</h3>}
                 {item.description && <p className={bodyClass}>{item.description}</p>}
-                {isIconCards &&
-                  item.action &&
-                  !isTopRequestQuoteCta(item.action.label) && (
+                {isIconCards && item.action && (
                   <Link
                     href={item.action.href}
                     className="aptus-software-btn aptus-software-btn-blue"

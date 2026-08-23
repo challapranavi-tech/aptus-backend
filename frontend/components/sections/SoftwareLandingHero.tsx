@@ -1,5 +1,4 @@
 import { Container } from "@/components/ui";
-import { isTopRequestQuoteCta } from "@/components/quote/quote-modal-utils";
 import type { SoftwareLandingHero as SoftwareLandingHeroData } from "@/types";
 import Link from "next/link";
 
@@ -14,9 +13,9 @@ const btnClass: Record<"blue" | "green" | "sky", string> = {
 };
 
 export function SoftwareLandingHero({ data }: SoftwareLandingHeroProps) {
-  const actions = (data.actions ?? []).filter(
-    (action) => !isTopRequestQuoteCta(action.label),
-  );
+  // Keep all CMS hero actions (including Request a Quote) — product-page
+  // quote CTAs sit under the description instead of the banner.
+  const actions = data.actions ?? [];
 
   return (
     <section className="aptus-software-hero" data-section="software-landing-hero">
