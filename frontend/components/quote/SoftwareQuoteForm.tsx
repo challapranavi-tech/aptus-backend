@@ -275,29 +275,44 @@ export function SoftwareQuoteForm({
     if (status === "submitting") return;
 
     const form = e.currentTarget;
-    const formData = new FormData(form);
-    formData.set("customer_type", customerType);
-    formData.set("name", name);
-    formData.set("email", email);
-    if (customerType === "company") {
-      formData.set("company", company);
-      formData.set("vat_id", vatId);
-      formData.set("cr_number", crNumber);
-    }
-    formData.set("country_code", countryCode);
-    formData.set("phone_local", phoneLocal);
-    formData.set("product", selectedProducts.join(", "));
-    formData.set("qty", qty || "1");
-    if (attachment) {
-      formData.set("attachment", attachment);
-    } else {
-      formData.delete("attachment");
-    }
+    const messageValue = String(
+      new FormData(form).get("message") ?? "",
+    ).trim();
+    const nameParts = name.trim().split(/\s+/).filter(Boolean);
+    const firstName = nameParts[0] || name.trim();
+    const lastName =
+      nameParts.length > 1 ? nameParts.slice(1).join(" ") : firstName;
+    const fullPhone = phoneLocal
+      ? `${countryCode}${phoneLocal}`
+      : "";
 
-    const payload: Record<string, string> = {};
-    formData.forEach((value, key) => {
-      if (typeof value === "string") payload[key] = value;
-    });
+    // Explicit payload — do not rely on FormData key iteration (can drop fields).
+    const payload: Record<string, string> = {
+      customer_type: customerType,
+      category,
+      name: name.trim(),
+      first_name: firstName,
+      last_name: lastName,
+      email: email.trim(),
+      company:
+        customerType === "company" ? company.trim() : "Individual",
+      country_code: countryCode,
+      phone_local: phoneLocal,
+      phone: fullPhone,
+      product: selectedProducts.join(", "),
+      qty: qty || "1",
+      message: messageValue,
+      profession: "",
+      vat_id: customerType === "company" ? vatId : "",
+      cr_number: customerType === "company" ? crNumber : "",
+    };
+
+    if (customerType === "individual") {
+      const professionValue = String(
+        new FormData(form).get("profession") ?? "",
+      ).trim();
+      payload.profession = professionValue;
+    }
 
     const fieldErrors = validateQuoteContactFields(payload);
     if (attachmentError) {
@@ -331,13 +346,21 @@ export function SoftwareQuoteForm({
     try {
       // Same-origin proxy (/api/contact) — avoids cross-origin CORS failures.
       const url = "/api/contact";
-      const res = attachment
-        ? await fetch(url, { method: "POST", body: formData })
-        : await fetch(url, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-          });
+      let res: Response;
+      if (attachment) {
+        const formData = new FormData();
+        for (const [key, value] of Object.entries(payload)) {
+          formData.set(key, value);
+        }
+        formData.set("attachment", attachment);
+        res = await fetch(url, { method: "POST", body: formData });
+      } else {
+        res = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+      }
 
       if (res.ok) {
         let ref = "";

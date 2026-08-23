@@ -447,7 +447,29 @@ function preprocessContactBody(input: unknown): unknown {
     return input;
   }
   const raw = input as Record<string, unknown>;
-  const customerTypeRaw = trimRaw(raw, "customer_type").toLowerCase();
+  let customerTypeRaw = trimRaw(raw, "customer_type").toLowerCase();
+
+  // Infer Individual/Company quote forms when customer_type was dropped in transit
+  // (proxy/older clients) but new-form fields are present.
+  if (customerTypeRaw !== "individual" && customerTypeRaw !== "company") {
+    const looksLikeNewQuote =
+      Boolean(trimRaw(raw, "phone_local")) ||
+      Boolean(trimRaw(raw, "profession")) ||
+      Boolean(trimRaw(raw, "vat_id")) ||
+      Boolean(trimRaw(raw, "cr_number")) ||
+      (Boolean(trimRaw(raw, "name")) && !trimRaw(raw, "first_name"));
+    if (looksLikeNewQuote) {
+      customerTypeRaw =
+        trimRaw(raw, "vat_id") ||
+        trimRaw(raw, "cr_number") ||
+        (Boolean(trimRaw(raw, "company")) &&
+          trimRaw(raw, "company") !== "Individual" &&
+          !trimRaw(raw, "profession"))
+          ? "company"
+          : "individual";
+    }
+  }
+
   const customer_type: CustomerType | "" =
     customerTypeRaw === "individual" || customerTypeRaw === "company"
       ? customerTypeRaw
@@ -522,6 +544,18 @@ function preprocessContactBody(input: unknown): unknown {
     company = [city, region].filter(Boolean).join(", ") || "Website inquiry";
   }
 
+  // New quote fields may arrive without customer_type on older proxies — map them.
+  const fullName = trimRaw(raw, "name");
+  const split = fullName ? splitFullName(fullName) : null;
+  const first_name = trimRaw(raw, "first_name") || split?.first_name || "";
+  const last_name = trimRaw(raw, "last_name") || split?.last_name || "";
+  const country_code =
+    trimRaw(raw, "country_code") || DEFAULT_COUNTRY_CALLING_CODE;
+  const phone_local = digitsOnly(trimRaw(raw, "phone_local"), PHONE_LOCAL_MAX_DIGITS);
+  const phone =
+    trimRaw(raw, "phone") ||
+    (phone_local ? `${country_code}${phone_local}` : "");
+
   let product: string | undefined = trimRaw(raw, "product");
   if (
     !product ||
@@ -551,12 +585,12 @@ function preprocessContactBody(input: unknown): unknown {
 
   return {
     customer_type: "",
-    first_name: raw.first_name,
-    last_name: raw.last_name,
-    name: "",
+    first_name: first_name || raw.first_name,
+    last_name: last_name || raw.last_name,
+    name: fullName,
     email: raw.email,
     company,
-    phone: raw.phone,
+    phone: phone || raw.phone,
     country_code: "",
     phone_local: "",
     product,
