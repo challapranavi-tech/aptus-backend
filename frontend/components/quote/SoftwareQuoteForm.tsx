@@ -3,7 +3,6 @@
 import { QuoteProductSelect } from "@/components/quote/QuoteProductSelect";
 import { QuoteSearchSelect } from "@/components/quote/QuoteSearchSelect";
 import { fetchAuthMeShared } from "@/lib/auth-me-client";
-import { publicApiBase } from "@/lib/api-base";
 import { normalizePhone } from "@/lib/phone";
 import { cn } from "@/lib/utils";
 import type { ClientProfile } from "@/types/profile";
@@ -18,7 +17,8 @@ import {
   PHONE_LOCAL_MAX_DIGITS,
   PRODUCT_PLACEHOLDER,
   QUOTE_ATTACHMENT_ACCEPT,
-  VAT_ID_MAX_DIGITS,
+  VAT_ID_MAX_LENGTH,
+  alphanumOnly,
   quoteAttachmentExtensionOk,
   validateQuoteContactFields,
   type CustomerType,
@@ -116,7 +116,7 @@ function profileToQuoteDefaults(user: ClientProfile): {
   const isCompany = user.contactType === "company";
   const companyName =
     user.company && user.company !== "Customer" ? user.company : user.name;
-  const taxDigits = digitsOnly(user.taxId ?? "", VAT_ID_MAX_DIGITS);
+  const taxDigits = alphanumOnly(user.taxId ?? "", VAT_ID_MAX_LENGTH);
   const phone = splitProfilePhone(user.phone || "");
 
   return {
@@ -126,11 +126,11 @@ function profileToQuoteDefaults(user: ClientProfile): {
     company: isCompany ? companyName.trim() : "",
     countryCode: phone.countryCode,
     phoneLocal: phone.local,
-    // Registration stores CR in taxId/vat — map into CR Number when it fits.
+    // Registration often stores CR in taxId — prefer CR when length fits.
     vatId: taxDigits.length > CR_NUMBER_MAX_DIGITS ? taxDigits : "",
     crNumber:
       taxDigits.length > 0 && taxDigits.length <= CR_NUMBER_MAX_DIGITS
-        ? taxDigits
+        ? digitsOnly(taxDigits, CR_NUMBER_MAX_DIGITS)
         : digitsOnly(user.taxId ?? "", CR_NUMBER_MAX_DIGITS),
   };
 }
@@ -219,7 +219,7 @@ export function SoftwareQuoteForm({
   }
 
   function onVatChange(e: ChangeEvent<HTMLInputElement>) {
-    setVatId(digitsOnly(e.target.value, VAT_ID_MAX_DIGITS));
+    setVatId(alphanumOnly(e.target.value, VAT_ID_MAX_LENGTH));
     clearField("vat_id");
   }
 
@@ -298,10 +298,15 @@ export function SoftwareQuoteForm({
     setQuoteRef("");
 
     try {
-      const res = await fetch(`${publicApiBase()}/api/contact`, {
-        method: "POST",
-        body: formData,
-      });
+      // Same-origin proxy (/api/contact) — avoids cross-origin CORS failures.
+      const url = "/api/contact";
+      const res = attachment
+        ? await fetch(url, { method: "POST", body: formData })
+        : await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
 
       if (res.ok) {
         let ref = "";
@@ -369,7 +374,9 @@ export function SoftwareQuoteForm({
       setMessage(msg);
     } catch {
       setStatus("error");
-      setMessage("Network error. Please check your connection and try again.");
+      setMessage(
+        "We couldn't reach the quote service. Please try again in a moment, or contact our sales team.",
+      );
     }
   }
 
@@ -473,12 +480,12 @@ export function SoftwareQuoteForm({
               <input
                 type="text"
                 name="vat_id"
-                inputMode="numeric"
+                inputMode="text"
                 autoComplete="off"
-                maxLength={VAT_ID_MAX_DIGITS}
+                maxLength={VAT_ID_MAX_LENGTH}
                 value={vatId}
                 required
-                placeholder="Up to 12 digits"
+                placeholder="Letters and numbers, up to 12"
                 aria-invalid={errors.vat_id ? true : undefined}
                 onChange={onVatChange}
                 className={cn(

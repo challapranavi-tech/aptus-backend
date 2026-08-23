@@ -106,8 +106,16 @@ export const QUOTE_ATTACHMENT_ACCEPT = QUOTE_ATTACHMENT_EXTENSIONS.join(",");
 export const MAX_QUOTE_ATTACHMENT_BYTES = 2 * 1024 * 1024; // 2 MB
 
 export const PHONE_LOCAL_MAX_DIGITS = 10;
-export const VAT_ID_MAX_DIGITS = 12;
+/** VAT ID: alphanumeric, max length (not digits-only). */
+export const VAT_ID_MAX_LENGTH = 12;
+/** @deprecated alias — prefer VAT_ID_MAX_LENGTH */
+export const VAT_ID_MAX_DIGITS = VAT_ID_MAX_LENGTH;
 export const CR_NUMBER_MAX_DIGITS = 10;
+
+/** Letters + digits only, capped length (VAT IDs). */
+export function alphanumOnly(value: string, max = VAT_ID_MAX_LENGTH): string {
+  return value.replace(/[^a-zA-Z0-9]/g, "").slice(0, max);
+}
 
 export type ContactRequest = {
   /** Empty string = legacy ContactLeadForm / older clients. */
@@ -341,12 +349,10 @@ export function validateQuoteContactFields(
       if (company) errors.company = company;
     }
 
-    const vatDigits = str("vat_id").replace(/\D/g, "");
-    if (!vatDigits) errors.vat_id = "Please enter a valid VAT ID.";
-    else if (vatDigits.length > VAT_ID_MAX_DIGITS) {
-      errors.vat_id = "VAT ID must contain a maximum of 12 digits.";
-    } else if (!/^\d+$/.test(vatDigits)) {
-      errors.vat_id = "VAT ID must contain digits only.";
+    const vatId = alphanumOnly(str("vat_id"), VAT_ID_MAX_LENGTH);
+    if (!vatId) errors.vat_id = "Please enter a valid VAT ID.";
+    else if (vatId.length > VAT_ID_MAX_LENGTH) {
+      errors.vat_id = "VAT ID must contain a maximum of 12 characters.";
     }
 
     const crDigits = str("cr_number").replace(/\D/g, "");
@@ -497,7 +503,7 @@ function preprocessContactBody(input: unknown): unknown {
         customer_type === "individual" ? trimRaw(raw, "profession") : "",
       vat_id:
         customer_type === "company"
-          ? digitsOnly(trimRaw(raw, "vat_id"), VAT_ID_MAX_DIGITS)
+          ? alphanumOnly(trimRaw(raw, "vat_id"), VAT_ID_MAX_LENGTH)
           : "",
       cr_number:
         customer_type === "company"
@@ -606,7 +612,7 @@ function validateTypedQuote(
         customer_type === "individual" ? data.profession.trim() : "",
       vat_id:
         customer_type === "company"
-          ? digitsOnly(data.vat_id, VAT_ID_MAX_DIGITS)
+          ? alphanumOnly(data.vat_id, VAT_ID_MAX_LENGTH)
           : "",
       cr_number:
         customer_type === "company"
