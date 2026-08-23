@@ -139,7 +139,55 @@ export function CTA({ data }: CTAProps) {
     },
   });
 
-  if (isLight) return null;
+  // Light contact CTAs were suppressed because the quote modal owns the form UX.
+  // After removing top "Request a Quote" buttons, pages without a mid-band CTA
+  // would have no quote entry point — render a bottom Request Quote button instead.
+  if (isLight) {
+    const quoteLabel =
+      data.action?.label &&
+      data.action.label !== "Contact Us" &&
+      data.action.label.trim()
+        ? data.action.label
+        : "Request a Quote";
+    const quoteHref =
+      data.action?.href?.startsWith("#") ||
+      data.action?.href?.toLowerCase().includes("popup")
+        ? (data.action.href as string)
+        : "#form";
+
+    return (
+      <section
+        ref={sectionRef}
+        id="Form"
+        className="aptus-software-mid-band"
+        data-section="cta"
+        data-layout="software-mid"
+      >
+        <div className="aptus-live-container">
+          <div
+            ref={innerRef}
+            className="aptus-software-mid-band__inner relative text-center"
+          >
+            {data.heading && (
+              <h2 data-cta-animate className="aptus-software-mid-title">
+                {data.heading}
+              </h2>
+            )}
+            {data.description && (
+              <p data-cta-animate className="aptus-software-mid-lead">
+                {data.description}
+              </p>
+            )}
+            <div data-cta-animate className="mt-8">
+              <Link href={quoteHref} className="aptus-software-btn aptus-software-btn-blue">
+                {quoteLabel}
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section
