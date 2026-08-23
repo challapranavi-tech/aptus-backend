@@ -89,8 +89,8 @@ export function SoftwareQuoteForm({
 
   const selectDefault =
     defaultProduct && products.includes(defaultProduct)
-      ? defaultProduct
-      : PRODUCT_PLACEHOLDER;
+      ? [defaultProduct]
+      : [];
 
   useEffect(() => {
     setErrors({});
@@ -506,14 +506,19 @@ export function SoftwareQuoteForm({
           </label>
         )}
 
-        <QuoteProductSelect
-          key={`${category}:${productLabel}:${selectDefault}:${products.join("|")}:${customerType}`}
-          name="product"
-          label={`${productLabel} *`}
-          products={products}
-          defaultValue={selectDefault}
-          placeholder={PRODUCT_PLACEHOLDER}
-        />
+        <div>
+          <QuoteProductSelect
+            key={`${category}:${productLabel}:${selectDefault.join("|")}:${products.join("|")}:${customerType}`}
+            name="product"
+            label={`${productLabel} *`}
+            products={products}
+            defaultSelected={selectDefault}
+            placeholder={PRODUCT_PLACEHOLDER}
+            error={Boolean(errors.product)}
+            onChange={() => clearField("product")}
+          />
+          <FieldError message={errors.product} />
+        </div>
 
         <label className="aptus-form-label">
           Quantity *

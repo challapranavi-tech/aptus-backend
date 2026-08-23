@@ -236,12 +236,20 @@ function splitFullName(fullName: string): { first_name: string; last_name: strin
 }
 
 function isProductSelected(product: string): boolean {
-  const p = product.trim();
-  return Boolean(
-    p &&
-      p !== PRODUCT_PLACEHOLDER &&
-      p !== LEGACY_PRODUCT_PLACEHOLDER,
-  );
+  return parseSelectedProducts(product).length > 0;
+}
+
+/** Split multi-select product payload (comma-separated). */
+export function parseSelectedProducts(product: string): string[] {
+  return product
+    .split(",")
+    .map((s) => s.trim())
+    .filter(
+      (p) =>
+        Boolean(p) &&
+        p !== PRODUCT_PLACEHOLDER &&
+        p !== LEGACY_PRODUCT_PLACEHOLDER,
+    );
 }
 
 /** Client-side quote field checks for Individual / Company forms. */
@@ -304,7 +312,7 @@ export function validateQuoteContactFields(
 
   const product = str("product");
   if (!isProductSelected(product)) {
-    errors.product = "Please select a software product.";
+    errors.product = "Please select at least one software product.";
   }
 
   const qty = str("qty");
