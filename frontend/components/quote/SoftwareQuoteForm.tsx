@@ -30,6 +30,7 @@ import {
 import type { FieldErrors } from "@shared/lib/schema";
 import {
   useEffect,
+  useMemo,
   useRef,
   useState,
   type ChangeEvent,
@@ -116,7 +117,8 @@ function profileToQuoteDefaults(user: ClientProfile): {
   const isCompany = user.contactType === "company";
   const companyName =
     user.company && user.company !== "Customer" ? user.company : user.name;
-  const taxDigits = alphanumOnly(user.taxId ?? "", VAT_ID_MAX_LENGTH);
+  const taxAlnum = alphanumOnly(user.taxId ?? "", VAT_ID_MAX_LENGTH);
+  const taxDigits = digitsOnly(user.taxId ?? "", CR_NUMBER_MAX_DIGITS);
   const phone = splitProfilePhone(user.phone || "");
 
   return {
@@ -126,12 +128,9 @@ function profileToQuoteDefaults(user: ClientProfile): {
     company: isCompany ? companyName.trim() : "",
     countryCode: phone.countryCode,
     phoneLocal: phone.local,
-    // Registration often stores CR in taxId — prefer CR when length fits.
-    vatId: taxDigits.length > CR_NUMBER_MAX_DIGITS ? taxDigits : "",
-    crNumber:
-      taxDigits.length > 0 && taxDigits.length <= CR_NUMBER_MAX_DIGITS
-        ? digitsOnly(taxDigits, CR_NUMBER_MAX_DIGITS)
-        : digitsOnly(user.taxId ?? "", CR_NUMBER_MAX_DIGITS),
+    // Prefill both when profile tax/CR is present — VAT is required on company form.
+    vatId: taxAlnum,
+    crNumber: taxDigits,
   };
 }
 
@@ -159,12 +158,29 @@ export function SoftwareQuoteForm({
   const [attachment, setAttachment] = useState<File | null>(null);
   const [attachmentError, setAttachmentError] = useState("");
   const [profilePrefill, setProfilePrefill] = useState(false);
+  const [qty, setQty] = useState("1");
+  const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
   const prefilledUserId = useRef<string | null>(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const selectDefault =
-    defaultProduct && products.includes(defaultProduct)
-      ? [defaultProduct]
-      : [];
+  const productOptions = useMemo(() => {
+    const list = [...products];
+    if (defaultProduct && !list.includes(defaultProduct)) {
+      list.unshift(defaultProduct);
+    }
+    return list;
+  }, [products, defaultProduct]);
+
+  const selectDefault = useMemo(() => {
+    if (defaultProduct && productOptions.includes(defaultProduct)) {
+      return [defaultProduct];
+    }
+    return [];
+  }, [defaultProduct, productOptions]);
+
+  useEffect(() => {
+    setSelectedProducts(selectDefault);
+  }, [selectDefault.join("|")]);
 
   useEffect(() => {
     let cancelled = false;
@@ -270,6 +286,8 @@ export function SoftwareQuoteForm({
     }
     formData.set("country_code", countryCode);
     formData.set("phone_local", phoneLocal);
+    formData.set("product", selectedProducts.join(", "));
+    formData.set("qty", qty || "1");
     if (attachment) {
       formData.set("attachment", attachment);
     } else {
@@ -288,7 +306,20 @@ export function SoftwareQuoteForm({
     if (Object.keys(fieldErrors).length) {
       setErrors(fieldErrors);
       setStatus("error");
-      setMessage("Please fill highlighted fields.");
+      const labels = Object.entries(fieldErrors)
+        .filter(([k]) => k !== "_form")
+        .map(([, msg]) => msg)
+        .slice(0, 3);
+      setMessage(
+        labels.length
+          ? labels.join(" ")
+          : "Please fill highlighted fields.",
+      );
+      window.setTimeout(() => {
+        form
+          .querySelector<HTMLElement>(".aptus-form-input--error, [aria-invalid='true']")
+          ?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 50);
       return;
     }
 
@@ -350,6 +381,8 @@ export function SoftwareQuoteForm({
           setProfilePrefill(false);
         }
         setAttachment(null);
+        setQty("1");
+        setSelectedProducts(selectDefault);
         return;
       }
 
@@ -360,10 +393,20 @@ export function SoftwareQuoteForm({
         if (data.errors && typeof data.errors === "object") {
           const apiErrors = data.errors as FieldErrors;
           setErrors(apiErrors);
-          const fieldKeys = Object.keys(apiErrors).filter((k) => k !== "_form");
-          msg = fieldKeys.length
-            ? "Please fill highlighted fields."
+          const msgs = Object.entries(apiErrors)
+            .filter(([k]) => k !== "_form")
+            .map(([, m]) => m)
+            .slice(0, 3);
+          msg = msgs.length
+            ? msgs.join(" ")
             : (apiErrors._form ?? msg);
+          window.setTimeout(() => {
+            formRef.current
+              ?.querySelector<HTMLElement>(
+                ".aptus-form-input--error, [aria-invalid='true']",
+              )
+              ?.scrollIntoView({ behavior: "smooth", block: "center" });
+          }, 50);
         } else if (typeof data.error === "string" && data.error) {
           msg = data.error;
         }
@@ -382,6 +425,7 @@ export function SoftwareQuoteForm({
 
   return (
     <form
+      ref={formRef}
       className={cn("relative mt-8 w-full text-left", className)}
       onSubmit={handleSubmit}
       noValidate
@@ -661,14 +705,17 @@ export function SoftwareQuoteForm({
 
         <div>
           <QuoteProductSelect
-            key={`${category}:${productLabel}:${selectDefault.join("|")}:${products.join("|")}:${customerType}`}
+            key={`${category}:${productLabel}:${selectDefault.join("|")}:${productOptions.join("|")}`}
             name="product"
             label={`${productLabel} *`}
-            products={products}
-            defaultSelected={selectDefault}
+            products={productOptions}
+            defaultSelected={selectedProducts.length ? selectedProducts : selectDefault}
             placeholder={PRODUCT_PLACEHOLDER}
             error={Boolean(errors.product)}
-            onChange={() => clearField("product")}
+            onChange={(next) => {
+              setSelectedProducts(next);
+              clearField("product");
+            }}
           />
           <FieldError message={errors.product} />
         </div>
@@ -682,10 +729,13 @@ export function SoftwareQuoteForm({
             step={1}
             inputMode="numeric"
             placeholder="1"
-            defaultValue={1}
+            value={qty}
             required
             aria-invalid={errors.qty ? true : undefined}
-            onChange={() => clearField("qty")}
+            onChange={(e) => {
+              setQty(e.target.value);
+              clearField("qty");
+            }}
             className={cn(
               "aptus-form-input mt-0 w-full px-4 py-3",
               inputError("qty"),

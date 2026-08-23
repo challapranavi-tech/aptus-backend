@@ -299,9 +299,9 @@ export function validateQuoteContactFields(
 
   const name = str("name");
   if (!name) errors.name = "Please enter your name.";
-  else {
-    const nameErr = personNameError(name, "Name");
-    if (nameErr) errors.name = nameErr;
+  else if (name.length < 2) errors.name = "Please enter your name.";
+  else if (!/[\p{L}\p{N}]/u.test(name)) {
+    errors.name = "Please enter your name.";
   }
 
   const countryCode = str("country_code") || DEFAULT_COUNTRY_CALLING_CODE;
