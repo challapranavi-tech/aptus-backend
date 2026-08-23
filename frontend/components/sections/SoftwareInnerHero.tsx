@@ -1,4 +1,5 @@
 import { SoftwareInnerHeroNav } from "@/components/layout/SoftwareInnerHeroNav";
+import { isTopRequestQuoteCta } from "@/components/quote/quote-modal-utils";
 import { CmsImage } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import type { SoftwareInnerHero as SoftwareInnerHeroData } from "@/types";
@@ -15,6 +16,10 @@ export function SoftwareInnerHero({ data }: SoftwareInnerHeroProps) {
   const hasIntroRows = Boolean(data.introRows?.length);
   const usePanel = mediaInline || hasIntroRows;
   const bannerAction = data.bannerAction ?? data.action;
+  const showBannerAction =
+    Boolean(bannerAction) && !isTopRequestQuoteCta(bannerAction?.label);
+  const showCopyAction =
+    Boolean(data.action) && !isTopRequestQuoteCta(data.action?.label);
   const TitleTag = data.titleLevel === "h2" ? "h2" : "h1";
 
   const introRowsPanel = hasIntroRows ? (
@@ -97,7 +102,7 @@ export function SoftwareInnerHero({ data }: SoftwareInnerHeroProps) {
           />
         </div>
       )}
-      {!hasIntroRows && data.action && (
+      {!hasIntroRows && showCopyAction && data.action && (
         <div className="aptus-software-inner-hero__cta">
           <Link href={data.action.href} className="aptus-software-btn aptus-software-btn-blue">
             {data.action.label}
@@ -117,7 +122,7 @@ export function SoftwareInnerHero({ data }: SoftwareInnerHeroProps) {
               {data.bannerTagline && (
                 <p className="aptus-software-page-banner__tagline">{data.bannerTagline}</p>
               )}
-              {bannerAction && (
+              {showBannerAction && bannerAction && (
                 <div className="aptus-software-page-banner__action-wrap">
                   <Link
                     href={bannerAction.href}

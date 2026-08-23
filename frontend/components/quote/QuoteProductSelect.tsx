@@ -9,6 +9,8 @@ type QuoteProductSelectProps = {
   label: string;
   products: string[];
   defaultValue?: string;
+  /** Placeholder option label when nothing is selected. */
+  placeholder?: string;
   className?: string;
 };
 
@@ -20,7 +22,8 @@ export function QuoteProductSelect({
   name = "product",
   label,
   products,
-  defaultValue = "Select Product",
+  defaultValue = "Select Software Product",
+  placeholder = "Select Software Product",
   className,
 }: QuoteProductSelectProps) {
   const listId = useId();
@@ -33,7 +36,7 @@ export function QuoteProductSelect({
   useEffect(() => {
     setValue(defaultValue);
     setOpen(false);
-  }, [defaultValue, products]);
+  }, [defaultValue, products, placeholder]);
 
   useLayoutEffect(() => {
     if (!open || !triggerRef.current) return;
@@ -82,12 +85,12 @@ export function QuoteProductSelect({
     };
   }, [open]);
 
-  const options = ["Select Product", ...products, "Others"];
+  const options = [placeholder, ...products, "Others"];
 
   return (
     <label ref={rootRef} className={cn("aptus-form-label relative block", className)}>
       {label}
-      <input type="hidden" name={name} value={value === "Select Product" ? "Select Product" : value} />
+      <input type="hidden" name={name} value={value === placeholder ? placeholder : value} />
       <button
         ref={triggerRef}
         type="button"
@@ -97,7 +100,7 @@ export function QuoteProductSelect({
         aria-controls={listId}
         onClick={() => setOpen((v) => !v)}
       >
-        <span className={value === "Select Product" ? "text-black/45" : undefined}>{value}</span>
+        <span className={value === placeholder ? "text-black/45" : undefined}>{value}</span>
         <span aria-hidden="true" className="text-black/45">
           ▾
         </span>

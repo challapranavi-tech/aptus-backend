@@ -5,6 +5,15 @@ import { CONTACT_PRODUCTS, ELV_PRODUCTS } from "@shared/lib/contact-request";
 
 const QUOTE_MODAL_LABELS = new Set(["Request a Quote", "Renew Subscription", "Get Your Quote Now"]);
 
+/**
+ * Top-of-page / product-card "Request Quote" CTAs to hide — keep mid/bottom
+ * "Get Your Quote Now" and Renew Subscription visible.
+ */
+export function isTopRequestQuoteCta(label?: string | null): boolean {
+  const t = (label ?? "").replace(/\s+/g, " ").trim().toLowerCase();
+  return t === "request a quote" || t === "request quote";
+}
+
 /** Slug → ELV product name (matches contactCta.productName in content JSON). */
 const ELV_SLUG_PRODUCT: Record<string, string> = {
   "access-control-system": "Access Control Systems",

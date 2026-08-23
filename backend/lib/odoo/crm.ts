@@ -39,6 +39,14 @@ export type CrmLeadInput = {
   message?: string;
   /** Odoo sequence value (RQ-…) or JS fallback. */
   quoteRef?: string;
+  customerType?: "individual" | "company";
+  profession?: string;
+  vatId?: string;
+  crNumber?: string;
+  countryCode?: string;
+  phoneLocal?: string;
+  contactName?: string;
+  attachmentName?: string;
 };
 
 /**
@@ -221,20 +229,32 @@ export async function nextRequestQuoteRef(): Promise<string> {
 export function buildCrmLeadValues(
   input: CrmLeadInput,
 ): Record<string, unknown> {
-  const contactName = [input.firstName, input.lastName]
-    .map((s) => s.trim())
-    .filter(Boolean)
-    .join(" ");
+  const contactName =
+    (input.contactName ?? "").trim() ||
+    [input.firstName, input.lastName]
+      .map((s) => s.trim())
+      .filter(Boolean)
+      .join(" ");
   const product = (input.product ?? "").trim();
   const quoteRef = (input.quoteRef ?? "").trim();
   const isQuoteProduct =
-    Boolean(product) && product !== "Others" && product !== "Select Product";
+    Boolean(product) && product !== "Others" && product !== "Select Product" && product !== "Select Software Product";
+  const customerType = input.customerType;
 
   const description = [
     quoteRef ? `Quote Ref: ${quoteRef}` : null,
+    customerType ? `Customer Type: ${customerType === "company" ? "Company" : "Individual"}` : null,
     `Client Message: ${input.message?.trim() || "—"}`,
     `Product: ${product || "—"}`,
     `QTY: ${input.qty?.trim() || "—"}`,
+    input.profession?.trim() ? `Profession: ${input.profession.trim()}` : null,
+    input.vatId?.trim() ? `VAT ID: ${input.vatId.trim()}` : null,
+    input.crNumber?.trim() ? `CR Number: ${input.crNumber.trim()}` : null,
+    input.countryCode?.trim() ? `Country Code: ${input.countryCode.trim()}` : null,
+    input.phoneLocal?.trim() ? `Phone (local): ${input.phoneLocal.trim()}` : null,
+    input.attachmentName?.trim()
+      ? `Attachment: ${input.attachmentName.trim()}`
+      : null,
     `Category: ${input.categoryLabel?.trim() || "—"}`,
     `Source: Website – Request Quote`,
   ]
@@ -248,13 +268,18 @@ export function buildCrmLeadValues(
         : `Request a Quote – ${product}`
       : `Website contact – ${contactName || input.company}`,
     contact_name: contactName,
-    partner_name: input.company.trim(),
-    email_from: input.email.trim(),
+    partner_name:
+      customerType === "individual"
+        ? ""
+        : input.company.trim(),
     phone: input.phone.trim(),
     description,
     // Opportunity shows in CRM Pipeline → New. type "lead" only appears under Leads.
     type: "opportunity",
   };
+
+  const email = input.email.trim();
+  if (email) values.email_from = email;
 
   const refField = quoteReferenceField();
   if (refField && quoteRef) {
@@ -325,5 +350,57 @@ export async function createCrmLead(input: CrmLeadInput): Promise<number> {
     if (!("user_id" in values)) throw err;
     const { user_id: _uid, ...rest } = values;
     return run(rest);
+  }
+}
+
+export type CrmLeadAttachment = {
+  filename: string;
+  content: Buffer;
+  contentType?: string;
+};
+
+/** Attach uploaded quote documents to an existing crm.lead (ir.attachment). */
+export async function attachFilesToCrmLead(
+  leadId: number,
+  attachments: CrmLeadAttachment[],
+): Promise<void> {
+  if (!attachments.length) return;
+
+  const {
+    getOdooServiceSession,
+    invalidateOdooServiceSession,
+    isOdooConfigured,
+  } = await import("./client");
+  const { create, OdooRpcError } = await import("./rpc");
+
+  if (!isOdooConfigured()) {
+    throw new Error("Odoo is not configured");
+  }
+
+  const uploadOne = async (
+    session: OdooRpcSession,
+    file: CrmLeadAttachment,
+  ) => {
+    await create(session, "ir.attachment", {
+      name: file.filename,
+      res_model: "crm.lead",
+      res_id: leadId,
+      type: "binary",
+      datas: file.content.toString("base64"),
+      mimetype: file.contentType ?? "application/octet-stream",
+    });
+  };
+
+  for (const file of attachments) {
+    try {
+      await uploadOne(await getOdooServiceSession(), file);
+    } catch (err) {
+      const unauthorized =
+        err instanceof OdooRpcError &&
+        (err.httpStatus === 401 || /access|denied|auth/i.test(err.message));
+      if (!unauthorized) throw err;
+      invalidateOdooServiceSession();
+      await uploadOne(await getOdooServiceSession(), file);
+    }
   }
 }
