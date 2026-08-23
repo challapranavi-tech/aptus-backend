@@ -11,6 +11,7 @@ import { isMailConfigured, sendEmail, type MailAttachment } from "@/lib/mail";
 import {
   attachFilesToCrmLead,
   createCrmLead,
+  crmLeadFormUrl,
   isOdooConfigured,
   nextRequestQuoteRef,
 } from "@/lib/odoo";
@@ -54,8 +55,16 @@ function buildSalesEmail(opts: {
   categoryLabel: string;
   submittedAt: string;
   attachmentName?: string;
+  crmLeadUrl?: string;
 }): { subject: string; text: string; html: string } {
-  const { data, quoteRef, categoryLabel, submittedAt, attachmentName } = opts;
+  const {
+    data,
+    quoteRef,
+    categoryLabel,
+    submittedAt,
+    attachmentName,
+    crmLeadUrl,
+  } = opts;
   const isTyped =
     data.customer_type === "individual" || data.customer_type === "company";
   const displayName =
@@ -69,6 +78,10 @@ function buildSalesEmail(opts: {
     : data.product && data.product !== "Others"
       ? `New quote request ${quoteRef} from ${displayName} (${categoryLabel})`
       : `New contact message ${quoteRef} from ${displayName}`;
+
+  const crmLine = crmLeadUrl
+    ? `Odoo CRM: ${crmLeadUrl}`
+    : null;
 
   const lines: string[] =
     data.customer_type === "individual"
@@ -88,6 +101,7 @@ function buildSalesEmail(opts: {
           `Product Category: ${categoryLabel}`,
           `Submission date/time: ${submittedAt}`,
           `Source: Website – Request Quote`,
+          ...(crmLine ? [crmLine] : []),
         ]
       : data.customer_type === "company"
         ? [
@@ -95,7 +109,7 @@ function buildSalesEmail(opts: {
             `Customer Type: Company`,
             `Company Name: ${data.company}`,
             `Name: ${data.name}`,
-            `VAT ID: ${data.vat_id}`,
+            `Tax ID: ${data.tax_id}`,
             `CR Number: ${data.cr_number}`,
             `Phone Number: ${data.phone_local}`,
             `Country Code: ${data.country_code}`,
@@ -107,6 +121,7 @@ function buildSalesEmail(opts: {
             `Product Category: ${categoryLabel}`,
             `Submission date/time: ${submittedAt}`,
             `Source: Website – Request Quote`,
+            ...(crmLine ? [crmLine] : []),
           ]
         : [
             `Quote Ref: ${quoteRef}`,
@@ -119,15 +134,19 @@ function buildSalesEmail(opts: {
             `Product Category: ${categoryLabel}`,
             `Date & Time: ${submittedAt}`,
             `Source: Website – Request Quote`,
+            ...(crmLine ? [crmLine] : []),
             "",
             data.message || "(no message)",
           ];
 
   const text = lines.join("\n");
+  const crmHtml = crmLeadUrl
+    ? `<p style="font-family:system-ui,sans-serif;font-size:14px;margin:16px 0 0"><a href="${crmLeadUrl.replace(/&/g, "&amp;").replace(/"/g, "&quot;")}" style="color:#0b3d91;font-weight:600">Open in Odoo CRM</a></p>`
+    : "";
   const html = `<pre style="font-family:system-ui,sans-serif;font-size:14px;line-height:1.5;white-space:pre-wrap">${text
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")}</pre>`;
+    .replace(/>/g, "&gt;")}</pre>${crmHtml}`;
 
   return { subject, text, html };
 }
@@ -241,7 +260,7 @@ export async function POST(req: NextRequest) {
     customer_type,
     name,
     profession,
-    vat_id,
+    tax_id,
     cr_number,
     country_code,
     phone_local,
@@ -305,7 +324,7 @@ export async function POST(req: NextRequest) {
   const crmInput = {
     firstName: first_name,
     lastName: last_name,
-    company,
+    company: customer_type === "individual" ? "" : company,
     email: email || "",
     phone,
     product,
@@ -315,22 +334,23 @@ export async function POST(req: NextRequest) {
     message,
     quoteRef,
     customerType: customer_type || undefined,
-    profession,
-    vatId: vat_id,
-    crNumber: cr_number,
+    profession: customer_type === "individual" ? profession : "",
+    // Tax ID / CR belong only on Company quotes (Odoo tax field).
+    vatId: customer_type === "company" ? tax_id : "",
+    crNumber: customer_type === "company" ? cr_number : "",
     countryCode: country_code,
     phoneLocal: phone_local,
     contactName: name || undefined,
     attachmentName,
   };
 
-  // Typed Request Quote: create Odoo CRM first so a mail-only success cannot
-  // leave sales without a lead. Legacy contact forms keep email-first.
+  // Create Odoo CRM before the sales email so the mail can include a CRM link.
+  // Typed Request Quote fails hard if CRM create fails; legacy quotes continue.
   let crmSynced = false;
   let leadId: number | undefined;
   const shouldCreateCrm = (isQuote || isTypedQuote) && isOdooConfigured();
 
-  if (shouldCreateCrm && isTypedQuote) {
+  if (shouldCreateCrm) {
     try {
       leadId = await createCrmLead(crmInput);
       crmSynced = true;
@@ -360,15 +380,25 @@ export async function POST(req: NextRequest) {
         alertTo: routing.to,
         error: err,
       });
-      return jsonCors(
-        req,
-        {
-          error:
-            "We couldn't submit your request right now. Please try again or contact our sales team.",
-        },
-        { status: 502 },
-      );
+      if (isTypedQuote) {
+        return jsonCors(
+          req,
+          {
+            error:
+              "We couldn't submit your request right now. Please try again or contact our sales team.",
+          },
+          { status: 502 },
+        );
+      }
     }
+  } else if (!isQuote && !isTypedQuote) {
+    console.info(
+      `[contact] CRM skipped (not a quote product) quoteRef=${quoteRef} product=${product || "—"}`,
+    );
+  } else if (!isOdooConfigured()) {
+    console.warn(
+      `[contact] CRM skipped (Odoo not configured) quoteRef=${quoteRef}`,
+    );
   }
 
   const salesMail = buildSalesEmail({
@@ -377,6 +407,7 @@ export async function POST(req: NextRequest) {
     categoryLabel: routing.categoryLabel,
     submittedAt,
     attachmentName,
+    crmLeadUrl: leadId ? crmLeadFormUrl(leadId) : undefined,
   });
 
   const result = await sendEmail({
@@ -393,32 +424,6 @@ export async function POST(req: NextRequest) {
     if (!crmSynced) {
       return jsonCors(req, { error: "Failed to send." }, { status: 502 });
     }
-  }
-
-  // Legacy quote path: CRM after email (previous behaviour).
-  if (shouldCreateCrm && !isTypedQuote) {
-    try {
-      leadId = await createCrmLead(crmInput);
-      crmSynced = true;
-      console.info(
-        `[contact] crm.lead #${leadId} created quoteRef=${quoteRef} category=${routing.category}`,
-      );
-    } catch (err) {
-      await reportCrmLeadFailure({
-        quoteRef,
-        input: crmInput,
-        alertTo: routing.to,
-        error: err,
-      });
-    }
-  } else if (!isQuote && !isTypedQuote) {
-    console.info(
-      `[contact] CRM skipped (not a quote product) quoteRef=${quoteRef} product=${product || "—"}`,
-    );
-  } else if (!isOdooConfigured()) {
-    console.warn(
-      `[contact] CRM skipped (Odoo not configured) quoteRef=${quoteRef}`,
-    );
   }
 
   if (email) {

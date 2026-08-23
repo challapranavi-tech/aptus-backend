@@ -180,11 +180,11 @@ assert.ok(
     company: "Aptus",
     country_code: "+968",
     phone_local: "91234567",
-    vat_id: "1234567890123",
+    tax_id: "1234567890123",
     cr_number: "12345678901",
     product: "Revit",
     qty: "1",
-  }).vat_id,
+  }).tax_id,
 );
 
 const individualOk = parseContactRequest({
@@ -211,14 +211,14 @@ const companyOk = parseContactRequest({
   company: "Analytical Engines",
   country_code: "+971",
   phone_local: "501234567",
-  vat_id: "123456789012",
+  tax_id: "123456789012",
   cr_number: "1234567890",
   product: "Civil 3D",
   qty: "5",
 });
 assert.equal(companyOk.ok, true);
 if (companyOk.ok) {
-  assert.equal(companyOk.data.vat_id, "123456789012");
+  assert.equal(companyOk.data.tax_id, "123456789012");
   assert.equal(companyOk.data.cr_number, "1234567890");
   assert.equal(companyOk.data.customer_type, "company");
 }

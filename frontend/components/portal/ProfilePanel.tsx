@@ -210,7 +210,7 @@ export function ProfilePanel() {
 
         {isCompany ? (
           <div className="aptus-field">
-            <label htmlFor="profile_cr">CR number</label>
+            <label htmlFor="profile_cr">Tax ID</label>
             <input
               id="profile_cr"
               className="form-control"
@@ -220,7 +220,7 @@ export function ProfilePanel() {
               readOnly
               aria-disabled="true"
               aria-readonly="true"
-              title="CR number is unique and cannot be changed"
+              title="Tax ID is unique and cannot be changed"
             />
           </div>
         ) : null}

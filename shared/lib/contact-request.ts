@@ -106,15 +106,24 @@ export const QUOTE_ATTACHMENT_ACCEPT = QUOTE_ATTACHMENT_EXTENSIONS.join(",");
 export const MAX_QUOTE_ATTACHMENT_BYTES = 2 * 1024 * 1024; // 2 MB
 
 export const PHONE_LOCAL_MAX_DIGITS = 10;
-/** VAT ID: alphanumeric, max length (not digits-only). */
-export const VAT_ID_MAX_LENGTH = 12;
-/** @deprecated alias — prefer VAT_ID_MAX_LENGTH */
-export const VAT_ID_MAX_DIGITS = VAT_ID_MAX_LENGTH;
+/** Tax ID (Odoo partner tax / vat field): alphanumeric, max length. */
+export const TAX_ID_MAX_LENGTH = 12;
+/** @deprecated alias — prefer TAX_ID_MAX_LENGTH */
+export const VAT_ID_MAX_LENGTH = TAX_ID_MAX_LENGTH;
+/** @deprecated alias — prefer TAX_ID_MAX_LENGTH */
+export const VAT_ID_MAX_DIGITS = TAX_ID_MAX_LENGTH;
 export const CR_NUMBER_MAX_DIGITS = 10;
 
-/** Letters + digits only, capped length (VAT IDs). */
-export function alphanumOnly(value: string, max = VAT_ID_MAX_LENGTH): string {
+/** Letters + digits only, capped length (Tax IDs). */
+export function alphanumOnly(value: string, max = TAX_ID_MAX_LENGTH): string {
   return value.replace(/[^a-zA-Z0-9]/g, "").slice(0, max);
+}
+
+/** Prefer tax_id; accept legacy vat_id from older clients. */
+function rawTaxId(raw: Record<string, FormDataEntryValue | string | undefined>): string {
+  const tax = String(raw.tax_id ?? "").trim();
+  if (tax) return tax;
+  return String(raw.vat_id ?? "").trim();
 }
 
 export type ContactRequest = {
@@ -135,7 +144,8 @@ export type ContactRequest = {
   message: string;
   category: ContactCategory | "";
   profession: string;
-  vat_id: string;
+  /** Maps to Odoo tax ID (res.partner vat). */
+  tax_id: string;
   cr_number: string;
 };
 
@@ -349,10 +359,10 @@ export function validateQuoteContactFields(
       if (company) errors.company = company;
     }
 
-    const vatId = alphanumOnly(str("vat_id"), VAT_ID_MAX_LENGTH);
-    if (!vatId) errors.vat_id = "Please enter a valid VAT ID.";
-    else if (vatId.length > VAT_ID_MAX_LENGTH) {
-      errors.vat_id = "VAT ID must contain a maximum of 12 characters.";
+    const cleanedTax = rawTaxId(raw).replace(/[^a-zA-Z0-9]/g, "");
+    if (!cleanedTax) errors.tax_id = "Please enter a valid Tax ID.";
+    else if (cleanedTax.length > TAX_ID_MAX_LENGTH) {
+      errors.tax_id = "Tax ID must contain a maximum of 12 characters.";
     }
 
     const crDigits = str("cr_number").replace(/\D/g, "");
@@ -455,11 +465,13 @@ function preprocessContactBody(input: unknown): unknown {
     const looksLikeNewQuote =
       Boolean(trimRaw(raw, "phone_local")) ||
       Boolean(trimRaw(raw, "profession")) ||
+      Boolean(trimRaw(raw, "tax_id")) ||
       Boolean(trimRaw(raw, "vat_id")) ||
       Boolean(trimRaw(raw, "cr_number")) ||
       (Boolean(trimRaw(raw, "name")) && !trimRaw(raw, "first_name"));
     if (looksLikeNewQuote) {
       customerTypeRaw =
+        trimRaw(raw, "tax_id") ||
         trimRaw(raw, "vat_id") ||
         trimRaw(raw, "cr_number") ||
         (Boolean(trimRaw(raw, "company")) &&
@@ -523,9 +535,12 @@ function preprocessContactBody(input: unknown): unknown {
       category: category || undefined,
       profession:
         customer_type === "individual" ? trimRaw(raw, "profession") : "",
-      vat_id:
+      tax_id:
         customer_type === "company"
-          ? alphanumOnly(trimRaw(raw, "vat_id"), VAT_ID_MAX_LENGTH)
+          ? alphanumOnly(
+              trimRaw(raw, "tax_id") || trimRaw(raw, "vat_id"),
+              TAX_ID_MAX_LENGTH,
+            )
           : "",
       cr_number:
         customer_type === "company"
@@ -598,7 +613,7 @@ function preprocessContactBody(input: unknown): unknown {
     message: message || undefined,
     category: category || undefined,
     profession: "",
-    vat_id: "",
+    tax_id: "",
     cr_number: "",
   };
 }
@@ -644,9 +659,12 @@ function validateTypedQuote(
           : "",
       profession:
         customer_type === "individual" ? data.profession.trim() : "",
-      vat_id:
+      tax_id:
         customer_type === "company"
-          ? alphanumOnly(data.vat_id, VAT_ID_MAX_LENGTH)
+          ? alphanumOnly(
+              data.tax_id || data.vat_id || "",
+              TAX_ID_MAX_LENGTH,
+            )
           : "",
       cr_number:
         customer_type === "company"
@@ -677,7 +695,8 @@ export function parseContactRequest(input: unknown): ParseResult<ContactRequest>
       message: String(raw.message ?? ""),
       category: String(raw.category ?? ""),
       profession: String(raw.profession ?? ""),
-      vat_id: String(raw.vat_id ?? ""),
+      tax_id: String(raw.tax_id ?? raw.vat_id ?? ""),
+      vat_id: String(raw.vat_id ?? raw.tax_id ?? ""),
       cr_number: String(raw.cr_number ?? ""),
     });
   }
@@ -716,7 +735,7 @@ export function parseContactRequest(input: unknown): ParseResult<ContactRequest>
       message: parsed.data.message ?? "",
       category: parsed.data.category ?? "",
       profession: "",
-      vat_id: "",
+      tax_id: "",
       cr_number: "",
     },
   };

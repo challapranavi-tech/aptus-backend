@@ -8,7 +8,7 @@
  * Callers treat CRM create as best-effort after the sales email is sent.
  */
 import type { ContactCategory } from "@shared/lib/contact-request";
-import type { OdooRpcSession } from "./rpc";
+import { normalizeOdooBaseUrl, type OdooRpcSession } from "./rpc";
 
 export type { ContactCategory };
 
@@ -41,6 +41,7 @@ export type CrmLeadInput = {
   quoteRef?: string;
   customerType?: "individual" | "company";
   profession?: string;
+  /** Odoo Tax ID (res.partner vat). */
   vatId?: string;
   crNumber?: string;
   countryCode?: string;
@@ -240,16 +241,32 @@ export function buildCrmLeadValues(
   const isQuoteProduct =
     Boolean(product) && product !== "Others" && product !== "Select Product" && product !== "Select Software Product";
   const customerType = input.customerType;
+  const isIndividual = customerType === "individual";
+  const isCompany = customerType === "company";
+
+  // Individual quotes must not carry company Tax ID / CR into Odoo.
+  const taxId = isCompany ? (input.vatId ?? "").trim() : "";
+  const crNumber = isCompany ? (input.crNumber ?? "").trim() : "";
+  // Never send the placeholder company label "Individual" as an Odoo company name.
+  const companyName = isIndividual
+    ? ""
+    : input.company.trim() === "Individual"
+      ? ""
+      : input.company.trim();
 
   const description = [
     quoteRef ? `Quote Ref: ${quoteRef}` : null,
-    customerType ? `Customer Type: ${customerType === "company" ? "Company" : "Individual"}` : null,
+    customerType
+      ? `Customer Type: ${isCompany ? "Company" : "Individual"}`
+      : null,
     `Client Message: ${input.message?.trim() || "—"}`,
     `Product: ${product || "—"}`,
     `QTY: ${input.qty?.trim() || "—"}`,
-    input.profession?.trim() ? `Profession: ${input.profession.trim()}` : null,
-    input.vatId?.trim() ? `VAT ID: ${input.vatId.trim()}` : null,
-    input.crNumber?.trim() ? `CR Number: ${input.crNumber.trim()}` : null,
+    isIndividual && input.profession?.trim()
+      ? `Profession: ${input.profession.trim()}`
+      : null,
+    taxId ? `Tax ID: ${taxId}` : null,
+    crNumber ? `CR Number: ${crNumber}` : null,
     input.countryCode?.trim() ? `Country Code: ${input.countryCode.trim()}` : null,
     input.phoneLocal?.trim() ? `Phone (local): ${input.phoneLocal.trim()}` : null,
     input.attachmentName?.trim()
@@ -266,12 +283,11 @@ export function buildCrmLeadValues(
       ? quoteRef
         ? `Request a Quote – ${product} (${quoteRef})`
         : `Request a Quote – ${product}`
-      : `Website contact – ${contactName || input.company}`,
+      : `Website contact – ${contactName || companyName}`,
     contact_name: contactName,
-    partner_name:
-      customerType === "individual"
-        ? ""
-        : input.company.trim(),
+    // Empty company name → Odoo treats the opportunity as an Individual customer.
+    // Non-empty partner_name → Company customer.
+    partner_name: isIndividual ? "" : companyName,
     phone: input.phone.trim(),
     description,
     // Opportunity shows in CRM Pipeline → New. type "lead" only appears under Leads.
@@ -284,6 +300,12 @@ export function buildCrmLeadValues(
   const refField = quoteReferenceField();
   if (refField && quoteRef) {
     values[refField] = quoteRef;
+  }
+
+  // Optional Studio/selection field for Individual vs Company (e.g. x_studio_customer_type).
+  const customerTypeField = process.env.ODOO_CRM_CUSTOMER_TYPE_FIELD?.trim();
+  if (customerTypeField && (isIndividual || isCompany)) {
+    values[customerTypeField] = isCompany ? "company" : "individual";
   }
 
   // Software pages → SOFTWARE company; ELV/Infrastructure pages → INFRA company.
@@ -301,6 +323,12 @@ export function buildCrmLeadValues(
   if (unassign) values.user_id = false;
 
   return values;
+}
+
+/** Deep-link to open a crm.lead / opportunity form in Odoo. */
+export function crmLeadFormUrl(leadId: number): string {
+  const base = normalizeOdooBaseUrl(process.env.ODOO_URL ?? "");
+  return `${base}/web#id=${leadId}&model=crm.lead&view_type=form`;
 }
 
 /**

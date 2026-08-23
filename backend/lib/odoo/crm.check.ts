@@ -206,6 +206,69 @@ const elvValuesWithTeam = buildCrmLeadValues({
 });
 assert.equal(elvValuesWithTeam.team_id, 42, "ELV lead should carry team_id=42");
 
+// Individual Request Quote → no company name, no Tax ID / CR in Odoo payload.
+const individualLead = buildCrmLeadValues({
+  firstName: "Ada",
+  lastName: "Lovelace",
+  company: "Individual",
+  email: "ada@example.com",
+  phone: "+96891234567",
+  product: "Revit",
+  qty: "1",
+  category: "software",
+  categoryLabel: "Software",
+  quoteRef: "RQ-2026-000200",
+  customerType: "individual",
+  contactName: "Ada Lovelace",
+  profession: "Engineer",
+  // Even if tax fields are wrongly passed, they must not appear for individuals.
+  vatId: "TAXSHOULDNOTAPPEAR",
+  crNumber: "9999999999",
+});
+assert.equal(individualLead.partner_name, "");
+assert.equal(individualLead.contact_name, "Ada Lovelace");
+assert.match(String(individualLead.description), /Customer Type: Individual/);
+assert.match(String(individualLead.description), /Profession: Engineer/);
+assert.equal(String(individualLead.description).includes("Tax ID:"), false);
+assert.equal(String(individualLead.description).includes("CR Number:"), false);
+
+const companyLead = buildCrmLeadValues({
+  firstName: "Ada",
+  lastName: "Lovelace",
+  company: "Analytical Engines",
+  email: "ada@example.com",
+  phone: "+96891234567",
+  product: "Revit",
+  qty: "1",
+  category: "software",
+  categoryLabel: "Software",
+  quoteRef: "RQ-2026-000201",
+  customerType: "company",
+  contactName: "Ada Lovelace",
+  vatId: "OM123456789",
+  crNumber: "1012345",
+});
+assert.equal(companyLead.partner_name, "Analytical Engines");
+assert.match(String(companyLead.description), /Customer Type: Company/);
+assert.match(String(companyLead.description), /Tax ID: OM123456789/);
+assert.match(String(companyLead.description), /CR Number: 1012345/);
+
+process.env.ODOO_CRM_CUSTOMER_TYPE_FIELD = "x_studio_customer_type";
+const typedFieldLead = buildCrmLeadValues({
+  firstName: "Ada",
+  lastName: "Lovelace",
+  company: "",
+  email: "ada@example.com",
+  phone: "+96891234567",
+  product: "Revit",
+  qty: "1",
+  category: "software",
+  customerType: "individual",
+  contactName: "Ada Lovelace",
+});
+assert.equal(typedFieldLead.x_studio_customer_type, "individual");
+delete process.env.ODOO_CRM_CUSTOMER_TYPE_FIELD;
+
 // Clean up
 [
   "ODOO_SOFTWARE_COMPANY_ID", "ODOO_ELV_COMPANY_ID",
