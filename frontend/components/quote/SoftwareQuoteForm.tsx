@@ -2,8 +2,11 @@
 
 import { QuoteProductSelect } from "@/components/quote/QuoteProductSelect";
 import { QuoteSearchSelect } from "@/components/quote/QuoteSearchSelect";
+import { fetchAuthMeShared } from "@/lib/auth-me-client";
 import { publicApiBase } from "@/lib/api-base";
+import { normalizePhone } from "@/lib/phone";
 import { cn } from "@/lib/utils";
+import type { ClientProfile } from "@/types/profile";
 import {
   COUNTRY_CALLING_CODES,
   DEFAULT_COUNTRY_CALLING_CODE,
@@ -27,6 +30,7 @@ import {
 import type { FieldErrors } from "@shared/lib/schema";
 import {
   useEffect,
+  useRef,
   useState,
   type ChangeEvent,
   type ComponentPropsWithoutRef,
@@ -66,6 +70,71 @@ function humanSize(bytes: number): string {
     : `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
 }
 
+/** Match the longest dial-code prefix, then keep up to 10 local digits. */
+function splitProfilePhone(phone: string): { countryCode: string; local: string } {
+  const normalized = normalizePhone(phone.trim());
+  if (!normalized) {
+    return { countryCode: DEFAULT_COUNTRY_CALLING_CODE, local: "" };
+  }
+
+  const codes = [...COUNTRY_CALLING_CODES]
+    .map((c) => c.value)
+    .sort((a, b) => b.length - a.length);
+
+  for (const code of codes) {
+    if (normalized.startsWith(code)) {
+      return {
+        countryCode: code,
+        local: digitsOnly(normalized.slice(code.length), PHONE_LOCAL_MAX_DIGITS),
+      };
+    }
+  }
+
+  if (normalized.startsWith("+")) {
+    return {
+      countryCode: DEFAULT_COUNTRY_CALLING_CODE,
+      local: digitsOnly(normalized.replace(/^\+\d{1,4}/, ""), PHONE_LOCAL_MAX_DIGITS),
+    };
+  }
+
+  return {
+    countryCode: DEFAULT_COUNTRY_CALLING_CODE,
+    local: digitsOnly(normalized, PHONE_LOCAL_MAX_DIGITS),
+  };
+}
+
+function profileToQuoteDefaults(user: ClientProfile): {
+  customerType: CustomerType;
+  name: string;
+  email: string;
+  company: string;
+  countryCode: string;
+  phoneLocal: string;
+  vatId: string;
+  crNumber: string;
+} {
+  const isCompany = user.contactType === "company";
+  const companyName =
+    user.company && user.company !== "Customer" ? user.company : user.name;
+  const taxDigits = digitsOnly(user.taxId ?? "", VAT_ID_MAX_DIGITS);
+  const phone = splitProfilePhone(user.phone || "");
+
+  return {
+    customerType: isCompany ? "company" : "individual",
+    name: user.name?.trim() || "",
+    email: user.email?.trim() || "",
+    company: isCompany ? companyName.trim() : "",
+    countryCode: phone.countryCode,
+    phoneLocal: phone.local,
+    // Registration stores CR in taxId/vat — map into CR Number when it fits.
+    vatId: taxDigits.length > CR_NUMBER_MAX_DIGITS ? taxDigits : "",
+    crNumber:
+      taxDigits.length > 0 && taxDigits.length <= CR_NUMBER_MAX_DIGITS
+        ? taxDigits
+        : digitsOnly(user.taxId ?? "", CR_NUMBER_MAX_DIGITS),
+  };
+}
+
 export function SoftwareQuoteForm({
   submitLabel = "Submit Request",
   className,
@@ -80,17 +149,48 @@ export function SoftwareQuoteForm({
   const [message, setMessage] = useState("");
   const [quoteRef, setQuoteRef] = useState("");
   const [errors, setErrors] = useState<FieldErrors>({});
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [company, setCompany] = useState("");
   const [countryCode, setCountryCode] = useState(DEFAULT_COUNTRY_CALLING_CODE);
   const [phoneLocal, setPhoneLocal] = useState("");
   const [vatId, setVatId] = useState("");
   const [crNumber, setCrNumber] = useState("");
   const [attachment, setAttachment] = useState<File | null>(null);
   const [attachmentError, setAttachmentError] = useState("");
+  const [profilePrefill, setProfilePrefill] = useState(false);
+  const prefilledUserId = useRef<string | null>(null);
 
   const selectDefault =
     defaultProduct && products.includes(defaultProduct)
       ? [defaultProduct]
       : [];
+
+  useEffect(() => {
+    let cancelled = false;
+
+    void (async () => {
+      const result = await fetchAuthMeShared();
+      if (cancelled || !result.ok) return;
+      if (prefilledUserId.current === result.user.id) return;
+
+      const defaults = profileToQuoteDefaults(result.user);
+      prefilledUserId.current = result.user.id;
+      setCustomerType(defaults.customerType);
+      setName(defaults.name);
+      setEmail(defaults.email);
+      setCompany(defaults.company);
+      setCountryCode(defaults.countryCode);
+      setPhoneLocal(defaults.phoneLocal);
+      setVatId(defaults.vatId);
+      setCrNumber(defaults.crNumber);
+      setProfilePrefill(true);
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     setErrors({});
@@ -99,10 +199,10 @@ export function SoftwareQuoteForm({
     setQuoteRef("");
   }, [customerType]);
 
-  function clearField(name: string) {
-    if (!errors[name]) return;
+  function clearField(nameKey: string) {
+    if (!errors[nameKey]) return;
     const next = { ...errors };
-    delete next[name];
+    delete next[nameKey];
     setErrors(next);
     if (!Object.keys(next).length) {
       setMessage("");
@@ -110,8 +210,8 @@ export function SoftwareQuoteForm({
     }
   }
 
-  const inputError = (name: string) =>
-    errors[name] ? "aptus-form-input--error" : undefined;
+  const inputError = (nameKey: string) =>
+    errors[nameKey] ? "aptus-form-input--error" : undefined;
 
   function onPhoneLocalChange(e: ChangeEvent<HTMLInputElement>) {
     setPhoneLocal(digitsOnly(e.target.value, PHONE_LOCAL_MAX_DIGITS));
@@ -161,12 +261,15 @@ export function SoftwareQuoteForm({
     const form = e.currentTarget;
     const formData = new FormData(form);
     formData.set("customer_type", customerType);
-    formData.set("country_code", countryCode);
-    formData.set("phone_local", phoneLocal);
+    formData.set("name", name);
+    formData.set("email", email);
     if (customerType === "company") {
+      formData.set("company", company);
       formData.set("vat_id", vatId);
       formData.set("cr_number", crNumber);
     }
+    formData.set("country_code", countryCode);
+    formData.set("phone_local", phoneLocal);
     if (attachment) {
       formData.set("attachment", attachment);
     } else {
@@ -216,12 +319,32 @@ export function SoftwareQuoteForm({
             : "Request Submitted Successfully. Thank you for your request. Our sales team will review your requirements and contact you shortly.",
         );
         form.reset();
-        setPhoneLocal("");
-        setVatId("");
-        setCrNumber("");
+        if (prefilledUserId.current) {
+          const again = await fetchAuthMeShared();
+          if (again.ok) {
+            const defaults = profileToQuoteDefaults(again.user);
+            setCustomerType(defaults.customerType);
+            setName(defaults.name);
+            setEmail(defaults.email);
+            setCompany(defaults.company);
+            setCountryCode(defaults.countryCode);
+            setPhoneLocal(defaults.phoneLocal);
+            setVatId(defaults.vatId);
+            setCrNumber(defaults.crNumber);
+            setProfilePrefill(true);
+          }
+        } else {
+          setName("");
+          setEmail("");
+          setCompany("");
+          setPhoneLocal("");
+          setVatId("");
+          setCrNumber("");
+          setCountryCode(DEFAULT_COUNTRY_CALLING_CODE);
+          setCustomerType("individual");
+          setProfilePrefill(false);
+        }
         setAttachment(null);
-        setCountryCode(DEFAULT_COUNTRY_CALLING_CODE);
-        setCustomerType("individual");
         return;
       }
 
@@ -258,6 +381,12 @@ export function SoftwareQuoteForm({
       {...formProps}
     >
       <input type="hidden" name="category" value={category} />
+
+      {profilePrefill && (
+        <p className="mb-4 rounded-lg bg-[#1352a3]/0.08 px-3 py-2 text-sm text-[#1352a3]">
+          Basic details were filled from your account. You can edit them before submitting.
+        </p>
+      )}
 
       <fieldset className="aptus-quote-customer-type">
         <legend className="aptus-form-label mb-2">Customer Type</legend>
@@ -298,6 +427,7 @@ export function SoftwareQuoteForm({
       <div className="mt-5 grid gap-5 sm:grid-cols-2">
         {customerType === "company" ? (
           <>
+            <input type="hidden" name="email" value={email} />
             <label className="aptus-form-label">
               Company Name *
               <input
@@ -305,8 +435,12 @@ export function SoftwareQuoteForm({
                 name="company"
                 autoComplete="organization"
                 required
+                value={company}
                 aria-invalid={errors.company ? true : undefined}
-                onChange={() => clearField("company")}
+                onChange={(e) => {
+                  setCompany(e.target.value);
+                  clearField("company");
+                }}
                 className={cn(
                   "aptus-form-input mt-0 w-full px-4 py-3",
                   inputError("company"),
@@ -321,8 +455,12 @@ export function SoftwareQuoteForm({
                 name="name"
                 autoComplete="name"
                 required
+                value={name}
                 aria-invalid={errors.name ? true : undefined}
-                onChange={() => clearField("name")}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  clearField("name");
+                }}
                 className={cn(
                   "aptus-form-input mt-0 w-full px-4 py-3",
                   inputError("name"),
@@ -380,8 +518,12 @@ export function SoftwareQuoteForm({
                 name="name"
                 autoComplete="name"
                 required
+                value={name}
                 aria-invalid={errors.name ? true : undefined}
-                onChange={() => clearField("name")}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  clearField("name");
+                }}
                 className={cn(
                   "aptus-form-input mt-0 w-full px-4 py-3",
                   inputError("name"),
@@ -437,9 +579,13 @@ export function SoftwareQuoteForm({
                 name="email"
                 autoComplete="email"
                 required
+                value={email}
                 placeholder="name@example.com"
                 aria-invalid={errors.email ? true : undefined}
-                onChange={() => clearField("email")}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  clearField("email");
+                }}
                 className={cn(
                   "aptus-form-input mt-0 w-full px-4 py-3",
                   inputError("email"),
@@ -581,7 +727,6 @@ export function SoftwareQuoteForm({
           role="status"
         >
           {message}
-          {quoteRef ? null : null}
         </p>
       )}
       {status === "error" && message && (
