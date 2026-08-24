@@ -73,6 +73,47 @@ html {
   justify-content: flex-start;
 }
 
+.aptus-masthead__topbar-cell--lang {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  margin-inline-start: auto;
+}
+
+.aptus-lang-switch {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+.aptus-lang-switch__btn {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  opacity: 0.75;
+  padding: 0;
+}
+
+.aptus-lang-switch__btn:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.aptus-lang-switch__btn--active {
+  font-weight: 700;
+  opacity: 1;
+  text-decoration: none;
+}
+
+.aptus-lang-switch__sep {
+  opacity: 0.45;
+}
+
 .aptus-masthead__social {
   align-items: center;
   display: flex;
@@ -650,7 +691,8 @@ html {
 @media (min-width: 1024px) {
   .aptus-masthead__topbar-inner {
     gap: 0;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.6fr) minmax(0, 1.6fr) minmax(0, 1.1fr);
+    grid-template-columns:
+      minmax(0, 1.1fr) minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1.1fr) auto;
   }
 
   .aptus-masthead__topbar-cell {
@@ -665,6 +707,12 @@ html {
 
   .aptus-masthead__topbar-cell--social {
     justify-content: flex-start;
+  }
+
+  .aptus-masthead__topbar-cell--lang {
+    justify-content: flex-end;
+    margin-inline-start: 0;
+    padding-inline-end: 0.25rem;
   }
 }
 

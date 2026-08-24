@@ -1,16 +1,30 @@
-import { Poppins } from "next/font/google";
+import { Noto_Sans_Arabic, Poppins } from "next/font/google";
 import "@/styles/globals.css";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { QuoteModalProvider } from "@/components/quote/QuoteModalProvider";
 import { GSAPProvider } from "@/components/providers/GSAPProvider";
+import { LocaleProvider } from "@/context/LocaleProvider";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import {
+  localeDir,
+  localeHtmlLang,
+  type Locale,
+} from "@/lib/locale";
+import { getRequestLocale } from "@/lib/request-locale";
 import type { Metadata, Viewport } from "next";
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
   variable: "--font-poppins",
+  display: "swap",
+});
+
+const notoArabic = Noto_Sans_Arabic({
+  subsets: ["arabic"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-arabic",
   display: "swap",
 });
 
@@ -44,22 +58,30 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale: Locale = await getRequestLocale();
+
   return (
-    <html lang="en" className={poppins.variable}>
+    <html
+      lang={localeHtmlLang(locale)}
+      dir={localeDir(locale)}
+      className={`${poppins.variable} ${notoArabic.variable}`}
+    >
       <body className="flex min-h-screen flex-col antialiased">
-        <GSAPProvider>
-          <QuoteModalProvider>
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-            <WhatsAppButton />
-          </QuoteModalProvider>
-        </GSAPProvider>
+        <LocaleProvider initialLocale={locale}>
+          <GSAPProvider>
+            <QuoteModalProvider>
+              <Header />
+              <main className="flex-1">{children}</main>
+              <Footer />
+              <WhatsAppButton />
+            </QuoteModalProvider>
+          </GSAPProvider>
+        </LocaleProvider>
       </body>
     </html>
   );

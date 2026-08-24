@@ -5,6 +5,8 @@ import { getElvPageScope } from "@/data/elv-page-scope";
 import { isAutodeskHiddenSlug } from "@/data/autodesk-subnav";
 import { getSoftwarePageScope, usesStackedSoftwareLayout } from "@/data/software-page-scope";
 import { getAllPageSlugs, getPageBySlug, loadCaseStudiesPageContent } from "@/data";
+import { localizePage } from "@/lib/localize-page";
+import { getRequestLocale } from "@/lib/request-locale";
 import { cn, buildPageMetadata, formatSlug } from "@/lib/utils";
 import "@/styles/case-studies-pages.css";
 import "@/styles/pages/team.css";
@@ -62,7 +64,9 @@ export default async function DynamicPage({ params }: PageProps) {
 
   let page;
   try {
-    page = await getPageBySlug(normalized);
+    const locale = await getRequestLocale();
+    const raw = await getPageBySlug(normalized);
+    page = raw ? await localizePage(raw, locale) : null;
   } catch (err) {
     console.error(`[cms] /${normalized} load failed:`, err);
     // Build safety net if a slug still entered the static set and then timed out.

@@ -4,6 +4,8 @@ import { cn } from "@/lib/utils";
 import type { NavigationItem } from "@/types";
 import { clearLegacyPortalSession, syncLegacyPortalSession } from "@/lib/access-token";
 import { fetchAuthMeShared, invalidateAuthMeCache } from "@/lib/auth-me-client";
+import { useLocale } from "@/context/LocaleProvider";
+import { translateNavLabel } from "@/locales/messages";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -18,6 +20,11 @@ import {
 
 interface NavMenuProps {
   items: NavigationItem[];
+}
+
+function NavLabel({ item }: { item: NavigationItem }) {
+  const { locale } = useLocale();
+  return <>{translateNavLabel(locale, item.href, item.label)}</>;
 }
 
 const VIEWPORT_PAD = 12;
@@ -153,7 +160,7 @@ function NavDropdownItem({
             aria-controls={panelId}
             onClick={onClose}
           >
-            {item.label}
+            <NavLabel item={item} />
             <NavChevron direction={chevronDirection} />
           </Link>
         ) : (
@@ -162,7 +169,7 @@ function NavDropdownItem({
             aria-haspopup="menu"
             aria-controls={panelId}
           >
-            {item.label}
+            <NavLabel item={item} />
             <NavChevron direction={chevronDirection} />
           </span>
         )}
@@ -187,7 +194,7 @@ function NavDropdownItem({
   return (
     <li>
       <Link href={item.href} className={`${linkClass}${active ? " is-active" : ""}`} onClick={onClose}>
-        {item.label}
+        <NavLabel item={item} />
       </Link>
     </li>
   );
@@ -204,8 +211,10 @@ function DropdownItem({
 }) {
   const hasChildren = item.children && item.children.length > 0;
   const active = isDirectlyActive(item, pathname);
-  const isSoftware = item.label === "Software";
-  const isElv = item.label === "ELV Solutions";
+  const isSoftware =
+    item.label === "Software" || item.href === "/software-solutions";
+  const isElv =
+    item.label === "ELV Solutions" || item.href === "/elv-solutions";
   const panelId = useId();
 
   if (!hasChildren) {
@@ -217,7 +226,7 @@ function DropdownItem({
           className={cn("aptus-masthead__link", active && "is-active")}
           onClick={onClose}
         >
-          {item.label}
+          <NavLabel item={item} />
         </Link>
       </li>
     );
@@ -238,7 +247,7 @@ function DropdownItem({
         aria-controls={panelId}
         onClick={onClose}
       >
-        {item.label}
+        <NavLabel item={item} />
         <NavChevron />
       </Link>
 
@@ -288,7 +297,7 @@ function MobileMenuItem({
         data-depth={depth}
         onClick={onClose}
       >
-        {item.label}
+        <NavLabel item={item} />
       </Link>
     );
   }
@@ -305,7 +314,7 @@ function MobileMenuItem({
             )}
             onClick={onClose}
           >
-            {item.label}
+            <NavLabel item={item} />
           </Link>
         ) : (
           <button
@@ -314,7 +323,7 @@ function MobileMenuItem({
             onClick={() => setOpen((o) => !o)}
             aria-expanded={open}
           >
-            {item.label}
+            <NavLabel item={item} />
           </button>
         )}
         <button

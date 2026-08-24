@@ -7,6 +7,7 @@ import {
   syncLegacyPortalSession,
 } from "@/lib/access-token";
 import { fetchAuthMeShared, invalidateAuthMeCache } from "@/lib/auth-me-client";
+import { useLocale } from "@/context/LocaleProvider";
 import {
   PORTAL_CART_EVENT,
   portalCartCount,
@@ -22,6 +23,7 @@ const CART_PATH = "/portal/cart";
  * middleware redirect to /login from before the session was established.
  */
 function HeaderCartLink({ showBadge }: { showBadge: boolean }) {
+  const { t } = useLocale();
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -50,11 +52,11 @@ function HeaderCartLink({ showBadge }: { showBadge: boolean }) {
       aria-label={
         showBadge
           ? count > 0
-            ? `Cart with ${count} items`
-            : "Cart"
-          : "Shopping cart"
+            ? `${t.auth.cart} (${count})`
+            : t.auth.cart
+          : t.auth.cart
       }
-      title="Shopping cart"
+      title={t.auth.cart}
     >
       <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden focusable="false">
         <path
@@ -70,6 +72,7 @@ function HeaderCartLink({ showBadge }: { showBadge: boolean }) {
 }
 
 export function HeaderAuthActions() {
+  const { t } = useLocale();
   const [user, setUser] = useState<PortalUser | null>(null);
 
   const refresh = useCallback(async () => {
@@ -110,7 +113,7 @@ export function HeaderAuthActions() {
       <div className="aptus-header-user">
         <HeaderCartLink showBadge={false} />
         <Link href="/login" className="aptus-masthead__link aptus-header-user__login">
-          Login
+          {t.auth.login}
         </Link>
       </div>
     );

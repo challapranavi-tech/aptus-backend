@@ -1,6 +1,7 @@
 "use client";
 
 import { SoftwareQuoteForm } from "@/components/quote/SoftwareQuoteForm";
+import { useLocale } from "@/context/LocaleProvider";
 import type { QuoteModalContext } from "@/components/quote/quote-modal-utils";
 
 type QuoteModalProps = {
@@ -10,6 +11,7 @@ type QuoteModalProps = {
 };
 
 export function QuoteModal({ open, onClose, context }: QuoteModalProps) {
+  const { locale, t } = useLocale();
   if (!open) return null;
 
   return (
@@ -22,14 +24,21 @@ export function QuoteModal({ open, onClose, context }: QuoteModalProps) {
         aria-labelledby="quote-modal-title"
       >
         <div className="aptus-quote-modal__header">
-          <button type="button" className="aptus-quote-modal__close" onClick={onClose} aria-label="Close">
+          <button
+            type="button"
+            className="aptus-quote-modal__close"
+            onClick={onClose}
+            aria-label={locale === "ar" ? "إغلاق" : "Close"}
+          >
             ×
           </button>
           <h2 id="quote-modal-title" className="aptus-software-form-heading">
-            Request a Quote
+            {t.common.requestQuote}
           </h2>
           <p className="aptus-software-form-lead">
-            Tell us what you need and our sales team will get back to you shortly.
+            {locale === "ar"
+              ? "أخبرنا بما تحتاجه وسيتواصل معك فريق المبيعات قريباً."
+              : "Tell us what you need and our sales team will get back to you shortly."}
           </p>
         </div>
         <div className="aptus-quote-modal__body">
@@ -40,6 +49,7 @@ export function QuoteModal({ open, onClose, context }: QuoteModalProps) {
             productLabel={context.productLabel}
             products={context.products}
             defaultProduct={context.defaultProduct}
+            submitLabel={t.common.submitRequest}
           />
         </div>
       </div>

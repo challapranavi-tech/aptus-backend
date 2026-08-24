@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useAuth } from "@/context/AuthProvider";
+import { useLocale } from "@/context/LocaleProvider";
 import { clearLegacyPortalSession } from "@/lib/access-token";
 
 const PROTECTED_PREFIX = "/portal";
@@ -15,12 +16,12 @@ const PROTECTED_PREFIX = "/portal";
 export function PortalAuthGuard({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { user, ready } = useAuth();
+  const { t } = useLocale();
   const isProtected = pathname.startsWith(PROTECTED_PREFIX);
 
   useEffect(() => {
     if (!isProtected || !ready || user) return;
     clearLegacyPortalSession();
-    // Hard nav: Next soft-nav can replay a cached middleware redirect loop.
     window.location.replace(`/login?next=${encodeURIComponent(pathname)}`);
   }, [isProtected, ready, user, pathname]);
 
@@ -34,7 +35,7 @@ export function PortalAuthGuard({ children }: { children: React.ReactNode }) {
         role="status"
         aria-live="polite"
       >
-        Loading your account…
+        {t.common.loadingAccount}
       </div>
     );
   }
