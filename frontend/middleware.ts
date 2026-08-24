@@ -27,7 +27,14 @@ export async function middleware(request: NextRequest) {
     if (pathname === "/api/revalidate") {
       return handleRevalidate(request, traceId);
     }
-    return handlePortalApi(request, pathname, traceId);
+    // Hot GET paths: IP rate limits only — skip JWT identify (crypto) on every call.
+    const skipIdentify =
+      request.method === "GET" &&
+      (pathname === "/api/auth/me" ||
+        pathname === "/api/notifications" ||
+        pathname === "/api/orders" ||
+        pathname === "/api/subscriptions");
+    return handlePortalApi(request, pathname, traceId, skipIdentify);
   }
 
   const response = NextResponse.next();
@@ -93,11 +100,14 @@ async function handlePortalApi(
   request: NextRequest,
   pathname: string,
   traceId: string,
+  skipIdentify = false,
 ) {
-  const userId = await identifyUser({
-    headers: request.headers,
-    cookieValue: (name) => request.cookies.get(name)?.value,
-  });
+  const userId = skipIdentify
+    ? null
+    : await identifyUser({
+        headers: request.headers,
+        cookieValue: (name) => request.cookies.get(name)?.value,
+      });
 
   const outcome = await enforceApiRateLimit(request, pathname, {
     userId,

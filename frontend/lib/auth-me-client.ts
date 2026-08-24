@@ -16,7 +16,8 @@ type Shared = {
   at: number;
 };
 
-const TTL_MS = 2_000;
+const TTL_MS = 60_000;
+
 
 function getShared(): Shared {
   if (typeof window === "undefined") {

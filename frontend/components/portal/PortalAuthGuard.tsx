@@ -10,7 +10,7 @@ const PROTECTED_PREFIX = "/portal";
 /**
  * Gate portal routes on AuthProvider (single /api/auth/me).
  * Confirmed unauthenticated → hard navigate to login (avoids soft-nav redirect cache).
- * Renders nothing while auth is resolving.
+ * Shows a light shell while auth is resolving (avoids a blank hang).
  */
 export function PortalAuthGuard({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -28,7 +28,15 @@ export function PortalAuthGuard({ children }: { children: React.ReactNode }) {
     return <>{children}</>;
   }
   if (!ready || !user) {
-    return null;
+    return (
+      <div
+        className="flex min-h-[40vh] items-center justify-center px-4 text-sm text-slate-500"
+        role="status"
+        aria-live="polite"
+      >
+        Loading your account…
+      </div>
+    );
   }
   return <>{children}</>;
 }

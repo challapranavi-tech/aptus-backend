@@ -5,6 +5,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useState,
 } from "react";
@@ -13,6 +14,7 @@ import {
   clearLegacyPortalSession,
   loginViaApi,
   logoutViaApi,
+  readLegacyPortalSessionUser,
   syncLegacyPortalSession,
 } from "@/lib/access-token";
 import { fetchAuthMeShared, invalidateAuthMeCache } from "@/lib/auth-me-client";
@@ -32,6 +34,40 @@ type AuthContextValue = {
 };
 
 const AuthContext = createContext<AuthContextValue | null>(null);
+
+function legacyToClientProfile(
+  legacy: NonNullable<ReturnType<typeof readLegacyPortalSessionUser>>,
+): ClientProfile {
+  return {
+    id: legacy.id,
+    email: legacy.email,
+    name: legacy.name,
+    initials: legacy.initials,
+    role: legacy.role ?? "Customer",
+    company: legacy.company,
+    phone: legacy.phone ?? "",
+    location: legacy.location ?? "",
+    accountManager: legacy.accountManager ?? "Aptus Support",
+    supportTier: legacy.supportTier ?? "Standard",
+    customerSince: legacy.customerSince ?? "",
+    billingCycle: legacy.billingCycle ?? "",
+    paymentTerms: legacy.paymentTerms ?? "",
+    contactType:
+      legacy.contactType === "company" || legacy.contactType === "person"
+        ? legacy.contactType
+        : undefined,
+    street: legacy.street,
+    street2: legacy.street2,
+    city: legacy.city,
+    state: legacy.state,
+    zip: legacy.zip,
+    country: legacy.country,
+    taxId: legacy.taxId,
+    website: legacy.website,
+    language: legacy.language,
+    tags: legacy.tags,
+  };
+}
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<ClientProfile | null>(null);
@@ -53,6 +89,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch {
       setUser(null);
       clearLegacyPortalSession();
+    }
+  }, []);
+
+  useLayoutEffect(() => {
+    // Paint portal chrome from last session before first paint when possible.
+    const legacy = readLegacyPortalSessionUser();
+    if (legacy) {
+      setUser(legacyToClientProfile(legacy));
+      setReady(true);
     }
   }, []);
 

@@ -75,7 +75,7 @@ export function odooConfigFromEnv() {
     db: (process.env.ODOO_DB ?? "").trim(),
     user: (process.env.ODOO_USER ?? "").trim(),
     apiKey: (process.env.ODOO_API_KEY ?? "").trim(),
-    revalidate: Number(process.env.ODOO_REVALIDATE ?? "60"),
+    revalidate: Number(process.env.ODOO_REVALIDATE ?? "300"),
     websiteId: Number(process.env.ODOO_WEBSITE_ID ?? "1"),
   };
 }
@@ -155,19 +155,24 @@ function isInvalidFieldError(err: unknown): string | null {
 async function resolvePageFields(session: OdooRpcSession): Promise<string[]> {
   if (_pageFields) return _pageFields;
 
-  const fields = [...PAGE_FIELDS_CORE] as string[];
+  // Prefer one RPC for core + all CMS fields (normal production). On Invalid
+  // field, strip that field and retry — avoids 3 sequential probe round-trips.
+  let candidate = [...PAGE_FIELDS_CORE, ...PAGE_FIELDS_CMS] as string[];
   const missing: string[] = [];
+  const coreSet = new Set<string>(PAGE_FIELDS_CORE as string[]);
 
-  for (const field of PAGE_FIELDS_CMS) {
+  while (true) {
     try {
       await searchRead(session, "website.page", [], {
-        fields: ["id", field],
+        fields: candidate,
         limit: 1,
       });
-      fields.push(field);
+      break;
     } catch (err) {
-      if (isInvalidFieldError(err) === field) {
-        missing.push(field);
+      const bad = isInvalidFieldError(err);
+      if (bad && candidate.includes(bad) && !coreSet.has(bad)) {
+        missing.push(bad);
+        candidate = candidate.filter((f) => f !== bad);
         continue;
       }
       throw err;
@@ -182,8 +187,8 @@ async function resolvePageFields(session: OdooRpcSession): Promise<string[]> {
     );
   }
 
-  _pageFields = fields;
-  return fields;
+  _pageFields = candidate;
+  return _pageFields;
 }
 
 /** Drop cached PAGE_FIELDS resolution (call with invalidateOdooClientSession). */
@@ -231,13 +236,23 @@ export class OdooClient {
       );
     }
 
-    const session = await authenticate(
-      cfg.url,
-      cfg.db,
-      cfg.user,
-      cfg.apiKey,
-      cfg.revalidate,
-    );
+    // Reuse the worker-cached JSON-RPC session so CMS cache misses don't
+    // authenticate again after getClient() / getOdooServiceSession().
+    const useSharedSession =
+      overrides.url === undefined &&
+      overrides.db === undefined &&
+      overrides.user === undefined &&
+      overrides.apiKey === undefined;
+
+    const session = useSharedSession
+      ? await getOdooServiceSession()
+      : await authenticate(
+          cfg.url,
+          cfg.db,
+          cfg.user,
+          cfg.apiKey,
+          cfg.revalidate,
+        );
 
     return new OdooClient(session, cfg.websiteId);
   }

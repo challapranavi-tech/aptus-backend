@@ -96,14 +96,9 @@ async function apiGet<T>(path: string): Promise<T | null> {
 }
 
 export const getSiteConfig = cache(async (): Promise<SiteConfig> => {
-  try {
-    const config = await apiGet<SiteConfig>("/api/cms/site-config");
-    return config ?? fallbackSiteConfig();
-  } catch (err) {
-    // Chrome must still render if CMS is down.
-    console.error(err);
-    return fallbackSiteConfig();
-  }
+  // Nav / footer / top bar are code-owned (see site-nav.ts). Skipping the
+  // frontend→backend hop removes a blocking RTT from every page SSR.
+  return fallbackSiteConfig();
 });
 
 export const getHomePage = cache(async (): Promise<Page | null> => {
