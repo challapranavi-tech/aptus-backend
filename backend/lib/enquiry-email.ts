@@ -39,3 +39,34 @@ export function formatContactEnquiryEmail(
     ].join("\n"),
   };
 }
+
+/** Customer acknowledgement after Request Quote / enquiry submit. */
+export function formatEnquiryThankYouEmail(opts: {
+  customerName: string;
+  enquiryId: string;
+  productName: string;
+  enquiryDate: string;
+  enquirySummary: string;
+}): EnquiryEmailContent {
+  const name = opts.customerName.trim() || "there";
+  return {
+    subject: "Thank You for Contacting Aptus Infotech",
+    text: [
+      `Dear ${name},`,
+      ``,
+      `Thank you for contacting Aptus Infotech. We have received your request.`,
+      ``,
+      `Reference: ${opts.enquiryId}`,
+      `Product / Topic: ${opts.productName}`,
+      `Date: ${opts.enquiryDate}`,
+      ``,
+      `Summary:`,
+      opts.enquirySummary,
+      ``,
+      `Our team will get back to you shortly.`,
+      ``,
+      `Best regards,`,
+      `Aptus Infotech`,
+    ].join("\n"),
+  };
+}

@@ -73,8 +73,8 @@ export function odooConfigFromEnv() {
   return {
     url: normalizeOdooBaseUrl(rawUrl),
     db: (process.env.ODOO_DB ?? "").trim(),
-    user: (process.env.ODOO_USER ?? "").trim(),
-    apiKey: (process.env.ODOO_API_KEY ?? "").trim(),
+    user: (process.env.ODOO_USER ?? "").trim().replace(/^['"]|['"]$/g, ""),
+    apiKey: (process.env.ODOO_API_KEY ?? "").trim().replace(/^['"]|['"]$/g, ""),
     revalidate: Number(process.env.ODOO_REVALIDATE ?? "60"),
     websiteId: Number(process.env.ODOO_WEBSITE_ID ?? "1"),
   };

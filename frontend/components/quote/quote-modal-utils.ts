@@ -5,6 +5,15 @@ import { CONTACT_PRODUCTS, ELV_PRODUCTS } from "@shared/lib/contact-request";
 
 const QUOTE_MODAL_LABELS = new Set(["Request a Quote", "Renew Subscription", "Get Your Quote Now"]);
 
+/**
+ * Top-of-page / product-card "Request Quote" CTAs to hide — keep mid/bottom
+ * "Get Your Quote Now" and Renew Subscription visible.
+ */
+export function isTopRequestQuoteCta(label?: string | null): boolean {
+  const t = (label ?? "").replace(/\s+/g, " ").trim().toLowerCase();
+  return t === "request a quote" || t === "request quote";
+}
+
 /** Slug → ELV product name (matches contactCta.productName in content JSON). */
 const ELV_SLUG_PRODUCT: Record<string, string> = {
   "access-control-system": "Access Control Systems",
@@ -89,12 +98,16 @@ function pathSlug(pathname: string): string {
 
 function productsForFamily(family: string): string[] {
   if (family === "elv") return [...ELV_PRODUCTS];
-  if (family === "autodesk" || family === "water-infrastructure") {
-    return [...AUTODESK_QUOTE_PRODUCTS];
-  }
-  const links = softwareSubnavForFamily(family);
+  // Prefer live subnav labels so product-page names (e.g. AutoCAD) match
+  // and can be pre-selected / multi-selected.
+  const links = softwareSubnavForFamily(
+    family === "water-infrastructure" ? "autodesk" : family,
+  );
   if (links?.length) {
     return [...new Set(links.map((link) => link.label))];
+  }
+  if (family === "autodesk" || family === "water-infrastructure") {
+    return [...AUTODESK_QUOTE_PRODUCTS];
   }
   return [...AUTODESK_QUOTE_PRODUCTS];
 }
@@ -102,18 +115,20 @@ function productsForFamily(family: string): string[] {
 function defaultProductForSlug(family: string, slug: string): string | undefined {
   if (family === "elv") return ELV_SLUG_PRODUCT[slug];
 
-  const links = softwareSubnavForFamily(family);
+  const navFamily = family === "water-infrastructure" ? "autodesk" : family;
+  const links = softwareSubnavForFamily(navFamily);
   const match = links?.find((link) => link.href.replace(/^\//, "") === slug);
   if (match) return match.label;
 
   if (family === "autodesk" || family === "water-infrastructure") {
     const AUTODESK_SLUG_PRODUCT: Record<string, string> = {
+      autocad: "AutoCAD",
       "3ds-max": "3ds Max",
       "civil-3d": "Civil 3D",
       "autocad-lt": "AutoCAD LT",
       revit: "Revit",
       "infowater-pro": "InfoWater Pro",
-      navisworks: "Navisworks Manage",
+      navisworks: "Navisworks",
     };
     return AUTODESK_SLUG_PRODUCT[slug];
   }

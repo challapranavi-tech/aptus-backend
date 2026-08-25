@@ -1,14 +1,23 @@
 "use client";
 
-import { QuoteModal } from "@/components/quote/QuoteModal";
 import {
   quoteContextFromLink,
   quoteContextFromPathname,
   shouldOpenQuoteModal,
   type QuoteModalContext,
 } from "@/components/quote/quote-modal-utils";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+
+/** Load the heavy quote form only when the modal actually opens. */
+const QuoteModal = dynamic(
+  () =>
+    import("@/components/quote/QuoteModal").then((m) => ({
+      default: m.QuoteModal,
+    })),
+  { ssr: false },
+);
 
 export function QuoteModalProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname() ?? "/";
@@ -50,7 +59,9 @@ export function QuoteModalProvider({ children }: { children: React.ReactNode }) 
   return (
     <>
       {children}
-      <QuoteModal open={open} onClose={() => setOpen(false)} context={context} />
+      {open ? (
+        <QuoteModal open onClose={() => setOpen(false)} context={context} />
+      ) : null}
     </>
   );
 }

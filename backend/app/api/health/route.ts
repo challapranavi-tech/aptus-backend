@@ -24,7 +24,9 @@ export async function GET() {
     normalizeOdooBaseUrl(rawOdooUrl) !== rawOdooUrl.trim().replace(/\/+$/, "");
 
   // Live RPC probe — catches bad hosts even when env vars are non-empty.
+  // Also try service auth so a dead API key doesn't look "healthy".
   let odooReachable: boolean | null = null;
+  let odooAuthOk: boolean | null = null;
   if (odooConfigured) {
     try {
       await getVersionInfo(odooConfigFromEnv().url);
@@ -32,11 +34,21 @@ export async function GET() {
     } catch {
       odooReachable = false;
     }
+    if (odooReachable) {
+      try {
+        const { getOdooServiceSession } = await import("@/lib/odoo");
+        await getOdooServiceSession();
+        odooAuthOk = true;
+      } catch {
+        odooAuthOk = false;
+      }
+    }
   }
 
   const checks = {
     odooConfigured,
     odooReachable,
+    odooAuthOk,
     odooUrlHadUiPath,
     revalidateToken,
     frontendUrl,
@@ -47,6 +59,7 @@ export async function GET() {
   const ready =
     checks.odooConfigured &&
     checks.odooReachable !== false &&
+    checks.odooAuthOk !== false &&
     checks.revalidateToken;
 
   return NextResponse.json({
@@ -74,6 +87,9 @@ export async function GET() {
             : null,
           checks.odooReachable === false
             ? "Odoo JSON-RPC unreachable. Use host-only ODOO_URL (https://….odoo.com) with no /odoo suffix, then redeploy."
+            : null,
+          checks.odooAuthOk === false
+            ? "Odoo 19 rejected ODOO_API_KEY (JSON-2 Invalid apikey). In Odoo on this same staging DB, open Preferences → Account Security → New API Key (no expiry if you are an admin), paste it into backend/.env.local ODOO_API_KEY, restart npm run dev, then recheck /api/health odooAuthOk."
             : null,
           !checks.revalidateToken
             ? "Set ODOO_REVALIDATE_TOKEN (must match frontend + Odoo nextjs.token)."

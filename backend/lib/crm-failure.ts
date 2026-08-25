@@ -11,6 +11,8 @@ export async function reportCrmLeadFailure(opts: {
   input: CrmLeadInput;
   alertTo: string;
   error: unknown;
+  /** False when the HTTP handler failed closed before thank-you / sales quote mail. */
+  customerNotified?: boolean;
 }): Promise<void> {
   const errMsg =
     opts.error instanceof Error ? opts.error.message : String(opts.error);
@@ -37,13 +39,16 @@ export async function reportCrmLeadFailure(opts: {
 
   const product = opts.input.product?.trim() || "—";
   const company = opts.input.company.trim() || "—";
+  const notified = opts.customerNotified === true;
   const alert = await sendEmail({
     to: opts.alertTo,
     subject: `CRM Lead creation failed for Quote #${opts.quoteRef}. Please review.`,
     text: [
       `CRM Lead creation failed for Quote #${opts.quoteRef}.`,
       ``,
-      `The customer already received confirmation and the sales quote email was sent.`,
+      notified
+        ? `The customer already received confirmation and the sales quote email was sent.`
+        : `The website request was received, but the CRM lead was not created. The customer was not told it succeeded.`,
       `Please create the CRM lead manually if it does not appear after automatic retry.`,
       ``,
       `Product: ${product}`,

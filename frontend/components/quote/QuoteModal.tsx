@@ -29,7 +29,7 @@ export function QuoteModal({ open, onClose, context }: QuoteModalProps) {
             Request a Quote
           </h2>
           <p className="aptus-software-form-lead">
-            Fill out the form below and our team will get back to you shortly
+            Tell us what you need and our sales team will get back to you shortly.
           </p>
         </div>
         <div className="aptus-quote-modal__body">

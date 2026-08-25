@@ -662,6 +662,26 @@ export function mapPageJson(
     }
   }
 
+  // Mid quote CTA above Key Features / product cards (not after them).
+  const midCta = data.midCta;
+  if (midCta?.heading) {
+    sections.push({
+      id: "page-mid-cta",
+      type: "cta",
+      order: ++order.n,
+      data: {
+        type: "cta",
+        heading: midCta.heading,
+        description: midCta.subheading ?? midCta.description,
+        action: {
+          label: midCta.actionLabel ?? "Get Your Quote Now",
+          href: midCta.actionHref ?? "#form",
+        },
+        layout: "software-mid",
+      },
+    });
+  }
+
   mapCardSections(data, sections, order);
 
   if (isPolicyPanel && data.intro?.visible !== false) {
@@ -989,25 +1009,6 @@ export function mapPageJson(
             description: "Collaboration with customers, employees and partners",
           },
         ],
-      },
-    });
-  }
-
-  const midCta = data.midCta;
-  if (midCta?.heading) {
-    sections.push({
-      id: "page-mid-cta",
-      type: "cta",
-      order: ++order.n,
-      data: {
-        type: "cta",
-        heading: midCta.heading,
-        description: midCta.subheading ?? midCta.description,
-        action: {
-          label: midCta.actionLabel ?? "Get Your Quote Now",
-          href: midCta.actionHref ?? "#form",
-        },
-        layout: "software-mid",
       },
     });
   }

@@ -77,7 +77,7 @@
   }
 
   .aptus-software-hero-actions .aptus-software-btn {
-    min-width: 220px;
+    min-width: min(220px, 100%);
     width: auto;
   }
 
@@ -106,18 +106,21 @@
     line-height: 1;
     padding: 12px 24px;
     text-align: center;
+    text-decoration: none;
     transition: all 1.5s ease;
     width: 100%;
   }
 
   .aptus-software-btn:hover,
   .aptus-software-btn:focus-visible {
+    color: #fff;
     opacity: 1;
   }
 
   .aptus-software-btn-blue:hover,
   .aptus-software-btn-blue:focus-visible {
     background-color: #13934b;
+    color: #fff;
   }
 
   .aptus-software-btn-blue {
@@ -192,6 +195,7 @@
     height: 100%;
     margin: 5px;
     min-width: 0;
+    overflow: hidden;
     padding: 0.5rem 0.5rem 1rem;
     text-align: start;
   }
@@ -203,6 +207,7 @@
     justify-content: center;
     margin: 0 auto;
     max-width: 70%;
+    overflow: hidden;
   }
 
   .aptus-software-product-title {
@@ -307,6 +312,12 @@
     max-width: 1000px;
   }
 
+  @media (min-width: 768px) {
+    .aptus-software-benefits-band .aptus-software-icon-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
   @media (min-width: 1024px) {
     .aptus-software-benefits-band .aptus-software-icon-grid {
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -353,6 +364,12 @@
     color: #1352a3;
     width: auto;
     padding: 0.75rem 1.5rem;
+  }
+
+  .aptus-software-mid-band .aptus-software-btn-blue:hover,
+  .aptus-software-mid-band .aptus-software-btn-blue:focus-visible {
+    background-color: #f3f4f6;
+    color: #1352a3;
   }
 
   .aptus-software-section[data-id="why-aptus"] .aptus-software-section-title {
@@ -477,7 +494,11 @@
   }
 
   .aptus-software-inner-hero__cta {
-    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 1.25rem;
     text-align: center;
   }
 
@@ -510,45 +531,56 @@
     min-width: 0;
   }
 
-  @media (min-width: 768px) {
-    .aptus-software-inner-hero__grid {
-      gap: 1rem;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .aptus-software-inner-hero__grid--two-column {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
+  /* Vertical product sidebar (ELV / Autodesk / family pages) */
   .aptus-software-subnav__list {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
     list-style: none;
     margin: 0;
     padding: 0;
   }
 
+  .aptus-software-subnav__list > li + li {
+    border-top: 1px solid rgb(19 82 163 / 0.12);
+  }
+
   .aptus-software-subnav__link {
-    color: #1352a3;
+    color: #1a1a1a;
     display: block;
-    font-size: var(--text-base);
+    font-size: var(--text-sm);
     font-weight: 600;
     line-height: 1.35;
-    padding: 0.625rem 0.75rem;
+    padding: 0.65rem 0.75rem;
     text-decoration: none;
     transition: background 0.15s ease, color 0.15s ease;
   }
 
   .aptus-software-subnav__link:hover,
+  .aptus-software-subnav__link:focus-visible {
+    background: rgb(19 82 163 / 0.06);
+    color: #1352a3;
+  }
+
   .aptus-software-subnav__link.is-active {
     background: #1352a3;
     color: #fff;
   }
 
-  .aptus-software-subnav__link.is-active {
+  .aptus-software-subnav__link.is-active:hover,
+  .aptus-software-subnav__link.is-active:focus-visible {
+    background: #0f4589;
     color: #fff;
+  }
+
+  @media (min-width: 768px) {
+    .aptus-software-inner-hero__grid--two-column {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .aptus-software-inner-hero__grid {
+      gap: 1rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
   }
 
   .aptus-software-inner-hero__title {
@@ -720,11 +752,6 @@
   }
 
   @media (min-width: 768px) and (max-width: 1023px) {
-    .aptus-software-inner-hero__grid {
-      gap: 1rem;
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr) minmax(0, 1fr);
-    }
-
     .aptus-software-inner-hero__grid--two-column {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -808,6 +835,12 @@
 
   @media (min-width: 768px) {
     .aptus-software-quote-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .aptus-software-quote-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
@@ -880,6 +913,18 @@
     }
   }
 
+  /* Tablet+: keep 3-up in one row (avoids 2+1 orphan on medium) */
+  @media (min-width: 768px) {
+    .aptus-software-icon-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .aptus-software-icon-grid--4 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: none;
+    }
+  }
+
   @media (min-width: 1024px) {
     .aptus-software-icon-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -902,20 +947,67 @@
 
   .aptus-software-value-grid {
     display: grid;
-    gap: 0.5rem;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  @media (min-width: 640px) {
+    .aptus-software-value-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 768px) {
+    .aptus-software-value-grid--3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .aptus-software-value-grid--4 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .aptus-software-value-grid--5 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
   @media (min-width: 1024px) {
     .aptus-software-value-grid {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
+
+    .aptus-software-value-grid--3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .aptus-software-value-grid--5 {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 639.98px) {
+    .aptus-software-value-card,
+    .aptus-software-icon-card {
+      margin: 0;
+      padding: 1rem 0.85rem 1.15rem;
+    }
+
+    .aptus-software-value-body,
+    .aptus-software-icon-card__body {
+      font-size: 0.8125rem;
+      margin-top: 0.25rem;
+    }
+
+    .aptus-software-value-icon {
+      height: 2.5rem;
+      width: 2.5rem;
+    }
   }
 
   .aptus-software-product-media img {
-    height: 136px;
-    margin-inline: auto;
-    max-width: 70%;
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
     object-fit: contain;
     width: auto;
   }
@@ -932,7 +1024,7 @@
     grid-template-columns: 1fr;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     .aptus-etap-grid {
       gap: 1rem;
       grid-template-columns: 25.219% 74.781%;

@@ -1,4 +1,5 @@
 import { SoftwareInnerHeroNav } from "@/components/layout/SoftwareInnerHeroNav";
+import { isTopRequestQuoteCta } from "@/components/quote/quote-modal-utils";
 import { CmsImage } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import type { SoftwareInnerHero as SoftwareInnerHeroData } from "@/types";
@@ -15,7 +16,34 @@ export function SoftwareInnerHero({ data }: SoftwareInnerHeroProps) {
   const hasIntroRows = Boolean(data.introRows?.length);
   const usePanel = mediaInline || hasIntroRows;
   const bannerAction = data.bannerAction ?? data.action;
+  // Keep banner free of Request Quote; show it under the description instead.
+  const showBannerAction =
+    Boolean(bannerAction) && !isTopRequestQuoteCta(bannerAction?.label);
   const TitleTag = data.titleLevel === "h2" ? "h2" : "h1";
+
+  // Always offer Request Quote under the product description (above Key Features).
+  const quoteAction =
+    data.action && isTopRequestQuoteCta(data.action.label)
+      ? data.action
+      : { label: "Request a Quote", href: "#form" };
+  const secondaryAction =
+    data.action && !isTopRequestQuoteCta(data.action.label) ? data.action : null;
+
+  const requestQuoteCta = (
+    <div className="aptus-software-inner-hero__cta">
+      <Link href={quoteAction.href} className="aptus-software-btn aptus-software-btn-blue">
+        {quoteAction.label}
+      </Link>
+      {secondaryAction && (
+        <Link
+          href={secondaryAction.href}
+          className="aptus-software-btn aptus-software-btn-blue"
+        >
+          {secondaryAction.label}
+        </Link>
+      )}
+    </div>
+  );
 
   const introRowsPanel = hasIntroRows ? (
     <div className="aptus-software-inner-hero__panel aptus-software-inner-hero__panel--intro-rows">
@@ -52,7 +80,7 @@ export function SoftwareInnerHero({ data }: SoftwareInnerHeroProps) {
                   );
                 }
                 return (
-                  <p key={key} className="aptus-software-inner-hero__text">
+                  <p key={paragraph.slice(0, 48)} className="aptus-software-inner-hero__text">
                     {paragraph}
                   </p>
                 );
@@ -72,6 +100,7 @@ export function SoftwareInnerHero({ data }: SoftwareInnerHeroProps) {
           </div>
         );
       })}
+      {requestQuoteCta}
     </div>
   ) : null;
 
@@ -97,13 +126,7 @@ export function SoftwareInnerHero({ data }: SoftwareInnerHeroProps) {
           />
         </div>
       )}
-      {!hasIntroRows && data.action && (
-        <div className="aptus-software-inner-hero__cta">
-          <Link href={data.action.href} className="aptus-software-btn aptus-software-btn-blue">
-            {data.action.label}
-          </Link>
-        </div>
-      )}
+      {!hasIntroRows && requestQuoteCta}
     </>
   );
 
@@ -117,7 +140,7 @@ export function SoftwareInnerHero({ data }: SoftwareInnerHeroProps) {
               {data.bannerTagline && (
                 <p className="aptus-software-page-banner__tagline">{data.bannerTagline}</p>
               )}
-              {bannerAction && (
+              {showBannerAction && bannerAction && (
                 <div className="aptus-software-page-banner__action-wrap">
                   <Link
                     href={bannerAction.href}

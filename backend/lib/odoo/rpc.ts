@@ -1,22 +1,19 @@
 /**
  * lib/odoo/rpc.ts
  *
- * Stateless JSON-RPC 2.0 client for Odoo.
+ * Odoo external API client.
  *
- * Architecture decisions:
- *  - Uses the `/jsonrpc` endpoint (not `/web/dataset/call_kw`).
- *    This allows credentials to be sent per-request in the body,
- *    which is essential for stateless Next.js server-side fetches.
- *  - Authentication is performed once per OdooRpcSession instance.
- *    Cache OdooRpcSession singletons at the module level so that
- *    cold-start auth only happens once per worker/edge instance.
- *  - API key is used in place of password (Odoo 14+).
- *    Path: Odoo → top-right avatar → Preferences → Account Security → API Keys.
+ * Odoo 19+ uses JSON-2 (`POST /json/2/{model}/{method}`) with an API key as
+ * `Authorization: bearer …`. Legacy `/jsonrpc` authenticate-as-password still
+ * works on older servers and as a fallback when the env value is a login
+ * password rather than an API key.
+ *
+ * security: ODOO_API_KEY stays in process memory on OdooRpcSession — never
+ * serialize it into cookies, responses, or logs.
  */
 
 import type { OdooRpcErrorData, OdooRpcResponse } from "@/types";
 
-// ─── Error class ──────────────────────────────────────────────────────────────
 export class OdooRpcError extends Error {
   constructor(
     message: string,
@@ -29,8 +26,6 @@ export class OdooRpcError extends Error {
   }
 }
 
-// ─── Types ────────────────────────────────────────────────────────────────────
-/** Odoo domain element: either a condition triple or a logical operator string */
 export type OdooDomainItem = [string, string, unknown] | "|" | "&" | "!";
 export type OdooDomain = OdooDomainItem[];
 
@@ -41,12 +36,8 @@ export interface SearchReadOptions {
   order?: string;
 }
 
-/** Authenticated JSON-RPC handle for the Odoo service account.
- *
- * security: This is NOT a browser/user session. It holds ODOO_API_KEY in
- * process memory only — never serialize it into cookies, responses, or logs.
- * Drop the cached client after rotating credentials (see invalidateOdooClientSession).
- */
+export type OdooTransport = "jsonrpc" | "json2";
+
 export interface OdooRpcSession {
   url: string;
   db: string;
@@ -54,34 +45,20 @@ export interface OdooRpcSession {
   apiKey: string;
   /** ISR revalidation in seconds (used by unstable_cache TTLs, not fetch cache). */
   revalidate: number;
+  transport: OdooTransport;
 }
 
-// ─── Counter for JSON-RPC `id` field ─────────────────────────────────────────
 let _id = 0;
 function nextId() {
   return ++_id;
 }
 
-/**
- * Normalize ODOO_URL to the JSON-RPC host.
- * Editors often paste the browser login URL (`…/odoo` or `…/web`), which makes
- * `{base}/jsonrpc` hit the web client (400 CSRF) and takes down CMS + careers.
- * Also trims whitespace from env-var paste mistakes.
- */
 export function normalizeOdooBaseUrl(raw: string): string {
   let u = raw.trim().replace(/\/+$/, "");
-  // Strip web-client path + anything after it (…/odoo, …/odoo/…, …/web/login).
   u = u.replace(/\/(?:odoo|web)(?:\/.*)?$/i, "");
   return u.replace(/\/+$/, "");
 }
 
-// ─── Low-level fetch ──────────────────────────────────────────────────────────
-/**
- * @param cacheMode
- *   - `no-store` — required when the request body includes ODOO_API_KEY (or any
- *     long-lived secret). Never put secret-bearing POSTs into Next.js Data Cache.
- *   - `revalidate` — only for unauthenticated public RPC (e.g. version_info).
- */
 async function rpcFetch<T>(
   endpoint: string,
   body: object,
@@ -89,7 +66,6 @@ async function rpcFetch<T>(
 ): Promise<T> {
   let response: Response;
   try {
-    // Writes / auth can be slow on Odoo Online from Vercel cold starts.
     const timeoutMs = cacheMode.kind === "no-store" ? 45_000 : 15_000;
     response = await fetch(endpoint, {
       method: "POST",
@@ -134,29 +110,151 @@ async function rpcFetch<T>(
   return json.result as T;
 }
 
-// ─── Authenticate ─────────────────────────────────────────────────────────────
+function json2ErrorMessage(status: number, raw: string): string {
+  try {
+    const json = JSON.parse(raw) as {
+      message?: string;
+      name?: string;
+    };
+    const msg = json.message?.trim();
+    if (status === 401 || /invalid apikey|unauthorized/i.test(msg ?? json.name ?? "")) {
+      return "Authentication failed: check ODOO_USER and ODOO_API_KEY";
+    }
+    if (msg) return msg;
+  } catch {
+    /* not JSON */
+  }
+  return `Odoo HTTP ${status}`;
+}
+
+async function json2Fetch<T>(
+  session: Pick<OdooRpcSession, "url" | "db" | "apiKey">,
+  model: string,
+  method: string,
+  body: Record<string, unknown>,
+): Promise<T> {
+  const endpoint = `${session.url}/json/2/${model}/${method}`;
+  let response: Response;
+  try {
+    response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        Accept: "application/json",
+        Authorization: `bearer ${session.apiKey}`,
+        "X-Odoo-Database": session.db,
+        "User-Agent": "Aptus-Backend/1.0",
+      },
+      body: JSON.stringify(body),
+      cache: "no-store",
+      signal: AbortSignal.timeout(45_000),
+    });
+  } catch (err) {
+    throw new OdooRpcError(
+      `Network error reaching Odoo: ${(err as Error).message}`,
+    );
+  }
+
+  const raw = await response.text();
+  if (!response.ok) {
+    throw new OdooRpcError(json2ErrorMessage(response.status, raw), response.status);
+  }
+  if (!raw) return undefined as T;
+  try {
+    return JSON.parse(raw) as T;
+  } catch {
+    throw new OdooRpcError("Odoo returned non-JSON response");
+  }
+}
+
 /**
- * Authenticates against Odoo and returns a session object.
- * Use the returned session with `searchRead`, `read`, etc.
- *
- * @param url      - Base URL e.g. "https://aptusinfotech-staging-35193445.dev.odoo.com"
- * @param db       - Database name e.g. "aptusinfotech-staging-35193445"
- * @param user     - Login email or username
- * @param apiKey   - API key (from Preferences → Account Security → API Keys)
- * @param revalidate - ISR cache TTL in seconds (default 60)
+ * Map execute_kw positional args to JSON-2 named params.
+ * JSON-2 has no positional calling convention.
  */
-export async function authenticate(
+export function json2BodyFromExecuteKw(
+  method: string,
+  args: unknown[] = [],
+  kwargs: Record<string, unknown> = {},
+): Record<string, unknown> {
+  const body: Record<string, unknown> = { ...kwargs };
+
+  if (method === "search_read" || method === "search" || method === "search_count") {
+    if (args[0] !== undefined) body.domain = args[0];
+    return body;
+  }
+  if (method === "create") {
+    const vals = args[0];
+    body.vals_list = Array.isArray(vals) ? vals : [vals];
+    return body;
+  }
+  if (method === "write") {
+    if (args[0] !== undefined) body.ids = args[0];
+    if (args[1] !== undefined) body.vals = args[1];
+    return body;
+  }
+  if (method === "read" || method === "unlink") {
+    if (args[0] !== undefined) body.ids = args[0];
+    return body;
+  }
+  if (method === "next_by_code") {
+    if (args[0] !== undefined) body.sequence_code = args[0];
+    return body;
+  }
+  if (method === "message_post") {
+    const ids = args[0];
+    body.ids = Array.isArray(ids) ? ids : ids !== undefined ? [ids] : [];
+    return body;
+  }
+  if (method === "context_get") {
+    return body;
+  }
+  if (args.length === 0) return body;
+  throw new OdooRpcError(
+    `JSON-2 cannot call ${method} with positional args`,
+  );
+}
+
+function asRecordId(raw: unknown): number {
+  if (typeof raw === "number" && Number.isInteger(raw) && raw > 0) return raw;
+  if (Array.isArray(raw) && raw.length > 0) return asRecordId(raw[0]);
+  throw new OdooRpcError("Odoo create returned no record id");
+}
+
+async function tryJson2Session(
+  url: string,
+  db: string,
+  apiKey: string,
+  revalidate: number,
+): Promise<OdooRpcSession | null> {
+  const probe: Pick<OdooRpcSession, "url" | "db" | "apiKey"> = {
+    url,
+    db,
+    apiKey,
+  };
+  try {
+    const ctx = await json2Fetch<{ uid?: number }>(
+      probe,
+      "res.users",
+      "context_get",
+      {},
+    );
+    const uid = ctx?.uid;
+    if (typeof uid !== "number" || uid <= 0) return null;
+    return { url, db, uid, apiKey, revalidate, transport: "json2" };
+  } catch (err) {
+    if (err instanceof OdooRpcError && err.httpStatus === 404) return null;
+    throw err;
+  }
+}
+
+async function jsonrpcAuthenticate(
   url: string,
   db: string,
   user: string,
   apiKey: string,
-  revalidate = 60,
-): Promise<OdooRpcSession> {
-  const base = normalizeOdooBaseUrl(url);
-  const endpoint = `${base}/jsonrpc`;
-
-  const uid = await rpcFetch<number | false>(
-    endpoint,
+): Promise<number | false> {
+  return rpcFetch<number | false>(
+    `${url}/jsonrpc`,
     {
       jsonrpc: "2.0",
       id: nextId(),
@@ -167,78 +265,63 @@ export async function authenticate(
         args: [db, user, apiKey, {}],
       },
     },
-    // security: API key is in the body — never cache this request.
     { kind: "no-store" },
   );
+}
 
+export async function authenticate(
+  url: string,
+  db: string,
+  user: string,
+  apiKey: string,
+  revalidate = 60,
+): Promise<OdooRpcSession> {
+  const base = normalizeOdooBaseUrl(url);
+  let major = 0;
+  try {
+    major = (await getVersionInfo(base)).server_version_info[0] ?? 0;
+  } catch {
+    major = 0;
+  }
+
+  if (major >= 19) {
+    try {
+      const json2 = await tryJson2Session(base, db, apiKey, revalidate);
+      if (json2) return json2;
+    } catch (err) {
+      // Invalid API key on JSON-2: still try jsonrpc in case ODOO_API_KEY is a login password.
+      if (!(err instanceof OdooRpcError && err.httpStatus === 401)) throw err;
+    }
+  }
+
+  const uid = await jsonrpcAuthenticate(base, db, user, apiKey);
   if (!uid) {
     throw new OdooRpcError(
       "Authentication failed: check ODOO_USER and ODOO_API_KEY",
       401,
     );
   }
-
-  return { url: base, db, uid, apiKey, revalidate };
+  return { url: base, db, uid, apiKey, revalidate, transport: "jsonrpc" };
 }
 
-// ─── search_read ──────────────────────────────────────────────────────────────
-/**
- * Calls `model.search_read(domain, fields, offset, limit, order)` on Odoo.
- */
-export async function searchRead<T>(
-  session: OdooRpcSession,
-  model: string,
-  domain: OdooDomain,
-  options: SearchReadOptions = {},
-): Promise<T[]> {
-  const { fields = [], limit = 100, offset = 0, order } = options;
-  const endpoint = `${session.url}/jsonrpc`;
-
-  const kwargs: Record<string, unknown> = { fields, limit, offset };
-  if (order) kwargs.order = order;
-
-  return rpcFetch<T[]>(
-    endpoint,
-    {
-      jsonrpc: "2.0",
-      id: nextId(),
-      method: "call",
-      params: {
-        service: "object",
-        method: "execute_kw",
-        args: [
-          session.db,
-          session.uid,
-          session.apiKey,
-          model,
-          "search_read",
-          [domain],
-          kwargs,
-        ],
-      },
-    },
-    // security: execute_kw sends apiKey in the body — cache responses via
-    // unstable_cache in OdooClient, not Next fetch Data Cache.
-    { kind: "no-store" },
-  );
-}
-
-// ─── execute_kw ───────────────────────────────────────────────────────────────
-/**
- * Generic `execute_kw(model, method, args, kwargs)`.
- * Prefer typed helpers (searchRead / create / write) for common ops.
- * security: API key is in the body — never cache this request.
- */
-export async function executeKw<T>(
+async function objectCall<T>(
   session: OdooRpcSession,
   model: string,
   method: string,
   args: unknown[] = [],
   kwargs: Record<string, unknown> = {},
 ): Promise<T> {
-  const endpoint = `${session.url}/jsonrpc`;
+  if (session.transport === "json2") {
+    return json2Fetch<T>(
+      session,
+      model,
+      method,
+      json2BodyFromExecuteKw(method, args, kwargs),
+    );
+  }
+
   return rpcFetch<T>(
-    endpoint,
+    `${session.url}/jsonrpc`,
     {
       jsonrpc: "2.0",
       id: nextId(),
@@ -261,24 +344,37 @@ export async function executeKw<T>(
   );
 }
 
-// ─── create ─────────────────────────────────────────────────────────────────
-/**
- * Calls `model.create(values)` on Odoo and returns the new record id.
- * security: execute_kw sends apiKey in the body — never cache this request.
- */
+export async function searchRead<T>(
+  session: OdooRpcSession,
+  model: string,
+  domain: OdooDomain,
+  options: SearchReadOptions = {},
+): Promise<T[]> {
+  const { fields = [], limit = 100, offset = 0, order } = options;
+  const kwargs: Record<string, unknown> = { fields, limit, offset };
+  if (order) kwargs.order = order;
+  return objectCall<T[]>(session, model, "search_read", [domain], kwargs);
+}
+
+export async function executeKw<T>(
+  session: OdooRpcSession,
+  model: string,
+  method: string,
+  args: unknown[] = [],
+  kwargs: Record<string, unknown> = {},
+): Promise<T> {
+  return objectCall<T>(session, model, method, args, kwargs);
+}
+
 export async function create(
   session: OdooRpcSession,
   model: string,
   values: Record<string, unknown>,
 ): Promise<number> {
-  return executeKw<number>(session, model, "create", [values]);
+  const raw = await executeKw<unknown>(session, model, "create", [values]);
+  return asRecordId(raw);
 }
 
-// ─── write ──────────────────────────────────────────────────────────────────
-/**
- * Calls `model.write([id], values)` on Odoo.
- * security: execute_kw sends apiKey in the body — never cache this request.
- */
 export async function write(
   session: OdooRpcSession,
   model: string,
@@ -288,10 +384,6 @@ export async function write(
   return executeKw<boolean>(session, model, "write", [[id], values]);
 }
 
-// ─── read ─────────────────────────────────────────────────────────────────────
-/**
- * Calls `model.read(ids, fields)` on Odoo.
- */
 export async function read<T>(
   session: OdooRpcSession,
   model: string,
@@ -299,33 +391,9 @@ export async function read<T>(
   fields: string[] = [],
 ): Promise<T[]> {
   if (ids.length === 0) return [];
-  const endpoint = `${session.url}/jsonrpc`;
-
-  return rpcFetch<T[]>(
-    endpoint,
-    {
-      jsonrpc: "2.0",
-      id: nextId(),
-      method: "call",
-      params: {
-        service: "object",
-        method: "execute_kw",
-        args: [
-          session.db,
-          session.uid,
-          session.apiKey,
-          model,
-          "read",
-          [ids],
-          { fields },
-        ],
-      },
-    },
-    { kind: "no-store" },
-  );
+  return objectCall<T[]>(session, model, "read", [ids], { fields });
 }
 
-// ─── version_info (no auth required) ─────────────────────────────────────────
 export interface OdooVersionInfo {
   server_version: string;
   server_version_info: [number, number, number, string, number];
@@ -347,7 +415,6 @@ export async function getVersionInfo(url: string): Promise<OdooVersionInfo> {
         args: [],
       },
     },
-    // version_info is unauthenticated — safe to cache briefly.
     { kind: "revalidate", seconds: 3600 },
   );
 }

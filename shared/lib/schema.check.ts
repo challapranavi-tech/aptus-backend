@@ -16,6 +16,7 @@ import {
   meaningfulTextError,
   parseObject,
   personNameError,
+  hasAllowedExtension,
   sanitizeFilename,
   sanitizeText,
   validationErrorPayload,
@@ -144,6 +145,84 @@ assert.equal(
   0,
 );
 
+// Individual quote form
+assert.equal(
+  Object.keys(
+    validateQuoteContactFields({
+      customer_type: "individual",
+      name: "Ada Lovelace",
+      email: "ada@example.com",
+      country_code: "+968",
+      phone_local: "91234567",
+      profession: "Engineer",
+      product: "Revit",
+      qty: "2",
+    }),
+  ).length,
+  0,
+);
+assert.ok(
+  validateQuoteContactFields({
+    customer_type: "individual",
+    name: "",
+    email: "ada@example.com",
+    country_code: "+968",
+    phone_local: "91234567890",
+    profession: "",
+    product: "Select Software Product",
+    qty: "0",
+  }).phone_local,
+);
+assert.ok(
+  validateQuoteContactFields({
+    customer_type: "company",
+    name: "Ada",
+    company: "Aptus",
+    country_code: "+968",
+    phone_local: "91234567",
+    tax_id: "1234567890123",
+    cr_number: "12345678901",
+    product: "Revit",
+    qty: "1",
+  }).tax_id,
+);
+
+const individualOk = parseContactRequest({
+  customer_type: "individual",
+  name: "Ada Lovelace",
+  email: "Ada@Example.com",
+  country_code: "+968",
+  phone_local: "91234567",
+  profession: "Engineer",
+  product: "Revit",
+  qty: "2",
+  message: "Need licenses",
+});
+assert.equal(individualOk.ok, true);
+if (individualOk.ok) {
+  assert.equal(individualOk.data.email, "ada@example.com");
+  assert.equal(individualOk.data.phone, "+96891234567");
+  assert.equal(individualOk.data.customer_type, "individual");
+}
+
+const companyOk = parseContactRequest({
+  customer_type: "company",
+  name: "Ada Lovelace",
+  company: "Analytical Engines",
+  country_code: "+971",
+  phone_local: "501234567",
+  tax_id: "123456789012",
+  cr_number: "1234567890",
+  product: "Civil 3D",
+  qty: "5",
+});
+assert.equal(companyOk.ok, true);
+if (companyOk.ok) {
+  assert.equal(companyOk.data.tax_id, "123456789012");
+  assert.equal(companyOk.data.cr_number, "1234567890");
+  assert.equal(companyOk.data.customer_type, "company");
+}
+
 // Unknown keys are stripped in preprocess (CTA city/heard_from mapping).
 assert.equal(
   parseContactRequest({
@@ -194,17 +273,19 @@ assert.equal(detectContactCategory("CCTV Surveillance Solutions", null), "elv");
 assert.equal(detectContactCategory("Revit", "elv"), "elv");
 assert.equal(detectContactCategory("Access Control Systems", "software"), "software");
 
-// Career fields.
-const career = parseApplicationFields({
-  fullName: "Jane Doe",
-  email: "jane@example.com",
-  phone: "+96812345678",
-  position: "Engineer",
-  experience: "5",
-  location: "Muscat",
-  coverMessage: "Hi",
-});
-assert.equal(career.ok, true);
+// Career fields — full validation lives in careers-application / apply routes.
+assert.equal(
+  parseApplicationFields({
+    fullName: "Jane Doe",
+    email: "jane@example.com",
+    phone: "+96812345678",
+    position: "Engineer",
+    experience: "5",
+    location: "Muscat",
+    coverMessage: "Hi",
+  }).ok,
+  false,
+);
 
 assert.ok(
   validateFile({ name: "cv.exe", size: 10, type: "application/x-msdownload" }, [".pdf"], "Resume", true),
@@ -219,5 +300,15 @@ assert.equal(parseCmsSlug("about-us").ok, true);
 assert.equal(parseCmsSlug("../x").ok, false);
 
 assert.equal(validationErrorPayload({ email: "bad" }).error, "Validation failed.");
+
+const proofExts = [".pdf", ".jpg", ".jpeg", ".png"] as const;
+assert.equal(
+  hasAllowedExtension("Screenshot_30-7-2026_152022_supabase.com.jpeg", proofExts),
+  true,
+  "hostname .com before .jpeg is not a compound executable",
+);
+assert.equal(hasAllowedExtension("slip.jpeg", proofExts), true);
+assert.equal(hasAllowedExtension("malware.exe.pdf", proofExts), false);
+assert.equal(hasAllowedExtension("photo.svg.jpg", proofExts), false);
 
 console.log("schema.check: ok");

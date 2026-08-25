@@ -4,6 +4,7 @@
     "visible": true,
     "family": "cyber-security",
     "subnavLinks": [
+      { "label": "Antivirus and Data Security", "href": "/antivirus-and-data-security" },
       { "label": "Fortinet", "href": "/fortinet" },
       { "label": "Sophos", "href": "/sophos" },
       { "label": "SonicWall Next-Gen Firewall", "href": "/sonicwall-next-gen-firewall" },
@@ -227,12 +228,14 @@
     ]
   },
   "contactCta": {
-    "heading": "Have questions? We can help",
-    "description": "Our experts can help you to implement the right security system for your business.",
+    "heading": "Request a Quote",
+    "description": "Tell us what you need and our sales team will get back to you shortly.",
     "showForm": true,
-    "submitLabel": "Submit Now",
-    "formVariant": "simple",
+    "submitLabel": "Submit Request",
+    "formVariant": "software-quote",
     "layout": "light",
+    "actionLabel": "Request a Quote",
+    "actionHref": "#form",
     "anchorId": "Form"
   }
 }
