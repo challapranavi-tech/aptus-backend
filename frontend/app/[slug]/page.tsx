@@ -19,6 +19,11 @@ interface PageProps {
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
+  // Vercel SSG of every CMS slug hammers the Odoo-backed API in parallel.
+  // One slow page (30s abort) fails the whole deploy. dynamicParams stays true
+  // so pages still render on demand / ISR via fetch revalidate.
+  if (process.env.VERCEL === "1") return [];
+
   const slugs = await getAllPageSlugs();
   // /autodesk and /adobe are dedicated App Router replicas, not CMS [slug].
   return slugs
@@ -47,7 +52,18 @@ export default async function DynamicPage({ params }: PageProps) {
     notFound();
   }
 
-  const page = await getPageBySlug(normalized);
+  let page;
+  try {
+    page = await getPageBySlug(normalized);
+  } catch (err) {
+    console.error(`[cms] failed to load /${normalized}`, err);
+    // Don't fail `next build` on a single Odoo timeout — serve on demand.
+    if (process.env.NEXT_PHASE === "phase-production-build") {
+      const { connection } = await import("next/server");
+      await connection();
+    }
+    throw err;
+  }
 
   if (!page) {
     notFound();
