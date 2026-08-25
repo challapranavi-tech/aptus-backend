@@ -31,6 +31,23 @@ function typeLabel(type: string): string {
   }
 }
 
+function typeHref(type: string): string {
+  switch (type) {
+    case "order":
+    case "payment_failed":
+    case "refund_requested":
+    case "refund_processed":
+      return "/portal/orders";
+    case "subscription":
+    case "renewal":
+    case "cancellation":
+    case "license_expired":
+      return "/portal/subscriptions";
+    default:
+      return "/portal/dashboard";
+  }
+}
+
 type NotificationsPanelProps = {
   limit?: number;
 };
@@ -56,18 +73,7 @@ export function NotificationsPanel({ limit }: NotificationsPanelProps) {
   }, [isPreview, loading, notifications, markRead]);
 
   return (
-    <section className="aptus-dashboard-card" aria-label="Account notifications">
-      <div className="aptus-dashboard-section-head">
-        <div>
-          <h2>{isPreview ? "Account alerts" : "All notifications"}</h2>
-          <p>
-            {isPreview
-              ? "Alerts appear here after our team confirms your subscription request."
-              : "Order updates, subscription events, renewals, and account announcements."}
-          </p>
-        </div>
-      </div>
-
+    <section className="aptus-portal-page-card" aria-label="Account notifications">
       {loading ? (
         <div className="aptus-odoo-subscriptions__state" role="status" aria-live="polite">
           <div className="aptus-payment-processing__spinner" aria-hidden="true" />
@@ -90,10 +96,13 @@ export function NotificationsPanel({ limit }: NotificationsPanelProps) {
       {!loading && !error && visible.length > 0 ? (
         <div className="aptus-portal-list">
           {visible.map((notification) => (
-            <article
+            <Link
               key={notification.id}
+              href={typeHref(notification.type)}
               className={
-                notification.read ? "aptus-notification--read" : "aptus-notification--unread"
+                notification.read
+                  ? "aptus-notification aptus-notification--read"
+                  : "aptus-notification aptus-notification--unread"
               }
             >
               <div className="aptus-notification__body">
@@ -112,14 +121,16 @@ export function NotificationsPanel({ limit }: NotificationsPanelProps) {
               >
                 {notificationStatusLabel(notification.status, notification.type)}
               </mark>
-            </article>
+            </Link>
           ))}
         </div>
       ) : null}
 
       {isPreview && !loading && notifications.length > (limit ?? 0) ? (
         <div className="aptus-dashboard-section-foot">
-          <Link href="/portal/notifications">View all notifications</Link>
+          <Link href="/portal/notifications" className="aptus-overview-compact__link">
+            View all notifications
+          </Link>
         </div>
       ) : null}
     </section>

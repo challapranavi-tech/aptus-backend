@@ -305,9 +305,14 @@ export function CartCheckoutPanel() {
           <div className="aptus-cart-checkout__main">
             <div className="aptus-cart-checkout__head">
               <h2>Shopping Cart</h2>
-              <span>
-                {itemCount} item{itemCount === 1 ? "" : "s"}
-              </span>
+              <div className="aptus-cart-checkout__head-meta">
+                <span>
+                  {itemCount} item{itemCount === 1 ? "" : "s"}
+                </span>
+                <Link href="/portal/products" className="aptus-overview-compact__link">
+                  Continue shopping
+                </Link>
+              </div>
             </div>
 
             {cart.items.length === 0 ? (

@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { authFetch } from "@/lib/access-token";
+import { formatOmanAmount, estimateOrderPricing } from "@/lib/order-pricing";
 import { formatShortDate } from "@/lib/overview-data";
 import { ordersWithPaymentProof } from "@/lib/portal-invoices";
 import { useOrders } from "@/hooks/useOrders";
@@ -11,6 +13,13 @@ function productLabel(order: PortalOrder): string {
   if (order.items.length === 0) return order.reference;
   if (order.items.length === 1) return order.items[0].productName;
   return `${order.items[0].productName} +${order.items.length - 1}`;
+}
+
+function invoiceAmount(order: PortalOrder): string {
+  if (order.amountDue && order.amountDue > 0) return formatOmanAmount(order.amountDue);
+  const pricing = estimateOrderPricing(order);
+  if (pricing?.complete) return formatOmanAmount(pricing.total);
+  return "—";
 }
 
 async function downloadPaymentProof(order: PortalOrder): Promise<void> {
@@ -48,18 +57,11 @@ export function InvoicesPanel() {
   }
 
   return (
-    <section className="aptus-dashboard-card aptus-portal-invoices" aria-label="Payment attachments">
-      <div className="aptus-dashboard-section-head">
-        <div>
-          <h2>Invoices &amp; payment attachments</h2>
-          <p>Files you uploaded as payment proof during bank transfer checkout.</p>
-        </div>
-      </div>
-
+    <section className="aptus-portal-page-card aptus-portal-invoices" aria-label="Invoices">
       {loading ? (
         <div className="aptus-odoo-subscriptions__state" role="status" aria-live="polite">
           <div className="aptus-payment-processing__spinner" aria-hidden="true" />
-          <p>Loading attachments…</p>
+          <p>Loading invoices…</p>
         </div>
       ) : null}
 
@@ -77,37 +79,56 @@ export function InvoicesPanel() {
 
       {!loading && !error && invoices.length === 0 ? (
         <div className="aptus-odoo-subscriptions__state">
-          <p>No payment attachments yet. Upload proof when paying by bank transfer on an approved order.</p>
+          <p>
+            No invoices yet.{" "}
+            <Link href="/portal/orders" className="aptus-overview-compact__link">
+              View orders
+            </Link>{" "}
+            after payment proof is uploaded.
+          </p>
         </div>
       ) : null}
 
       {!loading && !error && invoices.length > 0 ? (
-        <ul className="aptus-portal-invoices__list">
-          {invoices.map((order) => (
-            <li key={order.id} className="aptus-portal-invoices__item">
-              <div className="aptus-portal-invoices__meta">
-                <strong>{order.paymentProofFileName ?? "Payment proof"}</strong>
-                <span>{order.reference}</span>
-                <span>{productLabel(order)}</span>
-                {order.paymentProofUploadedAt ? (
-                  <time dateTime={order.paymentProofUploadedAt}>
-                    Uploaded {formatShortDate(order.paymentProofUploadedAt)}
-                  </time>
-                ) : (
-                  <time dateTime={order.updatedAt}>Order {formatShortDate(order.updatedAt)}</time>
-                )}
-              </div>
-              <button
-                type="button"
-                className="btn btn-aptus-primary aptus-portal-invoices__download"
-                disabled={busyId === order.id}
-                onClick={() => void handleDownload(order)}
-              >
-                {busyId === order.id ? "Downloading…" : "Download"}
-              </button>
-            </li>
-          ))}
-        </ul>
+        <div className="aptus-portal-table-wrap">
+          <table className="aptus-portal-table">
+            <thead>
+              <tr>
+                <th scope="col">Invoice</th>
+                <th scope="col">Product</th>
+                <th scope="col">Date</th>
+                <th scope="col" className="is-right">
+                  Amount
+                </th>
+                <th scope="col" className="is-right">
+                  Download
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {invoices.map((order) => (
+                <tr key={order.id}>
+                  <td>{order.paymentProofFileName ?? order.reference}</td>
+                  <td>{productLabel(order)}</td>
+                  <td className="is-muted">
+                    {formatShortDate(order.paymentProofUploadedAt ?? order.updatedAt)}
+                  </td>
+                  <td className="is-right">{invoiceAmount(order)}</td>
+                  <td className="is-right">
+                    <button
+                      type="button"
+                      className="aptus-portal-btn aptus-portal-btn--primary"
+                      disabled={busyId === order.id}
+                      onClick={() => void handleDownload(order)}
+                    >
+                      {busyId === order.id ? "Downloading…" : "Download"}
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       ) : null}
     </section>
   );
