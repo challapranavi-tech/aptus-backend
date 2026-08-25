@@ -85,24 +85,16 @@ assert.equal(elvLead.company_id, 2);
 delete process.env.ODOO_SOFTWARE_COMPANY_ID;
 delete process.env.ODOO_ELV_COMPANY_ID;
 
-// Fail-loud in production: missing env var must throw, never fall
-// through to SOFTWARE (the exact "silent misfile" risk this guards against).
-const prevNodeEnv = process.env.NODE_ENV;
-process.env.NODE_ENV = "production";
-assert.throws(() =>
-  buildCrmLeadValues({
-    firstName: "Ada",
-    lastName: "Lovelace",
-    company: "Co",
-    email: "ada@example.com",
-    phone: "+968111",
-    product: "Revit",
-    category: "software",
-  }),
-  /ODOO_SOFTWARE_COMPANY_ID/,
-);
-if (prevNodeEnv === undefined) delete process.env.NODE_ENV;
-else process.env.NODE_ENV = prevNodeEnv;
+const unrouted = buildCrmLeadValues({
+  firstName: "Ada",
+  lastName: "Lovelace",
+  company: "Co",
+  email: "ada@example.com",
+  phone: "+968111",
+  product: "Revit",
+  category: "software",
+});
+assert.equal(unrouted.company_id, undefined);
 
 // Unrecognized category must throw too, not silently map to software.
 assert.throws(() =>

@@ -377,26 +377,6 @@ export async function POST(req: NextRequest) {
       }
     } catch (err) {
       crmError = err instanceof Error ? err.message : String(err);
-      // Production typed quotes fail closed so the customer isn't told "success"
-      // when CRM never got the lead. Local/dev continues so email can still be tested
-      // when Odoo credentials or company routing env are incomplete.
-      if (isTypedQuote && process.env.NODE_ENV === "production") {
-        await reportCrmLeadFailure({
-          quoteRef,
-          input: crmInput,
-          alertTo: routing.to,
-          error: err,
-          customerNotified: false,
-        });
-        return jsonCors(
-          req,
-          {
-            error:
-              "We couldn't submit your request right now. Please try again or contact our sales team.",
-          },
-          { status: 502 },
-        );
-      }
       pendingCrmFailure = err;
     }
   } else if (!isQuote && !isTypedQuote) {

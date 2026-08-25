@@ -90,16 +90,8 @@ function companyIdForCategory(category?: ContactCategory): number | undefined {
     category === "software" ? "ODOO_SOFTWARE_COMPANY_ID" : "ODOO_ELV_COMPANY_ID";
   const id = envPositiveInt(key);
   if (!id) {
-    // Production must never invent a company (silent misfile risk).
-    // Local/dev without routing env can still create the lead under Odoo's default.
-    if (process.env.NODE_ENV === "production") {
-      throw new Error(
-        `${key} is not set — refuse to file a ${category} quote under the wrong company`,
-      );
-    }
-    console.warn(
-      `[crm] ${key} unset — creating lead without company_id (dev only)`,
-    );
+    // Unset routing → Odoo default company. Do not invent a company_id.
+    console.warn(`[crm] ${key} unset — creating lead without company_id`);
     return undefined;
   }
   return id;
