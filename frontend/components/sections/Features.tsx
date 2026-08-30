@@ -577,6 +577,7 @@ export function Features({ data }: FeaturesProps) {
   const isIconCards = data.variant === "icon-cards";
   const isBulletList = data.variant === "bullet-list";
   const isChecklist = data.variant === "checklist";
+  const isHomePromises = data.variant === "home-promises";
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -602,6 +603,71 @@ export function Features({ data }: FeaturesProps) {
 
     return () => ctx.revert();
   }, []);
+
+  if (isHomePromises) {
+    return (
+      <section
+        ref={sectionRef}
+        className="home-promises section-padding"
+        data-section="features"
+        data-variant="home-promises"
+      >
+        <Container>
+          {(data.eyebrow || data.heading || data.headingAccent || data.subheading) && (
+            <div className="mx-auto mb-12 max-w-2xl text-center">
+              {data.eyebrow && <p className="eyebrow mb-3">{data.eyebrow}</p>}
+              {(data.heading || data.headingAccent) && (
+                <h2
+                  className="text-brand-navy"
+                  style={{ fontSize: "var(--text-4xl)", fontWeight: 600 }}
+                >
+                  {data.heading}
+                  {data.heading && data.headingAccent && " "}
+                  {data.headingAccent && (
+                    <span className="text-brand-blue">{data.headingAccent}</span>
+                  )}
+                </h2>
+              )}
+              {data.subheading && (
+                <p className="mt-4 text-muted-foreground" style={{ fontSize: "var(--text-base)" }}>
+                  {data.subheading}
+                </p>
+              )}
+            </div>
+          )}
+          {data.items && data.items.length > 0 && (
+            <div className="home-promises__grid">
+              {data.items.map((item) => (
+                <article key={item.id} className="feature-card home-promises__card">
+                  {item.icon && (
+                    <div className="home-promises__icon">
+                      <PillarIcon name={item.icon} className="h-8 w-8" />
+                    </div>
+                  )}
+                  {item.title && (
+                    <h3
+                      className="mt-4 text-brand-navy"
+                      style={{ fontSize: "var(--text-lg)", fontWeight: 600 }}
+                    >
+                      {item.title}
+                    </h3>
+                  )}
+                  {item.description && (
+                    <p
+                      className="mt-2 leading-relaxed text-muted-foreground"
+                      style={{ fontSize: "var(--text-sm)" }}
+                    >
+                      {item.description}
+                    </p>
+                  )}
+                </article>
+              ))}
+            </div>
+          )}
+        </Container>
+      </section>
+    );
+  }
 
   if (isProductCards) {
     const colCount = data.gridColumns ?? ((data.items?.length ?? 0) <= 3 ? 3 : 4);
