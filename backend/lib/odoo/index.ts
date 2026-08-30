@@ -41,6 +41,7 @@ export {
   nextRequestQuoteRef,
   ensureRequestQuoteSequence,
   quoteReferenceField,
+  findPartnerIdByEmail,
   REQUEST_QUOTE_SEQUENCE,
   type CrmLeadInput,
   type CrmLeadAttachment,

@@ -32,6 +32,18 @@ assert.equal(
   "Quote Ref: RQ-2026-000001, Client Message: Need licenses, Product: Revit, QTY: 2, Category: Software, Source: Website – Request Quote",
 );
 
+const linked = buildCrmLeadValues({
+  firstName: "Ada",
+  lastName: "Lovelace",
+  company: "Analytical Engines",
+  email: "ada@example.com",
+  phone: "+968 1234 5678",
+  product: "Revit",
+  quoteRef: "RQ-2026-000002",
+  partnerId: 42,
+});
+assert.equal(linked.partner_id, 42);
+
 process.env.ODOO_QUOTE_REF_FIELD = "x_studio_quote_ref";
 const withField = buildCrmLeadValues({
   firstName: "Ada",

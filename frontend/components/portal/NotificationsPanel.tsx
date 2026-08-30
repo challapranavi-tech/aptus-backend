@@ -34,14 +34,20 @@ function typeLabel(type: string): string {
 function typeHref(type: string): string {
   switch (type) {
     case "order":
+    case "order_approved":
+    case "order_rejected":
     case "payment_failed":
     case "refund_requested":
     case "refund_processed":
+    case "quote":
+    case "quote_sent":
+    case "quote_payment":
       return "/portal/orders";
     case "subscription":
     case "renewal":
     case "cancellation":
     case "license_expired":
+    case "license_available":
       return "/portal/subscriptions";
     default:
       return "/portal/dashboard";

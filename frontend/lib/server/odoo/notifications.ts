@@ -1,5 +1,6 @@
 import { kvGet, kvSet, kvSetNx } from "../kv-store";
 import { fetchPartnerOrders } from "./orders";
+import { fetchPartnerQuotes } from "./quotes";
 import { fetchPartnerRenewalRequests } from "./renewal-requests";
 import { fetchPartnerSubscriptions } from "./subscriptions";
 import type {
@@ -7,6 +8,7 @@ import type {
   PortalNotificationStatus,
   PortalNotificationType,
 } from "@/types/notifications";
+import type { QuoteLifecycleStatus } from "@/types/quotes";
 
 const SENT_TTL_SEC = 90 * 24 * 60 * 60;
 
@@ -44,20 +46,26 @@ export async function claimNotificationSend(
 }
 
 /**
- * Build in-app notifications from live Odoo order / renewal state.
+ * Build in-app notifications from live Odoo order / quote / renewal state.
  * No local notification JSON — Odoo records are the source of truth.
  */
 export async function fetchPartnerNotifications(
   partnerId: number,
   limit = 100,
+  partnerEmail?: string,
 ): Promise<PortalNotification[]> {
-  const [orders, renewals, subscriptions] = await Promise.all([
+  const [orders, renewals, subscriptions, quotes] = await Promise.all([
     fetchPartnerOrders(partnerId),
     fetchPartnerRenewalRequests(partnerId),
     fetchPartnerSubscriptions(partnerId, { includeInactive: true }),
+    fetchPartnerQuotes(partnerId, partnerEmail),
   ]);
 
   const notifications: PortalNotification[] = [];
+
+  for (const quote of quotes) {
+    notifications.push(...notificationsForQuote(partnerId, quote));
+  }
 
   for (const order of orders) {
     if (order.status === "Approved" && order.paymentStatus !== "paid") {
@@ -218,4 +226,109 @@ export async function fetchPartnerNotifications(
   return notifications
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     .slice(0, limit);
+}
+
+function quoteNotifStatus(status: QuoteLifecycleStatus): PortalNotificationStatus {
+  switch (status) {
+    case "Quotation Sent":
+      return "Quotation Sent";
+    case "Payment Pending":
+      return "Approved";
+    case "Payment Received":
+      return "Payment Received";
+    case "Won":
+      return "License Issued";
+    case "Lost":
+      return "Rejected";
+    default:
+      return "Submitted";
+  }
+}
+
+function notificationsForQuote(
+  partnerId: number,
+  quote: {
+    reference: string;
+    productName: string;
+    status: QuoteLifecycleStatus;
+    updatedAt: string;
+    createdAt: string;
+  },
+): PortalNotification[] {
+  const createdAt = quote.updatedAt || quote.createdAt;
+  const base = {
+    partnerId,
+    reference: quote.reference,
+    read: false as const,
+    createdAt,
+  };
+
+  switch (quote.status) {
+    case "Quotation Sent":
+      return [
+        {
+          ...base,
+          id: `odoo-notif-quote-sent-${quote.reference}`,
+          title: "Quotation sent",
+          detail: `Our sales team sent a quotation for ${quote.productName} (${quote.reference}). Check Quote status for details.`,
+          status: quoteNotifStatus(quote.status),
+          type: "quote_sent",
+        },
+      ];
+    case "Payment Pending":
+      return [
+        {
+          ...base,
+          id: `odoo-notif-quote-pay-${quote.reference}`,
+          title: "Quotation ready — payment pending",
+          detail: `Your quotation ${quote.reference} for ${quote.productName} is ready. Complete payment to proceed.`,
+          status: quoteNotifStatus(quote.status),
+          type: "quote_payment",
+        },
+      ];
+    case "Payment Received":
+      return [
+        {
+          ...base,
+          id: `odoo-notif-quote-paid-${quote.reference}`,
+          title: "Payment received for quotation",
+          detail: `Payment for quotation ${quote.reference} (${quote.productName}) has been recorded.`,
+          status: quoteNotifStatus(quote.status),
+          type: "quote_payment",
+        },
+      ];
+    case "Won":
+      return [
+        {
+          ...base,
+          id: `odoo-notif-quote-won-${quote.reference}`,
+          title: "Quote won",
+          detail: `Your quote request ${quote.reference} for ${quote.productName} was marked as won.`,
+          status: quoteNotifStatus(quote.status),
+          type: "quote",
+        },
+      ];
+    case "Lost":
+      return [
+        {
+          ...base,
+          id: `odoo-notif-quote-lost-${quote.reference}`,
+          title: "Quote closed",
+          detail: `Your quote request ${quote.reference} for ${quote.productName} was closed.`,
+          status: quoteNotifStatus(quote.status),
+          type: "quote",
+        },
+      ];
+    default:
+      return [
+        {
+          ...base,
+          id: `odoo-notif-quote-submitted-${quote.reference}`,
+          title: "Quote request received",
+          detail: `We received your Request Quote ${quote.reference} for ${quote.productName}. Sales will send a quotation soon.`,
+          status: "Submitted",
+          type: "quote",
+        },
+      ];
+  }
 }

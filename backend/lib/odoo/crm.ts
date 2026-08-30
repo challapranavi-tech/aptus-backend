@@ -48,6 +48,8 @@ export type CrmLeadInput = {
   phoneLocal?: string;
   contactName?: string;
   attachmentName?: string;
+  /** Link to portal customer when email matches an existing res.partner. */
+  partnerId?: number;
 };
 
 /**
@@ -297,6 +299,10 @@ export function buildCrmLeadValues(
   const email = input.email.trim();
   if (email) values.email_from = email;
 
+  if (input.partnerId && Number.isInteger(input.partnerId) && input.partnerId > 0) {
+    values.partner_id = input.partnerId;
+  }
+
   const refField = quoteReferenceField();
   if (refField && quoteRef) {
     values[refField] = quoteRef;
@@ -323,6 +329,23 @@ export function buildCrmLeadValues(
   if (unassign) values.user_id = false;
 
   return values;
+}
+
+/** Find an existing portal/customer partner by email (for linking Request Quote leads). */
+export async function findPartnerIdByEmail(email: string): Promise<number | undefined> {
+  const trimmed = email.trim();
+  if (!trimmed) return undefined;
+
+  return withAuthRetry(async (session) => {
+    const { searchRead } = await import("./rpc");
+    const rows = await searchRead<{ id: number }>(
+      session,
+      "res.partner",
+      [["email", "=ilike", trimmed]],
+      { fields: ["id"], limit: 1 },
+    );
+    return rows[0]?.id;
+  });
 }
 
 /** Deep-link to open a crm.lead / opportunity form in Odoo. */

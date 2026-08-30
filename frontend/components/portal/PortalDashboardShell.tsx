@@ -75,7 +75,7 @@ const SECTION_META: Record<Section, NavMeta> = {
   orders: {
     section: "orders",
     title: "Orders",
-    sub: "All orders, most recent first.",
+    sub: "Quote status and purchase orders, most recent first.",
   },
   invoices: {
     section: "invoices",

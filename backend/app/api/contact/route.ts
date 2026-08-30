@@ -12,6 +12,7 @@ import {
   attachFilesToCrmLead,
   createCrmLead,
   crmLeadFormUrl,
+  findPartnerIdByEmail,
   isOdooConfigured,
   nextRequestQuoteRef,
 } from "@/lib/odoo";
@@ -321,6 +322,23 @@ export async function POST(req: NextRequest) {
   );
 
   const submittedAt = formatMuscatDateTime();
+  let partnerId: number | undefined;
+  if ((isQuote || isTypedQuote) && isOdooConfigured() && email) {
+    try {
+      partnerId = await findPartnerIdByEmail(email);
+      if (partnerId) {
+        console.info(
+          `[contact] linked quote to partner #${partnerId} email=${email} quoteRef=${quoteRef}`,
+        );
+      }
+    } catch (err) {
+      console.warn(
+        `[contact] partner lookup failed quoteRef=${quoteRef}:`,
+        err instanceof Error ? err.message : err,
+      );
+    }
+  }
+
   const crmInput = {
     firstName: first_name,
     lastName: last_name,
@@ -342,6 +360,7 @@ export async function POST(req: NextRequest) {
     phoneLocal: phone_local,
     contactName: name || undefined,
     attachmentName,
+    partnerId,
   };
 
   // Create Odoo CRM before the sales email so the mail can include a CRM link.
