@@ -8,8 +8,7 @@
 import { cache } from "react";
 import type { Page, SiteConfig } from "@/types";
 import type { CaseStudiesPageContent } from "@/types/case-studies-page";
-import { SITE_NAVIGATION } from "./site-nav";
-import { filterSiteNavigation } from "./autodesk-subnav";
+import { SITE_CONFIG } from "./site-config";
 
 const DEFAULT_API = "http://localhost:3001";
 // Cold /api/cms/home can take ~13 s (Odoo auth + page + draft fallback) and
@@ -48,17 +47,7 @@ function apiEnabled(): boolean {
 }
 
 function fallbackSiteConfig(): SiteConfig {
-  return {
-    name: "Aptus Infotech",
-    logo: { src: "/logo.svg", alt: "Aptus Infotech" },
-    navigation: filterSiteNavigation(SITE_NAVIGATION),
-    topBar: { phone: "", email: "", socialLinks: [] },
-    footer: {
-      logo: { src: "/logo.svg", alt: "Aptus Infotech" },
-      tagline: "",
-      columns: [],
-    },
-  };
+  return SITE_CONFIG;
 }
 
 async function apiGet<T>(path: string): Promise<T | null> {

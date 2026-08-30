@@ -24,7 +24,7 @@ export function FooterClient({
   return (
     <footer className="border-t border-border bg-white text-black" data-section="footer">
       <Container>
-        <div className="grid items-start gap-5 py-6 sm:grid-cols-2 sm:gap-5 sm:py-7 lg:grid-cols-[1.3fr_1.15fr_1.55fr] lg:gap-x-8 lg:gap-y-6 lg:py-8">
+        <div className="grid items-start gap-8 py-10 sm:grid-cols-2 sm:gap-8 sm:py-12 lg:grid-cols-[1.35fr_1.1fr_1.55fr] lg:gap-x-10 lg:gap-y-8 lg:py-14">
           <div className="aptus-footer-brand min-w-0">
             <Link href="/" className="aptus-footer-logo-link">
               {logo ? (
@@ -48,16 +48,15 @@ export function FooterClient({
 
             {footer.tagline && (
               <p
-                className="aptus-footer-col-text mt-2.5 leading-snug text-muted-foreground"
+                className="aptus-footer-col-text mt-4 leading-relaxed text-muted-foreground"
                 style={{ fontSize: "var(--text-sm)" }}
               >
-                <strong className="font-semibold text-black">{name}</strong>{" "}
-                {footer.tagline.replace(/^Aptus Infotech\s+/i, "")}
+                {footer.tagline}
               </p>
             )}
 
             {footer.socialLinks && footer.socialLinks.length > 0 && (
-              <div className="mt-3 flex flex-wrap items-center gap-1.5">
+              <div className="mt-5 flex flex-wrap items-center gap-2.5">
                 {footer.socialLinks.map((s) => (
                   <a
                     key={s.platform}
@@ -65,7 +64,7 @@ export function FooterClient({
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.label ?? s.platform}
-                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-blue text-white transition-all hover:bg-brand-blue-dark"
+                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-blue text-white transition-all hover:bg-brand-blue-dark"
                   >
                     <SocialIcon platform={s.platform} />
                   </a>
@@ -75,8 +74,8 @@ export function FooterClient({
           </div>
 
           {footer.mapEmbedUrl && (
-            <div className="flex min-w-0 items-center justify-center lg:pl-5">
-              <div className="aptus-footer-map relative aspect-[4/3] w-full overflow-hidden rounded-sm">
+            <div className="flex min-w-0 items-center justify-center">
+              <div className="aptus-footer-map relative aspect-square w-full max-w-[22rem] overflow-hidden rounded-md sm:max-w-none lg:aspect-[4/3]">
                 <iframe
                   src={footer.mapEmbedUrl}
                   title="Office location map"
@@ -90,20 +89,20 @@ export function FooterClient({
             </div>
           )}
 
-          <div className="grid min-w-0 grid-cols-1 gap-x-6 gap-y-4 min-[420px]:grid-cols-2 sm:col-span-2 lg:col-span-1 lg:gap-x-8">
+          <div className="grid min-w-0 grid-cols-1 gap-x-8 gap-y-8 min-[420px]:grid-cols-2 sm:col-span-2 lg:col-span-1">
             {footer.columns.map((column, index) => (
               <div key={column.title ?? index} className="min-w-0">
                 {column.title && (
                   <h3
-                    className="mb-2.5 text-black"
-                    style={{ fontSize: "var(--text-lg)", fontWeight: 600 }}
+                    className="mb-3 text-black"
+                    style={{ fontSize: "var(--text-lg)", fontWeight: 700 }}
                   >
                     {/quick links/i.test(column.title)
                       ? t.footer.quickLinks
                       : column.title}
                   </h3>
                 )}
-                <ul className="space-y-1.5">
+                <ul className="space-y-2.5">
                   {column.links.map((link) => (
                     <li key={link.href}>
                       <Link
@@ -122,17 +121,17 @@ export function FooterClient({
             {hasReachUs && (
               <div className="min-w-0">
                 <h3
-                  className="mb-2.5 text-black"
-                  style={{ fontSize: "var(--text-lg)", fontWeight: 600 }}
+                  className="mb-3 text-black"
+                  style={{ fontSize: "var(--text-lg)", fontWeight: 700 }}
                 >
                   {t.footer.reachUs}
                 </h3>
-                <ul className="space-y-1.5">
+                <ul className="space-y-2.5">
                   {footer.phone && (
                     <li>
                       <a
                         href={`tel:${footer.phone.replace(/\s/g, "")}`}
-                        className="aptus-footer-col-text flex items-center gap-2 text-brand-blue transition-colors hover:text-brand-green"
+                        className="aptus-footer-col-text flex items-center gap-2.5 text-brand-blue transition-colors hover:text-brand-green"
                         style={{ fontSize: "var(--text-sm)" }}
                       >
                         <svg
@@ -157,7 +156,7 @@ export function FooterClient({
                     <li>
                       <a
                         href={`mailto:${footer.email}`}
-                        className="aptus-footer-col-text flex items-center gap-2 text-brand-blue transition-colors hover:text-brand-green"
+                        className="aptus-footer-col-text flex items-center gap-2.5 text-brand-blue transition-colors hover:text-brand-green"
                         style={{ fontSize: "var(--text-sm)" }}
                       >
                         <svg
@@ -181,7 +180,7 @@ export function FooterClient({
                   )}
                   {footer.address && (
                     <li
-                      className="aptus-footer-col-text flex items-start gap-2 text-brand-blue"
+                      className="aptus-footer-col-text flex items-start gap-2.5 text-brand-blue"
                       style={{ fontSize: "var(--text-sm)" }}
                     >
                       <svg
@@ -210,7 +209,7 @@ export function FooterClient({
       </Container>
 
       {footer.copyright && (
-        <div className="border-t border-border py-2.5">
+        <div className="border-t border-border py-4">
           <Container>
             <p
               className="text-center text-muted-foreground"

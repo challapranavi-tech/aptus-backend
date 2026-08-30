@@ -162,17 +162,24 @@ export interface Section {
 // hero
 export interface HeroHighlight {
   id: string;
+  /** Short heading (e.g. EFFICIENCY). */
   label: string;
+  /** Supporting line under the heading. */
+  description?: string;
 }
 
 export interface Hero {
   type: "hero";
   heading?: string;
   headingAccent?: string;
+  /** Short punch line under the headline (homepage). */
+  tagline?: string;
   subheading?: string;
   primaryAction?: ActionLink;
   secondaryAction?: ActionLink;
   media?: MediaAsset;
+  /** Multiple background images (homepage crossfade / motion). */
+  backgroundMedia?: MediaAsset[];
   /** Result chips under the homepage CTA. */
   highlights?: HeroHighlight[];
   /** `home-centered` = pale band, centered copy + CTA + chips. */
@@ -265,8 +272,8 @@ export interface LogoGrid {
   heading?: string;
   headingAccent?: string;
   items?: LogoItem[];
-  /** `alliances` = live partner logo carousel (277px slides, infinite scroll). */
-  variant?: "default" | "alliances" | "alliances-grid";
+  /** `alliances` = live partner logo carousel. `partners-marquee` = homepage authorized partners strip. */
+  variant?: "default" | "alliances" | "alliances-grid" | "partners-marquee";
 }
 
 export interface FlipCardItem {
@@ -425,6 +432,7 @@ export interface SoftwareInnerHero {
 // features
 export interface FeatureItem {
   id: string;
+  number?: string;
   title?: string;
   description?: string;
   bullets?: string[];
@@ -442,6 +450,10 @@ export interface Features {
   headingAccent?: string;
   subheading?: string;
   items?: FeatureItem[];
+  /** Category pills (homepage industries). */
+  tags?: string[];
+  /** Bottom CTA (e.g. View more → case studies). */
+  action?: ActionLink;
   align?: "left" | "center";
   anchorId?: string;
   /** `pillars` = icon + title columns (Winning Together). `home-promises` = 4-up homepage promise grid. */
@@ -453,7 +465,10 @@ export interface Features {
     | "icon-cards"
     | "bullet-list"
     | "checklist"
-    | "home-promises";
+    | "home-promises"
+    | "home-industries"
+    | "home-challenges"
+    | "home-why-choose";
   /** Product hub grids: live uses 3-col (Microsoft core) or 4-col (Adobe hub). Stacked pages use 5. */
   gridColumns?: 3 | 4 | 5;
 }
@@ -525,12 +540,15 @@ export interface TestimonialItem {
 
 export interface Testimonials {
   type: "testimonials";
+  eyebrow?: string;
   heading?: string;
   subheading?: string;
+  /** Hint on the right of the homepage header (e.g. Scroll to read more). */
+  scrollHint?: string;
   items?: TestimonialItem[];
-  /** Bottom CTA (homepage 3-up cards). */
+  /** Bottom CTA (homepage cards). */
   action?: ActionLink;
-  /** `software-quotes` = light 3-column grid on product pages. `home-cards` = homepage 3-up + CTA. */
+  /** `software-quotes` = light 3-column grid on product pages. `home-cards` = homepage scroll cards. */
   variant?: "default" | "software-quotes" | "home-cards";
 }
 

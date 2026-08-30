@@ -578,6 +578,9 @@ export function Features({ data }: FeaturesProps) {
   const isBulletList = data.variant === "bullet-list";
   const isChecklist = data.variant === "checklist";
   const isHomePromises = data.variant === "home-promises";
+  const isHomeIndustries = data.variant === "home-industries";
+  const isHomeChallenges = data.variant === "home-challenges";
+  const isHomeWhyChoose = data.variant === "home-why-choose";
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -585,14 +588,19 @@ export function Features({ data }: FeaturesProps) {
 
     const ctx = gsap.context(() => {
       const cards = sectionRef.current?.querySelectorAll(".feature-card");
-      if (!cards) return;
+      if (!cards?.length) return;
       const isSoftware = sectionRef.current?.closest(".aptus-software-page");
+      const isFlipSection =
+        isHomeChallenges || isHomeWhyChoose || isHomePromises;
+
       gsap.from(cards, {
-        y: isSoftware ? 24 : 40,
+        y: isSoftware ? 24 : 36,
         opacity: isSoftware ? 1 : 0,
-        duration: 0.7,
+        rotateY: isFlipSection ? -55 : 0,
+        transformPerspective: isFlipSection ? 900 : undefined,
+        duration: isFlipSection ? 0.85 : 0.7,
         ease: "power3.out",
-        stagger: 0.12,
+        stagger: isFlipSection ? 0.1 : 0.12,
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 82%",
@@ -602,7 +610,198 @@ export function Features({ data }: FeaturesProps) {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [isHomeChallenges, isHomeWhyChoose, isHomePromises]);
+
+  if (isHomeWhyChoose) {
+    return (
+      <section
+        ref={sectionRef}
+        className="home-why-choose section-padding"
+        data-section="features"
+        data-variant="home-why-choose"
+      >
+        <Container>
+          {data.heading && (
+            <div className="home-why-choose__header">
+              <h2 className="home-why-choose__heading">{data.heading}</h2>
+              <p className="home-section-hint">Scroll &amp; flip the cards →</p>
+            </div>
+          )}
+          {data.items && data.items.length > 0 && (
+            <div className="home-card-track home-why-choose__track">
+              {data.items.map((item) => (
+                <article
+                  key={item.id}
+                  className="feature-card home-flip-card home-why-choose__card"
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`${item.title ?? "Card"}. Flip for details.`}
+                  onClick={(e) => {
+                    e.currentTarget.classList.toggle("is-flipped");
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      e.currentTarget.classList.toggle("is-flipped");
+                    }
+                  }}
+                >
+                  <div className="home-flip-card__inner">
+                    <div className="home-flip-card__face home-flip-card__face--front">
+                      {item.number && (
+                        <span className="home-why-choose__number">{item.number}</span>
+                      )}
+                      {item.title && (
+                        <h3 className="home-why-choose__title">{item.title}</h3>
+                      )}
+                      <span className="home-flip-card__cue">Flip for details</span>
+                    </div>
+                    <div className="home-flip-card__face home-flip-card__face--back">
+                      {item.title && (
+                        <h3 className="home-why-choose__title home-why-choose__title--back">
+                          {item.title}
+                        </h3>
+                      )}
+                      {item.description && (
+                        <p className="home-why-choose__desc">{item.description}</p>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+        </Container>
+      </section>
+    );
+  }
+
+  if (isHomeChallenges) {
+    return (
+      <section
+        ref={sectionRef}
+        className="home-challenges section-padding"
+        data-section="features"
+        data-variant="home-challenges"
+      >
+        <Container>
+          {(data.heading || data.subheading) && (
+            <div className="home-challenges__header">
+              {data.heading && <h2 className="home-challenges__heading">{data.heading}</h2>}
+              {data.subheading && (
+                <p className="home-challenges__subheading">{data.subheading}</p>
+              )}
+              <p className="home-section-hint">Scroll &amp; flip the cards →</p>
+            </div>
+          )}
+          {data.items && data.items.length > 0 && (
+            <div className="home-card-track home-challenges__track">
+              {data.items.map((item) => (
+                <article
+                  key={item.id}
+                  className="feature-card home-flip-card home-challenges__card"
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`${item.title ?? "Card"}. Flip for details.`}
+                  onClick={(e) => {
+                    e.currentTarget.classList.toggle("is-flipped");
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      e.currentTarget.classList.toggle("is-flipped");
+                    }
+                  }}
+                >
+                  <div className="home-flip-card__inner">
+                    <div className="home-flip-card__face home-flip-card__face--front">
+                      {item.title && <h3 className="home-challenges__title">{item.title}</h3>}
+                      <span className="home-flip-card__cue">Flip for details</span>
+                    </div>
+                    <div className="home-flip-card__face home-flip-card__face--back">
+                      {item.title && (
+                        <h3 className="home-challenges__title home-challenges__title--back">
+                          {item.title}
+                        </h3>
+                      )}
+                      {item.description && (
+                        <p className="home-challenges__desc">{item.description}</p>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+        </Container>
+      </section>
+    );
+  }
+
+  if (isHomeIndustries) {
+    return (
+      <section
+        ref={sectionRef}
+        className="home-industries section-padding"
+        data-section="features"
+        data-variant="home-industries"
+      >
+        <Container>
+          <div className="home-industries__header">
+            <div className="home-industries__titles">
+              {data.eyebrow && <p className="home-industries__eyebrow">{data.eyebrow}</p>}
+              {(data.heading || data.headingAccent) && (
+                <h2 className="home-industries__heading">
+                  {data.heading}
+                  {data.heading && data.headingAccent ? " " : null}
+                  {data.headingAccent}
+                </h2>
+              )}
+            </div>
+            {data.tags && data.tags.length > 0 && (
+              <ul className="home-industries__tags">
+                {data.tags.map((tag) => (
+                  <li key={tag} className="home-industries__tag">
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          {data.items && data.items.length > 0 && (
+            <div className="home-industries__grid">
+              {data.items.map((item) => (
+                <article key={item.id} className="feature-card home-industries__card">
+                  {item.media && (
+                    <CmsImage
+                      src={item.media.src}
+                      alt={item.media.alt || item.title || ""}
+                      width={640}
+                      height={420}
+                      className="home-industries__image"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  )}
+                  <div className="home-industries__overlay" aria-hidden="true" />
+                  {item.title && <h3 className="home-industries__label">{item.title}</h3>}
+                </article>
+              ))}
+            </div>
+          )}
+
+          {data.action && (
+            <div className="home-industries__more">
+              <Link href={data.action.href} className="home-industries__more-link">
+                {data.action.label}
+                <span aria-hidden="true"> →</span>
+              </Link>
+            </div>
+          )}
+        </Container>
+      </section>
+    );
+  }
 
   if (isHomePromises) {
     return (

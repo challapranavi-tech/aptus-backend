@@ -2,6 +2,7 @@ import { Noto_Sans_Arabic, Poppins } from "next/font/google";
 import "@/styles/globals.css";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { ExpertChatProvider } from "@/components/chat/ExpertChatProvider";
 import { QuoteModalProvider } from "@/components/quote/QuoteModalProvider";
 import { GSAPProvider } from "@/components/providers/GSAPProvider";
 import { LocaleProvider } from "@/context/LocaleProvider";
@@ -75,10 +76,12 @@ export default async function RootLayout({
         <LocaleProvider initialLocale={locale}>
           <GSAPProvider>
             <QuoteModalProvider>
-              <Header />
-              <main className="flex-1">{children}</main>
-              <Footer />
-              <WhatsAppButton />
+              <ExpertChatProvider>
+                <Header />
+                <main className="flex-1">{children}</main>
+                <Footer />
+                <WhatsAppButton />
+              </ExpertChatProvider>
             </QuoteModalProvider>
           </GSAPProvider>
         </LocaleProvider>

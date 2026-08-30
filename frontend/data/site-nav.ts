@@ -163,7 +163,6 @@ export const SITE_NAVIGATION: NavigationItem[] = [
       { label: "Conference room solution", href: "/conference-room-solution" },
     ],
   },
-  { label: "Aptus Case Studies", href: "/aptus-case-studies" },
 ];
 
 // ponytail: self-check — live Software menu has 11 top-level categories

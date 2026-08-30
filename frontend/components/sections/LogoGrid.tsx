@@ -11,6 +11,41 @@ export function LogoGrid({ data }: LogoGridProps) {
 
   const isAlliances = data.variant === "alliances";
   const isAlliancesGrid = data.variant === "alliances-grid";
+  const isPartnersMarquee = data.variant === "partners-marquee";
+
+  if (isPartnersMarquee) {
+    return (
+      <section
+        className="home-partners section-padding"
+        data-section="logo-grid"
+        data-variant="partners-marquee"
+      >
+        <Container>
+          {(data.heading || data.headingAccent) && (
+            <h2 className="home-partners__heading">
+              {data.heading}
+              {data.heading && data.headingAccent ? " " : null}
+              {data.headingAccent}
+            </h2>
+          )}
+        </Container>
+        <div
+          className="home-partners__marquee"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label={data.heading ?? "Authorized technology partners"}
+        >
+          <div className="home-partners__track">
+            {[...data.items, ...data.items].map((logo, i) => (
+              <div key={`${logo.id}-${i}`} className="home-partners__slide">
+                <span className="home-partners__name">{logo.alt}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section
@@ -27,12 +62,18 @@ export function LogoGrid({ data }: LogoGridProps) {
             {(data.heading || data.headingAccent) && (
               <h2
                 className={cn(isAlliances || isAlliancesGrid ? "aptus-alliances-heading" : "text-brand-navy")}
-                style={!(isAlliances || isAlliancesGrid) ? { fontSize: 'var(--text-4xl)', fontWeight: 600 } : undefined}
+                style={!(isAlliances || isAlliancesGrid) ? { fontSize: "var(--text-4xl)", fontWeight: 600 } : undefined}
               >
                 {data.heading}
                 {data.heading && data.headingAccent && " "}
                 {data.headingAccent && (
-                  <span className={isAlliances || isAlliancesGrid ? "aptus-alliances-heading-accent" : "text-[#38b6ff]"}>
+                  <span
+                    className={
+                      isAlliances || isAlliancesGrid
+                        ? "aptus-alliances-heading-accent"
+                        : "text-[#38b6ff]"
+                    }
+                  >
                     {data.headingAccent}
                   </span>
                 )}

@@ -87,8 +87,10 @@ interface RawTestimonials {
   visible?: boolean;
   presentation?: RawPresentation;
   variant?: "default" | "software-quotes" | "home-cards";
+  eyebrow?: string;
   heading?: string;
   subheading?: string;
+  scrollHint?: string;
   ctaLabel?: string;
   ctaHref?: string;
   items?: RawTestimonialItem[];
@@ -104,7 +106,24 @@ interface RawLogoGrid {
   presentation?: RawPresentation;
   heading?: string;
   headingAccent?: string;
+  variant?: "default" | "alliances" | "alliances-grid" | "partners-marquee";
   logos?: RawLogoItem[];
+}
+interface RawIndustryItem {
+  title?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+}
+interface RawIndustries {
+  id?: string;
+  visible?: boolean;
+  presentation?: RawPresentation;
+  eyebrow?: string;
+  title?: RawTitle;
+  tags?: string[];
+  items?: RawIndustryItem[];
+  ctaLabel?: string;
+  ctaHref?: string;
 }
 interface RawCtaBand {
   id?: string;
@@ -128,6 +147,30 @@ interface RawPromises {
   title?: RawTitle;
   items?: RawPromiseItem[];
 }
+interface RawChallengeItem {
+  title?: string;
+  description?: string;
+}
+interface RawChallenges {
+  id?: string;
+  visible?: boolean;
+  presentation?: RawPresentation;
+  heading?: string;
+  subheading?: string;
+  items?: RawChallengeItem[];
+}
+interface RawWhyChooseItem {
+  number?: string;
+  title?: string;
+  description?: string;
+}
+interface RawWhyChoose {
+  id?: string;
+  visible?: boolean;
+  presentation?: RawPresentation;
+  heading?: string;
+  items?: RawWhyChooseItem[];
+}
 interface RawHomeJson {
   hero?: {
     id?: string;
@@ -136,15 +179,20 @@ interface RawHomeJson {
     variant?: "banner" | "home-centered";
     title?: RawTitle;
     subtitle?: string;
+    tagline?: string;
     ctaLabel?: string;
     ctaHref?: string;
-    results?: { label?: string }[];
+    results?: { label?: string; title?: string; description?: string }[];
     imageSrc?: string;
     imageAlt?: string;
     imageWidth?: number;
     imageHeight?: number;
+    backgroundImages?: { src?: string; alt?: string }[];
   };
   logoGrid?: RawLogoGrid;
+  challenges?: RawChallenges;
+  whyChooseUs?: RawWhyChoose;
+  industries?: RawIndustries;
   features?: RawFeature[];
   midCta?: RawCtaBand;
   services?: RawServices;
@@ -227,11 +275,16 @@ export function mapHomepageJson(raw: string | false | undefined | null): Section
     if (isCentered) {
       const highlights = (hero.results ?? [])
         .map((r, i) => {
-          const label = r.label?.trim();
+          const label = (r.title ?? r.label)?.trim();
           if (!label) return null;
-          return { id: `home-result-${i}`, label };
+          const description = r.description?.trim();
+          return {
+            id: `home-result-${i}`,
+            label,
+            description: description || undefined,
+          };
         })
-        .filter((x): x is { id: string; label: string } => !!x);
+        .filter((x): x is { id: string; label: string; description?: string } => !!x);
 
       sections.push({
         id: hero.id ?? "home-hero",
@@ -243,6 +296,7 @@ export function mapHomepageJson(raw: string | false | undefined | null): Section
           variant: "home-centered",
           heading: hero.title?.before?.trim() || joinTitle(hero.title),
           headingAccent: hero.title?.accent,
+          tagline: hero.tagline,
           subheading: hero.subtitle,
           primaryAction:
             hero.ctaLabel && hero.ctaHref
@@ -250,6 +304,14 @@ export function mapHomepageJson(raw: string | false | undefined | null): Section
               : undefined,
           highlights: highlights.length ? highlights : undefined,
           media: usableImg(hero.imageSrc, hero.imageAlt),
+          backgroundMedia: (() => {
+            const fromGallery = (hero.backgroundImages ?? [])
+              .map((img) => usableImg(img.src, img.alt))
+              .filter((x): x is MediaAsset => !!x);
+            if (fromGallery.length > 0) return fromGallery;
+            const single = usableImg(hero.imageSrc, hero.imageAlt);
+            return single ? [single] : undefined;
+          })(),
         },
       });
     } else {
@@ -271,6 +333,95 @@ export function mapHomepageJson(raw: string | false | undefined | null): Section
         });
       }
     }
+  }
+
+  // Pain points / challenges (before industries)
+  const challenges = data.challenges;
+  if (
+    challenges &&
+    challenges.visible !== false &&
+    Array.isArray(challenges.items) &&
+    challenges.items.length > 0
+  ) {
+    sections.push({
+      id: challenges.id ?? "home-challenges",
+      type: "features",
+      order: ++order.n,
+      presentation: parsePresentation(challenges.presentation),
+      data: {
+        type: "features",
+        variant: "home-challenges",
+        heading: challenges.heading,
+        subheading: challenges.subheading,
+        align: "center",
+        items: challenges.items.map((it, i) => ({
+          id: `home-challenge-${i}`,
+          title: it.title,
+          description: it.description,
+        })),
+      },
+    });
+  }
+
+  // Why choose us (after challenges, before industries)
+  const whyChooseUs = data.whyChooseUs;
+  if (
+    whyChooseUs &&
+    whyChooseUs.visible !== false &&
+    Array.isArray(whyChooseUs.items) &&
+    whyChooseUs.items.length > 0
+  ) {
+    sections.push({
+      id: whyChooseUs.id ?? "home-why-choose",
+      type: "features",
+      order: ++order.n,
+      presentation: parsePresentation(whyChooseUs.presentation),
+      data: {
+        type: "features",
+        variant: "home-why-choose",
+        heading: whyChooseUs.heading ?? "Why Choose Us",
+        align: "center",
+        items: whyChooseUs.items.map((it, i) => ({
+          id: `home-why-${i}`,
+          number: it.number ?? String(i + 1).padStart(2, "0"),
+          title: it.title,
+          description: it.description,
+        })),
+      },
+    });
+  }
+
+  // Industries we serve (Sector Expertise)
+  const industries = data.industries;
+  if (
+    industries &&
+    industries.visible !== false &&
+    Array.isArray(industries.items) &&
+    industries.items.length > 0
+  ) {
+    sections.push({
+      id: industries.id ?? "home-industries",
+      type: "features",
+      order: ++order.n,
+      presentation: parsePresentation(industries.presentation),
+      data: {
+        type: "features",
+        variant: "home-industries",
+        eyebrow: industries.eyebrow,
+        heading: industries.title?.before,
+        headingAccent: industries.title?.accent,
+        tags: industries.tags?.filter(Boolean),
+        action:
+          industries.ctaLabel && industries.ctaHref
+            ? { label: industries.ctaLabel, href: industries.ctaHref }
+            : undefined,
+        items: industries.items.map((it, i) => ({
+          id: `home-industry-${i}`,
+          title: it.title,
+          media: usableImg(it.imageSrc, it.imageAlt ?? it.title),
+        })),
+      },
+    });
   }
 
   const logoGrid = data.logoGrid;
@@ -297,7 +448,7 @@ export function mapHomepageJson(raw: string | false | undefined | null): Section
           type: "logo-grid",
           heading: logoGrid.heading,
           headingAccent: logoGrid.headingAccent,
-          variant: "default",
+          variant: logoGrid.variant ?? "default",
           items,
         },
       });
@@ -432,8 +583,10 @@ export function mapHomepageJson(raw: string | false | undefined | null): Section
       data: {
         type: "testimonials",
         variant: testimonials.variant ?? "home-cards",
+        eyebrow: testimonials.eyebrow,
         heading: testimonials.heading,
         subheading: testimonials.subheading,
+        scrollHint: testimonials.scrollHint,
         action:
           testimonials.ctaLabel && testimonials.ctaHref
             ? { label: testimonials.ctaLabel, href: testimonials.ctaHref }

@@ -3,18 +3,66 @@
 import { Container } from "@/components/ui";
 import { gsap } from "@/lib/gsap";
 import { cn, resolveCmsImageSrc } from "@/lib/utils";
-import type { Hero as HeroData } from "@/types";
+import type { Hero as HeroData, MediaAsset } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 interface HeroProps {
   data: HeroData;
 }
 
+const SLIDE_MS = 5000;
+
+function HeroBackgroundSlides({ images }: { images: MediaAsset[] }) {
+  const [active, setActive] = useState(0);
+  const [motionOk, setMotionOk] = useState(false);
+
+  useEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setMotionOk(!reduce);
+    if (images.length < 2 || reduce) return;
+    const id = window.setInterval(() => {
+      setActive((i) => (i + 1) % images.length);
+    }, SLIDE_MS);
+    return () => window.clearInterval(id);
+  }, [images.length]);
+
+  return (
+    <div className="home-hero-slides" aria-hidden="true">
+      {images.map((img, i) => (
+        <div
+          key={`${img.src}-${i}`}
+          className={cn(
+            "home-hero-slide",
+            i === active && "home-hero-slide--active",
+            motionOk && "home-hero-slide--motion",
+          )}
+        >
+          <Image
+            src={resolveCmsImageSrc(img.src)}
+            alt=""
+            fill
+            className="object-cover"
+            priority={i === 0}
+            sizes="100vw"
+          />
+        </div>
+      ))}
+      <div className="home-hero-centered__veil" />
+    </div>
+  );
+}
+
 export function Hero({ data }: HeroProps) {
   const contentRef = useRef<HTMLDivElement>(null);
   const isHomeCentered = data.variant === "home-centered";
+  const backgroundImages = useMemo(() => {
+    if (data.backgroundMedia && data.backgroundMedia.length > 0) {
+      return data.backgroundMedia;
+    }
+    return data.media ? [data.media] : [];
+  }, [data.backgroundMedia, data.media]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -42,44 +90,45 @@ export function Hero({ data }: HeroProps) {
         data-section="hero"
         data-variant="home-centered"
       >
+        {backgroundImages.length > 0 && <HeroBackgroundSlides images={backgroundImages} />}
+
         <Container>
-          <div ref={contentRef} className="relative z-10 mx-auto max-w-3xl text-center">
-            {(data.heading || data.headingAccent) && (
-              <h1
-                className="anim-item text-brand-navy"
-                style={{ fontSize: "var(--text-5xl)", fontWeight: 700, lineHeight: 1.15 }}
-              >
-                {data.heading}
-                {data.heading && data.headingAccent ? " " : null}
-                {data.headingAccent && (
-                  <span className="text-brand-blue">{data.headingAccent}</span>
-                )}
-              </h1>
-            )}
-            {data.subheading && (
-              <p
-                className="anim-item mx-auto mt-5 max-w-2xl text-muted-foreground"
-                style={{ fontSize: "var(--text-lg)", lineHeight: 1.65 }}
-              >
-                {data.subheading}
-              </p>
-            )}
-            {data.primaryAction && (
-              <div className="anim-item mt-8 flex justify-center">
-                <Link
-                  href={data.primaryAction.href}
-                  className="home-cta-pill inline-flex items-center justify-center px-8 py-3.5 text-white transition-colors"
-                  style={{ fontSize: "var(--text-sm)", fontWeight: 600 }}
-                >
-                  {data.primaryAction.label}
-                </Link>
-              </div>
-            )}
+          <div ref={contentRef} className="relative z-10 mx-auto max-w-5xl text-center">
+            <div className="anim-item home-hero-logo mb-8 flex justify-center">
+              <Image
+                src="/logo-white.svg"
+                alt="Aptus Infotech"
+                width={220}
+                height={56}
+                className="h-12 w-auto sm:h-14"
+                priority
+              />
+            </div>
+
+            <div className="mx-auto max-w-3xl">
+              {(data.heading || data.headingAccent) && (
+                <h1 className="anim-item home-hero-heading">
+                  {data.heading}
+                  {data.heading && data.headingAccent ? " " : null}
+                  {data.headingAccent}
+                </h1>
+              )}
+              {data.tagline && (
+                <p className="anim-item home-hero-tagline">{data.tagline}</p>
+              )}
+              {data.subheading && (
+                <p className="anim-item home-hero-support">{data.subheading}</p>
+              )}
+            </div>
+
             {data.highlights && data.highlights.length > 0 && (
-              <ul className="anim-item home-hero-results mt-10 flex flex-wrap items-center justify-center gap-3">
+              <ul className="anim-item home-hero-results mt-10">
                 {data.highlights.map((item) => (
-                  <li key={item.id} className="home-hero-result-chip">
-                    {item.label}
+                  <li key={item.id} className="home-hero-result-card">
+                    <h2 className="home-hero-result-card__title">{item.label}</h2>
+                    {item.description && (
+                      <p className="home-hero-result-card__body">{item.description}</p>
+                    )}
                   </li>
                 ))}
               </ul>

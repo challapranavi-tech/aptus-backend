@@ -4,69 +4,192 @@
     "visible": true,
     "variant": "home-centered",
     "title": {
-      "before": "Licensed software and ELV delivery,",
-      "accent": "backed by Aptus expertise"
+      "before": "25+ Years in Oman. One Trusted Technology Partner."
     },
-    "subtitle": "From Autodesk and Adobe licensing to complete ELV systems, Aptus Infotech helps organisations across Oman adopt the right technology and put it to work.",
-    "ctaLabel": "Request Quote",
-    "ctaHref": "#form",
+    "tagline": "Work smarter. Operate securely. Grow with confidence.",
+    "subtitle": "We bring together global technology, local expertise and proven delivery to help businesses achieve more.",
+    "imageSrc": "/images/oman-tech-hero.jpg",
+    "imageAlt": "Modern technology and business landscape in Oman",
+    "backgroundImages": [
+      {
+        "src": "/images/oman-tech-hero.jpg",
+        "alt": "Oman technology and business skyline"
+      },
+      {
+        "src": "/images/adobe-banner.jpg",
+        "alt": "Adobe creative software"
+      },
+      {
+        "src": "/images/Aptusinfo.jpg",
+        "alt": "Aptus Infotech solutions"
+      },
+      {
+        "src": "/images/fdsg-1.jpg",
+        "alt": "Software and digital engineering"
+      },
+      {
+        "src": "/images/Access-Control-System-1-1024x1020.png",
+        "alt": "ELV and access control"
+      },
+      {
+        "src": "/images/about_banner-e1746943143932.jpg",
+        "alt": "Aptus technology partnership"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Unlock-the-Power-of-Autodesk.png",
+        "alt": "Autodesk solutions"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/imgi_8_photo-1581094794329-c8112a89af12-683x1024.png",
+        "alt": "Digital engineering at work"
+      }
+    ],
     "results": [
       {
-        "label": "Genuine licensed software"
+        "title": "Efficiency",
+        "description": "Optimize processes. Empower people. Improve performance."
       },
       {
-        "label": "End-to-end ELV delivery"
+        "title": "Resilience",
+        "description": "Stay secure, connected and ready for what's next."
       },
       {
-        "label": "Training & BIM support"
+        "title": "Scalability",
+        "description": "Adapt, expand and grow without technology becoming a barrier."
       }
     ]
   },
-  "logoGrid": {
-    "id": "trusted-logos",
+  "challenges": {
+    "id": "challenges",
     "visible": true,
-    "heading": "Trusted By Leading Companies",
-    "logos": [
+    "heading": "Technology Should Solve Problems — Not Create Them.",
+    "subheading": "Are you dealing with...",
+    "items": [
       {
-        "id": "logo-autodesk",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png",
-        "alt": "Autodesk"
+        "title": "Disconnected Systems",
+        "description": "Your tools don't talk to each other."
       },
       {
-        "id": "logo-sketchup",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png",
-        "alt": "SketchUp"
+        "title": "Rising Costs",
+        "description": "Too much time and money spent on inefficient processes."
       },
       {
-        "id": "logo-honeywell",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Honeywell.png",
-        "alt": "Honeywell"
+        "title": "Security Concerns",
+        "description": "Growing threats to your business, people and assets."
       },
       {
-        "id": "logo-hikvision",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Hikvision.png",
-        "alt": "Hikvision"
+        "title": "Outdated Technology",
+        "description": "Legacy systems holding your business back."
       },
       {
-        "id": "logo-apc",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/APC.png",
-        "alt": "APC"
+        "title": "Skills Gaps",
+        "description": "Not enough specialized expertise in-house."
       },
       {
-        "id": "logo-vertiv",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Vertiv.png",
-        "alt": "Vertiv"
-      },
-      {
-        "id": "logo-logitech",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Logitech.png",
-        "alt": "Logitech"
-      },
-      {
-        "id": "logo-tyco",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Tyco.png",
-        "alt": "Tyco"
+        "title": "Uncertain Investments",
+        "description": "Technology spending without clear business returns."
       }
+    ]
+  },
+  "whyChooseUs": {
+    "id": "why-choose-us",
+    "visible": true,
+    "heading": "Why Choose Us",
+    "items": [
+      {
+        "number": "01",
+        "title": "One Partner. Multiple Solutions.",
+        "description": "From enterprise software and digital engineering to ELV, security and smart infrastructure, we bring complementary solutions together under one roof."
+      },
+      {
+        "number": "02",
+        "title": "25+ Years of Experience in Oman",
+        "description": "Our deep local knowledge helps us understand your business, your environment and the challenges unique to operating in Oman."
+      },
+      {
+        "number": "03",
+        "title": "Global Technology. Local Expertise.",
+        "description": "With 20+ technology partners and experienced local teams, we combine world-class technologies with practical, on-ground expertise."
+      },
+      {
+        "number": "04",
+        "title": "From Solution to Support",
+        "description": "We don't just supply products. We help you identify, implement, integrate and support the right solutions for your business."
+      }
+    ]
+  },
+  "industries": {
+    "id": "industries",
+    "visible": true,
+    "eyebrow": "Industries We Serve",
+    "title": {
+      "before": "Sector Expertise"
+    },
+    "tags": [
+      "Banking",
+      "Hospitality",
+      "Manufacturing",
+      "Transportation",
+      "Defence",
+      "Airports"
+    ],
+    "items": [
+      {
+        "title": "Transportation",
+        "imageSrc": "https://images.unsplash.com/photo-1544620341-11cb2b0bda28?auto=format&fit=crop&w=1200&q=80",
+        "imageAlt": "Transportation"
+      },
+      {
+        "title": "Oil & Gas",
+        "imageSrc": "/images/Petroleum-Development-of-Oman.png",
+        "imageAlt": "Oil & Gas"
+      },
+      {
+        "title": "Healthcare",
+        "imageSrc": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80",
+        "imageAlt": "Healthcare"
+      },
+      {
+        "title": "Education",
+        "imageSrc": "/images/Al-Nahda.jpg",
+        "imageAlt": "Education"
+      },
+      {
+        "title": "Defence",
+        "imageSrc": "/images/Royal-Police.png",
+        "imageAlt": "Defence"
+      },
+      {
+        "title": "Smart Cities",
+        "imageSrc": "/images/Sultan-haitham-city.png",
+        "imageAlt": "Smart Cities"
+      }
+    ],
+    "ctaLabel": "View more",
+    "ctaHref": "/aptus-case-studies"
+  },
+  "logoGrid": {
+    "id": "authorized-partners",
+    "visible": true,
+    "variant": "partners-marquee",
+    "heading": "Authorized Technology Partners",
+    "logos": [
+      { "id": "p-autodesk", "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png", "alt": "Autodesk" },
+      { "id": "p-bentley", "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Prokon.png", "alt": "Bentley" },
+      { "id": "p-oracle", "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/aconex.png", "alt": "Oracle" },
+      { "id": "p-microsoft", "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/planswift.png", "alt": "Microsoft" },
+      { "id": "p-adobe", "src": "/images/Adobe-Acrobat-Pro.png", "alt": "Adobe" },
+      { "id": "p-csi", "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/etap.png", "alt": "CSI" },
+      { "id": "p-honeywell", "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Honeywell.png", "alt": "Honeywell" },
+      { "id": "p-hikvision", "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Hikvision.png", "alt": "Hikvision" },
+      { "id": "p-fortinet", "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/sophos.png", "alt": "Fortinet" },
+      { "id": "p-sophos", "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/sophos.png", "alt": "Sophos" },
+      { "id": "p-odoo", "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/spectronova.png", "alt": "Odoo" },
+      { "id": "p-sketchup", "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png", "alt": "SketchUp" },
+      { "id": "p-tyco", "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Tyco.png", "alt": "Tyco" },
+      { "id": "p-apc", "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/APC.png", "alt": "APC" },
+      { "id": "p-vertiv", "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Vertiv.png", "alt": "Vertiv" },
+      { "id": "p-logitech", "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Logitech.png", "alt": "Logitech" }
     ]
   },
   "features": [
@@ -86,44 +209,39 @@
       ],
       "imageSrc": "/images/Aptusinfo.jpg",
       "imageAlt": "Aptus Infotech success story",
-      "imagePosition": "left",
-      "buttonLabel": "Request Quote",
-      "href": "#form"
+      "imagePosition": "left"
     }
   ],
   "midCta": {
     "id": "mid-cta",
     "visible": true,
-    "heading": "Ready to transform how you buy and deploy technology?",
-    "description": "Tell us what you need — our team will prepare a clear quotation and guide you through the next steps.",
-    "actionLabel": "Request Quote",
-    "actionHref": "#form"
+    "heading": "Let’s Find the Right Solution for Your Business",
+    "description": "Whether you need software, ELV, security or a complete technology solution, our experts are here to understand your requirements and help you take the next step.",
+    "actionLabel": "Talk to an Expert",
+    "actionHref": "#talk-to-expert"
   },
   "keyEnablers": {
     "id": "home-steps",
     "visible": true,
     "variant": "home-steps",
-    "eyebrow": "How it works",
     "title": {
-      "before": "Three simple",
-      "accent": "steps"
+      "before": "How It Works"
     },
-    "subtitle": "From first enquiry to order tracking — a clear path with Aptus.",
     "items": [
       {
         "number": "01",
-        "title": "Request a Quote",
-        "description": "Share the software or ELV solution you need through our Request Quote form."
+        "title": "Tell Us What You Need",
+        "description": "Share your business requirement, challenge, project scope or technology needs with our team."
       },
       {
         "number": "02",
-        "title": "Receive quotation from Aptus",
-        "description": "Our sales team prepares a clear quotation tailored to your requirements."
+        "title": "We Design the Right Solution",
+        "description": "Our experts assess your requirements and recommend the right combination of technology, products and services from our global partners."
       },
       {
         "number": "03",
-        "title": "Track status in the portal",
-        "description": "Follow quotation status, complete your order, and manage licenses in the customer portal."
+        "title": "We Make It Happen",
+        "description": "From supply and implementation to integration and ongoing support, we help you bring the solution to life."
       }
     ]
   },
@@ -162,35 +280,43 @@
     "id": "testimonials",
     "visible": true,
     "variant": "home-cards",
+    "eyebrow": "Client Testimonials",
     "heading": "What our clients say",
-    "subheading": "Real feedback from organisations that trust Aptus Infotech.",
-    "ctaLabel": "Request Quote",
-    "ctaHref": "#form",
+    "scrollHint": "Scroll to read more →",
     "items": [
       {
         "id": "tmn-0",
-        "quote": "We would like to acknowledge and extend my heartfelt gratitude to Aptus Infotech for done an IT project in our Indian School Wadi Kabir international. We appreciate the commitment & dedication shown by Aptus Infotech for their implementation and services. We also admire about their aspiration for their prompt and flawless support from project team. We look forward for continual long-term association with Aptus Infotech",
+        "quote": "We appreciate the commitment & dedication shown by Aptus Infotech for their implementation and services.",
         "author": "Nambi Rajesh",
-        "role": "IT Manager, Indian School Wadi Kabir International",
-        "avatarSrc": "/images/logotest.png"
+        "role": "IT Manager",
+        "company": "Indian School Wadi Kabir International"
       },
       {
         "id": "tmn-1",
-        "quote": "The Autodesk solutions provided by Aptus Infotech have transformed our design process. The support and training we received were exceptional, and our team is now more productive than ever.",
-        "author": "Ahmed Hassan",
-        "role": "Design Director, Architecture Plus"
+        "quote": "The AutoCAD toolsets from Aptus have revolutionized our workflow.",
+        "author": "Mariam Al Said",
+        "role": "Lead Architect",
+        "company": "Design Firm, Oman"
       },
       {
         "id": "tmn-2",
-        "quote": "The Oracle database implementation by Aptus Infotech has significantly improved our data management capabilities. The system is robust, secure, and perfectly integrated with our existing processes.",
-        "author": "Sara Al Said",
-        "role": "IT Manager, Financial Services Group"
+        "quote": "Aptus recommended AutoCAD LT, which perfectly meets our needs without breaking the budget.",
+        "author": "Khalid Al Balushi",
+        "role": "Owner",
+        "company": "Engineering Consultancy"
+      },
+      {
+        "id": "tmn-3",
+        "quote": "Working with Aptus Infotech helped us reduce project completion time by 30%.",
+        "author": "Yusuf Al Hashmi",
+        "role": "Design Manager",
+        "company": "Construction Company, Muscat"
       }
     ]
   },
   "closingCta": {
     "id": "closing-cta",
-    "visible": true,
+    "visible": false,
     "heading": "Let’s build your next solution together",
     "description": "Whether you need licensed software, ELV systems, or training — start with a Request Quote.",
     "actionLabel": "Request Quote",

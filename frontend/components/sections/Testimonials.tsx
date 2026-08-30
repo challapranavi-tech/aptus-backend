@@ -13,6 +13,20 @@ interface TestimonialsProps {
   data: TestimonialsData;
 }
 
+const AVATAR_TONES = ["blue", "teal", "purple", "orange", "navy"] as const;
+
+function authorInitials(name?: string): string {
+  if (!name?.trim()) return "?";
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return `${parts[0][0] ?? ""}${parts[parts.length - 1][0] ?? ""}`.toUpperCase();
+}
+
+function roleLine(role?: string, company?: string): string | undefined {
+  if (role && company) return `${role} · ${company}`;
+  return role || company || undefined;
+}
+
 export function Testimonials({ data }: TestimonialsProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const isSoftwareQuotes = data.variant === "software-quotes";
@@ -44,6 +58,8 @@ export function Testimonials({ data }: TestimonialsProps) {
   if (!data.items?.length) return null;
 
   if (isHomeCards) {
+    const hint = data.scrollHint ?? "Scroll to read more →";
+
     return (
       <section
         ref={sectionRef}
@@ -52,67 +68,68 @@ export function Testimonials({ data }: TestimonialsProps) {
         data-variant="home-cards"
       >
         <Container>
-          {(data.heading || data.subheading) && (
-            <div className="mx-auto mb-12 max-w-2xl text-center">
-              {data.heading && (
-                <h2
-                  className="text-brand-navy"
-                  style={{ fontSize: "var(--text-4xl)", fontWeight: 600 }}
-                >
-                  {data.heading}
-                </h2>
+          <div className="home-testimonials-cards__header">
+            <div className="home-testimonials-cards__titles">
+              {data.eyebrow && (
+                <p className="home-testimonials-cards__eyebrow">{data.eyebrow}</p>
               )}
-              {data.subheading && (
-                <p
-                  className="mt-4 text-muted-foreground"
-                  style={{ fontSize: "var(--text-base)" }}
-                >
-                  {data.subheading}
-                </p>
+              {data.heading && (
+                <h2 className="home-testimonials-cards__heading">{data.heading}</h2>
               )}
             </div>
-          )}
+            <p className="home-testimonials-cards__hint" aria-hidden="true">
+              {hint}
+            </p>
+          </div>
 
-          <div className="testimonial-inner home-testimonials-cards__grid">
-            {data.items.map((item) => (
-              <article key={item.id} className="home-testimonial-card">
-                {item.avatar && (
-                  <div className="home-testimonial-card__avatar">
-                    <Image
-                      src={resolveCmsImageSrc(item.avatar.src)}
-                      alt={item.avatar.alt || item.author || ""}
-                      fill
-                      className="object-cover"
-                      sizes="64px"
-                    />
+          <div className="testimonial-inner home-testimonials-cards__track">
+            {data.items.map((item, index) => {
+              const meta = roleLine(item.role, item.company);
+              const tone = AVATAR_TONES[index % AVATAR_TONES.length];
+
+              return (
+                <article key={item.id} className="home-testimonial-card">
+                  <div className="home-testimonial-card__stars" aria-label="5 out of 5 stars">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <span key={i} className="home-testimonial-card__star" aria-hidden="true">
+                        ★
+                      </span>
+                    ))}
                   </div>
-                )}
-                {item.author && (
-                  <h3
-                    className="mt-4 text-brand-navy"
-                    style={{ fontSize: "var(--text-base)", fontWeight: 600 }}
-                  >
-                    {item.author}
-                  </h3>
-                )}
-                {(item.role || item.company) && (
-                  <p
-                    className="mt-1 text-brand-blue"
-                    style={{ fontSize: "var(--text-sm)", fontWeight: 500 }}
-                  >
-                    {item.role || item.company}
-                  </p>
-                )}
-                {item.quote && (
-                  <p
-                    className="mt-4 leading-relaxed text-muted-foreground"
-                    style={{ fontSize: "var(--text-sm)" }}
-                  >
-                    {item.quote}
-                  </p>
-                )}
-              </article>
-            ))}
+
+                  {item.quote && (
+                    <p className="home-testimonial-card__quote">&ldquo;{item.quote}&rdquo;</p>
+                  )}
+
+                  <footer className="home-testimonial-card__footer">
+                    {item.avatar ? (
+                      <div className="home-testimonial-card__avatar">
+                        <Image
+                          src={resolveCmsImageSrc(item.avatar.src)}
+                          alt={item.avatar.alt || item.author || ""}
+                          fill
+                          className="object-cover"
+                          sizes="48px"
+                        />
+                      </div>
+                    ) : (
+                      <div
+                        className={`home-testimonial-card__initials home-testimonial-card__initials--${tone}`}
+                        aria-hidden="true"
+                      >
+                        {authorInitials(item.author)}
+                      </div>
+                    )}
+                    <div className="home-testimonial-card__meta">
+                      {item.author && (
+                        <p className="home-testimonial-card__author">{item.author}</p>
+                      )}
+                      {meta && <p className="home-testimonial-card__role">{meta}</p>}
+                    </div>
+                  </footer>
+                </article>
+              );
+            })}
           </div>
 
           {data.action && (

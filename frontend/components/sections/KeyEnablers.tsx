@@ -41,8 +41,10 @@ export function KeyEnablers({ data }: KeyEnablersProps) {
         gsap.from(cards, {
           y: isHomeSteps ? 28 : 0,
           x: isHomeSteps ? 0 : 30,
+          rotateY: isHomeSteps ? -50 : 0,
+          transformPerspective: isHomeSteps ? 900 : undefined,
           opacity: 0,
-          duration: 0.65,
+          duration: 0.75,
           ease: "power3.out",
           stagger: 0.1,
           scrollTrigger: {
@@ -87,37 +89,55 @@ export function KeyEnablers({ data }: KeyEnablersProps) {
                   {data.subheading}
                 </p>
               )}
+              <p className="home-section-hint">Scroll &amp; flip the cards →</p>
             </div>
           )}
 
           {data.items && data.items.length > 0 && (
             <div
               ref={itemsRef}
-              className="home-steps__grid grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+              className="home-card-track home-steps__track"
             >
               {data.items.map((item) => (
-                <article key={item.id} className="enabler-item home-steps__card text-center">
-                  {item.number && (
-                    <span className="home-steps__number" aria-hidden="true">
-                      {item.number}
-                    </span>
-                  )}
-                  {item.title && (
-                    <h3
-                      className="mt-4 text-brand-navy"
-                      style={{ fontSize: "var(--text-lg)", fontWeight: 600 }}
-                    >
-                      {item.title}
-                    </h3>
-                  )}
-                  {item.description && (
-                    <p
-                      className="mt-2 leading-relaxed text-muted-foreground"
-                      style={{ fontSize: "var(--text-sm)" }}
-                    >
-                      {item.description}
-                    </p>
-                  )}
+                <article
+                  key={item.id}
+                  className="enabler-item home-flip-card home-steps__card"
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`${item.title ?? "Step"}. Flip for details.`}
+                  onClick={(e) => {
+                    e.currentTarget.classList.toggle("is-flipped");
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      e.currentTarget.classList.toggle("is-flipped");
+                    }
+                  }}
+                >
+                  <div className="home-flip-card__inner">
+                    <div className="home-flip-card__face home-flip-card__face--front">
+                      {item.number && (
+                        <span className="home-steps__number" aria-hidden="true">
+                          {item.number}
+                        </span>
+                      )}
+                      {item.title && (
+                        <h3 className="home-steps__title">{item.title}</h3>
+                      )}
+                      <span className="home-flip-card__cue">Flip for details</span>
+                    </div>
+                    <div className="home-flip-card__face home-flip-card__face--back">
+                      {item.title && (
+                        <h3 className="home-steps__title home-steps__title--back">
+                          {item.title}
+                        </h3>
+                      )}
+                      {item.description && (
+                        <p className="home-steps__desc">{item.description}</p>
+                      )}
+                    </div>
+                  </div>
                 </article>
               ))}
             </div>
