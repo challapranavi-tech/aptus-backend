@@ -20,6 +20,7 @@ import { useNotifications } from "@/hooks/useNotifications";
 import { usePortalCartCount } from "@/hooks/usePortalCartCount";
 import { useOrders } from "@/hooks/useOrders";
 import { NotificationCountBadge } from "./NotificationCountBadge";
+import { SensitiveContent } from "./SensitiveContent";
 
 type Section =
   | "dashboard"
@@ -33,6 +34,14 @@ type Section =
   | "notifications"
   | "support"
   | "profile";
+
+const SENSITIVE_SECTIONS = new Set<Section>([
+  "dashboard",
+  "orders",
+  "invoices",
+  "subscriptions",
+  "licenses",
+]);
 
 type NavMeta = {
   section: Section;
@@ -152,6 +161,26 @@ export function PortalDashboardShell({
       ? `All ${allOrders.length} orders, most recent first.`
       : current.sub;
 
+  const sectionBody =
+    section === "dashboard" ? (
+      <OverviewDashboard />
+    ) : children ? (
+      children
+    ) : (
+      <>
+        {section === "products" && <SoftwarePurchasePanel />}
+        {section === "cart" && <CartCheckoutPanel />}
+        {section === "subscriptions" && <SubscriptionsPanel statusFilter="all" />}
+        {section === "orders" && <OrdersSection />}
+        {section === "invoices" && <InvoicesPanel />}
+        {section === "licenses" && <SubscriptionsPanel statusFilter="all" licenseView />}
+        {section === "videos" && <HelpVideosPanel />}
+        {section === "notifications" && <NotificationsPanel />}
+        {section === "support" && <SupportPanel />}
+        {section === "profile" && <ProfilePanel />}
+      </>
+    );
+
   return (
     <div
       id="wrap"
@@ -259,23 +288,10 @@ export function PortalDashboardShell({
             />
           </div>
 
-          {section === "dashboard" ? (
-            <OverviewDashboard />
-          ) : children ? (
-            children
+          {SENSITIVE_SECTIONS.has(section) ? (
+            <SensitiveContent>{sectionBody}</SensitiveContent>
           ) : (
-            <>
-              {section === "products" && <SoftwarePurchasePanel />}
-              {section === "cart" && <CartCheckoutPanel />}
-              {section === "subscriptions" && <SubscriptionsPanel statusFilter="all" />}
-              {section === "orders" && <OrdersSection />}
-              {section === "invoices" && <InvoicesPanel />}
-              {section === "licenses" && <SubscriptionsPanel statusFilter="all" licenseView />}
-              {section === "videos" && <HelpVideosPanel />}
-              {section === "notifications" && <NotificationsPanel />}
-              {section === "support" && <SupportPanel />}
-              {section === "profile" && <ProfilePanel />}
-            </>
+            sectionBody
           )}
         </section>
       </main>
