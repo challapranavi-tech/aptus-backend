@@ -180,9 +180,12 @@ interface RawHomeJson {
     variant?: "banner" | "home-centered";
     title?: RawTitle;
     subtitle?: string;
+    supportLine?: string;
     tagline?: string;
     ctaLabel?: string;
     ctaHref?: string;
+    secondaryCtaLabel?: string;
+    secondaryCtaHref?: string;
     results?: { label?: string; title?: string; description?: string }[];
     imageSrc?: string;
     imageAlt?: string;
@@ -298,10 +301,14 @@ export function mapHomepageJson(raw: string | false | undefined | null): Section
           heading: hero.title?.before?.trim() || joinTitle(hero.title),
           headingAccent: hero.title?.accent,
           tagline: hero.tagline,
-          subheading: hero.subtitle,
+          subheading: [hero.subtitle, hero.supportLine].filter(Boolean).join("\n\n") || undefined,
           primaryAction:
             hero.ctaLabel && hero.ctaHref
               ? { label: hero.ctaLabel, href: hero.ctaHref }
+              : undefined,
+          secondaryAction:
+            hero.secondaryCtaLabel && hero.secondaryCtaHref
+              ? { label: hero.secondaryCtaLabel, href: hero.secondaryCtaHref }
               : undefined,
           highlights: highlights.length ? highlights : undefined,
           media: usableImg(hero.imageSrc, hero.imageAlt),

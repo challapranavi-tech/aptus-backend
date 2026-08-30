@@ -94,7 +94,7 @@ export function Hero({ data }: HeroProps) {
 
         <Container>
           <div ref={contentRef} className="relative z-10 mx-auto max-w-6xl text-center">
-            <div className="mx-auto max-w-none">
+            <div className="mx-auto max-w-4xl">
               {(data.heading || data.headingAccent) && (
                 <h1 className="anim-item home-hero-heading">
                   {data.heading}
@@ -102,11 +102,34 @@ export function Hero({ data }: HeroProps) {
                   {data.headingAccent}
                 </h1>
               )}
+              {data.subheading &&
+                data.subheading.split(/\n\n+/).map((line, i) => (
+                  <p key={i} className="anim-item home-hero-support">
+                    {line}
+                  </p>
+                ))}
               {data.tagline && (
-                <p className="anim-item home-hero-tagline">{data.tagline}</p>
+                <p className="anim-item home-hero-categories">{data.tagline}</p>
               )}
-              {data.subheading && (
-                <p className="anim-item home-hero-support">{data.subheading}</p>
+              {(data.primaryAction || data.secondaryAction) && (
+                <div className="anim-item home-hero-actions">
+                  {data.primaryAction && (
+                    <Link
+                      href={data.primaryAction.href}
+                      className="home-hero-btn home-hero-btn--primary"
+                    >
+                      {data.primaryAction.label}
+                    </Link>
+                  )}
+                  {data.secondaryAction && (
+                    <Link
+                      href={data.secondaryAction.href}
+                      className="home-hero-btn home-hero-btn--secondary"
+                    >
+                      {data.secondaryAction.label}
+                    </Link>
+                  )}
+                </div>
               )}
             </div>
 
