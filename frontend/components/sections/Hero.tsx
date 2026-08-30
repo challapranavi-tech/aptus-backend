@@ -92,17 +92,6 @@ export function Hero({ data }: HeroProps) {
       >
         {backgroundImages.length > 0 && <HeroBackgroundSlides images={backgroundImages} />}
 
-        <Link href="/" className="home-hero-corner-logo" aria-label="Aptus Infotech home">
-          <Image
-            src="/logo-white.svg"
-            alt="Aptus Infotech"
-            width={180}
-            height={46}
-            className="h-auto w-full"
-            priority
-          />
-        </Link>
-
         <Container>
           <div ref={contentRef} className="relative z-10 mx-auto max-w-6xl text-center">
             <div className="mx-auto max-w-none">

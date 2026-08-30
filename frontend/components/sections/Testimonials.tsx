@@ -4,7 +4,7 @@ import { Container } from "@/components/ui";
 import { useGSAPContext } from "@/hooks/useGSAPContext";
 import { gsap } from "@/lib/gsap";
 import { resolveCmsImageSrc } from "@/lib/utils";
-import type { Testimonials as TestimonialsData } from "@/types";
+import type { TestimonialItem, Testimonials as TestimonialsData } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
@@ -36,7 +36,7 @@ export function Testimonials({ data }: TestimonialsProps) {
     scope: sectionRef,
     dependencies: [data.items?.length, data.variant],
     setup() {
-      if (data.variant === "software-quotes") return;
+      if (data.variant === "software-quotes" || data.variant === "home-cards") return;
 
       const inner = sectionRef.current?.querySelector(".testimonial-inner");
       if (!inner) return;
@@ -58,7 +58,54 @@ export function Testimonials({ data }: TestimonialsProps) {
   if (!data.items?.length) return null;
 
   if (isHomeCards) {
-    const hint = data.scrollHint ?? "Scroll to read more →";
+    const items = data.items;
+    const renderCard = (item: TestimonialItem, index: number, keyPrefix: string) => {
+      const meta = roleLine(item.role, item.company);
+      const tone = AVATAR_TONES[index % AVATAR_TONES.length];
+
+      return (
+        <article key={`${keyPrefix}-${item.id}`} className="home-testimonial-card">
+          <div className="home-testimonial-card__stars" aria-label="5 out of 5 stars">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <span key={i} className="home-testimonial-card__star" aria-hidden="true">
+                ★
+              </span>
+            ))}
+          </div>
+
+          {item.quote && (
+            <p className="home-testimonial-card__quote">&ldquo;{item.quote}&rdquo;</p>
+          )}
+
+          <footer className="home-testimonial-card__footer">
+            {item.avatar ? (
+              <div className="home-testimonial-card__avatar">
+                <Image
+                  src={resolveCmsImageSrc(item.avatar.src)}
+                  alt={item.avatar.alt || item.author || ""}
+                  fill
+                  className="object-cover"
+                  sizes="48px"
+                />
+              </div>
+            ) : (
+              <div
+                className={`home-testimonial-card__initials home-testimonial-card__initials--${tone}`}
+                aria-hidden="true"
+              >
+                {authorInitials(item.author)}
+              </div>
+            )}
+            <div className="home-testimonial-card__meta">
+              {item.author && (
+                <p className="home-testimonial-card__author">{item.author}</p>
+              )}
+              {meta && <p className="home-testimonial-card__role">{meta}</p>}
+            </div>
+          </footer>
+        </article>
+      );
+    };
 
     return (
       <section
@@ -77,62 +124,23 @@ export function Testimonials({ data }: TestimonialsProps) {
                 <h2 className="home-testimonials-cards__heading">{data.heading}</h2>
               )}
             </div>
-            <p className="home-testimonials-cards__hint" aria-hidden="true">
-              {hint}
-            </p>
           </div>
+        </Container>
 
+        <div
+          className="home-testimonials-cards__marquee"
+          role="region"
+          aria-roledescription="marquee"
+          aria-label={data.heading ?? "Client testimonials"}
+        >
           <div className="testimonial-inner home-testimonials-cards__track">
-            {data.items.map((item, index) => {
-              const meta = roleLine(item.role, item.company);
-              const tone = AVATAR_TONES[index % AVATAR_TONES.length];
-
-              return (
-                <article key={item.id} className="home-testimonial-card">
-                  <div className="home-testimonial-card__stars" aria-label="5 out of 5 stars">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <span key={i} className="home-testimonial-card__star" aria-hidden="true">
-                        ★
-                      </span>
-                    ))}
-                  </div>
-
-                  {item.quote && (
-                    <p className="home-testimonial-card__quote">&ldquo;{item.quote}&rdquo;</p>
-                  )}
-
-                  <footer className="home-testimonial-card__footer">
-                    {item.avatar ? (
-                      <div className="home-testimonial-card__avatar">
-                        <Image
-                          src={resolveCmsImageSrc(item.avatar.src)}
-                          alt={item.avatar.alt || item.author || ""}
-                          fill
-                          className="object-cover"
-                          sizes="48px"
-                        />
-                      </div>
-                    ) : (
-                      <div
-                        className={`home-testimonial-card__initials home-testimonial-card__initials--${tone}`}
-                        aria-hidden="true"
-                      >
-                        {authorInitials(item.author)}
-                      </div>
-                    )}
-                    <div className="home-testimonial-card__meta">
-                      {item.author && (
-                        <p className="home-testimonial-card__author">{item.author}</p>
-                      )}
-                      {meta && <p className="home-testimonial-card__role">{meta}</p>}
-                    </div>
-                  </footer>
-                </article>
-              );
-            })}
+            {items.map((item, index) => renderCard(item, index, "a"))}
+            {items.map((item, index) => renderCard(item, index, "b"))}
           </div>
+        </div>
 
-          {data.action && (
+        {data.action && (
+          <Container>
             <div className="mt-12 text-center">
               <Link
                 href={data.action.href}
@@ -142,8 +150,8 @@ export function Testimonials({ data }: TestimonialsProps) {
                 {data.action.label}
               </Link>
             </div>
-          )}
-        </Container>
+          </Container>
+        )}
       </section>
     );
   }

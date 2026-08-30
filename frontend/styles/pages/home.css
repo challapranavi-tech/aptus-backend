@@ -155,30 +155,6 @@
     background: #0b1f3a;
   }
 
-  .page-home .home-hero-corner-logo {
-    position: absolute;
-    top: 1.15rem;
-    left: 1.15rem;
-    z-index: 12;
-    display: block;
-    width: min(8.5rem, 38vw);
-    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.35));
-  }
-
-  @media (min-width: 768px) {
-    .page-home .home-hero-corner-logo {
-      top: 1.5rem;
-      left: 1.75rem;
-      width: 10.5rem;
-    }
-  }
-
-  @media (min-width: 1200px) {
-    .page-home .home-hero-corner-logo {
-      left: max(1.75rem, calc((100vw - 72rem) / 2));
-    }
-  }
-
   .page-home .home-hero-slides {
     position: absolute;
     inset: 0;
@@ -683,19 +659,19 @@
 
   .page-home .home-challenges__subheading {
     margin: 0 0 0.75rem;
-    color: var(--aptus-color-primary, #1352a3);
-    font-size: 0.8rem;
+    color: #0b1f3a;
+    font-size: clamp(1.35rem, 2.8vw, 1.85rem);
     font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    text-transform: none;
   }
 
   .page-home .home-challenges__heading {
     margin: 0;
-    color: #0b1220;
-    font-size: clamp(1.5rem, 3vw, 2.125rem);
-    font-weight: 700;
-    line-height: 1.25;
+    color: #5b6575;
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    font-weight: 500;
+    line-height: 1.45;
     max-width: 40rem;
   }
 
@@ -925,11 +901,12 @@
     line-height: 1.55;
   }
 
-  /* ── Testimonials horizontal scroll cards ── */
+  /* ── Testimonials auto-scrolling marquee ── */
   .page-home .home-testimonials-cards {
     background:
       radial-gradient(ellipse 50% 40% at 100% 100%, rgba(19, 82, 163, 0.08), transparent 55%),
       linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+    overflow: hidden;
   }
 
   .page-home .home-testimonials-cards__header {
@@ -959,47 +936,53 @@
     text-transform: uppercase;
   }
 
-  .page-home .home-testimonials-cards__hint {
-    margin: 0;
-    flex-shrink: 0;
-    color: #9aa3b2;
-    font-size: 0.875rem;
-    font-weight: 500;
-    white-space: nowrap;
-  }
-
-  @media (max-width: 639px) {
-    .page-home .home-testimonials-cards__header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.75rem;
-    }
+  .page-home .home-testimonials-cards__marquee {
+    overflow: hidden;
+    width: 100%;
+    mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
   }
 
   .page-home .home-testimonials-cards__track {
     display: flex;
+    width: max-content;
     gap: 1.25rem;
-    overflow-x: auto;
-    padding-bottom: 0.75rem;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
+    padding: 0.25rem 1rem 0.75rem;
+    animation: home-testimonials-marquee 40s linear infinite;
   }
 
-  .page-home .home-testimonials-cards__track::-webkit-scrollbar {
-    height: 6px;
+  .page-home .home-testimonials-cards__marquee:hover .home-testimonials-cards__track {
+    animation-play-state: paused;
   }
 
-  .page-home .home-testimonials-cards__track::-webkit-scrollbar-thumb {
-    background: rgba(19, 82, 163, 0.25);
-    border-radius: 999px;
+  @keyframes home-testimonials-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .page-home .home-testimonials-cards__track {
+      animation: none;
+      flex-wrap: wrap;
+      width: 100%;
+      max-width: 72rem;
+      margin-inline: auto;
+      justify-content: center;
+    }
+
+    .page-home .home-testimonials-cards__marquee {
+      mask-image: none;
+      overflow-x: auto;
+    }
   }
 
   .page-home .home-testimonial-card {
     display: flex;
     flex-direction: column;
     flex: 0 0 min(22rem, 85vw);
-    scroll-snap-align: start;
     min-height: 17.5rem;
     padding: 1.5rem 1.5rem 1.35rem;
     border-radius: 1rem;
