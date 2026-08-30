@@ -39,10 +39,8 @@ interface RawFeature {
   eyebrow?: string;
   title?: RawTitle;
   description?: string;
-  paragraphs?: string[];
   imageSrc?: string;
   imageAlt?: string;
-  imagePosition?: "left" | "right" | "below";
   href?: string;
   buttonLabel?: string;
 }
@@ -67,7 +65,6 @@ interface RawEnablerItem {
 interface RawEnablers {
   visible?: boolean;
   presentation?: RawPresentation;
-  variant?: "default" | "home-steps";
   eyebrow?: string;
   title?: RawTitle;
   subtitle?: string;
@@ -82,87 +79,20 @@ interface RawTestimonial {
   authorTitle?: string;
   authorImageSrc?: string;
 }
-interface RawTestimonialItem {
-  id?: string;
-  quote?: string;
-  author?: string;
-  role?: string;
-  company?: string;
-  avatarSrc?: string;
-}
-interface RawTestimonials {
-  id?: string;
-  visible?: boolean;
-  presentation?: RawPresentation;
-  variant?: "default" | "software-quotes" | "home-cards";
-  heading?: string;
-  subheading?: string;
-  ctaLabel?: string;
-  ctaHref?: string;
-  items?: RawTestimonialItem[];
-}
-interface RawLogoItem {
-  id?: string;
-  src?: string;
-  alt?: string;
-}
-interface RawLogoGrid {
-  id?: string;
-  visible?: boolean;
-  presentation?: RawPresentation;
-  heading?: string;
-  headingAccent?: string;
-  logos?: RawLogoItem[];
-}
-interface RawCtaBand {
-  id?: string;
-  visible?: boolean;
-  presentation?: RawPresentation;
-  heading?: string;
-  description?: string;
-  actionLabel?: string;
-  actionHref?: string;
-}
-interface RawPromiseItem {
-  title?: string;
-  description?: string;
-  icon?: string;
-}
-interface RawPromises {
-  id?: string;
-  visible?: boolean;
-  presentation?: RawPresentation;
-  eyebrow?: string;
-  title?: RawTitle;
-  items?: RawPromiseItem[];
-}
 interface RawHomeJson {
   hero?: {
     id?: string;
     visible?: boolean;
     presentation?: RawPresentation;
-    variant?: "banner" | "home-centered";
-    title?: RawTitle;
-    subtitle?: string;
-    ctaLabel?: string;
-    ctaHref?: string;
-    results?: { label?: string }[];
     imageSrc?: string;
     imageAlt?: string;
     imageWidth?: number;
     imageHeight?: number;
   };
-  logoGrid?: RawLogoGrid;
   features?: RawFeature[];
-  midCta?: RawCtaBand;
   services?: RawServices;
   keyEnablers?: RawEnablers;
-  promises?: RawPromises;
-  /** Legacy single testimonial */
   testimonial?: RawTestimonial;
-  /** Multi-item testimonials (preferred) */
-  testimonials?: RawTestimonials;
-  closingCta?: RawCtaBand;
 }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -190,32 +120,6 @@ function usableImg(src?: string, alt?: string): MediaAsset | undefined {
   return ok ? { src, alt: alt ?? "" } : undefined;
 }
 
-function pushCta(
-  sections: Section[],
-  order: { n: number },
-  band: RawCtaBand | undefined,
-  fallbackId: string,
-): void {
-  if (!band || band.visible === false) return;
-  if (!band.heading && !band.actionLabel) return;
-  sections.push({
-    id: band.id ?? fallbackId,
-    type: "cta",
-    order: ++order.n,
-    presentation: parsePresentation(band.presentation),
-    data: {
-      type: "cta",
-      heading: band.heading,
-      description: band.description,
-      layout: "software-mid",
-      action:
-        band.actionLabel && band.actionHref
-          ? { label: band.actionLabel, href: band.actionHref }
-          : undefined,
-    },
-  });
-}
-
 // ─── Public API ───────────────────────────────────────────────────────────────
 /**
  * Parses `x_homepage_sections_json` into Section[].
@@ -233,109 +137,39 @@ export function mapHomepageJson(raw: string | false | undefined | null): Section
   if (!data || typeof data !== "object") return null;
 
   const sections: Section[] = [];
-  const order = { n: 0 };
+  let order = 0;
 
-  // Hero — centered homepage variant, or legacy full-width banner image
+  // Hero banner from Odoo JSON (full-width on live site)
   const hero = data.hero;
   if (hero && hero.visible !== false) {
-    const isCentered =
-      hero.variant === "home-centered" ||
-      Boolean(hero.title || hero.subtitle || hero.ctaLabel || hero.results?.length);
-
-    if (isCentered) {
-      const highlights = (hero.results ?? [])
-        .map((r, i) => {
-          const label = r.label?.trim();
-          if (!label) return null;
-          return { id: `home-result-${i}`, label };
-        })
-        .filter((x): x is { id: string; label: string } => !!x);
-
+    const media = usableImg(hero.imageSrc, hero.imageAlt);
+    if (media) {
       sections.push({
-        id: hero.id ?? "home-hero",
-        type: "hero",
-        order: ++order.n,
+        id: hero.id ?? "home-banner",
+        type: "banner",
+        order: ++order,
         presentation: parsePresentation(hero.presentation),
         data: {
-          type: "hero",
-          variant: "home-centered",
-          heading: hero.title?.before?.trim() || joinTitle(hero.title),
-          headingAccent: hero.title?.accent,
-          subheading: hero.subtitle,
-          primaryAction:
-            hero.ctaLabel && hero.ctaHref
-              ? { label: hero.ctaLabel, href: hero.ctaHref }
-              : undefined,
-          highlights: highlights.length ? highlights : undefined,
-          media: usableImg(hero.imageSrc, hero.imageAlt),
-        },
-      });
-    } else {
-      const media = usableImg(hero.imageSrc, hero.imageAlt);
-      if (media) {
-        sections.push({
-          id: hero.id ?? "home-banner",
           type: "banner",
-          order: ++order.n,
-          presentation: parsePresentation(hero.presentation),
-          data: {
-            type: "banner",
-            media: {
-              ...media,
-              width: hero.imageWidth,
-              height: hero.imageHeight,
-            },
+          media: {
+            ...media,
+            width: hero.imageWidth,
+            height: hero.imageHeight,
           },
-        });
-      }
-    }
-  }
-
-  // Trusted-by logos
-  const logoGrid = data.logoGrid;
-  if (logoGrid && logoGrid.visible !== false && Array.isArray(logoGrid.logos) && logoGrid.logos.length > 0) {
-    const items = logoGrid.logos
-      .map((logo, i) => {
-        const media = usableImg(logo.src, logo.alt);
-        if (!media) return null;
-        return {
-          id: logo.id ?? `home-logo-${i}`,
-          src: media.src,
-          alt: media.alt || "Partner",
-        };
-      })
-      .filter((x): x is { id: string; src: string; alt: string } => !!x);
-
-    if (items.length) {
-      sections.push({
-        id: logoGrid.id ?? "home-logos",
-        type: "logo-grid",
-        order: ++order.n,
-        presentation: parsePresentation(logoGrid.presentation),
-        data: {
-          type: "logo-grid",
-          heading: logoGrid.heading,
-          headingAccent: logoGrid.headingAccent,
-          variant: "default",
-          items,
         },
       });
     }
   }
 
-  // features[] → alternating image+text feature rows (success story, etc.)
+  // features[] → alternating image+text feature rows (matches live layout)
   const features = Array.isArray(data.features)
     ? data.features.filter((f) => f && f.visible !== false)
     : [];
   features.forEach((f, i) => {
-    const paragraphs =
-      Array.isArray(f.paragraphs) && f.paragraphs.length > 0
-        ? f.paragraphs.filter(Boolean)
-        : undefined;
     sections.push({
       id: f.id ?? `home-feature-${i}`,
       type: "feature-row",
-      order: ++order.n,
+      order: ++order,
       presentation: parsePresentation(f.presentation),
       data: {
         type: "feature-row",
@@ -344,9 +178,8 @@ export function mapHomepageJson(raw: string | false | undefined | null): Section
         headingAccent: f.title?.accent,
         headingAfter: f.title?.after,
         description: f.description,
-        paragraphs,
         media: usableImg(f.imageSrc, f.imageAlt),
-        imagePosition: f.imagePosition ?? (i % 2 === 0 ? "left" : "right"),
+        imagePosition: i % 2 === 0 ? "left" : "right",
         action:
           f.href && f.buttonLabel
             ? { label: f.buttonLabel, href: f.href }
@@ -355,20 +188,48 @@ export function mapHomepageJson(raw: string | false | undefined | null): Section
     });
   });
 
-  // Mid-page CTA strip
-  pushCta(sections, order, data.midCta, "home-mid-cta");
+  // services
+  const svc = data.services;
+  if (svc && svc.visible !== false && Array.isArray(svc.items) && svc.items.length > 0) {
+    sections.push({
+      id: "home-services",
+      type: "services",
+      order: ++order,
+      presentation: parsePresentation(svc.presentation),
+      data: {
+        type: "services",
+        eyebrow: svc.eyebrow,
+        heading: svc.title?.before,
+        headingAccent: svc.title?.accent,
+        items: svc.items.map((it, i) => ({
+          id: `home-svc-${i}`,
+          title: it.title,
+          description: it.description,
+          icon:
+            it.icon ??
+            (it.title === "ELV Solutions"
+              ? "lightbulb"
+              : it.title === "Software Related Training"
+                ? "cogs"
+                : it.title === "Building Information Modelling"
+                  ? "drafting-compass"
+                  : undefined),
+          media: usableImg(it.hoverImageSrc, it.title),
+        })),
+      },
+    });
+  }
 
-  // 3 simple steps (key enablers)
+  // keyEnablers
   const ke = data.keyEnablers;
   if (ke && ke.visible !== false && Array.isArray(ke.items) && ke.items.length > 0) {
     sections.push({
       id: "home-key-enablers",
       type: "key-enablers",
-      order: ++order.n,
+      order: ++order,
       presentation: parsePresentation(ke.presentation),
       data: {
         type: "key-enablers",
-        variant: ke.variant === "home-steps" ? "home-steps" : "default",
         eyebrow: ke.eyebrow,
         heading: ke.title?.before,
         headingAccent: ke.title?.accent,
@@ -383,123 +244,29 @@ export function mapHomepageJson(raw: string | false | undefined | null): Section
     });
   }
 
-  // Our Promise (4 columns) — preferred over legacy services flip cards
-  const promises = data.promises;
-  if (promises && promises.visible !== false && Array.isArray(promises.items) && promises.items.length > 0) {
+  // testimonial (single)
+  const t = data.testimonial;
+  if (t && t.visible !== false && t.quote) {
     sections.push({
-      id: promises.id ?? "home-promises",
-      type: "features",
-      order: ++order.n,
-      presentation: parsePresentation(promises.presentation),
-      data: {
-        type: "features",
-        variant: "home-promises",
-        eyebrow: promises.eyebrow,
-        heading: promises.title?.before,
-        headingAccent: promises.title?.accent,
-        align: "center",
-        gridColumns: 4,
-        items: promises.items.map((it, i) => ({
-          id: `home-promise-${i}`,
-          title: it.title,
-          description: it.description,
-          icon: it.icon,
-        })),
-      },
-    });
-  } else {
-    // Legacy services flip-box grid
-    const svc = data.services;
-    if (svc && svc.visible !== false && Array.isArray(svc.items) && svc.items.length > 0) {
-      sections.push({
-        id: "home-services",
-        type: "services",
-        order: ++order.n,
-        presentation: parsePresentation(svc.presentation),
-        data: {
-          type: "services",
-          eyebrow: svc.eyebrow,
-          heading: svc.title?.before,
-          headingAccent: svc.title?.accent,
-          items: svc.items.map((it, i) => ({
-            id: `home-svc-${i}`,
-            title: it.title,
-            description: it.description,
-            icon:
-              it.icon ??
-              (it.title === "ELV Solutions"
-                ? "lightbulb"
-                : it.title === "Software Related Training"
-                  ? "cogs"
-                  : it.title === "Building Information Modelling"
-                    ? "drafting-compass"
-                    : undefined),
-            media: usableImg(it.hoverImageSrc, it.title),
-          })),
-        },
-      });
-    }
-  }
-
-  // Testimonials — multi-item preferred; fall back to legacy single
-  const testimonials = data.testimonials;
-  if (
-    testimonials &&
-    testimonials.visible !== false &&
-    Array.isArray(testimonials.items) &&
-    testimonials.items.length > 0
-  ) {
-    sections.push({
-      id: testimonials.id ?? "home-testimonials",
+      id: "home-testimonials",
       type: "testimonials",
-      order: ++order.n,
-      presentation: parsePresentation(testimonials.presentation),
+      order: ++order,
+      presentation: parsePresentation(t.presentation),
       data: {
         type: "testimonials",
-        variant: testimonials.variant ?? "home-cards",
-        heading: testimonials.heading,
-        subheading: testimonials.subheading,
-        action:
-          testimonials.ctaLabel && testimonials.ctaHref
-            ? { label: testimonials.ctaLabel, href: testimonials.ctaHref }
-            : undefined,
-        items: testimonials.items.map((it, i) => ({
-          id: it.id ?? `home-tmn-${i}`,
-          quote: it.quote,
-          author: it.author,
-          role: it.role,
-          company: it.company,
-          avatar: usableImg(it.avatarSrc, it.author),
-        })),
+        heading: t.heading,
+        items: [
+          {
+            id: "home-tmn-0",
+            quote: t.quote,
+            author: t.authorName,
+            role: t.authorTitle,
+            avatar: usableImg(t.authorImageSrc, t.authorName),
+          },
+        ],
       },
     });
-  } else {
-    const t = data.testimonial;
-    if (t && t.visible !== false && t.quote) {
-      sections.push({
-        id: "home-testimonials",
-        type: "testimonials",
-        order: ++order.n,
-        presentation: parsePresentation(t.presentation),
-        data: {
-          type: "testimonials",
-          heading: t.heading,
-          items: [
-            {
-              id: "home-tmn-0",
-              quote: t.quote,
-              author: t.authorName,
-              role: t.authorTitle,
-              avatar: usableImg(t.authorImageSrc, t.authorName),
-            },
-          ],
-        },
-      });
-    }
   }
-
-  // Closing CTA
-  pushCta(sections, order, data.closingCta, "home-closing-cta");
 
   return sections.length > 0 ? sections : null;
 }

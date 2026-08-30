@@ -2,7 +2,7 @@
 
 import { Container } from "@/components/ui";
 import { gsap } from "@/lib/gsap";
-import { cn, resolveCmsImageSrc } from "@/lib/utils";
+import { resolveCmsImageSrc } from "@/lib/utils";
 import type { Hero as HeroData } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,7 +14,6 @@ interface HeroProps {
 
 export function Hero({ data }: HeroProps) {
   const contentRef = useRef<HTMLDivElement>(null);
-  const isHomeCentered = data.variant === "home-centered";
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -35,63 +34,9 @@ export function Hero({ data }: HeroProps) {
     return () => ctx.revert();
   }, []);
 
-  if (isHomeCentered) {
-    return (
-      <section
-        className="home-hero-centered relative overflow-hidden"
-        data-section="hero"
-        data-variant="home-centered"
-      >
-        <Container>
-          <div ref={contentRef} className="relative z-10 mx-auto max-w-3xl text-center">
-            {(data.heading || data.headingAccent) && (
-              <h1
-                className="anim-item text-brand-navy"
-                style={{ fontSize: "var(--text-5xl)", fontWeight: 700, lineHeight: 1.15 }}
-              >
-                {data.heading}
-                {data.heading && data.headingAccent ? " " : null}
-                {data.headingAccent && (
-                  <span className="text-brand-blue">{data.headingAccent}</span>
-                )}
-              </h1>
-            )}
-            {data.subheading && (
-              <p
-                className="anim-item mx-auto mt-5 max-w-2xl text-muted-foreground"
-                style={{ fontSize: "var(--text-lg)", lineHeight: 1.65 }}
-              >
-                {data.subheading}
-              </p>
-            )}
-            {data.primaryAction && (
-              <div className="anim-item mt-8 flex justify-center">
-                <Link
-                  href={data.primaryAction.href}
-                  className="home-cta-pill inline-flex items-center justify-center px-8 py-3.5 text-white transition-colors"
-                  style={{ fontSize: "var(--text-sm)", fontWeight: 600 }}
-                >
-                  {data.primaryAction.label}
-                </Link>
-              </div>
-            )}
-            {data.highlights && data.highlights.length > 0 && (
-              <ul className="anim-item home-hero-results mt-10 flex flex-wrap items-center justify-center gap-3">
-                {data.highlights.map((item) => (
-                  <li key={item.id} className="home-hero-result-chip">
-                    {item.label}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        </Container>
-      </section>
-    );
-  }
-
   return (
     <section className="relative section-padding overflow-hidden bg-brand-navy" data-section="hero">
+      {/* Background image */}
       {data.media && (
         <>
           <Image
@@ -107,16 +52,14 @@ export function Hero({ data }: HeroProps) {
       )}
 
       <Container>
-        <div ref={contentRef} className={cn("relative z-10 max-w-2xl")}>
-          {(data.heading || data.headingAccent) && (
-            <h1 className="anim-item" style={{ fontSize: "var(--text-5xl)", fontWeight: 700 }}>
-              {data.heading}
-              {data.heading && data.headingAccent ? " " : null}
-              {data.headingAccent && <span className="text-brand-orange">{data.headingAccent}</span>}
-            </h1>
+        <div ref={contentRef} className="relative z-10 max-w-2xl">
+          {data.heading && (
+           <h1 className="anim-item" style={{ fontSize: 'var(--text-5xl)', fontWeight: 700 }}>
+           {data.heading}
+         </h1>
           )}
           {data.subheading && (
-            <p className="anim-item" style={{ fontSize: "var(--text-base)" }}>
+            <p className="anim-item" style={{ fontSize: 'var(--text-base)' }}>
               {data.subheading}
             </p>
           )}
@@ -126,7 +69,7 @@ export function Hero({ data }: HeroProps) {
                 <Link
                   href={data.primaryAction.href}
                   className="inline-flex items-center gap-2 rounded-none bg-brand-orange px-7 py-3.5 text-white transition-all hover:bg-brand-orange-hover"
-                  style={{ fontSize: "var(--text-sm)", fontWeight: 500 }}
+                  style={{ fontSize: 'var(--text-sm)', fontWeight: 500 }}
                 >
                   {data.primaryAction.label}
                 </Link>
@@ -135,7 +78,7 @@ export function Hero({ data }: HeroProps) {
                 <Link
                   href={data.secondaryAction.href}
                   className="inline-flex items-center gap-2 rounded-none border border-white/30 px-7 py-3.5 text-white transition-all hover:border-brand-orange hover:text-brand-orange"
-                  style={{ fontSize: "var(--text-sm)", fontWeight: 500 }}
+                  style={{ fontSize: 'var(--text-sm)', fontWeight: 500 }}
                 >
                   {data.secondaryAction.label}
                 </Link>

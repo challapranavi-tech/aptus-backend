@@ -160,23 +160,13 @@ export interface Section {
 // ─── Section data models ──────────────────────────────────────────────────────
 
 // hero
-export interface HeroHighlight {
-  id: string;
-  label: string;
-}
-
 export interface Hero {
   type: "hero";
   heading?: string;
-  headingAccent?: string;
   subheading?: string;
   primaryAction?: ActionLink;
   secondaryAction?: ActionLink;
   media?: MediaAsset;
-  /** Result chips under the homepage CTA. */
-  highlights?: HeroHighlight[];
-  /** `home-centered` = pale band, centered copy + CTA + chips. */
-  variant?: "default" | "home-centered";
 }
 
 // hero-slider
@@ -444,16 +434,8 @@ export interface Features {
   items?: FeatureItem[];
   align?: "left" | "center";
   anchorId?: string;
-  /** `pillars` = icon + title columns (Winning Together). `home-promises` = 4-up homepage promise grid. */
-  variant?:
-    | "default"
-    | "pillars"
-    | "product-cards"
-    | "value-cards"
-    | "icon-cards"
-    | "bullet-list"
-    | "checklist"
-    | "home-promises";
+  /** `pillars` = icon + title columns (Winning Together). */
+  variant?: "default" | "pillars" | "product-cards" | "value-cards" | "icon-cards" | "bullet-list" | "checklist";
   /** Product hub grids: live uses 3-col (Microsoft core) or 4-col (Adobe hub). Stacked pages use 5. */
   gridColumns?: 3 | 4 | 5;
 }
@@ -492,8 +474,6 @@ export interface KeyEnablers {
   headingAccent?: string;
   subheading?: string;
   items?: KeyEnablerItem[];
-  /** `home-steps` = centered numbered 3-step row on the homepage. */
-  variant?: "default" | "home-steps";
 }
 
 // cta
@@ -528,10 +508,8 @@ export interface Testimonials {
   heading?: string;
   subheading?: string;
   items?: TestimonialItem[];
-  /** Bottom CTA (homepage 3-up cards). */
-  action?: ActionLink;
-  /** `software-quotes` = light 3-column grid on product pages. `home-cards` = homepage 3-up + CTA. */
-  variant?: "default" | "software-quotes" | "home-cards";
+  /** `software-quotes` = light 3-column grid on product pages. */
+  variant?: "default" | "software-quotes";
 }
 
 // faq
