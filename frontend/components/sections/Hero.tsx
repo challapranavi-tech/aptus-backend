@@ -92,20 +92,20 @@ export function Hero({ data }: HeroProps) {
       >
         {backgroundImages.length > 0 && <HeroBackgroundSlides images={backgroundImages} />}
 
-        <Container>
-          <div ref={contentRef} className="relative z-10 mx-auto max-w-5xl text-center">
-            <div className="anim-item home-hero-logo mb-8 flex justify-center">
-              <Image
-                src="/logo-white.svg"
-                alt="Aptus Infotech"
-                width={220}
-                height={56}
-                className="h-12 w-auto sm:h-14"
-                priority
-              />
-            </div>
+        <Link href="/" className="home-hero-corner-logo" aria-label="Aptus Infotech home">
+          <Image
+            src="/logo-white.svg"
+            alt="Aptus Infotech"
+            width={180}
+            height={46}
+            className="h-auto w-full"
+            priority
+          />
+        </Link>
 
-            <div className="mx-auto max-w-3xl">
+        <Container>
+          <div ref={contentRef} className="relative z-10 mx-auto max-w-6xl text-center">
+            <div className="mx-auto max-w-none">
               {(data.heading || data.headingAccent) && (
                 <h1 className="anim-item home-hero-heading">
                   {data.heading}
@@ -122,7 +122,7 @@ export function Hero({ data }: HeroProps) {
             </div>
 
             {data.highlights && data.highlights.length > 0 && (
-              <ul className="anim-item home-hero-results mt-10">
+              <ul className="anim-item home-hero-results">
                 {data.highlights.map((item) => (
                   <li key={item.id} className="home-hero-result-card">
                     <h2 className="home-hero-result-card__title">{item.label}</h2>

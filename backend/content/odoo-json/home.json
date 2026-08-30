@@ -207,8 +207,8 @@
         "Delivery: The project team stayed hands-on through installation, commissioning, and handover.",
         "Outcome: Prompt, flawless support and a partnership the school looks forward to continuing long term."
       ],
-      "imageSrc": "/images/Aptusinfo.jpg",
-      "imageAlt": "Aptus Infotech success story",
+      "imageSrc": "/images/Al-Nahda.jpg",
+      "imageAlt": "Education campus — Indian School Wadi Kabir International success story",
       "imagePosition": "left"
     }
   ],
@@ -224,22 +224,27 @@
     "id": "home-steps",
     "visible": true,
     "variant": "home-steps",
+    "eyebrow": "How It Works",
     "title": {
-      "before": "How It Works"
+      "before": "3 simple",
+      "accent": "steps"
     },
     "items": [
       {
-        "number": "01",
+        "number": "1",
+        "icon": "message",
         "title": "Tell Us What You Need",
         "description": "Share your business requirement, challenge, project scope or technology needs with our team."
       },
       {
-        "number": "02",
+        "number": "2",
+        "icon": "blueprint",
         "title": "We Design the Right Solution",
         "description": "Our experts assess your requirements and recommend the right combination of technology, products and services from our global partners."
       },
       {
-        "number": "03",
+        "number": "3",
+        "icon": "rocket",
         "title": "We Make It Happen",
         "description": "From supply and implementation to integration and ongoing support, we help you bring the solution to life."
       }
@@ -248,10 +253,8 @@
   "promises": {
     "id": "our-promise",
     "visible": true,
-    "eyebrow": "Why Aptus",
     "title": {
-      "before": "Our",
-      "accent": "Promise"
+      "before": "Our Commitment to Your Success"
     },
     "items": [
       {

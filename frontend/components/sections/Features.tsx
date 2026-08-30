@@ -590,8 +590,7 @@ export function Features({ data }: FeaturesProps) {
       const cards = sectionRef.current?.querySelectorAll(".feature-card");
       if (!cards?.length) return;
       const isSoftware = sectionRef.current?.closest(".aptus-software-page");
-      const isFlipSection =
-        isHomeChallenges || isHomeWhyChoose || isHomePromises;
+      const isFlipSection = false;
 
       gsap.from(cards, {
         y: isSoftware ? 24 : 36,
@@ -624,49 +623,19 @@ export function Features({ data }: FeaturesProps) {
           {data.heading && (
             <div className="home-why-choose__header">
               <h2 className="home-why-choose__heading">{data.heading}</h2>
-              <p className="home-section-hint">Scroll &amp; flip the cards →</p>
             </div>
           )}
           {data.items && data.items.length > 0 && (
-            <div className="home-card-track home-why-choose__track">
+            <div className="home-why-choose__grid">
               {data.items.map((item) => (
-                <article
-                  key={item.id}
-                  className="feature-card home-flip-card home-why-choose__card"
-                  tabIndex={0}
-                  role="button"
-                  aria-label={`${item.title ?? "Card"}. Flip for details.`}
-                  onClick={(e) => {
-                    e.currentTarget.classList.toggle("is-flipped");
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      e.currentTarget.classList.toggle("is-flipped");
-                    }
-                  }}
-                >
-                  <div className="home-flip-card__inner">
-                    <div className="home-flip-card__face home-flip-card__face--front">
-                      {item.number && (
-                        <span className="home-why-choose__number">{item.number}</span>
-                      )}
-                      {item.title && (
-                        <h3 className="home-why-choose__title">{item.title}</h3>
-                      )}
-                      <span className="home-flip-card__cue">Flip for details</span>
-                    </div>
-                    <div className="home-flip-card__face home-flip-card__face--back">
-                      {item.title && (
-                        <h3 className="home-why-choose__title home-why-choose__title--back">
-                          {item.title}
-                        </h3>
-                      )}
-                      {item.description && (
-                        <p className="home-why-choose__desc">{item.description}</p>
-                      )}
-                    </div>
-                  </div>
+                <article key={item.id} className="feature-card home-why-choose__card">
+                  {item.number && (
+                    <span className="home-why-choose__number">{item.number}</span>
+                  )}
+                  {item.title && <h3 className="home-why-choose__title">{item.title}</h3>}
+                  {item.description && (
+                    <p className="home-why-choose__desc">{item.description}</p>
+                  )}
                 </article>
               ))}
             </div>
@@ -687,48 +656,20 @@ export function Features({ data }: FeaturesProps) {
         <Container>
           {(data.heading || data.subheading) && (
             <div className="home-challenges__header">
-              {data.heading && <h2 className="home-challenges__heading">{data.heading}</h2>}
               {data.subheading && (
                 <p className="home-challenges__subheading">{data.subheading}</p>
               )}
-              <p className="home-section-hint">Scroll &amp; flip the cards →</p>
+              {data.heading && <h2 className="home-challenges__heading">{data.heading}</h2>}
             </div>
           )}
           {data.items && data.items.length > 0 && (
-            <div className="home-card-track home-challenges__track">
+            <div className="home-challenges__grid">
               {data.items.map((item) => (
-                <article
-                  key={item.id}
-                  className="feature-card home-flip-card home-challenges__card"
-                  tabIndex={0}
-                  role="button"
-                  aria-label={`${item.title ?? "Card"}. Flip for details.`}
-                  onClick={(e) => {
-                    e.currentTarget.classList.toggle("is-flipped");
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      e.currentTarget.classList.toggle("is-flipped");
-                    }
-                  }}
-                >
-                  <div className="home-flip-card__inner">
-                    <div className="home-flip-card__face home-flip-card__face--front">
-                      {item.title && <h3 className="home-challenges__title">{item.title}</h3>}
-                      <span className="home-flip-card__cue">Flip for details</span>
-                    </div>
-                    <div className="home-flip-card__face home-flip-card__face--back">
-                      {item.title && (
-                        <h3 className="home-challenges__title home-challenges__title--back">
-                          {item.title}
-                        </h3>
-                      )}
-                      {item.description && (
-                        <p className="home-challenges__desc">{item.description}</p>
-                      )}
-                    </div>
-                  </div>
+                <article key={item.id} className="feature-card home-challenges__card">
+                  {item.title && <h3 className="home-challenges__title">{item.title}</h3>}
+                  {item.description && (
+                    <p className="home-challenges__desc">{item.description}</p>
+                  )}
                 </article>
               ))}
             </div>
@@ -812,25 +753,17 @@ export function Features({ data }: FeaturesProps) {
         data-variant="home-promises"
       >
         <Container>
-          {(data.eyebrow || data.heading || data.headingAccent || data.subheading) && (
-            <div className="mx-auto mb-12 max-w-2xl text-center">
-              {data.eyebrow && <p className="eyebrow mb-3">{data.eyebrow}</p>}
+          {(data.heading || data.headingAccent || data.subheading) && (
+            <div className="home-promises__header">
               {(data.heading || data.headingAccent) && (
-                <h2
-                  className="text-brand-navy"
-                  style={{ fontSize: "var(--text-4xl)", fontWeight: 600 }}
-                >
+                <h2 className="home-promises__heading">
                   {data.heading}
-                  {data.heading && data.headingAccent && " "}
-                  {data.headingAccent && (
-                    <span className="text-brand-blue">{data.headingAccent}</span>
-                  )}
+                  {data.heading && data.headingAccent ? " " : null}
+                  {data.headingAccent}
                 </h2>
               )}
               {data.subheading && (
-                <p className="mt-4 text-muted-foreground" style={{ fontSize: "var(--text-base)" }}>
-                  {data.subheading}
-                </p>
+                <p className="home-promises__lead">{data.subheading}</p>
               )}
             </div>
           )}
@@ -843,21 +776,9 @@ export function Features({ data }: FeaturesProps) {
                       <PillarIcon name={item.icon} className="h-8 w-8" />
                     </div>
                   )}
-                  {item.title && (
-                    <h3
-                      className="mt-4 text-brand-navy"
-                      style={{ fontSize: "var(--text-lg)", fontWeight: 600 }}
-                    >
-                      {item.title}
-                    </h3>
-                  )}
+                  {item.title && <h3 className="home-promises__title">{item.title}</h3>}
                   {item.description && (
-                    <p
-                      className="mt-2 leading-relaxed text-muted-foreground"
-                      style={{ fontSize: "var(--text-sm)" }}
-                    >
-                      {item.description}
-                    </p>
+                    <p className="home-promises__desc">{item.description}</p>
                   )}
                 </article>
               ))}

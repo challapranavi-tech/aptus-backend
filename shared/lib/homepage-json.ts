@@ -55,6 +55,7 @@ interface RawEnablerItem {
   number?: string;
   title?: string;
   description?: string;
+  icon?: string;
 }
 interface RawEnablers {
   visible?: boolean;
@@ -504,9 +505,10 @@ export function mapHomepageJson(raw: string | false | undefined | null): Section
         subheading: ke.subtitle,
         items: ke.items.map((it, i) => ({
           id: `home-ke-${i}`,
-          number: it.number,
+          number: it.number ?? String(i + 1),
           title: it.title,
           description: it.description,
+          icon: it.icon,
         })),
       },
     });

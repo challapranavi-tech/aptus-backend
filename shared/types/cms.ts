@@ -498,6 +498,7 @@ export interface KeyEnablerItem {
   number?: string;
   title?: string;
   description?: string;
+  icon?: string;
 }
 
 export interface KeyEnablers {
