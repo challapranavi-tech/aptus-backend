@@ -3,7 +3,12 @@ import { getSoftwarePageScope } from "@/data/software-page-scope";
 import { softwareSubnavForFamily } from "@/data/software-subnav";
 import { CONTACT_PRODUCTS, ELV_PRODUCTS } from "@shared/lib/contact-request";
 
-const QUOTE_MODAL_LABELS = new Set(["Request a Quote", "Renew Subscription", "Get Your Quote Now"]);
+const QUOTE_MODAL_LABELS = new Set([
+  "Request a Quote",
+  "Request Quote",
+  "Renew Subscription",
+  "Get Your Quote Now",
+]);
 
 /**
  * Top-of-page / product-card "Request Quote" CTAs to hide — keep mid/bottom
@@ -188,16 +193,27 @@ export function quoteContextFromLink(
 ): QuoteModalContext {
   const href = link.getAttribute("href")?.trim() ?? "";
   const dataFamily = link.getAttribute("data-quote-family")?.trim();
+  const dataProduct = link.getAttribute("data-quote-product")?.trim();
 
+  let context: QuoteModalContext;
   if (dataFamily) {
-    return contextForFamily(dataFamily);
+    context = contextForFamily(dataFamily);
+  } else if (href.startsWith("/") && !href.startsWith("/#")) {
+    context = quoteContextFromPathname(href);
+  } else {
+    context = quoteContextFromPathname(pathname);
   }
 
-  if (href.startsWith("/") && !href.startsWith("/#")) {
-    return quoteContextFromPathname(href);
+  if (dataProduct) {
+    const match = context.products.find(
+      (product) => product.toLowerCase() === dataProduct.toLowerCase(),
+    );
+    if (match) {
+      return { ...context, defaultProduct: match };
+    }
   }
 
-  return quoteContextFromPathname(pathname);
+  return context;
 }
 
 // ponytail: self-check — fails if quote link / family catalog detection regresses

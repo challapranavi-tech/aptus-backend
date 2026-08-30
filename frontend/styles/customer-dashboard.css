@@ -8208,9 +8208,10 @@ body.aptus-payment-processing-open {
 }
 
 .aptus-portal-products__foot {
-  align-items: center;
+  align-items: flex-start;
   display: flex;
-  gap: 0.5rem;
+  flex-wrap: wrap;
+  gap: 0.65rem;
   justify-content: space-between;
 }
 
@@ -8222,7 +8223,15 @@ body.aptus-payment-processing-open {
 .aptus-portal-products__actions {
   align-items: center;
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.aptus-portal-products__foot {
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.65rem;
 }
 
 .aptus-portal-licenses__grid {
@@ -8307,170 +8316,4 @@ body.aptus-payment-processing-open {
     padding: 1.1rem 0.9rem 2rem;
   }
 }
-
-/* Sensitive portal content — hold-to-view + copy block */
-.aptus-sensitive-content {
-  min-height: 12rem;
-  position: relative;
-}
-
-.aptus-sensitive-content__body {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none !important;
-  -moz-user-select: none !important;
-  -ms-user-select: none !important;
-  position: relative;
-  user-select: none !important;
-}
-
-.aptus-sensitive-content__body *,
-.aptus-sensitive-content__body *::before,
-.aptus-sensitive-content__body *::after {
-  -webkit-user-select: none !important;
-  -moz-user-select: none !important;
-  user-select: none !important;
-}
-
-.aptus-sensitive-content__body ::selection {
-  background: transparent;
-  color: inherit;
-}
-
-body[data-aptus-copy-blocked="true"] {
-  -webkit-user-select: none !important;
-  user-select: none !important;
-}
-
-body[data-aptus-copy-blocked="true"] ::selection {
-  background: transparent;
-}
-
-.aptus-sensitive-content__watermark {
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  position: absolute;
-  z-index: 5;
-}
-
-.aptus-sensitive-content__watermark span {
-  color: rgba(23, 33, 43, 0.045);
-  display: inline-block;
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin: 2.5rem 1.5rem;
-  transform: rotate(-28deg);
-  user-select: none;
-  white-space: nowrap;
-}
-
-.aptus-sensitive-content__shield {
-  align-items: center;
-  background: #f7f8fa;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  left: 0;
-  min-height: 16rem;
-  padding: 2rem;
-  position: absolute;
-  right: 0;
-  top: 0;
-  z-index: 40;
-}
-
-.aptus-sensitive-content.is-shielded .aptus-sensitive-content__body {
-  filter: blur(22px);
-  opacity: 0;
-  pointer-events: none;
-  user-select: none;
-}
-
-.aptus-sensitive-content.is-revealed .aptus-sensitive-content__body {
-  filter: none;
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.aptus-sensitive-content__gate {
-  background: #fff;
-  border: 1px solid #e5e9ee;
-  border-radius: 16px;
-  box-shadow: 0 8px 28px rgba(24, 39, 56, 0.08);
-  max-width: 26rem;
-  padding: 1.5rem 1.35rem;
-  text-align: center;
-}
-
-.aptus-sensitive-content__gate-title {
-  color: #17212b;
-  font-size: 1rem;
-  font-weight: 650;
-  margin: 0 0 0.5rem;
-}
-
-.aptus-sensitive-content__gate p {
-  color: #66727e;
-  font-size: 0.8125rem;
-  line-height: 1.45;
-  margin: 0 0 1rem;
-}
-
-.aptus-sensitive-content__hold-btn {
-  background: #eaf3ff;
-  border: 1px solid #9fc8f4;
-  border-radius: 10px;
-  color: #1769c2;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 0.875rem;
-  font-weight: 600;
-  padding: 0.7rem 1.15rem;
-  touch-action: none;
-  user-select: none;
-  width: 100%;
-}
-
-.aptus-sensitive-content__hold-btn:active {
-  background: #d7e9fc;
-}
-
-.aptus-sensitive-content__gate-hint {
-  color: #98a2ad !important;
-  font-size: 0.75rem !important;
-  margin: 0.75rem 0 0 !important;
-}
-
-.aptus-sensitive-content__live-bar {
-  background: #17212b;
-  border-radius: 999px;
-  bottom: 1rem;
-  color: #fff;
-  font-size: 0.75rem;
-  left: 50%;
-  padding: 0.45rem 0.9rem;
-  pointer-events: none;
-  position: sticky;
-  text-align: center;
-  transform: translateX(-50%);
-  width: max-content;
-  z-index: 30;
-}
-
-@media print {
-  .aptus-sensitive-content,
-  .aptus-sensitive-content * {
-    visibility: hidden !important;
-  }
-
-  .aptus-sensitive-content::after {
-    color: #17212b;
-    content: "This portal content cannot be printed or captured.";
-    display: block;
-    font-size: 14px;
-    visibility: visible !important;
-  }
-}
-
-
 

@@ -20,7 +20,6 @@ import { useNotifications } from "@/hooks/useNotifications";
 import { usePortalCartCount } from "@/hooks/usePortalCartCount";
 import { useOrders } from "@/hooks/useOrders";
 import { NotificationCountBadge } from "./NotificationCountBadge";
-import { SensitiveContent } from "./SensitiveContent";
 
 type Section =
   | "dashboard"
@@ -34,14 +33,6 @@ type Section =
   | "notifications"
   | "support"
   | "profile";
-
-const SENSITIVE_SECTIONS = new Set<Section>([
-  "dashboard",
-  "orders",
-  "invoices",
-  "subscriptions",
-  "licenses",
-]);
 
 type NavMeta = {
   section: Section;
@@ -288,11 +279,7 @@ export function PortalDashboardShell({
             />
           </div>
 
-          {SENSITIVE_SECTIONS.has(section) ? (
-            <SensitiveContent>{sectionBody}</SensitiveContent>
-          ) : (
-            sectionBody
-          )}
+          {sectionBody}
         </section>
       </main>
     </div>

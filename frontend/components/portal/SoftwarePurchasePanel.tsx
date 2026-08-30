@@ -255,6 +255,14 @@ export function SoftwarePurchasePanel() {
                   <button type="button" className="aptus-portal-btn" onClick={() => addToCart(category, product)}>
                     {inCart ? "Add another" : "Add to cart"}
                   </button>
+                  <a
+                    href={product.href}
+                    className="aptus-portal-btn aptus-portal-btn--primary"
+                    data-quote-family={category.id === "elv-solutions" ? "elv" : category.id}
+                    data-quote-product={product.name}
+                  >
+                    Request Quote
+                  </a>
                   <Link href={portalProductDetailHref(product)} className="aptus-overview-compact__link">
                     Details
                   </Link>

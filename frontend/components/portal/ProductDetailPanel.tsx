@@ -396,6 +396,14 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
               >
                 Add to Cart
               </button>
+              <a
+                href={product.href}
+                className="aptus-product-detail__btn aptus-product-detail__btn--outline"
+                data-quote-family={category.id === "elv-solutions" ? "elv" : category.id}
+                data-quote-product={product.name}
+              >
+                Request Quote
+              </a>
             </div>
           </div>
         </aside>
