@@ -281,7 +281,7 @@ export function mapHomepageJson(raw: string | false | undefined | null): Section
           return {
             id: `home-result-${i}`,
             label,
-            description: description || undefined,
+            ...(description ? { description } : {}),
           };
         })
         .filter((x): x is { id: string; label: string; description?: string } => !!x);
