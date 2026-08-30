@@ -8,7 +8,15 @@ import {
 } from "@/components/quote/quote-modal-utils";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
 
 /** Load the heavy quote form only when the modal actually opens. */
 const QuoteModal = dynamic(
@@ -19,11 +27,41 @@ const QuoteModal = dynamic(
   { ssr: false },
 );
 
-export function QuoteModalProvider({ children }: { children: React.ReactNode }) {
+type QuoteModalApi = {
+  openQuote: (context: QuoteModalContext) => void;
+  closeQuote: () => void;
+};
+
+const QuoteModalApiContext = createContext<QuoteModalApi | null>(null);
+
+/** Same Request Quote modal used on marketing pages — also available in the portal. */
+export function useQuoteModal(): QuoteModalApi {
+  const api = useContext(QuoteModalApiContext);
+  if (!api) {
+    throw new Error("useQuoteModal must be used within QuoteModalProvider");
+  }
+  return api;
+}
+
+export function QuoteModalProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname() ?? "/";
   const [open, setOpen] = useState(false);
   const [context, setContext] = useState<QuoteModalContext>(() =>
     quoteContextFromPathname(pathname),
+  );
+
+  const openQuote = useCallback((next: QuoteModalContext) => {
+    setContext(next);
+    setOpen(true);
+  }, []);
+
+  const closeQuote = useCallback(() => {
+    setOpen(false);
+  }, []);
+
+  const api = useMemo(
+    () => ({ openQuote, closeQuote }),
+    [openQuote, closeQuote],
   );
 
   useEffect(() => {
@@ -57,11 +95,9 @@ export function QuoteModalProvider({ children }: { children: React.ReactNode }) 
   }, [open]);
 
   return (
-    <>
+    <QuoteModalApiContext.Provider value={api}>
       {children}
-      {open ? (
-        <QuoteModal open onClose={() => setOpen(false)} context={context} />
-      ) : null}
-    </>
+      {open ? <QuoteModal open onClose={closeQuote} context={context} /> : null}
+    </QuoteModalApiContext.Provider>
   );
 }

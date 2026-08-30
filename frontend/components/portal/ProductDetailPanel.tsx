@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useAuth } from "@/context/AuthProvider";
+import { useQuoteModal } from "@/components/quote/QuoteModalProvider";
+import { quoteContextForPortalProduct } from "@/components/quote/quote-modal-utils";
 import { getProductConfig } from "@/data/product-options";
 import {
   getProductDetailContent,
@@ -98,6 +100,7 @@ type ProductDetailPanelProps = {
 
 export function ProductDetailPanel({ product, category }: ProductDetailPanelProps) {
   const { user, ready: authReady } = useAuth();
+  const { openQuote } = useQuoteModal();
   const productsHref = portalProductsHref(category.id);
   const meta = getProductCardMeta(product, category.label);
   const imageSrc = getPurchaseProductImage(product.href);
@@ -396,14 +399,21 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
               >
                 Add to Cart
               </button>
-              <a
-                href={product.href}
+              <button
+                type="button"
                 className="aptus-product-detail__btn aptus-product-detail__btn--outline"
-                data-quote-family={category.id === "elv-solutions" ? "elv" : category.id}
-                data-quote-product={product.name}
+                onClick={() =>
+                  openQuote(
+                    quoteContextForPortalProduct({
+                      family: category.id === "elv-solutions" ? "elv" : category.id,
+                      productName: product.name,
+                      productHref: product.href,
+                    }),
+                  )
+                }
               >
                 Request Quote
-              </a>
+              </button>
             </div>
           </div>
         </aside>

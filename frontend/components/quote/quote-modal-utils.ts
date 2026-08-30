@@ -87,6 +87,15 @@ export type QuoteModalContext = {
 export function shouldOpenQuoteModal(link: HTMLAnchorElement): boolean {
   if (link.closest(".aptus-quote-modal")) return false;
 
+  // Portal / explicit quote CTAs
+  if (
+    link.getAttribute("data-aptus-quote") === "true" ||
+    link.hasAttribute("data-quote-product") ||
+    link.hasAttribute("data-quote-family")
+  ) {
+    return true;
+  }
+
   const href = link.getAttribute("href")?.trim() ?? "";
   const hrefLower = href.toLowerCase();
 
@@ -194,43 +203,81 @@ export function quoteContextFromLink(
   const href = link.getAttribute("href")?.trim() ?? "";
   const dataFamily = link.getAttribute("data-quote-family")?.trim();
   const dataProduct = link.getAttribute("data-quote-product")?.trim();
+  const hrefSlug =
+    href.startsWith("/") && !href.startsWith("/#") && !href.startsWith("/portal")
+      ? pathSlug(href)
+      : undefined;
 
   let context: QuoteModalContext;
   if (dataFamily) {
-    context = contextForFamily(dataFamily);
-  } else if (href.startsWith("/") && !href.startsWith("/#")) {
+    context = contextForFamily(dataFamily, hrefSlug);
+  } else if (href.startsWith("/") && !href.startsWith("/#") && !href.startsWith("/portal")) {
     context = quoteContextFromPathname(href);
   } else {
-    context = quoteContextFromPathname(pathname);
+    // Never resolve family from /portal/* — fall back to Autodesk catalog.
+    const path = pathname.startsWith("/portal") ? "/" : pathname;
+    context = quoteContextFromPathname(path);
   }
 
-  if (dataProduct) {
-    const match = context.products.find(
-      (product) => product.toLowerCase() === dataProduct.toLowerCase(),
-    );
-    if (match) {
-      return { ...context, defaultProduct: match };
-    }
-  }
+  return withDefaultProduct(context, dataProduct);
+}
 
-  return context;
+/** Build the same quote modal context used on marketing CTAs, for portal products. */
+export function quoteContextForPortalProduct(options: {
+  family: string;
+  productName: string;
+  productHref?: string;
+}): QuoteModalContext {
+  const family = options.family === "elv-solutions" ? "elv" : options.family;
+  const slug =
+    options.productHref && options.productHref.startsWith("/")
+      ? pathSlug(options.productHref)
+      : undefined;
+  const context = contextForFamily(family, slug);
+  return withDefaultProduct(context, options.productName);
+}
+
+function withDefaultProduct(
+  context: QuoteModalContext,
+  productName?: string | null,
+): QuoteModalContext {
+  if (!productName?.trim()) return context;
+  const needle = productName.trim().toLowerCase();
+  const exact = context.products.find((product) => product.toLowerCase() === needle);
+  if (exact) return { ...context, defaultProduct: exact };
+
+  const fuzzy = context.products.find((product) => {
+    const p = product.toLowerCase();
+    return p.includes(needle) || needle.includes(p.split(" - ")[0] ?? p);
+  });
+
+  // Keep portal product name even if not in family list — form unshifts it into options.
+  return { ...context, defaultProduct: fuzzy ?? productName.trim() };
 }
 
 // ponytail: self-check — fails if quote link / family catalog detection regresses
 if (process.env.NODE_ENV === "development") {
-  const mk = (href: string, text: string, family?: string) =>
+  const mk = (href: string, text: string, family?: string, product?: string) =>
     ({
       getAttribute: (name: string) => {
         if (name === "href") return href;
         if (name === "data-quote-family") return family ?? null;
+        if (name === "data-quote-product") return product ?? null;
+        if (name === "data-aptus-quote") return product || family ? "true" : null;
         return null;
       },
+      hasAttribute: (name: string) =>
+        (name === "data-quote-family" && Boolean(family)) ||
+        (name === "data-quote-product" && Boolean(product)),
       textContent: text,
       closest: () => null,
     }) as unknown as HTMLAnchorElement;
 
   console.assert(shouldOpenQuoteModal(mk("#form", "Request a Quote")) === true);
   console.assert(shouldOpenQuoteModal(mk("#Products", "Browse Products")) === false);
+  console.assert(
+    shouldOpenQuoteModal(mk("#form", "Request Quote", "autodesk", "AutoCAD")) === true,
+  );
 
   const elv = quoteContextFromPathname("/thermal-scanners");
   console.assert(elv.category === "elv");
@@ -252,4 +299,19 @@ if (process.env.NODE_ENV === "development") {
     "/software-solutions",
   );
   console.assert(fromQtyCard.family === "quantity-takeoff");
+
+  const fromPortal = quoteContextForPortalProduct({
+    family: "autodesk",
+    productName: "AutoCAD",
+    productHref: "/autocad",
+  });
+  console.assert(fromPortal.family === "autodesk");
+  console.assert(fromPortal.defaultProduct === "AutoCAD" || Boolean(fromPortal.defaultProduct));
+
+  const portalPathSafe = quoteContextFromLink(
+    mk("#form", "Request Quote", "adobe", "Adobe Photoshop"),
+    "/portal/products",
+  );
+  console.assert(portalPathSafe.family === "adobe");
+  console.assert(portalPathSafe.defaultProduct === "Adobe Photoshop");
 }

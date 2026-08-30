@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { useAuth } from "@/context/AuthProvider";
+import { useQuoteModal } from "@/components/quote/QuoteModalProvider";
+import { quoteContextForPortalProduct } from "@/components/quote/quote-modal-utils";
 import { getProductConfig } from "@/data/product-options";
 import {
   SOFTWARE_PURCHASE_CATALOG,
@@ -43,6 +45,7 @@ const TONE_CYCLE = ["danger", "accent", "success", "warning"] as const;
 
 export function SoftwarePurchasePanel() {
   const { user, ready: authReady } = useAuth();
+  const { openQuote } = useQuoteModal();
   const searchParams = useSearchParams();
   const catalog = SOFTWARE_PURCHASE_CATALOG;
   const categoryFromUrl = searchParams.get("category");
@@ -255,14 +258,21 @@ export function SoftwarePurchasePanel() {
                   <button type="button" className="aptus-portal-btn" onClick={() => addToCart(category, product)}>
                     {inCart ? "Add another" : "Add to cart"}
                   </button>
-                  <a
-                    href={product.href}
+                  <button
+                    type="button"
                     className="aptus-portal-btn aptus-portal-btn--primary"
-                    data-quote-family={category.id === "elv-solutions" ? "elv" : category.id}
-                    data-quote-product={product.name}
+                    onClick={() =>
+                      openQuote(
+                        quoteContextForPortalProduct({
+                          family: category.id === "elv-solutions" ? "elv" : category.id,
+                          productName: product.name,
+                          productHref: product.href,
+                        }),
+                      )
+                    }
                   >
                     Request Quote
-                  </a>
+                  </button>
                   <Link href={portalProductDetailHref(product)} className="aptus-overview-compact__link">
                     Details
                   </Link>
