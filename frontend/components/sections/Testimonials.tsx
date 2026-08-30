@@ -6,6 +6,7 @@ import { gsap } from "@/lib/gsap";
 import { resolveCmsImageSrc } from "@/lib/utils";
 import type { Testimonials as TestimonialsData } from "@/types";
 import Image from "next/image";
+import Link from "next/link";
 import { useRef } from "react";
 
 interface TestimonialsProps {
@@ -15,12 +16,12 @@ interface TestimonialsProps {
 export function Testimonials({ data }: TestimonialsProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const isSoftwareQuotes = data.variant === "software-quotes";
+  const isHomeCards = data.variant === "home-cards";
 
   useGSAPContext({
     scope: sectionRef,
     dependencies: [data.items?.length, data.variant],
     setup() {
-      // ponytail: software inner pages use a static 3-col quote grid (live post-15a67d8) — no fade-in
       if (data.variant === "software-quotes") return;
 
       const inner = sectionRef.current?.querySelector(".testimonial-inner");
@@ -41,6 +42,94 @@ export function Testimonials({ data }: TestimonialsProps) {
   });
 
   if (!data.items?.length) return null;
+
+  if (isHomeCards) {
+    return (
+      <section
+        ref={sectionRef}
+        className="home-testimonials-cards section-padding"
+        data-section="testimonials"
+        data-variant="home-cards"
+      >
+        <Container>
+          {(data.heading || data.subheading) && (
+            <div className="mx-auto mb-12 max-w-2xl text-center">
+              {data.heading && (
+                <h2
+                  className="text-brand-navy"
+                  style={{ fontSize: "var(--text-4xl)", fontWeight: 600 }}
+                >
+                  {data.heading}
+                </h2>
+              )}
+              {data.subheading && (
+                <p
+                  className="mt-4 text-muted-foreground"
+                  style={{ fontSize: "var(--text-base)" }}
+                >
+                  {data.subheading}
+                </p>
+              )}
+            </div>
+          )}
+
+          <div className="testimonial-inner home-testimonials-cards__grid">
+            {data.items.map((item) => (
+              <article key={item.id} className="home-testimonial-card">
+                {item.avatar && (
+                  <div className="home-testimonial-card__avatar">
+                    <Image
+                      src={resolveCmsImageSrc(item.avatar.src)}
+                      alt={item.avatar.alt || item.author || ""}
+                      fill
+                      className="object-cover"
+                      sizes="64px"
+                    />
+                  </div>
+                )}
+                {item.author && (
+                  <h3
+                    className="mt-4 text-brand-navy"
+                    style={{ fontSize: "var(--text-base)", fontWeight: 600 }}
+                  >
+                    {item.author}
+                  </h3>
+                )}
+                {(item.role || item.company) && (
+                  <p
+                    className="mt-1 text-brand-blue"
+                    style={{ fontSize: "var(--text-sm)", fontWeight: 500 }}
+                  >
+                    {item.role || item.company}
+                  </p>
+                )}
+                {item.quote && (
+                  <p
+                    className="mt-4 leading-relaxed text-muted-foreground"
+                    style={{ fontSize: "var(--text-sm)" }}
+                  >
+                    {item.quote}
+                  </p>
+                )}
+              </article>
+            ))}
+          </div>
+
+          {data.action && (
+            <div className="mt-12 text-center">
+              <Link
+                href={data.action.href}
+                className="home-cta-pill inline-flex items-center justify-center px-8 py-3.5 text-white transition-colors"
+                style={{ fontSize: "var(--text-sm)", fontWeight: 600 }}
+              >
+                {data.action.label}
+              </Link>
+            </div>
+          )}
+        </Container>
+      </section>
+    );
+  }
 
   if (isSoftwareQuotes) {
     return (
@@ -78,22 +167,52 @@ export function Testimonials({ data }: TestimonialsProps) {
       className="relative overflow-hidden bg-brand-navy py-12 text-white sm:py-16 md:py-20"
       data-section="testimonials"
     >
-      <div className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-brand-green/5" aria-hidden="true" />
-      <div className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-brand-blue/10" aria-hidden="true" />
+      <div
+        className="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-brand-green/5"
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-brand-blue/10"
+        aria-hidden="true"
+      />
 
       <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6">
         <div className="testimonial-inner">
           {data.items.map((item) => (
             <div key={item.id}>
               {item.quote && (
-                <p className="text-start leading-relaxed text-white/85" style={{ fontSize: 'var(--text-base)' }}>{item.quote}</p>
+                <p
+                  className="text-start leading-relaxed text-white/85"
+                  style={{ fontSize: "var(--text-base)" }}
+                >
+                  {item.quote}
+                </p>
               )}
 
               <div className="mt-8 text-center">
-                {item.author && <p className="text-center text-white" style={{ fontSize: 'var(--text-base)', fontWeight: 600 }}>{item.author}</p>}
-                {item.role && <p className="mt-1 text-center italic text-brand-green-light" style={{ fontSize: 'var(--text-sm)' }}>{item.role}</p>}
+                {item.author && (
+                  <p
+                    className="text-center text-white"
+                    style={{ fontSize: "var(--text-base)", fontWeight: 600 }}
+                  >
+                    {item.author}
+                  </p>
+                )}
+                {item.role && (
+                  <p
+                    className="mt-1 text-center italic text-brand-green-light"
+                    style={{ fontSize: "var(--text-sm)" }}
+                  >
+                    {item.role}
+                  </p>
+                )}
                 {item.company && !item.role && (
-                  <p className="mt-1 text-center italic text-brand-green-light" style={{ fontSize: 'var(--text-sm)' }}>{item.company}</p>
+                  <p
+                    className="mt-1 text-center italic text-brand-green-light"
+                    style={{ fontSize: "var(--text-sm)" }}
+                  >
+                    {item.company}
+                  </p>
                 )}
 
                 {item.avatar && (

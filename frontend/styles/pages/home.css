@@ -1,182 +1,246 @@
 /**
  * Page: Home (/)
- * Source: post-14.css (Elementor page ID 14)
- * UNIQUE ONLY — flip cards, key enablers, testimonial band
+ * Professional homepage layout — pale-blue bands, centered hero, steps, promises, testimonials.
  */
 @layer pages {
-  .page-home .home-hero-banner img {
-    width: 100%;
+  .page-home {
+    --home-band: rgba(19, 82, 163, 0.06);
+    --home-band-strong: rgba(19, 82, 163, 0.1);
+    --home-cta: var(--aptus-color-primary);
+    --home-cta-hover: var(--aptus-color-primary-hover);
   }
 
-  /* Feature row alternating layout */
-  .page-home .home-feature-row {
-    padding: 0.75rem 0;
-    max-width: var(--content-max);
-    margin-inline: auto;
+  /* Shared pill CTA */
+  .page-home .home-cta-pill {
+    border-radius: 999px;
+    background: var(--home-cta);
   }
 
-  .page-home [data-section="feature-row"] {
-    padding-block: 0.75rem;
+  .page-home .home-cta-pill:hover {
+    background: var(--home-cta-hover);
   }
 
-  .page-home [data-section="feature-row"] + [data-section="feature-row"] {
-    padding-top: 0.35rem;
+  /* ── Centered hero ── */
+  .page-home .home-hero-centered {
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(19, 82, 163, 0.12), transparent 70%),
+      linear-gradient(180deg, var(--home-band) 0%, #fff 100%);
+    padding-block: clamp(3.5rem, 8vw, 6rem);
   }
 
-  .page-home .home-feature-row__eyebrow {
-    font-size: var(--text-lg);
-    font-weight: 500;
+  .page-home .home-hero-results {
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
-  .page-home .home-feature-row__title {
-    font-size: var(--text-5xl);
-    font-weight: 600;
-    color: var(--color-text);
-  }
-
-  .page-home .home-feature-row__body {
-    font-size: var(--text-xl);
-    font-weight: 400;
-    color: var(--color-text);
-  }
-
-  .page-home .home-feature-row--tinted {
-    background-color: var(--color-surface-muted);
-  }
-
-  /* Services flip-box grid */
-  .page-home .home-services {
-    padding: 1.5rem 0;
-    max-width: var(--content-max);
-    margin-inline: auto;
-  }
-
-  .page-home .home-services__eyebrow {
-    text-align: center;
-    font-size: var(--text-xl);
-    font-weight: 600;
-    letter-spacing: 1.5px;
-  }
-
-  .page-home .home-services__title {
-    text-align: center;
-    font-size: var(--text-5xl);
-    font-weight: 600;
-    color: var(--color-text);
-  }
-
-  .page-home .home-services__subtitle {
-    text-align: start;
-    font-size: var(--text-xl);
-    color: var(--color-text);
-  }
-
-  /* Key enabler stat cards */
-  .page-home .home-stat-card {
+  .page-home .home-hero-result-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.55rem 1.1rem;
+    border-radius: 999px;
     background: #fff;
-    border-radius: var(--radius-card);
-    box-shadow: var(--shadow-enabler);
-    margin-bottom: 2rem;
-    padding: 0 1rem;
-  }
-
-  .page-home .home-stat-card__watermark {
-    font-size: var(--text-6xl);
+    border: 1px solid rgba(19, 82, 163, 0.18);
+    color: var(--aptus-color-primary);
+    font-size: var(--text-sm);
     font-weight: 600;
-    color: #13934b14;
-  }
-
-  .page-home .home-stat-card__label {
-    margin-top: -2.125rem;
-    font-size: var(--text-base);
-    color: var(--color-text);
-  }
-
-  /* Testimonials band */
-  .page-home .home-testimonials {
-    margin-top: var(--section-padding);
-    padding-bottom: var(--section-padding);
-    background-position: center;
-    background-size: cover;
-    position: relative;
-  }
-
-  .page-home .home-testimonials::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-color: var(--color-text);
-    opacity: 0.63;
-  }
-
-  .page-home .home-testimonials__carousel {
-    position: relative;
-    width: min(59%, 100%);
-    margin: -5rem auto 0;
-  }
-
-  @media (max-width: 1023px) {
-    .page-home .home-testimonials__carousel {
-      margin-top: -3rem;
-      width: min(85%, 100%);
-    }
+    box-shadow: 0 1px 2px rgba(19, 82, 163, 0.06);
   }
 
   @media (max-width: 767px) {
-    .page-home .home-testimonials__carousel {
-      margin-top: -2rem;
-      width: 100%;
+    .page-home .home-hero-centered h1 {
+      font-size: var(--text-3xl) !important;
     }
 
-    .page-home .home-testimonial__avatar {
-      height: 72px;
-      width: 72px;
+    .page-home .home-hero-results {
+      flex-direction: column;
+      align-items: stretch;
     }
 
-    .page-home .home-feature-row,
-    .page-home .home-services {
-      padding-inline: var(--content-pad-x, 1rem);
-    }
-
-    .page-home .home-feature-row__title,
-    .page-home .home-services__title {
-      font-size: var(--text-3xl);
-      overflow-wrap: anywhere;
-    }
-
-    .page-home .home-feature-row__body,
-    .page-home .home-services__subtitle {
-      font-size: var(--text-base);
-    }
-
-    .page-home .home-stat-card__watermark {
-      font-size: var(--text-4xl);
+    .page-home .home-hero-result-chip {
+      justify-content: center;
     }
   }
 
-  @media (min-width: 1536px) {
-    .page-home .home-testimonials__carousel {
-      width: min(59%, 900px);
-    }
+  /* ── Logo strip ── */
+  .page-home [data-section="logo-grid"] {
+    padding-block: clamp(2rem, 4vw, 3rem);
+    background: #fff;
   }
 
-  .page-home .home-testimonial__text {
-    font-size: var(--text-lg);
-  }
-
-  .page-home .home-testimonial__name {
-    font-size: var(--text-2xl);
+  .page-home [data-section="logo-grid"] h2 {
+    text-align: center;
+    font-size: var(--text-2xl) !important;
     font-weight: 600;
+    color: var(--aptus-color-text-muted);
   }
 
-  .page-home .home-testimonial__title {
-    color: var(--secondary-color);
-    font-size: var(--text-xl);
-    font-weight: 600;
+  .page-home [data-section="logo-grid"] .mx-auto.mt-4.block.h-1 {
+    display: none;
   }
 
-  .page-home .home-testimonial__avatar {
-    width: 94px;
-    height: 94px;
+  .page-home [data-section="logo-grid"] .grid > div {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    height: 4.5rem;
+    padding: 0.5rem;
+  }
+
+  .page-home [data-section="logo-grid"] .grid > div:hover {
+    box-shadow: none;
+  }
+
+  /* ── Success story (feature row) ── */
+  .page-home [data-section="feature-row"] {
+    background: var(--home-band);
+    padding-block: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .page-home [data-section="feature-row"] .section-eyebrow {
+    text-align: start;
+  }
+
+  .page-home [data-section="feature-row"] h2 {
+    text-align: start !important;
+  }
+
+  .page-home [data-section="feature-row"] .btn-section {
+    border-radius: 999px;
+    background: var(--home-cta);
+  }
+
+  .page-home [data-section="feature-row"] .btn-section:hover {
+    background: var(--home-cta-hover);
+  }
+
+  /* ── Mid / closing CTA bands (reuse software-mid blue strip + pill button) ── */
+  .page-home [data-section="cta"] .aptus-software-mid-lead {
+    text-align: center;
+    max-width: 36rem;
+    margin-inline: auto;
+  }
+
+  .page-home [data-section="cta"] .aptus-software-btn {
+    border-radius: 999px;
+  }
+
+  /* ── Three steps ── */
+  .page-home .home-steps {
+    background: #fff;
+  }
+
+  .page-home .home-steps__card {
+    padding: 1.75rem 1.25rem;
+    border-radius: 1rem;
+    background: var(--home-band);
+    border: 1px solid rgba(19, 82, 163, 0.08);
+    height: 100%;
+  }
+
+  .page-home .home-steps__number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 999px;
+    background: var(--aptus-color-primary);
+    color: #fff;
+    font-size: var(--text-base);
+    font-weight: 700;
+  }
+
+  /* ── Our Promise ── */
+  .page-home .home-promises {
+    background: var(--home-band);
+  }
+
+  .page-home .home-promises__grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 640px) {
+    .page-home .home-promises__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .page-home .home-promises__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .page-home .home-promises__card {
+    text-align: center;
+    padding: 1.75rem 1.25rem;
+    background: #fff;
+    border-radius: 1rem;
+    border: 1px solid rgba(19, 82, 163, 0.08);
+    height: 100%;
+  }
+
+  .page-home .home-promises__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 999px;
+    background: var(--home-band-strong);
+    color: var(--aptus-color-primary);
+  }
+
+  /* ── Testimonials 3-up ── */
+  .page-home .home-testimonials-cards {
+    background: #fff;
+  }
+
+  .page-home .home-testimonials-cards__grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
+    .page-home .home-testimonials-cards__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .page-home .home-testimonial-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    background: var(--home-band);
+    border: 1px solid rgba(19, 82, 163, 0.08);
+    height: 100%;
+  }
+
+  .page-home .home-testimonial-card__avatar {
+    position: relative;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 999px;
+    overflow: hidden;
+    background: #fff;
+    border: 2px solid rgba(19, 82, 163, 0.15);
+  }
+
+  .page-home .home-testimonial-card p {
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Legacy selectors kept for any residual classes */
+  .page-home .home-hero-banner img {
+    width: 100%;
   }
 }
