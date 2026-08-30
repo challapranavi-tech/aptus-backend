@@ -6,6 +6,9 @@
  *   2. Local disk JSON   — fallback for pages not yet seeded to Odoo (dev only)
  *   3. Mock              — fallback when Odoo is unconfigured
  *
+ * Homepage (`/`): committed `content/odoo-json/home.json` wins by default
+ * (set USE_LOCAL_HOME_JSON=false to force Odoo `x_homepage_sections_json`).
+ *
  * Layout chrome (nav, footer, top bar) is code-owned — see data/site-nav.ts.
  */
 
@@ -15,6 +18,7 @@ import {
   buildLocalHomePage,
   isLocalPageJsonInDev,
   listLocalDevPageSlugs,
+  preferLocalHomeJson,
 } from "@/lib/odoo/local-page-json";
 import { loadCaseStudiesPageContent } from "@/lib/case-studies-page-content";
 import { isAutodeskHiddenSlug } from "@/data/autodesk-subnav";
@@ -79,6 +83,16 @@ export async function getSiteConfig(): Promise<SiteConfig> {
 }
 
 export async function getHomePage(): Promise<Page | null> {
+  // Committed home.json drives `/` by default so repo redesigns are visible
+  // without re-seeding Odoo. Set USE_LOCAL_HOME_JSON=false to use Odoo instead.
+  if (preferLocalHomeJson()) {
+    const localFirst = buildLocalHomePage();
+    if (localFirst?.sections.length) {
+      debugLog("Mapped Page [home local]", localFirst);
+      return localFirst;
+    }
+  }
+
   if (!isOdooConfigured()) {
     return (isLocalPageJsonInDev() && buildLocalHomePage()) || mockGetHomePage();
   }
@@ -89,7 +103,7 @@ export async function getHomePage(): Promise<Page | null> {
     debugLog("Mapped Page [home]", page);
 
     // Fresh staging DBs lack x_homepage_sections_json — arch parse is a stub.
-    // Prefer committed home.json in dev until the Odoo Text field exists + is seeded.
+    // Prefer committed home.json in dev until the Odoo JSON field exists + is seeded.
     if (isLocalPageJsonInDev() && !cmsPageFieldAvailable("x_homepage_sections_json")) {
       const local = buildLocalHomePage();
       if (local) {

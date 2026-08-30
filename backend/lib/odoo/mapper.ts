@@ -16,7 +16,12 @@ import type {
   SiteConfig,
 } from "@/types";
 import { parseArch } from "./arch-parser";
-import { isLocalPageJsonInDev, loadLocalPageSectionsJson } from "./local-page-json";
+import {
+  isLocalPageJsonInDev,
+  loadLocalHomeJson,
+  loadLocalPageSectionsJson,
+  preferLocalHomeJson,
+} from "./local-page-json";
 import { mapHomepageJson } from "./json-mapper";
 import { mapPageJson } from "./page-json-mapper";
 
@@ -55,7 +60,11 @@ export function mapOdooPage(
 
   const slug = odooUrlToSlug(rawPage.url);
 
-  const homeSections = mapHomepageJson(rawPage.x_homepage_sections_json);
+  // Prefer committed home.json so homepage redesigns in git are visible without
+  // re-seeding Odoo. Set USE_LOCAL_HOME_JSON=false to force Odoo JSON.
+  const localHomeRaw = preferLocalHomeJson() ? loadLocalHomeJson() : null;
+  const homeSections =
+    mapHomepageJson(localHomeRaw) ?? mapHomepageJson(rawPage.x_homepage_sections_json);
   if (homeSections && homeSections.length > 0) {
     sections = homeSections;
   } else {
