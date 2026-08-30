@@ -102,6 +102,12 @@ export const getSiteConfig = cache(async (): Promise<SiteConfig> => {
 });
 
 export const getHomePage = cache(async (): Promise<Page | null> => {
+  // Prefer committed frontend home.json so Vercel frontend deploys show the
+  // redesign without depending on a separate backend/Odoo seed.
+  const { buildLocalHomePage } = await import("@/lib/build-local-home-page");
+  const local = buildLocalHomePage();
+  if (local?.sections.length) return local;
+
   return apiGet<Page>("/api/cms/home");
 });
 

@@ -1,0 +1,199 @@
+{
+  "hero": {
+    "id": "hero",
+    "visible": true,
+    "variant": "home-centered",
+    "title": {
+      "before": "Licensed software and ELV delivery,",
+      "accent": "backed by Aptus expertise"
+    },
+    "subtitle": "From Autodesk and Adobe licensing to complete ELV systems, Aptus Infotech helps organisations across Oman adopt the right technology and put it to work.",
+    "ctaLabel": "Request Quote",
+    "ctaHref": "#form",
+    "results": [
+      {
+        "label": "Genuine licensed software"
+      },
+      {
+        "label": "End-to-end ELV delivery"
+      },
+      {
+        "label": "Training & BIM support"
+      }
+    ]
+  },
+  "logoGrid": {
+    "id": "trusted-logos",
+    "visible": true,
+    "heading": "Trusted By Leading Companies",
+    "logos": [
+      {
+        "id": "logo-autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "logo-sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png",
+        "alt": "SketchUp"
+      },
+      {
+        "id": "logo-honeywell",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Honeywell.png",
+        "alt": "Honeywell"
+      },
+      {
+        "id": "logo-hikvision",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Hikvision.png",
+        "alt": "Hikvision"
+      },
+      {
+        "id": "logo-apc",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/APC.png",
+        "alt": "APC"
+      },
+      {
+        "id": "logo-vertiv",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Vertiv.png",
+        "alt": "Vertiv"
+      },
+      {
+        "id": "logo-logitech",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Logitech.png",
+        "alt": "Logitech"
+      },
+      {
+        "id": "logo-tyco",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Tyco.png",
+        "alt": "Tyco"
+      }
+    ]
+  },
+  "features": [
+    {
+      "id": "success-story",
+      "visible": true,
+      "eyebrow": "Success Story",
+      "title": {
+        "before": "Indian School",
+        "accent": "Wadi Kabir International"
+      },
+      "paragraphs": [
+        "Challenge: Deliver a reliable IT project for a busy international school campus with no room for downtime.",
+        "Solution: Aptus Infotech planned and implemented the systems to match the school’s current needs and room to grow.",
+        "Delivery: The project team stayed hands-on through installation, commissioning, and handover.",
+        "Outcome: Prompt, flawless support and a partnership the school looks forward to continuing long term."
+      ],
+      "imageSrc": "/images/Aptusinfo.jpg",
+      "imageAlt": "Aptus Infotech success story",
+      "imagePosition": "left",
+      "buttonLabel": "Request Quote",
+      "href": "#form"
+    }
+  ],
+  "midCta": {
+    "id": "mid-cta",
+    "visible": true,
+    "heading": "Ready to transform how you buy and deploy technology?",
+    "description": "Tell us what you need — our team will prepare a clear quotation and guide you through the next steps.",
+    "actionLabel": "Request Quote",
+    "actionHref": "#form"
+  },
+  "keyEnablers": {
+    "id": "home-steps",
+    "visible": true,
+    "variant": "home-steps",
+    "eyebrow": "How it works",
+    "title": {
+      "before": "Three simple",
+      "accent": "steps"
+    },
+    "subtitle": "From first enquiry to order tracking — a clear path with Aptus.",
+    "items": [
+      {
+        "number": "01",
+        "title": "Request a Quote",
+        "description": "Share the software or ELV solution you need through our Request Quote form."
+      },
+      {
+        "number": "02",
+        "title": "Receive quotation from Aptus",
+        "description": "Our sales team prepares a clear quotation tailored to your requirements."
+      },
+      {
+        "number": "03",
+        "title": "Track status in the portal",
+        "description": "Follow quotation status, complete your order, and manage licenses in the customer portal."
+      }
+    ]
+  },
+  "promises": {
+    "id": "our-promise",
+    "visible": true,
+    "eyebrow": "Why Aptus",
+    "title": {
+      "before": "Our",
+      "accent": "Promise"
+    },
+    "items": [
+      {
+        "title": "Differentiated engagement",
+        "description": "Industry insight at the front — we listen first, then recommend what fits your business.",
+        "icon": "handshake"
+      },
+      {
+        "title": "Standardised delivery",
+        "description": "Delivery models built for faster, efficient outcomes aligned to clear business KPIs.",
+        "icon": "check-circle"
+      },
+      {
+        "title": "Strategic partnerships",
+        "description": "Genuine products and collaborative offerings with leading software and ELV vendors.",
+        "icon": "users"
+      },
+      {
+        "title": "Ongoing support",
+        "description": "Prompt, dedicated support from implementation through training and long-term association.",
+        "icon": "headset"
+      }
+    ]
+  },
+  "testimonials": {
+    "id": "testimonials",
+    "visible": true,
+    "variant": "home-cards",
+    "heading": "What our clients say",
+    "subheading": "Real feedback from organisations that trust Aptus Infotech.",
+    "ctaLabel": "Request Quote",
+    "ctaHref": "#form",
+    "items": [
+      {
+        "id": "tmn-0",
+        "quote": "We would like to acknowledge and extend my heartfelt gratitude to Aptus Infotech for done an IT project in our Indian School Wadi Kabir international. We appreciate the commitment & dedication shown by Aptus Infotech for their implementation and services. We also admire about their aspiration for their prompt and flawless support from project team. We look forward for continual long-term association with Aptus Infotech",
+        "author": "Nambi Rajesh",
+        "role": "IT Manager, Indian School Wadi Kabir International",
+        "avatarSrc": "/images/logotest.png"
+      },
+      {
+        "id": "tmn-1",
+        "quote": "The Autodesk solutions provided by Aptus Infotech have transformed our design process. The support and training we received were exceptional, and our team is now more productive than ever.",
+        "author": "Ahmed Hassan",
+        "role": "Design Director, Architecture Plus"
+      },
+      {
+        "id": "tmn-2",
+        "quote": "The Oracle database implementation by Aptus Infotech has significantly improved our data management capabilities. The system is robust, secure, and perfectly integrated with our existing processes.",
+        "author": "Sara Al Said",
+        "role": "IT Manager, Financial Services Group"
+      }
+    ]
+  },
+  "closingCta": {
+    "id": "closing-cta",
+    "visible": true,
+    "heading": "Let’s build your next solution together",
+    "description": "Whether you need licensed software, ELV systems, or training — start with a Request Quote.",
+    "actionLabel": "Request Quote",
+    "actionHref": "#form"
+  }
+}
