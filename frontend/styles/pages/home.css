@@ -205,13 +205,51 @@
 
   .page-home .home-hero-heading {
     margin: 0;
-    color: #fff;
     font-size: clamp(1.45rem, 3.4vw, 2.65rem);
     font-weight: 700;
     line-height: 1.2;
     white-space: normal;
     letter-spacing: -0.015em;
     text-wrap: balance;
+    background-image: linear-gradient(
+      110deg,
+      #ffffff 0%,
+      #d7e8ff 18%,
+      #67db85 42%,
+      #8ec5ff 62%,
+      #ffffff 82%,
+      #67db85 100%
+    );
+    background-size: 220% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 14px rgba(103, 219, 133, 0.28))
+      drop-shadow(0 0 28px rgba(19, 82, 163, 0.35));
+    animation: home-hero-heading-glow 7s ease-in-out infinite;
+  }
+
+  @keyframes home-hero-heading-glow {
+    0%,
+    100% {
+      background-position: 0% 50%;
+      filter: drop-shadow(0 0 12px rgba(103, 219, 133, 0.22))
+        drop-shadow(0 0 24px rgba(19, 82, 163, 0.3));
+    }
+    50% {
+      background-position: 100% 50%;
+      filter: drop-shadow(0 0 18px rgba(103, 219, 133, 0.45))
+        drop-shadow(0 0 36px rgba(56, 182, 255, 0.4));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .page-home .home-hero-heading {
+      animation: none;
+      background-position: 40% 50%;
+      filter: drop-shadow(0 0 12px rgba(19, 82, 163, 0.28));
+    }
   }
 
   .page-home .home-hero-support {
