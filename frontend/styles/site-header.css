@@ -438,96 +438,23 @@ html {
   overflow-y: auto;
 }
 
-/* Products & Services: full-width horizontal secondary bar (attachment-style) */
-.aptus-masthead__megabar-slot {
-  display: none;
-  flex: 1 0 100%;
-  order: 20;
-  width: 100%;
+/* Products & Services: compact first panel (Software + ELV only); children open sideways */
+.aptus-masthead__dropdown-panel--products {
+  max-height: none !important;
+  min-width: 220px;
+  overflow: visible !important;
 }
 
-.aptus-masthead__megabar {
-  background: #fff;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-  width: 100%;
-}
-
-.aptus-masthead__megabar-row {
-  margin: 0 auto;
-  max-width: 1300px;
-  padding: 0.55rem var(--content-pad-x, clamp(0.75rem, 2vw, 1rem));
-}
-
-.aptus-masthead__megabar-row--tertiary {
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
-  padding-block: 0.45rem 0.65rem;
-}
-
-.aptus-masthead__megabar-list {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.15rem 0.25rem;
-  justify-content: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.aptus-masthead__megabar-list > li {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.aptus-masthead__megabar-link {
-  color: #000 !important;
-  display: inline-flex;
-  font-size: var(--text-sm);
-  font-weight: 500;
-  padding: 0.45rem 0.9rem;
-  text-decoration: none !important;
+.aptus-masthead__dropdown-panel--products > li > a,
+.aptus-masthead__dropdown-panel--products > li > .aptus-masthead__link--parent,
+.aptus-masthead__dropdown-panel--products > li > .aptus-masthead__link--flyout-trigger {
   white-space: nowrap;
 }
 
-.aptus-masthead__megabar-link:hover,
-.aptus-masthead__megabar-link:focus-visible {
-  color: var(--aptus-color-primary, #1352a3) !important;
-}
-
-.aptus-masthead__megabar-link.is-active {
-  color: var(--aptus-color-primary, #1352a3) !important;
-  font-weight: 700;
-}
-
-/* Highlight Products trigger like the attachment active state */
-.aptus-masthead__dropdown--products:hover > .aptus-masthead__link,
-.aptus-masthead__dropdown--products:focus-within > .aptus-masthead__link,
-.aptus-masthead__nav-inner:has(.aptus-masthead__megabar-slot:hover) .aptus-masthead__dropdown--products > .aptus-masthead__link,
-.aptus-masthead__nav-inner:has(.aptus-masthead__megabar-slot.is-route-active) .aptus-masthead__dropdown--products > .aptus-masthead__link {
-  color: var(--aptus-color-primary, #1352a3) !important;
-}
-
-.aptus-masthead__dropdown--products:hover > .aptus-masthead__link::before,
-.aptus-masthead__dropdown--products:focus-within > .aptus-masthead__link::before,
-.aptus-masthead__nav-inner:has(.aptus-masthead__megabar-slot:hover) .aptus-masthead__dropdown--products > .aptus-masthead__link::before,
-.aptus-masthead__nav-inner:has(.aptus-masthead__megabar-slot.is-route-active) .aptus-masthead__dropdown--products > .aptus-masthead__link::before {
-  opacity: 0;
-  transform: scale(0.2);
-}
-
-@media (min-width: 1025px) {
-  .aptus-masthead__nav-inner:has(.aptus-masthead__dropdown--products:hover) .aptus-masthead__megabar-slot,
-  .aptus-masthead__nav-inner:has(.aptus-masthead__dropdown--products:focus-within) .aptus-masthead__megabar-slot,
-  .aptus-masthead__nav-inner:has(.aptus-masthead__megabar-slot:hover) .aptus-masthead__megabar-slot,
-  .aptus-masthead__megabar-slot.is-route-active {
-    display: block;
-  }
-}
-
-/* Legacy accordion rules kept inert — Products now uses megabar */
-.aptus-masthead__dropdown-panel--products {
-  display: none !important;
+.aptus-masthead__dropdown-panel--hub.aptus-masthead__dropdown-panel--nested {
+  max-height: min(75vh, 560px);
+  min-width: 280px;
+  z-index: 1080;
 }
 
 .aptus-masthead__dropdown-panel--software {
