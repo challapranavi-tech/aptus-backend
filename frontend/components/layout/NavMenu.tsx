@@ -40,9 +40,11 @@ function positionFlyout(dropdown: HTMLElement) {
   panel.style.removeProperty("bottom");
 
   const nested = dropdown.classList.contains("aptus-masthead__dropdown--nested");
+  // Last main item (Products & Services): keep nested flyouts opening to the right
+  const underProducts = Boolean(dropdown.closest(".aptus-masthead__dropdown--products"));
   let rect = panel.getBoundingClientRect();
 
-  if (rect.right > window.innerWidth - VIEWPORT_PAD) {
+  if (rect.right > window.innerWidth - VIEWPORT_PAD && !(underProducts && nested)) {
     panel.classList.add("is-flip-x");
     rect = panel.getBoundingClientRect();
   }
