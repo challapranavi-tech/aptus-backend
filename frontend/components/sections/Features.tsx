@@ -654,12 +654,9 @@ export function Features({ data }: FeaturesProps) {
         data-variant="home-challenges"
       >
         <Container>
-          {(data.heading || data.subheading) && (
+          {data.subheading && (
             <div className="home-challenges__header">
-              {data.subheading && (
-                <p className="home-challenges__subheading">{data.subheading}</p>
-              )}
-              {data.heading && <h2 className="home-challenges__heading">{data.heading}</h2>}
+              <p className="home-challenges__subheading">{data.subheading}</p>
             </div>
           )}
           {data.items && data.items.length > 0 && (
@@ -673,6 +670,9 @@ export function Features({ data }: FeaturesProps) {
                 </article>
               ))}
             </div>
+          )}
+          {data.heading && (
+            <p className="home-challenges__heading">{data.heading}</p>
           )}
         </Container>
       </section>
