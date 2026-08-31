@@ -185,10 +185,13 @@ export function findNavItemByLabel(
   return undefined;
 }
 
-// ponytail: self-check — Software + ELV live under Products and Services
+// ponytail: self-check — Software + ELV live under Products and Services (exactly two hubs)
 const products = SITE_NAVIGATION.find((item) => item.label === "Products and Services");
 const software = products?.children?.find((item) => item.label === "Software");
 const elv = products?.children?.find((item) => item.label === "ELV Solutions");
+if (!products?.children || products.children.length !== 2) {
+  throw new Error("SITE_NAVIGATION Products and Services must contain exactly Software and ELV Solutions");
+}
 if (!software?.children || software.children.length !== 11) {
   throw new Error("SITE_NAVIGATION Software menu out of sync with live site");
 }

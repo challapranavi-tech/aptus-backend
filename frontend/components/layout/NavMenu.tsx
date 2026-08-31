@@ -152,16 +152,24 @@ function NavDropdownItem({
   const panelId = useId();
 
   if (hasChildren) {
+    // Software / ELV under Products & Services: same full menus as the old top-level tabs
+    const isHubMenu = isSoftware || isElv;
     const nestedPanelClass = cn(
       "aptus-masthead__dropdown-panel",
       "aptus-masthead__dropdown-panel--nested",
-      (isElv || isSoftware) && "aptus-masthead__dropdown-panel--wide",
+      isHubMenu && "aptus-masthead__dropdown-panel--wide",
+      isHubMenu && "aptus-masthead__dropdown-panel--hub",
       isSoftware && "aptus-masthead__dropdown-panel--software",
+      isElv && "aptus-masthead__dropdown-panel--elv",
     );
 
     return (
       <li
-        className="aptus-masthead__dropdown aptus-masthead__dropdown--nested"
+        className={cn(
+          "aptus-masthead__dropdown",
+          "aptus-masthead__dropdown--nested",
+          isHubMenu && "aptus-masthead__dropdown--hub",
+        )}
         onMouseEnter={onDropdownPointerEnter}
       >
         {item.href ? (
@@ -247,8 +255,10 @@ function DropdownItem({
 
   const panelClass = cn(
     "aptus-masthead__dropdown-panel",
-    (isElv || isSoftware || isProducts) && "aptus-masthead__dropdown-panel--wide",
+    (isElv || isSoftware) && "aptus-masthead__dropdown-panel--wide",
     isSoftware && "aptus-masthead__dropdown-panel--software",
+    isElv && "aptus-masthead__dropdown-panel--elv",
+    isProducts && "aptus-masthead__dropdown-panel--products",
   );
 
   return (

@@ -1,19 +1,11 @@
 {
-  "hero": {
+  "softwareInnerHero": {
     "id": "hero",
     "visible": true,
-    "variant": "software-landing",
-    "title": {
-      "before": "Premium Software Solutions for",
-      "accent": "Modern Businesses in 2026"
-    },
-    "tagline": "Empowering businesses with cutting-edge software solutions from industry-leading brands",
-    "imageSrc": "linear-gradient(180deg, #000000 0%, #5429F2 100%)",
-    "imageAlt": "software",
-    "actions": []
-  },
-  "introRow": {
-    "heading": "Your Premier Software Solutions Provider",
+    "family": "software-solutions",
+    "bannerTitle": "Premium Software Solutions for Modern Businesses",
+    "bannerTagline": "Empowering businesses with cutting-edge software solutions from industry-leading brands",
+    "title": "Your Premier Software Solutions Provider",
     "paragraphs": [
       "Aptus Infotech is a leading provider of premium software solutions designed to help businesses streamline operations, enhance productivity, and drive growth. With over 25 years of experience in the IT industry, we have successfully delivered cutting-edge software solutions to clients across various sectors.",
       "As an authorized partner of industry-leading software brands, we offer genuine licenses, expert implementation, and comprehensive support for all our software solutions. Our team of certified professionals works closely with clients to understand their unique challenges and recommend the most suitable software for their specific needs.",
@@ -21,7 +13,8 @@
     ],
     "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/imgi_8_photo-1581094794329-c8112a89af12-683x1024.png",
     "imageAlt": "Aptus Infotech software solutions",
-    "imagePosition": "right"
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
   },
   "cardSections": [
     {

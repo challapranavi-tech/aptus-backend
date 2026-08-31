@@ -23,6 +23,23 @@ function linksFromTopNav(label: string): SoftwareSubNavLink[] {
   return item?.children ? flattenChildren(item.children) : [];
 }
 
+/** Top-level Software categories for the /software-solutions hub sidebar (ELV-style). */
+function linksFromSoftwareHub(): SoftwareSubNavLink[] {
+  const software = SITE_NAVIGATION.find((item) => item.label === "Software");
+  if (!software?.children?.length) return [];
+
+  const links: SoftwareSubNavLink[] = [];
+  for (const category of software.children) {
+    const href =
+      category.href && category.href !== "#"
+        ? category.href
+        : category.children?.find((child) => child.href && child.href !== "#")?.href;
+    if (!href) continue;
+    links.push({ label: category.label, href });
+  }
+  return links;
+}
+
 export const ADOBE_SUBNAV_LINKS = linksFromCategory("Adobe");
 export const MICROSOFT_SUBNAV_LINKS = linksFromCategory("Microsoft");
 export const MULTIMEDIA_SUBNAV_LINKS = linksFromCategory("Multimedia");
@@ -38,6 +55,7 @@ export const EDUCATIONAL_SUBNAV_LINKS: SoftwareSubNavLink[] = [
   { label: "ANSYS", href: "/ansys" },
 ];
 export const ELV_SUBNAV_LINKS = linksFromTopNav("ELV Solutions");
+export const SOFTWARE_HUB_SUBNAV_LINKS = linksFromSoftwareHub();
 
 /** Live sidebar on Quantity Takeoff product pages. */
 export const QUANTITY_TAKEOFF_SUBNAV_LINKS: SoftwareSubNavLink[] = [
@@ -92,6 +110,8 @@ export const CUBICOST_GROUP_SUBNAV_LINKS: SoftwareSubNavLink[] = [
 ];
 
 export const SOFTWARE_SUBNAV_BY_FAMILY: Record<string, SoftwareSubNavLink[]> = {
+  software: SOFTWARE_HUB_SUBNAV_LINKS,
+  "software-solutions": SOFTWARE_HUB_SUBNAV_LINKS,
   autodesk: [...AUTODESK_SUBNAV_LINKS],
   adobe: ADOBE_SUBNAV_LINKS,
   microsoft: MICROSOFT_SUBNAV_LINKS,
@@ -99,6 +119,7 @@ export const SOFTWARE_SUBNAV_BY_FAMILY: Record<string, SoftwareSubNavLink[]> = {
   oracle: ORACLE_SUBNAV_LINKS,
   edms: EDMS_SUBNAV_LINKS,
   educational: EDUCATIONAL_SUBNAV_LINKS,
+  electrical: ELECTRICAL_SOFTWARE_SUBNAV_LINKS,
   elv: ELV_SUBNAV_LINKS,
   "cubicost-group": CUBICOST_GROUP_SUBNAV_LINKS,
   structural: STRUCTURAL_SUBNAV_LINKS,

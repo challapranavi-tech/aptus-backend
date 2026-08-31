@@ -2,6 +2,7 @@ import { isSoftwareInnerSlug, SOFTWARE_FAMILIES } from "@/data/software-product-
 
 const SOFTWARE_HUB_SLUGS = new Set([
   "software",
+  "software-solutions",
   "autodesk",
   "adobe",
   "microsoft",
@@ -87,7 +88,7 @@ export function usesStackedSoftwareLayout(slug: string): boolean {
 
 export function getSoftwarePageScope(slug: string): SoftwarePageScope | null {
   if (SOFTWARE_HUB_SLUGS.has(slug)) {
-    const family = slug === "multimedia-software-solutions" ? "multimedia" : slug === "software" ? "software" : slug;
+    const family = slug === "multimedia-software-solutions" ? "multimedia" : slug === "software" || slug === "software-solutions" ? "software-solutions" : slug;
     return {
       isHub: true,
       isInner: false,

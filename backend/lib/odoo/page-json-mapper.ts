@@ -295,6 +295,7 @@ function innerProductFallbackImage(slug: string): string | undefined {
 // software-inner-hero (mirrors frontend's SOFTWARE_HUB_SLUGS).
 const NON_PRODUCT_SLUGS = new Set([
   "software",
+  "software-solutions",
   "autodesk",
   "adobe",
   "microsoft",

@@ -438,9 +438,43 @@ html {
   overflow-y: auto;
 }
 
+/* Products & Services: only Software + ELV — compact, never scrollable */
+.aptus-masthead__dropdown-panel--products {
+  max-height: none !important;
+  min-width: 220px;
+  overflow: visible !important;
+}
+
+.aptus-masthead__dropdown-panel--products > li > a,
+.aptus-masthead__dropdown-panel--products > li > .aptus-masthead__link--parent,
+.aptus-masthead__dropdown-panel--products > li > .aptus-masthead__link--flyout-trigger {
+  white-space: nowrap;
+}
+
+/* Full Software / ELV menus when opened from Products & Services (same as old top-level) */
+.aptus-masthead__dropdown-panel--hub.aptus-masthead__dropdown-panel--nested {
+  max-height: min(75vh, 560px);
+  min-width: 280px;
+  z-index: 1080;
+}
+
 .aptus-masthead__dropdown-panel--software {
   background-color: #1a1a2e;
   max-height: none;
+  overflow: visible;
+}
+
+.aptus-masthead__dropdown-panel--elv {
+  background-color: #1a1a2e;
+  max-height: min(75vh, 560px);
+  min-width: 300px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.aptus-masthead__dropdown-panel--software.aptus-masthead__dropdown-panel--nested {
+  max-height: none;
+  min-width: 280px;
   overflow: visible;
 }
 
