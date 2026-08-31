@@ -46,31 +46,6 @@ export function FooterClient({
               )}
             </Link>
 
-            {footer.tagline && (
-              <p
-                className="aptus-footer-col-text mt-4 leading-relaxed text-muted-foreground"
-                style={{ fontSize: "var(--text-sm)" }}
-              >
-                {footer.tagline}
-              </p>
-            )}
-
-            {footer.socialLinks && footer.socialLinks.length > 0 && (
-              <div className="mt-5 flex flex-wrap items-center gap-2.5">
-                {footer.socialLinks.map((s) => (
-                  <a
-                    key={s.platform}
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={s.label ?? s.platform}
-                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-blue text-white transition-all hover:bg-brand-blue-dark"
-                  >
-                    <SocialIcon platform={s.platform} />
-                  </a>
-                ))}
-              </div>
-            )}
           </div>
 
           {footer.mapEmbedUrl && (
@@ -206,6 +181,31 @@ export function FooterClient({
             )}
           </div>
         </div>
+
+        {footer.socialLinks && footer.socialLinks.length > 0 && (
+          <div className="aptus-footer-follow border-t border-border pt-8 pb-2">
+            <h3
+              className="mb-4 text-black"
+              style={{ fontSize: "var(--text-lg)", fontWeight: 700 }}
+            >
+              {t.topBar.followUs}
+            </h3>
+            <div className="flex flex-wrap items-center gap-2.5">
+              {footer.socialLinks.map((s) => (
+                <a
+                  key={s.platform}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label ?? s.platform}
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-blue text-white transition-all hover:bg-brand-blue-dark"
+                >
+                  <SocialIcon platform={s.platform} />
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
       </Container>
 
       {footer.copyright && (

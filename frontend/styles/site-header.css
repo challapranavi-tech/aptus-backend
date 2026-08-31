@@ -781,6 +781,15 @@ html {
   }
 }
 
+/* Language switcher in main nav row */
+.aptus-masthead__lang {
+  color: var(--aptus-color-primary, #1352a3);
+}
+
+.aptus-masthead__lang .aptus-lang-switch__btn {
+  color: inherit;
+}
+
 /* Customer portal login / avatar in masthead */
 .aptus-masthead__auth {
   align-items: center;
