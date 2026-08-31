@@ -268,12 +268,30 @@ function DropdownItem({
     );
   }
 
+  // Products & Services uses the full-width horizontal megabar (see ProductsMegaBar)
+  if (isProducts) {
+    return (
+      <li className="aptus-masthead__dropdown aptus-masthead__dropdown--products">
+        <span
+          className={cn(
+            "aptus-masthead__link aptus-masthead__link--flyout-trigger",
+            active && "is-active",
+          )}
+          aria-haspopup="true"
+          aria-expanded={active || undefined}
+        >
+          <NavLabel item={item} />
+          <NavChevron />
+        </span>
+      </li>
+    );
+  }
+
   const panelClass = cn(
     "aptus-masthead__dropdown-panel",
     (isElv || isSoftware) && "aptus-masthead__dropdown-panel--wide",
     isSoftware && "aptus-masthead__dropdown-panel--software",
     isElv && "aptus-masthead__dropdown-panel--elv",
-    isProducts && "aptus-masthead__dropdown-panel--products",
   );
 
   return (
@@ -314,12 +332,112 @@ function DropdownItem({
                 ? "software"
                 : undefined
             }
-            expandMode={isProducts ? "vertical" : "side"}
+            expandMode="side"
             pathname={pathname}
           />
         ))}
       </ul>
     </li>
+  );
+}
+
+function hubChildHref(item: NavigationItem): string | undefined {
+  if (item.href && item.href !== "#") return item.href;
+  return item.children?.find((child) => child.href && child.href !== "#")?.href;
+}
+
+/** Full-width horizontal sub-nav under the main bar (Products & Services). */
+function ProductsMegaBar({
+  item,
+  pathname,
+  onClose,
+}: {
+  item: NavigationItem;
+  pathname: string;
+  onClose: () => void;
+}) {
+  const hubs = item.children ?? [];
+  const [openHub, setOpenHub] = useState<string | null>(null);
+
+  useEffect(() => {
+    const match = hubs.find((hub) => isItemActive(hub, pathname));
+    setOpenHub(match?.label ?? null);
+  }, [pathname, item]);
+
+  if (!hubs.length) return null;
+
+  const activeHub =
+    hubs.find((hub) => hub.label === openHub) ??
+    hubs.find((hub) => isItemActive(hub, pathname));
+  const tertiary = activeHub?.children ?? [];
+
+  return (
+    <div
+      className="aptus-masthead__megabar"
+      onMouseLeave={() => {
+        const match = hubs.find((hub) => isItemActive(hub, pathname));
+        setOpenHub(match?.label ?? null);
+      }}
+    >
+      <div className="aptus-masthead__megabar-row">
+        <ul className="aptus-masthead__megabar-list" aria-label="Products and Services">
+          {hubs.map((hub) => {
+            const href = hubChildHref(hub);
+            const active = isItemActive(hub, pathname) || openHub === hub.label;
+            const className = cn(
+              "aptus-masthead__megabar-link",
+              active && "is-active",
+            );
+            return (
+              <li
+                key={hub.label}
+                onMouseEnter={() => setOpenHub(hub.label)}
+                onFocus={() => setOpenHub(hub.label)}
+              >
+                {href ? (
+                  <Link href={href} className={className} onClick={onClose}>
+                    <NavLabel item={hub} />
+                  </Link>
+                ) : (
+                  <span className={className}>
+                    <NavLabel item={hub} />
+                  </span>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+
+      {tertiary.length > 0 ? (
+        <div className="aptus-masthead__megabar-row aptus-masthead__megabar-row--tertiary">
+          <ul
+            className="aptus-masthead__megabar-list"
+            aria-label={activeHub ? `${activeHub.label} products` : "Products"}
+          >
+            {tertiary.map((child) => {
+              const href = hubChildHref(child);
+              if (!href) return null;
+              const active = isItemActive(child, pathname);
+              return (
+                <li key={child.label}>
+                  <Link
+                    href={href}
+                    className={cn(
+                      "aptus-masthead__megabar-link",
+                      active && "is-active",
+                    )}
+                    onClick={onClose}
+                  >
+                    <NavLabel item={child} />
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ) : null}
+    </div>
   );
 }
 
@@ -469,6 +587,10 @@ export function NavMenu({ items }: NavMenuProps) {
   // ponytail: CSS :hover menus stay open after click while the pointer is still over them;
   // lock hides panels until the pointer leaves the menu (or route changes).
   const [menuLocked, setMenuLocked] = useState(false);
+  const productsItem = items.find((item) => item.label === "Products and Services");
+  const productsSectionActive = productsItem
+    ? isItemActive(productsItem, pathname)
+    : false;
 
   const resetFlyouts = useCallback(() => {
     document.querySelectorAll<HTMLElement>(".aptus-masthead__dropdown-panel").forEach((panel) => {
@@ -543,6 +665,21 @@ export function NavMenu({ items }: NavMenuProps) {
           ))}
         </ul>
       </nav>
+
+      {productsItem ? (
+        <div
+          className={cn(
+            "aptus-masthead__megabar-slot",
+            productsSectionActive && "is-route-active",
+          )}
+        >
+          <ProductsMegaBar
+            item={productsItem}
+            pathname={pathname}
+            onClose={closeDesktopMenus}
+          />
+        </div>
+      ) : null}
 
       <button
         type="button"
