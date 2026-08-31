@@ -130,12 +130,15 @@ function NavDropdownItem({
   onClose,
   nested = false,
   menuVariant,
+  expandMode = "side",
   pathname,
 }: {
   item: NavigationItem;
   onClose?: () => void;
   nested?: boolean;
   menuVariant?: "software";
+  /** side = horizontal flyout; vertical = accordion under the parent (Products & Services). */
+  expandMode?: "side" | "vertical";
   pathname: string;
 }) {
   const hasChildren = item.children && item.children.length > 0;
@@ -144,33 +147,44 @@ function NavDropdownItem({
   const isElv =
     item.label === "ELV Solutions" || item.href === "/elv-solutions";
   const effectiveVariant = menuVariant ?? (isSoftware ? "software" : undefined);
+  const isVertical = expandMode === "vertical";
   const linkClass = nested
     ? "aptus-masthead__link aptus-masthead__link--nested"
     : "aptus-masthead__link";
-  const chevronDirection = effectiveVariant === "software" || isSoftware || isElv ? "right" : "down";
+  const chevronDirection =
+    isVertical || (!(isSoftware || isElv) && effectiveVariant !== "software")
+      ? "down"
+      : "right";
   const active = isDirectlyActive(item, pathname);
   const panelId = useId();
 
   if (hasChildren) {
-    // Software / ELV under Products & Services: same full menus as the old top-level tabs
     const isHubMenu = isSoftware || isElv;
+    // Products & Services: keep expanding vertically at every level
+    const childExpandMode = expandMode;
+    const useStacked = isVertical;
     const nestedPanelClass = cn(
       "aptus-masthead__dropdown-panel",
-      "aptus-masthead__dropdown-panel--nested",
-      isHubMenu && "aptus-masthead__dropdown-panel--wide",
-      isHubMenu && "aptus-masthead__dropdown-panel--hub",
+      useStacked
+        ? "aptus-masthead__dropdown-panel--stacked"
+        : "aptus-masthead__dropdown-panel--nested",
+      isHubMenu && !useStacked && "aptus-masthead__dropdown-panel--wide",
+      isHubMenu && !useStacked && "aptus-masthead__dropdown-panel--hub",
       isSoftware && "aptus-masthead__dropdown-panel--software",
       isElv && "aptus-masthead__dropdown-panel--elv",
+      useStacked && isElv && "aptus-masthead__dropdown-panel--elv-stacked",
     );
 
     return (
       <li
         className={cn(
           "aptus-masthead__dropdown",
-          "aptus-masthead__dropdown--nested",
+          useStacked
+            ? "aptus-masthead__dropdown--accordion"
+            : "aptus-masthead__dropdown--nested",
           isHubMenu && "aptus-masthead__dropdown--hub",
         )}
-        onMouseEnter={onDropdownPointerEnter}
+        onMouseEnter={useStacked ? undefined : onDropdownPointerEnter}
       >
         {item.href ? (
           <Link
@@ -201,6 +215,7 @@ function NavDropdownItem({
               onClose={onClose}
               nested
               menuVariant={effectiveVariant}
+              expandMode={childExpandMode}
               pathname={pathname}
             />
           ))}
@@ -299,6 +314,7 @@ function DropdownItem({
                 ? "software"
                 : undefined
             }
+            expandMode={isProducts ? "vertical" : "side"}
             pathname={pathname}
           />
         ))}

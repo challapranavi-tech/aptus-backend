@@ -440,9 +440,10 @@ html {
 
 /* Products & Services: only Software + ELV — compact, never scrollable */
 .aptus-masthead__dropdown-panel--products {
-  max-height: none !important;
-  min-width: 220px;
-  overflow: visible !important;
+  max-height: min(75vh, 560px) !important;
+  min-width: 280px;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
 }
 
 .aptus-masthead__dropdown-panel--products > li > a,
@@ -451,7 +452,80 @@ html {
   white-space: nowrap;
 }
 
-/* Full Software / ELV menus when opened from Products & Services (same as old top-level) */
+/* Vertical accordion under Products & Services (Software / ELV expand downward) */
+.aptus-masthead__dropdown--accordion {
+  position: relative;
+}
+
+.aptus-masthead__dropdown-panel--stacked {
+  background-color: #111120;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  left: auto !important;
+  margin: 0 !important;
+  max-height: 0;
+  min-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0 !important;
+  pointer-events: none;
+  position: static !important;
+  right: auto !important;
+  top: auto !important;
+  transform: none !important;
+  transition:
+    max-height 0.22s ease,
+    opacity 0.18s ease,
+    padding 0.18s ease,
+    visibility 0.18s ease;
+  visibility: hidden;
+  width: 100%;
+  z-index: auto;
+}
+
+.aptus-masthead__dropdown--accordion:hover > .aptus-masthead__dropdown-panel--stacked,
+.aptus-masthead__dropdown--accordion:focus-within > .aptus-masthead__dropdown-panel--stacked {
+  max-height: min(60vh, 480px);
+  opacity: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 2px 0 6px !important;
+  pointer-events: auto;
+  transform: none !important;
+  visibility: visible;
+}
+
+.aptus-masthead__dropdown-panel--stacked > li > a,
+.aptus-masthead__dropdown-panel--stacked > li > .aptus-masthead__link--parent,
+.aptus-masthead__dropdown-panel--stacked > li > .aptus-masthead__link--flyout-trigger {
+  padding-inline-start: 1.75rem !important;
+}
+
+/* Nested accordion levels indent further */
+.aptus-masthead__dropdown-panel--stacked .aptus-masthead__dropdown-panel--stacked > li > a,
+.aptus-masthead__dropdown-panel--stacked .aptus-masthead__dropdown-panel--stacked > li > .aptus-masthead__link--parent,
+.aptus-masthead__dropdown-panel--stacked .aptus-masthead__dropdown-panel--stacked > li > .aptus-masthead__link--flyout-trigger {
+  padding-inline-start: 2.5rem !important;
+}
+
+.aptus-masthead__dropdown-panel--stacked .aptus-masthead__dropdown-panel--stacked .aptus-masthead__dropdown-panel--stacked > li > a,
+.aptus-masthead__dropdown-panel--stacked .aptus-masthead__dropdown-panel--stacked .aptus-masthead__dropdown-panel--stacked > li > .aptus-masthead__link--parent,
+.aptus-masthead__dropdown-panel--stacked .aptus-masthead__dropdown-panel--stacked .aptus-masthead__dropdown-panel--stacked > li > .aptus-masthead__link--flyout-trigger {
+  padding-inline-start: 3.25rem !important;
+}
+
+.aptus-masthead__dropdown-panel--elv-stacked {
+  background-color: #111120;
+}
+
+/* Prevent the generic absolute-panel hover transform from fighting accordion */
+.aptus-masthead__dropdown--accordion:hover > .aptus-masthead__dropdown-panel--stacked,
+.aptus-masthead__dropdown--accordion:focus-within > .aptus-masthead__dropdown-panel--stacked {
+  transform: none !important;
+}
+
+/* Full Software / ELV menus when opened as side flyouts */
 .aptus-masthead__dropdown-panel--hub.aptus-masthead__dropdown-panel--nested {
   max-height: min(75vh, 560px);
   min-width: 280px;
