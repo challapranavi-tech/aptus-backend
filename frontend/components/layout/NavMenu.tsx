@@ -139,14 +139,26 @@ function NavDropdownItem({
   pathname: string;
 }) {
   const hasChildren = item.children && item.children.length > 0;
+  const isSoftware =
+    item.label === "Software" || item.href === "/software-solutions";
+  const isElv =
+    item.label === "ELV Solutions" || item.href === "/elv-solutions";
+  const effectiveVariant = menuVariant ?? (isSoftware ? "software" : undefined);
   const linkClass = nested
     ? "aptus-masthead__link aptus-masthead__link--nested"
     : "aptus-masthead__link";
-  const chevronDirection = menuVariant === "software" ? "right" : "down";
+  const chevronDirection = effectiveVariant === "software" || isSoftware || isElv ? "right" : "down";
   const active = isDirectlyActive(item, pathname);
   const panelId = useId();
 
   if (hasChildren) {
+    const nestedPanelClass = cn(
+      "aptus-masthead__dropdown-panel",
+      "aptus-masthead__dropdown-panel--nested",
+      (isElv || isSoftware) && "aptus-masthead__dropdown-panel--wide",
+      isSoftware && "aptus-masthead__dropdown-panel--software",
+    );
+
     return (
       <li
         className="aptus-masthead__dropdown aptus-masthead__dropdown--nested"
@@ -173,14 +185,14 @@ function NavDropdownItem({
             <NavChevron direction={chevronDirection} />
           </span>
         )}
-        <ul id={panelId} className="aptus-masthead__dropdown-panel aptus-masthead__dropdown-panel--nested" role="menu">
+        <ul id={panelId} className={nestedPanelClass} role="menu">
           {item.children!.map((child) => (
             <NavDropdownItem
               key={child.label}
               item={child}
               onClose={onClose}
               nested
-              menuVariant={menuVariant}
+              menuVariant={effectiveVariant}
               pathname={pathname}
             />
           ))}
@@ -210,7 +222,8 @@ function DropdownItem({
   onClose: () => void;
 }) {
   const hasChildren = item.children && item.children.length > 0;
-  const active = isDirectlyActive(item, pathname);
+  const active = isItemActive(item, pathname);
+  const isProducts = item.label === "Products and Services";
   const isSoftware =
     item.label === "Software" || item.href === "/software-solutions";
   const isElv =
@@ -234,22 +247,36 @@ function DropdownItem({
 
   const panelClass = cn(
     "aptus-masthead__dropdown-panel",
-    (isElv || isSoftware) && "aptus-masthead__dropdown-panel--wide",
+    (isElv || isSoftware || isProducts) && "aptus-masthead__dropdown-panel--wide",
     isSoftware && "aptus-masthead__dropdown-panel--software",
   );
 
   return (
     <li className="aptus-masthead__dropdown" onMouseEnter={onDropdownPointerEnter}>
-      <Link
-        href={item.href ?? "#"}
-        className={cn("aptus-masthead__link", active && "is-active")}
-        aria-haspopup="menu"
-        aria-controls={panelId}
-        onClick={onClose}
-      >
-        <NavLabel item={item} />
-        <NavChevron />
-      </Link>
+      {item.href ? (
+        <Link
+          href={item.href}
+          className={cn("aptus-masthead__link", active && "is-active")}
+          aria-haspopup="menu"
+          aria-controls={panelId}
+          onClick={onClose}
+        >
+          <NavLabel item={item} />
+          <NavChevron />
+        </Link>
+      ) : (
+        <span
+          className={cn(
+            "aptus-masthead__link aptus-masthead__link--flyout-trigger",
+            active && "is-active",
+          )}
+          aria-haspopup="menu"
+          aria-controls={panelId}
+        >
+          <NavLabel item={item} />
+          <NavChevron />
+        </span>
+      )}
 
       <ul id={panelId} className={panelClass} role="menu">
         {item.children!.map((child) => (
@@ -257,7 +284,11 @@ function DropdownItem({
             key={child.label}
             item={child}
             onClose={onClose}
-            menuVariant={isSoftware ? "software" : undefined}
+            menuVariant={
+              child.label === "Software" || child.href === "/software-solutions"
+                ? "software"
+                : undefined
+            }
             pathname={pathname}
           />
         ))}

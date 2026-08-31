@@ -1,4 +1,4 @@
-import { SITE_NAVIGATION } from "@/data/site-nav";
+import { findNavItemByLabel, SITE_NAVIGATION } from "@/data/site-nav";
 import { softwareHeroImage } from "@/data/software-product-media";
 import type { NavigationItem } from "@/types";
 
@@ -410,7 +410,7 @@ const CATEGORY_HINTS: Record<string, string> = {
  * Products appear once: first Software section wins; category hub links are skipped.
  */
 export function buildSoftwarePurchaseCatalog(): SoftwarePurchaseCategory[] {
-  const software = SITE_NAVIGATION.find((item) => item.label === "Software");
+  const software = findNavItemByLabel(SITE_NAVIGATION, "Software");
   if (!software?.children?.length) return [];
 
   const categoryHubHrefs = new Set<string>();
@@ -511,7 +511,7 @@ export function lookupGuidePrice(
 
 /** ELV Solutions catalog — kept for a future redesign; not surfaced in the Products UI. */
 export function buildElvPurchaseCatalog(): SoftwarePurchaseCategory[] {
-  const elv = SITE_NAVIGATION.find((item) => item.label === "ELV Solutions");
+  const elv = findNavItemByLabel(SITE_NAVIGATION, "ELV Solutions");
   if (!elv?.children?.length) return [];
 
   const claimedHrefs = new Set<string>();

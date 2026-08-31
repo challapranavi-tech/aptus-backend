@@ -1,5 +1,5 @@
 import { AUTODESK_SUBNAV_LINKS } from "@/data/autodesk-subnav";
-import { SITE_NAVIGATION } from "@/data/site-nav";
+import { findNavItemByLabel, SITE_NAVIGATION } from "@/data/site-nav";
 
 export type SoftwareSubNavLink = { label: string; href: string };
 
@@ -13,13 +13,13 @@ function flattenChildren(children: { label: string; href?: string; children?: { 
 }
 
 function linksFromCategory(label: string): SoftwareSubNavLink[] {
-  const software = SITE_NAVIGATION.find((item) => item.label === "Software");
+  const software = findNavItemByLabel(SITE_NAVIGATION, "Software");
   const category = software?.children?.find((c) => c.label === label);
   return category?.children ? flattenChildren(category.children) : [];
 }
 
 function linksFromTopNav(label: string): SoftwareSubNavLink[] {
-  const item = SITE_NAVIGATION.find((nav) => nav.label === label);
+  const item = findNavItemByLabel(SITE_NAVIGATION, label);
   return item?.children ? flattenChildren(item.children) : [];
 }
 
