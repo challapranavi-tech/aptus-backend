@@ -7445,6 +7445,16 @@ body.aptus-payment-processing-open {
   background: #eff6ff;
 }
 
+.aptus-product-detail__btn--trial {
+  background: #13934b;
+  color: #fff;
+}
+
+.aptus-product-detail__btn--trial:hover {
+  background: #0f7a3e;
+  color: #fff;
+}
+
 .aptus-product-detail__quote {
   color: #1d4ed8;
   display: block;
@@ -7683,6 +7693,17 @@ body.aptus-payment-processing-open {
   border-color: #9fc8f4;
   color: var(--pc-accent);
   font-weight: 600;
+}
+
+.aptus-portal-btn--trial {
+  background: #ecfdf3;
+  border-color: #86efac;
+  color: #15803d;
+  font-weight: 600;
+}
+
+.aptus-portal-btn--trial:hover {
+  background: #dcfce7;
 }
 
 .aptus-portal-page-card {

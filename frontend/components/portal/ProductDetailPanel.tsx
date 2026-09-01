@@ -27,6 +27,7 @@ import {
   writePortalCart,
 } from "@/lib/portal-cart";
 import type { OrderLineItem, PortalOrder, PurchaseType } from "@/types/orders";
+import { AutodeskFreeTrialLink } from "@/components/shared/AutodeskFreeTrialLink";
 import { ProductDetailBlocks } from "./ProductDetailBlocks";
 import { ProductPurchaseOptions } from "./ProductPurchaseOptions";
 
@@ -399,6 +400,7 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
               >
                 Add to Cart
               </button>
+              <AutodeskFreeTrialLink productHref={product.href} />
               <button
                 type="button"
                 className="aptus-product-detail__btn aptus-product-detail__btn--outline"

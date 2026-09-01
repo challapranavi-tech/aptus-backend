@@ -22,6 +22,7 @@ import {
   syncPortalCartWithServer,
   writePortalCart,
 } from "@/lib/portal-cart";
+import { AutodeskFreeTrialLink } from "@/components/shared/AutodeskFreeTrialLink";
 import type { PortalOrder, PurchaseType } from "@/types/orders";
 
 type Duration = PortalOrder["duration"];
@@ -273,6 +274,7 @@ export function SoftwarePurchasePanel() {
                   >
                     Request Quote
                   </button>
+                  <AutodeskFreeTrialLink productHref={product.href} variant="portal-card" />
                   <Link href={portalProductDetailHref(product)} className="aptus-overview-compact__link">
                     Details
                   </Link>

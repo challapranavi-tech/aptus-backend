@@ -1,4 +1,5 @@
 import { SoftwareInnerHeroNav } from "@/components/layout/SoftwareInnerHeroNav";
+import { AutodeskFreeTrialLink } from "@/components/shared/AutodeskFreeTrialLink";
 import { isTopRequestQuoteCta } from "@/components/quote/quote-modal-utils";
 import { CmsImage } from "@/components/ui";
 import { cn } from "@/lib/utils";
@@ -29,11 +30,14 @@ export function SoftwareInnerHero({ data }: SoftwareInnerHeroProps) {
   const secondaryAction =
     data.action && !isTopRequestQuoteCta(data.action.label) ? data.action : null;
 
+  const showFreeTrial = data.family === "autodesk" || data.family === "water-infrastructure";
+
   const requestQuoteCta = (
     <div className="aptus-software-inner-hero__cta">
       <Link href={quoteAction.href} className="aptus-software-btn aptus-software-btn-blue">
         {quoteAction.label}
       </Link>
+      {showFreeTrial ? <AutodeskFreeTrialLink variant="marketing" /> : null}
       {secondaryAction && (
         <Link
           href={secondaryAction.href}
