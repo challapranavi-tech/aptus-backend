@@ -40,12 +40,40 @@ function linksFromSoftwareHub(): SoftwareSubNavLink[] {
   return links;
 }
 
-export const ADOBE_SUBNAV_LINKS = linksFromCategory("Adobe");
-export const MICROSOFT_SUBNAV_LINKS = linksFromCategory("Microsoft");
-export const MULTIMEDIA_SUBNAV_LINKS = linksFromCategory("Multimedia");
-export const ORACLE_SUBNAV_LINKS = linksFromCategory("Oracle");
-export const EDMS_SUBNAV_LINKS = linksFromCategory("EDMS");
-export const ELECTRICAL_SOFTWARE_SUBNAV_LINKS = linksFromCategory("Electrical Software");
+export const ADOBE_SUBNAV_LINKS: SoftwareSubNavLink[] = [
+  { label: "Adobe Business & Creative Solutions", href: "/adobe-business-creative-solutions" },
+  { label: "Adobe Acrobat Pro", href: "/adobe-acrobat-pro" },
+  { label: "Adobe Illustrator", href: "/adobe-illustrator" },
+  { label: "Adobe Photoshop", href: "/adobe-photoshop" },
+  { label: "Adobe Premiere Pro", href: "/adobe-premiere-pro" },
+];
+export const MICROSOFT_SUBNAV_LINKS: SoftwareSubNavLink[] = [
+  { label: "Microsoft 365 Apps", href: "/microsoft-365-apps" },
+  { label: "Microsoft 365 Business", href: "/microsoft-365-business" },
+  { label: "Microsoft Visio", href: "/microsoft-visio" },
+  { label: "Power BI", href: "/power-bi" },
+];
+export const ORACLE_SUBNAV_LINKS: SoftwareSubNavLink[] = [
+  { label: "Oracle Primavera P6", href: "/oracle-primavera-p6" },
+  { label: "Aconex", href: "/aconex" },
+];
+export const MULTIMEDIA_SUBNAV_LINKS: SoftwareSubNavLink[] = [
+  { label: "Bluebeam", href: "/bluebeam" },
+  { label: "Corona", href: "/chaos-corona" },
+  { label: "Enscape", href: "/enscape" },
+  { label: "Lumion", href: "/luminon" },
+  { label: "Nitro", href: "/nitro" },
+  { label: "Sketchup", href: "/sketchup" },
+  { label: "Twinmotion", href: "/twinmotion" },
+  { label: "V-Ray", href: "/v-ray" },
+];
+export const EDMS_SUBNAV_LINKS: SoftwareSubNavLink[] = [
+  { label: "Autodesk Construction Cloud", href: "/construction-cloud" },
+  { label: "Aconex", href: "/aconex" },
+  { label: "Odoo", href: "/odoo" },
+  { label: "SpectroNova", href: "/spectronova" },
+];
+export const ELECTRICAL_SOFTWARE_SUBNAV_LINKS: SoftwareSubNavLink[] = [{ label: "Etap", href: "/etap" }];
 
 /** Live sidebar on Educational Software pages (post-2091 ANSYS). */
 export const EDUCATIONAL_SUBNAV_LINKS: SoftwareSubNavLink[] = [

@@ -25,123 +25,37 @@ export const SITE_NAVIGATION: NavigationItem[] = [
         label: "Software",
         href: "/software-solutions",
         children: [
-          {
-            label: "Autodesk",
-            href: "/autodesk",
-            children: [
-              { label: "AutoCAD", href: "/autocad" },
-              { label: "3ds Max", href: "/3ds-max" },
-              { label: "Revit", href: "/revit" },
-              { label: "Civil 3D", href: "/civil-3d" },
-              { label: "AEC Collection", href: "/aec-collection" },
-              { label: "AutoCAD LT", href: "/autocad-lt" },
-              { label: "BIM Collaborate Pro", href: "/bim-collaborate-pro" },
-              { label: "Autodesk Docs", href: "/autodesk-docs" },
-              { label: "Autodesk Build", href: "/autodesk-build" },
-              { label: "Autodesk Takeoff", href: "/autodesk-takeoff" },
-              { label: "Navisworks", href: "/navisworks" },
-              {
-                label: "Water Infrastructure",
-                children: [
-                  { label: "InfoDrainage", href: "/infodrainage" },
-                  { label: "InfoWater Pro", href: "/infowater-pro" },
-                  { label: "InfoWorks ICM", href: "/infoworks-icm" },
-                  { label: "InfoWorks WS Pro", href: "/infoworks-ws-pro" },
-                ],
-              },
-            ],
-          },
-          {
-            label: "Electrical Software",
-            children: [{ label: "ETAP", href: "/etap" }],
-          },
-          {
-            label: "Adobe",
-            href: "/adobe",
-            children: [
-              { label: "Adobe Business & Creative Solutions", href: "/adobe-business-creative-solutions" },
-              { label: "Adobe Acrobat Pro", href: "/adobe-acrobat-pro" },
-              { label: "Adobe Illustrator", href: "/adobe-illustrator" },
-              { label: "Adobe Photoshop", href: "/adobe-photoshop" },
-              { label: "Adobe Premiere Pro", href: "/adobe-premiere-pro" },
-            ],
-          },
-          {
-            label: "Oracle",
-            children: [
-              { label: "Oracle Primavera P6", href: "/oracle-primavera-p6" },
-              { label: "Aconex", href: "/aconex" },
-            ],
-          },
-          {
-            label: "Microsoft",
-            href: "/microsoft",
-            children: [
-              { label: "Microsoft 365 Apps", href: "/microsoft-365-apps" },
-              { label: "Microsoft 365 Business", href: "/microsoft-365-business" },
-              { label: "Microsoft Visio", href: "/microsoft-visio" },
-              { label: "Power BI", href: "/power-bi" },
-            ],
-          },
-          {
-            label: "Multimedia",
-            href: "/multimedia-software-solutions",
-            children: [
-              { label: "Bluebeam", href: "/bluebeam" },
-              { label: "Chaos Corona", href: "/chaos-corona" },
-              { label: "Enscape", href: "/enscape" },
-              { label: "Luminon", href: "/luminon" },
-              { label: "Nitro PDF", href: "/nitro" },
-              { label: "Sketchup", href: "/sketchup" },
-              { label: "Twinmotion", href: "/twinmotion" },
-              { label: "V-Ray", href: "/v-ray" },
-            ],
-          },
-          {
-            label: "Quantity Takeoff",
-            children: [
-              { label: "Cubicost BM QS", href: "/cubicost-bm-qs" },
-              { label: "Planswift", href: "/plainswift" },
-              { label: "RIB CostX", href: "/rib-costx" },
-            ],
-          },
-          {
-            label: "Structural Software",
-            children: [
-              { label: "Computers & Structures, Inc", href: "/computers-structures" },
-              { label: "Prokon", href: "/prokon" },
-            ],
-          },
-          {
-            label: "Cyber Security Solutions",
-            href: "/cyber-security-solution",
-            children: [
-              { label: "Fortinet", href: "/fortinet" },
-              { label: "Sophos", href: "/sophos" },
-              { label: "SonicWall Next-Gen Firewall", href: "/sonicwall-next-gen-firewall" },
-              { label: "Kaspersky", href: "/kaspersky" },
-              { label: "Antivirus and Data Security", href: "/antivirus-and-data-security" },
-            ],
-          },
-          {
-            label: "Educational Software",
-            children: [
-              { label: "Adobe", href: "/adobe" },
-              { label: "ANSYS", href: "/ansys" },
-              { label: "IBM SPSS Software", href: "/ibm-spss-software" },
-              { label: "Matlab", href: "/matlab" },
-              { label: "Turnitin", href: "/turnitin" },
-            ],
-          },
-          {
-            label: "EDMS",
-            children: [
-              { label: "Autodesk Construction Cloud", href: "/construction-cloud" },
-              { label: "Aconex", href: "/aconex" },
-              { label: "Odoo", href: "/odoo" },
-              { label: "SpectroNova", href: "/spectronova" },
-            ],
-          },
+          { label: "Autodesk", href: "/autodesk" },
+          { label: "Adobe", href: "/adobe" },
+          { label: "Microsoft", href: "/microsoft" },
+          { label: "Oracle", href: "/oracle-primavera-p6" },
+          { label: "CostX", href: "/rib-costx" },
+          { label: "Cubicost", href: "/cubicost-bm-qs" },
+          { label: "Planswift", href: "/plainswift" },
+          { label: "SpectroNova", href: "/spectronova" },
+          { label: "CSI", href: "/computers-structures" },
+          { label: "Bentley", href: "/bentley" },
+          { label: "Turnitin", href: "/turnitin" },
+          { label: "Mathwork", href: "/matlab" },
+          { label: "Nitro", href: "/nitro" },
+          { label: "Fortinet", href: "/fortinet" },
+          { label: "Sophos", href: "/sophos" },
+          { label: "Kaspersky", href: "/kaspersky" },
+          { label: "Symantec", href: "/antivirus-and-data-security" },
+          { label: "Palo Alto", href: "/palo-alto" },
+          { label: "RedHAT", href: "/redhat" },
+          { label: "Etap", href: "/etap" },
+          { label: "Prokon", href: "/prokon" },
+          { label: "Lumion", href: "/luminon" },
+          { label: "V-Ray", href: "/v-ray" },
+          { label: "Sketchup", href: "/sketchup" },
+          { label: "Bluebeam", href: "/bluebeam" },
+          { label: "Twinmotion", href: "/twinmotion" },
+          { label: "Solidworks", href: "/solidworks" },
+          { label: "SPSS", href: "/ibm-spss-software" },
+          { label: "Corona", href: "/chaos-corona" },
+          { label: "D5 Render", href: "/d5-render" },
+          { label: "Quorum", href: "/quorum" },
         ],
       },
       {
@@ -185,6 +99,8 @@ export function findNavItemByLabel(
   return undefined;
 }
 
+const SOFTWARE_BRAND_COUNT = 31;
+
 // ponytail: self-check — Software + ELV live under Products and Services (exactly two hubs)
 const products = SITE_NAVIGATION.find((item) => item.label === "Products and Services");
 const software = products?.children?.find((item) => item.label === "Software");
@@ -192,8 +108,8 @@ const elv = products?.children?.find((item) => item.label === "ELV Solutions");
 if (!products?.children || products.children.length !== 2) {
   throw new Error("SITE_NAVIGATION Products and Services must contain exactly Software and ELV Solutions");
 }
-if (!software?.children || software.children.length !== 11) {
-  throw new Error("SITE_NAVIGATION Software menu out of sync with live site");
+if (!software?.children || software.children.length !== SOFTWARE_BRAND_COUNT) {
+  throw new Error(`SITE_NAVIGATION Software menu must contain exactly ${SOFTWARE_BRAND_COUNT} brands`);
 }
 if (!elv?.children?.length) {
   throw new Error("SITE_NAVIGATION ELV Solutions menu missing under Products and Services");

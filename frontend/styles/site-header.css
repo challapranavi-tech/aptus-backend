@@ -476,8 +476,10 @@ html {
 
 .aptus-masthead__dropdown-panel--software {
   background-color: #1a1a2e;
-  max-height: none;
-  overflow: visible;
+  max-height: min(75vh, 560px);
+  min-width: 280px;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .aptus-masthead__dropdown-panel--elv {
