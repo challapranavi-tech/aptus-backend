@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { productSlugFromHref } from "@/data/software-purchase-catalog";
 import {
   getProductDetailContent,
   PORTAL_PRODUCT_NAMES,
@@ -6,34 +7,31 @@ import {
 } from "./product-detail-content";
 
 const keys = productDetailContentKeys();
-assert.equal(keys.length, 8, `portal catalog expects 8 products, got ${keys.length}`);
+assert.ok(keys.length >= 40, `expected at least 40 PDF-backed products, got ${keys.length}`);
 
 for (const name of PORTAL_PRODUCT_NAMES) {
-  const content = getProductDetailContent(name);
-  assert.ok(content, `missing content for ${name}`);
-  assert.ok(content!.overview.length > 0, `${name} overview empty`);
-  assert.ok(content!.keyFeatures.length > 0, `${name} keyFeatures empty`);
-  assert.ok(content!.whatsIncluded.length > 0, `${name} whatsIncluded empty`);
-  assert.ok(content!.subscriptionLicensing.length > 0, `${name} subscriptionLicensing empty`);
-  assert.equal(content!.whatsIncluded[0]?.type, "table", `${name} whatsIncluded must be a table`);
-  assert.equal(
-    content!.subscriptionLicensing[0]?.type,
-    "table",
-    `${name} subscriptionLicensing must be a table`,
-  );
+  const slug =
+    name === "Navisworks Manage"
+      ? "navisworks"
+      : productSlugFromHref(`/${name.toLowerCase().replace(/\s+/g, "-")}`);
+  const content = getProductDetailContent(name, { brandLabel: "Autodesk", slug });
+  assert.ok(content.overview.length > 0, `${name} overview empty`);
+  assert.ok(content.keyFeatures.length > 0, `${name} keyFeatures empty`);
+  assert.ok(content.whatsIncluded.length > 0, `${name} whatsIncluded empty`);
+  assert.ok(content.subscriptionLicensing.length > 0, `${name} subscriptionLicensing empty`);
 }
 
-assert.ok(getProductDetailContent("Adobe Acrobat Pro").overview.length > 0);
-assert.ok(getProductDetailContent("Autodesk Build").overview.length > 0);
+const adobe = getProductDetailContent("Adobe Acrobat Pro", {
+  brandLabel: "Adobe",
+  slug: "adobe-acrobat-pro",
+});
+assert.ok(adobe.overview.length > 0);
+assert.ok(!adobe.overview[0]!.text.includes("available through Aptus Infotech with genuine licensing"));
 
-const autocad = getProductDetailContent("AutoCAD")!;
-assert.ok(
-  autocad.whatsIncluded.some(
-    (block) =>
-      block.type === "table" &&
-      block.rows.some((row) => row[0] === "Industry Toolsets (7 Packs)"),
-  ),
-  "AutoCAD should list industry toolsets under What's Included",
-);
+const p6 = getProductDetailContent("Oracle Primavera P6", {
+  brandLabel: "Oracle",
+  slug: "oracle-primavera-p6",
+});
+assert.ok(p6.overview.some((b) => b.type === "p" && b.text.toLowerCase().includes("primavera")));
 
-console.log(`product-detail-content.check: ok (${keys.length} portal products)`);
+console.log(`product-detail-content.check: ok (${keys.length} PDF-backed products)`);

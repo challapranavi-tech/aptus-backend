@@ -24,39 +24,88 @@ function normalizeKey(name) {
   return name.trim().toLowerCase();
 }
 
-/** Title line → catalog product name (or null to skip / attach-as-extra). */
+/** Title line → catalog slug (primary CONTENT key). */
 const TITLE_RULES = [
-  { re: /autocad\s*lt/i, catalog: "AutoCAD LT" },
-  { re: /autocad\b(?!.*lt)/i, catalog: "AutoCAD" },
-  { re: /civil\s*3d/i, catalog: "Civil 3D" },
-  { re: /architecture engineering|aec collection/i, catalog: "AEC Collection" },
-  { re: /3ds\s*max/i, catalog: "3ds Max" },
-  { re: /forma design collaboration|bim collaborate pro/i, catalog: "BIM Collaborate Pro" },
-  { re: /bim collaborate\s+cloud/i, catalog: "BIM Collaborate Pro", extraHeading: true },
-  { re: /build\s*-\s*cloud|autodesk build/i, catalog: "Autodesk Build" },
-  { re: /takeoff/i, catalog: "Autodesk Takeoff" },
-  { re: /docs\s*-\s*user|autodesk docs/i, catalog: "Autodesk Docs" },
-  { re: /navisworks manage/i, catalog: "Navisworks" },
-  { re: /navisworks simulate/i, catalog: "Navisworks", extraHeading: true },
-  { re: /revit/i, catalog: "Revit" },
-  { re: /infodrainage/i, catalog: "InfoDrainage" },
-  { re: /infowater/i, catalog: "InfoWater Pro" },
-  { re: /infoworks icm.*standard|infoworks icm\s*-\s*standard/i, catalog: "InfoWorks ICM" },
-  { re: /infoworks icm.*ultimate|infoworks icm\s*-\s*ultimate/i, catalog: "InfoWorks ICM", extraHeading: true },
-  { re: /infoworks ws/i, catalog: "InfoWorks WS Pro" },
-  { re: /acrobat pro/i, catalog: "Adobe Acrobat Pro" },
-  { re: /premiere pro/i, catalog: "Adobe Premiere Pro" },
-  { re: /primavera p6 professional/i, catalog: "Oracle Primavera P6" },
-  { re: /primavera p6 enterprise/i, catalog: "Oracle Primavera P6", extraHeading: true },
-  { re: /microsoft 365 apps for business/i, catalog: "Microsoft 365 Apps" },
-  { re: /microsoft 365 business standard/i, catalog: "Microsoft 365 Business" },
-  { re: /visio plan 2/i, catalog: "Microsoft Visio" },
-  { re: /power bi pro(?!.*premium)/i, catalog: "Power BI" },
-  // Documented but no portal product page — intentionally skipped:
-  // PDMC, Fabrication CAMduct, InfraWorks, Inventor, M365 E3, Office 365 E1,
-  // Exchange Kiosk, Teams Essentials, Planner, Defender, Teams Rooms, Planner Plan 1,
-  // Power BI Premium, Windows 11, Office LTSC, Project Professional, Windows Server,
-  // Software Update License, Copilot, Business Basic, etc.
+  { re: /autocad\s*lt/i, catalog: "AutoCAD LT", slug: "autocad-lt" },
+  { re: /autocad\b(?!.*lt)/i, catalog: "AutoCAD", slug: "autocad" },
+  { re: /civil\s*3d/i, catalog: "Civil 3D", slug: "civil-3d" },
+  { re: /architecture engineering|aec collection/i, catalog: "AEC Collection", slug: "aec-collection" },
+  {
+    re: /product design.*manufacturing|pdmc/i,
+    catalog: "Product Design & Manufacturing Collection",
+    slug: "product-design-manufacturing-collection",
+  },
+  { re: /3ds\s*max/i, catalog: "3ds Max", slug: "3ds-max" },
+  {
+    re: /forma design collaboration|bim collaborate pro/i,
+    catalog: "Forma Design Collaboration",
+    slug: "bim-collaborate-pro",
+  },
+  { re: /bim collaborate\s+cloud/i, catalog: "BIM Collaborate", slug: "bim-collaborate", extraHeading: true },
+  { re: /build\s*-\s*cloud|autodesk build/i, catalog: "Autodesk Build", slug: "autodesk-build" },
+  { re: /takeoff/i, catalog: "Autodesk Takeoff", slug: "autodesk-takeoff" },
+  { re: /docs\s*-\s*user|autodesk docs|docs.*cloud commercial/i, catalog: "Autodesk Docs", slug: "autodesk-docs" },
+  { re: /navisworks manage/i, catalog: "Navisworks Manage", slug: "navisworks" },
+  { re: /navisworks simulate/i, catalog: "Navisworks Simulate", slug: "navisworks-simulate", extraHeading: true },
+  { re: /revit commercial/i, catalog: "Revit", slug: "revit" },
+  { re: /fabrication camduct/i, catalog: "Fabrication CAMduct", slug: "fabrication-camduct" },
+  { re: /infraworks/i, catalog: "InfraWorks", slug: "infraworks" },
+  { re: /inventor professional/i, catalog: "Inventor Professional", slug: "inventor-professional" },
+  { re: /infodrainage/i, catalog: "InfoDrainage", slug: "infodrainage" },
+  { re: /infowater/i, catalog: "InfoWater Pro", slug: "infowater-pro" },
+  {
+    re: /infoworks icm.*ultimate|infoworks icm\s*-\s*ultimate/i,
+    catalog: "InfoWorks ICM Ultimate",
+    slug: "infoworks-icm-ultimate",
+    extraHeading: true,
+  },
+  { re: /infoworks icm/i, catalog: "InfoWorks ICM", slug: "infoworks-icm" },
+  { re: /infoworks ws/i, catalog: "InfoWorks WS Pro", slug: "infoworks-ws-pro" },
+  { re: /acrobat pro/i, catalog: "Adobe Acrobat Pro", slug: "adobe-acrobat-pro" },
+  { re: /premiere pro/i, catalog: "Adobe Premiere Pro", slug: "adobe-premiere-pro" },
+  { re: /photoshop/i, catalog: "Adobe Photoshop", slug: "adobe-photoshop" },
+  { re: /illustrator/i, catalog: "Adobe Illustrator", slug: "adobe-illustrator" },
+  {
+    re: /creative cloud for teams.*education/i,
+    catalog: "Creative Cloud for Teams Education",
+    slug: "creative-cloud-teams-education",
+  },
+  {
+    re: /creative cloud for enterprise.*hed|new hed/i,
+    catalog: "Creative Cloud for Enterprise HED",
+    slug: "creative-cloud-enterprise-hed",
+  },
+  {
+    re: /creative cloud for enterprise/i,
+    catalog: "Creative Cloud for Enterprise",
+    slug: "creative-cloud-enterprise",
+  },
+  {
+    re: /creative cloud for teams all apps/i,
+    catalog: "Creative Cloud for Teams All Apps",
+    slug: "adobe-business-creative-solutions",
+  },
+  { re: /primavera p6 professional/i, catalog: "Oracle Primavera P6", slug: "oracle-primavera-p6" },
+  {
+    re: /primavera p6 enterprise/i,
+    catalog: "Oracle Primavera P6 Enterprise",
+    slug: "oracle-primavera-p6-enterprise",
+    extraHeading: true,
+  },
+  { re: /microsoft 365 e3/i, catalog: "Microsoft 365 E3", slug: "microsoft-365-e3" },
+  { re: /microsoft 365 apps/i, catalog: "Microsoft 365 Apps", slug: "microsoft-365-apps" },
+  { re: /microsoft 365 business standard/i, catalog: "Microsoft 365 Business Standard", slug: "microsoft-365-business" },
+  { re: /microsoft 365 business basic/i, catalog: "Microsoft 365 Business Basic", slug: "microsoft-365-business-basic" },
+  { re: /exchange online kiosk/i, catalog: "Exchange Online Kiosk", slug: "exchange-online-kiosk" },
+  { re: /microsoft teams essentials/i, catalog: "Microsoft Teams Essentials", slug: "microsoft-teams-essentials" },
+  { re: /visio plan 2/i, catalog: "Microsoft Visio", slug: "microsoft-visio" },
+  { re: /copilot for microsoft 365/i, catalog: "Copilot for Microsoft 365", slug: "copilot-for-microsoft-365" },
+  { re: /planner plan 1/i, catalog: "Planner Plan 1", slug: "planner-plan-1" },
+  { re: /power bi premium per user/i, catalog: "Power BI Premium Per User", slug: "power-bi-premium-per-user" },
+  { re: /power bi pro(?!.*premium)/i, catalog: "Power BI Pro", slug: "power-bi" },
+  { re: /windows 11 pro/i, catalog: "Windows 11 Pro", slug: "windows-11-pro" },
+  { re: /project professional 2024/i, catalog: "Project Professional 2024", slug: "project-professional-2024" },
+  { re: /windows server 2025/i, catalog: "Windows Server 2025 Standard", slug: "windows-server-2025" },
 ];
 
 const TITLE_START =
@@ -86,10 +135,43 @@ function splitProducts(raw) {
 function matchCatalog(titleLine) {
   for (const rule of TITLE_RULES) {
     if (rule.re.test(titleLine)) {
-      return { catalog: rule.catalog, extraHeading: Boolean(rule.extraHeading), titleLine };
+      return {
+        catalog: rule.catalog,
+        slug: rule.slug,
+        extraHeading: Boolean(rule.extraHeading),
+        titleLine,
+      };
     }
   }
   return null;
+}
+
+function licensingBlocksToTab(blocks) {
+  if (!blocks.length) {
+    return [{ type: "p", text: "Contact Aptus for subscription and licensing options for this product." }];
+  }
+  const items = [];
+  for (const block of blocks) {
+    if (block.type === "ul") items.push(...block.items);
+    else if (block.type === "p") items.push(block.text);
+  }
+  if (!items.length) return blocks;
+  const rows = items.map((item) => {
+    const splitAt = item.indexOf(": ");
+    if (splitAt === -1) return [item, ""];
+    return [item.slice(0, splitAt), item.slice(splitAt + 2)];
+  });
+  return [{ type: "table", headers: ["Licensing Option", "Description"], rows }];
+}
+
+function includedFallback(blocks) {
+  if (blocks.length) return blocks;
+  return [{ type: "p", text: "See the overview and key features for included components." }];
+}
+
+function featuresFallback(blocks) {
+  if (blocks.length) return blocks;
+  return [{ type: "p", text: "See product overview for capabilities." }];
 }
 
 const OVERVIEW_HEAD =
@@ -381,37 +463,32 @@ function parseProductBody(bodyLines) {
   const included = linesToBlocks(sections.included, "included");
   const licensing = linesToBlocks(sections.licensing, "licensing");
 
-  const specifications = [];
-  if (included.length) {
-    specifications.push({ type: "h3", text: "What's Included" });
-    specifications.push(...included);
-  }
-  if (licensing.length) {
-    specifications.push({ type: "h3", text: "Subscription & Licensing Options" });
-    specifications.push(...licensing);
-  }
-
-  return { overview, features, specifications };
+  return { overview, features, included, licensing };
 }
 
 function mergeExtra(existing, titleLine, parsed) {
-  const heading = titleLine.replace(/^(?:Product Title\s*:|Product title\s*:|Project title\s*:|Product Detail\s*:|Product list\s*:|Product List\s*:)\s*/i, "").trim();
+  const heading = titleLine
+    .replace(/^(?:Product Title\s*:|Product title\s*:|Project title\s*:|Product Detail\s*:|Product list\s*:|Product List\s*:)\s*/i, "")
+    .trim();
   const add = (tab, blocks) => {
     if (!blocks.length) return;
     existing[tab].push({ type: "h3", text: heading });
     existing[tab].push(...blocks);
   };
-  // Extra SKUs (Simulate, Ultimate, EPPM, second BIM Collaborate) append under Specs to avoid overwriting primary Overview.
-  add("specifications", [
-    ...parsed.overview,
-    ...parsed.features,
-    ...parsed.specifications.filter((b) => b.type !== "h3" || !/^(What's Included|Subscription)/.test(b.text ?? "")),
-  ]);
-  // Also keep their Features/Included under Specs only — already flattened above.
-  if (parsed.features.length) {
-    /* already included */
-  }
+  add("overview", parsed.overview);
+  add("keyFeatures", parsed.features);
+  add("whatsIncluded", parsed.included);
+  add("subscriptionLicensing", parsed.licensing);
   return existing;
+}
+
+function toContent(parsed) {
+  return {
+    overview: parsed.overview.length ? parsed.overview : [{ type: "p", text: "Product overview available on request." }],
+    keyFeatures: featuresFallback(parsed.features),
+    whatsIncluded: includedFallback(parsed.included),
+    subscriptionLicensing: licensingBlocksToTab(parsed.licensing),
+  };
 }
 
 function processFile(relPath) {
@@ -438,27 +515,22 @@ const files = [
   "docx-tmp/bundle.txt",
 ];
 
-const byCatalog = new Map();
+const bySlug = new Map();
 const allSkipped = [];
 
 for (const file of files) {
   const { mapped, skipped } = processFile(file);
   allSkipped.push(...skipped);
   for (const entry of mapped) {
-    const key = normalizeKey(entry.catalog);
-    if (entry.extraHeading && byCatalog.has(key)) {
-      byCatalog.set(key, mergeExtra(byCatalog.get(key), entry.titleLine, entry.parsed));
-    } else if (!byCatalog.has(key) || !entry.extraHeading) {
-      // Primary wins; don't overwrite primary with a later primary of same key unless empty
-      if (!byCatalog.has(key)) {
-        byCatalog.set(key, {
-          productName: entry.catalog,
-          overview: entry.parsed.overview,
-          features: entry.parsed.features,
-          specifications: entry.parsed.specifications,
-          sourceTitle: entry.titleLine,
-        });
-      }
+    const key = entry.slug;
+    if (entry.extraHeading && bySlug.has(key)) {
+      bySlug.set(key, mergeExtra(bySlug.get(key), entry.titleLine, entry.parsed));
+    } else if (!bySlug.has(key)) {
+      bySlug.set(key, {
+        productName: entry.catalog,
+        sourceTitle: entry.titleLine,
+        ...toContent(entry.parsed),
+      });
     }
   }
 }
@@ -489,10 +561,8 @@ function emitBlocks(blocks, indent) {
 }
 
 let ts = `/**
- * Portal product detail tab content (Overview / Features / Specifications).
- * Generated from the three product detailing documents in docx-tmp/.
- * Do not hand-edit product copy — re-run:
- *   node frontend/scripts/generate-product-detail-content.mjs
+ * Product detail tab content from docx-tmp/ PDF extracts.
+ * Re-run: node frontend/scripts/generate-product-detail-content.mjs
  */
 
 export type ProductDetailBlock =
@@ -503,30 +573,147 @@ export type ProductDetailBlock =
 
 export type ProductDetailContent = {
   overview: ProductDetailBlock[];
-  features: ProductDetailBlock[];
-  specifications: ProductDetailBlock[];
+  keyFeatures: ProductDetailBlock[];
+  whatsIncluded: ProductDetailBlock[];
+  subscriptionLicensing: ProductDetailBlock[];
 };
+
+export const PORTAL_PRODUCT_NAMES = [
+  "AutoCAD",
+  "Civil 3D",
+  "AEC Collection",
+  "AutoCAD LT",
+  "AutoCAD Revit LT Suite",
+  "3ds Max",
+  "Navisworks Manage",
+  "Revit",
+] as const;
 
 const CONTENT: Record<string, ProductDetailContent> = {
 `;
 
-for (const [key, value] of [...byCatalog.entries()].sort((a, b) => a[0].localeCompare(b[0]))) {
+for (const [key, value] of [...bySlug.entries()].sort((a, b) => a[0].localeCompare(b[0]))) {
   ts += `  ${esc(key)}: {\n`;
   ts += `    overview: ${emitBlocks(value.overview, 4).trimStart()},\n`;
-  ts += `    features: ${emitBlocks(value.features, 4).trimStart()},\n`;
-  ts += `    specifications: ${emitBlocks(value.specifications, 4).trimStart()},\n`;
+  ts += `    keyFeatures: ${emitBlocks(value.keyFeatures, 4).trimStart()},\n`;
+  ts += `    whatsIncluded: ${emitBlocks(value.whatsIncluded, 4).trimStart()},\n`;
+  ts += `    subscriptionLicensing: ${emitBlocks(value.subscriptionLicensing, 4).trimStart()},\n`;
   ts += `  },\n`;
 }
 
 ts += `};
 
 function normalizeName(label: string): string {
-  return label.trim().toLowerCase();
+  return label.trim().toLowerCase().replace(/^\\([^)]*\\)\\s*/, "");
 }
 
-/** Returns document-backed detail content for a catalog product, or null if none. */
-export function getProductDetailContent(productName: string): ProductDetailContent | null {
-  return CONTENT[normalizeName(productName)] ?? null;
+function slugify(label: string): string {
+  return label
+    .trim()
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+const NAME_ALIASES: Record<string, string> = {
+  autocad: "autocad",
+  "civil 3d": "civil-3d",
+  "aec collection": "aec-collection",
+  "autocad lt": "autocad-lt",
+  "autocad revit lt suite": "autocad-revit-lt-suite",
+  "3ds max": "3ds-max",
+  navisworks: "navisworks",
+  "navisworks manage": "navisworks",
+  revit: "revit",
+  "oracle primavera p6": "oracle-primavera-p6",
+  "power bi": "power-bi",
+  "power bi pro": "power-bi",
+  "microsoft visio": "microsoft-visio",
+  "microsoft 365 business": "microsoft-365-business",
+  "microsoft 365 business standard": "microsoft-365-business",
+  "forma design collaboration": "bim-collaborate-pro",
+  "bim collaborate pro": "bim-collaborate-pro",
+};
+
+function resolveContentKey(input: { productName: string; slug?: string }): string | undefined {
+  if (input.slug && CONTENT[input.slug]) return input.slug;
+  const byName = NAME_ALIASES[normalizeName(input.productName)] ?? slugify(input.productName);
+  if (CONTENT[byName]) return byName;
+  return undefined;
+}
+
+function genericFeatureBullets(productName: string): string[] {
+  const lower = productName.toLowerCase();
+  if (lower.includes("autocad") || lower.includes("revit") || lower.includes("civil")) {
+    return ["2D & 3D design", "Industry toolsets", "Cloud collaboration", "Automation tools"];
+  }
+  if (lower.includes("adobe") || lower.includes("photoshop") || lower.includes("illustrator")) {
+    return ["Creative workflows", "Cloud libraries", "Team collaboration", "Regular updates"];
+  }
+  if (lower.includes("microsoft") || lower.includes("365") || lower.includes("visio")) {
+    return ["Business productivity", "Cloud sync", "Security & compliance", "Ongoing updates"];
+  }
+  return [
+    "Genuine commercial licensing",
+    "Publisher-backed support options",
+    "Implementation and renewal assistance from Aptus",
+    "Flexible subscription or perpetual terms where available",
+  ];
+}
+
+export function buildGenericProductContent(
+  productName: string,
+  brandLabel: string,
+  description?: string,
+): ProductDetailContent {
+  return {
+    overview: [
+      {
+        type: "p",
+        text:
+          description ??
+          \`\${productName} from \${brandLabel} is available through Aptus Infotech with genuine licensing, expert guidance, and local support in Oman.\`,
+      },
+    ],
+    keyFeatures: [{ type: "ul", items: genericFeatureBullets(productName) }],
+    whatsIncluded: [
+      {
+        type: "table",
+        headers: ["Included Component", "Description", "Delivery Method"],
+        rows: [
+          ["Software license", \`Authorized \${productName} license or subscription as quoted.\`, "Electronic delivery (ELD)"],
+          ["Publisher support", "Vendor support and updates per your license agreement.", "Vendor portal"],
+          ["Aptus account management", "Quoting, provisioning, renewals, and billing support.", "Aptus customer portal"],
+        ],
+      },
+    ],
+    subscriptionLicensing: [
+      {
+        type: "table",
+        headers: ["Licensing Option", "Description"],
+        rows: [
+          ["Commercial New", "For organizations adding new seats or starting a new agreement."],
+          ["Renewal Subscription", "Extend an active contract without service interruption."],
+          ["Term options", "Annual (12-month) and multi-year agreements where offered."],
+          ["Delivery", "Electronic license delivery through Aptus with setup guidance."],
+        ],
+      },
+    ],
+  };
+}
+
+export function getProductDetailContent(
+  productName: string,
+  fallback?: { brandLabel: string; description?: string; slug?: string },
+): ProductDetailContent {
+  const key = resolveContentKey({ productName, slug: fallback?.slug });
+  if (key) return CONTENT[key];
+  return buildGenericProductContent(
+    productName,
+    fallback?.brandLabel ?? "Software",
+    fallback?.description,
+  );
 }
 
 export function productDetailContentKeys(): string[] {
@@ -536,9 +723,7 @@ export function productDetailContentKeys(): string[] {
 
 fs.writeFileSync(outFile, ts, "utf8");
 console.log(`Wrote ${outFile}`);
-console.log(`Products: ${byCatalog.size}`);
-console.log(
-  [...byCatalog.keys()].sort().join("\n"),
-);
+console.log(`Products: ${bySlug.size}`);
+console.log([...bySlug.keys()].sort().join("\n"));
 console.log(`\nSkipped (no catalog match): ${allSkipped.length}`);
 allSkipped.forEach((s) => console.log(`  - ${s}`));

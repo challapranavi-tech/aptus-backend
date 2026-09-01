@@ -18,7 +18,7 @@ import {
   type SoftwarePurchaseCategory,
   type SoftwarePurchaseProduct,
 } from "@/lib/order-pricing";
-import { lookupPortalSku } from "@/data/software-purchase-catalog";
+import { lookupPortalSku, productSlugFromHref } from "@/data/software-purchase-catalog";
 import { cartLineUnitPrice } from "@/lib/portal-cart-checkout";
 import {
   persistPortalCartToServer,
@@ -144,13 +144,15 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
   };
   const unit = cartLineUnitPrice(draftItem, duration);
   const bullets = featureBullets(product.name);
+  const productSlug = productSlugFromHref(product.href);
   const detailContent = useMemo(
     () =>
       getProductDetailContent(product.name, {
         brandLabel: category.label,
         description: meta.description,
+        slug: productSlug,
       }),
-    [product.name, category.label, meta.description],
+    [product.name, productSlug, category.label, meta.description],
   );
   const priceBlocks = useMemo(() => priceDetailBlocks(product.name), [product.name]);
   const activeBlocks = activeTab === "priceDetails" ? priceBlocks : detailContent[activeTab];

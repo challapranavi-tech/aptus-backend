@@ -28,7 +28,10 @@ import {
 import { fetchAuthMeShared } from "@/lib/auth-me-client";
 import { ensureSignedInForPurchase } from "@/lib/purchase-auth";
 import { AutodeskFreeTrialLink } from "@/components/shared/AutodeskFreeTrialLink";
+import { ProductPurchaseOptions } from "@/components/portal/ProductPurchaseOptions";
+import { RenewalSerialNumberField } from "@/components/portal/RenewalSerialNumberField";
 import { SoftwareBrandFilterModal } from "@/components/software/SoftwareBrandFilterModal";
+import type { ProductConfig } from "@/data/product-options";
 import { scheduleScrollToSoftwareCatalog, SOFTWARE_CATALOG_ANCHOR_ID } from "@/lib/scroll-to-software-catalog";
 import type { ClientProfile } from "@/types/profile";
 import type { PortalOrder, PurchaseType } from "@/types/orders";
@@ -52,10 +55,46 @@ type Selection = {
 };
 
 const TONE_CYCLE = ["danger", "accent", "success", "warning"] as const;
+const FEATURED_PURCHASABLE_COUNT = 8;
 
 function familyFromBrandId(brandId: string): string {
   if (brandId === "elv-solutions") return "elv";
   return brandId;
+}
+
+function defaultSelection(
+  brand: SoftwarePurchaseCategory,
+  product: SoftwarePurchaseProduct,
+  config: ProductConfig,
+): Selection {
+  return {
+    category: brand.label,
+    productName: product.name,
+    quantity: 1,
+    duration: "1year",
+    purchaseType: "new",
+    packageId: config.kind !== "bundle" ? config.packages?.[0]?.id : undefined,
+    levelId: config.kind === "levels" ? config.levels[0]?.id : undefined,
+  };
+}
+
+function CatalogOptionHints({ config }: { config: ProductConfig }) {
+  if (config.kind === "bundle") {
+    return <p className="aptus-software-catalog__option-hints">Single bundle · Quantity only</p>;
+  }
+  if (config.kind === "levels") {
+    return (
+      <p className="aptus-software-catalog__option-hints">
+        Levels {config.levels.map((level) => level.label.replace("Level ", "")).join(" · ")}
+      </p>
+    );
+  }
+  return (
+    <p className="aptus-software-catalog__option-hints">
+      New · Renewal · 1 Year · 3 Years
+      {config.packages?.length ? ` · ${config.packages.map((p) => p.label).join(" · ")}` : ""}
+    </p>
+  );
 }
 
 export function SoftwareCatalogPanel() {
@@ -76,6 +115,8 @@ export function SoftwareCatalogPanel() {
   const [message, setMessage] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const [brandModalOpen, setBrandModalOpen] = useState(false);
+  const [showAllProducts, setShowAllProducts] = useState(false);
+  const [cardDrafts, setCardDrafts] = useState<Record<SelectionKey, Selection>>({});
 
   useEffect(() => {
     if (!brandFromUrl) return;
@@ -88,6 +129,10 @@ export function SoftwareCatalogPanel() {
     if (!brandFromUrl) return;
     scheduleScrollToSoftwareCatalog();
   }, [brandFromUrl]);
+
+  useEffect(() => {
+    setShowAllProducts(false);
+  }, [activeBrandId, query]);
 
   function applyCartState(cart: ReturnType<typeof readPortalCart>) {
     setCartDuration(cart.duration);
@@ -177,29 +222,64 @@ export function SoftwareCatalogPanel() {
     );
   }, [catalog, activeBrandId, query]);
 
+  const isDefaultView = activeBrandId === "all" && !query.trim();
+
+  const visibleProducts = useMemo(() => {
+    if (showAllProducts || !isDefaultView) return flatProducts;
+    const featured = flatProducts.filter(({ product }) => isPortalPurchasableProduct(product.href));
+    return featured.slice(0, FEATURED_PURCHASABLE_COUNT);
+  }, [flatProducts, showAllProducts, isDefaultView]);
+
+  const hiddenProductCount =
+    isDefaultView && !showAllProducts ? Math.max(0, flatProducts.length - visibleProducts.length) : 0;
+
+  function getCardDraft(
+    brand: SoftwarePurchaseCategory,
+    product: SoftwarePurchaseProduct,
+    config: ProductConfig,
+  ): Selection {
+    const key = selectionKey(brand.label, product.name);
+    return (
+      cardDrafts[key] ??
+      selections[key] ??
+      defaultSelection(brand, product, config)
+    );
+  }
+
+  function updateCardDraft(
+    brand: SoftwarePurchaseCategory,
+    product: SoftwarePurchaseProduct,
+    patch: Partial<Selection>,
+  ) {
+    const key = selectionKey(brand.label, product.name);
+    const config = getProductConfig(product.name);
+    setCardDrafts((prev) => ({
+      ...prev,
+      [key]: { ...getCardDraft(brand, product, config), ...patch },
+    }));
+  }
+
   async function addToCart(brand: SoftwarePurchaseCategory, product: SoftwarePurchaseProduct) {
     if (!isPortalPurchasableProduct(product.href)) return;
 
     const signedIn = await ensureSignedInForPurchase(setMessage);
     if (!signedIn) return;
 
-    const key = selectionKey(brand.label, product.name);
     const config = getProductConfig(product.name);
+    const draft = getCardDraft(brand, product, config);
+    if (config.kind === "renewal" && draft.purchaseType === "renew" && !draft.serialNumber?.trim()) {
+      setMessage("Enter your existing serial number for renewal before adding to cart.");
+      return;
+    }
+
+    const key = selectionKey(brand.label, product.name);
     setSelections((prev) => {
       const existing = prev[key];
       return {
         ...prev,
         [key]: existing
           ? { ...existing, quantity: Math.min(999, existing.quantity + 1) }
-          : {
-              category: brand.label,
-              productName: product.name,
-              quantity: 1,
-              duration: "1year",
-              purchaseType: "new",
-              packageId: config.kind !== "bundle" ? config.packages?.[0]?.id : undefined,
-              levelId: config.kind === "levels" ? config.levels[0]?.id : undefined,
-            },
+          : { ...draft },
       };
     });
     setMessage(`${product.name} added to cart.`);
@@ -221,8 +301,8 @@ export function SoftwareCatalogPanel() {
         <div className="aptus-software-catalog__header">
           <h2 className="aptus-software-catalog__title">Browse all software</h2>
           <p className="aptus-software-catalog__subtitle">
-            {productCount} products across {catalog.length} brands — search, filter by brand, and
-            purchase online or request a quote.
+            {productCount} products across {catalog.length} brands — 8 purchasable online with
+            New/Renewal and 1 yr/3 yr options. View more for the full catalog.
           </p>
         </div>
 
@@ -273,24 +353,17 @@ export function SoftwareCatalogPanel() {
         ) : null}
 
         <div className="aptus-portal-products__grid">
-          {flatProducts.map(({ brand, product }, index) => {
+          {visibleProducts.map(({ brand, product }, index) => {
             const meta = getProductCardMeta(product, brand.label);
             const key = selectionKey(brand.label, product.name);
             const selected = selections[key];
             const inCart = Boolean(selected);
             const purchasable = isPortalPurchasableProduct(product.href);
             const config = getProductConfig(product.name);
+            const draft = getCardDraft(brand, product, config);
+            const showSerial = purchasable && config.kind === "renewal" && draft.purchaseType === "renew";
             const unit = purchasable
-              ? cartLineUnitPrice(
-                  selected ?? {
-                    category: brand.label,
-                    productName: product.name,
-                    quantity: 1,
-                    packageId: config.kind !== "bundle" ? config.packages?.[0]?.id : undefined,
-                    levelId: config.kind === "levels" ? config.levels[0]?.id : undefined,
-                  },
-                  "1year",
-                )
+              ? cartLineUnitPrice(draft, draft.duration)
               : undefined;
             const tone = TONE_CYCLE[index % TONE_CYCLE.length];
             const imageSrc = getPurchaseProductImage(product.href);
@@ -315,6 +388,39 @@ export function SoftwareCatalogPanel() {
                 )}
                 <p className="aptus-portal-products__name">{product.name}</p>
                 <p className="aptus-portal-products__cat">{brand.label}</p>
+
+                {purchasable ? (
+                  <div className="aptus-software-catalog__purchase-options">
+                    <ProductPurchaseOptions
+                      config={config}
+                      duration={draft.duration}
+                      purchaseType={draft.purchaseType}
+                      packageId={draft.packageId}
+                      levelId={draft.levelId}
+                      packageLayout="cards"
+                      compact
+                      onDurationChange={(duration) => updateCardDraft(brand, product, { duration })}
+                      onPurchaseTypeChange={(purchaseType) =>
+                        updateCardDraft(brand, product, {
+                          purchaseType,
+                          serialNumber: purchaseType === "new" ? undefined : draft.serialNumber,
+                        })
+                      }
+                      onPackageChange={(packageId) => updateCardDraft(brand, product, { packageId })}
+                      onLevelChange={(levelId) => updateCardDraft(brand, product, { levelId })}
+                    />
+                    {showSerial ? (
+                      <RenewalSerialNumberField
+                        id={`serial-${key}`}
+                        value={draft.serialNumber ?? ""}
+                        onChange={(serialNumber) => updateCardDraft(brand, product, { serialNumber })}
+                      />
+                    ) : null}
+                  </div>
+                ) : (
+                  <CatalogOptionHints config={config} />
+                )}
+
                 <div className="aptus-portal-products__foot">
                   <span className="aptus-portal-products__price">
                     {purchasable && unit
@@ -360,6 +466,30 @@ export function SoftwareCatalogPanel() {
             );
           })}
         </div>
+
+        {hiddenProductCount > 0 ? (
+          <div className="aptus-software-catalog__view-more-wrap">
+            <button
+              type="button"
+              className="aptus-software-catalog__view-more"
+              onClick={() => setShowAllProducts(true)}
+            >
+              View more ({hiddenProductCount} more products)
+            </button>
+          </div>
+        ) : null}
+
+        {showAllProducts && isDefaultView ? (
+          <div className="aptus-software-catalog__view-more-wrap">
+            <button
+              type="button"
+              className="aptus-software-catalog__view-more aptus-software-catalog__view-more--secondary"
+              onClick={() => setShowAllProducts(false)}
+            >
+              Show fewer products
+            </button>
+          </div>
+        ) : null}
 
         {flatProducts.length === 0 ? (
           <p className="aptus-overview-compact__empty">No products match your search.</p>

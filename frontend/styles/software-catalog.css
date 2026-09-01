@@ -539,6 +539,61 @@
   text-decoration: underline;
 }
 
+.aptus-software-catalog__purchase-options {
+  margin: 0.5rem 0 0.75rem;
+}
+
+.aptus-software-catalog__purchase-options .aptus-product-options {
+  gap: 0.45rem;
+}
+
+.aptus-software-catalog__purchase-options .aptus-product-options__field--cards span {
+  font-size: 0.6875rem;
+}
+
+.aptus-software-catalog__purchase-options .aptus-product-options__option-card {
+  font-size: 0.6875rem;
+  padding: 0.35rem 0.55rem;
+}
+
+.aptus-software-catalog__option-hints {
+  color: #64748b;
+  font-size: 0.6875rem;
+  line-height: 1.45;
+  margin: 0.35rem 0 0.75rem;
+}
+
+.aptus-software-catalog__view-more-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.aptus-software-catalog__view-more {
+  background: #1352a3;
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+}
+
+.aptus-software-catalog__view-more:hover {
+  background: #0e3d7a;
+}
+
+.aptus-software-catalog__view-more--secondary {
+  background: #fff;
+  border: 1px solid #dbe3ef;
+  color: #1352a3;
+}
+
+.aptus-software-catalog__view-more--secondary:hover {
+  background: #f8fafc;
+}
+
 @media (max-width: 1024px) {
   .aptus-software-catalog .aptus-portal-products__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
