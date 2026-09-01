@@ -438,7 +438,7 @@ html {
   overflow-y: auto;
 }
 
-/* Products & Services: compact first panel (Software + ELV only); children open sideways */
+/* Products & Services: compact first panel (Software + ELV only); children open left */
 .aptus-masthead__dropdown-panel--products {
   left: auto;
   max-height: none !important;
@@ -453,14 +453,14 @@ html {
   white-space: nowrap;
 }
 
-/* Keep Software / ELV flyouts opening to the right under Products */
+/* Software / ELV flyouts open to the left under Products (into the page) */
 .aptus-masthead__dropdown--products .aptus-masthead__dropdown--nested > .aptus-masthead__dropdown-panel--nested,
 .aptus-masthead__dropdown--products .aptus-masthead__dropdown--nested > .aptus-masthead__dropdown-panel--nested.is-flip-x {
-  left: 100%;
-  margin-left: -1px;
-  margin-right: 0;
-  right: auto;
-  transform: translateX(4px);
+  left: auto;
+  margin-left: 0;
+  margin-right: -1px;
+  right: 100%;
+  transform: translateX(-4px);
 }
 
 .aptus-masthead__dropdown--products .aptus-masthead__dropdown--nested:hover > .aptus-masthead__dropdown-panel--nested,
