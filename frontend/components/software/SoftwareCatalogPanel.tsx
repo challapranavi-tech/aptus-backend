@@ -30,7 +30,7 @@ import { ensureSignedInForPurchase } from "@/lib/purchase-auth";
 import { AutodeskFreeTrialLink } from "@/components/shared/AutodeskFreeTrialLink";
 import { ProductPurchaseOptions } from "@/components/portal/ProductPurchaseOptions";
 import { RenewalSerialNumberField } from "@/components/portal/RenewalSerialNumberField";
-import { SoftwareBrandFilterModal } from "@/components/software/SoftwareBrandFilterModal";
+import { SoftwareBrandFilterDropdown } from "@/components/software/SoftwareBrandFilterDropdown";
 import type { ProductConfig } from "@/data/product-options";
 import { scheduleScrollToSoftwareCatalog, SOFTWARE_CATALOG_ANCHOR_ID } from "@/lib/scroll-to-software-catalog";
 import type { ClientProfile } from "@/types/profile";
@@ -114,7 +114,7 @@ export function SoftwareCatalogPanel() {
   const [hydrated, setHydrated] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [query, setQuery] = useState("");
-  const [brandModalOpen, setBrandModalOpen] = useState(false);
+  const [brandFilterOpen, setBrandFilterOpen] = useState(false);
   const [showAllProducts, setShowAllProducts] = useState(false);
   const [cardDrafts, setCardDrafts] = useState<Record<SelectionKey, Selection>>({});
 
@@ -309,7 +309,7 @@ export function SoftwareCatalogPanel() {
         </div>
 
         <div className="aptus-portal-products__toolbar aptus-software-catalog__toolbar">
-          <label className="aptus-portal-products__search">
+          <label className="aptus-portal-products__search aptus-software-catalog__search">
             <input
               type="search"
               placeholder="Search products or brands"
@@ -318,25 +318,15 @@ export function SoftwareCatalogPanel() {
               onChange={(e) => setQuery(e.target.value)}
             />
           </label>
-          <button
-            type="button"
-            className="aptus-brand-filter-tile"
-            aria-haspopup="dialog"
-            aria-expanded={brandModalOpen}
-            onClick={() => setBrandModalOpen(true)}
-          >
-            <span className="aptus-brand-filter-tile__label">Brand</span>
-            <span className="aptus-brand-filter-tile__value">{activeBrandLabel}</span>
-          </button>
+          <SoftwareBrandFilterDropdown
+            open={brandFilterOpen}
+            brands={catalog}
+            selectedBrandIds={selectedBrandIds}
+            activeLabel={activeBrandLabel}
+            onOpenChange={setBrandFilterOpen}
+            onChange={setSelectedBrandIds}
+          />
         </div>
-
-        <SoftwareBrandFilterModal
-          open={brandModalOpen}
-          brands={catalog}
-          selectedBrandIds={selectedBrandIds}
-          onClose={() => setBrandModalOpen(false)}
-          onApply={setSelectedBrandIds}
-        />
 
         {message ? (
           <p
@@ -373,23 +363,27 @@ export function SoftwareCatalogPanel() {
             return (
               <article
                 key={`${brand.id}-${product.href}`}
-                className="aptus-portal-products__card aptus-software-catalog__card"
+                className={`aptus-portal-products__card aptus-software-catalog__card aptus-software-catalog__card--${tone}`}
               >
-                {imageSrc ? (
-                  <div className="aptus-software-catalog__thumb">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={imageSrc} alt="" loading="lazy" />
+                <div className="aptus-software-catalog__card-head">
+                  <div className="aptus-software-catalog__card-meta">
+                    <p className="aptus-portal-products__name">{product.name}</p>
+                    <p className="aptus-portal-products__cat">{brand.label}</p>
                   </div>
-                ) : (
-                  <div
-                    className={`aptus-portal-products__icon aptus-portal-products__icon--${tone}`}
-                    aria-hidden
-                  >
-                    {meta.initials}
-                  </div>
-                )}
-                <p className="aptus-portal-products__name">{product.name}</p>
-                <p className="aptus-portal-products__cat">{brand.label}</p>
+                  {imageSrc ? (
+                    <div className="aptus-software-catalog__thumb aptus-software-catalog__thumb--corner">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={imageSrc} alt="" loading="lazy" />
+                    </div>
+                  ) : (
+                    <div
+                      className={`aptus-software-catalog__corner-icon aptus-portal-products__icon aptus-portal-products__icon--${tone}`}
+                      aria-hidden
+                    >
+                      {meta.initials}
+                    </div>
+                  )}
+                </div>
 
                 {purchasable ? (
                   <div className="aptus-software-catalog__purchase-options">

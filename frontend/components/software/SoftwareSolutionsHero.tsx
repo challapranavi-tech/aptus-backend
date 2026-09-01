@@ -39,8 +39,7 @@ export function SoftwareSolutionsHero() {
       </div>
 
       <div className="aptus-software-catalog-hero__content">
-        <p className="aptus-software-catalog-hero__eyebrow">Products and Services</p>
-        <h1 id="software-catalog-heading" className="aptus-software-catalog-hero__title">
+        <h1 id="software-catalog-heading" className="aptus-software-catalog-hero__title aptus-software-catalog-hero__title--glow">
           Premium Software Solutions for Modern Businesses
         </h1>
         <p className="aptus-software-catalog-hero__tagline">

@@ -28,6 +28,7 @@ import {
 } from "@/lib/portal-cart";
 import { fetchAuthMeShared } from "@/lib/auth-me-client";
 import { ensureSignedInForPurchase } from "@/lib/purchase-auth";
+import { sanitizeProductDetailBlocks } from "@/lib/sanitize-product-detail-blocks";
 import { softwareCatalogHref } from "@/lib/software-catalog-links";
 import type { ClientProfile } from "@/types/profile";
 import type { OrderLineItem, PortalOrder, PurchaseType } from "@/types/orders";
@@ -155,8 +156,11 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
     [product.name, productSlug, category.label, meta.description],
   );
   const priceBlocks = useMemo(() => priceDetailBlocks(product.name), [product.name]);
-  const activeBlocks = activeTab === "priceDetails" ? priceBlocks : detailContent[activeTab];
-  const hasActiveBlocks = Boolean(activeBlocks?.length);
+  const activeBlocks = useMemo(() => {
+    const raw = activeTab === "priceDetails" ? priceBlocks : detailContent[activeTab];
+    return sanitizeProductDetailBlocks(raw ?? [], activeTab);
+  }, [activeTab, detailContent, priceBlocks]);
+  const hasActiveBlocks = Boolean(activeBlocks.length);
 
   useEffect(() => {
     let cancelled = false;
