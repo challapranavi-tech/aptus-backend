@@ -32,7 +32,7 @@ export const SITE_NAVIGATION: NavigationItem[] = [
           { label: "Civil 3D", href: "/civil-3d" },
           { label: "AEC Collection", href: "/aec-collection" },
           { label: "AutoCAD LT", href: "/autocad-lt" },
-          { label: "BIM Collaborate Pro", href: "/bim-collaborate-pro" },
+          { label: "Forma Design Collaboration", href: "/bim-collaborate-pro" },
           { label: "Autodesk Docs", href: "/autodesk-docs" },
           { label: "Autodesk Build", href: "/autodesk-build" },
           { label: "Autodesk Takeoff", href: "/autodesk-takeoff" },

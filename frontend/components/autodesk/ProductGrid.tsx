@@ -92,7 +92,7 @@ const PRODUCTS: Product[] = [
   },
   {
     id: "COLLRP",
-    name: "BIM Collaborate Pro",
+    name: "Forma Design Collaboration",
     href: "/bim-collaborate-pro",
     thumb: `${ASSET}/bim-collaborate-pro-video-thumb-788x1050.jpg`,
     thumbAlt: "Colorful abstract architectural site plan",
