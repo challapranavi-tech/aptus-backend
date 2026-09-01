@@ -4479,17 +4479,21 @@ body.aptus-payment-processing-open {
   margin-bottom: 1rem;
 }
 
-.aptus-product-options__field--package {
+.aptus-product-options__field--package,
+.aptus-product-options__field--full,
+.aptus-product-options__field--cards {
   grid-column: 1 / -1;
 }
 
-.aptus-product-options__package-cards {
+.aptus-product-options__package-cards,
+.aptus-product-options__option-cards {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
 }
 
-.aptus-product-options__package-card {
+.aptus-product-options__package-card,
+.aptus-product-options__option-card {
   background: #fff;
   border: 1px solid #d1d5db;
   border-radius: 0.5rem;
@@ -4501,14 +4505,24 @@ body.aptus-payment-processing-open {
   transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease;
 }
 
-.aptus-product-options__package-card:hover {
+.aptus-product-options__package-card:hover,
+.aptus-product-options__option-card:hover {
   border-color: #94a3b8;
 }
 
-.aptus-product-options__package-card.is-active {
+.aptus-product-options__package-card.is-active,
+.aptus-product-options__option-card.is-active {
   background: #eff6ff;
   border-color: #1d4ed8;
   color: #1d4ed8;
+}
+
+.aptus-product-detail__catalog-title {
+  color: #475569;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.45;
+  margin: -0.25rem 0 0.75rem;
 }
 
 .aptus-cart-table__options {
@@ -7361,6 +7375,47 @@ body.aptus-payment-processing-open {
   color: #dc2626;
   font-size: 0.78rem;
   margin: 0.35rem 0 0;
+}
+
+.aptus-renewal-serial {
+  margin-bottom: 1.25rem;
+}
+
+.aptus-renewal-serial label {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.aptus-renewal-serial label > span {
+  color: #475569;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.aptus-renewal-serial input {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  color: #0f172a;
+  font-size: 0.875rem;
+  padding: 0.55rem 0.75rem;
+  width: 100%;
+}
+
+.aptus-renewal-serial input:focus {
+  border-color: #248bcc;
+  outline: 2px solid rgba(36, 139, 204, 0.15);
+  outline-offset: 0;
+}
+
+.aptus-renewal-serial__error {
+  color: #dc2626;
+  font-size: 0.78rem;
+  margin: 0.35rem 0 0;
+}
+
+.aptus-renewal-serial--cart {
+  margin-bottom: 0;
+  margin-top: 0.55rem;
 }
 
 .aptus-product-detail__qty {

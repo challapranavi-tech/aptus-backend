@@ -51,16 +51,6 @@ export async function middleware(request: NextRequest) {
   }
 
   const { pathname } = request.nextUrl;
-
-  // Public CMS reads are cacheable and high-QPS — skip Edge Redis RTT here.
-  // Abuse still hits Vercel/platform limits; writes keep rate limits below.
-  if (
-    request.method === "GET" &&
-    (pathname.startsWith("/api/cms/") || pathname === "/api/health")
-  ) {
-    return NextResponse.next();
-  }
-
   const preset = presetFor(pathname);
   if (!preset) return NextResponse.next();
 

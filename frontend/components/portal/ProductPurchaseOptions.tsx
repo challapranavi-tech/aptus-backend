@@ -3,6 +3,11 @@ import type { PortalOrder, PurchaseType } from "@/types/orders";
 
 type Duration = PortalOrder["duration"];
 
+type OptionCard = {
+  value: string;
+  label: string;
+};
+
 type ProductPurchaseOptionsProps = {
   /** Which selectors to render — driven entirely by the product's data-driven configuration. */
   config: ProductConfig;
@@ -17,9 +22,79 @@ type ProductPurchaseOptionsProps = {
   className?: string;
   /** Shorter labels for tight layouts (cart table). */
   compact?: boolean;
-  /** "cards" renders Package as selectable buttons (product detail page); "select" keeps the compact dropdown (cart table). */
+  /** "cards" renders all options as selectable buttons (product detail page). */
   packageLayout?: "select" | "cards";
 };
+
+function OptionCardGroup({
+  label,
+  ariaLabel,
+  value,
+  options,
+  onChange,
+  fullWidth = false,
+}: {
+  label: string;
+  ariaLabel: string;
+  value: string;
+  options: OptionCard[];
+  onChange: (value: string) => void;
+  fullWidth?: boolean;
+}) {
+  return (
+    <div
+      className={
+        "aptus-product-options__field aptus-product-options__field--cards" +
+        (fullWidth ? " aptus-product-options__field--full" : "")
+      }
+    >
+      <span>{label}</span>
+      <div className="aptus-product-options__option-cards" role="group" aria-label={ariaLabel}>
+        {options.map((option) => (
+          <button
+            key={option.value}
+            type="button"
+            className={
+              "aptus-product-options__option-card" +
+              (option.value === value ? " is-active" : "")
+            }
+            aria-pressed={option.value === value}
+            onClick={() => onChange(option.value)}
+          >
+            {option.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function OptionSelect({
+  label,
+  ariaLabel,
+  value,
+  options,
+  onChange,
+}: {
+  label: string;
+  ariaLabel: string;
+  value: string;
+  options: OptionCard[];
+  onChange: (value: string) => void;
+}) {
+  return (
+    <label className="aptus-product-options__field">
+      <span>{label}</span>
+      <select value={value} aria-label={ariaLabel} onChange={(event) => onChange(event.target.value)}>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </label>
+  );
+}
 
 export function ProductPurchaseOptions({
   config,
@@ -35,95 +110,117 @@ export function ProductPurchaseOptions({
   compact = false,
   packageLayout = "select",
 }: ProductPurchaseOptionsProps) {
-  // Single Bundle products: no selectors at all — quantity only (rendered by the caller).
-  if (config.kind === "bundle") return null;
+  const useCardLayout = packageLayout === "cards";
+
+  if (config.kind === "bundle") {
+    if (!useCardLayout) return null;
+    return (
+      <div className={["aptus-product-options", className].filter(Boolean).join(" ")}>
+        <OptionCardGroup
+          label="License"
+          ariaLabel="License type"
+          value="bundle"
+          options={[{ value: "bundle", label: "Single Bundle" }]}
+          onChange={() => undefined}
+          fullWidth
+        />
+      </div>
+    );
+  }
 
   const packages = config.kind === "renewal" || config.kind === "levels" ? config.packages : undefined;
   const resolvedPackageId = packageId ?? packages?.[0]?.id;
-  // Card layout is scoped to Software with Renewals products only (per product spec);
-  // a Levels product with an (unusual) configured package still falls back to the dropdown.
-  const useCardLayout = packageLayout === "cards" && config.kind === "renewal";
+  const resolvedLevelId =
+    levelId ?? (config.kind === "levels" ? config.levels[0]?.id : undefined);
+
+  const durationOptions: OptionCard[] = [
+    { value: "1year", label: compact ? "1 Year" : "1 Year" },
+    { value: "3year", label: compact ? "3 Years" : "3 Years" },
+  ];
+  const licenseOptions: OptionCard[] = [
+    { value: "new", label: compact ? "New" : "New Purchase" },
+    { value: "renew", label: compact ? "Renewal" : "Renewal" },
+  ];
 
   return (
     <div className={["aptus-product-options", className].filter(Boolean).join(" ")}>
       {packages?.length ? (
         useCardLayout ? (
-          <div className="aptus-product-options__field aptus-product-options__field--package">
-            <span>Package</span>
-            <div className="aptus-product-options__package-cards" role="group" aria-label="Package">
-              {packages.map((option) => (
-                <button
-                  key={option.id}
-                  type="button"
-                  className={
-                    "aptus-product-options__package-card" +
-                    (option.id === resolvedPackageId ? " is-active" : "")
-                  }
-                  aria-pressed={option.id === resolvedPackageId}
-                  onClick={() => onPackageChange(option.id)}
-                >
-                  {option.label}
-                </button>
-              ))}
-            </div>
-          </div>
+          <OptionCardGroup
+            label="Package"
+            ariaLabel="Package"
+            value={resolvedPackageId ?? packages[0]!.id}
+            options={packages.map((option) => ({ value: option.id, label: option.label }))}
+            onChange={onPackageChange}
+            fullWidth
+          />
         ) : (
-          <label className="aptus-product-options__field">
-            <span>Package</span>
-            <select
-              value={resolvedPackageId}
-              aria-label="Package"
-              onChange={(event) => onPackageChange(event.target.value)}
-            >
-              {packages.map((option) => (
-                <option key={option.id} value={option.id}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </label>
+          <OptionSelect
+            label="Package"
+            ariaLabel="Package"
+            value={resolvedPackageId ?? packages[0]!.id}
+            options={packages.map((option) => ({ value: option.id, label: option.label }))}
+            onChange={onPackageChange}
+          />
         )
       ) : null}
 
       {config.kind === "levels" ? (
-        <label className="aptus-product-options__field">
-          <span>Level</span>
-          <select
-            value={levelId ?? config.levels[0]?.id}
-            aria-label="Level"
-            onChange={(event) => onLevelChange(event.target.value)}
-          >
-            {config.levels.map((option) => (
-              <option key={option.id} value={option.id}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </label>
+        useCardLayout ? (
+          <OptionCardGroup
+            label="Level"
+            ariaLabel="Level"
+            value={resolvedLevelId ?? config.levels[0]!.id}
+            options={config.levels.map((option) => ({ value: option.id, label: option.label }))}
+            onChange={onLevelChange}
+            fullWidth
+          />
+        ) : (
+          <OptionSelect
+            label="Level"
+            ariaLabel="Level"
+            value={resolvedLevelId ?? config.levels[0]!.id}
+            options={config.levels.map((option) => ({ value: option.id, label: option.label }))}
+            onChange={onLevelChange}
+          />
+        )
       ) : (
         <>
-          <label className="aptus-product-options__field">
-            <span>{compact ? "Duration" : "Subscription Duration"}</span>
-            <select
-              value={duration}
-              aria-label="Subscription duration"
-              onChange={(event) => onDurationChange(event.target.value as Duration)}
-            >
-              <option value="1year">Annual</option>
-              <option value="3year">3 Years</option>
-            </select>
-          </label>
-          <label className="aptus-product-options__field">
-            <span>{compact ? "Type" : "License Type"}</span>
-            <select
-              value={purchaseType}
-              aria-label="License type"
-              onChange={(event) => onPurchaseTypeChange(event.target.value as PurchaseType)}
-            >
-              <option value="new">{compact ? "New" : "New Purchase"}</option>
-              <option value="renew">{compact ? "Renew" : "Renew"}</option>
-            </select>
-          </label>
+          {useCardLayout ? (
+            <>
+              <OptionCardGroup
+                label={compact ? "Duration" : "Subscription Duration"}
+                ariaLabel="Subscription duration"
+                value={duration}
+                options={durationOptions}
+                onChange={(value) => onDurationChange(value as Duration)}
+              />
+              <OptionCardGroup
+                label={compact ? "Type" : "License Type"}
+                ariaLabel="License type"
+                value={purchaseType}
+                options={licenseOptions}
+                onChange={(value) => onPurchaseTypeChange(value as PurchaseType)}
+              />
+            </>
+          ) : (
+            <>
+              <OptionSelect
+                label={compact ? "Duration" : "Subscription Duration"}
+                ariaLabel="Subscription duration"
+                value={duration}
+                options={durationOptions}
+                onChange={(value) => onDurationChange(value as Duration)}
+              />
+              <OptionSelect
+                label={compact ? "Type" : "License Type"}
+                ariaLabel="License type"
+                value={purchaseType}
+                options={licenseOptions}
+                onChange={(value) => onPurchaseTypeChange(value as PurchaseType)}
+              />
+            </>
+          )}
         </>
       )}
     </div>

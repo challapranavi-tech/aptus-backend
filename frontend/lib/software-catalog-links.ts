@@ -7,7 +7,7 @@ const CATALOG_BROWSE_LABEL =
 /** True when a hero/CTA should open the unified software catalog (optionally filtered). */
 export function isCatalogBrowseAction(href: string, label?: string): boolean {
   const normalizedHref = href.trim().toLowerCase();
-  if (normalizedHref === "#products" || normalizedHref === "#software") {
+  if (normalizedHref === "#products" || normalizedHref === "#software" || normalizedHref === "#software-catalog") {
     return true;
   }
   if (!label) return false;

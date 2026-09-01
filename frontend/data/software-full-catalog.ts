@@ -1,16 +1,20 @@
 import { AUTODESK_SUBNAV_LINKS } from "@/data/autodesk-subnav";
 import { findNavItemByLabel, SITE_NAVIGATION } from "@/data/site-nav";
 import {
-  ADOBE_SUBNAV_LINKS,
+  mergeSoftwareLinks,
+  PDF_ADOBE_LEVEL_PRODUCTS,
+  PDF_AUTODESK_RENEWAL_PRODUCTS,
+  PDF_MICROSOFT_BUNDLE_PRODUCTS,
+  PDF_ORACLE_BUNDLE_PRODUCTS,
+  PDF_WATER_INFRASTRUCTURE_PRODUCTS,
+} from "@/data/pdf-software-catalog";
+import {
   CYBER_SECURITY_SUBNAV_LINKS,
   EDMS_SUBNAV_LINKS,
   EDUCATIONAL_SUBNAV_LINKS,
-  MICROSOFT_SUBNAV_LINKS,
   MULTIMEDIA_SUBNAV_LINKS,
-  ORACLE_SUBNAV_LINKS,
   QUANTITY_TAKEOFF_SUBNAV_LINKS,
   STRUCTURAL_SUBNAV_LINKS,
-  WATER_INFRASTRUCTURE_SUBNAV_LINKS,
   type SoftwareSubNavLink,
 } from "@/data/software-subnav";
 import type {
@@ -62,16 +66,16 @@ function linksToProducts(links: SoftwareSubNavLink[]): SoftwarePurchaseProduct[]
   return products;
 }
 
-/** Brand label → product pages under that brand. */
+/** Brand label → product pages under that brand. PDF products are merged first, then existing nav links. */
 const BRAND_PRODUCT_LINKS: Record<string, SoftwareSubNavLink[]> = {
-  Autodesk: [
-    ...AUTODESK_SUBNAV_LINKS,
-    { label: "AutoCAD Revit LT Suite", href: "/autocad-revit-lt-suite" },
-    ...WATER_INFRASTRUCTURE_SUBNAV_LINKS,
-  ],
-  Adobe: ADOBE_SUBNAV_LINKS,
-  Microsoft: MICROSOFT_SUBNAV_LINKS,
-  Oracle: ORACLE_SUBNAV_LINKS,
+  Autodesk: mergeSoftwareLinks(
+    PDF_AUTODESK_RENEWAL_PRODUCTS,
+    PDF_WATER_INFRASTRUCTURE_PRODUCTS,
+    AUTODESK_SUBNAV_LINKS,
+  ),
+  Adobe: PDF_ADOBE_LEVEL_PRODUCTS,
+  Microsoft: PDF_MICROSOFT_BUNDLE_PRODUCTS,
+  Oracle: PDF_ORACLE_BUNDLE_PRODUCTS,
   CostX: QUANTITY_TAKEOFF_SUBNAV_LINKS.filter((l) => l.href === "/rib-costx"),
   Cubicost: QUANTITY_TAKEOFF_SUBNAV_LINKS.filter((l) => l.href === "/cubicost-bm-qs"),
   Planswift: QUANTITY_TAKEOFF_SUBNAV_LINKS.filter((l) => l.href === "/plainswift"),

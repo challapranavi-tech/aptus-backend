@@ -1,5 +1,12 @@
 import { AUTODESK_SUBNAV_LINKS } from "@/data/autodesk-subnav";
 import { findNavItemByLabel, SITE_NAVIGATION } from "@/data/site-nav";
+import {
+  mergeSoftwareLinks,
+  PDF_ADOBE_LEVEL_PRODUCTS,
+  PDF_MICROSOFT_BUNDLE_PRODUCTS,
+  PDF_ORACLE_BUNDLE_PRODUCTS,
+  PDF_WATER_INFRASTRUCTURE_PRODUCTS,
+} from "@/data/pdf-software-catalog";
 
 export type SoftwareSubNavLink = { label: string; href: string };
 
@@ -40,23 +47,9 @@ function linksFromSoftwareHub(): SoftwareSubNavLink[] {
   return links;
 }
 
-export const ADOBE_SUBNAV_LINKS: SoftwareSubNavLink[] = [
-  { label: "Adobe Business & Creative Solutions", href: "/adobe-business-creative-solutions" },
-  { label: "Adobe Acrobat Pro", href: "/adobe-acrobat-pro" },
-  { label: "Adobe Illustrator", href: "/adobe-illustrator" },
-  { label: "Adobe Photoshop", href: "/adobe-photoshop" },
-  { label: "Adobe Premiere Pro", href: "/adobe-premiere-pro" },
-];
-export const MICROSOFT_SUBNAV_LINKS: SoftwareSubNavLink[] = [
-  { label: "Microsoft 365 Apps", href: "/microsoft-365-apps" },
-  { label: "Microsoft 365 Business", href: "/microsoft-365-business" },
-  { label: "Microsoft Visio", href: "/microsoft-visio" },
-  { label: "Power BI", href: "/power-bi" },
-];
-export const ORACLE_SUBNAV_LINKS: SoftwareSubNavLink[] = [
-  { label: "Oracle Primavera P6", href: "/oracle-primavera-p6" },
-  { label: "Aconex", href: "/aconex" },
-];
+export const ADOBE_SUBNAV_LINKS: SoftwareSubNavLink[] = PDF_ADOBE_LEVEL_PRODUCTS;
+export const MICROSOFT_SUBNAV_LINKS: SoftwareSubNavLink[] = PDF_MICROSOFT_BUNDLE_PRODUCTS;
+export const ORACLE_SUBNAV_LINKS: SoftwareSubNavLink[] = PDF_ORACLE_BUNDLE_PRODUCTS;
 export const MULTIMEDIA_SUBNAV_LINKS: SoftwareSubNavLink[] = [
   { label: "Bluebeam", href: "/bluebeam" },
   { label: "Corona", href: "/chaos-corona" },
@@ -105,12 +98,8 @@ export const ANTIVIRUS_SUBNAV_LINKS: SoftwareSubNavLink[] = [
 ];
 
 /** Live sidebar on Water Infrastructure product pages (post-3188 InfoDrainage et al.). */
-export const WATER_INFRASTRUCTURE_SUBNAV_LINKS: SoftwareSubNavLink[] = [
-  { label: "InfoDrainage", href: "/infodrainage" },
-  { label: "InfoWater Pro", href: "/infowater-pro" },
-  { label: "InfoWorks ICM", href: "/infoworks-icm" },
-  { label: "InfoWorks WS Pro", href: "/infoworks-ws-pro" },
-];
+export const WATER_INFRASTRUCTURE_SUBNAV_LINKS: SoftwareSubNavLink[] =
+  PDF_WATER_INFRASTRUCTURE_PRODUCTS;
 
 /** Live sidebar on Cyber Security product pages (post-2786 Fortinet et al.). */
 export const CYBER_SECURITY_SUBNAV_LINKS: SoftwareSubNavLink[] = [

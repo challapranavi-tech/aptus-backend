@@ -28,6 +28,8 @@ import {
 import { fetchAuthMeShared } from "@/lib/auth-me-client";
 import { ensureSignedInForPurchase } from "@/lib/purchase-auth";
 import { AutodeskFreeTrialLink } from "@/components/shared/AutodeskFreeTrialLink";
+import { SoftwareBrandFilterModal } from "@/components/software/SoftwareBrandFilterModal";
+import { scheduleScrollToSoftwareCatalog, SOFTWARE_CATALOG_ANCHOR_ID } from "@/lib/scroll-to-software-catalog";
 import type { ClientProfile } from "@/types/profile";
 import type { PortalOrder, PurchaseType } from "@/types/orders";
 
@@ -46,6 +48,7 @@ type Selection = {
   purchaseType: PurchaseType;
   packageId?: string;
   levelId?: string;
+  serialNumber?: string;
 };
 
 const TONE_CYCLE = ["danger", "accent", "success", "warning"] as const;
@@ -72,6 +75,7 @@ export function SoftwareCatalogPanel() {
   const [hydrated, setHydrated] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [query, setQuery] = useState("");
+  const [brandModalOpen, setBrandModalOpen] = useState(false);
 
   useEffect(() => {
     if (!brandFromUrl) return;
@@ -82,10 +86,7 @@ export function SoftwareCatalogPanel() {
 
   useEffect(() => {
     if (!brandFromUrl) return;
-    const timer = window.setTimeout(() => {
-      document.getElementById("software-catalog")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 100);
-    return () => window.clearTimeout(timer);
+    scheduleScrollToSoftwareCatalog();
   }, [brandFromUrl]);
 
   function applyCartState(cart: ReturnType<typeof readPortalCart>) {
@@ -102,6 +103,7 @@ export function SoftwareCatalogPanel() {
             purchaseType: item.purchaseType ?? "new",
             packageId: item.packageId,
             levelId: item.levelId,
+            serialNumber: item.serialNumber,
           },
         ]),
       ),
@@ -142,6 +144,7 @@ export function SoftwareCatalogPanel() {
         purchaseType: item.purchaseType,
         packageId: item.packageId,
         levelId: item.levelId,
+        serialNumber: item.serialNumber,
       })),
     };
     writePortalCart(cart);
@@ -203,9 +206,17 @@ export function SoftwareCatalogPanel() {
   }
 
   const productCount = catalog.reduce((sum, brand) => sum + brand.products.length, 0);
+  const activeBrandLabel =
+    activeBrandId === "all"
+      ? "All brands"
+      : (catalog.find((brand) => brand.id === activeBrandId)?.label ?? "All brands");
 
   return (
-    <section className="aptus-software-catalog" aria-label="Software products">
+    <section
+      id={SOFTWARE_CATALOG_ANCHOR_ID}
+      className="aptus-software-catalog"
+      aria-label="Software products"
+    >
       <div className="aptus-software-catalog__inner">
         <div className="aptus-software-catalog__header">
           <h2 className="aptus-software-catalog__title">Browse all software</h2>
@@ -215,7 +226,7 @@ export function SoftwareCatalogPanel() {
           </p>
         </div>
 
-        <div className="aptus-portal-products__toolbar">
+        <div className="aptus-portal-products__toolbar aptus-software-catalog__toolbar">
           <label className="aptus-portal-products__search">
             <input
               type="search"
@@ -225,31 +236,25 @@ export function SoftwareCatalogPanel() {
               onChange={(e) => setQuery(e.target.value)}
             />
           </label>
-        </div>
-
-        <div className="aptus-portal-chips" role="tablist" aria-label="Software brands">
           <button
             type="button"
-            role="tab"
-            aria-selected={activeBrandId === "all"}
-            className={`aptus-portal-chip${activeBrandId === "all" ? " is-active" : ""}`}
-            onClick={() => setActiveBrandId("all")}
+            className="aptus-brand-filter-tile"
+            aria-haspopup="dialog"
+            aria-expanded={brandModalOpen}
+            onClick={() => setBrandModalOpen(true)}
           >
-            All brands
+            <span className="aptus-brand-filter-tile__label">Brand</span>
+            <span className="aptus-brand-filter-tile__value">{activeBrandLabel}</span>
           </button>
-          {catalog.map((brand) => (
-            <button
-              key={brand.id}
-              type="button"
-              role="tab"
-              aria-selected={activeBrandId === brand.id}
-              className={`aptus-portal-chip${activeBrandId === brand.id ? " is-active" : ""}`}
-              onClick={() => setActiveBrandId(brand.id)}
-            >
-              {brand.label}
-            </button>
-          ))}
         </div>
+
+        <SoftwareBrandFilterModal
+          open={brandModalOpen}
+          brands={catalog}
+          activeBrandId={activeBrandId}
+          onClose={() => setBrandModalOpen(false)}
+          onSelect={setActiveBrandId}
+        />
 
         {message ? (
           <p

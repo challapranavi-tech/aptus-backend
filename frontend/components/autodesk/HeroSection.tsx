@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useRef, useState } from "react";
-import { softwareCatalogHref } from "@/lib/software-catalog-links";
+import { ExploreProductsLink } from "@/components/software/ExploreProductsLink";
 import shared from "@/styles/autodesk/autodesk.module.css";
 import styles from "./HeroSection.module.css";
 
@@ -75,9 +74,9 @@ export function HeroSection() {
               project-based work and product exploration.
             </p>
             <div className={styles.actions}>
-              <Link href={softwareCatalogHref("autodesk")} className={shared.btnPrimary}>
+              <ExploreProductsLink brandId="autodesk" className={shared.btnPrimary}>
                 Explore products
-              </Link>
+              </ExploreProductsLink>
             </div>
           </div>
         </div>

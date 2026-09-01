@@ -21,6 +21,7 @@ import {
   estimateCartPricing,
   lineConfigSummary,
   productInitials,
+  renewalSerialRequired,
   resolveLineDuration,
   type CartCheckoutStep,
 } from "@/lib/portal-cart-checkout";
@@ -37,6 +38,7 @@ import {
 } from "@/lib/portal-cart";
 import { OrderPaymentModal } from "./OrderPaymentModal";
 import { ProductPurchaseOptions } from "./ProductPurchaseOptions";
+import { RenewalSerialNumberField } from "./RenewalSerialNumberField";
 import type { PortalOrder } from "@/types/orders";
 
 function CheckIcon() {
@@ -236,6 +238,12 @@ export function CartCheckoutPanel() {
       return;
     }
 
+    const missingSerial = cart.items.find((item) => renewalSerialRequired(item) && !item.serialNumber?.trim());
+    if (missingSerial) {
+      setError(`Serial number is required for ${missingSerial.productName} renewals.`);
+      return;
+    }
+
     setSubmitting(true);
     setError(null);
     try {
@@ -357,6 +365,7 @@ export function CartCheckoutPanel() {
                         const initials = catalogProduct
                           ? getProductCardMeta(catalogProduct, item.category).initials
                           : productInitials(item.productName);
+                        const needsSerial = renewalSerialRequired(item);
                         return (
                           <tr key={`${item.category}-${item.productName}`}>
                             <td data-label="Product">
@@ -391,7 +400,10 @@ export function CartCheckoutPanel() {
                                     updateLine(item.category, item.productName, { duration })
                                   }
                                   onPurchaseTypeChange={(purchaseType) =>
-                                    updateLine(item.category, item.productName, { purchaseType })
+                                    updateLine(item.category, item.productName, {
+                                      purchaseType,
+                                      ...(purchaseType === "new" ? { serialNumber: undefined } : {}),
+                                    })
                                   }
                                   onPackageChange={(packageId) =>
                                     updateLine(item.category, item.productName, { packageId })
@@ -401,6 +413,16 @@ export function CartCheckoutPanel() {
                                   }
                                 />
                               )}
+                              {needsSerial ? (
+                                <RenewalSerialNumberField
+                                  id={`cart-serial-${item.category}-${item.productName}`.replace(/\s+/g, "-")}
+                                  className="aptus-renewal-serial--cart"
+                                  value={item.serialNumber ?? ""}
+                                  onChange={(serialNumber) =>
+                                    updateLine(item.category, item.productName, { serialNumber })
+                                  }
+                                />
+                              ) : null}
                             </td>
                             <td data-label="Qty">
                               <select

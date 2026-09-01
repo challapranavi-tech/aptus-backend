@@ -1,4 +1,5 @@
 import type { OrderLineItem } from "@/types/orders";
+import { filterPortalPurchasableCartItems } from "@/lib/portal-purchasable";
 import { authFetch, getValidAccessToken } from "./access-token";
 
 const CART_KEY = "aptus:portal-cart";
@@ -24,7 +25,8 @@ export function readPortalCart(): PortalCartState {
     if (!parsed || !Array.isArray(parsed.items)) return emptyCart();
     return {
       duration: parsed.duration === "3year" ? "3year" : "1year",
-      items: parsed.items
+      items: filterPortalPurchasableCartItems(
+        parsed.items
         .filter(
           (item) =>
             item &&
@@ -40,6 +42,7 @@ export function readPortalCart(): PortalCartState {
           levelId: typeof item.levelId === "string" ? item.levelId : undefined,
           serialNumber: typeof item.serialNumber === "string" ? item.serialNumber.trim() : undefined,
         })),
+      ),
     };
   } catch {
     return emptyCart();
@@ -98,7 +101,7 @@ export async function fetchServerPortalCart(): Promise<PortalCartState | null> {
 
   return {
     duration: data.cart.duration === "3year" ? "3year" : "1year",
-    items: data.cart.items,
+    items: filterPortalPurchasableCartItems(data.cart.items),
   };
 }
 

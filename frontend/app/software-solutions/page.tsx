@@ -1,7 +1,15 @@
 import { Suspense } from "react";
 import { SoftwareCatalogPanel } from "@/components/software/SoftwareCatalogPanel";
+import { SoftwareCatalogHashScroll } from "@/components/software/SoftwareCatalogHashScroll";
 import { SoftwareSolutionsHero } from "@/components/software/SoftwareSolutionsHero";
-import { CTA } from "@/components/sections/CTA";
+import { Features } from "@/components/sections/Features";
+import { LogoGrid } from "@/components/sections/LogoGrid";
+import { Testimonials } from "@/components/sections/Testimonials";
+import {
+  SOFTWARE_OUR_PROCESS,
+  SOFTWARE_PARTNERSHIPS,
+  SOFTWARE_TESTIMONIALS,
+} from "@/data/software-solutions-page";
 import type { Metadata } from "next";
 import "@/styles/software-catalog.css";
 import "@/styles/software-pages.css";
@@ -25,23 +33,16 @@ function CatalogFallback() {
 export default function SoftwareSolutionsPage() {
   return (
     <main className="aptus-software-page aptus-software-catalog-page">
+      <Suspense fallback={null}>
+        <SoftwareCatalogHashScroll />
+      </Suspense>
       <SoftwareSolutionsHero />
-      <div id="software-catalog">
-        <Suspense fallback={<CatalogFallback />}>
-          <SoftwareCatalogPanel />
-        </Suspense>
-      </div>
-      <CTA
-        data={{
-          type: "cta",
-          heading: "Have questions? We can help",
-          showForm: true,
-          submitLabel: "Submit Now",
-          formVariant: "software-quote",
-          layout: "light",
-          category: "software",
-        }}
-      />
+      <LogoGrid data={SOFTWARE_PARTNERSHIPS} />
+      <Suspense fallback={<CatalogFallback />}>
+        <SoftwareCatalogPanel />
+      </Suspense>
+      <Features data={SOFTWARE_OUR_PROCESS} />
+      <Testimonials data={SOFTWARE_TESTIMONIALS} />
     </main>
   );
 }

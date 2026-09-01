@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useQuoteModal } from "@/components/quote/QuoteModalProvider";
 import { quoteContextForPortalProduct } from "@/components/quote/quote-modal-utils";
+import { getProductCatalogTitle } from "@/data/product-catalog-titles";
 import { getProductConfig } from "@/data/product-options";
 import {
   getProductDetailContent,
@@ -33,6 +34,7 @@ import type { OrderLineItem, PortalOrder, PurchaseType } from "@/types/orders";
 import { AutodeskFreeTrialLink } from "@/components/shared/AutodeskFreeTrialLink";
 import { ProductDetailBlocks } from "./ProductDetailBlocks";
 import { ProductPurchaseOptions } from "./ProductPurchaseOptions";
+import { RenewalSerialNumberField } from "./RenewalSerialNumberField";
 
 type Duration = PortalOrder["duration"];
 
@@ -109,6 +111,7 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
   const meta = getProductCardMeta(product, category.label);
   const imageSrc = getPurchaseProductImage(product.href);
   const config = useMemo(() => getProductConfig(product.name), [product.name]);
+  const catalogTitle = useMemo(() => getProductCatalogTitle(product.href), [product.href]);
   const [user, setUser] = useState<ClientProfile | null>(null);
   const [duration, setDuration] = useState<Duration>("1year");
   const [purchaseType, setPurchaseType] = useState<PurchaseType>("new");
@@ -326,6 +329,9 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
             </div>
 
             <h2 className="aptus-product-detail__title">{product.name}</h2>
+            {catalogTitle ? (
+              <p className="aptus-product-detail__catalog-title">{catalogTitle}</p>
+            ) : null}
 
             <p className="aptus-product-detail__summary">{meta.description}</p>
 
@@ -345,56 +351,48 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
                         : formatOmanAmount(unit)
                       : "Quote on request"}
                   </p>
-                  <p className="aptus-product-detail__price-note">
-                    {config.kind === "bundle"
-                      ? "One-time bundle price · Includes support & updates"
-                      : config.kind === "levels"
-                        ? `${config.levels.find((level) => level.id === levelId)?.label ?? config.levels[0]?.label ?? "Level 1"} · Includes support & updates`
-                        : `${purchaseType === "renew" ? "Renewal" : "Commercial New"} · ${
-                            duration === "3year" ? "3 Years (36 months)" : "Annual (12 months)"
-                          } · Includes support & updates`}
-                  </p>
+                </>
+              ) : (
+                <p className="aptus-product-detail__price">Quote on request</p>
+              )}
+              <p className="aptus-product-detail__price-note">
+                {config.kind === "bundle"
+                  ? "Single bundle · Perpetual or one-time license"
+                  : config.kind === "levels"
+                    ? `${config.levels.find((level) => level.id === levelId)?.label ?? config.levels[0]?.label ?? "Level 1"} · Select a level below`
+                    : `${purchaseType === "renew" ? "Renewal" : "New Purchase"} · ${
+                        duration === "3year" ? "3 Years" : "1 Year"
+                      } · Select options below`}
+              </p>
 
-                  <ProductPurchaseOptions
-                    className="aptus-product-detail__purchase-options"
-                    config={config}
-                    duration={duration}
-                    purchaseType={purchaseType}
-                    packageId={packageId}
-                    levelId={levelId}
-                    onDurationChange={setDuration}
-                    onPurchaseTypeChange={handlePurchaseTypeChange}
-                    onPackageChange={setPackageId}
-                    onLevelChange={setLevelId}
-                    packageLayout="cards"
-                  />
+              <ProductPurchaseOptions
+                className="aptus-product-detail__purchase-options"
+                config={config}
+                duration={duration}
+                purchaseType={purchaseType}
+                packageId={packageId}
+                levelId={levelId}
+                onDurationChange={setDuration}
+                onPurchaseTypeChange={handlePurchaseTypeChange}
+                onPackageChange={setPackageId}
+                onLevelChange={setLevelId}
+                packageLayout="cards"
+              />
 
-                  {showSerialNumber ? (
-                    <div className="aptus-product-detail__serial">
-                      <label htmlFor="product-serial-number">
-                        <span>Serial number</span>
-                        <input
-                          id="product-serial-number"
-                          type="text"
-                          value={serialNumber}
-                          required
-                          aria-required="true"
-                          aria-invalid={serialError ? true : undefined}
-                          placeholder="Enter your existing license serial"
-                          onChange={(event) => {
-                            setSerialNumber(event.target.value);
-                            if (serialError) setSerialError(null);
-                          }}
-                        />
-                      </label>
-                      {serialError ? (
-                        <p className="aptus-product-detail__serial-error" role="alert">
-                          {serialError}
-                        </p>
-                      ) : null}
-                    </div>
-                  ) : null}
+              {showSerialNumber ? (
+                <RenewalSerialNumberField
+                  id="product-serial-number"
+                  value={serialNumber}
+                  error={serialError}
+                  onChange={(value) => {
+                    setSerialNumber(value);
+                    if (serialError) setSerialError(null);
+                  }}
+                />
+              ) : null}
 
+              {purchasable ? (
+                <>
                   <div className="aptus-product-detail__qty">
                     <span>Quantity</span>
                     <div className="aptus-product-detail__qty-controls">
@@ -430,9 +428,7 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
                   ) : null}
                   <AutodeskFreeTrialLink productHref={product.href} />
                 </>
-              ) : (
-                <p className="aptus-product-detail__price">Quote on request</p>
-              )}
+              ) : null}
               <button
                 type="button"
                 className="aptus-product-detail__btn aptus-product-detail__btn--outline"

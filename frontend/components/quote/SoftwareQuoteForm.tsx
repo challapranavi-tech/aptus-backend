@@ -3,8 +3,10 @@
 import { QuoteProductSelect } from "@/components/quote/QuoteProductSelect";
 import { QuoteSearchSelect } from "@/components/quote/QuoteSearchSelect";
 import { fetchAuthMeShared } from "@/lib/auth-me-client";
+import { publicApiBase } from "@/lib/api-base";
 import { normalizePhone } from "@/lib/phone";
 import { cn } from "@/lib/utils";
+import type { ClientProfile } from "@/types/profile";
 import {
   COUNTRY_CALLING_CODES,
   DEFAULT_COUNTRY_CALLING_CODE,
@@ -16,8 +18,7 @@ import {
   PHONE_LOCAL_MAX_DIGITS,
   PRODUCT_PLACEHOLDER,
   QUOTE_ATTACHMENT_ACCEPT,
-  TAX_ID_MAX_LENGTH,
-  alphanumOnly,
+  VAT_ID_MAX_DIGITS,
   quoteAttachmentExtensionOk,
   validateQuoteContactFields,
   type CustomerType,
@@ -29,7 +30,6 @@ import {
 import type { FieldErrors } from "@shared/lib/schema";
 import {
   useEffect,
-  useMemo,
   useRef,
   useState,
   type ChangeEvent,
@@ -37,33 +37,6 @@ import {
   type FormEvent,
 } from "react";
 
-const LEGACY_SESSION_KEY = "aptusPortalSession";
-
-type LegacyPortalSession = {
-  userId?: string;
-  email?: string;
-  name?: string;
-  company?: string;
-  phone?: string;
-  contactType?: string;
-  taxId?: string;
-  expiresAt?: number;
-};
-
-function readLegacyPortalSession(): LegacyPortalSession | null {
-  if (typeof window === "undefined") return null;
-  try {
-    const raw =
-      window.localStorage.getItem(LEGACY_SESSION_KEY) ||
-      window.sessionStorage.getItem(LEGACY_SESSION_KEY);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw) as LegacyPortalSession;
-    if (parsed.expiresAt && Date.now() > parsed.expiresAt) return null;
-    return parsed;
-  } catch {
-    return null;
-  }
-}
 type Status = "idle" | "submitting" | "success" | "error";
 
 type SoftwareQuoteFormProps = {
@@ -130,49 +103,35 @@ function splitProfilePhone(phone: string): { countryCode: string; local: string 
   };
 }
 
-function profileToQuoteDefaults(user: {
-  id?: string;
-  contactType?: string;
-  company?: string;
-  name?: string;
-  email?: string;
-  phone?: string;
-  taxId?: string;
-}): {
+function profileToQuoteDefaults(user: ClientProfile): {
   customerType: CustomerType;
   name: string;
   email: string;
   company: string;
   countryCode: string;
   phoneLocal: string;
-  taxId: string;
+  vatId: string;
   crNumber: string;
-  sourceId: string;
 } {
   const isCompany = user.contactType === "company";
   const companyName =
     user.company && user.company !== "Customer" ? user.company : user.name;
-  // Odoo stores Tax ID on res.partner.vat — portal exposes it as taxId / CR.
-  const profileTax = (user.taxId ?? "").trim();
-  const taxAlnum = alphanumOnly(profileTax, TAX_ID_MAX_LENGTH);
-  const taxDigits = digitsOnly(profileTax, CR_NUMBER_MAX_DIGITS);
+  const taxDigits = digitsOnly(user.taxId ?? "", VAT_ID_MAX_DIGITS);
   const phone = splitProfilePhone(user.phone || "");
 
   return {
     customerType: isCompany ? "company" : "individual",
     name: user.name?.trim() || "",
     email: user.email?.trim() || "",
-    company: isCompany ? (companyName ?? "").trim() : "",
+    company: isCompany ? companyName.trim() : "",
     countryCode: phone.countryCode,
     phoneLocal: phone.local,
-    // Prefill Tax ID from Odoo tax field; also seed CR when the value is numeric.
-    taxId: taxAlnum,
-    crNumber: /^\d+$/.test(profileTax.replace(/\s/g, ""))
-      ? taxDigits
-      : taxDigits.length >= 6
+    // Registration stores CR in taxId/vat — map into CR Number when it fits.
+    vatId: taxDigits.length > CR_NUMBER_MAX_DIGITS ? taxDigits : "",
+    crNumber:
+      taxDigits.length > 0 && taxDigits.length <= CR_NUMBER_MAX_DIGITS
         ? taxDigits
-        : "",
-    sourceId: user.id || user.email || "legacy",
+        : digitsOnly(user.taxId ?? "", CR_NUMBER_MAX_DIGITS),
   };
 }
 
@@ -200,73 +159,32 @@ export function SoftwareQuoteForm({
   const [attachment, setAttachment] = useState<File | null>(null);
   const [attachmentError, setAttachmentError] = useState("");
   const [profilePrefill, setProfilePrefill] = useState(false);
-  const [qty, setQty] = useState("1");
-  const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
   const prefilledUserId = useRef<string | null>(null);
-  const formRef = useRef<HTMLFormElement>(null);
 
-  function applyQuoteDefaults(
-    defaults: ReturnType<typeof profileToQuoteDefaults>,
-  ) {
-    if (prefilledUserId.current === defaults.sourceId) return;
-    prefilledUserId.current = defaults.sourceId;
-    setCustomerType(defaults.customerType);
-    setName(defaults.name);
-    setEmail(defaults.email);
-    setCompany(defaults.company);
-    setCountryCode(defaults.countryCode);
-    setPhoneLocal(defaults.phoneLocal);
-    setVatId(defaults.taxId);
-    setCrNumber(defaults.crNumber);
-    setProfilePrefill(true);
-  }
-
-  const productOptions = useMemo(() => {
-    const list = [...products];
-    if (defaultProduct && !list.includes(defaultProduct)) {
-      list.unshift(defaultProduct);
-    }
-    return list;
-  }, [products, defaultProduct]);
-
-  const selectDefault = useMemo(() => {
-    if (defaultProduct && productOptions.includes(defaultProduct)) {
-      return [defaultProduct];
-    }
-    return [];
-  }, [defaultProduct, productOptions]);
-
-  useEffect(() => {
-    setSelectedProducts(selectDefault);
-  }, [selectDefault.join("|")]);
+  const selectDefault =
+    defaultProduct && products.includes(defaultProduct)
+      ? [defaultProduct]
+      : [];
 
   useEffect(() => {
     let cancelled = false;
 
     void (async () => {
       const result = await fetchAuthMeShared();
-      if (cancelled) return;
+      if (cancelled || !result.ok) return;
+      if (prefilledUserId.current === result.user.id) return;
 
-      if (result.ok) {
-        applyQuoteDefaults(profileToQuoteDefaults(result.user));
-        return;
-      }
-
-      // Public product pages may not have a fresh /api/auth/me cookie yet —
-      // fall back to the portal session already in localStorage.
-      const legacy = readLegacyPortalSession();
-      if (!legacy?.email && !legacy?.name) return;
-      applyQuoteDefaults(
-        profileToQuoteDefaults({
-          id: legacy.userId,
-          contactType: legacy.contactType,
-          company: legacy.company,
-          name: legacy.name,
-          email: legacy.email,
-          phone: legacy.phone,
-          taxId: legacy.taxId,
-        }),
-      );
+      const defaults = profileToQuoteDefaults(result.user);
+      prefilledUserId.current = result.user.id;
+      setCustomerType(defaults.customerType);
+      setName(defaults.name);
+      setEmail(defaults.email);
+      setCompany(defaults.company);
+      setCountryCode(defaults.countryCode);
+      setPhoneLocal(defaults.phoneLocal);
+      setVatId(defaults.vatId);
+      setCrNumber(defaults.crNumber);
+      setProfilePrefill(true);
     })();
 
     return () => {
@@ -301,8 +219,8 @@ export function SoftwareQuoteForm({
   }
 
   function onVatChange(e: ChangeEvent<HTMLInputElement>) {
-    setVatId(alphanumOnly(e.target.value, TAX_ID_MAX_LENGTH));
-    clearField("tax_id");
+    setVatId(digitsOnly(e.target.value, VAT_ID_MAX_DIGITS));
+    clearField("vat_id");
   }
 
   function onCrChange(e: ChangeEvent<HTMLInputElement>) {
@@ -341,45 +259,27 @@ export function SoftwareQuoteForm({
     if (status === "submitting") return;
 
     const form = e.currentTarget;
-    const messageValue = String(
-      new FormData(form).get("message") ?? "",
-    ).trim();
-    const nameParts = name.trim().split(/\s+/).filter(Boolean);
-    const firstName = nameParts[0] || name.trim();
-    const lastName =
-      nameParts.length > 1 ? nameParts.slice(1).join(" ") : firstName;
-    const fullPhone = phoneLocal
-      ? `${countryCode}${phoneLocal}`
-      : "";
-
-    // Explicit payload — do not rely on FormData key iteration (can drop fields).
-    const payload: Record<string, string> = {
-      customer_type: customerType,
-      category,
-      name: name.trim(),
-      first_name: firstName,
-      last_name: lastName,
-      email: email.trim(),
-      company:
-        customerType === "company" ? company.trim() : "Individual",
-      country_code: countryCode,
-      phone_local: phoneLocal,
-      phone: fullPhone,
-      product: selectedProducts.join(", "),
-      qty: qty || "1",
-      message: messageValue,
-      profession: "",
-      tax_id: customerType === "company" ? vatId : "",
-      vat_id: customerType === "company" ? vatId : "",
-      cr_number: customerType === "company" ? crNumber : "",
-    };
-
-    if (customerType === "individual") {
-      const professionValue = String(
-        new FormData(form).get("profession") ?? "",
-      ).trim();
-      payload.profession = professionValue;
+    const formData = new FormData(form);
+    formData.set("customer_type", customerType);
+    formData.set("name", name);
+    formData.set("email", email);
+    if (customerType === "company") {
+      formData.set("company", company);
+      formData.set("vat_id", vatId);
+      formData.set("cr_number", crNumber);
     }
+    formData.set("country_code", countryCode);
+    formData.set("phone_local", phoneLocal);
+    if (attachment) {
+      formData.set("attachment", attachment);
+    } else {
+      formData.delete("attachment");
+    }
+
+    const payload: Record<string, string> = {};
+    formData.forEach((value, key) => {
+      if (typeof value === "string") payload[key] = value;
+    });
 
     const fieldErrors = validateQuoteContactFields(payload);
     if (attachmentError) {
@@ -388,20 +288,7 @@ export function SoftwareQuoteForm({
     if (Object.keys(fieldErrors).length) {
       setErrors(fieldErrors);
       setStatus("error");
-      const labels = Object.entries(fieldErrors)
-        .filter(([k]) => k !== "_form")
-        .map(([, msg]) => msg)
-        .slice(0, 3);
-      setMessage(
-        labels.length
-          ? labels.join(" ")
-          : "Please fill highlighted fields.",
-      );
-      window.setTimeout(() => {
-        form
-          .querySelector<HTMLElement>(".aptus-form-input--error, [aria-invalid='true']")
-          ?.scrollIntoView({ behavior: "smooth", block: "center" });
-      }, 50);
+      setMessage("Please fill highlighted fields.");
       return;
     }
 
@@ -411,23 +298,10 @@ export function SoftwareQuoteForm({
     setQuoteRef("");
 
     try {
-      // Same-origin proxy (/api/contact) — avoids cross-origin CORS failures.
-      const url = "/api/contact";
-      let res: Response;
-      if (attachment) {
-        const formData = new FormData();
-        for (const [key, value] of Object.entries(payload)) {
-          formData.set(key, value);
-        }
-        formData.set("attachment", attachment);
-        res = await fetch(url, { method: "POST", body: formData });
-      } else {
-        res = await fetch(url, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-      }
+      const res = await fetch(`${publicApiBase()}/api/contact`, {
+        method: "POST",
+        body: formData,
+      });
 
       if (res.ok) {
         let ref = "";
@@ -455,7 +329,7 @@ export function SoftwareQuoteForm({
             setCompany(defaults.company);
             setCountryCode(defaults.countryCode);
             setPhoneLocal(defaults.phoneLocal);
-            setVatId(defaults.taxId);
+            setVatId(defaults.vatId);
             setCrNumber(defaults.crNumber);
             setProfilePrefill(true);
           }
@@ -471,8 +345,6 @@ export function SoftwareQuoteForm({
           setProfilePrefill(false);
         }
         setAttachment(null);
-        setQty("1");
-        setSelectedProducts(selectDefault);
         return;
       }
 
@@ -483,20 +355,10 @@ export function SoftwareQuoteForm({
         if (data.errors && typeof data.errors === "object") {
           const apiErrors = data.errors as FieldErrors;
           setErrors(apiErrors);
-          const msgs = Object.entries(apiErrors)
-            .filter(([k]) => k !== "_form")
-            .map(([, m]) => m)
-            .slice(0, 3);
-          msg = msgs.length
-            ? msgs.join(" ")
+          const fieldKeys = Object.keys(apiErrors).filter((k) => k !== "_form");
+          msg = fieldKeys.length
+            ? "Please fill highlighted fields."
             : (apiErrors._form ?? msg);
-          window.setTimeout(() => {
-            formRef.current
-              ?.querySelector<HTMLElement>(
-                ".aptus-form-input--error, [aria-invalid='true']",
-              )
-              ?.scrollIntoView({ behavior: "smooth", block: "center" });
-          }, 50);
         } else if (typeof data.error === "string" && data.error) {
           msg = data.error;
         }
@@ -507,15 +369,12 @@ export function SoftwareQuoteForm({
       setMessage(msg);
     } catch {
       setStatus("error");
-      setMessage(
-        "We couldn't reach the quote service. Please try again in a moment, or contact our sales team.",
-      );
+      setMessage("Network error. Please check your connection and try again.");
     }
   }
 
   return (
     <form
-      ref={formRef}
       className={cn("relative mt-8 w-full text-left", className)}
       onSubmit={handleSubmit}
       noValidate
@@ -610,24 +469,24 @@ export function SoftwareQuoteForm({
               <FieldError message={errors.name} />
             </label>
             <label className="aptus-form-label">
-              Tax ID *
+              VAT ID *
               <input
                 type="text"
-                name="tax_id"
-                inputMode="text"
+                name="vat_id"
+                inputMode="numeric"
                 autoComplete="off"
-                maxLength={TAX_ID_MAX_LENGTH}
+                maxLength={VAT_ID_MAX_DIGITS}
                 value={vatId}
                 required
-                placeholder="Letters and numbers, up to 12"
-                aria-invalid={errors.tax_id ? true : undefined}
+                placeholder="Up to 12 digits"
+                aria-invalid={errors.vat_id ? true : undefined}
                 onChange={onVatChange}
                 className={cn(
                   "aptus-form-input mt-0 w-full px-4 py-3",
-                  inputError("tax_id"),
+                  inputError("vat_id"),
                 )}
               />
-              <FieldError message={errors.tax_id} />
+              <FieldError message={errors.vat_id} />
             </label>
             <label className="aptus-form-label">
               CR Number *
@@ -795,17 +654,14 @@ export function SoftwareQuoteForm({
 
         <div>
           <QuoteProductSelect
-            key={`${category}:${productLabel}:${selectDefault.join("|")}:${productOptions.join("|")}`}
+            key={`${category}:${productLabel}:${selectDefault.join("|")}:${products.join("|")}:${customerType}`}
             name="product"
             label={`${productLabel} *`}
-            products={productOptions}
-            defaultSelected={selectedProducts.length ? selectedProducts : selectDefault}
+            products={products}
+            defaultSelected={selectDefault}
             placeholder={PRODUCT_PLACEHOLDER}
             error={Boolean(errors.product)}
-            onChange={(next) => {
-              setSelectedProducts(next);
-              clearField("product");
-            }}
+            onChange={() => clearField("product")}
           />
           <FieldError message={errors.product} />
         </div>
@@ -819,13 +675,10 @@ export function SoftwareQuoteForm({
             step={1}
             inputMode="numeric"
             placeholder="1"
-            value={qty}
+            defaultValue={1}
             required
             aria-invalid={errors.qty ? true : undefined}
-            onChange={(e) => {
-              setQty(e.target.value);
-              clearField("qty");
-            }}
+            onChange={() => clearField("qty")}
             className={cn(
               "aptus-form-input mt-0 w-full px-4 py-3",
               inputError("qty"),

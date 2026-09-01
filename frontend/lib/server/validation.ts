@@ -1,6 +1,10 @@
 import { z } from "zod";
 import { normalizePhone } from "@/lib/phone";
 import { renewalSerialRequired } from "@/lib/portal-cart-checkout";
+import {
+  isPortalPurchasableLineItem,
+  portalPurchasableValidationError,
+} from "@/lib/portal-purchasable";
 import { formatCustomerMessageForOdooOptional } from "@/lib/portal-customer-message";
 
 const optionalPhoneSchema = z
@@ -206,12 +210,30 @@ function validateRenewalSerialNumbers(
   });
 }
 
+function validatePortalPurchasableItems(
+  items: Array<z.infer<typeof portalCartLineSchema>>,
+  ctx: z.RefinementCtx,
+): void {
+  items.forEach((item, index) => {
+    if (!isPortalPurchasableLineItem(item)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: portalPurchasableValidationError(item.productName),
+        path: ["items", index, "productName"],
+      });
+    }
+  });
+}
+
 export const portalCartSchema = z
   .object({
     duration: z.enum(["1year", "3year"]),
     items: z.array(portalCartLineSchema).max(50),
   })
-  .superRefine((value, ctx) => validateRenewalSerialNumbers(value.items, ctx));
+  .superRefine((value, ctx) => {
+    validatePortalPurchasableItems(value.items, ctx);
+    validateRenewalSerialNumbers(value.items, ctx);
+  });
 
 export type PortalCartValidated = z.infer<typeof portalCartSchema>;
 
@@ -231,7 +253,10 @@ export const placeOrderSchema = z
     amountPaid: z.number().positive().optional(),
     paymentMethod: z.string().max(128).trim().optional(),
   })
-  .superRefine((value, ctx) => validateRenewalSerialNumbers(value.items, ctx));
+  .superRefine((value, ctx) => {
+    validatePortalPurchasableItems(value.items, ctx);
+    validateRenewalSerialNumbers(value.items, ctx);
+  });
 
 export type PlaceOrderValidated = z.infer<typeof placeOrderSchema>;
 
