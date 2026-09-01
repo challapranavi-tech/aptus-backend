@@ -7,19 +7,19 @@ const HELP_VIDEOS = [
     title: "AutoCAD: getting started",
     product: "AutoCAD",
     duration: "4:12",
-    href: "/portal/products",
+    href: "/software-solutions",
   },
   {
     title: "3ds Max: rendering basics",
     product: "3ds Max",
     duration: "7:40",
-    href: "/portal/products",
+    href: "/software-solutions",
   },
   {
     title: "Acrobat Pro: e-signatures",
     product: "Adobe Acrobat",
     duration: "3:05",
-    href: "/portal/products",
+    href: "/software-solutions",
   },
 ] as const;
 

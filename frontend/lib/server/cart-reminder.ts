@@ -53,7 +53,7 @@ export async function maybeSendCartReminderForActor(
       (item) => `${item.productName} (${item.category}) × ${item.quantity}`,
     ),
     duration: cart.duration,
-    continueUrl: `${portalUrl}/portal/products#cart`,
+    continueUrl: `${portalUrl}/software-solutions#cart`,
   });
 
   const result = await sendPortalEmail({

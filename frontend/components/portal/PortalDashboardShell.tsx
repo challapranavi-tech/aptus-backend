@@ -42,7 +42,7 @@ type NavMeta = {
 
 const NAV_ITEMS: PortalNavEntry[] = [
   { href: "/portal/dashboard", label: "Dashboard", icon: "dashboard" },
-  { href: "/portal/products", label: "Products", icon: "box" },
+  { href: "/software-solutions", label: "Products", icon: "box" },
   { href: "/portal/cart", label: "Cart", icon: "cart" },
   { href: "/portal/orders", label: "Orders", icon: "orders" },
   { href: "/portal/invoices", label: "Invoices", icon: "invoices" },

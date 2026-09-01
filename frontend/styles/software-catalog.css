@@ -1,0 +1,337 @@
+/* Unified /software-solutions product catalog page */
+
+.aptus-software-catalog-page {
+  background: #f4f7fb;
+}
+
+/* ── Hero ── */
+.aptus-software-catalog-hero {
+  color: #fff;
+  min-height: clamp(420px, 58vh, 640px);
+  overflow: hidden;
+  position: relative;
+}
+
+.aptus-software-catalog-hero__bg {
+  background-position: center;
+  background-size: cover;
+  inset: 0;
+  position: absolute;
+  transform: scale(1.04);
+}
+
+.aptus-software-catalog-hero__overlay {
+  background: linear-gradient(
+    125deg,
+    rgba(10, 22, 55, 0.88) 0%,
+    rgba(19, 82, 163, 0.72) 52%,
+    rgba(41, 98, 242, 0.55) 100%
+  );
+  inset: 0;
+  position: absolute;
+}
+
+.aptus-software-catalog-hero__content {
+  margin: 0 auto;
+  max-width: 920px;
+  padding: clamp(4rem, 10vw, 6.5rem) 1.25rem 3.5rem;
+  position: relative;
+  text-align: center;
+  z-index: 1;
+}
+
+.aptus-software-catalog-hero__eyebrow {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+}
+
+.aptus-software-catalog-hero__title {
+  font-size: clamp(1.85rem, 4.5vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0 0 0.85rem;
+}
+
+.aptus-software-catalog-hero__tagline {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  margin: 0 0 1.25rem;
+}
+
+.aptus-software-catalog-hero__intro {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 0 auto 1.75rem;
+  max-width: 760px;
+  text-align: left;
+}
+
+.aptus-software-catalog-hero__intro p {
+  margin: 0 0 0.85rem;
+}
+
+.aptus-software-catalog-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.aptus-software-catalog-hero__btn {
+  background: #1352a3;
+  border-radius: 999px;
+  color: #fff;
+  display: inline-block;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.aptus-software-catalog-hero__btn:hover {
+  background: #0e3d7a;
+  transform: translateY(-1px);
+}
+
+.aptus-software-catalog-hero__btn--ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+}
+
+.aptus-software-catalog-hero__btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ── Catalog panel ── */
+.aptus-software-catalog {
+  padding: 2.5rem 0 3.5rem;
+}
+
+.aptus-software-catalog__inner {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 1.25rem;
+}
+
+.aptus-software-catalog__header {
+  margin-bottom: 1.5rem;
+}
+
+.aptus-software-catalog__title {
+  color: #1a1a2e;
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-weight: 700;
+  margin: 0 0 0.35rem;
+}
+
+.aptus-software-catalog__subtitle {
+  color: #64748b;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.aptus-software-catalog__card {
+  display: flex;
+  flex-direction: column;
+}
+
+.aptus-software-catalog__thumb {
+  align-items: center;
+  background: #f8fafc;
+  border-radius: 10px;
+  display: flex;
+  height: 72px;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  width: 72px;
+}
+
+.aptus-software-catalog__thumb img {
+  max-height: 56px;
+  max-width: 56px;
+  object-fit: contain;
+}
+
+/* Reused portal catalog controls (public page) */
+.aptus-software-catalog .aptus-portal-products__toolbar {
+  margin-bottom: 0.75rem;
+}
+
+.aptus-software-catalog .aptus-portal-products__search input {
+  background: #fff;
+  border: 1px solid #dbe3ef;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  padding: 0.65rem 0.85rem;
+  width: 100%;
+}
+
+.aptus-software-catalog .aptus-portal-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 1.25rem;
+}
+
+.aptus-software-catalog .aptus-portal-chip {
+  background: #fff;
+  border: 1px solid #dbe3ef;
+  border-radius: 999px;
+  color: #334155;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.4rem 0.85rem;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.aptus-software-catalog .aptus-portal-chip.is-active {
+  background: #1352a3;
+  border-color: #1352a3;
+  color: #fff;
+}
+
+.aptus-software-catalog .aptus-portal-products__grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.aptus-software-catalog .aptus-portal-products__card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(24, 39, 56, 0.04);
+  padding: 1.1rem 1.15rem;
+}
+
+.aptus-software-catalog .aptus-portal-products__icon {
+  align-items: center;
+  border-radius: 8px;
+  display: inline-flex;
+  font-size: 0.7rem;
+  font-weight: 700;
+  height: 36px;
+  justify-content: center;
+  margin-bottom: 0.65rem;
+  width: 36px;
+}
+
+.aptus-software-catalog .aptus-portal-products__icon--danger {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.aptus-software-catalog .aptus-portal-products__icon--accent {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.aptus-software-catalog .aptus-portal-products__icon--success {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.aptus-software-catalog .aptus-portal-products__icon--warning {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.aptus-software-catalog .aptus-portal-products__name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin: 0 0 0.15rem;
+}
+
+.aptus-software-catalog .aptus-portal-products__cat {
+  color: #64748b;
+  font-size: 0.75rem;
+  margin: 0 0 0.75rem;
+}
+
+.aptus-software-catalog .aptus-portal-products__foot {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: auto;
+}
+
+.aptus-software-catalog .aptus-portal-products__price {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.aptus-software-catalog .aptus-portal-products__actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.aptus-software-catalog .aptus-portal-btn {
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  color: #1e293b;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.4rem 0.7rem;
+}
+
+.aptus-software-catalog .aptus-portal-btn:hover {
+  background: #f8fafc;
+}
+
+.aptus-software-catalog .aptus-portal-btn--primary {
+  background: #1352a3;
+  border-color: #1352a3;
+  color: #fff;
+}
+
+.aptus-software-catalog .aptus-portal-btn--primary:hover {
+  background: #0e3d7a;
+}
+
+.aptus-software-catalog .aptus-portal-products__toast {
+  color: #15803d;
+  font-size: 0.8125rem;
+  margin: 0 0 0.75rem;
+}
+
+.aptus-software-catalog .aptus-overview-compact__link {
+  color: #1352a3;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.aptus-software-catalog .aptus-overview-compact__link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 1024px) {
+  .aptus-software-catalog .aptus-portal-products__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .aptus-software-catalog .aptus-portal-products__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .aptus-software-catalog-hero__intro {
+    text-align: center;
+  }
+}

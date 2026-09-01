@@ -309,7 +309,7 @@ export function CartCheckoutPanel() {
                 <span>
                   {itemCount} item{itemCount === 1 ? "" : "s"}
                 </span>
-                <Link href="/portal/products" className="aptus-overview-compact__link">
+                <Link href="/software-solutions" className="aptus-overview-compact__link">
                   Continue shopping
                 </Link>
               </div>
@@ -318,7 +318,7 @@ export function CartCheckoutPanel() {
             {cart.items.length === 0 ? (
               <div className="aptus-cart-checkout__empty">
                 <p>Your cart is empty.</p>
-                <Link href="/portal/products" className="btn btn-aptus-primary">
+                <Link href="/software-solutions" className="btn btn-aptus-primary">
                   Browse products
                 </Link>
               </div>
@@ -481,7 +481,7 @@ export function CartCheckoutPanel() {
             >
               Proceed to Checkout →
             </button>
-            <Link href="/portal/products" className="aptus-cart-summary__back">
+            <Link href="/software-solutions" className="aptus-cart-summary__back">
               ← Continue Shopping
             </Link>
           </aside>

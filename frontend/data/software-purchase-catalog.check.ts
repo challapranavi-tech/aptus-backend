@@ -34,10 +34,10 @@ assert.equal(lookupPortalSku("AutoCAD LT", "3year", "renew")?.price, 561.63);
 assert.equal(productSlugFromHref(autocad!.product.href), "autocad");
 assert.match(portalProductDetailHref(autocad!.product), /^\/portal\/products\/autocad$/);
 
-assert.equal(portalProductsHref(), "/portal/products");
-assert.equal(portalProductsHref("autodesk"), "/portal/products?category=autodesk");
+assert.equal(portalProductsHref(), "/software-solutions");
+assert.equal(portalProductsHref("autodesk"), "/software-solutions?brand=autodesk");
 const revit = lookupPurchaseProductBySlug("revit");
 assert.ok(revit);
-assert.equal(portalProductsHref(revit!.category.id), "/portal/products?category=autodesk");
+assert.equal(portalProductsHref(revit!.category.id), "/software-solutions?brand=autodesk");
 
 console.log("software-purchase-catalog.check: ok");

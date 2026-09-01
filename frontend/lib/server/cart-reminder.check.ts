@@ -6,7 +6,7 @@ const mail = formatCartReminderEmail({
   customerName: "Test User",
   products: ["AutoCAD (Autodesk) × 1"],
   duration: "1year",
-  continueUrl: "https://example.com/portal/products#cart",
+  continueUrl: "https://example.com/software-solutions#cart",
 });
 
 assert.equal(CART_REMINDER_INTERVAL_MS, 7 * 24 * 60 * 60 * 1000);

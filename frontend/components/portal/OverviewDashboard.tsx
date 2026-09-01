@@ -136,7 +136,7 @@ export function OverviewDashboard() {
                     <Link href="/portal/subscriptions">
                       <PortalNavIcon name="key" /> View licenses
                     </Link>
-                    <Link href="/portal/products">
+                    <Link href="/software-solutions">
                       <PortalNavIcon name="box" /> Buy software
                     </Link>
                   </div>
@@ -186,7 +186,7 @@ export function OverviewDashboard() {
             {activeSoftware.length === 0 ? (
               <p className="aptus-overview-compact__empty">
                 No licenses yet.{" "}
-                <Link href="/portal/products" className="aptus-overview-compact__link">
+                <Link href="/software-solutions" className="aptus-overview-compact__link">
                   Browse products
                 </Link>
               </p>
@@ -211,7 +211,7 @@ export function OverviewDashboard() {
                         </div>
                       </div>
                       {expired ? (
-                        <Link href="/portal/products" className="aptus-overview-compact__tile-btn">
+                        <Link href="/software-solutions" className="aptus-overview-compact__tile-btn">
                           Renew license
                         </Link>
                       ) : soon ? (
@@ -246,7 +246,7 @@ export function OverviewDashboard() {
             {recentOrders.length === 0 ? (
               <p className="aptus-overview-compact__empty">
                 No orders yet.{" "}
-                <Link href="/portal/products" className="aptus-overview-compact__link">
+                <Link href="/software-solutions" className="aptus-overview-compact__link">
                   Browse products
                 </Link>
               </p>

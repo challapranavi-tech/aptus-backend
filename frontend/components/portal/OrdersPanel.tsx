@@ -90,7 +90,7 @@ export function OrdersPanel({ orders, loading, error, limit }: OrdersPanelProps)
         <div className="aptus-odoo-subscriptions__state">
           <p>
             No orders in this view yet.{" "}
-            <Link href="/portal/products" className="aptus-overview-compact__link">
+            <Link href="/software-solutions" className="aptus-overview-compact__link">
               Browse products
             </Link>{" "}
             to place an order.

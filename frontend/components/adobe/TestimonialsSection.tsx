@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import styles from "@/styles/adobe/adobe.module.css";
 import { AdobeLink } from "./DeadLink";
-import { ADOBE_ROUTES } from "./routes";
+import { softwareCatalogHref } from "@/lib/software-catalog-links";
 
 const TESTIMONIALS = [
   {
@@ -68,7 +68,7 @@ export function TestimonialsSection() {
                 </p>
                 <div>
                   <AdobeLink
-                    href={ADOBE_ROUTES.business}
+                    href={softwareCatalogHref("adobe")}
                     className={`${styles.btnPrimary} ${styles.btnWhite}`}
                   >
                     Explore Adobe solutions

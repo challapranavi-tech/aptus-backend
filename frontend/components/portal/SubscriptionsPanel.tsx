@@ -47,7 +47,7 @@ export function SubscriptionsPanel({
         <div className="aptus-portal-page-card aptus-odoo-subscriptions__state">
           <p>
             No active licenses yet.{" "}
-            <Link href="/portal/products" className="aptus-overview-compact__link">
+            <Link href="/software-solutions" className="aptus-overview-compact__link">
               Buy software
             </Link>{" "}
             or check{" "}

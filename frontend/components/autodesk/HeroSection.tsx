@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useRef, useState } from "react";
+import { softwareCatalogHref } from "@/lib/software-catalog-links";
 import shared from "@/styles/autodesk/autodesk.module.css";
 import styles from "./HeroSection.module.css";
 
@@ -74,7 +75,7 @@ export function HeroSection() {
               project-based work and product exploration.
             </p>
             <div className={styles.actions}>
-              <Link href="/autocad" className={shared.btnPrimary}>
+              <Link href={softwareCatalogHref("autodesk")} className={shared.btnPrimary}>
                 Explore products
               </Link>
             </div>

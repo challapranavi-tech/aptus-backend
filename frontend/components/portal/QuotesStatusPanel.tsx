@@ -34,7 +34,7 @@ export function QuotesStatusPanel() {
             recorded, or the opportunity changes.
           </p>
         </div>
-        <Link href="/portal/products" className="aptus-overview-compact__link">
+        <Link href="/software-solutions" className="aptus-overview-compact__link">
           Request a Quote
         </Link>
       </div>
@@ -56,7 +56,7 @@ export function QuotesStatusPanel() {
         <div className="aptus-odoo-subscriptions__state">
           <p>
             No quote requests yet.{" "}
-            <Link href="/portal/products" className="aptus-overview-compact__link">
+            <Link href="/software-solutions" className="aptus-overview-compact__link">
               Request a Quote
             </Link>{" "}
             from Products — status will appear here once sales updates Odoo.

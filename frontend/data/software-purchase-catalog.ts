@@ -288,8 +288,8 @@ export function portalProductDetailHref(product: SoftwarePurchaseProduct): strin
 
 /** Products list, optionally pre-selecting a category pill (e.g. Microsoft, Autodesk). */
 export function portalProductsHref(categoryId?: string): string {
-  if (!categoryId) return "/portal/products";
-  return `/portal/products?category=${encodeURIComponent(categoryId)}`;
+  if (!categoryId) return "/software-solutions";
+  return `/software-solutions?brand=${encodeURIComponent(categoryId)}`;
 }
 
 export function lookupPurchaseProductBySlug(
@@ -434,6 +434,15 @@ export function buildSoftwarePurchaseCatalog(): SoftwarePurchaseCategory[] {
   }));
 }
 
+export function createCatalogProduct(label: string, href: string): SoftwarePurchaseProduct {
+  return {
+    name: label,
+    href,
+    partNumber: partNumberFor(label),
+    ...guidePrice(label),
+  };
+}
+
 export const SOFTWARE_PURCHASE_CATALOG: SoftwarePurchaseCategory[] = [
   {
     id: "autodesk",
@@ -441,54 +450,14 @@ export const SOFTWARE_PURCHASE_CATALOG: SoftwarePurchaseCategory[] = [
     hint: "Design, BIM, and construction tools",
     href: "/autodesk",
     products: [
-      {
-        name: "AutoCAD",
-        href: "/autocad",
-        partNumber: partNumberFor("AutoCAD"),
-        ...guidePrice("AutoCAD"),
-      },
-      {
-        name: "Civil 3D",
-        href: "/civil-3d",
-        partNumber: partNumberFor("Civil 3D"),
-        ...guidePrice("Civil 3D"),
-      },
-      {
-        name: "AEC Collection",
-        href: "/aec-collection",
-        partNumber: partNumberFor("AEC Collection"),
-        ...guidePrice("AEC Collection"),
-      },
-      {
-        name: "AutoCAD LT",
-        href: "/autocad-lt",
-        partNumber: partNumberFor("AutoCAD LT"),
-        ...guidePrice("AutoCAD LT"),
-      },
-      {
-        name: "AutoCAD Revit LT Suite",
-        href: "/autocad-revit-lt-suite",
-        partNumber: partNumberFor("AutoCAD Revit LT Suite"),
-        ...guidePrice("AutoCAD Revit LT Suite"),
-      },
-      {
-        name: "3ds Max",
-        href: "/3ds-max",
-        partNumber: partNumberFor("3ds Max"),
-        ...guidePrice("3ds Max"),
-      },
-      {
-        name: "Navisworks Manage",
-        href: "/navisworks",
-        partNumber: partNumberFor("Navisworks Manage"),
-        ...guidePrice("Navisworks Manage"),
-      },
-      {
-        name: "Revit",
-        href: "/revit",
-        partNumber: partNumberFor("Revit"),
-        ...guidePrice("Revit"),
-      },
+      createCatalogProduct("AutoCAD", "/autocad"),
+      createCatalogProduct("Civil 3D", "/civil-3d"),
+      createCatalogProduct("AEC Collection", "/aec-collection"),
+      createCatalogProduct("AutoCAD LT", "/autocad-lt"),
+      createCatalogProduct("AutoCAD Revit LT Suite", "/autocad-revit-lt-suite"),
+      createCatalogProduct("3ds Max", "/3ds-max"),
+      createCatalogProduct("Navisworks Manage", "/navisworks"),
+      createCatalogProduct("Revit", "/revit"),
     ],
   },
 ];

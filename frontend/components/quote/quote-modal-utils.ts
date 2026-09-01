@@ -310,7 +310,7 @@ if (process.env.NODE_ENV === "development") {
 
   const portalPathSafe = quoteContextFromLink(
     mk("#form", "Request Quote", "adobe", "Adobe Photoshop"),
-    "/portal/products",
+    "/software-solutions",
   );
   console.assert(portalPathSafe.family === "adobe");
   console.assert(portalPathSafe.defaultProduct === "Adobe Photoshop");

@@ -1,6 +1,6 @@
 import { AdobeLink } from "./DeadLink";
 import styles from "@/styles/adobe/adobe.module.css";
-import { ADOBE_ROUTES } from "./routes";
+import { softwareCatalogHref } from "@/lib/software-catalog-links";
 
 /** "Tools that work for you." — garage-door cover over news (view timeline). */
 export function CTASection() {
@@ -25,7 +25,7 @@ export function CTASection() {
           Bring any idea to life with products for creators, businesses, and beyond.
         </p>
         <AdobeLink
-          href={ADOBE_ROUTES.business}
+          href={softwareCatalogHref("adobe")}
           className={`${styles.btnPrimary} ${styles.btnOutlineWhiteLg}`}
         >
           Explore Adobe solutions

@@ -1,6 +1,13 @@
+"use client";
+
 import { Container } from "@/components/ui";
+import {
+  resolveSoftwareCatalogHref,
+  slugFromPathname,
+} from "@/lib/software-catalog-links";
 import type { SoftwareLandingHero as SoftwareLandingHeroData } from "@/types";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface SoftwareLandingHeroProps {
   data: SoftwareLandingHeroData;
@@ -13,8 +20,8 @@ const btnClass: Record<"blue" | "green" | "sky", string> = {
 };
 
 export function SoftwareLandingHero({ data }: SoftwareLandingHeroProps) {
-  // Keep all CMS hero actions (including Request a Quote) — product-page
-  // quote CTAs sit under the description instead of the banner.
+  const pathname = usePathname() ?? "/";
+  const pageSlug = slugFromPathname(pathname);
   const actions = data.actions ?? [];
 
   return (
@@ -28,7 +35,7 @@ export function SoftwareLandingHero({ data }: SoftwareLandingHeroProps) {
             {actions.map((action) => (
               <Link
                 key={action.label}
-                href={action.href}
+                href={resolveSoftwareCatalogHref(pageSlug, action.href, action.label)}
                 className={`aptus-software-btn ${btnClass[action.tone ?? "blue"]}`}
               >
                 {action.label}
