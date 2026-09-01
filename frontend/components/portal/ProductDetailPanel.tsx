@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useAuth } from "@/context/AuthProvider";
 import { useQuoteModal } from "@/components/quote/QuoteModalProvider";
 import { quoteContextForPortalProduct } from "@/components/quote/quote-modal-utils";
 import { getProductConfig } from "@/data/product-options";
@@ -10,11 +9,11 @@ import {
   getProductDetailContent,
   type ProductDetailBlock,
 } from "@/data/product-detail-content";
+import { isPortalPurchasableProduct } from "@/data/software-full-catalog";
 import {
   formatOmanAmount,
   getProductCardMeta,
   getPurchaseProductImage,
-  portalProductsHref,
   type SoftwarePurchaseCategory,
   type SoftwarePurchaseProduct,
 } from "@/lib/order-pricing";
@@ -26,6 +25,10 @@ import {
   syncPortalCartWithServer,
   writePortalCart,
 } from "@/lib/portal-cart";
+import { fetchAuthMeShared } from "@/lib/auth-me-client";
+import { ensureSignedInForPurchase } from "@/lib/purchase-auth";
+import { softwareCatalogHref } from "@/lib/software-catalog-links";
+import type { ClientProfile } from "@/types/profile";
 import type { OrderLineItem, PortalOrder, PurchaseType } from "@/types/orders";
 import { AutodeskFreeTrialLink } from "@/components/shared/AutodeskFreeTrialLink";
 import { ProductDetailBlocks } from "./ProductDetailBlocks";
@@ -100,12 +103,13 @@ type ProductDetailPanelProps = {
 };
 
 export function ProductDetailPanel({ product, category }: ProductDetailPanelProps) {
-  const { user, ready: authReady } = useAuth();
   const { openQuote } = useQuoteModal();
-  const productsHref = portalProductsHref(category.id);
+  const productsHref = softwareCatalogHref(category.id);
+  const purchasable = isPortalPurchasableProduct(product.href);
   const meta = getProductCardMeta(product, category.label);
   const imageSrc = getPurchaseProductImage(product.href);
   const config = useMemo(() => getProductConfig(product.name), [product.name]);
+  const [user, setUser] = useState<ClientProfile | null>(null);
   const [duration, setDuration] = useState<Duration>("1year");
   const [purchaseType, setPurchaseType] = useState<PurchaseType>("new");
   const [packageId, setPackageId] = useState<string | undefined>(
@@ -137,22 +141,33 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
   };
   const unit = cartLineUnitPrice(draftItem, duration);
   const bullets = featureBullets(product.name);
-  const detailContent = useMemo(() => getProductDetailContent(product.name), [product.name]);
+  const detailContent = useMemo(
+    () =>
+      getProductDetailContent(product.name, {
+        brandLabel: category.label,
+        description: meta.description,
+      }),
+    [product.name, category.label, meta.description],
+  );
   const priceBlocks = useMemo(() => priceDetailBlocks(product.name), [product.name]);
-  const activeBlocks = activeTab === "priceDetails" ? priceBlocks : detailContent?.[activeTab];
+  const activeBlocks = activeTab === "priceDetails" ? priceBlocks : detailContent[activeTab];
   const hasActiveBlocks = Boolean(activeBlocks?.length);
 
   useEffect(() => {
     let cancelled = false;
     async function hydrateCart() {
-      const cart = user ? await syncPortalCartWithServer() : readPortalCart();
+      const me = await fetchAuthMeShared();
+      const loggedIn = me.ok ? me.user : null;
+      if (cancelled) return;
+      setUser(loggedIn);
+
+      const cart = loggedIn ? await syncPortalCartWithServer() : readPortalCart();
       if (cancelled) return;
       const existing = cart.items.find(
         (item) =>
           item.category === category.label && item.productName === product.name,
       );
       if (existing) {
-        // Quantity on this page is "amount to add", not cart total — leave at 1.
         if (existing.duration) setDuration(existing.duration);
         if (existing.purchaseType) setPurchaseType(existing.purchaseType);
         if (existing.packageId) setPackageId(existing.packageId);
@@ -161,12 +176,11 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
       }
       setHydrated(true);
     }
-    if (!authReady) return;
     void hydrateCart();
     return () => {
       cancelled = true;
     };
-  }, [authReady, user?.id, category.label, product.name]);
+  }, [category.label, product.name]);
 
   function handlePurchaseTypeChange(nextPurchaseType: PurchaseType) {
     setPurchaseType(nextPurchaseType);
@@ -176,7 +190,12 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
     }
   }
 
-  function addToCart() {
+  async function addToCart() {
+    if (!purchasable) return;
+
+    const signedIn = await ensureSignedInForPurchase(setMessage);
+    if (!signedIn) return;
+
     if (showSerialNumber && !serialNumber.trim()) {
       setSerialError("Serial number is required for renewals.");
       setMessage(null);
@@ -204,7 +223,9 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
       items: Object.values(selections),
     };
     writePortalCart(cart);
-    if (user) {
+    const me = await fetchAuthMeShared();
+    if (me.ok) {
+      setUser(me.user);
       if (persistTimerRef.current) clearTimeout(persistTimerRef.current);
       void persistPortalCartToServer(cart);
     }
@@ -213,7 +234,7 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
     setMessage(`${product.name} added to cart.`);
   }
 
-  if (!hydrated && authReady) {
+  if (!hydrated) {
     return (
       <div className="aptus-product-detail__loading" role="status">
         Loading product…
@@ -231,9 +252,9 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
       </Link>
 
       <nav className="aptus-product-detail__breadcrumb" aria-label="Breadcrumb">
-        <Link href="/portal/dashboard">Home</Link>
+        <Link href="/">Home</Link>
         <span aria-hidden="true">›</span>
-        <Link href={productsHref}>Products</Link>
+        <Link href="/software-solutions">Software</Link>
         <span aria-hidden="true">›</span>
         <Link href={productsHref}>{category.label}</Link>
         <span aria-hidden="true">›</span>
@@ -315,92 +336,103 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
             </ul>
 
             <div className="aptus-product-detail__purchase">
-              <p className="aptus-product-detail__price">
-                {unit
-                  ? config.kind === "renewal"
-                    ? `${formatOmanAmount(unit)}/${duration === "3year" ? "3yr" : "year"}`
-                    : formatOmanAmount(unit)
-                  : "Quote on request"}
-              </p>
-              <p className="aptus-product-detail__price-note">
-                {config.kind === "bundle"
-                  ? "One-time bundle price · Includes support & updates"
-                  : config.kind === "levels"
-                    ? `${config.levels.find((level) => level.id === levelId)?.label ?? config.levels[0]?.label ?? "Level 1"} · Includes support & updates`
-                    : `${purchaseType === "renew" ? "Renewal" : "Commercial New"} · ${
-                        duration === "3year" ? "3 Years (36 months)" : "Annual (12 months)"
-                      } · Includes support & updates`}
-              </p>
+              {purchasable ? (
+                <>
+                  <p className="aptus-product-detail__price">
+                    {unit
+                      ? config.kind === "renewal"
+                        ? `${formatOmanAmount(unit)}/${duration === "3year" ? "3yr" : "year"}`
+                        : formatOmanAmount(unit)
+                      : "Quote on request"}
+                  </p>
+                  <p className="aptus-product-detail__price-note">
+                    {config.kind === "bundle"
+                      ? "One-time bundle price · Includes support & updates"
+                      : config.kind === "levels"
+                        ? `${config.levels.find((level) => level.id === levelId)?.label ?? config.levels[0]?.label ?? "Level 1"} · Includes support & updates`
+                        : `${purchaseType === "renew" ? "Renewal" : "Commercial New"} · ${
+                            duration === "3year" ? "3 Years (36 months)" : "Annual (12 months)"
+                          } · Includes support & updates`}
+                  </p>
 
-              <ProductPurchaseOptions
-                className="aptus-product-detail__purchase-options"
-                config={config}
-                duration={duration}
-                purchaseType={purchaseType}
-                packageId={packageId}
-                levelId={levelId}
-                onDurationChange={setDuration}
-                onPurchaseTypeChange={handlePurchaseTypeChange}
-                onPackageChange={setPackageId}
-                onLevelChange={setLevelId}
-                packageLayout="cards"
-              />
+                  <ProductPurchaseOptions
+                    className="aptus-product-detail__purchase-options"
+                    config={config}
+                    duration={duration}
+                    purchaseType={purchaseType}
+                    packageId={packageId}
+                    levelId={levelId}
+                    onDurationChange={setDuration}
+                    onPurchaseTypeChange={handlePurchaseTypeChange}
+                    onPackageChange={setPackageId}
+                    onLevelChange={setLevelId}
+                    packageLayout="cards"
+                  />
 
-              {showSerialNumber ? (
-                <div className="aptus-product-detail__serial">
-                  <label htmlFor="product-serial-number">
-                    <span>Serial number</span>
-                    <input
-                      id="product-serial-number"
-                      type="text"
-                      value={serialNumber}
-                      required
-                      aria-required="true"
-                      aria-invalid={serialError ? true : undefined}
-                      placeholder="Enter your existing license serial"
-                      onChange={(event) => {
-                        setSerialNumber(event.target.value);
-                        if (serialError) setSerialError(null);
-                      }}
-                    />
-                  </label>
-                  {serialError ? (
-                    <p className="aptus-product-detail__serial-error" role="alert">
-                      {serialError}
+                  {showSerialNumber ? (
+                    <div className="aptus-product-detail__serial">
+                      <label htmlFor="product-serial-number">
+                        <span>Serial number</span>
+                        <input
+                          id="product-serial-number"
+                          type="text"
+                          value={serialNumber}
+                          required
+                          aria-required="true"
+                          aria-invalid={serialError ? true : undefined}
+                          placeholder="Enter your existing license serial"
+                          onChange={(event) => {
+                            setSerialNumber(event.target.value);
+                            if (serialError) setSerialError(null);
+                          }}
+                        />
+                      </label>
+                      {serialError ? (
+                        <p className="aptus-product-detail__serial-error" role="alert">
+                          {serialError}
+                        </p>
+                      ) : null}
+                    </div>
+                  ) : null}
+
+                  <div className="aptus-product-detail__qty">
+                    <span>Quantity</span>
+                    <div className="aptus-product-detail__qty-controls">
+                      <button
+                        type="button"
+                        aria-label="Decrease quantity"
+                        onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                      >
+                        −
+                      </button>
+                      <span>{quantity}</span>
+                      <button
+                        type="button"
+                        aria-label="Increase quantity"
+                        onClick={() => setQuantity((q) => Math.min(999, q + 1))}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="aptus-product-detail__btn aptus-product-detail__btn--primary"
+                    onClick={() => void addToCart()}
+                  >
+                    Add to Cart
+                  </button>
+                  {!user ? (
+                    <p className="aptus-product-detail__sign-in-note">
+                      Sign in to purchase — you will be redirected to sign in when adding to cart.
                     </p>
                   ) : null}
-                </div>
-              ) : null}
-
-              <div className="aptus-product-detail__qty">
-                <span>Quantity</span>
-                <div className="aptus-product-detail__qty-controls">
-                  <button
-                    type="button"
-                    aria-label="Decrease quantity"
-                    onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                  >
-                    −
-                  </button>
-                  <span>{quantity}</span>
-                  <button
-                    type="button"
-                    aria-label="Increase quantity"
-                    onClick={() => setQuantity((q) => Math.min(999, q + 1))}
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-
-              <button
-                type="button"
-                className="aptus-product-detail__btn aptus-product-detail__btn--primary"
-                onClick={() => addToCart()}
-              >
-                Add to Cart
-              </button>
-              <AutodeskFreeTrialLink productHref={product.href} />
+                  <AutodeskFreeTrialLink productHref={product.href} />
+                </>
+              ) : (
+                <p className="aptus-product-detail__price">Quote on request</p>
+              )}
               <button
                 type="button"
                 className="aptus-product-detail__btn aptus-product-detail__btn--outline"

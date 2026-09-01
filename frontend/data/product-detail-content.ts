@@ -264,12 +264,100 @@ const CONTENT: Record<string, ProductDetailContent> = {
   }),
 };
 
+function genericFeatureBullets(productName: string): string[] {
+  const lower = productName.toLowerCase();
+  if (lower.includes("autocad") || lower.includes("revit") || lower.includes("civil")) {
+    return [
+      "Professional design and documentation workflows",
+      "Industry-specific toolsets and libraries",
+      "Cloud collaboration and file sharing",
+      "Automation, standards, and productivity tools",
+    ];
+  }
+  if (lower.includes("adobe") || lower.includes("photoshop") || lower.includes("illustrator")) {
+    return [
+      "Creative production and editing tools",
+      "Cloud libraries and asset management",
+      "Team collaboration and review workflows",
+      "Regular feature updates and security patches",
+    ];
+  }
+  if (lower.includes("microsoft") || lower.includes("365") || lower.includes("visio") || lower.includes("power bi")) {
+    return [
+      "Business productivity and analytics",
+      "Secure cloud sync across devices",
+      "Enterprise-grade security and compliance",
+      "Ongoing updates and publisher support",
+    ];
+  }
+  if (lower.includes("security") || lower.includes("fortinet") || lower.includes("sophos") || lower.includes("kaspersky")) {
+    return [
+      "Threat protection and monitoring",
+      "Centralized administration",
+      "Policy-based access control",
+      "Vendor updates and security intelligence",
+    ];
+  }
+  return [
+    "Genuine commercial licensing",
+    "Publisher-backed support options",
+    "Implementation and renewal assistance from Aptus",
+    "Flexible subscription or perpetual terms where available",
+  ];
+}
+
+export function buildGenericProductContent(
+  productName: string,
+  brandLabel: string,
+  description?: string,
+): ProductDetailContent {
+  return buildProductContent({
+    overview:
+      description ??
+      `${productName} from ${brandLabel} is available through Aptus Infotech with genuine licensing, expert guidance, and local support in Oman. We help you choose the right edition, deploy seats, and manage renewals so your team stays productive.`,
+    keyFeatures: genericFeatureBullets(productName),
+    whatsIncluded: [
+      [
+        "Software license",
+        `Authorized ${productName} license or subscription as quoted for your organization.`,
+        "Electronic delivery (ELD)",
+      ],
+      [
+        "Publisher support",
+        "Access to vendor support and updates according to your license agreement.",
+        "Vendor portal",
+      ],
+      [
+        "Aptus account management",
+        "Dedicated Aptus team for quoting, provisioning, renewals, and billing.",
+        "Aptus customer portal",
+      ],
+    ],
+    subscriptionLicensing: [
+      "Commercial New: For organizations adding new seats or starting a new agreement.",
+      "Renewal Subscription: Extend an active contract to avoid interruption of service.",
+      "Term options: Annual (12-month) and multi-year agreements where offered by the publisher.",
+      "Delivery: Licenses are provisioned electronically through Aptus with setup guidance as needed.",
+    ],
+  });
+}
+
 function normalizeName(label: string): string {
   return label.trim().toLowerCase();
 }
 
-export function getProductDetailContent(productName: string): ProductDetailContent | null {
-  return CONTENT[normalizeName(productName)] ?? null;
+export function getProductDetailContent(
+  productName: string,
+  fallback?: { brandLabel: string; description?: string },
+): ProductDetailContent {
+  return (
+    CONTENT[normalizeName(productName)] ??
+    buildGenericProductContent(
+      productName,
+      fallback?.brandLabel ?? "Software",
+      fallback?.description,
+    )
+  );
 }
 
 export function productDetailContentKeys(): string[] {

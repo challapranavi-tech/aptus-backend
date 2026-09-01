@@ -326,6 +326,27 @@
   }
 }
 
+.aptus-software-product-detail-page__shell {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 1.5rem 1.25rem 2.5rem;
+}
+
+.aptus-software-product-detail-page__marketing-fallback {
+  display: none;
+}
+
+.aptus-product-detail__sign-in-note {
+  color: #64748b;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  margin: 0.35rem 0 0;
+}
+
+.aptus-portal-products__toast--sign-in {
+  color: #b45309;
+}
+
 @media (max-width: 640px) {
   .aptus-software-catalog .aptus-portal-products__grid {
     grid-template-columns: 1fr;

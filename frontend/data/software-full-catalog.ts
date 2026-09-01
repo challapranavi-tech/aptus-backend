@@ -157,9 +157,31 @@ export function buildSoftwareFullCatalog(): SoftwarePurchaseCategory[] {
 
 export const SOFTWARE_FULL_CATALOG = buildSoftwareFullCatalog();
 
-export function productDetailHref(product: SoftwarePurchaseProduct): string {
-  if (isPortalPurchasableProduct(product.href)) {
-    return `/portal/products/${productSlugFromHref(product.href)}`;
+export function lookupFullCatalogProductBySlug(
+  slug: string,
+): { product: SoftwarePurchaseProduct; brand: SoftwarePurchaseCategory } | undefined {
+  const needle = slug.trim().toLowerCase();
+  if (!needle) return undefined;
+  for (const brand of SOFTWARE_FULL_CATALOG) {
+    for (const product of brand.products) {
+      if (productSlugFromHref(product.href) === needle) {
+        return { product, brand };
+      }
+    }
   }
-  return product.href;
+  return undefined;
+}
+
+export function allFullCatalogProductSlugs(): string[] {
+  const slugs = new Set<string>();
+  for (const brand of SOFTWARE_FULL_CATALOG) {
+    for (const product of brand.products) {
+      slugs.add(productSlugFromHref(product.href));
+    }
+  }
+  return [...slugs];
+}
+
+export function productDetailHref(product: SoftwarePurchaseProduct): string {
+  return `/software-solutions/${productSlugFromHref(product.href)}`;
 }

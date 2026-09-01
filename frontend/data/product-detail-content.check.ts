@@ -23,8 +23,8 @@ for (const name of PORTAL_PRODUCT_NAMES) {
   );
 }
 
-assert.equal(getProductDetailContent("Adobe Acrobat Pro"), null);
-assert.equal(getProductDetailContent("Autodesk Build"), null);
+assert.ok(getProductDetailContent("Adobe Acrobat Pro").overview.length > 0);
+assert.ok(getProductDetailContent("Autodesk Build").overview.length > 0);
 
 const autocad = getProductDetailContent("AutoCAD")!;
 assert.ok(

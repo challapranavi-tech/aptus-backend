@@ -26,6 +26,7 @@ import {
   writePortalCart,
 } from "@/lib/portal-cart";
 import { fetchAuthMeShared } from "@/lib/auth-me-client";
+import { ensureSignedInForPurchase } from "@/lib/purchase-auth";
 import { AutodeskFreeTrialLink } from "@/components/shared/AutodeskFreeTrialLink";
 import type { ClientProfile } from "@/types/profile";
 import type { PortalOrder, PurchaseType } from "@/types/orders";
@@ -173,8 +174,12 @@ export function SoftwareCatalogPanel() {
     );
   }, [catalog, activeBrandId, query]);
 
-  function addToCart(brand: SoftwarePurchaseCategory, product: SoftwarePurchaseProduct) {
+  async function addToCart(brand: SoftwarePurchaseCategory, product: SoftwarePurchaseProduct) {
     if (!isPortalPurchasableProduct(product.href)) return;
+
+    const signedIn = await ensureSignedInForPurchase(setMessage);
+    if (!signedIn) return;
+
     const key = selectionKey(brand.label, product.name);
     const config = getProductConfig(product.name);
     setSelections((prev) => {
@@ -247,11 +252,18 @@ export function SoftwareCatalogPanel() {
         </div>
 
         {message ? (
-          <p role="status" className="aptus-portal-products__toast">
+          <p
+            role="status"
+            className={`aptus-portal-products__toast${
+              message.includes("Sign in") ? " aptus-portal-products__toast--sign-in" : ""
+            }`}
+          >
             {message}{" "}
-            <Link href="/portal/cart" className="aptus-overview-compact__link">
-              View cart
-            </Link>
+            {!message.includes("Sign in") ? (
+              <Link href="/portal/cart" className="aptus-overview-compact__link">
+                View cart
+              </Link>
+            ) : null}
           </p>
         ) : null}
 
@@ -312,7 +324,7 @@ export function SoftwareCatalogPanel() {
                         <button
                           type="button"
                           className="aptus-portal-btn"
-                          onClick={() => addToCart(brand, product)}
+                          onClick={() => void addToCart(brand, product)}
                         >
                           {inCart ? "Add another" : "Add to cart"}
                         </button>
