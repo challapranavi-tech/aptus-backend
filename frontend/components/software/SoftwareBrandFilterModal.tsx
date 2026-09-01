@@ -1,24 +1,29 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import type { SoftwarePurchaseCategory } from "@/lib/order-pricing";
 
 interface SoftwareBrandFilterModalProps {
   open: boolean;
   brands: SoftwarePurchaseCategory[];
-  activeBrandId: string;
+  selectedBrandIds: string[];
   onClose: () => void;
-  onSelect: (brandId: string) => void;
+  onApply: (brandIds: string[]) => void;
 }
 
 export function SoftwareBrandFilterModal({
   open,
   brands,
-  activeBrandId,
+  selectedBrandIds,
   onClose,
-  onSelect,
+  onApply,
 }: SoftwareBrandFilterModalProps) {
-  const dialogRef = useRef<HTMLDivElement>(null);
+  const [draftIds, setDraftIds] = useState<string[]>(selectedBrandIds);
+
+  useEffect(() => {
+    if (!open) return;
+    setDraftIds(selectedBrandIds);
+  }, [open, selectedBrandIds]);
 
   useEffect(() => {
     if (!open) return;
@@ -38,15 +43,26 @@ export function SoftwareBrandFilterModal({
 
   if (!open) return null;
 
-  function handleSelect(brandId: string) {
-    onSelect(brandId);
+  const allSelected = draftIds.length === 0;
+
+  function toggleBrand(brandId: string) {
+    setDraftIds((prev) =>
+      prev.includes(brandId) ? prev.filter((id) => id !== brandId) : [...prev, brandId],
+    );
+  }
+
+  function toggleAll(checked: boolean) {
+    setDraftIds(checked ? [] : brands.map((brand) => brand.id));
+  }
+
+  function handleApply() {
+    onApply(draftIds);
     onClose();
   }
 
   return (
     <div className="aptus-brand-filter-overlay" onClick={onClose} role="presentation">
       <div
-        ref={dialogRef}
         className="aptus-brand-filter-modal"
         role="dialog"
         aria-modal="true"
@@ -62,30 +78,47 @@ export function SoftwareBrandFilterModal({
           </button>
         </div>
 
-        <p className="aptus-brand-filter-modal__hint">Scroll to browse all brands</p>
+        <p className="aptus-brand-filter-modal__hint">Select one or more brands, or leave all checked for the full catalog.</p>
 
-        <div className="aptus-brand-filter-modal__scroll" role="listbox" aria-label="Software brands">
+        <div className="aptus-brand-filter-modal__list" role="group" aria-label="Software brands">
+          <label className="aptus-brand-filter-option">
+            <input
+              type="checkbox"
+              checked={allSelected}
+              onChange={(event) => toggleAll(event.target.checked)}
+            />
+            <span>All brands</span>
+          </label>
+
+          {brands.map((brand) => (
+            <label key={brand.id} className="aptus-brand-filter-option">
+              <input
+                type="checkbox"
+                checked={allSelected || draftIds.includes(brand.id)}
+                onChange={() => {
+                  if (allSelected) {
+                    setDraftIds([brand.id]);
+                    return;
+                  }
+                  toggleBrand(brand.id);
+                }}
+              />
+              <span>{brand.label}</span>
+            </label>
+          ))}
+        </div>
+
+        <div className="aptus-brand-filter-modal__actions">
           <button
             type="button"
-            role="option"
-            aria-selected={activeBrandId === "all"}
-            className={`aptus-brand-filter-chip${activeBrandId === "all" ? " is-active" : ""}`}
-            onClick={() => handleSelect("all")}
+            className="aptus-brand-filter-modal__btn aptus-brand-filter-modal__btn--ghost"
+            onClick={() => setDraftIds([])}
           >
-            All brands
+            Clear all
           </button>
-          {brands.map((brand) => (
-            <button
-              key={brand.id}
-              type="button"
-              role="option"
-              aria-selected={activeBrandId === brand.id}
-              className={`aptus-brand-filter-chip${activeBrandId === brand.id ? " is-active" : ""}`}
-              onClick={() => handleSelect(brand.id)}
-            >
-              {brand.label}
-            </button>
-          ))}
+          <button type="button" className="aptus-brand-filter-modal__btn" onClick={handleApply}>
+            Apply filters
+          </button>
         </div>
       </div>
     </div>

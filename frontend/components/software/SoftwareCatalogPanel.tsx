@@ -103,11 +103,11 @@ export function SoftwareCatalogPanel() {
   const catalog = SOFTWARE_FULL_CATALOG;
   const brandFromUrl = searchParams.get("brand");
   const [user, setUser] = useState<ClientProfile | null>(null);
-  const [activeBrandId, setActiveBrandId] = useState(() => {
+  const [selectedBrandIds, setSelectedBrandIds] = useState<string[]>(() => {
     if (brandFromUrl && catalog.some((brand) => brand.id === brandFromUrl)) {
-      return brandFromUrl;
+      return [brandFromUrl];
     }
-    return "all";
+    return [];
   });
   const [cartDuration, setCartDuration] = useState<Duration>("1year");
   const [selections, setSelections] = useState<Record<SelectionKey, Selection>>({});
@@ -121,7 +121,7 @@ export function SoftwareCatalogPanel() {
   useEffect(() => {
     if (!brandFromUrl) return;
     if (catalog.some((brand) => brand.id === brandFromUrl)) {
-      setActiveBrandId(brandFromUrl);
+      setSelectedBrandIds([brandFromUrl]);
     }
   }, [brandFromUrl, catalog]);
 
@@ -132,7 +132,7 @@ export function SoftwareCatalogPanel() {
 
   useEffect(() => {
     setShowAllProducts(false);
-  }, [activeBrandId, query]);
+  }, [selectedBrandIds, query]);
 
   function applyCartState(cart: ReturnType<typeof readPortalCart>) {
     setCartDuration(cart.duration);
@@ -209,7 +209,7 @@ export function SoftwareCatalogPanel() {
       product: SoftwarePurchaseProduct;
     }> = [];
     for (const brand of catalog) {
-      if (activeBrandId !== "all" && brand.id !== activeBrandId) continue;
+      if (selectedBrandIds.length > 0 && !selectedBrandIds.includes(brand.id)) continue;
       for (const product of brand.products) {
         rows.push({ brand, product });
       }
@@ -220,9 +220,9 @@ export function SoftwareCatalogPanel() {
       ({ brand, product }) =>
         product.name.toLowerCase().includes(q) || brand.label.toLowerCase().includes(q),
     );
-  }, [catalog, activeBrandId, query]);
+  }, [catalog, selectedBrandIds, query]);
 
-  const isDefaultView = activeBrandId === "all" && !query.trim();
+  const isDefaultView = selectedBrandIds.length === 0 && !query.trim();
 
   const visibleProducts = useMemo(() => {
     if (showAllProducts || !isDefaultView) return flatProducts;
@@ -287,9 +287,11 @@ export function SoftwareCatalogPanel() {
 
   const productCount = catalog.reduce((sum, brand) => sum + brand.products.length, 0);
   const activeBrandLabel =
-    activeBrandId === "all"
+    selectedBrandIds.length === 0
       ? "All brands"
-      : (catalog.find((brand) => brand.id === activeBrandId)?.label ?? "All brands");
+      : selectedBrandIds.length === 1
+        ? (catalog.find((brand) => brand.id === selectedBrandIds[0])?.label ?? "1 brand")
+        : `${selectedBrandIds.length} brands`;
 
   return (
     <section
@@ -331,9 +333,9 @@ export function SoftwareCatalogPanel() {
         <SoftwareBrandFilterModal
           open={brandModalOpen}
           brands={catalog}
-          activeBrandId={activeBrandId}
+          selectedBrandIds={selectedBrandIds}
           onClose={() => setBrandModalOpen(false)}
-          onSelect={setActiveBrandId}
+          onApply={setSelectedBrandIds}
         />
 
         {message ? (

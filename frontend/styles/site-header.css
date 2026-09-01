@@ -491,9 +491,11 @@ html {
 }
 
 .aptus-masthead__dropdown-panel--software.aptus-masthead__dropdown-panel--nested {
-  max-height: none;
+  max-height: min(75vh, 560px);
   min-width: 280px;
-  overflow: visible;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .aptus-masthead__dropdown-panel--software > li > a,
