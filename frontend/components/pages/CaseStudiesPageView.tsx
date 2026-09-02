@@ -27,7 +27,7 @@ function CaseStudyIcon({ name }: { name: string }) {
   );
 }
 
-/** Dedicated layout for /aptus-case-studies — matches live Elementor post-5734. */
+/** Dedicated layout for /customer-stories (ex-/aptus-case-studies) — matches live Elementor post-5734. */
 export function CaseStudiesPageView({ content }: CaseStudiesPageViewProps) {
   const { hero, caseStudies, painPoints, whyChoose, transformCta, testimonials, partnerships } =
     content;

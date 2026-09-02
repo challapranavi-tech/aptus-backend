@@ -11,6 +11,8 @@ import { useRef } from "react";
 
 interface TestimonialsProps {
   data: TestimonialsData;
+  /** Dark horizontal marquee (software catalog page). */
+  marquee?: boolean;
 }
 
 const AVATAR_TONES = ["blue", "teal", "purple", "orange", "navy"] as const;
@@ -27,16 +29,25 @@ function roleLine(role?: string, company?: string): string | undefined {
   return role || company || undefined;
 }
 
-export function Testimonials({ data }: TestimonialsProps) {
+export function Testimonials({ data, marquee = false }: TestimonialsProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const isSoftwareQuotes = data.variant === "software-quotes";
+  const isSoftwareQuotes = data.variant === "software-quotes" && !marquee;
+  const isSoftwareQuotesMarquee =
+    marquee || data.variant === "software-quotes-marquee";
   const isHomeCards = data.variant === "home-cards";
 
   useGSAPContext({
     scope: sectionRef,
-    dependencies: [data.items?.length, data.variant],
+    dependencies: [data.items?.length, data.variant, marquee],
     setup() {
-      if (data.variant === "software-quotes" || data.variant === "home-cards") return;
+      if (
+        data.variant === "software-quotes" ||
+        data.variant === "software-quotes-marquee" ||
+        data.variant === "home-cards" ||
+        marquee
+      ) {
+        return;
+      }
 
       const inner = sectionRef.current?.querySelector(".testimonial-inner");
       if (!inner) return;
@@ -152,6 +163,48 @@ export function Testimonials({ data }: TestimonialsProps) {
             </div>
           </Container>
         )}
+      </section>
+    );
+  }
+
+  if (isSoftwareQuotesMarquee) {
+    const items = data.items;
+    const renderQuote = (item: (typeof items)[number], keyPrefix: string) => (
+      <article key={`${keyPrefix}-${item.id}`} className="aptus-software-quote-card">
+        {item.quote && <p className="aptus-software-quote-card__quote">{item.quote}</p>}
+        {item.author && <h3 className="aptus-software-quote-card__author">{item.author}</h3>}
+        {item.role && <p className="aptus-software-quote-card__role">{item.role}</p>}
+        {item.company && <p className="aptus-software-quote-card__role">{item.company}</p>}
+      </article>
+    );
+
+    return (
+      <section
+        ref={sectionRef}
+        className="aptus-software-section aptus-software-quotes aptus-software-quotes--marquee"
+        data-section="testimonials"
+        data-variant="software-quotes-marquee"
+      >
+        <div className="aptus-live-container">
+          {data.heading && (
+            <h2 className="aptus-software-section-title aptus-software-section-title--lg">
+              {data.heading}
+            </h2>
+          )}
+          {data.subheading && <p className="aptus-software-section-lead">{data.subheading}</p>}
+        </div>
+
+        <div
+          className="aptus-software-quotes__marquee"
+          role="region"
+          aria-roledescription="marquee"
+          aria-label={data.heading ?? "Client testimonials"}
+        >
+          <div className="testimonial-inner aptus-software-quotes__track">
+            {items.map((item) => renderQuote(item, "a"))}
+            {items.map((item) => renderQuote(item, "b"))}
+          </div>
+        </div>
       </section>
     );
   }

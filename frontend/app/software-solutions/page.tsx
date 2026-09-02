@@ -42,7 +42,7 @@ export default function SoftwareSolutionsPage() {
         <SoftwareCatalogPanel />
       </Suspense>
       <Features data={SOFTWARE_OUR_PROCESS} />
-      <Testimonials data={SOFTWARE_TESTIMONIALS} />
+      <Testimonials data={SOFTWARE_TESTIMONIALS} marquee />
     </main>
   );
 }

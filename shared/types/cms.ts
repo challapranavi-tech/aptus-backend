@@ -549,8 +549,8 @@ export interface Testimonials {
   items?: TestimonialItem[];
   /** Bottom CTA (homepage cards). */
   action?: ActionLink;
-  /** `software-quotes` = light 3-column grid on product pages. `home-cards` = homepage scroll cards. */
-  variant?: "default" | "software-quotes" | "home-cards";
+  /** `software-quotes` = light 3-column grid on product pages. `software-quotes-marquee` = dark scrolling band. `home-cards` = homepage scroll cards. */
+  variant?: "default" | "software-quotes" | "software-quotes-marquee" | "home-cards";
 }
 
 // faq

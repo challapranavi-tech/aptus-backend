@@ -20,6 +20,10 @@ interface PageProps {
 
 export const dynamicParams = true;
 
+function isCaseStudiesSlug(slug: string): boolean {
+  return slug === "customer-stories" || slug === "aptus-case-studies";
+}
+
 export async function generateStaticParams() {
   const slugs = (await getAllPageSlugs()).filter(
     // /autodesk and /adobe are dedicated App Router replicas, not CMS [slug].
@@ -30,8 +34,9 @@ export async function generateStaticParams() {
   // One slow Odoo page (e.g. /spectronova) must not abort the whole Vercel build.
   // Skipped slugs stay live via dynamicParams on first request.
   // ponytail: serial probes — parallel stampedes Odoo and creates more timeouts.
-  const out: { slug: string }[] = [];
+  const out: { slug: string }[] = [{ slug: "customer-stories" }];
   for (const slug of slugs) {
+    if (isCaseStudiesSlug(slug)) continue;
     try {
       if (await getPageBySlug(slug)) out.push({ slug });
     } catch (err) {
@@ -45,8 +50,12 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
+  const normalized = formatSlug(slug);
+  if (isCaseStudiesSlug(normalized)) {
+    return { title: "Customer Stories" };
+  }
   try {
-    const page = await getPageBySlug(formatSlug(slug));
+    const page = await getPageBySlug(normalized);
     if (!page) return { title: slug };
     return buildPageMetadata(page);
   } catch {
@@ -60,6 +69,21 @@ export default async function DynamicPage({ params }: PageProps) {
 
   if (isAutodeskHiddenSlug(normalized)) {
     notFound();
+  }
+
+  if (isCaseStudiesSlug(normalized)) {
+    const caseStudiesContent = await loadCaseStudiesPageContent();
+    if (!caseStudiesContent) {
+      notFound();
+    }
+
+    return (
+      <Suspense fallback={<Loading fullScreen />}>
+        <div className="aptus-case-studies-page">
+          <CaseStudiesPageView content={caseStudiesContent} />
+        </div>
+      </Suspense>
+    );
   }
 
   let page;
@@ -79,21 +103,6 @@ export default async function DynamicPage({ params }: PageProps) {
 
   if (!page) {
     notFound();
-  }
-
-  if (normalized === "aptus-case-studies") {
-    const caseStudiesContent = await loadCaseStudiesPageContent();
-    if (!caseStudiesContent) {
-      notFound();
-    }
-
-    return (
-      <Suspense fallback={<Loading fullScreen />}>
-        <div className="aptus-case-studies-page">
-          <CaseStudiesPageView content={caseStudiesContent} />
-        </div>
-      </Suspense>
-    );
   }
 
   const softwareScope = getSoftwarePageScope(normalized);

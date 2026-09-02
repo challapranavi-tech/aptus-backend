@@ -72,7 +72,7 @@ export const SITE_NAVIGATION: NavigationItem[] = [
     label: "Knowledge Hub",
     children: [
       { label: "Blog", href: "/our-story" },
-      { label: "Customer Stories", href: "/winning-together" },
+      { label: "Customer Stories", href: "/customer-stories" },
       { label: "Knowledge Base", href: "/software-solutions" },
       { label: "FAQ", href: "/contact-us" },
       { label: "Documentation", href: "/aptus-policy" },

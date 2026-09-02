@@ -7,7 +7,7 @@ export interface KnowledgeHubLink {
 
 export const KNOWLEDGE_HUB_LINKS: KnowledgeHubLink[] = [
   { label: "Blog", href: "/our-story" },
-  { label: "Customer Stories", href: "/winning-together" },
+  { label: "Customer Stories", href: "/customer-stories" },
   { label: "Knowledge Base", href: "/software-solutions" },
   { label: "FAQ", href: "/contact-us" },
   { label: "Documentation", href: "/aptus-policy" },
@@ -20,7 +20,7 @@ export const KNOWLEDGE_HUB_FEATURED = {
   title: "How Aptus Infotech **streamlined licensing** for a regional engineering firm.",
   metric: "40%",
   metricLabel: "Faster license deployment",
-  href: "/winning-together",
+  href: "/customer-stories",
 } as const;
 
 export const KNOWLEDGE_HUB_NEWS = {
