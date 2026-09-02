@@ -62,9 +62,13 @@ export function CaseStudiesPageView({ content }: CaseStudiesPageViewProps) {
   const { hero, caseStudies, keyProjects, transformCta } = content;
 
   const featured =
-    caseStudies.visible !== false ? caseStudies.items : [];
+    caseStudies.visible !== false
+      ? caseStudies.items.filter((item) => Boolean(item.imageSrc))
+      : [];
   const keyItems =
-    keyProjects?.visible !== false ? (keyProjects?.items ?? []) : [];
+    keyProjects?.visible !== false
+      ? (keyProjects?.items ?? []).filter((item) => Boolean(item.imageSrc))
+      : [];
   const allProjects = [...featured, ...keyItems];
   const projectsTitle = keyProjects?.title ?? caseStudies.title;
 
