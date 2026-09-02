@@ -310,8 +310,8 @@ export function portalProductDetailHref(product: SoftwarePurchaseProduct): strin
 
 /** Products list, optionally pre-selecting a category pill (e.g. Microsoft, Autodesk). */
 export function portalProductsHref(categoryId?: string): string {
-  if (!categoryId) return "/software-solutions";
-  return `/software-solutions?brand=${encodeURIComponent(categoryId)}`;
+  if (!categoryId) return "/software-solutions/products";
+  return `/software-solutions/products?brand=${encodeURIComponent(categoryId)}`;
 }
 
 export function lookupPurchaseProductBySlug(

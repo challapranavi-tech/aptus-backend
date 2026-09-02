@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { SubscriptionCard } from "./SubscriptionCard";
@@ -33,7 +33,7 @@ export function SubscriptionsPanel({
       {loading ? (
         <div className="aptus-odoo-subscriptions__state" role="status" aria-live="polite">
           <div className="aptus-payment-processing__spinner" aria-hidden="true" />
-          <p>Loading your licenses…</p>
+          <p>Loading your licensesâ€¦</p>
         </div>
       ) : null}
 
@@ -47,7 +47,7 @@ export function SubscriptionsPanel({
         <div className="aptus-portal-page-card aptus-odoo-subscriptions__state">
           <p>
             No active licenses yet.{" "}
-            <Link href="/software-solutions" className="aptus-overview-compact__link">
+            <Link href="/software-solutions/products" className="aptus-overview-compact__link">
               Buy software
             </Link>{" "}
             or check{" "}

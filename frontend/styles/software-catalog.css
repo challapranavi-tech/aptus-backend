@@ -753,6 +753,219 @@
   color: #b45309;
 }
 
+/* ── Products catalog page hero ── */
+.aptus-software-products-hero {
+  background: #0b1220;
+  color: #fff;
+  padding: clamp(2.5rem, 6vw, 3.75rem) 1.25rem 2.25rem;
+}
+
+.aptus-software-products-hero__inner {
+  margin: 0 auto;
+  max-width: 920px;
+  text-align: center;
+}
+
+.aptus-software-products-hero__eyebrow {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin: 0 0 0.85rem;
+}
+
+.aptus-software-products-hero__eyebrow a {
+  color: #7dd3fc;
+  text-decoration: none;
+}
+
+.aptus-software-products-hero__eyebrow a:hover {
+  text-decoration: underline;
+}
+
+.aptus-software-products-hero__title {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0 0 0.75rem;
+}
+
+.aptus-software-products-hero__lead {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0 auto;
+  max-width: 40rem;
+}
+
+.aptus-software-products-page .aptus-software-catalog__header {
+  display: none;
+}
+
+/* ── Software landing: challenges + solutions ── */
+.aptus-software-landing-section {
+  padding: clamp(2.75rem, 6vw, 4.25rem) 1.25rem;
+}
+
+.aptus-software-landing-section--challenges {
+  background:
+    radial-gradient(ellipse 70% 55% at 10% 0%, rgba(19, 82, 163, 0.08), transparent 55%),
+    #f4f7fb;
+}
+
+.aptus-software-landing-section--solutions {
+  background: #fff;
+}
+
+.aptus-software-landing-section__inner {
+  margin: 0 auto;
+  max-width: 1100px;
+}
+
+.aptus-software-landing-section__header {
+  margin: 0 auto 2rem;
+  max-width: 720px;
+  text-align: center;
+}
+
+.aptus-software-landing-section__heading {
+  color: #0b1220;
+  font-size: clamp(1.55rem, 3.4vw, 2.15rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 0.65rem;
+}
+
+.aptus-software-landing-section__subheading {
+  color: #475569;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.aptus-software-landing-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .aptus-software-landing-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .aptus-software-landing-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.aptus-software-landing-card {
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.aptus-software-landing-card--challenges {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.05);
+}
+
+.aptus-software-landing-card--solutions {
+  background: #fff;
+  border: 1px solid #d7e6f7;
+  box-shadow: 0 8px 22px rgba(19, 82, 163, 0.06);
+}
+
+.aptus-software-landing-card__media {
+  isolation: isolate;
+  overflow: hidden;
+  position: relative;
+}
+
+.aptus-software-landing-card__media img {
+  aspect-ratio: 16 / 11;
+  display: block;
+  height: auto;
+  object-fit: cover;
+  object-position: center top;
+  width: 100%;
+}
+
+.aptus-software-landing-card__media-shade {
+  background: linear-gradient(180deg, rgba(11, 18, 32, 0.05) 0%, rgba(11, 18, 32, 0.45) 100%);
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.aptus-software-landing-card__icon {
+  align-items: center;
+  background: #1352a3;
+  border-radius: 12px;
+  bottom: 0.85rem;
+  color: #fff;
+  display: inline-flex;
+  height: 2.65rem;
+  justify-content: center;
+  left: 0.85rem;
+  position: absolute;
+  width: 2.65rem;
+  z-index: 1;
+}
+
+.aptus-software-landing-card__icon svg {
+  height: 1.2rem;
+  width: 1.2rem;
+}
+
+.aptus-software-landing-card--solutions .aptus-software-landing-card__icon {
+  background: linear-gradient(135deg, #1352a3 0%, #0b1220 100%);
+}
+
+.aptus-software-landing-card__step {
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 999px;
+  bottom: 0.95rem;
+  color: #0b1220;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin: 0;
+  padding: 0.28rem 0.55rem;
+  position: absolute;
+  right: 0.85rem;
+  z-index: 1;
+}
+
+.aptus-software-landing-card__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 1.15rem 1.15rem 1.35rem;
+}
+
+.aptus-software-landing-card__title {
+  color: #0b1220;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.aptus-software-landing-card__body {
+  color: #475569;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
 @media (max-width: 640px) {
   .aptus-software-catalog .aptus-portal-products__grid {
     grid-template-columns: 1fr;

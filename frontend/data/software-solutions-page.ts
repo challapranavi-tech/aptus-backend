@@ -1,6 +1,6 @@
 import type { Features, LogoGrid, Testimonials } from "@/types";
 
-/** Marketing sections for /software-solutions (mirrors backend/content/odoo-json/software-solutions.json). */
+/** Marketing sections for /software-solutions. */
 
 export const SOFTWARE_PARTNERSHIPS: LogoGrid = {
   type: "logo-grid",
@@ -24,6 +24,101 @@ export const SOFTWARE_PARTNERSHIPS: LogoGrid = {
     { id: "vray", src: "https://aptusinfotech.com/wp-content/uploads/2025/08/v.ray_.png", alt: "V-Ray" },
     { id: "twinmotion", src: "https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png", alt: "Twinmotion" },
   ],
+};
+
+export interface SoftwareLandingCard {
+  id: string;
+  title: string;
+  description?: string;
+  icon: "search" | "license" | "cost" | "deploy" | "guidance" | "manage" | "optimize" | "implement";
+  imageSrc: string;
+  imageAlt: string;
+}
+
+export const SOFTWARE_CHALLENGES = {
+  heading: "Software Challenges Shouldn’t Slow Your Business Down",
+  subheading: "Common friction points we help teams remove every day",
+  items: [
+    {
+      id: "finding",
+      title: "Finding the right software for your business needs",
+      icon: "search",
+      imageSrc:
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80",
+      imageAlt: "Team collaborating around laptops to choose the right software",
+    },
+    {
+      id: "licenses",
+      title: "Managing licenses, subscriptions, and renewals efficiently",
+      icon: "license",
+      imageSrc:
+        "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=900&q=80",
+      imageAlt: "Professional reviewing software licenses and subscription documents",
+    },
+    {
+      id: "costs",
+      title: "Controlling software costs and avoiding unnecessary expenses",
+      icon: "cost",
+      imageSrc:
+        "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=900&q=80",
+      imageAlt: "Business team reviewing software costs and budget planning",
+    },
+    {
+      id: "implementation",
+      title: "Simplifying implementation, integration, and deployment",
+      icon: "deploy",
+      imageSrc:
+        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=900&q=80",
+      imageAlt: "Engineers working together on software implementation",
+    },
+  ] satisfies SoftwareLandingCard[],
+};
+
+export const SOFTWARE_OUR_SOLUTIONS = {
+  heading: "Our Solutions",
+  subheading: "One platform to simplify your entire software journey",
+  items: [
+    {
+      id: "right-software",
+      title: "The Right Software",
+      description:
+        "Get expert guidance to choose the software and licensing option that best fits your business needs.",
+      icon: "guidance",
+      imageSrc:
+        "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=900&q=80",
+      imageAlt: "Consultant advising a client on the right software choice",
+    },
+    {
+      id: "license-management",
+      title: "Simplified License Management",
+      description:
+        "Manage licenses, subscriptions, renewals, and upgrades with greater ease and visibility.",
+      icon: "manage",
+      imageSrc:
+        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=900&q=80",
+      imageAlt: "Professional managing software licenses on a laptop",
+    },
+    {
+      id: "cost-effective",
+      title: "Cost-Effective Solutions",
+      description:
+        "Optimize your software investment and avoid unnecessary licensing and subscription costs.",
+      icon: "optimize",
+      imageSrc:
+        "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=900&q=80",
+      imageAlt: "Business leaders discussing cost-effective software investments",
+    },
+    {
+      id: "seamless-implementation",
+      title: "Seamless Implementation",
+      description:
+        "Get support for installation, configuration, integration, and deployment for a smoother setup.",
+      icon: "implement",
+      imageSrc:
+        "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80",
+      imageAlt: "Team celebrating a successful software deployment",
+    },
+  ] satisfies SoftwareLandingCard[],
 };
 
 export const SOFTWARE_OUR_PROCESS: Features = {

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -273,7 +273,7 @@ export function CartCheckoutPanel() {
         return;
       }
 
-      // Nothing is purchased yet — /api/orders/place only prepares the order to pay
+      // Nothing is purchased yet â€” /api/orders/place only prepares the order to pay
       // for. The cart stays intact so the customer can go back or retry a failed
       // payment; it is cleared once the payment step reports success (onPaid).
       if (data.order) {
@@ -299,7 +299,7 @@ export function CartCheckoutPanel() {
   if (!hydrated) {
     return (
       <section className="aptus-cart-checkout" aria-label="Shopping cart">
-        <p className="aptus-cart-checkout__loading">Loading your cart…</p>
+        <p className="aptus-cart-checkout__loading">Loading your cartâ€¦</p>
       </section>
     );
   }
@@ -317,7 +317,7 @@ export function CartCheckoutPanel() {
                 <span>
                   {itemCount} item{itemCount === 1 ? "" : "s"}
                 </span>
-                <Link href="/software-solutions" className="aptus-overview-compact__link">
+                <Link href="/software-solutions/products" className="aptus-overview-compact__link">
                   Continue shopping
                 </Link>
               </div>
@@ -326,7 +326,7 @@ export function CartCheckoutPanel() {
             {cart.items.length === 0 ? (
               <div className="aptus-cart-checkout__empty">
                 <p>Your cart is empty.</p>
-                <Link href="/software-solutions" className="btn btn-aptus-primary">
+                <Link href="/software-solutions/products" className="btn btn-aptus-primary">
                   Browse products
                 </Link>
               </div>
@@ -448,7 +448,7 @@ export function CartCheckoutPanel() {
                               {unit > 0 ? formatOmanAmount(unit) : "Quote"}
                             </td>
                             <td className="aptus-cart-table__num" data-label="Total">
-                              {lineTotal > 0 ? formatOmanAmount(lineTotal) : "—"}
+                              {lineTotal > 0 ? formatOmanAmount(lineTotal) : "â€”"}
                             </td>
                             <td data-label="Remove">
                               <button
@@ -501,10 +501,10 @@ export function CartCheckoutPanel() {
                 setStep("checkout");
               }}
             >
-              Proceed to Checkout →
+              Proceed to Checkout â†’
             </button>
-            <Link href="/software-solutions" className="aptus-cart-summary__back">
-              ← Continue Shopping
+            <Link href="/software-solutions/products" className="aptus-cart-summary__back">
+              â† Continue Shopping
             </Link>
           </aside>
         </div>
@@ -614,7 +614,7 @@ export function CartCheckoutPanel() {
               {cart.items.map((item) => (
                 <li key={`${item.category}-${item.productName}`}>
                     <span>
-                      {item.productName} ×{item.quantity} ({lineConfigSummary(item, cart.duration)})
+                      {item.productName} Ã—{item.quantity} ({lineConfigSummary(item, cart.duration)})
                     </span>
                     <span>
                       {cartLineTotal(item, cart.duration) > 0
@@ -635,14 +635,14 @@ export function CartCheckoutPanel() {
               disabled={submitting || cart.items.length === 0}
               onClick={() => void submitOrder()}
             >
-              {submitting ? "Submitting…" : "Continue to payment →"}
+              {submitting ? "Submittingâ€¦" : "Continue to payment â†’"}
             </button>
             <button
               type="button"
               className="aptus-cart-summary__back aptus-cart-summary__back-btn"
               onClick={() => setStep("cart")}
             >
-              ← Back to cart
+              â† Back to cart
             </button>
             {error ? (
               <p className="aptus-field__error" role="alert">

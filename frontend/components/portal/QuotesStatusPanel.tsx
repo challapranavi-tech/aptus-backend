@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useQuotes } from "@/hooks/useQuotes";
@@ -30,11 +30,11 @@ export function QuotesStatusPanel() {
         <div>
           <h2>Quote status</h2>
           <p>
-            Updates from Odoo after you Request a Quote — when sales sends a quotation, payment is
+            Updates from Odoo after you Request a Quote â€” when sales sends a quotation, payment is
             recorded, or the opportunity changes.
           </p>
         </div>
-        <Link href="/software-solutions" className="aptus-overview-compact__link">
+        <Link href="/software-solutions/products" className="aptus-overview-compact__link">
           Request a Quote
         </Link>
       </div>
@@ -42,7 +42,7 @@ export function QuotesStatusPanel() {
       {loading ? (
         <div className="aptus-odoo-subscriptions__state" role="status" aria-live="polite">
           <div className="aptus-payment-processing__spinner" aria-hidden="true" />
-          <p>Loading quote status…</p>
+          <p>Loading quote statusâ€¦</p>
         </div>
       ) : null}
 
@@ -56,10 +56,10 @@ export function QuotesStatusPanel() {
         <div className="aptus-odoo-subscriptions__state">
           <p>
             No quote requests yet.{" "}
-            <Link href="/software-solutions" className="aptus-overview-compact__link">
+            <Link href="/software-solutions/products" className="aptus-overview-compact__link">
               Request a Quote
             </Link>{" "}
-            from Products — status will appear here once sales updates Odoo.
+            from Products â€” status will appear here once sales updates Odoo.
           </p>
         </div>
       ) : null}

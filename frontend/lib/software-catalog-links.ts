@@ -34,9 +34,9 @@ export function brandIdFromPageSlug(slug: string): string | undefined {
 
 /** Main software catalog URL, optionally filtered to one brand. */
 export function softwareCatalogHref(brandId?: string): string {
-  const base = "/software-solutions";
-  if (!brandId) return `${base}#software-catalog`;
-  return `${base}?brand=${encodeURIComponent(brandId)}#software-catalog`;
+  const base = "/software-solutions/products";
+  if (!brandId) return base;
+  return `${base}?brand=${encodeURIComponent(brandId)}`;
 }
 
 /** Rewrite in-page #Products / Browse Products links to the unified catalog. */

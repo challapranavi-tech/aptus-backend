@@ -16,7 +16,7 @@ type ExploreProductsLinkProps = Omit<ComponentPropsWithoutRef<typeof Link>, "hre
 
 export function ExploreProductsLink({ brandId, children, onClick, ...rest }: ExploreProductsLinkProps) {
   const pathname = usePathname() ?? "/";
-  const onCatalogPage = pathname === "/software-solutions";
+  const onCatalogPage = pathname === "/software-solutions/products";
   const href = onCatalogPage ? `#${SOFTWARE_CATALOG_ANCHOR_ID}` : softwareCatalogHref(brandId);
 
   return (

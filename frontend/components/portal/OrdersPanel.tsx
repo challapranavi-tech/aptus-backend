@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -76,7 +76,7 @@ export function OrdersPanel({ orders, loading, error, limit }: OrdersPanelProps)
       {loading ? (
         <div className="aptus-odoo-subscriptions__state" role="status" aria-live="polite">
           <div className="aptus-payment-processing__spinner" aria-hidden="true" />
-          <p>Loading your orders…</p>
+          <p>Loading your ordersâ€¦</p>
         </div>
       ) : null}
 
@@ -90,7 +90,7 @@ export function OrdersPanel({ orders, loading, error, limit }: OrdersPanelProps)
         <div className="aptus-odoo-subscriptions__state">
           <p>
             No orders in this view yet.{" "}
-            <Link href="/software-solutions" className="aptus-overview-compact__link">
+            <Link href="/software-solutions/products" className="aptus-overview-compact__link">
               Browse products
             </Link>{" "}
             to place an order.
@@ -150,7 +150,7 @@ export function OrdersPanel({ orders, loading, error, limit }: OrdersPanelProps)
                           View license
                         </Link>
                       ) : (
-                        <span className="is-muted">—</span>
+                        <span className="is-muted">â€”</span>
                       )}
                     </td>
                   </tr>

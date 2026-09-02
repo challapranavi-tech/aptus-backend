@@ -15,14 +15,14 @@ assert.equal(brandIdFromPageSlug("autocad"), "autodesk");
 assert.equal(brandIdFromPageSlug("rib-costx"), "costx");
 assert.equal(brandIdFromPageSlug("fortinet"), "fortinet");
 
-assert.equal(softwareCatalogHref("adobe"), "/software-solutions?brand=adobe#software-catalog");
+assert.equal(softwareCatalogHref("adobe"), "/software-solutions/products?brand=adobe");
 assert.equal(
   resolveSoftwareCatalogHref("microsoft", "#Products", "Browse Products"),
-  "/software-solutions?brand=microsoft#software-catalog",
+  "/software-solutions/products?brand=microsoft",
 );
 assert.equal(
   resolveSoftwareCatalogHref("autocad", "#Products", "Browse Products"),
-  "/software-solutions?brand=autodesk#software-catalog",
+  "/software-solutions/products?brand=autodesk",
 );
 
 console.log("software-catalog-links.check.ts passed");

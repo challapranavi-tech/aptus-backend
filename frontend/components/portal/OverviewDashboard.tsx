@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useAuth } from "@/context/AuthProvider";
@@ -46,7 +46,7 @@ export function OverviewDashboard() {
   const { notifications, loading: notificationsLoading } = useNotifications();
 
   if (!ready || !user) {
-    return <LoadingBlock label="Loading your workspace…" />;
+    return <LoadingBlock label="Loading your workspaceâ€¦" />;
   }
 
   const loading = ordersLoading || subscriptionsLoading || notificationsLoading;
@@ -64,7 +64,7 @@ export function OverviewDashboard() {
   return (
     <div className="aptus-overview-compact">
       {loading ? (
-        <LoadingBlock label="Loading dashboard…" />
+        <LoadingBlock label="Loading dashboardâ€¦" />
       ) : (
         <>
           {urgentRenewal ? (
@@ -136,7 +136,7 @@ export function OverviewDashboard() {
                     <Link href="/portal/subscriptions">
                       <PortalNavIcon name="key" /> View licenses
                     </Link>
-                    <Link href="/software-solutions">
+                    <Link href="/software-solutions/products">
                       <PortalNavIcon name="box" /> Buy software
                     </Link>
                   </div>
@@ -186,7 +186,7 @@ export function OverviewDashboard() {
             {activeSoftware.length === 0 ? (
               <p className="aptus-overview-compact__empty">
                 No licenses yet.{" "}
-                <Link href="/software-solutions" className="aptus-overview-compact__link">
+                <Link href="/software-solutions/products" className="aptus-overview-compact__link">
                   Browse products
                 </Link>
               </p>
@@ -205,13 +205,13 @@ export function OverviewDashboard() {
                           <strong>{subscription.productName}</strong>
                           <small>
                             {expired
-                              ? `Expired · ${subscription.expiryDate || subscription.renewalDate || "—"}`
-                              : `${subscription.status}${soon ? "" : ""} · ${subscription.renewalDate || "—"}`}
+                              ? `Expired Â· ${subscription.expiryDate || subscription.renewalDate || "â€”"}`
+                              : `${subscription.status}${soon ? "" : ""} Â· ${subscription.renewalDate || "â€”"}`}
                           </small>
                         </div>
                       </div>
                       {expired ? (
-                        <Link href="/software-solutions" className="aptus-overview-compact__tile-btn">
+                        <Link href="/software-solutions/products" className="aptus-overview-compact__tile-btn">
                           Renew license
                         </Link>
                       ) : soon ? (
@@ -246,7 +246,7 @@ export function OverviewDashboard() {
             {recentOrders.length === 0 ? (
               <p className="aptus-overview-compact__empty">
                 No orders yet.{" "}
-                <Link href="/software-solutions" className="aptus-overview-compact__link">
+                <Link href="/software-solutions/products" className="aptus-overview-compact__link">
                   Browse products
                 </Link>
               </p>
@@ -272,7 +272,7 @@ export function OverviewDashboard() {
                           ? formatOmanAmount(order.amountDue)
                           : pricing?.complete
                             ? formatOmanAmount(pricing.total)
-                            : "—";
+                            : "â€”";
                       const productLabel =
                         order.items.length === 1
                           ? order.items[0].productName

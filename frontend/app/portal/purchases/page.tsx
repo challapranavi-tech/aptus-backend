@@ -4,5 +4,5 @@ export const metadata = { title: "Products | Aptus Customer Portal" };
 
 /** Legacy /portal/purchases URL → Products. */
 export default function PurchasesRedirectPage() {
-  redirect("/software-solutions");
+  redirect("/software-solutions/products");
 }
