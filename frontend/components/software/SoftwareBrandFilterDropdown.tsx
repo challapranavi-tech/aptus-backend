@@ -6,10 +6,11 @@ import type { SoftwarePurchaseCategory } from "@/lib/order-pricing";
 interface SoftwareBrandFilterDropdownProps {
   open: boolean;
   brands: SoftwarePurchaseCategory[];
-  selectedBrandIds: string[];
+  /** null = all brands; [] = none; non-empty = specific selection */
+  selectedBrandIds: string[] | null;
   activeLabel: string;
   onOpenChange: (open: boolean) => void;
-  onChange: (brandIds: string[]) => void;
+  onChange: (brandIds: string[] | null) => void;
 }
 
 export function SoftwareBrandFilterDropdown({
@@ -22,7 +23,8 @@ export function SoftwareBrandFilterDropdown({
 }: SoftwareBrandFilterDropdownProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const listId = useId();
-  const allSelected = selectedBrandIds.length === 0;
+  const allSelected = selectedBrandIds === null;
+  const noneSelected = selectedBrandIds !== null && selectedBrandIds.length === 0;
 
   useEffect(() => {
     if (!open) return;
@@ -47,19 +49,22 @@ export function SoftwareBrandFilterDropdown({
   }, [open, onOpenChange]);
 
   function toggleAll(checked: boolean) {
-    onChange(checked ? [] : brands.map((brand) => brand.id));
+    onChange(checked ? null : []);
   }
 
   function toggleBrand(brandId: string) {
     if (allSelected) {
+      onChange(brands.map((brand) => brand.id).filter((id) => id !== brandId));
+      return;
+    }
+    if (noneSelected) {
       onChange([brandId]);
       return;
     }
-    onChange(
-      selectedBrandIds.includes(brandId)
-        ? selectedBrandIds.filter((id) => id !== brandId)
-        : [...selectedBrandIds, brandId],
-    );
+    const next = selectedBrandIds.includes(brandId)
+      ? selectedBrandIds.filter((id) => id !== brandId)
+      : [...selectedBrandIds, brandId];
+    onChange(next.length === brands.length ? null : next);
   }
 
   return (
@@ -97,7 +102,7 @@ export function SoftwareBrandFilterDropdown({
             <label key={brand.id} className="aptus-brand-filter-option">
               <input
                 type="checkbox"
-                checked={allSelected || selectedBrandIds.includes(brand.id)}
+                checked={allSelected || (selectedBrandIds?.includes(brand.id) ?? false)}
                 onChange={() => toggleBrand(brand.id)}
               />
               <span>{brand.label}</span>

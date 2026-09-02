@@ -103,11 +103,11 @@ export function SoftwareCatalogPanel() {
   const catalog = SOFTWARE_FULL_CATALOG;
   const brandFromUrl = searchParams.get("brand");
   const [user, setUser] = useState<ClientProfile | null>(null);
-  const [selectedBrandIds, setSelectedBrandIds] = useState<string[]>(() => {
+  const [selectedBrandIds, setSelectedBrandIds] = useState<string[] | null>(() => {
     if (brandFromUrl && catalog.some((brand) => brand.id === brandFromUrl)) {
       return [brandFromUrl];
     }
-    return [];
+    return null;
   });
   const [cartDuration, setCartDuration] = useState<Duration>("1year");
   const [selections, setSelections] = useState<Record<SelectionKey, Selection>>({});
@@ -209,7 +209,7 @@ export function SoftwareCatalogPanel() {
       product: SoftwarePurchaseProduct;
     }> = [];
     for (const brand of catalog) {
-      if (selectedBrandIds.length > 0 && !selectedBrandIds.includes(brand.id)) continue;
+      if (selectedBrandIds !== null && !selectedBrandIds.includes(brand.id)) continue;
       for (const product of brand.products) {
         rows.push({ brand, product });
       }
@@ -222,7 +222,7 @@ export function SoftwareCatalogPanel() {
     );
   }, [catalog, selectedBrandIds, query]);
 
-  const isDefaultView = selectedBrandIds.length === 0 && !query.trim();
+  const isDefaultView = selectedBrandIds === null && !query.trim();
 
   const visibleProducts = useMemo(() => {
     if (showAllProducts || !isDefaultView) return flatProducts;
@@ -287,11 +287,13 @@ export function SoftwareCatalogPanel() {
 
   const productCount = catalog.reduce((sum, brand) => sum + brand.products.length, 0);
   const activeBrandLabel =
-    selectedBrandIds.length === 0
+    selectedBrandIds === null
       ? "All brands"
-      : selectedBrandIds.length === 1
-        ? (catalog.find((brand) => brand.id === selectedBrandIds[0])?.label ?? "1 brand")
-        : `${selectedBrandIds.length} brands`;
+      : selectedBrandIds.length === 0
+        ? "No brands"
+        : selectedBrandIds.length === 1
+          ? (catalog.find((brand) => brand.id === selectedBrandIds[0])?.label ?? "1 brand")
+          : `${selectedBrandIds.length} brands`;
 
   return (
     <section

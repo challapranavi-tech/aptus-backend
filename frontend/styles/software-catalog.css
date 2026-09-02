@@ -13,321 +13,7 @@
   background: #0b1220;
   color: #fff;
   min-height: clamp(440px, 62vh, 680px);
-  overflow: hidden;
   position: relative;
-}
-
-.aptus-software-catalog-hero__bg-stack {
-  inset: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: 0;
-}
-
-.aptus-software-catalog-hero__bg {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  inset: -8%;
-  position: absolute;
-  will-change: transform, opacity;
-}
-
-.aptus-software-catalog-hero__bg--1 {
-  animation:
-    aptus-hero-bg-zoom-a 22s ease-in-out infinite alternate,
-    aptus-hero-bg-fade-1 32s ease-in-out infinite;
-}
-
-.aptus-software-catalog-hero__bg--2 {
-  animation:
-    aptus-hero-bg-zoom-b 26s ease-in-out infinite alternate,
-    aptus-hero-bg-fade-2 32s ease-in-out infinite;
-}
-
-.aptus-software-catalog-hero__bg--3 {
-  animation:
-    aptus-hero-bg-zoom-c 24s ease-in-out infinite alternate,
-    aptus-hero-bg-fade-3 32s ease-in-out infinite;
-}
-
-.aptus-software-catalog-hero__bg--4 {
-  animation:
-    aptus-hero-bg-zoom-a 28s ease-in-out infinite alternate-reverse,
-    aptus-hero-bg-fade-4 32s ease-in-out infinite;
-}
-
-@keyframes aptus-hero-bg-zoom-a {
-  0% {
-    transform: scale(1) translate3d(0, 0, 0);
-  }
-
-  100% {
-    transform: scale(1.14) translate3d(-1.5%, -1%, 0);
-  }
-}
-
-@keyframes aptus-hero-bg-zoom-b {
-  0% {
-    transform: scale(1.06) translate3d(1%, 0, 0);
-  }
-
-  100% {
-    transform: scale(1.18) translate3d(-1%, 1.5%, 0);
-  }
-}
-
-@keyframes aptus-hero-bg-zoom-c {
-  0% {
-    transform: scale(1.02) translate3d(-0.5%, 1%, 0);
-  }
-
-  100% {
-    transform: scale(1.16) translate3d(1.5%, -0.5%, 0);
-  }
-}
-
-@keyframes aptus-hero-bg-fade-1 {
-  0%,
-  20% {
-    opacity: 0.62;
-  }
-
-  28%,
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes aptus-hero-bg-fade-2 {
-  0%,
-  20% {
-    opacity: 0;
-  }
-
-  28%,
-  45% {
-    opacity: 0.62;
-  }
-
-  53%,
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes aptus-hero-bg-fade-3 {
-  0%,
-  45% {
-    opacity: 0;
-  }
-
-  53%,
-  70% {
-    opacity: 0.62;
-  }
-
-  78%,
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes aptus-hero-bg-fade-4 {
-  0%,
-  70% {
-    opacity: 0;
-  }
-
-  78%,
-  95% {
-    opacity: 0.62;
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
-
-.aptus-software-catalog-hero__overlay {
-  background:
-    linear-gradient(180deg, rgba(11, 18, 32, 0.55) 0%, rgba(11, 18, 32, 0.82) 55%, rgba(11, 18, 32, 0.94) 100%),
-    radial-gradient(ellipse 85% 65% at 50% 0%, rgba(56, 189, 248, 0.18) 0%, transparent 58%),
-    radial-gradient(ellipse 50% 42% at 100% 90%, rgba(103, 219, 133, 0.12) 0%, transparent 52%),
-    radial-gradient(ellipse 42% 38% at 0% 80%, rgba(167, 139, 250, 0.1) 0%, transparent 48%);
-  inset: 0;
-  position: absolute;
-  z-index: 1;
-}
-
-.aptus-software-catalog-hero__floats {
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  position: absolute;
-  z-index: 2;
-}
-
-.aptus-software-catalog-hero__float {
-  aspect-ratio: 4 / 3;
-  border-radius: 14px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.12);
-  opacity: 0.95;
-  overflow: hidden;
-  position: absolute;
-  width: clamp(80px, 12vw, 120px);
-}
-
-.aptus-software-catalog-hero__float-media {
-  height: 100%;
-  overflow: hidden;
-  width: 100%;
-}
-
-.aptus-software-catalog-hero__float img {
-  display: block;
-  height: 100%;
-  object-fit: cover;
-  transform-origin: center center;
-  width: 100%;
-}
-
-.aptus-software-catalog-hero__float--1 img {
-  animation: aptus-hero-float-img-zoom-a 9s ease-in-out infinite;
-}
-
-.aptus-software-catalog-hero__float--2 img {
-  animation: aptus-hero-float-img-zoom-b 11s ease-in-out infinite;
-}
-
-.aptus-software-catalog-hero__float--3 img {
-  animation: aptus-hero-float-img-zoom-c 10s ease-in-out infinite;
-}
-
-.aptus-software-catalog-hero__float--4 img {
-  animation: aptus-hero-float-img-zoom-b 12s ease-in-out infinite reverse;
-}
-
-.aptus-software-catalog-hero__float--5 img {
-  animation: aptus-hero-float-img-zoom-a 13s ease-in-out infinite reverse;
-}
-
-@keyframes aptus-hero-float-img-zoom-a {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.12);
-  }
-}
-
-@keyframes aptus-hero-float-img-zoom-b {
-  0%,
-  100% {
-    transform: scale(1.06);
-  }
-
-  50% {
-    transform: scale(1.18);
-  }
-}
-
-@keyframes aptus-hero-float-img-zoom-c {
-  0%,
-  100% {
-    transform: scale(1.02);
-  }
-
-  50% {
-    transform: scale(1.15);
-  }
-}
-
-.aptus-software-catalog-hero__float--1 {
-  animation: aptus-hero-float-a 9s ease-in-out infinite;
-  left: 4%;
-  top: 18%;
-}
-
-.aptus-software-catalog-hero__float--2 {
-  animation: aptus-hero-float-b 11s ease-in-out infinite;
-  right: 6%;
-  top: 12%;
-}
-
-.aptus-software-catalog-hero__float--3 {
-  animation: aptus-hero-float-c 10s ease-in-out infinite;
-  bottom: 22%;
-  left: 8%;
-}
-
-.aptus-software-catalog-hero__float--4 {
-  animation: aptus-hero-float-b 12s ease-in-out infinite reverse;
-  bottom: 16%;
-  right: 10%;
-}
-
-.aptus-software-catalog-hero__float--5 {
-  animation: aptus-hero-float-a 13s ease-in-out infinite reverse;
-  left: 42%;
-  top: 8%;
-}
-
-@keyframes aptus-hero-float-a {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) rotate(-2deg);
-  }
-
-  50% {
-    transform: translate3d(0, -14px, 0) rotate(3deg);
-  }
-}
-
-@keyframes aptus-hero-float-b {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) rotate(2deg);
-  }
-
-  50% {
-    transform: translate3d(0, 12px, 0) rotate(-3deg);
-  }
-}
-
-@keyframes aptus-hero-float-c {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) rotate(1deg);
-  }
-
-  50% {
-    transform: translate3d(10px, -10px, 0) rotate(-2deg);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .aptus-software-catalog-hero__bg,
-  .aptus-software-catalog-hero__float {
-    animation: none !important;
-  }
-
-  .aptus-software-catalog-hero__bg--1 {
-    opacity: 0.5;
-  }
-
-  .aptus-software-catalog-hero__bg--2,
-  .aptus-software-catalog-hero__bg--3,
-  .aptus-software-catalog-hero__bg--4 {
-    opacity: 0;
-  }
-
-  .aptus-software-catalog-hero__float img {
-    animation: none !important;
-    transform: none;
-  }
 }
 
 .aptus-software-catalog-hero__content {
@@ -336,16 +22,6 @@
   padding: clamp(3.25rem, 8vw, 5.5rem) 1.25rem 3.5rem;
   position: relative;
   text-align: center;
-  z-index: 3;
-}
-
-.aptus-software-catalog-hero__content::before {
-  background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(15, 23, 42, 0.35) 0%, transparent 70%);
-  content: "";
-  inset: -10% -5%;
-  pointer-events: none;
-  position: absolute;
-  z-index: -1;
 }
 
 .aptus-software-catalog-hero__eyebrow {
@@ -402,14 +78,10 @@
 }
 
 .aptus-software-catalog-hero__tagline {
-  background: linear-gradient(90deg, #7dd3fc 0%, #67db85 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
+  color: rgba(255, 255, 255, 0.82);
   font-size: clamp(1rem, 2.2vw, 1.2rem);
   font-weight: 600;
   margin: 0 0 1.25rem;
-  -webkit-text-fill-color: transparent;
 }
 
 .aptus-software-catalog-hero__intro {
@@ -597,20 +269,21 @@
   align-items: stretch;
   display: grid;
   gap: 0.65rem;
-  grid-template-columns: minmax(0, 16rem) auto;
+  grid-template-columns: minmax(0, 22rem) auto;
   margin-bottom: 1rem;
 }
 
 .aptus-software-catalog .aptus-software-catalog__search {
-  max-width: 16rem;
+  max-width: 22rem;
 }
 
 .aptus-software-catalog .aptus-portal-products__search input {
   background: #fff;
   border: 1px solid #dbe3ef;
   border-radius: 8px;
-  font-size: 0.8125rem;
-  padding: 0.5rem 0.75rem;
+  font-size: 0.9375rem;
+  min-height: 2.75rem;
+  padding: 0.65rem 0.9rem;
   width: 100%;
 }
 
@@ -985,17 +658,5 @@
 
   .aptus-software-catalog-hero__intro {
     text-align: center;
-  }
-
-  .aptus-software-catalog-hero__float {
-    opacity: 0.65;
-    width: clamp(64px, 17vw, 84px);
-  }
-
-  .aptus-software-catalog-hero__bg--1,
-  .aptus-software-catalog-hero__bg--2,
-  .aptus-software-catalog-hero__bg--3,
-  .aptus-software-catalog-hero__bg--4 {
-    inset: -4%;
   }
 }
