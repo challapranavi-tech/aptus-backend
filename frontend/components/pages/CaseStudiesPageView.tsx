@@ -1,11 +1,5 @@
 import { Container } from "@/components/ui";
-import {
-  CASE_STUDIES_ICONS,
-  PAIN_POINT_ICONS,
-  WHY_CHOOSE_ICONS,
-} from "@/data/case-studies-icons";
-import { ELV_ICONS } from "@/data/elv-icons";
-import { joinAccentTitle, renderAccentTitle } from "@/lib/render-accent-title";
+import { joinAccentTitle } from "@/lib/render-accent-title";
 import { resolveCmsImageSrc } from "@/lib/utils";
 import type { CaseStudiesPageContent } from "@/types/case-studies-page";
 
@@ -13,24 +7,9 @@ type CaseStudiesPageViewProps = {
   content: CaseStudiesPageContent;
 };
 
-function CaseStudyIcon({ name }: { name: string }) {
-  const live = ELV_ICONS[name] ?? CASE_STUDIES_ICONS[name];
-  if (!live) return null;
-  return (
-    <svg
-      className="aptus-cs-icon"
-      viewBox={live.viewBox}
-      fill="currentColor"
-      aria-hidden="true"
-      dangerouslySetInnerHTML={{ __html: live.paths }}
-    />
-  );
-}
-
-/** Dedicated layout for /customer-stories (ex-/aptus-case-studies) — matches live Elementor post-5734. */
+/** Dedicated layout for /customer-stories (Solutions in Action). */
 export function CaseStudiesPageView({ content }: CaseStudiesPageViewProps) {
-  const { hero, caseStudies, keyProjects, painPoints, whyChoose, transformCta, testimonials, partnerships } =
-    content;
+  const { hero, caseStudies, keyProjects, transformCta } = content;
 
   return (
     <>
@@ -134,44 +113,7 @@ export function CaseStudiesPageView({ content }: CaseStudiesPageViewProps) {
         </section>
       ) : null}
 
-      {painPoints.visible !== false ? (
-        <section className="aptus-cs-section">
-          <Container>
-            <h2 className="aptus-cs-section-title">{joinAccentTitle(painPoints.title)}</h2>
-            <div className="mx-auto grid max-w-[800px] gap-2 md:grid-cols-3">
-              {painPoints.items.map((item, index) => (
-                <article key={item.title} className="aptus-cs-icon-card">
-                  <CaseStudyIcon name={PAIN_POINT_ICONS[index] ?? PAIN_POINT_ICONS[0]} />
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                </article>
-              ))}
-            </div>
-            <p className="aptus-cs-closing">{painPoints.closingParagraph}</p>
-          </Container>
-        </section>
-      ) : null}
-
-      {whyChoose.visible !== false ? (
-        <section className="aptus-cs-section">
-          <Container>
-            <h2 className="aptus-cs-section-title aptus-cs-section-title--lg">
-              {joinAccentTitle(whyChoose.title)}
-            </h2>
-            <div className="mx-auto grid max-w-[1000px] gap-2 sm:grid-cols-2 lg:grid-cols-4">
-              {whyChoose.items.map((item, index) => (
-                <article key={item.title} className="aptus-cs-icon-card">
-                  <CaseStudyIcon name={WHY_CHOOSE_ICONS[index] ?? WHY_CHOOSE_ICONS[0]} />
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                </article>
-              ))}
-            </div>
-          </Container>
-        </section>
-      ) : null}
-
-      {transformCta.visible !== false ? (
+      {transformCta?.visible !== false && transformCta ? (
         <section className="aptus-cs-transform">
           <Container>
             <h2>{joinAccentTitle(transformCta.title)}</h2>
@@ -182,53 +124,6 @@ export function CaseStudiesPageView({ content }: CaseStudiesPageViewProps) {
           </Container>
         </section>
       ) : null}
-
-      {testimonials.visible !== false ? (
-        <section className="aptus-cs-section">
-          <Container>
-            <h2 className="aptus-cs-section-title aptus-cs-section-title--lg">
-              {testimonials.eyebrow}
-            </h2>
-            <p className="aptus-cs-subtitle">{renderAccentTitle(testimonials.title)}</p>
-            <div className="mx-auto grid max-w-[800px] gap-2 md:grid-cols-3">
-              {testimonials.items.map((item) => (
-                <article key={item.authorName} className="aptus-cs-testimonial-card">
-                  <blockquote>&ldquo;{item.quote}&rdquo;</blockquote>
-                  <p className="aptus-cs-author">{item.authorName}</p>
-                  <p className="aptus-cs-role">
-                    {item.authorRole},
-                    <br />
-                    {item.company}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </Container>
-        </section>
-      ) : null}
-
-      {partnerships?.visible !== false && partnerships?.logos?.length ? (
-        <section className="aptus-cs-section">
-          <Container>
-            <h2 className="aptus-cs-partners-title">
-              {partnerships.title.before}{" "}
-              <span>{partnerships.title.accent}</span>
-            </h2>
-            <div className="aptus-cs-partners-grid">
-              {partnerships.logos.map((logo) => (
-                <img
-                  key={logo.alt}
-                  src={resolveCmsImageSrc(logo.src)}
-                  alt={logo.alt}
-                  loading="lazy"
-                  decoding="async"
-                />
-              ))}
-            </div>
-          </Container>
-        </section>
-      ) : null}
-
     </>
   );
 }

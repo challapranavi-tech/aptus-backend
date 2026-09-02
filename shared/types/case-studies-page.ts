@@ -42,26 +42,26 @@ export type CaseStudiesPageContent = {
     title: AccentTitleContent;
     items: KeyProjectItemContent[];
   };
-  painPoints: {
+  painPoints?: {
     visible?: boolean;
     title: AccentTitleContent;
     items: { title: string; description: string }[];
     closingParagraph: string;
   };
-  whyChoose: {
+  whyChoose?: {
     visible?: boolean;
     eyebrow?: string;
     title: AccentTitleContent;
     items: { title: string; description: string }[];
   };
-  transformCta: {
+  transformCta?: {
     visible?: boolean;
     title: AccentTitleContent;
     subtitle: string;
     ctaLabel: string;
     ctaHref: string;
   };
-  testimonials: {
+  testimonials?: {
     visible?: boolean;
     eyebrow: string;
     title: AccentTitleContent;
