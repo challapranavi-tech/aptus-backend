@@ -8,27 +8,30 @@ type CaseStudiesPageViewProps = {
 };
 
 function ProjectCard({ item }: { item: CaseStudyItemContent }) {
+  const image = item.imageSrc ? (
+    <img
+      src={resolveCmsImageSrc(item.imageSrc)}
+      alt={item.imageAlt ?? item.title}
+      className="aptus-cs-card__image"
+      loading="lazy"
+      decoding="async"
+    />
+  ) : null;
+
   return (
     <article className="aptus-cs-card aptus-cs-card--key-project">
-      {item.imageSrc ? (
+      {image ? (
         item.pdfHref ? (
-          <a href={item.pdfHref} target="_blank" rel="noopener noreferrer">
-            <img
-              src={resolveCmsImageSrc(item.imageSrc)}
-              alt={item.imageAlt ?? item.title}
-              className="aptus-cs-card__image"
-              loading="lazy"
-              decoding="async"
-            />
+          <a
+            href={item.pdfHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="aptus-cs-card__logo-wrap"
+          >
+            {image}
           </a>
         ) : (
-          <img
-            src={resolveCmsImageSrc(item.imageSrc)}
-            alt={item.imageAlt ?? item.title}
-            className="aptus-cs-card__image"
-            loading="lazy"
-            decoding="async"
-          />
+          <div className="aptus-cs-card__logo-wrap">{image}</div>
         )
       ) : null}
       <h3 className="aptus-cs-card__title">
