@@ -1,13 +1,18 @@
 /**
  * Product detail tab content for the software catalog.
  * - 8 Autodesk portal products: rich hand-crafted copy in product-detail-autodesk-portal.ts
- * - Adobe + all other products: structured generic tabs from buildGenericProductContent()
+ * - Word-catalog products (Adobe, Microsoft, Oracle, other Autodesk): product-detail-word-catalog.ts
+ * - Remaining products: structured generic tabs from buildGenericProductContent()
  */
 
 import {
   PORTAL_AUTODESK_DETAIL_CONTENT,
   PORTAL_AUTODESK_DETAIL_SLUGS,
 } from "@/data/product-detail-autodesk-portal";
+import {
+  WORD_CATALOG_DETAIL_CONTENT,
+  WORD_CATALOG_DETAIL_SLUGS,
+} from "@/data/product-detail-word-catalog";
 
 export type ProductDetailBlock =
   | { type: "p"; text: string }
@@ -190,6 +195,10 @@ export function getProductDetailContent(
     return PORTAL_AUTODESK_DETAIL_CONTENT[slug]!;
   }
 
+  if (WORD_CATALOG_DETAIL_SLUGS.has(slug)) {
+    return WORD_CATALOG_DETAIL_CONTENT[slug]!;
+  }
+
   return buildGenericProductContent(
     productName,
     fallback?.brandLabel ?? "Software",
@@ -198,5 +207,5 @@ export function getProductDetailContent(
 }
 
 export function productDetailContentKeys(): string[] {
-  return [...PORTAL_AUTODESK_DETAIL_SLUGS];
+  return [...PORTAL_AUTODESK_DETAIL_SLUGS, ...WORD_CATALOG_DETAIL_SLUGS];
 }

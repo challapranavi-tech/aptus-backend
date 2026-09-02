@@ -1,1450 +1,761 @@
-Product Title: AutoCAD - including specialized toolsets AD Commercial (1 year, 3 year) (New,
-renewal)
+﻿Product Title: AutoCAD - including specialized toolsets AD Commercial (1 year, 3 year) (New, renewal)
 Product Overview
-Design the world around you with the industry-standard CAD software trusted by millions.
-Autodesk AutoCAD with Specialized Toolsets gives you access to seven discipline-specific
-toolsets—including Architecture, Mechanical, and Electrical—driving an average productivity
-gain of up to 63%. This AD Commercial package delivers an unrestricted, fully compliant
-commercial license tailored for business owners, enterprise engineering teams, and freelance
-professionals.
+Design the world around you with the industry-standard CAD software trusted by millions. Autodesk AutoCAD with Specialized Toolsets gives you access to seven discipline-specific toolsets—including Architecture, Mechanical, and Electrical—driving an average productivity gain of up to 63%. This AD Commercial package delivers an unrestricted, fully compliant commercial license tailored for business owners, enterprise engineering teams, and freelance professionals.
 Key Product Benefits
- All-In-One Power: Get standard AutoCAD alongside 7 distinct engineering toolsets under
-a single subscription.
- Massive Symbol Libraries: Instantly unlock over 750,000 intelligent parts, symbols, and
-components.
- Work Anywhere: Seamlessly sync across desktop, web browsers, and mobile devices via
-AutoCAD Web.
- Smart Automation: Speed up tracking with AI-driven object placement, smart text
-replacement, and automated revision comparisons.
+All-In-One Power: Get standard AutoCAD alongside 7 distinct engineering toolsets under a single subscription.
+Massive Symbol Libraries: Instantly unlock over 750,000 intelligent parts, symbols, and components.
+Work Anywhere: Seamlessly sync across desktop, web browsers, and mobile devices via AutoCAD Web.
+Smart Automation: Speed up tracking with AI-driven object placement, smart text replacement, and automated revision comparisons.
 What’s Included? The 7 Specialized Toolsets
- The toolsets run as individual, highly optimized applications tailored to your specific
-workflow needs:
-Toolset
-Name Core Focus & Features Included Asset
-Count
-Architecture Automates floor plans, elevations, sections, and ceiling grids
-using smart walls, doors, and windows.
-8,000+ Intelligent
-Objects
-Mechanical Accelerates product design with intelligent manufacturing
-machinery parts and automated bills of materials (BOM).
-700,000+ Parts &
-Symbols
-
--- 1 of 38 --
-
-Electrical Streamlines control systems, schematic drawings, panel
-layouts, and wire tagging to international standards.
-65,000+ Electrical
-Symbols
-MEP Purpose-built design for Mechanical, Electrical, and Plumbing
-engineering (HVAC ductwork, piping, circuits).
-10,500+
-Intelligent Objects
-Plant 3D Generates process plant layouts, 3D piping routing, and
-smart Piping and Instrumentation Diagrams (P&IDs).
-Dynamic Spec-
-driven Piping
-Map 3D Integrates Geographic Information System (GIS) models and
-geospatial topology to bridge engineering and mapping data.
-Direct GIS Data
-Connectors
-Raster
-Design
-Converts scanned paper blueprints, legacy sketches, or
-bitmaps directly into clean, editable vector lines.
-Raster-to-Vector
-Engine
+The toolsets run as individual, highly optimized applications tailored to your specific workflow needs:
+Toolset Name
+Core Focus & Features
+Included Asset Count
+Architecture
+Automates floor plans, elevations, sections, and ceiling grids using smart walls, doors, and windows.
+8,000+ Intelligent Objects
+Mechanical
+Accelerates product design with intelligent manufacturing machinery parts and automated bills of materials (BOM).
+700,000+ Parts & Symbols
+Electrical
+Streamlines control systems, schematic drawings, panel layouts, and wire tagging to international standards.
+65,000+ Electrical Symbols
+MEP
+Purpose-built design for Mechanical, Electrical, and Plumbing engineering (HVAC ductwork, piping, circuits).
+10,500+ Intelligent Objects
+Plant 3D
+Generates process plant layouts, 3D piping routing, and smart Piping and Instrumentation Diagrams (P&IDs).
+Dynamic Spec-driven Piping
+Map 3D
+Integrates Geographic Information System (GIS) models and geospatial topology to bridge engineering and mapping data.
+Direct GIS Data Connectors
+Raster Design
+Converts scanned paper blueprints, legacy sketches, or bitmaps directly into clean, editable vector lines.
+Raster-to-Vector Engine
 Administrative & Licensing Details
- License Class: AD Commercial (Valid for commercial business production and enterprise
-workflows).
- Delivery Method: ELD (Electronic License Delivery). Software downloads securely from
-your digital Autodesk Account. No physical box is shipped.
- Seat Type: Single-user Named License. Assigned securely via email to an individual team
-member.
- Version Access: Grants full rights to the latest version plus administrative rollback access
-to the 3 previous legacy versions
+License Class: AD Commercial (Valid for commercial business production and enterprise workflows).
+Delivery Method: ELD (Electronic License Delivery). Software downloads securely from your digital Autodesk Account. No physical box is shipped.
+Seat Type: Single-user Named License. Assigned securely via email to an individual team member.
+Version Access: Grants full rights to the latest version plus administrative rollback access to the 3 previous legacy versions
 ______________________________________________________________________________
 Product Title: Autodesk Civil 3D Commercial Subscription ( 1 year , 3 year ) ( New , renewal)
-Product Overview : Autodesk Civil 3D is the premier 3D software for civil infrastructure, site
-grading, and land surveying. Its intelligent, dynamic modeling automatically updates your entire
-design—from surfaces to utility networks—the moment changes are made. A commercial
-subscription gives engineering teams the automated tools and legal rights to optimize
-workflows, calculate earthworks, and deliver project sheets faster.
+Product Overview : Autodesk Civil 3D is the premier 3D software for civil infrastructure, site grading, and land surveying. Its intelligent, dynamic modeling automatically updates your entire design—from surfaces to utility networks—the moment changes are made. A commercial subscription gives engineering teams the automated tools and legal rights to optimize workflows, calculate earthworks, and deliver project sheets faster.
 Key Features & Capabilities (The "What It Does" Section)
-
--- 2 of 38 --
-
 Group the technical features into highly visible benefits for the end-user
- Corridor & Road Modeling: Build intelligent, 3D dynamic models for highways, transit
-tracks, and local roads.
- Dynamic Site Grading: Automate complex grading designs for commercial lots, ponds,
-and surfaces while keeping volume tracking live.
- Pipe & Pressure Networks: Draft and analyze gravity-fed and pressurized utility systems,
-complete with depth checks and interference analysis.
- Automated Sheet Production: Instantly generate scaled construction plans, profiles, and
-cross-section sheets.
- Earthworks & Material Takeoffs: Run precise cut-and-fill calculations to output Quantity
-Take-Off (QTO) reports for strict project budgeting
+Corridor & Road Modeling: Build intelligent, 3D dynamic models for highways, transit tracks, and local roads.
+Dynamic Site Grading: Automate complex grading designs for commercial lots, ponds, and surfaces while keeping volume tracking live.
+Pipe & Pressure Networks: Draft and analyze gravity-fed and pressurized utility systems, complete with depth checks and interference analysis.
+Automated Sheet Production: Instantly generate scaled construction plans, profiles, and cross-section sheets.
+Earthworks & Material Takeoffs: Run precise cut-and-fill calculations to output Quantity Take-Off (QTO) reports for strict project budgeting
 Subscription & Licensing Options (The Pricing/CTA Section)
- Access Type: 100% digital deployment and delivery managed via the online Autodesk
-Portal Account.
- Subscription Tiers: Flexible procurement available in 1-year or 3-year commercial plans.
- Commercial Rights: Grants authorized business use for commercial, profit-generating
-operations.
- Collaboration Add-ons: Cloud-hosted multi-user options via the Autodesk Construction
-Cloud (ACC) and BIM Collaborate Pro. [1]
+Access Type: 100% digital deployment and delivery managed via the online Autodesk Portal Account.
+Subscription Tiers: Flexible procurement available in 1-year or 3-year commercial plans.
+Commercial Rights: Grants authorized business use for commercial, profit-generating operations.
+Collaboration Add-ons: Cloud-hosted multi-user options via the Autodesk Construction Cloud (ACC) and BIM Collaborate Pro. [1]
 ___________________________________________________________________________
-Product Title: Architecture Engineering & Construction Collection IC Commercial ( 1 year , 3
-year ) ( New , renewal)
+Product Title: Architecture Engineering & Construction Collection IC Commercial ( 1 year , 3 year ) ( New , renewal)
 Product Overview
-The Autodesk AEC Collection Commercial is an all-in-one software ecosystem combining flagship
-CAD, 3D modeling, and cloud-connected BIM tools. It equips architecture, engineering, and
-construction teams with everything needed to transition projects from concept to final
-construction seamlessly.
+The Autodesk AEC Collection Commercial is an all-in-one software ecosystem combining flagship CAD, 3D modeling, and cloud-connected BIM tools. It equips architecture, engineering, and construction teams with everything needed to transition projects from concept to final construction seamlessly.
 Key Features
- Multi-Discipline BIM: Design, model, and document buildings with intelligent
-parametric tools for architecture, structure, and MEP.
-
--- 3 of 38 --
-
- Precision Specialized CAD: Access standard drafting alongside vertical toolsets tailored
-for architecture, electrical, and mechanical design.
- Infrastructure & Civil Design: Streamline site layouts, corridor modeling, grading, and
-transportation design with automated tools.
- Pre-Construction Clash Detection: Combine trades into a single model to run
-interference checks and simulate construction schedules.
- Unified Cloud Environment: Securely manage, track, and share project documents
-across a centralized platform to minimize field errors.
- Reality Capture & Rendering: Convert laser scans into 3D models and generate
-cinematic renderings for client approvals.
+Multi-Discipline BIM: Design, model, and document buildings with intelligent parametric tools for architecture, structure, and MEP.
+Precision Specialized CAD: Access standard drafting alongside vertical toolsets tailored for architecture, electrical, and mechanical design.
+Infrastructure & Civil Design: Streamline site layouts, corridor modeling, grading, and transportation design with automated tools.
+Pre-Construction Clash Detection: Combine trades into a single model to run interference checks and simulate construction schedules.
+Unified Cloud Environment: Securely manage, track, and share project documents across a centralized platform to minimize field errors.
+Reality Capture & Rendering: Convert laser scans into 3D models and generate cinematic renderings for client approvals.
 What's Included
-Software / Service Primary Industry Application
-Revit Multidisciplinary BIM (Architecture, Structure, MEP)
-AutoCAD Industry-standard 2D/3D drafting and specialized
-toolsets
-Civil 3D Civil engineering infrastructure design and site layout
-Navisworks Manage Project coordination, 3D clash detection, and simulation
-Autodesk Docs Cloud-based common data environment (CDE)
-Infraworks Conceptual civil infrastructure design and city modeling
-3ds Max 3D modeling, animation, and photorealistic rendering
-Advance Steel Structural steel detailing and fabrication modeling
-Robot Structural Analysis
-Professional Advanced structural load analysis and code compliance
-ReCap Pro Laser scan and reality capture data processing
-
--- 4 of 38 --
-
+Software / Service
+Primary Industry Application
+Revit
+Multidisciplinary BIM (Architecture, Structure, MEP)
+AutoCAD
+Industry-standard 2D/3D drafting and specialized toolsets
+Civil 3D
+Civil engineering infrastructure design and site layout
+Navisworks Manage
+Project coordination, 3D clash detection, and simulation
+Autodesk Docs
+Cloud-based common data environment (CDE)
+Infraworks
+Conceptual civil infrastructure design and city modeling
+3ds Max
+3D modeling, animation, and photorealistic rendering
+Advance Steel
+Structural steel detailing and fabrication modeling
+Robot Structural Analysis Professional
+Advanced structural load analysis and code compliance
+ReCap Pro
+Laser scan and reality capture data processing
 Subscription & Licensing Options
 License Tier
- Commercial Use: Fully compliant for businesses, corporate enterprises, independent
-contractors, and government agencies (excludes educational use).
- Single-User Access: Assigned directly to a specific user via their email address (Autodesk
-ID).
- Cloud-Managed: Users can log in and download the software on multiple machines, but
-only one active session can run at any given time.
- Electronic License Delivery (ELD): Fully digital distribution. Licenses are provisioned
-directly to your organization’s Autodesk Account portal for immediate deployment.
+Commercial Use: Fully compliant for businesses, corporate enterprises, independent contractors, and government agencies (excludes educational use).
+Single-User Access: Assigned directly to a specific user via their email address (Autodesk ID).
+Cloud-Managed: Users can log in and download the software on multiple machines, but only one active session can run at any given time.
+Electronic License Delivery (ELD): Fully digital distribution. Licenses are provisioned directly to your organization’s Autodesk Account portal for immediate deployment.
 ______________________________________________________________________________
-Product Title: Autodesk Product Design & Manufacturing Collection (IC Commercial) ( 1 year ,
-3 year ) ( New , renewal)
+Product Title: Autodesk Product Design & Manufacturing Collection (IC Commercial) ( 1 year , 3 year ) ( New , renewal)
 Product Overview
-The Autodesk Product Design & Manufacturing Collection (PDMC) is an enterprise-grade suite
-of professional CAD, CAM, and CAE applications. It provides engineering and manufacturing
-teams with a complete set of tools to design, simulate, and manufacture complex products. The
-IC Commercial designation indicates a fully compliant, professional Industry Collection license
-intended for profit-generating business operations. By unifying professional-grade 3D
-mechanical design with advanced simulation and CNC programming, this collection eliminates
-data silos and streamlines production from initial concept to the final factory floor layout.
+The Autodesk Product Design & Manufacturing Collection (PDMC) is an enterprise-grade suite of professional CAD, CAM, and CAE applications. It provides engineering and manufacturing teams with a complete set of tools to design, simulate, and manufacture complex products. The IC Commercial designation indicates a fully compliant, professional Industry Collection license intended for profit-generating business operations. By unifying professional-grade 3D mechanical design with advanced simulation and CNC programming, this collection eliminates data silos and streamlines production from initial concept to the final factory floor layout.
 Key Features
- Professional 3D Mechanical Design: Create complex parametric models, massive
-assemblies, and production-ready drawings.
- Integrated Simulation (FEA): Test stress, thermal response, vibration, and fatigue using
-advanced Nastran technology.
- Advanced CNC Machining (CAM): Generate high-efficiency 2.5-axis to 5-axis toolpaths
-directly inside your CAD workspace.
- Factory Floor Optimization: Plan, analyze, and optimize complete manufacturing
-facilities with visual layout tools.
-
--- 5 of 38 --
-
- Automated Nesting: Optimize material yield for sheet metal cutting to minimize scrap
-and material costs.
- Associative Workflows: Downstream CAM toolpaths and simulation models update
-automatically when the base CAD design changes.
+Professional 3D Mechanical Design: Create complex parametric models, massive assemblies, and production-ready drawings.
+Integrated Simulation (FEA): Test stress, thermal response, vibration, and fatigue using advanced Nastran technology.
+Advanced CNC Machining (CAM): Generate high-efficiency 2.5-axis to 5-axis toolpaths directly inside your CAD workspace.
+Factory Floor Optimization: Plan, analyze, and optimize complete manufacturing facilities with visual layout tools.
+Automated Nesting: Optimize material yield for sheet metal cutting to minimize scrap and material costs.
+Associative Workflows: Downstream CAM toolpaths and simulation models update automatically when the base CAD design changes.
 What's Included
-Software Primary Purpose Key Manufacturing Value
-Autodesk Inventor
-Professional
-3D Mechanical
-Design
-Delivers high-end parametric modeling, assembly
-design, and production drawings.
-AutoCAD (with
-Toolsets) 2D & 3D Drafting Accelerates drafting with specialized Mechanical,
-Electrical, and Plant 3D toolsets.
-Fusion Cloud
-CAD/CAM/CAE
-Provides cloud-connected collaborative workspace
-for generative design and PCB engineering.
-Inventor Nastran Advanced
-Simulation
-Embedded FEA tool for structural, thermal, stress,
-and vibration analysis.
-Inventor CAM CNC Programming Generates 2.5-axis to 5-axis toolpaths directly inside
-the CAD viewport.
-Navisworks Manage Project Review Offers large-scale 3D clash detection and production
-line coordination.
-Factory Design
-Utilities
-Layout
-Optimization
-Optimizes factory floors using visual planning and
-digital factory models.
-Vault Basic Data
-Management
-Secures version control and tracks engineering
-design histories.
-Subscription & Licensing Options
- Commercial Compliance: Fully licensed for commercial, professional, and profit-generating
-business use.
- Named User Licensing: Assigned to specific individuals via their Autodesk Account for
-secure, flexible access on multiple devices.
-
--- 6 of 38 --
-
- Flexible Terms: Available in standard subscription intervals including 1-Year and 3-Year
-terms to match project budgeting.
- Global Access: Includes rights to use the software home or during international travel
-based on Autodesk standard terms.
- Cloud Benefits: Includes cloud storage allocations and access to cloud-based rendering and
-generative design processing.
- Technical Support: Standard subscription grants access to Autodesk web support, updates,
-and community forums.
-AutoCAD LT Commercial: Professional 2D Drafting & Design Software Product Overview ( 1
-year , 3 year ) ( New , renewal)
-AutoCAD LT Commercial is the industry-leading 2D computer-aided design (CAD) software
-trusted by millions of architects, engineers, and construction professionals worldwide.
-Engineered specifically for precision drafting, this commercial version grants full legal rights for
-use in for-profit projects, client deliverables, and professional environments. It delivers a
-streamlined, cost-effective toolset focused entirely on 2D design, allowing you to generate
-documentation faster and collaborate seamlessly across teams without paying for unused 3D
-features.
-✨ Key Features
- Precision 2D Drafting & Documentation
-o Create precise technical drawings with intuitive editing, shaping, and annotation
-tools.
- Smart Blocks & Automation
-o Automate repetitive counting tasks and find/replace blocks quickly across your
-entire canvas.
- AutoCAD Web and Mobile Apps
-o View, edit, share, and co-author drawings on the go from any browser or mobile
-device.
- DWG™ History & Compare
-o See past versions of your drawing side-by-side to track changes, edits, and
-evolutionary progress.
-
--- 7 of 38 --
-
- Trace & Share Ecosystem
-o Review drawings safely and add feedback directly to a DWG file without altering
-the existing blueprint.
- Cross-Platform Compatibility
-o Work flawlessly with native support optimized for both Windows and macOS
-systems.
-📦 What's Included
-Component Description Delivery Method
-AutoCAD LT Core
 Software
-Full commercial access to the 2D CAD
-engine.
-Electronic Software Download
-(ESD)
-AutoCAD Web App Browser-based CAD tool for on-the-fly
-edits.
-Cloud-Based Access via Web
-Browser
-AutoCAD Mobile App iOS and Android companion app for job-
-site viewing.
-App Store / Google Play
-Download
-Autodesk Cloud
-Storage
-Secure cloud space for file syncing and
-backup.
-Integrated Autodesk Account
-Storage
-Technical Support Direct access to Autodesk support
-experts.
-Online Ticket, Chat, and
-Scheduled Call
+Primary Purpose
+Key Manufacturing Value
+Autodesk Inventor Professional
+3D Mechanical Design
+Delivers high-end parametric modeling, assembly design, and production drawings.
+AutoCAD (with Toolsets)
+2D & 3D Drafting
+Accelerates drafting with specialized Mechanical, Electrical, and Plant 3D toolsets.
+Fusion
+Cloud CAD/CAM/CAE
+Provides cloud-connected collaborative workspace for generative design and PCB engineering.
+Inventor Nastran
+Advanced Simulation
+Embedded FEA tool for structural, thermal, stress, and vibration analysis.
+Inventor CAM
+CNC Programming
+Generates 2.5-axis to 5-axis toolpaths directly inside the CAD viewport.
+Navisworks Manage
+Project Review
+Offers large-scale 3D clash detection and production line coordination.
+Factory Design Utilities
+Layout Optimization
+Optimizes factory floors using visual planning and digital factory models.
+Vault Basic
+Data Management
+Secures version control and tracks engineering design histories.
+Subscription & Licensing Options
+Commercial Compliance: Fully licensed for commercial, professional, and profit-generating business use.
+Named User Licensing: Assigned to specific individuals via their Autodesk Account for secure, flexible access on multiple devices.
+Flexible Terms: Available in standard subscription intervals including 1-Year and 3-Year terms to match project budgeting.
+Global Access: Includes rights to use the software home or during international travel based on Autodesk standard terms.
+Cloud Benefits: Includes cloud storage allocations and access to cloud-based rendering and generative design processing.
+Technical Support: Standard subscription grants access to Autodesk web support, updates, and community forums.
+AutoCAD LT Commercial: Professional 2D Drafting & Design Software Product Overview ( 1 year , 3 year ) ( New , renewal)
+AutoCAD LT Commercial is the industry-leading 2D computer-aided design (CAD) software trusted by millions of architects, engineers, and construction professionals worldwide. Engineered specifically for precision drafting, this commercial version grants full legal rights for use in for-profit projects, client deliverables, and professional environments. It delivers a streamlined, cost-effective toolset focused entirely on 2D design, allowing you to generate documentation faster and collaborate seamlessly across teams without paying for unused 3D features.
+✨ Key Features
+Precision 2D Drafting & Documentation
+Create precise technical drawings with intuitive editing, shaping, and annotation tools.
+Smart Blocks & Automation
+Automate repetitive counting tasks and find/replace blocks quickly across your entire canvas.
+AutoCAD Web and Mobile Apps
+View, edit, share, and co-author drawings on the go from any browser or mobile device.
+DWG™ History & Compare
+See past versions of your drawing side-by-side to track changes, edits, and evolutionary progress.
+Trace & Share Ecosystem
+Review drawings safely and add feedback directly to a DWG file without altering the existing blueprint.
+Cross-Platform Compatibility
+Work flawlessly with native support optimized for both Windows and macOS systems.
+📦 What's Included
+Component
+Description
+Delivery Method
+AutoCAD LT Core Software
+Full commercial access to the 2D CAD engine.
+Electronic Software Download (ESD)
+AutoCAD Web App
+Browser-based CAD tool for on-the-fly edits.
+Cloud-Based Access via Web Browser
+AutoCAD Mobile App
+iOS and Android companion app for job-site viewing.
+App Store / Google Play Download
+Autodesk Cloud Storage
+Secure cloud space for file syncing and backup.
+Integrated Autodesk Account Storage
+Technical Support
+Direct access to Autodesk support experts.
+Online Ticket, Chat, and Scheduled Call
 🔑 Subscription & Licensing Options
-Autodesk software is licensed strictly via a Named User Subscription Model. Licenses are tied
-directly to an individual's Autodesk Account, allowing the user to sign in and activate the
-software on multiple machines (though it can only be actively used on one device at a time).
+Autodesk software is licensed strictly via a Named User Subscription Model. Licenses are tied directly to an individual's Autodesk Account, allowing the user to sign in and activate the software on multiple machines (though it can only be actively used on one device at a time).
 Autodesk Forma Design Collaboration (formerly BIM Collaborate Pro)
 Product Overview ( 10, 25,50,100,500,1000)
-Autodesk Forma Design Collaboration is a cloud-based design management and co-authoring
-software built for architecture, engineering, and construction (AEC) teams. It serves as a unified,
-cloud-hosted "single source of truth," allowing multi-disciplinary teams to collaborate on
-complex models securely from any location. By moving data management to the cloud, the
-
--- 8 of 38 --
-
-platform eliminates local server silos, speeds up project delivery, and minimizes costly on-site
-errors before construction begins.
+Autodesk Forma Design Collaboration is a cloud-based design management and co-authoring software built for architecture, engineering, and construction (AEC) teams. It serves as a unified, cloud-hosted "single source of truth," allowing multi-disciplinary teams to collaborate on complex models securely from any location. By moving data management to the cloud, the platform eliminates local server silos, speeds up project delivery, and minimizes costly on-site errors before construction begins.
 Key Features
- Real-Time Cloud Co-Authoring: Multi-user cloud worksharing across Autodesk Revit,
-Civil 3D, and AutoCAD Plant 3D.
- Automated Clash Detection: Automatically identifies spatial conflicts when models are
-uploaded, reducing manual interference checks.
- Advanced Change Analytics: Visualizes exactly what has been added, modified, or
-deleted between model versions in 2D or 3D.
- Centralized Issue Tracking: Assigns, tracks, and resolves design issues directly in a
-browser or natively within design tools.
- ISO 19650 Compliance: Utilizes standardized file-naming protocols and deep permission
-controls to align with global BIM standards.
+Real-Time Cloud Co-Authoring: Multi-user cloud worksharing across Autodesk Revit, Civil 3D, and AutoCAD Plant 3D.
+Automated Clash Detection: Automatically identifies spatial conflicts when models are uploaded, reducing manual interference checks.
+Advanced Change Analytics: Visualizes exactly what has been added, modified, or deleted between model versions in 2D or 3D.
+Centralized Issue Tracking: Assigns, tracks, and resolves design issues directly in a browser or natively within design tools.
+ISO 19650 Compliance: Utilizes standardized file-naming protocols and deep permission controls to align with global BIM standards.
 What's Included
-Module / Component Description Primary Value
-Forma Data
-Management (formerly
-Autodesk Docs)
-Common Data Environment
-(CDE) for document control.
-Unlimited cloud storage, version
-tracking, and strict permission
-management.
+Module / Component
+Description
+Primary Value
+Forma Data Management (formerly Autodesk Docs)
+Common Data Environment (CDE) for document control.
+Unlimited cloud storage, version tracking, and strict permission management.
 Design Collaboration
-Milestone tracking and cross-
-discipline data exchange
-package management.
-Controls how and when design data
-is shared with external teams to
-prevent disruption.
-Model Coordination Automated aggregation and
-conflict testing environment.
-Instantly highlights clashes across
-multiple discipline models without
-opening heavy software.
-Revit Cloud
-Worksharing
-Core engine powering live Revit
-collaboration.
-Allows multiple architects and
-engineers to work inside the same
-central file concurrently.
-
--- 9 of 38 --
-
-Collaboration for Civil
-3D & Plant 3D
-Cloud engine for infrastructure
-and process plant designers.
-Connects horizontal design teams
-and manages data shortcuts over
-the cloud securely.
+Milestone tracking and cross-discipline data exchange package management.
+Controls how and when design data is shared with external teams to prevent disruption.
+Model Coordination
+Automated aggregation and conflict testing environment.
+Instantly highlights clashes across multiple discipline models without opening heavy software.
+Revit Cloud Worksharing
+Core engine powering live Revit collaboration.
+Allows multiple architects and engineers to work inside the same central file concurrently.
+Collaboration for Civil 3D & Plant 3D
+Cloud engine for infrastructure and process plant designers.
+Connects horizontal design teams and manages data shortcuts over the cloud securely.
 Subscription & Licensing Options
- Named User Licensing: Tied to individual Autodesk Accounts, preventing credential
-sharing and ensuring precise activity auditing.
- Flexible Term Lengths: Available via monthly, annual, or multi-year subscription plans to
-scale alongside fluctuating project demands.
- Bring Your Own Subscription (BYOS): Enables external consultants and subcontractors
-to use their own licenses within your host project hub.
- Autodesk Flex Access: Pay-as-you-go token model designed for occasional users who
-only need project access a few days per month.
+Named User Licensing: Tied to individual Autodesk Accounts, preventing credential sharing and ensuring precise activity auditing.
+Flexible Term Lengths: Available via monthly, annual, or multi-year subscription plans to scale alongside fluctuating project demands.
+Bring Your Own Subscription (BYOS): Enables external consultants and subcontractors to use their own licenses within your host project hub.
+Autodesk Flex Access: Pay-as-you-go token model designed for occasional users who only need project access a few days per month.
 Product Title: 3ds Max Commercial ( 1 year , 3 year ) ( New , renewal)
 Product Overview
-Autodesk 3ds Max delivers a powerful, flexible toolset to create massive worlds, high-fidelity
-game assets, and premium product visualizations. Its robust modeling pipeline allows artists to
-quickly shape, texturize, and light complex scenes. Built-in automation and Python integration
-let you scale production workflows effortlessly, while the legendary Arnold renderer provides
-production-ready, physically accurate previews straight out of the box.
+Autodesk 3ds Max delivers a powerful, flexible toolset to create massive worlds, high-fidelity game assets, and premium product visualizations. Its robust modeling pipeline allows artists to quickly shape, texturize, and light complex scenes. Built-in automation and Python integration let you scale production workflows effortlessly, while the legendary Arnold renderer provides production-ready, physically accurate previews straight out of the box.
 🚀 Key Features
- Advanced Polygon Modeling: Build intricate 3D environments, organic characters, and
-hard-surface props with powerful parametric tools.
- Built-in Arnold Renderer: Generate photorealistic visual effects, high-fidelity graphics,
-and complex lighting simulations in real time.
- Automated Asset Pipelines: Streamline repetitive studio tasks using built-in scripting
-tools and comprehensive Python 3 support.
-
--- 10 of 38 --
-
- Dynamic FX & Physics: Simulate realistic fire, water, smoke, and cloth using integrated
-Bifrost and particle systems.
- Smart Retopology Tools: Optimize dense, high-polygon CAD geometry into clean,
-production-ready meshes with a single click.
+Advanced Polygon Modeling: Build intricate 3D environments, organic characters, and hard-surface props with powerful parametric tools.
+Built-in Arnold Renderer: Generate photorealistic visual effects, high-fidelity graphics, and complex lighting simulations in real time.
+Automated Asset Pipelines: Streamline repetitive studio tasks using built-in scripting tools and comprehensive Python 3 support.
+Dynamic FX & Physics: Simulate realistic fire, water, smoke, and cloth using integrated Bifrost and particle systems.
+Smart Retopology Tools: Optimize dense, high-polygon CAD geometry into clean, production-ready meshes with a single click.
 📦 What's Included
-Component Description Deployment
-3ds Max Core Software Desktop application for modeling, texturing,
-animation, and FX.
-Local
-Installation
-Arnold Render Engine Integrated interactive rendering engine for
-photorealistic outputs. Local Plugin
-Autodesk Desktop App Central hub for software updates, plugin
-management, and hotfixes.
-Background
-Utility
-Cloud Storage &
-Collaboration
-Shared views and cloud storage access for remote
-client reviews. Cloud Hosted
-Technical Support 24/7 access to Autodesk experts, live chats, and
-documentation. Online Support
+Component
+Description
+Deployment
+3ds Max Core Software
+Desktop application for modeling, texturing, animation, and FX.
+Local Installation
+Arnold Render Engine
+Integrated interactive rendering engine for photorealistic outputs.
+Local Plugin
+Autodesk Desktop App
+Central hub for software updates, plugin management, and hotfixes.
+Background Utility
+Cloud Storage & Collaboration
+Shared views and cloud storage access for remote client reviews.
+Cloud Hosted
+Technical Support
+24/7 access to Autodesk experts, live chats, and documentation.
+Online Support
 Subscription & Licensing Options
- Standard Commercial: Full commercial rights. No revenue caps. Available on flexible
-monthly or annual terms.
- 3ds Max Indie: Full commercial rights. For freelancers and startups. Restricted to users
-below the regional revenue cap.
- Autodesk Flex: Pay-as-you-go token system. Best for occasional users. Deducts tokens
-only on the days you use it.
-Product Title: Build - CLOUD Commercial ( 550 , 5000 , unlimited) ( 1 year , 3 year ) (
-New , renewal)
-
--- 11 of 38 --
-
+Standard Commercial: Full commercial rights. No revenue caps. Available on flexible monthly or annual terms.
+3ds Max Indie: Full commercial rights. For freelancers and startups. Restricted to users below the regional revenue cap.
+Autodesk Flex: Pay-as-you-go token system. Best for occasional users. Deducts tokens only on the days you use it.
+Product Title: Build - CLOUD Commercial ( 550 , 5000 , unlimited) ( 1 year , 3 year ) ( New , renewal)
 Product Overview
-Autodesk Build bridges the gap between design and jobsite execution by centralizing
-communication, data collection, and document tracking. Built on a common data environment,
-it allows teams to manage day-to-day operations seamlessly from any device. It combines the
-best of PlanGrid and BIM 360 to deliver standardized forms, real-time quality tracking, and
-comprehensive cost insights, ensuring your projects finish on time and under budget.
+Autodesk Build bridges the gap between design and jobsite execution by centralizing communication, data collection, and document tracking. Built on a common data environment, it allows teams to manage day-to-day operations seamlessly from any device. It combines the best of PlanGrid and BIM 360 to deliver standardized forms, real-time quality tracking, and comprehensive cost insights, ensuring your projects finish on time and under budget.
 🚀 Key Features
- Connected Project Management: Streamline submittals, RFIs, meeting minutes, and
-daily logs in one shared digital dashboard.
- Real-Time Field Collaboration: Access up-to-date 2D sheets and 3D BIM data directly
-on-site via mobile devices.
- Integrated Cost Control: Track change orders, monitor budgets, and forecast risks
-dynamically to safeguard profitability.
- Quality & Safety Tracking: Standardize safety checklists, log punch lists, and track real-
-time resolution of field issues.
- Predictive Insights & Reports: Leverage machine learning analytics to identify project
-risks before they stall construction.
+Connected Project Management: Streamline submittals, RFIs, meeting minutes, and daily logs in one shared digital dashboard.
+Real-Time Field Collaboration: Access up-to-date 2D sheets and 3D BIM data directly on-site via mobile devices.
+Integrated Cost Control: Track change orders, monitor budgets, and forecast risks dynamically to safeguard profitability.
+Quality & Safety Tracking: Standardize safety checklists, log punch lists, and track real-time resolution of field issues.
+Predictive Insights & Reports: Leverage machine learning analytics to identify project risks before they stall construction.
 📦 What's Included
-Component Description Deployment
-Autodesk Build Core
-Module
-Cloud tools for RFIs, submittals, schedules, and daily
-construction workflows. Cloud Platform
-Autodesk Docs Central document management system providing a
-single source of project truth. Cloud Platform
-Cost Management
-Extension
-Tools to manage cash flow, budgets, contracts, and
-financial change orders.
-Integrated
-Utility
-PlanGrid Mobile App Mobile field execution app optimized for fast sheet
-viewing and offline sync.
-iOS / Android
-App
-
--- 12 of 38 --
-
-Insight &
-Administration
-Central dashboard for member permissions, custom
-templates, and cross-project reports. Cloud Analytics
+Component
+Description
+Deployment
+Autodesk Build Core Module
+Cloud tools for RFIs, submittals, schedules, and daily construction workflows.
+Cloud Platform
+Autodesk Docs
+Central document management system providing a single source of project truth.
+Cloud Platform
+Cost Management Extension
+Tools to manage cash flow, budgets, contracts, and financial change orders.
+Integrated Utility
+PlanGrid Mobile App
+Mobile field execution app optimized for fast sheet viewing and offline sync.
+iOS / Android App
+Insight & Administration
+Central dashboard for member permissions, custom templates, and cross-project reports.
+Cloud Analytics
 💳 Subscription & Licensing Options
- Build 550 Sheet Plan (Commercial): Full commercial rights. Grants access to up to 550
-active sheets across all active projects. Best for small-to-medium project teams.
- Flexible Term Contracts: Available as a single-user electronic software delivery (ELD)
-license issued on fixed 1-year or multi-year subscription terms.
- Bring Your Own Subscription (BYOS): Allows contractors and external vendors to bring
-their own Build 550 license into a client's hub without utilizing extra host seat
-allocations.
+Build 550 Sheet Plan (Commercial): Full commercial rights. Grants access to up to 550 active sheets across all active projects. Best for small-to-medium project teams.
+Flexible Term Contracts: Available as a single-user electronic software delivery (ELD) license issued on fixed 1-year or multi-year subscription terms.
+Bring Your Own Subscription (BYOS): Allows contractors and external vendors to bring their own Build 550 license into a client's hub without utilizing extra host seat allocations.
 Product Title : Takeoff CLOUD Commercial ( 1 year , 3 year ) ( New , renewal)
 Product Overview
-Autodesk Takeoff streamlines the estimating process by allowing teams to capture project
-scopes using both 2D drawings and 3D models. Operating within a shared common data
-environment, it eliminates data silos and ensures that estimators always work off the latest
-design revision. By automating quantity calculations and linking takeoffs directly to construction
-documents, it reduces human error, cuts down on rework, and dramatically accelerates the
-bidding cycle.
+Autodesk Takeoff streamlines the estimating process by allowing teams to capture project scopes using both 2D drawings and 3D models. Operating within a shared common data environment, it eliminates data silos and ensures that estimators always work off the latest design revision. By automating quantity calculations and linking takeoffs directly to construction documents, it reduces human error, cuts down on rework, and dramatically accelerates the bidding cycle.
 🚀 Key Features
- Cloud-Based Quantification: Access and perform takeoffs anytime, anywhere,
-eliminating the need for bulky local software installations.
- Integrated 2D and 3D Takeoffs: Combine linear, count, and area takeoffs from PDF
-sheets with automated multi-dimensional takeoffs from 3D models.
- Custom Classification Systems: Upload and map your standard corporate or regional
-costing catalogs directly to your quantities.
- Real-Time Collaboration: Allow multiple estimators to work simultaneously on a single
-project package without risking duplicated counts.
-
--- 13 of 38 --
-
- Automated Version Tracking: Receive immediate alerts when design files change,
-allowing you to instantly view and adjust impacted quantities.
+Cloud-Based Quantification: Access and perform takeoffs anytime, anywhere, eliminating the need for bulky local software installations.
+Integrated 2D and 3D Takeoffs: Combine linear, count, and area takeoffs from PDF sheets with automated multi-dimensional takeoffs from 3D models.
+Custom Classification Systems: Upload and map your standard corporate or regional costing catalogs directly to your quantities.
+Real-Time Collaboration: Allow multiple estimators to work simultaneously on a single project package without risking duplicated counts.
+Automated Version Tracking: Receive immediate alerts when design files change, allowing you to instantly view and adjust impacted quantities.
 📦 What's Included
-Component Description Deployment
-Autodesk Takeoff
-Module
-Unified workspace for 2D sheet takeoff and 3D model-
-based quantification. Cloud Platform
-Autodesk Docs Central document management system ensuring access to
-the latest construction documents. Cloud Platform
-Formula Engine
-Tool
-Tool for creating custom mathematical formulas to
-automate complex component calculations.
-Integrated
-Utility
-Takeoff Viewer &
-Panel
-Responsive browser-based interface for filtering, auditing,
-and sorting itemized takeoff outputs. Web Browser
-Insight & Analytics Central dashboard for visual reporting, data export, and
-permission management.
-Cloud
-Analytics
+Component
+Description
+Deployment
+Autodesk Takeoff Module
+Unified workspace for 2D sheet takeoff and 3D model-based quantification.
+Cloud Platform
+Autodesk Docs
+Central document management system ensuring access to the latest construction documents.
+Cloud Platform
+Formula Engine Tool
+Tool for creating custom mathematical formulas to automate complex component calculations.
+Integrated Utility
+Takeoff Viewer & Panel
+Responsive browser-based interface for filtering, auditing, and sorting itemized takeoff outputs.
+Web Browser
+Insight & Analytics
+Central dashboard for visual reporting, data export, and permission management.
+Cloud Analytics
 💳 Subscription & Licensing Options
- Standard Commercial License: Full commercial rights. Grants unrestricted access to both
-2D and 3D cloud takeoff workflows for professional estimations.
- Flexible Term Contracts: Available as a single-user electronic software delivery (ELD)
-license issued on fixed 1-year or multi-year subscription terms.
- Bring Your Own Subscription (BYOS): Allows external estimators or trade partners to
-bring their own Takeoff license into a master project hub without drawing down host
-seat pools.
-Project title: Docs - User CLOUD Commercial ( Single , 10,25,100,500) ( 1 year , 3
-year ) ( New , renewal)
-
--- 14 of 38 --
-
+Standard Commercial License: Full commercial rights. Grants unrestricted access to both 2D and 3D cloud takeoff workflows for professional estimations.
+Flexible Term Contracts: Available as a single-user electronic software delivery (ELD) license issued on fixed 1-year or multi-year subscription terms.
+Bring Your Own Subscription (BYOS): Allows external estimators or trade partners to bring their own Takeoff license into a master project hub without drawing down host seat pools.
+Project title: Docs - User CLOUD Commercial ( Single , 10,25,100,500) ( 1 year , 3 year ) ( New , renewal)
 Product Overview
-Autodesk Docs serves as the foundation for the Autodesk Construction Cloud platform,
-providing a secure, centralized repository for all project data. It eliminates communication silos
-by allowing teams to review, markup, and approve 2D drawings, 3D models, and standard office
-documents from any device. Built-in permission controls, version histories, and automated
-approval workflows ensure that field teams, architects, and owners always collaborate on the
-correct, most up-to-date information.
+Autodesk Docs serves as the foundation for the Autodesk Construction Cloud platform, providing a secure, centralized repository for all project data. It eliminates communication silos by allowing teams to review, markup, and approve 2D drawings, 3D models, and standard office documents from any device. Built-in permission controls, version histories, and automated approval workflows ensure that field teams, architects, and owners always collaborate on the correct, most up-to-date information.
 🚀 Key Features
- Common Data Environment: Centralize all construction files, structural designs, and
-contracts in a single, secure cloud hub.
- Advanced 2D/3D Viewer: Preview, pan, zoom, and inspect complex CAD drawings and
-BIM models directly within your web browser.
- Markup & Issue Tracking: Layer public or private comments, callouts, and issue pins onto
-sheets to accelerate clash resolutions.
- Automated Approval Workflows: Streamline document review cycles with customized
-multi-step routing, electronic sign-offs, and status tracking.
- Complete Version Control: Retain a permanent history of document revisions with side-
-by-side visual comparisons to spot design changes instantly.
+Common Data Environment: Centralize all construction files, structural designs, and contracts in a single, secure cloud hub.
+Advanced 2D/3D Viewer: Preview, pan, zoom, and inspect complex CAD drawings and BIM models directly within your web browser.
+Markup & Issue Tracking: Layer public or private comments, callouts, and issue pins onto sheets to accelerate clash resolutions.
+Automated Approval Workflows: Streamline document review cycles with customized multi-step routing, electronic sign-offs, and status tracking.
+Complete Version Control: Retain a permanent history of document revisions with side-by-side visual comparisons to spot design changes instantly.
 📦 What's Included
-Component Description Deployment
-Autodesk Docs Hub Cloud platform for advanced file storage, custom
-folder structures, and attribute tagging. Cloud Platform
-BIM 360 Document
-Management
-Companion access to legacy BIM 360 environments for
-older, active project architectures. Cloud Platform
-Autodesk Desktop
-Connector
-Background utility that syncs your local desktop file
-explorer directly to cloud project folders. Desktop Utility
-
--- 15 of 38 --
-
-Mobile Access App On-the-go sheet viewing, issue tracking, and offline file
-synchronization for jobsite use.
-iOS / Android
-App
-Admin & Security Tools Rigorous role-based, company-based, and user-based
-folder access permission dashboards.
-Cloud
-Analytics
+Component
+Description
+Deployment
+Autodesk Docs Hub
+Cloud platform for advanced file storage, custom folder structures, and attribute tagging.
+Cloud Platform
+BIM 360 Document Management
+Companion access to legacy BIM 360 environments for older, active project architectures.
+Cloud Platform
+Autodesk Desktop Connector
+Background utility that syncs your local desktop file explorer directly to cloud project folders.
+Desktop Utility
+Mobile Access App
+On-the-go sheet viewing, issue tracking, and offline file synchronization for jobsite use.
+iOS / Android App
+Admin & Security Tools
+Rigorous role-based, company-based, and user-based folder access permission dashboards.
+Cloud Analytics
 💳 Subscription & Licensing Options
- Single-User Commercial License: Full commercial rights. Grants one dedicated user full
-cloud access to manage, view, and collaborate on project documents.
- Flexible Term Contracts: Available as an electronic software delivery (ELD) license issued
-on fixed 1-year or multi-year subscription terms.
- Bring Your Own Subscription (BYOS): Allows consultants, clients, or subcontractors to
-bring their own Docs license into a project hub without using the host company's
-available seat inventory.
-Product Title: BIM Collaborate CLOUD Commercial ( Single,10,25,100,500,1000) (
-1 year , 3 year ) ( New , renewal)
+Single-User Commercial License: Full commercial rights. Grants one dedicated user full cloud access to manage, view, and collaborate on project documents.
+Flexible Term Contracts: Available as an electronic software delivery (ELD) license issued on fixed 1-year or multi-year subscription terms.
+Bring Your Own Subscription (BYOS): Allows consultants, clients, or subcontractors to bring their own Docs license into a project hub without using the host company's available seat inventory.
+Product Title: BIM Collaborate CLOUD Commercial ( Single,10,25,100,500,1000) ( 1 year , 3 year ) ( New , renewal)
 Product Overview
-Autodesk BIM Collaborate allows project teams to share design data, track progress, and
-coordinate models in a shared common data environment. Operating entirely in the cloud, it
-helps teams catch design errors and constructability issues early in the preconstruction lifecycle.
-It aggregates design models from Revit, Civil 3D, and AutoCAD into a single view, automating
-spatial coordination and providing actionable insights to eliminate costly on-site reworks and
-communication delays.
+Autodesk BIM Collaborate allows project teams to share design data, track progress, and coordinate models in a shared common data environment. Operating entirely in the cloud, it helps teams catch design errors and constructability issues early in the preconstruction lifecycle. It aggregates design models from Revit, Civil 3D, and AutoCAD into a single view, automating spatial coordination and providing actionable insights to eliminate costly on-site reworks and communication delays.
 🚀 Key Features
- Automated Clash Detection: Aggregate multi-discipline models into shared coordination
-spaces to instantly spot spatial conflicts.
- Visual Change Analysis: Compare design changes between 3D model iterations side-by-
-side to understand project impacts instantly.
-
--- 16 of 38 --
-
- Unified Issue Tracking: Create, assign, and track design issues to resolution using pinned
-locations directly on 2D sheets and 3D models.
- Design Timeline & Packages: Control how and when design data is shared with other
-project teams using formal packaging and tracking streams.
- Connected Navisworks Workflow: Sync cloud-based issue tracking directly with
-Navisworks Manage for advanced coordination and deeper field analysis.
+Automated Clash Detection: Aggregate multi-discipline models into shared coordination spaces to instantly spot spatial conflicts.
+Visual Change Analysis: Compare design changes between 3D model iterations side-by-side to understand project impacts instantly.
+Unified Issue Tracking: Create, assign, and track design issues to resolution using pinned locations directly on 2D sheets and 3D models.
+Design Timeline & Packages: Control how and when design data is shared with other project teams using formal packaging and tracking streams.
+Connected Navisworks Workflow: Sync cloud-based issue tracking directly with Navisworks Manage for advanced coordination and deeper field analysis.
 📦 What's Included
-Component Description Deployment
-BIM Collaborate
-Module
-Cloud platform for automated model coordination,
-clash spaces, and matrix reviews.
-Cloud
-Platform
-Design Collaboration
-Module
-Timeline workspace for managing package handoffs and
-visual project updates.
-Cloud
-Platform
-Autodesk Docs Central document management foundation ensuring
-access to the latest source drawings.
-Cloud
-Platform
-BIM 360 Workspace Legacy access to older project hubs hosted on the
-previous BIM 360 platform.
-Cloud
-Platform
-Coordination Utilities Desktop Connector integration and browser-based 3D
-multi-model aggregation tools.
-Cloud &
-Desktop
+Component
+Description
+Deployment
+BIM Collaborate Module
+Cloud platform for automated model coordination, clash spaces, and matrix reviews.
+Cloud Platform
+Design Collaboration Module
+Timeline workspace for managing package handoffs and visual project updates.
+Cloud Platform
+Autodesk Docs
+Central document management foundation ensuring access to the latest source drawings.
+Cloud Platform
+BIM 360 Workspace
+Legacy access to older project hubs hosted on the previous BIM 360 platform.
+Cloud Platform
+Coordination Utilities
+Desktop Connector integration and browser-based 3D multi-model aggregation tools.
+Cloud & Desktop
 💳 Subscription & Licensing Options
- Standard Commercial License: Full commercial rights. Grants a single user cloud access
-to automated clash matrices, change reviews, and issue tracking.
- Flexible Term Contracts: Available as an electronic software delivery (ELD) license issued
-on fixed 1-year or multi-year subscription terms.
- Bring Your Own Subscription (BYOS): Allows external consultants, structural engineers, or
-contractors to bring their own license into a client's hub without utilizing extra host seat
-allocations.
-
--- 17 of 38 --
-
+Standard Commercial License: Full commercial rights. Grants a single user cloud access to automated clash matrices, change reviews, and issue tracking.
+Flexible Term Contracts: Available as an electronic software delivery (ELD) license issued on fixed 1-year or multi-year subscription terms.
+Bring Your Own Subscription (BYOS): Allows external consultants, structural engineers, or contractors to bring their own license into a client's hub without utilizing extra host seat allocations.
 Product Title: Fabrication CAMduct Commercial (1 year, 3 year) (New, renewal)
 Product Overview
-Autodesk Fabrication CAMduct enables mechanical, electrical, and plumbing (MEP) contractors
-to transition seamlessly from design models to shop floor production. It combines an extensive
-library of parametric sheet metal components with advanced nesting algorithms to maximize
-material efficiency and reduce scrap. By generating precise machine-specific NC code directly
-from fabrication models, it ensures consistent sheet metal manufacturing, accurate cost
-tracking, and streamlined delivery to the jobsite.
+Autodesk Fabrication CAMduct enables mechanical, electrical, and plumbing (MEP) contractors to transition seamlessly from design models to shop floor production. It combines an extensive library of parametric sheet metal components with advanced nesting algorithms to maximize material efficiency and reduce scrap. By generating precise machine-specific NC code directly from fabrication models, it ensures consistent sheet metal manufacturing, accurate cost tracking, and streamlined delivery to the jobsite.
 🚀 Key Features
- Comprehensive Component Library: Access a massive database of parametric
-rectangular, round, and oval ductwork specifications.
- Advanced Material Nesting: Utilize powerful automatic nesting algorithms to maximize
-sheet utilization and minimize material waste.
- Direct CNC Machine Drivers: Generate tailored NC code to directly drive specialized
-sheet metal cutters, plasma burners, and coil lines.
- Barcoding & Tracking: Print custom tracking labels with barcodes to track components
-from assembly to jobsite installation.
- Integrated Cost Estimating: Calculate reliable material, labor, and production costs
-dynamically based on custom shop parameters.
+Comprehensive Component Library: Access a massive database of parametric rectangular, round, and oval ductwork specifications.
+Advanced Material Nesting: Utilize powerful automatic nesting algorithms to maximize sheet utilization and minimize material waste.
+Direct CNC Machine Drivers: Generate tailored NC code to directly drive specialized sheet metal cutters, plasma burners, and coil lines.
+Barcoding & Tracking: Print custom tracking labels with barcodes to track components from assembly to jobsite installation.
+Integrated Cost Estimating: Calculate reliable material, labor, and production costs dynamically based on custom shop parameters.
 📦 What's Included
-Component Description Deployment
-Fabrication CAMduct
-Core
-Desktop application for sheet metal manufacturing,
-nesting, and machine tooling. Local Installation
-CAMduct
-Components Library
-Shared parametric database for Imperial and Metric
-ductwork configurations.
-Local / Network
-Shared
-Post-Processors &
-Drivers
-Built-in translator tools to format files for a wide
-variety of CNC equipment. Local Utility
-
--- 18 of 38 --
-
-Tracker & Label
-Utilities
-Auxiliary tools to format, customize, and print
-production barcodes. Local Utility
-Autodesk Desktop
-App
-Central hub for software updates, manufacturing
-patches, and hotfixes. Background Utility
+Component
+Description
+Deployment
+Fabrication CAMduct Core
+Desktop application for sheet metal manufacturing, nesting, and machine tooling.
+Local Installation
+CAMduct Components Library
+Shared parametric database for Imperial and Metric ductwork configurations.
+Local / Network Shared
+Post-Processors & Drivers
+Built-in translator tools to format files for a wide variety of CNC equipment.
+Local Utility
+Tracker & Label Utilities
+Auxiliary tools to format, customize, and print production barcodes.
+Local Utility
+Autodesk Desktop App
+Central hub for software updates, manufacturing patches, and hotfixes.
+Background Utility
 💳 Subscription & Licensing Options
- Standard Commercial License: Full commercial rights. Grants unrestricted use for active
-sheet metal shops and corporate manufacturing pipelines.
- Flexible Term Contracts: Available as a single-user electronic software delivery (ELD)
-license issued on fixed 1-year or multi-year subscription terms.
- Multi-User Migration Options: Available under modern named-user standard plans,
-replacing older legacy perpetual network licenses.
+Standard Commercial License: Full commercial rights. Grants unrestricted use for active sheet metal shops and corporate manufacturing pipelines.
+Flexible Term Contracts: Available as a single-user electronic software delivery (ELD) license issued on fixed 1-year or multi-year subscription terms.
+Multi-User Migration Options: Available under modern named-user standard plans, replacing older legacy perpetual network licenses.
 Product Title: InfraWorks Commercial (1 year, 3 year) (New, renewal)
 Product Overview
-Autodesk InfraWorks transforms the preconstruction phase by allowing teams to generate
-massive, data-rich 3D models of existing environments using real-world GIS data, satellite
-imagery, and point clouds. It bridges the gap between planning and detailed design by
-connecting directly to Autodesk Civil 3D and Revit pipelines. By running preliminary traffic,
-flood, and structural simulations within a visually stunning 3D landscape, it enables stakeholders
-to evaluate design alternatives, minimize project risks, and make faster, data-driven decisions.
+Autodesk InfraWorks transforms the preconstruction phase by allowing teams to generate massive, data-rich 3D models of existing environments using real-world GIS data, satellite imagery, and point clouds. It bridges the gap between planning and detailed design by connecting directly to Autodesk Civil 3D and Revit pipelines. By running preliminary traffic, flood, and structural simulations within a visually stunning 3D landscape, it enables stakeholders to evaluate design alternatives, minimize project risks, and make faster, data-driven decisions.
 🚀 Key Features
- Real-World Context Modeling: Aggregate vast amounts of GIS, BIM, and reality capture
-data to generate highly accurate 3D city or regional models.
- Parametric Civil Design: Sketch out conceptually detailed roads, multi-girder bridges,
-tunnels, and complex drainage networks using rule-based parameters.
- Environmental & Traffic Simulation: Run built-in visual simulations for vehicle traffic
-flow, terrain mobility, and line-of-sight analyses.
-
--- 19 of 38 --
-
- Seamless Civil 3D/Revit Pipelines: Pass conceptual models directly to Civil 3D for
-detailed grading or to Revit for structural detailing without data loss.
- High-Fidelity Visual Presentations: Generate photorealistic renderings and fly-through
-animations to easily communicate project intent to public and private stakeholders.
+Real-World Context Modeling: Aggregate vast amounts of GIS, BIM, and reality capture data to generate highly accurate 3D city or regional models.
+Parametric Civil Design: Sketch out conceptually detailed roads, multi-girder bridges, tunnels, and complex drainage networks using rule-based parameters.
+Environmental & Traffic Simulation: Run built-in visual simulations for vehicle traffic flow, terrain mobility, and line-of-sight analyses.
+Seamless Civil 3D/Revit Pipelines: Pass conceptual models directly to Civil 3D for detailed grading or to Revit for structural detailing without data loss.
+High-Fidelity Visual Presentations: Generate photorealistic renderings and fly-through animations to easily communicate project intent to public and private stakeholders.
 📦 What's Included
-Component Description Deployment
-InfraWorks Core
-Software
-Desktop application for conceptual civil modeling, site
-planning, and simulation. Local Installation
-Model Builder
-Utility
-Cloud-powered service that automatically builds 3D
-environments using global open-source maps and GIS
-data.
-Integrated Cloud
-Service
-Autodesk Docs
-Integration
-Cloud-hosted document management access to publish,
-share, and collaborate on infrastructure models. Cloud Platform
 Component
-Libraries
-Extensive database of parametric road parts, bridge
-structures, street furniture, and vegetation models.
-Local / Network
-Shared
-Autodesk
-Desktop App
-Central hub for software updates, performance patches,
-and hotfixes.
-Background
-Utility
+Description
+Deployment
+InfraWorks Core Software
+Desktop application for conceptual civil modeling, site planning, and simulation.
+Local Installation
+Model Builder Utility
+Cloud-powered service that automatically builds 3D environments using global open-source maps and GIS data.
+Integrated Cloud Service
+Autodesk Docs Integration
+Cloud-hosted document management access to publish, share, and collaborate on infrastructure models.
+Cloud Platform
+Component Libraries
+Extensive database of parametric road parts, bridge structures, street furniture, and vegetation models.
+Local / Network Shared
+Autodesk Desktop App
+Central hub for software updates, performance patches, and hotfixes.
+Background Utility
 💳 Subscription & Licensing Options
- Standard Commercial License: Full commercial rights. Grants unrestricted usage for
-engineering firms, municipalities, and professional infrastructure consultants.
- Flexible Term Contracts: Available as a single-user electronic software delivery (ELD)
-license issued on fixed 1-year or multi-year subscription terms.
- Autodesk Flex (Pay-As-You-Go): Compatible with Autodesk's token system, allowing
-occasional users or external contractors to consume tokens only on the days the
-software is active.
-
--- 20 of 38 --
-
+Standard Commercial License: Full commercial rights. Grants unrestricted usage for engineering firms, municipalities, and professional infrastructure consultants.
+Flexible Term Contracts: Available as a single-user electronic software delivery (ELD) license issued on fixed 1-year or multi-year subscription terms.
+Autodesk Flex (Pay-As-You-Go): Compatible with Autodesk's token system, allowing occasional users or external contractors to consume tokens only on the days the software is active.
 Product Title: Inventor Professional Commercial (1 year, 3 year) (New, renewal)
 Product Overview
-Autodesk Inventor Professional provides a complete set of design and engineering tools for 3D
-mechanical design, simulation, visualization, and documentation. It enables engineering teams
-to create accurate 3D digital prototypes of complex machinery, consumer products, and
-industrial systems before fabrication. By integrating parametric, direct, and freeform modeling
-tools alongside advanced stress analysis and kinematic simulation, Inventor helps
-manufacturers reduce physical prototyping costs, minimize design errors, and streamline the
-transition from concept to the factory floor.
+Autodesk Inventor Professional provides a complete set of design and engineering tools for 3D mechanical design, simulation, visualization, and documentation. It enables engineering teams to create accurate 3D digital prototypes of complex machinery, consumer products, and industrial systems before fabrication. By integrating parametric, direct, and freeform modeling tools alongside advanced stress analysis and kinematic simulation, Inventor helps manufacturers reduce physical prototyping costs, minimize design errors, and streamline the transition from concept to the factory floor.
 🚀 Key Features
- Professional-Grade 3D Modeling: Design complex parts and massive mechanical
-assemblies using flexible parametric, direct, and freeform modeling tools.
- Integrated Shape Optimization: Leverage generative design utilities to optimize
-components for weight reduction and structural integrity based on real-world
-constraints
- Advanced Simulation & FEA: Conduct integrated stress analysis, modal analysis, and
-kinematic simulations to evaluate product performance before manufacturing.
- Automated Tube, Pipe, & Cable Routing: Accelerate the design of complex hydraulic
-runs, rigid piping networks, and electrical wire harnesses with rule-based routing tools.
- Model-Based Definition (MBD): Embed 3D manufacturing dimensions, geometric
-tolerances (GD&T), and critical annotations directly into the 3D model for downstream
-production.
+Professional-Grade 3D Modeling: Design complex parts and massive mechanical assemblies using flexible parametric, direct, and freeform modeling tools.
+Integrated Shape Optimization: Leverage generative design utilities to optimize components for weight reduction and structural integrity based on real-world constraints
+Advanced Simulation & FEA: Conduct integrated stress analysis, modal analysis, and kinematic simulations to evaluate product performance before manufacturing.
+Automated Tube, Pipe, & Cable Routing: Accelerate the design of complex hydraulic runs, rigid piping networks, and electrical wire harnesses with rule-based routing tools.
+Model-Based Definition (MBD): Embed 3D manufacturing dimensions, geometric tolerances (GD&T), and critical annotations directly into the 3D model for downstream production.
 📦 What's Included
-Component Description Deployment
-Inventor Professional
-Core
-Desktop application for 3D part modeling, assembly
-design, sheet metal, and detailing. Local Installation
-
--- 21 of 38 --
-
-Standard Content
-Center
-Comprehensive cloud/local library of millions of
-standard components, fasteners, and steel shapes.
-Local / Network
-Shared
-Integrated FEA &
-Motion Simulation
-Finite Element Analysis and dynamic simulation tools
-for evaluating structural and mechanical loads. Local Plugin
-Autodesk Vault Basic Data management tool for tracking design histories,
-managing file relationships, and controlling revisions.
-Local / Server
-App
-Autodesk Docs &
-Shared Views
-Cloud-based collaboration tools to publish, review,
-and mark up 3D designs with clients or shop floors. Cloud Platform
+Component
+Description
+Deployment
+Inventor Professional Core
+Desktop application for 3D part modeling, assembly design, sheet metal, and detailing.
+Local Installation
+Standard Content Center
+Comprehensive cloud/local library of millions of standard components, fasteners, and steel shapes.
+Local / Network Shared
+Integrated FEA & Motion Simulation
+Finite Element Analysis and dynamic simulation tools for evaluating structural and mechanical loads.
+Local Plugin
+Autodesk Vault Basic
+Data management tool for tracking design histories, managing file relationships, and controlling revisions.
+Local / Server App
+Autodesk Docs & Shared Views
+Cloud-based collaboration tools to publish, review, and mark up 3D designs with clients or shop floors.
+Cloud Platform
 💳 Subscription & Licensing Options
- Standard Commercial License: Full commercial rights. Grants unrestricted usage for
-manufacturing enterprises, engineering firms, and product design consultants.
- Flexible Term Contracts: Available as a single-user electronic software delivery (ELD)
-license issued on fixed 1-year or multi-year subscription terms.
- Autodesk Flex (Pay-As-You-Go): Compatible with Autodesk's token system, allowing
-occasional engineers, external contractors, or toolmakers to consume tokens only on the
-active days of use.
+Standard Commercial License: Full commercial rights. Grants unrestricted usage for manufacturing enterprises, engineering firms, and product design consultants.
+Flexible Term Contracts: Available as a single-user electronic software delivery (ELD) license issued on fixed 1-year or multi-year subscription terms.
+Autodesk Flex (Pay-As-You-Go): Compatible with Autodesk's token system, allowing occasional engineers, external contractors, or toolmakers to consume tokens only on the active days of use.
 Product Title: Navisworks Manage Commercial (1 year, 3 year) (New, renewal)
 Product Overview
-Autodesk Navisworks Manage allows architecture, engineering, and construction
-professionals to pre-visualize entire projects before construction begins. It aggregates 3D
-data from disparate design applications—regardless of file size or format—into a unified
-project model. By combining automated clash detection, interference checking, time-
-liner scheduling, and quantification tools, Navisworks Manage helps preconstruction
-teams anticipate risks, resolve conflicts early, and eliminate expensive structural reworks
-on the jobsite.
+Autodesk Navisworks Manage allows architecture, engineering, and construction professionals to pre-visualize entire projects before construction begins. It aggregates 3D data from disparate design applications—regardless of file size or format—into a unified project model. By combining automated clash detection, interference checking, time-liner scheduling, and quantification tools, Navisworks Manage helps preconstruction teams anticipate risks, resolve conflicts early, and eliminate expensive structural reworks on the jobsite.
 🚀 Key Features
-
--- 22 of 38 --
-
- Advanced Clash & Interference Detection: Automatically identify, isolate, and log spatial
-conflicts between multi-discipline design models before breaking ground.
- Unified Model Aggregation: Merge massive 3D models and design files from Revit, Civil
-3D, AutoCAD, and non-Autodesk formats into one responsive scene.
- 4D and 5D Simulation: Link 3D model geometry directly to construction schedules (4D)
-and cost tracking (5D) to visualize project timelines.
- Streamlined Quantification: Perform automated, high-speed material takeoffs from
-integrated 3D models or combined 2D sheet sets.
- Cloud-Connected Issues: Sync clash results dynamically with Autodesk BIM Collaborate
-to manage and assign field issues within a shared cloud environment.
+Advanced Clash & Interference Detection: Automatically identify, isolate, and log spatial conflicts between multi-discipline design models before breaking ground.
+Unified Model Aggregation: Merge massive 3D models and design files from Revit, Civil 3D, AutoCAD, and non-Autodesk formats into one responsive scene.
+4D and 5D Simulation: Link 3D model geometry directly to construction schedules (4D) and cost tracking (5D) to visualize project timelines.
+Streamlined Quantification: Perform automated, high-speed material takeoffs from integrated 3D models or combined 2D sheet sets.
+Cloud-Connected Issues: Sync clash results dynamically with Autodesk BIM Collaborate to manage and assign field issues within a shared cloud environment.
 📦 What's Included
-Component Description Deployment
-Navisworks
-Manage Core
-Desktop application for advanced clash
-matrix detection, 3D model
-aggregation, and quantification.
-Local
-Installation
-Navisworks
-Simulate
-Companion tool for scene visualization,
-4D/5D time-lining, and animation
-(without the clash matrix module).
-Local
-Installation
-Navisworks
-Freedom
-Viewer
-Complimentary distribution utility used
-to view compiled NWD files with field
-teams or external clients.
-Free Desktop
-App
-File Format
-Exporters
-Comprehensive plugins to export native
-CAD/BIM formats into lightweight
-Navisworks file formats (NWC).
-Integrated
-Plugins
-Autodesk
-Desktop App
-Central workstation hub for software
-updates, coordination updates, and
-performance hotfixes.
-Background
-Utility
-
--- 23 of 38 --
-
+Component
+Description
+Deployment
+Navisworks Manage Core
+Desktop application for advanced clash matrix detection, 3D model aggregation, and quantification.
+Local Installation
+Navisworks Simulate
+Companion tool for scene visualization, 4D/5D time-lining, and animation (without the clash matrix module).
+Local Installation
+Navisworks Freedom Viewer
+Complimentary distribution utility used to view compiled NWD files with field teams or external clients.
+Free Desktop App
+File Format Exporters
+Comprehensive plugins to export native CAD/BIM formats into lightweight Navisworks file formats (NWC).
+Integrated Plugins
+Autodesk Desktop App
+Central workstation hub for software updates, coordination updates, and performance hotfixes.
+Background Utility
 💳 Subscription & Licensing Options
- Standard Commercial License: Full commercial rights. Grants unrestricted usage for
-general contractors, BIM managers, engineering consultants, and commercial
-developers.
- Flexible Term Contracts: Available as a single-user electronic software delivery (ELD)
-license issued on fixed 1-year or multi-year subscription terms.
- Autodesk Flex (Pay-As-You-Go): Fully compatible with Autodesk's token system, allowing
-seasonal coordinators or external trade contractors to consume tokens only on the
-active days of use.
+Standard Commercial License: Full commercial rights. Grants unrestricted usage for general contractors, BIM managers, engineering consultants, and commercial developers.
+Flexible Term Contracts: Available as a single-user electronic software delivery (ELD) license issued on fixed 1-year or multi-year subscription terms.
+Autodesk Flex (Pay-As-You-Go): Fully compatible with Autodesk's token system, allowing seasonal coordinators or external trade contractors to consume tokens only on the active days of use.
 Product Title: Navisworks Simulate Commercial. (1 year, 3 year) (New, renewal)
 Product Overview
-Autodesk Navisworks Simulate empowers architecture, engineering, and construction
-professionals to aggregate 3D data from multiple design applications into a single, lightweight
-project environment. Built for preconstruction scheduling and review, it helps teams analyze,
-communicate, and visualize project outcomes before construction begins. By combining
-scheduling data with 3D models (4D) and material tracking (5D), Navisworks Simulate ensures
-clear communication among stakeholders, smoother on-site logistics, and accurate material
-takeoffs.
+Autodesk Navisworks Simulate empowers architecture, engineering, and construction professionals to aggregate 3D data from multiple design applications into a single, lightweight project environment. Built for preconstruction scheduling and review, it helps teams analyze, communicate, and visualize project outcomes before construction begins. By combining scheduling data with 3D models (4D) and material tracking (5D), Navisworks Simulate ensures clear communication among stakeholders, smoother on-site logistics, and accurate material takeoffs.
 🚀 Key Features
- Unified Model Aggregation: Combine massive 3D models and design files from Revit,
-Civil 3D, AutoCAD, and non-Autodesk applications into a single, responsive file.
- 4D Schedule Simulation: Link 3D geometry directly to project schedules (such as
-Primavera or Microsoft Project) to visually simulate construction timelines
- 5D Cost Quantification: Perform high-speed material takeoffs and measure distances,
-areas, and counts from integrated 3D models or 2D sheets.
- Photorealistic Rendering & Animation: Generate professional 3D walk-throughs, fly-bys,
-and photorealistic asset animations to effectively communicate project intent.
- Comprehensive Review Tools: Utilize sectioning tools, redlining capabilities, and
-comment tracking to review design packages with clients and field teams.
-
--- 24 of 38 --
-
+Unified Model Aggregation: Combine massive 3D models and design files from Revit, Civil 3D, AutoCAD, and non-Autodesk applications into a single, responsive file.
+4D Schedule Simulation: Link 3D geometry directly to project schedules (such as Primavera or Microsoft Project) to visually simulate construction timelines
+5D Cost Quantification: Perform high-speed material takeoffs and measure distances, areas, and counts from integrated 3D models or 2D sheets.
+Photorealistic Rendering & Animation: Generate professional 3D walk-throughs, fly-bys, and photorealistic asset animations to effectively communicate project intent.
+Comprehensive Review Tools: Utilize sectioning tools, redlining capabilities, and comment tracking to review design packages with clients and field teams.
 📦 What's Included
-Component Description Deployment
-Navisworks
-Simulate Core
-Desktop application for project aggregation, 4D/5D
-simulation, rendering, and quantification.
-Local
-Installation
-Navisworks
-Freedom Viewer
-Complimentary distribution utility used to share
-compiled project files (NWD) with external field
-stakeholders.
-Free Desktop
-App
-File Format
-Exporters
-Comprehensive plugins to export native CAD and BIM
-formats into lightweight Navisworks files (NWC).
-Integrated
-Plugins
-Quantification
-Workbook
-Integrated utility for managing item catalogs, automated
-counts, and visual takeoff outputs. Local Utility
-Autodesk Desktop
-App
-Central workstation hub for software updates,
-performance patches, and hotfixes.
-Background
-Utility
+Component
+Description
+Deployment
+Navisworks Simulate Core
+Desktop application for project aggregation, 4D/5D simulation, rendering, and quantification.
+Local Installation
+Navisworks Freedom Viewer
+Complimentary distribution utility used to share compiled project files (NWD) with external field stakeholders.
+Free Desktop App
+File Format Exporters
+Comprehensive plugins to export native CAD and BIM formats into lightweight Navisworks files (NWC).
+Integrated Plugins
+Quantification Workbook
+Integrated utility for managing item catalogs, automated counts, and visual takeoff outputs.
+Local Utility
+Autodesk Desktop App
+Central workstation hub for software updates, performance patches, and hotfixes.
+Background Utility
 💳 Subscription & Licensing Options
- Standard Commercial License: Full commercial rights. Grants unrestricted usage for
-general contractors, scheduling managers, estimators, and project owners.
- Flexible Term Contracts: Available as a single-user electronic software delivery (ELD)
-license issued on fixed 1-year or multi-year subscription terms.
- Autodesk Flex (Pay-As-You-Go): Fully compatible with Autodesk's token system, allowing
-seasonal coordinators or external trade contractors to consume tokens only on active
-days of use.
+Standard Commercial License: Full commercial rights. Grants unrestricted usage for general contractors, scheduling managers, estimators, and project owners.
+Flexible Term Contracts: Available as a single-user electronic software delivery (ELD) license issued on fixed 1-year or multi-year subscription terms.
+Autodesk Flex (Pay-As-You-Go): Fully compatible with Autodesk's token system, allowing seasonal coordinators or external trade contractors to consume tokens only on active days of use.
 Product Title: Revit Commercial (1 year, 3 year) (New, renewal)
 Product Overview
-Autodesk Revit delivers an all-in-one BIM solution that enables design and construction
-teams to bring high-quality architectural concepts to physical realization. Unlike standard
-2D drafting tools, Revit captures a complete digital representation of a building where
-every wall, pipe, and beam is an intelligent parametric component. This unified database
-
--- 25 of 38 --
-
-ensures that any structural modification made anywhere in the project instantly updates
-across all 2D sheets, 3D views, schedules, and sections—eliminating coordination errors,
-streamlining documentation, and driving smoother on-site execution.
+Autodesk Revit delivers an all-in-one BIM solution that enables design and construction teams to bring high-quality architectural concepts to physical realization. Unlike standard 2D drafting tools, Revit captures a complete digital representation of a building where every wall, pipe, and beam is an intelligent parametric component. This unified database ensures that any structural modification made anywhere in the project instantly updates across all 2D sheets, 3D views, schedules, and sections—eliminating coordination errors, streamlining documentation, and driving smoother on-site execution.
 🚀 Key Features
- Multidisciplinary BIM Workspace: Access specialized toolsets for architectural design,
-structural engineering, and mechanical, electrical, and plumbing (MEP) fabrication
-detailing within a single platform.
- Parametric Components: Create intelligent 3D building blocks (Families) that hold
-physical property parameters, dimensions, and operational data.
- Automated Documentation: Generate precise 2D plans, elevations, details, and material
-schedules that dynamically update in real time as the 3D design changes.
- OpenBIM & IFC Support: Collaborate seamlessly across different software applications
-with native support for international IFC standards and advanced file interoperability.
- Integrated Analysis Tools: Run preliminary structural load tests, energy consumption
-evaluations, and computational fluid dynamics (CFD) workflows directly inside the
-design model.
+Multidisciplinary BIM Workspace: Access specialized toolsets for architectural design, structural engineering, and mechanical, electrical, and plumbing (MEP) fabrication detailing within a single platform.
+Parametric Components: Create intelligent 3D building blocks (Families) that hold physical property parameters, dimensions, and operational data.
+Automated Documentation: Generate precise 2D plans, elevations, details, and material schedules that dynamically update in real time as the 3D design changes.
+OpenBIM & IFC Support: Collaborate seamlessly across different software applications with native support for international IFC standards and advanced file interoperability.
+Integrated Analysis Tools: Run preliminary structural load tests, energy consumption evaluations, and computational fluid dynamics (CFD) workflows directly inside the design model.
 📦 What's Included
-Component Description Deployment
-Revit Core
-Software
-Unified desktop application for
-architectural design, structural
-engineering, and MEP system
-modeling.
-Local
-Installation
-Parametric
 Component
-Library
-Deep database of pre-built doors,
-windows, steel connections, light
-fixtures, and duct geometries.
-Local /
-Network
-Shared
-Autodesk Insight
-Engine
-Cloud-powered analytical tool used
-to run environmental performance
-and carbon footprint simulations.
-Integrated
-Cloud Service
-
--- 26 of 38 --
-
-Autodesk Docs
-Interoperability
-Background cloud integration to
-share 3D models and sync work
-packages into a common data
-environment.
+Description
+Deployment
+Revit Core Software
+Unified desktop application for architectural design, structural engineering, and MEP system modeling.
+Local Installation
+Parametric Component Library
+Deep database of pre-built doors, windows, steel connections, light fixtures, and duct geometries.
+Local / Network Shared
+Autodesk Insight Engine
+Cloud-powered analytical tool used to run environmental performance and carbon footprint simulations.
+Integrated Cloud Service
+Autodesk Docs Interoperability
+Background cloud integration to share 3D models and sync work packages into a common data environment.
 Cloud Platform
-Autodesk Desktop
-App
-Central workstation hub for
-software updates, design hotfixes,
-and product additions.
-Background
-Utility
+Autodesk Desktop App
+Central workstation hub for software updates, design hotfixes, and product additions.
+Background Utility
 Subscription & Licensing Options
- Single-User License: 1 user, up to 2 active devices, and 12 months of free version
-updates for solo practitioners.
- Team Studio License: Up to 10 users, BIM 360/ACC server deployment, 24 months of
-updates, and priority email support.
- Enterprise License: Unlimited users across a corporate domain, lifetime updates, and a
-live onboarding session.
-Product Title: InfoDrainage Commercial (1 year, 3 year) (New, renewal)
+Single-User License: 1 user, up to 2 active devices, and 12 months of free version updates for solo practitioners.
+Team Studio License: Up to 10 users, BIM 360/ACC server deployment, 24 months of updates, and priority email support.
+Enterprise License: Unlimited users across a corporate domain, lifetime updates, and a live onboarding session.
+Product Title: InfoDrainage Commercial  (1 year, 3 year) (New, renewal)
 Product Overview
-Accelerate your sustainable stormwater design workflow and streamline regulatory
-approvals from day one. The InfoDrainage Commercial Master Bundle is a production-
-ready model template and asset library engineered specifically for multi-story corporate,
-retail, industrial, and mixed-use land development projects. It eliminates hours of
-repetitive drainage setup, bringing immediate Autodesk InfoDrainage standardization
-and sustainable design compliance to your civil engineering practice. [1, 2]
+Accelerate your sustainable stormwater design workflow and streamline regulatory approvals from day one. The InfoDrainage Commercial Master Bundle is a production-ready model template and asset library engineered specifically for multi-story corporate, retail, industrial, and mixed-use land development projects. It eliminates hours of repetitive drainage setup, bringing immediate Autodesk InfoDrainage standardization and sustainable design compliance to your civil engineering practice. [1, 2]
 Key Features
- Advanced BIM & Civil 3D Integration: Seamless round-tripping structures and surface
-data with Civil 3D to eliminate manual entry errors.
- Pre-Configured Regional Deluge Templates: Built-in rainfall curves and Huff distribution
-distributions tailored to regional commercial standards. [1]
-
--- 27 of 38 --
-
- SuDS & LID Component Templates: Instantly size parametric rain gardens, bioretention
-cells, permeable pavements, and infiltration trenches.
- Automated Hydraulic Sizing Wizards: Smart algorithms optimize pipe sizes, pipe
-gradients, and online storage structures to prevent site flooding.
- Compliance Report Generation: Pre-formatted layout reports mapped to regulatory
-agency requirements for instant print-to-PDF submission. [1]
+Advanced BIM & Civil 3D Integration: Seamless round-tripping structures and surface data with Civil 3D to eliminate manual entry errors.
+Pre-Configured Regional Deluge Templates: Built-in rainfall curves and Huff distribution distributions tailored to regional commercial standards. [1]
+SuDS & LID Component Templates: Instantly size parametric rain gardens, bioretention cells, permeable pavements, and infiltration trenches.
+Automated Hydraulic Sizing Wizards: Smart algorithms optimize pipe sizes, pipe gradients, and online storage structures to prevent site flooding.
+Compliance Report Generation: Pre-formatted layout reports mapped to regulatory agency requirements for instant print-to-PDF submission. [1]
 What's Included
-Component Type Included Assets Format / Version
+Component Type
+Included Assets
+Format / Version
 Model Template
-1x Master Commercial Template
-with pre-set runoff methods,
-routing criteria, and boundary
-conditions
-.iddx
-(InfoDrainage
-2024–2026+)
-SuDS & Structure
-Library
-50+ Custom inlet/outlet structures,
-proprietary stormwater filters, weir
-structures, and smart orifices
-.idlx (Fully
-Parametric)
-Rainfall & Deluge
-Data
-Global NOAA Atlas 14, NRCS, and
-standard synthetic storm profiles
-pre-loaded into the rainfall
-manager
-Pre-built in
-template
-Analysis Smart
-Reports
-5x Regulatory compliance
-reporting layouts covering pipe
-audits, hydraulic grade lines, and
-critical storm paths
+1x Master Commercial Template with pre-set runoff methods, routing criteria, and boundary conditions
+.iddx (InfoDrainage 2024–2026+)
+SuDS & Structure Library
+50+ Custom inlet/outlet structures, proprietary stormwater filters, weir structures, and smart orifices
+.idlx (Fully Parametric)
+Rainfall & Deluge Data
+Global NOAA Atlas 14, NRCS, and standard synthetic storm profiles pre-loaded into the rainfall manager
+Pre-built in template
+Analysis Smart Reports
+5x Regulatory compliance reporting layouts covering pipe audits, hydraulic grade lines, and critical storm paths
 Pre-loaded
-Implementation
-Manual
-35-page digital implementation
-guide covering catchments, utility
-collision checks, and Civil 3D
-workflows
-.pdf Digital
-Download
+Implementation Manual
+35-page digital implementation guide covering catchments, utility collision checks, and Civil 3D workflows
+.pdf Digital Download
 Subscription & Licensing Options
- Single-User License: 1 user, up to 2 active workstations, and 12 months of free version
-updates for freelance civil engineers.
-
--- 28 of 38 --
-
- Team Design License: Up to 10 users, shared network library deployment, 24 months of
-updates, and priority technical support.
- Enterprise License: Unlimited users across a corporate domain, floating network
-licensing, lifetime updates, and custom API onboarding
+Single-User License: 1 user, up to 2 active workstations, and 12 months of free version updates for freelance civil engineers.
+Team Design License: Up to 10 users, shared network library deployment, 24 months of updates, and priority technical support.
+Enterprise License: Unlimited users across a corporate domain, floating network licensing, lifetime updates, and custom API onboarding
 Product Title: InfoWater Pro Commercial (1 year, 3 year) (New, renewal)
 Overview
-Autodesk InfoWater Pro is a GIS-native desktop hydraulic modeling software that runs
-directly inside Esri ArcGIS Pro. Built for water utility engineers and consulting firms, it
-delivers a one-to-one data alignment between geographic information system (GIS)
-layers and the hydraulic model. The software leverages the industry-standard EPANET
-engine to simulate countless "what-if" scenarios. This allows operators to accurately
-plan, design, and manage resilient water distribution networks without maintaining
-separate, detached modeling databases.
+Autodesk InfoWater Pro is a GIS-native desktop hydraulic modeling software that runs directly inside Esri ArcGIS Pro. Built for water utility engineers and consulting firms, it delivers a one-to-one data alignment between geographic information system (GIS) layers and the hydraulic model. The software leverages the industry-standard EPANET engine to simulate countless "what-if" scenarios. This allows operators to accurately plan, design, and manage resilient water distribution networks without maintaining separate, detached modeling databases.
 Key Features
- ArcGIS Pro Integration: Build, edit, and analyze hydraulic networks within a single
-geospatial environment.
- Criticality Assessment: Identify vulnerable valves and pipe segments to quickly assess
-isolation and failure impacts.
- Advanced Water Quality: Track water age, source tracing, and multi-species chemical
-interactions dynamically.
- Unidirectional Flushing (UDF): Optimize system cleaning plans by simulating the
-necessary valve closures and target velocities.
- Transient Analysis: Simulate pressure surges and water hammer effects to shield
-physical infrastructure from ruptures.
- Automated Demand Allocation: Extract customer consumption from meter data or
-polygons directly onto network nodes.
- ArcGIS Online Publishing: Share live model insights, 3D visualizations, and interactive
-maps seamlessly with external stakeholders.
-
--- 29 of 38 --
-
+ArcGIS Pro Integration: Build, edit, and analyze hydraulic networks within a single geospatial environment.
+Criticality Assessment: Identify vulnerable valves and pipe segments to quickly assess isolation and failure impacts.
+Advanced Water Quality: Track water age, source tracing, and multi-species chemical interactions dynamically.
+Unidirectional Flushing (UDF): Optimize system cleaning plans by simulating the necessary valve closures and target velocities.
+Transient Analysis: Simulate pressure surges and water hammer effects to shield physical infrastructure from ruptures.
+Automated Demand Allocation: Extract customer consumption from meter data or polygons directly onto network nodes.
+ArcGIS Online Publishing: Share live model insights, 3D visualizations, and interactive maps seamlessly with external stakeholders.
 What's Included
+Included Product / Service
+Description
+Availability
+InfoWater Pro Core Engine
+Full access to hydraulic and water quality modeling tools inside ArcGIS Pro.
+Standard Component
+Advanced Extensions
+Bundled access to UDF, Multi-Species Analysis, and Pressure Zone Managers.
 Included
-Product /
-Service
-Description Availability
-InfoWater Pro
-Core Engine
-Full access to hydraulic and water
-quality modeling tools inside ArcGIS
-Pro.
-Standard
-Component
-Advanced
-Extensions
-Bundled access to UDF, Multi-
-Species Analysis, and Pressure Zone
-Managers.
+Info360 Cloud Services
+Access to Info360 Cloud Model Service for advanced cloud-based simulation runs.
 Included
-Info360 Cloud
-Services
-Access to Info360 Cloud Model
-Service for advanced cloud-based
-simulation runs.
+Autodesk Web Services
+Cloud-based collaborative storage solutions like Autodesk Drive and Shared Views.
 Included
-Autodesk Web
-Services
-Cloud-based collaborative storage
-solutions like Autodesk Drive and
-Shared Views.
+Autodesk Technical Support
+Phone and online web support directly from senior Autodesk support specialists.
 Included
-Autodesk
-Technical
-Support
-Phone and online web support
-directly from senior Autodesk
-support specialists.
+Previous Version Access
+Permissions to download and run up to three previous versions of the software.
 Included
-Previous
-Version Access
-Permissions to download and run up
-to three previous versions of the
-software.
-Included
-Esri ArcGIS Pro
-License
-Required underlying GIS
-environment platform needed to
-run the InfoWater interface.
-Not Included
-(Sold Separately)
+Esri ArcGIS Pro License
+Required underlying GIS environment platform needed to run the InfoWater interface.
+Not Included (Sold Separately)
 Subscription & Licensing Options
- Named User Access: Licenses are tied directly to an individual's Autodesk ID rather than
-a specific machine.
-
--- 30 of 38 --
-
- Multi-Device Installation: A assigned user can activate the software on up to three
-separate computers (e.g., office desktop, home setup, and field laptop).
- Single Concurrent Session: The software can only be actively run on one device at any
-given time per user.
- Autodesk Flex Tokens: A pay-as-you-go credit system ideal for occasional users or
-temporary project contractors.
- Daily Token Deduction: Tokens are deducted from a shared company pool only on the
-days the software is launched.
+Named User Access: Licenses are tied directly to an individual's Autodesk ID rather than a specific machine.
+Multi-Device Installation: A assigned user can activate the software on up to three separate computers (e.g., office desktop, home setup, and field laptop).
+Single Concurrent Session: The software can only be actively run on one device at any given time per user.
+Autodesk Flex Tokens: A pay-as-you-go credit system ideal for occasional users or temporary project contractors.
+Daily Token Deduction: Tokens are deducted from a shared company pool only on the days the software is launched.
 Product Title: InfoWorks ICM - Standard Commercial ( 1 year ,3 year ) ( New , Renewal)
 Overview
-Autodesk InfoWorks ICM Standard (officially designated as InfoWorks ICM Sewer in
-recent versions) is an advanced integrated catchment modeling software optimized for
-wastewater and sanitary sewer networks. It enables engineering firms and utility
-operators to build exceptionally fast, accurate, and collaborative hydraulic models of
-complex subsurface pipe infrastructure. By delivering unlimited 1D modeling
-capabilities, it serves as a central source of truth for capacity planning, system expansion
-analysis, and regulatory compliance without requiring a separate geographic information
-system (GIS) interface.
+Autodesk InfoWorks ICM Standard (officially designated as InfoWorks ICM Sewer in recent versions) is an advanced integrated catchment modeling software optimized for wastewater and sanitary sewer networks. It enables engineering firms and utility operators to build exceptionally fast, accurate, and collaborative hydraulic models of complex subsurface pipe infrastructure. By delivering unlimited 1D modeling capabilities, it serves as a central source of truth for capacity planning, system expansion analysis, and regulatory compliance without requiring a separate geographic information system (GIS) interface.
 Key Features
- Unlimited 1D Modeling: Simulate complex sanitary sewer, combined sewer, and riverine
-networks with zero cap on network nodes.
- Dual-Engine Simulation: Run native, highly stable hydraulic computations using either
-the standard SWMM5 engine or the proprietary, dynamic time-step ICM SIM engine.
- Integrated Catchment Hydrology: Leverage over 15 distinct hydrologic routing models to
-compute domestic flows, infiltration, and rainfall runoff.
- Live Database Lifecycle Tracking: Keep an immutable audit trail using a built-in commit
-history to trace changes, resolve multi-user conflicts, and roll back edits.
- Cloud Computing: Push computationally heavy simulations straight to the cloud to
-significantly increase calculation speed and free up local workstation resources.
-
--- 31 of 38 --
-
- Scenario Management: Construct and simulate dozens of concurrent "what-if" planning
-scenarios simultaneously within a unified environment.
- Civil 3D Integration: Seamlessly round-trip infrastructure designs between Autodesk Civil
-3D and InfoWorks ICM for continuous hydraulic validation.
+Unlimited 1D Modeling: Simulate complex sanitary sewer, combined sewer, and riverine networks with zero cap on network nodes.
+Dual-Engine Simulation: Run native, highly stable hydraulic computations using either the standard SWMM5 engine or the proprietary, dynamic time-step ICM SIM engine.
+Integrated Catchment Hydrology: Leverage over 15 distinct hydrologic routing models to compute domestic flows, infiltration, and rainfall runoff.
+Live Database Lifecycle Tracking: Keep an immutable audit trail using a built-in commit history to trace changes, resolve multi-user conflicts, and roll back edits.
+Cloud Computing: Push computationally heavy simulations straight to the cloud to significantly increase calculation speed and free up local workstation resources.
+Scenario Management: Construct and simulate dozens of concurrent "what-if" planning scenarios simultaneously within a unified environment.
+Civil 3D Integration: Seamlessly round-trip infrastructure designs between Autodesk Civil 3D and InfoWorks ICM for continuous hydraulic validation.
 What's Included
-Included
-Product /
-Service
-Description Availability
-InfoWorks ICM
-Sewer Engine
-Full access to unlimited 1D hydraulic
-and hydrologic modeling tools. Standard Component
-SWMM5 & ICM
-SIM Engines
-Native access to industry-standard
-computational routing solver
-systems.
-Included
-Cloud Simulation
-Services
-Access to Autodesk cloud database
-hosting and remote calculation
-nodes.
-Included
-Autodesk Drive
-& Storage
-Web-based storage and secure
-viewer links for remote client
-presentations.
-Included
-InfoWorks ICM
-Free Viewer
-Lightweight companion software
-allowing non-technical stakeholders
-to review model results.
-Included
-Autodesk
-Technical
-Support
-Direct web and phone access to
-advanced Autodesk utility
-infrastructure specialists.
-Included
-Full 2D Overland
-Mesh Expansion
-Complex 2D surface floodplain and
-overland storm flood tracking.
-Not Included
-(Requires InfoWorks
-ICM Ultimate)
-
--- 32 of 38 --
-
-Subscription & Licensing Options
- Named User Access: Licenses are tied directly to an individual's Autodesk ID rather than
-a specific machine.
- Multi-Device Installation: An assigned user can activate the software on up to three
-separate computers (e.g., office desktop, home setup, and field laptop).
- Single Concurrent Session: The software can only be actively run on one device at any
-given time per user.
- Autodesk Flex Tokens: A pay-as-you-go credit system ideal for occasional users or
-temporary project contractors.
- Daily Token Deduction: Tokens are deducted from a shared company pool only on the
-days the software is launched
-Product Title: InfoWorks ICM - Ultimate Commercial (1 year, 3 year) (New,
-renewal)
-Overview
-Autodesk InfoWorks ICM Ultimate is the premier integrated catchment modeling
-platform designed for advanced storm, sanitary, and river system simulations. Built for
-tier-one engineering firms, flood authorities, and major water utilities, it delivers a fully
-integrated, simultaneous 1D and 2D hydraulic engine. The software allows engineers to
-accurately model complex subsurface pipe networks alongside overland urban and
-riverine floodplains within a single, highly collaborative workspace. By utilizing high-
-performance GPU-accelerated computing, it resolves complex, large-scale flood risk
-scenarios rapidly and accurately.
-Key Features
- Integrated 1D/2D Simulation Engine: Dynamically links subsurface sewer networks (1D)
-with complex surface topography (2D) to simulate realistic water movement and urban
-flooding.
- GPU-Accelerated 2D Mesh Computations: Leverages local graphics cards or cloud
-resources to execute millions of surface flow calculations exponentially faster than CPU-
-only processing.
-
--- 33 of 38 --
-
- Flexible 2D Mesh Generation: Creates custom triangular mesh zones with variable
-resolutions to capture intricate structural details like roads, buildings, and flood defense
-walls.
- Comprehensive River and Floodplain Modeling: Simulates open channels, bridges,
-culverts, weirs, and complex tidal boundaries alongside stormwater runoff.
- Multi-User Master Database Architecture: Enables large, distributed teams to work
-concurrently on the same regional model with built-in version control and conflict
-resolution.
- Advanced Remote Cloud Simulation: Offloads massive, multi-scenario 2D runs to
-Autodesk’s cloud servers to instantly free up local engineering workstations.
- Automated Spatial Data Import: Directly ingests high-resolution LiDAR data, GIS layers,
-and CAD files to rapidly build and refresh terrain models.
-What's Included
-Included Product
-/ Service Description Availability
-InfoWorks ICM
-Ultimate Engine
-Uncapped access to full 1D pipe modeling
-and advanced 2D overland flood routing.
-Standard
-Component
-GPU-Enabled
-Solver (ICM SIM)
-Native support for graphics card
-acceleration to run heavy 2D mesh
-computations locally.
-Included
-Cloud Simulation
-Services
-Uncapped ability to offload high-density
-1D and 2D runs to remote Autodesk
-servers.
-Included
-InfoWorks ICM
-Free Viewer
-Complimentary standalone application for
-clients and reviewers to inspect finished
-model files.
-Included
-
--- 34 of 38 --
-
-Autodesk Web
-Services &
-Storage
-Cloud database hosting environments
-paired with shared link generation for
-project collaboration.
-Included
-Autodesk
-Technical Support
-Priority access to senior Autodesk water
-infrastructure engineers via phone or
-digital tickets.
-Included
-Previous Version
-Rights
-Authorization to download, license, and
-deploy up to three historical versions of
-the software.
-Included
-Subscription & Licensing Options
- Named User Access: Licenses are tied directly to an individual's Autodesk ID rather than
-a specific machine.
- Multi-Device Installation: An assigned user can activate the software on up to three
-separate computers (e.g., office desktop, home setup, and field laptop).
- Single Concurrent Session: The software can only be actively run on one device at any
-given time per user.
- Autodesk Flex Tokens: A pay-as-you-go credit system ideal for occasional users or
-temporary project contractors.
- Daily Token Deduction: Tokens are deducted from a shared company pool only on the
-days the software is launched.
-Product Title: InfoWorks WS Pro Commercial (1 year, 3 year) (New,
-renewal)
-Overview
-Autodesk InfoWorks WS Pro is an enterprise-level, standalone hydraulic modeling
-platform built to plan, design, and operate highly accurate clean water distribution
-networks. Unlike GIS-dependent applications, InfoWorks WS Pro uses a centralized
-master database architecture that allows large, multi-disciplinary engineering teams to
-collaborate on the same regional network model simultaneously. It enables utilities to
-build complex, standalone digital twins, connect directly to live telemetry, and execute
-
--- 35 of 38 --
-
-heavy multi-core or cloud simulations to evaluate system performance and protect
-water quality.
-Key Features
- Multi-User Collaborative Database: Enables multiple modeling engineers to access and
-edit the exact same model simultaneously, complete with built-in version control and
-conflict resolution.
- Live Telemetry Integration: Connects directly to external SCADA or telemetry data
-streams to automate demand area calibrations, assess system leakage, and analyze real-
-time network behavior.
- Advanced Ruby Script Automation: Automates highly repetitive workflows, cleanups,
-and complex data imports from external systems using a built-in Ruby scripting
-environment.
- Comprehensive System Analytics: Simulates advanced water quality parameters (such
-as multi-species chlorination decays and water age), fire flow capacities, and
-unidirectional main flushing programs.
- Realistic Operational Modeling: Recreates true-to-life utility operations by explicitly
-modeling hydrants, localized meters, complex valve curves, and variable-speed pump
-control policies.
- Integrated Surge & Transient Analysis: Simulates pressure surges, pipe bursts, and water
-hammer events natively to evaluate asset resilience against physical structural failures.
- Multi-Scenario EPANET Importer: Ingests multiple third-party .inp network
-configurations concurrently into a single model folder to rapidly convert legacy data sets
-into functional operational scenarios.
-What's Included
-Included Product
-/ Service Description Availability
-
--- 36 of 38 --
-
-InfoWorks WS
-Pro Client Engine
-Complete workspace access to holistic 1D
-water distribution network building and
-analysis tools.
-Standard
-Component
-IWLive Pro
-Integration
-Built-in access to live baseline operational
-forecasting and real-time pipe burst or
-isolation tracking.
-Included
-Cloud Simulation
-Capabilities
-Ability to run highly scalable, multi-run
-calculations using remote cloud server
-computing resources.
-Included
-InfoWorks WS
-Pro Free Viewer
-A complimentary desktop app allowing
-review teams and clients to view simulation
-data assets without a active license.
-Included
-Autodesk Web
-Services & Drive
-Secure cloud-hosted database spaces
-combined with web link generation for
-collaborative team design reviews.
-Included
-Autodesk
-Technical
-Support
-Priority ticketing, web assistance, and phone
-support from Autodesk utility infrastructure
-specialists.
-Included
-Historical Version
+Included Product / Service
+Description
 Availability
-Complete access to download, configure, and
-operate up to three previous release cycles of
-the core software.
+InfoWorks ICM Sewer Engine
+Full access to unlimited 1D hydraulic and hydrologic modeling tools.
+Standard Component
+SWMM5 & ICM SIM Engines
+Native access to industry-standard computational routing solver systems.
+Included
+Cloud Simulation Services
+Access to Autodesk cloud database hosting and remote calculation nodes.
+Included
+Autodesk Drive & Storage
+Web-based storage and secure viewer links for remote client presentations.
+Included
+InfoWorks ICM Free Viewer
+Lightweight companion software allowing non-technical stakeholders to review model results.
+Included
+Autodesk Technical Support
+Direct web and phone access to advanced Autodesk utility infrastructure specialists.
+Included
+Full 2D Overland Mesh Expansion
+Complex 2D surface floodplain and overland storm flood tracking.
+Not Included (Requires InfoWorks ICM Ultimate)
+Subscription & Licensing Options
+Named User Access: Licenses are tied directly to an individual's Autodesk ID rather than a specific machine.
+Multi-Device Installation: An assigned user can activate the software on up to three separate computers (e.g., office desktop, home setup, and field laptop).
+Single Concurrent Session: The software can only be actively run on one device at any given time per user.
+Autodesk Flex Tokens: A pay-as-you-go credit system ideal for occasional users or temporary project contractors.
+Daily Token Deduction: Tokens are deducted from a shared company pool only on the days the software is launched
+Product Title: InfoWorks ICM - Ultimate Commercial (1 year, 3 year) (New, renewal)
+Overview
+Autodesk InfoWorks ICM Ultimate is the premier integrated catchment modeling platform designed for advanced storm, sanitary, and river system simulations. Built for tier-one engineering firms, flood authorities, and major water utilities, it delivers a fully integrated, simultaneous 1D and 2D hydraulic engine. The software allows engineers to accurately model complex subsurface pipe networks alongside overland urban and riverine floodplains within a single, highly collaborative workspace. By utilizing high-performance GPU-accelerated computing, it resolves complex, large-scale flood risk scenarios rapidly and accurately.
+Key Features
+Integrated 1D/2D Simulation Engine: Dynamically links subsurface sewer networks (1D) with complex surface topography (2D) to simulate realistic water movement and urban flooding.
+GPU-Accelerated 2D Mesh Computations: Leverages local graphics cards or cloud resources to execute millions of surface flow calculations exponentially faster than CPU-only processing.
+Flexible 2D Mesh Generation: Creates custom triangular mesh zones with variable resolutions to capture intricate structural details like roads, buildings, and flood defense walls.
+Comprehensive River and Floodplain Modeling: Simulates open channels, bridges, culverts, weirs, and complex tidal boundaries alongside stormwater runoff.
+Multi-User Master Database Architecture: Enables large, distributed teams to work concurrently on the same regional model with built-in version control and conflict resolution.
+Advanced Remote Cloud Simulation: Offloads massive, multi-scenario 2D runs to Autodesk’s cloud servers to instantly free up local engineering workstations.
+Automated Spatial Data Import: Directly ingests high-resolution LiDAR data, GIS layers, and CAD files to rapidly build and refresh terrain models.
+What's Included
+Included Product / Service
+Description
+Availability
+InfoWorks ICM Ultimate Engine
+Uncapped access to full 1D pipe modeling and advanced 2D overland flood routing.
+Standard Component
+GPU-Enabled Solver (ICM SIM)
+Native support for graphics card acceleration to run heavy 2D mesh computations locally.
+Included
+Cloud Simulation Services
+Uncapped ability to offload high-density 1D and 2D runs to remote Autodesk servers.
+Included
+InfoWorks ICM Free Viewer
+Complimentary standalone application for clients and reviewers to inspect finished model files.
+Included
+Autodesk Web Services & Storage
+Cloud database hosting environments paired with shared link generation for project collaboration.
+Included
+Autodesk Technical Support
+Priority access to senior Autodesk water infrastructure engineers via phone or digital tickets.
+Included
+Previous Version Rights
+Authorization to download, license, and deploy up to three historical versions of the software.
 Included
 Subscription & Licensing Options
- Named User Access: Licenses are tied directly to an individual's Autodesk ID rather than
-a specific machine.
- Multi-Device Installation: An assigned user can activate the software on up to three
-separate computers (e.g., office desktop, home setup, and field laptop).
- Single Concurrent Session: The software can only be actively run on one device at any
-given time per user.
-
--- 37 of 38 --
-
- Autodesk Flex Tokens: A pay-as-you-go credit system ideal for occasional users or
-temporary project contractors.
- Daily Token Deduction: Tokens are deducted from a shared company pool only on the
-days the software is launched.
-
--- 38 of 38 --
-
+Named User Access: Licenses are tied directly to an individual's Autodesk ID rather than a specific machine.
+Multi-Device Installation: An assigned user can activate the software on up to three separate computers (e.g., office desktop, home setup, and field laptop).
+Single Concurrent Session: The software can only be actively run on one device at any given time per user.
+Autodesk Flex Tokens: A pay-as-you-go credit system ideal for occasional users or temporary project contractors.
+Daily Token Deduction: Tokens are deducted from a shared company pool only on the days the software is launched.
+Product Title: InfoWorks WS Pro Commercial (1 year, 3 year) (New, renewal)
+Overview
+Autodesk InfoWorks WS Pro is an enterprise-level, standalone hydraulic modeling platform built to plan, design, and operate highly accurate clean water distribution networks. Unlike GIS-dependent applications, InfoWorks WS Pro uses a centralized master database architecture that allows large, multi-disciplinary engineering teams to collaborate on the same regional network model simultaneously. It enables utilities to build complex, standalone digital twins, connect directly to live telemetry, and execute heavy multi-core or cloud simulations to evaluate system performance and protect water quality.
+Key Features
+Multi-User Collaborative Database: Enables multiple modeling engineers to access and edit the exact same model simultaneously, complete with built-in version control and conflict resolution.
+Live Telemetry Integration: Connects directly to external SCADA or telemetry data streams to automate demand area calibrations, assess system leakage, and analyze real-time network behavior.
+Advanced Ruby Script Automation: Automates highly repetitive workflows, cleanups, and complex data imports from external systems using a built-in Ruby scripting environment.
+Comprehensive System Analytics: Simulates advanced water quality parameters (such as multi-species chlorination decays and water age), fire flow capacities, and unidirectional main flushing programs.
+Realistic Operational Modeling: Recreates true-to-life utility operations by explicitly modeling hydrants, localized meters, complex valve curves, and variable-speed pump control policies.
+Integrated Surge & Transient Analysis: Simulates pressure surges, pipe bursts, and water hammer events natively to evaluate asset resilience against physical structural failures.
+Multi-Scenario EPANET Importer: Ingests multiple third-party .inp network configurations concurrently into a single model folder to rapidly convert legacy data sets into functional operational scenarios.
+What's Included
+Included Product / Service
+Description
+Availability
+InfoWorks WS Pro Client Engine
+Complete workspace access to holistic 1D water distribution network building and analysis tools.
+Standard Component
+IWLive Pro Integration
+Built-in access to live baseline operational forecasting and real-time pipe burst or isolation tracking.
+Included
+Cloud Simulation Capabilities
+Ability to run highly scalable, multi-run calculations using remote cloud server computing resources.
+Included
+InfoWorks WS Pro Free Viewer
+A complimentary desktop app allowing review teams and clients to view simulation data assets without a active license.
+Included
+Autodesk Web Services & Drive
+Secure cloud-hosted database spaces combined with web link generation for collaborative team design reviews.
+Included
+Autodesk Technical Support
+Priority ticketing, web assistance, and phone support from Autodesk utility infrastructure specialists.
+Included
+Historical Version Availability
+Complete access to download, configure, and operate up to three previous release cycles of the core software.
+Included
+Subscription & Licensing Options
+Named User Access: Licenses are tied directly to an individual's Autodesk ID rather than a specific machine.
+Multi-Device Installation: An assigned user can activate the software on up to three separate computers (e.g., office desktop, home setup, and field laptop).
+Single Concurrent Session: The software can only be actively run on one device at any given time per user.
+Autodesk Flex Tokens: A pay-as-you-go credit system ideal for occasional users or temporary project contractors.
+Daily Token Deduction: Tokens are deducted from a shared company pool only on the days the software is launched.

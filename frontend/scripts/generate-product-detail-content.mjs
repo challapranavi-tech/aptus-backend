@@ -93,6 +93,11 @@ const TITLE_RULES = [
     slug: "oracle-primavera-p6-enterprise",
     extraHeading: true,
   },
+  {
+    re: /software update license\s*&\s*support/i,
+    catalog: "Oracle Software Update License & Support",
+    slug: "oracle-software-update-license-support",
+  },
   { re: /microsoft 365 e3/i, catalog: "Microsoft 365 E3", slug: "microsoft-365-e3" },
   { re: /microsoft 365 apps/i, catalog: "Microsoft 365 Apps", slug: "microsoft-365-apps" },
   { re: /microsoft 365 business standard/i, catalog: "Microsoft 365 Business Standard", slug: "microsoft-365-business" },
@@ -101,7 +106,24 @@ const TITLE_RULES = [
   { re: /microsoft teams essentials/i, catalog: "Microsoft Teams Essentials", slug: "microsoft-teams-essentials" },
   { re: /visio plan 2/i, catalog: "Microsoft Visio", slug: "microsoft-visio" },
   { re: /copilot for microsoft 365/i, catalog: "Copilot for Microsoft 365", slug: "copilot-for-microsoft-365" },
+  { re: /planner and project plan 3/i, catalog: "Planner and Project Plan 3", slug: "planner-and-project-plan-3" },
   { re: /planner plan 1/i, catalog: "Planner Plan 1", slug: "planner-plan-1" },
+  {
+    re: /defender for office 365.*plan 1|microsoft defender for office 365/i,
+    catalog: "Microsoft Defender for Office 365 Plan 1",
+    slug: "microsoft-defender-office-365-plan-1",
+  },
+  {
+    re: /teams rooms pro/i,
+    catalog: "Microsoft Teams Rooms Pro",
+    slug: "microsoft-teams-rooms-pro",
+  },
+  { re: /office 365 e1/i, catalog: "Office 365 E1", slug: "office-365-e1" },
+  {
+    re: /office ltsc standard 2024/i,
+    catalog: "Office LTSC Standard 2024",
+    slug: "office-ltsc-standard-2024",
+  },
   { re: /power bi premium per user/i, catalog: "Power BI Premium Per User", slug: "power-bi-premium-per-user" },
   { re: /power bi pro(?!.*premium)/i, catalog: "Power BI Pro", slug: "power-bi" },
   { re: /windows 11 pro/i, catalog: "Windows 11 Pro", slug: "windows-11-pro" },
@@ -536,6 +558,155 @@ for (const file of files) {
   }
 }
 
+const PAGE_MARKER = /--\s*\d+\s+of\s+\d+\s*--/gi;
+const SKIP_HEADINGS = /^(overview|product overview|included product\s*\/\s*service|description|availability|component(?: type)?|toolset name|core focus|deployment|format\s*\/\s*version)$/i;
+
+/** Hand-crafted portal copy takes precedence for these slugs. */
+const PORTAL_AUTODESK_SKIP = new Set([
+  "autocad",
+  "civil-3d",
+  "aec-collection",
+  "autocad-lt",
+  "autocad-revit-lt-suite",
+  "3ds-max",
+  "navisworks",
+  "revit",
+]);
+
+function cleanText(text) {
+  return String(text)
+    .replace(PAGE_MARKER, " ")
+    .replace(/[\uF0B7\u2022]/g, " ")
+    .replace(/\s{2,}/g, " ")
+    .replace(/^\s*:\s*/, "")
+    .trim();
+}
+
+function extractBulletItems(text) {
+  const cleaned = cleanText(text);
+  if (!cleaned) return [];
+  return cleaned
+    .split(/[\uF0B7\u2022]\s*/)
+    .map((item) => cleanText(item))
+    .filter((item) => item.length > 12 && !SKIP_HEADINGS.test(item) && !PAGE_MARKER.test(item));
+}
+
+function splitFeatureItems(raw) {
+  const fromBullets = extractBulletItems(raw);
+  const single = fromBullets.length === 1 ? fromBullets[0] : fromBullets.join(" ");
+  if (!single) return [];
+
+  if (fromBullets.length > 1) return fromBullets;
+
+  const split = single
+    .split(/\.\s*(?=[A-Z][^:]{2,60}:)/)
+    .map((item) => cleanText(item))
+    .filter((item) => item.length > 12 && !SKIP_HEADINGS.test(item));
+  return split.length > 1 ? split : [single];
+}
+
+function mergeListTab(blocks, fallback) {
+  const raw = blocks
+    .flatMap((block) => {
+      if (block.type === "ul") return block.items;
+      if (block.type === "p") return [block.text];
+      return [];
+    })
+    .join(" ");
+  const cleaned = [...new Set(splitFeatureItems(raw))];
+  if (!cleaned.length) return [{ type: "p", text: fallback }];
+  return [{ type: "ul", items: cleaned }];
+}
+
+function sanitizeBlocks(blocks, tabId) {
+  const out = [];
+  for (const block of blocks) {
+    if (block.type === "p") {
+      const text = cleanText(block.text);
+      if (!text || SKIP_HEADINGS.test(text) || (tabId === "overview" && text.toLowerCase() === "overview")) continue;
+      const items = extractBulletItems(text);
+      if (items.length > 1) out.push({ type: "ul", items });
+      else if (items.length === 1) out.push({ type: "p", text: items[0] });
+    } else if (block.type === "h3") {
+      const text = cleanText(block.text);
+      if (text && !SKIP_HEADINGS.test(text) && text.toLowerCase() !== "overview") out.push({ type: "h3", text });
+    } else if (block.type === "ul") {
+      const items = block.items.flatMap((item) => extractBulletItems(item)).filter(Boolean);
+      if (items.length) out.push({ type: "ul", items });
+    } else if (block.type === "table") {
+      const headers = block.headers.map(cleanText).filter(Boolean);
+      const rows = block.rows
+        .map((row) => row.map(cleanText))
+        .filter((row) => row.some((cell) => cell && !PAGE_MARKER.test(cell)));
+      if (headers.length && rows.length) out.push({ type: "table", headers, rows });
+    }
+  }
+  return out;
+}
+
+function mergeOverview(blocks) {
+  const parts = [];
+  for (const block of blocks) {
+    if (block.type === "p") parts.push(block.text);
+    if (block.type === "ul") parts.push(...block.items);
+  }
+  let text = cleanText(parts.join(" "));
+  text = text.replace(/^Subscription\s*\([^)]*\)\s*/i, "");
+  text = text.replace(/^Product Overview\s*/i, "");
+  return text ? [{ type: "p", text }] : [{ type: "p", text: "Product overview available on request." }];
+}
+
+function mergeIncluded(blocks) {
+  for (const block of blocks) {
+    if (block.type !== "table") continue;
+    const headers =
+      block.headers.map(cleanText).filter(Boolean).length >= 2
+        ? block.headers.map(cleanText)
+        : ["Included Component", "Description", "Delivery Method"];
+    const rows = block.rows
+      .map((row) => row.map(cleanText))
+      .filter((row) => row.filter(Boolean).length >= 2 && !row.some((cell) => SKIP_HEADINGS.test(cell)));
+    if (rows.length >= 2) return [{ type: "table", headers, rows }];
+  }
+  return [{ type: "p", text: "See the overview and key features for included components." }];
+}
+
+function mergeLicensing(blocks) {
+  const list = mergeListTab(blocks, "");
+  if (list[0]?.type === "ul" && list[0].items.length) {
+    const rows = list[0].items.map((item) => {
+      const splitAt = item.indexOf(": ");
+      if (splitAt === -1) return [item, ""];
+      return [item.slice(0, splitAt), item.slice(splitAt + 2)];
+    });
+    return [{ type: "table", headers: ["Licensing Option", "Description"], rows }];
+  }
+  for (const block of blocks) {
+    if (block.type === "table") {
+      const headers = block.headers.map(cleanText);
+      const rows = block.rows.map((row) => row.map(cleanText)).filter((row) => row.some(Boolean));
+      if (rows.length) return [{ type: "table", headers, rows }];
+    }
+  }
+  return [{ type: "p", text: "Contact Aptus for subscription and licensing options for this product." }];
+}
+
+function sanitizeProductContent(content) {
+  const overview = sanitizeBlocks(content.overview, "overview");
+  const keyFeatures = sanitizeBlocks(content.keyFeatures, "keyFeatures");
+  const whatsIncluded = sanitizeBlocks(content.whatsIncluded, "whatsIncluded");
+  const subscriptionLicensing = sanitizeBlocks(content.subscriptionLicensing, "subscriptionLicensing");
+
+  return {
+    overview: mergeOverview(overview),
+    keyFeatures: mergeListTab(keyFeatures, "See product overview for capabilities."),
+    whatsIncluded: mergeIncluded(whatsIncluded),
+    subscriptionLicensing: mergeLicensing(subscriptionLicensing),
+  };
+}
+
+const wordCatalogFile = path.join(root, "frontend/data/product-detail-word-catalog.ts");
+
 function esc(str) {
   return JSON.stringify(str);
 }
@@ -560,6 +731,40 @@ function emitBlocks(blocks, indent) {
   lines.push(`${pad}]`);
   return lines.join("\n");
 }
+
+function emitContentObject(content) {
+  return `{
+    overview: ${emitBlocks(content.overview, 4)},
+    keyFeatures: ${emitBlocks(content.keyFeatures, 4)},
+    whatsIncluded: ${emitBlocks(content.whatsIncluded, 4)},
+    subscriptionLicensing: ${emitBlocks(content.subscriptionLicensing, 4)},
+  }`;
+}
+
+let wordCatalogTs = `/**
+ * Product detail content imported from docx-tmp/*.txt (Word document exports).
+ * Re-run after updating Word exports: node frontend/scripts/build-word-catalog-detail.mjs
+ */
+
+import type { ProductDetailContent } from "./product-detail-content";
+
+export const WORD_CATALOG_DETAIL_CONTENT: Record<string, ProductDetailContent> = {
+`;
+
+for (const [slug, data] of [...bySlug.entries()].sort(([a], [b]) => a.localeCompare(b))) {
+  if (PORTAL_AUTODESK_SKIP.has(slug)) continue;
+  wordCatalogTs += `  ${JSON.stringify(slug)}: ${emitContentObject(sanitizeProductContent(data))},\n`;
+}
+
+wordCatalogTs += `};
+
+export const WORD_CATALOG_DETAIL_SLUGS = new Set<string>(Object.keys(WORD_CATALOG_DETAIL_CONTENT));
+`;
+
+fs.writeFileSync(wordCatalogFile, wordCatalogTs, "utf8");
+console.log(
+  `Wrote ${wordCatalogFile} (${[...bySlug.keys()].filter((s) => !PORTAL_AUTODESK_SKIP.has(s)).length} products)`,
+);
 
 let ts = `/** @deprecated PDF extract archive — not imported by the app. See product-detail-content.ts */
 

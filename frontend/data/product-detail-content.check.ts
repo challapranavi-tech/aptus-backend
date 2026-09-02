@@ -7,7 +7,7 @@ import {
 } from "./product-detail-content";
 
 const keys = productDetailContentKeys();
-assert.equal(keys.length, 8, `expected 8 portal Autodesk detail entries, got ${keys.length}`);
+assert.ok(keys.length >= 52, `expected at least 52 detail entries, got ${keys.length}`);
 
 for (const name of PORTAL_PRODUCT_NAMES) {
   const slug =
@@ -25,10 +25,10 @@ for (const name of PORTAL_PRODUCT_NAMES) {
 const adobe = getProductDetailContent("Adobe Acrobat Pro", {
   brandLabel: "Adobe",
   slug: "adobe-acrobat-pro",
-  description: "Industry-standard PDF and e-signature tools for teams.",
 });
 assert.ok(adobe.overview.length > 0);
 assert.equal(adobe.keyFeatures[0]?.type, "ul");
+assert.ok((adobe.keyFeatures[0]?.type === "ul" ? adobe.keyFeatures[0].items.length : 0) >= 3);
 assert.ok(!JSON.stringify(adobe).includes("-- 1 of 23 --"));
 
 const microsoft = getProductDetailContent("Microsoft 365 Apps", {
@@ -39,4 +39,4 @@ const microsoft = getProductDetailContent("Microsoft 365 Apps", {
 assert.equal(microsoft.keyFeatures[0]?.type, "ul");
 assert.ok(!JSON.stringify(microsoft).includes("\uF0B7"));
 
-console.log(`product-detail-content.check: ok (${keys.length} Autodesk portal products)`);
+console.log(`product-detail-content.check: ok (${keys.length} products with detail content)`);
