@@ -753,49 +753,8 @@
   color: #b45309;
 }
 
-/* ── Products catalog page hero ── */
-.aptus-software-products-hero {
-  background: #0b1220;
-  color: #fff;
-  padding: clamp(2.5rem, 6vw, 3.75rem) 1.25rem 2.25rem;
-}
-
-.aptus-software-products-hero__inner {
-  margin: 0 auto;
-  max-width: 920px;
-  text-align: center;
-}
-
-.aptus-software-products-hero__eyebrow {
-  color: rgba(255, 255, 255, 0.72);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  margin: 0 0 0.85rem;
-}
-
-.aptus-software-products-hero__eyebrow a {
-  color: #7dd3fc;
-  text-decoration: none;
-}
-
-.aptus-software-products-hero__eyebrow a:hover {
-  text-decoration: underline;
-}
-
-.aptus-software-products-hero__title {
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-weight: 700;
-  line-height: 1.15;
-  margin: 0 0 0.75rem;
-}
-
-.aptus-software-products-hero__lead {
-  color: rgba(255, 255, 255, 0.82);
-  font-size: 1rem;
-  line-height: 1.6;
-  margin: 0 auto;
-  max-width: 40rem;
+.aptus-software-products-page .aptus-software-catalog {
+  padding-top: 1.5rem;
 }
 
 .aptus-software-products-page .aptus-software-catalog__header {

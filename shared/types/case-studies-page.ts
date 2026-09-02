@@ -7,8 +7,15 @@ export type AccentTitleContent = {
 export type CaseStudyItemContent = {
   title: string;
   description: string;
-  pdfHref: string;
+  pdfHref?: string;
   readMoreLabel?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+};
+
+export type KeyProjectItemContent = {
+  title: string;
+  description: string;
   imageSrc?: string;
   imageAlt?: string;
 };
@@ -29,6 +36,11 @@ export type CaseStudiesPageContent = {
     visible?: boolean;
     title: AccentTitleContent;
     items: CaseStudyItemContent[];
+  };
+  keyProjects?: {
+    visible?: boolean;
+    title: AccentTitleContent;
+    items: KeyProjectItemContent[];
   };
   painPoints: {
     visible?: boolean;

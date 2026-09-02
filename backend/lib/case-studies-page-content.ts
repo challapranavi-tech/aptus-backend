@@ -30,6 +30,18 @@ function backfillImages(
     content.partnerships = local.partnerships;
   }
 
+  if (!content.keyProjects?.items?.length && local.keyProjects?.items?.length) {
+    content.keyProjects = local.keyProjects;
+  } else if (content.keyProjects?.items?.length && local.keyProjects?.items?.length) {
+    const byTitle = new Map(local.keyProjects.items.map((item) => [item.title, item]));
+    for (const item of content.keyProjects.items) {
+      const loc = byTitle.get(item.title);
+      if (!loc?.imageSrc || item.imageSrc) continue;
+      item.imageSrc = loc.imageSrc;
+      item.imageAlt ??= loc.imageAlt;
+    }
+  }
+
   return content;
 }
 

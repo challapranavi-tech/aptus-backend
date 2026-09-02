@@ -29,7 +29,7 @@ function CaseStudyIcon({ name }: { name: string }) {
 
 /** Dedicated layout for /customer-stories (ex-/aptus-case-studies) — matches live Elementor post-5734. */
 export function CaseStudiesPageView({ content }: CaseStudiesPageViewProps) {
-  const { hero, caseStudies, painPoints, whyChoose, transformCta, testimonials, partnerships } =
+  const { hero, caseStudies, keyProjects, painPoints, whyChoose, transformCta, testimonials, partnerships } =
     content;
 
   return (
@@ -60,7 +60,17 @@ export function CaseStudiesPageView({ content }: CaseStudiesPageViewProps) {
               {caseStudies.items.map((item) => (
                 <article key={item.title} className="aptus-cs-card">
                   {item.imageSrc ? (
-                    <a href={item.pdfHref} target="_blank" rel="noopener noreferrer">
+                    item.pdfHref ? (
+                      <a href={item.pdfHref} target="_blank" rel="noopener noreferrer">
+                        <img
+                          src={resolveCmsImageSrc(item.imageSrc)}
+                          alt={item.imageAlt ?? item.title}
+                          className="aptus-cs-card__image"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </a>
+                    ) : (
                       <img
                         src={resolveCmsImageSrc(item.imageSrc)}
                         alt={item.imageAlt ?? item.title}
@@ -68,24 +78,55 @@ export function CaseStudiesPageView({ content }: CaseStudiesPageViewProps) {
                         loading="lazy"
                         decoding="async"
                       />
-                    </a>
+                    )
                   ) : null}
                   <h3 className="aptus-cs-card__title">
-                    <a href={item.pdfHref} target="_blank" rel="noopener noreferrer">
-                      {item.title}
-                    </a>
+                    {item.pdfHref ? (
+                      <a href={item.pdfHref} target="_blank" rel="noopener noreferrer">
+                        {item.title}
+                      </a>
+                    ) : (
+                      item.title
+                    )}
                   </h3>
                   <p className="aptus-cs-card__body">{item.description}</p>
-                  <div className="aptus-cs-card__btn-wrap">
-                    <a
-                      href={item.pdfHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="aptus-cs-btn"
-                    >
-                      {item.readMoreLabel ?? "Read More"}
-                    </a>
-                  </div>
+                  {item.pdfHref ? (
+                    <div className="aptus-cs-card__btn-wrap">
+                      <a
+                        href={item.pdfHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="aptus-cs-btn"
+                      >
+                        {item.readMoreLabel ?? "Read More"}
+                      </a>
+                    </div>
+                  ) : null}
+                </article>
+              ))}
+            </div>
+          </Container>
+        </section>
+      ) : null}
+
+      {keyProjects?.visible !== false && keyProjects?.items?.length ? (
+        <section className="aptus-cs-section">
+          <Container>
+            <h2 className="aptus-cs-section-title">{joinAccentTitle(keyProjects.title)}</h2>
+            <div className="aptus-cs-grid aptus-cs-grid--key-projects grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {keyProjects.items.map((item) => (
+                <article key={item.title} className="aptus-cs-card aptus-cs-card--key-project">
+                  {item.imageSrc ? (
+                    <img
+                      src={resolveCmsImageSrc(item.imageSrc)}
+                      alt={item.imageAlt ?? item.title}
+                      className="aptus-cs-card__image"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : null}
+                  <h3 className="aptus-cs-card__title">{item.title}</h3>
+                  <p className="aptus-cs-card__body">{item.description}</p>
                 </article>
               ))}
             </div>

@@ -163,7 +163,7 @@ export const SITE_NAVIGATION: NavigationItem[] = [
       { label: "Conference room solution", href: "/conference-room-solution" },
     ],
   },
-  { label: "Customer Stories", href: "/customer-stories" },
+  { label: "Solutions in Action", href: "/customer-stories" },
 ];
 
 // ponytail: self-check — live Software menu has 11 top-level categories

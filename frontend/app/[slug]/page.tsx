@@ -52,7 +52,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const normalized = formatSlug(slug);
   if (isCaseStudiesSlug(normalized)) {
-    return { title: "Customer Stories" };
+    return { title: "Solutions in Action" };
   }
   try {
     const page = await getPageBySlug(normalized);

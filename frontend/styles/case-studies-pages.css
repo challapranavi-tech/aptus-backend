@@ -68,6 +68,28 @@
   max-width: 1000px;
 }
 
+.aptus-case-studies-page .aptus-cs-grid--key-projects {
+  max-width: 1200px;
+}
+
+.aptus-case-studies-page .aptus-cs-card--key-project .aptus-cs-card__image {
+  height: 180px;
+  object-fit: cover;
+  padding: 0;
+}
+
+.aptus-case-studies-page .aptus-cs-card--key-project .aptus-cs-card__title {
+  font-size: var(--text-base);
+  line-height: 1.35;
+  padding: 0 1rem;
+}
+
+.aptus-case-studies-page .aptus-cs-card--key-project .aptus-cs-card__body {
+  flex: 1;
+  font-size: var(--text-sm);
+  padding: 0 1rem 1.25rem;
+}
+
 .aptus-case-studies-page .aptus-cs-card {
   background: #fff;
   border-radius: 10px;
