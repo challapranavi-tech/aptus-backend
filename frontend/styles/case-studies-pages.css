@@ -204,30 +204,31 @@
 /* ── Transform CTA band (§3393b603) ── */
 .aptus-case-studies-page .aptus-cs-transform {
   background-color: var(--cs-blue);
-  padding: 4rem 1rem;
+  padding: 1.75rem 1rem;
   text-align: center;
 }
 
 .aptus-case-studies-page .aptus-cs-transform h2 {
   color: #fff;
-  font-size: var(--text-3xl);
+  font-size: var(--text-2xl);
   font-weight: 600;
+  line-height: 1.2;
   margin: 0;
   text-align: center;
 }
 
 .aptus-case-studies-page .aptus-cs-transform p {
   color: #fff;
-  font-size: var(--text-base);
-  line-height: 1.5;
-  margin: 1rem auto 0;
+  font-size: var(--text-sm);
+  line-height: 1.45;
+  margin: 0.5rem auto 0;
   max-width: 640px;
-  text-align: start;
+  text-align: center;
 }
 
 .aptus-case-studies-page .aptus-cs-transform .aptus-cs-btn {
   display: inline-block;
-  margin-top: 2rem;
+  margin-top: 1rem;
   width: auto;
 }
 
