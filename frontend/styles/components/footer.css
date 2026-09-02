@@ -15,13 +15,16 @@
 [data-section="footer"] .aptus-footer-logo-link {
   display: inline-block;
   max-width: 100%;
+  background: rgb(255 255 255 / 0.96);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
 }
 
 [data-section="footer"] .aptus-footer-logo {
   display: block !important;
   height: auto !important;
-  max-height: 2rem;
-  max-width: min(100%, 9.5rem);
+  max-height: 2.75rem;
+  max-width: min(100%, 12.5rem);
   width: auto !important;
 }
 
@@ -58,8 +61,8 @@
 
 @media (min-width: 640px) {
   [data-section="footer"] .aptus-footer-logo {
-    max-height: 2.35rem;
-    max-width: min(100%, 11rem);
+    max-height: 3rem;
+    max-width: min(100%, 14rem);
   }
 
   [data-section="footer"] .aptus-footer-map {
@@ -69,8 +72,8 @@
 
 @media (min-width: 1024px) {
   [data-section="footer"] .aptus-footer-logo {
-    max-height: 2.75rem;
-    max-width: min(100%, 13rem);
+    max-height: 3.25rem;
+    max-width: min(100%, 15rem);
   }
 
   [data-section="footer"] .aptus-footer-map {

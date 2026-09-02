@@ -20,7 +20,7 @@ export function FooterClient({
 }) {
   const { locale, t } = useLocale();
   const hasReachUs = footer.phone || footer.email || footer.address;
-  const footerLogoSrc = "/logo-white.svg";
+  const footerLogo = footer.logo ?? logo;
 
   return (
     <footer className="border-t" data-section="footer">
@@ -28,12 +28,12 @@ export function FooterClient({
         <div className="grid items-start gap-8 py-10 sm:grid-cols-2 sm:gap-8 sm:py-12 lg:grid-cols-[1.35fr_1.1fr_1.55fr] lg:gap-x-10 lg:gap-y-8 lg:py-14">
           <div className="aptus-footer-brand min-w-0">
             <Link href="/" className="aptus-footer-logo-link">
-              {logo ? (
+              {footerLogo ? (
                 <Image
-                  src={footerLogoSrc}
-                  alt={logo.alt}
-                  width={logo.width ?? 160}
-                  height={logo.height ?? 44}
+                  src={resolveCmsImageSrc(footerLogo.src)}
+                  alt={footerLogo.alt}
+                  width={footerLogo.width ?? 180}
+                  height={footerLogo.height ?? 48}
                   className="aptus-footer-logo object-contain"
                   unoptimized
                 />
