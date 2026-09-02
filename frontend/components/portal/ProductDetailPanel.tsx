@@ -8,7 +8,6 @@ import { getProductCatalogTitle } from "@/data/product-catalog-titles";
 import { getProductConfig } from "@/data/product-options";
 import {
   getProductDetailContent,
-  type ProductDetailBlock,
 } from "@/data/product-detail-content";
 import { isPortalPurchasableProduct } from "@/data/software-full-catalog";
 import {
@@ -18,7 +17,7 @@ import {
   type SoftwarePurchaseCategory,
   type SoftwarePurchaseProduct,
 } from "@/lib/order-pricing";
-import { lookupPortalSku, productSlugFromHref } from "@/data/software-purchase-catalog";
+import { productSlugFromHref } from "@/data/software-purchase-catalog";
 import { cartLineUnitPrice } from "@/lib/portal-cart-checkout";
 import {
   persistPortalCartToServer,
@@ -44,7 +43,6 @@ const DETAIL_TABS = [
   { id: "keyFeatures", label: "Key Features" },
   { id: "whatsIncluded", label: "What's Included" },
   { id: "subscriptionLicensing", label: "Subscription and Licensing Options" },
-  { id: "priceDetails", label: "Price Details" },
 ] as const;
 
 type DetailTabId = (typeof DETAIL_TABS)[number]["id"];
@@ -61,43 +59,6 @@ function featureBullets(productName: string): string[] {
     return ["Business productivity", "Cloud sync", "Security & compliance", "Ongoing updates"];
   }
   return ["Licensed software", "Vendor support", "Updates included", "Aptus account management"];
-}
-
-function priceDetailBlocks(productName: string): ProductDetailBlock[] {
-  const rows: Array<[string, string, string]> = [
-    ["Commercial New", "Annual (12 months)", "new", "1year"],
-    ["Commercial New", "3 Years (36 months)", "new", "3year"],
-    ["Renewal Subscription", "Annual (12 months)", "renew", "1year"],
-    ["Renewal Subscription", "3 Years (36 months)", "renew", "3year"],
-  ].map(([license, term, purchaseType, duration]) => {
-    const sku = lookupPortalSku(
-      productName,
-      duration as "1year" | "3year",
-      purchaseType as "new" | "renew",
-    );
-    return [license, term, sku ? formatOmanAmount(sku.price) : "Quote on request"];
-  });
-
-  if (rows.every((row) => row[2] === "Quote on request")) {
-    return [
-      {
-        type: "p",
-        text: "Pricing for this product is available on request. Contact the Aptus sales team for a quotation.",
-      },
-    ];
-  }
-
-  return [
-    {
-      type: "p",
-      text: "Prices are in Omani Rial (OMR) and exclude 5% VAT. Choose duration and license type in the buy card to match the price below.",
-    },
-    {
-      type: "table",
-      headers: ["License type", "Term", "Price"],
-      rows,
-    },
-  ];
 }
 
 type ProductDetailPanelProps = {
@@ -150,16 +111,15 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
     () =>
       getProductDetailContent(product.name, {
         brandLabel: category.label,
-        description: meta.description,
+        description: catalogTitle ?? meta.description,
         slug: productSlug,
       }),
-    [product.name, productSlug, category.label, meta.description],
+    [product.name, productSlug, category.label, catalogTitle, meta.description],
   );
-  const priceBlocks = useMemo(() => priceDetailBlocks(product.name), [product.name]);
   const activeBlocks = useMemo(() => {
-    const raw = activeTab === "priceDetails" ? priceBlocks : detailContent[activeTab];
+    const raw = detailContent[activeTab];
     return sanitizeProductDetailBlocks(raw ?? [], activeTab);
-  }, [activeTab, detailContent, priceBlocks]);
+  }, [activeTab, detailContent]);
   const hasActiveBlocks = Boolean(activeBlocks.length);
 
   useEffect(() => {
@@ -318,10 +278,6 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
               </p>
             )}
           </div>
-
-          <p className="aptus-product-detail__marketing-link">
-            <Link href={product.href}>View full product page on aptusinfotech.com →</Link>
-          </p>
         </div>
 
         <aside className="aptus-product-detail__sidebar">

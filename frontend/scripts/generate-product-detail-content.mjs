@@ -1,13 +1,14 @@
 /**
- * One-shot generator: parses the three product detailing .txt extracts and writes
- * frontend/data/product-detail-content.ts. Re-run after the source docs change.
+ * One-shot generator: parses product detailing .txt extracts and writes
+ * frontend/data/product-detail-pdf-archive.ts (reference only — not used in the app).
+ * Product detail pages use product-detail-content.ts + product-detail-autodesk-portal.ts.
  */
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-const outFile = path.join(root, "frontend/data/product-detail-content.ts");
+const outFile = path.join(root, "frontend/data/product-detail-pdf-archive.ts");
 
 function decode(text) {
   return text
@@ -560,10 +561,7 @@ function emitBlocks(blocks, indent) {
   return lines.join("\n");
 }
 
-let ts = `/**
- * Product detail tab content from docx-tmp/ PDF extracts.
- * Re-run: node frontend/scripts/generate-product-detail-content.mjs
- */
+let ts = `/** @deprecated PDF extract archive — not imported by the app. See product-detail-content.ts */
 
 export type ProductDetailBlock =
   | { type: "p"; text: string }
@@ -589,10 +587,33 @@ export const PORTAL_PRODUCT_NAMES = [
   "Revit",
 ] as const;
 
+export const ADOBE_ORIGINAL_DETAIL_SLUGS = new Set([
+  "adobe-business-creative-solutions",
+  "creative-cloud-teams-education",
+  "creative-cloud-enterprise-hed",
+  "creative-cloud-enterprise",
+  "adobe-acrobat-pro",
+  "adobe-illustrator",
+  "adobe-photoshop",
+  "adobe-premiere-pro",
+]);
+
 const CONTENT: Record<string, ProductDetailContent> = {
 `;
 
+const ADOBE_ORIGINAL_DETAIL_SLUGS = new Set([
+  "adobe-business-creative-solutions",
+  "creative-cloud-teams-education",
+  "creative-cloud-enterprise-hed",
+  "creative-cloud-enterprise",
+  "adobe-acrobat-pro",
+  "adobe-illustrator",
+  "adobe-photoshop",
+  "adobe-premiere-pro",
+]);
+
 for (const [key, value] of [...bySlug.entries()].sort((a, b) => a[0].localeCompare(b[0]))) {
+  if (ADOBE_ORIGINAL_DETAIL_SLUGS.has(key)) continue;
   ts += `  ${esc(key)}: {\n`;
   ts += `    overview: ${emitBlocks(value.overview, 4).trimStart()},\n`;
   ts += `    keyFeatures: ${emitBlocks(value.keyFeatures, 4).trimStart()},\n`;
@@ -707,6 +728,19 @@ export function getProductDetailContent(
   productName: string,
   fallback?: { brandLabel: string; description?: string; slug?: string },
 ): ProductDetailContent {
+  const slug =
+    fallback?.slug ??
+    NAME_ALIASES[normalizeName(productName)] ??
+    slugify(productName);
+
+  if (ADOBE_ORIGINAL_DETAIL_SLUGS.has(slug)) {
+    return buildGenericProductContent(
+      productName,
+      fallback?.brandLabel ?? "Adobe",
+      fallback?.description,
+    );
+  }
+
   const key = resolveContentKey({ productName, slug: fallback?.slug });
   if (key) return CONTENT[key];
   return buildGenericProductContent(
