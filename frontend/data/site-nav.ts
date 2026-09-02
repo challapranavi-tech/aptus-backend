@@ -5,20 +5,6 @@ import type { NavigationItem } from "@/types";
 export const SITE_NAVIGATION: NavigationItem[] = [
   { label: "Home", href: "/" },
   {
-    label: "About Us",
-    href: "/our-story",
-    children: [
-      { label: "Our Team", href: "/our-team" },
-      { label: "Our Story", href: "/our-story" },
-      { label: "Aptus Policy", href: "/aptus-policy" },
-      { label: "Why Aptus Infotech", href: "/why-aptus-infotech" },
-      { label: "Winning together", href: "/winning-together" },
-      { label: "Aptus Infotech ISO Certifications", href: "/aptus-infotech-iso-certifications" },
-      { label: "Careers", href: "/careers" },
-      { label: "Contact Us", href: "/contact-us" },
-    ],
-  },
-  {
     label: "Products and Services",
     children: [
       {
@@ -80,6 +66,32 @@ export const SITE_NAVIGATION: NavigationItem[] = [
           { label: "Conference room solution", href: "/conference-room-solution" },
         ],
       },
+    ],
+  },
+  {
+    label: "Knowledge Hub",
+    children: [
+      { label: "Blog", href: "/our-story" },
+      { label: "Customer Stories", href: "/winning-together" },
+      { label: "Knowledge Base", href: "/software-solutions" },
+      { label: "FAQ", href: "/contact-us" },
+      { label: "Documentation", href: "/aptus-policy" },
+      { label: "Resources", href: "/why-aptus-infotech" },
+      { label: "Academy", href: "/training" },
+    ],
+  },
+  {
+    label: "About Us",
+    href: "/our-story",
+    children: [
+      { label: "Our Team", href: "/our-team" },
+      { label: "Our Story", href: "/our-story" },
+      { label: "Aptus Policy", href: "/aptus-policy" },
+      { label: "Why Aptus Infotech", href: "/why-aptus-infotech" },
+      { label: "Winning together", href: "/winning-together" },
+      { label: "Aptus Infotech ISO Certifications", href: "/aptus-infotech-iso-certifications" },
+      { label: "Careers", href: "/careers" },
+      { label: "Contact Us", href: "/contact-us" },
     ],
   },
 ];

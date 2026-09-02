@@ -5,6 +5,8 @@ import type { NavigationItem } from "@/types";
 import { clearLegacyPortalSession, syncLegacyPortalSession } from "@/lib/access-token";
 import { fetchAuthMeShared, invalidateAuthMeCache } from "@/lib/auth-me-client";
 import { useLocale } from "@/context/LocaleProvider";
+import { KnowledgeHubMegaMenu } from "@/components/layout/KnowledgeHubMegaMenu";
+import { KNOWLEDGE_HUB_LABEL } from "@/data/knowledge-hub-nav";
 import { translateNavLabel } from "@/locales/messages";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -236,6 +238,47 @@ function NavDropdownItem({
       <Link href={item.href} className={`${linkClass}${active ? " is-active" : ""}`} onClick={onClose}>
         <NavLabel item={item} />
       </Link>
+    </li>
+  );
+}
+
+function KnowledgeHubDropdownItem({
+  item,
+  pathname,
+  onClose,
+}: {
+  item: NavigationItem;
+  pathname: string;
+  onClose: () => void;
+}) {
+  const active = isItemActive(item, pathname);
+  const panelId = useId();
+
+  return (
+    <li
+      className="aptus-masthead__dropdown aptus-masthead__dropdown--mega"
+      onMouseEnter={onDropdownPointerEnter}
+    >
+      <span
+        className={cn(
+          "aptus-masthead__link aptus-masthead__link--flyout-trigger",
+          active && "is-active",
+        )}
+        aria-haspopup="true"
+        aria-controls={panelId}
+      >
+        <NavLabel item={item} />
+        <NavChevron />
+      </span>
+
+      <div
+        id={panelId}
+        className="aptus-masthead__mega-panel"
+        role="region"
+        aria-label="Knowledge Hub"
+      >
+        <KnowledgeHubMegaMenu onNavigate={onClose} />
+      </div>
     </li>
   );
 }
@@ -544,14 +587,23 @@ export function NavMenu({ items }: NavMenuProps) {
           onKeyDown={onMenuKeyDown}
           onBlur={onMenuBlur}
         >
-          {items.map((item) => (
-            <DropdownItem
-              key={item.label}
-              item={item}
-              pathname={pathname}
-              onClose={closeDesktopMenus}
-            />
-          ))}
+          {items.map((item) =>
+            item.label === KNOWLEDGE_HUB_LABEL ? (
+              <KnowledgeHubDropdownItem
+                key={item.label}
+                item={item}
+                pathname={pathname}
+                onClose={closeDesktopMenus}
+              />
+            ) : (
+              <DropdownItem
+                key={item.label}
+                item={item}
+                pathname={pathname}
+                onClose={closeDesktopMenus}
+              />
+            ),
+          )}
         </ul>
       </nav>
 
