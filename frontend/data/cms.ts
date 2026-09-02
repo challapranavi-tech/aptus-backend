@@ -130,6 +130,10 @@ export async function getAllPages(): Promise<Page[]> {
 
 export const loadCaseStudiesPageContent = cache(
   async (): Promise<CaseStudiesPageContent | null> => {
+    const { buildLocalCaseStudiesPageContent } = await import("@/lib/build-local-case-studies-page");
+    const local = buildLocalCaseStudiesPageContent();
+    if (local?.keyProjects?.items?.length) return local;
+
     return apiGet<CaseStudiesPageContent>("/api/cms/case-studies");
   },
 );

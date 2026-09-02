@@ -1,8 +1,10 @@
-/* Site footer — Tailwind layout in Footer.tsx; keep logo/overflow constraints here
-   so globals `img { height: auto }` can't blow past the viewport. */
+/* Site footer — dark Aptus details band */
 
 [data-section="footer"] {
   overflow-x: clip;
+  background-color: #0b1220;
+  color: rgb(255 255 255 / 0.92);
+  border-top-color: rgb(255 255 255 / 0.12);
 }
 
 [data-section="footer"] .aptus-footer-brand {
@@ -29,6 +31,29 @@
 
 [data-section="footer"] .aptus-footer-col-text {
   overflow-wrap: anywhere;
+  color: rgb(255 255 255 / 0.82);
+}
+
+[data-section="footer"] .aptus-footer-heading {
+  color: #fff;
+}
+
+[data-section="footer"] .aptus-footer-link {
+  color: rgb(255 255 255 / 0.82);
+  transition: color 0.2s ease;
+}
+
+[data-section="footer"] .aptus-footer-link:hover {
+  color: var(--color-brand-green-light, #67db85);
+}
+
+[data-section="footer"] .aptus-footer-follow {
+  border-top-color: rgb(255 255 255 / 0.12);
+}
+
+[data-section="footer"] .aptus-footer-copyright {
+  border-top-color: rgb(255 255 255 / 0.12);
+  color: rgb(255 255 255 / 0.55);
 }
 
 @media (min-width: 640px) {
@@ -55,7 +80,7 @@
 
 /* Legacy class kept for any leftover markup */
 .aptus-footer {
-  background-color: var(--color-navy-dark);
+  background-color: #0b1220;
   color: rgb(255 255 255 / 0.9);
   padding-block: var(--section-padding);
 }
@@ -66,5 +91,5 @@
 }
 
 .aptus-footer a:hover {
-  color: var(--accent-amber);
+  color: var(--color-brand-green-light, #67db85);
 }

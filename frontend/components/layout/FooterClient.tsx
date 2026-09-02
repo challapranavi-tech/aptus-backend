@@ -20,16 +20,17 @@ export function FooterClient({
 }) {
   const { locale, t } = useLocale();
   const hasReachUs = footer.phone || footer.email || footer.address;
+  const footerLogoSrc = "/logo-white.svg";
 
   return (
-    <footer className="border-t border-border bg-white text-black" data-section="footer">
+    <footer className="border-t" data-section="footer">
       <Container>
         <div className="grid items-start gap-8 py-10 sm:grid-cols-2 sm:gap-8 sm:py-12 lg:grid-cols-[1.35fr_1.1fr_1.55fr] lg:gap-x-10 lg:gap-y-8 lg:py-14">
           <div className="aptus-footer-brand min-w-0">
             <Link href="/" className="aptus-footer-logo-link">
               {logo ? (
                 <Image
-                  src={resolveCmsImageSrc(logo.src)}
+                  src={footerLogoSrc}
                   alt={logo.alt}
                   width={logo.width ?? 160}
                   height={logo.height ?? 44}
@@ -38,7 +39,7 @@ export function FooterClient({
                 />
               ) : (
                 <span
-                  className="text-black"
+                  className="text-white"
                   style={{ fontSize: "var(--text-xl)", fontWeight: 700 }}
                 >
                   {name}
@@ -69,7 +70,7 @@ export function FooterClient({
               <div key={column.title ?? index} className="min-w-0">
                 {column.title && (
                   <h3
-                    className="mb-3 text-black"
+                    className="aptus-footer-heading mb-3"
                     style={{ fontSize: "var(--text-lg)", fontWeight: 700 }}
                   >
                     {/quick links/i.test(column.title)
@@ -82,7 +83,7 @@ export function FooterClient({
                     <li key={link.href}>
                       <Link
                         href={link.href}
-                        className="aptus-footer-col-text text-brand-blue transition-colors hover:text-brand-green"
+                        className="aptus-footer-col-text aptus-footer-link"
                         style={{ fontSize: "var(--text-sm)" }}
                       >
                         {translateNavLabel(locale, link.href, link.label)}
@@ -96,7 +97,7 @@ export function FooterClient({
             {hasReachUs && (
               <div className="min-w-0">
                 <h3
-                  className="mb-3 text-black"
+                  className="aptus-footer-heading mb-3"
                   style={{ fontSize: "var(--text-lg)", fontWeight: 700 }}
                 >
                   {t.footer.reachUs}
@@ -106,7 +107,7 @@ export function FooterClient({
                     <li>
                       <a
                         href={`tel:${footer.phone.replace(/\s/g, "")}`}
-                        className="aptus-footer-col-text flex items-center gap-2.5 text-brand-blue transition-colors hover:text-brand-green"
+                        className="aptus-footer-col-text aptus-footer-link flex items-center gap-2.5"
                         style={{ fontSize: "var(--text-sm)" }}
                       >
                         <svg
@@ -118,7 +119,7 @@ export function FooterClient({
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"
-                          className="shrink-0 text-brand-blue"
+                          className="shrink-0"
                           aria-hidden="true"
                         >
                           <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.24h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.86a16 16 0 0 0 6.13 6.13l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
@@ -131,7 +132,7 @@ export function FooterClient({
                     <li>
                       <a
                         href={`mailto:${footer.email}`}
-                        className="aptus-footer-col-text flex items-center gap-2.5 text-brand-blue transition-colors hover:text-brand-green"
+                        className="aptus-footer-col-text aptus-footer-link flex items-center gap-2.5"
                         style={{ fontSize: "var(--text-sm)" }}
                       >
                         <svg
@@ -143,7 +144,7 @@ export function FooterClient({
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"
-                          className="shrink-0 text-brand-blue"
+                          className="shrink-0"
                           aria-hidden="true"
                         >
                           <rect width="20" height="16" x="2" y="4" rx="2" />
@@ -155,7 +156,7 @@ export function FooterClient({
                   )}
                   {footer.address && (
                     <li
-                      className="aptus-footer-col-text flex items-start gap-2.5 text-brand-blue"
+                      className="aptus-footer-col-text flex items-start gap-2.5"
                       style={{ fontSize: "var(--text-sm)" }}
                     >
                       <svg
@@ -167,7 +168,7 @@ export function FooterClient({
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className="mt-0.5 shrink-0 text-brand-blue"
+                        className="mt-0.5 shrink-0"
                         aria-hidden="true"
                       >
                         <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
@@ -183,9 +184,9 @@ export function FooterClient({
         </div>
 
         {footer.socialLinks && footer.socialLinks.length > 0 && (
-          <div className="aptus-footer-follow border-t border-border pt-8 pb-2">
+          <div className="aptus-footer-follow border-t pt-8 pb-2">
             <h3
-              className="mb-4 text-black"
+              className="aptus-footer-heading mb-4"
               style={{ fontSize: "var(--text-lg)", fontWeight: 700 }}
             >
               {t.topBar.followUs}
@@ -209,12 +210,9 @@ export function FooterClient({
       </Container>
 
       {footer.copyright && (
-        <div className="border-t border-border py-4">
+        <div className="aptus-footer-copyright border-t py-4">
           <Container>
-            <p
-              className="text-center text-muted-foreground"
-              style={{ fontSize: "var(--text-sm)" }}
-            >
+            <p className="text-center" style={{ fontSize: "var(--text-sm)" }}>
               {footer.copyright}
             </p>
           </Container>

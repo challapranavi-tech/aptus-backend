@@ -14,6 +14,7 @@ const caseStudiesPath = path.join(
   root,
   "backend/content/odoo-json/case-studies/aptus-case-studies.json",
 );
+const frontendCaseStudiesPath = path.join(root, "frontend/content/case-studies.json");
 
 const DESCRIPTION_START =
   /^(We |For |In |A |The |Our |Provided |Executed |Implemented |Promoted |One of |Healthcare |Public Authority|Adobe|Khazzan |PABX |A true |Our skilled|From early|UTAS |Network |Attendance |Barrier |Leveraging |End-to-End |CCTV |Steering |Security|Unlocking |Complete ELV Solutions$|Complete ELV Solutions We|Ministry of Defense$|Sultanate of Oman$|Proper security|Design &|Software that|Fiber To The|Promoted academic)/i;
@@ -267,6 +268,7 @@ function main() {
   };
 
   fs.writeFileSync(caseStudiesPath, `${JSON.stringify(caseStudies, null, 2)}\n`);
+  fs.writeFileSync(frontendCaseStudiesPath, `${JSON.stringify(caseStudies, null, 2)}\n`);
   console.log(`Updated keyProjects (${items.length} items, ${Math.min(items.length, images.length)} images).`);
 }
 
