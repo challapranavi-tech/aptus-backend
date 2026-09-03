@@ -71,7 +71,7 @@ export function TestimonialsSection() {
                     href={softwareCatalogHref("adobe")}
                     className={`${styles.btnPrimary} ${styles.btnWhite}`}
                   >
-                    Explore Adobe solutions
+                    Explore products
                   </AdobeLink>
                 </div>
               </div>

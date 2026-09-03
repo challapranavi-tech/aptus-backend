@@ -4,6 +4,11 @@ import { productSlugFromHref } from "@/data/software-purchase-catalog";
 const CATALOG_BROWSE_LABEL =
   /^(browse products?|explore products?|explore software|explore .+ solutions?)$/i;
 
+/** Software nav brand hubs that should surface Explore products → pre-filtered catalog. */
+export const SOFTWARE_BRAND_HUB_IDS = new Set(
+  SOFTWARE_FULL_CATALOG.map((brand) => brand.id),
+);
+
 /** True when a hero/CTA should open the unified software catalog (optionally filtered). */
 export function isCatalogBrowseAction(href: string, label?: string): boolean {
   const normalizedHref = href.trim().toLowerCase();
@@ -21,6 +26,7 @@ export function brandIdFromPageSlug(slug: string): string | undefined {
   if (!normalized) return undefined;
 
   for (const brand of SOFTWARE_FULL_CATALOG) {
+    if (brand.id === normalized) return brand.id;
     if (brand.href && productSlugFromHref(brand.href) === normalized) {
       return brand.id;
     }
@@ -52,4 +58,33 @@ export function resolveSoftwareCatalogHref(
 /** Slug from a Next.js pathname (e.g. /autodesk → autodesk). */
 export function slugFromPathname(pathname: string): string {
   return pathname.replace(/^\//, "").split("/").filter(Boolean)[0] ?? "";
+}
+
+export type BrandHeroAction = {
+  label: string;
+  href: string;
+  tone?: "blue" | "green" | "sky";
+};
+
+/**
+ * Brand hub heroes always lead with Explore products → catalog?brand=.
+ * Keeps any other CMS CTAs after it (deduped by label).
+ */
+export function withBrandExploreProductsAction(
+  pageSlug: string,
+  actions: BrandHeroAction[] = [],
+): BrandHeroAction[] {
+  const brandId = brandIdFromPageSlug(pageSlug);
+  if (!brandId || !SOFTWARE_BRAND_HUB_IDS.has(brandId)) {
+    return actions;
+  }
+
+  const explore: BrandHeroAction = {
+    label: "Explore products",
+    href: softwareCatalogHref(brandId),
+    tone: "blue",
+  };
+
+  const rest = actions.filter((action) => !CATALOG_BROWSE_LABEL.test(action.label.trim()));
+  return [explore, ...rest];
 }

@@ -2,8 +2,9 @@
 
 import { Container } from "@/components/ui";
 import {
-  resolveSoftwareCatalogHref,
   slugFromPathname,
+  withBrandExploreProductsAction,
+  type BrandHeroAction,
 } from "@/lib/software-catalog-links";
 import type { SoftwareLandingHero as SoftwareLandingHeroData } from "@/types";
 import Link from "next/link";
@@ -22,7 +23,12 @@ const btnClass: Record<"blue" | "green" | "sky", string> = {
 export function SoftwareLandingHero({ data }: SoftwareLandingHeroProps) {
   const pathname = usePathname() ?? "/";
   const pageSlug = slugFromPathname(pathname);
-  const actions = data.actions ?? [];
+  const cmsActions: BrandHeroAction[] = (data.actions ?? []).map((action) => ({
+    label: action.label,
+    href: action.href,
+    tone: action.tone,
+  }));
+  const actions = withBrandExploreProductsAction(pageSlug, cmsActions);
 
   return (
     <section className="aptus-software-hero" data-section="software-landing-hero">
@@ -34,8 +40,8 @@ export function SoftwareLandingHero({ data }: SoftwareLandingHeroProps) {
           <div className="aptus-software-hero-actions">
             {actions.map((action) => (
               <Link
-                key={action.label}
-                href={resolveSoftwareCatalogHref(pageSlug, action.href, action.label)}
+                key={`${action.label}-${action.href}`}
+                href={action.href}
                 className={`aptus-software-btn ${btnClass[action.tone ?? "blue"]}`}
               >
                 {action.label}

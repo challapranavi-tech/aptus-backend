@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { DeadLink } from "./DeadLink";
 import styles from "./IndustryExplore.module.css";
 
 interface Industry {
@@ -96,7 +95,7 @@ function Chevron({ dir }: { dir: "left" | "right" }) {
   );
 }
 
-/** “Explore Autodesk by industry” — landscape media cards + yellow hover (live). */
+/** Autodesk Across Industries — media cards (display only, not clickable). */
 export function IndustryExplore() {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [canPrev, setCanPrev] = useState(false);
@@ -130,12 +129,12 @@ export function IndustryExplore() {
     el.scrollBy({ left: dir * step * 2, behavior: "smooth" });
   };
 
-  const playVideo = (e: React.MouseEvent<HTMLElement> | React.FocusEvent<HTMLElement>) => {
+  const playVideo = (e: React.MouseEvent<HTMLElement>) => {
     const video = e.currentTarget.querySelector("video");
     if (video) void video.play().catch(() => {});
   };
 
-  const pauseVideo = (e: React.MouseEvent<HTMLElement> | React.FocusEvent<HTMLElement>) => {
+  const pauseVideo = (e: React.MouseEvent<HTMLElement>) => {
     const video = e.currentTarget.querySelector("video");
     if (video) {
       video.pause();
@@ -147,9 +146,14 @@ export function IndustryExplore() {
     <section className={styles.section} aria-labelledby="industry-explore-heading">
       <div className={styles.inner}>
         <div className={styles.headRow}>
-          <h2 id="industry-explore-heading" className={styles.title}>
-            Explore Autodesk by industry
-          </h2>
+          <div className={styles.headCopy}>
+            <h2 id="industry-explore-heading" className={styles.title}>
+              Autodesk Across Industries
+            </h2>
+            <p className={styles.lead}>
+              Powering design and innovation across diverse industries.
+            </p>
+          </div>
           <div className={styles.nav}>
             <button
               type="button"
@@ -179,14 +183,12 @@ export function IndustryExplore() {
           aria-label="Industries"
         >
           {INDUSTRIES.map((item) => (
-            <DeadLink
+            <article
               key={item.label}
               role="listitem"
               className={styles.card}
               onMouseEnter={playVideo}
               onMouseLeave={pauseVideo}
-              onFocus={playVideo}
-              onBlur={pauseVideo}
             >
               <video
                 className={styles.media}
@@ -199,10 +201,7 @@ export function IndustryExplore() {
               />
               <div className={styles.scrim} aria-hidden="true" />
               <span className={styles.label}>{item.label}</span>
-              <span className={styles.hoverArrow} aria-hidden="true">
-                <Chevron dir="right" />
-              </span>
-            </DeadLink>
+            </article>
           ))}
         </div>
       </div>

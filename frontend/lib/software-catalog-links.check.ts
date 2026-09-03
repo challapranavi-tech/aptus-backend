@@ -4,6 +4,7 @@ import {
   isCatalogBrowseAction,
   resolveSoftwareCatalogHref,
   softwareCatalogHref,
+  withBrandExploreProductsAction,
 } from "./software-catalog-links.ts";
 
 assert.equal(isCatalogBrowseAction("#Products", "Browse Products"), true);
@@ -24,5 +25,18 @@ assert.equal(
   resolveSoftwareCatalogHref("autocad", "#Products", "Browse Products"),
   "/software-solutions/products?brand=autodesk",
 );
+
+const microsoftActions = withBrandExploreProductsAction("microsoft", [
+  { label: "Contact sales", href: "/contact", tone: "green" },
+  { label: "Browse Products", href: "#Products", tone: "blue" },
+]);
+assert.equal(microsoftActions[0]?.label, "Explore products");
+assert.equal(microsoftActions[0]?.href, "/software-solutions/products?brand=microsoft");
+assert.equal(microsoftActions.length, 2);
+assert.equal(microsoftActions[1]?.label, "Contact sales");
+
+assert.deepEqual(withBrandExploreProductsAction("not-a-brand", [{ label: "X", href: "/" }]), [
+  { label: "X", href: "/" },
+]);
 
 console.log("software-catalog-links.check.ts passed");

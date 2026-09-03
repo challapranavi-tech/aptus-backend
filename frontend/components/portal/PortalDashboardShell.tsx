@@ -20,6 +20,7 @@ import { useNotifications } from "@/hooks/useNotifications";
 import { usePortalCartCount } from "@/hooks/usePortalCartCount";
 import { useOrders } from "@/hooks/useOrders";
 import { NotificationCountBadge } from "./NotificationCountBadge";
+import { SensitiveContent } from "./SensitiveContent";
 
 type Section =
   | "dashboard"
@@ -179,109 +180,111 @@ export function PortalDashboardShell({
       data-aptus-dashboard-page="true"
       data-aptus-dashboard-section={section}
     >
-      <main className="aptus-dashboard-shell">
-        <aside className="aptus-dashboard-sidebar" aria-label="Customer dashboard navigation">
-          <Link href="/portal/dashboard" className="aptus-portal-compact__brand">
-            {workspaceName}
-          </Link>
+      <SensitiveContent className="aptus-portal-sensitive-shell">
+        <main className="aptus-dashboard-shell">
+          <aside className="aptus-dashboard-sidebar" aria-label="Customer dashboard navigation">
+            <Link href="/portal/dashboard" className="aptus-portal-compact__brand">
+              {workspaceName}
+            </Link>
 
-          <PortalSideNav
-            items={NAV_ITEMS}
-            label="Customer portal"
-            renderTrailing={(href) =>
-              href === "/portal/cart" ? (
-                <NotificationCountBadge count={cartCount} active />
-              ) : null
-            }
-          />
-
-          <button
-            type="button"
-            className="aptus-dashboard-sidebar__logout"
-            data-aptus-logout="true"
-            disabled={loggingOut}
-            onClick={() => {
-              void handleLogout();
-            }}
-          >
-            {loggingOut ? "Signing out…" : "Logout"}
-          </button>
-        </aside>
-
-        <section className="aptus-dashboard-main">
-          <header className="aptus-portal-v3__header aptus-portal-compact__topbar">
-            <div className="aptus-portal-v3__header-copy">
-              <h1>{current.title}</h1>
-              <p>{ordersSub}</p>
-            </div>
-
-            <div className="aptus-portal-v3__header-actions">
-              <Link
-                href="/portal/support"
-                className="aptus-portal-v3__icon-btn"
-                aria-label="Support"
-                title="Support"
-              >
-                <PortalNavIcon name="support" className="aptus-portal-v3__header-icon" />
-              </Link>
-              <Link
-                href="/portal/notifications"
-                className="aptus-portal-v3__icon-btn"
-                aria-label={`Notifications${unreadNotificationCount ? `, ${unreadNotificationCount} unread` : ""}`}
-              >
-                <PortalNavIcon name="bell" className="aptus-portal-v3__header-icon" />
-                {unreadNotificationCount > 0 ? <span className="aptus-portal-v3__bell-dot" /> : null}
-              </Link>
-              <Link
-                href="/portal/profile"
-                className="aptus-portal-compact__avatar-link"
-                aria-label="Profile"
-                title="Profile"
-              >
-                {avatarDataUrl ? (
-                  <span
-                    className="aptus-portal-compact__top-avatar has-image"
-                    style={{ backgroundImage: `url('${avatarDataUrl}')` }}
-                    aria-hidden
-                  />
-                ) : (
-                  <span className="aptus-portal-compact__top-avatar" aria-hidden>
-                    {user?.initials || "—"}
-                  </span>
-                )}
-              </Link>
-              <button
-                type="button"
-                className="aptus-portal-v3__icon-btn aptus-portal-v3__logout-btn"
-                data-aptus-logout="true"
-                aria-label={loggingOut ? "Signing out" : "Logout"}
-                title="Logout"
-                disabled={loggingOut}
-                onClick={() => {
-                  void handleLogout();
-                }}
-              >
-                <PortalNavIcon name="logout" className="aptus-portal-v3__header-icon" />
-              </button>
-            </div>
-          </header>
-
-          <div className="aptus-dashboard-mobile-nav" aria-label="Dashboard quick navigation">
             <PortalSideNav
               items={NAV_ITEMS}
-              label="Customer portal quick navigation"
-              horizontal
+              label="Customer portal"
               renderTrailing={(href) =>
                 href === "/portal/cart" ? (
                   <NotificationCountBadge count={cartCount} active />
                 ) : null
               }
             />
-          </div>
 
-          {sectionBody}
-        </section>
-      </main>
+            <button
+              type="button"
+              className="aptus-dashboard-sidebar__logout"
+              data-aptus-logout="true"
+              disabled={loggingOut}
+              onClick={() => {
+                void handleLogout();
+              }}
+            >
+              {loggingOut ? "Signing out…" : "Logout"}
+            </button>
+          </aside>
+
+          <section className="aptus-dashboard-main">
+            <header className="aptus-portal-v3__header aptus-portal-compact__topbar">
+              <div className="aptus-portal-v3__header-copy">
+                <h1>{current.title}</h1>
+                <p>{ordersSub}</p>
+              </div>
+
+              <div className="aptus-portal-v3__header-actions">
+                <Link
+                  href="/portal/support"
+                  className="aptus-portal-v3__icon-btn"
+                  aria-label="Support"
+                  title="Support"
+                >
+                  <PortalNavIcon name="support" className="aptus-portal-v3__header-icon" />
+                </Link>
+                <Link
+                  href="/portal/notifications"
+                  className="aptus-portal-v3__icon-btn"
+                  aria-label={`Notifications${unreadNotificationCount ? `, ${unreadNotificationCount} unread` : ""}`}
+                >
+                  <PortalNavIcon name="bell" className="aptus-portal-v3__header-icon" />
+                  {unreadNotificationCount > 0 ? <span className="aptus-portal-v3__bell-dot" /> : null}
+                </Link>
+                <Link
+                  href="/portal/profile"
+                  className="aptus-portal-compact__avatar-link"
+                  aria-label="Profile"
+                  title="Profile"
+                >
+                  {avatarDataUrl ? (
+                    <span
+                      className="aptus-portal-compact__top-avatar has-image"
+                      style={{ backgroundImage: `url('${avatarDataUrl}')` }}
+                      aria-hidden
+                    />
+                  ) : (
+                    <span className="aptus-portal-compact__top-avatar" aria-hidden>
+                      {user?.initials || "—"}
+                    </span>
+                  )}
+                </Link>
+                <button
+                  type="button"
+                  className="aptus-portal-v3__icon-btn aptus-portal-v3__logout-btn"
+                  data-aptus-logout="true"
+                  aria-label={loggingOut ? "Signing out" : "Logout"}
+                  title="Logout"
+                  disabled={loggingOut}
+                  onClick={() => {
+                    void handleLogout();
+                  }}
+                >
+                  <PortalNavIcon name="logout" className="aptus-portal-v3__header-icon" />
+                </button>
+              </div>
+            </header>
+
+            <div className="aptus-dashboard-mobile-nav" aria-label="Dashboard quick navigation">
+              <PortalSideNav
+                items={NAV_ITEMS}
+                label="Customer portal quick navigation"
+                horizontal
+                renderTrailing={(href) =>
+                  href === "/portal/cart" ? (
+                    <NotificationCountBadge count={cartCount} active />
+                  ) : null
+                }
+              />
+            </div>
+
+            {sectionBody}
+          </section>
+        </main>
+      </SensitiveContent>
     </div>
   );
 }

@@ -28,7 +28,7 @@ export function CTASection() {
           href={softwareCatalogHref("adobe")}
           className={`${styles.btnPrimary} ${styles.btnOutlineWhiteLg}`}
         >
-          Explore Adobe solutions
+          Explore products
         </AdobeLink>
       </div>
     </section>

@@ -45,12 +45,12 @@
   position: relative;
   border-radius: 10px;
   overflow: hidden;
-  text-decoration: none;
   color: #fff;
   border: 2px solid transparent;
   aspect-ratio: 906 / 680;
   background: #111;
   isolation: isolate;
+  cursor: default;
   transition:
     border-color var(--sh-dur) var(--sh-ease),
     box-shadow var(--sh-dur) var(--sh-ease),
@@ -69,16 +69,13 @@
     opacity 500ms var(--sh-ease) calc(var(--i, 0) * 90ms);
 }
 
-.card:hover,
-.card:focus-visible {
-  border-color: var(--sh-yellow);
-  outline: none;
-  box-shadow: 0 0 0 1px var(--sh-yellow), 0 12px 32px rgba(0, 0, 0, 0.45);
+.card:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
   transform: translateY(-2px);
 }
 
-.sectionIn .card:hover,
-.sectionIn .card:focus-visible {
+.sectionIn .card:hover {
   transform: translateY(-2px);
 }
 
@@ -92,8 +89,7 @@
   transition: transform 400ms var(--sh-ease);
 }
 
-.card:hover .cardImage,
-.card:focus-visible .cardImage {
+.card:hover .cardImage {
   transform: scale(1.04);
 }
 
@@ -112,8 +108,7 @@
   z-index: 1;
 }
 
-.card:hover .scrim,
-.card:focus-visible .scrim {
+.card:hover .scrim {
   opacity: 0.9;
 }
 
@@ -149,41 +144,16 @@
   overflow: hidden;
 }
 
-.cta {
+.actions {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 4px 0 0;
-  font-size: 0.9375rem;
-  font-weight: 700;
-  color: #fff;
-  font-family: var(--sh-font);
-  transition: transform 200ms ease;
-}
-
-.card:hover .cta,
-.card:focus-visible .cta {
-  transform: translateX(3px);
-}
-
-.ctaArrow {
-  width: 22px;
-  height: 22px;
-  flex-shrink: 0;
-  opacity: 0.85;
-  transition: opacity 200ms ease;
-}
-
-.card:hover .ctaArrow,
-.card:focus-visible .ctaArrow {
-  opacity: 1;
+  justify-content: center;
+  margin-top: 36px;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .section,
   .card,
-  .cardImage,
-  .cta {
+  .cardImage {
     transition: none !important;
   }
 
@@ -193,8 +163,7 @@
     transform: none !important;
   }
 
-  .card:hover .cardImage,
-  .card:focus-visible .cardImage {
+  .card:hover .cardImage {
     transform: none;
   }
 }
@@ -225,5 +194,9 @@
 
   .cardBody {
     padding: 20px 20px 24px;
+  }
+
+  .actions {
+    margin-top: 28px;
   }
 }
