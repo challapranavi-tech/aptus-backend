@@ -1843,3 +1843,243 @@
     min-height: auto;
   }
 }
+/* —— Adobe destination pages (/adobe/creative-cloud, firefly, …) —— */
+
+.btnDark {
+  background: #222;
+  color: #fff;
+  border-color: #222;
+}
+.btnDark:hover {
+  background: #000;
+  border-color: #000;
+}
+
+.destHero {
+  position: relative;
+  min-height: min(88vh, 860px);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  color: #fff;
+}
+
+.destHeroDark { background: #0a0a0a; color: #fff; }
+.destHeroLight { background: #f8f8f8; color: #131313; }
+.destHeroRed { background: #980d05; color: #fff; }
+
+.destHeroMedia {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.destHeroMediaEl {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.destHeroScrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.72) 0%,
+    rgba(0, 0, 0, 0.45) 48%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
+}
+
+.destHeroLight .destHeroScrim {
+  background: linear-gradient(
+    90deg,
+    rgba(248, 248, 248, 0.94) 0%,
+    rgba(248, 248, 248, 0.72) 45%,
+    rgba(248, 248, 248, 0.2) 100%
+  );
+}
+
+.destHeroRed .destHeroScrim {
+  background: linear-gradient(
+    90deg,
+    rgba(152, 13, 5, 0.88) 0%,
+    rgba(152, 13, 5, 0.55) 50%,
+    rgba(152, 13, 5, 0.2) 100%
+  );
+}
+
+.destHeroInner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: clamp(48px, 8vw, 96px) clamp(20px, 5vw, 64px);
+}
+
+.destHeroCopy {
+  max-width: 34rem;
+}
+
+.destHeroIcon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.destEyebrow {
+  font-size: var(--fs-14);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin: 0 0 12px;
+  opacity: 0.9;
+}
+
+.destTitle {
+  font-family: var(--adobe-font-heading);
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  line-height: 1.05;
+  font-weight: 800;
+  margin: 0 0 20px;
+  letter-spacing: -0.02em;
+}
+
+.destBody {
+  font-size: var(--fs-18);
+  line-height: 1.45;
+  margin: 0 0 28px;
+}
+
+.destBody p {
+  margin: 0 0 12px;
+}
+
+.destCtas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.destSection {
+  padding: clamp(48px, 7vw, 96px) clamp(20px, 5vw, 64px);
+}
+
+.destSectionLight { background: #fff; color: #131313; }
+.destSectionGray { background: #f8f8f8; color: #131313; }
+.destSectionDark { background: #000; color: #fff; }
+
+.destSectionInner,
+.destSectionInnerText {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.destSectionInner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+
+.destSectionInnerText {
+  max-width: 48rem;
+}
+
+.destSectionHeading {
+  font-family: var(--adobe-font-heading);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1.1;
+  font-weight: 800;
+  margin: 0 0 16px;
+  letter-spacing: -0.02em;
+}
+
+.destSectionBody {
+  font-size: var(--fs-18);
+  line-height: 1.5;
+  margin: 0 0 20px;
+  color: inherit;
+  opacity: 0.92;
+}
+
+.destSectionDark .destSectionBody {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.destSectionMedia {
+  border-radius: var(--radius-24);
+  overflow: hidden;
+  background: #111;
+  aspect-ratio: 16 / 10;
+}
+
+.destSectionMediaEl {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.destGallery {
+  max-width: 1440px;
+  margin: clamp(28px, 4vw, 48px) auto 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.destGalleryItem {
+  border-radius: var(--radius-16);
+  overflow: hidden;
+  background: #111;
+}
+
+.destGalleryMedia {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.destGalleryCaption {
+  margin: 0;
+  padding: 12px 14px;
+  font-size: var(--fs-14);
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.destSectionDark .destGalleryCaption {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+.destFooterCta {
+  background: #000;
+  color: #fff;
+  padding: clamp(64px, 10vw, 120px) clamp(20px, 5vw, 64px);
+  text-align: center;
+}
+
+.destFooterCtaInner {
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.destFooterCta .destSectionBody {
+  margin-bottom: 28px;
+}
+
+@media (max-width: 900px) {
+  .destSectionInner {
+    grid-template-columns: 1fr;
+  }
+
+  .destHero {
+    min-height: min(78vh, 720px);
+    align-items: flex-end;
+  }
+}

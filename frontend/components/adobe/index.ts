@@ -1,6 +1,8 @@
 export { AdobePageView } from "./AdobePageView";
 export { CTASection } from "./CTASection";
 export { AdobeLink, DeadLink } from "./DeadLink";
+export { AdobeDestinationView } from "./destinations/AdobeDestinationView";
+export { ADOBE_DESTINATIONS } from "./destinations/content";
 export { FeaturesSection } from "./FeaturesSection";
 export { HeroSection } from "./HeroSection";
 export { NewsSection } from "./NewsSection";
