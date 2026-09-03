@@ -12,7 +12,7 @@ const FEATURED_CARD = {
   heading: "Turn AI signals into business impact with Adobe Brand Visibility.",
   body: "Get the intelligence and tools to win customers in AI searches.",
   linkLabel: "Learn more",
-  href: ADOBE_ROUTES.business,
+  href: ADOBE_ROUTES.brandVisibility,
   image:
     "https://www.adobe.com/upp-shared/media_1ffc572777c63f4a753a7ac51b7a94bd275e98cd7.png?width=2000&format=webply&optimize=medium",
   imageAlt:

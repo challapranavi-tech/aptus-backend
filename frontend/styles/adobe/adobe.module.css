@@ -1,4 +1,4 @@
-/* Adobe homepage — tokens + section styles (CSS modules: local classes only) */
+﻿/* Adobe homepage Ã¢Â€Â” tokens + section styles (CSS modules: local classes only) */
 
 .adobePage {
   --adobe-font-heading: "Adobe Clean Display", adobe-clean-display, "Arial Black", sans-serif;
@@ -59,7 +59,7 @@
 }
 
 @keyframes garageDoorGrow {
-  /* ponytail: clip+scale only — translateY pulled CTA up over News mid-scroll */
+  /* ponytail: clip+scale only Ã¢Â€Â” translateY pulled CTA up over News mid-scroll */
   from {
     clip-path: inset(0 0 calc(100% - var(--gd-reveal-from, 28vh)) 0);
     transform: scaleY(0.94);
@@ -90,12 +90,12 @@
     animation-timing-function: cubic-bezier(0.42, 0, 0, 1);
     animation-fill-mode: forwards;
     animation-timeline: view();
-    /* start after CTA has entered — don't eat News while it's still on screen */
+    /* start after CTA has entered Ã¢Â€Â” don't eat News while it's still on screen */
     animation-range: entry 35% cover 70%;
   }
 }
 
-/* Live: hero.parallax-move-up-fast — sticky + root scroll timeline */
+/* Live: hero.parallax-move-up-fast Ã¢Â€Â” sticky + root scroll timeline */
 @supports (animation-timeline: scroll()) {
   .parallaxMoveUpFast {
     --parallax-move-up-to: -35vh;
@@ -198,8 +198,7 @@
 
 /* Card-as-link: keep block layout when wrapping with <Link> */
 .adobePage a.baseCard,
-.adobePage a.newsItem,
-.adobePage a.elasticCarouselItem {
+.adobePage a.newsItem {
   display: flex;
   flex-direction: column;
 }
@@ -318,7 +317,7 @@
   text-decoration: none;
 }
 .standaloneLink::after {
-  content: '›';
+  content: 'Ã¢Â€Âº';
   font-size: var(--fs-16);
 }
 .standaloneLink:hover {
@@ -383,7 +382,7 @@
   pointer-events: none;
 }
 
-/* Full frame visible — no stretch, no aggressive crop */
+/* Full frame visible Ã¢Â€Â” no stretch, no aggressive crop */
 .rmBgVideo {
   position: absolute;
   inset: 0;
@@ -631,7 +630,7 @@
 
 /* ====================================================================
    SECTION 3: ELASTIC CAROUSEL (product category cards)
-   Live: width expands ~260→420 via flex-grow; height fixed; siblings compress.
+   Live: width expands ~260Ã¢Â†Â’420 via flex-grow; height fixed; siblings compress.
    No transform:scale().
    ==================================================================== */
 .carouselSection {
@@ -682,7 +681,7 @@
   background: var(--gray-50);
   text-decoration: none;
   color: var(--gray-900);
-  cursor: pointer;
+  cursor: default;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -824,7 +823,7 @@
   text-overflow: ellipsis;
 }
 
-/* Wider hover card → cover shows more of the landscape demo horizontally */
+/* Wider hover card Ã¢Â†Â’ cover shows more of the landscape demo horizontally */
 .elasticItemMedia {
   width: calc(100% - 28px);
   margin: 12px 14px 0;
@@ -991,7 +990,7 @@
   margin: 0;
 }
 
-/* Brand Visibility copy — sits below the featured media */
+/* Brand Visibility copy Ã¢Â€Â” sits below the featured media */
 .featuresHeader {
   background: #fff;
   display: flex;
@@ -1114,7 +1113,7 @@
   background: #000;
 }
 
-/* Only the hero media — not the product icon overlay */
+/* Only the hero media Ã¢Â€Â” not the product icon overlay */
 .baseCardMediaImg {
   display: block;
   width: 100%;
@@ -1175,7 +1174,7 @@
   background: #fff;
   padding: var(--sp-24) 0 0;
   overflow: hidden;
-  /* no sticky / no garage-door — News sheet covers this as it scrolls */
+  /* no sticky / no garage-door Ã¢Â€Â” News sheet covers this as it scrolls */
 }
 
 .testimonialFrame {
@@ -1187,7 +1186,7 @@
   flex: 1;
   display: flex;
   align-items: center;
-  /* fixed slide height — avoid 100svh overlap into News */
+  /* fixed slide height Ã¢Â€Â” avoid 100svh overlap into News */
   min-height: 0;
   height: clamp(520px, 72vh, 780px);
   padding-block: 12px 56px;
@@ -1348,7 +1347,7 @@
 }
 
 /* ====================================================================
-   SECTION 10: NEWS — stays above testimonials AND above CTA mid-scroll
+   SECTION 10: NEWS Ã¢Â€Â” stays above testimonials AND above CTA mid-scroll
    ==================================================================== */
 .newsPanel {
   position: relative;
@@ -1843,243 +1842,243 @@
     min-height: auto;
   }
 }
-/* �� Adobe destination pages (/adobe/creative-cloud, firefly, �) �� */
 
-.btnDark {
-  background: #222;
+/* —— Adobe Brand Visibility destination (/adobe/brand-visibility) —— */
+
+.bvHero {
+  background: #002d62;
   color: #fff;
-  border-color: #222;
-}
-.btnDark:hover {
-  background: #000;
-  border-color: #000;
+  padding: clamp(48px, 7vw, 88px) clamp(20px, 5vw, 64px);
 }
 
-.destHero {
-  position: relative;
-  min-height: min(88vh, 860px);
-  display: flex;
-  align-items: flex-end;
-  overflow: hidden;
-  color: #fff;
-}
-
-.destHeroDark { background: #0a0a0a; color: #fff; }
-.destHeroLight { background: #f8f8f8; color: #131313; }
-.destHeroRed { background: #980d05; color: #fff; }
-
-.destHeroMedia {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-.destHeroMediaEl {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.destHeroScrim {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.72) 0%,
-    rgba(0, 0, 0, 0.45) 48%,
-    rgba(0, 0, 0, 0.15) 100%
-  );
-}
-
-.destHeroLight .destHeroScrim {
-  background: linear-gradient(
-    90deg,
-    rgba(248, 248, 248, 0.94) 0%,
-    rgba(248, 248, 248, 0.72) 45%,
-    rgba(248, 248, 248, 0.2) 100%
-  );
-}
-
-.destHeroRed .destHeroScrim {
-  background: linear-gradient(
-    90deg,
-    rgba(152, 13, 5, 0.88) 0%,
-    rgba(152, 13, 5, 0.55) 50%,
-    rgba(152, 13, 5, 0.2) 100%
-  );
-}
-
-.destHeroInner {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 1440px;
+.bvHeroInner {
+  max-width: 1280px;
   margin: 0 auto;
-  padding: clamp(48px, 8vw, 96px) clamp(20px, 5vw, 64px);
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(28px, 5vw, 56px);
+  align-items: center;
 }
 
-.destHeroCopy {
-  max-width: 34rem;
-}
-
-.destHeroIcon {
-  width: 48px;
-  height: 48px;
-  margin-bottom: 16px;
+.bvHeroIcon {
+  width: 44px;
+  height: 44px;
+  margin-bottom: 14px;
   display: block;
+  filter: brightness(0) invert(1);
 }
 
-.destEyebrow {
+.bvEyebrow {
   font-size: var(--fs-14);
   font-weight: 700;
-  letter-spacing: 0.02em;
   margin: 0 0 12px;
   opacity: 0.9;
 }
 
-.destTitle {
+.bvTitle {
   font-family: var(--adobe-font-heading);
-  font-size: clamp(2rem, 4.5vw, 3.5rem);
-  line-height: 1.05;
+  font-size: clamp(1.85rem, 3.6vw, 2.85rem);
+  line-height: 1.1;
   font-weight: 800;
-  margin: 0 0 20px;
   letter-spacing: -0.02em;
+  margin: 0 0 18px;
 }
 
-.destBody {
+.bvLead {
   font-size: var(--fs-18);
-  line-height: 1.45;
+  line-height: 1.5;
   margin: 0 0 28px;
+  opacity: 0.94;
 }
 
-.destBody p {
-  margin: 0 0 12px;
-}
-
-.destCtas {
+.bvCtas {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-}
-
-.destSection {
-  padding: clamp(48px, 7vw, 96px) clamp(20px, 5vw, 64px);
-}
-
-.destSectionLight { background: #fff; color: #131313; }
-.destSectionGray { background: #f8f8f8; color: #131313; }
-.destSectionDark { background: #000; color: #fff; }
-
-.destSectionInner,
-.destSectionInnerText {
-  max-width: 1440px;
-  margin: 0 auto;
-}
-
-.destSectionInner {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
-  gap: clamp(28px, 5vw, 64px);
   align-items: center;
 }
 
-.destSectionInnerText {
-  max-width: 48rem;
+.bvWatchBtn {
+  background: transparent;
+  color: #fff;
+  border-color: #fff;
+  gap: 8px;
 }
 
-.destSectionHeading {
-  font-family: var(--adobe-font-heading);
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
-  line-height: 1.1;
-  font-weight: 800;
-  margin: 0 0 16px;
-  letter-spacing: -0.02em;
+.bvWatchBtn:hover {
+  background: #fff;
+  color: #002d62;
 }
 
-.destSectionBody {
-  font-size: var(--fs-18);
-  line-height: 1.5;
-  margin: 0 0 20px;
-  color: inherit;
-  opacity: 0.92;
-}
-
-.destSectionDark .destSectionBody {
-  color: rgba(255, 255, 255, 0.88);
-}
-
-.destSectionMedia {
+.bvHeroMedia {
+  position: relative;
+  border: 0;
+  padding: 0;
   border-radius: var(--radius-24);
   overflow: hidden;
-  background: #111;
+  cursor: pointer;
+  background: #001a3a;
   aspect-ratio: 16 / 10;
+  display: block;
+  width: 100%;
 }
 
-.destSectionMediaEl {
+.bvHeroMedia img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-.destGallery {
-  max-width: 1440px;
-  margin: clamp(28px, 4vw, 48px) auto 0;
+.bvPlayBadge {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  color: #002d62;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
+  place-items: center;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
 }
 
-.destGalleryItem {
+.bvVideoSection,
+.bvSection,
+.bvAbout {
+  padding: clamp(48px, 6vw, 80px) clamp(20px, 5vw, 64px);
+}
+
+.bvVideoSection { background: #0a0a0a; color: #fff; }
+.bvSection { background: #fff; color: #131313; }
+.bvSection:nth-of-type(even) { background: #f8f8f8; }
+.bvAbout { background: #f8f8f8; color: #131313; }
+
+.bvSectionInner {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.bvVideoSection .bvSectionInner {
+  max-width: 1080px;
+}
+
+.bvSectionHeading {
+  font-family: var(--adobe-font-heading);
+  font-size: clamp(1.6rem, 2.8vw, 2.25rem);
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 14px;
+}
+
+.bvSectionBody {
+  font-size: var(--fs-18);
+  line-height: 1.5;
+  margin: 0 0 20px;
+  opacity: 0.92;
+}
+
+.bvList {
+  margin: 0;
+  padding: 0 0 0 1.2em;
+  display: grid;
+  gap: 12px;
+}
+
+.bvList li {
+  font-size: var(--fs-16);
+  line-height: 1.5;
+}
+
+.bvVideoFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
   border-radius: var(--radius-16);
   overflow: hidden;
-  background: #111;
-}
-
-.destGalleryMedia {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  display: block;
-}
-
-.destGalleryCaption {
-  margin: 0;
-  padding: 12px 14px;
-  font-size: var(--fs-14);
-  font-weight: 600;
-  background: rgba(0, 0, 0, 0.04);
-}
-
-.destSectionDark .destGalleryCaption {
-  background: rgba(255, 255, 255, 0.06);
-  color: #fff;
-}
-
-.destFooterCta {
   background: #000;
+  margin-top: 8px;
+}
+
+.bvVideoFrame iframe,
+.bvModalVideo iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.bvFooterCta {
+  background: #002d62;
   color: #fff;
-  padding: clamp(64px, 10vw, 120px) clamp(20px, 5vw, 64px);
+  padding: clamp(64px, 9vw, 112px) clamp(20px, 5vw, 64px);
   text-align: center;
 }
 
-.destFooterCtaInner {
+.bvFooterCtaInner {
   max-width: 40rem;
   margin: 0 auto;
 }
 
-.destFooterCta .destSectionBody {
+.bvFooterCta .bvSectionBody {
   margin-bottom: 28px;
 }
 
-@media (max-width: 900px) {
-  .destSectionInner {
-    grid-template-columns: 1fr;
-  }
+.bvModal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.72);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
 
-  .destHero {
-    min-height: min(78vh, 720px);
-    align-items: flex-end;
+.bvModalPanel {
+  width: min(960px, 100%);
+  background: #111;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+}
+
+.bvModalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  color: #fff;
+}
+
+.bvModalTitle {
+  margin: 0;
+  font-size: var(--fs-18);
+  font-weight: 700;
+}
+
+.bvModalClose {
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.bvModalVideo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+@media (max-width: 900px) {
+  .bvHeroInner {
+    grid-template-columns: 1fr;
   }
 }

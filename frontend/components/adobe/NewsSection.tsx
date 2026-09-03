@@ -6,7 +6,7 @@ const NEWS_ITEMS: { heading: string; body: string; href: AdobeRoute }[] = [
   {
     heading: "Introducing Adobe Brand Visibility.",
     body: "Get to know Adobe's new unified GEO platform for enterprise brands.",
-    href: ADOBE_ROUTES.business,
+    href: ADOBE_ROUTES.brandVisibility,
   },
   {
     heading: "Explore new ways to share information with PDF Spaces.",
