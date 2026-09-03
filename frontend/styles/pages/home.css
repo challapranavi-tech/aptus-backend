@@ -584,7 +584,7 @@
   }
 
   .page-home .home-industries__more {
-    margin-top: 1.75rem;
+    margin-top: 3rem;
     text-align: center;
   }
 
@@ -703,6 +703,7 @@
     background:
       radial-gradient(circle at 80% 10%, rgba(103, 219, 133, 0.16), transparent 40%),
       linear-gradient(180deg, #f2fbf6 0%, #eaf6f0 100%);
+    overflow-x: clip;
   }
 
   .page-home .home-steps__header {
@@ -747,8 +748,9 @@
 
   @media (min-width: 900px) {
     .page-home .home-steps__grid {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 2.25rem;
+      align-items: stretch;
     }
   }
 
@@ -759,6 +761,7 @@
     align-items: center;
     text-align: center;
     height: 100%;
+    min-width: 0;
     padding: 1.75rem 1.35rem 1.5rem;
     border-radius: 1.1rem;
     background: linear-gradient(180deg, #ffffff 0%, #f6f9fd 100%);
@@ -841,12 +844,16 @@
     .page-home .home-steps__connector {
       display: block;
       position: absolute;
-      top: 3.4rem;
-      right: -0.9rem;
-      width: 1.8rem;
+      /* Vertically center on the step icon (padding-top 1.75rem + half of 4.5rem icon). */
+      top: calc(1.75rem + 2.25rem);
+      /* Horizontally center in the 2.25rem grid gap. */
+      right: calc(-2.25rem / 2);
+      width: 1.35rem;
       height: 2px;
       background: linear-gradient(90deg, rgba(19, 82, 163, 0.35), rgba(103, 219, 133, 0.55));
       z-index: 1;
+      transform: translate(50%, -50%);
+      pointer-events: none;
     }
 
     .page-home .home-steps__connector::after {
@@ -885,7 +892,7 @@
   }
 
   .page-home .home-challenges__heading {
-    margin: 2.25rem 0 0;
+    margin: 3.5rem 0 0;
     color: #5b6575;
     font-size: clamp(1rem, 1.8vw, 1.2rem);
     font-weight: 500;
@@ -964,9 +971,13 @@
       linear-gradient(180deg, #0d2748 0%, #123a66 55%, #0b1f3a 100%);
   }
 
+  .page-home .home-why-choose > .mx-auto {
+    max-width: min(1420px, 100%);
+  }
+
   .page-home .home-why-choose__header {
     margin: 0 auto 2rem;
-    max-width: 40rem;
+    max-width: 48rem;
     text-align: center;
   }
 
