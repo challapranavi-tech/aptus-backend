@@ -60,6 +60,7 @@ function CtaForm({ data }: { data: CTAData }) {
         data-cta-animate
         submitLabel={data.submitLabel ?? "Submit Now"}
         category={data.category ?? quote.category}
+        family={quote.family}
         productLabel={quote.productLabel}
         products={quote.products}
         defaultProduct={data.productName ?? quote.defaultProduct}

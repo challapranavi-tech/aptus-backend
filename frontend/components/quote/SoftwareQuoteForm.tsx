@@ -2,6 +2,12 @@
 
 import { QuoteProductSelect } from "@/components/quote/QuoteProductSelect";
 import { QuoteSearchSelect } from "@/components/quote/QuoteSearchSelect";
+import {
+  QUOTE_PRODUCT_TYPES,
+  quoteContextForProductType,
+  resolveQuoteProductType,
+  type QuoteProductType,
+} from "@/components/quote/quote-interest";
 import { fetchAuthMeShared } from "@/lib/auth-me-client";
 import { publicApiBase } from "@/lib/api-base";
 import { normalizePhone } from "@/lib/phone";
@@ -30,6 +36,7 @@ import {
 import type { FieldErrors } from "@shared/lib/schema";
 import {
   useEffect,
+  useMemo,
   useRef,
   useState,
   type ChangeEvent,
@@ -44,9 +51,11 @@ type SoftwareQuoteFormProps = {
   className?: string;
   /** Routes the lead (software vs ELV inbox). */
   category?: "software" | "elv";
-  /** Dropdown label, e.g. "Product". */
+  /** Quote/page family — used to pick the matching Products list. */
+  family?: string;
+  /** Dropdown label, e.g. "Products". */
   productLabel?: string;
-  /** Product options shown in the multi-select. */
+  /** Initial product options (overridden when interest category changes). */
   products?: string[];
   /** Prefills the product select when opening from a product page. */
   defaultProduct?: string;
@@ -139,7 +148,8 @@ export function SoftwareQuoteForm({
   submitLabel = "Submit Request",
   className,
   category = "software",
-  productLabel = "Product",
+  family,
+  productLabel = "Products",
   products = [],
   defaultProduct,
   ...formProps
@@ -160,11 +170,29 @@ export function SoftwareQuoteForm({
   const [attachmentError, setAttachmentError] = useState("");
   const [profilePrefill, setProfilePrefill] = useState(false);
   const prefilledUserId = useRef<string | null>(null);
+  const [productType, setProductType] = useState<QuoteProductType>(() =>
+    resolveQuoteProductType(family, category),
+  );
+
+  useEffect(() => {
+    setProductType(resolveQuoteProductType(family, category));
+  }, [family, category]);
+
+  const catalog = useMemo(
+    () => quoteContextForProductType(productType, defaultProduct),
+    [productType, defaultProduct],
+  );
+  const activeProducts =
+    catalog.products.length > 0 ? catalog.products : products;
+  const activeCategory = catalog.category;
+  const activeProductLabel = catalog.productLabel || productLabel;
 
   const selectDefault =
-    defaultProduct && products.includes(defaultProduct)
+    defaultProduct && activeProducts.includes(defaultProduct)
       ? [defaultProduct]
-      : [];
+      : catalog.defaultProduct && activeProducts.includes(catalog.defaultProduct)
+        ? [catalog.defaultProduct]
+        : [];
 
   useEffect(() => {
     let cancelled = false;
@@ -380,7 +408,8 @@ export function SoftwareQuoteForm({
       noValidate
       {...formProps}
     >
-      <input type="hidden" name="category" value={category} />
+      <input type="hidden" name="category" value={activeCategory} />
+      <input type="hidden" name="product_type" value={productType} />
 
       {profilePrefill && (
         <p className="mb-4 rounded-lg bg-[#1352a3]/0.08 px-3 py-2 text-sm text-[#1352a3]">
@@ -653,11 +682,38 @@ export function SoftwareQuoteForm({
         )}
 
         <div>
+          <label className="aptus-form-label">
+            Product type *
+            <select
+              value={productType}
+              aria-label="Product type"
+              aria-invalid={errors.product_type ? true : undefined}
+              onChange={(e) => {
+                setProductType(e.target.value as QuoteProductType);
+                clearField("product");
+                clearField("product_type");
+              }}
+              className={cn(
+                "aptus-form-input mt-0 w-full px-4 py-3",
+                inputError("product_type"),
+              )}
+            >
+              {QUOTE_PRODUCT_TYPES.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <FieldError message={errors.product_type} />
+        </div>
+
+        <div>
           <QuoteProductSelect
-            key={`${category}:${productLabel}:${selectDefault.join("|")}:${products.join("|")}:${customerType}`}
+            key={`${activeCategory}:${productType}:${activeProductLabel}:${selectDefault.join("|")}:${activeProducts.join("|")}:${customerType}`}
             name="product"
-            label={`${productLabel} *`}
-            products={products}
+            label={`${activeProductLabel} *`}
+            products={activeProducts}
             defaultSelected={selectDefault}
             placeholder={PRODUCT_PLACEHOLDER}
             error={Boolean(errors.product)}

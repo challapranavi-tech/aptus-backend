@@ -58,7 +58,7 @@ const TITLE_FAMILY_HINT: Record<string, string> = {
   "Educational Documents Management": "edms",
 };
 
-/** Full product catalog for the Request Quote form (software + ELV). */
+/** Full product catalog for generic Request Quote (software + ELV). */
 const ALL_QUOTE_PRODUCTS: string[] = (() => {
   const names = new Set<string>();
   for (const [family, links] of Object.entries(SOFTWARE_SUBNAV_BY_FAMILY)) {
@@ -79,6 +79,54 @@ const ALL_QUOTE_PRODUCTS: string[] = (() => {
   }
   return Array.from(names).sort((a, b) => a.localeCompare(b));
 })();
+
+const ELV_QUOTE_PRODUCTS = [
+  ...new Set(
+    ELV_PRODUCTS.filter((product) => product !== "ELV Solutions"),
+  ),
+].sort((a, b) => a.localeCompare(b));
+
+const SOFTWARE_QUOTE_PRODUCTS = ALL_QUOTE_PRODUCTS.filter(
+  (product) => !(ELV_PRODUCTS as readonly string[]).includes(product),
+);
+
+/** Aptus Solar quote options (hub content still expanding). */
+export const SOLAR_QUOTE_PRODUCTS = [
+  "Residential Solar Systems",
+  "Commercial Solar Systems",
+  "Industrial Solar Solutions",
+  "Solar Hybrid Systems",
+  "Off-Grid Solar Solutions",
+  "Solar Water Heating",
+  "Solar Maintenance & Support",
+  "Aptus Solar Consultation",
+] as const;
+
+function productsForFamily(family: string): string[] {
+  if (family === "all") return [...ALL_QUOTE_PRODUCTS];
+  if (family === "elv") return [...ELV_QUOTE_PRODUCTS];
+  if (family === "solar" || family === "aptus-solar") {
+    return [...SOLAR_QUOTE_PRODUCTS];
+  }
+  if (family === "software-licensing" || family === "software") {
+    return [...SOFTWARE_QUOTE_PRODUCTS];
+  }
+
+  const links = softwareSubnavForFamily(
+    family === "water-infrastructure" ? "autodesk" : family,
+  );
+  if (links?.length) {
+    return [...new Set(links.map((link) => link.label.trim()).filter(Boolean))].sort(
+      (a, b) => a.localeCompare(b),
+    );
+  }
+
+  if (family === "autodesk" || family === "water-infrastructure") {
+    return CONTACT_PRODUCTS.filter((p) => p !== "Others").map(String);
+  }
+
+  return [...SOFTWARE_QUOTE_PRODUCTS];
+}
 
 export type QuoteModalContext = {
   category: "software" | "elv";
@@ -138,32 +186,49 @@ function defaultProductForSlug(family: string, slug: string): string | undefined
   return undefined;
 }
 
-function contextForFamily(family: string, slug?: string): QuoteModalContext {
-  const products = [...ALL_QUOTE_PRODUCTS];
+/** Build Request Quote context for a product family (used by Talk to Expert + CTAs). */
+export function quoteContextForFamily(
+  family: string,
+  slug?: string,
+): QuoteModalContext {
+  const products = productsForFamily(family);
   const defaultProduct = slug ? defaultProductForSlug(family, slug) : undefined;
   return {
     category: family === "elv" ? "elv" : "software",
     family,
-    productLabel: "Product",
+    productLabel: "Products",
     products,
     defaultProduct:
       defaultProduct && products.includes(defaultProduct) ? defaultProduct : undefined,
   };
 }
 
+function contextForFamily(family: string, slug?: string): QuoteModalContext {
+  return quoteContextForFamily(family, slug);
+}
+
 /** Resolve quote catalog from the current page path. */
 export function quoteContextFromPathname(pathname: string): QuoteModalContext {
   const slug = pathSlug(pathname);
+
+  if (!slug) {
+    return contextForFamily("all");
+  }
+
+  if (slug === "aptus-solar") {
+    return contextForFamily("solar", slug);
+  }
 
   if (isElvHubSlug(slug) || isElvInnerSlug(slug)) {
     return contextForFamily("elv", slug);
   }
 
   const scope = getSoftwarePageScope(slug);
-  let family =
-    scope?.family && scope.family !== "software" && scope.family !== "software-solutions"
-      ? scope.family
-      : "autodesk";
+  if (!scope?.family || scope.family === "software" || scope.family === "software-solutions") {
+    return contextForFamily("software-licensing", slug);
+  }
+
+  let family = scope.family;
   // Electrical Software cards link to /etap — keep a dedicated ETAP catalog.
   if (slug === "etap") family = "electrical";
   return contextForFamily(family, slug);
@@ -269,16 +334,16 @@ if (process.env.NODE_ENV === "development") {
 
   const elv = quoteContextFromPathname("/thermal-scanners");
   console.assert(elv.category === "elv");
-  console.assert(elv.productLabel === "Product");
+  console.assert(elv.productLabel === "Products");
   console.assert(elv.defaultProduct === "Thermal Scanner Solutions");
-  console.assert(elv.products.includes("Adobe Photoshop"));
+  console.assert(!elv.products.includes("Adobe Photoshop"));
   console.assert(elv.products.includes("Thermal Scanner Solutions"));
 
   const adobe = quoteContextFromPathname("/adobe-business-creative-solutions");
   console.assert(adobe.family === "adobe");
-  console.assert(adobe.productLabel === "Product");
+  console.assert(adobe.productLabel === "Products");
   console.assert(adobe.products.includes("Adobe Photoshop"));
-  console.assert(adobe.products.includes("AutoCAD"));
+  console.assert(!adobe.products.includes("AutoCAD"));
 
   const fromAdobeCard = quoteContextFromLink(
     mk("/adobe", "Request a Quote"),
@@ -292,7 +357,7 @@ if (process.env.NODE_ENV === "development") {
     "/software-solutions",
   );
   console.assert(fromQtyCard.family === "quantity-takeoff");
-  console.assert(fromQtyCard.productLabel === "Product");
+  console.assert(fromQtyCard.productLabel === "Products");
 
   const fromPortal = quoteContextForPortalProduct({
     family: "autodesk",
@@ -310,6 +375,12 @@ if (process.env.NODE_ENV === "development") {
   console.assert(portalPathSafe.defaultProduct === "Adobe Photoshop");
 
   const homeQuote = quoteContextFromPathname("/");
-  console.assert(homeQuote.productLabel === "Product");
+  console.assert(homeQuote.family === "all");
+  console.assert(homeQuote.productLabel === "Products");
   console.assert(homeQuote.products.length > 20);
+
+  const expertElv = quoteContextForFamily("elv");
+  console.assert(expertElv.category === "elv");
+  console.assert(expertElv.products.every((p) => !p.toLowerCase().includes("photoshop")));
+  console.assert(expertElv.products.includes("CCTV Surveillance Solutions"));
 }

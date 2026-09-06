@@ -86,7 +86,7 @@ export const ALL_CONTACT_PRODUCTS = [
 export type ContactCategory = "software" | "elv";
 export type CustomerType = "individual" | "company";
 
-export const PRODUCT_PLACEHOLDER = "Select Product";
+export const PRODUCT_PLACEHOLDER = "Select Products";
 export const LEGACY_PRODUCT_PLACEHOLDER = "Select Product";
 
 /** Quote attachment limits (frontend + backend). */

@@ -155,6 +155,55 @@
   background: #eaf1fa;
 }
 
+.aptus-expert-chat__chip.is-active {
+  background: #1352a3;
+  border-color: #1352a3;
+  color: #fff;
+}
+
+.aptus-expert-chat__products {
+  padding: 0.5rem 1rem 0.25rem;
+}
+
+.aptus-expert-chat__products-label {
+  margin: 0 0 0.45rem;
+  color: #0d2748;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.aptus-expert-chat__product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  max-height: 11.5rem;
+  overflow-y: auto;
+  padding-right: 0.15rem;
+}
+
+.aptus-expert-chat__product {
+  appearance: none;
+  width: 100%;
+  text-align: left;
+  border: 1px solid rgba(19, 82, 163, 0.14);
+  background: #fff;
+  color: #0d2748;
+  border-radius: 0.55rem;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.3;
+  cursor: pointer;
+}
+
+.aptus-expert-chat__product:hover {
+  background: #eaf1fa;
+  border-color: rgba(19, 82, 163, 0.35);
+  color: #1352a3;
+}
+
 .aptus-expert-chat__actions {
   display: flex;
   gap: 0.5rem;

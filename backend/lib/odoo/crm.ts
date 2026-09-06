@@ -50,6 +50,11 @@ export type CrmLeadInput = {
   attachmentName?: string;
   /** Link to portal customer when email matches an existing res.partner. */
   partnerId?: number;
+  /**
+   * Website capture channel. Talk to Expert leads use a distinct CRM title/source
+   * and are created without quote-email side effects (see /api/talk-to-expert).
+   */
+  channel?: "request-quote" | "talk-to-expert";
 };
 
 /**
@@ -240,8 +245,14 @@ export function buildCrmLeadValues(
       .join(" ");
   const product = (input.product ?? "").trim();
   const quoteRef = (input.quoteRef ?? "").trim();
+  const isTalkToExpert = input.channel === "talk-to-expert";
   const isQuoteProduct =
-    Boolean(product) && product !== "Others" && product !== "Select Product" && product !== "Select Software Product";
+    !isTalkToExpert &&
+    Boolean(product) &&
+    product !== "Others" &&
+    product !== "Select Product" &&
+    product !== "Select Products" &&
+    product !== "Select Software Product";
   const customerType = input.customerType;
   const isIndividual = customerType === "individual";
   const isCompany = customerType === "company";
@@ -256,40 +267,60 @@ export function buildCrmLeadValues(
       ? ""
       : input.company.trim();
 
-  const description = [
-    quoteRef ? `Quote Ref: ${quoteRef}` : null,
-    customerType
-      ? `Customer Type: ${isCompany ? "Company" : "Individual"}`
-      : null,
-    `Client Message: ${input.message?.trim() || "—"}`,
-    `Product: ${product || "—"}`,
-    `QTY: ${input.qty?.trim() || "—"}`,
-    isIndividual && input.profession?.trim()
-      ? `Profession: ${input.profession.trim()}`
-      : null,
-    taxId ? `Tax ID: ${taxId}` : null,
-    crNumber ? `CR Number: ${crNumber}` : null,
-    input.countryCode?.trim() ? `Country Code: ${input.countryCode.trim()}` : null,
-    input.phoneLocal?.trim() ? `Phone (local): ${input.phoneLocal.trim()}` : null,
-    input.attachmentName?.trim()
-      ? `Attachment: ${input.attachmentName.trim()}`
-      : null,
-    `Category: ${input.categoryLabel?.trim() || "—"}`,
-    `Source: Website – Request Quote`,
-  ]
-    .filter(Boolean)
-    .join(", ");
+  const sourceLabel = isTalkToExpert
+    ? "Website – Talk to an Expert"
+    : "Website – Request Quote";
+
+  const description = isTalkToExpert
+    ? [
+        `Name: ${contactName || "—"}`,
+        `Email: ${input.email.trim() || "—"}`,
+        `Phone: ${input.phone.trim() || "—"}`,
+        input.message?.trim() ? `Notes: ${input.message.trim()}` : null,
+        `Source: ${sourceLabel}`,
+      ]
+        .filter(Boolean)
+        .join(", ")
+    : [
+        quoteRef ? `Quote Ref: ${quoteRef}` : null,
+        customerType
+          ? `Customer Type: ${isCompany ? "Company" : "Individual"}`
+          : null,
+        `Client Message: ${input.message?.trim() || "—"}`,
+        `Product: ${product || "—"}`,
+        `QTY: ${input.qty?.trim() || "—"}`,
+        isIndividual && input.profession?.trim()
+          ? `Profession: ${input.profession.trim()}`
+          : null,
+        taxId ? `Tax ID: ${taxId}` : null,
+        crNumber ? `CR Number: ${crNumber}` : null,
+        input.countryCode?.trim()
+          ? `Country Code: ${input.countryCode.trim()}`
+          : null,
+        input.phoneLocal?.trim()
+          ? `Phone (local): ${input.phoneLocal.trim()}`
+          : null,
+        input.attachmentName?.trim()
+          ? `Attachment: ${input.attachmentName.trim()}`
+          : null,
+        `Category: ${input.categoryLabel?.trim() || "—"}`,
+        `Source: ${sourceLabel}`,
+      ]
+        .filter(Boolean)
+        .join(", ");
 
   const values: Record<string, unknown> = {
-    name: isQuoteProduct
-      ? quoteRef
-        ? `Request a Quote – ${product} (${quoteRef})`
-        : `Request a Quote – ${product}`
-      : `Website contact – ${contactName || companyName}`,
+    name: isTalkToExpert
+      ? `Talk to an Expert – ${contactName || "Website lead"}`
+      : isQuoteProduct
+        ? quoteRef
+          ? `Request a Quote – ${product} (${quoteRef})`
+          : `Request a Quote – ${product}`
+        : `Website contact – ${contactName || companyName}`,
     contact_name: contactName,
     // Empty company name → Odoo treats the opportunity as an Individual customer.
     // Non-empty partner_name → Company customer.
-    partner_name: isIndividual ? "" : companyName,
+    partner_name: isTalkToExpert || isIndividual ? "" : companyName,
     phone: input.phone.trim(),
     description,
     // Opportunity shows in CRM Pipeline → New. type "lead" only appears under Leads.
@@ -304,25 +335,26 @@ export function buildCrmLeadValues(
   }
 
   const refField = quoteReferenceField();
-  if (refField && quoteRef) {
+  if (refField && quoteRef && !isTalkToExpert) {
     values[refField] = quoteRef;
   }
 
   // Optional Studio/selection field for Individual vs Company (e.g. x_studio_customer_type).
   const customerTypeField = process.env.ODOO_CRM_CUSTOMER_TYPE_FIELD?.trim();
-  if (customerTypeField && (isIndividual || isCompany)) {
+  if (customerTypeField && (isIndividual || isCompany) && !isTalkToExpert) {
     values[customerTypeField] = isCompany ? "company" : "individual";
   }
 
   // Software pages → SOFTWARE company; ELV/Infrastructure pages → INFRA company.
-  // Page already tells us the category — no frontend company picker needed.
-  const companyId = companyIdForCategory(input.category);
-  if (companyId) values.company_id = companyId;
+  // Talk to Expert stays unscoped so it is not mixed into quote company queues.
+  if (!isTalkToExpert) {
+    const companyId = companyIdForCategory(input.category);
+    if (companyId) values.company_id = companyId;
 
-  // Route to the correct Odoo sales team/stage based on category (software vs ELV).
-  const { teamId, stageId } = crmTeamConfig(input.category);
-  if (teamId) values.team_id = teamId;
-  if (stageId) values.stage_id = stageId;
+    const { teamId, stageId } = crmTeamConfig(input.category);
+    if (teamId) values.team_id = teamId;
+    if (stageId) values.stage_id = stageId;
+  }
 
   // Omit user_id so Sales Team / New is visible; false breaks some Odoo DBs.
   const unassign = process.env.ODOO_CRM_UNASSIGN !== "0";

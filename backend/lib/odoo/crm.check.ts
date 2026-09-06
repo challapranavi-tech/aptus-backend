@@ -68,6 +68,25 @@ const contact = buildCrmLeadValues({
 });
 assert.equal(contact.name, "Website contact – Sam Lee");
 
+const expert = buildCrmLeadValues({
+  firstName: "Noor",
+  lastName: "Al Said",
+  company: "",
+  email: "noor@example.com",
+  phone: "+96891234567",
+  contactName: "Noor Al Said",
+  channel: "talk-to-expert",
+  message: "Lead captured from Talk to an Expert chatbot.",
+});
+assert.equal(expert.name, "Talk to an Expert – Noor Al Said");
+assert.equal(expert.contact_name, "Noor Al Said");
+assert.equal(expert.partner_name, "");
+assert.equal(expert.email_from, "noor@example.com");
+assert.equal(expert.type, "opportunity");
+assert.match(String(expert.description), /Source: Website – Talk to an Expert/);
+assert.equal(expert.company_id, undefined);
+assert.equal(expert.team_id, undefined);
+
 // Multi-company routing: category decides company_id, no frontend input involved.
 process.env.ODOO_SOFTWARE_COMPANY_ID = "1";
 process.env.ODOO_ELV_COMPANY_ID = "2";

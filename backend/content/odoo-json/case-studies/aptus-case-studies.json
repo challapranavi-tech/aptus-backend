@@ -20,8 +20,6 @@
       {
         "title": "Al Nadha Hospital",
         "description": "Aptus Infotech engineered a future-proof hospital network at Al Nahda—deploying MICROSENS FTTO switches, secure virtual networks/authentication, and campus-wide fiber—enabling real-time patient data, reliable Wi-Fi, PoE, and scalable, resilient connectivity across critical care and administration departments.",
-        "pdfHref": "https://aptusinfotech.com/wp-content/uploads/2025/09/Al-Nahda-Hospital-Case-Study.pdf",
-        "readMoreLabel": "Read More",
         "imageSrc": "/images/Al-Nahda.jpg",
         "imageAlt": "Al-Nahda",
         "industry": "Healthcare"
@@ -29,8 +27,6 @@
       {
         "title": "Petroleum Development of Oman",
         "description": "Aptus Infotech upgraded PDO from AutoCAD 2019 to 2025 for 100 users, delivered training, and implemented Navisworks—accelerating collaboration with AI features and Trace, enabling clash detection, reducing rework, improving takeoffs, and saving time and cost.",
-        "pdfHref": "https://aptusinfotech.com/wp-content/uploads/2025/09/Petroleum-Development-of-Oman-Case-Study.pdf",
-        "readMoreLabel": "Read More",
         "imageSrc": "/images/Petroleum-Development-of-Oman.png",
         "imageAlt": "Petroleum-Development-of-Oman",
         "industry": "Oil & Gas"
@@ -38,8 +34,6 @@
       {
         "title": "Royal Oman Police",
         "description": "Aptus Infotech accelerated ROP's digital policing by supplying, implementing, and training teams on ETAP electrical digital twin, real-time visualization tools, and Primavera P6—centralizing workflows, boosting collaboration, and enabling secure, data-driven operations across mission-critical projects securely.",
-        "pdfHref": "https://aptusinfotech.com/wp-content/uploads/2025/09/Royal-Oman-Police-Case-Study.pdf",
-        "readMoreLabel": "Read More",
         "imageSrc": "/images/Royal-Police.png",
         "imageAlt": "Royal-police-oman",
         "industry": "Defence"
@@ -47,8 +41,6 @@
       {
         "title": "Sultan Haitam City",
         "description": "Aptus Infotech enabled Sultan Haitham City's delivery by supplying, implementing, training on Autodesk AEC and Forma Design Collaboration—deploying a Common Data Environment to centralize data, enable model co-authoring, reduce clashes, cut rework, and accelerate execution.",
-        "pdfHref": "https://aptusinfotech.com/wp-content/uploads/2025/09/Sultan-Haitam-City-Case-Study.pdf",
-        "readMoreLabel": "Read More",
         "imageSrc": "/images/Sultan-haitham-city.png",
         "imageAlt": "Sultan Haitam City",
         "industry": "Smart Cities"

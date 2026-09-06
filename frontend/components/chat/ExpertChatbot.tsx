@@ -1,9 +1,15 @@
 "use client";
 
 import { useQuoteModal } from "@/components/quote/QuoteModalProvider";
-import { quoteContextFromPathname } from "@/components/quote/quote-modal-utils";
+import {
+  quoteContextForFamily,
+  quoteContextFromPathname,
+  type QuoteModalContext,
+} from "@/components/quote/quote-modal-utils";
+import { publicApiBase } from "@/lib/api-base";
+import { normalizePhone } from "@/lib/phone";
 import { usePathname } from "next/navigation";
-import { FormEvent, useEffect, useId, useRef, useState } from "react";
+import { FormEvent, useEffect, useId, useMemo, useRef, useState } from "react";
 
 type Role = "bot" | "user";
 
@@ -19,38 +25,41 @@ type ContactInfo = {
   phone: string;
 };
 
-const QUICK_REPLIES = [
-  "Software licensing",
-  "ELV & security",
-  "Digital engineering",
-  "Training & support",
-] as const;
+type InterestOption = {
+  label: string;
+  family: string;
+  intro: string;
+};
+
+const INTEREST_OPTIONS: InterestOption[] = [
+  {
+    label: "Software licensing",
+    family: "software-licensing",
+    intro:
+      "Here are our software products. Pick one to request a quote, or tell me which product you need.",
+  },
+  {
+    label: "ELV & security",
+    family: "elv",
+    intro:
+      "Here are our ELV & security solutions. Pick one to request a quote, or describe your site needs.",
+  },
+  {
+    label: "Digital engineering",
+    family: "autodesk",
+    intro:
+      "Here are digital engineering / Autodesk tools we support. Pick one to request a quote.",
+  },
+  {
+    label: "Training & support",
+    family: "educational",
+    intro:
+      "Here are training-focused products we support. Pick one, or tell us which team needs enablement.",
+  },
+];
 
 const WELCOME_TEXT =
   "Hi — I’m your Aptus assistant. Please share your name, email, and phone number so an expert can follow up, then tell me what you need.";
-
-function botReply(input: string): string {
-  const q = input.toLowerCase();
-  if (/software|license|autodesk|adobe|oracle|microsoft|autocad/.test(q)) {
-    return "Great — Aptus is an authorized partner for Autodesk, Adobe, Oracle, Microsoft and more. Tell me the product or team size, or open a quote request and our specialists will follow up.";
-  }
-  if (/elv|security|cctv|access|cabling|data center|networking/.test(q)) {
-    return "We design and deliver ELV, security, structured cabling and smart infrastructure across Oman. Share your site type or challenge and we’ll connect you with the right expert.";
-  }
-  if (/engineer|bim|revit|civil|digital/.test(q)) {
-    return "Our digital engineering team helps with BIM, design workflows and partner toolsets. What project phase are you in — design, coordination, or handover?";
-  }
-  if (/train|support|course|learn/.test(q)) {
-    return "We offer product training and ongoing support so your team gets value from day one. Which solution should we focus on?";
-  }
-  if (/price|cost|quote|budget/.test(q)) {
-    return "Happy to help with pricing. Use Request a Quote for a formal estimate, or leave your name and number here and an expert will call you back.";
-  }
-  if (/hello|hi|hey|salam/.test(q)) {
-    return "Hello! How can Aptus Infotech help your business today — software, ELV/security, or a full technology solution?";
-  }
-  return "Thanks for sharing that. An Aptus expert can guide you on the right mix of technology and services. Would you like a callback, WhatsApp chat, or a formal quote request?";
-}
 
 function uid() {
   return `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
@@ -63,6 +72,23 @@ function isValidEmail(value: string) {
 function isValidPhone(value: string) {
   const digits = value.replace(/\D/g, "");
   return digits.length >= 7 && digits.length <= 15;
+}
+
+function interestFromText(input: string): InterestOption | undefined {
+  const q = input.toLowerCase();
+  if (/elv|security|cctv|access|cabling|data center|networking|ups|smatv/.test(q)) {
+    return INTEREST_OPTIONS.find((o) => o.family === "elv");
+  }
+  if (/train|support|course|learn|matlab|turnitin|spss|ansys/.test(q)) {
+    return INTEREST_OPTIONS.find((o) => o.family === "educational");
+  }
+  if (/engineer|bim|revit|civil|digital|autocad|navisworks|autodesk/.test(q)) {
+    return INTEREST_OPTIONS.find((o) => o.family === "autodesk");
+  }
+  if (/software|license|adobe|oracle|microsoft|product/.test(q)) {
+    return INTEREST_OPTIONS.find((o) => o.family === "software-licensing");
+  }
+  return INTEREST_OPTIONS.find((o) => o.label.toLowerCase() === q);
 }
 
 export function ExpertChatbot({
@@ -86,6 +112,8 @@ export function ExpertChatbot({
   });
   const [contactError, setContactError] = useState("");
   const [contactCaptured, setContactCaptured] = useState(false);
+  const [savingContact, setSavingContact] = useState(false);
+  const [interestFamily, setInterestFamily] = useState<string | null>(null);
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: "welcome",
@@ -93,6 +121,13 @@ export function ExpertChatbot({
       text: WELCOME_TEXT,
     },
   ]);
+
+  const productContext: QuoteModalContext = useMemo(() => {
+    if (interestFamily) return quoteContextForFamily(interestFamily);
+    return quoteContextFromPathname(pathname);
+  }, [interestFamily, pathname]);
+
+  const productOptions = productContext.products;
 
   useEffect(() => {
     if (!open) return;
@@ -109,7 +144,7 @@ export function ExpertChatbot({
   useEffect(() => {
     if (!open) return;
     listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
-  }, [messages, open, contactCaptured, contactError]);
+  }, [messages, open, contactCaptured, contactError, interestFamily, productOptions.length]);
 
   useEffect(() => {
     if (!open) return;
@@ -120,11 +155,13 @@ export function ExpertChatbot({
     return () => window.removeEventListener("keydown", onKey);
   }, [open, onClose]);
 
-  const submitContact = (e: FormEvent) => {
+  const submitContact = async (e: FormEvent) => {
     e.preventDefault();
+    if (savingContact) return;
+
     const name = contact.name.trim();
     const email = contact.email.trim();
-    const phone = contact.phone.trim();
+    const phone = normalizePhone(contact.phone.trim());
 
     if (!name || !email || !phone) {
       setContactError("Name, email, and phone number are required.");
@@ -140,18 +177,85 @@ export function ExpertChatbot({
     }
 
     setContactError("");
-    setContactCaptured(true);
+    setSavingContact(true);
+
+    try {
+      const res = await fetch(`${publicApiBase()}/api/talk-to-expert`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, phone }),
+      });
+
+      if (!res.ok) {
+        let msg =
+          "We couldn't save your details right now. Please try again.";
+        try {
+          const data = (await res.json()) as {
+            error?: string;
+            errors?: Record<string, string>;
+          };
+          if (typeof data.error === "string" && data.error) msg = data.error;
+          else if (data.errors) {
+            msg =
+              data.errors.name ||
+              data.errors.email ||
+              data.errors.phone ||
+              data.errors._form ||
+              msg;
+          }
+        } catch {
+          /* keep default */
+        }
+        setContactError(msg);
+        return;
+      }
+
+      setContactCaptured(true);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: uid(),
+          role: "user",
+          text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}`,
+        },
+        {
+          id: uid(),
+          role: "bot",
+          text: `Thanks, ${name.split(/\s+/)[0] || name}! Choose a category below and I’ll show the matching products.`,
+        },
+      ]);
+    } catch {
+      setContactError("Network error. Please check your connection and try again.");
+    } finally {
+      setSavingContact(false);
+    }
+  };
+
+  const selectInterest = (option: InterestOption) => {
+    if (!contactCaptured) return;
+    setInterestFamily(option.family);
     setMessages((prev) => [
       ...prev,
-      {
-        id: uid(),
-        role: "user",
-        text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}`,
-      },
+      { id: uid(), role: "user", text: option.label },
+      { id: uid(), role: "bot", text: option.intro },
+    ]);
+    setInput("");
+  };
+
+  const selectProduct = (product: string) => {
+    if (!contactCaptured || !interestFamily) return;
+    const context = quoteContextForFamily(interestFamily);
+    openQuote({
+      ...context,
+      defaultProduct: context.products.includes(product) ? product : product,
+    });
+    setMessages((prev) => [
+      ...prev,
+      { id: uid(), role: "user", text: product },
       {
         id: uid(),
         role: "bot",
-        text: `Thanks, ${name.split(/\s+/)[0] || name}! How can Aptus help today — software licensing, ELV & security, digital engineering, or something else?`,
+        text: `Opening a quote request for ${product}. You can also keep chatting if you need anything else.`,
       },
     ]);
   };
@@ -160,10 +264,35 @@ export function ExpertChatbot({
     if (!contactCaptured) return;
     const trimmed = text.trim();
     if (!trimmed) return;
+
+    const matchedInterest = interestFromText(trimmed);
+    if (matchedInterest) {
+      selectInterest(matchedInterest);
+      return;
+    }
+
+    if (interestFamily) {
+      const products = quoteContextForFamily(interestFamily).products;
+      const productMatch = products.find(
+        (product) => product.toLowerCase() === trimmed.toLowerCase(),
+      );
+      if (productMatch) {
+        selectProduct(productMatch);
+        setInput("");
+        return;
+      }
+    }
+
     setMessages((prev) => [
       ...prev,
       { id: uid(), role: "user", text: trimmed },
-      { id: uid(), role: "bot", text: botReply(trimmed) },
+      {
+        id: uid(),
+        role: "bot",
+        text: interestFamily
+          ? "Thanks — pick a product from the list above, or use Request a Quote to send full details."
+          : "Please choose Software licensing, ELV & security, Digital engineering, or Training & support so I can show the right products.",
+      },
     ]);
     setInput("");
   };
@@ -213,49 +342,43 @@ export function ExpertChatbot({
             <form className="aptus-expert-chat__lead" onSubmit={submitContact} noValidate>
               <p className="aptus-expert-chat__lead-label">Your details</p>
               <label className="aptus-expert-chat__field">
-                <span>Name *</span>
+                Name *
                 <input
                   ref={nameRef}
                   type="text"
                   name="name"
                   autoComplete="name"
-                  required
                   value={contact.name}
-                  onChange={(e) => {
-                    setContact((prev) => ({ ...prev, name: e.target.value }));
-                    setContactError("");
-                  }}
-                  placeholder="Full name"
+                  disabled={savingContact}
+                  onChange={(e) =>
+                    setContact((prev) => ({ ...prev, name: e.target.value }))
+                  }
                 />
               </label>
               <label className="aptus-expert-chat__field">
-                <span>Email *</span>
+                Email *
                 <input
                   type="email"
                   name="email"
                   autoComplete="email"
-                  required
                   value={contact.email}
-                  onChange={(e) => {
-                    setContact((prev) => ({ ...prev, email: e.target.value }));
-                    setContactError("");
-                  }}
-                  placeholder="name@company.com"
+                  disabled={savingContact}
+                  onChange={(e) =>
+                    setContact((prev) => ({ ...prev, email: e.target.value }))
+                  }
                 />
               </label>
               <label className="aptus-expert-chat__field">
-                <span>Phone number *</span>
+                Phone *
                 <input
                   type="tel"
                   name="phone"
                   autoComplete="tel"
-                  required
                   value={contact.phone}
-                  onChange={(e) => {
-                    setContact((prev) => ({ ...prev, phone: e.target.value }));
-                    setContactError("");
-                  }}
-                  placeholder="+968 …"
+                  disabled={savingContact}
+                  onChange={(e) =>
+                    setContact((prev) => ({ ...prev, phone: e.target.value }))
+                  }
                 />
               </label>
               {contactError ? (
@@ -263,70 +386,93 @@ export function ExpertChatbot({
                   {contactError}
                 </p>
               ) : null}
-              <button type="submit" className="aptus-expert-chat__lead-submit">
-                Continue
+              <button
+                type="submit"
+                className="aptus-expert-chat__lead-submit"
+                disabled={savingContact}
+              >
+                {savingContact ? "Saving…" : "Continue"}
               </button>
             </form>
-          ) : null}
+          ) : (
+            <>
+              <div className="aptus-expert-chat__quick" aria-label="Interest categories">
+                {INTEREST_OPTIONS.map((option) => (
+                  <button
+                    key={option.label}
+                    type="button"
+                    className={
+                      interestFamily === option.family
+                        ? "aptus-expert-chat__chip is-active"
+                        : "aptus-expert-chat__chip"
+                    }
+                    onClick={() => selectInterest(option)}
+                  >
+                    {option.label}
+                  </button>
+                ))}
+              </div>
+
+              {interestFamily && productOptions.length ? (
+                <div className="aptus-expert-chat__products">
+                  <p className="aptus-expert-chat__products-label">Products</p>
+                  <div className="aptus-expert-chat__product-list" role="list">
+                    {productOptions.map((product) => (
+                      <button
+                        key={product}
+                        type="button"
+                        role="listitem"
+                        className="aptus-expert-chat__product"
+                        onClick={() => selectProduct(product)}
+                      >
+                        {product}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+
+              <div className="aptus-expert-chat__actions">
+                <a
+                  href="https://wa.me/96891234567"
+                  className="aptus-expert-chat__action"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  WhatsApp
+                </a>
+                <button
+                  type="button"
+                  className="aptus-expert-chat__action aptus-expert-chat__action--primary"
+                  onClick={() => openQuote(productContext)}
+                >
+                  Request a Quote
+                </button>
+              </div>
+            </>
+          )}
         </div>
 
         {contactCaptured ? (
-          <>
-            <div className="aptus-expert-chat__quick">
-              {QUICK_REPLIES.map((label) => (
-                <button
-                  key={label}
-                  type="button"
-                  className="aptus-expert-chat__chip"
-                  onClick={() => pushUser(label)}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
-
-            <div className="aptus-expert-chat__actions">
-              <a
-                href="https://api.whatsapp.com/send?phone=96899418481"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="aptus-expert-chat__action"
-              >
-                WhatsApp
-              </a>
-              <button
-                type="button"
-                className="aptus-expert-chat__action aptus-expert-chat__action--primary"
-                onClick={() => {
-                  openQuote(quoteContextFromPathname(pathname));
-                  onClose();
-                }}
-              >
-                Request a Quote
-              </button>
-            </div>
-
-            <form
-              className="aptus-expert-chat__composer"
-              onSubmit={(e) => {
-                e.preventDefault();
-                pushUser(input);
-              }}
-            >
-              <input
-                ref={inputRef}
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Type your requirement…"
-                className="aptus-expert-chat__input"
-                aria-label="Message"
-              />
-              <button type="submit" className="aptus-expert-chat__send" aria-label="Send message">
-                Send
-              </button>
-            </form>
-          </>
+          <form
+            className="aptus-expert-chat__composer"
+            onSubmit={(e) => {
+              e.preventDefault();
+              pushUser(input);
+            }}
+          >
+            <input
+              ref={inputRef}
+              type="text"
+              className="aptus-expert-chat__input"
+              placeholder="Type your message…"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+            />
+            <button type="submit" className="aptus-expert-chat__send" aria-label="Send message">
+              Send
+            </button>
+          </form>
         ) : (
           <p className="aptus-expert-chat__gate-hint">
             Enter your name, email, and phone to start chatting with an expert.

@@ -46,6 +46,7 @@ export function QuoteModal({ open, onClose, context }: QuoteModalProps) {
             key={`${context.family}:${context.defaultProduct ?? ""}`}
             className="mt-0"
             category={context.category}
+            family={context.family}
             productLabel={context.productLabel}
             products={context.products}
             defaultProduct={context.defaultProduct}
