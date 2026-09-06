@@ -7,6 +7,7 @@ export type AccentTitleContent = {
 export type CaseStudyItemContent = {
   title: string;
   description: string;
+  industry?: string;
   pdfHref?: string;
   readMoreLabel?: string;
   imageSrc?: string;
@@ -16,6 +17,7 @@ export type CaseStudyItemContent = {
 export type KeyProjectItemContent = {
   title: string;
   description: string;
+  industry?: string;
   imageSrc?: string;
   imageAlt?: string;
 };

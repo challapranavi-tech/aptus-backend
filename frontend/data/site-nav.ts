@@ -3,7 +3,18 @@ import type { NavigationItem } from "@/types";
 /** Main site navigation — synced from https://aptusinfotech.com/ (see aptus-web/scripts/generate-site-nav.mjs). */
 
 export const SITE_NAVIGATION: NavigationItem[] = [
-  { label: "Our Story", href: "/our-story" },
+  {
+    label: "About Us",
+    href: "/our-story",
+    children: [
+      { label: "Our Story", href: "/our-story" },
+      { label: "Our Team", href: "/our-team" },
+      { label: "Aptus Policy", href: "/aptus-policy" },
+      { label: "ISO Certifications", href: "/aptus-infotech-iso-certifications" },
+      { label: "Careers", href: "/careers" },
+      { label: "Contact Us", href: "/contact-us" },
+    ],
+  },
   {
     label: "Products and Solutions",
     children: [
@@ -82,19 +93,6 @@ export const SITE_NAVIGATION: NavigationItem[] = [
       { label: "Documentation", href: "/aptus-policy" },
       { label: "Resources", href: "/why-aptus-infotech" },
       { label: "Academy", href: "/training" },
-    ],
-  },
-  {
-    label: "About Us",
-    href: "/our-team",
-    children: [
-      { label: "Our Team", href: "/our-team" },
-      { label: "Aptus Policy", href: "/aptus-policy" },
-      { label: "Why Aptus Infotech", href: "/why-aptus-infotech" },
-      { label: "Winning together", href: "/winning-together" },
-      { label: "Aptus Infotech ISO Certifications", href: "/aptus-infotech-iso-certifications" },
-      { label: "Careers", href: "/careers" },
-      { label: "Contact Us", href: "/contact-us" },
     ],
   },
 ];

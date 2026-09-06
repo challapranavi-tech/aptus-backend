@@ -54,7 +54,65 @@
   font-size: var(--text-3xl);
   font-weight: 600;
   line-height: 1.2;
-  margin: 0 0 2rem;
+  margin: 0 0 1.25rem;
+  text-align: center;
+}
+
+.aptus-case-studies-page .aptus-cs-industry-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0 auto 1.75rem;
+  max-width: 56rem;
+}
+
+.aptus-case-studies-page .aptus-cs-industry-filter {
+  appearance: none;
+  border: 1px solid rgba(19, 82, 163, 0.28);
+  background: #fff;
+  color: #1352a3;
+  border-radius: 999px;
+  padding: 0.45rem 0.95rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.aptus-case-studies-page .aptus-cs-industry-filter:hover {
+  border-color: #1352a3;
+  background: #eef5ff;
+}
+
+.aptus-case-studies-page .aptus-cs-industry-filter.is-active {
+  background: #1352a3;
+  border-color: #1352a3;
+  color: #fff;
+}
+
+.aptus-case-studies-page .aptus-cs-industry-filter:focus-visible {
+  outline: 2px solid #38b6ff;
+  outline-offset: 2px;
+}
+
+.aptus-case-studies-page .aptus-cs-industry-empty {
+  margin: 0 auto;
+  max-width: 32rem;
+  text-align: center;
+  color: var(--cs-body);
+  font-size: var(--text-base);
+}
+
+.aptus-case-studies-page .aptus-cs-card__industry {
+  margin: 0;
+  padding: 0 0.75rem 0.35rem;
+  color: #1352a3;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   text-align: center;
 }
 

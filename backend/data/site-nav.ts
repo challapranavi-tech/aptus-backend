@@ -4,18 +4,13 @@ import type { NavigationItem } from "@/types";
 
 export const SITE_NAVIGATION: NavigationItem[] = [
   {
-    label: "Our Story",
-    href: "/our-story",
-  },
-  {
     label: "About Us",
-    href: "/our-team",
+    href: "/our-story",
     children: [
+      { label: "Our Story", href: "/our-story" },
       { label: "Our Team", href: "/our-team" },
       { label: "Aptus Policy", href: "/aptus-policy" },
-      { label: "Why Aptus Infotech", href: "/why-aptus-infotech" },
-      { label: "Winning together", href: "/winning-together" },
-      { label: "Aptus Infotech ISO Certifications", href: "/aptus-infotech-iso-certifications" },
+      { label: "ISO Certifications", href: "/aptus-infotech-iso-certifications" },
       { label: "Careers", href: "/careers" },
       { label: "Contact Us", href: "/contact-us" },
     ],

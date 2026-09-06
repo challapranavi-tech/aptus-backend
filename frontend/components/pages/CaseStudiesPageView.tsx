@@ -1,64 +1,12 @@
+import { CaseStudiesProjectsSection } from "@/components/pages/CaseStudiesProjectsSection";
 import { Container } from "@/components/ui";
 import { joinAccentTitle } from "@/lib/render-accent-title";
 import { resolveCmsImageSrc } from "@/lib/utils";
-import type { CaseStudiesPageContent, CaseStudyItemContent } from "@/types/case-studies-page";
+import type { CaseStudiesPageContent } from "@/types/case-studies-page";
 
 type CaseStudiesPageViewProps = {
   content: CaseStudiesPageContent;
 };
-
-function ProjectCard({ item }: { item: CaseStudyItemContent }) {
-  const image = item.imageSrc ? (
-    <img
-      src={resolveCmsImageSrc(item.imageSrc)}
-      alt={item.imageAlt ?? item.title}
-      className="aptus-cs-card__image"
-      loading="lazy"
-      decoding="async"
-    />
-  ) : null;
-
-  return (
-    <article className="aptus-cs-card aptus-cs-card--key-project">
-      {image ? (
-        item.pdfHref ? (
-          <a
-            href={item.pdfHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="aptus-cs-card__logo-wrap"
-          >
-            {image}
-          </a>
-        ) : (
-          <div className="aptus-cs-card__logo-wrap">{image}</div>
-        )
-      ) : null}
-      <h3 className="aptus-cs-card__title">
-        {item.pdfHref ? (
-          <a href={item.pdfHref} target="_blank" rel="noopener noreferrer">
-            {item.title}
-          </a>
-        ) : (
-          item.title
-        )}
-      </h3>
-      <p className="aptus-cs-card__body">{item.description}</p>
-      {item.pdfHref ? (
-        <div className="aptus-cs-card__btn-wrap">
-          <a
-            href={item.pdfHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="aptus-cs-btn"
-          >
-            {item.readMoreLabel ?? "Read More"}
-          </a>
-        </div>
-      ) : null}
-    </article>
-  );
-}
 
 /** Dedicated layout for /customer-stories (Solutions in Action). */
 export function CaseStudiesPageView({ content }: CaseStudiesPageViewProps) {
@@ -96,16 +44,7 @@ export function CaseStudiesPageView({ content }: CaseStudiesPageViewProps) {
       ) : null}
 
       {allProjects.length ? (
-        <section className="aptus-cs-section aptus-cs-section--muted">
-          <Container>
-            <h2 className="aptus-cs-section-title">{joinAccentTitle(projectsTitle)}</h2>
-            <div className="aptus-cs-grid aptus-cs-grid--key-projects grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {allProjects.map((item) => (
-                <ProjectCard key={item.title} item={item} />
-              ))}
-            </div>
-          </Container>
-        </section>
+        <CaseStudiesProjectsSection title={projectsTitle} projects={allProjects} />
       ) : null}
 
       {transformCta?.visible !== false && transformCta ? (
