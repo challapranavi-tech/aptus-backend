@@ -50,6 +50,8 @@ export interface ActionLink {
   label: string;
   href: string;
   variant?: "primary" | "secondary" | "ghost";
+  /** Optional dropdown items (e.g. homepage Explore Solutions). */
+  children?: ActionLink[];
 }
 
 export interface MediaAsset {
@@ -177,6 +179,8 @@ export interface Hero {
   subheading?: string;
   primaryAction?: ActionLink;
   secondaryAction?: ActionLink;
+  /** Optional third CTA (e.g. Request a Quote on the homepage hero). */
+  tertiaryAction?: ActionLink;
   media?: MediaAsset;
   /** Multiple background images (homepage crossfade / motion). */
   backgroundMedia?: MediaAsset[];

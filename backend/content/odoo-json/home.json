@@ -9,8 +9,15 @@
     "subtitle": "25+ years in Oman, delivering smarter technology and integrated solutions that help businesses work better, operate securely and build for the future.",
     "ctaLabel": "Explore Our Solutions",
     "ctaHref": "/software-solutions",
+    "ctaMenu": [
+      { "label": "Software", "href": "/software-solutions" },
+      { "label": "ELV", "href": "/elv-solutions" },
+      { "label": "Aptus Solar", "href": "/aptus-solar" }
+    ],
     "secondaryCtaLabel": "Talk to an Expert",
     "secondaryCtaHref": "#talk-to-expert",
+    "tertiaryCtaLabel": "Request a Quote",
+    "tertiaryCtaHref": "#form",
     "imageSrc": "/images/oman-tech-hero.jpg",
     "imageAlt": "Modern technology and business landscape in Oman",
     "backgroundImages": [

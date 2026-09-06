@@ -130,6 +130,7 @@
   background: #1352a3;
   color: #fff;
   border-bottom-right-radius: 0.25rem;
+  white-space: pre-line;
 }
 
 .aptus-expert-chat__quick {
@@ -220,6 +221,84 @@
 
 .aptus-expert-chat__send:hover {
   filter: brightness(0.96);
+}
+
+.aptus-expert-chat__lead {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-top: 0.15rem;
+  padding: 0.85rem;
+  border-radius: 0.9rem;
+  background: #fff;
+  border: 1px solid rgba(19, 82, 163, 0.12);
+}
+
+.aptus-expert-chat__lead-label {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #1352a3;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.aptus-expert-chat__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #3a4658;
+}
+
+.aptus-expert-chat__field input {
+  border: 1px solid rgba(19, 82, 163, 0.18);
+  border-radius: 0.6rem;
+  padding: 0.55rem 0.7rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #1a2332;
+  outline: none;
+  background: #fff;
+}
+
+.aptus-expert-chat__field input:focus {
+  border-color: #1352a3;
+  box-shadow: 0 0 0 3px rgba(19, 82, 163, 0.12);
+}
+
+.aptus-expert-chat__lead-error {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #b42318;
+}
+
+.aptus-expert-chat__lead-submit {
+  margin-top: 0.15rem;
+  border: 0;
+  border-radius: 0.65rem;
+  background: #1352a3;
+  color: #fff;
+  padding: 0.6rem 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.aptus-expert-chat__lead-submit:hover {
+  filter: brightness(1.05);
+}
+
+.aptus-expert-chat__gate-hint {
+  margin: 0;
+  padding: 0.75rem 1rem 1rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #5b677a;
+  border-top: 1px solid rgba(19, 82, 163, 0.08);
 }
 
 @media (prefers-reduced-motion: reduce) {

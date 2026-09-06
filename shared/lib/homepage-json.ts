@@ -184,8 +184,11 @@ interface RawHomeJson {
     tagline?: string;
     ctaLabel?: string;
     ctaHref?: string;
+    ctaMenu?: { label?: string; href?: string }[];
     secondaryCtaLabel?: string;
     secondaryCtaHref?: string;
+    tertiaryCtaLabel?: string;
+    tertiaryCtaHref?: string;
     results?: { label?: string; title?: string; description?: string }[];
     imageSrc?: string;
     imageAlt?: string;
@@ -303,12 +306,31 @@ export function mapHomepageJson(raw: string | false | undefined | null): Section
           tagline: hero.tagline,
           subheading: [hero.subtitle, hero.supportLine].filter(Boolean).join("\n\n") || undefined,
           primaryAction:
-            hero.ctaLabel && hero.ctaHref
-              ? { label: hero.ctaLabel, href: hero.ctaHref }
+            hero.ctaLabel
+              ? {
+                  label: hero.ctaLabel,
+                  href: hero.ctaHref || "#",
+                  ...(hero.ctaMenu?.length
+                    ? {
+                        children: hero.ctaMenu
+                          .filter((item): item is { label: string; href: string } =>
+                            Boolean(item.label?.trim() && item.href?.trim()),
+                          )
+                          .map((item) => ({
+                            label: item.label.trim(),
+                            href: item.href.trim(),
+                          })),
+                      }
+                    : {}),
+                }
               : undefined,
           secondaryAction:
             hero.secondaryCtaLabel && hero.secondaryCtaHref
               ? { label: hero.secondaryCtaLabel, href: hero.secondaryCtaHref }
+              : undefined,
+          tertiaryAction:
+            hero.tertiaryCtaLabel && hero.tertiaryCtaHref
+              ? { label: hero.tertiaryCtaLabel, href: hero.tertiaryCtaHref }
               : undefined,
           highlights: highlights.length ? highlights : undefined,
           media: usableImg(hero.imageSrc, hero.imageAlt),

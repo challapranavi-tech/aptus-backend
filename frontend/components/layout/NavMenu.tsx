@@ -294,7 +294,10 @@ function DropdownItem({
 }) {
   const hasChildren = item.children && item.children.length > 0;
   const active = isItemActive(item, pathname);
-  const isProducts = item.label === "Products and Services";
+  const isProducts =
+    item.label === "Products and Solutions" ||
+    item.label === "Products to Solutions" ||
+    item.label === "Products and Services";
   const isSoftware =
     item.label === "Software" || item.href === "/software-solutions";
   const isElv =

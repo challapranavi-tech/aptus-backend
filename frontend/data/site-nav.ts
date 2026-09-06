@@ -3,9 +3,9 @@ import type { NavigationItem } from "@/types";
 /** Main site navigation — synced from https://aptusinfotech.com/ (see aptus-web/scripts/generate-site-nav.mjs). */
 
 export const SITE_NAVIGATION: NavigationItem[] = [
-  { label: "Home", href: "/" },
+  { label: "Our Story", href: "/our-story" },
   {
-    label: "Products and Services",
+    label: "Products and Solutions",
     children: [
       {
         label: "Software",
@@ -66,6 +66,10 @@ export const SITE_NAVIGATION: NavigationItem[] = [
           { label: "Conference room solution", href: "/conference-room-solution" },
         ],
       },
+      {
+        label: "Aptus Solar",
+        href: "/aptus-solar",
+      },
     ],
   },
   {
@@ -82,10 +86,9 @@ export const SITE_NAVIGATION: NavigationItem[] = [
   },
   {
     label: "About Us",
-    href: "/our-story",
+    href: "/our-team",
     children: [
       { label: "Our Team", href: "/our-team" },
-      { label: "Our Story", href: "/our-story" },
       { label: "Aptus Policy", href: "/aptus-policy" },
       { label: "Why Aptus Infotech", href: "/why-aptus-infotech" },
       { label: "Winning together", href: "/winning-together" },
@@ -113,16 +116,22 @@ export function findNavItemByLabel(
 
 const SOFTWARE_BRAND_COUNT = 31;
 
-// ponytail: self-check — Software + ELV live under Products and Services (exactly two hubs)
-const products = SITE_NAVIGATION.find((item) => item.label === "Products and Services");
+// ponytail: self-check — Software + ELV + Aptus Solar under Products and Solutions
+const products = SITE_NAVIGATION.find((item) => item.label === "Products and Solutions");
 const software = products?.children?.find((item) => item.label === "Software");
 const elv = products?.children?.find((item) => item.label === "ELV Solutions");
-if (!products?.children || products.children.length !== 2) {
-  throw new Error("SITE_NAVIGATION Products and Services must contain exactly Software and ELV Solutions");
+const solar = products?.children?.find((item) => item.label === "Aptus Solar");
+if (!products?.children || products.children.length !== 3) {
+  throw new Error(
+    "SITE_NAVIGATION Products and Solutions must contain Software, ELV Solutions, and Aptus Solar",
+  );
 }
 if (!software?.children || software.children.length !== SOFTWARE_BRAND_COUNT) {
   throw new Error(`SITE_NAVIGATION Software menu must contain exactly ${SOFTWARE_BRAND_COUNT} brands`);
 }
 if (!elv?.children?.length) {
-  throw new Error("SITE_NAVIGATION ELV Solutions menu missing under Products and Services");
+  throw new Error("SITE_NAVIGATION ELV Solutions menu missing under Products and Solutions");
+}
+if (!solar?.href) {
+  throw new Error("SITE_NAVIGATION Aptus Solar hub missing under Products and Solutions");
 }

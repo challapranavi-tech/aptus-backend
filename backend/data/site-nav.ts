@@ -3,13 +3,15 @@ import type { NavigationItem } from "@/types";
 /** Main site navigation — synced from https://aptusinfotech.com/ (see aptus-web/scripts/generate-site-nav.mjs). */
 
 export const SITE_NAVIGATION: NavigationItem[] = [
-  { label: "Home", href: "/" },
+  {
+    label: "Our Story",
+    href: "/our-story",
+  },
   {
     label: "About Us",
-    href: "/about-us",
+    href: "/our-team",
     children: [
       { label: "Our Team", href: "/our-team" },
-      { label: "Our Story", href: "/our-story" },
       { label: "Aptus Policy", href: "/aptus-policy" },
       { label: "Why Aptus Infotech", href: "/why-aptus-infotech" },
       { label: "Winning together", href: "/winning-together" },
@@ -162,6 +164,10 @@ export const SITE_NAVIGATION: NavigationItem[] = [
       { label: "Switching and Routing", href: "/switching-and-routing" },
       { label: "Conference room solution", href: "/conference-room-solution" },
     ],
+  },
+  {
+    label: "Aptus Solar",
+    href: "/aptus-solar",
   },
   { label: "Solutions in Action", href: "/customer-stories" },
 ];

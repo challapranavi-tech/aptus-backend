@@ -27,7 +27,11 @@ function isCaseStudiesSlug(slug: string): boolean {
 export async function generateStaticParams() {
   const slugs = (await getAllPageSlugs()).filter(
     // /autodesk and /adobe are dedicated App Router replicas, not CMS [slug].
-    (slug) => slug !== "autodesk" && slug !== "adobe" && slug !== "software-solutions",
+    (slug) =>
+      slug !== "autodesk" &&
+      slug !== "adobe" &&
+      slug !== "software-solutions" &&
+      slug !== "aptus-solar",
   );
 
   // Warm + gate: only prerender pages that respond before the CMS timeout.

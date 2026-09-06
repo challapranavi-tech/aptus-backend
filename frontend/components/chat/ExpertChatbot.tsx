@@ -3,7 +3,7 @@
 import { useQuoteModal } from "@/components/quote/QuoteModalProvider";
 import { quoteContextFromPathname } from "@/components/quote/quote-modal-utils";
 import { usePathname } from "next/navigation";
-import { useEffect, useId, useRef, useState } from "react";
+import { FormEvent, useEffect, useId, useRef, useState } from "react";
 
 type Role = "bot" | "user";
 
@@ -13,12 +13,21 @@ type ChatMessage = {
   text: string;
 };
 
+type ContactInfo = {
+  name: string;
+  email: string;
+  phone: string;
+};
+
 const QUICK_REPLIES = [
   "Software licensing",
   "ELV & security",
   "Digital engineering",
   "Training & support",
 ] as const;
+
+const WELCOME_TEXT =
+  "Hi — I’m your Aptus assistant. Please share your name, email, and phone number so an expert can follow up, then tell me what you need.";
 
 function botReply(input: string): string {
   const q = input.toLowerCase();
@@ -47,6 +56,15 @@ function uid() {
   return `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 }
 
+function isValidEmail(value: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+}
+
+function isValidPhone(value: string) {
+  const digits = value.replace(/\D/g, "");
+  return digits.length >= 7 && digits.length <= 15;
+}
+
 export function ExpertChatbot({
   open,
   onClose,
@@ -58,26 +76,40 @@ export function ExpertChatbot({
   const pathname = usePathname() ?? "/";
   const { openQuote } = useQuoteModal();
   const listRef = useRef<HTMLDivElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [input, setInput] = useState("");
+  const [contact, setContact] = useState<ContactInfo>({
+    name: "",
+    email: "",
+    phone: "",
+  });
+  const [contactError, setContactError] = useState("");
+  const [contactCaptured, setContactCaptured] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: "welcome",
       role: "bot",
-      text: "Hi — I’m your Aptus assistant. Tell me what you need and I’ll connect you with the right expert.",
+      text: WELCOME_TEXT,
     },
   ]);
 
   useEffect(() => {
     if (!open) return;
-    const t = window.setTimeout(() => inputRef.current?.focus(), 120);
+    const t = window.setTimeout(() => {
+      if (!contactCaptured) {
+        nameRef.current?.focus();
+      } else {
+        inputRef.current?.focus();
+      }
+    }, 120);
     return () => window.clearTimeout(t);
-  }, [open]);
+  }, [open, contactCaptured]);
 
   useEffect(() => {
     if (!open) return;
     listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
-  }, [messages, open]);
+  }, [messages, open, contactCaptured, contactError]);
 
   useEffect(() => {
     if (!open) return;
@@ -88,7 +120,44 @@ export function ExpertChatbot({
     return () => window.removeEventListener("keydown", onKey);
   }, [open, onClose]);
 
+  const submitContact = (e: FormEvent) => {
+    e.preventDefault();
+    const name = contact.name.trim();
+    const email = contact.email.trim();
+    const phone = contact.phone.trim();
+
+    if (!name || !email || !phone) {
+      setContactError("Name, email, and phone number are required.");
+      return;
+    }
+    if (!isValidEmail(email)) {
+      setContactError("Please enter a valid email address.");
+      return;
+    }
+    if (!isValidPhone(phone)) {
+      setContactError("Please enter a valid phone number.");
+      return;
+    }
+
+    setContactError("");
+    setContactCaptured(true);
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: uid(),
+        role: "user",
+        text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}`,
+      },
+      {
+        id: uid(),
+        role: "bot",
+        text: `Thanks, ${name.split(/\s+/)[0] || name}! How can Aptus help today — software licensing, ELV & security, digital engineering, or something else?`,
+      },
+    ]);
+  };
+
   const pushUser = (text: string) => {
+    if (!contactCaptured) return;
     const trimmed = text.trim();
     if (!trimmed) return;
     setMessages((prev) => [
@@ -139,62 +208,130 @@ export function ExpertChatbot({
               {m.text}
             </div>
           ))}
+
+          {!contactCaptured ? (
+            <form className="aptus-expert-chat__lead" onSubmit={submitContact} noValidate>
+              <p className="aptus-expert-chat__lead-label">Your details</p>
+              <label className="aptus-expert-chat__field">
+                <span>Name *</span>
+                <input
+                  ref={nameRef}
+                  type="text"
+                  name="name"
+                  autoComplete="name"
+                  required
+                  value={contact.name}
+                  onChange={(e) => {
+                    setContact((prev) => ({ ...prev, name: e.target.value }));
+                    setContactError("");
+                  }}
+                  placeholder="Full name"
+                />
+              </label>
+              <label className="aptus-expert-chat__field">
+                <span>Email *</span>
+                <input
+                  type="email"
+                  name="email"
+                  autoComplete="email"
+                  required
+                  value={contact.email}
+                  onChange={(e) => {
+                    setContact((prev) => ({ ...prev, email: e.target.value }));
+                    setContactError("");
+                  }}
+                  placeholder="name@company.com"
+                />
+              </label>
+              <label className="aptus-expert-chat__field">
+                <span>Phone number *</span>
+                <input
+                  type="tel"
+                  name="phone"
+                  autoComplete="tel"
+                  required
+                  value={contact.phone}
+                  onChange={(e) => {
+                    setContact((prev) => ({ ...prev, phone: e.target.value }));
+                    setContactError("");
+                  }}
+                  placeholder="+968 …"
+                />
+              </label>
+              {contactError ? (
+                <p className="aptus-expert-chat__lead-error" role="alert">
+                  {contactError}
+                </p>
+              ) : null}
+              <button type="submit" className="aptus-expert-chat__lead-submit">
+                Continue
+              </button>
+            </form>
+          ) : null}
         </div>
 
-        <div className="aptus-expert-chat__quick">
-          {QUICK_REPLIES.map((label) => (
-            <button
-              key={label}
-              type="button"
-              className="aptus-expert-chat__chip"
-              onClick={() => pushUser(label)}
+        {contactCaptured ? (
+          <>
+            <div className="aptus-expert-chat__quick">
+              {QUICK_REPLIES.map((label) => (
+                <button
+                  key={label}
+                  type="button"
+                  className="aptus-expert-chat__chip"
+                  onClick={() => pushUser(label)}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+
+            <div className="aptus-expert-chat__actions">
+              <a
+                href="https://api.whatsapp.com/send?phone=96899418481"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="aptus-expert-chat__action"
+              >
+                WhatsApp
+              </a>
+              <button
+                type="button"
+                className="aptus-expert-chat__action aptus-expert-chat__action--primary"
+                onClick={() => {
+                  openQuote(quoteContextFromPathname(pathname));
+                  onClose();
+                }}
+              >
+                Request a Quote
+              </button>
+            </div>
+
+            <form
+              className="aptus-expert-chat__composer"
+              onSubmit={(e) => {
+                e.preventDefault();
+                pushUser(input);
+              }}
             >
-              {label}
-            </button>
-          ))}
-        </div>
-
-        <div className="aptus-expert-chat__actions">
-          <a
-            href="https://api.whatsapp.com/send?phone=96899418481"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="aptus-expert-chat__action"
-          >
-            WhatsApp
-          </a>
-          <button
-            type="button"
-            className="aptus-expert-chat__action aptus-expert-chat__action--primary"
-            onClick={() => {
-              openQuote(quoteContextFromPathname(pathname));
-              onClose();
-            }}
-          >
-            Request a Quote
-          </button>
-        </div>
-
-        <form
-          className="aptus-expert-chat__composer"
-          onSubmit={(e) => {
-            e.preventDefault();
-            pushUser(input);
-          }}
-        >
-          <input
-            ref={inputRef}
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Type your requirement…"
-            className="aptus-expert-chat__input"
-            aria-label="Message"
-          />
-          <button type="submit" className="aptus-expert-chat__send" aria-label="Send message">
-            Send
-          </button>
-        </form>
+              <input
+                ref={inputRef}
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Type your requirement…"
+                className="aptus-expert-chat__input"
+                aria-label="Message"
+              />
+              <button type="submit" className="aptus-expert-chat__send" aria-label="Send message">
+                Send
+              </button>
+            </form>
+          </>
+        ) : (
+          <p className="aptus-expert-chat__gate-hint">
+            Enter your name, email, and phone to start chatting with an expert.
+          </p>
+        )}
       </div>
     </div>
   );

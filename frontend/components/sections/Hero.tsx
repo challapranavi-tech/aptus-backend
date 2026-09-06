@@ -3,16 +3,103 @@
 import { Container } from "@/components/ui";
 import { gsap } from "@/lib/gsap";
 import { cn, resolveCmsImageSrc } from "@/lib/utils";
-import type { Hero as HeroData, MediaAsset } from "@/types";
+import type { ActionLink, Hero as HeroData, MediaAsset } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 
 interface HeroProps {
   data: HeroData;
 }
 
 const SLIDE_MS = 5000;
+
+function HeroActionDropdown({
+  action,
+  className,
+}: {
+  action: ActionLink;
+  className: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const menuId = useId();
+  const items = action.children ?? [];
+
+  useEffect(() => {
+    if (!open) return;
+    const onPointer = (e: MouseEvent) => {
+      if (!rootRef.current?.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("mousedown", onPointer);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onPointer);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  if (items.length === 0) {
+    return (
+      <Link href={action.href} className={className}>
+        {action.label}
+      </Link>
+    );
+  }
+
+  return (
+    <div className="home-hero-dropdown" ref={rootRef}>
+      <button
+        type="button"
+        className={`${className} home-hero-dropdown__trigger`}
+        aria-expanded={open}
+        aria-haspopup="menu"
+        aria-controls={menuId}
+        onClick={() => setOpen((v) => !v)}
+      >
+        <span>{action.label}</span>
+        <svg
+          className={cn(
+            "home-hero-dropdown__chevron",
+            open && "home-hero-dropdown__chevron--open",
+          )}
+          width="14"
+          height="14"
+          viewBox="0 0 16 16"
+          fill="none"
+          aria-hidden
+        >
+          <path
+            d="M4 6l4 4 4-4"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
+      {open ? (
+        <ul id={menuId} className="home-hero-dropdown__menu" role="menu">
+          {items.map((item) => (
+            <li key={`${item.label}-${item.href}`} role="none">
+              <Link
+                href={item.href}
+                role="menuitem"
+                className="home-hero-dropdown__item"
+                onClick={() => setOpen(false)}
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : null}
+    </div>
+  );
+}
 
 function HeroBackgroundSlides({ images }: { images: MediaAsset[] }) {
   const [active, setActive] = useState(0);
@@ -111,15 +198,13 @@ export function Hero({ data }: HeroProps) {
               {data.tagline && (
                 <p className="anim-item home-hero-categories">{data.tagline}</p>
               )}
-              {(data.primaryAction || data.secondaryAction) && (
+              {(data.primaryAction || data.secondaryAction || data.tertiaryAction) && (
                 <div className="anim-item home-hero-actions">
                   {data.primaryAction && (
-                    <Link
-                      href={data.primaryAction.href}
+                    <HeroActionDropdown
+                      action={data.primaryAction}
                       className="home-hero-btn home-hero-btn--primary"
-                    >
-                      {data.primaryAction.label}
-                    </Link>
+                    />
                   )}
                   {data.secondaryAction && (
                     <Link
@@ -127,6 +212,14 @@ export function Hero({ data }: HeroProps) {
                       className="home-hero-btn home-hero-btn--secondary"
                     >
                       {data.secondaryAction.label}
+                    </Link>
+                  )}
+                  {data.tertiaryAction && (
+                    <Link
+                      href={data.tertiaryAction.href}
+                      className="home-hero-btn home-hero-btn--quote"
+                    >
+                      {data.tertiaryAction.label}
                     </Link>
                   )}
                 </div>
@@ -181,16 +274,13 @@ export function Hero({ data }: HeroProps) {
               {data.subheading}
             </p>
           )}
-          {(data.primaryAction || data.secondaryAction) && (
+          {(data.primaryAction || data.secondaryAction || data.tertiaryAction) && (
             <div className="anim-item mt-10 flex flex-wrap gap-4">
               {data.primaryAction && (
-                <Link
-                  href={data.primaryAction.href}
+                <HeroActionDropdown
+                  action={data.primaryAction}
                   className="inline-flex items-center gap-2 rounded-none bg-brand-orange px-7 py-3.5 text-white transition-all hover:bg-brand-orange-hover"
-                  style={{ fontSize: "var(--text-sm)", fontWeight: 500 }}
-                >
-                  {data.primaryAction.label}
-                </Link>
+                />
               )}
               {data.secondaryAction && (
                 <Link
@@ -199,6 +289,15 @@ export function Hero({ data }: HeroProps) {
                   style={{ fontSize: "var(--text-sm)", fontWeight: 500 }}
                 >
                   {data.secondaryAction.label}
+                </Link>
+              )}
+              {data.tertiaryAction && (
+                <Link
+                  href={data.tertiaryAction.href}
+                  className="inline-flex items-center gap-2 rounded-none border border-white bg-white px-7 py-3.5 text-brand-navy transition-all hover:bg-transparent hover:text-white"
+                  style={{ fontSize: "var(--text-sm)", fontWeight: 500 }}
+                >
+                  {data.tertiaryAction.label}
                 </Link>
               )}
             </div>
