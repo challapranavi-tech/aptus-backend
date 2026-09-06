@@ -1,7 +1,10 @@
 import { isElvHubSlug, isElvInnerSlug } from "@/data/elv-product-media";
 import { getSoftwarePageScope } from "@/data/software-page-scope";
-import { softwareSubnavForFamily } from "@/data/software-subnav";
-import { CONTACT_PRODUCTS, ELV_PRODUCTS } from "@shared/lib/contact-request";
+import {
+  SOFTWARE_SUBNAV_BY_FAMILY,
+  softwareSubnavForFamily,
+} from "@/data/software-subnav";
+import { CONTACT_PRODUCTS, ELV_PRODUCTS, EXTRA_SOFTWARE_PRODUCTS } from "@shared/lib/contact-request";
 
 const QUOTE_MODAL_LABELS = new Set([
   "Request a Quote",
@@ -55,26 +58,27 @@ const TITLE_FAMILY_HINT: Record<string, string> = {
   "Educational Documents Management": "edms",
 };
 
-const AUTODESK_QUOTE_PRODUCTS = CONTACT_PRODUCTS.filter((p) => p !== "Others");
-
-const FAMILY_PRODUCT_LABEL: Record<string, string> = {
-  elv: "ELV Product",
-  adobe: "Adobe Product",
-  microsoft: "Microsoft Product",
-  autodesk: "Autodesk Product",
-  "water-infrastructure": "Autodesk Product",
-  multimedia: "Multimedia Product",
-  oracle: "Oracle Product",
-  edms: "EDMS Product",
-  educational: "Educational Product",
-  electrical: "Electrical Product",
-  "cyber-security": "Cyber Security Product",
-  antivirus: "Product",
-  structural: "Structural Product",
-  csi: "Structural Product",
-  "quantity-takeoff": "Quantity Takeoff Product",
-  "cubicost-group": "Product",
-};
+/** Full product catalog for the Request Quote form (software + ELV). */
+const ALL_QUOTE_PRODUCTS: string[] = (() => {
+  const names = new Set<string>();
+  for (const [family, links] of Object.entries(SOFTWARE_SUBNAV_BY_FAMILY)) {
+    // Hub entries are brand/category tiles, not sellable line items.
+    if (family === "software" || family === "software-solutions") continue;
+    for (const link of links) {
+      if (link.label.trim()) names.add(link.label.trim());
+    }
+  }
+  for (const product of CONTACT_PRODUCTS) {
+    if (product !== "Others") names.add(product);
+  }
+  for (const product of EXTRA_SOFTWARE_PRODUCTS) {
+    names.add(product);
+  }
+  for (const product of ELV_PRODUCTS) {
+    names.add(product);
+  }
+  return Array.from(names).sort((a, b) => a.localeCompare(b));
+})();
 
 export type QuoteModalContext = {
   category: "software" | "elv";
@@ -110,22 +114,6 @@ function pathSlug(pathname: string): string {
   return pathname.replace(/^\/+|\/+$/g, "").split("/")[0] ?? "";
 }
 
-function productsForFamily(family: string): string[] {
-  if (family === "elv") return [...ELV_PRODUCTS];
-  // Prefer live subnav labels so product-page names (e.g. AutoCAD) match
-  // and can be pre-selected / multi-selected.
-  const links = softwareSubnavForFamily(
-    family === "water-infrastructure" ? "autodesk" : family,
-  );
-  if (links?.length) {
-    return [...new Set(links.map((link) => link.label))];
-  }
-  if (family === "autodesk" || family === "water-infrastructure") {
-    return [...AUTODESK_QUOTE_PRODUCTS];
-  }
-  return [...AUTODESK_QUOTE_PRODUCTS];
-}
-
 function defaultProductForSlug(family: string, slug: string): string | undefined {
   if (family === "elv") return ELV_SLUG_PRODUCT[slug];
 
@@ -151,12 +139,12 @@ function defaultProductForSlug(family: string, slug: string): string | undefined
 }
 
 function contextForFamily(family: string, slug?: string): QuoteModalContext {
-  const products = productsForFamily(family);
+  const products = [...ALL_QUOTE_PRODUCTS];
   const defaultProduct = slug ? defaultProductForSlug(family, slug) : undefined;
   return {
     category: family === "elv" ? "elv" : "software",
     family,
-    productLabel: FAMILY_PRODUCT_LABEL[family] ?? "Product",
+    productLabel: "Product",
     products,
     defaultProduct:
       defaultProduct && products.includes(defaultProduct) ? defaultProduct : undefined,
@@ -214,7 +202,7 @@ export function quoteContextFromLink(
   } else if (href.startsWith("/") && !href.startsWith("/#") && !href.startsWith("/portal")) {
     context = quoteContextFromPathname(href);
   } else {
-    // Never resolve family from /portal/* — fall back to Autodesk catalog.
+    // Never resolve family from /portal/* — fall back to full product catalog.
     const path = pathname.startsWith("/portal") ? "/" : pathname;
     context = quoteContextFromPathname(path);
   }
@@ -281,11 +269,16 @@ if (process.env.NODE_ENV === "development") {
 
   const elv = quoteContextFromPathname("/thermal-scanners");
   console.assert(elv.category === "elv");
+  console.assert(elv.productLabel === "Product");
   console.assert(elv.defaultProduct === "Thermal Scanner Solutions");
+  console.assert(elv.products.includes("Adobe Photoshop"));
+  console.assert(elv.products.includes("Thermal Scanner Solutions"));
 
   const adobe = quoteContextFromPathname("/adobe-business-creative-solutions");
   console.assert(adobe.family === "adobe");
+  console.assert(adobe.productLabel === "Product");
   console.assert(adobe.products.includes("Adobe Photoshop"));
+  console.assert(adobe.products.includes("AutoCAD"));
 
   const fromAdobeCard = quoteContextFromLink(
     mk("/adobe", "Request a Quote"),
@@ -299,6 +292,7 @@ if (process.env.NODE_ENV === "development") {
     "/software-solutions",
   );
   console.assert(fromQtyCard.family === "quantity-takeoff");
+  console.assert(fromQtyCard.productLabel === "Product");
 
   const fromPortal = quoteContextForPortalProduct({
     family: "autodesk",
@@ -314,4 +308,8 @@ if (process.env.NODE_ENV === "development") {
   );
   console.assert(portalPathSafe.family === "adobe");
   console.assert(portalPathSafe.defaultProduct === "Adobe Photoshop");
+
+  const homeQuote = quoteContextFromPathname("/");
+  console.assert(homeQuote.productLabel === "Product");
+  console.assert(homeQuote.products.length > 20);
 }

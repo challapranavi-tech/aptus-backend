@@ -44,9 +44,9 @@ type SoftwareQuoteFormProps = {
   className?: string;
   /** Routes the lead (software vs ELV inbox). */
   category?: "software" | "elv";
-  /** Dropdown label, e.g. "Adobe Product". */
+  /** Dropdown label, e.g. "Product". */
   productLabel?: string;
-  /** Family-specific product options. */
+  /** Product options shown in the multi-select. */
   products?: string[];
   /** Prefills the product select when opening from a product page. */
   defaultProduct?: string;
@@ -139,7 +139,7 @@ export function SoftwareQuoteForm({
   submitLabel = "Submit Request",
   className,
   category = "software",
-  productLabel = "Software Product",
+  productLabel = "Product",
   products = [],
   defaultProduct,
   ...formProps
