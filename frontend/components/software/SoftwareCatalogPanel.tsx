@@ -33,6 +33,7 @@ import { RenewalSerialNumberField } from "@/components/portal/RenewalSerialNumbe
 import { SoftwareBrandFilterDropdown } from "@/components/software/SoftwareBrandFilterDropdown";
 import type { ProductConfig } from "@/data/product-options";
 import { scheduleScrollToSoftwareCatalog, SOFTWARE_CATALOG_ANCHOR_ID } from "@/lib/scroll-to-software-catalog";
+import { parseCatalogBrandIds } from "@/lib/software-catalog-links";
 import type { ClientProfile } from "@/types/profile";
 import type { PortalOrder, PurchaseType } from "@/types/orders";
 
@@ -102,13 +103,15 @@ export function SoftwareCatalogPanel() {
   const searchParams = useSearchParams();
   const catalog = SOFTWARE_FULL_CATALOG;
   const brandFromUrl = searchParams.get("brand");
+  const brandIdsFromUrl = useMemo(() => {
+    const valid = new Set(catalog.map((brand) => brand.id));
+    return parseCatalogBrandIds(brandFromUrl).filter((id) => valid.has(id));
+  }, [brandFromUrl, catalog]);
+  const brandFilterKey = brandIdsFromUrl.join(",");
   const [user, setUser] = useState<ClientProfile | null>(null);
-  const [selectedBrandIds, setSelectedBrandIds] = useState<string[] | null>(() => {
-    if (brandFromUrl && catalog.some((brand) => brand.id === brandFromUrl)) {
-      return [brandFromUrl];
-    }
-    return null;
-  });
+  const [selectedBrandIds, setSelectedBrandIds] = useState<string[] | null>(() =>
+    brandIdsFromUrl.length ? brandIdsFromUrl : null,
+  );
   const [cartDuration, setCartDuration] = useState<Duration>("1year");
   const [selections, setSelections] = useState<Record<SelectionKey, Selection>>({});
   const [hydrated, setHydrated] = useState(false);
@@ -120,15 +123,13 @@ export function SoftwareCatalogPanel() {
 
   useEffect(() => {
     if (!brandFromUrl) return;
-    if (catalog.some((brand) => brand.id === brandFromUrl)) {
-      setSelectedBrandIds([brandFromUrl]);
-    }
-  }, [brandFromUrl, catalog]);
+    setSelectedBrandIds(brandIdsFromUrl.length ? brandIdsFromUrl : null);
+  }, [brandFromUrl, brandFilterKey, brandIdsFromUrl]);
 
   useEffect(() => {
-    if (!brandFromUrl) return;
+    if (!brandIdsFromUrl.length) return;
     scheduleScrollToSoftwareCatalog();
-  }, [brandFromUrl]);
+  }, [brandFilterKey, brandIdsFromUrl.length]);
 
   useEffect(() => {
     setShowAllProducts(false);

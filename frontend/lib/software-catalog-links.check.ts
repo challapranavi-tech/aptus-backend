@@ -2,7 +2,9 @@ import assert from "node:assert/strict";
 import {
   brandIdFromPageSlug,
   isCatalogBrowseAction,
+  parseCatalogBrandIds,
   resolveSoftwareCatalogHref,
+  softwareBrandsHref,
   softwareCatalogHref,
   withBrandExploreProductsAction,
 } from "./software-catalog-links.ts";
@@ -17,6 +19,14 @@ assert.equal(brandIdFromPageSlug("rib-costx"), "costx");
 assert.equal(brandIdFromPageSlug("fortinet"), "fortinet");
 
 assert.equal(softwareCatalogHref("adobe"), "/software-solutions/products?brand=adobe");
+assert.equal(
+  softwareCatalogHref(["adobe", "microsoft"]),
+  "/software-solutions/products?brand=adobe,microsoft",
+);
+assert.equal(softwareBrandsHref(), "/software-solutions/brands");
+assert.deepEqual(parseCatalogBrandIds("adobe,microsoft"), ["adobe", "microsoft"]);
+assert.deepEqual(parseCatalogBrandIds("adobe+microsoft"), ["adobe", "microsoft"]);
+assert.deepEqual(parseCatalogBrandIds(null), []);
 assert.equal(
   resolveSoftwareCatalogHref("microsoft", "#Products", "Browse Products"),
   "/software-solutions/products?brand=microsoft",

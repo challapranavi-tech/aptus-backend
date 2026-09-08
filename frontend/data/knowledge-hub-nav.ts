@@ -10,9 +10,8 @@ export const KNOWLEDGE_HUB_LINKS: KnowledgeHubLink[] = [
   { label: "Solutions in Action", href: "/customer-stories" },
   { label: "Knowledge Base", href: "/software-solutions" },
   { label: "FAQ", href: "/contact-us" },
-  { label: "Documentation", href: "/aptus-policy" },
-  { label: "Resources", href: "/why-aptus-infotech" },
-  { label: "Academy", href: "/training" },
+  { label: "Events", href: "/events" },
+  { label: "Gallery", href: "/gallery" },
 ];
 
 export const KNOWLEDGE_HUB_FEATURED = {

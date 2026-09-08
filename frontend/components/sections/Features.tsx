@@ -592,20 +592,29 @@ export function Features({ data }: FeaturesProps) {
       const isSoftware = sectionRef.current?.closest(".aptus-software-page");
       const isFlipSection = false;
 
-      gsap.from(cards, {
-        y: isSoftware ? 24 : 36,
-        opacity: isSoftware ? 1 : 0,
-        rotateY: isFlipSection ? -55 : 0,
-        transformPerspective: isFlipSection ? 900 : undefined,
-        duration: isFlipSection ? 0.85 : 0.7,
-        ease: "power3.out",
-        stagger: isFlipSection ? 0.1 : 0.12,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 82%",
-          once: true,
+      gsap.fromTo(
+        cards,
+        {
+          y: isSoftware ? 24 : 36,
+          opacity: isSoftware ? 1 : 0,
+          rotateY: isFlipSection ? -55 : 0,
         },
-      });
+        {
+          y: 0,
+          opacity: 1,
+          rotateY: 0,
+          transformPerspective: isFlipSection ? 900 : undefined,
+          duration: isFlipSection ? 0.85 : 0.7,
+          ease: "power3.out",
+          stagger: isFlipSection ? 0.1 : 0.12,
+          clearProps: "transform",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 82%",
+            once: true,
+          },
+        },
+      );
     }, sectionRef);
 
     return () => ctx.revert();
@@ -713,13 +722,17 @@ export function Features({ data }: FeaturesProps) {
           {data.items && data.items.length > 0 && (
             <div className="home-industries__grid">
               {data.items.map((item) => (
-                <article key={item.id} className="feature-card home-industries__card">
+                <article
+                  key={item.id}
+                  className="feature-card home-industries__card"
+                  data-industry={item.title || undefined}
+                >
                   {item.media && (
                     <CmsImage
                       src={item.media.src}
                       alt={item.media.alt || item.title || ""}
                       width={640}
-                      height={420}
+                      height={480}
                       className="home-industries__image"
                       sizes="(max-width: 768px) 100vw, 33vw"
                     />

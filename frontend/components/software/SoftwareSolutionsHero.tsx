@@ -1,10 +1,29 @@
 "use client";
 
-import { ExploreProductsLink } from "@/components/software/ExploreProductsLink";
+import { SOFTWARE_BRAND_LOGO_ITEMS } from "@/data/software-brand-logos";
+import { softwareBrandsHref } from "@/lib/software-catalog-links";
+import Link from "next/link";
+
+/** Brand logos that drift slowly behind the software hero copy. */
+const HERO_LOGOS = SOFTWARE_BRAND_LOGO_ITEMS.filter((brand) => Boolean(brand.logoSrc)).slice(0, 12);
 
 export function SoftwareSolutionsHero() {
   return (
     <section className="aptus-software-catalog-hero" aria-labelledby="software-catalog-heading">
+      <div className="aptus-software-catalog-hero__logo-field" aria-hidden>
+        {HERO_LOGOS.map((brand, index) => (
+          <span
+            key={brand.id}
+            className={`aptus-software-catalog-hero__logo-piece aptus-software-catalog-hero__logo-piece--${index + 1}`}
+            style={{ animationDelay: `${index * -0.85}s` }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={brand.logoSrc!} alt="" loading="eager" decoding="async" />
+          </span>
+        ))}
+      </div>
+      <div className="aptus-software-catalog-hero__overlay" aria-hidden />
+
       <div className="aptus-software-catalog-hero__content">
         <h1 id="software-catalog-heading" className="aptus-software-catalog-hero__title aptus-software-catalog-hero__title--glow">
           Premium Software Solutions for Modern Businesses
@@ -28,9 +47,12 @@ export function SoftwareSolutionsHero() {
         </div>
 
         <div className="aptus-software-catalog-hero__actions">
-          <ExploreProductsLink className="aptus-software-catalog-hero__btn aptus-software-catalog-hero__btn--primary">
+          <Link
+            href={softwareBrandsHref()}
+            className="aptus-software-catalog-hero__btn aptus-software-catalog-hero__btn--primary"
+          >
             Explore products
-          </ExploreProductsLink>
+          </Link>
         </div>
       </div>
     </section>

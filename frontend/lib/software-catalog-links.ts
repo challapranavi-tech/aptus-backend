@@ -38,11 +38,33 @@ export function brandIdFromPageSlug(slug: string): string | undefined {
   return undefined;
 }
 
-/** Main software catalog URL, optionally filtered to one brand. */
-export function softwareCatalogHref(brandId?: string): string {
+/** Brands picker shown from software-home Explore products. */
+export function softwareBrandsHref(): string {
+  return "/software-solutions/brands";
+}
+
+/** Parse `?brand=adobe` or `?brand=adobe,microsoft` into catalog brand ids. */
+export function parseCatalogBrandIds(param: string | null | undefined): string[] {
+  if (!param?.trim()) return [];
+  const seen = new Set<string>();
+  const ids: string[] = [];
+  for (const part of param.split(/[,+]/)) {
+    const id = part.trim();
+    if (!id || seen.has(id)) continue;
+    seen.add(id);
+    ids.push(id);
+  }
+  return ids;
+}
+
+/** Main software catalog URL, optionally filtered to one or more brands. */
+export function softwareCatalogHref(brandIds?: string | string[]): string {
   const base = "/software-solutions/products";
-  if (!brandId) return base;
-  return `${base}?brand=${encodeURIComponent(brandId)}`;
+  const ids = (Array.isArray(brandIds) ? brandIds : brandIds ? [brandIds] : [])
+    .map((id) => id.trim())
+    .filter(Boolean);
+  if (!ids.length) return base;
+  return `${base}?brand=${ids.map(encodeURIComponent).join(",")}`;
 }
 
 /** Rewrite in-page #Products / Browse Products links to the unified catalog. */

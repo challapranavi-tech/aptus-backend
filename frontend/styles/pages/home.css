@@ -591,17 +591,18 @@
     display: grid;
     gap: 1rem;
     grid-template-columns: 1fr;
+    align-items: stretch;
   }
 
   @media (min-width: 640px) {
     .page-home .home-industries__grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
   @media (min-width: 1024px) {
     .page-home .home-industries__grid {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1.15rem;
     }
   }
@@ -610,7 +611,10 @@
     position: relative;
     overflow: hidden;
     border-radius: 1.1rem;
+    width: 100%;
     aspect-ratio: 4 / 3;
+    height: auto;
+    min-height: 0;
     background: #e5e7eb;
     border: 1px solid rgba(19, 82, 163, 0.14);
     box-shadow:
@@ -644,11 +648,41 @@
     transform: scale(1.04);
   }
 
+  /* Next/Image wrapper + img must fill the 4:3 tile equally */
+  .page-home .home-industries__card > span,
+  .page-home .home-industries__media {
+    position: absolute !important;
+    inset: 0;
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
   .page-home .home-industries__image {
-    width: 100%;
-    height: 100%;
+    position: absolute !important;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
     object-fit: cover;
+    object-position: center center;
     transition: transform 0.35s ease;
+  }
+
+  .page-home .home-industries__card[data-industry="Transportation"] .home-industries__image {
+    object-position: center 58%;
+  }
+
+  .page-home .home-industries__card[data-industry="Education"] .home-industries__image {
+    object-position: center 40%;
+  }
+
+  .page-home .home-industries__card[data-industry="Oil & Gas"] .home-industries__image,
+  .page-home .home-industries__card[data-industry="Defence"] .home-industries__image {
+    object-fit: contain;
+    object-position: center;
+    background: #fff;
+    padding: 1.25rem;
   }
 
   .page-home .home-industries__overlay {
@@ -1079,24 +1113,28 @@
     display: grid;
     gap: 1.15rem;
     grid-template-columns: 1fr;
+    align-items: stretch;
   }
 
   @media (min-width: 640px) {
     .page-home .home-why-choose__grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
   @media (min-width: 1100px) {
     .page-home .home-why-choose__grid {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
 
   .page-home .home-why-choose__card {
     display: flex;
     flex-direction: column;
+    align-self: stretch;
     height: 100%;
+    min-height: 100%;
+    margin: 0;
     padding: 1.65rem 1.4rem;
     border-radius: 1rem;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.06) 100%);
@@ -1106,6 +1144,7 @@
       0 4px 0 rgba(0, 0, 0, 0.22),
       0 10px 24px rgba(0, 0, 0, 0.18);
     cursor: default;
+    transform: none;
     transition:
       transform 0.2s ease,
       box-shadow 0.2s ease,
