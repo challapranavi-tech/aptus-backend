@@ -7,15 +7,43 @@ import { NextRequest, NextResponse } from "next/server";
 export const maxDuration = 60;
 
 function backendBase(): string {
-  return (
+  const raw = (
     process.env.APTUS_API_URL ??
     process.env.NEXT_PUBLIC_API_URL ??
-    "http://localhost:3001"
+    ""
   ).replace(/\/$/, "");
+
+  const onVercel = Boolean(process.env.VERCEL);
+  const isLocal =
+    !raw || /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(raw);
+
+  if (onVercel && isLocal) {
+    throw new Error(
+      "APTUS_API_URL is missing or points at localhost. Set it to the deployed backend URL in Vercel → frontend env.",
+    );
+  }
+
+  return raw || "http://localhost:3001";
 }
 
 export async function POST(req: NextRequest) {
-  const target = `${backendBase()}/api/talk-to-expert`;
+  let target: string;
+  try {
+    target = `${backendBase()}/api/talk-to-expert`;
+  } catch (err) {
+    console.error(
+      "[api/talk-to-expert proxy] misconfigured:",
+      err instanceof Error ? err.message : err,
+    );
+    return NextResponse.json(
+      {
+        error:
+          "We couldn't save your details right now. Please try again or contact our sales team.",
+      },
+      { status: 503 },
+    );
+  }
+
   const contentType = req.headers.get("content-type") ?? "";
 
   try {

@@ -134,6 +134,38 @@ export function crmTeamConfig(category?: ContactCategory): {
   };
 }
 
+/** Default Odoo CRM stage name for Talk to Expert website leads. */
+export const TALK_TO_EXPERT_STAGE_NAME_DEFAULT = "Website cold calling leads";
+
+/**
+ * Pipeline placement for Talk to Expert chatbot leads.
+ * Prefer ODOO_CRM_TALK_TO_EXPERT_STAGE_ID; name lookup fills stage when unset.
+ */
+export function talkToExpertCrmConfig(): {
+  teamId: number | undefined;
+  stageId: number | undefined;
+} {
+  function positiveInt(raw: string | undefined): number | undefined {
+    const n = Number(raw?.trim() ?? "");
+    return Number.isInteger(n) && n > 0 ? n : undefined;
+  }
+
+  return {
+    teamId:
+      positiveInt(process.env.ODOO_CRM_TALK_TO_EXPERT_TEAM_ID) ??
+      positiveInt(process.env.ODOO_CRM_SOFTWARE_TEAM_ID) ??
+      positiveInt(process.env.ODOO_CRM_TEAM_ID),
+    stageId: positiveInt(process.env.ODOO_CRM_TALK_TO_EXPERT_STAGE_ID),
+  };
+}
+
+export function talkToExpertStageName(): string {
+  return (
+    process.env.ODOO_CRM_TALK_TO_EXPERT_STAGE_NAME?.trim() ||
+    TALK_TO_EXPERT_STAGE_NAME_DEFAULT
+  );
+}
+
 async function withAuthRetry<T>(fn: (session: OdooRpcSession) => Promise<T>): Promise<T> {
   const {
     getOdooServiceSession,
@@ -346,8 +378,16 @@ export function buildCrmLeadValues(
   }
 
   // Software pages → SOFTWARE company; ELV/Infrastructure pages → INFRA company.
-  // Talk to Expert stays unscoped so it is not mixed into quote company queues.
-  if (!isTalkToExpert) {
+  // Talk to Expert → Software company + dedicated "Website cold calling leads" stage.
+  if (isTalkToExpert) {
+    const softwareCompany = Number(process.env.ODOO_SOFTWARE_COMPANY_ID);
+    if (Number.isInteger(softwareCompany) && softwareCompany > 0) {
+      values.company_id = softwareCompany;
+    }
+    const { teamId, stageId } = talkToExpertCrmConfig();
+    if (teamId) values.team_id = teamId;
+    if (stageId) values.stage_id = stageId;
+  } else {
     const companyId = companyIdForCategory(input.category);
     if (companyId) values.company_id = companyId;
 
@@ -356,9 +396,10 @@ export function buildCrmLeadValues(
     if (stageId) values.stage_id = stageId;
   }
 
-  // Omit user_id so Sales Team / New is visible; false breaks some Odoo DBs.
+  // Omit user_id so Sales Team / New is visible. `false` breaks some Odoo DBs;
+  // Talk to Expert never sends it (retry path still strips it for quotes).
   const unassign = process.env.ODOO_CRM_UNASSIGN !== "0";
-  if (unassign) values.user_id = false;
+  if (unassign && !isTalkToExpert) values.user_id = false;
 
   return values;
 }
@@ -374,6 +415,25 @@ export async function findPartnerIdByEmail(email: string): Promise<number | unde
       session,
       "res.partner",
       [["email", "=ilike", trimmed]],
+      { fields: ["id"], limit: 1 },
+    );
+    return rows[0]?.id;
+  });
+}
+
+/** Find crm.stage id by name (e.g. "Website cold calling leads"). */
+export async function findCrmStageIdByName(
+  name: string,
+): Promise<number | undefined> {
+  const trimmed = name.trim();
+  if (!trimmed) return undefined;
+
+  return withAuthRetry(async (session) => {
+    const { searchRead } = await import("./rpc");
+    const rows = await searchRead<{ id: number }>(
+      session,
+      "crm.stage",
+      [["name", "=ilike", trimmed]],
       { fields: ["id"], limit: 1 },
     );
     return rows[0]?.id;
@@ -426,6 +486,26 @@ export async function createCrmLead(input: CrmLeadInput): Promise<number> {
   };
 
   const values = buildCrmLeadValues(input);
+
+  // Talk to Expert: if no stage id in env, resolve "Website cold calling leads" by name.
+  if (input.channel === "talk-to-expert" && !values.stage_id) {
+    try {
+      const stageId = await findCrmStageIdByName(talkToExpertStageName());
+      if (stageId) values.stage_id = stageId;
+      else {
+        console.warn(
+          `[crm] Talk to Expert stage not found (name="${talkToExpertStageName()}"). ` +
+            `Set ODOO_CRM_TALK_TO_EXPERT_STAGE_ID or rename the Odoo stage.`,
+        );
+      }
+    } catch (err) {
+      console.warn(
+        "[crm] Talk to Expert stage lookup failed:",
+        err instanceof Error ? err.message : err,
+      );
+    }
+  }
+
   try {
     return await run(values);
   } catch (err) {

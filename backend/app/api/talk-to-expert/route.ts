@@ -127,62 +127,51 @@ export async function POST(req: NextRequest) {
 
   if (!isOdooConfigured()) {
     console.error("[talk-to-expert] Odoo is not configured.");
-    return jsonCors(
-      req,
-      {
-        error:
-          "We couldn't save your details right now. Please try again or contact our sales team.",
-      },
-      { status: 503 },
-    );
   }
 
   const { firstName, lastName } = splitName(name);
   let partnerId: number | undefined;
-  try {
-    partnerId = await findPartnerIdByEmail(email);
-  } catch (err) {
-    console.warn(
-      "[talk-to-expert] partner lookup failed:",
-      err instanceof Error ? err.message : err,
-    );
-  }
+  let leadId: number | null = null;
 
-  let leadId: number;
-  try {
-    leadId = await createCrmLead({
-      firstName,
-      lastName,
-      company: "",
-      email,
-      phone,
-      contactName: name,
-      partnerId,
-      channel: "talk-to-expert",
-      message: "Lead captured from Talk to an Expert chatbot.",
-    });
-    console.info(
-      `[talk-to-expert] crm.lead #${leadId} created email=${email}`,
-    );
-  } catch (err) {
-    console.error(
-      "[talk-to-expert] CRM create failed:",
-      err instanceof Error ? err.message : err,
-    );
-    return jsonCors(
-      req,
-      {
-        error:
-          "We couldn't save your details right now. Please try again or contact our sales team.",
-      },
-      { status: 502 },
-    );
+  if (isOdooConfigured()) {
+    try {
+      partnerId = await findPartnerIdByEmail(email);
+    } catch (err) {
+      console.warn(
+        "[talk-to-expert] partner lookup failed:",
+        err instanceof Error ? err.message : err,
+      );
+    }
+
+    try {
+      leadId = await createCrmLead({
+        firstName,
+        lastName,
+        company: "",
+        email,
+        phone,
+        contactName: name,
+        partnerId,
+        channel: "talk-to-expert",
+        message: "Lead captured from Talk to an Expert chatbot.",
+      });
+      console.info(
+        `[talk-to-expert] crm.lead #${leadId} created email=${email}`,
+      );
+    } catch (err) {
+      console.error(
+        "[talk-to-expert] CRM create failed:",
+        err instanceof Error ? err.message : err,
+      );
+      // Do not block the chatbot — still acknowledge contact and send thank-you.
+      leadId = null;
+    }
   }
 
   if (isMailConfigured()) {
     const thankYou = formatEnquiryThankYouEmail({
       customerName: name,
-      enquiryId: `TTE-${leadId}`,
+      enquiryId: leadId ? `TTE-${leadId}` : `TTE-${Date.now()}`,
       productName: "Talk to an Expert",
       enquiryDate: formatMuscatDateTime(),
       enquirySummary:
@@ -195,15 +184,19 @@ export async function POST(req: NextRequest) {
     });
     if (!thankYouResult.ok) {
       console.warn(
-        `[talk-to-expert] customer thank-you failed lead=#${leadId}:`,
+        `[talk-to-expert] customer thank-you failed lead=#${leadId ?? "none"}:`,
         thankYouResult.error,
       );
     }
   } else {
     console.warn(
-      `[talk-to-expert] thank-you skipped (mail not configured) lead=#${leadId}`,
+      `[talk-to-expert] thank-you skipped (mail not configured) lead=#${leadId ?? "none"}`,
     );
   }
 
-  return jsonCors(req, { ok: true, leadId });
+  return jsonCors(req, {
+    ok: true,
+    leadId: leadId ?? undefined,
+    crmSynced: leadId != null,
+  });
 }

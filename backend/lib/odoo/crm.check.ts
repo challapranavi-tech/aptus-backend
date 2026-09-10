@@ -86,6 +86,23 @@ assert.equal(expert.type, "opportunity");
 assert.match(String(expert.description), /Source: Website – Talk to an Expert/);
 assert.equal(expert.company_id, undefined);
 assert.equal(expert.team_id, undefined);
+assert.equal(expert.stage_id, undefined);
+
+process.env.ODOO_CRM_TALK_TO_EXPERT_STAGE_ID = "42";
+process.env.ODOO_CRM_TALK_TO_EXPERT_TEAM_ID = "7";
+const expertStaged = buildCrmLeadValues({
+  firstName: "Noor",
+  lastName: "Al Said",
+  company: "",
+  email: "noor@example.com",
+  phone: "+96891234567",
+  contactName: "Noor Al Said",
+  channel: "talk-to-expert",
+});
+assert.equal(expertStaged.stage_id, 42);
+assert.equal(expertStaged.team_id, 7);
+delete process.env.ODOO_CRM_TALK_TO_EXPERT_STAGE_ID;
+delete process.env.ODOO_CRM_TALK_TO_EXPERT_TEAM_ID;
 
 // Multi-company routing: category decides company_id, no frontend input involved.
 process.env.ODOO_SOFTWARE_COMPANY_ID = "1";
