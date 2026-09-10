@@ -78,8 +78,9 @@ function parseTalkToExpertBody(raw: unknown): {
 }
 
 /**
- * Talk to an Expert chatbot lead gate → Odoo CRM + customer thank-you email.
- * Creates a distinctly named opportunity ("Talk to an Expert – …").
+ * Talk to an Expert chatbot → Odoo CRM Pipeline + customer thank-you email.
+ * Creates an opportunity titled "Talk to an Expert – …" in stage
+ * "Website cold calling leads" (or ODOO_CRM_TALK_TO_EXPERT_STAGE_ID).
  * Does not notify the sales inbox.
  */
 export async function POST(req: NextRequest) {

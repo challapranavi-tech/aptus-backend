@@ -41,6 +41,7 @@ export {
   talkToExpertCrmConfig,
   talkToExpertStageName,
   findCrmStageIdByName,
+  resolveTalkToExpertPlacement,
   TALK_TO_EXPERT_STAGE_NAME_DEFAULT,
   nextRequestQuoteRef,
   ensureRequestQuoteSequence,

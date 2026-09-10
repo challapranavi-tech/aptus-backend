@@ -355,9 +355,10 @@ export function buildCrmLeadValues(
     partner_name: isTalkToExpert || isIndividual ? "" : companyName,
     phone: input.phone.trim(),
     description,
-    // Talk to Expert → CRM Leads (stage "Website cold calling leads").
-    // Quotes stay as Pipeline opportunities.
-    type: isTalkToExpert ? "lead" : "opportunity",
+    // Talk to Expert + quotes both land in CRM Pipeline (opportunities).
+    // The "Website cold calling leads" column is a Pipeline stage — type=lead
+    // hid records from My Pipeline / team pipelines where that stage lives.
+    type: "opportunity",
   };
 
   const email = input.email.trim();
@@ -426,19 +427,118 @@ export async function findPartnerIdByEmail(email: string): Promise<number | unde
 export async function findCrmStageIdByName(
   name: string,
 ): Promise<number | undefined> {
+  const placement = await findCrmStagePlacementByName(name);
+  return placement?.stageId;
+}
+
+type CrmStagePlacement = {
+  stageId: number;
+  /** First sales team linked to the stage, if any. */
+  teamId?: number;
+};
+
+/**
+ * Resolve stage + matching sales team. Odoo resets stage_id when team_id does
+ * not match the stage's team_ids domain — so team must come from the stage.
+ */
+export async function findCrmStagePlacementByName(
+  name: string,
+): Promise<CrmStagePlacement | undefined> {
   const trimmed = name.trim();
   if (!trimmed) return undefined;
 
   return withAuthRetry(async (session) => {
     const { searchRead } = await import("./rpc");
-    const rows = await searchRead<{ id: number }>(
+    const rows = await searchRead<{
+      id: number;
+      team_id: [number, string] | false;
+      team_ids: number[] | false;
+    }>(
       session,
       "crm.stage",
       [["name", "=ilike", trimmed]],
-      { fields: ["id"], limit: 1 },
+      { fields: ["id", "team_id", "team_ids"], limit: 1 },
     );
-    return rows[0]?.id;
+    const stage = rows[0];
+    if (!stage) return undefined;
+    return placementFromStageRow(stage);
   });
+}
+
+export async function findCrmStagePlacementById(
+  stageId: number,
+): Promise<CrmStagePlacement | undefined> {
+  if (!Number.isInteger(stageId) || stageId <= 0) return undefined;
+
+  return withAuthRetry(async (session) => {
+    const { searchRead } = await import("./rpc");
+    const rows = await searchRead<{
+      id: number;
+      team_id: [number, string] | false;
+      team_ids: number[] | false;
+    }>(
+      session,
+      "crm.stage",
+      [["id", "=", stageId]],
+      { fields: ["id", "team_id", "team_ids"], limit: 1 },
+    );
+    const stage = rows[0];
+    if (!stage) return undefined;
+    return placementFromStageRow(stage);
+  });
+}
+
+function placementFromStageRow(stage: {
+  id: number;
+  team_id: [number, string] | false;
+  team_ids: number[] | false;
+}): CrmStagePlacement {
+  const fromTeamIds =
+    Array.isArray(stage.team_ids) && stage.team_ids.length > 0
+      ? stage.team_ids[0]
+      : undefined;
+  const fromTeamId = Array.isArray(stage.team_id) ? stage.team_id[0] : undefined;
+  return {
+    stageId: stage.id,
+    teamId: fromTeamIds ?? fromTeamId,
+  };
+}
+
+/**
+ * Talk to Expert must land on the configured Pipeline stage (and its team).
+ * Throws when the stage cannot be resolved — do not silently use "New".
+ */
+export async function resolveTalkToExpertPlacement(): Promise<{
+  stageId: number;
+  teamId?: number;
+}> {
+  const { teamId: envTeamId, stageId: envStageId } = talkToExpertCrmConfig();
+  const stageName = talkToExpertStageName();
+
+  let placement: CrmStagePlacement | undefined;
+  if (envStageId) {
+    placement = await findCrmStagePlacementById(envStageId);
+    if (!placement) {
+      throw new Error(
+        `ODOO_CRM_TALK_TO_EXPERT_STAGE_ID=${envStageId} was not found in Odoo crm.stage. ` +
+          `Open CRM → Configuration → Stages, confirm the id for "${stageName}", and update the env var.`,
+      );
+    }
+  } else {
+    placement = await findCrmStagePlacementByName(stageName);
+    if (!placement) {
+      throw new Error(
+        `CRM stage "${stageName}" was not found. Create it under CRM → Configuration → Stages ` +
+          `(or on the Sales Team pipeline), then set ODOO_CRM_TALK_TO_EXPERT_STAGE_ID to its id.`,
+      );
+    }
+  }
+
+  // Prefer the stage's team so Odoo does not recompute stage_id away.
+  return {
+    stageId: placement.stageId,
+    teamId: placement.teamId ?? envTeamId,
+  };
 }
 
 /** Deep-link to open a crm.lead / opportunity form in Odoo. */
@@ -488,27 +588,34 @@ export async function createCrmLead(input: CrmLeadInput): Promise<number> {
 
   const values = buildCrmLeadValues(input);
 
-  // Talk to Expert: if no stage id in env, resolve "Website cold calling leads" by name.
-  if (input.channel === "talk-to-expert" && !values.stage_id) {
-    try {
-      const stageId = await findCrmStageIdByName(talkToExpertStageName());
-      if (stageId) values.stage_id = stageId;
-      else {
-        console.warn(
-          `[crm] Talk to Expert stage not found (name="${talkToExpertStageName()}"). ` +
-            `Set ODOO_CRM_TALK_TO_EXPERT_STAGE_ID or rename the Odoo stage.`,
-        );
-      }
-    } catch (err) {
-      console.warn(
-        "[crm] Talk to Expert stage lookup failed:",
-        err instanceof Error ? err.message : err,
-      );
-    }
+  // Talk to Expert: always bind Pipeline stage + matching sales team.
+  if (input.channel === "talk-to-expert") {
+    const placement = await resolveTalkToExpertPlacement();
+    values.stage_id = placement.stageId;
+    if (placement.teamId) values.team_id = placement.teamId;
   }
 
   try {
-    return await run(values);
+    const leadId = await run(values);
+    // Odoo may recompute stage on create — force the intended column.
+    if (input.channel === "talk-to-expert" && values.stage_id) {
+      try {
+        await withAuthRetry(async (session) => {
+          const { write } = await import("./rpc");
+          const patch: Record<string, unknown> = {
+            stage_id: values.stage_id,
+          };
+          if (values.team_id) patch.team_id = values.team_id;
+          await write(session, "crm.lead", leadId, patch);
+        });
+      } catch (err) {
+        console.warn(
+          "[crm] Talk to Expert stage re-write failed:",
+          err instanceof Error ? err.message : err,
+        );
+      }
+    }
+    return leadId;
   } catch (err) {
     // Some DBs reject user_id: false — retry without it.
     if (!("user_id" in values)) throw err;

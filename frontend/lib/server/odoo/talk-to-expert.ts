@@ -31,71 +31,74 @@ function talkToExpertStageName(): string {
 }
 
 async function resolveStageAndTeam(client: OdooClient): Promise<{
-  stageId?: number;
+  stageId: number;
   teamId?: number;
 }> {
-  const stageId = talkToExpertStageIdFromEnv();
+  const envStageId = talkToExpertStageIdFromEnv();
   const envTeamId = talkToExpertTeamIdFromEnv();
+  const stageName = talkToExpertStageName();
 
-  if (stageId) {
-    try {
-      const stages = await client.read<{
+  const readPlacement = async (stageId: number) => {
+    const stages = await client.read<{
+      id: number;
+      team_id: [number, string] | false;
+      team_ids: number[] | false;
+    }>("crm.stage", [stageId], ["id", "team_id", "team_ids"]);
+    return stages[0];
+  };
+
+  let stage:
+    | {
         id: number;
         team_id: [number, string] | false;
         team_ids: number[] | false;
-      }>(
-        "crm.stage",
-        [stageId],
-        ["id", "team_id", "team_ids"],
-      );
-      const stage = stages[0];
-      if (stage) {
-        const fromTeamIds =
-          Array.isArray(stage.team_ids) && stage.team_ids.length > 0
-            ? stage.team_ids[0]
-            : undefined;
-        const fromTeamId = Array.isArray(stage.team_id)
-          ? stage.team_id[0]
-          : undefined;
-        return {
-          stageId: stage.id,
-          teamId: envTeamId ?? fromTeamIds ?? fromTeamId,
-        };
       }
-    } catch {
-      /* stage read optional */
-    }
-    return { stageId, teamId: envTeamId };
-  }
+    | undefined;
 
-  const name = talkToExpertStageName();
-  const rows = await client.searchRead<{
-    id: number;
-    team_id: [number, string] | false;
-    team_ids: number[] | false;
-  }>(
-    "crm.stage",
-    [["name", "=ilike", name]],
-    ["id", "team_id", "team_ids"],
-    1,
-  );
-  const stage = rows[0];
-  if (!stage) return { teamId: envTeamId };
+  if (envStageId) {
+    stage = await readPlacement(envStageId);
+    if (!stage) {
+      throw new Error(
+        `ODOO_CRM_TALK_TO_EXPERT_STAGE_ID=${envStageId} was not found in Odoo. ` +
+          `Confirm the id for "${stageName}" under CRM → Configuration → Stages.`,
+      );
+    }
+  } else {
+    const rows = await client.searchRead<{
+      id: number;
+      team_id: [number, string] | false;
+      team_ids: number[] | false;
+    }>(
+      "crm.stage",
+      [["name", "=ilike", stageName]],
+      ["id", "team_id", "team_ids"],
+      1,
+    );
+    stage = rows[0];
+    if (!stage) {
+      throw new Error(
+        `CRM stage "${stageName}" was not found. Create it on the Sales Team pipeline ` +
+          `(CRM → Sales → Teams → Pipeline), then set ODOO_CRM_TALK_TO_EXPERT_STAGE_ID.`,
+      );
+    }
+  }
 
   const fromTeamIds =
     Array.isArray(stage.team_ids) && stage.team_ids.length > 0
       ? stage.team_ids[0]
       : undefined;
   const fromTeamId = Array.isArray(stage.team_id) ? stage.team_id[0] : undefined;
+
   return {
     stageId: stage.id,
-    teamId: envTeamId ?? fromTeamIds ?? fromTeamId,
+    // Prefer the stage's team so Odoo does not reset stage_id.
+    teamId: fromTeamIds ?? fromTeamId ?? envTeamId,
   };
 }
 
 /**
- * Create a Talk to Expert CRM lead (type=lead) in Odoo.
- * Uses the same ODOO_* env as the customer portal when available.
+ * Create a Talk to Expert CRM opportunity in the Pipeline stage
+ * "Website cold calling leads" (or ODOO_CRM_TALK_TO_EXPERT_STAGE_ID).
  */
 export async function createTalkToExpertLead(input: {
   name: string;
@@ -118,13 +121,29 @@ export async function createTalkToExpertLead(input: {
   const email = input.email.trim();
   const phone = input.phone.trim();
 
+  let stageId: number;
+  let teamId: number | undefined;
+  try {
+    const placement = await resolveStageAndTeam(client);
+    stageId = placement.stageId;
+    teamId = placement.teamId;
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    logger.error("Talk to Expert: CRM stage unresolved", {
+      action: "talk-to-expert",
+      error: message,
+    });
+    return { leadId: null, crmSynced: false, error: message };
+  }
+
   const values: Record<string, unknown> = {
     name: `Talk to an Expert – ${contactName || "Website lead"}`,
     contact_name: contactName,
     phone,
     email_from: email,
-    // Leads menu (not Pipeline) — matches "Website cold calling leads" stage.
-    type: "lead",
+    // Pipeline opportunity — same view as Request Quote / My Pipeline.
+    type: "opportunity",
+    stage_id: stageId,
     description: [
       `Name: ${contactName || "—"}`,
       `Email: ${email || "—"}`,
@@ -133,47 +152,40 @@ export async function createTalkToExpertLead(input: {
     ].join(", "),
   };
 
+  if (teamId) values.team_id = teamId;
+
   const companyId = talkToExpertCompanyIdFromEnv();
   if (companyId) values.company_id = companyId;
 
-  try {
-    const { stageId, teamId } = await resolveStageAndTeam(client);
-    if (stageId) values.stage_id = stageId;
-    if (teamId) values.team_id = teamId;
-    if (!stageId) {
-      logger.warn("Talk to Expert: CRM stage not found", {
-        action: "talk-to-expert",
-        stageName: talkToExpertStageName(),
-      });
-    }
-  } catch (err) {
-    logger.warn("Talk to Expert: stage lookup failed", {
-      action: "talk-to-expert",
-      error: err instanceof Error ? err.message : String(err),
-    });
-  }
-
   const attempts: Record<string, unknown>[] = [values];
-  // Fallbacks if company/stage constraints reject the create.
+  // Company mismatch is common; retry without company_id only.
   if (values.company_id) {
     const { company_id: _c, ...noCompany } = values;
     attempts.push(noCompany);
-  }
-  if (values.stage_id) {
-    const { stage_id: _s, team_id: _t, ...noStage } = values;
-    attempts.push(noStage);
   }
 
   let lastError = "";
   for (const attempt of attempts) {
     try {
       const leadId = await client.create("crm.lead", attempt);
-      logger.info("Talk to Expert CRM lead created", {
+      try {
+        await client.write("crm.lead", [leadId], {
+          stage_id: stageId,
+          ...(teamId ? { team_id: teamId } : {}),
+        });
+      } catch (writeErr) {
+        logger.warn("Talk to Expert: stage re-write failed", {
+          action: "talk-to-expert",
+          leadId,
+          error: writeErr instanceof Error ? writeErr.message : String(writeErr),
+        });
+      }
+      logger.info("Talk to Expert CRM opportunity created", {
         action: "talk-to-expert",
         leadId,
-        stageId: attempt.stage_id ?? null,
-        teamId: attempt.team_id ?? null,
-        type: attempt.type,
+        stageId,
+        teamId: teamId ?? null,
+        type: "opportunity",
       });
       return { leadId, crmSynced: true };
     } catch (err) {

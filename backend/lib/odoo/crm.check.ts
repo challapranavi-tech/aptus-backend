@@ -68,6 +68,15 @@ const contact = buildCrmLeadValues({
 });
 assert.equal(contact.name, "Website contact – Sam Lee");
 
+const savedTalkStage = process.env.ODOO_CRM_TALK_TO_EXPERT_STAGE_ID;
+const savedTalkTeam = process.env.ODOO_CRM_TALK_TO_EXPERT_TEAM_ID;
+const savedSoftTeam = process.env.ODOO_CRM_SOFTWARE_TEAM_ID;
+const savedCrmTeam = process.env.ODOO_CRM_TEAM_ID;
+delete process.env.ODOO_CRM_TALK_TO_EXPERT_STAGE_ID;
+delete process.env.ODOO_CRM_TALK_TO_EXPERT_TEAM_ID;
+delete process.env.ODOO_CRM_SOFTWARE_TEAM_ID;
+delete process.env.ODOO_CRM_TEAM_ID;
+
 const expert = buildCrmLeadValues({
   firstName: "Noor",
   lastName: "Al Said",
@@ -82,7 +91,7 @@ assert.equal(expert.name, "Talk to an Expert – Noor Al Said");
 assert.equal(expert.contact_name, "Noor Al Said");
 assert.equal(expert.partner_name, "");
 assert.equal(expert.email_from, "noor@example.com");
-assert.equal(expert.type, "lead");
+assert.equal(expert.type, "opportunity");
 assert.match(String(expert.description), /Source: Website – Talk to an Expert/);
 assert.equal(expert.company_id, undefined);
 assert.equal(expert.team_id, undefined);
@@ -103,6 +112,19 @@ assert.equal(expertStaged.stage_id, 42);
 assert.equal(expertStaged.team_id, 7);
 delete process.env.ODOO_CRM_TALK_TO_EXPERT_STAGE_ID;
 delete process.env.ODOO_CRM_TALK_TO_EXPERT_TEAM_ID;
+
+if (savedTalkStage !== undefined) {
+  process.env.ODOO_CRM_TALK_TO_EXPERT_STAGE_ID = savedTalkStage;
+}
+if (savedTalkTeam !== undefined) {
+  process.env.ODOO_CRM_TALK_TO_EXPERT_TEAM_ID = savedTalkTeam;
+}
+if (savedSoftTeam !== undefined) {
+  process.env.ODOO_CRM_SOFTWARE_TEAM_ID = savedSoftTeam;
+}
+if (savedCrmTeam !== undefined) {
+  process.env.ODOO_CRM_TEAM_ID = savedCrmTeam;
+}
 
 // Multi-company routing: category decides company_id, no frontend input involved.
 process.env.ODOO_SOFTWARE_COMPANY_ID = "1";
