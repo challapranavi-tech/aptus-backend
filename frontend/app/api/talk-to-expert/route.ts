@@ -6,6 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
  * Talk to Expert contact gate.
  * 1) Prefer backend API when APTUS_API_URL is set (backend holds Odoo + stage id).
  * 2) Else create via frontend Odoo (portal ODOO_* vars).
+ * Fails loudly when CRM does not sync so missing env is obvious.
  */
 export const maxDuration = 60;
 
@@ -66,9 +67,18 @@ async function tryBackendProxy(payload: {
   name: string;
   email: string;
   phone: string;
-}): Promise<{ ok: true; data: Record<string, unknown> } | { ok: false }> {
+}): Promise<
+  | { ok: true; data: Record<string, unknown> }
+  | { ok: false; detail: string }
+> {
   const base = backendBase();
-  if (!base) return { ok: false };
+  if (!base) {
+    return {
+      ok: false,
+      detail:
+        "Frontend APTUS_API_URL is missing or points to localhost. Set it to your backend Vercel URL.",
+    };
+  }
 
   try {
     const upstream = await fetch(`${base}/api/talk-to-expert`, {
@@ -81,21 +91,26 @@ async function tryBackendProxy(payload: {
       string,
       unknown
     >;
-    if (upstream.ok && data.ok === true) {
+    if (upstream.ok && data.ok === true && data.crmSynced !== false) {
       return { ok: true, data };
     }
-    console.error(
-      "[api/talk-to-expert] backend proxy non-ok:",
-      upstream.status,
-      data,
-    );
-    return { ok: false };
+    if (upstream.ok && data.ok === true && data.crmSynced === false) {
+      return {
+        ok: false,
+        detail:
+          "Backend reached, but CRM did not sync. Check backend ODOO_URL / ODOO_DB / ODOO_USER / ODOO_API_KEY and ODOO_CRM_TALK_TO_EXPERT_STAGE_ID=10.",
+      };
+    }
+    const errMsg =
+      typeof data.error === "string"
+        ? data.error
+        : `Backend returned HTTP ${upstream.status}.`;
+    return { ok: false, detail: errMsg };
   } catch (err) {
-    console.error(
-      "[api/talk-to-expert] backend proxy error:",
-      err instanceof Error ? err.message : err,
-    );
-    return { ok: false };
+    return {
+      ok: false,
+      detail: `Could not reach backend (${err instanceof Error ? err.message : "network error"}). Check APTUS_API_URL.`,
+    };
   }
 }
 
@@ -113,14 +128,14 @@ export async function POST(req: NextRequest) {
   }
 
   const { name, email, phone } = parsed.data;
+  const errors: string[] = [];
 
-  // 1) Backend first — usually where Odoo + stage id are configured.
   const proxied = await tryBackendProxy({ name, email, phone });
   if (proxied.ok) {
     return NextResponse.json(proxied.data);
   }
+  errors.push(proxied.detail);
 
-  // 2) Frontend Odoo (portal credentials).
   if (isOdooConfigured()) {
     const result = await createTalkToExpertLead({ name, email, phone });
     if (result.crmSynced) {
@@ -130,18 +145,36 @@ export async function POST(req: NextRequest) {
         crmSynced: true,
       });
     }
-    console.error("[api/talk-to-expert] frontend Odoo create failed:", result.error);
+    errors.push(
+      result.error
+        ? `Frontend Odoo create failed: ${result.error}`
+        : "Frontend Odoo create failed.",
+    );
   } else {
-    console.error(
-      "[api/talk-to-expert] No APTUS_API_URL and Odoo is not configured on frontend.",
+    errors.push(
+      "Frontend ODOO_* vars are not set (copy ODOO_URL, ODOO_DB, ODOO_USER, ODOO_API_KEY from backend, or set APTUS_API_URL).",
     );
   }
 
-  // Unlock chat, but flag that CRM did not sync so ops can fix env.
+  return NextResponse.json(
+    {
+      error:
+        "We couldn't save your details to Odoo CRM. " +
+        errors.filter(Boolean).join(" "),
+      details: errors,
+    },
+    { status: 502 },
+  );
+}
+
+/** Quick config check — open /api/talk-to-expert in the browser. */
+export async function GET() {
+  const base = backendBase();
   return NextResponse.json({
     ok: true,
-    crmSynced: false,
-    warning:
-      "Contact received, but CRM sync failed. Check frontend APTUS_API_URL or ODOO_* env vars.",
+    frontendOdooConfigured: isOdooConfigured(),
+    aptusApiUrlConfigured: Boolean(base),
+    talkToExpertStageId:
+      process.env.ODOO_CRM_TALK_TO_EXPERT_STAGE_ID?.trim() || null,
   });
 }

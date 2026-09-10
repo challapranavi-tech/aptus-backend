@@ -127,45 +127,58 @@ export async function POST(req: NextRequest) {
 
   if (!isOdooConfigured()) {
     console.error("[talk-to-expert] Odoo is not configured.");
+    return jsonCors(
+      req,
+      {
+        error:
+          "Odoo is not configured on the backend. Set ODOO_URL, ODOO_DB, ODOO_USER, and ODOO_API_KEY.",
+        ok: false,
+        crmSynced: false,
+      },
+      { status: 503 },
+    );
   }
 
   const { firstName, lastName } = splitName(name);
   let partnerId: number | undefined;
   let leadId: number | null = null;
 
-  if (isOdooConfigured()) {
-    try {
-      partnerId = await findPartnerIdByEmail(email);
-    } catch (err) {
-      console.warn(
-        "[talk-to-expert] partner lookup failed:",
-        err instanceof Error ? err.message : err,
-      );
-    }
+  try {
+    partnerId = await findPartnerIdByEmail(email);
+  } catch (err) {
+    console.warn(
+      "[talk-to-expert] partner lookup failed:",
+      err instanceof Error ? err.message : err,
+    );
+  }
 
-    try {
-      leadId = await createCrmLead({
-        firstName,
-        lastName,
-        company: "",
-        email,
-        phone,
-        contactName: name,
-        partnerId,
-        channel: "talk-to-expert",
-        message: "Lead captured from Talk to an Expert chatbot.",
-      });
-      console.info(
-        `[talk-to-expert] crm.lead #${leadId} created email=${email}`,
-      );
-    } catch (err) {
-      console.error(
-        "[talk-to-expert] CRM create failed:",
-        err instanceof Error ? err.message : err,
-      );
-      // Do not block the chatbot — still acknowledge contact and send thank-you.
-      leadId = null;
-    }
+  try {
+    leadId = await createCrmLead({
+      firstName,
+      lastName,
+      company: "",
+      email,
+      phone,
+      contactName: name,
+      partnerId,
+      channel: "talk-to-expert",
+      message: "Lead captured from Talk to an Expert chatbot.",
+    });
+    console.info(
+      `[talk-to-expert] crm.lead #${leadId} created email=${email}`,
+    );
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error("[talk-to-expert] CRM create failed:", message);
+    return jsonCors(
+      req,
+      {
+        error: `Odoo CRM create failed: ${message}`,
+        ok: false,
+        crmSynced: false,
+      },
+      { status: 502 },
+    );
   }
 
   if (isMailConfigured()) {
