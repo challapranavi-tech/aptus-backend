@@ -1,11 +1,10 @@
 import { SOFTWARE_FULL_CATALOG } from "@/data/software-full-catalog";
 
-const WP = "https://aptusinfotech.com/wp-content/uploads";
 const LOCAL = "/images/brands";
 
 /**
- * Exact brand marks for the software brands explorer.
- * Official SVG marks locally where available; Aptus partner PNGs for the rest.
+ * Brand marks for the brands explorer + software hero.
+ * Local assets for now — send correct software logos one by one to replace these.
  */
 const BRAND_LOGO_BY_ID: Record<string, string> = {
   autodesk: `${LOCAL}/autodesk-wordmark.svg`,
@@ -14,10 +13,10 @@ const BRAND_LOGO_BY_ID: Record<string, string> = {
   oracle: `${LOCAL}/oracle.svg`,
   costx: `${LOCAL}/costx.png`,
   cubicost: `${LOCAL}/cubicost.png`,
-  planswift: `${WP}/2025/08/planswift.png`,
+  planswift: `${LOCAL}/planswift.png`,
   spectronova: `${LOCAL}/spectronova.png`,
   csi: `${LOCAL}/csi.png`,
-  bentley: `${LOCAL}/bentley.svg`,
+  bentley: `${LOCAL}/bentley.png`,
   turnitin: `${LOCAL}/turnitin.png`,
   mathwork: `${LOCAL}/mathworks.png`,
   nitro: `${LOCAL}/nitro.png`,
@@ -39,6 +38,13 @@ const BRAND_LOGO_BY_ID: Record<string, string> = {
   corona: `${LOCAL}/corona.png`,
   "d5-render": `${LOCAL}/d5.png`,
   quorum: `${LOCAL}/quorum.png`,
+  cype: `${LOCAL}/cype.png`,
+  sap2000: `${LOCAL}/sap2000.png`,
+  etabs: `${LOCAL}/etabs.png`,
+  safe: `${LOCAL}/safe.png`,
+  bitdefender: `${LOCAL}/bitdefender.png`,
+  "trend-micro": `${LOCAL}/trend-micro.png`,
+  acronis: `${LOCAL}/acronis.png`,
 };
 
 export type SoftwareBrandLogoItem = {

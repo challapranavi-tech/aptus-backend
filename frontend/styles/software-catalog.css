@@ -27,13 +27,13 @@
 
 .aptus-software-catalog-hero__logo-piece {
   align-items: center;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+  border: none;
   border-radius: 1rem;
   display: flex;
   height: clamp(3.25rem, 7vw, 4.75rem);
   justify-content: center;
-  opacity: 0.55;
+  opacity: 0.85;
   padding: 0.55rem 0.75rem;
   position: absolute;
   width: clamp(5.5rem, 12vw, 8.5rem);
@@ -41,12 +41,12 @@
 
 .aptus-software-catalog-hero__logo-piece img {
   display: block;
-  filter: brightness(0) invert(1);
+  filter: none;
   height: 100%;
   max-height: 2.35rem;
   max-width: 100%;
   object-fit: contain;
-  opacity: 0.9;
+  opacity: 1;
   width: auto;
 }
 
@@ -1179,6 +1179,50 @@
   margin-inline-start: auto;
 }
 
+.aptus-software-brands__filters {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  gap: 0.55rem 0.75rem;
+  padding-bottom: 0.15rem;
+}
+
+.aptus-software-brands__filter-label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.8rem;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+}
+
+.aptus-software-brands__filter-select {
+  appearance: none;
+  background:
+    linear-gradient(45deg, transparent 50%, #fff 50%) calc(100% - 16px) calc(50% - 2px) / 6px 6px no-repeat,
+    linear-gradient(135deg, #fff 50%, transparent 50%) calc(100% - 11px) calc(50% - 2px) / 6px 6px no-repeat,
+    rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  max-width: 100%;
+  min-width: min(100%, 18rem);
+  padding: 0.55rem 2.25rem 0.55rem 0.95rem;
+}
+
+.aptus-software-brands__filter-select:hover,
+.aptus-software-brands__filter-select:focus {
+  border-color: rgba(255, 255, 255, 0.55);
+  outline: none;
+}
+
+.aptus-software-brands__filter-select option {
+  background: #0b1220;
+  color: #fff;
+}
+
 .aptus-software-brands__ghost {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.28);
@@ -1260,6 +1304,7 @@
 
 .aptus-software-brands__logo {
   align-items: center;
+  background: transparent;
   display: flex;
   flex: 1 1 auto;
   justify-content: center;
@@ -1269,16 +1314,14 @@
 }
 
 .aptus-software-brands__logo img {
+  display: block;
+  filter: none;
   height: 100%;
   max-height: 2.65rem;
   max-width: 88%;
   object-fit: contain;
-  width: auto;
-}
-
-.aptus-software-brands__tile:hover .aptus-software-brands__logo img,
-.aptus-software-brands__tile.is-selected .aptus-software-brands__logo img {
   opacity: 1;
+  width: auto;
 }
 
 .aptus-software-brands__initials {

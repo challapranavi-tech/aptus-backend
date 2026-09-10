@@ -1,6 +1,10 @@
 "use client";
 
-import { SOFTWARE_BRAND_LOGO_ITEMS } from "@/data/software-brand-logos";
+import {
+  SOFTWARE_BRANDS_EXPLORER_ITEMS,
+  SOFTWARE_SOLUTION_FILTERS,
+  brandsForSolutionFilter,
+} from "@/data/software-brand-solutions";
 import { softwareCatalogHref } from "@/lib/software-catalog-links";
 import Link from "next/link";
 import { useMemo, useState } from "react";
@@ -14,10 +18,15 @@ function brandInitials(label: string): string {
 }
 
 export function SoftwareBrandsExplorer() {
-  const brands = SOFTWARE_BRAND_LOGO_ITEMS;
+  const allBrands = SOFTWARE_BRANDS_EXPLORER_ITEMS;
+  const [solutionFilter, setSolutionFilter] = useState<string | null>(null);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [brokenLogos, setBrokenLogos] = useState<Record<string, true>>({});
 
+  const visibleBrands = useMemo(
+    () => brandsForSolutionFilter(solutionFilter, allBrands),
+    [allBrands, solutionFilter],
+  );
   const selectedSet = useMemo(() => new Set(selectedIds), [selectedIds]);
   const catalogHref =
     selectedIds.length > 0 ? softwareCatalogHref(selectedIds) : softwareCatalogHref();
@@ -28,12 +37,20 @@ export function SoftwareBrandsExplorer() {
     );
   }
 
-  function selectAll() {
-    setSelectedIds(brands.map((brand) => brand.id));
+  function selectAllVisible() {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      for (const brand of visibleBrands) next.add(brand.id);
+      return [...next];
+    });
   }
 
   function clearSelection() {
     setSelectedIds([]);
+  }
+
+  function setFilter(filterId: string | null) {
+    setSolutionFilter(filterId);
   }
 
   return (
@@ -45,11 +62,11 @@ export function SoftwareBrandsExplorer() {
               Explore by brand
             </h1>
             <p className="aptus-software-brands__subtitle">
-              Select one or more brands, then open the catalogue with those filters applied.
+              Filter by solution, select one or more brands, then open the catalogue.
             </p>
           </div>
           <div className="aptus-software-brands__toolbar">
-            <button type="button" className="aptus-software-brands__ghost" onClick={selectAll}>
+            <button type="button" className="aptus-software-brands__ghost" onClick={selectAllVisible}>
               Select all
             </button>
             <button
@@ -68,12 +85,37 @@ export function SoftwareBrandsExplorer() {
           </div>
         </header>
 
+        <div className="aptus-software-brands__filters">
+          <label className="aptus-software-brands__filter-label" htmlFor="software-brands-solution-filter">
+            Solution
+          </label>
+          <select
+            id="software-brands-solution-filter"
+            className="aptus-software-brands__filter-select"
+            value={solutionFilter ?? ""}
+            onChange={(event) => setFilter(event.target.value || null)}
+            aria-label="Filter brands by solution"
+          >
+            <option value="">All solutions</option>
+            {SOFTWARE_SOLUTION_FILTERS.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
         <div
           className="aptus-software-brands__grid"
           role="group"
-          aria-label="Software brands"
+          aria-label={
+            solutionFilter
+              ? SOFTWARE_SOLUTION_FILTERS.find((item) => item.id === solutionFilter)?.label ??
+                "Software brands"
+              : "All software brands"
+          }
         >
-          {brands.map((brand) => {
+          {visibleBrands.map((brand) => {
             const selected = selectedSet.has(brand.id);
             const showLogo = Boolean(brand.logoSrc) && !brokenLogos[brand.id];
             return (
