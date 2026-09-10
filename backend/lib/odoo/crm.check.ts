@@ -82,7 +82,7 @@ assert.equal(expert.name, "Talk to an Expert – Noor Al Said");
 assert.equal(expert.contact_name, "Noor Al Said");
 assert.equal(expert.partner_name, "");
 assert.equal(expert.email_from, "noor@example.com");
-assert.equal(expert.type, "opportunity");
+assert.equal(expert.type, "lead");
 assert.match(String(expert.description), /Source: Website – Talk to an Expert/);
 assert.equal(expert.company_id, undefined);
 assert.equal(expert.team_id, undefined);

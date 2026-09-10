@@ -186,29 +186,30 @@ export function ExpertChatbot({
         body: JSON.stringify({ name, email, phone }),
       });
 
+      const data = (await res.json().catch(() => ({}))) as {
+        error?: string;
+        errors?: Record<string, string>;
+        crmSynced?: boolean;
+        ok?: boolean;
+      };
+
       if (!res.ok) {
         let msg =
           "We couldn't save your details right now. Please try again.";
-        try {
-          const data = (await res.json()) as {
-            error?: string;
-            errors?: Record<string, string>;
-          };
-          if (typeof data.error === "string" && data.error) msg = data.error;
-          else if (data.errors) {
-            msg =
-              data.errors.name ||
-              data.errors.email ||
-              data.errors.phone ||
-              data.errors._form ||
-              msg;
-          }
-        } catch {
-          /* keep default */
+        if (typeof data.error === "string" && data.error) msg = data.error;
+        else if (data.errors) {
+          msg =
+            data.errors.name ||
+            data.errors.email ||
+            data.errors.phone ||
+            data.errors._form ||
+            msg;
         }
         setContactError(msg);
         return;
       }
+
+      const crmSynced = data.crmSynced !== false;
 
       setContactCaptured(true);
       setMessages((prev) => [
@@ -221,7 +222,9 @@ export function ExpertChatbot({
         {
           id: uid(),
           role: "bot",
-          text: `Thanks, ${name.split(/\s+/)[0] || name}! Choose a category below and I’ll show the matching products.`,
+          text: crmSynced
+            ? `Thanks, ${name.split(/\s+/)[0] || name}! Choose a category below and I’ll show the matching products.`
+            : `Thanks, ${name.split(/\s+/)[0] || name}! We saved your details for follow-up. Choose a category below and I’ll show the matching products.`,
         },
       ]);
     } catch {

@@ -4,8 +4,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 /**
  * Talk to Expert contact gate.
- * Creates the CRM lead directly via frontend Odoo (same ODOO_* as portal),
- * so it does not depend on APTUS_API_URL / backend proxy.
+ * 1) Prefer backend API when APTUS_API_URL is set (backend holds Odoo + stage id).
+ * 2) Else create via frontend Odoo (portal ODOO_* vars).
  */
 export const maxDuration = 60;
 
@@ -14,6 +14,19 @@ const PERSON_NAME_RE = /^(?=.*\p{L})[\p{L}\p{M}'’\- ]{2,120}$/u;
 
 function normalizePhone(value: string): string {
   return value.replace(/[^\d+]/g, "").trim();
+}
+
+function backendBase(): string | null {
+  const raw = (
+    process.env.APTUS_API_URL ??
+    process.env.NEXT_PUBLIC_API_URL ??
+    ""
+  ).replace(/\/$/, "");
+  if (!raw) return null;
+  if (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(raw)) {
+    if (process.env.VERCEL) return null;
+  }
+  return raw;
 }
 
 function parseBody(raw: unknown): {
@@ -49,6 +62,43 @@ function parseBody(raw: unknown): {
   return { ok: true, data: { name, email, phone } };
 }
 
+async function tryBackendProxy(payload: {
+  name: string;
+  email: string;
+  phone: string;
+}): Promise<{ ok: true; data: Record<string, unknown> } | { ok: false }> {
+  const base = backendBase();
+  if (!base) return { ok: false };
+
+  try {
+    const upstream = await fetch(`${base}/api/talk-to-expert`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      cache: "no-store",
+    });
+    const data = (await upstream.json().catch(() => ({}))) as Record<
+      string,
+      unknown
+    >;
+    if (upstream.ok && data.ok === true) {
+      return { ok: true, data };
+    }
+    console.error(
+      "[api/talk-to-expert] backend proxy non-ok:",
+      upstream.status,
+      data,
+    );
+    return { ok: false };
+  } catch (err) {
+    console.error(
+      "[api/talk-to-expert] backend proxy error:",
+      err instanceof Error ? err.message : err,
+    );
+    return { ok: false };
+  }
+}
+
 export async function POST(req: NextRequest) {
   let raw: unknown;
   try {
@@ -64,57 +114,34 @@ export async function POST(req: NextRequest) {
 
   const { name, email, phone } = parsed.data;
 
-  // Prefer direct Odoo on the frontend (portal credentials). Always unlock chat.
-  if (isOdooConfigured()) {
-    const result = await createTalkToExpertLead({ name, email, phone });
-    return NextResponse.json({
-      ok: true,
-      leadId: result.leadId ?? undefined,
-      crmSynced: result.crmSynced,
-    });
+  // 1) Backend first — usually where Odoo + stage id are configured.
+  const proxied = await tryBackendProxy({ name, email, phone });
+  if (proxied.ok) {
+    return NextResponse.json(proxied.data);
   }
 
-  // Fallback: proxy to backend if frontend has no Odoo but backend API is set.
-  const backend = (
-    process.env.APTUS_API_URL ??
-    process.env.NEXT_PUBLIC_API_URL ??
-    ""
-  ).replace(/\/$/, "");
-  const isLocal =
-    !backend || /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(backend);
-
-  if (!isLocal) {
-    try {
-      const upstream = await fetch(`${backend}/api/talk-to-expert`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, phone }),
-        cache: "no-store",
+  // 2) Frontend Odoo (portal credentials).
+  if (isOdooConfigured()) {
+    const result = await createTalkToExpertLead({ name, email, phone });
+    if (result.crmSynced) {
+      return NextResponse.json({
+        ok: true,
+        leadId: result.leadId ?? undefined,
+        crmSynced: true,
       });
-      const data = (await upstream.json().catch(() => ({}))) as Record<
-        string,
-        unknown
-      >;
-      if (upstream.ok) {
-        return NextResponse.json(data);
-      }
-      console.error(
-        "[api/talk-to-expert] backend fallback failed:",
-        upstream.status,
-        data,
-      );
-    } catch (err) {
-      console.error(
-        "[api/talk-to-expert] backend fallback error:",
-        err instanceof Error ? err.message : err,
-      );
     }
+    console.error("[api/talk-to-expert] frontend Odoo create failed:", result.error);
   } else {
     console.error(
-      "[api/talk-to-expert] Odoo not configured on frontend and no remote APTUS_API_URL.",
+      "[api/talk-to-expert] No APTUS_API_URL and Odoo is not configured on frontend.",
     );
   }
 
-  // Still unlock the chatbot so the visitor can continue.
-  return NextResponse.json({ ok: true, crmSynced: false });
+  // Unlock chat, but flag that CRM did not sync so ops can fix env.
+  return NextResponse.json({
+    ok: true,
+    crmSynced: false,
+    warning:
+      "Contact received, but CRM sync failed. Check frontend APTUS_API_URL or ODOO_* env vars.",
+  });
 }

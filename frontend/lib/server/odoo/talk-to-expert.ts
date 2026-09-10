@@ -1,5 +1,5 @@
 import { logger } from "../logger";
-import { getOdooClient } from "./client";
+import { getOdooClient, type OdooClient } from "./client";
 
 const DEFAULT_STAGE_NAME = "Website cold calling leads";
 
@@ -30,38 +30,88 @@ function talkToExpertStageName(): string {
   );
 }
 
-async function resolveTalkToExpertStageId(): Promise<number | undefined> {
-  const fromEnv = talkToExpertStageIdFromEnv();
-  if (fromEnv) return fromEnv;
+async function resolveStageAndTeam(client: OdooClient): Promise<{
+  stageId?: number;
+  teamId?: number;
+}> {
+  const stageId = talkToExpertStageIdFromEnv();
+  const envTeamId = talkToExpertTeamIdFromEnv();
 
-  const client = getOdooClient();
-  if (!client) return undefined;
+  if (stageId) {
+    try {
+      const stages = await client.read<{
+        id: number;
+        team_id: [number, string] | false;
+        team_ids: number[] | false;
+      }>(
+        "crm.stage",
+        [stageId],
+        ["id", "team_id", "team_ids"],
+      );
+      const stage = stages[0];
+      if (stage) {
+        const fromTeamIds =
+          Array.isArray(stage.team_ids) && stage.team_ids.length > 0
+            ? stage.team_ids[0]
+            : undefined;
+        const fromTeamId = Array.isArray(stage.team_id)
+          ? stage.team_id[0]
+          : undefined;
+        return {
+          stageId: stage.id,
+          teamId: envTeamId ?? fromTeamIds ?? fromTeamId,
+        };
+      }
+    } catch {
+      /* stage read optional */
+    }
+    return { stageId, teamId: envTeamId };
+  }
 
   const name = talkToExpertStageName();
-  const rows = await client.searchRead<{ id: number }>(
+  const rows = await client.searchRead<{
+    id: number;
+    team_id: [number, string] | false;
+    team_ids: number[] | false;
+  }>(
     "crm.stage",
     [["name", "=ilike", name]],
-    ["id"],
+    ["id", "team_id", "team_ids"],
     1,
   );
-  return rows[0]?.id;
+  const stage = rows[0];
+  if (!stage) return { teamId: envTeamId };
+
+  const fromTeamIds =
+    Array.isArray(stage.team_ids) && stage.team_ids.length > 0
+      ? stage.team_ids[0]
+      : undefined;
+  const fromTeamId = Array.isArray(stage.team_id) ? stage.team_id[0] : undefined;
+  return {
+    stageId: stage.id,
+    teamId: envTeamId ?? fromTeamIds ?? fromTeamId,
+  };
 }
 
 /**
- * Create a Talk to Expert opportunity in Odoo from the frontend app
- * (uses the same ODOO_* env as the customer portal).
+ * Create a Talk to Expert CRM lead (type=lead) in Odoo.
+ * Uses the same ODOO_* env as the customer portal when available.
  */
 export async function createTalkToExpertLead(input: {
   name: string;
   email: string;
   phone: string;
-}): Promise<{ leadId: number | null; crmSynced: boolean }> {
+}): Promise<{ leadId: number | null; crmSynced: boolean; error?: string }> {
   const client = getOdooClient();
   if (!client) {
     logger.warn("Talk to Expert: Odoo not configured on frontend", {
       action: "talk-to-expert",
     });
-    return { leadId: null, crmSynced: false };
+    return {
+      leadId: null,
+      crmSynced: false,
+      error: "Odoo is not configured on the frontend.",
+    };
   }
 
   const contactName = input.name.trim();
@@ -71,10 +121,10 @@ export async function createTalkToExpertLead(input: {
   const values: Record<string, unknown> = {
     name: `Talk to an Expert – ${contactName || "Website lead"}`,
     contact_name: contactName,
-    partner_name: "",
     phone,
     email_from: email,
-    type: "opportunity",
+    // Leads menu (not Pipeline) — matches "Website cold calling leads" stage.
+    type: "lead",
     description: [
       `Name: ${contactName || "—"}`,
       `Email: ${email || "—"}`,
@@ -86,13 +136,11 @@ export async function createTalkToExpertLead(input: {
   const companyId = talkToExpertCompanyIdFromEnv();
   if (companyId) values.company_id = companyId;
 
-  const teamId = talkToExpertTeamIdFromEnv();
-  if (teamId) values.team_id = teamId;
-
   try {
-    const stageId = await resolveTalkToExpertStageId();
+    const { stageId, teamId } = await resolveStageAndTeam(client);
     if (stageId) values.stage_id = stageId;
-    else {
+    if (teamId) values.team_id = teamId;
+    if (!stageId) {
       logger.warn("Talk to Expert: CRM stage not found", {
         action: "talk-to-expert",
         stageName: talkToExpertStageName(),
@@ -105,19 +153,41 @@ export async function createTalkToExpertLead(input: {
     });
   }
 
-  try {
-    const leadId = await client.create("crm.lead", values);
-    logger.info("Talk to Expert CRM lead created", {
-      action: "talk-to-expert",
-      leadId,
-      stageId: values.stage_id ?? null,
-    });
-    return { leadId, crmSynced: true };
-  } catch (err) {
-    logger.error("Talk to Expert CRM create failed", {
-      action: "talk-to-expert",
-      error: err instanceof Error ? err.message : String(err),
-    });
-    return { leadId: null, crmSynced: false };
+  const attempts: Record<string, unknown>[] = [values];
+  // Fallbacks if company/stage constraints reject the create.
+  if (values.company_id) {
+    const { company_id: _c, ...noCompany } = values;
+    attempts.push(noCompany);
   }
+  if (values.stage_id) {
+    const { stage_id: _s, team_id: _t, ...noStage } = values;
+    attempts.push(noStage);
+  }
+
+  let lastError = "";
+  for (const attempt of attempts) {
+    try {
+      const leadId = await client.create("crm.lead", attempt);
+      logger.info("Talk to Expert CRM lead created", {
+        action: "talk-to-expert",
+        leadId,
+        stageId: attempt.stage_id ?? null,
+        teamId: attempt.team_id ?? null,
+        type: attempt.type,
+      });
+      return { leadId, crmSynced: true };
+    } catch (err) {
+      lastError = err instanceof Error ? err.message : String(err);
+      logger.warn("Talk to Expert CRM create attempt failed", {
+        action: "talk-to-expert",
+        error: lastError,
+      });
+    }
+  }
+
+  logger.error("Talk to Expert CRM create failed", {
+    action: "talk-to-expert",
+    error: lastError,
+  });
+  return { leadId: null, crmSynced: false, error: lastError };
 }

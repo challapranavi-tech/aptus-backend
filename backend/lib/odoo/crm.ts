@@ -355,8 +355,9 @@ export function buildCrmLeadValues(
     partner_name: isTalkToExpert || isIndividual ? "" : companyName,
     phone: input.phone.trim(),
     description,
-    // Opportunity shows in CRM Pipeline → New. type "lead" only appears under Leads.
-    type: "opportunity",
+    // Talk to Expert → CRM Leads (stage "Website cold calling leads").
+    // Quotes stay as Pipeline opportunities.
+    type: isTalkToExpert ? "lead" : "opportunity",
   };
 
   const email = input.email.trim();
