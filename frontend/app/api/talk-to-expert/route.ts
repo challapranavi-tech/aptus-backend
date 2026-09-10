@@ -1,5 +1,5 @@
 import { createTalkToExpertLead } from "@/lib/server/odoo/talk-to-expert";
-import { isOdooConfigured } from "@/lib/server/config";
+import { getOdooConfig, isOdooConfigured } from "@/lib/server/config";
 import { NextRequest, NextResponse } from "next/server";
 
 /**
@@ -92,7 +92,10 @@ async function tryBackendProxy(payload: {
       unknown
     >;
     if (upstream.ok && data.ok === true && data.crmSynced !== false) {
-      return { ok: true, data };
+      return {
+        ok: true,
+        data: { ...data, via: data.via ?? "backend-proxy" },
+      };
     }
     if (upstream.ok && data.ok === true && data.crmSynced === false) {
       return {
@@ -143,6 +146,11 @@ export async function POST(req: NextRequest) {
         ok: true,
         leadId: result.leadId ?? undefined,
         crmSynced: true,
+        stageId: result.stageId,
+        stageName: result.stageName,
+        odooHost: result.odooHost,
+        crmUrl: result.crmUrl,
+        via: "frontend-odoo",
       });
     }
     errors.push(
@@ -170,11 +178,62 @@ export async function POST(req: NextRequest) {
 /** Quick config check — open /api/talk-to-expert in the browser. */
 export async function GET() {
   const base = backendBase();
+  const cfg = getOdooConfig();
+  let odooHost: string | null = null;
+  try {
+    odooHost = cfg.baseUrl ? new URL(cfg.baseUrl).host : null;
+  } catch {
+    odooHost = cfg.baseUrl || null;
+  }
+
+  let resolvedStage: { id: number; name: string } | null = null;
+  let stageResolveError: string | null = null;
+  if (isOdooConfigured()) {
+    try {
+      const { getOdooClient } = await import("@/lib/server/odoo/client");
+      const client = getOdooClient();
+      const stageName =
+        process.env.ODOO_CRM_TALK_TO_EXPERT_STAGE_NAME?.trim() ||
+        "Website cold calling leads";
+      const envId = Number(
+        process.env.ODOO_CRM_TALK_TO_EXPERT_STAGE_ID?.trim() ?? "",
+      );
+      if (client && Number.isInteger(envId) && envId > 0) {
+        const rows = await client.read<{ id: number; name: string }>(
+          "crm.stage",
+          [envId],
+          ["id", "name"],
+        );
+        if (rows[0]) resolvedStage = { id: rows[0].id, name: rows[0].name };
+      }
+      if (client && (!resolvedStage || resolvedStage.name.toLowerCase() !== stageName.toLowerCase())) {
+        const rows = await client.searchRead<{ id: number; name: string }>(
+          "crm.stage",
+          [["name", "=ilike", stageName]],
+          ["id", "name"],
+          1,
+        );
+        if (rows[0]) resolvedStage = { id: rows[0].id, name: rows[0].name };
+      }
+    } catch (err) {
+      stageResolveError = err instanceof Error ? err.message : String(err);
+    }
+  }
+
   return NextResponse.json({
     ok: true,
     frontendOdooConfigured: isOdooConfigured(),
     aptusApiUrlConfigured: Boolean(base),
+    odooHost,
+    odooDb: cfg.db || null,
     talkToExpertStageId:
       process.env.ODOO_CRM_TALK_TO_EXPERT_STAGE_ID?.trim() || null,
+    talkToExpertStageName:
+      process.env.ODOO_CRM_TALK_TO_EXPERT_STAGE_NAME?.trim() ||
+      "Website cold calling leads",
+    resolvedStage,
+    stageResolveError,
+    hint:
+      "Leads are written to odooHost above (often staging). Search CRM Pipeline for 'Talk to an Expert'.",
   });
 }

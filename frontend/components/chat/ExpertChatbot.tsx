@@ -191,6 +191,9 @@ export function ExpertChatbot({
         errors?: Record<string, string>;
         crmSynced?: boolean;
         ok?: boolean;
+        leadId?: number;
+        odooHost?: string;
+        stageName?: string;
       };
 
       if (!res.ok) {
@@ -210,6 +213,10 @@ export function ExpertChatbot({
       }
 
       const crmSynced = data.crmSynced !== false;
+      const leadHint =
+        typeof data.leadId === "number"
+          ? ` (CRM #${data.leadId}${data.odooHost ? ` on ${data.odooHost}` : ""})`
+          : "";
 
       setContactCaptured(true);
       setMessages((prev) => [
@@ -223,7 +230,7 @@ export function ExpertChatbot({
           id: uid(),
           role: "bot",
           text: crmSynced
-            ? `Thanks, ${name.split(/\s+/)[0] || name}! Choose a category below and I’ll show the matching products.`
+            ? `Thanks, ${name.split(/\s+/)[0] || name}! Your details were saved${leadHint}. Choose a category below and I’ll show the matching products.`
             : `Thanks, ${name.split(/\s+/)[0] || name}! We saved your details for follow-up. Choose a category below and I’ll show the matching products.`,
         },
       ]);

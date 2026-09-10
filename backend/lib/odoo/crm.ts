@@ -425,6 +425,7 @@ export async function findPartnerIdByEmail(email: string): Promise<number | unde
 
 type CrmStagePlacement = {
   stageId: number;
+  stageName: string;
   /** First sales team linked to the stage, if any. */
   teamId?: number;
 };
@@ -441,9 +442,10 @@ async function searchCrmStagePlacement(
     const { searchRead } = await import("./rpc");
     const rows = await searchRead<{
       id: number;
+      name: string;
       team_ids: number[] | false;
     }>(session, "crm.stage", domain, {
-      fields: ["id", "team_ids"],
+      fields: ["id", "name", "team_ids"],
       limit: 1,
     });
     const stage = rows[0];
@@ -452,7 +454,7 @@ async function searchCrmStagePlacement(
       Array.isArray(stage.team_ids) && stage.team_ids.length > 0
         ? stage.team_ids[0]
         : undefined;
-    return { stageId: stage.id, teamId };
+    return { stageId: stage.id, stageName: stage.name, teamId };
   });
 }
 
@@ -482,13 +484,15 @@ export async function findCrmStagePlacementById(
 /**
  * Talk to Expert must land on the configured Pipeline stage (and its team).
  * Throws when the stage cannot be resolved — do not silently use "New".
+ * If STAGE_ID points at a differently named stage, fall back to name lookup.
  */
 export async function resolveTalkToExpertPlacement(): Promise<{
   stageId: number;
+  stageName: string;
   teamId?: number;
 }> {
   const { teamId: envTeamId, stageId: envStageId } = talkToExpertCrmConfig();
-  const stageName = talkToExpertStageName();
+  const expectedName = talkToExpertStageName();
 
   let placement: CrmStagePlacement | undefined;
   if (envStageId) {
@@ -496,22 +500,39 @@ export async function resolveTalkToExpertPlacement(): Promise<{
     if (!placement) {
       throw new Error(
         `ODOO_CRM_TALK_TO_EXPERT_STAGE_ID=${envStageId} was not found in Odoo crm.stage. ` +
-          `Open CRM → Configuration → Stages, confirm the id for "${stageName}", and update the env var.`,
+          `Open CRM → Configuration → Stages, confirm the id for "${expectedName}", and update the env var.`,
       );
     }
+    const nameMatches =
+      placement.stageName.trim().toLowerCase() ===
+      expectedName.trim().toLowerCase();
+    if (!nameMatches) {
+      console.warn(
+        `[crm] Talk to Expert STAGE_ID=${envStageId} is "${placement.stageName}", ` +
+          `expected "${expectedName}" — resolving by name instead.`,
+      );
+      const byName = await findCrmStagePlacementByName(expectedName);
+      if (!byName) {
+        throw new Error(
+          `ODOO_CRM_TALK_TO_EXPERT_STAGE_ID=${envStageId} is "${placement.stageName}", not "${expectedName}". ` +
+            `Update the env var to the correct stage id on this Odoo database.`,
+        );
+      }
+      placement = byName;
+    }
   } else {
-    placement = await findCrmStagePlacementByName(stageName);
+    placement = await findCrmStagePlacementByName(expectedName);
     if (!placement) {
       throw new Error(
-        `CRM stage "${stageName}" was not found. Create it under CRM → Configuration → Stages ` +
+        `CRM stage "${expectedName}" was not found. Create it under CRM → Configuration → Stages ` +
           `(or on the Sales Team pipeline), then set ODOO_CRM_TALK_TO_EXPERT_STAGE_ID to its id.`,
       );
     }
   }
 
-  // Prefer the stage's team so Odoo does not recompute stage_id away.
   return {
     stageId: placement.stageId,
+    stageName: placement.stageName,
     teamId: placement.teamId ?? envTeamId,
   };
 }
@@ -568,6 +589,10 @@ export async function createCrmLead(input: CrmLeadInput): Promise<number> {
     const placement = await resolveTalkToExpertPlacement();
     values.stage_id = placement.stageId;
     if (placement.teamId) values.team_id = placement.teamId;
+    console.info(
+      `[crm] Talk to Expert placement stage=#${placement.stageId} ` +
+        `name="${placement.stageName}" team=${placement.teamId ?? "none"}`,
+    );
   }
 
   try {

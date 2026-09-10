@@ -33,44 +33,69 @@ function talkToExpertStageName(): string {
 async function resolveStageAndTeam(client: OdooClient): Promise<{
   stageId: number;
   teamId?: number;
+  stageName: string;
 }> {
   const envStageId = talkToExpertStageIdFromEnv();
   const envTeamId = talkToExpertTeamIdFromEnv();
-  const stageName = talkToExpertStageName();
+  const expectedName = talkToExpertStageName();
 
   // Aptus Odoo: crm.stage has team_ids only — never request legacy team_id.
-  const readPlacement = async (stageId: number) => {
+  const readStage = async (stageId: number) => {
     const stages = await client.read<{
       id: number;
+      name: string;
       team_ids: number[] | false;
-    }>("crm.stage", [stageId], ["id", "team_ids"]);
+    }>("crm.stage", [stageId], ["id", "name", "team_ids"]);
     return stages[0];
   };
 
-  let stage: { id: number; team_ids: number[] | false } | undefined;
-
-  if (envStageId) {
-    stage = await readPlacement(envStageId);
-    if (!stage) {
-      throw new Error(
-        `ODOO_CRM_TALK_TO_EXPERT_STAGE_ID=${envStageId} was not found in Odoo. ` +
-          `Confirm the id for "${stageName}" under CRM → Configuration → Stages.`,
-      );
-    }
-  } else {
+  const findByName = async () => {
     const rows = await client.searchRead<{
       id: number;
+      name: string;
       team_ids: number[] | false;
     }>(
       "crm.stage",
-      [["name", "=ilike", stageName]],
-      ["id", "team_ids"],
+      [["name", "=ilike", expectedName]],
+      ["id", "name", "team_ids"],
       1,
     );
-    stage = rows[0];
+    return rows[0];
+  };
+
+  let stage: { id: number; name: string; team_ids: number[] | false } | undefined;
+
+  if (envStageId) {
+    stage = await readStage(envStageId);
     if (!stage) {
       throw new Error(
-        `CRM stage "${stageName}" was not found. Create it on the Sales Team pipeline ` +
+        `ODOO_CRM_TALK_TO_EXPERT_STAGE_ID=${envStageId} was not found in Odoo. ` +
+          `Confirm the id for "${expectedName}" under CRM → Configuration → Stages.`,
+      );
+    }
+    const nameMatches =
+      stage.name.trim().toLowerCase() === expectedName.trim().toLowerCase();
+    if (!nameMatches) {
+      logger.warn("Talk to Expert: STAGE_ID does not match expected name — using name lookup", {
+        action: "talk-to-expert",
+        envStageId,
+        stageNameFound: stage.name,
+        expectedName,
+      });
+      const byName = await findByName();
+      if (!byName) {
+        throw new Error(
+          `ODOO_CRM_TALK_TO_EXPERT_STAGE_ID=${envStageId} is "${stage.name}", not "${expectedName}". ` +
+            `Update the env var to the correct stage id on this Odoo database.`,
+        );
+      }
+      stage = byName;
+    }
+  } else {
+    stage = await findByName();
+    if (!stage) {
+      throw new Error(
+        `CRM stage "${expectedName}" was not found. Create it on the Sales Team pipeline ` +
           `(CRM → Sales → Teams → Pipeline), then set ODOO_CRM_TALK_TO_EXPERT_STAGE_ID.`,
       );
     }
@@ -83,6 +108,7 @@ async function resolveStageAndTeam(client: OdooClient): Promise<{
 
   return {
     stageId: stage.id,
+    stageName: stage.name,
     teamId: fromTeamIds ?? envTeamId,
   };
 }
@@ -95,7 +121,15 @@ export async function createTalkToExpertLead(input: {
   name: string;
   email: string;
   phone: string;
-}): Promise<{ leadId: number | null; crmSynced: boolean; error?: string }> {
+}): Promise<{
+  leadId: number | null;
+  crmSynced: boolean;
+  error?: string;
+  stageId?: number;
+  stageName?: string;
+  odooHost?: string;
+  crmUrl?: string;
+}> {
   const client = getOdooClient();
   if (!client) {
     logger.warn("Talk to Expert: Odoo not configured on frontend", {
@@ -113,10 +147,12 @@ export async function createTalkToExpertLead(input: {
   const phone = input.phone.trim();
 
   let stageId: number;
+  let stageName: string;
   let teamId: number | undefined;
   try {
     const placement = await resolveStageAndTeam(client);
     stageId = placement.stageId;
+    stageName = placement.stageName;
     teamId = placement.teamId;
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
@@ -155,6 +191,16 @@ export async function createTalkToExpertLead(input: {
     attempts.push(noCompany);
   }
 
+  const odooHost = (() => {
+    try {
+      const raw =
+        process.env.ODOO_BASE_URL ?? process.env.ODOO_URL ?? "";
+      return raw ? new URL(raw).host : undefined;
+    } catch {
+      return undefined;
+    }
+  })();
+
   let lastError = "";
   for (const attempt of attempts) {
     try {
@@ -171,14 +217,31 @@ export async function createTalkToExpertLead(input: {
           error: writeErr instanceof Error ? writeErr.message : String(writeErr),
         });
       }
+      const base =
+        (process.env.ODOO_BASE_URL ?? process.env.ODOO_URL ?? "").replace(
+          /\/$/,
+          "",
+        );
+      const crmUrl = base
+        ? `${base}/web#id=${leadId}&model=crm.lead&view_type=form`
+        : undefined;
       logger.info("Talk to Expert CRM opportunity created", {
         action: "talk-to-expert",
         leadId,
         stageId,
+        stageName,
         teamId: teamId ?? null,
+        odooHost: odooHost ?? null,
         type: "opportunity",
       });
-      return { leadId, crmSynced: true };
+      return {
+        leadId,
+        crmSynced: true,
+        stageId,
+        stageName,
+        odooHost,
+        crmUrl,
+      };
     } catch (err) {
       lastError = err instanceof Error ? err.message : String(err);
       logger.warn("Talk to Expert CRM create attempt failed", {
@@ -192,5 +255,5 @@ export async function createTalkToExpertLead(input: {
     action: "talk-to-expert",
     error: lastError,
   });
-  return { leadId: null, crmSynced: false, error: lastError };
+  return { leadId: null, crmSynced: false, error: lastError, odooHost };
 }

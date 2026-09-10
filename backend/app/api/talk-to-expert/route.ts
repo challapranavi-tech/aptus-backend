@@ -5,6 +5,7 @@ import { formatEnquiryThankYouEmail } from "@/lib/enquiry-email";
 import { isMailConfigured, sendEmail } from "@/lib/mail";
 import {
   createCrmLead,
+  crmLeadFormUrl,
   findPartnerIdByEmail,
   isOdooConfigured,
 } from "@/lib/odoo";
@@ -208,9 +209,20 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  let odooHost: string | undefined;
+  try {
+    const raw = (process.env.ODOO_URL ?? "").trim();
+    odooHost = raw ? new URL(raw).host : undefined;
+  } catch {
+    odooHost = undefined;
+  }
+
   return jsonCors(req, {
     ok: true,
     leadId: leadId ?? undefined,
     crmSynced: leadId != null,
+    crmUrl: leadId != null ? crmLeadFormUrl(leadId) : undefined,
+    odooHost,
+    via: "backend",
   });
 }
