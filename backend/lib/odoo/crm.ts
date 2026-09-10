@@ -423,6 +423,39 @@ export async function findPartnerIdByEmail(email: string): Promise<number | unde
   });
 }
 
+type CrmStagePlacement = {
+  stageId: number;
+  /** First sales team linked to the stage, if any. */
+  teamId?: number;
+};
+
+/**
+ * Resolve stage + matching sales team.
+ * Aptus Odoo uses `team_ids` on crm.stage (not legacy `team_id`) — never
+ * request `team_id` or search_read fails with Invalid field.
+ */
+async function searchCrmStagePlacement(
+  domain: unknown[],
+): Promise<CrmStagePlacement | undefined> {
+  return withAuthRetry(async (session) => {
+    const { searchRead } = await import("./rpc");
+    const rows = await searchRead<{
+      id: number;
+      team_ids: number[] | false;
+    }>(session, "crm.stage", domain, {
+      fields: ["id", "team_ids"],
+      limit: 1,
+    });
+    const stage = rows[0];
+    if (!stage) return undefined;
+    const teamId =
+      Array.isArray(stage.team_ids) && stage.team_ids.length > 0
+        ? stage.team_ids[0]
+        : undefined;
+    return { stageId: stage.id, teamId };
+  });
+}
+
 /** Find crm.stage id by name (e.g. "Website cold calling leads"). */
 export async function findCrmStageIdByName(
   name: string,
@@ -431,77 +464,19 @@ export async function findCrmStageIdByName(
   return placement?.stageId;
 }
 
-type CrmStagePlacement = {
-  stageId: number;
-  /** First sales team linked to the stage, if any. */
-  teamId?: number;
-};
-
-/**
- * Resolve stage + matching sales team. Odoo resets stage_id when team_id does
- * not match the stage's team_ids domain — so team must come from the stage.
- */
 export async function findCrmStagePlacementByName(
   name: string,
 ): Promise<CrmStagePlacement | undefined> {
   const trimmed = name.trim();
   if (!trimmed) return undefined;
-
-  return withAuthRetry(async (session) => {
-    const { searchRead } = await import("./rpc");
-    const rows = await searchRead<{
-      id: number;
-      team_id: [number, string] | false;
-      team_ids: number[] | false;
-    }>(
-      session,
-      "crm.stage",
-      [["name", "=ilike", trimmed]],
-      { fields: ["id", "team_id", "team_ids"], limit: 1 },
-    );
-    const stage = rows[0];
-    if (!stage) return undefined;
-    return placementFromStageRow(stage);
-  });
+  return searchCrmStagePlacement([["name", "=ilike", trimmed]]);
 }
 
 export async function findCrmStagePlacementById(
   stageId: number,
 ): Promise<CrmStagePlacement | undefined> {
   if (!Number.isInteger(stageId) || stageId <= 0) return undefined;
-
-  return withAuthRetry(async (session) => {
-    const { searchRead } = await import("./rpc");
-    const rows = await searchRead<{
-      id: number;
-      team_id: [number, string] | false;
-      team_ids: number[] | false;
-    }>(
-      session,
-      "crm.stage",
-      [["id", "=", stageId]],
-      { fields: ["id", "team_id", "team_ids"], limit: 1 },
-    );
-    const stage = rows[0];
-    if (!stage) return undefined;
-    return placementFromStageRow(stage);
-  });
-}
-
-function placementFromStageRow(stage: {
-  id: number;
-  team_id: [number, string] | false;
-  team_ids: number[] | false;
-}): CrmStagePlacement {
-  const fromTeamIds =
-    Array.isArray(stage.team_ids) && stage.team_ids.length > 0
-      ? stage.team_ids[0]
-      : undefined;
-  const fromTeamId = Array.isArray(stage.team_id) ? stage.team_id[0] : undefined;
-  return {
-    stageId: stage.id,
-    teamId: fromTeamIds ?? fromTeamId,
-  };
+  return searchCrmStagePlacement([["id", "=", stageId]]);
 }
 
 /**

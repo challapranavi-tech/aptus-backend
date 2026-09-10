@@ -38,22 +38,16 @@ async function resolveStageAndTeam(client: OdooClient): Promise<{
   const envTeamId = talkToExpertTeamIdFromEnv();
   const stageName = talkToExpertStageName();
 
+  // Aptus Odoo: crm.stage has team_ids only — never request legacy team_id.
   const readPlacement = async (stageId: number) => {
     const stages = await client.read<{
       id: number;
-      team_id: [number, string] | false;
       team_ids: number[] | false;
-    }>("crm.stage", [stageId], ["id", "team_id", "team_ids"]);
+    }>("crm.stage", [stageId], ["id", "team_ids"]);
     return stages[0];
   };
 
-  let stage:
-    | {
-        id: number;
-        team_id: [number, string] | false;
-        team_ids: number[] | false;
-      }
-    | undefined;
+  let stage: { id: number; team_ids: number[] | false } | undefined;
 
   if (envStageId) {
     stage = await readPlacement(envStageId);
@@ -66,12 +60,11 @@ async function resolveStageAndTeam(client: OdooClient): Promise<{
   } else {
     const rows = await client.searchRead<{
       id: number;
-      team_id: [number, string] | false;
       team_ids: number[] | false;
     }>(
       "crm.stage",
       [["name", "=ilike", stageName]],
-      ["id", "team_id", "team_ids"],
+      ["id", "team_ids"],
       1,
     );
     stage = rows[0];
@@ -87,12 +80,10 @@ async function resolveStageAndTeam(client: OdooClient): Promise<{
     Array.isArray(stage.team_ids) && stage.team_ids.length > 0
       ? stage.team_ids[0]
       : undefined;
-  const fromTeamId = Array.isArray(stage.team_id) ? stage.team_id[0] : undefined;
 
   return {
     stageId: stage.id,
-    // Prefer the stage's team so Odoo does not reset stage_id.
-    teamId: fromTeamIds ?? fromTeamId ?? envTeamId,
+    teamId: fromTeamIds ?? envTeamId,
   };
 }
 
