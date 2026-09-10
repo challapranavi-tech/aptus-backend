@@ -6,7 +6,6 @@ import {
   quoteContextFromPathname,
   type QuoteModalContext,
 } from "@/components/quote/quote-modal-utils";
-import { publicApiBase } from "@/lib/api-base";
 import { normalizePhone } from "@/lib/phone";
 import { usePathname } from "next/navigation";
 import { FormEvent, useEffect, useId, useMemo, useRef, useState } from "react";
@@ -180,7 +179,8 @@ export function ExpertChatbot({
     setSavingContact(true);
 
     try {
-      const res = await fetch(`${publicApiBase()}/api/talk-to-expert`, {
+      // Same-origin proxy → backend CRM (avoids CORS / wrong NEXT_PUBLIC_API_URL in browser)
+      const res = await fetch("/api/talk-to-expert", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, phone }),

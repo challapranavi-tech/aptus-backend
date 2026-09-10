@@ -12,7 +12,8 @@
 .aptus-software-catalog-hero {
   background: #070b14;
   color: #fff;
-  min-height: clamp(440px, 62vh, 680px);
+  /* Keep below the viewport so the next section peeks and invites scroll */
+  min-height: 0;
   overflow: hidden;
   position: relative;
 }
@@ -173,7 +174,7 @@
 .aptus-software-catalog-hero__content {
   margin: 0 auto;
   max-width: 920px;
-  padding: clamp(3.25rem, 8vw, 5.5rem) 1.25rem 3.5rem;
+  padding: clamp(2rem, 4.5vw, 3rem) 1.25rem clamp(1.5rem, 3vw, 2.25rem);
   position: relative;
   text-align: center;
   z-index: 2;
@@ -189,10 +190,10 @@
 }
 
 .aptus-software-catalog-hero__title {
-  font-size: clamp(1.85rem, 4.5vw, 2.75rem);
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
   font-weight: 700;
   line-height: 1.15;
-  margin: 0 0 0.85rem;
+  margin: 0 0 0.65rem;
 }
 
 .aptus-software-catalog-hero__title--glow {
@@ -234,16 +235,16 @@
 
 .aptus-software-catalog-hero__tagline {
   color: rgba(255, 255, 255, 0.82);
-  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
   font-weight: 600;
-  margin: 0 0 1.25rem;
+  margin: 0 0 0.9rem;
 }
 
 .aptus-software-catalog-hero__intro {
   color: #c8d4e3;
-  font-size: 0.95rem;
-  line-height: 1.7;
-  margin: 0 auto 1.5rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 0 auto 1.15rem;
   max-width: 760px;
   text-align: left;
 }

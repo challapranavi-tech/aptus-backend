@@ -45,6 +45,15 @@ const BRAND_LOGO_BY_ID: Record<string, string> = {
   bitdefender: `${LOCAL}/bitdefender.png`,
   "trend-micro": `${LOCAL}/trend-micro.png`,
   acronis: `${LOCAL}/acronis.png`,
+  sonicwall: `${LOCAL}/sonicwall.png`,
+  pulseway: `${LOCAL}/pulseway.png`,
+  citrix: `${LOCAL}/citrix.png`,
+  "mitsubishi-electric": `${LOCAL}/mitsubishi-electric.png`,
+  "tor-ai": `${LOCAL}/tor-ai.png`,
+  ansys: `${LOCAL}/ansys.png`,
+  iflytek: `${LOCAL}/iflytek.png`,
+  telenet: `${LOCAL}/telenet.png`,
+  earthcam: `${LOCAL}/earthcam.png`,
 };
 
 export type SoftwareBrandLogoItem = {

@@ -85,7 +85,7 @@ export const SOFTWARE_SOLUTION_CATEGORIES: SoftwareSolutionCategory[] = [
   {
     id: "electrical",
     label: "Electrical Software",
-    brandIds: ["etap", "caneco", "see-electrical"],
+    brandIds: ["etap"],
   },
 ];
 
@@ -110,8 +110,6 @@ export const BROCHURE_EXTRA_BRANDS: SoftwareBrandLogoItem[] = [
   { id: "ansys", label: "Ansys", logoSrc: softwareBrandLogoSrc("ansys") },
   { id: "iflytek", label: "iFLYTEK", logoSrc: softwareBrandLogoSrc("iflytek") },
   { id: "telenet", label: "Telenet", logoSrc: softwareBrandLogoSrc("telenet") },
-  { id: "caneco", label: "Caneco", logoSrc: softwareBrandLogoSrc("caneco") },
-  { id: "see-electrical", label: "SEE Electrical", logoSrc: softwareBrandLogoSrc("see-electrical") },
   { id: "earthcam", label: "EarthCam", logoSrc: softwareBrandLogoSrc("earthcam") },
 ];
 
