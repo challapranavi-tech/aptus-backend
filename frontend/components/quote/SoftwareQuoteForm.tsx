@@ -498,7 +498,7 @@ export function SoftwareQuoteForm({
               <FieldError message={errors.name} />
             </label>
             <label className="aptus-form-label">
-              VAT ID *
+              VAT ID
               <input
                 type="text"
                 name="vat_id"
@@ -506,8 +506,7 @@ export function SoftwareQuoteForm({
                 autoComplete="off"
                 maxLength={VAT_ID_MAX_DIGITS}
                 value={vatId}
-                required
-                placeholder="Up to 12 digits"
+                placeholder="Optional — up to 12 digits"
                 aria-invalid={errors.vat_id ? true : undefined}
                 onChange={onVatChange}
                 className={cn(

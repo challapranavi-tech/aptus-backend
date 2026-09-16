@@ -223,6 +223,22 @@ if (companyOk.ok) {
   assert.equal(companyOk.data.customer_type, "company");
 }
 
+const companyWithoutVat = parseContactRequest({
+  customer_type: "company",
+  name: "Ada Lovelace",
+  company: "Analytical Engines",
+  country_code: "+971",
+  phone_local: "501234567",
+  cr_number: "1234567890",
+  product: "Civil 3D",
+  qty: "5",
+});
+assert.equal(companyWithoutVat.ok, true);
+if (companyWithoutVat.ok) {
+  assert.equal(companyWithoutVat.data.tax_id, "");
+  assert.equal(companyWithoutVat.data.cr_number, "1234567890");
+}
+
 // Unknown keys are stripped in preprocess (CTA city/heard_from mapping).
 assert.equal(
   parseContactRequest({

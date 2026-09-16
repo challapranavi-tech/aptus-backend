@@ -158,6 +158,7 @@ interface RawChallenges {
   presentation?: RawPresentation;
   heading?: string;
   subheading?: string;
+  bridge?: string;
   items?: RawChallengeItem[];
 }
 interface RawWhyChooseItem {
@@ -383,6 +384,7 @@ export function mapHomepageJson(raw: string | false | undefined | null): Section
         variant: "home-challenges",
         heading: challenges.heading,
         subheading: challenges.subheading,
+        bridge: challenges.bridge,
         align: "center",
         items: challenges.items.map((it, i) => ({
           id: `home-challenge-${i}`,
@@ -516,8 +518,6 @@ export function mapHomepageJson(raw: string | false | undefined | null): Section
     });
   });
 
-  pushCta(sections, order, data.midCta, "home-mid-cta");
-
   const ke = data.keyEnablers;
   if (ke && ke.visible !== false && Array.isArray(ke.items) && ke.items.length > 0) {
     sections.push({
@@ -598,6 +598,8 @@ export function mapHomepageJson(raw: string | false | undefined | null): Section
       });
     }
   }
+
+  pushCta(sections, order, data.midCta, "home-mid-cta");
 
   const testimonials = data.testimonials;
   if (

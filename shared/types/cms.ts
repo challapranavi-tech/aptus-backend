@@ -453,6 +453,8 @@ export interface Features {
   heading?: string;
   headingAccent?: string;
   subheading?: string;
+  /** Closing line under home-challenges (e.g. "So choose us"). */
+  bridge?: string;
   items?: FeatureItem[];
   /** Category pills (homepage industries). */
   tags?: string[];

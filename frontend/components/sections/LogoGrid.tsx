@@ -9,48 +9,16 @@ interface LogoGridProps {
 export function LogoGrid({ data }: LogoGridProps) {
   if (!data.items || data.items.length === 0) return null;
 
-  const isAlliances = data.variant === "alliances";
+  // Homepage "Authorized Technology Partners" uses the same logo carousel as Our Story.
+  const isAlliances =
+    data.variant === "alliances" || data.variant === "partners-marquee";
   const isAlliancesGrid = data.variant === "alliances-grid";
-  const isPartnersMarquee = data.variant === "partners-marquee";
-
-  if (isPartnersMarquee) {
-    return (
-      <section
-        className="home-partners section-padding"
-        data-section="logo-grid"
-        data-variant="partners-marquee"
-      >
-        <Container>
-          {(data.heading || data.headingAccent) && (
-            <h2 className="home-partners__heading">
-              {data.heading}
-              {data.heading && data.headingAccent ? " " : null}
-              {data.headingAccent}
-            </h2>
-          )}
-        </Container>
-        <div
-          className="home-partners__marquee"
-          role="region"
-          aria-roledescription="carousel"
-          aria-label={data.heading ?? "Authorized technology partners"}
-        >
-          <div className="home-partners__track">
-            {[...data.items, ...data.items].map((logo, i) => (
-              <div key={`${logo.id}-${i}`} className="home-partners__slide">
-                <span className="home-partners__name">{logo.alt}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section
       className={cn(
         isAlliances || isAlliancesGrid ? "bg-white py-4 sm:py-5" : "section-padding bg-brand-light",
+        data.variant === "partners-marquee" && "home-partners",
       )}
       data-section="logo-grid"
       data-variant={data.variant ?? "default"}
@@ -128,7 +96,7 @@ export function LogoGrid({ data }: LogoGridProps) {
           className="aptus-alliance-marquee"
           role="region"
           aria-roledescription="carousel"
-          aria-label="Strategic alliance partners"
+          aria-label={data.heading ?? "Authorized technology partners"}
         >
           <div className="aptus-alliance-marquee__track">
             {[...data.items, ...data.items].map((logo, i) => (

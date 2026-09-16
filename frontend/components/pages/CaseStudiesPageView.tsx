@@ -3,6 +3,7 @@ import { Container } from "@/components/ui";
 import { joinAccentTitle } from "@/lib/render-accent-title";
 import { resolveCmsImageSrc } from "@/lib/utils";
 import type { CaseStudiesPageContent } from "@/types/case-studies-page";
+import { Suspense } from "react";
 
 type CaseStudiesPageViewProps = {
   content: CaseStudiesPageContent;
@@ -44,7 +45,9 @@ export function CaseStudiesPageView({ content }: CaseStudiesPageViewProps) {
       ) : null}
 
       {allProjects.length ? (
-        <CaseStudiesProjectsSection title={projectsTitle} projects={allProjects} />
+        <Suspense fallback={null}>
+          <CaseStudiesProjectsSection title={projectsTitle} projects={allProjects} />
+        </Suspense>
       ) : null}
 
       {transformCta?.visible !== false && transformCta ? (

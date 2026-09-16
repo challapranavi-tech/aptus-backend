@@ -359,8 +359,8 @@ export function validateQuoteContactFields(
     }
 
     const cleanedTax = rawTaxId(raw).replace(/[^a-zA-Z0-9]/g, "");
-    if (!cleanedTax) errors.tax_id = "Please enter a valid Tax ID.";
-    else if (cleanedTax.length > TAX_ID_MAX_LENGTH) {
+    // VAT / Tax ID is optional for company quotes — validate format only when entered.
+    if (cleanedTax && cleanedTax.length > TAX_ID_MAX_LENGTH) {
       errors.tax_id = "Tax ID must contain a maximum of 12 characters.";
     }
 

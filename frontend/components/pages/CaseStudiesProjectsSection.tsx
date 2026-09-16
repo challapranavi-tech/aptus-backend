@@ -4,7 +4,8 @@ import { Container } from "@/components/ui";
 import { joinAccentTitle } from "@/lib/render-accent-title";
 import { resolveCmsImageSrc } from "@/lib/utils";
 import type { AccentTitleContent, CaseStudyItemContent } from "@/types/case-studies-page";
-import { useMemo, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 
 const ALL_INDUSTRIES = "All";
 
@@ -71,6 +72,9 @@ export function CaseStudiesProjectsSection({
   title,
   projects,
 }: CaseStudiesProjectsSectionProps) {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
   const industries = useMemo(() => {
     const set = new Set<string>();
     for (const project of projects) {
@@ -79,7 +83,39 @@ export function CaseStudiesProjectsSection({
     return [ALL_INDUSTRIES, ...Array.from(set).sort((a, b) => a.localeCompare(b))];
   }, [projects]);
 
+  const industryFromUrl = useMemo(() => {
+    const raw = searchParams.get("industry")?.trim();
+    if (!raw) return null;
+    try {
+      return decodeURIComponent(raw);
+    } catch {
+      return raw;
+    }
+  }, [searchParams]);
+
   const [activeIndustry, setActiveIndustry] = useState(ALL_INDUSTRIES);
+
+  useEffect(() => {
+    if (!industryFromUrl) {
+      setActiveIndustry(ALL_INDUSTRIES);
+      return;
+    }
+    const match = industries.find(
+      (industry) =>
+        industry !== ALL_INDUSTRIES &&
+        industry.toLowerCase() === industryFromUrl.toLowerCase(),
+    );
+    setActiveIndustry(match ?? ALL_INDUSTRIES);
+  }, [industryFromUrl, industries]);
+
+  const selectIndustry = (industry: string) => {
+    setActiveIndustry(industry);
+    const params = new URLSearchParams(searchParams.toString());
+    if (industry === ALL_INDUSTRIES) params.delete("industry");
+    else params.set("industry", industry);
+    const query = params.toString();
+    router.replace(query ? `?${query}` : "?", { scroll: false });
+  };
 
   const filtered = useMemo(() => {
     if (activeIndustry === ALL_INDUSTRIES) return projects;
@@ -87,7 +123,7 @@ export function CaseStudiesProjectsSection({
   }, [activeIndustry, projects]);
 
   return (
-    <section className="aptus-cs-section aptus-cs-section--muted">
+    <section className="aptus-cs-section aptus-cs-section--muted" id="projects">
       <Container>
         <h2 className="aptus-cs-section-title">{joinAccentTitle(title)}</h2>
 
@@ -108,7 +144,7 @@ export function CaseStudiesProjectsSection({
                     : "aptus-cs-industry-filter"
                 }
                 aria-pressed={active}
-                onClick={() => setActiveIndustry(industry)}
+                onClick={() => selectIndustry(industry)}
               >
                 {industry}
               </button>

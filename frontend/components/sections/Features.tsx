@@ -683,12 +683,18 @@ export function Features({ data }: FeaturesProps) {
           {data.heading && (
             <p className="home-challenges__heading">{data.heading}</p>
           )}
+          {data.bridge && (
+            <p className="home-challenges__bridge">{data.bridge}</p>
+          )}
         </Container>
       </section>
     );
   }
 
   if (isHomeIndustries) {
+    const industryHref = (industry: string) =>
+      `/customer-stories?industry=${encodeURIComponent(industry)}`;
+
     return (
       <section
         ref={sectionRef}
@@ -708,40 +714,71 @@ export function Features({ data }: FeaturesProps) {
                 </h2>
               )}
             </div>
-            {data.tags && data.tags.length > 0 && (
-              <ul className="home-industries__tags">
-                {data.tags.map((tag) => (
-                  <li key={tag} className="home-industries__tag">
-                    {tag}
-                  </li>
-                ))}
-              </ul>
-            )}
           </div>
 
           {data.items && data.items.length > 0 && (
             <div className="home-industries__grid">
-              {data.items.map((item) => (
-                <article
-                  key={item.id}
-                  className="feature-card home-industries__card"
-                  data-industry={item.title || undefined}
-                >
-                  {item.media && (
-                    <CmsImage
-                      src={item.media.src}
-                      alt={item.media.alt || item.title || ""}
-                      width={640}
-                      height={480}
-                      className="home-industries__image"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                  )}
-                  <div className="home-industries__overlay" aria-hidden="true" />
-                  {item.title && <h3 className="home-industries__label">{item.title}</h3>}
-                </article>
-              ))}
+              {data.items.map((item) => {
+                const title = item.title?.trim() || "";
+                const card = (
+                  <>
+                    {item.media && (
+                      <CmsImage
+                        src={item.media.src}
+                        alt={item.media.alt || title}
+                        width={640}
+                        height={480}
+                        className="home-industries__image"
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                      />
+                    )}
+                    <div className="home-industries__overlay" aria-hidden="true" />
+                    {title ? <h3 className="home-industries__label">{title}</h3> : null}
+                  </>
+                );
+
+                if (!title) {
+                  return (
+                    <article
+                      key={item.id}
+                      className="feature-card home-industries__card"
+                    >
+                      {card}
+                    </article>
+                  );
+                }
+
+                return (
+                  <Link
+                    key={item.id}
+                    href={industryHref(title)}
+                    className="feature-card home-industries__card"
+                    data-industry={title}
+                    aria-label={`View ${title} solutions in action`}
+                  >
+                    {card}
+                  </Link>
+                );
+              })}
             </div>
+          )}
+
+          {data.tags && data.tags.length > 0 && (
+            <ul
+              className="home-industries__tags"
+              aria-label="Browse industries"
+            >
+              {data.tags.map((tag) => (
+                <li key={tag}>
+                  <Link
+                    href={industryHref(tag)}
+                    className="home-industries__tag"
+                  >
+                    {tag}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           )}
 
           {data.action && (

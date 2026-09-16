@@ -72,7 +72,8 @@
   "challenges": {
     "id": "challenges",
     "visible": true,
-    "heading": "Technology Should Solve Problems — Not Create Them.",
+    "heading": "Technology should solve problems — not create them.",
+    "bridge": "Smarter solutions. Stronger operations. A partner you can rely on.",
     "subheading": "Are you dealing with...",
     "items": [
       {
@@ -104,7 +105,7 @@
   "whyChooseUs": {
     "id": "why-choose-us",
     "visible": true,
-    "heading": "Why Choose Us",
+    "heading": "Why Businesses choose Aptus",
     "items": [
       {
         "number": "01",
@@ -137,11 +138,17 @@
     },
     "tags": [
       "Banking",
-      "Hospitality",
-      "Manufacturing",
-      "Transportation",
+      "Construction & Real Estate",
       "Defence",
-      "Airports"
+      "Education",
+      "Government",
+      "Healthcare",
+      "Hospitality",
+      "Industrial",
+      "Oil & Gas",
+      "Smart Cities",
+      "Transportation",
+      "Utilities"
     ],
     "items": [
       {
@@ -175,7 +182,7 @@
         "imageAlt": "Smart Cities"
       }
     ],
-    "ctaLabel": "View more",
+    "ctaLabel": "Click here for project details",
     "ctaHref": "/customer-stories"
   },
   "logoGrid": {
@@ -212,10 +219,10 @@
         "accent": "Wadi Kabir International"
       },
       "paragraphs": [
-        "Challenge: Deliver a reliable IT project for a busy international school campus with no room for downtime.",
-        "Solution: Aptus Infotech planned and implemented the systems to match the school’s current needs and room to grow.",
-        "Delivery: The project team stayed hands-on through installation, commissioning, and handover.",
-        "Outcome: Prompt, flawless support and a partnership the school looks forward to continuing long term."
+        "Challenge: Indian School Wadi Kabir International needed a dependable campus-wide IT foundation that could support teaching, administration, and day-to-day operations — without disrupting classes or risking downtime during term time.",
+        "Solution: Aptus Infotech worked closely with the school to assess current systems, define priorities, and design a practical technology setup. The plan balanced immediate classroom and admin needs with clear room to scale as the campus grows.",
+        "Delivery: Our project team stayed hands-on from installation through commissioning and handover, coordinating with school staff so work was sequenced around the academic calendar and critical systems stayed available.",
+        "Outcome: The school now runs on a more reliable, future-ready infrastructure — backed by responsive support and a long-term partnership they continue to trust for ongoing technology needs."
       ],
       "imageSrc": "/images/indian-school-wadi-kabir.png",
       "imageAlt": "Indian School Al Wadi Al Kabir main entrance — success story",
@@ -234,7 +241,7 @@
     "id": "home-steps",
     "visible": true,
     "variant": "home-steps",
-    "eyebrow": "How It Works",
+    "eyebrow": "How We Work",
     "title": {
       "before": "3 simple",
       "accent": "steps"
