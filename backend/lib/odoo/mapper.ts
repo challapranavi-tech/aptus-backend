@@ -61,14 +61,18 @@ export function mapOdooPage(
 
   const slug = odooUrlToSlug(rawPage.url);
 
-  // Prefer committed home.json so homepage redesigns in git are visible without
-  // re-seeding Odoo. Set USE_LOCAL_HOME_JSON=false to force Odoo JSON.
-  const localHomeRaw = preferLocalHomeJson() ? loadLocalHomeJson() : null;
-  const homeSections =
-    mapHomepageJson(localHomeRaw) ?? mapHomepageJson(rawPage.x_homepage_sections_json);
-  if (homeSections && homeSections.length > 0) {
-    sections = homeSections;
-  } else {
+  // Prefer committed home.json only for the homepage — never overwrite other slugs.
+  // Set USE_LOCAL_HOME_JSON=false to force Odoo JSON for `/`.
+  if (slug === "home") {
+    const localHomeRaw = preferLocalHomeJson() ? loadLocalHomeJson() : null;
+    const homeSections =
+      mapHomepageJson(localHomeRaw) ?? mapHomepageJson(rawPage.x_homepage_sections_json);
+    if (homeSections && homeSections.length > 0) {
+      sections = homeSections;
+    }
+  }
+
+  if (sections.length === 0) {
     const localStoryJson =
       slug === "our-story" && preferLocalOurStoryJson()
         ? loadLocalPageSectionsJson("our-story")

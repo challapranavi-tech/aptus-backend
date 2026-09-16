@@ -8,6 +8,8 @@
  *
  * Homepage (`/`): committed `content/odoo-json/home.json` wins by default
  * (set USE_LOCAL_HOME_JSON=false to force Odoo `x_homepage_sections_json`).
+ * Our Story (`/our-story`): committed `content/odoo-json/our-story.json` wins
+ * by default (set USE_LOCAL_OUR_STORY_JSON=false to force Odoo).
  *
  * Layout chrome (nav, footer, top bar) is code-owned — see data/site-nav.ts.
  */
@@ -19,6 +21,7 @@ import {
   isLocalPageJsonInDev,
   listLocalDevPageSlugs,
   preferLocalHomeJson,
+  preferLocalOurStoryJson,
 } from "@/lib/odoo/local-page-json";
 import { loadCaseStudiesPageContent } from "@/lib/case-studies-page-content";
 import { isAutodeskHiddenSlug } from "@/data/autodesk-subnav";
@@ -154,6 +157,16 @@ export async function getHomePage(): Promise<Page | null> {
 export async function getPageBySlug(slug: string): Promise<Page | null> {
   // security: hidden product slugs are denied at the data layer (object id = slug).
   if (isAutodeskHiddenSlug(slug)) return null;
+
+  // Committed our-story.json drives `/our-story` by default so the redesign is
+  // visible without re-seeding Odoo (same pattern as home.json).
+  if (slug === "our-story" && preferLocalOurStoryJson()) {
+    const localStory = buildLocalDevPage("our-story");
+    if (localStory?.sections.length) {
+      debugLog("Mapped Page [our-story local]", localStory);
+      return localStory;
+    }
+  }
 
   if (!isOdooConfigured()) {
     // No Odoo — local JSON then mock
