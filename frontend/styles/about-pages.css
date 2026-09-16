@@ -695,29 +695,9 @@
   }
 }
 
-/* Our Story — collapse stacked section padding (same pattern as .page-home) */
+/* Our Story — dedicated layout in pages/our-story.css */
 @layer pages {
-  .page-our-story [data-section="banner"] {
-    margin-bottom: 0;
-  }
-
-  .page-our-story [data-section="feature-row"],
-  .page-our-story [data-section="flip-cards"],
-  .page-our-story [data-section="logo-grid"] {
-    padding-block: 0.75rem;
-  }
-
-  .page-our-story [data-section="feature-row"] + [data-section="flip-cards"],
-  .page-our-story [data-section="flip-cards"] + [data-section="logo-grid"],
-  .page-our-story [data-section="logo-grid"] + [data-section="cta"] {
-    padding-top: 0.25rem;
-  }
-
-  .page-our-story .aptus-alliances-heading {
-    margin-bottom: 0.75rem;
-  }
-
-  .page-our-story .aptus-alliance-marquee {
-    margin-top: 0.25rem;
+  .page-our-story [data-section="our-story"] {
+    margin: 0;
   }
 }

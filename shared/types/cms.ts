@@ -43,7 +43,8 @@ export type SectionType =
   | "iso-panel"
   | "career-panel"
   | "software-landing-hero"
-  | "software-inner-hero";
+  | "software-inner-hero"
+  | "our-story";
 
 // ─── Primitives ───────────────────────────────────────────────────────────────
 export interface ActionLink {
@@ -156,7 +157,8 @@ export interface Section {
     | IsoPanel
     | CareerPanel
     | SoftwareLandingHero
-    | SoftwareInnerHero;
+    | SoftwareInnerHero
+    | OurStory;
 }
 
 // ─── Section data models ──────────────────────────────────────────────────────
@@ -431,6 +433,58 @@ export interface SoftwareInnerHero {
   }[];
   /** Live CYPE uses h2 for the page title above the intro panel. */
   titleLevel?: "h1" | "h2";
+}
+
+export type OurStoryTone = "navy" | "sky" | "green";
+
+export interface OurStoryValue {
+  id: string;
+  title: string;
+  description?: string;
+  icon?: string;
+  /** Hex / brand logo image for Trust, Stability, Growth, etc. */
+  iconSrc?: string;
+  tone?: OurStoryTone;
+}
+
+export interface OurStoryMilestone {
+  id: string;
+  year: string;
+  title: string;
+  description?: string;
+  tone?: OurStoryTone;
+}
+
+export interface OurStoryHighlight {
+  id: string;
+  title: string;
+  description?: string;
+  icon?: string;
+}
+
+/** Dedicated /our-story layout — hero, journey timeline, highlight strip. */
+export interface OurStory {
+  type: "our-story";
+  hero?: {
+    eyebrow?: string;
+    titleBefore?: string;
+    titleAccent?: string;
+    description?: string;
+    /** Primary / fallback hero image. */
+    media?: MediaAsset;
+    /** Rotating Muscat (or other) hero images. */
+    images?: MediaAsset[];
+    values?: OurStoryValue[];
+  };
+  journey?: {
+    origin?: string;
+    originParagraphs?: string[];
+    today?: string;
+    milestones?: OurStoryMilestone[];
+  };
+  highlights?: {
+    items?: OurStoryHighlight[];
+  };
 }
 
 // features

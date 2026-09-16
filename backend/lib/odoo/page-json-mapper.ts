@@ -228,12 +228,55 @@ interface RawPartnerships {
   variant?: "default" | "alliances" | "alliances-grid";
   logos?: { id?: string; src?: string; alt?: string }[];
 }
+interface RawStoryValue {
+  id?: string;
+  title?: string;
+  description?: string;
+  icon?: string;
+  iconSrc?: string;
+  tone?: "navy" | "sky" | "green";
+}
+interface RawStoryMilestone {
+  id?: string;
+  year?: string;
+  title?: string;
+  description?: string;
+  tone?: "navy" | "sky" | "green";
+}
+interface RawStoryHighlight {
+  id?: string;
+  title?: string;
+  description?: string;
+  icon?: string;
+}
+interface RawStoryHero {
+  eyebrow?: string;
+  titleBefore?: string;
+  titleAccent?: string;
+  description?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  images?: { src?: string; alt?: string }[];
+  values?: RawStoryValue[];
+}
+interface RawStoryJourney {
+  origin?: string;
+  originParagraphs?: string[];
+  today?: string;
+  milestones?: RawStoryMilestone[];
+}
+interface RawStoryHighlights {
+  items?: RawStoryHighlight[];
+}
 interface RawPageJson {
   banner?: RawBanner;
   introRow?: RawIntroRow;
   featureRows?: RawIntroRow[];
   flipCards?: RawFlipCards;
   partnerships?: RawPartnerships;
+  storyHero?: RawStoryHero;
+  storyJourney?: RawStoryJourney;
+  storyHighlights?: RawStoryHighlights;
   hero?: RawHero;
   intro?: RawText;
   text?: RawText;
@@ -514,6 +557,76 @@ export function mapPageJson(
 
   const sections: Section[] = [];
   const order = { n: 0 };
+
+  const storyHero = data.storyHero;
+  const storyJourney = data.storyJourney;
+  const storyHighlights = data.storyHighlights;
+  if (storyHero || storyJourney || storyHighlights) {
+    sections.push({
+      id: "our-story",
+      type: "our-story",
+      order: ++order.n,
+      data: {
+        type: "our-story",
+        hero: storyHero
+          ? {
+              eyebrow: storyHero.eyebrow,
+              titleBefore: storyHero.titleBefore,
+              titleAccent: storyHero.titleAccent,
+              description: storyHero.description,
+              media: usableImg(storyHero.imageSrc, storyHero.imageAlt),
+              images: (() => {
+                const fromList =
+                  storyHero.images
+                    ?.map((img) => usableImg(img.src, img.alt))
+                    .filter((img): img is NonNullable<typeof img> => Boolean(img)) ?? [];
+                if (fromList.length) return fromList;
+                const single = usableImg(storyHero.imageSrc, storyHero.imageAlt);
+                return single ? [single] : undefined;
+              })(),
+              values: storyHero.values
+                ?.filter((v) => v.title)
+                .map((v, i) => ({
+                  id: v.id ?? `value-${i}`,
+                  title: v.title!,
+                  description: v.description,
+                  icon: v.icon,
+                  iconSrc: v.iconSrc,
+                  tone: v.tone,
+                })),
+            }
+          : undefined,
+        journey: storyJourney
+          ? {
+              origin: storyJourney.origin,
+              originParagraphs: storyJourney.originParagraphs?.filter(Boolean),
+              today: storyJourney.today,
+              milestones: storyJourney.milestones
+                ?.filter((m) => m.year && m.title)
+                .map((m, i) => ({
+                  id: m.id ?? `milestone-${i}`,
+                  year: m.year!,
+                  title: m.title!,
+                  description: m.description,
+                  tone: m.tone,
+                })),
+            }
+          : undefined,
+        highlights: storyHighlights?.items?.length
+          ? {
+              items: storyHighlights.items
+                .filter((item) => item.title)
+                .map((item, i) => ({
+                  id: item.id ?? `highlight-${i}`,
+                  title: item.title!,
+                  description: item.description,
+                  icon: item.icon,
+                })),
+            }
+          : undefined,
+      },
+    });
+  }
 
   const banner = data.banner;
   if (banner?.imageSrc) {
@@ -1084,9 +1197,25 @@ export function mapPageJson(
     }
   }
 
-  // CTA — explicit `contactCta` object and/or legacy `showContactCta` flag
+  // CTA — explicit `contactCta` object and/or legacy `showContactCta` flag.
+  // About Us / Our Story segment pages never show the light "Request a Quote" band.
+  const ABOUT_NO_QUOTE_SLUGS = new Set([
+    "our-story",
+    "our-team",
+    "aptus-policy",
+    "aptus-infotech-iso-certifications",
+    "why-aptus-infotech",
+    "winning-together",
+  ]);
   const cta = data.contactCta;
-  if (cta || data.showContactCta) {
+  const slug = options?.slug ?? "";
+  const isAboutNoQuote = ABOUT_NO_QUOTE_SLUGS.has(slug);
+  const ctaIsLightQuote =
+    (cta?.layout ?? "light") === "light" &&
+    (cta?.formVariant ?? "simple") === "simple" &&
+    cta?.formVariant !== "career" &&
+    cta?.formVariant !== "contact";
+  if ((cta || data.showContactCta) && !(isAboutNoQuote && (ctaIsLightQuote || !cta))) {
     sections.push({
       id: "page-cta",
       type: "cta",
@@ -1151,4 +1280,31 @@ const _pi = _types.indexOf("logo-grid");
 const _ci = _types.lastIndexOf("cta");
 if (!(_ti >= 0 && _pi > _ti && _ci > _pi)) {
   throw new Error("partnerships logo-grid must render after testimonials and before contact CTA");
+}
+
+{
+  const _story = mapPageJson(
+    JSON.stringify({
+      storyHero: {
+        eyebrow: "OUR STORY",
+        titleBefore: "Powered by",
+        titleAccent: "performance",
+        description: "d",
+        values: [{ id: "trust", title: "Trust", tone: "navy" }],
+      },
+      storyJourney: {
+        origin: "o",
+        today: "t",
+        milestones: [{ id: "m1", year: "2000", title: "Start", tone: "navy" }],
+      },
+      storyHighlights: {
+        items: [{ id: "h1", title: "Gold Partner" }],
+      },
+    }),
+    { slug: "our-story" },
+  );
+  const _storySection = _story?.find((s) => s.type === "our-story");
+  if (!_storySection || _storySection.data.type !== "our-story" || !_storySection.data.hero?.titleAccent) {
+    throw new Error("our-story JSON must map to our-story section with hero accent");
+  }
 }

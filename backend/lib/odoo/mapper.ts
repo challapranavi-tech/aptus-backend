@@ -21,6 +21,7 @@ import {
   loadLocalHomeJson,
   loadLocalPageSectionsJson,
   preferLocalHomeJson,
+  preferLocalOurStoryJson,
 } from "./local-page-json";
 import { mapHomepageJson } from "./json-mapper";
 import { mapPageJson } from "./page-json-mapper";
@@ -68,6 +69,10 @@ export function mapOdooPage(
   if (homeSections && homeSections.length > 0) {
     sections = homeSections;
   } else {
+    const localStoryJson =
+      slug === "our-story" && preferLocalOurStoryJson()
+        ? loadLocalPageSectionsJson("our-story")
+        : null;
     const localJson = isLocalPageJsonInDev() ? loadLocalPageSectionsJson(slug) : null;
     const caseStudiesJson =
       slug === "aptus-case-studies"
@@ -76,6 +81,7 @@ export function mapOdooPage(
     // Odoo stays source-of-truth. Local JSON is only a dev fallback when Odoo
     // has no JSON content for that page yet. Odoo empty Char/Text is often
     // `false` (not null/undefined) — treat that as missing so local can win.
+    // Exception: committed our-story.json wins by default (same pattern as home).
     const odooPageJson =
       typeof caseStudiesJson === "string" && caseStudiesJson.trim()
         ? caseStudiesJson
@@ -83,7 +89,7 @@ export function mapOdooPage(
             rawPage.x_page_sections_json.trim()
           ? rawPage.x_page_sections_json
           : null;
-    const pageJsonRaw = odooPageJson ?? localJson;
+    const pageJsonRaw = localStoryJson ?? odooPageJson ?? localJson;
     const pageSections = mapPageJson(pageJsonRaw, { slug });
     if (pageSections && pageSections.length > 0) {
       sections = pageSections;

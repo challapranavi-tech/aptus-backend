@@ -42,12 +42,5 @@
     "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/07/team-aptusinfotech.png",
     "imageAlt": "Aptus Infotech Team",
     "imagePosition": "below"
-  },
-  "contactCta": {
-    "heading": "Have questions? We can help",
-    "showForm": true,
-    "formVariant": "simple",
-    "submitLabel": "Submit Now",
-    "layout": "light"
   }
 }

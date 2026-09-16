@@ -99,6 +99,14 @@ export function preferLocalHomeJson(): boolean {
 }
 
 /**
+ * When true (default), committed our-story.json wins over Odoo page JSON.
+ * Set USE_LOCAL_OUR_STORY_JSON=false to force Odoo as source.
+ */
+export function preferLocalOurStoryJson(): boolean {
+  return process.env.USE_LOCAL_OUR_STORY_JSON !== "false";
+}
+
+/**
  * Build home from content/odoo-json/home.json (homepage schema, not page-json).
  */
 export function buildLocalHomePage(): Page | null {

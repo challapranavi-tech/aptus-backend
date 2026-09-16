@@ -17,6 +17,7 @@ import { Hero } from "./Hero";
 import { HeroSlider } from "./HeroSlider";
 import { KeyEnablers } from "./KeyEnablers";
 import { LogoGrid } from "./LogoGrid";
+import { OurStory } from "./OurStory";
 import { PageHeader } from "./PageHeader";
 import { PageTitle } from "./PageTitle";
 import { RichText } from "./RichText";
@@ -49,6 +50,7 @@ const sectionRegistry: Partial<Record<SectionType, ComponentType<SectionComponen
   "career-panel": CareerPanel as ComponentType<SectionComponentProps>,
   "software-landing-hero": SoftwareLandingHero as ComponentType<SectionComponentProps>,
   "software-inner-hero": SoftwareInnerHero as ComponentType<SectionComponentProps>,
+  "our-story": OurStory as ComponentType<SectionComponentProps>,
   services: Services as ComponentType<SectionComponentProps>,
   "key-enablers": KeyEnablers as ComponentType<SectionComponentProps>,
   cta: CTA as ComponentType<SectionComponentProps>,

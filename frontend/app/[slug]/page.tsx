@@ -9,6 +9,7 @@ import { localizePage } from "@/lib/localize-page";
 import { getRequestLocale } from "@/lib/request-locale";
 import { cn, buildPageMetadata, formatSlug } from "@/lib/utils";
 import "@/styles/case-studies-pages.css";
+import "@/styles/pages/our-story.css";
 import "@/styles/pages/team.css";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
