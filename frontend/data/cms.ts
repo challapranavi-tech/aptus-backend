@@ -101,6 +101,13 @@ export const getHomePage = cache(async (): Promise<Page | null> => {
 });
 
 export const getPageBySlug = cache(async (slug: string): Promise<Page | null> => {
+  // Committed frontend JSON for Our Story — do not wait on backend/Odoo (same as home).
+  if (slug === "our-story") {
+    const { buildLocalOurStoryPage } = await import("@/lib/build-local-our-story-page");
+    const local = buildLocalOurStoryPage();
+    if (local?.sections.length) return local;
+  }
+
   return apiGet<Page>(`/api/cms/pages/${encodeURIComponent(slug)}`);
 });
 

@@ -1,0 +1,100 @@
+{
+  "storyHero": {
+    "titleBefore": "Powered by",
+    "titleAccent": "Performance",
+    "description": "For over 25 years, we have been empowering businesses in Oman with innovative technology and integrated solutions that drive efficiency, security and sustainable growth.",
+    "images": [
+      {
+        "src": "/images/our-story/muscat-harbour.jpg",
+        "alt": "Mutrah Corniche in Muscat with mosque, white buildings, and mountains"
+      },
+      {
+        "src": "/images/our-story/muscat-corniche.jpg",
+        "alt": "Mutrah Corniche street with blue minaret and Al Hajar mountains"
+      },
+      {
+        "src": "/images/our-story/muscat-mosque.jpg",
+        "alt": "Sultan Qaboos Grand Mosque in Muscat"
+      },
+      {
+        "src": "/images/our-story/muscat-skyline.jpg",
+        "alt": "Muscat waterfront skyline with mountains and the Gulf of Oman"
+      }
+    ],
+    "values": [
+      {
+        "id": "trust",
+        "title": "Trust",
+        "description": "Built on long-term partnerships.",
+        "icon": "handshake",
+        "tone": "navy"
+      },
+      {
+        "id": "stability",
+        "title": "Stability",
+        "description": "A strong foundation for the future.",
+        "icon": "balance-scale",
+        "tone": "sky"
+      },
+      {
+        "id": "growth",
+        "title": "Growth",
+        "description": "Technology that moves you forward.",
+        "icon": "chart-line",
+        "tone": "green"
+      }
+    ]
+  },
+  "storyJourney": {
+    "originParagraphs": [
+      "Aptus Infotech traces its origins to the year 2000, with the establishment of Oriental Oryx Intl LLC in the Central Business District of Muscat. What began as a bold vision, inspired by the entrepreneurial spirit of Mr. Dhirubhai Ambani, grew into a trusted IT solutions partner for Oman's evolving technology sector.",
+      "In 2005, this vision became Aptus Infotech — a dedicated team of pre-sales engineers and sales professionals, committed to delivering globally recognized software solutions (ISVs) and ELV systems with professionalism and competitive value."
+    ],
+    "today": "Today, we are a premier System Integrator and Software Consultant, offering consulting and training services to large and medium-sized enterprises. With extensive cross-industry experience, we assess each client's operational scale, objectives and challenges to deliver strategically aligned, cost-effective IT solutions that support long-term business growth.",
+    "milestones": [
+      {
+        "id": "m-2000",
+        "year": "2000",
+        "title": "Oriental Oryx Intl LLC",
+        "description": "Our journey began in the heart of Muscat's Central Business District.",
+        "tone": "navy"
+      },
+      {
+        "id": "m-2005",
+        "year": "2005",
+        "title": "Aptus Infotech",
+        "description": "Formed with a dedicated team to serve Oman's growing IT sector.",
+        "tone": "sky"
+      },
+      {
+        "id": "m-2022",
+        "year": "2022",
+        "title": "Aptus SolarTech",
+        "description": "Launched a dedicated division for solar energy solutions.",
+        "tone": "green"
+      }
+    ]
+  },
+  "storyHighlights": {
+    "items": [
+      {
+        "id": "solutions",
+        "title": "Comprehensive Solutions",
+        "description": "Software | ELV | Infrastructure | Security | Networking",
+        "icon": "shield-check"
+      },
+      {
+        "id": "partners",
+        "title": "Gold Partner",
+        "description": "Autodesk | Adobe | Oracle",
+        "icon": "award"
+      },
+      {
+        "id": "solar",
+        "title": "Aptus SolarTech",
+        "description": "Sustainable energy for a brighter tomorrow.",
+        "icon": "solar-panel"
+      }
+    ]
+  }
+}

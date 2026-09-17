@@ -39,9 +39,9 @@ export async function generateStaticParams() {
   // One slow Odoo page (e.g. /spectronova) must not abort the whole Vercel build.
   // Skipped slugs stay live via dynamicParams on first request.
   // ponytail: serial probes — parallel stampedes Odoo and creates more timeouts.
-  const out: { slug: string }[] = [{ slug: "customer-stories" }];
+  const out: { slug: string }[] = [{ slug: "customer-stories" }, { slug: "our-story" }];
   for (const slug of slugs) {
-    if (isCaseStudiesSlug(slug)) continue;
+    if (isCaseStudiesSlug(slug) || slug === "our-story") continue;
     try {
       if (await getPageBySlug(slug)) out.push({ slug });
     } catch (err) {
@@ -58,6 +58,9 @@ export async function generateMetadata({
   const normalized = formatSlug(slug);
   if (isCaseStudiesSlug(normalized)) {
     return { title: "Solutions in Action" };
+  }
+  if (normalized === "our-story") {
+    return { title: "Our Story | Aptus Infotech" };
   }
   try {
     const page = await getPageBySlug(normalized);
