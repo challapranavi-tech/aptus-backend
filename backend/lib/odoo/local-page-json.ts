@@ -106,6 +106,36 @@ export function preferLocalOurStoryJson(): boolean {
   return process.env.USE_LOCAL_OUR_STORY_JSON !== "false";
 }
 
+const ELV_LOCAL_FIRST_SLUGS = new Set([
+  "elv-solutions",
+  "cctv-camera",
+  "access-control-system",
+  "gate-automation",
+  "audio-video-solutions",
+  "home-automation",
+  "telephone-systems",
+  "network-and-structured-cabling-solutions",
+  "thermal-scanners",
+  "ups",
+  "guest-room-management",
+  "nurse-calling-system",
+  "conference-room-solution",
+  "smatv-iptv",
+  "switching-and-routing",
+  "data-center-solutions",
+  "rsi-queue-management",
+]);
+
+/**
+ * When true (default), committed ELV odoo-json wins over Odoo page JSON
+ * so product-page edits go live without re-seeding. Set
+ * USE_LOCAL_ELV_JSON=false to force Odoo as source.
+ */
+export function preferLocalElvPageJson(slug: string): boolean {
+  if (process.env.USE_LOCAL_ELV_JSON === "false") return false;
+  return ELV_LOCAL_FIRST_SLUGS.has(slug);
+}
+
 /**
  * Build home from content/odoo-json/home.json (homepage schema, not page-json).
  */

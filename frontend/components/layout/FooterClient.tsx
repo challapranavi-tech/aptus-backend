@@ -25,7 +25,7 @@ export function FooterClient({
   return (
     <footer className="border-t" data-section="footer">
       <Container>
-        <div className="grid items-start gap-8 py-10 sm:grid-cols-2 sm:gap-8 sm:py-12 lg:grid-cols-[1.35fr_1.1fr_1.55fr] lg:gap-x-10 lg:gap-y-8 lg:py-14">
+        <div className="grid items-start gap-4 py-5 sm:grid-cols-2 sm:gap-5 sm:py-6 lg:grid-cols-[1.35fr_1.1fr_1.55fr] lg:gap-x-6 lg:gap-y-4 lg:py-7">
           <div className="aptus-footer-brand min-w-0">
             <Link href="/" className="aptus-footer-logo-link">
               {footerLogo ? (
@@ -51,7 +51,7 @@ export function FooterClient({
 
           {footer.mapEmbedUrl && (
             <div className="flex min-w-0 items-center justify-center">
-              <div className="aptus-footer-map relative aspect-square w-full max-w-[22rem] overflow-hidden rounded-md sm:max-w-none lg:aspect-[4/3]">
+              <div className="aptus-footer-map relative aspect-[5/3] w-full max-w-[18rem] overflow-hidden rounded-md sm:max-w-none lg:aspect-[5/3]">
                 <iframe
                   src={footer.mapEmbedUrl}
                   title="Office location map"
@@ -65,26 +65,26 @@ export function FooterClient({
             </div>
           )}
 
-          <div className="grid min-w-0 grid-cols-1 gap-x-8 gap-y-8 min-[420px]:grid-cols-2 sm:col-span-2 lg:col-span-1">
+          <div className="grid min-w-0 grid-cols-1 gap-x-5 gap-y-4 min-[420px]:grid-cols-2 sm:col-span-2 lg:col-span-1">
             {footer.columns.map((column, index) => (
               <div key={column.title ?? index} className="min-w-0">
                 {column.title && (
                   <h3
-                    className="aptus-footer-heading mb-3"
-                    style={{ fontSize: "var(--text-lg)", fontWeight: 700 }}
+                    className="aptus-footer-heading aptus-footer-heading--compact mb-1.5"
+                    style={{ fontSize: "0.8rem", fontWeight: 700 }}
                   >
                     {/quick links/i.test(column.title)
                       ? t.footer.quickLinks
                       : column.title}
                   </h3>
                 )}
-                <ul className="space-y-2.5">
+                <ul className="space-y-1">
                   {column.links.map((link) => (
                     <li key={link.href}>
                       <Link
                         href={link.href}
                         className="aptus-footer-col-text aptus-footer-link"
-                        style={{ fontSize: "var(--text-sm)" }}
+                        style={{ fontSize: "0.75rem" }}
                       >
                         {translateNavLabel(locale, link.href, link.label)}
                       </Link>
@@ -97,22 +97,22 @@ export function FooterClient({
             {hasReachUs && (
               <div className="min-w-0">
                 <h3
-                  className="aptus-footer-heading mb-3"
-                  style={{ fontSize: "var(--text-lg)", fontWeight: 700 }}
+                  className="aptus-footer-heading mb-1.5"
+                  style={{ fontSize: "0.8rem", fontWeight: 700 }}
                 >
                   {t.footer.reachUs}
                 </h3>
-                <ul className="space-y-2.5">
+                <ul className="space-y-1.5">
                   {footer.phone && (
                     <li>
                       <a
                         href={`tel:${footer.phone.replace(/\s/g, "")}`}
                         className="aptus-footer-col-text aptus-footer-link flex items-center gap-2.5"
-                        style={{ fontSize: "var(--text-sm)" }}
+                        style={{ fontSize: "0.75rem" }}
                       >
                         <svg
-                          width="14"
-                          height="14"
+                          width="12"
+                          height="12"
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
@@ -133,11 +133,11 @@ export function FooterClient({
                       <a
                         href={`mailto:${footer.email}`}
                         className="aptus-footer-col-text aptus-footer-link flex items-center gap-2.5"
-                        style={{ fontSize: "var(--text-sm)" }}
+                        style={{ fontSize: "0.75rem" }}
                       >
                         <svg
-                          width="14"
-                          height="14"
+                          width="12"
+                          height="12"
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
@@ -157,11 +157,11 @@ export function FooterClient({
                   {footer.address && (
                     <li
                       className="aptus-footer-col-text flex items-start gap-2.5"
-                      style={{ fontSize: "var(--text-sm)" }}
+                      style={{ fontSize: "0.75rem" }}
                     >
                       <svg
-                        width="14"
-                        height="14"
+                        width="12"
+                        height="12"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -184,14 +184,14 @@ export function FooterClient({
         </div>
 
         {footer.socialLinks && footer.socialLinks.length > 0 && (
-          <div className="aptus-footer-follow border-t pt-8 pb-2">
+          <div className="aptus-footer-follow border-t pt-2.5 pb-0.5">
             <h3
-              className="aptus-footer-heading mb-4"
-              style={{ fontSize: "var(--text-lg)", fontWeight: 700 }}
+              className="aptus-footer-heading aptus-footer-heading--compact mb-1.5"
+              style={{ fontSize: "0.8rem", fontWeight: 700 }}
             >
               {t.topBar.followUs}
             </h3>
-            <div className="flex flex-wrap items-center gap-2.5">
+            <div className="flex flex-wrap items-center gap-1.5">
               {footer.socialLinks.map((s) => (
                 <a
                   key={s.platform}
@@ -199,9 +199,9 @@ export function FooterClient({
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label ?? s.platform}
-                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-blue text-white transition-all hover:bg-brand-blue-dark"
+                  className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-blue text-white transition-all hover:bg-brand-blue-dark"
                 >
-                  <SocialIcon platform={s.platform} />
+                  <SocialIcon platform={s.platform} size={10} />
                 </a>
               ))}
             </div>
@@ -210,9 +210,9 @@ export function FooterClient({
       </Container>
 
       {footer.copyright && (
-        <div className="aptus-footer-copyright border-t py-4">
+        <div className="aptus-footer-copyright border-t py-2.5">
           <Container>
-            <p className="text-center" style={{ fontSize: "var(--text-sm)" }}>
+            <p className="text-center" style={{ fontSize: "0.75rem" }}>
               {footer.copyright}
             </p>
           </Container>

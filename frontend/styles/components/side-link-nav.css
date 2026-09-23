@@ -3,6 +3,51 @@
 .aptus-software-inner-hero__nav,
 .aptus-etap-nav {
   min-width: 0;
+  position: relative;
+}
+
+.aptus-software-inner-hero__nav-toggle {
+  align-items: center;
+  background: transparent;
+  border: 1px solid rgba(19, 82, 163, 0.28);
+  border-radius: 999px;
+  color: #1352a3;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 1.15rem;
+  font-weight: 700;
+  height: 1.75rem;
+  justify-content: center;
+  line-height: 1;
+  margin: 0 0 0.5rem auto;
+  padding: 0;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  width: 1.75rem;
+}
+
+.aptus-software-inner-hero__nav-toggle:hover,
+.aptus-software-inner-hero__nav-toggle:focus-visible {
+  background: rgba(19, 82, 163, 0.08);
+  border-color: #1352a3;
+  outline: 2px solid transparent;
+}
+
+.aptus-software-inner-hero__nav--collapsed {
+  width: auto;
+}
+
+.aptus-software-inner-hero__nav--collapsed .aptus-software-inner-hero__nav-toggle {
+  margin: 0;
+}
+
+.aptus-software-inner-hero__nav-panel[hidden] {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .aptus-software-inner-hero__grid--nav-collapsed.aptus-software-inner-hero__grid--two-column {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
 }
 
 .aptus-software-subnav__list {

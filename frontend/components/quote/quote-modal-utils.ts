@@ -84,7 +84,7 @@ const ELV_QUOTE_PRODUCTS = [
   ...new Set(
     ELV_PRODUCTS.filter((product) => product !== "ELV Solutions"),
   ),
-].sort((a, b) => a.localeCompare(b));
+];
 
 const SOFTWARE_QUOTE_PRODUCTS = ALL_QUOTE_PRODUCTS.filter(
   (product) => !(ELV_PRODUCTS as readonly string[]).includes(product),

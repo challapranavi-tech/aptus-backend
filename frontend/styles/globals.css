@@ -94,6 +94,18 @@ main [data-section] .aptus-form-submit,
   text-align: center;
 }
 
+.page-aptus-policy [data-section="legal-policies"] :is(h1, h2, h3, h4, h5, h6),
+.page-aptus-policy .aptus-legal__title,
+.page-aptus-policy .aptus-legal__heading,
+.page-aptus-policy .aptus-legal__subheading,
+.page-aptus-policy .aptus-legal__nav-label,
+.page-aptus-policy .aptus-legal__p,
+.page-aptus-policy .aptus-legal__list,
+.page-aptus-policy .aptus-legal__intro p,
+.page-aptus-policy .aptus-legal__footer {
+  text-align: left;
+}
+
 /* Body / leads beat parent `.text-center` wrappers */
 main [data-section] .text-start,
 main [data-section] .aptus-iso-intro-text,

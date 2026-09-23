@@ -22,6 +22,11 @@ const nextConfig: NextConfig = {
         destination: "/customer-stories",
         permanent: true,
       },
+      {
+        source: "/aptus-solar",
+        destination: "https://www.aptussolartech.com/",
+        permanent: false,
+      },
     ];
   },
   images: {

@@ -3,22 +3,22 @@
 import { resolveCmsImageSrc } from "@shared/lib/cms-image";
 
 export const ELV_INNER_SLUGS = [
-  "access-control-system",
-  "audio-video-solutions",
   "cctv-camera",
-  "conference-room-solution",
-  "data-center-solutions",
+  "access-control-system",
   "gate-automation",
-  "guest-room-management",
+  "audio-video-solutions",
   "home-automation",
+  "telephone-systems",
   "network-and-structured-cabling-solutions",
+  "thermal-scanners",
+  "ups",
+  "guest-room-management",
   "nurse-calling-system",
-  "rsi-queue-management",
+  "conference-room-solution",
   "smatv-iptv",
   "switching-and-routing",
-  "telephone-systems",
-  "thermal-scanners",
-  "ups"
+  "data-center-solutions",
+  "rsi-queue-management",
 ] as const;
 export type ElvInnerSlug = (typeof ELV_INNER_SLUGS)[number];
 

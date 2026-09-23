@@ -4,6 +4,10 @@ export function cn(...classes: (string | undefined | null | false)[]): string {
   return classes.filter(Boolean).join(" ");
 }
 
+export function isExternalHref(href?: string): boolean {
+  return Boolean(href && /^https?:\/\//i.test(href));
+}
+
 export function formatSlug(slug: string): string {
   return slug.replace(/^\/+|\/+$/g, "").toLowerCase();
 }

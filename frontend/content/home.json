@@ -12,7 +12,7 @@
     "ctaMenu": [
       { "label": "Software", "href": "/software-solutions" },
       { "label": "ELV", "href": "/elv-solutions" },
-      { "label": "Aptus Solar", "href": "/aptus-solar" }
+      { "label": "Aptus Solar", "href": "https://www.aptussolartech.com/" }
     ],
     "secondaryCtaLabel": "Talk to an Expert",
     "secondaryCtaHref": "#talk-to-expert",

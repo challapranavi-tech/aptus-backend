@@ -860,7 +860,9 @@ export function Features({ data }: FeaturesProps) {
           <div
             className={cn(
               "aptus-software-product-grid",
-              colCount === 3 ? "aptus-software-product-grid--3" : "aptus-software-product-grid--4",
+              colCount === 3 && "aptus-software-product-grid--3",
+              colCount === 4 && "aptus-software-product-grid--4",
+              colCount >= 5 && "aptus-software-product-grid--5",
             )}
           >
             {data.items?.map((item) => (

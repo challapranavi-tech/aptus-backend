@@ -12,8 +12,20 @@ import ourStoryJson from "@/content/our-story.json";
 
 type RawStory = typeof ourStoryJson;
 
+const STORY_TONES = new Set<OurStoryTone>([
+  "navy",
+  "sky",
+  "green",
+  "purple",
+  "pink",
+  "teal",
+  "blue",
+  "orange",
+  "red",
+]);
+
 function asTone(value: string | undefined): OurStoryTone | undefined {
-  if (value === "navy" || value === "sky" || value === "green") return value;
+  if (value && STORY_TONES.has(value as OurStoryTone)) return value as OurStoryTone;
   return undefined;
 }
 
@@ -22,7 +34,8 @@ export function buildLocalOurStoryPage(): Page | null {
   const hero = raw.storyHero;
   const journey = raw.storyJourney;
   const highlights = raw.storyHighlights;
-  if (!hero && !journey && !highlights) return null;
+  const tenets = raw.storyTenets;
+  if (!hero && !journey && !highlights && !tenets) return null;
 
   const data: OurStory = {
     type: "our-story",
@@ -53,6 +66,8 @@ export function buildLocalOurStoryPage(): Page | null {
             year: item.year,
             title: item.title,
             description: item.description,
+            imageSrc: item.imageSrc,
+            imageAlt: item.imageAlt,
             tone: asTone(item.tone),
           })),
         }
@@ -64,6 +79,18 @@ export function buildLocalOurStoryPage(): Page | null {
             title: item.title,
             description: item.description,
             icon: item.icon,
+          })),
+        }
+      : undefined,
+    tenets: tenets
+      ? {
+          eyebrow: tenets.eyebrow,
+          title: "title" in tenets ? (tenets as { title?: string }).title : undefined,
+          description: tenets.description,
+          items: tenets.items?.map((item) => ({
+            id: item.id,
+            title: item.title,
+            description: item.description,
           })),
         }
       : undefined,

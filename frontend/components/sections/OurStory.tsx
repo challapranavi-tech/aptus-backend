@@ -11,7 +11,7 @@ interface OurStoryProps {
   data: OurStoryData;
 }
 
-const SLIDE_MS = 5500;
+const SLIDE_MS = 6500;
 
 function ValueIllustration({ name }: { name?: string }) {
   if (name === "handshake" || name === "trust") {
@@ -101,12 +101,11 @@ function HighlightIcon({ name, className }: { name?: string; className?: string 
 }
 
 function toneClass(tone?: OurStoryTone) {
-  if (tone === "sky") return "aptus-story-tone--sky";
-  if (tone === "green") return "aptus-story-tone--green";
-  return "aptus-story-tone--navy";
+  if (!tone) return "aptus-story-tone--navy";
+  return `aptus-story-tone--${tone}`;
 }
 
-function StoryHeroMedia({ images }: { images: MediaAsset[] }) {
+function StoryBackground({ images }: { images: MediaAsset[] }) {
   const [active, setActive] = useState(0);
   const [base, setBase] = useState(0);
   const count = images.length;
@@ -122,48 +121,25 @@ function StoryHeroMedia({ images }: { images: MediaAsset[] }) {
     return () => window.clearInterval(id);
   }, [count]);
 
-  function goTo(index: number) {
-    setActive((prev) => {
-      if (prev === index) return prev;
-      setBase(prev);
-      return index;
-    });
-  }
+  if (!count) return null;
 
   return (
-    <div data-story-hero className="aptus-story-hero__media" aria-roledescription="carousel">
+    <div className="aptus-story-bg" aria-hidden="true">
       {images.map((image, index) => (
         // eslint-disable-next-line @next/next/no-img-element
         <img
           key={`${image.src}-${index}`}
           src={resolveCmsImageSrc(image.src)}
-          alt={image.alt ?? ""}
+          alt=""
           className={cn(
-            "aptus-story-hero__slide",
-            index === base && "aptus-story-hero__slide--base",
-            index === active && "aptus-story-hero__slide--active",
+            "aptus-story-bg__slide",
+            index === base && "aptus-story-bg__slide--base",
+            index === active && "aptus-story-bg__slide--active",
           )}
           loading={index === 0 ? "eager" : "lazy"}
         />
       ))}
-      {count > 1 ? (
-        <div className="aptus-story-hero__dots" role="tablist" aria-label="Muscat photos">
-          {images.map((image, index) => (
-            <button
-              key={`dot-${image.src}-${index}`}
-              type="button"
-              role="tab"
-              aria-selected={index === active}
-              aria-label={`Show photo ${index + 1}`}
-              className={cn(
-                "aptus-story-hero__dot",
-                index === active && "aptus-story-hero__dot--active",
-              )}
-              onClick={() => goTo(index)}
-            />
-          ))}
-        </div>
-      ) : null}
+      <div className="aptus-story-bg__scrim" />
     </div>
   );
 }
@@ -173,8 +149,9 @@ export function OurStory({ data }: OurStoryProps) {
   const hero = data.hero;
   const journey = data.journey;
   const highlights = data.highlights;
+  const tenets = data.tenets;
 
-  const heroImages = useMemo(() => {
+  const bgImages = useMemo(() => {
     const list = hero?.images?.filter((img) => Boolean(img.src)) ?? [];
     if (list.length) return list;
     return hero?.media?.src ? [hero.media] : [];
@@ -187,15 +164,20 @@ export function OurStory({ data }: OurStoryProps) {
 
   useGSAPContext({
     scope: rootRef,
-    dependencies: [hero?.titleBefore, journey?.milestones?.length, highlights?.items?.length],
+    dependencies: [
+      hero?.titleBefore,
+      journey?.milestones?.length,
+      highlights?.items?.length,
+      tenets?.items?.length,
+    ],
     setup() {
       const root = rootRef.current;
       if (!root) return;
 
-      gsap.from(root.querySelectorAll("[data-story-hero]"), {
+      gsap.from(root.querySelectorAll("[data-story-reveal]"), {
         y: 22,
         opacity: 0,
-        duration: 0.8,
+        duration: 0.75,
         ease: "power2.out",
         stagger: 0.08,
       });
@@ -239,7 +221,7 @@ export function OurStory({ data }: OurStoryProps) {
         duration: 0.7,
         ease: "back.out(1.4)",
         stagger: 0.12,
-        delay: 0.25,
+        delay: 0.2,
       });
 
       gsap.from(root.querySelectorAll("[data-story-journey]"), {
@@ -248,7 +230,15 @@ export function OurStory({ data }: OurStoryProps) {
         duration: 0.7,
         ease: "power2.out",
         stagger: 0.1,
-        scrollTrigger: { trigger: root.querySelector(".aptus-story-journey"), start: "top 82%", once: true },
+        scrollTrigger: { trigger: root.querySelector(".aptus-story-rail-block") ?? root.querySelector(".aptus-story-body"), start: "top 78%", once: true },
+      });
+
+      gsap.from(root.querySelectorAll(".aptus-story-rail-figure__img"), {
+        y: 16,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: { trigger: root.querySelector(".aptus-story-rail-block"), start: "top 80%", once: true },
       });
 
       gsap.from(root.querySelectorAll("[data-story-highlight]"), {
@@ -259,16 +249,26 @@ export function OurStory({ data }: OurStoryProps) {
         stagger: 0.1,
         scrollTrigger: { trigger: root.querySelector(".aptus-story-highlights"), start: "top 88%", once: true },
       });
+
+      gsap.from(root.querySelectorAll("[data-story-tenet]"), {
+        y: 18,
+        opacity: 0,
+        duration: 0.65,
+        ease: "power2.out",
+        stagger: 0.08,
+        scrollTrigger: { trigger: root.querySelector(".aptus-story-tenets-block"), start: "top 85%", once: true },
+      });
     },
   });
 
   return (
     <article ref={rootRef} className="aptus-story" data-section="our-story">
-      {hero ? (
-        <section className="aptus-story-hero">
-          <div className="aptus-story-hero__grid">
-            <div className="aptus-story-hero__copy">
-              <div data-story-hero className="aptus-story-title-row">
+      <section className="aptus-story-stage aptus-story-stage--hero">
+        <StoryBackground images={bgImages} />
+        <Container className="aptus-story-stage__inner aptus-story-stage__inner--hero">
+          {hero ? (
+            <header className="aptus-story-intro">
+              <div data-story-reveal className="aptus-story-title-row">
                 <h1 className="aptus-story-title">
                   {hero.titleBefore ? <span className="aptus-story-title__before">{hero.titleBefore} </span> : null}
                   {hero.titleAccent ? (
@@ -284,12 +284,12 @@ export function OurStory({ data }: OurStoryProps) {
                 />
               </div>
               {hero.description ? (
-                <p data-story-hero className="aptus-story-lead">
+                <p data-story-reveal className="aptus-story-lead">
                   {hero.description}
                 </p>
               ) : null}
               {hero.values?.length ? (
-                <ul data-story-hero className="aptus-story-values">
+                <ul data-story-reveal className="aptus-story-values">
                   {hero.values.map((value) => (
                     <li key={value.id} className={cn("aptus-story-value", toneClass(value.tone))}>
                       <div className="aptus-story-hex" aria-hidden="true">
@@ -303,72 +303,123 @@ export function OurStory({ data }: OurStoryProps) {
                   ))}
                 </ul>
               ) : null}
-            </div>
-            {heroImages.length ? <StoryHeroMedia images={heroImages} /> : null}
-          </div>
-        </section>
-      ) : null}
+            </header>
+          ) : null}
+        </Container>
+      </section>
 
-      {journey ? (
-        <section className="aptus-story-journey">
-          <Container>
-            <div className="aptus-story-journey__grid">
-              {originParagraphs.length ? (
-                <div data-story-journey className="aptus-story-journey__copy-stack">
-                  {originParagraphs.map((paragraph) => (
-                    <p key={paragraph.slice(0, 48)} className="aptus-story-journey__copy">
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-              ) : null}
+      <section className="aptus-story-stage aptus-story-stage--mid">
+        <Container className="aptus-story-stage__inner">
+          {journey ? (
+            <>
+              <div className="aptus-story-body">
+                {originParagraphs.length ? (
+                  <div data-story-journey className="aptus-story-journey__copy-stack">
+                    {originParagraphs.map((paragraph) => (
+                      <p key={paragraph.slice(0, 48)} className="aptus-story-journey__copy">
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+                ) : null}
+
+                {journey.today ? (
+                  <p data-story-journey className="aptus-story-journey__copy aptus-story-journey__copy--today">
+                    {journey.today}
+                  </p>
+                ) : null}
+              </div>
 
               {journey.milestones?.length ? (
-                <ol data-story-journey className="aptus-story-timeline" aria-label="Company timeline">
-                  {journey.milestones.map((item) => (
-                    <li key={item.id} className={cn("aptus-story-timeline__item", toneClass(item.tone))}>
-                      <span className="aptus-story-timeline__dot" aria-hidden="true" />
-                      <div className="aptus-story-timeline__body">
-                        <span className="aptus-story-timeline__year">{item.year}</span>
-                        <strong className="aptus-story-timeline__title">{item.title}</strong>
+                <div data-story-journey className="aptus-story-rail-block">
+                  <h2 className="aptus-story-rail-block__heading">Our Timeline</h2>
+                  <figure className="aptus-story-rail-figure">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      className="aptus-story-rail-figure__img"
+                      src={resolveCmsImageSrc("/images/our-story/our-story-timeline.png")}
+                      alt="Aptus Infotech timeline from 2000 Oriental Oryx through 2005, 2007 brand identity, 2015 ELV and ICT, 2026 leading and specializing, to 2040 Oman Vision"
+                      loading="lazy"
+                    />
+                    <ol className="visually-hidden">
+                      {journey.milestones.map((item) => (
+                        <li key={item.id}>
+                          {item.year}: {item.title}
+                          {item.description ? ` — ${item.description}` : ""}
+                        </li>
+                      ))}
+                    </ol>
+                  </figure>
+                </div>
+              ) : null}
+            </>
+          ) : null}
+
+          {highlights?.items?.length ? (
+            <ul className="aptus-story-highlights">
+              {highlights.items.map((item) => (
+                <li key={item.id} data-story-highlight className="aptus-story-highlight">
+                  {item.href ? (
+                    <a
+                      href={item.href}
+                      className="aptus-story-highlight__link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span className="aptus-story-highlight__icon" aria-hidden="true">
+                        <HighlightIcon name={item.icon} />
+                      </span>
+                      <div className="aptus-story-highlight__text">
+                        <strong>{item.title}</strong>
+                        {item.description ? <span>{item.description}</span> : null}
+                      </div>
+                    </a>
+                  ) : (
+                    <>
+                      <span className="aptus-story-highlight__icon" aria-hidden="true">
+                        <HighlightIcon name={item.icon} />
+                      </span>
+                      <div className="aptus-story-highlight__text">
+                        <strong>{item.title}</strong>
+                        {item.description ? <span>{item.description}</span> : null}
+                      </div>
+                    </>
+                  )}
+                </li>
+              ))}
+            </ul>
+          ) : null}
+
+          {tenets?.items?.length ? (
+            <section className="aptus-story-tenets-block" aria-labelledby="our-story-tenets-heading">
+              <h2 id="our-story-tenets-heading" className="aptus-story-tenets-block__heading">
+                {tenets.eyebrow ?? "Our Tenets"}
+              </h2>
+              <div className="aptus-story-tenets">
+                {tenets.description ? (
+                  <p className="aptus-story-tenets__lead">{tenets.description}</p>
+                ) : null}
+                <ol className="aptus-story-tenets__grid">
+                  {tenets.items.map((item, index) => (
+                    <li key={item.id} data-story-tenet className="aptus-story-tenet">
+                      <span className="aptus-story-tenet__index" aria-hidden="true">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <div className="aptus-story-tenet__body">
+                        <strong className="aptus-story-tenet__title">{item.title}</strong>
                         {item.description ? (
-                          <span className="aptus-story-timeline__desc">{item.description}</span>
+                          <p className="aptus-story-tenet__desc">{item.description}</p>
                         ) : null}
                       </div>
                     </li>
                   ))}
                 </ol>
-              ) : null}
-
-              {journey.today ? (
-                <p data-story-journey className="aptus-story-journey__copy">
-                  {journey.today}
-                </p>
-              ) : null}
-            </div>
-          </Container>
-        </section>
-      ) : null}
-
-      {highlights?.items?.length ? (
-        <section className="aptus-story-highlights">
-          <Container>
-            <ul className="aptus-story-highlights__grid">
-              {highlights.items.map((item) => (
-                <li key={item.id} data-story-highlight className="aptus-story-highlight">
-                  <span className="aptus-story-highlight__icon" aria-hidden="true">
-                    <HighlightIcon name={item.icon} />
-                  </span>
-                  <div className="aptus-story-highlight__text">
-                    <strong>{item.title}</strong>
-                    {item.description ? <span>{item.description}</span> : null}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </Container>
-        </section>
-      ) : null}
+              </div>
+            </section>
+          ) : null}
+        </Container>
+      </section>
     </article>
   );
 }
+

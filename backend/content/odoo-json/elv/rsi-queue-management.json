@@ -4,79 +4,143 @@
     "visible": true,
     "family": "elv",
     "bannerTitle": "Queue Management Solutions",
-    "bannerTagline": "Streamline customer flow and enhance service efficiency withour intelligent queue management systems",
-    "title": "Optimizing Customer Flow and Experience",
-    "paragraphs": [
-      "In today’s service-focused world, the speed and quality of customer service are paramount. More and more organizations are upgrading their waiting areas with advanced Queue Management Solutions to maximize efficiency and customer satisfaction.",
-      "Whether you’re managing a complex queue in a large public sector office or simplifying service lines in a retail bank, these technologies dramatically improve the way you direct, serve, and engage with waiting visitors.",
-      "Experience superior operational control and seamless customer flow with our comprehensive solutions for virtual queuing, digital signage, and real-time analytics across any service environment.",
-      "From self-service ticket kiosks and mobile check-in applications to dynamic display boards and customizable staff dashboards, we provide end-to-end solutions that ensure every interaction is organized, personalized, and utterly efficient."
+    "bannerTagline": "Transform Waiting into a Smarter Customer Experience",
+    "bannerSupport": "Virtual Queuing · Self-Service Kiosks · Digital Signage · Analytics",
+    "bannerBackgroundImages": [
+      {
+        "src": "/images/Leonardo_Phoenix_10_a_cinematic_photo_of_a_bustling_lobby_with_3.jpg",
+        "alt": "Queue management kiosk and customer waiting area"
+      },
+      {
+        "src": "/images/ncs-monitoring.jpg",
+        "alt": "Service desk and visitor check-in environment"
+      },
+      {
+        "src": "/images/av-signage.jpg",
+        "alt": "Mobile check-in and virtual queuing"
+      },
+      {
+        "src": "/images/ups-monitoring.jpg",
+        "alt": "Real-time queue analytics and staff dashboards"
+      },
+      {
+        "src": "/images/Leonardo_Phoenix_10_Create_a_visually_appealing_image_for_Conf_0-673x1024.jpg",
+        "alt": "Digital display for visitor information"
+      }
     ],
-    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_a_cinematic_photo_of_a_bustling_lobby_with_3.jpg",
-    "imageAlt": "Queue Management Solutions",
+    "title": "Queue Management Solutions",
+    "paragraphs": [
+      "In today’s service-driven environment, efficient customer flow is essential to delivering a seamless experience. Modern Queue Management Solutions help organizations reduce waiting times, optimize service capacity, and create a more organized and engaging environment for every visitor.",
+      "From government offices and healthcare facilities to banks, retail environments, and large service centers, our solutions intelligently manage customer journeys from arrival to service completion."
+    ],
+    "imageSrc": "false",
+    "layout": "two-column",
     "ctaLabel": "Request a Quote",
-    "ctaHref": "#form"
+    "ctaHref": "#form",
+    "ctaPlacement": "end",
+    "bodySections": [
+      {
+        "heading": "Intelligent Queuing. Seamless Service. Better Experiences.",
+        "paragraphs": [
+          "Our end-to-end queue management solutions combine <strong>virtual queuing, self-service kiosks, digital signage, appointment management, and real-time analytics</strong> to give organizations greater control over customer flow and service operations.",
+          "Customers can check in through self-service kiosks, mobile applications, or digital channels, while intelligent queue allocation directs them to the right service point. Dynamic display systems and personalized notifications keep visitors informed throughout their journey, reducing uncertainty and improving the overall experience.",
+          "Behind the scenes, staff gain access to intuitive dashboards and real-time insights that help monitor demand, manage workloads, and identify opportunities to improve operational efficiency.",
+          "From <strong>ticket issuance and virtual waiting to customer notifications, digital displays, and performance analytics</strong>, Aptus delivers a connected queue management ecosystem designed to make every interaction faster, smarter, and more efficient."
+        ]
+      },
+      {
+        "heading": "Designed for Modern Service Environments",
+        "paragraphs": [
+          "Whether you need to manage high-volume public services, streamline customer visits in a bank, improve patient flow, or enhance the experience across a retail environment, our scalable solutions can be tailored to your operational requirements."
+        ]
+      },
+      {
+        "heading": "Smarter Queues. Shorter Waits. Better Service Experiences.",
+        "paragraphs": [
+          "<strong>Smarter queues. Shorter waits. Better service experiences.</strong>"
+        ]
+      }
+    ]
   },
   "cardSections": [
     {
-      "id": "features",
+      "id": "queue-deliver",
       "visible": true,
-      "variant": "icon-cards",
+      "variant": "product-cards",
+      "gridColumns": 3,
       "title": {
-        "before": "Powerful Features"
+        "before": "What We Deliver"
       },
-      "subheading": "Discover the capabilities that make our Queue Management System the ideal solution for your business",
-      "align": "center",
+      "subheading": "Virtual queuing, kiosks, signage, appointments, notifications, and analytics — a connected customer-flow ecosystem.",
+      "align": "left",
       "items": [
         {
           "title": "Virtual Queuing",
-          "body": "Allow customers to join queues remotely via mobile app, website, or SMS, reducing physical crowding and enhancing convenience.",
-          "icon": "envira"
+          "body": "Let visitors join the queue remotely through mobile applications or digital channels, then allocate them to the right service point without crowding the waiting area.",
+          "imageSrc": "/images/av-signage.jpg",
+          "imageAlt": "Virtual queuing and mobile check-in"
         },
         {
-          "title": "Appointment Scheduling",
-          "body": "Enable customers to book appointments in advance, ensuring dedicated service slots and minimizing wait times.",
-          "icon": "calendar-alt"
+          "title": "Self-Service Kiosks",
+          "body": "Customers can check in, select a service, and receive a ticket at self-service kiosks — reducing reception bottlenecks from the moment they arrive.",
+          "imageSrc": "/images/Leonardo_Phoenix_10_a_cinematic_photo_of_a_bustling_lobby_with_3.jpg",
+          "imageAlt": "Self-service queue management kiosk"
         },
         {
           "title": "Digital Signage",
-          "body": "Display real-time queue status, announcements, and promotional content on digital screens to keep customers informed.",
-          "icon": "tv"
+          "body": "Dynamic display systems keep visitors informed with queue status, service points, and personalized updates throughout their journey.",
+          "imageSrc": "/images/Leonardo_Phoenix_10_Create_a_visually_appealing_image_for_Conf_0-673x1024.jpg",
+          "imageAlt": "Digital signage for visitor information"
         },
         {
-          "title": "Real-time Analytics",
-          "body": "Monitor queue performance, staff efficiency, and customer flow with comprehensive dashboards and reports.",
-          "icon": "chart-line"
+          "title": "Appointment Management",
+          "body": "Give customers a scheduled visit and give staff a planned workload — so service capacity stays organized from booking through completion.",
+          "imageSrc": "/images/ncs-analytics.jpg",
+          "imageAlt": "Appointment management for service visits"
         },
         {
-          "title": "Multi-channel Notifications",
-          "body": "Alert customers via SMS, email, or mobile app when their turn is approaching, allowing them to wait comfortably.",
+          "title": "Customer Notifications",
+          "body": "Personalized notifications keep visitors informed as their turn approaches, reducing uncertainty and improving the waiting experience.",
+          "imageSrc": "/images/ncs-monitoring.jpg",
+          "imageAlt": "Customer notifications and informed waiting"
+        },
+        {
+          "title": "Real-Time Analytics",
+          "body": "Intuitive dashboards give staff real-time insight into demand, workloads, and performance so they can improve operational efficiency.",
+          "imageSrc": "/images/ups-monitoring.jpg",
+          "imageAlt": "Real-time queue analytics dashboard"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Benefits of Our Queue Management Solutions"
+      },
+      "subheading": "Smarter customer flow from arrival to service completion.",
+      "align": "center",
+      "items": [
+        {
+          "title": "Shorter Waits",
+          "body": "Reduce waiting times and keep service moving with intelligent queue allocation.",
+          "icon": "stopwatch"
+        },
+        {
+          "title": "Organized Customer Flow",
+          "body": "Direct every visitor to the right service point from check-in through completion.",
+          "icon": "users"
+        },
+        {
+          "title": "Informed Visitors",
+          "body": "Digital displays and personalized notifications reduce uncertainty in the waiting journey.",
           "icon": "bell"
         },
         {
-          "title": "Customizable Workflows",
-          "body": "Adapt the system to your specific business processes with configurable service types, priorities, and routing rules.",
-          "icon": "cogs"
-        },
-        {
-          "title": "Enhanced Customer Experience",
-          "body": "As an authorized partner, we provide access to genuine Autodesk products.",
-          "icon": "smile"
-        },
-        {
-          "title": "Improved Operational Efficiency",
-          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
-          "icon": "tachometer-alt"
-        },
-        {
-          "title": "Data-Driven Decisions",
-          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "title": "Operational Insight",
+          "body": "Real-time dashboards help staff monitor demand, manage workloads, and improve efficiency.",
           "icon": "chart-line"
-        },
-        {
-          "title": "Enhanced Safety & Hygiene",
-          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
-          "icon": "shield-alt"
         }
       ]
     },
@@ -86,73 +150,74 @@
       "variant": "value-cards",
       "title": {
         "before": "Why Choose Aptus Infotech",
-        "accent": "Queue Management Solutions?"
+        "accent": "for Queue Management?"
       },
       "align": "center",
       "items": [
         {
           "title": "Customized Solutions",
-          "body": "We design and implement queue management systems tailored to your specific business requirements and workflows.",
+          "body": "We design queue management around your service types, volumes, and visitor journey — not a generic package.",
           "icon": "certificate"
         },
         {
-          "title": "Comprehensive Training",
-          "body": "Our experts provide thorough training for your staff to ensure smooth adoption and maximum utilization of the system.",
-          "icon": "graduation-cap"
+          "title": "End-to-End Delivery",
+          "body": "From kiosks and displays to virtual queues and analytics, we integrate the complete customer-flow ecosystem.",
+          "icon": "screwdriver"
         },
         {
           "title": "24/7 Technical Support",
-          "body": "Our dedicated support team is available round the clock to assist with any issues and ensure uninterrupted service.",
+          "body": "Our support team is available to keep check-in, notifications, and service operations running.",
           "icon": "headset"
         },
         {
-          "title": "Continuous Updates",
-          "body": "We provide regular software updates and enhancements to keep your system current with the latest features and security.",
-          "icon": "reply"
+          "title": "Built to Scale",
+          "body": "From a single branch to high-volume public service centers, the same platform can grow with your operations.",
+          "icon": "chart-line"
         }
       ]
     }
   ],
   "testimonials": {
     "visible": true,
-    "variant": "software-quotes",
+    "variant": "software-quotes-marquee",
     "title": {
-      "before": "What Our",
-      "accent": "Clients Say"
+      "before": "What Our Clients Say"
     },
-    "subheading": "Get in touch with our queue management experts to discuss your requirements and find the perfect solution for your business.",
+    "subheading": "Hear from organizations that turned waiting into a smarter customer experience",
     "items": [
       {
-        "quote": "Aptus Infotech’s queue management system has transformed our patient experience. Wait times have decreased by 40%, and our staff can now focus on providing quality care rather than managing crowds.",
+        "quote": "Aptus transformed our patient flow. Visitors check in at the kiosk, wait without crowding, and our staff finally have a clear view of demand.",
         "author": "Dr. Ahmed Al Balushi",
         "role": "Administrator"
       },
       {
-        "quote": "The virtual queuing feature has been a game-changer for our bank. Customers can now wait comfortably and receive notifications when their turn is near, resulting in much higher satisfaction scores.",
+        "quote": "Virtual queuing changed how our bank serves customers. People wait comfortably and get notified when their turn is near.",
         "author": "Fatima Al Habsi",
         "role": "Branch Manager"
       },
       {
-        "quote": "The analytics provided by Aptus’s queue management system have helped us optimize staff scheduling and reduce peak-hour congestion. Our customer complaints about waiting times have virtually disappeared.",
+        "quote": "The analytics helped us balance counters during peak hours. Complaints about waiting times have almost disappeared.",
         "author": "Khalid Al Mawali",
         "role": "Operations Director"
       }
     ]
   },
-  "contactCta": {
-    "heading": "Have questions? We can help",
-    "description": "Our experts can help you to implement the right security system for your business.",
-    "showForm": true,
-    "submitLabel": "Submit Now",
-    "formVariant": "simple",
-    "layout": "light",
-    "category": "elv",
-    "productName": "Queue Management Solutions"
-  },
   "midCta": {
-    "heading": "Ready to Transform Your Customer Experience?",
-    "description": "Get in touch with our queue management experts to discuss your requirements and find the perfect solution for your business.",
-    "actionLabel": "Request a Quote",
+    "placement": "bottom",
+    "heading": "Ready to Transform Waiting into a Smarter Experience?",
+    "description": "Contact our queue management specialists today for a consultation and a solution tailored to your service environment.",
+    "actionLabel": "Get Your Quote Now",
     "actionHref": "#form"
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "src": "/images/brands/qnap.svg",
+        "alt": "QNAP"
+      }
+    ]
   }
 }

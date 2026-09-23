@@ -5,58 +5,66 @@
     "family": "elv",
     "bannerTitle": "Smart Home Solutions",
     "bannerTagline": "Transform your living space with intelligent automation and connected technology",
-    "title": "Experience the Future of Living",
+    "title": "Intelligent Technology. Effortless Living.",
     "paragraphs": [
-      "In today’s connected world, seamless control and energy savings are paramount. More and more homeowners are upgrading their residences with advanced Smart Home Solutions to maximize comfort, security, and efficiency.",
-      "Whether you’re automating the lighting in a single apartment or integrating climate, security, and entertainment across a large villa, these technologies dramatically improve the way you live, interact with, and manage your personal space.",
-      "Experience superior control and effortless convenience with our comprehensive solutions for lighting automation, environmental regulation, and integrated security across every part of your home.",
-      "From voice-controlled hubs and smart thermostats to intelligent door locks and centralized touch-panel interfaces, we provide end-to-end solutions that ensure every moment is comfortable, secure, and utterly effortless."
+      "A truly smart home is more than connected devices—it is an intelligent environment designed around the way you live. Aptus Smart Home Solutions bring together automation, security, lighting, climate control, entertainment, and energy management into one seamless experience.",
+      "From a smart apartment to a fully automated villa, we design and integrate intelligent systems that give you greater control, enhanced comfort, improved security, and effortless convenience throughout your home.",
+      "Automate lighting and curtains, manage temperature and climate, control entertainment systems, monitor security, and access your home with intelligent door and access solutions—all through intuitive interfaces designed for effortless everyday use.",
+      "From voice control and smart sensors to centralized touch panels and integrated home management systems, Aptus delivers end-to-end smart home solutions—from design and integration to installation and ongoing support."
     ],
-    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/Home-Automation-1024x683.webp",
-    "imageAlt": "Smart Home Solutions",
+    "imageSrc": "false",
+    "layout": "two-column",
     "ctaLabel": "Request a Quote",
-    "ctaHref": "#form"
+    "ctaHref": "#form",
+    "ctaPlacement": "end",
+    "bodySections": [
+      {
+        "heading": "Smarter Spaces. Greater Comfort. Complete Control.",
+        "paragraphs": []
+      }
+    ]
   },
   "cardSections": [
     {
-      "id": "features",
+      "id": "smart-home-types",
       "visible": true,
-      "variant": "icon-cards",
+      "variant": "product-cards",
+      "gridColumns": 5,
       "title": {
-        "before": "Powerful Features"
+        "before": "Types of Smart Home Systems"
       },
-      "subheading": "Discover the capabilities that make AutoCAD the industry standard",
-      "align": "center",
+      "subheading": "Connected solutions for comfort, security, and control — designed around how you live.",
+      "align": "left",
       "items": [
         {
-          "title": "Voice Control",
-          "body": "Control lights, thermostats, entertainment systems, and more using simple voice commands with Google Assistant or Amazon Alexa.",
-          "icon": "home"
-        },
-        {
-          "title": "Automated Lighting",
-          "body": "Customizable lighting scenes, schedules, and motion sensors that adjust brightness and color temperature automatically.",
-          "icon": "lightbulb"
+          "title": "Lighting & Curtains",
+          "body": "Automated scenes, schedules, and motorized shades that set the mood and save energy throughout the day.",
+          "imageSrc": "/images/Home-Automation-1024x683.webp",
+          "imageAlt": "Smart lighting and curtain automation"
         },
         {
           "title": "Climate Control",
-          "body": "Precise temperature regulation with learning algorithms that adapt to your preferences and optimize energy usage.",
-          "icon": "temperature-low"
-        },
-        {
-          "title": "Security Integration",
-          "body": "Seamless integration with door locks, cameras, alarms, and sensors for comprehensive home security monitoring.",
-          "icon": "lock"
-        },
-        {
-          "title": "Energy Management",
-          "body": "Monitor and control energy consumption with smart plugs, outlets, and appliance monitoring for cost savings.",
-          "icon": "plug"
+          "body": "Intelligent heating and cooling that adapts to your routines for comfort without wasting energy.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/Smart-Homes.png",
+          "imageAlt": "Smart climate and temperature control"
         },
         {
           "title": "Entertainment Systems",
-          "body": "Unified control of TVs, speakers, and media players with centralized interfaces for movies, music, and streaming.",
-          "icon": "tv"
+          "body": "Whole-home audio and video control so media follows you from room to room with one interface.",
+          "imageSrc": "/images/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Audio_3-673x1024.jpg",
+          "imageAlt": "Smart home entertainment systems"
+        },
+        {
+          "title": "Security & Access",
+          "body": "Smart locks, cameras, sensors, and alerts that protect your home and let you control entry remotely.",
+          "imageSrc": "/images/Access-Control-System-1-1024x1020.png",
+          "imageAlt": "Smart home security and access"
+        },
+        {
+          "title": "Central Management",
+          "body": "Voice, app, and touch-panel control that unifies every system into one effortless home experience.",
+          "imageSrc": "/images/Leonardo_Phoenix_10_a_cinematic_photo_of_a_bustling_lobby_with_3.jpg",
+          "imageAlt": "Centralized smart home management"
         }
       ]
     },
@@ -127,40 +135,31 @@
   ],
   "testimonials": {
     "visible": true,
-    "variant": "software-quotes",
+    "variant": "software-quotes-marquee",
     "title": {
-      "before": "What Our",
-      "accent": "Clients Say"
+      "before": "What Our Clients Say"
     },
     "subheading": "Hear from satisfied customers who have upgraded their homes with our smart technology",
     "items": [
       {
-        "quote": "“The smart home system has completely changed how we live. Being able to control everything from my phone is incredibly convenient, and the energy savings have been significant.”",
+        "quote": "The smart home system has completely changed how we live. Being able to control everything from my phone is incredibly convenient, and the energy savings have been significant.",
         "author": "Mohammed Al Farsi",
         "role": "Homeowner"
       },
       {
-        "quote": "“We installed the premium smart home package and couldn’t be happier. The security features give us peace of mind, and the voice controls make daily tasks much easier.”",
+        "quote": "We installed the premium smart home package and couldn’t be happier. The security features give us peace of mind, and the voice controls make daily tasks much easier.",
         "author": "Sarah Johnson",
         "role": "Family Home"
       },
       {
-        "quote": "“The commercial smart home solution transformed our office space. We can now monitor energy usage, control lighting remotely, and manage access for employees seamlessly.”",
+        "quote": "The commercial smart home solution transformed our office space. We can now monitor energy usage, control lighting remotely, and manage access for employees seamlessly.",
         "author": "Ahmed Hassan",
         "role": "Office Manager"
       }
     ]
   },
-  "contactCta": {
-    "heading": "Have questions? We can help",
-    "showForm": true,
-    "submitLabel": "Submit Now",
-    "formVariant": "simple",
-    "layout": "light",
-    "category": "elv",
-    "productName": "Smart Home Solutions"
-  },
   "midCta": {
+    "placement": "bottom",
     "heading": "Ready to Transform Your Living Experience?",
     "description": "Contact our smart home specialists today for a free consultation and customized solution proposal.",
     "actionLabel": "Get Your Quote Now",
@@ -172,8 +171,16 @@
     "variant": "alliances",
     "logos": [
       {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Schneider.png",
+        "alt": "Schneider Electric"
+      },
+      {
         "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/URMET.png",
-        "alt": "URMET"
+        "alt": "Urmet"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Fanvil.png",
+        "alt": "Fanvil"
       },
       {
         "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/FERMAX-1-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",

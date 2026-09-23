@@ -7,6 +7,7 @@ import { CTA } from "./CTA";
 import { Features } from "./Features";
 import { FlipCards } from "./FlipCards";
 import { PolicyPanel } from "./PolicyPanel";
+import { LegalPolicies } from "./LegalPolicies";
 import { SoftwareLandingHero } from "./SoftwareLandingHero";
 import { SoftwareInnerHero } from "./SoftwareInnerHero";
 import { CareerPanel } from "./CareerPanel";
@@ -45,6 +46,7 @@ const sectionRegistry: Partial<Record<SectionType, ComponentType<SectionComponen
   features: Features as ComponentType<SectionComponentProps>,
   "flip-cards": FlipCards as ComponentType<SectionComponentProps>,
   "policy-panel": PolicyPanel as ComponentType<SectionComponentProps>,
+  "legal-policies": LegalPolicies as ComponentType<SectionComponentProps>,
   "why-panel": WhyPanel as ComponentType<SectionComponentProps>,
   "iso-panel": IsoPanel as ComponentType<SectionComponentProps>,
   "career-panel": CareerPanel as ComponentType<SectionComponentProps>,

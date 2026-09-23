@@ -2506,7 +2506,7 @@
 }
 
 .aptus-software-page .aptus-software-mid-band__inner {
-  padding: 2.5rem 2rem 1.5rem;
+  padding: 1.15rem 1.5rem;
 }
 
 .aptus-software-page .aptus-form-band {
@@ -2532,5 +2532,12 @@
 .aptus-software-page .aptus-software-bullet-panel {
   margin-top: 1rem;
   padding: 1.5rem 1.75rem;
+}
+
+/* Compact end-of-page Request Quote / mid CTA bands across all product pages */
+.aptus-software-page .aptus-software-mid-band__inner,
+[class*="aptus-software-page--"] .aptus-software-mid-band__inner {
+  padding-block: 1.15rem;
+  padding-inline: clamp(1rem, 3vw, 1.5rem);
 }
 

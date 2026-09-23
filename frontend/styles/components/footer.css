@@ -16,20 +16,20 @@
   display: inline-block;
   max-width: 100%;
   background: rgb(255 255 255 / 0.96);
-  border-radius: 8px;
-  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  padding: 0.3rem 0.5rem;
 }
 
 [data-section="footer"] .aptus-footer-logo {
   display: block !important;
   height: auto !important;
-  max-height: 2.75rem;
-  max-width: min(100%, 12.5rem);
+  max-height: 2rem;
+  max-width: min(100%, 9.5rem);
   width: auto !important;
 }
 
 [data-section="footer"] .aptus-footer-map {
-  min-height: 180px;
+  min-height: 120px;
 }
 
 [data-section="footer"] .aptus-footer-col-text {
@@ -39,6 +39,10 @@
 
 [data-section="footer"] .aptus-footer-heading {
   color: #fff;
+}
+
+[data-section="footer"] .aptus-footer-heading--compact {
+  letter-spacing: 0.01em;
 }
 
 [data-section="footer"] .aptus-footer-link {
@@ -61,23 +65,23 @@
 
 @media (min-width: 640px) {
   [data-section="footer"] .aptus-footer-logo {
-    max-height: 3rem;
-    max-width: min(100%, 14rem);
+    max-height: 2.25rem;
+    max-width: min(100%, 10.5rem);
   }
 
   [data-section="footer"] .aptus-footer-map {
-    min-height: 220px;
+    min-height: 140px;
   }
 }
 
 @media (min-width: 1024px) {
   [data-section="footer"] .aptus-footer-logo {
-    max-height: 3.25rem;
-    max-width: min(100%, 15rem);
+    max-height: 2.5rem;
+    max-width: min(100%, 11.5rem);
   }
 
   [data-section="footer"] .aptus-footer-map {
-    min-height: 260px;
+    min-height: 160px;
   }
 }
 

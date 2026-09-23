@@ -3,75 +3,98 @@
     "id": "hero",
     "visible": true,
     "family": "elv",
-    "bannerTitle": "CCTV Surveillance Solutions",
-    "bannerTagline": "Comprehensive video surveillance systems for enhanced security and monitoring",
-    "title": "CCTV Solutions",
-    "paragraphs": [
-      "In today’s complex world, continuous monitoring and visual verification are paramount. More and more organizations are upgrading their premises with advanced CCTV Solutions to maximize security and deter unauthorized activity.",
-      "Whether you’re installing cameras at a single entry point or deploying a fully networked system across a massive industrial complex, these technologies dramatically improve the way you observe, record, and analyze events in real-time.",
-      "Experience superior clarity and seamless coverage with our comprehensive solutions for high-definition IP cameras, network video recorders (NVRs), and video management software (VMS) across any environment.",
-      "From 4K dome and turret cameras with night vision to centralized analytics platforms and secure remote viewing applications, we provide end-to-end solutions that ensure every area is visible, documented, and utterly protected."
+    "bannerTitle": "Complete Visibility. Total Protection.",
+    "bannerTagline": "Enterprise-grade CCTV surveillance solutions — from 4K IP cameras to centralized video management systems — engineered and installed by certified security technicians across Oman.",
+    "bannerSupport": "Trusted brands. Custom-designed systems. 24/7 support.",
+    "bannerBackgroundImages": [
+      {
+        "src": "/images/CCTV-Cameras.jpg",
+        "alt": "CCTV camera systems for enterprise surveillance"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/CCTV_banner.png",
+        "alt": "CCTV surveillance control and monitoring"
+      },
+      {
+        "src": "/images/Access-Control-System-1-1024x1020.png",
+        "alt": "Integrated security and access monitoring"
+      },
+      {
+        "src": "/images/Thermal_Scanner-1024x1020.png",
+        "alt": "Thermal and advanced imaging security cameras"
+      },
+      {
+        "src": "/images/Gate.jpg",
+        "alt": "Perimeter and entry point video surveillance"
+      }
     ],
-    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/CCTV-Cameras.jpg",
-    "imageAlt": "CCTV Surveillance Solutions",
+    "title": "Surveillance That Strengthens Security",
+    "paragraphs": [
+      "In an increasingly complex security landscape, continuous monitoring and visual verification are no longer optional — they are fundamental to protecting people, assets, and operations. Threats today are more sophisticated, liability expectations are higher, and organizations are expected to demonstrate not just that they have security measures in place, but that those measures actually work. This is why more businesses, institutions, and industrial facilities across every sector are upgrading their premises with advanced CCTV solutions — not simply to record footage, but to actively strengthen security, deter unauthorized activity, and maintain clear accountability at every access point.",
+      "Whether you're securing a single entry point at a retail storefront, monitoring a multi-building corporate campus, or deploying a fully networked surveillance system across a large-scale industrial or logistics complex, the right CCTV infrastructure fundamentally transforms how you observe, record, and respond to events. Modern systems don't just capture footage after the fact — they enable real-time awareness, faster incident response, and evidence-grade documentation that holds up when it matters most."
+    ],
+    "imageSrc": "false",
+    "layout": "two-column",
     "ctaLabel": "Request a Quote",
-    "ctaHref": "#form"
+    "ctaHref": "#form",
+    "bodySections": [
+      {
+        "heading": "Comprehensive, End-to-End Coverage",
+        "paragraphs": [
+          "Our CCTV solutions bring together high-definition IP cameras, network video recorders (NVRs), and video management software (VMS) into a single, cohesive system — engineered to deliver seamless coverage and exceptional image clarity across any environment, whether indoor, outdoor, low-light, or extreme-weather. Every component is selected and configured to work together, so you get consistent performance rather than a patchwork of disconnected devices.",
+          "From 4K dome and turret cameras with advanced night vision and wide dynamic range, to bullet and PTZ cameras built for long-range and pan-tilt-zoom coverage, to thermal cameras capable of perimeter intrusion and fire detection — we design systems around the specific risks and layout of your facility, not a one-size-fits-all package."
+        ]
+      },
+      {
+        "heading": "Smarter Security, Not Just More Cameras",
+        "paragraphs": [
+          "Beyond hardware, our solutions incorporate centralized analytics platforms and smart motion detection to reduce false alarms and surface genuinely relevant events, along with secure remote viewing applications that let you monitor your premises from anywhere, on any device. Combined with reliable cloud storage and backup, historical footage is always retrievable when you need it — for investigations, audits, insurance claims, or operational review.",
+          "The result is a surveillance ecosystem where every area is visible, every event is documented, and every asset is protected — backed by systems that are built to scale as your organization grows."
+        ]
+      }
+    ]
   },
   "cardSections": [
     {
-      "id": "features",
+      "id": "camera-types",
       "visible": true,
-      "variant": "icon-cards",
+      "variant": "product-cards",
+      "gridColumns": 5,
       "title": {
-        "before": "Key CCTV System Features"
+        "before": "CCTV Camera Types"
       },
-      "subheading": "Explore the comprehensive functionality of our surveillance solutions",
-      "align": "center",
+      "subheading": "Labeled solutions for every coverage need — from close-range interiors to long-range perimeter protection.",
+      "align": "left",
       "items": [
         {
-          "title": "High-Resolution Cameras",
-          "body": "Ultra-clear imaging with HD and 4K resolution for detailed identification and evidence collection.",
-          "icon": "video"
-        },
-        {
-          "title": "Smart Motion Detection",
-          "body": "Advanced algorithms detect movement and unusual activity, reducing false alarms and focusing on relevant events.",
-          "icon": "eye"
-        },
-        {
-          "title": "Night Vision Technology",
-          "body": "Infrared and thermal imaging for clear visibility in complete darkness, ensuring continuous security coverage.",
-          "icon": "moon"
-        },
-        {
-          "title": "Remote Access & Monitoring",
-          "body": "Secure mobile and web access to view live feeds, review recordings, and manage settings from anywhere.",
-          "icon": "mobile-alt"
-        },
-        {
-          "title": "Cloud Storage & Backup",
-          "body": "Secure cloud storage with automatic backups and easy retrieval of historical footage when needed.",
-          "icon": "cloud-upload-alt"
-        },
-        {
           "title": "Dome Cameras",
-          "body": "360-degree coverageVandal-resistant housingWeatherproof designCompact desktop design",
-          "icon": "cube"
+          "body": "Discrete 360° coverage with vandal-resistant housings — ideal for interiors, corridors, and public spaces.",
+          "imageSrc": "/images/dome-150x150.png",
+          "imageAlt": "Dome CCTV camera"
+        },
+        {
+          "title": "Turret Cameras",
+          "body": "4K clarity with advanced night vision and wide dynamic range for demanding indoor and outdoor zones.",
+          "imageSrc": "/images/CCTV-Cameras.jpg",
+          "imageAlt": "Turret CCTV camera"
         },
         {
           "title": "Bullet Cameras",
-          "body": "Adjustable zoom lensesLong-distance viewingWeatherproof constructionHot-swappable batteries and components",
-          "icon": "cube"
+          "body": "Long-distance viewing with adjustable zoom and weatherproof construction for building exteriors and yards.",
+          "imageSrc": "/images/Bullet-Cameras-150x150.png",
+          "imageAlt": "Bullet CCTV camera"
         },
         {
           "title": "PTZ Cameras",
-          "body": "Remote pan-tilt-zoom controlPre-programmed patrol routesAdvanced analytics and reportingFull system redundancy and failover",
-          "icon": "cube"
+          "body": "Remote pan-tilt-zoom control with patrol routes for active monitoring of large sites and open areas.",
+          "imageSrc": "/images/PTZ-Cameras-150x150.png",
+          "imageAlt": "PTZ CCTV camera"
         },
         {
           "title": "Thermal Cameras",
-          "body": "Temperature difference detectionPerimeter intrusion detectionFire detection capabilitiesNo-light required operation",
-          "icon": "cube"
+          "body": "Perimeter intrusion and fire detection with clear imaging in complete darkness and harsh conditions.",
+          "imageSrc": "/images/thermal-camera-150x150.png",
+          "imageAlt": "Thermal CCTV camera"
         }
       ]
     },
@@ -83,7 +106,7 @@
         "before": "Why Choose Aptus",
         "accent": "CCTV Surveillance Needs?"
       },
-      "align": "center",
+      "align": "left",
       "items": [
         {
           "title": "Industry Expertise",
@@ -110,54 +133,49 @@
   ],
   "testimonials": {
     "visible": true,
-    "variant": "software-quotes",
+    "variant": "software-quotes-marquee",
     "title": {
-      "before": "What Our",
-      "accent": "Clients Say"
+      "before": "What Our Clients Say"
     },
     "subheading": "Hear from businesses that have enhanced their security with our CCTV solutions",
     "items": [
       {
-        "quote": "“The installation of Aptus Infotech’s CCTV system has dramatically improved our operational efficiency across multiple departments.”",
+        "quote": "The installation of Aptus Infotech’s CCTV system has dramatically improved our operational efficiency across multiple departments.",
         "author": "Sarah Johnson",
         "role": "Director of Operations"
       },
       {
-        "quote": "“Their system seamlessly integrated with our existing infrastructure, resulting in 40% reduction in operational costs and improved disaster recovery capabilities.”",
+        "quote": "Their system seamlessly integrated with our existing infrastructure, resulting in 40% reduction in operational costs and improved disaster recovery capabilities.",
         "author": "Michael Chen",
         "role": "CEO"
       },
       {
-        "quote": "“We were particularly impressed with the system’s reliability during critical situations and the excellent training provided to our staff.”",
+        "quote": "We were particularly impressed with the system’s reliability during critical situations and the excellent training provided to our staff.",
         "author": "Jessica Williams",
         "role": "Operations Manager"
       }
     ]
   },
-  "contactCta": {
-    "heading": "Have questions? We can help",
-    "description": "Our experts can help you to implement the right security system for your business.",
-    "showForm": true,
-    "submitLabel": "Submit Now",
-    "formVariant": "simple",
-    "layout": "light",
-    "category": "elv",
-    "productName": "CCTV Surveillance Solutions"
-  },
   "midCta": {
-    "heading": "Ready to Transform Your Hotel Operations?",
+    "placement": "bottom",
+    "heading": "Ready to Strengthen Your Surveillance?",
     "description": "Contact our CCTV technology specialists to discuss how our surveillance solutions can enhance security, streamline monitoring, and ensure peace of mind across your facility.",
     "actionLabel": "Get Your Quote Now",
     "actionHref": "#form"
   },
   "partnerships": {
+    "placement": "before-testimonials",
     "heading": "Winning together with",
     "headingAccent": "Strategic Alliances",
     "variant": "alliances",
     "logos": [
       {
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Hikvision.png",
-        "alt": "Hikvision"
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Avigilon.png",
+        "alt": "Avigilon"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Milesight-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "Milesight"
       },
       {
         "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Norden-300x180.png",
@@ -168,24 +186,12 @@
         "alt": "PELCO"
       },
       {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Hikvision.png",
+        "alt": "Hikvision"
+      },
+      {
         "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Dahua-rajc6eniwnl2qx20ib4zabi5fy6843kx2rpg00yiy6.png",
         "alt": "Dahua"
-      },
-      {
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/WatchNet.png",
-        "alt": "WatchNet"
-      },
-      {
-        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/BOSCH-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
-        "alt": "BOSCH"
-      },
-      {
-        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Milesight-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
-        "alt": "Milesight"
-      },
-      {
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Avigilon.png",
-        "alt": "Avigilon"
       }
     ]
   }

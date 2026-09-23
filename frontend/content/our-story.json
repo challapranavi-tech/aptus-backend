@@ -5,20 +5,36 @@
     "description": "For over 25 years, we have been empowering businesses in Oman with innovative technology and integrated solutions that drive efficiency, security and sustainable growth.",
     "images": [
       {
-        "src": "/images/our-story/muscat-harbour.jpg",
-        "alt": "Mutrah Corniche in Muscat with mosque, white buildings, and mountains"
+        "src": "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1920&q=80",
+        "alt": "Trust — partners shaking hands on a long-term agreement"
       },
       {
-        "src": "/images/our-story/muscat-corniche.jpg",
-        "alt": "Mutrah Corniche street with blue minaret and Al Hajar mountains"
+        "src": "https://images.unsplash.com/photo-1486406149826-9800ceff90e8?auto=format&fit=crop&w=1920&q=80",
+        "alt": "Stability — solid modern architecture and lasting foundations"
       },
       {
-        "src": "/images/our-story/muscat-mosque.jpg",
-        "alt": "Sultan Qaboos Grand Mosque in Muscat"
+        "src": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1920&q=80",
+        "alt": "Growth — technology and data driving business performance"
       },
       {
-        "src": "/images/our-story/muscat-skyline.jpg",
-        "alt": "Muscat waterfront skyline with mountains and the Gulf of Oman"
+        "src": "/images/oman-tech-hero.jpg",
+        "alt": "Software and IT consulting — modern technology workplace"
+      },
+      {
+        "src": "/images/CCTV-Cameras.jpg",
+        "alt": "ELV security — CCTV camera systems"
+      },
+      {
+        "src": "/images/Access-Control-System-1-1024x1020.png",
+        "alt": "ELV access control — secure entry systems"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1920&q=80",
+        "alt": "Networking and infrastructure — data centre and structured cabling"
+      },
+      {
+        "src": "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1920&q=80",
+        "alt": "Aptus SolarTech — solar energy installations"
       }
     ],
     "values": [
@@ -55,23 +71,45 @@
       {
         "id": "m-2000",
         "year": "2000",
-        "title": "Oriental Oryx Intl LLC",
-        "description": "Our journey began in the heart of Muscat's Central Business District.",
-        "tone": "navy"
+        "title": "Oriental Oryx",
+        "imageSrc": "/images/our-story/timeline-oriental-oryx.png",
+        "imageAlt": "Oriental Oryx Intl LLC IT Consultancy Services",
+        "tone": "purple"
       },
       {
         "id": "m-2005",
         "year": "2005",
-        "title": "Aptus Infotech",
-        "description": "Formed with a dedicated team to serve Oman's growing IT sector.",
-        "tone": "sky"
+        "title": "Enters IT Engineering Software Business",
+        "tone": "pink"
       },
       {
-        "id": "m-2022",
-        "year": "2022",
-        "title": "Aptus SolarTech",
-        "description": "Launched a dedicated division for solar energy solutions.",
-        "tone": "green"
+        "id": "m-2007",
+        "year": "2007",
+        "title": "New Brand Identity",
+        "imageSrc": "/images/our-story/timeline-aptus-brand.png",
+        "imageAlt": "Aptus Infotech logo",
+        "tone": "teal"
+      },
+      {
+        "id": "m-2015",
+        "year": "2015",
+        "title": "Diversified in ELV & ICT",
+        "tone": "blue"
+      },
+      {
+        "id": "m-2026",
+        "year": "2026",
+        "title": "Leading & Specializing",
+        "description": "Plan, Design & Build ELV, Security & Digitization Software Solutions",
+        "tone": "orange"
+      },
+      {
+        "id": "m-2040",
+        "year": "2040",
+        "title": "Moving Forward with Confidence",
+        "imageSrc": "/images/our-story/timeline-oman-vision-2040.png",
+        "imageAlt": "Oman Vision 2040",
+        "tone": "red"
       }
     ]
   },
@@ -93,7 +131,44 @@
         "id": "solar",
         "title": "Aptus SolarTech",
         "description": "Sustainable energy for a brighter tomorrow.",
-        "icon": "solar-panel"
+        "icon": "solar-panel",
+        "href": "https://www.aptussolartech.com/"
+      }
+    ]
+  },
+  "storyTenets": {
+    "eyebrow": "Our Tenets",
+    "description": "Six principles behind every project we deliver, from the first conversation to long-term support.",
+    "items": [
+      {
+        "id": "listen",
+        "title": "We listen before we recommend",
+        "description": "We start with your problem, not our catalog, and recommend what fits, even when it's the smaller option."
+      },
+      {
+        "id": "one-partner",
+        "title": "One partner, one accountable team",
+        "description": "Software, ELV, security and infrastructure come together under one team that owns the outcome."
+      },
+      {
+        "id": "honest",
+        "title": "Genuine products, honest advice",
+        "description": "We work with authorized partners and tell you plainly what you need and what you don't."
+      },
+      {
+        "id": "delivery",
+        "title": "Delivery is the start, not the finish",
+        "description": "From implementation to training to long-term support, we stay with you and work around your operations."
+      },
+      {
+        "id": "local",
+        "title": "Global technology, local commitment",
+        "description": "World-class vendors, backed by a team in Oman with 25+ years of local experience."
+      },
+      {
+        "id": "next",
+        "title": "Build for what's next",
+        "description": "Our solutions grow with your business, so technology never becomes the limit."
       }
     ]
   }

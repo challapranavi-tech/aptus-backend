@@ -1063,10 +1063,11 @@
     letter-spacing: -0.02em;
     max-width: 42rem;
     text-align: center;
-    text-shadow:
-      0 0 12px rgba(19, 82, 163, 0.35),
-      0 0 28px rgba(19, 82, 163, 0.22),
-      0 0 48px rgba(100, 180, 255, 0.18);
+    text-shadow: none;
+    filter: none;
+    animation: none;
+    background: none;
+    -webkit-text-fill-color: currentColor;
   }
 
   .page-home .home-challenges__bridge {

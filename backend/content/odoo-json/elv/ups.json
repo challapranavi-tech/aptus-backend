@@ -3,59 +3,96 @@
     "id": "hero",
     "visible": true,
     "family": "elv",
-    "bannerTitle": "Uninterruptible Power Supply - UPS",
-    "bannerTagline": "Comprehensive backup power solutions for businesses and organizations",
-    "title": "Backup power supply",
-    "paragraphs": [
-      "An uninterruptible power supply (UPS), also known as a battery backup, is an electrical apparatus that provides emergency power to a load when the input power source or mains power fails.",
-      "A UPS allows for the safe, orderly shutdown of a computer and connected equipment. The size and design of a UPS determine how long it will supply power. If an end user is working on the computer when the UPS notifies of the power loss, they have time to save any data they are working on and exit before the secondary power source (the battery) runs out.",
-      "When all power runs out, any data in your computer’s random access memory (RAM) is erased. When power surges occur, a UPS intercepts the surge so that it does not damage the computer."
+    "bannerTitle": "Reliable Backup Power & Power Protection Solutions",
+    "bannerTagline": "Keep critical systems running with dependable backup power, intelligent protection, and seamless power continuity.",
+    "bannerBackgroundImages": [
+      {
+        "src": "/images/Standby-ups.png",
+        "alt": "Uninterruptible power supply and backup systems"
+      },
+      {
+        "src": "/images/Leonardo_Phoenix_10_a_cinematic_photograph_of_a_futuristic_dat_0-673x1024.jpg",
+        "alt": "Data center and critical IT power protection"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Data-Centers-Teaser-scaled.webp",
+        "alt": "Server room backup power infrastructure"
+      },
+      {
+        "src": "/images/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Netwo_2-673x1024.jpg",
+        "alt": "Network and communications power continuity"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/unnamed.jpg",
+        "alt": "Enterprise infrastructure requiring backup power"
+      }
     ],
-    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/Standby-ups.png",
-    "imageAlt": "Uninterruptible Power Supply - UPS",
+    "title": "Reliable Backup Power & Power Protection Solutions",
+    "paragraphs": [
+      "Power interruptions, voltage fluctuations, and electrical disturbances can disrupt operations, affect sensitive equipment, and lead to data or productivity losses. Our Backup Power Solutions provide reliable power continuity to help keep essential systems operational when the primary power supply is interrupted.",
+      "Our UPS systems deliver instantaneous backup power during outages while helping protect connected equipment from power fluctuations, surges, and other electrical disturbances. This gives organizations the time and stability needed to maintain critical operations or perform a safe and controlled shutdown when required.",
+      "From IT infrastructure and servers to networking equipment, security systems, communication infrastructure, and other critical loads, we provide scalable backup power solutions designed around your operational requirements.",
+      "<strong>Protect your infrastructure, maintain operational continuity, and stay powered through unexpected interruptions with dependable backup power solutions from Aptus.</strong>"
+    ],
+    "imageSrc": "false",
+    "layout": "two-column",
     "ctaLabel": "Request a Quote",
-    "ctaHref": "#form"
+    "ctaHref": "#form",
+    "ctaPlacement": "end"
   },
   "cardSections": [
     {
-      "id": "features",
+      "id": "ups-deliver",
       "visible": true,
-      "variant": "icon-cards",
+      "variant": "product-cards",
+      "gridColumns": 4,
       "title": {
-        "before": "Powerful Features"
+        "before": "What We Deliver"
       },
-      "subheading": "Explore the comprehensive functionality of our power backup solutions",
-      "align": "center",
+      "subheading": "Backup power, surge protection, and intelligent monitoring for critical systems.",
+      "align": "left",
       "items": [
         {
-          "title": "Extended Battery Life",
-          "body": "High-quality batteries with extended runtime capability, ensuring sufficient power during prolonged outages.",
-          "icon": "battery-full"
+          "title": "Uninterruptible Power Supply (UPS)",
+          "body": "Continuous backup power during mains failure.",
+          "imageSrc": "/images/Standby-ups.png",
+          "imageAlt": "Uninterruptible power supply systems"
         },
         {
-          "title": "Pure Sine Wave Output",
-          "body": "Delivers clean, stable power with pure sine wave output, ideal for sensitive electronic equipment and servers.",
-          "icon": "chart-line"
+          "title": "Power Surge & Voltage Protection",
+          "body": "Helps safeguard sensitive equipment from electrical disturbances.",
+          "imageSrc": "/images/ups-surge-protection.jpg",
+          "imageAlt": "Power surge and voltage protection"
         },
         {
-          "title": "Advanced Microprocessor Control",
-          "body": "Intelligent microprocessor control ensures precise voltage regulation and automatic shutdown during overload conditions.",
-          "icon": "microchip"
+          "title": "Battery Backup Systems",
+          "body": "Configurable backup capacity based on required runtime and load.",
+          "imageSrc": "/images/ups-battery-backup.jpg",
+          "imageAlt": "Battery backup systems"
         },
         {
-          "title": "Real-Time Monitoring",
-          "body": "Comprehensive monitoring system tracks battery health, load levels, and remaining runtime with detailed diagnostics.",
-          "icon": "stopwatch"
+          "title": "Critical Equipment Protection",
+          "body": "Designed for IT, networking, security, communication, and business-critical infrastructure.",
+          "imageSrc": "/images/ups-critical-equipment.jpg",
+          "imageAlt": "Critical equipment power protection"
         },
         {
-          "title": "Multiple Outlet Configurations",
-          "body": "Versatile outlet configurations with surge protection for various types of connected equipment.",
-          "icon": "plug"
+          "title": "Intelligent Monitoring",
+          "body": "Visibility into power status, load levels, battery condition, and system performance.",
+          "imageSrc": "/images/ups-monitoring.jpg",
+          "imageAlt": "Intelligent UPS monitoring"
         },
         {
-          "title": "Automatic Self-Testing",
-          "body": "Regular self-tests ensure the UPS is functioning properly and ready to respond instantly when needed.",
-          "icon": "reply-all"
+          "title": "Safe Shutdown Support",
+          "body": "Provides sufficient backup time for controlled shutdowns where required.",
+          "imageSrc": "/images/ups-safe-shutdown.jpg",
+          "imageAlt": "Safe shutdown support for critical systems"
+        },
+        {
+          "title": "Scalable Power Solutions",
+          "body": "Suitable for offices, server rooms, data centers, commercial facilities, and industrial environments.",
+          "imageSrc": "/images/ups-scalable.jpg",
+          "imageAlt": "Scalable backup power solutions"
         }
       ]
     },
@@ -126,41 +163,31 @@
   ],
   "testimonials": {
     "visible": true,
-    "variant": "software-quotes",
+    "variant": "software-quotes-marquee",
     "title": {
-      "before": "What Our",
-      "accent": "Clients Say"
+      "before": "What Our Clients Say"
     },
     "subheading": "Success stories from businesses using AutoCAD through Aptus Infotech",
     "items": [
       {
-        "quote": "“The implementation of Aptus Infotech’s UPS system has dramatically improved our operational efficiency across multiple departments.”",
+        "quote": "The implementation of Aptus Infotech’s UPS system has dramatically improved our operational efficiency across multiple departments.",
         "author": "Sarah Johnson",
         "role": "Director of Operations"
       },
       {
-        "quote": "“Their system seamlessly integrated with our existing infrastructure, creating a unified power backup ecosystem that has reduced errors and improved documentation accuracy.”",
+        "quote": "Their system seamlessly integrated with our existing infrastructure, creating a unified power backup ecosystem that has reduced errors and improved documentation accuracy.",
         "author": "Michael Chen",
         "role": "CEO"
       },
       {
-        "quote": "“We were particularly impressed with the system’s reliability during critical situations and the excellent training provided to our staff.”",
+        "quote": "We were particularly impressed with the system’s reliability during critical situations and the excellent training provided to our staff.",
         "author": "Jessica Williams",
         "role": "Operations Manager"
       }
     ]
   },
-  "contactCta": {
-    "heading": "Have questions? We can help",
-    "description": "Our experts can help you to implement the right security system for your business.",
-    "showForm": true,
-    "submitLabel": "Submit Now",
-    "formVariant": "simple",
-    "layout": "light",
-    "category": "elv",
-    "productName": "Uninterruptible Power Supply - UPS"
-  },
   "midCta": {
+    "placement": "bottom",
     "heading": "Ready to Ensure Your Business Continuity?",
     "description": "Contact our power systems specialists to discuss how our UPS solutions can protect your critical operations from power disruptions.",
     "actionLabel": "Get Your Quote Now",
@@ -190,6 +217,10 @@
       {
         "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/infosec-rajdoxajaq7s4pv65vhzwk8lshgmk40gklva1s4i26.png",
         "alt": "infosec"
+      },
+      {
+        "src": "/images/kstar.png",
+        "alt": "KSTAR"
       }
     ]
   }

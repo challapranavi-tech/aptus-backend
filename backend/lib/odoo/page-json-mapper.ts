@@ -118,6 +118,8 @@ interface RawMidCta {
   subheading?: string;
   actionLabel?: string;
   actionHref?: string;
+  /** `mid` (default): above product cards. `bottom`: just before the contact CTA. */
+  placement?: "mid" | "bottom";
 }
 interface RawSoftwareInnerHero {
   id?: string;
@@ -126,6 +128,8 @@ interface RawSoftwareInnerHero {
   subnavLinks?: { label: string; href: string }[];
   bannerTitle?: string;
   bannerTagline?: string;
+  bannerSupport?: string;
+  bannerBackgroundImages?: { src: string; alt?: string }[];
   pageTitle?: string;
   title?: string;
   paragraphs?: string[];
@@ -136,6 +140,8 @@ interface RawSoftwareInnerHero {
   layout?: "default" | "two-column";
   topBannerImage?: string;
   mediaInline?: boolean;
+  /** Heading shown above an inline product image. */
+  imageHeading?: string;
   titleLevel?: "h1" | "h2";
   introRows?: {
     paragraphs?: string[];
@@ -143,6 +149,12 @@ interface RawSoftwareInnerHero {
     imageAlt?: string;
     imagePosition?: "left" | "right";
   }[];
+  bodySections?: {
+    heading?: string;
+    paragraphs?: string[];
+  }[];
+  /** Where Request a Quote sits when bodySections exist. Default: after intro. */
+  ctaPlacement?: "after-intro" | "end";
 }
 interface RawTestimonialItem {
   id?: string;
@@ -153,7 +165,7 @@ interface RawTestimonialItem {
 }
 interface RawTestimonials {
   visible?: boolean;
-  variant?: "default" | "software-quotes";
+  variant?: "default" | "software-quotes" | "software-quotes-marquee";
   title?: RawTitle;
   subheading?: string;
   items?: RawTestimonialItem[];
@@ -227,6 +239,8 @@ interface RawPartnerships {
   headingAccent?: string;
   variant?: "default" | "alliances" | "alliances-grid";
   logos?: { id?: string; src?: string; alt?: string }[];
+  /** Default: after testimonials. `before-testimonials` places logo band above quotes. */
+  placement?: "after-testimonials" | "before-testimonials";
 }
 interface RawStoryValue {
   id?: string;
@@ -241,13 +255,16 @@ interface RawStoryMilestone {
   year?: string;
   title?: string;
   description?: string;
-  tone?: "navy" | "sky" | "green";
+  imageSrc?: string;
+  imageAlt?: string;
+  tone?: "navy" | "sky" | "green" | "purple" | "pink" | "teal" | "blue" | "orange" | "red";
 }
 interface RawStoryHighlight {
   id?: string;
   title?: string;
   description?: string;
   icon?: string;
+  href?: string;
 }
 interface RawStoryHero {
   eyebrow?: string;
@@ -268,6 +285,17 @@ interface RawStoryJourney {
 interface RawStoryHighlights {
   items?: RawStoryHighlight[];
 }
+interface RawStoryTenet {
+  id?: string;
+  title?: string;
+  description?: string;
+}
+interface RawStoryTenets {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  items?: RawStoryTenet[];
+}
 interface RawPageJson {
   banner?: RawBanner;
   introRow?: RawIntroRow;
@@ -277,6 +305,7 @@ interface RawPageJson {
   storyHero?: RawStoryHero;
   storyJourney?: RawStoryJourney;
   storyHighlights?: RawStoryHighlights;
+  storyTenets?: RawStoryTenets;
   hero?: RawHero;
   intro?: RawText;
   text?: RawText;
@@ -561,7 +590,8 @@ export function mapPageJson(
   const storyHero = data.storyHero;
   const storyJourney = data.storyJourney;
   const storyHighlights = data.storyHighlights;
-  if (storyHero || storyJourney || storyHighlights) {
+  const storyTenets = data.storyTenets;
+  if (storyHero || storyJourney || storyHighlights || storyTenets) {
     sections.push({
       id: "our-story",
       type: "our-story",
@@ -608,6 +638,8 @@ export function mapPageJson(
                   year: m.year!,
                   title: m.title!,
                   description: m.description,
+                  imageSrc: m.imageSrc,
+                  imageAlt: m.imageAlt,
                   tone: m.tone,
                 })),
             }
@@ -621,6 +653,21 @@ export function mapPageJson(
                   title: item.title!,
                   description: item.description,
                   icon: item.icon,
+                  href: item.href,
+                })),
+            }
+          : undefined,
+        tenets: storyTenets
+          ? {
+              eyebrow: storyTenets.eyebrow,
+              title: storyTenets.title,
+              description: storyTenets.description,
+              items: storyTenets.items
+                ?.filter((item) => item.title)
+                .map((item, i) => ({
+                  id: item.id ?? `tenet-${i}`,
+                  title: item.title!,
+                  description: item.description,
                 })),
             }
           : undefined,
@@ -665,6 +712,10 @@ export function mapPageJson(
         type: "software-inner-hero",
         bannerTitle: innerHero.bannerTitle,
         bannerTagline: innerHero.bannerTagline,
+        bannerSupport: innerHero.bannerSupport,
+        bannerBackgroundImages: innerHero.bannerBackgroundImages
+          ?.filter((img) => Boolean(img.src))
+          .map((img) => ({ src: img.src, alt: img.alt ?? "" })),
         pageTitle: innerHero.pageTitle,
         title: innerHero.title,
         paragraphs: innerHero.paragraphs,
@@ -681,12 +732,20 @@ export function mapPageJson(
             : undefined,
         layout: innerHero.layout,
         mediaInline: innerHero.mediaInline,
+        imageHeading: innerHero.imageHeading,
         titleLevel: innerHero.titleLevel,
         introRows: innerHero.introRows?.map((row) => ({
           paragraphs: row.paragraphs,
           media: usableImg(row.imageSrc, row.imageAlt),
           imagePosition: row.imagePosition ?? "left",
         })),
+        bodySections: innerHero.bodySections
+          ?.filter((section) => section.heading || section.paragraphs?.length)
+          .map((section) => ({
+            heading: section.heading,
+            paragraphs: section.paragraphs,
+          })),
+        ctaPlacement: innerHero.ctaPlacement,
       },
     });
   }
@@ -776,9 +835,11 @@ export function mapPageJson(
     }
   }
 
-  // Mid quote CTA above Key Features / product cards (not after them).
+  // Mid quote CTA above Key Features / product cards (not after them),
+  // unless `placement: "bottom"` — then it renders just before the contact CTA.
   const midCta = data.midCta;
-  if (midCta?.heading) {
+  const pushMidCta = () => {
+    if (!midCta?.heading) return;
     sections.push({
       id: "page-mid-cta",
       type: "cta",
@@ -794,6 +855,9 @@ export function mapPageJson(
         layout: "software-mid",
       },
     });
+  };
+  if (midCta?.placement !== "bottom") {
+    pushMidCta();
   }
 
   mapCardSections(data, sections, order);
@@ -1127,8 +1191,9 @@ export function mapPageJson(
     });
   }
 
-  const testimonials = data.testimonials;
-  if (testimonials && testimonials.visible !== false && testimonials.items?.length) {
+  const pushTestimonials = () => {
+    const testimonials = data.testimonials;
+    if (!(testimonials && testimonials.visible !== false && testimonials.items?.length)) return;
     sections.push({
       id: "page-testimonials",
       type: "testimonials",
@@ -1137,7 +1202,11 @@ export function mapPageJson(
         type: "testimonials",
         heading: joinTitle(testimonials.title),
         subheading: testimonials.subheading,
-        variant: testimonials.variant ?? (options?.slug && (isInnerProductSlug(options.slug) || isElvHubSlug(options.slug)) ? "software-quotes" : "default"),
+        variant:
+          testimonials.variant ??
+          (options?.slug && (isInnerProductSlug(options.slug) || isElvHubSlug(options.slug))
+            ? "software-quotes"
+            : "default"),
         items: testimonials.items.map((it, i) => ({
           id: it.id ?? `testimonial-${i}`,
           quote: it.quote,
@@ -1147,7 +1216,7 @@ export function mapPageJson(
         })),
       },
     });
-  }
+  };
 
   if (data.showPartnerships) {
     sections.push({
@@ -1167,8 +1236,9 @@ export function mapPageJson(
     });
   }
 
-  const partnerships = data.partnerships;
-  if (partnerships?.logos?.length) {
+  const pushPartnerships = () => {
+    const partnerships = data.partnerships;
+    if (!partnerships?.logos?.length) return;
     const items: LogoItem[] = partnerships.logos
       .map((logo, i) => {
         const src = logo.src;
@@ -1181,20 +1251,33 @@ export function mapPageJson(
       })
       .filter((x): x is LogoItem => !!x);
 
-    if (items.length) {
-      sections.push({
-        id: "page-partnerships",
+    if (!items.length) return;
+    sections.push({
+      id: "page-partnerships",
+      type: "logo-grid",
+      order: ++order.n,
+      data: {
         type: "logo-grid",
-        order: ++order.n,
-        data: {
-          type: "logo-grid",
-          heading: partnerships.heading,
-          headingAccent: partnerships.headingAccent,
-          variant: partnerships.variant ?? "default",
-          items,
-        },
-      });
-    }
+        heading: partnerships.heading,
+        headingAccent: partnerships.headingAccent,
+        variant: partnerships.variant ?? "default",
+        items,
+      },
+    });
+  };
+
+  const partnershipsBeforeTestimonials =
+    data.partnerships?.placement === "before-testimonials";
+  if (partnershipsBeforeTestimonials) {
+    pushPartnerships();
+    pushTestimonials();
+  } else {
+    pushTestimonials();
+    pushPartnerships();
+  }
+
+  if (midCta?.placement === "bottom") {
+    pushMidCta();
   }
 
   // CTA — explicit `contactCta` object and/or legacy `showContactCta` flag.

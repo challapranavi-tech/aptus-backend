@@ -29,28 +29,20 @@
       "align": "center",
       "items": [
         {
-          "title": "Access Control System",
-          "body": "Advanced access control solutions to secure your premises with biometric, card, and mobile access options.",
-          "icon": "cube",
-          "href": "/access-control-system",
-          "actionLabel": "Read More",
-          "actionHref": "/access-control-system"
-        },
-        {
-          "title": "Thermal Scanners",
-          "body": "State-of-the-art thermal scanning technology for health screening and access control in high-traffic areas.",
-          "icon": "cube",
-          "href": "/thermal-scanners",
-          "actionLabel": "Read More",
-          "actionHref": "/thermal-scanners"
-        },
-        {
           "title": "CCTV",
           "body": "Comprehensive surveillance systems with high-definition cameras, recording, and monitoring capabilities.",
           "icon": "cube",
           "href": "/cctv-camera",
           "actionLabel": "Read More",
           "actionHref": "/cctv-camera"
+        },
+        {
+          "title": "Access Control System",
+          "body": "Advanced access control solutions to secure your premises with biometric, card, and mobile access options.",
+          "icon": "cube",
+          "href": "/access-control-system",
+          "actionLabel": "Read More",
+          "actionHref": "/access-control-system"
         },
         {
           "title": "Gate Automation",
@@ -61,14 +53,6 @@
           "actionHref": "/gate-automation"
         },
         {
-          "title": "Smart Homes",
-          "body": "Integrated smart home solutions for lighting, climate, security, and entertainment control.",
-          "icon": "cube",
-          "href": "/home-automation",
-          "actionLabel": "Read More",
-          "actionHref": "/home-automation"
-        },
-        {
           "title": "Audio/Video Solutions",
           "body": "Professional audio and video systems for conference rooms, auditoriums, and entertainment spaces.",
           "icon": "cube",
@@ -77,12 +61,36 @@
           "actionHref": "/audio-video-solutions"
         },
         {
-          "title": "Network & Structured Cabling",
+          "title": "Smart Homes",
+          "body": "Integrated smart home solutions for lighting, climate, security, and entertainment control.",
+          "icon": "cube",
+          "href": "/home-automation",
+          "actionLabel": "Read More",
+          "actionHref": "/home-automation"
+        },
+        {
+          "title": "Telephone Systems",
+          "body": "IP PBX and traditional telephone systems for reliable business communication across your organization.",
+          "icon": "cube",
+          "href": "/telephone-systems",
+          "actionLabel": "Read More",
+          "actionHref": "/telephone-systems"
+        },
+        {
+          "title": "Network and Structured Cabling Solutions",
           "body": "Reliable network infrastructure with structured cabling solutions for data, voice, and video.",
           "icon": "cube",
           "href": "/network-and-structured-cabling-solutions",
           "actionLabel": "Read More",
           "actionHref": "/network-and-structured-cabling-solutions"
+        },
+        {
+          "title": "Thermal Scanners",
+          "body": "State-of-the-art thermal scanning technology for health screening and access control in high-traffic areas.",
+          "icon": "cube",
+          "href": "/thermal-scanners",
+          "actionLabel": "Read More",
+          "actionHref": "/thermal-scanners"
         },
         {
           "title": "UPS",
@@ -109,28 +117,20 @@
           "actionHref": "/nurse-calling-system"
         },
         {
+          "title": "Conference Room Solution",
+          "body": "Integrated conference room solutions with audio, video, control systems, and collaboration tools.",
+          "icon": "users",
+          "href": "/conference-room-solution",
+          "actionLabel": "Read More",
+          "actionHref": "/conference-room-solution"
+        },
+        {
           "title": "SMATV/IPTV",
           "body": "Satellite Master Antenna Television and Internet Protocol TV solutions for multi-dwelling units.",
           "icon": "cube",
           "href": "/smatv-iptv",
           "actionLabel": "Read More",
           "actionHref": "/smatv-iptv"
-        },
-        {
-          "title": "Queue Management",
-          "body": "Efficient queue management systems for banks, hospitals, and service centers with digital displays.",
-          "icon": "users",
-          "href": "/rsi-queue-management",
-          "actionLabel": "Read More",
-          "actionHref": "/rsi-queue-management"
-        },
-        {
-          "title": "Data Center Solutions",
-          "body": "Complete data center solutions including design, installation, and maintenance of critical infrastructure.",
-          "icon": "database",
-          "href": "/data-center-solutions",
-          "actionLabel": "Read More",
-          "actionHref": "/data-center-solutions"
         },
         {
           "title": "Switching and Routing",
@@ -141,12 +141,20 @@
           "actionHref": "/switching-and-routing"
         },
         {
-          "title": "Conference Room Solution",
-          "body": "Integrated conference room solutions with audio, video, control systems, and collaboration tools.",
-          "icon": "users",
-          "href": "/conference-room-solution",
+          "title": "Data Center Solutions",
+          "body": "Complete data center solutions including design, installation, and maintenance of critical infrastructure.",
+          "icon": "database",
+          "href": "/data-center-solutions",
           "actionLabel": "Read More",
-          "actionHref": "/conference-room-solution"
+          "actionHref": "/data-center-solutions"
+        },
+        {
+          "title": "Queue Management",
+          "body": "Efficient queue management systems for banks, hospitals, and service centers with digital displays.",
+          "icon": "users",
+          "href": "/rsi-queue-management",
+          "actionLabel": "Read More",
+          "actionHref": "/rsi-queue-management"
         }
       ]
     },
@@ -217,6 +225,7 @@
     }
   ],
   "midCta": {
+    "placement": "bottom",
     "heading": "Ready to Transform Your Building?",
     "description": "Contact us today for a consultation and discover how our ELV solutions can enhance your property’s security, efficiency, and functionality.",
     "actionLabel": "Get Your Quote Now",
@@ -224,25 +233,24 @@
   },
   "testimonials": {
     "visible": true,
-    "variant": "software-quotes",
+    "variant": "software-quotes-marquee",
     "title": {
-      "before": "What Our",
-      "accent": "Clients Say"
+      "before": "What Our Clients Say"
     },
     "subheading": "Success stories from businesses using AutoCAD through Aptus Infotech",
     "items": [
       {
-        "quote": "“ELV Solutions transformed our building security with their integrated access control and CCTV systems. The installation was seamless, and the ongoing support has been exceptional.”",
+        "quote": "ELV Solutions transformed our building security with their integrated access control and CCTV systems. The installation was seamless, and the ongoing support has been exceptional.",
         "author": "Yusuf Al Hashmi",
         "role": "Facility Manager,"
       },
       {
-        "quote": "“The smart home solution provided by ELV Solutions has made our property more efficient and secure. Their team was professional and the installation was completed on time.”",
+        "quote": "The smart home solution provided by ELV Solutions has made our property more efficient and secure. Their team was professional and the installation was completed on time.",
         "author": "Mariam Al Said",
         "role": "Property Developer,"
       },
       {
-        "quote": "“We needed a comprehensive conference room solution, and ELV Solutions delivered beyond our expectations. The audio/video quality and integration are outstanding.”",
+        "quote": "We needed a comprehensive conference room solution, and ELV Solutions delivered beyond our expectations. The audio/video quality and integration are outstanding.",
         "author": "Khalid Al Balushi",
         "role": "IT Director,"
       }
@@ -274,15 +282,5 @@
         "alt": "infosec"
       }
     ]
-  },
-  "contactCta": {
-    "heading": "Have questions? We can help",
-    "description": "Our experts can help you to implement the right ELV Solution for your business.",
-    "showForm": true,
-    "submitLabel": "Submit Now",
-    "formVariant": "simple",
-    "layout": "light",
-    "category": "elv",
-    "productName": "ELV Solutions"
   }
 }

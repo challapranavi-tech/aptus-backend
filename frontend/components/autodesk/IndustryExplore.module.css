@@ -9,7 +9,7 @@
   --ind-dur: 280ms;
 
   background: #000;
-  padding: 48px 0 56px;
+  padding: 20px 0 22px;
   color: #fff;
 }
 
@@ -23,8 +23,8 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 28px;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
 .headCopy {
@@ -43,11 +43,11 @@
 }
 
 .lead {
-  margin: 0.65rem 0 0;
+  margin: 0.4rem 0 0;
   font-family: ArtifaktElement, Arial, sans-serif;
-  font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.05rem);
+  font-size: clamp(0.9rem, 0.85rem + 0.2vw, 1rem);
   font-weight: 400;
-  line-height: 1.45;
+  line-height: 1.4;
   color: rgba(255, 255, 255, 0.78);
 }
 
@@ -177,11 +177,11 @@
 @media (max-width: 768px) {
   .section {
     --ind-card-w: min(72vw, 260px);
-    padding: 36px 0 44px;
+    padding: 16px 0 18px;
   }
 
   .headRow {
-    margin-bottom: 20px;
+    margin-bottom: 12px;
   }
 
   .title {

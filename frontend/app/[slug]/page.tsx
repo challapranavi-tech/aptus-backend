@@ -10,6 +10,7 @@ import { getRequestLocale } from "@/lib/request-locale";
 import { cn, buildPageMetadata, formatSlug } from "@/lib/utils";
 import "@/styles/case-studies-pages.css";
 import "@/styles/pages/our-story.css";
+import "@/styles/pages/aptus-policy.css";
 import "@/styles/pages/team.css";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -26,6 +27,16 @@ function isCaseStudiesSlug(slug: string): boolean {
 }
 
 export async function generateStaticParams() {
+  // Dev: do not probe every CMS slug on boot — that stampedes a compiling
+  // backend and aborts pages like /nurse-calling-system with a 30s timeout.
+  if (process.env.NODE_ENV !== "production") {
+    return [
+      { slug: "customer-stories" },
+      { slug: "our-story" },
+      { slug: "aptus-policy" },
+    ];
+  }
+
   const slugs = (await getAllPageSlugs()).filter(
     // /autodesk and /adobe are dedicated App Router replicas, not CMS [slug].
     (slug) =>
@@ -39,9 +50,13 @@ export async function generateStaticParams() {
   // One slow Odoo page (e.g. /spectronova) must not abort the whole Vercel build.
   // Skipped slugs stay live via dynamicParams on first request.
   // ponytail: serial probes — parallel stampedes Odoo and creates more timeouts.
-  const out: { slug: string }[] = [{ slug: "customer-stories" }, { slug: "our-story" }];
+  const out: { slug: string }[] = [
+    { slug: "customer-stories" },
+    { slug: "our-story" },
+    { slug: "aptus-policy" },
+  ];
   for (const slug of slugs) {
-    if (isCaseStudiesSlug(slug) || slug === "our-story") continue;
+    if (isCaseStudiesSlug(slug) || slug === "our-story" || slug === "aptus-policy") continue;
     try {
       if (await getPageBySlug(slug)) out.push({ slug });
     } catch (err) {
@@ -61,6 +76,9 @@ export async function generateMetadata({
   }
   if (normalized === "our-story") {
     return { title: "Our Story | Aptus Infotech" };
+  }
+  if (normalized === "aptus-policy") {
+    return { title: "Our Policies & Terms | Aptus Infotech" };
   }
   try {
     const page = await getPageBySlug(normalized);
@@ -125,6 +143,7 @@ export default async function DynamicPage({ params }: PageProps) {
           (softwareScope?.family === "autodesk" || softwareScope?.isInner) && "aptus-autodesk-page",
           softwareScope?.isInner && `aptus-autodesk-page--${normalized}`,
           normalized === "our-story" && "page-our-story",
+          normalized === "aptus-policy" && "page-aptus-policy",
         )}
       >
         {usesStackedSoftwareLayout(normalized) ? (

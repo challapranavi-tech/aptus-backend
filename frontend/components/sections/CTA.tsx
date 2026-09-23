@@ -188,7 +188,7 @@ export function CTA({ data }: CTAProps) {
                 {description}
               </p>
             )}
-            <div data-cta-animate className="mt-8">
+            <div data-cta-animate className="aptus-software-mid-band__cta">
               <Link href={quoteHref} className="aptus-software-btn aptus-software-btn-blue">
                 {quoteLabel}
               </Link>
@@ -235,7 +235,7 @@ export function CTA({ data }: CTAProps) {
               </p>
             )}
             {data.action && (
-              <div data-cta-animate className="mt-8">
+              <div data-cta-animate className="aptus-software-mid-band__cta">
                 <Link href={data.action.href} className="aptus-software-btn aptus-software-btn-blue">
                   {data.action.label}
                 </Link>

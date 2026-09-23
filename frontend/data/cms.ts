@@ -14,7 +14,7 @@ const DEFAULT_API = "http://localhost:3001";
 // Cold /api/cms/home can take ~13 s (Odoo auth + page + draft fallback) and
 // first-hit Next compile adds more. 15 s aborted that race; metadata + page
 // both call getHomePage so React cache() keeps it to one fetch per request.
-const API_TIMEOUT_MS = 30_000;
+const API_TIMEOUT_MS = 90_000;
 
 function apiBase(): string {
   return (process.env.APTUS_API_URL ?? DEFAULT_API).replace(/\/$/, "");
@@ -105,6 +105,12 @@ export const getPageBySlug = cache(async (slug: string): Promise<Page | null> =>
   if (slug === "our-story") {
     const { buildLocalOurStoryPage } = await import("@/lib/build-local-our-story-page");
     const local = buildLocalOurStoryPage();
+    if (local?.sections.length) return local;
+  }
+
+  if (slug === "aptus-policy") {
+    const { buildLocalAptusPolicyPage } = await import("@/lib/build-local-aptus-policy-page");
+    const local = buildLocalAptusPolicyPage();
     if (local?.sections.length) return local;
   }
 

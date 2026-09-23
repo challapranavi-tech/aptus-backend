@@ -58,22 +58,22 @@ export const EXTRA_SOFTWARE_PRODUCTS = [
 
 /** ELV product page names (hidden product field). */
 export const ELV_PRODUCTS = [
-  "Access Control Systems",
-  "Audio Video Solutions",
   "CCTV Surveillance Solutions",
-  "Conference Room Solutions",
-  "Data Center Solutions",
+  "Access Control Systems",
   "Gate Automation Solutions",
-  "Guestroom Management System",
+  "Audio Video Solutions",
   "Smart Home Solutions",
-  "Network & Structured Cabling Solutions",
-  "Nurse Calling System",
-  "Queue Management Solutions",
-  "SMATV/IPTV Solutions",
-  "Switching and Routing",
   "Telephone Systems",
+  "Network & Structured Cabling Solutions",
   "Thermal Scanner Solutions",
   "Uninterruptible Power Supply - UPS",
+  "Guestroom Management System",
+  "Nurse Calling System",
+  "Conference Room Solutions",
+  "SMATV/IPTV Solutions",
+  "Switching and Routing",
+  "Data Center Solutions",
+  "Queue Management Solutions",
   "ELV Solutions",
 ] as const;
 

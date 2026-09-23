@@ -39,6 +39,7 @@ export type SectionType =
   | "faq"
   | "flip-cards"
   | "policy-panel"
+  | "legal-policies"
   | "why-panel"
   | "iso-panel"
   | "career-panel"
@@ -153,6 +154,7 @@ export interface Section {
     | FAQ
     | FlipCards
     | PolicyPanel
+    | LegalPolicies
     | WhyPanel
     | IsoPanel
     | CareerPanel
@@ -315,6 +317,44 @@ export interface PolicyPanel {
   privacyParagraphs?: string[];
 }
 
+export interface LegalPolicyBlock {
+  id?: string;
+  number?: string;
+  title?: string;
+  paragraphs?: string[];
+  bullets?: string[];
+  numberedList?: string[];
+  closingParagraphs?: string[];
+}
+
+export interface LegalPolicySection extends LegalPolicyBlock {
+  id: string;
+  number: string;
+  title: string;
+  subsections?: LegalPolicyBlock[];
+}
+
+export interface LegalPolicies {
+  type: "legal-policies";
+  title: string;
+  effectiveDate?: string;
+  lastUpdated?: string;
+  intro?: string[];
+  sections?: LegalPolicySection[];
+  contact?: {
+    heading?: string;
+    company?: string;
+    location?: string;
+    website?: string;
+    websiteHref?: string;
+    email?: string;
+    telephone?: string;
+    privacyLabel?: string;
+    privacyEmail?: string;
+  };
+  footerNote?: string;
+}
+
 export interface WhyPanelRow {
   heading?: string;
   bullets?: string[];
@@ -410,6 +450,10 @@ export interface SoftwareInnerHero {
   /** Dark gradient band above the 3-column layout (live post-2031). */
   bannerTitle?: string;
   bannerTagline?: string;
+  /** Optional short line under the banner tagline. */
+  bannerSupport?: string;
+  /** Rotating full-bleed banner backgrounds (CCTV / ELV hero slides). */
+  bannerBackgroundImages?: MediaAsset[];
   /** ETAP / Microsoft stacked pages — H1 above intro panel (live post-2780). */
   pageTitle?: string;
   bannerAction?: ActionLink;
@@ -425,17 +469,35 @@ export interface SoftwareInnerHero {
   layout?: "default" | "two-column";
   /** Logo/infographic below copy instead of a third grid column (Adobe Business Creative). */
   mediaInline?: boolean;
+  /** Heading shown above an inline product image. */
+  imageHeading?: string;
   /** CYPE-style paired text + logo rows inside the gray intro panel. */
   introRows?: {
     paragraphs?: string[];
     media?: MediaAsset;
     imagePosition?: "left" | "right";
   }[];
+  /** Extra prose blocks under the intro paragraphs (same copy column). */
+  bodySections?: {
+    heading?: string;
+    paragraphs?: string[];
+  }[];
+  /** Where Request a Quote sits when bodySections exist. Default: after-intro. */
+  ctaPlacement?: "after-intro" | "end";
   /** Live CYPE uses h2 for the page title above the intro panel. */
   titleLevel?: "h1" | "h2";
 }
 
-export type OurStoryTone = "navy" | "sky" | "green";
+export type OurStoryTone =
+  | "navy"
+  | "sky"
+  | "green"
+  | "purple"
+  | "pink"
+  | "teal"
+  | "blue"
+  | "orange"
+  | "red";
 
 export interface OurStoryValue {
   id: string;
@@ -452,6 +514,9 @@ export interface OurStoryMilestone {
   year: string;
   title: string;
   description?: string;
+  /** Optional logo / mark under the milestone title. */
+  imageSrc?: string;
+  imageAlt?: string;
   tone?: OurStoryTone;
 }
 
@@ -460,6 +525,13 @@ export interface OurStoryHighlight {
   title: string;
   description?: string;
   icon?: string;
+  href?: string;
+}
+
+export interface OurStoryTenet {
+  id: string;
+  title: string;
+  description?: string;
 }
 
 /** Dedicated /our-story layout — hero, journey timeline, highlight strip. */
@@ -484,6 +556,12 @@ export interface OurStory {
   };
   highlights?: {
     items?: OurStoryHighlight[];
+  };
+  tenets?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    items?: OurStoryTenet[];
   };
 }
 

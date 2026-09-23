@@ -49,6 +49,20 @@
       gap: 1rem;
       grid-template-columns: 22.64% 43.69% minmax(0, 1fr);
     }
+
+    /* No empty third column when layout is sidebar + copy only */
+    .aptus-elv-page .aptus-software-inner-hero__grid--two-column {
+      grid-template-columns: minmax(200px, 22.64%) minmax(0, 1fr);
+    }
+
+    .aptus-elv-page .aptus-software-inner-hero__grid--nav-collapsed {
+      grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .aptus-elv-page
+      .aptus-software-inner-hero__grid--nav-collapsed:not(.aptus-software-inner-hero__grid--two-column) {
+      grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr);
+    }
   }
 
   .aptus-elv-page .aptus-software-inner-hero__title {
@@ -126,8 +140,15 @@
     padding-block: 2rem;
   }
 
-  .aptus-elv-page [data-section="testimonials"] .aptus-software-section-title--lg {
+  .aptus-elv-page [data-section="testimonials"][data-variant="software-quotes"] .aptus-software-section-title--lg {
     color: var(--e-global-color-accent);
+  }
+
+  .aptus-elv-page [data-section="testimonials"][data-variant="software-quotes-marquee"] .aptus-software-section-title,
+  .aptus-elv-page [data-section="testimonials"][data-variant="software-quotes-marquee"] .aptus-software-section-title--lg,
+  .aptus-elv-page [data-section="testimonials"][data-variant="software-quotes-marquee"] .aptus-software-section-lead {
+    color: #fff;
+    text-align: center;
   }
 
   .aptus-elv-page [data-section="features"]#why-elv,
@@ -140,7 +161,7 @@
   }
 
   .aptus-elv-page .aptus-software-mid-band__inner {
-    padding: 2.5rem 1rem 1.5rem;
+    padding: 1.15rem 1rem;
   }
 
   .aptus-elv-page [data-section="cta"][data-layout="light"] {

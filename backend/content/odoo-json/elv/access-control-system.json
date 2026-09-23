@@ -3,60 +3,84 @@
     "id": "hero",
     "visible": true,
     "family": "elv",
-    "bannerTitle": "Access Control Systems",
-    "bannerTagline": "Secure your premises with intelligent access control solutions",
-    "title": "Advanced Access Control Solutions for Secure Environments",
-    "paragraphs": [
-      "In today’s security-conscious environment, controlling who enters your premises is paramount. More and more organizations are upgrading their physical security with advanced Access Control Systems to maximize safety and monitor traffic flow.",
-      "Whether you’re securing a single office door with key cards or managing high-security zones across a multi-story building, these technologies dramatically improve the way you grant, track, and restrict entry for employees and visitors.",
-      "Experience superior authorization management and seamless security integration with our comprehensive solutions for card readers, biometric scanners, and electronic locking mechanisms across any entry point.",
-      "From proximity badge readers and smart locks to centralized security management software and real-time visitor logs, we provide end-to-end solutions that ensure every entrance is monitored, secure, and utterly compliant."
+    "bannerTitle": "Secure Access, Designed for Modern Facilities",
+    "bannerTagline": "Enterprise-grade access control systems that help organizations manage entry, permissions and restricted areas with greater precision.",
+    "bannerBackgroundImages": [
+      {
+        "src": "/images/Access-Control-System-1-1024x1020.png",
+        "alt": "Access control readers and secure entry systems"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Access-Control-System-1300.png",
+        "alt": "Enterprise access control infrastructure"
+      },
+      {
+        "src": "/images/Gate.jpg",
+        "alt": "Controlled gate and perimeter access"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Leonardo_Phoenix_10_A_modern_residential_gated_entrance_with_a_2-1-e1746969471326.jpg",
+        "alt": "Modern gated entrance with access control"
+      },
+      {
+        "src": "/images/Home-Automation-1024x683.webp",
+        "alt": "Smart facility entry and access management"
+      }
     ],
-    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/Access-Control-System-1-1024x1020.png",
-    "imageAlt": "Access Control Systems",
+    "title": "Intelligent Access Control for Modern Facilities",
+    "paragraphs": [
+      "Access control is no longer simply about securing a door. It is about creating a connected, intelligent framework for managing movement across your facility.",
+      "Aptus delivers advanced access control solutions that combine secure authentication, intelligent access management, real-time monitoring, and seamless integration with your wider security infrastructure. From individual access points to complex multi-site environments, our solutions are designed to provide organizations with greater control over who can access specific areas, when they can access them, and under what conditions.",
+      "Our portfolio brings together card and proximity readers, biometric authentication, smart and electronic locking systems, access controllers, visitor management, and centralized access management platforms. These technologies can be configured to support different security levels, access policies, user groups, and operational requirements across your facility.",
+      "With centralized visibility and intelligent authorization, organizations can streamline access administration, maintain detailed access records, monitor activity in real time, and respond more effectively to changing security requirements.",
+      "Whether you are upgrading an existing facility or designing access infrastructure for a new environment, Aptus provides scalable, technology-led access control solutions engineered around your facility, your workflows, and your security requirements."
+    ],
+    "imageSrc": "false",
+    "layout": "two-column",
     "ctaLabel": "Request a Quote",
     "ctaHref": "#form"
   },
   "cardSections": [
     {
-      "id": "features",
+      "id": "access-types",
       "visible": true,
-      "variant": "icon-cards",
+      "variant": "product-cards",
+      "gridColumns": 5,
       "title": {
-        "before": "Powerful Features"
+        "before": "Types of Access Control Systems"
       },
-      "subheading": "Comprehensive access control solutions designed for modern security needs",
-      "align": "center",
+      "subheading": "Credential and entry options for every security level — from proximity badges to biometric and mobile access.",
+      "align": "left",
       "items": [
         {
-          "title": "Biometric Authentication",
-          "body": "Advanced fingerprint and facial recognition technology for highly secure access control with no risk of lost or stolen credentials.",
-          "icon": "fingerprint"
+          "title": "Card & Proximity Readers",
+          "body": "Encrypted proximity cards and key fobs for fast, reliable entry at doors, turnstiles, and shared workspaces.",
+          "imageSrc": "/images/Access-Control-System-1-1024x1020.png",
+          "imageAlt": "Card and proximity access readers"
         },
         {
-          "title": "Smart Card Systems",
-          "body": "Programmable proximity cards and key fobs with encrypted data storage for secure building entry and employee identification.",
-          "icon": "credit-card"
+          "title": "Biometric Access",
+          "body": "Fingerprint and facial recognition that verifies identity at the door — no lost cards, no shared credentials.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/Access-Control-System-1300.png",
+          "imageAlt": "Biometric access control terminal"
         },
         {
-          "title": "Mobile Access",
-          "body": "Smartphone-based access control allowing users to enter secured areas using their mobile devices via Bluetooth or QR code scanning.",
-          "icon": "mobile-alt"
+          "title": "Mobile Credentials",
+          "body": "Smartphone-based access via Bluetooth or QR so users unlock secured areas with the device they already carry.",
+          "imageSrc": "/images/Home-Automation-1024x683.webp",
+          "imageAlt": "Mobile credential access control"
         },
         {
-          "title": "Time-Based Permissions",
-          "body": "Set granular access schedules for individuals or groups, restricting entry to specific days, times, and locations automatically.",
-          "icon": "calendar-alt"
+          "title": "Electronic & Smart Locks",
+          "body": "Networked locking hardware for offices, suites, and high-security rooms with remote lock and unlock control.",
+          "imageSrc": "/images/Gate.jpg",
+          "imageAlt": "Electronic and smart locking systems"
         },
         {
-          "title": "Centralized Management",
-          "body": "Web-based dashboard for managing all access points, user permissions, and activity logs from anywhere with internet access.",
-          "icon": "database"
-        },
-        {
-          "title": "Detailed Audit Trails",
-          "body": "Comprehensive logging of all access attempts with time-stamped records showing who entered where and when for compliance and security purposes.",
-          "icon": "reply-all"
+          "title": "Visitor Management",
+          "body": "Temporary credentials, pre-registration, and digital badges for guests with clear audit trails for every visit.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/Leonardo_Phoenix_10_A_modern_residential_gated_entrance_with_a_2-1-e1746969471326.jpg",
+          "imageAlt": "Visitor management and controlled entry"
         }
       ]
     },
@@ -127,40 +151,31 @@
   ],
   "testimonials": {
     "visible": true,
-    "variant": "software-quotes",
+    "variant": "software-quotes-marquee",
     "title": {
-      "before": "Client Success",
-      "accent": "Stories"
+      "before": "What Our Clients Say"
     },
-    "subheading": "Hear from satisfied customers who have upgraded their access control systems",
+    "subheading": "Hear from businesses that have enhanced their security with our access control solutions",
     "items": [
       {
-        "quote": "“The new access control system has completely transformed how we manage our facility. The biometric readers work flawlessly and the central management system is incredibly intuitive.”",
+        "quote": "The new access control system has completely transformed how we manage our facility. The biometric readers work flawlessly and the central management system is incredibly intuitive.",
         "author": "Mohammed Al Farsi",
         "role": "Facilities Manager"
       },
       {
-        "quote": "“We installed the high-security access control system and couldn’t be happier. The intrusion detection integration adds an extra layer of protection that gives us peace of mind.”",
+        "quote": "We installed the high-security access control system and couldn’t be happier. The intrusion detection integration adds an extra layer of protection that gives us peace of mind.",
         "author": "Sarah Johnson",
         "role": "Operations Manager"
       },
       {
-        "quote": "“The visitor management system has made visitors much more efficient. Pre-registration and digital ID badges save us significant time during peak hours.”",
+        "quote": "The visitor management system has made visitors much more efficient. Pre-registration and digital ID badges save us significant time during peak hours.",
         "author": "Ahmed Hassan",
         "role": "IT Director"
       }
     ]
   },
-  "contactCta": {
-    "heading": "Have questions? We can help",
-    "showForm": true,
-    "submitLabel": "Submit Now",
-    "formVariant": "simple",
-    "layout": "light",
-    "category": "elv",
-    "productName": "Access Control Systems"
-  },
   "midCta": {
+    "placement": "bottom",
     "heading": "Ready to Secure Your Premises?",
     "description": "Contact our access control specialists today for a free consultation and customized solution proposal.",
     "actionLabel": "Get Your Quote Now",
@@ -176,20 +191,24 @@
         "alt": "WatchNet"
       },
       {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/ZKTeco.png",
+        "alt": "ZKTeco"
+      },
+      {
         "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Tyco.png",
-        "alt": "Tyco"
+        "alt": "TYCO"
       },
       {
         "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Suprema.png",
-        "alt": "suprema"
+        "alt": "Suprema"
       },
       {
         "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Hikvision.png",
         "alt": "Hikvision"
       },
       {
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/ZKTeco.png",
-        "alt": "ZKT"
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/BOSCH-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "Bosch"
       }
     ]
   }

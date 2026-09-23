@@ -1,4 +1,5 @@
-import { SoftwareInnerHeroNav } from "@/components/layout/SoftwareInnerHeroNav";
+import { BannerBackgroundSlides } from "@/components/sections/BannerBackgroundSlides";
+import { CollapsibleSoftwareInnerHeroGrid } from "@/components/layout/CollapsibleSoftwareInnerHeroGrid";
 import { AutodeskFreeTrialLink } from "@/components/shared/AutodeskFreeTrialLink";
 import { isTopRequestQuoteCta } from "@/components/quote/quote-modal-utils";
 import { CmsImage } from "@/components/ui";
@@ -12,6 +13,8 @@ interface SoftwareInnerHeroProps {
 
 export function SoftwareInnerHero({ data }: SoftwareInnerHeroProps) {
   const showBanner = Boolean(data.bannerTitle);
+  const bannerSlides = data.bannerBackgroundImages?.filter((img) => img.src) ?? [];
+  const hasBannerSlides = bannerSlides.length > 0;
   const isTwoColumn = data.layout === "two-column";
   const mediaInline = data.mediaInline;
   const hasIntroRows = Boolean(data.introRows?.length);
@@ -108,19 +111,61 @@ export function SoftwareInnerHero({ data }: SoftwareInnerHeroProps) {
     </div>
   ) : null;
 
+  const hasBodySections = Boolean(data.bodySections?.length);
+  const ctaAtEnd = !hasBodySections || data.ctaPlacement === "end";
+
   const copyPanel = (
     <>
       {!showBanner && data.bannerTagline && (
         <h2 className="aptus-software-inner-hero__subtitle">{data.bannerTagline}</h2>
       )}
       {!hasIntroRows &&
-        data.paragraphs?.map((paragraph) => (
-          <p key={paragraph.slice(0, 48)} className="aptus-software-inner-hero__text">
-            {paragraph}
-          </p>
+        data.paragraphs?.map((paragraph) =>
+          paragraph.includes("<") ? (
+            <p
+              key={paragraph.slice(0, 48)}
+              className="aptus-software-inner-hero__text"
+              dangerouslySetInnerHTML={{ __html: paragraph }}
+            />
+          ) : (
+            <p key={paragraph.slice(0, 48)} className="aptus-software-inner-hero__text">
+              {paragraph}
+            </p>
+          ),
+        )}
+      {!hasIntroRows && hasBodySections && !ctaAtEnd ? requestQuoteCta : null}
+      {!hasIntroRows &&
+        data.bodySections?.map((section) => (
+          <div
+            key={section.heading ?? section.paragraphs?.[0]?.slice(0, 48) ?? "body-section"}
+            className="aptus-software-inner-hero__body-section"
+          >
+            {section.heading ? (
+              <h2 className="aptus-software-inner-hero__body-heading">{section.heading}</h2>
+            ) : null}
+            {section.paragraphs?.map((paragraph) =>
+              paragraph.includes("<") ? (
+                <p
+                  key={paragraph.slice(0, 48)}
+                  className="aptus-software-inner-hero__text"
+                  dangerouslySetInnerHTML={{ __html: paragraph }}
+                />
+              ) : (
+                <p key={paragraph.slice(0, 48)} className="aptus-software-inner-hero__text">
+                  {paragraph}
+                </p>
+              ),
+            )}
+          </div>
         ))}
+      {!hasIntroRows && ctaAtEnd ? requestQuoteCta : null}
       {!hasIntroRows && data.media && mediaInline && (
         <div className="aptus-software-inner-hero__media aptus-software-inner-hero__media--inline">
+          {data.imageHeading ? (
+            <h2 className="aptus-software-inner-hero__body-heading aptus-software-inner-hero__media-heading">
+              {data.imageHeading}
+            </h2>
+          ) : null}
           <CmsImage
             src={data.media.src}
             alt={data.media.alt}
@@ -130,19 +175,28 @@ export function SoftwareInnerHero({ data }: SoftwareInnerHeroProps) {
           />
         </div>
       )}
-      {!hasIntroRows && requestQuoteCta}
     </>
   );
 
   return (
     <>
       {showBanner && (
-        <section className="aptus-software-page-banner" data-section="software-page-banner">
+        <section
+          className={cn(
+            "aptus-software-page-banner",
+            hasBannerSlides && "aptus-software-page-banner--slides",
+          )}
+          data-section="software-page-banner"
+        >
+          {hasBannerSlides ? <BannerBackgroundSlides images={bannerSlides} /> : null}
           <div className="aptus-live-container">
             <div className="aptus-software-page-banner__inner">
               <h1 className="aptus-software-page-banner__title">{data.bannerTitle}</h1>
               {data.bannerTagline && (
                 <p className="aptus-software-page-banner__tagline">{data.bannerTagline}</p>
+              )}
+              {data.bannerSupport && (
+                <p className="aptus-software-page-banner__support">{data.bannerSupport}</p>
               )}
               {showBannerAction && bannerAction && (
                 <div className="aptus-software-page-banner__action-wrap">
@@ -168,16 +222,12 @@ export function SoftwareInnerHero({ data }: SoftwareInnerHeroProps) {
         data-section="software-inner-hero"
       >
         <div className="aptus-live-container">
-          <div
-            className={cn(
-              "aptus-software-inner-hero__grid",
-              isTwoColumn && "aptus-software-inner-hero__grid--two-column",
-              (mediaInline || hasIntroRows) && "aptus-software-inner-hero__grid--inline-media",
-            )}
+          <CollapsibleSoftwareInnerHeroGrid
+            family={data.family}
+            links={data.subnavLinks}
+            isTwoColumn={isTwoColumn}
+            inlineMedia={mediaInline || hasIntroRows}
           >
-            <aside className="aptus-software-inner-hero__nav">
-              <SoftwareInnerHeroNav family={data.family} links={data.subnavLinks} />
-            </aside>
             <div className="aptus-software-inner-hero__copy">
               {data.title && (
                 <TitleTag className="aptus-software-inner-hero__title">{data.title}</TitleTag>
@@ -200,7 +250,7 @@ export function SoftwareInnerHero({ data }: SoftwareInnerHeroProps) {
                 />
               </div>
             )}
-          </div>
+          </CollapsibleSoftwareInnerHeroGrid>
         </div>
       </section>
     </>

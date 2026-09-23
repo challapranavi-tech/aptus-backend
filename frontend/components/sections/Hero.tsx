@@ -2,7 +2,7 @@
 
 import { Container } from "@/components/ui";
 import { gsap } from "@/lib/gsap";
-import { cn, resolveCmsImageSrc } from "@/lib/utils";
+import { cn, isExternalHref, resolveCmsImageSrc } from "@/lib/utils";
 import type { ActionLink, Hero as HeroData, MediaAsset } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -90,6 +90,9 @@ function HeroActionDropdown({
                 role="menuitem"
                 className="home-hero-dropdown__item"
                 onClick={() => setOpen(false)}
+                {...(isExternalHref(item.href)
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : {})}
               >
                 {item.label}
               </Link>

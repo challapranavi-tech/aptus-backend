@@ -50,7 +50,7 @@ export const SITE_CONFIG: SiteConfig = {
         title: "Company",
         links: [
           { label: "About Us", href: "/our-story" },
-          { label: "Training", href: "/training" },
+          { label: "Our Policies", href: "/aptus-policy" },
           { label: "Careers", href: "/careers" },
           { label: "Contact Us", href: "/contact-us" },
         ],

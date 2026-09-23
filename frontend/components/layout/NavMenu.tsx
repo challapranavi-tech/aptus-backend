@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn, isExternalHref } from "@/lib/utils";
 import type { NavigationItem } from "@/types";
 import { clearLegacyPortalSession, syncLegacyPortalSession } from "@/lib/access-token";
 import { fetchAuthMeShared, invalidateAuthMeCache } from "@/lib/auth-me-client";
@@ -15,9 +15,11 @@ import {
   useEffect,
   useId,
   useState,
+  type AnchorHTMLAttributes,
   type FocusEvent,
   type KeyboardEvent,
   type MouseEvent,
+  type ReactNode,
 } from "react";
 
 interface NavMenuProps {
@@ -122,9 +124,42 @@ function NavChevron({ direction = "down" }: { direction?: "down" | "right" }) {
 }
 
 function isDirectlyActive(item: NavigationItem, pathname: string): boolean {
-  if (!item.href || item.href === "#") return false;
+  if (!item.href || item.href === "#" || isExternalHref(item.href)) return false;
   if (item.href === "/") return pathname === "/";
   return pathname === item.href || pathname.startsWith(`${item.href}/`);
+}
+
+function NavHref({
+  href,
+  className,
+  onClick,
+  children,
+  ...rest
+}: {
+  href: string;
+  className?: string;
+  onClick?: () => void;
+  children: ReactNode;
+} & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href">) {
+  if (isExternalHref(href)) {
+    return (
+      <a
+        href={href}
+        className={className}
+        onClick={onClick}
+        target="_blank"
+        rel="noopener noreferrer"
+        {...rest}
+      >
+        {children}
+      </a>
+    );
+  }
+  return (
+    <Link href={href} className={className} onClick={onClick} {...rest}>
+      {children}
+    </Link>
+  );
 }
 
 function isItemActive(item: NavigationItem, pathname: string): boolean {
@@ -194,7 +229,7 @@ function NavDropdownItem({
         onMouseEnter={useStacked ? undefined : onDropdownPointerEnter}
       >
         {item.href ? (
-          <Link
+          <NavHref
             href={item.href}
             className={`${linkClass} aptus-masthead__link--parent${active ? " is-active" : ""}`}
             aria-haspopup="menu"
@@ -203,7 +238,7 @@ function NavDropdownItem({
           >
             <NavLabel item={item} />
             <NavChevron direction={chevronDirection} />
-          </Link>
+          </NavHref>
         ) : (
           <span
             className={`${linkClass} aptus-masthead__link--parent aptus-masthead__link--flyout-trigger`}
@@ -235,9 +270,9 @@ function NavDropdownItem({
 
   return (
     <li>
-      <Link href={item.href} className={`${linkClass}${active ? " is-active" : ""}`} onClick={onClose}>
+      <NavHref href={item.href} className={`${linkClass}${active ? " is-active" : ""}`} onClick={onClose}>
         <NavLabel item={item} />
-      </Link>
+      </NavHref>
     </li>
   );
 }
@@ -308,13 +343,13 @@ function DropdownItem({
     if (!item.href) return null;
     return (
       <li>
-        <Link
+        <NavHref
           href={item.href}
           className={cn("aptus-masthead__link", active && "is-active")}
           onClick={onClose}
         >
           <NavLabel item={item} />
-        </Link>
+        </NavHref>
       </li>
     );
   }
@@ -336,7 +371,7 @@ function DropdownItem({
       onMouseEnter={onDropdownPointerEnter}
     >
       {item.href ? (
-        <Link
+        <NavHref
           href={item.href}
           className={cn("aptus-masthead__link", active && "is-active")}
           aria-haspopup="menu"
@@ -345,7 +380,7 @@ function DropdownItem({
         >
           <NavLabel item={item} />
           <NavChevron />
-        </Link>
+        </NavHref>
       ) : (
         <span
           className={cn(
@@ -402,7 +437,7 @@ function MobileMenuItem({
   if (!hasChildren) {
     if (!item.href) return null;
     return (
-      <Link
+      <NavHref
         href={item.href}
         className={cn(
           "aptus-masthead__link aptus-masthead__mobile-link",
@@ -412,7 +447,7 @@ function MobileMenuItem({
         onClick={onClose}
       >
         <NavLabel item={item} />
-      </Link>
+      </NavHref>
     );
   }
 
@@ -420,7 +455,7 @@ function MobileMenuItem({
     <div className="aptus-masthead__mobile-group" data-depth={depth}>
       <div className="aptus-masthead__mobile-row">
         {item.href ? (
-          <Link
+          <NavHref
             href={item.href}
             className={cn(
               "aptus-masthead__link aptus-masthead__mobile-link",
@@ -429,7 +464,7 @@ function MobileMenuItem({
             onClick={onClose}
           >
             <NavLabel item={item} />
-          </Link>
+          </NavHref>
         ) : (
           <button
             type="button"
