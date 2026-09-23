@@ -34,6 +34,7 @@ export async function generateStaticParams() {
       { slug: "customer-stories" },
       { slug: "our-story" },
       { slug: "aptus-policy" },
+      { slug: "aptus-infotech-iso-certifications" },
     ];
   }
 
@@ -54,9 +55,16 @@ export async function generateStaticParams() {
     { slug: "customer-stories" },
     { slug: "our-story" },
     { slug: "aptus-policy" },
+    { slug: "aptus-infotech-iso-certifications" },
   ];
   for (const slug of slugs) {
-    if (isCaseStudiesSlug(slug) || slug === "our-story" || slug === "aptus-policy") continue;
+    if (
+      isCaseStudiesSlug(slug) ||
+      slug === "our-story" ||
+      slug === "aptus-policy" ||
+      slug === "aptus-infotech-iso-certifications"
+    )
+      continue;
     try {
       if (await getPageBySlug(slug)) out.push({ slug });
     } catch (err) {
@@ -79,6 +87,9 @@ export async function generateMetadata({
   }
   if (normalized === "aptus-policy") {
     return { title: "Our Policies & Terms | Aptus Infotech" };
+  }
+  if (normalized === "aptus-infotech-iso-certifications") {
+    return { title: "Aptus Infotech ISO Certifications | Aptus Infotech" };
   }
   try {
     const page = await getPageBySlug(normalized);
