@@ -1,0 +1,191 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Smart Home Solutions",
+    "bannerTagline": "Transform your living space with intelligent automation and connected technology",
+    "title": "Intelligent Technology. Effortless Living.",
+    "paragraphs": [
+      "A truly smart home is more than connected devices—it is an intelligent environment designed around the way you live. Aptus Smart Home Solutions bring together automation, security, lighting, climate control, entertainment, and energy management into one seamless experience.",
+      "From a smart apartment to a fully automated villa, we design and integrate intelligent systems that give you greater control, enhanced comfort, improved security, and effortless convenience throughout your home.",
+      "Automate lighting and curtains, manage temperature and climate, control entertainment systems, monitor security, and access your home with intelligent door and access solutions—all through intuitive interfaces designed for effortless everyday use.",
+      "From voice control and smart sensors to centralized touch panels and integrated home management systems, Aptus delivers end-to-end smart home solutions—from design and integration to installation and ongoing support."
+    ],
+    "imageSrc": "false",
+    "layout": "two-column",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form",
+    "ctaPlacement": "end",
+    "bodySections": [
+      {
+        "heading": "Smarter Spaces. Greater Comfort. Complete Control.",
+        "paragraphs": []
+      }
+    ]
+  },
+  "cardSections": [
+    {
+      "id": "smart-home-types",
+      "visible": true,
+      "variant": "product-cards",
+      "gridColumns": 5,
+      "title": {
+        "before": "Types of Smart Home Systems"
+      },
+      "subheading": "Connected solutions for comfort, security, and control — designed around how you live.",
+      "align": "left",
+      "items": [
+        {
+          "title": "Lighting & Curtains",
+          "body": "Automated scenes, schedules, and motorized shades that set the mood and save energy throughout the day.",
+          "imageSrc": "/images/Home-Automation-1024x683.webp",
+          "imageAlt": "Smart lighting and curtain automation"
+        },
+        {
+          "title": "Climate Control",
+          "body": "Intelligent heating and cooling that adapts to your routines for comfort without wasting energy.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/Smart-Homes.png",
+          "imageAlt": "Smart climate and temperature control"
+        },
+        {
+          "title": "Entertainment Systems",
+          "body": "Whole-home audio and video control so media follows you from room to room with one interface.",
+          "imageSrc": "/images/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Audio_3-673x1024.jpg",
+          "imageAlt": "Smart home entertainment systems"
+        },
+        {
+          "title": "Security & Access",
+          "body": "Smart locks, cameras, sensors, and alerts that protect your home and let you control entry remotely.",
+          "imageSrc": "/images/Access-Control-System-1-1024x1020.png",
+          "imageAlt": "Smart home security and access"
+        },
+        {
+          "title": "Central Management",
+          "body": "Voice, app, and touch-panel control that unifies every system into one effortless home experience.",
+          "imageSrc": "/images/Leonardo_Phoenix_10_a_cinematic_photo_of_a_bustling_lobby_with_3.jpg",
+          "imageAlt": "Centralized smart home management"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Benefits of Smart Home Technology"
+      },
+      "subheading": "Why invest in intelligent home automation for your residence",
+      "align": "center",
+      "items": [
+        {
+          "title": "Convenience & Comfort",
+          "body": "Immediate notification system for patients requiring urgent assistance with visual, audible, and vibration-based alerts.",
+          "icon": "stopwatch"
+        },
+        {
+          "title": "Energy Efficiency",
+          "body": "Reliable wireless communication devices ensuring staff are always reachable regardless of location within the facility.",
+          "icon": "user-nurse"
+        },
+        {
+          "title": "Enhanced Security",
+          "body": "Real-time dashboard displaying active calls, response times, and system status for complete situational awareness.",
+          "icon": "users"
+        },
+        {
+          "title": "Cost Savings",
+          "body": "All communications are encrypted and meet strict HIPAA requirements for patient privacy protection.",
+          "icon": "hospital"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech",
+        "accent": "for Your Smart Home?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Certified Professionals",
+          "body": "Our technicians are trained and certified by major manufacturers including Samsung SmartThings, Philips Hue, and Nest.",
+          "icon": "medal"
+        },
+        {
+          "title": "End-to-End Services",
+          "body": "We handle everything from design consultation to installation, configuration, and ongoing maintenance.",
+          "icon": "headset"
+        },
+        {
+          "title": "24/7 Technical Support",
+          "body": "Comprehensive after-sales service with emergency response and proactive system health monitoring.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Future-Ready Technology",
+          "body": "We select scalable platforms that accommodate future technologies and updates without requiring complete replacements.",
+          "icon": "mobile-alt"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes-marquee",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Hear from satisfied customers who have upgraded their homes with our smart technology",
+    "items": [
+      {
+        "quote": "The smart home system has completely changed how we live. Being able to control everything from my phone is incredibly convenient, and the energy savings have been significant.",
+        "author": "Mohammed Al Farsi",
+        "role": "Homeowner"
+      },
+      {
+        "quote": "We installed the premium smart home package and couldn’t be happier. The security features give us peace of mind, and the voice controls make daily tasks much easier.",
+        "author": "Sarah Johnson",
+        "role": "Family Home"
+      },
+      {
+        "quote": "The commercial smart home solution transformed our office space. We can now monitor energy usage, control lighting remotely, and manage access for employees seamlessly.",
+        "author": "Ahmed Hassan",
+        "role": "Office Manager"
+      }
+    ]
+  },
+  "midCta": {
+    "placement": "bottom",
+    "heading": "Ready to Transform Your Living Experience?",
+    "description": "Contact our smart home specialists today for a free consultation and customized solution proposal.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Schneider.png",
+        "alt": "Schneider Electric"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/URMET.png",
+        "alt": "Urmet"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Fanvil.png",
+        "alt": "Fanvil"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/FERMAX-1-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "Fermax"
+      }
+    ]
+  }
+}

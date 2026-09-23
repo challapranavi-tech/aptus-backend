@@ -1,0 +1,224 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Connected Infrastructure. Built for Performance.",
+    "bannerTagline": "Secure, high-performance network solutions engineered to keep your business connected, productive, and ready for what’s next.",
+    "bannerSupport": "Structured Cabling · Fiber Optics · Enterprise Networking · Network Security",
+    "bannerBackgroundImages": [
+      {
+        "src": "/images/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Netwo_2-673x1024.jpg",
+        "alt": "Enterprise network and structured cabling infrastructure"
+      },
+      {
+        "src": "/images/indianschool.jpg",
+        "alt": "Network infrastructure for educational institutions"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/IPTV-Network-Television.jpg",
+        "alt": "High-performance network connectivity"
+      },
+      {
+        "src": "/images/Leonardo_Phoenix_10_a_cinematic_photograph_of_a_futuristic_dat_0-673x1024.jpg",
+        "alt": "Data center and network performance infrastructure"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/unnamed.jpg",
+        "alt": "Switching and routing for connected businesses"
+      },
+      {
+        "src": "/images/indian-school-wadi-kabir.png",
+        "alt": "Campus networking for schools and educational facilities"
+      }
+    ],
+    "title": "Network Infrastructure Solutions",
+    "paragraphs": [
+      "From structured cabling and fiber optic infrastructure to enterprise networking, Wi-Fi, and network security, Aptus Infotech delivers end-to-end solutions designed around the way your organization operates.",
+      "In today’s connected business environment, a reliable and secure network is the foundation of seamless operations. We design and implement intelligent network infrastructure for businesses, educational institutions, commercial spaces, and large-scale facilities, ensuring dependable connectivity across every environment.",
+      "Our solutions bring together high-performance routing and switching, structured cabling, fiber optic networks, enterprise Wi-Fi, secure access, firewalls, and intrusion prevention technologies. This integrated approach enables seamless communication, efficient collaboration, secure data exchange, and reliable access to critical applications and cloud services.",
+      "From initial design and infrastructure deployment to integration, optimization, and ongoing support, Aptus provides a complete network ecosystem engineered for performance, reliability, security, and future scalability."
+    ],
+    "imageSrc": "false",
+    "layout": "two-column",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form",
+    "ctaPlacement": "end"
+  },
+  "cardSections": [
+    {
+      "id": "network-types",
+      "visible": true,
+      "variant": "product-cards",
+      "gridColumns": 5,
+      "title": {
+        "before": "Types of Networking Infrastructure"
+      },
+      "subheading": "End-to-end connectivity building blocks — from cabling and fiber to Wi-Fi, switching, and security.",
+      "align": "left",
+      "items": [
+        {
+          "title": "Structured Cabling",
+          "body": "Cat 6, Cat 6A, and organized copper pathways that deliver reliable high-speed connectivity across every floor and wing.",
+          "imageSrc": "/images/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Netwo_2-673x1024.jpg",
+          "imageAlt": "Structured cabling infrastructure"
+        },
+        {
+          "title": "Fiber Optics",
+          "body": "High-capacity fiber backbone and FTTO links for long-distance, low-latency performance between buildings and data rooms.",
+          "imageSrc": "/images/Leonardo_Phoenix_10_a_cinematic_photograph_of_a_futuristic_dat_0-673x1024.jpg",
+          "imageAlt": "Fiber optic network infrastructure"
+        },
+        {
+          "title": "Enterprise Networking",
+          "body": "Routing and switching designed for secure, scalable LAN and WAN performance across offices, campuses, and multi-site environments.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/unnamed.jpg",
+          "imageAlt": "Enterprise switching and routing"
+        },
+        {
+          "title": "Enterprise Wi-Fi",
+          "body": "Seamless wireless coverage with centralized management — ideal for offices, schools, warehouses, and high-density spaces.",
+          "imageSrc": "/images/indianschool.jpg",
+          "imageAlt": "Enterprise Wi-Fi for campuses and facilities"
+        },
+        {
+          "title": "Network Security",
+          "body": "Firewalls, secure access, VPNs, and intrusion prevention that protect data, users, and critical applications end to end.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/IPTV-Network-Television.jpg",
+          "imageAlt": "Network security and secure connectivity"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Benefits of Professional Cabling"
+      },
+      "subheading": "Why invest in structured cabling solutions for your business?",
+      "align": "center",
+      "items": [
+        {
+          "title": "Improved Performance",
+          "body": "High-speed data transmission with minimal latency for better productivity and faster operations.",
+          "icon": "stopwatch"
+        },
+        {
+          "title": "Future-Proof Investment",
+          "body": "Scalable infrastructure that supports current and future technologies without requiring major upgrades.",
+          "icon": "user-nurse"
+        },
+        {
+          "title": "Reduced Downtime",
+          "body": "Reliable and organizedcabling system minimizes network disruptions and costly downtime.",
+          "icon": "users"
+        },
+        {
+          "title": "Cost Efficiency",
+          "body": "Long-term savings through reduced maintenance costs and energy-efficient designs.",
+          "icon": "hospital"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech",
+        "accent": "for Your Network Needs?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Certified Professionals",
+          "body": "Our technicians are certified by leading vendors including Cisco, Juniper, and others.",
+          "icon": "certificate"
+        },
+        {
+          "title": "End-to-End Services",
+          "body": "We handle everything from design and installation to maintenance and support.",
+          "icon": "screwdriver"
+        },
+        {
+          "title": "24/7 Technical Support",
+          "body": "Comprehensive after-sales service with emergency response and proactive maintenance.",
+          "icon": "headset"
+        },
+        {
+          "title": "Local Presence",
+          "body": "With offices throughout Oman, we provide personalized service and quick response times.",
+          "icon": "retweet"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes-marquee",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Hear from satisfied customers who have upgraded their network infrastructure",
+    "items": [
+      {
+        "quote": "IT Director",
+        "author": "Mohammed Al Farsi",
+        "role": ""
+      },
+      {
+        "quote": "The structured cabling solution provided by Aptus has transformed how we manage our data center. Everything is now organized and easily accessible.",
+        "author": "Sarah Johnson",
+        "role": "Facilities Manager"
+      },
+      {
+        "quote": "We needed a reliable wireless solution for our warehouse facility. Aptus delivered a robust system that covers the entire area with excellent performance.",
+        "author": "Ahmed Hassan",
+        "role": "Operations Manager"
+      }
+    ]
+  },
+  "midCta": {
+    "placement": "bottom",
+    "heading": "Ready to Upgrade Your Network Infrastructure?",
+    "description": "Contact our network specialists today for a free site survey and customized solution proposal.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Norden-1-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "Norden"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Opterna.png",
+        "alt": "Opterna"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Panduit.png",
+        "alt": "Panduit"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Commscope-rajdgmduxeulkpxcnaamvno0vydwkd1tfievfsfp0u.png",
+        "alt": "Commscope"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/belden-rajdgo9jb2x67xumcb3w0n6y2q4mzr9a3rpueccwoe.png",
+        "alt": "belden"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/excel-rajdgq57oqzqv5rw1bx55mpv9hvdf5gqs10tcwa4by.png",
+        "alt": "excel"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/panduit-rajdgr31vl116rqivubrq4hbuvqqmukh45oau68q5q.png",
+        "alt": "panduit"
+      }
+    ]
+  }
+}

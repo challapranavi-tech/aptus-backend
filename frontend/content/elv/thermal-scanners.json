@@ -1,0 +1,204 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Advanced Thermal Screening & Imaging Solutions",
+    "bannerTagline": "Intelligent, contactless temperature screening designed for safer, faster, and more efficient access management.",
+    "bannerBackgroundImages": [
+      {
+        "src": "/images/Thermal_Scanner-1024x1020.png",
+        "alt": "Contactless thermal screening and imaging"
+      },
+      {
+        "src": "/images/Leonardo_Phoenix_10_a_cinematic_photo_of_a_bustling_lobby_with_3.jpg",
+        "alt": "High-traffic lobby thermal screening"
+      },
+      {
+        "src": "/images/Access-Control-System-1-1024x1020.png",
+        "alt": "Thermal screening integrated with access control"
+      },
+      {
+        "src": "/images/CCTV-Cameras.jpg",
+        "alt": "Thermal cameras for entry monitoring"
+      },
+      {
+        "src": "/images/Gate.jpg",
+        "alt": "Entry-point thermal screening and barriers"
+      }
+    ],
+    "title": "Advanced Thermal Screening & Imaging Solutions",
+    "paragraphs": [
+      "In high-traffic environments, fast and reliable screening is essential to maintaining safer, more efficient entry points. Our Thermal Screening & Imaging Solutions use advanced thermal imaging technology to enable rapid, non-contact temperature measurement without disrupting the flow of people.",
+      "From corporate offices and commercial facilities to airports, factories, healthcare environments, and other high-footfall locations, our solutions are designed to provide accurate thermal monitoring, real-time alerts, and seamless integration with existing security infrastructure.",
+      "Deploy standalone thermal cameras or integrate thermal screening with facial recognition, access control, metal detection, automatic barriers, and centralized monitoring platforms to create a smarter and more coordinated entry-management experience."
+    ],
+    "imageSrc": "false",
+    "layout": "two-column",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form",
+    "ctaPlacement": "end"
+  },
+  "cardSections": [
+    {
+      "id": "thermal-deliver",
+      "visible": true,
+      "variant": "product-cards",
+      "gridColumns": 3,
+      "title": {
+        "before": "What We Deliver"
+      },
+      "subheading": "Thermal screening and imaging only — temperature detection, alerts, and screening dashboards.",
+      "align": "left",
+      "items": [
+        {
+          "title": "Contactless Thermal Screening",
+          "body": "Rapid, non-contact temperature measurement at entry points without slowing people flow.",
+          "imageSrc": "/images/Thermal_Scanner-1024x1020.png",
+          "imageAlt": "Contactless thermal screening"
+        },
+        {
+          "title": "High-Accuracy Temperature Detection",
+          "body": "Thermal cameras calibrated for reliable skin-temperature screening in high-traffic lobbies and checkpoints.",
+          "imageSrc": "/images/Thermal_Scanner-1024x1020.png",
+          "imageAlt": "High-accuracy thermal temperature detection"
+        },
+        {
+          "title": "Threshold Alerts",
+          "body": "Real-time notifications when a configured temperature threshold is exceeded so staff can respond immediately.",
+          "imageSrc": "/images/Leonardo_Phoenix_10_a_cinematic_photo_of_a_bustling_lobby_with_3.jpg",
+          "imageAlt": "Thermal screening threshold alerts"
+        },
+        {
+          "title": "Dual-Spectrum Thermal Imaging",
+          "body": "Pair thermal and visual views so operators can confirm a screening event without a separate CCTV project.",
+          "imageSrc": "/images/Thermal_Scanner-1024x1020.png",
+          "imageAlt": "Dual-spectrum thermal imaging"
+        },
+        {
+          "title": "Screening Dashboards",
+          "body": "See live screening status, alerts, and checkpoint activity from a thermal-management interface.",
+          "imageSrc": "/images/ups-monitoring.jpg",
+          "imageAlt": "Thermal screening dashboards"
+        },
+        {
+          "title": "Multi-Entry Checkpoints",
+          "body": "Deploy standalone or linked thermal scanners across one lobby or many facility entrances.",
+          "imageSrc": "/images/Leonardo_Phoenix_10_a_cinematic_photo_of_a_bustling_lobby_with_3.jpg",
+          "imageAlt": "Multi-entry thermal screening checkpoints"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Benefits of Thermal Scanning Technology"
+      },
+      "subheading": "Why invest in professional thermal imaging solutions",
+      "align": "center",
+      "items": [
+        {
+          "title": "Non-Contact Health Screening",
+          "body": "Rapid, accurate temperature measurements without physical contact for safe mass screening.",
+          "icon": "eye-dropper"
+        },
+        {
+          "title": "Industrial Maintenance",
+          "body": "Identify hotspots and anomalies in electrical systems, HVAC components, and building envelopes before failures occur.",
+          "icon": "industry"
+        },
+        {
+          "title": "Building Diagnostics",
+          "body": "Detect insulation gaps, moisture issues, and structural problems with thermal imaging technology.",
+          "icon": "hammer"
+        },
+        {
+          "title": "Energy Efficiency",
+          "body": "Find heat loss areas and optimize energy consumption through targeted insulation improvements.",
+          "icon": "hospital"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech",
+        "accent": "for Thermal Scanning?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Certified Technicians",
+          "body": "Our team is trained and certified by FLIR, FLUKE, and other leading thermal imaging manufacturers.",
+          "icon": "medal"
+        },
+        {
+          "title": "Turnkey Solutions",
+          "body": "We handle everything from consultation to installation, calibration, and maintenance.",
+          "icon": "screwdriver"
+        },
+        {
+          "title": "Priority Support",
+          "body": "Comprehensive after-sales service with emergency response and regular calibration checks.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Regular Updates",
+          "body": "Stay current with firmware updates and new feature enhancements for maximum performance.",
+          "icon": "mobile-alt"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes-marquee",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Hear from satisfied customers who have implemented our thermal scanning solutions",
+    "items": [
+      {
+        "quote": "The thermal scanner has become essential for our facility operations. The ability to quickly identify overheating equipment has prevented costly downtime and improved our preventive maintenance schedule.",
+        "author": "Mohammed Al Farsi",
+        "role": "Facility Manager"
+      },
+      {
+        "quote": "We installed the advanced thermal imaging system for our health screening checkpoint and couldn’t be happier. The accuracy and speed have made our entry process much more efficient.",
+        "author": "Sarah Johnson",
+        "role": "HR Director"
+      },
+      {
+        "quote": "The thermal diagnostic tool helped us locate hidden moisture damage in our building envelope before it became a major issue. This proactive approach saved us significant repair costs.",
+        "author": "Ahmed Hassan",
+        "role": "Property Manager"
+      }
+    ]
+  },
+  "midCta": {
+    "placement": "bottom",
+    "heading": "Ready to Enhance Your Safety Protocols?",
+    "description": "Contact our thermal imaging specialists today for a free demonstration and customized solution proposal.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Norden-1-r5nfokpczdgnl8p7u170zh46h1y8curhfe0g7wpii0.png",
+        "alt": "Norden"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Avigilon.png",
+        "alt": "Avigilon"
+      }
+    ]
+  }
+}

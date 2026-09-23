@@ -1,0 +1,256 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Connected Spaces. Smarter Communication.",
+    "bannerTagline": "Professional Audio & Video Solutions engineered for seamless collaboration, immersive experiences, and intelligent communication across modern workplaces.",
+    "bannerBackgroundImages": [
+      {
+        "src": "/images/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Audio_3-673x1024.jpg",
+        "alt": "Professional audio and video collaboration systems"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/brnd-7.jpg",
+        "alt": "Enterprise AV and meeting room technology"
+      },
+      {
+        "src": "/images/Leonardo_Phoenix_10_Create_a_visually_appealing_image_for_Conf_0-673x1024.jpg",
+        "alt": "Conference room audio video solutions"
+      },
+      {
+        "src": "/images/LDA-audio-tech-rajcmtw0bg2fln77lwpbcob33b83lps3021uv2lw8e.png",
+        "alt": "Professional audio technology systems"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Conference-Room-Solutions-768x512.webp",
+        "alt": "Connected conference and collaboration spaces"
+      }
+    ],
+    "title": "Intelligent Audio & Video Solutions for Connected Spaces",
+    "paragraphs": [
+      "Transform the way people communicate, collaborate, and experience your spaces with professionally integrated Audio & Video solutions.",
+      "From corporate boardrooms and meeting rooms to educational institutions, retail environments, control rooms, and large-scale venues, we design and deploy AV solutions that combine clarity, connectivity, and intelligent technology.",
+      "Our solutions bring together high-definition video, professional audio, video conferencing, display systems, digital signage, PA systems, and collaboration technologies to create seamless and engaging environments.",
+      "Whether you need a smart meeting room, an immersive video wall, a campus-wide PA system, or a fully integrated conferencing environment, Aptus delivers end-to-end AV solutions—from consultation and system design to installation, integration, and ongoing support."
+    ],
+    "imageSrc": "false",
+    "layout": "two-column",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form",
+    "ctaPlacement": "end",
+    "bodySections": [
+      {
+        "heading": "Connect. Collaborate. Experience.",
+        "paragraphs": [
+          "With the right technology working seamlessly behind the scenes, every conversation becomes clearer, every presentation more impactful, and every space more connected."
+        ]
+      }
+    ]
+  },
+  "cardSections": [
+    {
+      "id": "av-types",
+      "visible": true,
+      "variant": "product-cards",
+      "gridColumns": 5,
+      "title": {
+        "before": "Types of AV Solutions"
+      },
+      "subheading": "Integrated audio and video systems for meeting rooms, campuses, venues, and connected workplaces.",
+      "align": "left",
+      "items": [
+        {
+          "title": "Video Conferencing",
+          "body": "HD cameras, codecs, and room systems for clear, reliable meetings across boardrooms and hybrid workplaces.",
+          "imageSrc": "/images/Leonardo_Phoenix_10_Create_a_visually_appealing_image_for_Conf_0-673x1024.jpg",
+          "imageAlt": "Video conferencing room systems"
+        },
+        {
+          "title": "Professional Audio",
+          "body": "Microphones, speakers, and DSP for crystal-clear speech reinforcement in rooms of any size.",
+          "imageSrc": "/images/LDA-audio-tech-rajcmtw0bg2fln77lwpbcob33b83lps3021uv2lw8e.png",
+          "imageAlt": "Professional audio systems"
+        },
+        {
+          "title": "Displays & Video Walls",
+          "body": "Large-format displays and immersive video walls for presentations, control rooms, and public spaces.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/brnd-7.jpg",
+          "imageAlt": "Displays and video wall solutions"
+        },
+        {
+          "title": "Digital Signage",
+          "body": "Dynamic content displays for lobbies, retail, and campuses — scheduled messaging and brand experiences.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Conference-Room-Solutions-768x512.webp",
+          "imageAlt": "Digital signage displays"
+        },
+        {
+          "title": "PA & Collaboration",
+          "body": "Campus-wide PA systems and wireless collaboration tools that keep every space connected and engaging.",
+          "imageSrc": "/images/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Audio_3-673x1024.jpg",
+          "imageAlt": "PA and collaboration AV systems"
+        }
+      ]
+    },
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Powerful Features"
+      },
+      "subheading": "Discover the capabilities that make AutoCAD the industry standard",
+      "align": "center",
+      "items": [
+        {
+          "title": "Video Conferencing Systems",
+          "body": "High-definition video conferencing with multiple camera angles, noise cancellation, and seamless integration with popular platforms.",
+          "icon": "video"
+        },
+        {
+          "title": "Audio Enhancement Systems",
+          "body": "Advanced microphone arrays with beamforming technology and echo cancellation for crystal-clear audio in any environment.",
+          "icon": "microphone"
+        },
+        {
+          "title": "Content Sharing & Collaboration",
+          "body": "Wireless presentation systems with screen sharing, annotation tools, and multi-device connectivity for dynamic meetings.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Surveillance & Monitoring",
+          "body": "High-resolution recording with pan-tilt-zoom capabilities and remote monitoring for security and operational insights.",
+          "icon": "tv"
+        },
+        {
+          "title": "Room Booking & Scheduling",
+          "body": "Integrated calendar synchronization with room availability status and automated booking systems.",
+          "icon": "angle-double-left"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Benefits of Our Audio/Video Solutions"
+      },
+      "subheading": "Why invest in professional audio and video technology for your organization",
+      "align": "center",
+      "items": [
+        {
+          "title": "Enhanced Communication",
+          "body": "Crystal-clear audio and video quality ensures everyone can hear and see clearly, improving understanding and engagement.",
+          "icon": "comments"
+        },
+        {
+          "title": "Increased Productivity",
+          "body": "Efficient meetings and collaboration tools help teams accomplish more in less time with fewer misunderstandings.",
+          "icon": "users"
+        },
+        {
+          "title": "Remote Accessibility",
+          "body": "Enable participation from anywhere with reliable video and audio connections for distributed teams.",
+          "icon": "globe-europe"
+        },
+        {
+          "title": "Cost Efficiency",
+          "body": "Reduce travel expenses and increase ROI with high-quality virtual meetings replacing expensive in-person gatherings.",
+          "icon": "chart-line"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus",
+        "accent": "Audio Video Solutions?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Certified Professionals",
+          "body": "Our technicians are certified by leading manufacturers including Zoom, Poly, and Shure.",
+          "icon": "certificate"
+        },
+        {
+          "title": "End-to-End Services",
+          "body": "We handle everything from design consultation to installation, calibration, and maintenance.",
+          "icon": "screwdriver"
+        },
+        {
+          "title": "24/7 Technical Support",
+          "body": "Comprehensive after-sales service with emergency response and proactive system health monitoring.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Future-Ready Technology",
+          "body": "We select scalable platforms that accommodate future technologies and updates without requiring complete replacements.",
+          "icon": "reply-all"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes-marquee",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Hear from satisfied customers who have upgraded their meeting spaces",
+    "items": [
+      {
+        "quote": "The new video conferencing system has completely transformed how we conduct client meetings. The image quality is exceptional and the sound clarity is remarkable.",
+        "author": "Mohammed Al Farsi",
+        "role": "IT Director"
+      },
+      {
+        "quote": "We installed the premium audio enhancement system in our boardroom and couldn’t be happier. The difference in voice clarity during conference calls is night and day.",
+        "author": "Sarah Johnson",
+        "role": "Facilities Manager"
+      },
+      {
+        "quote": "The room booking system integrated perfectly with our existing calendar software. Now scheduling meetings is much easier and more efficient.",
+        "author": "Ahmed Hassan",
+        "role": "Operations Manager"
+      }
+    ]
+  },
+  "midCta": {
+    "placement": "bottom",
+    "heading": "Ready to Transform Your Meetings?",
+    "description": "Contact our audio/video specialists today for a free demonstration and customized solution proposal.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/LDA-audio-tech-rajcmtw0bg2fln77lwpbcob33b83lps3021uv2lw8e.png",
+        "alt": "LDA-audio-tech"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Extron.png",
+        "alt": "Extron"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Norden-1-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "Norden"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/zycoo-rajd0gjreyq3y3ei0sski8hp6g1p7pvyvilbdiee0e.png",
+        "alt": "zycoo"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Crown-harman-rajd2u32ovz7aly95brmb4wn8ic3o6bjj9yi1ovka6.png",
+        "alt": "Crown-harman"
+      }
+    ]
+  }
+}

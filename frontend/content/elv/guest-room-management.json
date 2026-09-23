@@ -1,0 +1,173 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Intelligent Guestroom Management Systems",
+    "bannerTagline": "Smarter Rooms. Seamless Comfort. Effortless Control.",
+    "bannerBackgroundImages": [
+      {
+        "src": "/images/Home-Automation-1024x683.webp",
+        "alt": "Intelligent guest room lighting and climate control"
+      },
+      {
+        "src": "/images/Leonardo_Phoenix_10_a_cinematic_photo_of_a_bustling_lobby_with_3.jpg",
+        "alt": "Hotel lobby and hospitality guest experience"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/imgi_8_photo-1581094794329-c8112a89af12-683x1024.png",
+        "alt": "Guestroom management and in-room automation"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Smart-Homes.png",
+        "alt": "Connected room amenities and smart controls"
+      },
+      {
+        "src": "/images/Leonardo_Phoenix_10_Create_a_visually_appealing_image_for_Conf_0-673x1024.jpg",
+        "alt": "Hospitality spaces with integrated room systems"
+      }
+    ],
+    "title": "Intelligent Guestroom Management Systems",
+    "paragraphs": [
+      "Modern hospitality is about creating experiences that feel effortless. Our Guestroom Management Systems (GRMS) bring intelligent automation, energy efficiency, and personalized control together to transform every guestroom into a connected, comfortable environment.",
+      "From boutique hotels to luxury resorts, our solutions give guests intuitive control over lighting, temperature, curtains, and room settings—while giving hotel teams greater visibility and control over energy consumption and room operations."
+    ],
+    "imageSrc": "false",
+    "layout": "two-column",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form",
+    "ctaPlacement": "end",
+    "bodySections": [
+      {
+        "heading": "Intelligent Control for Every Guest Experience",
+        "paragraphs": [
+          "Our GRMS solutions integrate seamlessly with your hotel’s infrastructure to create connected guestrooms that respond to both guest preferences and operational requirements.",
+          "Whether you are managing individual room controls or deploying automation across an entire property, we deliver scalable technology designed around the way modern hotels operate."
+        ]
+      },
+      {
+        "heading": "Designed Around the Modern Hotel",
+        "paragraphs": [
+          "Our Guestroom Management Systems help create a connected ecosystem where guest comfort and operational efficiency work together.",
+          "By integrating room automation with hotel infrastructure, properties can deliver a more personalized guest experience while improving energy management and simplifying day-to-day operations.",
+          "From check-in to check-out, every room can be smarter, more efficient, and easier to manage."
+        ]
+      }
+    ]
+  },
+  "cardSections": [
+    {
+      "id": "grms-types",
+      "visible": true,
+      "variant": "product-cards",
+      "gridColumns": 3,
+      "title": {
+        "before": "What We Deliver"
+      },
+      "subheading": "Intelligent room control for guest comfort, energy savings, and hotel operations.",
+      "align": "left",
+      "items": [
+        {
+          "title": "Lighting & Scene Control",
+          "body": "Create the right ambience with intelligent lighting controls, preset scenes, and intuitive bedside interfaces.",
+          "imageSrc": "/images/grms-lighting.jpg",
+          "imageAlt": "Guestroom lighting and scene control"
+        },
+        {
+          "title": "Smart Climate Management",
+          "body": "Maintain personalized room comfort with intelligent thermostats and automated temperature control while optimizing energy consumption.",
+          "imageSrc": "/images/grms-climate.jpg",
+          "imageAlt": "Smart guestroom climate management"
+        },
+        {
+          "title": "Guestroom Automation",
+          "body": "Connect lighting, HVAC, curtains, and other room functions through a centralized automation platform for effortless control.",
+          "imageSrc": "/images/grms-automation.jpg",
+          "imageAlt": "Connected guestroom automation"
+        },
+        {
+          "title": "Digital Room Indicators",
+          "body": "Enhance guest privacy and housekeeping efficiency with intuitive Do Not Disturb, Make Up Room, and room-status indicators.",
+          "imageSrc": "/images/grms-indicators.jpg",
+          "imageAlt": "Digital guestroom status indicators"
+        },
+        {
+          "title": "Bedside Control Panels",
+          "body": "Give guests convenient access to essential room functions through elegant, easy-to-use bedside control interfaces.",
+          "imageSrc": "/images/grms-bedside.jpg",
+          "imageAlt": "Bedside guestroom control panels"
+        },
+        {
+          "title": "Centralized Management",
+          "body": "Provide hotel teams with greater visibility into room status, energy usage, and system performance through centralized monitoring and management.",
+          "imageSrc": "/images/grms-management.jpg",
+          "imageAlt": "Centralized hotel room management"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech",
+        "accent": "Guest Room Management Solutions?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Hospitality Expertise",
+          "body": "As an authorized partner, we provide access to genuine Autodesk products.",
+          "icon": "hotel"
+        },
+        {
+          "title": "24/7 Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset"
+        },
+        {
+          "title": "Customized Solutions",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Proactive Maintenance",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "reply-all"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes-marquee",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Hear from hoteliers who have transformed their operations with our solutions",
+    "items": [
+      {
+        "quote": "The implementation of Aptus Infotech’s guestroom management system has dramatically improved our operational efficiency across multiple departments.",
+        "author": "Sarah Johnson",
+        "role": "Director of Operations"
+      },
+      {
+        "quote": "Their system seamlessly integrated with our existing PMS platform, creating a unified communication ecosystem that has reduced errors and improved documentation accuracy.",
+        "author": "Michael Chen",
+        "role": "CEO"
+      },
+      {
+        "quote": "We were particularly impressed with the system’s reliability during critical situations and the excellent training provided to our staff.",
+        "author": "Jessica Williams",
+        "role": "Operations Manager"
+      }
+    ]
+  },
+  "midCta": {
+    "placement": "bottom",
+    "heading": "Ready to Transform Your Hotel Operations?",
+    "description": "Contact our hospitality technology specialists to discuss how our guestroom management system can improve efficiency and guest satisfaction in your facility.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  }
+}

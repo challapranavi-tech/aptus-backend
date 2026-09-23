@@ -114,16 +114,23 @@ export const getPageBySlug = cache(async (slug: string): Promise<Page | null> =>
     if (local?.sections.length) return local;
   }
 
+  const { isLocalElvSlug, buildLocalElvPage } = await import("@/lib/build-local-elv-page");
+  if (isLocalElvSlug(slug)) {
+    const local = buildLocalElvPage(slug);
+    if (local?.sections.length) return local;
+  }
+
   return apiGet<Page>(`/api/cms/pages/${encodeURIComponent(slug)}`);
 });
 
 export async function getAllPageSlugs(): Promise<string[]> {
+  const { ELV_LOCAL_PAGE_SLUGS } = await import("@/lib/build-local-elv-page");
   try {
     const data = await apiGet<{ slugs: string[] }>("/api/cms/slugs");
-    return data?.slugs ?? [];
+    return [...new Set([...(data?.slugs ?? []), ...ELV_LOCAL_PAGE_SLUGS])];
   } catch (err) {
     console.error(err);
-    return [];
+    return [...ELV_LOCAL_PAGE_SLUGS];
   }
 }
 

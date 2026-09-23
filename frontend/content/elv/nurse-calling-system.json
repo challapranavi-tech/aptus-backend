@@ -1,0 +1,196 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Advanced Nurse Calling Systems",
+    "bannerTagline": "Faster Communication. Smarter Response. Better Patient Care.",
+    "bannerBackgroundImages": [
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/nurse.jpg",
+        "alt": "Nurse calling system for healthcare facilities"
+      },
+      {
+        "src": "/images/Leonardo_Phoenix_10_a_cinematic_photo_of_a_bustling_lobby_with_3.jpg",
+        "alt": "Healthcare facility communication and response"
+      },
+      {
+        "src": "/images/Thermal_Scanner-1024x1020.png",
+        "alt": "Patient safety and screening at healthcare entry"
+      },
+      {
+        "src": "/images/Access-Control-System-1-1024x1020.png",
+        "alt": "Secure staff and patient area communication"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/nurse-call-system.jpg",
+        "alt": "Integrated nurse call communication"
+      }
+    ],
+    "title": "Advanced Nurse Calling Systems",
+    "paragraphs": [
+      "In healthcare, every call matters. A reliable Nurse Calling System enables patients to communicate their needs quickly while helping care teams respond efficiently and coordinate seamlessly across the facility.",
+      "Our intelligent nurse call solutions combine dependable communication technology with intuitive interfaces to create a more responsive and connected healthcare environment. From individual patient rooms and clinics to multi-floor hospitals, our systems are designed to support efficient workflows while enhancing patient safety and comfort."
+    ],
+    "imageSrc": "false",
+    "layout": "two-column",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form",
+    "ctaPlacement": "end",
+    "bodySections": [
+      {
+        "heading": "Connected Communication for Modern Healthcare",
+        "paragraphs": [
+          "Our Nurse Calling Systems provide a seamless communication link between patients and care teams, helping ensure that requests reach the right people at the right time."
+        ]
+      },
+      {
+        "heading": "Designed for Every Healthcare Environment",
+        "paragraphs": [
+          "Whether you are equipping a hospital, clinic, nursing home, rehabilitation centre, or specialized care facility, our solutions can be configured around your operational requirements.",
+          "From a simple patient call button to a fully integrated hospital-wide communication network, we deliver scalable systems that connect patients, nurses, and healthcare teams through one reliable communication infrastructure."
+        ]
+      },
+      {
+        "heading": "Every Call. Clearly Communicated. Promptly Responded.",
+        "paragraphs": [
+          "<strong>Create a safer, more connected healthcare environment with intelligent Nurse Calling Systems designed for reliable communication, efficient response, and better patient experiences.</strong>"
+        ]
+      }
+    ]
+  },
+  "cardSections": [
+    {
+      "id": "ncs-deliver",
+      "visible": true,
+      "variant": "product-cards",
+      "gridColumns": 3,
+      "title": {
+        "before": "What We Deliver"
+      },
+      "subheading": "Patient calling, staff alerts, and centralized monitoring for faster, safer care.",
+      "align": "left",
+      "items": [
+        {
+          "title": "Patient Bedside Calling",
+          "body": "Intuitive bedside call stations allow patients to request assistance quickly and conveniently, with clear indication of call status.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/nurse.jpg",
+          "imageAlt": "Patient bedside calling stations"
+        },
+        {
+          "title": "Emergency & Assistance Calls",
+          "body": "Support urgent communication with dedicated emergency buttons, pull cords, and specialized call points designed for patient safety.",
+          "imageSrc": "/images/ncs-emergency.jpg",
+          "imageAlt": "Emergency and assistance call points"
+        },
+        {
+          "title": "Staff Communication",
+          "body": "Deliver alerts directly to nurses and care teams through room displays, wireless devices, pagers, or mobile communication platforms.",
+          "imageSrc": "/images/ncs-staff.jpg",
+          "imageAlt": "Staff communication and nurse alerts"
+        },
+        {
+          "title": "Centralized Monitoring",
+          "body": "Give healthcare teams a clear overview of active calls, room status, and response activity through centralized monitoring and management interfaces.",
+          "imageSrc": "/images/ncs-monitoring.jpg",
+          "imageAlt": "Centralized nurse call monitoring"
+        },
+        {
+          "title": "Visual & Audible Alerts",
+          "body": "Combine visual indicators and audible notifications to ensure calls are clearly identified across patient rooms, corridors, and nursing stations.",
+          "imageSrc": "/images/ncs-alerts.jpg",
+          "imageAlt": "Visual and audible nurse call alerts"
+        },
+        {
+          "title": "Reporting & Analytics",
+          "body": "Track call activity and response patterns to support operational visibility, workflow improvements, and better resource planning.",
+          "imageSrc": "/images/ncs-analytics.jpg",
+          "imageAlt": "Nurse call reporting and analytics"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech",
+        "accent": "Nurse Calling System?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Clinical Expertise",
+          "body": "As an authorized partner, we provide access to genuine Autodesk products.",
+          "icon": "stethoscope"
+        },
+        {
+          "title": "24/7 Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset"
+        },
+        {
+          "title": "Customized Solutions",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "network-wired"
+        },
+        {
+          "title": "Proactive Maintenance",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "reply-all"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes-marquee",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Hear from healthcare providers who have transformed their operations with our solutions",
+    "items": [
+      {
+        "quote": "The implementation of Aptus Infotech’s nurse call system has dramatically improved our response times and patient satisfaction scores across multiple departments.",
+        "author": "Sarah Johnson",
+        "role": "Director of Nursing"
+      },
+      {
+        "quote": "Their system seamlessly integrated with our existing EHR platform, creating a unified communication ecosystem that has reduced errors and improved documentation accuracy.",
+        "author": "Michael Chen",
+        "role": "CEO,"
+      },
+      {
+        "quote": "We were particularly impressed with the system’s reliability during critical situations and the excellent training provided to our staff.",
+        "author": "Jessica Williams",
+        "role": "Operations Manager"
+      }
+    ]
+  },
+  "midCta": {
+    "placement": "bottom",
+    "heading": "Ready to Enhance Your Healthcare Communications?",
+    "description": "Contact our healthcare technology specialists to discuss how our nurse call system can improve patient safety and staff efficiency in your facility.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Fanvil.png",
+        "alt": "Fanvil"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/ascom-raje23z1629kzspo62oldqgds2gzj9cwpvbheikory.png",
+        "alt": "ascom"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/austco-raje25upjqc5n0mxv3huipzayu7pynkde4mgd2hwfi.png",
+        "alt": "austco"
+      }
+    ]
+  }
+}
