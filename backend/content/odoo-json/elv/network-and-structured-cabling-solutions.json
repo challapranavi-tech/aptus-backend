@@ -4,7 +4,7 @@
     "visible": true,
     "family": "elv",
     "bannerTitle": "Connected Infrastructure. Built for Performance.",
-    "bannerTagline": "Secure, high-performance network solutions engineered to keep your business connected, productive, and ready for what’s next.",
+    "bannerTagline": "Cabling, fiber, Wi-Fi, and security — one network you can grow.",
     "bannerSupport": "Structured Cabling · Fiber Optics · Enterprise Networking · Network Security",
     "bannerBackgroundImages": [
       {
@@ -34,16 +34,14 @@
     ],
     "title": "Network Infrastructure Solutions",
     "paragraphs": [
-      "From structured cabling and fiber optic infrastructure to enterprise networking, Wi-Fi, and network security, Aptus Infotech delivers end-to-end solutions designed around the way your organization operates.",
-      "In today’s connected business environment, a reliable and secure network is the foundation of seamless operations. We design and implement intelligent network infrastructure for businesses, educational institutions, commercial spaces, and large-scale facilities, ensuring dependable connectivity across every environment.",
-      "Our solutions bring together high-performance routing and switching, structured cabling, fiber optic networks, enterprise Wi-Fi, secure access, firewalls, and intrusion prevention technologies. This integrated approach enables seamless communication, efficient collaboration, secure data exchange, and reliable access to critical applications and cloud services.",
-      "From initial design and infrastructure deployment to integration, optimization, and ongoing support, Aptus provides a complete network ecosystem engineered for performance, reliability, security, and future scalability."
+      "Every other system depends on a clean network. Structured cabling, fiber, switching, and Wi-Fi are planned as one infrastructure. That keeps data, voice, and security traffic stable as the building grows. We install, test, and support the fabric your operations run on."
     ],
-    "imageSrc": "false",
+    "imageSrc": "/images/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Netwo_2-673x1024.jpg",
     "layout": "two-column",
     "ctaLabel": "Request a Quote",
     "ctaHref": "#form",
-    "ctaPlacement": "end"
+    "ctaPlacement": "end",
+    "imageAlt": "Enterprise network and structured cabling infrastructure"
   },
   "cardSections": [
     {

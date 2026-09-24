@@ -4,7 +4,7 @@
     "visible": true,
     "family": "elv",
     "bannerTitle": "Secure Access, Designed for Modern Facilities",
-    "bannerTagline": "Enterprise-grade access control systems that help organizations manage entry, permissions and restricted areas with greater precision.",
+    "bannerTagline": "Control who enters, when they enter, and how access is recorded.",
     "bannerBackgroundImages": [
       {
         "src": "/images/Access-Control-System-1-1024x1020.png",
@@ -29,16 +29,13 @@
     ],
     "title": "Intelligent Access Control for Modern Facilities",
     "paragraphs": [
-      "Access control is no longer simply about securing a door. It is about creating a connected, intelligent framework for managing movement across your facility.",
-      "Aptus delivers advanced access control solutions that combine secure authentication, intelligent access management, real-time monitoring, and seamless integration with your wider security infrastructure. From individual access points to complex multi-site environments, our solutions are designed to provide organizations with greater control over who can access specific areas, when they can access them, and under what conditions.",
-      "Our portfolio brings together card and proximity readers, biometric authentication, smart and electronic locking systems, access controllers, visitor management, and centralized access management platforms. These technologies can be configured to support different security levels, access policies, user groups, and operational requirements across your facility.",
-      "With centralized visibility and intelligent authorization, organizations can streamline access administration, maintain detailed access records, monitor activity in real time, and respond more effectively to changing security requirements.",
-      "Whether you are upgrading an existing facility or designing access infrastructure for a new environment, Aptus provides scalable, technology-led access control solutions engineered around your facility, your workflows, and your security requirements."
+      "Decide who can enter, when they can enter, and how that access is recorded. Cards, biometrics, and mobile credentials can share one policy across doors and sites. Visitors are logged without slowing daily staff movement. You get a live view of activity and a clear trail when you need it."
     ],
-    "imageSrc": "false",
+    "imageSrc": "/images/Access-Control-System-1-1024x1020.png",
     "layout": "two-column",
     "ctaLabel": "Request a Quote",
-    "ctaHref": "#form"
+    "ctaHref": "#form",
+    "imageAlt": "Access control readers and secure entry systems"
   },
   "cardSections": [
     {

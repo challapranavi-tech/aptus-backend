@@ -107,7 +107,9 @@ function mapLeadToStatus(lead: OdooCrmLeadRow): PortalOrderStatus {
   const stageName = Array.isArray(lead.stage_id) ? lead.stage_id[1].toLowerCase() : "";
   if (!lead.active || stageName.includes("lost")) return "Rejected";
   if (stageName.includes("license issued") || stageName.includes("won")) return "Completed";
-  if (stageName.includes("payment confirmation")) return "Completed";
+  if (stageName.includes("payment confirmation") || stageName.includes("payment verified")) {
+    return "Completed";
+  }
   if (stageName.includes("approved")) return "Approved";
   return "Submitted";
 }
@@ -125,8 +127,21 @@ function paymentMetaFromCrmStage(
   if (stage.includes("license issued") || stage.includes("won")) {
     return { ...base, paymentStatus: base.paymentStatus === "failed" ? "failed" : "paid", licenseIssued: true };
   }
-  if (stage.includes("payment confirmation")) {
+  if (stage.includes("payment confirmation") || stage.includes("payment verified")) {
     return { ...base, paymentStatus: base.paymentStatus === "failed" ? "failed" : "paid" };
+  }
+  if (
+    stage.includes("payment verification") ||
+    stage.includes("portal purchase") ||
+    stage.includes("portal software order")
+  ) {
+    return {
+      ...base,
+      paymentStatus:
+        base.paymentStatus === "failed" || base.paymentStatus === "paid"
+          ? base.paymentStatus
+          : "pending_verification",
+    };
   }
   return base;
 }
@@ -440,7 +455,7 @@ function dedupePortalOrders(orders: PortalOrder[]): PortalOrder[] {
 
     if (match) {
       if (match.leadId == null) match.leadId = order.leadId;
-      if (!match.crmStage && order.crmStage) match.crmStage = order.crmStage;
+      if (order.crmStage) match.crmStage = order.crmStage;
       if (order.licenseIssued) match.licenseIssued = true;
       // Lead often holds the payment-proof tags when SO create was delayed/failed.
       if (!match.paymentProofFileName && order.paymentProofFileName) {
@@ -987,6 +1002,29 @@ export async function listAllPortalOrdersFromOdoo(limit = 200): Promise<PortalOr
   return [...merged.values()].sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
   );
+}
+
+export async function listPartnerIdsWithPortalOrders(): Promise<number[]> {
+  const client = getOdooClient();
+  if (!client) return [];
+  try {
+    const rows = await client.searchRead<{ partner_id: [number, string] | false }>(
+      "crm.lead",
+      [
+        ["name", "ilike", "Portal software order"],
+        ["active", "in", [true, false]],
+      ],
+      ["partner_id"],
+      200,
+    );
+    const ids = new Set<number>();
+    for (const row of rows) {
+      if (Array.isArray(row.partner_id)) ids.add(row.partner_id[0]);
+    }
+    return [...ids];
+  } catch {
+    return [];
+  }
 }
 
 export function resolveOrderLeadId(order: Pick<PortalOrder, "id" | "reference" | "leadId">): number | null {

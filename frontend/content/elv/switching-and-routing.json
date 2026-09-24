@@ -4,7 +4,7 @@
     "visible": true,
     "family": "elv",
     "bannerTitle": "Enterprise Switching & Routing Solutions",
-    "bannerTagline": "Build a Faster, Smarter, and More Reliable Network",
+    "bannerTagline": "A faster, cleaner network core for every site.",
     "bannerSupport": "Enterprise Switching · Intelligent Routing · High-Speed Connectivity",
     "bannerBackgroundImages": [
       {
@@ -30,35 +30,14 @@
     ],
     "title": "Enterprise Switching & Routing Solutions",
     "paragraphs": [
-      "A strong network begins with a reliable switching and routing infrastructure. Our Switching and Routing Solutions provide the connectivity, performance, and control businesses need to keep applications, users, devices, and locations seamlessly connected.",
-      "From a single office network to complex enterprise environments, we design and deploy scalable network infrastructure that supports high-performance data communication, secure connectivity, and uninterrupted business operations."
+      "Applications, phones, and cameras all need a reliable network core. Switches and routers send traffic to the right place across floors and sites. Access, distribution, and core layers are planned so VLANs and PoE stay easy to manage. We build the fabric you can grow without ripping it out."
     ],
-    "imageSrc": "false",
+    "imageSrc": "/images/switch-managed.jpg",
     "layout": "two-column",
     "ctaLabel": "Request a Quote",
     "ctaHref": "#form",
     "ctaPlacement": "end",
-    "bodySections": [
-      {
-        "heading": "The Core of Your Network Infrastructure",
-        "paragraphs": [
-          "Switches and routers form the foundation of modern business networks. Working together, they ensure data reaches the right destination efficiently while enabling secure communication between users, systems, locations, and external networks."
-        ]
-      },
-      {
-        "heading": "Designed for Modern Business Networks",
-        "paragraphs": [
-          "Our switching and routing solutions can be configured to support a wide range of environments, including <strong>corporate offices and enterprise networks, multi-site and branch networks, data centres and server environments, educational institutions, hospitality and residential properties, and industrial and commercial facilities</strong>.",
-          "We work across the complete network infrastructure—from core and distribution layers to access networks and inter-site connectivity—to create a scalable architecture aligned with your business requirements."
-        ]
-      },
-      {
-        "heading": "Performance at the Core. Connectivity Everywhere.",
-        "paragraphs": [
-          "<strong>With the right switching and routing infrastructure, your network becomes more than a connection—it becomes a reliable foundation for business operations, digital applications, cloud services, and future growth.</strong>"
-        ]
-      }
-    ]
+    "imageAlt": "Enterprise switching and routing equipment"
   },
   "cardSections": [
     {

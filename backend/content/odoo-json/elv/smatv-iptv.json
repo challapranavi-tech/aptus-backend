@@ -4,7 +4,7 @@
     "visible": true,
     "family": "elv",
     "bannerTitle": "Smart SMATV & IPTV Solutions",
-    "bannerTagline": "Connected Entertainment. Seamless Content. Exceptional Experiences.",
+    "bannerTagline": "TV and on-demand content, managed from one headend.",
     "bannerBackgroundImages": [
       {
         "src": "https://aptusinfotech.com/wp-content/uploads/2025/09/Lucid_Origin_Create_a_visually_striking_image_representing_SMA_2-683x1024.jpg",
@@ -29,35 +29,14 @@
     ],
     "title": "Smart SMATV & IPTV Solutions",
     "paragraphs": [
-      "Modern hospitality, residential, and commercial environments expect more from their television and entertainment systems. Our SMATV and IPTV solutions provide reliable content distribution, centralized management, and intuitive viewing experiences across properties of every scale.",
-      "From hotels and serviced apartments to residential communities, hospitals, offices, and multi-dwelling developments, we design and integrate television infrastructure that delivers high-quality content with consistent performance and centralized control."
+      "Guests and residents expect television that just works. SMATV and IPTV deliver live channels and in-room content from one managed headend. Line-ups, quality, and access stay consistent across every screen. We design the path from satellite or IP source through to the room."
     ],
-    "imageSrc": "false",
+    "imageSrc": "/images/smatv-system.jpg",
     "layout": "two-column",
     "ctaLabel": "Request a Quote",
     "ctaHref": "#form",
     "ctaPlacement": "end",
-    "bodySections": [
-      {
-        "heading": "A Smarter Approach to Digital Entertainment",
-        "paragraphs": [
-          "Our solutions combine satellite reception, structured distribution, IP-based delivery, and interactive platforms to create a seamless entertainment ecosystem."
-        ]
-      },
-      {
-        "heading": "Built for Connected Properties",
-        "paragraphs": [
-          "Whether you are deploying television infrastructure across a <strong>five-star hotel, residential community, hospital, office complex, or multi-dwelling development</strong>, our solutions are designed around your property, network, and content requirements.",
-          "We integrate the complete ecosystem—from signal reception and headend equipment to network distribution, IPTV platforms, displays, and interactive services—creating a reliable and scalable entertainment infrastructure."
-        ]
-      },
-      {
-        "heading": "Entertainment That Goes Beyond the Screen",
-        "paragraphs": [
-          "<strong>Give guests, residents, and users more than television. Create a connected digital experience with reliable content delivery, intelligent management, and technology built to scale with your property.</strong>"
-        ]
-      }
-    ]
+    "imageAlt": "SMATV and IPTV content distribution system"
   },
   "cardSections": [
     {

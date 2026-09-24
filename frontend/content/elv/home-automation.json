@@ -4,25 +4,17 @@
     "visible": true,
     "family": "elv",
     "bannerTitle": "Smart Home Solutions",
-    "bannerTagline": "Transform your living space with intelligent automation and connected technology",
+    "bannerTagline": "Lighting, climate, security, and entertainment — one simple control.",
     "title": "Intelligent Technology. Effortless Living.",
     "paragraphs": [
-      "A truly smart home is more than connected devices—it is an intelligent environment designed around the way you live. Aptus Smart Home Solutions bring together automation, security, lighting, climate control, entertainment, and energy management into one seamless experience.",
-      "From a smart apartment to a fully automated villa, we design and integrate intelligent systems that give you greater control, enhanced comfort, improved security, and effortless convenience throughout your home.",
-      "Automate lighting and curtains, manage temperature and climate, control entertainment systems, monitor security, and access your home with intelligent door and access solutions—all through intuitive interfaces designed for effortless everyday use.",
-      "From voice control and smart sensors to centralized touch panels and integrated home management systems, Aptus delivers end-to-end smart home solutions—from design and integration to installation and ongoing support."
+      "A smart home should feel simple, not like a pile of apps. Lighting, climate, security, and entertainment share one control so daily routines stay easy. Scenes can welcome you home, save energy when rooms are empty, and lock down at night. We design, install, and support the whole system."
     ],
-    "imageSrc": "false",
+    "imageSrc": "/images/Home-Automation-1024x683.webp",
     "layout": "two-column",
     "ctaLabel": "Request a Quote",
     "ctaHref": "#form",
     "ctaPlacement": "end",
-    "bodySections": [
-      {
-        "heading": "Smarter Spaces. Greater Comfort. Complete Control.",
-        "paragraphs": []
-      }
-    ]
+    "imageAlt": "Smart home lighting, climate, and control"
   },
   "cardSections": [
     {

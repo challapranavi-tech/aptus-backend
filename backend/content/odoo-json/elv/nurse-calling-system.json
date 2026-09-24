@@ -4,7 +4,7 @@
     "visible": true,
     "family": "elv",
     "bannerTitle": "Advanced Nurse Calling Systems",
-    "bannerTagline": "Faster Communication. Smarter Response. Better Patient Care.",
+    "bannerTagline": "Every patient call reaches the right team, fast.",
     "bannerBackgroundImages": [
       {
         "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/nurse.jpg",
@@ -29,35 +29,14 @@
     ],
     "title": "Advanced Nurse Calling Systems",
     "paragraphs": [
-      "In healthcare, every call matters. A reliable Nurse Calling System enables patients to communicate their needs quickly while helping care teams respond efficiently and coordinate seamlessly across the facility.",
-      "Our intelligent nurse call solutions combine dependable communication technology with intuitive interfaces to create a more responsive and connected healthcare environment. From individual patient rooms and clinics to multi-floor hospitals, our systems are designed to support efficient workflows while enhancing patient safety and comfort."
+      "When a patient calls, the right team should see it immediately. Bedside buttons, staff alerts, and a central desk keep requests visible. Wards stay quieter because calls are routed, not shouted down a corridor. We size the network to your floors, rooms, and response process."
     ],
-    "imageSrc": "false",
+    "imageSrc": "/images/ncs-bedside.jpg",
     "layout": "two-column",
     "ctaLabel": "Request a Quote",
     "ctaHref": "#form",
     "ctaPlacement": "end",
-    "bodySections": [
-      {
-        "heading": "Connected Communication for Modern Healthcare",
-        "paragraphs": [
-          "Our Nurse Calling Systems provide a seamless communication link between patients and care teams, helping ensure that requests reach the right people at the right time."
-        ]
-      },
-      {
-        "heading": "Designed for Every Healthcare Environment",
-        "paragraphs": [
-          "Whether you are equipping a hospital, clinic, nursing home, rehabilitation centre, or specialized care facility, our solutions can be configured around your operational requirements.",
-          "From a simple patient call button to a fully integrated hospital-wide communication network, we deliver scalable systems that connect patients, nurses, and healthcare teams through one reliable communication infrastructure."
-        ]
-      },
-      {
-        "heading": "Every Call. Clearly Communicated. Promptly Responded.",
-        "paragraphs": [
-          "<strong>Create a safer, more connected healthcare environment with intelligent Nurse Calling Systems designed for reliable communication, efficient response, and better patient experiences.</strong>"
-        ]
-      }
-    ]
+    "imageAlt": "Nurse calling system at the patient bedside"
   },
   "cardSections": [
     {

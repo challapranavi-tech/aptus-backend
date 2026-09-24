@@ -156,20 +156,8 @@ export function CustomerLoginForm() {
         if (data.user && typeof data.user === "object") {
           syncLegacyPortalSession(data.user as LegacySessionUser, remember);
         }
-        // Confirm /me accepts the new token before leaving login (catches JWT/Upstash misconfig).
         invalidateAuthMeCache();
-        const me = await fetchAuthMeShared();
-        if (!me.ok) {
-          clearAccessToken();
-          clearLegacyPortalSession();
-        setMessage(
-          me.status === 401 || me.status === 403
-            ? "Your password was accepted but the session could not start. This usually means a stale cookie — clear this site's cookies and sign in again."
-            : "Sign-in could not load your profile. Please try again.",
-        );
-          return;
-        }
-        await syncPortalCartWithServer();
+        void syncPortalCartWithServer();
         // Hard nav so a cached middleware redirect cannot bounce back to /login.
         window.location.assign(safeNextPath(window.location.search));
         return;

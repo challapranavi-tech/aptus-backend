@@ -191,7 +191,7 @@ async function resolvePortalPurchaseStageId(
 ): Promise<number | null> {
   return resolvePipelineStageIdByHints(
     client,
-    ["portal purchase", "portal software order"],
+    ["payment verification", "portal purchase", "portal software order"],
     teamId,
   );
 }
@@ -201,7 +201,11 @@ async function resolvePaymentConfirmationStageId(
   client: OdooClient,
   teamId?: number,
 ): Promise<number | null> {
-  return resolvePipelineStageIdByHints(client, ["payment confirmation"], teamId);
+  return resolvePipelineStageIdByHints(
+    client,
+    ["payment confirmation", "payment verified"],
+    teamId,
+  );
 }
 
 /** Software team issued the license. Prefer dedicated stage; Won is last resort. */

@@ -1,5 +1,7 @@
-import { getOdooConfig, isOdooConfigured } from "../config";
+import { getOdooConfig, isOdooConfigured, normalizeOdooBaseUrl } from "../config";
 import { logger } from "../logger";
+
+export { normalizeOdooBaseUrl };
 
 export class OdooNotConfiguredError extends Error {
   constructor() {
@@ -18,13 +20,6 @@ type RpcResponse<T> = {
     data?: { message?: string };
   };
 };
-
-/** Strip /odoo or /web paths editors often paste from the browser login URL. */
-export function normalizeOdooBaseUrl(raw: string): string {
-  let u = raw.trim().replace(/\/+$/, "");
-  u = u.replace(/\/(?:odoo|web)(?:\/.*)?$/i, "");
-  return u.replace(/\/+$/, "");
-}
 
 let rpcId = 0;
 function nextId() {

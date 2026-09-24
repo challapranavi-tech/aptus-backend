@@ -21,6 +21,7 @@ export function CollapsibleSoftwareInnerHeroGrid({
   children,
 }: CollapsibleSoftwareInnerHeroGridProps) {
   const [navCollapsed, setNavCollapsed] = useState(false);
+  const hideNav = family === "elv";
 
   return (
     <div
@@ -28,10 +29,12 @@ export function CollapsibleSoftwareInnerHeroGrid({
         "aptus-software-inner-hero__grid",
         isTwoColumn && "aptus-software-inner-hero__grid--two-column",
         inlineMedia && "aptus-software-inner-hero__grid--inline-media",
-        navCollapsed && "aptus-software-inner-hero__grid--nav-collapsed",
+        hideNav && "aptus-software-inner-hero__grid--no-nav",
+        !hideNav && navCollapsed && "aptus-software-inner-hero__grid--nav-collapsed",
       )}
-      data-nav-collapsed={navCollapsed ? "true" : "false"}
+      data-nav-collapsed={hideNav ? "true" : navCollapsed ? "true" : "false"}
     >
+      {hideNav ? null : (
       <aside
         className={cn(
           "aptus-software-inner-hero__nav",
@@ -56,6 +59,7 @@ export function CollapsibleSoftwareInnerHeroGrid({
           <SoftwareInnerHeroNav family={family} links={links} />
         </div>
       </aside>
+      )}
       {children}
     </div>
   );

@@ -29,35 +29,14 @@
     ],
     "title": "Intelligent Conference Room Solutions",
     "paragraphs": [
-      "Modern workplaces demand meeting spaces that are more than just rooms with screens. Our Conference Room Solutions bring together advanced audiovisual technology, intuitive controls, and seamless connectivity to create meeting environments designed for effortless collaboration.",
-      "From compact huddle rooms and collaborative spaces to executive boardrooms and large conference facilities, we design and integrate technology around the way your teams communicate, present, and make decisions."
+      "A meeting room should start the same way every time. Displays, cameras, and microphones sit behind one-touch join for huddle spaces and boardrooms. Hybrid calls stay clear for people in the room and on the line. We keep the experience consistent across every space you add."
     ],
-    "imageSrc": "false",
+    "imageSrc": "/images/Leonardo_Phoenix_10_Create_a_visually_appealing_image_for_Conf_0-673x1024.jpg",
     "layout": "two-column",
     "ctaLabel": "Request a Quote",
     "ctaHref": "#form",
     "ctaPlacement": "end",
-    "bodySections": [
-      {
-        "heading": "Technology That Makes Every Meeting Simpler",
-        "paragraphs": [
-          "Our integrated solutions connect displays, cameras, microphones, speakers, presentation systems, and room controls into a seamless meeting experience."
-        ]
-      },
-      {
-        "heading": "Designed for Every Meeting Environment",
-        "paragraphs": [
-          "Whether you are creating a huddle room, training room, executive boardroom, video conference room, or large-scale meeting facility, our solutions are designed to scale with your organization.",
-          "We integrate the right combination of hardware, software, connectivity, and room automation to create a consistent experience across your meeting spaces."
-        ]
-      },
-      {
-        "heading": "Meetings That Work the Way Your Business Does",
-        "paragraphs": [
-          "<strong>From the first presentation to the final decision, Aptus creates intelligent meeting environments that make collaboration simpler, communication clearer, and every meeting more productive.</strong>"
-        ]
-      }
-    ]
+    "imageAlt": "Intelligent conference room collaboration setup"
   },
   "cardSections": [
     {

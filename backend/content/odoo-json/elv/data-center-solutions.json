@@ -4,7 +4,7 @@
     "visible": true,
     "family": "elv",
     "bannerTitle": "Advanced Data Center Solutions",
-    "bannerTagline": "Resilient Infrastructure. Intelligent Performance. Built for Continuity.",
+    "bannerTagline": "Compute, storage, and networking built to stay online.",
     "bannerSupport": "Compute · Storage · Networking · Virtualization · Continuity",
     "bannerBackgroundImages": [
       {
@@ -30,37 +30,14 @@
     ],
     "title": "Advanced Data Center Solutions",
     "paragraphs": [
-      "Modern businesses depend on infrastructure that is always available, scalable, and ready for what comes next. Our Data Center Solutions provide the critical foundation required to run applications, manage workloads, protect data, and support uninterrupted business operations.",
-      "From compact infrastructure deployments to enterprise-scale data centers, we design and integrate solutions that bring together compute, storage, networking, virtualization, power, and infrastructure management into a cohesive environment."
+      "Business systems need a room that stays online as workloads grow. Compute, storage, and networking are designed as one environment, not a pile of racks. Backup and monitoring sit in the same plan so recovery is clear. We build for a compact room or a full hall."
     ],
-    "imageSrc": "false",
+    "imageSrc": "/images/Leonardo_Phoenix_10_a_cinematic_photograph_of_a_futuristic_dat_0-673x1024.jpg",
     "layout": "two-column",
     "ctaLabel": "Request a Quote",
     "ctaHref": "#form",
     "ctaPlacement": "end",
-    "bodySections": [
-      {
-        "heading": "Infrastructure Built for Performance and Resilience",
-        "paragraphs": [
-          "A modern data center needs to do more than store and process information. It must deliver consistent performance, adapt to changing workloads, and protect critical business operations.",
-          "Our solutions help organizations build data center environments that are:",
-          "<strong>Scalable</strong> — Expand infrastructure as business requirements and workloads grow.<br /><strong>Highly Available</strong> — Minimize disruption with resilient infrastructure and redundancy.<br /><strong>High Performance</strong> — Support demanding applications, databases, virtualization, and cloud workloads.<br /><strong>Secure</strong> — Protect critical systems and data through integrated infrastructure and security measures.<br /><strong>Efficient</strong> — Optimize resources, power consumption, and infrastructure management.<br /><strong>Future-Ready</strong> — Create an adaptable foundation for evolving technologies and digital transformation."
-        ]
-      },
-      {
-        "heading": "Built Around Your Business",
-        "paragraphs": [
-          "Whether you are <strong>building a new data center, modernizing an existing facility, consolidating infrastructure, or preparing for cloud adoption</strong>, our solutions are designed around your technical requirements and business objectives.",
-          "From individual infrastructure components to complete data center environments, Aptus brings together the technologies, integration, and expertise required to create a resilient, scalable, and future-ready digital foundation."
-        ]
-      },
-      {
-        "heading": "The Infrastructure Behind Your Digital Business",
-        "paragraphs": [
-          "<strong>Build with confidence on infrastructure engineered for performance, availability, security, and continuous growth.</strong>"
-        ]
-      }
-    ]
+    "imageAlt": "Enterprise data center server hall"
   },
   "cardSections": [
     {

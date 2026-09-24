@@ -515,7 +515,7 @@ function MobileNavAuthLink({ onClose }: { onClose: () => void }) {
         if (cancelled) return;
         if (!result.ok) {
           setSignedIn(false);
-          if (result.status === 401 || result.status === 403) clearLegacyPortalSession();
+          if (result.status === 401) clearLegacyPortalSession();
           return;
         }
         syncLegacyPortalSession(result.user, true, { silent: true });

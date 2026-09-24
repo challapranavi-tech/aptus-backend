@@ -15,7 +15,7 @@ const pipeline = [
 ];
 
 assert.equal(pickStageIdByHints(pipeline, ["added to cart"]), 1);
-assert.equal(pickStageIdByHints(pipeline, ["portal purchase", "portal software order"]), 2);
+assert.equal(pickStageIdByHints(pipeline, ["payment verification", "portal purchase", "portal software order"]), 2);
 assert.equal(pickStageIdByHints(pipeline, ["payment confirmation"]), 3);
 assert.equal(pickStageIdByHints(pipeline, ["license issued"]), 4);
 

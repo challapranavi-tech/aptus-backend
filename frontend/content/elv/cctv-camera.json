@@ -4,7 +4,7 @@
     "visible": true,
     "family": "elv",
     "bannerTitle": "Complete Visibility. Total Protection.",
-    "bannerTagline": "Enterprise-grade CCTV surveillance solutions — from 4K IP cameras to centralized video management systems — engineered and installed by certified security technicians across Oman.",
+    "bannerTagline": "4K cameras, centralized monitoring, and 24/7 support across Oman.",
     "bannerSupport": "Trusted brands. Custom-designed systems. 24/7 support.",
     "bannerBackgroundImages": [
       {
@@ -30,29 +30,13 @@
     ],
     "title": "Surveillance That Strengthens Security",
     "paragraphs": [
-      "In an increasingly complex security landscape, continuous monitoring and visual verification are no longer optional — they are fundamental to protecting people, assets, and operations. Threats today are more sophisticated, liability expectations are higher, and organizations are expected to demonstrate not just that they have security measures in place, but that those measures actually work. This is why more businesses, institutions, and industrial facilities across every sector are upgrading their premises with advanced CCTV solutions — not simply to record footage, but to actively strengthen security, deter unauthorized activity, and maintain clear accountability at every access point.",
-      "Whether you're securing a single entry point at a retail storefront, monitoring a multi-building corporate campus, or deploying a fully networked surveillance system across a large-scale industrial or logistics complex, the right CCTV infrastructure fundamentally transforms how you observe, record, and respond to events. Modern systems don't just capture footage after the fact — they enable real-time awareness, faster incident response, and evidence-grade documentation that holds up when it matters most."
+      "See every access point clearly — from a shop entrance to a multi-building campus. Cameras, recording, and remote viewing sit in one system so staff can watch live and review events later. We match camera types to light, weather, and coverage needs. Support stays available after handover so the system keeps performing."
     ],
-    "imageSrc": "false",
+    "imageSrc": "/images/CCTV-Cameras.jpg",
     "layout": "two-column",
     "ctaLabel": "Request a Quote",
     "ctaHref": "#form",
-    "bodySections": [
-      {
-        "heading": "Comprehensive, End-to-End Coverage",
-        "paragraphs": [
-          "Our CCTV solutions bring together high-definition IP cameras, network video recorders (NVRs), and video management software (VMS) into a single, cohesive system — engineered to deliver seamless coverage and exceptional image clarity across any environment, whether indoor, outdoor, low-light, or extreme-weather. Every component is selected and configured to work together, so you get consistent performance rather than a patchwork of disconnected devices.",
-          "From 4K dome and turret cameras with advanced night vision and wide dynamic range, to bullet and PTZ cameras built for long-range and pan-tilt-zoom coverage, to thermal cameras capable of perimeter intrusion and fire detection — we design systems around the specific risks and layout of your facility, not a one-size-fits-all package."
-        ]
-      },
-      {
-        "heading": "Smarter Security, Not Just More Cameras",
-        "paragraphs": [
-          "Beyond hardware, our solutions incorporate centralized analytics platforms and smart motion detection to reduce false alarms and surface genuinely relevant events, along with secure remote viewing applications that let you monitor your premises from anywhere, on any device. Combined with reliable cloud storage and backup, historical footage is always retrievable when you need it — for investigations, audits, insurance claims, or operational review.",
-          "The result is a surveillance ecosystem where every area is visible, every event is documented, and every asset is protected — backed by systems that are built to scale as your organization grows."
-        ]
-      }
-    ]
+    "imageAlt": "CCTV camera systems for enterprise surveillance"
   },
   "cardSections": [
     {

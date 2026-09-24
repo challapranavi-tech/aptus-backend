@@ -28,7 +28,11 @@ export async function createRecoverySession(accountEmail: string, identifier: st
     identifier,
     otpVerified: false,
   };
-  await kvSet(`${RECOVERY_PREFIX}${token}`, session, RECOVERY_TTL_SEC);
+  try {
+    await kvSet(`${RECOVERY_PREFIX}${token}`, session, RECOVERY_TTL_SEC);
+  } catch {
+    // Identification can still continue; password recovery may fail until Redis is set.
+  }
   return token;
 }
 

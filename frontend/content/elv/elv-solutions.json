@@ -4,15 +4,13 @@
     "visible": true,
     "family": "elv",
     "bannerTitle": "Comprehensive ELV Solutions",
-    "bannerTagline": "Integrating advanced low voltage systems for smarter, safer, and more efficient buildings.",
+    "bannerTagline": "Smarter, safer buildings — designed, installed, and supported end to end.",
     "title": "Your Trusted ELV Solutions Partner",
     "paragraphs": [
-      "ELV Solutions is a leading provider of comprehensive Extra Low Voltage (ELV) systems integration services. With over 15 years of experience in the industry, we specialize in designing, installing, and maintaining advanced low voltage systems for commercial, residential, and industrial properties.",
-      "Our team of certified professionals is committed to delivering cutting-edge solutions that enhance security, improve communication, and optimize building operations. We work with leading technology partners to ensure our clients receive the most reliable and innovative systems available.",
-      "From initial consultation to ongoing support, we provide end-to-end services that are tailored to meet the unique needs of each client. Our customer-centric approach and technical expertise have made us a preferred partner for businesses across the region."
+      "We design, install, and support extra-low voltage systems that make buildings safer and easier to run. Security, communication, and automation sit on one plan instead of a mix of disconnected products. Every project is sized to the site — from a single floor to a full campus. You get one team from survey through handover and aftercare."
     ],
-    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_Create_a_visually_appealing_image_for_Conf_0-673x1024.jpg",
-    "imageAlt": "ELV Solutions",
+    "imageSrc": "/images/Leonardo_Phoenix_10_Create_a_visually_appealing_image_for_Conf_0-673x1024.jpg",
+    "imageAlt": "Integrated ELV systems for modern buildings",
     "ctaLabel": "Request a Quote",
     "ctaHref": "#form"
   },

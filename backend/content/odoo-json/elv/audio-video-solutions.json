@@ -4,7 +4,7 @@
     "visible": true,
     "family": "elv",
     "bannerTitle": "Connected Spaces. Smarter Communication.",
-    "bannerTagline": "Professional Audio & Video Solutions engineered for seamless collaboration, immersive experiences, and intelligent communication across modern workplaces.",
+    "bannerTagline": "Clear audio, sharp video, and rooms that just work.",
     "bannerBackgroundImages": [
       {
         "src": "/images/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Audio_3-673x1024.jpg",
@@ -29,24 +29,14 @@
     ],
     "title": "Intelligent Audio & Video Solutions for Connected Spaces",
     "paragraphs": [
-      "Transform the way people communicate, collaborate, and experience your spaces with professionally integrated Audio & Video solutions.",
-      "From corporate boardrooms and meeting rooms to educational institutions, retail environments, control rooms, and large-scale venues, we design and deploy AV solutions that combine clarity, connectivity, and intelligent technology.",
-      "Our solutions bring together high-definition video, professional audio, video conferencing, display systems, digital signage, PA systems, and collaboration technologies to create seamless and engaging environments.",
-      "Whether you need a smart meeting room, an immersive video wall, a campus-wide PA system, or a fully integrated conferencing environment, Aptus delivers end-to-end AV solutions—from consultation and system design to installation, integration, and ongoing support."
+      "Rooms should sound clear and look sharp without a fight to start a meeting. We integrate displays, microphones, speakers, and conferencing so presenters can walk in and begin. The same approach covers signage, PA, and larger venues. Design, install, and support stay with one team."
     ],
-    "imageSrc": "false",
+    "imageSrc": "/images/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Audio_3-673x1024.jpg",
     "layout": "two-column",
     "ctaLabel": "Request a Quote",
     "ctaHref": "#form",
     "ctaPlacement": "end",
-    "bodySections": [
-      {
-        "heading": "Connect. Collaborate. Experience.",
-        "paragraphs": [
-          "With the right technology working seamlessly behind the scenes, every conversation becomes clearer, every presentation more impactful, and every space more connected."
-        ]
-      }
-    ]
+    "imageAlt": "Professional audio and video collaboration systems"
   },
   "cardSections": [
     {

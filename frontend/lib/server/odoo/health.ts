@@ -10,6 +10,8 @@ export type OdooConnectionStatus = {
   baseUrl: string | null;
   database: string | null;
   message: string;
+  /** Safe failure class when connected is false. */
+  reason?: "auth" | "timeout" | "bad_url" | "unreachable" | "rpc";
   /** Login used by ODOO_USER (no secrets). */
   apiUser?: string | null;
   /** Portal Char fields on res.partner visible to the API user. */
@@ -123,12 +125,30 @@ export async function getOdooConnectionStatus(): Promise<OdooConnectionStatus> {
       portalFields,
     };
   } catch (error) {
+    const raw = error instanceof Error ? error.message : String(error);
     logger.error("Odoo health check failed", {
       action: "odoo.health.failed",
-      error: error instanceof Error ? error.message : String(error),
+      error: raw,
       baseUrl,
       database: db,
     });
+    const reason = /Authentication failed/i.test(raw)
+      ? "auth"
+      : /timed out|Timeout/i.test(raw)
+        ? "timeout"
+        : /HTTP 400|CSRF/i.test(raw)
+          ? "bad_url"
+          : /HTTP|request failed|fetch|non-JSON/i.test(raw)
+            ? "unreachable"
+            : "rpc";
+    const message =
+      reason === "auth"
+        ? "Odoo rejected the API user or key. Update ODOO_USER and ODOO_API_KEY on Vercel, then redeploy."
+        : reason === "bad_url"
+          ? "ODOO_BASE_URL looks like a browser path. Use the host only (no /odoo), then redeploy."
+          : reason === "timeout"
+            ? "Odoo did not respond in time. Check the staging instance is awake, then try again."
+            : "Unable to reach Odoo right now. Please try again shortly.";
     return {
       configured: true,
       connected: false,
@@ -136,7 +156,8 @@ export async function getOdooConnectionStatus(): Promise<OdooConnectionStatus> {
       baseUrl,
       database: db,
       apiUser: user || null,
-      message: "Unable to reach Odoo right now. Please try again shortly.",
+      reason,
+      message,
     };
   }
 }

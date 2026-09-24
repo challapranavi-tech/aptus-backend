@@ -80,7 +80,7 @@ export function HeaderAuthActions() {
       const result = await fetchAuthMeShared();
       if (!result.ok) {
         setUser(null);
-        if (result.status === 401 || result.status === 403) {
+        if (result.status === 401) {
           clearLegacyPortalSession();
         }
         return;

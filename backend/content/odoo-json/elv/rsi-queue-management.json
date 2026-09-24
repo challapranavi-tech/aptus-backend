@@ -4,7 +4,7 @@
     "visible": true,
     "family": "elv",
     "bannerTitle": "Queue Management Solutions",
-    "bannerTagline": "Transform Waiting into a Smarter Customer Experience",
+    "bannerTagline": "Shorter waits. Clearer flow. Happier visitors.",
     "bannerSupport": "Virtual Queuing · Self-Service Kiosks · Digital Signage · Analytics",
     "bannerBackgroundImages": [
       {
@@ -30,37 +30,14 @@
     ],
     "title": "Queue Management Solutions",
     "paragraphs": [
-      "In today’s service-driven environment, efficient customer flow is essential to delivering a seamless experience. Modern Queue Management Solutions help organizations reduce waiting times, optimize service capacity, and create a more organized and engaging environment for every visitor.",
-      "From government offices and healthcare facilities to banks, retail environments, and large service centers, our solutions intelligently manage customer journeys from arrival to service completion."
+      "Waiting should feel organized, not crowded. Visitors check in at a kiosk or on their phone and are called to the right counter. Screens and alerts keep people informed while staff watch demand live. We fit the flow to banks, clinics, and public service halls."
     ],
-    "imageSrc": "false",
+    "imageSrc": "/images/Leonardo_Phoenix_10_a_cinematic_photo_of_a_bustling_lobby_with_3.jpg",
     "layout": "two-column",
     "ctaLabel": "Request a Quote",
     "ctaHref": "#form",
     "ctaPlacement": "end",
-    "bodySections": [
-      {
-        "heading": "Intelligent Queuing. Seamless Service. Better Experiences.",
-        "paragraphs": [
-          "Our end-to-end queue management solutions combine <strong>virtual queuing, self-service kiosks, digital signage, appointment management, and real-time analytics</strong> to give organizations greater control over customer flow and service operations.",
-          "Customers can check in through self-service kiosks, mobile applications, or digital channels, while intelligent queue allocation directs them to the right service point. Dynamic display systems and personalized notifications keep visitors informed throughout their journey, reducing uncertainty and improving the overall experience.",
-          "Behind the scenes, staff gain access to intuitive dashboards and real-time insights that help monitor demand, manage workloads, and identify opportunities to improve operational efficiency.",
-          "From <strong>ticket issuance and virtual waiting to customer notifications, digital displays, and performance analytics</strong>, Aptus delivers a connected queue management ecosystem designed to make every interaction faster, smarter, and more efficient."
-        ]
-      },
-      {
-        "heading": "Designed for Modern Service Environments",
-        "paragraphs": [
-          "Whether you need to manage high-volume public services, streamline customer visits in a bank, improve patient flow, or enhance the experience across a retail environment, our scalable solutions can be tailored to your operational requirements."
-        ]
-      },
-      {
-        "heading": "Smarter Queues. Shorter Waits. Better Service Experiences.",
-        "paragraphs": [
-          "<strong>Smarter queues. Shorter waits. Better service experiences.</strong>"
-        ]
-      }
-    ]
+    "imageAlt": "Queue management kiosk and visitor waiting area"
   },
   "cardSections": [
     {

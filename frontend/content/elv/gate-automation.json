@@ -4,7 +4,7 @@
     "visible": true,
     "family": "elv",
     "bannerTitle": "Smarter Access. Stronger Security. Seamless Entry.",
-    "bannerTagline": "Intelligent gate automation and access control solutions designed for secure, effortless entry across residential, commercial and high-traffic environments.",
+    "bannerTagline": "Secure, effortless entry for homes, offices, and high-traffic sites.",
     "bannerBackgroundImages": [
       {
         "src": "/images/Gate.jpg",
@@ -29,26 +29,14 @@
     ],
     "title": "Smarter Entry Starts at the Gate",
     "paragraphs": [
-      "Your gate is more than an entrance. It is the first point of control between your property and the outside world.",
-      "A modern gate automation system brings together security, convenience and intelligent access, allowing you to control how people and vehicles enter and exit your premises—without compromising the experience of authorized users.",
-      "At Aptus Infotech, we design and deploy integrated gate automation solutions for residential, commercial and industrial environments. From automated sliding and swing gates to vehicle barriers, access control and visitor management, our solutions are engineered to work as part of a connected security ecosystem.",
-      "Whether you need to secure a private residence, manage access to a commercial facility or control vehicle movement across a large site, we combine the right automation technologies with practical site-specific design."
+      "The gate is the first control point for people and vehicles. Sliding, swing, and barrier systems open for authorized users and stay closed to everyone else. We pair motors, sensors, and credentials with the way your site actually moves. The result is faster entry for the right traffic and a tighter perimeter."
     ],
-    "imageSrc": "false",
+    "imageSrc": "/images/Gate.jpg",
     "layout": "two-column",
     "ctaLabel": "Request a Quote",
     "ctaHref": "#form",
     "ctaPlacement": "end",
-    "bodySections": [
-      {
-        "heading": "Designed for Control. Built for Everyday Reliability.",
-        "paragraphs": [
-          "Our approach goes beyond installing an automated gate. We look at how your property operates, who needs access, how movement should be controlled and how the system can integrate with your existing security infrastructure.",
-          "The result is a smarter entry experience—where authorized access is effortless, security is strengthened, and every movement can be managed with greater visibility and control.",
-          "From solution design and installation to integration, commissioning and ongoing support, Aptus provides an end-to-end approach to gate automation that is built around your property, your security requirements and your future needs."
-        ]
-      }
-    ]
+    "imageAlt": "Automated gate systems for secure entry"
   },
   "cardSections": [
     {

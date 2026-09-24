@@ -274,15 +274,28 @@ export function SoftwareCatalogPanel() {
     }
 
     const key = selectionKey(brand.label, product.name);
-    setSelections((prev) => {
-      const existing = prev[key];
-      return {
-        ...prev,
-        [key]: existing
-          ? { ...existing, quantity: Math.min(999, existing.quantity + 1) }
-          : { ...draft },
-      };
-    });
+    const existing = selections[key];
+    const nextItem = existing
+      ? { ...existing, quantity: Math.min(999, existing.quantity + 1) }
+      : { ...draft };
+    const nextSelections = { ...selections, [key]: nextItem };
+    setSelections(nextSelections);
+
+    const cart = {
+      duration: cartDuration,
+      items: Object.values(nextSelections).map((item) => ({
+        category: item.category,
+        productName: item.productName,
+        quantity: item.quantity,
+        duration: item.duration,
+        purchaseType: item.purchaseType,
+        packageId: item.packageId,
+        levelId: item.levelId,
+        serialNumber: item.serialNumber,
+      })),
+    };
+    writePortalCart(cart);
+    void persistPortalCartToServer(cart);
     setMessage(`${product.name} added to cart.`);
   }
 

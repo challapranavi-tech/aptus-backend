@@ -4,7 +4,7 @@
     "visible": true,
     "family": "elv",
     "bannerTitle": "Reliable Backup Power & Power Protection Solutions",
-    "bannerTagline": "Keep critical systems running with dependable backup power, intelligent protection, and seamless power continuity.",
+    "bannerTagline": "Keep critical systems running when the power does not.",
     "bannerBackgroundImages": [
       {
         "src": "/images/Standby-ups.png",
@@ -29,16 +29,14 @@
     ],
     "title": "Reliable Backup Power & Power Protection Solutions",
     "paragraphs": [
-      "Power interruptions, voltage fluctuations, and electrical disturbances can disrupt operations, affect sensitive equipment, and lead to data or productivity losses. Our Backup Power Solutions provide reliable power continuity to help keep essential systems operational when the primary power supply is interrupted.",
-      "Our UPS systems deliver instantaneous backup power during outages while helping protect connected equipment from power fluctuations, surges, and other electrical disturbances. This gives organizations the time and stability needed to maintain critical operations or perform a safe and controlled shutdown when required.",
-      "From IT infrastructure and servers to networking equipment, security systems, communication infrastructure, and other critical loads, we provide scalable backup power solutions designed around your operational requirements.",
-      "<strong>Protect your infrastructure, maintain operational continuity, and stay powered through unexpected interruptions with dependable backup power solutions from Aptus.</strong>"
+      "A short outage should not take down servers, cameras, or phones. UPS and backup power ride through cuts and protect kit from surges. You get time to keep working or shut down safely. We size batteries and monitoring to the loads that must stay on."
     ],
-    "imageSrc": "false",
+    "imageSrc": "/images/Standby-ups.png",
     "layout": "two-column",
     "ctaLabel": "Request a Quote",
     "ctaHref": "#form",
-    "ctaPlacement": "end"
+    "ctaPlacement": "end",
+    "imageAlt": "Uninterruptible power supply and backup systems"
   },
   "cardSections": [
     {

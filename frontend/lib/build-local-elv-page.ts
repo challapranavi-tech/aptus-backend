@@ -9,7 +9,6 @@
 
 import type { LogoItem, Page, Section } from "@/types";
 import { ELV_INNER_SLUGS, isElvHubSlug, isElvInnerSlug } from "@/data/elv-product-media";
-import { softwareSubnavForFamily } from "@/data/software-subnav";
 import { resolveCmsImageSrc } from "@shared/lib/cms-image";
 import accessControl from "@/content/elv/access-control-system.json";
 import audioVideo from "@/content/elv/audio-video-solutions.json";
@@ -48,6 +47,7 @@ type RawHero = {
   ctaLabel?: string;
   ctaHref?: string;
   layout?: "default" | "two-column";
+  mediaInline?: boolean;
   bodySections?: { heading?: string; paragraphs?: string[] }[];
   ctaPlacement?: "after-intro" | "end";
 };
@@ -154,7 +154,6 @@ function mapElvSections(data: RawElvPage, slug: string): Section[] {
         paragraphs: innerHero.paragraphs,
         media: usableImg(innerHero.imageSrc, innerHero.imageAlt),
         family,
-        subnavLinks: softwareSubnavForFamily(family),
         action:
           innerHero.ctaLabel && innerHero.ctaHref
             ? { label: innerHero.ctaLabel, href: innerHero.ctaHref }
@@ -164,6 +163,7 @@ function mapElvSections(data: RawElvPage, slug: string): Section[] {
             ? { label: innerHero.ctaLabel, href: innerHero.ctaHref }
             : undefined,
         layout: innerHero.layout,
+        mediaInline: innerHero.mediaInline,
         bodySections: innerHero.bodySections
           ?.filter((section) => section.heading || section.paragraphs?.length)
           .map((section) => ({

@@ -4,7 +4,7 @@
     "visible": true,
     "family": "elv",
     "bannerTitle": "Intelligent Communication Systems",
-    "bannerTagline": "Seamless, scalable voice solutions designed to connect your business, enhance collaboration, and elevate every customer interaction.",
+    "bannerTagline": "Voice, video, and messaging that stay with your team — in office or remote.",
     "bannerBackgroundImages": [
       {
         "src": "/images/Leonardo_Phoenix_10_Create_a_visually_appealing_image_for_Conf_0-673x1024.jpg",
@@ -33,24 +33,14 @@
     ],
     "title": "Modern Telecommunications Solutions",
     "imageSrc": "/images/voip-benefits-01.jpg",
-    "imageAlt": "Modern telecommunications and VoIP systems",
-    "imageHeading": "VoIP Benefits",
-    "mediaInline": true,
+    "imageAlt": "Business telephony and VoIP communication systems",
+    "mediaInline": false,
     "layout": "two-column",
     "ctaLabel": "Request a Quote",
     "ctaHref": "#form",
     "ctaPlacement": "end",
-    "bodySections": [
-      {
-        "heading": "Intelligent Communication Infrastructure for Connected Businesses",
-        "paragraphs": [
-          "Effective communication is at the heart of every successful business. Our telecommunications solutions help organizations in Muscat and across Oman build reliable, flexible, and connected communication environments that support both on-site and remote teams.",
-          "From IP PBX and VoIP systems to advanced business telephony and unified communications, we deliver solutions that enable seamless voice communication while improving collaboration, accessibility, and operational efficiency.",
-          "Our IP-based telephone systems provide businesses with a scalable communication infrastructure that can reduce communication costs while creating a secure and efficient internal network. With flexible extensions, centralized management, and remote accessibility, employees can stay connected whether they are working from the office, remotely, or across multiple locations.",
-          "Our solutions also support modern collaboration requirements, bringing together voice calls, video conferencing, online meetings, screen sharing, and remote communication within a connected business environment.",
-          "Whether you are upgrading an existing PABX system or implementing a complete IP telephony infrastructure, Aptus Infotech provides end-to-end telecommunications solutions designed around your business, your people, and the way you work."
-        ]
-      }
+    "paragraphs": [
+      "Calls, meetings, and mobile users belong on one reliable network. IP telephony keeps extensions, routing, and reporting in a single place. Teams stay reachable in the office or remote without a separate phone island. We size the system to how you work today and how you will grow."
     ]
   },
   "cardSections": [

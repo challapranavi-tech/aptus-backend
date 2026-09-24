@@ -1,7 +1,11 @@
+import { getValidAccessToken } from "@/lib/access-token";
 import { fetchAuthMeShared } from "@/lib/auth-me-client";
 
 /** Redirect unauthenticated users to sign in before purchasing. Returns true when signed in. */
 export async function ensureSignedInForPurchase(message?: (text: string) => void): Promise<boolean> {
+  const token = await getValidAccessToken();
+  if (token) return true;
+
   const me = await fetchAuthMeShared();
   if (me.ok) return true;
 

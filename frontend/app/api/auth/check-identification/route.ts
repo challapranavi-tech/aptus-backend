@@ -29,10 +29,23 @@ export async function POST(request: NextRequest) {
   );
   if (!limit.ok) return limit.response;
 
-  const result = await checkIdentification(
-    parsed.data.userType,
-    parsed.data.identifier,
-    parsed.data.pendingEmail,
-  );
-  return jsonOk(result);
+  try {
+    const result = await checkIdentification(
+      parsed.data.userType,
+      parsed.data.identifier,
+      parsed.data.pendingEmail,
+    );
+    return jsonOk(result);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    const isConfig = /UPSTASH|ODOO_|not configured|Authentication failed|Odoo lookup/i.test(
+      message,
+    );
+    return jsonError(
+      isConfig
+        ? "Identification check is not fully configured. Add Odoo and Upstash Redis environment variables on Vercel, then try again."
+        : "Unable to verify identification. Please try again.",
+      503,
+    );
+  }
 }

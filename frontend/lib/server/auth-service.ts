@@ -7,8 +7,12 @@ import {
   findPartnerByEmail,
   findPartnerByPhone,
   findPartnerByPortalAccountId,
+  findPartnerForLogin,
+  findPartnerSessionByPortalAccountId,
   getPartnerPasswordHash,
+  writePartnerPortalSetup,
   getPartnerPortalMeta,
+  mapPartnerToProfile,
   partnerPhone,
   readPartnerProfile,
   setPartnerPasswordHash,
@@ -141,11 +145,19 @@ async function sendEmailVerificationLink(actorId: string, email: string, name: s
  * was sent at some point (post-registration) and has not yet been confirmed.
  */
 export async function isEmailVerificationPending(actorId: string): Promise<boolean> {
-  const [required, verified] = await Promise.all([
-    kvGet<boolean>(emailVerificationRequiredKey(actorId)),
-    kvGet<boolean>(emailVerifiedKey(actorId)),
-  ]);
-  return Boolean(required) && !verified;
+  try {
+    const [required, verified] = await Promise.all([
+      kvGet<boolean>(emailVerificationRequiredKey(actorId)),
+      kvGet<boolean>(emailVerifiedKey(actorId)),
+    ]);
+    return Boolean(required) && !verified;
+  } catch (error) {
+    logger.error("Email verification lookup failed", {
+      action: "auth.email_verification_pending",
+      error: error instanceof Error ? error.message : String(error),
+    });
+    return false;
+  }
 }
 
 /** Consumes a verification token (single-use). Returns the verified actor/email, or null if invalid/expired/used. */
@@ -447,10 +459,10 @@ export async function resolveLoginAttempt(
     return { status: "success", profile: account.profile };
   }
 
-  const partner = await findPartnerByEmail(normalized);
-  if (!partner) return { status: "not_found" };
+  const snapshot = await findPartnerForLogin(normalized);
+  if (!snapshot) return { status: "not_found" };
 
-  const storedHash = await getPartnerPasswordHash(partner.id);
+  const { partner, passwordHash: storedHash, meta } = snapshot;
   if (!storedHash) {
     return {
       status: "partner_exists",
@@ -464,8 +476,7 @@ export async function resolveLoginAttempt(
     };
   }
 
-  const meta = await getPartnerPortalMeta(partner.id);
-  if (meta?.x_portal_status === "disabled" || meta?.x_portal_status === "deleted") {
+  if (meta.x_portal_status === "disabled" || meta.x_portal_status === "deleted") {
     return { status: "account_disabled" };
   }
 
@@ -477,31 +488,31 @@ export async function resolveLoginAttempt(
     };
   }
 
-  const denied = await assertPartnerAccess(partner.id);
-  if (denied === "partner_not_found") return { status: "partner_not_found" };
-  if (denied === "partner_archived") return { status: "partner_archived" };
-  if (denied === "partner_portal_disabled") return { status: "partner_portal_disabled" };
+  if (!snapshot.active) return { status: "partner_archived" };
+  if (process.env.ODOO_PORTAL_ENABLED_FIELD?.trim()) {
+    const denied = await assertPartnerAccess(partner.id);
+    if (denied === "partner_not_found") return { status: "partner_not_found" };
+    if (denied === "partner_archived") return { status: "partner_archived" };
+    if (denied === "partner_portal_disabled") return { status: "partner_portal_disabled" };
+  }
 
-  const portalAccountId = meta?.x_portal_account_id || `pa-${partner.id}`;
+  const portalAccountId = meta.x_portal_account_id || `pa-${partner.id}`;
 
   if (await isEmailVerificationPending(portalAccountId)) {
     return { status: "email_not_verified", maskedEmail: maskEmail(odooString(partner.email) || normalized) };
   }
 
-  await updatePartnerPortalMeta(partner.id, {
+  void updatePartnerPortalMeta(partner.id, {
     x_portal_last_login: new Date().toISOString(),
-    ...(meta?.x_portal_account_id ? {} : { x_portal_account_id: portalAccountId }),
+    ...(meta.x_portal_account_id ? {} : { x_portal_account_id: portalAccountId }),
+  }).catch((error) => {
+    logger.warn("Portal last-login write failed", {
+      action: "auth.login",
+      error: error instanceof Error ? error.message : String(error),
+    });
   });
 
-  const profile = await resolveLiveProfile(partner.id, portalAccountId);
-  if (!profile) {
-    return {
-      status: "invalid_password",
-      maskedEmail: maskEmail(normalized),
-      maskedPhone: "",
-    };
-  }
-
+  const profile = profileWithPortalId(mapPartnerToProfile(partner), portalAccountId);
   return { status: "success", profile };
 }
 
@@ -590,7 +601,7 @@ export async function checkIdentification(
   const phone = partnerPhone(partner);
 
   // Allow claiming an existing CRM contact that shares the same email and has no portal password yet.
-  const hash = await getPartnerPasswordHash(partner.id);
+  const hash = odooString(partner.x_portal_password_hash) || (await getPartnerPasswordHash(partner.id));
   if (
     !hash &&
     normalizedPending &&
@@ -996,8 +1007,8 @@ export async function registerCustomer(input: RegisterInput): Promise<RegisterRe
   }
 
   const portalAccountId = `pa-${randomUUID()}`;
-  await setPartnerPasswordHash(partnerId, hashPassword(input.password));
-  await updatePartnerPortalMeta(partnerId, {
+  await writePartnerPortalSetup(partnerId, {
+    x_portal_password_hash: hashPassword(input.password),
     x_portal_account_id: portalAccountId,
     x_portal_status: "active",
     x_portal_created_at: new Date().toISOString(),
@@ -1007,7 +1018,7 @@ export async function registerCustomer(input: RegisterInput): Promise<RegisterRe
   if (!profile) {
     throw new Error("Partner created but profile could not be loaded");
   }
-  await sendAuthLifecycleEmail(
+  void sendAuthLifecycleEmail(
     email,
     formatRegistrationSuccessfulEmail({
       customerName: profile.name,
@@ -1016,7 +1027,7 @@ export async function registerCustomer(input: RegisterInput): Promise<RegisterRe
     }),
     "auth.register_email",
   );
-  await sendEmailVerificationLink(portalAccountId, email, profile.name);
+  void sendEmailVerificationLink(portalAccountId, email, profile.name);
   return { ok: true, profile };
 }
 
@@ -1090,6 +1101,32 @@ export async function updateCustomerProfile(
   return resolveLiveProfile(found.id, portalAccountId);
 }
 
+function profileFromClaims(claims: SessionClaims): ClientProfile {
+  const name = claims.name?.trim() || claims.email || "Customer";
+  return {
+    id: claims.sub,
+    portalAccountId: claims.sub,
+    partnerId: claims.partnerId,
+    email: claims.email,
+    name,
+    initials: name
+      .split(" ")
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((part) => part[0]?.toUpperCase() ?? "")
+      .join(""),
+    role: "Customer",
+    company: "",
+    phone: "",
+    location: "",
+    accountManager: "Aptus Support",
+    supportTier: "Standard",
+    customerSince: "",
+    billingCycle: "",
+    paymentTerms: "",
+  };
+}
+
 export async function resolveProfile(claims: SessionClaims): Promise<ClientProfile | null> {
   if (isDemoMode()) {
     const account = await getDemoAccountById(claims.sub);
@@ -1097,27 +1134,35 @@ export async function resolveProfile(claims: SessionClaims): Promise<ClientProfi
     return account.profile;
   }
 
-  const found = await findPartnerByPortalAccountId(claims.sub);
-  if (!found) {
-    // Legacy JWTs that used partner-{id} as sub
+  try {
+    const snapshot = await findPartnerSessionByPortalAccountId(claims.sub);
+    if (snapshot) {
+      if (!snapshot.active) return null;
+      if (snapshot.meta.x_portal_status === "disabled" || snapshot.meta.x_portal_status === "deleted") {
+        return null;
+      }
+      if (process.env.ODOO_PORTAL_ENABLED_FIELD?.trim()) {
+        const denied = await assertPartnerAccess(snapshot.partner.id);
+        if (denied) return null;
+      }
+      return profileWithPortalId(mapPartnerToProfile(snapshot.partner), claims.sub);
+    }
+
     if (claims.partnerId) {
       const meta = await getPartnerPortalMeta(claims.partnerId);
-      if (meta?.x_portal_account_id && meta.x_portal_account_id !== claims.sub) return null;
       if (meta?.x_portal_status === "disabled" || meta?.x_portal_status === "deleted") return null;
-      const denied = await assertPartnerAccess(claims.partnerId);
-      if (denied) return null;
-      return resolveLiveProfile(claims.partnerId, claims.sub);
+      const profile = await resolveLiveProfile(claims.partnerId, claims.sub);
+      if (profile) return profile;
     }
-    return null;
+  } catch (error) {
+    logger.warn("Profile lookup failed; using session claims", {
+      action: "auth.resolve_profile",
+      error: error instanceof Error ? error.message : String(error),
+    });
   }
 
-  const meta = await getPartnerPortalMeta(found.id);
-  if (meta?.x_portal_status === "disabled" || meta?.x_portal_status === "deleted") return null;
-
-  const denied = await assertPartnerAccess(found.id);
-  if (denied) return null;
-
-  return resolveLiveProfile(found.id, claims.sub);
+  // Valid JWT — do not treat an Odoo miss as a signed-out / disabled account.
+  return profileFromClaims(claims);
 }
 
 export async function softDeleteCustomerAccount(portalAccountId: string, actorId: string): Promise<boolean> {

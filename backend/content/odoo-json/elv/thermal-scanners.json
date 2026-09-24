@@ -4,7 +4,7 @@
     "visible": true,
     "family": "elv",
     "bannerTitle": "Advanced Thermal Screening & Imaging Solutions",
-    "bannerTagline": "Intelligent, contactless temperature screening designed for safer, faster, and more efficient access management.",
+    "bannerTagline": "Fast, contactless screening at busy entrances.",
     "bannerBackgroundImages": [
       {
         "src": "/images/Thermal_Scanner-1024x1020.png",
@@ -29,15 +29,14 @@
     ],
     "title": "Advanced Thermal Screening & Imaging Solutions",
     "paragraphs": [
-      "In high-traffic environments, fast and reliable screening is essential to maintaining safer, more efficient entry points. Our Thermal Screening & Imaging Solutions use advanced thermal imaging technology to enable rapid, non-contact temperature measurement without disrupting the flow of people.",
-      "From corporate offices and commercial facilities to airports, factories, healthcare environments, and other high-footfall locations, our solutions are designed to provide accurate thermal monitoring, real-time alerts, and seamless integration with existing security infrastructure.",
-      "Deploy standalone thermal cameras or integrate thermal screening with facial recognition, access control, metal detection, automatic barriers, and centralized monitoring platforms to create a smarter and more coordinated entry-management experience."
+      "Busy entrances need screening that does not create a second queue. Thermal cameras read temperature without contact and can alert staff in real time. Units can stand alone or link to access control and barriers. We place and tune them for the flow of your lobby or gate."
     ],
-    "imageSrc": "false",
+    "imageSrc": "/images/Thermal_Scanner-1024x1020.png",
     "layout": "two-column",
     "ctaLabel": "Request a Quote",
     "ctaHref": "#form",
-    "ctaPlacement": "end"
+    "ctaPlacement": "end",
+    "imageAlt": "Contactless thermal screening at building entry"
   },
   "cardSections": [
     {

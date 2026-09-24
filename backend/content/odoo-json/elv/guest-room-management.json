@@ -4,7 +4,7 @@
     "visible": true,
     "family": "elv",
     "bannerTitle": "Intelligent Guestroom Management Systems",
-    "bannerTagline": "Smarter Rooms. Seamless Comfort. Effortless Control.",
+    "bannerTagline": "Smarter rooms. Less energy. A better stay.",
     "bannerBackgroundImages": [
       {
         "src": "/images/Home-Automation-1024x683.webp",
@@ -29,31 +29,14 @@
     ],
     "title": "Intelligent Guestroom Management Systems",
     "paragraphs": [
-      "Modern hospitality is about creating experiences that feel effortless. Our Guestroom Management Systems (GRMS) bring intelligent automation, energy efficiency, and personalized control together to transform every guestroom into a connected, comfortable environment.",
-      "From boutique hotels to luxury resorts, our solutions give guests intuitive control over lighting, temperature, curtains, and room settings—while giving hotel teams greater visibility and control over energy consumption and room operations."
+      "Guests should control light, climate, and scenes from the bedside without calling the desk. Hotel teams see occupancy and energy use across the property. Empty rooms do not waste power; occupied rooms feel personal. We integrate room automation with the way your hotel already operates."
     ],
-    "imageSrc": "false",
+    "imageSrc": "/images/grms-hero-suite.jpg",
     "layout": "two-column",
     "ctaLabel": "Request a Quote",
     "ctaHref": "#form",
     "ctaPlacement": "end",
-    "bodySections": [
-      {
-        "heading": "Intelligent Control for Every Guest Experience",
-        "paragraphs": [
-          "Our GRMS solutions integrate seamlessly with your hotel’s infrastructure to create connected guestrooms that respond to both guest preferences and operational requirements.",
-          "Whether you are managing individual room controls or deploying automation across an entire property, we deliver scalable technology designed around the way modern hotels operate."
-        ]
-      },
-      {
-        "heading": "Designed Around the Modern Hotel",
-        "paragraphs": [
-          "Our Guestroom Management Systems help create a connected ecosystem where guest comfort and operational efficiency work together.",
-          "By integrating room automation with hotel infrastructure, properties can deliver a more personalized guest experience while improving energy management and simplifying day-to-day operations.",
-          "From check-in to check-out, every room can be smarter, more efficient, and easier to manage."
-        ]
-      }
-    ]
+    "imageAlt": "Intelligent guestroom lighting and comfort control"
   },
   "cardSections": [
     {
