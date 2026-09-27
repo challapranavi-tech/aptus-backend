@@ -290,6 +290,7 @@ export async function POST(request: NextRequest, context: RouteContext) {
             quantity: item.quantity,
           })),
           existingLeadId: order.leadId,
+          expectedRevenue: totalAmount ?? pricing?.subscriptionFee ?? pricing?.total,
         }).catch((error: unknown) => {
           throw Object.assign(error instanceof Error ? error : new Error(String(error)), {
             failedOperation: "promote_lead" as const,

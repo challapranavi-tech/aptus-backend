@@ -1,5 +1,5 @@
 import { estimateOrderPricing } from "@/lib/order-pricing";
-import { cartLineUnitPrice } from "@/lib/portal-cart-checkout";
+import { cartLineUnitPrice, estimateCartPricing } from "@/lib/portal-cart-checkout";
 import { writeAudit } from "./audit-log";
 import { isDemoMode } from "./config";
 import { logger } from "./logger";
@@ -83,6 +83,7 @@ export async function syncCartCrmJourney(input: {
         productNames: input.cart.items.map((item) => item.productName),
         description,
         existingLeadId: input.cart.crmLeadId,
+        expectedRevenue: estimateCartPricing(input.cart)?.subscriptionFee,
       });
       if (leadId !== input.cart.crmLeadId) {
         await patchStoredPortalCartMeta(input.actorId, { crmLeadId: leadId });

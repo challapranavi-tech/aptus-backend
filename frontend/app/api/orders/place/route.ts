@@ -114,6 +114,7 @@ export async function POST(request: NextRequest) {
       productNames: orderPayload.items.map((item) => item.productName),
       description: checkoutNotes,
       existingLeadId: cart?.crmLeadId,
+      expectedRevenue: amountDue,
     });
     // Keep the server cart in step with what is being paid for and tie it to this
     // lead: the payment step reads these lines (quantities included) when it
