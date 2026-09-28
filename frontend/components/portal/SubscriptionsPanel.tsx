@@ -33,7 +33,7 @@ export function SubscriptionsPanel({
       {loading ? (
         <div className="aptus-odoo-subscriptions__state" role="status" aria-live="polite">
           <div className="aptus-payment-processing__spinner" aria-hidden="true" />
-          <p>Loading your licensesâ€¦</p>
+          <p>Loading your licenses</p>
         </div>
       ) : null}
 

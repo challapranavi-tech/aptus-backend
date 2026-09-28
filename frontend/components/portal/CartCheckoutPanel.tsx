@@ -273,7 +273,7 @@ export function CartCheckoutPanel() {
         return;
       }
 
-      // Nothing is purchased yet â€” /api/orders/place only prepares the order to pay
+      // Nothing is purchased yet - /api/orders/place only prepares the order to pay
       // for. The cart stays intact so the customer can go back or retry a failed
       // payment; it is cleared once the payment step reports success (onPaid).
       if (data.order) {
@@ -299,7 +299,7 @@ export function CartCheckoutPanel() {
   if (!hydrated) {
     return (
       <section className="aptus-cart-checkout" aria-label="Shopping cart">
-        <p className="aptus-cart-checkout__loading">Loading your cartâ€¦</p>
+        <p className="aptus-cart-checkout__loading">Loading your cart</p>
       </section>
     );
   }
@@ -448,7 +448,7 @@ export function CartCheckoutPanel() {
                               {unit > 0 ? formatOmanAmount(unit) : "Quote"}
                             </td>
                             <td className="aptus-cart-table__num" data-label="Total">
-                              {lineTotal > 0 ? formatOmanAmount(lineTotal) : "â€”"}
+                              {lineTotal > 0 ? formatOmanAmount(lineTotal) : "-"}
                             </td>
                             <td data-label="Remove">
                               <button
@@ -501,10 +501,10 @@ export function CartCheckoutPanel() {
                 setStep("checkout");
               }}
             >
-              Proceed to Checkout â†’
+              Proceed to Checkout
             </button>
             <Link href="/software-solutions/products" className="aptus-cart-summary__back">
-              â† Continue Shopping
+              Continue Shopping
             </Link>
           </aside>
         </div>
@@ -635,14 +635,14 @@ export function CartCheckoutPanel() {
               disabled={submitting || cart.items.length === 0}
               onClick={() => void submitOrder()}
             >
-              {submitting ? "Submittingâ€¦" : "Continue to payment â†’"}
+              {submitting ? "Submitting" : "Continue to payment"}
             </button>
             <button
               type="button"
               className="aptus-cart-summary__back aptus-cart-summary__back-btn"
               onClick={() => setStep("cart")}
             >
-              â† Back to cart
+              Back to cart
             </button>
             {error ? (
               <p className="aptus-field__error" role="alert">

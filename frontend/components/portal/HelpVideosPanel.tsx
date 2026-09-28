@@ -32,7 +32,7 @@ export function HelpVideosPanel({ limit }: { limit?: number }) {
         {videos.map((video) => (
           <Link key={video.title} href={video.href} className="aptus-portal-videos__card">
             <div className="aptus-portal-videos__thumb" aria-hidden="true">
-              <span className="aptus-portal-videos__play">â–¶</span>
+              <span className="aptus-portal-videos__play">Play</span>
               <span className="aptus-portal-videos__dur">{video.duration}</span>
             </div>
             <div className="aptus-portal-videos__meta">

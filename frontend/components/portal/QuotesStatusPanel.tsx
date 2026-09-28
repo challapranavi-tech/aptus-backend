@@ -30,7 +30,7 @@ export function QuotesStatusPanel() {
         <div>
           <h2>Quote status</h2>
           <p>
-            Updates from Odoo after you Request a Quote â€” when sales sends a quotation, payment is
+            Updates from Odoo after you Request a Quote - when sales sends a quotation, payment is
             recorded, or the opportunity changes.
           </p>
         </div>
@@ -42,7 +42,7 @@ export function QuotesStatusPanel() {
       {loading ? (
         <div className="aptus-odoo-subscriptions__state" role="status" aria-live="polite">
           <div className="aptus-payment-processing__spinner" aria-hidden="true" />
-          <p>Loading quote statusâ€¦</p>
+          <p>Loading quote status</p>
         </div>
       ) : null}
 
@@ -59,7 +59,7 @@ export function QuotesStatusPanel() {
             <Link href="/software-solutions/products" className="aptus-overview-compact__link">
               Request a Quote
             </Link>{" "}
-            from Products â€” status will appear here once sales updates Odoo.
+            from Products - status will appear here once sales updates Odoo.
           </p>
         </div>
       ) : null}

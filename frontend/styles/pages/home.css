@@ -1133,15 +1133,15 @@
     color: var(--aptus-color-primary, #1352a3);
     font-size: 1.05rem;
     font-weight: 700;
-    line-height: 1.3;
+    line-height: 1.35;
   }
 
   .page-home .home-challenges__desc {
     margin: 0.55rem 0 0;
     color: #5b6575;
-    font-size: 0.925rem;
+    font-size: 0.9rem;
     font-weight: 500;
-    line-height: 1.5;
+    line-height: 1.55;
   }
 
   /* ── Why Choose Us ── */

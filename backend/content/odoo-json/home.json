@@ -74,31 +74,31 @@
     "visible": true,
     "heading": "Technology should solve problems — not create them.",
     "bridge": "Smarter solutions. Stronger operations. A partner you can rely on.",
-    "subheading": "Are you dealing with...",
+    "subheading": "What's Holding Your Business Back?",
     "items": [
       {
-        "title": "Disconnected Systems",
-        "description": "Your tools don't talk to each other."
+        "title": "01 — Too Many Systems, One Business",
+        "description": "CCTV, access control, networks and business applications operate separately, making it difficult to manage everything as one connected environment."
       },
       {
-        "title": "Rising Costs",
-        "description": "Too much time and money spent on inefficient processes."
+        "title": "02 — Choosing the Right Technology Isn't Simple",
+        "description": "With multiple brands, solutions and licensing options available, it can be difficult to compare trade-offs and identify what actually fits your business requirements."
       },
       {
-        "title": "Security Concerns",
-        "description": "Growing threats to your business, people and assets."
+        "title": "03 — Security Without Complete Visibility",
+        "description": "Access, surveillance and building systems may exist, but without integration, teams lack a unified view of what is happening across the facility."
       },
       {
-        "title": "Outdated Technology",
-        "description": "Legacy systems holding your business back."
+        "title": "04 — Networks That Can't Keep Up",
+        "description": "Growing workloads, new devices and evolving technology demand network upgrades, reliable infrastructure and timely technical support."
       },
       {
-        "title": "Skills Gaps",
-        "description": "Not enough specialized expertise in-house."
+        "title": "05 — Limited Technical Support & Expertise",
+        "description": "Installation, configuration, employee training, troubleshooting and ongoing management can become challenging without the right technical expertise."
       },
       {
-        "title": "Uncertain Investments",
-        "description": "Technology spending without clear business returns."
+        "title": "06 — Renewals & Maintenance Become a Hassle",
+        "description": "Managing software renewals, licences, warranties and annual maintenance across multiple vendors can lead to missed deadlines, downtime and unnecessary effort."
       }
     ]
   },

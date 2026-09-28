@@ -76,7 +76,7 @@ export function OrdersPanel({ orders, loading, error, limit }: OrdersPanelProps)
       {loading ? (
         <div className="aptus-odoo-subscriptions__state" role="status" aria-live="polite">
           <div className="aptus-payment-processing__spinner" aria-hidden="true" />
-          <p>Loading your ordersâ€¦</p>
+          <p>Loading your orders</p>
         </div>
       ) : null}
 
@@ -150,7 +150,7 @@ export function OrdersPanel({ orders, loading, error, limit }: OrdersPanelProps)
                           View license
                         </Link>
                       ) : (
-                        <span className="is-muted">â€”</span>
+                        <span className="is-muted">-</span>
                       )}
                     </td>
                   </tr>

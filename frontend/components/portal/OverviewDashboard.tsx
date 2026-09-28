@@ -46,7 +46,7 @@ export function OverviewDashboard() {
   const { notifications, loading: notificationsLoading } = useNotifications();
 
   if (!ready || !user) {
-    return <LoadingBlock label="Loading your workspaceâ€¦" />;
+    return <LoadingBlock label="Loading your workspace" />;
   }
 
   const loading = ordersLoading || subscriptionsLoading || notificationsLoading;
@@ -64,7 +64,7 @@ export function OverviewDashboard() {
   return (
     <div className="aptus-overview-compact">
       {loading ? (
-        <LoadingBlock label="Loading dashboardâ€¦" />
+        <LoadingBlock label="Loading dashboard" />
       ) : (
         <>
           {urgentRenewal ? (
@@ -205,8 +205,8 @@ export function OverviewDashboard() {
                           <strong>{subscription.productName}</strong>
                           <small>
                             {expired
-                              ? `Expired Â· ${subscription.expiryDate || subscription.renewalDate || "â€”"}`
-                              : `${subscription.status}${soon ? "" : ""} Â· ${subscription.renewalDate || "â€”"}`}
+                              ? `Expired - ${subscription.expiryDate || subscription.renewalDate || "-"}`
+                              : `${subscription.status}${soon ? "" : ""} - ${subscription.renewalDate || "-"}`}
                           </small>
                         </div>
                       </div>
@@ -272,7 +272,7 @@ export function OverviewDashboard() {
                           ? formatOmanAmount(order.amountDue)
                           : pricing?.complete
                             ? formatOmanAmount(pricing.total)
-                            : "â€”";
+                            : "-";
                       const productLabel =
                         order.items.length === 1
                           ? order.items[0].productName
