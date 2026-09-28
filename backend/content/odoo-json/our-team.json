@@ -1,7 +1,39 @@
 {
-  "banner": {
-    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/team_banner-b208e690e53223aff88366fe906d37da73e490705fd5d21cd14ab0a68440b094.png",
-    "imageAlt": "Our Team"
+  "text": {
+    "id": "team-culture",
+    "visible": true,
+    "variant": "culture-panel",
+    "eyebrow": "OUR TEAM",
+    "title": { "before": "Our People.", "accent": "Our Strength." },
+    "items": [
+      {
+        "title": "People at the Core",
+        "description": "Our people are our greatest asset. We foster an environment where employees feel valued, supported and empowered to contribute to Aptus' success."
+      },
+      {
+        "title": "A Culture of Collaboration",
+        "description": "We work with our clients as one team, building relationships grounded in mutual respect, trust and shared success."
+      },
+      {
+        "title": "A Workplace That Inspires",
+        "description": "We cultivate an open, positive and inclusive workplace where employees are encouraged to share ideas, challenge conventions and bring creativity and innovation to their work."
+      },
+      {
+        "title": "Diverse Perspectives, Shared Purpose",
+        "description": "Our diverse team brings together talent from 5–7+ nationalities, with experience across national, independent and international IT organizations."
+      },
+      {
+        "title": "Growing Local Talent",
+        "description": "Developing Oman's national workforce remains a key priority. Our talented Omani professionals continue to grow their expertise, broaden their horizons and build meaningful careers within Oman's evolving technology landscape."
+      },
+      {
+        "title": "Performance That Is Recognized",
+        "description": "We believe in recognizing contribution, encouraging professional growth and creating opportunities for our people to achieve both personal and organizational goals."
+      }
+    ],
+    "imageSrc": "/images/our-team-group.jpg",
+    "imageAlt": "Aptus Infotech team",
+    "imagePosition": "above"
   },
   "team": {
     "id": "leadership",
@@ -27,20 +59,15 @@
       }
     ]
   },
-  "text": {
-    "id": "team-culture",
+  "join": {
     "visible": true,
-    "variant": "culture-panel",
-    "eyebrow": "OUR TEAM",
-    "title": { "before": "Our core strength is", "accent": "our team" },
+    "title": { "before": "Join", "accent": "Our Team" },
+    "subheading": "Build your career with a team that builds what's next.",
     "paragraphs": [
-      "We recognize our primary asset is people. To be successful, Aptus must be a rewarding place to work for all our staff. We work with our clients as a team. Mutual respect provides the foundation for our success.",
-      "At Aptus Infotech, we intend for our working environment to make our employees 'feel at home'. It is a fun and stress free environment where employees are encouraged to raise their opinion and be innovative and creative to achieve personal and organizational goals which attracts, motivates and retains superior personnel and rewards performance.",
-      "Aptus Infotech team is incredibly diverse, with employees drawn from over 5-7 different countries with a wide variety experience in national, independent and international IT companies.",
-      "A critical success factor for our business is the development of the National workforce in all our locations. We have a cadre of talented Omanis who have grown professionally in the IT industry of Oman, are now able to expand their horizons and take their skills to a new level on the international stage."
+      "At Aptus Infotech, we believe great technology starts with great people. We bring together diverse talent, technical expertise and fresh ideas to deliver solutions that make a difference for our clients.",
+      "Whether you are an experienced professional or looking to take the next step in your career, Aptus offers an environment where you can learn, contribute, innovate and grow."
     ],
-    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/07/team-aptusinfotech.png",
-    "imageAlt": "Aptus Infotech Team",
-    "imagePosition": "below"
+    "actionLabel": "View Open Roles",
+    "actionHref": "/careers"
   }
 }

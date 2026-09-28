@@ -35,6 +35,7 @@ export async function generateStaticParams() {
       { slug: "our-story" },
       { slug: "aptus-policy" },
       { slug: "aptus-infotech-iso-certifications" },
+      { slug: "our-team" },
     ];
   }
 
@@ -56,13 +57,15 @@ export async function generateStaticParams() {
     { slug: "our-story" },
     { slug: "aptus-policy" },
     { slug: "aptus-infotech-iso-certifications" },
+    { slug: "our-team" },
   ];
   for (const slug of slugs) {
     if (
       isCaseStudiesSlug(slug) ||
       slug === "our-story" ||
       slug === "aptus-policy" ||
-      slug === "aptus-infotech-iso-certifications"
+      slug === "aptus-infotech-iso-certifications" ||
+      slug === "our-team"
     )
       continue;
     try {
@@ -90,6 +93,9 @@ export async function generateMetadata({
   }
   if (normalized === "aptus-infotech-iso-certifications") {
     return { title: "Aptus Infotech ISO Certifications | Aptus Infotech" };
+  }
+  if (normalized === "our-team") {
+    return { title: "Our Team | Aptus Infotech" };
   }
   try {
     const page = await getPageBySlug(normalized);
@@ -155,6 +161,7 @@ export default async function DynamicPage({ params }: PageProps) {
           softwareScope?.isInner && `aptus-autodesk-page--${normalized}`,
           normalized === "our-story" && "page-our-story",
           normalized === "aptus-policy" && "page-aptus-policy",
+          normalized === "our-team" && "page-team",
         )}
       >
         {usesStackedSoftwareLayout(normalized) ? (

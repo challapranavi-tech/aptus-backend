@@ -24,6 +24,7 @@ import {
   listLocalDevPageSlugs,
   preferLocalHomeJson,
   preferLocalOurStoryJson,
+  preferLocalOurTeamJson,
   preferLocalElvPageJson,
 } from "@/lib/odoo/local-page-json";
 import { loadCaseStudiesPageContent } from "@/lib/case-studies-page-content";
@@ -168,6 +169,14 @@ export async function getPageBySlug(slug: string): Promise<Page | null> {
     if (localStory?.sections.length) {
       debugLog("Mapped Page [our-story local]", localStory);
       return localStory;
+    }
+  }
+
+  if (slug === "our-team" && preferLocalOurTeamJson()) {
+    const localTeam = buildLocalDevPage("our-team");
+    if (localTeam?.sections.length) {
+      debugLog("Mapped Page [our-team local]", localTeam);
+      return localTeam;
     }
   }
 

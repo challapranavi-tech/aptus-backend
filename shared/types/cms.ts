@@ -230,7 +230,7 @@ export interface FeatureRow {
   description?: string;
   paragraphs?: string[];
   media?: MediaAsset;
-  imagePosition?: "left" | "right" | "below";
+  imagePosition?: "left" | "right" | "below" | "above";
   action?: ActionLink;
   /** When true, renders the heading as h1 (inner pages like Our Story). */
   headingAsH1?: boolean;
@@ -261,11 +261,15 @@ export interface RichText {
   headingAccent?: string;
   paragraphs?: string[];
   bullets?: string[];
+  /** Titled blocks under a culture heading (Our Team). */
+  items?: { title?: string; description?: string }[];
   media?: MediaAsset;
-  imagePosition?: "left" | "right" | "below";
+  imagePosition?: "left" | "right" | "below" | "above";
   background?: "white" | "light";
-  /** `culture-panel` = Our Team tinted block (watermark + subtitle + photo). */
-  variant?: "default" | "culture-panel" | "policy-panel";
+  /** `culture-panel` = Our Team tinted block. `join-panel` = Join Our Team band. */
+  variant?: "default" | "culture-panel" | "policy-panel" | "join-panel";
+  subheading?: string;
+  action?: ActionLink;
 }
 
 // logo-grid — partner / brand logo wall

@@ -1,0 +1,73 @@
+{
+  "text": {
+    "id": "team-culture",
+    "visible": true,
+    "variant": "culture-panel",
+    "eyebrow": "OUR TEAM",
+    "title": { "before": "Our People.", "accent": "Our Strength." },
+    "items": [
+      {
+        "title": "People at the Core",
+        "description": "Our people are our greatest asset. We foster an environment where employees feel valued, supported and empowered to contribute to Aptus' success."
+      },
+      {
+        "title": "A Culture of Collaboration",
+        "description": "We work with our clients as one team, building relationships grounded in mutual respect, trust and shared success."
+      },
+      {
+        "title": "A Workplace That Inspires",
+        "description": "We cultivate an open, positive and inclusive workplace where employees are encouraged to share ideas, challenge conventions and bring creativity and innovation to their work."
+      },
+      {
+        "title": "Diverse Perspectives, Shared Purpose",
+        "description": "Our diverse team brings together talent from 5–7+ nationalities, with experience across national, independent and international IT organizations."
+      },
+      {
+        "title": "Growing Local Talent",
+        "description": "Developing Oman's national workforce remains a key priority. Our talented Omani professionals continue to grow their expertise, broaden their horizons and build meaningful careers within Oman's evolving technology landscape."
+      },
+      {
+        "title": "Performance That Is Recognized",
+        "description": "We believe in recognizing contribution, encouraging professional growth and creating opportunities for our people to achieve both personal and organizational goals."
+      }
+    ],
+    "imageSrc": "/images/our-team-group.jpg",
+    "imageAlt": "Aptus Infotech team",
+    "imagePosition": "above"
+  },
+  "team": {
+    "id": "leadership",
+    "visible": true,
+    "variant": "leadership",
+    "title": { "before": "Management", "accent": "Profile" },
+    "members": [
+      {
+        "id": "rajesh-malaviya",
+        "name": "Rajesh Malaviya",
+        "role": "CEO & Co-Founder",
+        "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/10/Rrajesh-malaviya-e1761120536160.jpg",
+        "imageAlt": "Rajesh Malaviya",
+        "bio": "Rajesh Malaviya was responsible for guiding Oriental Oryx, (Aptus Infotech), through two decades of diversification and growth to finally emerge as one of the leaders in the IT & software industry in the Oman. With his inborn nature of wanting to know other people, his every interaction has been purposeful."
+      },
+      {
+        "id": "mubin-mir",
+        "name": "Mubin Mir",
+        "role": "Director Sales",
+        "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/10/Mubin-Mir-e1761120496118.jpg",
+        "imageAlt": "Mubin Mir",
+        "bio": "A commerce graduate from University of Madras, an absolute team player, with a genuine commitment to the task with expertise in business development; core emphasis on creation of long-term value for an organization from customers, markets, and business relationships."
+      }
+    ]
+  },
+  "join": {
+    "visible": true,
+    "title": { "before": "Join", "accent": "Our Team" },
+    "subheading": "Build your career with a team that builds what's next.",
+    "paragraphs": [
+      "At Aptus Infotech, we believe great technology starts with great people. We bring together diverse talent, technical expertise and fresh ideas to deliver solutions that make a difference for our clients.",
+      "Whether you are an experienced professional or looking to take the next step in your career, Aptus offers an environment where you can learn, contribute, innovate and grow."
+    ],
+    "actionLabel": "View Open Roles",
+    "actionHref": "/careers"
+  }
+}

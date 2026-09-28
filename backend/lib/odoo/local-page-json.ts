@@ -106,6 +106,14 @@ export function preferLocalOurStoryJson(): boolean {
   return process.env.USE_LOCAL_OUR_STORY_JSON !== "false";
 }
 
+/**
+ * When true (default), committed our-team.json wins over Odoo page JSON.
+ * Set USE_LOCAL_OUR_TEAM_JSON=false to force Odoo as source.
+ */
+export function preferLocalOurTeamJson(): boolean {
+  return process.env.USE_LOCAL_OUR_TEAM_JSON !== "false";
+}
+
 const ELV_LOCAL_FIRST_SLUGS = new Set([
   "elv-solutions",
   "cctv-camera",

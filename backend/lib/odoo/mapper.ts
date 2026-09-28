@@ -22,6 +22,7 @@ import {
   loadLocalPageSectionsJson,
   preferLocalHomeJson,
   preferLocalOurStoryJson,
+  preferLocalOurTeamJson,
   preferLocalElvPageJson,
 } from "./local-page-json";
 import { mapHomepageJson } from "./json-mapper";
@@ -78,6 +79,10 @@ export function mapOdooPage(
       slug === "our-story" && preferLocalOurStoryJson()
         ? loadLocalPageSectionsJson("our-story")
         : null;
+    const localTeamJson =
+      slug === "our-team" && preferLocalOurTeamJson()
+        ? loadLocalPageSectionsJson("our-team")
+        : null;
     const localElvJson = preferLocalElvPageJson(slug)
       ? loadLocalPageSectionsJson(slug)
       : null;
@@ -97,7 +102,8 @@ export function mapOdooPage(
             rawPage.x_page_sections_json.trim()
           ? rawPage.x_page_sections_json
           : null;
-    const pageJsonRaw = localStoryJson ?? localElvJson ?? odooPageJson ?? localJson;
+    const pageJsonRaw =
+      localStoryJson ?? localTeamJson ?? localElvJson ?? odooPageJson ?? localJson;
     const pageSections = mapPageJson(pageJsonRaw, { slug });
     if (pageSections && pageSections.length > 0) {
       sections = pageSections;

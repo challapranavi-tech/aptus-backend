@@ -81,9 +81,10 @@ interface RawText {
   title?: RawTitle;
   paragraphs?: string[];
   bullets?: string[];
+  items?: { title?: string; description?: string }[];
   imageSrc?: string;
   imageAlt?: string;
-  imagePosition?: "left" | "right" | "below";
+  imagePosition?: "left" | "right" | "below" | "above";
   variant?: "default" | "culture-panel" | "policy-panel";
 }
 // Card sections — used by software/product inner pages for feature grids
@@ -218,7 +219,7 @@ interface RawIntroRow {
   bullets?: string[];
   imageSrc?: string;
   imageAlt?: string;
-  imagePosition?: "left" | "right" | "below";
+  imagePosition?: "left" | "right" | "below" | "above";
   headingAsH1?: boolean;
   variant?: "default" | "boxed" | "panel";
   downloadHref?: string;
@@ -317,6 +318,11 @@ interface RawPageJson {
   lists?: RawList[];
   faq?: RawFaq;
   team?: RawTeam;
+  join?: RawText & {
+    subheading?: string;
+    actionLabel?: string;
+    actionHref?: string;
+  };
   certifications?: RawCertifications;
   contactInfo?: RawContactInfo;
   showKeyEnablers?: boolean;
@@ -984,63 +990,105 @@ export function mapPageJson(
     });
   }
 
-  const team = data.team;
-  if (team && team.visible !== false && (team.eyebrow || joinTitle(team.title) || team.members?.length)) {
-    sections.push({
-      id: "page-team",
-      type: "team",
-      order: ++order.n,
-      presentation: parsePresentation(team.presentation),
-      data: {
+  const pushTeam = () => {
+    const team = data.team;
+    if (team && team.visible !== false && (team.eyebrow || joinTitle(team.title) || team.members?.length)) {
+      sections.push({
+        id: "page-team",
         type: "team",
-        eyebrow: team.eyebrow,
-        heading: joinTitle(team.title),
-        variant: team.variant,
-        members: team.members?.map((m, i) => ({
-          id: m.id ?? `member-${i}`,
-          name: m.name,
-          role: m.role,
-          bio: m.bio,
-          avatar: usableImg(m.imageSrc, m.imageAlt ?? m.name),
-        })),
-      },
-    });
+        order: ++order.n,
+        presentation: parsePresentation(team.presentation),
+        data: {
+          type: "team",
+          eyebrow: team.eyebrow,
+          heading: joinTitle(team.title),
+          variant: team.variant,
+          members: team.members?.map((m, i) => ({
+            id: m.id ?? `member-${i}`,
+            name: m.name,
+            role: m.role,
+            bio: m.bio,
+            avatar: usableImg(m.imageSrc, m.imageAlt ?? m.name),
+          })),
+        },
+      });
+    }
+  };
+
+  const pushTextBlocks = () => {
+    for (const block of [data.intro, data.text].filter(Boolean)) {
+      if (!block || block.visible === false) continue;
+      if (isPolicyPanel && (block === data.intro || block === data.text)) continue;
+      if (isWhyPanel && block === data.text) continue;
+      if (isIsoPanel && (block === data.intro || block === data.text)) continue;
+      if (isCareerPanel && block === data.intro) continue;
+      const hasContent =
+        block.eyebrow ||
+        joinTitle(block.title) ||
+        block.paragraphs?.length ||
+        block.bullets?.length ||
+        block.imageSrc;
+      if (!hasContent) continue;
+
+      const culturePanel = block.variant === "culture-panel";
+
+      sections.push({
+        id: `page-text-${order}`,
+        type: "rich-text",
+        order: ++order.n,
+        presentation: parsePresentation(block.presentation),
+        data: {
+          type: "rich-text",
+          eyebrow: block.eyebrow,
+          heading: block.title?.before,
+          headingAccent: block.title?.accent
+            ? [block.title.accent, block.title.after].filter(Boolean).join(" ") || block.title.accent
+            : block.title?.after,
+          paragraphs: block.paragraphs,
+          bullets: block.bullets,
+          items: block.items
+            ?.filter((item) => item.title || item.description)
+            .map((item) => ({
+              title: item.title,
+              description: item.description,
+            })),
+          media: usableImg(block.imageSrc, block.imageAlt),
+          imagePosition: block.imagePosition,
+          variant: block.variant,
+          background: culturePanel ? "white" : order.n % 2 === 0 ? "light" : "white",
+        },
+      });
+    }
+  };
+
+  // Our Team: culture copy first, then Management Profile cards.
+  const cultureFirst =
+    options?.slug === "our-team" || data.text?.variant === "culture-panel";
+  if (cultureFirst) {
+    pushTextBlocks();
+    pushTeam();
+  } else {
+    pushTeam();
+    pushTextBlocks();
   }
 
-  for (const block of [data.intro, data.text].filter(Boolean)) {
-    if (!block || block.visible === false) continue;
-    if (isPolicyPanel && (block === data.intro || block === data.text)) continue;
-    if (isWhyPanel && block === data.text) continue;
-    if (isIsoPanel && (block === data.intro || block === data.text)) continue;
-    if (isCareerPanel && block === data.intro) continue;
-    const hasContent =
-      block.eyebrow ||
-      joinTitle(block.title) ||
-      block.paragraphs?.length ||
-      block.bullets?.length ||
-      block.imageSrc;
-    if (!hasContent) continue;
-
-    const culturePanel = block.variant === "culture-panel";
-
+  const join = data.join;
+  if (join && join.visible !== false && (joinTitle(join.title) || join.paragraphs?.length || join.subheading)) {
     sections.push({
-      id: `page-text-${order}`,
+      id: "page-join-team",
       type: "rich-text",
       order: ++order.n,
-      presentation: parsePresentation(block.presentation),
       data: {
         type: "rich-text",
-        eyebrow: block.eyebrow,
-        heading: block.title?.before,
-        headingAccent: block.title?.accent
-          ? [block.title.accent, block.title.after].filter(Boolean).join(" ") || block.title.accent
-          : block.title?.after,
-        paragraphs: block.paragraphs,
-        bullets: block.bullets,
-        media: usableImg(block.imageSrc, block.imageAlt),
-        imagePosition: block.imagePosition,
-        variant: block.variant,
-        background: culturePanel ? "white" : order.n % 2 === 0 ? "light" : "white",
+        heading: join.title?.before ?? "Join",
+        headingAccent: join.title?.accent ?? "Our Team",
+        subheading: join.subheading,
+        paragraphs: join.paragraphs,
+        variant: "join-panel",
+        action:
+          join.actionLabel && join.actionHref
+            ? { label: join.actionLabel, href: join.actionHref }
+            : { label: "View Open Roles", href: "/careers" },
       },
     });
   }
@@ -1298,7 +1346,11 @@ export function mapPageJson(
     (cta?.formVariant ?? "simple") === "simple" &&
     cta?.formVariant !== "career" &&
     cta?.formVariant !== "contact";
-  if ((cta || data.showContactCta) && !(isAboutNoQuote && (ctaIsLightQuote || !cta))) {
+  if (
+    slug !== "our-team" &&
+    (cta || data.showContactCta) &&
+    !(isAboutNoQuote && (ctaIsLightQuote || !cta))
+  ) {
     sections.push({
       id: "page-cta",
       type: "cta",
@@ -1389,5 +1441,33 @@ if (!(_ti >= 0 && _pi > _ti && _ci > _pi)) {
   const _storySection = _story?.find((s) => s.type === "our-story");
   if (!_storySection || _storySection.data.type !== "our-story" || !_storySection.data.hero?.titleAccent) {
     throw new Error("our-story JSON must map to our-story section with hero accent");
+  }
+}
+
+{
+  const _teamPage = mapPageJson(
+    JSON.stringify({
+      text: {
+        variant: "culture-panel",
+        title: { before: "Our core strength is", accent: "our team" },
+        paragraphs: ["p"],
+      },
+      team: {
+        variant: "leadership",
+        title: { before: "Management", accent: "Profile" },
+        members: [{ id: "a", name: "A" }],
+      },
+      showContactCta: true,
+    }),
+    { slug: "our-team" },
+  );
+  const _teamTypes = _teamPage?.map((s) => s.type) ?? [];
+  const _cultureAt = _teamTypes.indexOf("rich-text");
+  const _leadAt = _teamTypes.indexOf("team");
+  if (!(_cultureAt >= 0 && _leadAt > _cultureAt)) {
+    throw new Error("our-team must render culture copy before management profiles");
+  }
+  if (_teamTypes.includes("cta")) {
+    throw new Error("our-team must not render a Request a Quote band");
   }
 }
