@@ -1,5 +1,4 @@
 import { Container, CmsImage } from "@/components/ui";
-import { cn } from "@/lib/utils";
 import type { Team as TeamData } from "@/types";
 
 interface TeamProps {

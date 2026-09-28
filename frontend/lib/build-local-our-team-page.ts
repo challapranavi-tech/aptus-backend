@@ -7,10 +7,18 @@ import type { Page, Section } from "@/types";
 import ourTeamJson from "@/content/our-team.json";
 
 type RawTitle = { before?: string; accent?: string; after?: string };
+type ImagePosition = "left" | "right" | "below" | "above";
 
 function joinTitle(t?: RawTitle): string | undefined {
   if (!t) return undefined;
   return [t.before, t.accent, t.after].filter(Boolean).join(" ").trim() || undefined;
+}
+
+function asImagePosition(value: string | undefined): ImagePosition | undefined {
+  if (value === "left" || value === "right" || value === "below" || value === "above") {
+    return value;
+  }
+  return undefined;
 }
 
 export function buildLocalOurTeamPage(): Page | null {
@@ -36,7 +44,7 @@ export function buildLocalOurTeamPage(): Page | null {
         media: culture.imageSrc
           ? { src: culture.imageSrc, alt: culture.imageAlt ?? "" }
           : undefined,
-        imagePosition: culture.imagePosition,
+        imagePosition: asImagePosition(culture.imagePosition),
         variant: "culture-panel",
         background: "white",
       },
