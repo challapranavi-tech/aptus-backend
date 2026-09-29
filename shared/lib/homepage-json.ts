@@ -110,10 +110,16 @@ interface RawLogoGrid {
   variant?: "default" | "alliances" | "alliances-grid" | "partners-marquee";
   logos?: RawLogoItem[];
 }
+type RawIndustryCategory = "elv" | "software";
 interface RawIndustryItem {
   title?: string;
   imageSrc?: string;
   imageAlt?: string;
+  categories?: RawIndustryCategory[];
+}
+interface RawIndustryTag {
+  label?: string;
+  categories?: RawIndustryCategory[];
 }
 interface RawIndustries {
   id?: string;
@@ -121,10 +127,47 @@ interface RawIndustries {
   presentation?: RawPresentation;
   eyebrow?: string;
   title?: RawTitle;
-  tags?: string[];
+  tags?: Array<string | RawIndustryTag>;
   items?: RawIndustryItem[];
   ctaLabel?: string;
   ctaHref?: string;
+}
+
+function normalizeIndustryCategories(
+  value: RawIndustryCategory[] | undefined,
+): RawIndustryCategory[] | undefined {
+  if (!Array.isArray(value) || !value.length) return undefined;
+  const cats = value.filter(
+    (item): item is RawIndustryCategory => item === "elv" || item === "software",
+  );
+  return cats.length ? cats : undefined;
+}
+
+function normalizeIndustryTags(
+  tags: Array<string | RawIndustryTag> | undefined,
+): {
+  labels: string[];
+  tagItems: Array<{ label: string; categories?: RawIndustryCategory[] }>;
+} {
+  if (!Array.isArray(tags) || !tags.length) return { labels: [], tagItems: [] };
+  const tagItems = tags
+    .map((tag) => {
+      if (typeof tag === "string") {
+        const label = tag.trim();
+        return label ? { label } : null;
+      }
+      const label = tag.label?.trim();
+      if (!label) return null;
+      return {
+        label,
+        categories: normalizeIndustryCategories(tag.categories),
+      };
+    })
+    .filter((tag): tag is { label: string; categories?: RawIndustryCategory[] } => !!tag);
+  return {
+    labels: tagItems.map((tag) => tag.label),
+    tagItems,
+  };
 }
 interface RawCtaBand {
   id?: string;
@@ -431,6 +474,7 @@ export function mapHomepageJson(raw: string | false | undefined | null): Section
     Array.isArray(industries.items) &&
     industries.items.length > 0
   ) {
+    const industryTags = normalizeIndustryTags(industries.tags);
     sections.push({
       id: industries.id ?? "home-industries",
       type: "features",
@@ -442,7 +486,8 @@ export function mapHomepageJson(raw: string | false | undefined | null): Section
         eyebrow: industries.eyebrow,
         heading: industries.title?.before,
         headingAccent: industries.title?.accent,
-        tags: industries.tags?.filter(Boolean),
+        tags: industryTags.labels,
+        tagItems: industryTags.tagItems,
         action:
           industries.ctaLabel && industries.ctaHref
             ? { label: industries.ctaLabel, href: industries.ctaHref }
@@ -451,6 +496,7 @@ export function mapHomepageJson(raw: string | false | undefined | null): Section
           id: `home-industry-${i}`,
           title: it.title,
           media: usableImg(it.imageSrc, it.imageAlt ?? it.title),
+          categories: normalizeIndustryCategories(it.categories),
         })),
       },
     });

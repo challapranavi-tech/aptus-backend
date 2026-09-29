@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { useAuth } from "@/context/AuthProvider";
 
 const BLOCKED_KEYS = new Set(["c", "x", "a", "p", "s", "u", "insert"]);
 
@@ -55,12 +54,10 @@ export function SensitiveContent({
   children: ReactNode;
   className?: string;
 }) {
-  const { user } = useAuth();
   const rootRef = useRef<HTMLDivElement>(null);
   const [shielded, setShielded] = useState(false);
   const captureLockRef = useRef(false);
   const captureTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const watermark = user?.email || user?.name || "Aptus portal";
 
   useEffect(() => {
     const root = rootRef.current;
@@ -248,11 +245,6 @@ export function SensitiveContent({
       aria-live="polite"
     >
       <div className="aptus-sensitive-content__body">
-        <div className="aptus-sensitive-content__watermark" aria-hidden="true">
-          {Array.from({ length: 24 }, (_, index) => (
-            <span key={index}>{watermark}</span>
-          ))}
-        </div>
         {children}
       </div>
       <div className="aptus-sensitive-content__shield" aria-hidden={!shielded}>

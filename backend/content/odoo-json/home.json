@@ -137,49 +137,55 @@
       "before": "Sector Expertise"
     },
     "tags": [
-      "Banking",
-      "Construction & Real Estate",
-      "Defence",
-      "Education",
-      "Government",
-      "Healthcare",
-      "Hospitality",
-      "Industrial",
-      "Oil & Gas",
-      "Smart Cities",
-      "Transportation",
-      "Utilities"
+      { "label": "Banking", "categories": ["software"] },
+      { "label": "Construction & Real Estate", "categories": ["elv", "software"] },
+      { "label": "Defence", "categories": ["elv", "software"] },
+      { "label": "Education", "categories": ["elv", "software"] },
+      { "label": "Government", "categories": ["elv", "software"] },
+      { "label": "Healthcare", "categories": ["elv", "software"] },
+      { "label": "Hospitality", "categories": ["elv"] },
+      { "label": "Industrial", "categories": ["elv"] },
+      { "label": "Oil & Gas", "categories": ["elv", "software"] },
+      { "label": "Smart Cities", "categories": ["elv", "software"] },
+      { "label": "Transportation", "categories": ["elv", "software"] },
+      { "label": "Utilities", "categories": ["elv", "software"] }
     ],
     "items": [
       {
         "title": "Transportation",
         "imageSrc": "/images/transportation-industry.png",
-        "imageAlt": "Transportation"
+        "imageAlt": "Transportation",
+        "categories": ["elv", "software"]
       },
       {
         "title": "Oil & Gas",
         "imageSrc": "/images/Petroleum-Development-of-Oman.png",
-        "imageAlt": "Oil & Gas"
+        "imageAlt": "Oil & Gas",
+        "categories": ["elv", "software"]
       },
       {
         "title": "Healthcare",
         "imageSrc": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80",
-        "imageAlt": "Healthcare"
+        "imageAlt": "Healthcare",
+        "categories": ["elv", "software"]
       },
       {
         "title": "Education",
         "imageSrc": "/images/indian-school-wadi-kabir.png",
-        "imageAlt": "Education"
+        "imageAlt": "Education",
+        "categories": ["elv", "software"]
       },
       {
         "title": "Defence",
         "imageSrc": "/images/Royal-Police.png",
-        "imageAlt": "Defence"
+        "imageAlt": "Defence",
+        "categories": ["elv", "software"]
       },
       {
         "title": "Smart Cities",
         "imageSrc": "/images/Sultan-haitham-city.png",
-        "imageAlt": "Smart Cities"
+        "imageAlt": "Smart Cities",
+        "categories": ["elv", "software"]
       }
     ],
     "ctaLabel": "Click here for project details",

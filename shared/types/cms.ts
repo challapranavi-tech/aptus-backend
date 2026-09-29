@@ -581,6 +581,8 @@ export interface FeatureItem {
   href?: string;
   hrefLabel?: string;
   action?: ActionLink;
+  /** Homepage Sector Expertise: which solution families this industry belongs to. */
+  categories?: Array<"elv" | "software">;
 }
 
 export interface Features {
@@ -594,6 +596,8 @@ export interface Features {
   items?: FeatureItem[];
   /** Category pills (homepage industries). */
   tags?: string[];
+  /** Industry pills with optional ELV / Software categories. */
+  tagItems?: Array<{ label: string; categories?: Array<"elv" | "software"> }>;
   /** Bottom CTA (e.g. View more → case studies). */
   action?: ActionLink;
   align?: "left" | "center";

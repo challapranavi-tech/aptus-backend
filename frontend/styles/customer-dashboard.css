@@ -8475,25 +8475,6 @@ body[data-aptus-copy-blocked="true"] ::selection {
   background: transparent;
 }
 
-.aptus-sensitive-content__watermark {
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  position: absolute;
-  z-index: 5;
-}
-
-.aptus-sensitive-content__watermark span {
-  color: rgba(23, 33, 43, 0.045);
-  display: inline-block;
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin: 2.5rem 1.5rem;
-  transform: rotate(-28deg);
-  user-select: none;
-  white-space: nowrap;
-}
-
 .aptus-sensitive-content__shield {
   align-items: center;
   background: #f7f8fa;

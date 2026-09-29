@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import type { Features as FeaturesData } from "@/types";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import { HomeIndustriesSection } from "./HomeIndustriesSection";
 
 interface FeaturesProps {
   data: FeaturesData;
@@ -692,106 +693,7 @@ export function Features({ data }: FeaturesProps) {
   }
 
   if (isHomeIndustries) {
-    const industryHref = (industry: string) =>
-      `/customer-stories?industry=${encodeURIComponent(industry)}`;
-
-    return (
-      <section
-        ref={sectionRef}
-        className="home-industries section-padding"
-        data-section="features"
-        data-variant="home-industries"
-      >
-        <Container>
-          <div className="home-industries__header">
-            <div className="home-industries__titles">
-              {data.eyebrow && <p className="home-industries__eyebrow">{data.eyebrow}</p>}
-              {(data.heading || data.headingAccent) && (
-                <h2 className="home-industries__heading">
-                  {data.heading}
-                  {data.heading && data.headingAccent ? " " : null}
-                  {data.headingAccent}
-                </h2>
-              )}
-            </div>
-          </div>
-
-          {data.items && data.items.length > 0 && (
-            <div className="home-industries__grid">
-              {data.items.map((item) => {
-                const title = item.title?.trim() || "";
-                const card = (
-                  <>
-                    {item.media && (
-                      <CmsImage
-                        src={item.media.src}
-                        alt={item.media.alt || title}
-                        width={640}
-                        height={480}
-                        className="home-industries__image"
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                      />
-                    )}
-                    <div className="home-industries__overlay" aria-hidden="true" />
-                    {title ? <h3 className="home-industries__label">{title}</h3> : null}
-                  </>
-                );
-
-                if (!title) {
-                  return (
-                    <article
-                      key={item.id}
-                      className="feature-card home-industries__card"
-                    >
-                      {card}
-                    </article>
-                  );
-                }
-
-                return (
-                  <Link
-                    key={item.id}
-                    href={industryHref(title)}
-                    className="feature-card home-industries__card"
-                    data-industry={title}
-                    aria-label={`View ${title} solutions in action`}
-                  >
-                    {card}
-                  </Link>
-                );
-              })}
-            </div>
-          )}
-
-          {data.tags && data.tags.length > 0 && (
-            <ul
-              className="home-industries__tags"
-              aria-label="Browse industries"
-            >
-              {data.tags.map((tag) => (
-                <li key={tag}>
-                  <Link
-                    href={industryHref(tag)}
-                    className="home-industries__tag"
-                  >
-                    {tag}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          )}
-
-          {data.action && (
-            <div className="home-industries__more">
-              <Link href={data.action.href} className="home-industries__more-link">
-                {data.action.label}
-                <span aria-hidden="true"> →</span>
-              </Link>
-            </div>
-          )}
-        </Container>
-      </section>
-    );
+    return <HomeIndustriesSection data={data} />;
   }
 
   if (isHomePromises) {
