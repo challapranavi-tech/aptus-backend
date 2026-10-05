@@ -5,8 +5,6 @@ import type { NavigationItem } from "@/types";
 import { clearLegacyPortalSession, syncLegacyPortalSession } from "@/lib/access-token";
 import { fetchAuthMeShared, invalidateAuthMeCache } from "@/lib/auth-me-client";
 import { useLocale } from "@/context/LocaleProvider";
-import { KnowledgeHubMegaMenu } from "@/components/layout/KnowledgeHubMegaMenu";
-import { KNOWLEDGE_HUB_LABEL } from "@/data/knowledge-hub-nav";
 import { translateNavLabel } from "@/locales/messages";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -26,8 +24,9 @@ interface NavMenuProps {
   items: NavigationItem[];
 }
 
-function NavLabel({ item }: { item: NavigationItem }) {
+function NavLabel({ item, keepLabel = false }: { item: NavigationItem; keepLabel?: boolean }) {
   const { locale } = useLocale();
+  if (keepLabel) return <>{item.label}</>;
   return <>{translateNavLabel(locale, item.href, item.label)}</>;
 }
 
@@ -174,6 +173,7 @@ function NavDropdownItem({
   menuVariant,
   expandMode = "side",
   pathname,
+  keepLabel = false,
 }: {
   item: NavigationItem;
   onClose?: () => void;
@@ -182,6 +182,7 @@ function NavDropdownItem({
   /** side = horizontal flyout; vertical = accordion under the parent (Products & Services). */
   expandMode?: "side" | "vertical";
   pathname: string;
+  keepLabel?: boolean;
 }) {
   const hasChildren = item.children && item.children.length > 0;
   const isSoftware =
@@ -236,7 +237,7 @@ function NavDropdownItem({
             aria-controls={panelId}
             onClick={onClose}
           >
-            <NavLabel item={item} />
+            <NavLabel item={item} keepLabel={keepLabel} />
             <NavChevron direction={chevronDirection} />
           </NavHref>
         ) : (
@@ -245,7 +246,7 @@ function NavDropdownItem({
             aria-haspopup="menu"
             aria-controls={panelId}
           >
-            <NavLabel item={item} />
+            <NavLabel item={item} keepLabel={keepLabel} />
             <NavChevron direction={chevronDirection} />
           </span>
         )}
@@ -259,6 +260,7 @@ function NavDropdownItem({
               menuVariant={effectiveVariant}
               expandMode={childExpandMode}
               pathname={pathname}
+              keepLabel={keepLabel}
             />
           ))}
         </ul>
@@ -271,49 +273,8 @@ function NavDropdownItem({
   return (
     <li>
       <NavHref href={item.href} className={`${linkClass}${active ? " is-active" : ""}`} onClick={onClose}>
-        <NavLabel item={item} />
+        <NavLabel item={item} keepLabel={keepLabel} />
       </NavHref>
-    </li>
-  );
-}
-
-function KnowledgeHubDropdownItem({
-  item,
-  pathname,
-  onClose,
-}: {
-  item: NavigationItem;
-  pathname: string;
-  onClose: () => void;
-}) {
-  const active = isItemActive(item, pathname);
-  const panelId = useId();
-
-  return (
-    <li
-      className="aptus-masthead__dropdown aptus-masthead__dropdown--mega"
-      onMouseEnter={onDropdownPointerEnter}
-    >
-      <span
-        className={cn(
-          "aptus-masthead__link aptus-masthead__link--flyout-trigger",
-          active && "is-active",
-        )}
-        aria-haspopup="true"
-        aria-controls={panelId}
-      >
-        <NavLabel item={item} />
-        <NavChevron />
-      </span>
-
-      <div
-        id={panelId}
-        className="aptus-masthead__mega-panel"
-        role="region"
-        aria-label="Knowledge Hub"
-      >
-        <KnowledgeHubMegaMenu onNavigate={onClose} />
-      </div>
     </li>
   );
 }
@@ -332,7 +293,8 @@ function DropdownItem({
   const isProducts =
     item.label === "Products and Solutions" ||
     item.label === "Products to Solutions" ||
-    item.label === "Products and Services";
+    item.label === "Products and Services" ||
+    item.label === "Knowledge Hub";
   const isSoftware =
     item.label === "Software" || item.href === "/software-solutions";
   const isElv =
@@ -379,7 +341,7 @@ function DropdownItem({
           onClick={onClose}
         >
           <NavLabel item={item} />
-          <NavChevron />
+          {item.label === "Knowledge Hub" ? null : <NavChevron />}
         </NavHref>
       ) : (
         <span
@@ -391,7 +353,7 @@ function DropdownItem({
           aria-controls={panelId}
         >
           <NavLabel item={item} />
-          <NavChevron />
+          {item.label === "Knowledge Hub" ? null : <NavChevron />}
         </span>
       )}
 
@@ -408,6 +370,7 @@ function DropdownItem({
             }
             expandMode="side"
             pathname={pathname}
+            keepLabel={item.label === "Knowledge Hub"}
           />
         ))}
       </ul>
@@ -420,11 +383,13 @@ function MobileMenuItem({
   pathname,
   onClose,
   depth = 0,
+  keepLabel = false,
 }: {
   item: NavigationItem;
   pathname: string;
   onClose: () => void;
   depth?: number;
+  keepLabel?: boolean;
 }) {
   const hasChildren = Boolean(item.children?.length);
   const childActive = hasChildren && isItemActive(item, pathname);
@@ -446,7 +411,7 @@ function MobileMenuItem({
         data-depth={depth}
         onClick={onClose}
       >
-        <NavLabel item={item} />
+        <NavLabel item={item} keepLabel={keepLabel} />
       </NavHref>
     );
   }
@@ -463,7 +428,7 @@ function MobileMenuItem({
             )}
             onClick={onClose}
           >
-            <NavLabel item={item} />
+            <NavLabel item={item} keepLabel={keepLabel} />
           </NavHref>
         ) : (
           <button
@@ -472,18 +437,20 @@ function MobileMenuItem({
             onClick={() => setOpen((o) => !o)}
             aria-expanded={open}
           >
-            <NavLabel item={item} />
+            <NavLabel item={item} keepLabel={keepLabel} />
           </button>
         )}
-        <button
-          type="button"
-          className={cn("aptus-masthead__mobile-chevron", open && "is-open")}
-          aria-label={open ? `Collapse ${item.label}` : `Expand ${item.label}`}
-          aria-expanded={open}
-          onClick={() => setOpen((o) => !o)}
-        >
-          <NavChevron />
-        </button>
+        {item.label === "Knowledge Hub" ? null : (
+          <button
+            type="button"
+            className={cn("aptus-masthead__mobile-chevron", open && "is-open")}
+            aria-label={open ? `Collapse ${item.label}` : `Expand ${item.label}`}
+            aria-expanded={open}
+            onClick={() => setOpen((o) => !o)}
+          >
+            <NavChevron />
+          </button>
+        )}
       </div>
       {open ? (
         <ul className="aptus-masthead__mobile-list aptus-masthead__mobile-list--nested">
@@ -494,6 +461,7 @@ function MobileMenuItem({
                 pathname={pathname}
                 onClose={onClose}
                 depth={depth + 1}
+                keepLabel={keepLabel || item.label === "Knowledge Hub"}
               />
             </li>
           ))}
@@ -625,23 +593,14 @@ export function NavMenu({ items }: NavMenuProps) {
           onKeyDown={onMenuKeyDown}
           onBlur={onMenuBlur}
         >
-          {items.map((item) =>
-            item.label === KNOWLEDGE_HUB_LABEL ? (
-              <KnowledgeHubDropdownItem
-                key={item.label}
-                item={item}
-                pathname={pathname}
-                onClose={closeDesktopMenus}
-              />
-            ) : (
-              <DropdownItem
-                key={item.label}
-                item={item}
-                pathname={pathname}
-                onClose={closeDesktopMenus}
-              />
-            ),
-          )}
+          {items.map((item) => (
+            <DropdownItem
+              key={item.label}
+              item={item}
+              pathname={pathname}
+              onClose={closeDesktopMenus}
+            />
+          ))}
         </ul>
       </nav>
 

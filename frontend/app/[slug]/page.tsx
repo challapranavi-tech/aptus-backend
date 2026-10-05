@@ -11,6 +11,7 @@ import { cn, buildPageMetadata, formatSlug } from "@/lib/utils";
 import "@/styles/case-studies-pages.css";
 import "@/styles/pages/our-story.css";
 import "@/styles/pages/aptus-policy.css";
+import "@/styles/pages/faq.css";
 import "@/styles/pages/team.css";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -36,6 +37,7 @@ export async function generateStaticParams() {
       { slug: "aptus-policy" },
       { slug: "aptus-infotech-iso-certifications" },
       { slug: "our-team" },
+      { slug: "faq" },
     ];
   }
 
@@ -58,6 +60,7 @@ export async function generateStaticParams() {
     { slug: "aptus-policy" },
     { slug: "aptus-infotech-iso-certifications" },
     { slug: "our-team" },
+    { slug: "faq" },
   ];
   for (const slug of slugs) {
     if (
@@ -65,7 +68,8 @@ export async function generateStaticParams() {
       slug === "our-story" ||
       slug === "aptus-policy" ||
       slug === "aptus-infotech-iso-certifications" ||
-      slug === "our-team"
+      slug === "our-team" ||
+      slug === "faq"
     )
       continue;
     try {
@@ -96,6 +100,9 @@ export async function generateMetadata({
   }
   if (normalized === "our-team") {
     return { title: "Our Team | Aptus Infotech" };
+  }
+  if (normalized === "faq") {
+    return { title: "FAQs | Aptus Infotech" };
   }
   try {
     const page = await getPageBySlug(normalized);
@@ -162,6 +169,7 @@ export default async function DynamicPage({ params }: PageProps) {
           normalized === "our-story" && "page-our-story",
           normalized === "aptus-policy" && "page-aptus-policy",
           normalized === "our-team" && "page-team",
+          normalized === "faq" && "page-faq",
         )}
       >
         {usesStackedSoftwareLayout(normalized) ? (

@@ -89,7 +89,7 @@ export const SITE_NAVIGATION: NavigationItem[] = [
       { label: "Blog", href: "/our-story" },
       { label: "Solutions in Action", href: "/customer-stories" },
       { label: "Knowledge Base", href: "/software-solutions" },
-      { label: "FAQ", href: "/contact-us" },
+      { label: "FAQ", href: "/faq" },
       { label: "Events", href: "/events" },
       { label: "Gallery", href: "/gallery" },
     ],

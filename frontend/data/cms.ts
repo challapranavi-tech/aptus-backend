@@ -126,6 +126,12 @@ export const getPageBySlug = cache(async (slug: string): Promise<Page | null> =>
     if (local?.sections.length) return local;
   }
 
+  if (slug === "faq") {
+    const { buildLocalFaqPage } = await import("@/lib/build-local-faq-page");
+    const local = buildLocalFaqPage();
+    if (local?.sections.length) return local;
+  }
+
   const { isLocalElvSlug, buildLocalElvPage } = await import("@/lib/build-local-elv-page");
   if (isLocalElvSlug(slug)) {
     const local = buildLocalElvPage(slug);
@@ -145,11 +151,12 @@ export async function getAllPageSlugs(): Promise<string[]> {
         ...ELV_LOCAL_PAGE_SLUGS,
         "aptus-infotech-iso-certifications",
         "our-team",
+        "faq",
       ]),
     ];
   } catch (err) {
     console.error(err);
-    return [...ELV_LOCAL_PAGE_SLUGS, "aptus-infotech-iso-certifications", "our-team"];
+    return [...ELV_LOCAL_PAGE_SLUGS, "aptus-infotech-iso-certifications", "our-team", "faq"];
   }
 }
 

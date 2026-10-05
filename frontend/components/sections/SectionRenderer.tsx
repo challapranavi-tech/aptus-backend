@@ -25,13 +25,12 @@ import { RichText } from "./RichText";
 import { Services } from "./Services";
 import { Team } from "./Team";
 import { Testimonials } from "./Testimonials";
+import { Faq } from "./Faq";
 
 type SectionComponentProps = {
   data: Section["data"];
 };
 
-// ponytail: "faq" is registered as null until the FAQ component is built.
-// SectionRenderer already handles null gracefully (skips + warns in dev).
 const sectionRegistry: Partial<Record<SectionType, ComponentType<SectionComponentProps>>> = {
   hero: Hero as ComponentType<SectionComponentProps>,
   "hero-slider": HeroSlider as ComponentType<SectionComponentProps>,
@@ -57,7 +56,7 @@ const sectionRegistry: Partial<Record<SectionType, ComponentType<SectionComponen
   "key-enablers": KeyEnablers as ComponentType<SectionComponentProps>,
   cta: CTA as ComponentType<SectionComponentProps>,
   testimonials: Testimonials as ComponentType<SectionComponentProps>,
-  // faq: registered when FAQ component is built
+  faq: Faq as ComponentType<SectionComponentProps>,
 };
 
 interface SectionRendererProps {

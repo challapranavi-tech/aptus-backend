@@ -106,6 +106,11 @@ main [data-section] .aptus-form-submit,
   text-align: left;
 }
 
+.page-faq .aptus-faq__question,
+.page-faq .aptus-faq__answer {
+  text-align: start;
+}
+
 /* Body / leads beat parent `.text-center` wrappers */
 main [data-section] .text-start,
 main [data-section] .aptus-iso-intro-text,
