@@ -86,9 +86,13 @@ export function QuoteSearchSelect({
     if (!open) return;
     const t = window.setTimeout(() => searchRef.current?.focus(), 0);
     const onPointer = (event: MouseEvent) => {
-      const target = event.target as Node;
-      if (rootRef.current?.contains(target)) return;
-      if ((target as Element).closest?.(".aptus-quote-product-menu")) return;
+      const target = event.target instanceof Element
+        ? event.target
+        : event.target instanceof Node
+          ? event.target.parentElement
+          : null;
+      if (target && rootRef.current?.contains(target)) return;
+      if (target?.closest(".aptus-quote-product-menu")) return;
       setOpen(false);
       setQuery("");
     };

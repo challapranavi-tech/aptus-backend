@@ -329,7 +329,7 @@ export function validateQuoteContactFields(
 
   const product = str("product");
   if (!isProductSelected(product)) {
-    errors.product = "Please select at least one software product.";
+    errors.product = "Please select at least one product.";
   }
 
   const qty = str("qty");

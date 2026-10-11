@@ -73,6 +73,14 @@ function FieldError({ message }: { message?: string }) {
   );
 }
 
+function quoteFieldErrorMessage(errors: FieldErrors): string {
+  const messages = Object.entries(errors)
+    .filter(([key]) => key !== "_form")
+    .map(([, value]) => value?.trim())
+    .filter((value): value is string => Boolean(value));
+  return messages.length ? messages.join(" ") : "Please fill highlighted fields.";
+}
+
 function humanSize(bytes: number): string {
   return bytes < 1024 * 1024
     ? `${Math.max(1, Math.round(bytes / 1024))} KB`
@@ -316,7 +324,12 @@ export function SoftwareQuoteForm({
     if (Object.keys(fieldErrors).length) {
       setErrors(fieldErrors);
       setStatus("error");
-      setMessage("Please fill highlighted fields.");
+      setMessage(quoteFieldErrorMessage(fieldErrors));
+      requestAnimationFrame(() => {
+        form
+          .querySelector<HTMLElement>("[aria-invalid='true']")
+          ?.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
       return;
     }
 
@@ -385,8 +398,15 @@ export function SoftwareQuoteForm({
           setErrors(apiErrors);
           const fieldKeys = Object.keys(apiErrors).filter((k) => k !== "_form");
           msg = fieldKeys.length
-            ? "Please fill highlighted fields."
+            ? quoteFieldErrorMessage(apiErrors)
             : (apiErrors._form ?? msg);
+          if (fieldKeys.length) {
+            requestAnimationFrame(() => {
+              form
+                .querySelector<HTMLElement>("[aria-invalid='true']")
+                ?.scrollIntoView({ behavior: "smooth", block: "center" });
+            });
+          }
         } else if (typeof data.error === "string" && data.error) {
           msg = data.error;
         }
