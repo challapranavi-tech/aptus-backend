@@ -86,7 +86,7 @@ export const SITE_NAVIGATION: NavigationItem[] = [
   {
     label: "Knowledge Hub",
     children: [
-      { label: "Blog", href: "/our-story" },
+      { label: "Blog", href: "/blog" },
       { label: "Solutions in Action", href: "/customer-stories" },
       { label: "Knowledge Base", href: "/software-solutions" },
       { label: "FAQ", href: "/faq" },

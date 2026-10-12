@@ -107,7 +107,11 @@ main [data-section] .aptus-form-submit,
 }
 
 .page-faq .aptus-faq__question,
-.page-faq .aptus-faq__answer {
+.page-faq .aptus-faq__answer,
+.page-blog .aptus-blog__title,
+.page-blog .aptus-blog__brand,
+.page-blog .aptus-blog__name,
+.page-blog .aptus-blog__intro {
   text-align: start;
 }
 
