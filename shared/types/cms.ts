@@ -39,17 +39,21 @@ export type SectionType =
   | "faq"
   | "flip-cards"
   | "policy-panel"
+  | "legal-policies"
   | "why-panel"
   | "iso-panel"
   | "career-panel"
   | "software-landing-hero"
-  | "software-inner-hero";
+  | "software-inner-hero"
+  | "our-story";
 
 // ─── Primitives ───────────────────────────────────────────────────────────────
 export interface ActionLink {
   label: string;
   href: string;
   variant?: "primary" | "secondary" | "ghost";
+  /** Optional dropdown items (e.g. homepage Explore Solutions). */
+  children?: ActionLink[];
 }
 
 export interface MediaAsset {
@@ -150,23 +154,44 @@ export interface Section {
     | FAQ
     | FlipCards
     | PolicyPanel
+    | LegalPolicies
     | WhyPanel
     | IsoPanel
     | CareerPanel
     | SoftwareLandingHero
-    | SoftwareInnerHero;
+    | SoftwareInnerHero
+    | OurStory;
 }
 
 // ─── Section data models ──────────────────────────────────────────────────────
 
 // hero
+export interface HeroHighlight {
+  id: string;
+  /** Short heading (e.g. EFFICIENCY). */
+  label: string;
+  /** Supporting line under the heading. */
+  description?: string;
+}
+
 export interface Hero {
   type: "hero";
   heading?: string;
+  headingAccent?: string;
+  /** Short punch line under the headline (homepage). */
+  tagline?: string;
   subheading?: string;
   primaryAction?: ActionLink;
   secondaryAction?: ActionLink;
+  /** Optional third CTA (e.g. Request a Quote on the homepage hero). */
+  tertiaryAction?: ActionLink;
   media?: MediaAsset;
+  /** Multiple background images (homepage crossfade / motion). */
+  backgroundMedia?: MediaAsset[];
+  /** Result chips under the homepage CTA. */
+  highlights?: HeroHighlight[];
+  /** `home-centered` = pale band, centered copy + CTA + chips. */
+  variant?: "default" | "home-centered";
 }
 
 // hero-slider
@@ -205,7 +230,7 @@ export interface FeatureRow {
   description?: string;
   paragraphs?: string[];
   media?: MediaAsset;
-  imagePosition?: "left" | "right" | "below";
+  imagePosition?: "left" | "right" | "below" | "above";
   action?: ActionLink;
   /** When true, renders the heading as h1 (inner pages like Our Story). */
   headingAsH1?: boolean;
@@ -236,11 +261,15 @@ export interface RichText {
   headingAccent?: string;
   paragraphs?: string[];
   bullets?: string[];
+  /** Titled blocks under a culture heading (Our Team). */
+  items?: { title?: string; description?: string }[];
   media?: MediaAsset;
-  imagePosition?: "left" | "right" | "below";
+  imagePosition?: "left" | "right" | "below" | "above";
   background?: "white" | "light";
-  /** `culture-panel` = Our Team tinted block (watermark + subtitle + photo). */
-  variant?: "default" | "culture-panel" | "policy-panel";
+  /** `culture-panel` = Our Team tinted block. `join-panel` = Join Our Team band. */
+  variant?: "default" | "culture-panel" | "policy-panel" | "join-panel";
+  subheading?: string;
+  action?: ActionLink;
 }
 
 // logo-grid — partner / brand logo wall
@@ -255,8 +284,8 @@ export interface LogoGrid {
   heading?: string;
   headingAccent?: string;
   items?: LogoItem[];
-  /** `alliances` = live partner logo carousel (277px slides, infinite scroll). */
-  variant?: "default" | "alliances" | "alliances-grid";
+  /** `alliances` = live partner logo carousel. `partners-marquee` = homepage authorized partners strip. */
+  variant?: "default" | "alliances" | "alliances-grid" | "partners-marquee";
 }
 
 export interface FlipCardItem {
@@ -290,6 +319,44 @@ export interface PolicyPanel {
   rows: PolicyPanelRow[];
   privacyHeading?: string;
   privacyParagraphs?: string[];
+}
+
+export interface LegalPolicyBlock {
+  id?: string;
+  number?: string;
+  title?: string;
+  paragraphs?: string[];
+  bullets?: string[];
+  numberedList?: string[];
+  closingParagraphs?: string[];
+}
+
+export interface LegalPolicySection extends LegalPolicyBlock {
+  id: string;
+  number: string;
+  title: string;
+  subsections?: LegalPolicyBlock[];
+}
+
+export interface LegalPolicies {
+  type: "legal-policies";
+  title: string;
+  effectiveDate?: string;
+  lastUpdated?: string;
+  intro?: string[];
+  sections?: LegalPolicySection[];
+  contact?: {
+    heading?: string;
+    company?: string;
+    location?: string;
+    website?: string;
+    websiteHref?: string;
+    email?: string;
+    telephone?: string;
+    privacyLabel?: string;
+    privacyEmail?: string;
+  };
+  footerNote?: string;
 }
 
 export interface WhyPanelRow {
@@ -387,6 +454,10 @@ export interface SoftwareInnerHero {
   /** Dark gradient band above the 3-column layout (live post-2031). */
   bannerTitle?: string;
   bannerTagline?: string;
+  /** Optional short line under the banner tagline. */
+  bannerSupport?: string;
+  /** Rotating full-bleed banner backgrounds (CCTV / ELV hero slides). */
+  bannerBackgroundImages?: MediaAsset[];
   /** ETAP / Microsoft stacked pages — H1 above intro panel (live post-2780). */
   pageTitle?: string;
   bannerAction?: ActionLink;
@@ -402,19 +473,106 @@ export interface SoftwareInnerHero {
   layout?: "default" | "two-column";
   /** Logo/infographic below copy instead of a third grid column (Adobe Business Creative). */
   mediaInline?: boolean;
+  /** Heading shown above an inline product image. */
+  imageHeading?: string;
   /** CYPE-style paired text + logo rows inside the gray intro panel. */
   introRows?: {
     paragraphs?: string[];
     media?: MediaAsset;
     imagePosition?: "left" | "right";
   }[];
+  /** Extra prose blocks under the intro paragraphs (same copy column). */
+  bodySections?: {
+    heading?: string;
+    paragraphs?: string[];
+  }[];
+  /** Where Request a Quote sits when bodySections exist. Default: after-intro. */
+  ctaPlacement?: "after-intro" | "end";
   /** Live CYPE uses h2 for the page title above the intro panel. */
   titleLevel?: "h1" | "h2";
+}
+
+export type OurStoryTone =
+  | "navy"
+  | "sky"
+  | "green"
+  | "purple"
+  | "pink"
+  | "teal"
+  | "blue"
+  | "orange"
+  | "red";
+
+export interface OurStoryValue {
+  id: string;
+  title: string;
+  description?: string;
+  icon?: string;
+  /** Hex / brand logo image for Trust, Stability, Growth, etc. */
+  iconSrc?: string;
+  tone?: OurStoryTone;
+}
+
+export interface OurStoryMilestone {
+  id: string;
+  year: string;
+  title: string;
+  description?: string;
+  /** Optional logo / mark under the milestone title. */
+  imageSrc?: string;
+  imageAlt?: string;
+  tone?: OurStoryTone;
+}
+
+export interface OurStoryHighlight {
+  id: string;
+  title: string;
+  description?: string;
+  icon?: string;
+  href?: string;
+}
+
+export interface OurStoryTenet {
+  id: string;
+  title: string;
+  description?: string;
+}
+
+/** Dedicated /our-story layout — hero, journey timeline, highlight strip. */
+export interface OurStory {
+  type: "our-story";
+  hero?: {
+    eyebrow?: string;
+    titleBefore?: string;
+    titleAccent?: string;
+    description?: string;
+    /** Primary / fallback hero image. */
+    media?: MediaAsset;
+    /** Rotating Muscat (or other) hero images. */
+    images?: MediaAsset[];
+    values?: OurStoryValue[];
+  };
+  journey?: {
+    origin?: string;
+    originParagraphs?: string[];
+    today?: string;
+    milestones?: OurStoryMilestone[];
+  };
+  highlights?: {
+    items?: OurStoryHighlight[];
+  };
+  tenets?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+    items?: OurStoryTenet[];
+  };
 }
 
 // features
 export interface FeatureItem {
   id: string;
+  number?: string;
   title?: string;
   description?: string;
   bullets?: string[];
@@ -423,6 +581,8 @@ export interface FeatureItem {
   href?: string;
   hrefLabel?: string;
   action?: ActionLink;
+  /** Homepage Sector Expertise: which solution families this industry belongs to. */
+  categories?: Array<"elv" | "software">;
 }
 
 export interface Features {
@@ -431,11 +591,30 @@ export interface Features {
   heading?: string;
   headingAccent?: string;
   subheading?: string;
+  /** Closing line under home-challenges (e.g. "So choose us"). */
+  bridge?: string;
   items?: FeatureItem[];
+  /** Category pills (homepage industries). */
+  tags?: string[];
+  /** Industry pills with optional ELV / Software categories. */
+  tagItems?: Array<{ label: string; categories?: Array<"elv" | "software"> }>;
+  /** Bottom CTA (e.g. View more → case studies). */
+  action?: ActionLink;
   align?: "left" | "center";
   anchorId?: string;
-  /** `pillars` = icon + title columns (Winning Together). */
-  variant?: "default" | "pillars" | "product-cards" | "value-cards" | "icon-cards" | "bullet-list" | "checklist";
+  /** `pillars` = icon + title columns (Winning Together). `home-promises` = 4-up homepage promise grid. */
+  variant?:
+    | "default"
+    | "pillars"
+    | "product-cards"
+    | "value-cards"
+    | "icon-cards"
+    | "bullet-list"
+    | "checklist"
+    | "home-promises"
+    | "home-industries"
+    | "home-challenges"
+    | "home-why-choose";
   /** Product hub grids: live uses 3-col (Microsoft core) or 4-col (Adobe hub). Stacked pages use 5. */
   gridColumns?: 3 | 4 | 5;
 }
@@ -465,6 +644,7 @@ export interface KeyEnablerItem {
   number?: string;
   title?: string;
   description?: string;
+  icon?: string;
 }
 
 export interface KeyEnablers {
@@ -474,6 +654,8 @@ export interface KeyEnablers {
   headingAccent?: string;
   subheading?: string;
   items?: KeyEnablerItem[];
+  /** `home-steps` = centered numbered 3-step row on the homepage. */
+  variant?: "default" | "home-steps";
 }
 
 // cta
@@ -505,11 +687,16 @@ export interface TestimonialItem {
 
 export interface Testimonials {
   type: "testimonials";
+  eyebrow?: string;
   heading?: string;
   subheading?: string;
+  /** Hint on the right of the homepage header (e.g. Scroll to read more). */
+  scrollHint?: string;
   items?: TestimonialItem[];
-  /** `software-quotes` = light 3-column grid on product pages. */
-  variant?: "default" | "software-quotes";
+  /** Bottom CTA (homepage cards). */
+  action?: ActionLink;
+  /** `software-quotes` = light 3-column grid on product pages. `software-quotes-marquee` = dark scrolling band. `home-cards` = homepage scroll cards. */
+  variant?: "default" | "software-quotes" | "software-quotes-marquee" | "home-cards";
 }
 
 // faq

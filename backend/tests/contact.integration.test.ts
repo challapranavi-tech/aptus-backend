@@ -101,6 +101,7 @@ describe("POST /api/contact", () => {
 
   it("creates a crm.lead when Odoo is configured", async () => {
     mocks.isOdooConfigured.mockReturnValue(true);
+    process.env.ODOO_URL = "https://odoo.example.com";
     const res = await POST(contactReq(validBody));
     expect(res.status).toBe(200);
     const body = await res.json();
@@ -125,6 +126,10 @@ describe("POST /api/contact", () => {
     expect(mocks.sendEmail.mock.calls[0][0].text).toContain(
       "Quote Ref: RQ-2026-000001",
     );
+    expect(mocks.sendEmail.mock.calls[0][0].text).toContain(
+      "Odoo CRM: https://odoo.example.com/web#id=101&model=crm.lead&view_type=form",
+    );
+    expect(mocks.sendEmail.mock.calls[0][0].html).toContain("Open in Odoo CRM");
     expect(mocks.sendEmail.mock.calls[0][0].subject).toContain(
       "RQ-2026-000001",
     );
@@ -174,13 +179,15 @@ describe("POST /api/contact", () => {
     expect(body.ok).toBe(true);
     expect(body.quoteRef).toBe("RQ-2026-000001");
     expect(body.crmSynced).toBe(false);
-    // sales quote + CRM failure alert + customer thank-you
+    // CRM failure alert + sales quote + customer thank-you
     expect(mocks.sendEmail).toHaveBeenCalledTimes(3);
-    const alert = mocks.sendEmail.mock.calls[1][0];
-    expect(alert.subject).toContain(
-      `CRM Lead creation failed for Quote #${body.quoteRef}`,
-    );
-    expect(alert.to).toBe("info@aptusinfotech.com");
+    const alert = mocks.sendEmail.mock.calls.find((call) =>
+      String(call[0].subject ?? "").includes(
+        `CRM Lead creation failed for Quote #${body.quoteRef}`,
+      ),
+    )?.[0];
+    expect(alert).toBeTruthy();
+    expect(alert?.to).toBe("info@aptusinfotech.com");
   });
 
   it("falls back to JS quoteRef when Odoo sequence fails", async () => {

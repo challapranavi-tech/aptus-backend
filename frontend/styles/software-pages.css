@@ -340,14 +340,14 @@
   }
 
   .aptus-software-mid-band__inner {
-    padding: 2.5rem clamp(1rem, 3vw, 2rem) 1.5rem;
+    padding: 1.15rem clamp(1rem, 3vw, 1.5rem) 1.15rem;
   }
 
   .aptus-software-mid-title {
     color: #fff;
-    font-size: var(--text-4xl);
+    font-size: clamp(1.35rem, 2.4vw, 1.85rem);
     font-weight: 600;
-    line-height: 1.2;
+    line-height: 1.25;
     text-align: center;
   }
 
@@ -355,7 +355,7 @@
     color: #fff;
     font-size: var(--text-base);
     line-height: 1.5;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     text-align: start;
   }
 
@@ -363,7 +363,11 @@
     background-color: #fff;
     color: #1352a3;
     width: auto;
-    padding: 0.75rem 1.5rem;
+    padding: 0.55rem 1.25rem;
+  }
+
+  .aptus-software-mid-band__cta {
+    margin-top: 0.85rem;
   }
 
   .aptus-software-mid-band .aptus-software-btn-blue:hover,
@@ -441,6 +445,66 @@
     z-index: 0;
   }
 
+  .aptus-software-page-banner--slides {
+    background-image: none;
+    background-color: #0a1220;
+    min-height: clamp(16rem, 42vw, 22rem);
+    overflow: hidden;
+  }
+
+  .aptus-software-page-banner--slides::before {
+    display: none;
+  }
+
+  .aptus-software-page-banner__slides {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .aptus-software-page-banner__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: scale(1.05);
+    transition: opacity 1.15s ease;
+  }
+
+  .aptus-software-page-banner__slide.is-active {
+    opacity: 1;
+    z-index: 1;
+  }
+
+  .aptus-software-page-banner__slide.has-motion.is-active {
+    animation: aptus-banner-kenburns 5.2s ease-out forwards;
+  }
+
+  @keyframes aptus-banner-kenburns {
+    from {
+      transform: scale(1.05);
+    }
+    to {
+      transform: scale(1.14);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .aptus-software-page-banner__slide.has-motion.is-active {
+      animation: none;
+    }
+  }
+
+  .aptus-software-page-banner__veil {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background:
+      linear-gradient(180deg, rgba(6, 12, 24, 0.55) 0%, rgba(6, 12, 24, 0.72) 48%, rgba(6, 12, 24, 0.88) 100%),
+      radial-gradient(ellipse 70% 55% at 50% 35%, rgba(19, 82, 163, 0.22), transparent 70%);
+    pointer-events: none;
+  }
+
   .aptus-software-page-banner .aptus-live-container {
     padding-bottom: 3rem;
     position: relative;
@@ -449,7 +513,7 @@
 
   .aptus-software-page-banner__inner {
     position: relative;
-    text-align: start;
+    text-align: center;
     z-index: 1;
   }
 
@@ -485,7 +549,20 @@
     margin: 0.75rem auto 0;
     max-width: 56rem;
     padding-bottom: 0;
-    text-align: start;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .aptus-software-page-banner__support {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: var(--text-base);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1.5;
+    margin: 0.65rem auto 0;
+    max-width: 56rem;
+    text-align: center;
+    text-wrap: balance;
   }
 
   .aptus-software-page-banner__action-wrap {
@@ -494,7 +571,11 @@
   }
 
   .aptus-software-inner-hero__cta {
-    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 1.25rem;
     text-align: center;
   }
 
@@ -529,7 +610,7 @@
 
   @media (min-width: 768px) {
     .aptus-software-inner-hero__grid--two-column {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
     }
   }
 
@@ -537,6 +618,15 @@
     .aptus-software-inner-hero__grid {
       gap: 1rem;
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .aptus-software-inner-hero__grid--two-column {
+      grid-template-columns: minmax(200px, 260px) minmax(0, 1fr);
+    }
+
+    .aptus-software-inner-hero__grid--nav-collapsed,
+    .aptus-software-inner-hero__grid--nav-collapsed.aptus-software-inner-hero__grid--two-column {
+      grid-template-columns: auto minmax(0, 1fr);
     }
   }
 
@@ -547,6 +637,20 @@
     line-height: 1.25;
     margin: 0 0 1rem;
     text-align: center;
+  }
+
+  .aptus-software-inner-hero__body-section {
+    margin-top: 1.75rem;
+  }
+
+  .aptus-software-inner-hero__body-heading {
+    color: #0b1f3a;
+    font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    margin: 0 0 0.85rem;
+    text-align: start;
   }
 
   .aptus-software-inner-hero__subtitle {
@@ -710,7 +814,7 @@
 
   @media (min-width: 768px) and (max-width: 1023px) {
     .aptus-software-inner-hero__grid--two-column {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: minmax(160px, 220px) minmax(0, 1fr);
     }
 
     .aptus-software-inner-hero__grid--inline-media {
@@ -802,6 +906,96 @@
     }
   }
 
+  /* Dark scrolling client quotes (software catalog + product pages) */
+  [data-variant="software-quotes-marquee"],
+  .aptus-software-quotes--marquee {
+    background: #0b1220;
+    color: #fff;
+    overflow: hidden;
+    padding-bottom: 2.75rem;
+    padding-top: 2.5rem;
+  }
+
+  [data-variant="software-quotes-marquee"] .aptus-software-section-title,
+  [data-variant="software-quotes-marquee"] .aptus-software-section-lead,
+  .aptus-software-quotes--marquee .aptus-software-section-title,
+  .aptus-software-quotes--marquee .aptus-software-section-lead {
+    color: #fff;
+    text-align: center;
+  }
+
+  [data-variant="software-quotes-marquee"] .aptus-software-section-lead,
+  .aptus-software-quotes--marquee .aptus-software-section-lead {
+    opacity: 0.82;
+  }
+
+  .aptus-software-quotes__marquee {
+    -webkit-overflow-scrolling: touch;
+    margin-top: 2rem;
+    mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    width: 100%;
+  }
+
+  .aptus-software-quotes__marquee::-webkit-scrollbar {
+    display: none;
+  }
+
+  .aptus-software-quotes__track {
+    animation: aptus-software-quotes-marquee 42s linear infinite;
+    display: flex;
+    gap: 1.25rem;
+    padding: 0.35rem 1rem 0.85rem;
+    width: max-content;
+  }
+
+  .aptus-software-quotes__marquee:hover .aptus-software-quotes__track {
+    animation-play-state: paused;
+  }
+
+  [data-variant="software-quotes-marquee"] .aptus-software-quote-card,
+  .aptus-software-quotes--marquee .aptus-software-quote-card {
+    background: #141b2d;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+    color: #fff;
+    flex: 0 0 min(22rem, 82vw);
+    margin: 0;
+    min-height: 14.5rem;
+  }
+
+  [data-variant="software-quotes-marquee"] .aptus-software-quote-card__quote,
+  .aptus-software-quotes--marquee .aptus-software-quote-card__quote {
+    color: rgba(255, 255, 255, 0.88);
+    text-align: start;
+  }
+
+  [data-variant="software-quotes-marquee"] .aptus-software-quote-card__author,
+  [data-variant="software-quotes-marquee"] .aptus-software-quote-card__role,
+  .aptus-software-quotes--marquee .aptus-software-quote-card__author,
+  .aptus-software-quotes--marquee .aptus-software-quote-card__role {
+    color: #fff;
+    text-align: center;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .aptus-software-quotes__track {
+      animation: none;
+    }
+  }
+
+  @keyframes aptus-software-quotes-marquee {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
   /* ── Section bands (live uses 2rem, not site section-padding) ── */
   .aptus-software-section {
     padding: 2rem 0;
@@ -843,6 +1037,10 @@
     .aptus-software-product-grid--4 {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
+    .aptus-software-product-grid--5 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
   @media (min-width: 1024px) {
@@ -852,6 +1050,10 @@
 
     .aptus-software-product-grid--4 {
       grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .aptus-software-product-grid--5 {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
     }
   }
 

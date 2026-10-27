@@ -53,6 +53,7 @@ type OdooPartner = {
   website: string | false;
   lang: string | false;
   is_company: boolean;
+  x_portal_password_hash?: string | false;
 };
 
 /** Prefer phone; optional mobile when present on the Odoo model. */
@@ -106,17 +107,85 @@ export function mapPartnerToProfile(partner: OdooPartner): ClientProfile {
   };
 }
 
+type PartnerLoginRow = OdooPartner & {
+  active?: boolean;
+  x_portal_password_hash?: string | false;
+  x_portal_account_id?: string | false;
+  x_portal_status?: string | false;
+  x_portal_created_at?: string | false;
+  x_portal_last_login?: string | false;
+};
+
+export type PartnerLoginSnapshot = {
+  partner: OdooPartner;
+  active: boolean;
+  passwordHash: string | null;
+  meta: PartnerPortalMeta;
+};
+
+function portalMetaFromRow(row: PartnerLoginRow): PartnerPortalMeta {
+  const status = odooChar(row.x_portal_status);
+  return {
+    x_portal_account_id: odooChar(row.x_portal_account_id) ?? undefined,
+    x_portal_status:
+      status === "active" || status === "disabled" || status === "deleted" ? status : undefined,
+    x_portal_created_at: odooChar(row.x_portal_created_at) ?? undefined,
+    x_portal_last_login: odooChar(row.x_portal_last_login) ?? undefined,
+  };
+}
+
 export async function findPartnerByEmail(email: string): Promise<OdooPartner | null> {
   const client = getOdooClient();
   if (!client) return null;
 
-  const rows = await client.searchRead<OdooPartner>(
-    "res.partner",
-    [["email", "=", email.trim().toLowerCase()]],
-    [...PARTNER_PROFILE_FIELDS],
-    1,
-  );
-  return rows[0] ?? null;
+  try {
+    const rows = await client.searchRead<OdooPartner>(
+      "res.partner",
+      [["email", "=", email.trim().toLowerCase()]],
+      [...PARTNER_PROFILE_FIELDS],
+      1,
+    );
+    return rows[0] ?? null;
+  } catch {
+    return null;
+  }
+}
+
+/** One Odoo round-trip for login: profile + password hash + portal meta + active. */
+export async function findPartnerForLogin(email: string): Promise<PartnerLoginSnapshot | null> {
+  const client = getOdooClient();
+  if (!client) return null;
+
+  const domain = [["email", "=", email.trim().toLowerCase()]];
+  try {
+    const rows = await client.searchRead<PartnerLoginRow>(
+      "res.partner",
+      domain,
+      [...PARTNER_PROFILE_FIELDS, ...PARTNER_PORTAL_FIELDS, "active"],
+      1,
+    );
+    const row = rows[0];
+    if (!row) return null;
+    return {
+      partner: row,
+      active: row.active !== false,
+      passwordHash: odooChar(row.x_portal_password_hash),
+      meta: portalMetaFromRow(row),
+    };
+  } catch {
+    const partner = await findPartnerByEmail(email);
+    if (!partner) return null;
+    const [passwordHash, meta] = await Promise.all([
+      getPartnerPasswordHash(partner.id),
+      getPartnerPortalMeta(partner.id),
+    ]);
+    return {
+      partner,
+      active: true,
+      passwordHash,
+      meta: meta ?? {},
+    };
+  }
 }
 
 function normalizeCrNumber(value: string): string {
@@ -134,21 +203,25 @@ export async function findPartnerByCrNumber(crNumber: string): Promise<OdooPartn
   const normalized = normalizeCrNumber(crNumber);
   if (!normalized) return null;
 
-  const rows = await client.searchRead<OdooPartner>(
-    "res.partner",
-    [["vat", "=", normalized]],
-    [...PARTNER_PROFILE_FIELDS],
-    1,
-  );
-  if (rows[0]) return rows[0];
+  try {
+    const rows = await client.searchRead<OdooPartner>(
+      "res.partner",
+      [["vat", "=", normalized]],
+      [...PARTNER_PROFILE_FIELDS, "x_portal_password_hash"],
+      1,
+    );
+    if (rows[0]) return rows[0];
 
-  const fuzzy = await client.searchRead<OdooPartner>(
-    "res.partner",
-    [["vat", "ilike", normalized]],
-    [...PARTNER_PROFILE_FIELDS],
-    1,
-  );
-  return fuzzy[0] ?? null;
+    const fuzzy = await client.searchRead<OdooPartner>(
+      "res.partner",
+      [["vat", "ilike", normalized]],
+      [...PARTNER_PROFILE_FIELDS, "x_portal_password_hash"],
+      1,
+    );
+    return fuzzy[0] ?? null;
+  } catch {
+    return null;
+  }
 }
 
 export async function findPartnerByPhone(phone: string): Promise<OdooPartner | null> {
@@ -159,17 +232,21 @@ export async function findPartnerByPhone(phone: string): Promise<OdooPartner | n
   if (digits.length < 7) return null;
 
   const local = digits.length > 8 ? digits.slice(-8) : digits;
-  const rows = await client.searchRead<OdooPartner>(
-    "res.partner",
-    [
-      "|",
-      ["phone", "ilike", digits],
-      ["phone", "ilike", local],
-    ],
-    [...PARTNER_PROFILE_FIELDS],
-    1,
-  );
-  return rows[0] ?? null;
+  try {
+    const rows = await client.searchRead<OdooPartner>(
+      "res.partner",
+      [
+        "|",
+        ["phone", "ilike", digits],
+        ["phone", "ilike", local],
+      ],
+      [...PARTNER_PROFILE_FIELDS, "x_portal_password_hash"],
+      1,
+    );
+    return rows[0] ?? null;
+  } catch {
+    return null;
+  }
 }
 
 export async function readPartnerProfile(partnerId: number): Promise<ClientProfile | null> {
@@ -329,18 +406,34 @@ function odooChar(value: string | false | undefined): string | null {
 export async function setPartnerPasswordHash(partnerId: number, hash: string): Promise<void> {
   const client = getOdooClient();
   if (!client) throw new Error("Odoo not configured");
-  await client.write("res.partner", [partnerId], { x_portal_password_hash: hash });
+  try {
+    await client.write("res.partner", [partnerId], { x_portal_password_hash: hash });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    if (/x_portal_password_hash/i.test(message)) {
+      throw new Error(
+        "Odoo is missing writable Contact field x_portal_password_hash for the API user. " +
+          "Create/fix that Char field on res.partner (Technical → Fields), then retry.",
+      );
+    }
+    throw error;
+  }
 }
 
 export async function getPartnerPasswordHash(partnerId: number): Promise<string | null> {
   const client = getOdooClient();
   if (!client) return null;
-  const rows = await client.read<{ x_portal_password_hash: string | false }>(
-    "res.partner",
-    [partnerId],
-    ["x_portal_password_hash"],
-  );
-  return odooChar(rows[0]?.x_portal_password_hash);
+  try {
+    const rows = await client.read<{ x_portal_password_hash: string | false }>(
+      "res.partner",
+      [partnerId],
+      ["x_portal_password_hash"],
+    );
+    return odooChar(rows[0]?.x_portal_password_hash);
+  } catch {
+    // Missing field or a down Odoo must not crash login/identification.
+    return null;
+  }
 }
 
 export async function updatePartnerPortalMeta(
@@ -357,46 +450,77 @@ export async function getPartnerPortalMeta(
 ): Promise<(PartnerPortalMeta & { x_portal_password_hash?: string | null }) | null> {
   const client = getOdooClient();
   if (!client) return null;
-  const rows = await client.read<{
-    x_portal_password_hash: string | false;
-    x_portal_account_id: string | false;
-    x_portal_status: string | false;
-    x_portal_created_at: string | false;
-    x_portal_last_login: string | false;
-  }>("res.partner", [partnerId], [...PARTNER_PORTAL_FIELDS]);
-  const row = rows[0];
-  if (!row) return null;
-  const status = odooChar(row.x_portal_status);
-  return {
-    x_portal_password_hash: odooChar(row.x_portal_password_hash),
-    x_portal_account_id: odooChar(row.x_portal_account_id) ?? undefined,
-    x_portal_status:
-      status === "active" || status === "disabled" || status === "deleted"
-        ? status
-        : undefined,
-    x_portal_created_at: odooChar(row.x_portal_created_at) ?? undefined,
-    x_portal_last_login: odooChar(row.x_portal_last_login) ?? undefined,
-  };
+  try {
+    const rows = await client.read<{
+      x_portal_password_hash: string | false;
+      x_portal_account_id: string | false;
+      x_portal_status: string | false;
+      x_portal_created_at: string | false;
+      x_portal_last_login: string | false;
+    }>("res.partner", [partnerId], [...PARTNER_PORTAL_FIELDS]);
+    const row = rows[0];
+    if (!row) return null;
+    const status = odooChar(row.x_portal_status);
+    return {
+      x_portal_password_hash: odooChar(row.x_portal_password_hash),
+      x_portal_account_id: odooChar(row.x_portal_account_id) ?? undefined,
+      x_portal_status:
+        status === "active" || status === "disabled" || status === "deleted"
+          ? status
+          : undefined,
+      x_portal_created_at: odooChar(row.x_portal_created_at) ?? undefined,
+      x_portal_last_login: odooChar(row.x_portal_last_login) ?? undefined,
+    };
+  } catch {
+    return null;
+  }
 }
 
 export async function findPartnerByPortalAccountId(
   portalAccountId: string,
 ): Promise<{ id: number; email: string; is_company: boolean } | null> {
+  const snapshot = await findPartnerSessionByPortalAccountId(portalAccountId);
+  if (!snapshot) return null;
+  return {
+    id: snapshot.partner.id,
+    email: str(snapshot.partner.email),
+    is_company: snapshot.partner.is_company,
+  };
+}
+
+/** One Odoo round-trip for /me and other session loads. */
+export async function findPartnerSessionByPortalAccountId(
+  portalAccountId: string,
+): Promise<PartnerLoginSnapshot | null> {
   const client = getOdooClient();
   if (!client || !portalAccountId.trim()) return null;
-  const rows = await client.searchRead<{
-    id: number;
-    email: string | false;
-    is_company: boolean;
-  }>(
-    "res.partner",
-    [["x_portal_account_id", "=", portalAccountId.trim()]],
-    ["id", "email", "is_company"],
-    1,
-  );
-  const row = rows[0];
-  if (!row) return null;
-  return { id: row.id, email: str(row.email), is_company: Boolean(row.is_company) };
+  try {
+    const rows = await client.searchRead<PartnerLoginRow>(
+      "res.partner",
+      [["x_portal_account_id", "=", portalAccountId.trim()]],
+      [...PARTNER_PROFILE_FIELDS, ...PARTNER_PORTAL_FIELDS, "active"],
+      1,
+    );
+    const row = rows[0];
+    if (!row) return null;
+    return {
+      partner: row,
+      active: row.active !== false,
+      passwordHash: odooChar(row.x_portal_password_hash),
+      meta: portalMetaFromRow(row),
+    };
+  } catch {
+    return null;
+  }
+}
+
+export async function writePartnerPortalSetup(
+  partnerId: number,
+  values: PartnerPortalMeta & { x_portal_password_hash?: string },
+): Promise<void> {
+  const client = getOdooClient();
+  if (!client) throw new Error("Odoo not configured");
+  await client.write("res.partner", [partnerId], values);
 }
 
 /** Soft-delete portal access on the partner — does not archive the CRM record. */

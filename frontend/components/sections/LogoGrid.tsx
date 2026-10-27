@@ -9,13 +9,16 @@ interface LogoGridProps {
 export function LogoGrid({ data }: LogoGridProps) {
   if (!data.items || data.items.length === 0) return null;
 
-  const isAlliances = data.variant === "alliances";
+  // Homepage "Authorized Technology Partners" uses the same logo carousel as Our Story.
+  const isAlliances =
+    data.variant === "alliances" || data.variant === "partners-marquee";
   const isAlliancesGrid = data.variant === "alliances-grid";
 
   return (
     <section
       className={cn(
         isAlliances || isAlliancesGrid ? "bg-white py-4 sm:py-5" : "section-padding bg-brand-light",
+        data.variant === "partners-marquee" && "home-partners",
       )}
       data-section="logo-grid"
       data-variant={data.variant ?? "default"}
@@ -27,12 +30,18 @@ export function LogoGrid({ data }: LogoGridProps) {
             {(data.heading || data.headingAccent) && (
               <h2
                 className={cn(isAlliances || isAlliancesGrid ? "aptus-alliances-heading" : "text-brand-navy")}
-                style={!(isAlliances || isAlliancesGrid) ? { fontSize: 'var(--text-4xl)', fontWeight: 600 } : undefined}
+                style={!(isAlliances || isAlliancesGrid) ? { fontSize: "var(--text-4xl)", fontWeight: 600 } : undefined}
               >
                 {data.heading}
                 {data.heading && data.headingAccent && " "}
                 {data.headingAccent && (
-                  <span className={isAlliances || isAlliancesGrid ? "aptus-alliances-heading-accent" : "text-[#38b6ff]"}>
+                  <span
+                    className={
+                      isAlliances || isAlliancesGrid
+                        ? "aptus-alliances-heading-accent"
+                        : "text-[#38b6ff]"
+                    }
+                  >
                     {data.headingAccent}
                   </span>
                 )}
@@ -87,7 +96,7 @@ export function LogoGrid({ data }: LogoGridProps) {
           className="aptus-alliance-marquee"
           role="region"
           aria-roledescription="carousel"
-          aria-label="Strategic alliance partners"
+          aria-label={data.heading ?? "Authorized technology partners"}
         >
           <div className="aptus-alliance-marquee__track">
             {[...data.items, ...data.items].map((logo, i) => (

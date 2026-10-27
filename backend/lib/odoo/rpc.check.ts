@@ -5,7 +5,7 @@
 import assert from "node:assert/strict";
 import { normalizeOdooBaseUrl } from "./rpc";
 
-const host = "https://aptusinfotech-staging-35193445.dev.odoo.com";
+const host = "https://aptusinfotech-staging-38276337.dev.odoo.com";
 
 assert.equal(normalizeOdooBaseUrl(host), host);
 assert.equal(normalizeOdooBaseUrl(`${host}/`), host);

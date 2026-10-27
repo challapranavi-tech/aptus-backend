@@ -48,6 +48,11 @@ export function purchaseTypeLabel(type: PurchaseType | undefined): string {
   return type === "renew" ? "Renew" : "New Purchase";
 }
 
+export function renewalSerialRequired(item: OrderLineItem): boolean {
+  const config = getProductConfig(item.productName);
+  return config.kind === "renewal" && item.purchaseType === "renew";
+}
+
 /** Human-readable summary of a line's selected options, shaped by its product configuration. */
 export function lineConfigSummary(item: OrderLineItem, cartDuration: LineDuration = "1year"): string {
   const config = getProductConfig(item.productName);
@@ -60,7 +65,13 @@ export function lineConfigSummary(item: OrderLineItem, cartDuration: LineDuratio
   }
 
   const pkg = resolveLinePackage(item, config);
-  return [durationLabel(resolveLineDuration(item, cartDuration)), purchaseTypeLabel(item.purchaseType), pkg?.label]
+  const serial = item.serialNumber?.trim();
+  return [
+    durationLabel(resolveLineDuration(item, cartDuration)),
+    purchaseTypeLabel(item.purchaseType),
+    pkg?.label,
+    serial ? `Serial: ${serial}` : undefined,
+  ]
     .filter(Boolean)
     .join(" · ");
 }
@@ -79,7 +90,11 @@ export function cartLineUnitPrice(item: OrderLineItem, cartDuration: LineDuratio
     return base * (level?.priceMultiplier ?? 1) * (pkg?.priceMultiplier ?? 1);
   }
 
-  const base = lookupGuidePrice(item.productName, resolveLineDuration(item, cartDuration));
+  const base = lookupGuidePrice(
+    item.productName,
+    resolveLineDuration(item, cartDuration),
+    item.purchaseType === "renew" ? "renew" : "new",
+  );
   const pkg = resolveLinePackage(item, config);
   return base * (pkg?.priceMultiplier ?? 1);
 }

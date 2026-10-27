@@ -1,4 +1,5 @@
 export { AdobePageView } from "./AdobePageView";
+export { BrandVisibilityPageView } from "./BrandVisibilityPageView";
 export { CTASection } from "./CTASection";
 export { AdobeLink, DeadLink } from "./DeadLink";
 export { FeaturesSection } from "./FeaturesSection";

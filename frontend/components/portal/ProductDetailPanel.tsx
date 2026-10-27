@@ -2,17 +2,22 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useAuth } from "@/context/AuthProvider";
+import { useQuoteModal } from "@/components/quote/QuoteModalProvider";
+import { quoteContextForPortalProduct } from "@/components/quote/quote-modal-utils";
+import { getProductCatalogTitle } from "@/data/product-catalog-titles";
 import { getProductConfig } from "@/data/product-options";
-import { getProductDetailContent } from "@/data/product-detail-content";
+import {
+  getProductDetailContent,
+} from "@/data/product-detail-content";
+import { isPortalPurchasableProduct } from "@/data/software-full-catalog";
 import {
   formatOmanAmount,
   getProductCardMeta,
   getPurchaseProductImage,
-  portalProductsHref,
   type SoftwarePurchaseCategory,
   type SoftwarePurchaseProduct,
 } from "@/lib/order-pricing";
+import { productSlugFromHref } from "@/data/software-purchase-catalog";
 import { cartLineUnitPrice } from "@/lib/portal-cart-checkout";
 import {
   persistPortalCartToServer,
@@ -20,13 +25,27 @@ import {
   syncPortalCartWithServer,
   writePortalCart,
 } from "@/lib/portal-cart";
+import { fetchAuthMeShared } from "@/lib/auth-me-client";
+import { ensureSignedInForPurchase } from "@/lib/purchase-auth";
+import { sanitizeProductDetailBlocks } from "@/lib/sanitize-product-detail-blocks";
+import { softwareCatalogHref } from "@/lib/software-catalog-links";
+import type { ClientProfile } from "@/types/profile";
 import type { OrderLineItem, PortalOrder, PurchaseType } from "@/types/orders";
+import { AutodeskFreeTrialLink } from "@/components/shared/AutodeskFreeTrialLink";
 import { ProductDetailBlocks } from "./ProductDetailBlocks";
 import { ProductPurchaseOptions } from "./ProductPurchaseOptions";
+import { RenewalSerialNumberField } from "./RenewalSerialNumberField";
 
 type Duration = PortalOrder["duration"];
 
-const DETAIL_TABS = ["Overview", "Features", "Specifications"] as const;
+const DETAIL_TABS = [
+  { id: "overview", label: "Overview" },
+  { id: "keyFeatures", label: "Key Features" },
+  { id: "whatsIncluded", label: "What's Included" },
+  { id: "subscriptionLicensing", label: "Subscription and Licensing Options" },
+] as const;
+
+type DetailTabId = (typeof DETAIL_TABS)[number]["id"];
 
 function featureBullets(productName: string): string[] {
   const lower = productName.toLowerCase();
@@ -48,11 +67,14 @@ type ProductDetailPanelProps = {
 };
 
 export function ProductDetailPanel({ product, category }: ProductDetailPanelProps) {
-  const { user, ready: authReady } = useAuth();
-  const productsHref = portalProductsHref(category.id);
+  const { openQuote } = useQuoteModal();
+  const productsHref = softwareCatalogHref(category.id);
+  const purchasable = isPortalPurchasableProduct(product.href);
   const meta = getProductCardMeta(product, category.label);
   const imageSrc = getPurchaseProductImage(product.href);
   const config = useMemo(() => getProductConfig(product.name), [product.name]);
+  const catalogTitle = useMemo(() => getProductCatalogTitle(product.href), [product.href]);
+  const [user, setUser] = useState<ClientProfile | null>(null);
   const [duration, setDuration] = useState<Duration>("1year");
   const [purchaseType, setPurchaseType] = useState<PurchaseType>("new");
   const [packageId, setPackageId] = useState<string | undefined>(
@@ -62,11 +84,14 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
     config.kind === "levels" ? config.levels[0]?.id : undefined,
   );
   const [quantity, setQuantity] = useState(1);
-  const [activeTab, setActiveTab] = useState<(typeof DETAIL_TABS)[number]>("Overview");
+  const [serialNumber, setSerialNumber] = useState("");
+  const [serialError, setSerialError] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<DetailTabId>("overview");
   const [message, setMessage] = useState<string | null>(null);
   const [hydrated, setHydrated] = useState(false);
   const persistTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  const showSerialNumber = config.kind === "renewal" && purchaseType === "renew";
   const draftItem: OrderLineItem = {
     category: category.label,
     productName: product.name,
@@ -75,44 +100,78 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
     purchaseType,
     packageId,
     levelId,
+    ...(showSerialNumber && serialNumber.trim()
+      ? { serialNumber: serialNumber.trim() }
+      : {}),
   };
   const unit = cartLineUnitPrice(draftItem, duration);
   const bullets = featureBullets(product.name);
-  const detailContent = useMemo(() => getProductDetailContent(product.name), [product.name]);
-  const activeBlocks =
-    activeTab === "Overview"
-      ? detailContent?.overview
-      : activeTab === "Features"
-        ? detailContent?.features
-        : detailContent?.specifications;
-  const hasActiveBlocks = Boolean(activeBlocks?.length);
+  const productSlug = productSlugFromHref(product.href);
+  const detailContent = useMemo(
+    () =>
+      getProductDetailContent(product.name, {
+        brandLabel: category.label,
+        description: catalogTitle ?? meta.description,
+        slug: productSlug,
+      }),
+    [product.name, productSlug, category.label, catalogTitle, meta.description],
+  );
+  const activeBlocks = useMemo(() => {
+    const raw = detailContent[activeTab];
+    return sanitizeProductDetailBlocks(raw ?? [], activeTab);
+  }, [activeTab, detailContent]);
+  const hasActiveBlocks = Boolean(activeBlocks.length);
 
   useEffect(() => {
     let cancelled = false;
     async function hydrateCart() {
-      const cart = user ? await syncPortalCartWithServer() : readPortalCart();
+      const me = await fetchAuthMeShared();
+      const loggedIn = me.ok ? me.user : null;
+      if (cancelled) return;
+      setUser(loggedIn);
+
+      const cart = loggedIn ? await syncPortalCartWithServer() : readPortalCart();
       if (cancelled) return;
       const existing = cart.items.find(
         (item) =>
           item.category === category.label && item.productName === product.name,
       );
       if (existing) {
-        // Quantity on this page is "amount to add", not cart total — leave at 1.
         if (existing.duration) setDuration(existing.duration);
         if (existing.purchaseType) setPurchaseType(existing.purchaseType);
         if (existing.packageId) setPackageId(existing.packageId);
         if (existing.levelId) setLevelId(existing.levelId);
+        if (existing.serialNumber) setSerialNumber(existing.serialNumber);
       }
       setHydrated(true);
     }
-    if (!authReady) return;
     void hydrateCart();
     return () => {
       cancelled = true;
     };
-  }, [authReady, user?.id, category.label, product.name]);
+  }, [category.label, product.name]);
 
-  function addToCart() {
+  function handlePurchaseTypeChange(nextPurchaseType: PurchaseType) {
+    setPurchaseType(nextPurchaseType);
+    if (nextPurchaseType === "new") {
+      setSerialNumber("");
+      setSerialError(null);
+    }
+  }
+
+  async function addToCart() {
+    if (!purchasable) return;
+
+    const signedIn = await ensureSignedInForPurchase(setMessage);
+    if (!signedIn) return;
+
+    if (showSerialNumber && !serialNumber.trim()) {
+      setSerialError("Serial number is required for renewals.");
+      setMessage(null);
+      return;
+    }
+    setSerialError(null);
+
     const existing = readPortalCart();
     const key = `${category.label}::${product.name}`;
     const selections = Object.fromEntries(
@@ -133,15 +192,18 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
       items: Object.values(selections),
     };
     writePortalCart(cart);
-    if (user) {
+    const me = await fetchAuthMeShared();
+    if (me.ok) {
+      setUser(me.user);
       if (persistTimerRef.current) clearTimeout(persistTimerRef.current);
       void persistPortalCartToServer(cart);
     }
     setQuantity(1);
+    setSerialNumber("");
     setMessage(`${product.name} added to cart.`);
   }
 
-  if (!hydrated && authReady) {
+  if (!hydrated) {
     return (
       <div className="aptus-product-detail__loading" role="status">
         Loading product…
@@ -159,9 +221,9 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
       </Link>
 
       <nav className="aptus-product-detail__breadcrumb" aria-label="Breadcrumb">
-        <Link href="/portal/dashboard">Home</Link>
+        <Link href="/">Home</Link>
         <span aria-hidden="true">›</span>
-        <Link href={productsHref}>Products</Link>
+        <Link href="/software-solutions">Software</Link>
         <span aria-hidden="true">›</span>
         <Link href={productsHref}>{category.label}</Link>
         <span aria-hidden="true">›</span>
@@ -190,14 +252,14 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
           <div className="aptus-product-detail__tabs" role="tablist" aria-label="Product information">
             {DETAIL_TABS.map((tab) => (
               <button
-                key={tab}
+                key={tab.id}
                 type="button"
                 role="tab"
-                aria-selected={activeTab === tab}
-                className={activeTab === tab ? "is-active" : undefined}
-                onClick={() => setActiveTab(tab)}
+                aria-selected={activeTab === tab.id}
+                className={activeTab === tab.id ? "is-active" : undefined}
+                onClick={() => setActiveTab(tab.id)}
               >
-                {tab}
+                {tab.label}
               </button>
             ))}
           </div>
@@ -205,20 +267,17 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
           <div className="aptus-product-detail__tab-panel" role="tabpanel">
             {hasActiveBlocks ? (
               <ProductDetailBlocks blocks={activeBlocks!} />
-            ) : activeTab === "Overview" ? (
+            ) : activeTab === "overview" ? (
               <p>{meta.description}</p>
             ) : (
               <p>
-                {activeTab} details for {product.name} are available from our sales team.{" "}
+                {DETAIL_TABS.find((tab) => tab.id === activeTab)?.label ?? "Product"} details for{" "}
+                {product.name} are available from our sales team.{" "}
                 <a href="mailto:info@aptusinfotech.com">Contact info@aptusinfotech.com</a> or call{" "}
                 <a href="tel:+96899418481">+968 9941 8481</a>.
               </p>
             )}
           </div>
-
-          <p className="aptus-product-detail__marketing-link">
-            <Link href={product.href}>View full product page on aptusinfotech.com →</Link>
-          </p>
         </div>
 
         <aside className="aptus-product-detail__sidebar">
@@ -232,6 +291,9 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
             </div>
 
             <h2 className="aptus-product-detail__title">{product.name}</h2>
+            {catalogTitle ? (
+              <p className="aptus-product-detail__catalog-title">{catalogTitle}</p>
+            ) : null}
 
             <p className="aptus-product-detail__summary">{meta.description}</p>
 
@@ -242,21 +304,27 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
             </ul>
 
             <div className="aptus-product-detail__purchase">
-              <p className="aptus-product-detail__price">
-                {unit
-                  ? config.kind === "renewal"
-                    ? `${formatOmanAmount(unit)}/${duration === "3year" ? "3yr" : "year"}`
-                    : formatOmanAmount(unit)
-                  : "Quote on request"}
-              </p>
+              {purchasable ? (
+                <>
+                  <p className="aptus-product-detail__price">
+                    {unit
+                      ? config.kind === "renewal"
+                        ? `${formatOmanAmount(unit)}/${duration === "3year" ? "3yr" : "year"}`
+                        : formatOmanAmount(unit)
+                      : "Quote on request"}
+                  </p>
+                </>
+              ) : (
+                <p className="aptus-product-detail__price">Quote on request</p>
+              )}
               <p className="aptus-product-detail__price-note">
                 {config.kind === "bundle"
-                  ? "One-time bundle price · Includes support & updates"
+                  ? "Single bundle · Perpetual or one-time license"
                   : config.kind === "levels"
-                    ? `${config.levels.find((level) => level.id === levelId)?.label ?? config.levels[0]?.label ?? "Level 1"} · Includes support & updates`
-                    : duration === "3year"
-                      ? "3 Years subscription · Includes support & updates"
-                      : "Annual subscription · Includes support & updates"}
+                    ? `${config.levels.find((level) => level.id === levelId)?.label ?? config.levels[0]?.label ?? "Level 1"} · Select a level below`
+                    : `${purchaseType === "renew" ? "Renewal" : "New Purchase"} · ${
+                        duration === "3year" ? "3 Years" : "1 Year"
+                      } · Select options below`}
               </p>
 
               <ProductPurchaseOptions
@@ -267,39 +335,76 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
                 packageId={packageId}
                 levelId={levelId}
                 onDurationChange={setDuration}
-                onPurchaseTypeChange={setPurchaseType}
+                onPurchaseTypeChange={handlePurchaseTypeChange}
                 onPackageChange={setPackageId}
                 onLevelChange={setLevelId}
                 packageLayout="cards"
               />
 
-              <div className="aptus-product-detail__qty">
-                <span>Quantity</span>
-                <div className="aptus-product-detail__qty-controls">
-                  <button
-                    type="button"
-                    aria-label="Decrease quantity"
-                    onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                  >
-                    −
-                  </button>
-                  <span>{quantity}</span>
-                  <button
-                    type="button"
-                    aria-label="Increase quantity"
-                    onClick={() => setQuantity((q) => Math.min(999, q + 1))}
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
+              {showSerialNumber ? (
+                <RenewalSerialNumberField
+                  id="product-serial-number"
+                  value={serialNumber}
+                  error={serialError}
+                  onChange={(value) => {
+                    setSerialNumber(value);
+                    if (serialError) setSerialError(null);
+                  }}
+                />
+              ) : null}
 
+              {purchasable ? (
+                <>
+                  <div className="aptus-product-detail__qty">
+                    <span>Quantity</span>
+                    <div className="aptus-product-detail__qty-controls">
+                      <button
+                        type="button"
+                        aria-label="Decrease quantity"
+                        onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                      >
+                        −
+                      </button>
+                      <span>{quantity}</span>
+                      <button
+                        type="button"
+                        aria-label="Increase quantity"
+                        onClick={() => setQuantity((q) => Math.min(999, q + 1))}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="aptus-product-detail__btn aptus-product-detail__btn--primary"
+                    onClick={() => void addToCart()}
+                  >
+                    Add to Cart
+                  </button>
+                  {!user ? (
+                    <p className="aptus-product-detail__sign-in-note">
+                      Sign in to purchase — you will be redirected to sign in when adding to cart.
+                    </p>
+                  ) : null}
+                  <AutodeskFreeTrialLink productHref={product.href} />
+                </>
+              ) : null}
               <button
                 type="button"
-                className="aptus-product-detail__btn aptus-product-detail__btn--primary"
-                onClick={() => addToCart()}
+                className="aptus-product-detail__btn aptus-product-detail__btn--outline"
+                onClick={() =>
+                  openQuote(
+                    quoteContextForPortalProduct({
+                      family: category.id === "elv-solutions" ? "elv" : category.id,
+                      productName: product.name,
+                      productHref: product.href,
+                    }),
+                  )
+                }
               >
-                Add to Cart
+                Request Quote
               </button>
             </div>
           </div>

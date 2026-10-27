@@ -143,10 +143,18 @@ export async function POST(req: NextRequest) {
   const photoErr = validateImageFile(photograph, "Passport-size photograph", true);
   if (photoErr) errors.photograph = photoErr;
 
+  const payslipErr = validateFile(
+    latestPayslip,
+    [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS],
+    "Payslip",
+    true,
+    DOC_OR_IMAGE_MIME_OK,
+  );
+  if (payslipErr) errors.latestPayslip = payslipErr;
+
   const optionalDocs: Array<[File | null, string, string]> = [
     [appointmentLetter, "appointmentLetter", "Appointment letter"],
     [relievingLetter, "relievingLetter", "Relieving letter"],
-    [latestPayslip, "latestPayslip", "Latest payslip"],
   ];
   for (const [file, key, label] of optionalDocs) {
     const e = validateFile(
@@ -194,9 +202,9 @@ export async function POST(req: NextRequest) {
       [resume, RESUME_EXTENSIONS, "Resume", "resume"],
       [passportCopy, [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS], "Passport copy", "passportCopy"],
       [photograph, IMAGE_EXTENSIONS, "Passport-size photograph", "photograph"],
+      [latestPayslip, [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS], "Payslip", "latestPayslip"],
       [appointmentLetter, [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS], "Appointment letter", "appointmentLetter"],
       [relievingLetter, [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS], "Relieving letter", "relievingLetter"],
-      [latestPayslip, [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS], "Latest payslip", "latestPayslip"],
     ];
     for (const [file, exts, label, key] of contentTargets) {
       if (!file) continue;

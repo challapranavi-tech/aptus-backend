@@ -460,9 +460,17 @@ export async function processAllSubscriptionReminders(): Promise<{
   expiredSent: number;
 }> {
   const { listPartnerIdsWithSubscriptions } = await import("./odoo/subscriptions");
-  const { maybeNotifyLicensesAvailable } = await import("./subscription-confirmation");
+  const { fetchPartnerOrders, listPartnerIdsWithPortalOrders } = await import("./odoo/orders");
+  const { maybeNotifyLicensesAvailable, maybeNotifyWorkflowFromOdoo } = await import(
+    "./subscription-confirmation"
+  );
 
-  const partnerIds = await listPartnerIdsWithSubscriptions();
+  const partnerIds = [
+    ...new Set([
+      ...(await listPartnerIdsWithSubscriptions()),
+      ...(await listPartnerIdsWithPortalOrders()),
+    ]),
+  ];
   let remindersSent = 0;
   let expiredSent = 0;
 
@@ -472,6 +480,8 @@ export async function processAllSubscriptionReminders(): Promise<{
       remindersSent += await maybeSendRenewalReminders(subscriptions, partnerId);
       expiredSent += await maybeSendLicenseExpiredEmails(subscriptions, partnerId);
       await maybeNotifyLicensesAvailable(subscriptions, partnerId);
+      const orders = await fetchPartnerOrders(partnerId);
+      await maybeNotifyWorkflowFromOdoo(orders, "cron");
     } catch (error) {
       logger.warn("Subscription reminder cron failed for partner", {
         action: "cron.subscription_reminders",

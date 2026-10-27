@@ -35,12 +35,21 @@ export {
 export {
   createCrmLead,
   buildCrmLeadValues,
+  attachFilesToCrmLead,
+  crmLeadFormUrl,
   crmTeamConfig,
+  talkToExpertCrmConfig,
+  talkToExpertStageName,
+  findCrmStageIdByName,
+  resolveTalkToExpertPlacement,
+  TALK_TO_EXPERT_STAGE_NAME_DEFAULT,
   nextRequestQuoteRef,
   ensureRequestQuoteSequence,
   quoteReferenceField,
+  findPartnerIdByEmail,
   REQUEST_QUOTE_SEQUENCE,
   type CrmLeadInput,
+  type CrmLeadAttachment,
   type ContactCategory,
 } from "./crm";
 

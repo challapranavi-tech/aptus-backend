@@ -16,6 +16,8 @@ assert.equal(getProductConfig("Windows Server 2025 Standard").kind, "bundle");
 
 // Levels / renewals still resolve.
 assert.equal(getProductConfig("Adobe Acrobat Pro").kind, "levels");
+assert.equal(getProductConfig("Adobe Photoshop").kind, "levels");
+assert.equal(getProductConfig("Adobe Illustrator").kind, "levels");
 assert.equal(getProductConfig("Revit").kind, "renewal");
 assert.equal(getProductConfig("Revit").packages, undefined);
 assert.equal(getProductConfig("3ds Max").packages, undefined);

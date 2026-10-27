@@ -9,7 +9,7 @@
   --ind-dur: 280ms;
 
   background: #000;
-  padding: 48px 0 56px;
+  padding: 20px 0 22px;
   color: #fff;
 }
 
@@ -21,10 +21,15 @@
 
 .headRow {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 28px;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.headCopy {
+  min-width: 0;
+  max-width: 40rem;
 }
 
 .title {
@@ -35,6 +40,15 @@
   line-height: 1.2;
   letter-spacing: -0.02em;
   color: #fff;
+}
+
+.lead {
+  margin: 0.4rem 0 0;
+  font-family: ArtifaktElement, Arial, sans-serif;
+  font-size: clamp(0.9rem, 0.85rem + 0.2vw, 1rem);
+  font-weight: 400;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.78);
 }
 
 .nav {
@@ -99,12 +113,12 @@
   border-radius: var(--ind-radius);
   overflow: hidden;
   scroll-snap-align: start;
-  text-decoration: none;
   color: #fff;
   display: block;
   border: 2px solid transparent;
   background: #1a1a1a;
   isolation: isolate;
+  cursor: default;
   transition: border-color var(--ind-dur) var(--ind-ease), transform var(--ind-dur) var(--ind-ease),
     box-shadow var(--ind-dur) var(--ind-ease);
 }
@@ -143,61 +157,31 @@
   font-weight: 600;
   line-height: 1.25;
   color: #fff;
-  max-width: calc(100% - 72px);
+  max-width: calc(100% - 32px);
 }
 
-/* Yellow circular chevron — appears on hover (reference) */
-.hoverArrow {
-  position: absolute;
-  right: 14px;
-  bottom: 14px;
-  z-index: 3;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--ind-yellow);
-  color: #111;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transform: scale(0.85);
-  transition: opacity var(--ind-dur) var(--ind-ease), transform var(--ind-dur) var(--ind-ease);
-  pointer-events: none;
-}
-
-.card:hover,
-.card:focus-visible {
-  border-color: var(--ind-yellow);
-  outline: none;
-  box-shadow: 0 0 0 1px var(--ind-yellow), 0 12px 32px rgba(0, 0, 0, 0.45);
+.card:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
   transform: translateY(-2px);
 }
 
-.card:hover .media,
-.card:focus-visible .media {
+.card:hover .media {
   transform: scale(1.04);
 }
 
-.card:hover .scrim,
-.card:focus-visible .scrim {
+.card:hover .scrim {
   opacity: 0.85;
-}
-
-.card:hover .hoverArrow,
-.card:focus-visible .hoverArrow {
-  opacity: 1;
-  transform: scale(1);
 }
 
 @media (max-width: 768px) {
   .section {
     --ind-card-w: min(72vw, 260px);
-    padding: 36px 0 44px;
+    padding: 16px 0 18px;
   }
 
   .headRow {
-    margin-bottom: 20px;
+    margin-bottom: 12px;
   }
 
   .title {
@@ -225,18 +209,15 @@
 @media (prefers-reduced-motion: reduce) {
   .card,
   .media,
-  .hoverArrow,
   .navBtn {
     transition: none;
   }
 
-  .card:hover,
-  .card:focus-visible {
+  .card:hover {
     transform: none;
   }
 
-  .card:hover .media,
-  .card:focus-visible .media {
+  .card:hover .media {
     transform: none;
   }
 }

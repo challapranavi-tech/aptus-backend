@@ -21,6 +21,7 @@
 
 @import "./components/navbar.css";
 @import "./components/footer.css";
+@import "./components/expert-chat.css";
 @import "./components/buttons.css";
 @import "./components/cards.css";
 @import "./components/forms.css";
@@ -60,8 +61,6 @@ main [data-section] .aptus-cta-light-heading,
 main [data-section] .aptus-software-form-heading,
 main [data-section] .aptus-contact-form-title,
 main [data-section] .aptus-iso-hero-title,
-main [data-section] .aptus-iso-intro-heading,
-main [data-section] .aptus-iso-core-heading,
 main [data-section] .aptus-iso-cert-heading,
 main [data-section] .aptus-alliances-heading,
 main [data-section] .aptus-team-section-title,
@@ -91,6 +90,36 @@ main [data-section] .aptus-form-submit,
 .aptus-software-page .aptus-software-form-heading,
 .aptus-software-page .aptus-software-btn {
   text-align: center;
+}
+
+.page-aptus-policy [data-section="legal-policies"] :is(h1, h2, h3, h4, h5, h6),
+.page-aptus-policy .aptus-legal__title,
+.page-aptus-policy .aptus-legal__heading,
+.page-aptus-policy .aptus-legal__subheading,
+.page-aptus-policy .aptus-legal__nav-label,
+.page-aptus-policy .aptus-legal__p,
+.page-aptus-policy .aptus-legal__list,
+.page-aptus-policy .aptus-legal__intro p,
+.page-aptus-policy .aptus-legal__footer {
+  text-align: left;
+}
+
+/* ISO body headings share the container left edge with cards */
+.page-iso [data-section="iso-panel"] .aptus-iso-intro-heading,
+.page-iso [data-section="iso-panel"] .aptus-iso-core-heading,
+.page-iso [data-section="iso-panel"] .aptus-iso-subtitle,
+.page-iso [data-section="iso-panel"] .aptus-iso-intro-text,
+.page-iso [data-section="iso-panel"] .aptus-iso-footer-text {
+  text-align: start;
+}
+
+.page-faq .aptus-faq__question,
+.page-faq .aptus-faq__answer,
+.page-blog .aptus-blog__title,
+.page-blog .aptus-blog__brand,
+.page-blog .aptus-blog__name,
+.page-blog .aptus-blog__intro {
+  text-align: start;
 }
 
 /* Body / leads beat parent `.text-center` wrappers */

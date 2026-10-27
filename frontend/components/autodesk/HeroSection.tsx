@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useRef, useState } from "react";
+import { ExploreProductsLink } from "@/components/software/ExploreProductsLink";
 import shared from "@/styles/autodesk/autodesk.module.css";
 import styles from "./HeroSection.module.css";
 
@@ -65,18 +65,17 @@ export function HeroSection() {
       <div className={styles.content}>
         <div className={shared.container}>
           <div className={styles.stack}>
-            <p className={`${shared.eyebrow} ${styles.eyebrow}`}>NEW OFFER FROM AUTODESK</p>
             <h1 className={styles.headline}>
-              Autodesk Flex <span className={styles.underline}>now starting at $99</span>
+              Design the Future. Build with Confidence.
             </h1>
             <p className={styles.subtext}>
-              Prepay with tokens for flexible access to 100+ Autodesk products—ideal for
-              project-based work and product exploration.
+              Explore Autodesk’s industry-leading software solutions for architecture,
+              engineering, construction, manufacturing, and creative professionals.
             </p>
             <div className={styles.actions}>
-              <Link href="/autocad" className={shared.btnPrimary}>
+              <ExploreProductsLink brandId="autodesk" className={shared.btnPrimary}>
                 Explore products
-              </Link>
+              </ExploreProductsLink>
             </div>
           </div>
         </div>

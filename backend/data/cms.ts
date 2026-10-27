@@ -6,6 +6,13 @@
  *   2. Local disk JSON   — fallback for pages not yet seeded to Odoo (dev only)
  *   3. Mock              — fallback when Odoo is unconfigured
  *
+ * Homepage (`/`): committed `content/odoo-json/home.json` wins by default
+ * (set USE_LOCAL_HOME_JSON=false to force Odoo `x_homepage_sections_json`).
+ * Our Story (`/our-story`): committed `content/odoo-json/our-story.json` wins
+ * by default (set USE_LOCAL_OUR_STORY_JSON=false to force Odoo).
+ * ELV product pages: committed `content/odoo-json/elv/*.json` wins by default
+ * (set USE_LOCAL_ELV_JSON=false to force Odoo).
+ *
  * Layout chrome (nav, footer, top bar) is code-owned — see data/site-nav.ts.
  */
 
@@ -15,6 +22,10 @@ import {
   buildLocalHomePage,
   isLocalPageJsonInDev,
   listLocalDevPageSlugs,
+  preferLocalHomeJson,
+  preferLocalOurStoryJson,
+  preferLocalOurTeamJson,
+  preferLocalElvPageJson,
 } from "@/lib/odoo/local-page-json";
 import { loadCaseStudiesPageContent } from "@/lib/case-studies-page-content";
 import { isAutodeskHiddenSlug } from "@/data/autodesk-subnav";
@@ -79,6 +90,16 @@ export async function getSiteConfig(): Promise<SiteConfig> {
 }
 
 export async function getHomePage(): Promise<Page | null> {
+  // Committed home.json drives `/` by default so repo redesigns are visible
+  // without re-seeding Odoo. Set USE_LOCAL_HOME_JSON=false to use Odoo instead.
+  if (preferLocalHomeJson()) {
+    const localFirst = buildLocalHomePage();
+    if (localFirst?.sections.length) {
+      debugLog("Mapped Page [home local]", localFirst);
+      return localFirst;
+    }
+  }
+
   if (!isOdooConfigured()) {
     return (isLocalPageJsonInDev() && buildLocalHomePage()) || mockGetHomePage();
   }
@@ -89,7 +110,7 @@ export async function getHomePage(): Promise<Page | null> {
     debugLog("Mapped Page [home]", page);
 
     // Fresh staging DBs lack x_homepage_sections_json — arch parse is a stub.
-    // Prefer committed home.json in dev until the Odoo Text field exists + is seeded.
+    // Prefer committed home.json in dev until the Odoo JSON field exists + is seeded.
     if (isLocalPageJsonInDev() && !cmsPageFieldAvailable("x_homepage_sections_json")) {
       const local = buildLocalHomePage();
       if (local) {
@@ -140,6 +161,42 @@ export async function getHomePage(): Promise<Page | null> {
 export async function getPageBySlug(slug: string): Promise<Page | null> {
   // security: hidden product slugs are denied at the data layer (object id = slug).
   if (isAutodeskHiddenSlug(slug)) return null;
+
+  // Committed our-story.json drives `/our-story` by default so the redesign is
+  // visible without re-seeding Odoo (same pattern as home.json).
+  if (slug === "our-story" && preferLocalOurStoryJson()) {
+    const localStory = buildLocalDevPage("our-story");
+    if (localStory?.sections.length) {
+      debugLog("Mapped Page [our-story local]", localStory);
+      return localStory;
+    }
+  }
+
+  if (slug === "our-team" && preferLocalOurTeamJson()) {
+    const localTeam = buildLocalDevPage("our-team");
+    if (localTeam?.sections.length) {
+      debugLog("Mapped Page [our-team local]", localTeam);
+      return localTeam;
+    }
+  }
+
+  if (preferLocalElvPageJson(slug)) {
+    const localElv = buildLocalDevPage(slug);
+    if (localElv?.sections.length) {
+      debugLog(`Mapped Page [${slug} local]`, localElv);
+      return localElv;
+    }
+  }
+
+  // Dev: committed odoo-json wins so ELV/product edits load instantly
+  // without waiting on a slow or compiling Odoo round-trip.
+  if (isLocalPageJsonInDev()) {
+    const localFirst = buildLocalDevPage(slug);
+    if (localFirst?.sections.length) {
+      debugLog(`Mapped Page [${slug} local]`, localFirst);
+      return localFirst;
+    }
+  }
 
   if (!isOdooConfigured()) {
     // No Odoo — local JSON then mock

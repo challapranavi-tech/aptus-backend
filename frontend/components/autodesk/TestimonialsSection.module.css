@@ -21,7 +21,9 @@
   z-index: 0;
   display: block;
   width: 100%;
-  height: auto;
+  height: min(30vh, 16rem);
+  object-fit: cover;
+  object-position: center;
   max-width: none;
   pointer-events: none;
   animation: bgIn 500ms var(--cs-ease);
@@ -47,7 +49,7 @@
   z-index: 2;
   max-width: 1440px;
   margin: 0 auto;
-  padding: clamp(28px, 4vh, 48px) clamp(20px, 4vw, 48px) clamp(32px, 5vh, 56px);
+  padding: clamp(12px, 2vh, 20px) clamp(20px, 4vw, 48px) clamp(14px, 2.5vh, 22px);
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -59,7 +61,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   flex-shrink: 0;
 }
 
@@ -68,9 +70,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 148px;
-  height: 56px;
-  padding: 10px 18px;
+  width: 128px;
+  height: 44px;
+  padding: 8px 14px;
   border-radius: 100vmax;
   border: 1.5px solid rgba(255, 255, 255, 0.85);
   background: rgba(0, 0, 0, 0.35);
@@ -126,12 +128,12 @@
   flex-direction: column;
   justify-content: center;
   max-width: 560px;
-  padding-top: 24px;
+  padding-top: 12px;
   animation: fadeSlide 420ms var(--cs-ease);
 }
 
 .eyebrow {
-  margin: 0 0 20px;
+  margin: 0 0 10px;
   font-family: var(--cs-font);
   font-size: 0.8125rem;
   font-weight: 700;
@@ -155,7 +157,7 @@
 }
 
 .attribution {
-  margin: 24px 0 0;
+  margin: 12px 0 0;
   font-family: var(--cs-font);
   font-size: 1rem;
   font-weight: 400;

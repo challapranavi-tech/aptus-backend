@@ -7,6 +7,7 @@ import { CTA } from "./CTA";
 import { Features } from "./Features";
 import { FlipCards } from "./FlipCards";
 import { PolicyPanel } from "./PolicyPanel";
+import { LegalPolicies } from "./LegalPolicies";
 import { SoftwareLandingHero } from "./SoftwareLandingHero";
 import { SoftwareInnerHero } from "./SoftwareInnerHero";
 import { CareerPanel } from "./CareerPanel";
@@ -17,19 +18,19 @@ import { Hero } from "./Hero";
 import { HeroSlider } from "./HeroSlider";
 import { KeyEnablers } from "./KeyEnablers";
 import { LogoGrid } from "./LogoGrid";
+import { OurStory } from "./OurStory";
 import { PageHeader } from "./PageHeader";
 import { PageTitle } from "./PageTitle";
 import { RichText } from "./RichText";
 import { Services } from "./Services";
 import { Team } from "./Team";
 import { Testimonials } from "./Testimonials";
+import { Faq } from "./Faq";
 
 type SectionComponentProps = {
   data: Section["data"];
 };
 
-// ponytail: "faq" is registered as null until the FAQ component is built.
-// SectionRenderer already handles null gracefully (skips + warns in dev).
 const sectionRegistry: Partial<Record<SectionType, ComponentType<SectionComponentProps>>> = {
   hero: Hero as ComponentType<SectionComponentProps>,
   "hero-slider": HeroSlider as ComponentType<SectionComponentProps>,
@@ -44,16 +45,18 @@ const sectionRegistry: Partial<Record<SectionType, ComponentType<SectionComponen
   features: Features as ComponentType<SectionComponentProps>,
   "flip-cards": FlipCards as ComponentType<SectionComponentProps>,
   "policy-panel": PolicyPanel as ComponentType<SectionComponentProps>,
+  "legal-policies": LegalPolicies as ComponentType<SectionComponentProps>,
   "why-panel": WhyPanel as ComponentType<SectionComponentProps>,
   "iso-panel": IsoPanel as ComponentType<SectionComponentProps>,
   "career-panel": CareerPanel as ComponentType<SectionComponentProps>,
   "software-landing-hero": SoftwareLandingHero as ComponentType<SectionComponentProps>,
   "software-inner-hero": SoftwareInnerHero as ComponentType<SectionComponentProps>,
+  "our-story": OurStory as ComponentType<SectionComponentProps>,
   services: Services as ComponentType<SectionComponentProps>,
   "key-enablers": KeyEnablers as ComponentType<SectionComponentProps>,
   cta: CTA as ComponentType<SectionComponentProps>,
   testimonials: Testimonials as ComponentType<SectionComponentProps>,
-  // faq: registered when FAQ component is built
+  faq: Faq as ComponentType<SectionComponentProps>,
 };
 
 interface SectionRendererProps {

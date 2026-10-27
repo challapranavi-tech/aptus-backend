@@ -1,0 +1,225 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Reliable Backup Power & Power Protection Solutions",
+    "bannerTagline": "Keep critical systems running when the power does not.",
+    "bannerBackgroundImages": [
+      {
+        "src": "/images/Standby-ups.png",
+        "alt": "Uninterruptible power supply and backup systems"
+      },
+      {
+        "src": "/images/Leonardo_Phoenix_10_a_cinematic_photograph_of_a_futuristic_dat_0-673x1024.jpg",
+        "alt": "Data center and critical IT power protection"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Data-Centers-Teaser-scaled.webp",
+        "alt": "Server room backup power infrastructure"
+      },
+      {
+        "src": "/images/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Netwo_2-673x1024.jpg",
+        "alt": "Network and communications power continuity"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/unnamed.jpg",
+        "alt": "Enterprise infrastructure requiring backup power"
+      }
+    ],
+    "title": "Reliable Backup Power & Power Protection Solutions",
+    "paragraphs": [
+      "A short outage should not take down servers, cameras, or phones. UPS and backup power ride through cuts and protect kit from surges. You get time to keep working or shut down safely. We size batteries and monitoring to the loads that must stay on."
+    ],
+    "imageSrc": "/images/Standby-ups.png",
+    "layout": "two-column",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form",
+    "ctaPlacement": "end",
+    "imageAlt": "Uninterruptible power supply and backup systems"
+  },
+  "cardSections": [
+    {
+      "id": "ups-deliver",
+      "visible": true,
+      "variant": "product-cards",
+      "gridColumns": 4,
+      "title": {
+        "before": "What We Deliver"
+      },
+      "subheading": "Backup power, surge protection, and intelligent monitoring for critical systems.",
+      "align": "left",
+      "items": [
+        {
+          "title": "Uninterruptible Power Supply (UPS)",
+          "body": "Continuous backup power during mains failure.",
+          "imageSrc": "/images/Standby-ups.png",
+          "imageAlt": "Uninterruptible power supply systems"
+        },
+        {
+          "title": "Power Surge & Voltage Protection",
+          "body": "Helps safeguard sensitive equipment from electrical disturbances.",
+          "imageSrc": "/images/ups-surge-protection.jpg",
+          "imageAlt": "Power surge and voltage protection"
+        },
+        {
+          "title": "Battery Backup Systems",
+          "body": "Configurable backup capacity based on required runtime and load.",
+          "imageSrc": "/images/ups-battery-backup.jpg",
+          "imageAlt": "Battery backup systems"
+        },
+        {
+          "title": "Critical Equipment Protection",
+          "body": "Designed for IT, networking, security, communication, and business-critical infrastructure.",
+          "imageSrc": "/images/ups-critical-equipment.jpg",
+          "imageAlt": "Critical equipment power protection"
+        },
+        {
+          "title": "Intelligent Monitoring",
+          "body": "Visibility into power status, load levels, battery condition, and system performance.",
+          "imageSrc": "/images/ups-monitoring.jpg",
+          "imageAlt": "Intelligent UPS monitoring"
+        },
+        {
+          "title": "Safe Shutdown Support",
+          "body": "Provides sufficient backup time for controlled shutdowns where required.",
+          "imageSrc": "/images/ups-safe-shutdown.jpg",
+          "imageAlt": "Safe shutdown support for critical systems"
+        },
+        {
+          "title": "Scalable Power Solutions",
+          "body": "Suitable for offices, server rooms, data centers, commercial facilities, and industrial environments.",
+          "imageSrc": "/images/ups-scalable.jpg",
+          "imageAlt": "Scalable backup power solutions"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Benefits of Our UPS Solutions"
+      },
+      "subheading": "Why our uninterruptible power supply systems are trusted by leading organizations",
+      "align": "center",
+      "items": [
+        {
+          "title": "Data Protection",
+          "body": "Immediate notification system for patients requiring urgent assistance with visual, audible, and vibration-based alerts.",
+          "icon": "shield-alt"
+        },
+        {
+          "title": "Business Continuity",
+          "body": "Reliable wireless communication devices ensuring staff are always reachable regardless of location within the facility.",
+          "icon": "stopwatch-20"
+        },
+        {
+          "title": "Cost Savings",
+          "body": "Real-time dashboard displaying active calls, response times, and system status for complete situational awareness.",
+          "icon": "dollar-sign"
+        },
+        {
+          "title": "Maintenance-Free Operation",
+          "body": "All communications are encrypted and meet strict HIPAA requirements for patient privacy protection.",
+          "icon": "screwdriver"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech",
+        "accent": "UPS Solutions?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Expert Engineering",
+          "body": "As an authorized partner, we provide access to genuine Autodesk products.",
+          "icon": "expand"
+        },
+        {
+          "title": "24/7 Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset"
+        },
+        {
+          "title": "Customized Solutions",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "project-diagram"
+        },
+        {
+          "title": "Proactive Maintenance",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "reply-all"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes-marquee",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Success stories from businesses using AutoCAD through Aptus Infotech",
+    "items": [
+      {
+        "quote": "The implementation of Aptus Infotech’s UPS system has dramatically improved our operational efficiency across multiple departments.",
+        "author": "Sarah Johnson",
+        "role": "Director of Operations"
+      },
+      {
+        "quote": "Their system seamlessly integrated with our existing infrastructure, creating a unified power backup ecosystem that has reduced errors and improved documentation accuracy.",
+        "author": "Michael Chen",
+        "role": "CEO"
+      },
+      {
+        "quote": "We were particularly impressed with the system’s reliability during critical situations and the excellent training provided to our staff.",
+        "author": "Jessica Williams",
+        "role": "Operations Manager"
+      }
+    ]
+  },
+  "midCta": {
+    "placement": "bottom",
+    "heading": "Ready to Ensure Your Business Continuity?",
+    "description": "Contact our power systems specialists to discuss how our UPS solutions can protect your critical operations from power disruptions.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Norden-1-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "Norden"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/EATON.png",
+        "alt": "EATON"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Vertiv.png",
+        "alt": "Vertiv"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Coral-rajdmogeyz54e94l9wk2y4mypcj2653jlhrirzgcxa.png",
+        "alt": "Coral"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/infosec-rajdoxajaq7s4pv65vhzwk8lshgmk40gklva1s4i26.png",
+        "alt": "infosec"
+      },
+      {
+        "src": "/images/kstar.png",
+        "alt": "KSTAR"
+      }
+    ]
+  }
+}

@@ -2,9 +2,9 @@
 
 .section {
   --pg-radius: 16px;
-  --pg-card-w: 420px;
-  --pg-card-w-open: 420px;
-  --pg-gap: 24px;
+  --pg-card-w: 260px;
+  --pg-card-w-open: 260px;
+  --pg-gap: 16px;
   --pg-font: ArtifaktElement, "Artifakt Element", Arial, sans-serif;
   --pg-black: #000;
   --pg-white: #fff;
@@ -21,7 +21,7 @@
   background-repeat: no-repeat;
   background-position: right center;
   background-size: cover;
-  padding: clamp(2rem, 8vh, 4rem) 0;
+  padding: 1rem 0 1.15rem;
   overflow: hidden;
   opacity: 0;
   transform: translateY(28px);
@@ -45,8 +45,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 28px;
-  gap: 16px;
+  margin-bottom: 10px;
+  gap: 12px;
 }
 
 .title {
@@ -97,7 +97,7 @@
   scrollbar-width: none;
   -ms-overflow-style: none;
   -webkit-overflow-scrolling: touch;
-  padding: 8px 4px 16px;
+  padding: 4px 2px 8px;
 }
 .scroller::-webkit-scrollbar {
   display: none;
@@ -107,8 +107,8 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 8px;
+  margin-top: 8px;
 }
 
 .navBtn {
@@ -172,7 +172,7 @@
 .flipOuter {
   position: relative;
   width: 100%;
-  aspect-ratio: 788 / 1050;
+  aspect-ratio: 3 / 4;
   transform-style: preserve-3d;
   transition: transform var(--pg-flip-dur) var(--pg-ease);
   border-radius: var(--pg-radius);
@@ -463,8 +463,8 @@
     padding: 0 32px;
   }
   .section {
-    --pg-card-w: 360px;
-    --pg-card-w-open: 360px;
+    --pg-card-w: 260px;
+    --pg-card-w-open: 260px;
   }
 }
 

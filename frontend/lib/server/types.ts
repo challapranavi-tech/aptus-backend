@@ -44,6 +44,7 @@ export type OrderLineInput = {
   purchaseType?: "new" | "renew";
   packageId?: string;
   levelId?: string;
+  serialNumber?: string;
 };
 
 export type PlaceOrderInput = {

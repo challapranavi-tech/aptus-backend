@@ -3,7 +3,9 @@ import { createOdooAttachment } from "./attachments";
 import { getPartnerOdooContext, resolveCrmRouting } from "./partner-context";
 import { formatPaymentPendingNote } from "./payment-meta";
 import { getCrmLeadNotesFieldName } from "./crm-lead-notes";
-import { lineConfigSummary } from "@/lib/portal-cart-checkout";
+import { cartLineUnitPrice, lineConfigSummary } from "@/lib/portal-cart-checkout";
+import { lookupGuidePrice, lookupPortalSku } from "@/data/software-purchase-catalog";
+import type { OdooClient } from "./client";
 
 export function isRecoverableSaleOrderCreateError(error: unknown): boolean {
   const message = error instanceof Error ? error.message : String(error);
@@ -56,6 +58,7 @@ export type PortalOrderLine = {
   purchaseType?: "new" | "renew";
   packageId?: string;
   levelId?: string;
+  serialNumber?: string;
 };
 
 /** Draft sales order with multiple product lines from the portal checkout. */
@@ -73,8 +76,28 @@ export async function createPortalSaleOrderWithLines(input: {
   const ctx = await getPartnerOdooContext(input.partnerId);
   const softwareCompanyId = resolveCrmRouting("software").companyId ?? ctx.companyId;
 
+  const pricedLines = input.lines.map((line) => {
+    const unitPrice = Math.max(
+      0,
+      cartLineUnitPrice(
+        {
+          category: line.category ?? "",
+          productName: line.productName,
+          quantity: line.quantity,
+          duration: line.duration ?? input.duration,
+          purchaseType: line.purchaseType,
+          packageId: line.packageId,
+          levelId: line.levelId,
+          serialNumber: line.serialNumber,
+        },
+        input.duration,
+      ),
+    );
+    return { line, unitPrice };
+  });
+
   const orderLines: unknown[] = [];
-  for (const line of input.lines) {
+  for (const { line, unitPrice } of pricedLines) {
     const productId = await findProductIdByName(line.productName, softwareCompanyId);
     const label = line.category ? `${line.category} — ${line.productName}` : line.productName;
     const summary = lineConfigSummary(
@@ -86,23 +109,23 @@ export async function createPortalSaleOrderWithLines(input: {
         purchaseType: line.purchaseType,
         packageId: line.packageId,
         levelId: line.levelId,
+        serialNumber: line.serialNumber,
       },
       input.duration,
     );
-    orderLines.push([
-      0,
-      0,
-      productId
-        ? {
-            product_id: productId,
-            product_uom_qty: line.quantity,
-            name: `${label} (${summary})`,
-          }
-        : {
-            name: `${label} (${summary})`,
-            product_uom_qty: line.quantity,
-          },
-    ]);
+    const sku = lookupPortalSku(
+      line.productName,
+      line.duration ?? input.duration,
+      line.purchaseType === "renew" ? "renew" : "new",
+    );
+    const skuSuffix = sku?.partNumber ? ` [${sku.partNumber}]` : "";
+    const values: Record<string, unknown> = {
+      name: `${label}${skuSuffix} (${summary})`,
+      product_uom_qty: line.quantity,
+    };
+    if (productId) values.product_id = productId;
+    if (unitPrice > 0) values.price_unit = unitPrice;
+    orderLines.push([0, 0, values]);
   }
 
   const orderValues: Record<string, unknown> = {
@@ -114,7 +137,43 @@ export async function createPortalSaleOrderWithLines(input: {
   if (input.orderReference) orderValues.client_order_ref = input.orderReference;
   if (softwareCompanyId) orderValues.company_id = softwareCompanyId;
 
-  return client.create("sale.order", orderValues);
+  const saleOrderId = await client.create("sale.order", orderValues);
+  await applyPortalLinePrices(
+    client,
+    saleOrderId,
+    pricedLines.map(({ line, unitPrice }) => ({
+      productName: line.productName,
+      priceUnit: unitPrice,
+    })),
+  );
+  return saleOrderId;
+}
+
+async function applyPortalLinePrices(
+  client: OdooClient,
+  saleOrderId: number,
+  lines: Array<{ productName: string; priceUnit: number }>,
+): Promise<void> {
+  const priced = lines.filter((line) => line.priceUnit > 0);
+  if (!priced.length) return;
+
+  try {
+    const rows = await client.searchRead<{ id: number; name: string; price_unit: number }>(
+      "sale.order.line",
+      [["order_id", "=", saleOrderId]],
+      ["id", "name", "price_unit"],
+      50,
+    );
+    for (const line of priced) {
+      const needle = line.productName.toLowerCase();
+      const match = rows.find((row) => row.name.toLowerCase().includes(needle));
+      if (!match) continue;
+      if (Number(match.price_unit) === line.priceUnit) continue;
+      await client.write("sale.order.line", [match.id], { price_unit: line.priceUnit });
+    }
+  } catch {
+    /* create already sent price_unit; this write is a fallback if pricelist wiped it */
+  }
 }
 
 /** Draft sales order linked to the portal customer (visible under Sales on the contact). */
@@ -129,16 +188,13 @@ export async function createPortalSaleOrder(input: {
   const ctx = await getPartnerOdooContext(input.partnerId);
   const elvCompanyId = resolveCrmRouting("elv").companyId ?? ctx.companyId;
   const productId = await findProductIdByName(input.productName, elvCompanyId);
-  const line = productId
-    ? {
-        product_id: productId,
-        product_uom_qty: 1,
-        name: input.productName,
-      }
-    : {
-        name: input.productName,
-        product_uom_qty: 1,
-      };
+  const unitPrice = lookupGuidePrice(input.productName, "1year");
+  const line: Record<string, unknown> = {
+    name: input.productName,
+    product_uom_qty: 1,
+  };
+  if (productId) line.product_id = productId;
+  if (unitPrice > 0) line.price_unit = unitPrice;
 
   const orderValues: Record<string, unknown> = {
     partner_id: input.partnerId,

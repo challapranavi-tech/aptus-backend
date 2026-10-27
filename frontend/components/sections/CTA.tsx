@@ -60,6 +60,7 @@ function CtaForm({ data }: { data: CTAData }) {
         data-cta-animate
         submitLabel={data.submitLabel ?? "Submit Now"}
         category={data.category ?? quote.category}
+        family={quote.family}
         productLabel={quote.productLabel}
         products={quote.products}
         defaultProduct={data.productName ?? quote.defaultProduct}
@@ -139,7 +140,64 @@ export function CTA({ data }: CTAProps) {
     },
   });
 
-  if (isLight) return null;
+  // Light contact CTAs were suppressed because the quote modal owns the form UX.
+  // After removing top "Request a Quote" buttons, pages without a mid-band CTA
+  // would have no quote entry point — render a bottom Request Quote button instead.
+  if (isLight) {
+    const quoteLabel =
+      data.formVariant === "software-quote" ||
+      data.heading?.trim().toLowerCase() === "request a quote"
+        ? "Request a Quote"
+        : data.action?.label &&
+            data.action.label !== "Contact Us" &&
+            data.action.label.trim()
+          ? data.action.label
+          : "Request a Quote";
+    const quoteHref =
+      data.action?.href?.startsWith("#") ||
+      data.action?.href?.toLowerCase().includes("popup")
+        ? (data.action.href as string)
+        : "#form";
+    const heading =
+      data.heading?.trim().toLowerCase() === "have questions? we can help"
+        ? "Request a Quote"
+        : (data.heading ?? "Request a Quote");
+    const description =
+      data.description?.toLowerCase().includes("fill out the form")
+        ? "Tell us what you need and our sales team will get back to you shortly."
+        : data.description;
+
+    return (
+      <section
+        ref={sectionRef}
+        id="Form"
+        className="aptus-software-mid-band"
+        data-section="cta"
+        data-layout="software-mid"
+      >
+        <div className="aptus-live-container">
+          <div
+            ref={innerRef}
+            className="aptus-software-mid-band__inner relative text-center"
+          >
+            <h2 data-cta-animate className="aptus-software-mid-title">
+              {heading}
+            </h2>
+            {description && (
+              <p data-cta-animate className="aptus-software-mid-lead">
+                {description}
+              </p>
+            )}
+            <div data-cta-animate className="aptus-software-mid-band__cta">
+              <Link href={quoteHref} className="aptus-software-btn aptus-software-btn-blue">
+                {quoteLabel}
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section
@@ -177,7 +235,7 @@ export function CTA({ data }: CTAProps) {
               </p>
             )}
             {data.action && (
-              <div data-cta-animate className="mt-8">
+              <div data-cta-animate className="aptus-software-mid-band__cta">
                 <Link href={data.action.href} className="aptus-software-btn aptus-software-btn-blue">
                   {data.action.label}
                 </Link>

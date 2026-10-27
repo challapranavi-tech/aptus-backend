@@ -1,14 +1,16 @@
-"use client";
+﻿"use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { OrderPaymentModal } from "./OrderPaymentModal";
 import {
   canMakePayment,
   getOrderDisplayStatus,
   isOrdersPageOrder,
-  orderStatusClass,
-  orderStatusHint,
+  orderRowStatusLabel,
+  orderRowStatusTone,
 } from "@/lib/order-status";
+import { formatShortDate } from "@/lib/overview-data";
 import { notifyPortalDataChanged } from "@/lib/portal-data-events";
 import type { PortalOrder } from "@/types/orders";
 import type { OrderDisplayStatus } from "@/lib/order-status";
@@ -18,7 +20,7 @@ const STATUS_FILTERS: Array<
 > = ["all", "Payment Verification Pending", "Payment Verified", "License Issued"];
 
 function durationLabel(duration: PortalOrder["duration"]): string {
-  return duration === "3year" ? "3 Years" : "1 Year";
+  return duration === "3year" ? "3 Years" : "Annual";
 }
 
 function matchesFilter(
@@ -27,6 +29,12 @@ function matchesFilter(
 ): boolean {
   if (filter === "all") return true;
   return getOrderDisplayStatus(order) === filter;
+}
+
+function productLabel(order: PortalOrder): string {
+  if (order.items.length === 0) return order.reference;
+  if (order.items.length === 1) return order.items[0].productName;
+  return `${order.items[0].productName} +${order.items.length - 1}`;
 }
 
 type OrdersPanelProps = {
@@ -40,34 +48,23 @@ export function OrdersPanel({ orders, loading, error, limit }: OrdersPanelProps)
   const [filter, setFilter] = useState<
     "all" | "Payment Verification Pending" | "Payment Verified" | "License Issued"
   >("all");
-  const [expandedId, setExpandedId] = useState<string | null>(null);
   const [payOrder, setPayOrder] = useState<PortalOrder | null>(null);
 
-  // Payment proof submitted through license issued
   const pageOrders = orders.filter(isOrdersPageOrder);
   const filtered = pageOrders.filter((order) => matchesFilter(order, filter));
   const visible = limit ? filtered.slice(0, limit) : filtered;
 
   return (
-    <section className="aptus-dashboard-card aptus-odoo-orders" aria-label="My orders">
-      <div className="aptus-dashboard-section-head">
-        <div>
-          <h2>Software purchase requests</h2>
-          <p>
-            Track payment verification, payment confirmed, and licenses that have been issued.
-          </p>
-        </div>
-      </div>
-
+    <section className="aptus-portal-page-card aptus-portal-orders" aria-label="My orders">
       {!limit ? (
-        <div className="aptus-orders-filters" role="tablist" aria-label="Filter orders by status">
+        <div className="aptus-portal-chips" role="tablist" aria-label="Filter orders by status">
           {STATUS_FILTERS.map((item) => (
             <button
               key={item}
               type="button"
               role="tab"
               aria-selected={filter === item}
-              className={filter === item ? "is-active" : ""}
+              className={`aptus-portal-chip${filter === item ? " is-active" : ""}`}
               onClick={() => setFilter(item)}
             >
               {item === "all" ? "All" : item}
@@ -79,7 +76,7 @@ export function OrdersPanel({ orders, loading, error, limit }: OrdersPanelProps)
       {loading ? (
         <div className="aptus-odoo-subscriptions__state" role="status" aria-live="polite">
           <div className="aptus-payment-processing__spinner" aria-hidden="true" />
-          <p>Loading your orders…</p>
+          <p>Loading your orders</p>
         </div>
       ) : null}
 
@@ -92,68 +89,75 @@ export function OrdersPanel({ orders, loading, error, limit }: OrdersPanelProps)
       {!loading && !error && visible.length === 0 ? (
         <div className="aptus-odoo-subscriptions__state">
           <p>
-            No orders in this view yet. Complete payment on a purchase request to see it here.
+            No orders in this view yet.{" "}
+            <Link href="/software-solutions/products" className="aptus-overview-compact__link">
+              Browse products
+            </Link>{" "}
+            to place an order.
           </p>
         </div>
       ) : null}
 
       {!loading && !error && visible.length > 0 ? (
-        <div className="aptus-orders-list">
-          {visible.map((order) => {
-            const isOpen = expandedId === order.id;
-            const totalQty = order.items.reduce((sum, item) => sum + item.quantity, 0);
-            const displayStatus = getOrderDisplayStatus(order);
-            const statusHint = orderStatusHint(displayStatus);
-            return (
-              <article key={order.id} className="aptus-order-card">
-                <header className="aptus-order-card__head">
-                  <div>
-                    <span className="aptus-order-card__ref">{order.reference}</span>
-                    <strong>{order.items.map((item) => item.productName).join(", ")}</strong>
-                  </div>
-                  <div className="aptus-order-card__actions">
-                    <mark className={`aptus-status ${orderStatusClass(displayStatus)}`}>
-                      {displayStatus}
-                    </mark>
-                    {canMakePayment(order) ? (
-                      <button
-                        type="button"
-                        className="aptus-order-card__pay"
-                        onClick={() => setPayOrder(order)}
-                      >
-                        Make Payment
-                      </button>
-                    ) : null}
-                  </div>
-                </header>
-                {statusHint ? <p className="aptus-order-card__hint">{statusHint}</p> : null}
-                <div className="aptus-order-card__meta">
-                  <span>{durationLabel(order.duration)}</span>
-                  <span>{totalQty} item{totalQty === 1 ? "" : "s"}</span>
-                  <span>{new Date(order.createdAt).toLocaleDateString("en-GB")}</span>
-                </div>
-                <button
-                  type="button"
-                  className="aptus-order-card__toggle"
-                  aria-expanded={isOpen}
-                  onClick={() => setExpandedId(isOpen ? null : order.id)}
-                >
-                  {isOpen ? "Hide details" : "View details"}
-                </button>
-                {isOpen ? (
-                  <div className="aptus-order-card__details">
-                    <ul>
-                      {order.items.map((item) => (
-                        <li key={`${item.category}-${item.productName}`}>
-                          {item.category} — {item.productName} × {item.quantity}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ) : null}
-              </article>
-            );
-          })}
+        <div className="aptus-portal-table-wrap">
+          <table className="aptus-portal-table">
+            <thead>
+              <tr>
+                <th scope="col">Order ID</th>
+                <th scope="col">Product</th>
+                <th scope="col">Order date</th>
+                <th scope="col">Status</th>
+                <th scope="col">License type</th>
+                <th scope="col">Invoice</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {visible.map((order) => {
+                const displayStatus = getOrderDisplayStatus(order);
+                const hasInvoice = Boolean(order.paymentProofUrl || order.paymentProofFileName);
+                return (
+                  <tr key={order.id}>
+                    <td>{order.reference}</td>
+                    <td>{productLabel(order)}</td>
+                    <td className="is-muted">{formatShortDate(order.createdAt)}</td>
+                    <td>
+                      <span className={`aptus-portal-pill aptus-portal-pill--${orderRowStatusTone(displayStatus)}`}>
+                        {orderRowStatusLabel(displayStatus)}
+                      </span>
+                    </td>
+                    <td>{durationLabel(order.duration)}</td>
+                    <td>
+                      {hasInvoice ? (
+                        <Link href="/portal/invoices" className="aptus-overview-compact__link">
+                          View invoice
+                        </Link>
+                      ) : (
+                        <span className="is-muted">Pending</span>
+                      )}
+                    </td>
+                    <td>
+                      {canMakePayment(order) ? (
+                        <button
+                          type="button"
+                          className="aptus-portal-btn aptus-portal-btn--primary"
+                          onClick={() => setPayOrder(order)}
+                        >
+                          Make payment
+                        </button>
+                      ) : displayStatus === "License Issued" ? (
+                        <Link href="/portal/subscriptions" className="aptus-overview-compact__link">
+                          View license
+                        </Link>
+                      ) : (
+                        <span className="is-muted">-</span>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
       ) : null}
 

@@ -1,5 +1,4 @@
 import { Container, CmsImage } from "@/components/ui";
-import { cn } from "@/lib/utils";
 import type { Team as TeamData } from "@/types";
 
 interface TeamProps {
@@ -13,7 +12,7 @@ export function Team({ data }: TeamProps) {
     return (
       <>
         {data.heading && (
-          <section className="bg-white py-8" data-section="team-title">
+          <section className="bg-white pb-4 pt-2" data-section="team-title">
             <Container>
               <h2 className="aptus-team-section-title">{data.heading}</h2>
             </Container>
@@ -21,7 +20,7 @@ export function Team({ data }: TeamProps) {
         )}
 
         {data.members && data.members.length > 0 && (
-          <section className="bg-white pb-16 pt-0" data-section="team" data-variant="leadership">
+          <section className="bg-white pb-8 pt-0" data-section="team" data-variant="leadership">
             <Container>
               <div className="grid gap-8 lg:grid-cols-2 lg:gap-6">
                 {data.members.map((m) => (

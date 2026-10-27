@@ -16,7 +16,15 @@ import type {
   SiteConfig,
 } from "@/types";
 import { parseArch } from "./arch-parser";
-import { isLocalPageJsonInDev, loadLocalPageSectionsJson } from "./local-page-json";
+import {
+  isLocalPageJsonInDev,
+  loadLocalHomeJson,
+  loadLocalPageSectionsJson,
+  preferLocalHomeJson,
+  preferLocalOurStoryJson,
+  preferLocalOurTeamJson,
+  preferLocalElvPageJson,
+} from "./local-page-json";
 import { mapHomepageJson } from "./json-mapper";
 import { mapPageJson } from "./page-json-mapper";
 
@@ -55,10 +63,29 @@ export function mapOdooPage(
 
   const slug = odooUrlToSlug(rawPage.url);
 
-  const homeSections = mapHomepageJson(rawPage.x_homepage_sections_json);
-  if (homeSections && homeSections.length > 0) {
-    sections = homeSections;
-  } else {
+  // Prefer committed home.json only for the homepage — never overwrite other slugs.
+  // Set USE_LOCAL_HOME_JSON=false to force Odoo JSON for `/`.
+  if (slug === "home") {
+    const localHomeRaw = preferLocalHomeJson() ? loadLocalHomeJson() : null;
+    const homeSections =
+      mapHomepageJson(localHomeRaw) ?? mapHomepageJson(rawPage.x_homepage_sections_json);
+    if (homeSections && homeSections.length > 0) {
+      sections = homeSections;
+    }
+  }
+
+  if (sections.length === 0) {
+    const localStoryJson =
+      slug === "our-story" && preferLocalOurStoryJson()
+        ? loadLocalPageSectionsJson("our-story")
+        : null;
+    const localTeamJson =
+      slug === "our-team" && preferLocalOurTeamJson()
+        ? loadLocalPageSectionsJson("our-team")
+        : null;
+    const localElvJson = preferLocalElvPageJson(slug)
+      ? loadLocalPageSectionsJson(slug)
+      : null;
     const localJson = isLocalPageJsonInDev() ? loadLocalPageSectionsJson(slug) : null;
     const caseStudiesJson =
       slug === "aptus-case-studies"
@@ -67,6 +94,7 @@ export function mapOdooPage(
     // Odoo stays source-of-truth. Local JSON is only a dev fallback when Odoo
     // has no JSON content for that page yet. Odoo empty Char/Text is often
     // `false` (not null/undefined) — treat that as missing so local can win.
+    // Exception: committed our-story.json wins by default (same pattern as home).
     const odooPageJson =
       typeof caseStudiesJson === "string" && caseStudiesJson.trim()
         ? caseStudiesJson
@@ -74,7 +102,8 @@ export function mapOdooPage(
             rawPage.x_page_sections_json.trim()
           ? rawPage.x_page_sections_json
           : null;
-    const pageJsonRaw = odooPageJson ?? localJson;
+    const pageJsonRaw =
+      localStoryJson ?? localTeamJson ?? localElvJson ?? odooPageJson ?? localJson;
     const pageSections = mapPageJson(pageJsonRaw, { slug });
     if (pageSections && pageSections.length > 0) {
       sections = pageSections;

@@ -1,5 +1,6 @@
-"use client";
+﻿"use client";
 
+import Link from "next/link";
 import { SubscriptionCard } from "./SubscriptionCard";
 import { useSubscriptions } from "@/hooks/useSubscriptions";
 import type { SubscriptionStatus } from "@/types/subscriptions";
@@ -26,30 +27,13 @@ export function SubscriptionsPanel({
 
   return (
     <section
-      className="aptus-dashboard-card aptus-odoo-subscriptions"
+      className="aptus-portal-licenses"
       aria-label={licenseView ? "My licenses" : "My subscriptions"}
     >
-      <div className="aptus-dashboard-section-head">
-        <div>
-          <h2>
-            {licenseView
-              ? "Your software licenses"
-              : statusFilter === "Expiring Soon"
-                ? "Subscriptions expiring soon"
-                : "Subscriptions & renewals"}
-          </h2>
-          <p>
-            {licenseView
-              ? "License keys, download links, and renewal dates for your purchased software."
-              : "Manage active subscriptions, renewals, upgrades, and cancellations."}
-          </p>
-        </div>
-      </div>
-
       {loading ? (
         <div className="aptus-odoo-subscriptions__state" role="status" aria-live="polite">
           <div className="aptus-payment-processing__spinner" aria-hidden="true" />
-          <p>Loading your subscriptions…</p>
+          <p>Loading your licenses</p>
         </div>
       ) : null}
 
@@ -60,13 +44,23 @@ export function SubscriptionsPanel({
       ) : null}
 
       {!loading && !error && visible.length === 0 ? (
-        <div className="aptus-odoo-subscriptions__state">
-          <p>No active subscriptions yet. Orders will appear here once confirmed in Odoo.</p>
+        <div className="aptus-portal-page-card aptus-odoo-subscriptions__state">
+          <p>
+            No active licenses yet.{" "}
+            <Link href="/software-solutions/products" className="aptus-overview-compact__link">
+              Buy software
+            </Link>{" "}
+            or check{" "}
+            <Link href="/portal/orders" className="aptus-overview-compact__link">
+              orders
+            </Link>
+            .
+          </p>
         </div>
       ) : null}
 
       {!loading && !error && visible.length > 0 ? (
-        <div className="aptus-lifecycle-grid">
+        <div className="aptus-portal-licenses__grid">
           {visible.map((subscription) => (
             <SubscriptionCard
               key={

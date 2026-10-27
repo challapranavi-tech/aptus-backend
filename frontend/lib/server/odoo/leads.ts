@@ -1,3 +1,4 @@
+import { cartLineUnitPrice } from "@/lib/portal-cart-checkout";
 import { logger } from "../logger";
 import { getOdooClient, type OdooClient } from "./client";
 import { persistCrmLeadNotes } from "./crm-lead-notes";
@@ -31,6 +32,40 @@ export function productOrderLeadName(items: LeadNameItem[]): string {
   const preview = labels.slice(0, 3).join(", ");
   const suffix = labels.length > 3 ? ` +${labels.length - 3} more` : "";
   return `Portal software order: ${preview}${suffix}`;
+}
+
+type PricedLeadItem = {
+  productName: string;
+  quantity: number;
+  duration?: "1year" | "3year";
+  purchaseType?: "new" | "renew";
+  packageId?: string;
+  levelId?: string;
+};
+
+/** Catalog subtotal for CRM Estimated Revenue (expected_revenue). */
+export function estimatedRevenueFromItems(
+  items: PricedLeadItem[],
+  duration: "1year" | "3year" = "1year",
+): number {
+  let total = 0;
+  for (const item of items) {
+    const qty = Math.min(999, Math.max(1, Math.floor(item.quantity || 1)));
+    const unit = cartLineUnitPrice(
+      {
+        category: "",
+        productName: item.productName,
+        quantity: qty,
+        duration: item.duration ?? duration,
+        purchaseType: item.purchaseType,
+        packageId: item.packageId,
+        levelId: item.levelId,
+      },
+      duration,
+    );
+    if (unit > 0) total += unit * qty;
+  }
+  return Math.round(total * 1000) / 1000;
 }
 
 /**
@@ -78,6 +113,7 @@ async function createPortalCrmLead(
     name: string;
     description: string;
     routing?: CrmRoutingKind;
+    expectedRevenue?: number;
   },
 ): Promise<number> {
   const ctx = await getPartnerOdooContextForCrm(input.partnerId, input.routing ?? "default");
@@ -91,6 +127,9 @@ async function createPortalCrmLead(
     type: "opportunity",
     probability: 10,
   };
+  if (input.expectedRevenue != null && input.expectedRevenue > 0) {
+    values.expected_revenue = input.expectedRevenue;
+  }
   if (ctx.email) values.email_from = ctx.email;
   if (ctx.name) values.contact_name = ctx.name;
   if (ctx.companyId) values.company_id = ctx.companyId;
@@ -157,6 +196,7 @@ export async function createProductOrderLead(input: {
   partnerId: number;
   items: Array<{ productName: string; quantity: number }>;
   description: string;
+  expectedRevenue?: number;
 }): Promise<number> {
   const client = getOdooClient();
   if (!client) throw new Error("Odoo is not configured");
@@ -166,6 +206,7 @@ export async function createProductOrderLead(input: {
     name: productOrderLeadName(input.items),
     description: input.description,
     routing: "software",
+    expectedRevenue: input.expectedRevenue ?? estimatedRevenueFromItems(input.items),
   });
 }
 
@@ -191,7 +232,7 @@ async function resolvePortalPurchaseStageId(
 ): Promise<number | null> {
   return resolvePipelineStageIdByHints(
     client,
-    ["portal purchase", "portal software order"],
+    ["payment verification", "portal purchase", "portal software order"],
     teamId,
   );
 }
@@ -201,7 +242,11 @@ async function resolvePaymentConfirmationStageId(
   client: OdooClient,
   teamId?: number,
 ): Promise<number | null> {
-  return resolvePipelineStageIdByHints(client, ["payment confirmation"], teamId);
+  return resolvePipelineStageIdByHints(
+    client,
+    ["payment confirmation", "payment verified"],
+    teamId,
+  );
 }
 
 /** Software team issued the license. Prefer dedicated stage; Won is last resort. */
@@ -328,6 +373,7 @@ export async function upsertCartCrmLead(input: {
   productNames: string[];
   description: string;
   existingLeadId?: number;
+  expectedRevenue?: number;
 }): Promise<number> {
   const client = getOdooClient();
   if (!client) throw new Error("Odoo is not configured");
@@ -368,6 +414,9 @@ export async function upsertCartCrmLead(input: {
     if (ctx.companyId) values.company_id = ctx.companyId;
     if (ctx.teamId) values.team_id = ctx.teamId;
     if (stageId) values.stage_id = stageId;
+    if (input.expectedRevenue != null && input.expectedRevenue > 0) {
+      values.expected_revenue = input.expectedRevenue;
+    }
 
     await client.write("crm.lead", [leadId], values);
     if (input.description.trim()) {
@@ -395,6 +444,9 @@ export async function upsertCartCrmLead(input: {
   if (ctx.companyId) values.company_id = ctx.companyId;
   if (ctx.teamId) values.team_id = ctx.teamId;
   if (stageId) values.stage_id = stageId;
+  if (input.expectedRevenue != null && input.expectedRevenue > 0) {
+    values.expected_revenue = input.expectedRevenue;
+  }
 
   leadId = await client.create("crm.lead", values);
   if (input.description.trim()) {
@@ -456,6 +508,7 @@ export async function promoteCartLeadToProductOrder(input: {
   /** Omit to keep the notes the cart journey already wrote (checkout details). */
   description?: string;
   existingLeadId?: number;
+  expectedRevenue?: number;
 }): Promise<number> {
   const client = getOdooClient();
   if (!client) throw new Error("Odoo is not configured");
@@ -470,6 +523,7 @@ export async function promoteCartLeadToProductOrder(input: {
       partnerId: input.partnerId,
       items: input.items,
       description: input.description ?? "",
+      expectedRevenue: input.expectedRevenue,
     });
   }
 
@@ -477,6 +531,7 @@ export async function promoteCartLeadToProductOrder(input: {
   const stageId = await resolvePortalPurchaseStageId(client, ctx.teamId);
   const name = productOrderLeadName(input.items);
 
+  const expectedRevenue = input.expectedRevenue ?? estimatedRevenueFromItems(input.items);
   const values: Record<string, unknown> = {
     name,
     probability: 30,
@@ -489,6 +544,7 @@ export async function promoteCartLeadToProductOrder(input: {
   if (ctx.companyId) values.company_id = ctx.companyId;
   if (ctx.teamId) values.team_id = ctx.teamId;
   if (stageId) values.stage_id = stageId;
+  if (expectedRevenue > 0) values.expected_revenue = expectedRevenue;
 
   await client.write("crm.lead", [leadId], values);
   if (input.description?.trim()) {

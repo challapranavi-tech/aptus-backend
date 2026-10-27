@@ -73,6 +73,47 @@ html {
   justify-content: flex-start;
 }
 
+.aptus-masthead__topbar-cell--lang {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  margin-inline-start: auto;
+}
+
+.aptus-lang-switch {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+.aptus-lang-switch__btn {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  opacity: 0.75;
+  padding: 0;
+}
+
+.aptus-lang-switch__btn:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.aptus-lang-switch__btn--active {
+  font-weight: 700;
+  opacity: 1;
+  text-decoration: none;
+}
+
+.aptus-lang-switch__sep {
+  opacity: 0.45;
+}
+
 .aptus-masthead__social {
   align-items: center;
   display: flex;
@@ -296,6 +337,21 @@ html {
   transform: scale(1);
 }
 
+/* Active + hover: keep blue pill so white hover text stays visible */
+.aptus-masthead__link.is-active:hover,
+.aptus-masthead__link.is-active:focus-visible,
+.aptus-masthead__dropdown:hover > .aptus-masthead__link.is-active,
+.aptus-masthead__dropdown:focus-within > .aptus-masthead__link.is-active {
+  color: #fff !important;
+}
+
+.aptus-masthead__link.is-active:hover::before,
+.aptus-masthead__link.is-active:focus-visible::before,
+.aptus-masthead__dropdown:hover > .aptus-masthead__link.is-active::before,
+.aptus-masthead__dropdown:focus-within > .aptus-masthead__link.is-active::before {
+  background-color: #1352a3;
+}
+
 .aptus-masthead__chevron {
   flex-shrink: 0;
   height: 10px;
@@ -397,10 +453,64 @@ html {
   overflow-y: auto;
 }
 
+/* Products & Services: compact first panel (Software + ELV only); children open left */
+.aptus-masthead__dropdown-panel--products {
+  left: auto;
+  max-height: none !important;
+  min-width: 220px;
+  overflow: visible !important;
+  right: 0;
+}
+
+.aptus-masthead__dropdown-panel--products > li > a,
+.aptus-masthead__dropdown-panel--products > li > .aptus-masthead__link--parent,
+.aptus-masthead__dropdown-panel--products > li > .aptus-masthead__link--flyout-trigger {
+  white-space: nowrap;
+}
+
+/* Software / ELV flyouts open to the left under Products (into the page) */
+.aptus-masthead__dropdown--products .aptus-masthead__dropdown--nested > .aptus-masthead__dropdown-panel--nested,
+.aptus-masthead__dropdown--products .aptus-masthead__dropdown--nested > .aptus-masthead__dropdown-panel--nested.is-flip-x {
+  left: auto;
+  margin-left: 0;
+  margin-right: -1px;
+  right: 100%;
+  transform: translateX(-4px);
+}
+
+.aptus-masthead__dropdown--products .aptus-masthead__dropdown--nested:hover > .aptus-masthead__dropdown-panel--nested,
+.aptus-masthead__dropdown--products .aptus-masthead__dropdown--nested:focus-within > .aptus-masthead__dropdown-panel--nested {
+  transform: translateX(0);
+}
+
+.aptus-masthead__dropdown-panel--hub.aptus-masthead__dropdown-panel--nested {
+  max-height: min(75vh, 560px);
+  min-width: 280px;
+  z-index: 1080;
+}
+
 .aptus-masthead__dropdown-panel--software {
   background-color: #1a1a2e;
-  max-height: none;
-  overflow: visible;
+  max-height: min(75vh, 560px);
+  min-width: 280px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.aptus-masthead__dropdown-panel--elv {
+  background-color: #1a1a2e;
+  max-height: min(75vh, 560px);
+  min-width: 300px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.aptus-masthead__dropdown-panel--software.aptus-masthead__dropdown-panel--nested {
+  max-height: min(75vh, 560px);
+  min-width: 280px;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .aptus-masthead__dropdown-panel--software > li > a,
@@ -650,7 +760,8 @@ html {
 @media (min-width: 1024px) {
   .aptus-masthead__topbar-inner {
     gap: 0;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.6fr) minmax(0, 1.6fr) minmax(0, 1.1fr);
+    grid-template-columns:
+      minmax(0, 1.1fr) minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1.1fr) auto;
   }
 
   .aptus-masthead__topbar-cell {
@@ -665,6 +776,12 @@ html {
 
   .aptus-masthead__topbar-cell--social {
     justify-content: flex-start;
+  }
+
+  .aptus-masthead__topbar-cell--lang {
+    justify-content: flex-end;
+    margin-inline-start: 0;
+    padding-inline-end: 0.25rem;
   }
 }
 
@@ -731,6 +848,15 @@ html {
   .aptus-masthead__link {
     padding: 13px 20px !important;
   }
+}
+
+/* Language switcher in main nav row */
+.aptus-masthead__lang {
+  color: var(--aptus-color-primary, #1352a3);
+}
+
+.aptus-masthead__lang .aptus-lang-switch__btn {
+  color: inherit;
 }
 
 /* Customer portal login / avatar in masthead */
@@ -861,5 +987,23 @@ html {
 @media (max-width: 1024px) {
   .aptus-masthead__center {
     display: none !important;
+  }
+}
+
+.aptus-header-support {
+  align-items: center;
+  color: var(--aptus-color-primary, #1352a3);
+  display: inline-flex;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.aptus-header-support:hover {
+  color: var(--aptus-color-primary-dark, #0e3f7d);
+}
+
+@media (min-width: 1025px) {
+  .aptus-masthead__nav-inner {
+    --masthead-nav-height: 68px;
   }
 }

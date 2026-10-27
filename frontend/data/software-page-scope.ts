@@ -20,14 +20,36 @@ const INNER_FAMILY_BY_SLUG: Record<string, string> = {};
 for (const family of SOFTWARE_FAMILIES) {
   // ponytail: slug prefix heuristic until manifest is imported at build time
   if (family === "adobe") {
-    ["adobe-business-creative-solutions", "adobe-acrobat-pro", "adobe-illustrator", "adobe-photoshop", "adobe-premiere-pro"].forEach(
-      (s) => {
-        INNER_FAMILY_BY_SLUG[s] = family;
-      },
-    );
+    [
+      "adobe-business-creative-solutions",
+      "creative-cloud-teams-education",
+      "creative-cloud-enterprise-hed",
+      "creative-cloud-enterprise",
+      "adobe-acrobat-pro",
+      "adobe-illustrator",
+      "adobe-photoshop",
+      "adobe-premiere-pro",
+    ].forEach((s) => {
+      INNER_FAMILY_BY_SLUG[s] = family;
+    });
   }
   if (family === "microsoft") {
-    ["microsoft-365-apps", "microsoft-365-business", "microsoft-visio", "power-bi"].forEach((s) => {
+    [
+      "microsoft-365-e3",
+      "microsoft-365-apps",
+      "microsoft-365-business",
+      "microsoft-365-business-basic",
+      "exchange-online-kiosk",
+      "microsoft-teams-essentials",
+      "microsoft-visio",
+      "copilot-for-microsoft-365",
+      "planner-plan-1",
+      "power-bi",
+      "power-bi-premium-per-user",
+      "windows-11-pro",
+      "project-professional-2024",
+      "windows-server-2025",
+    ].forEach((s) => {
       INNER_FAMILY_BY_SLUG[s] = family;
     });
   }
@@ -42,7 +64,7 @@ for (const family of SOFTWARE_FAMILIES) {
     });
   }
   if (family === "oracle") {
-    ["oracle-primavera-p6", "aconex"].forEach((s) => {
+    ["oracle-primavera-p6", "oracle-primavera-p6-enterprise", "aconex"].forEach((s) => {
       INNER_FAMILY_BY_SLUG[s] = family;
     });
   }
@@ -76,7 +98,7 @@ INNER_FAMILY_BY_SLUG["antivirus-and-data-security"] = "cyber-security";
 INNER_FAMILY_BY_SLUG.infodrainage = "water-infrastructure";
 INNER_FAMILY_BY_SLUG["infowater-pro"] = "water-infrastructure";
 INNER_FAMILY_BY_SLUG["infoworks-icm"] = "water-infrastructure";
-INNER_FAMILY_BY_SLUG["infoworks-ws-pro"] = "water-infrastructure";
+INNER_FAMILY_BY_SLUG["infoworks-icm-ultimate"] = "water-infrastructure";
 
 const STACKED_INNER_SLUGS = new Set<string>([
   // ponytail: empty — all software inners use AutoCAD-style SectionRenderer layout
@@ -88,7 +110,7 @@ export function usesStackedSoftwareLayout(slug: string): boolean {
 
 export function getSoftwarePageScope(slug: string): SoftwarePageScope | null {
   if (SOFTWARE_HUB_SLUGS.has(slug)) {
-    const family = slug === "multimedia-software-solutions" ? "multimedia" : slug === "software" ? "software" : slug;
+    const family = slug === "multimedia-software-solutions" ? "multimedia" : slug === "software" || slug === "software-solutions" ? "software-solutions" : slug;
     return {
       isHub: true,
       isInner: false,

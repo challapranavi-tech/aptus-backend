@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import type { Features as FeaturesData } from "@/types";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import { HomeIndustriesSection } from "./HomeIndustriesSection";
 
 interface FeaturesProps {
   data: FeaturesData;
@@ -577,6 +578,10 @@ export function Features({ data }: FeaturesProps) {
   const isIconCards = data.variant === "icon-cards";
   const isBulletList = data.variant === "bullet-list";
   const isChecklist = data.variant === "checklist";
+  const isHomePromises = data.variant === "home-promises";
+  const isHomeIndustries = data.variant === "home-industries";
+  const isHomeChallenges = data.variant === "home-challenges";
+  const isHomeWhyChoose = data.variant === "home-why-choose";
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -584,24 +589,157 @@ export function Features({ data }: FeaturesProps) {
 
     const ctx = gsap.context(() => {
       const cards = sectionRef.current?.querySelectorAll(".feature-card");
-      if (!cards) return;
+      if (!cards?.length) return;
       const isSoftware = sectionRef.current?.closest(".aptus-software-page");
-      gsap.from(cards, {
-        y: isSoftware ? 24 : 40,
-        opacity: isSoftware ? 1 : 0,
-        duration: 0.7,
-        ease: "power3.out",
-        stagger: 0.12,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 82%",
-          once: true,
+      const isFlipSection = false;
+
+      gsap.fromTo(
+        cards,
+        {
+          y: isSoftware ? 24 : 36,
+          opacity: isSoftware ? 1 : 0,
+          rotateY: isFlipSection ? -55 : 0,
         },
-      });
+        {
+          y: 0,
+          opacity: 1,
+          rotateY: 0,
+          transformPerspective: isFlipSection ? 900 : undefined,
+          duration: isFlipSection ? 0.85 : 0.7,
+          ease: "power3.out",
+          stagger: isFlipSection ? 0.1 : 0.12,
+          clearProps: "transform",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 82%",
+            once: true,
+          },
+        },
+      );
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [isHomeChallenges, isHomeWhyChoose, isHomePromises]);
+
+  if (isHomeWhyChoose) {
+    return (
+      <section
+        ref={sectionRef}
+        className="home-why-choose section-padding"
+        data-section="features"
+        data-variant="home-why-choose"
+      >
+        <Container>
+          {data.heading && (
+            <div className="home-why-choose__header">
+              <h2 className="home-why-choose__heading">{data.heading}</h2>
+            </div>
+          )}
+          {data.items && data.items.length > 0 && (
+            <div className="home-why-choose__grid">
+              {data.items.map((item) => (
+                <article key={item.id} className="feature-card home-why-choose__card">
+                  {item.number && (
+                    <span className="home-why-choose__number">{item.number}</span>
+                  )}
+                  {item.title && <h3 className="home-why-choose__title">{item.title}</h3>}
+                  {item.description && (
+                    <p className="home-why-choose__desc">{item.description}</p>
+                  )}
+                </article>
+              ))}
+            </div>
+          )}
+        </Container>
+      </section>
+    );
+  }
+
+  if (isHomeChallenges) {
+    return (
+      <section
+        ref={sectionRef}
+        className="home-challenges section-padding"
+        data-section="features"
+        data-variant="home-challenges"
+      >
+        <Container>
+          {data.subheading && (
+            <div className="home-challenges__header">
+              <p className="home-challenges__subheading">{data.subheading}</p>
+            </div>
+          )}
+          {data.items && data.items.length > 0 && (
+            <div className="home-challenges__grid">
+              {data.items.map((item) => (
+                <article key={item.id} className="feature-card home-challenges__card">
+                  {item.title && <h3 className="home-challenges__title">{item.title}</h3>}
+                  {item.description && (
+                    <p className="home-challenges__desc">{item.description}</p>
+                  )}
+                </article>
+              ))}
+            </div>
+          )}
+          {data.heading && (
+            <p className="home-challenges__heading">{data.heading}</p>
+          )}
+          {data.bridge && (
+            <p className="home-challenges__bridge">{data.bridge}</p>
+          )}
+        </Container>
+      </section>
+    );
+  }
+
+  if (isHomeIndustries) {
+    return <HomeIndustriesSection data={data} />;
+  }
+
+  if (isHomePromises) {
+    return (
+      <section
+        ref={sectionRef}
+        className="home-promises section-padding"
+        data-section="features"
+        data-variant="home-promises"
+      >
+        <Container>
+          {(data.heading || data.headingAccent || data.subheading) && (
+            <div className="home-promises__header">
+              {(data.heading || data.headingAccent) && (
+                <h2 className="home-promises__heading">
+                  {data.heading}
+                  {data.heading && data.headingAccent ? " " : null}
+                  {data.headingAccent}
+                </h2>
+              )}
+              {data.subheading && (
+                <p className="home-promises__lead">{data.subheading}</p>
+              )}
+            </div>
+          )}
+          {data.items && data.items.length > 0 && (
+            <div className="home-promises__grid">
+              {data.items.map((item) => (
+                <article key={item.id} className="feature-card home-promises__card">
+                  {item.icon && (
+                    <div className="home-promises__icon">
+                      <PillarIcon name={item.icon} className="h-8 w-8" />
+                    </div>
+                  )}
+                  {item.title && <h3 className="home-promises__title">{item.title}</h3>}
+                  {item.description && (
+                    <p className="home-promises__desc">{item.description}</p>
+                  )}
+                </article>
+              ))}
+            </div>
+          )}
+        </Container>
+      </section>
+    );
+  }
 
   if (isProductCards) {
     const colCount = data.gridColumns ?? ((data.items?.length ?? 0) <= 3 ? 3 : 4);
@@ -624,7 +762,9 @@ export function Features({ data }: FeaturesProps) {
           <div
             className={cn(
               "aptus-software-product-grid",
-              colCount === 3 ? "aptus-software-product-grid--3" : "aptus-software-product-grid--4",
+              colCount === 3 && "aptus-software-product-grid--3",
+              colCount === 4 && "aptus-software-product-grid--4",
+              colCount >= 5 && "aptus-software-product-grid--5",
             )}
           >
             {data.items?.map((item) => (

@@ -13,6 +13,7 @@ const STRUCTURAL_PATHS = new Set(["/computers-structures", "/prokon"]);
 
 function subnavLabel(family?: string): string {
   if (family === "elv") return "ELV Solutions";
+  if (family === "software" || family === "software-solutions") return "Software Solutions";
   if (family === "educational") return "Educational Software";
   if (family === "cubicost-group") return "Software products";
   if (family === "structural" || family === "csi") return "Structural Software";

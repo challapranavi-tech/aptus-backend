@@ -39,6 +39,8 @@ export function notificationStatusLabel(
   if (mapped === "Rejected") return "Rejected";
   if (mapped === "Approved") return "Approved";
   if (mapped === "Submitted") return "Submitted";
+  if (status === "Quotation Sent") return "Quotation Sent";
+  if (status === "Payment Received") return "Payment Received";
   return status;
 }
 

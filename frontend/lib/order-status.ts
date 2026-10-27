@@ -17,6 +17,25 @@ function crmStageHint(order: PortalOrder): string {
   return (order.crmStage ?? "").toLowerCase();
 }
 
+export function isPaymentVerificationCrmStage(stage?: string): boolean {
+  const value = (stage ?? "").toLowerCase();
+  return (
+    value.includes("payment verification") ||
+    value.includes("portal purchase") ||
+    value.includes("portal software order")
+  );
+}
+
+export function isPaymentVerifiedCrmStage(stage?: string): boolean {
+  const value = (stage ?? "").toLowerCase();
+  return value.includes("payment confirmation") || value.includes("payment verified");
+}
+
+export function isLicenseIssuedCrmStage(stage?: string): boolean {
+  const value = (stage ?? "").toLowerCase();
+  return value.includes("license issued") || value.includes("won");
+}
+
 /**
  * Portal-facing status mirrors the purchase CRM journey:
  * Portal Purchase → Payment Verification Pending
@@ -31,26 +50,21 @@ export function getOrderDisplayStatus(order: PortalOrder): OrderDisplayStatus {
     return "Rejected";
   }
 
-  if (
-    order.licenseIssued ||
-    stage.includes("license issued") ||
-    stage.includes("won")
-  ) {
+  if (order.licenseIssued || isLicenseIssuedCrmStage(stage)) {
     return "License Issued";
   }
 
   if (
     order.paymentStatus === "paid" ||
     status === "Completed" ||
-    stage.includes("payment confirmation")
+    isPaymentVerifiedCrmStage(stage)
   ) {
     return "Payment Verified";
   }
 
   if (
     order.paymentStatus === "pending_verification" ||
-    stage.includes("portal purchase") ||
-    stage.includes("portal software order")
+    isPaymentVerificationCrmStage(stage)
   ) {
     return "Payment Verification Pending";
   }

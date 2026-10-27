@@ -21,6 +21,7 @@ interface SoftwareStackedSectionsProps {
 
 function subnavLabel(family?: string): string {
   if (family === "elv") return "ELV Solutions";
+  if (family === "software" || family === "software-solutions") return "Software Solutions";
   if (family === "educational") return "Electrical Software";
   if (family === "microsoft") return "Microsoft products";
   return `${family ?? "Software"} products`;

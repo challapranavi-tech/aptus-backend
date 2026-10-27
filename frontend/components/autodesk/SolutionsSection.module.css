@@ -18,7 +18,9 @@
   z-index: 0;
   display: block;
   width: 100%;
-  height: auto;
+  height: min(26vh, 13.5rem);
+  object-fit: cover;
+  object-position: center;
   max-width: none;
   pointer-events: none;
 }
@@ -45,8 +47,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
-  padding: clamp(32px, 6vh, 72px) clamp(24px, 6vw, 80px);
-  gap: clamp(32px, 8vh, 96px);
+  padding: clamp(16px, 2.5vh, 24px) clamp(24px, 6vw, 80px);
+  gap: clamp(12px, 2vh, 20px);
   line-height: normal;
   opacity: 0;
   transform: translateY(20px);
@@ -128,8 +130,8 @@
   .content {
     justify-content: flex-end;
     align-items: stretch;
-    padding: 24px clamp(16px, 4vw, 28px) 28px;
-    gap: 20px;
+    padding: 16px clamp(16px, 4vw, 28px) 18px;
+    gap: 12px;
   }
 
   .title,

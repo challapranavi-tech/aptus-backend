@@ -1,8 +1,10 @@
-/* Site footer — Tailwind layout in Footer.tsx; keep logo/overflow constraints here
-   so globals `img { height: auto }` can't blow past the viewport. */
+/* Site footer — dark Aptus details band */
 
 [data-section="footer"] {
   overflow-x: clip;
+  background-color: #0b1220;
+  color: rgb(255 255 255 / 0.92);
+  border-top-color: rgb(255 255 255 / 0.12);
 }
 
 [data-section="footer"] .aptus-footer-brand {
@@ -13,6 +15,9 @@
 [data-section="footer"] .aptus-footer-logo-link {
   display: inline-block;
   max-width: 100%;
+  background: rgb(255 255 255 / 0.96);
+  border-radius: 6px;
+  padding: 0.3rem 0.5rem;
 }
 
 [data-section="footer"] .aptus-footer-logo {
@@ -24,38 +29,65 @@
 }
 
 [data-section="footer"] .aptus-footer-map {
-  min-height: 180px;
+  min-height: 120px;
 }
 
 [data-section="footer"] .aptus-footer-col-text {
   overflow-wrap: anywhere;
+  color: rgb(255 255 255 / 0.82);
+}
+
+[data-section="footer"] .aptus-footer-heading {
+  color: #fff;
+}
+
+[data-section="footer"] .aptus-footer-heading--compact {
+  letter-spacing: 0.01em;
+}
+
+[data-section="footer"] .aptus-footer-link {
+  color: rgb(255 255 255 / 0.82);
+  transition: color 0.2s ease;
+}
+
+[data-section="footer"] .aptus-footer-link:hover {
+  color: var(--color-brand-green-light, #67db85);
+}
+
+[data-section="footer"] .aptus-footer-follow {
+  border-top-color: rgb(255 255 255 / 0.12);
+}
+
+[data-section="footer"] .aptus-footer-copyright {
+  border-top-color: rgb(255 255 255 / 0.12);
+  color: rgb(255 255 255 / 0.55);
 }
 
 @media (min-width: 640px) {
   [data-section="footer"] .aptus-footer-logo {
-    max-height: 2.35rem;
-    max-width: min(100%, 11rem);
+    max-height: 2.25rem;
+    max-width: min(100%, 10.5rem);
   }
 
   [data-section="footer"] .aptus-footer-map {
-    min-height: 220px;
+    min-height: 140px;
   }
 }
 
 @media (min-width: 1024px) {
   [data-section="footer"] .aptus-footer-logo {
-    max-height: 2.75rem;
-    max-width: min(100%, 13rem);
+    max-height: 2.5rem;
+    max-width: min(100%, 11.5rem);
   }
 
   [data-section="footer"] .aptus-footer-map {
-    min-height: 260px;
+    min-height: 160px;
   }
 }
 
 /* Legacy class kept for any leftover markup */
 .aptus-footer {
-  background-color: var(--color-navy-dark);
+  background-color: #0b1220;
   color: rgb(255 255 255 / 0.9);
   padding-block: var(--section-padding);
 }
@@ -66,5 +98,5 @@
 }
 
 .aptus-footer a:hover {
-  color: var(--accent-amber);
+  color: var(--color-brand-green-light, #67db85);
 }

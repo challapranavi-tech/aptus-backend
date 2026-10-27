@@ -1,9 +1,11 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn, isExternalHref } from "@/lib/utils";
 import type { NavigationItem } from "@/types";
 import { clearLegacyPortalSession, syncLegacyPortalSession } from "@/lib/access-token";
 import { fetchAuthMeShared, invalidateAuthMeCache } from "@/lib/auth-me-client";
+import { useLocale } from "@/context/LocaleProvider";
+import { translateNavLabel } from "@/locales/messages";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -11,13 +13,21 @@ import {
   useEffect,
   useId,
   useState,
+  type AnchorHTMLAttributes,
   type FocusEvent,
   type KeyboardEvent,
   type MouseEvent,
+  type ReactNode,
 } from "react";
 
 interface NavMenuProps {
   items: NavigationItem[];
+}
+
+function NavLabel({ item, keepLabel = false }: { item: NavigationItem; keepLabel?: boolean }) {
+  const { locale } = useLocale();
+  if (keepLabel) return <>{item.label}</>;
+  return <>{translateNavLabel(locale, item.href, item.label)}</>;
 }
 
 const VIEWPORT_PAD = 12;
@@ -33,14 +43,19 @@ function positionFlyout(dropdown: HTMLElement) {
   panel.style.removeProperty("bottom");
 
   const nested = dropdown.classList.contains("aptus-masthead__dropdown--nested");
+  // Last main item (Products & Services): nested flyouts always open to the left
+  const underProducts = Boolean(dropdown.closest(".aptus-masthead__dropdown--products"));
   let rect = panel.getBoundingClientRect();
 
-  if (rect.right > window.innerWidth - VIEWPORT_PAD) {
+  if (underProducts && nested) {
+    panel.classList.add("is-flip-x");
+    rect = panel.getBoundingClientRect();
+  } else if (rect.right > window.innerWidth - VIEWPORT_PAD) {
     panel.classList.add("is-flip-x");
     rect = panel.getBoundingClientRect();
   }
 
-  if (rect.left < VIEWPORT_PAD) {
+  if (rect.left < VIEWPORT_PAD && !(underProducts && nested)) {
     panel.classList.remove("is-flip-x");
     rect = panel.getBoundingClientRect();
   }
@@ -108,9 +123,42 @@ function NavChevron({ direction = "down" }: { direction?: "down" | "right" }) {
 }
 
 function isDirectlyActive(item: NavigationItem, pathname: string): boolean {
-  if (!item.href || item.href === "#") return false;
+  if (!item.href || item.href === "#" || isExternalHref(item.href)) return false;
   if (item.href === "/") return pathname === "/";
   return pathname === item.href || pathname.startsWith(`${item.href}/`);
+}
+
+function NavHref({
+  href,
+  className,
+  onClick,
+  children,
+  ...rest
+}: {
+  href: string;
+  className?: string;
+  onClick?: () => void;
+  children: ReactNode;
+} & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href">) {
+  if (isExternalHref(href)) {
+    return (
+      <a
+        href={href}
+        className={className}
+        onClick={onClick}
+        target="_blank"
+        rel="noopener noreferrer"
+        {...rest}
+      >
+        {children}
+      </a>
+    );
+  }
+  return (
+    <Link href={href} className={className} onClick={onClick} {...rest}>
+      {children}
+    </Link>
+  );
 }
 
 function isItemActive(item: NavigationItem, pathname: string): boolean {
@@ -123,58 +171,96 @@ function NavDropdownItem({
   onClose,
   nested = false,
   menuVariant,
+  expandMode = "side",
   pathname,
+  keepLabel = false,
 }: {
   item: NavigationItem;
   onClose?: () => void;
   nested?: boolean;
   menuVariant?: "software";
+  /** side = horizontal flyout; vertical = accordion under the parent (Products & Services). */
+  expandMode?: "side" | "vertical";
   pathname: string;
+  keepLabel?: boolean;
 }) {
   const hasChildren = item.children && item.children.length > 0;
+  const isSoftware =
+    item.label === "Software" || item.href === "/software-solutions";
+  const isElv =
+    item.label === "ELV Solutions" || item.href === "/elv-solutions";
+  const effectiveVariant = menuVariant ?? (isSoftware ? "software" : undefined);
+  const isVertical = expandMode === "vertical";
   const linkClass = nested
     ? "aptus-masthead__link aptus-masthead__link--nested"
     : "aptus-masthead__link";
-  const chevronDirection = menuVariant === "software" ? "right" : "down";
+  const chevronDirection =
+    isVertical || (!(isSoftware || isElv) && effectiveVariant !== "software")
+      ? "down"
+      : "right";
   const active = isDirectlyActive(item, pathname);
   const panelId = useId();
 
   if (hasChildren) {
+    const isHubMenu = isSoftware || isElv;
+    // Products & Services: keep expanding vertically at every level
+    const childExpandMode = expandMode;
+    const useStacked = isVertical;
+    const nestedPanelClass = cn(
+      "aptus-masthead__dropdown-panel",
+      useStacked
+        ? "aptus-masthead__dropdown-panel--stacked"
+        : "aptus-masthead__dropdown-panel--nested",
+      isHubMenu && !useStacked && "aptus-masthead__dropdown-panel--wide",
+      isHubMenu && !useStacked && "aptus-masthead__dropdown-panel--hub",
+      isSoftware && "aptus-masthead__dropdown-panel--software",
+      isElv && "aptus-masthead__dropdown-panel--elv",
+      useStacked && isElv && "aptus-masthead__dropdown-panel--elv-stacked",
+    );
+
     return (
       <li
-        className="aptus-masthead__dropdown aptus-masthead__dropdown--nested"
-        onMouseEnter={onDropdownPointerEnter}
+        className={cn(
+          "aptus-masthead__dropdown",
+          useStacked
+            ? "aptus-masthead__dropdown--accordion"
+            : "aptus-masthead__dropdown--nested",
+          isHubMenu && "aptus-masthead__dropdown--hub",
+        )}
+        onMouseEnter={useStacked ? undefined : onDropdownPointerEnter}
       >
         {item.href ? (
-          <Link
+          <NavHref
             href={item.href}
             className={`${linkClass} aptus-masthead__link--parent${active ? " is-active" : ""}`}
             aria-haspopup="menu"
             aria-controls={panelId}
             onClick={onClose}
           >
-            {item.label}
+            <NavLabel item={item} keepLabel={keepLabel} />
             <NavChevron direction={chevronDirection} />
-          </Link>
+          </NavHref>
         ) : (
           <span
             className={`${linkClass} aptus-masthead__link--parent aptus-masthead__link--flyout-trigger`}
             aria-haspopup="menu"
             aria-controls={panelId}
           >
-            {item.label}
+            <NavLabel item={item} keepLabel={keepLabel} />
             <NavChevron direction={chevronDirection} />
           </span>
         )}
-        <ul id={panelId} className="aptus-masthead__dropdown-panel aptus-masthead__dropdown-panel--nested" role="menu">
+        <ul id={panelId} className={nestedPanelClass} role="menu">
           {item.children!.map((child) => (
             <NavDropdownItem
               key={child.label}
               item={child}
               onClose={onClose}
               nested
-              menuVariant={menuVariant}
+              menuVariant={effectiveVariant}
+              expandMode={childExpandMode}
               pathname={pathname}
+              keepLabel={keepLabel}
             />
           ))}
         </ul>
@@ -186,9 +272,9 @@ function NavDropdownItem({
 
   return (
     <li>
-      <Link href={item.href} className={`${linkClass}${active ? " is-active" : ""}`} onClick={onClose}>
-        {item.label}
-      </Link>
+      <NavHref href={item.href} className={`${linkClass}${active ? " is-active" : ""}`} onClick={onClose}>
+        <NavLabel item={item} keepLabel={keepLabel} />
+      </NavHref>
     </li>
   );
 }
@@ -203,22 +289,29 @@ function DropdownItem({
   onClose: () => void;
 }) {
   const hasChildren = item.children && item.children.length > 0;
-  const active = isDirectlyActive(item, pathname);
-  const isSoftware = item.label === "Software";
-  const isElv = item.label === "ELV Solutions";
+  const active = isItemActive(item, pathname);
+  const isProducts =
+    item.label === "Products and Solutions" ||
+    item.label === "Products to Solutions" ||
+    item.label === "Products and Services" ||
+    item.label === "Knowledge Hub";
+  const isSoftware =
+    item.label === "Software" || item.href === "/software-solutions";
+  const isElv =
+    item.label === "ELV Solutions" || item.href === "/elv-solutions";
   const panelId = useId();
 
   if (!hasChildren) {
     if (!item.href) return null;
     return (
       <li>
-        <Link
+        <NavHref
           href={item.href}
           className={cn("aptus-masthead__link", active && "is-active")}
           onClick={onClose}
         >
-          {item.label}
-        </Link>
+          <NavLabel item={item} />
+        </NavHref>
       </li>
     );
   }
@@ -227,20 +320,42 @@ function DropdownItem({
     "aptus-masthead__dropdown-panel",
     (isElv || isSoftware) && "aptus-masthead__dropdown-panel--wide",
     isSoftware && "aptus-masthead__dropdown-panel--software",
+    isElv && "aptus-masthead__dropdown-panel--elv",
+    isProducts && "aptus-masthead__dropdown-panel--products",
   );
 
   return (
-    <li className="aptus-masthead__dropdown" onMouseEnter={onDropdownPointerEnter}>
-      <Link
-        href={item.href ?? "#"}
-        className={cn("aptus-masthead__link", active && "is-active")}
-        aria-haspopup="menu"
-        aria-controls={panelId}
-        onClick={onClose}
-      >
-        {item.label}
-        <NavChevron />
-      </Link>
+    <li
+      className={cn(
+        "aptus-masthead__dropdown",
+        isProducts && "aptus-masthead__dropdown--products",
+      )}
+      onMouseEnter={onDropdownPointerEnter}
+    >
+      {item.href ? (
+        <NavHref
+          href={item.href}
+          className={cn("aptus-masthead__link", active && "is-active")}
+          aria-haspopup="menu"
+          aria-controls={panelId}
+          onClick={onClose}
+        >
+          <NavLabel item={item} />
+          {item.label === "Knowledge Hub" ? null : <NavChevron />}
+        </NavHref>
+      ) : (
+        <span
+          className={cn(
+            "aptus-masthead__link aptus-masthead__link--flyout-trigger",
+            active && "is-active",
+          )}
+          aria-haspopup="menu"
+          aria-controls={panelId}
+        >
+          <NavLabel item={item} />
+          {item.label === "Knowledge Hub" ? null : <NavChevron />}
+        </span>
+      )}
 
       <ul id={panelId} className={panelClass} role="menu">
         {item.children!.map((child) => (
@@ -248,8 +363,14 @@ function DropdownItem({
             key={child.label}
             item={child}
             onClose={onClose}
-            menuVariant={isSoftware ? "software" : undefined}
+            menuVariant={
+              child.label === "Software" || child.href === "/software-solutions"
+                ? "software"
+                : undefined
+            }
+            expandMode="side"
             pathname={pathname}
+            keepLabel={item.label === "Knowledge Hub"}
           />
         ))}
       </ul>
@@ -262,11 +383,13 @@ function MobileMenuItem({
   pathname,
   onClose,
   depth = 0,
+  keepLabel = false,
 }: {
   item: NavigationItem;
   pathname: string;
   onClose: () => void;
   depth?: number;
+  keepLabel?: boolean;
 }) {
   const hasChildren = Boolean(item.children?.length);
   const childActive = hasChildren && isItemActive(item, pathname);
@@ -279,7 +402,7 @@ function MobileMenuItem({
   if (!hasChildren) {
     if (!item.href) return null;
     return (
-      <Link
+      <NavHref
         href={item.href}
         className={cn(
           "aptus-masthead__link aptus-masthead__mobile-link",
@@ -288,8 +411,8 @@ function MobileMenuItem({
         data-depth={depth}
         onClick={onClose}
       >
-        {item.label}
-      </Link>
+        <NavLabel item={item} keepLabel={keepLabel} />
+      </NavHref>
     );
   }
 
@@ -297,7 +420,7 @@ function MobileMenuItem({
     <div className="aptus-masthead__mobile-group" data-depth={depth}>
       <div className="aptus-masthead__mobile-row">
         {item.href ? (
-          <Link
+          <NavHref
             href={item.href}
             className={cn(
               "aptus-masthead__link aptus-masthead__mobile-link",
@@ -305,8 +428,8 @@ function MobileMenuItem({
             )}
             onClick={onClose}
           >
-            {item.label}
-          </Link>
+            <NavLabel item={item} keepLabel={keepLabel} />
+          </NavHref>
         ) : (
           <button
             type="button"
@@ -314,18 +437,20 @@ function MobileMenuItem({
             onClick={() => setOpen((o) => !o)}
             aria-expanded={open}
           >
-            {item.label}
+            <NavLabel item={item} keepLabel={keepLabel} />
           </button>
         )}
-        <button
-          type="button"
-          className={cn("aptus-masthead__mobile-chevron", open && "is-open")}
-          aria-label={open ? `Collapse ${item.label}` : `Expand ${item.label}`}
-          aria-expanded={open}
-          onClick={() => setOpen((o) => !o)}
-        >
-          <NavChevron />
-        </button>
+        {item.label === "Knowledge Hub" ? null : (
+          <button
+            type="button"
+            className={cn("aptus-masthead__mobile-chevron", open && "is-open")}
+            aria-label={open ? `Collapse ${item.label}` : `Expand ${item.label}`}
+            aria-expanded={open}
+            onClick={() => setOpen((o) => !o)}
+          >
+            <NavChevron />
+          </button>
+        )}
       </div>
       {open ? (
         <ul className="aptus-masthead__mobile-list aptus-masthead__mobile-list--nested">
@@ -336,6 +461,7 @@ function MobileMenuItem({
                 pathname={pathname}
                 onClose={onClose}
                 depth={depth + 1}
+                keepLabel={keepLabel || item.label === "Knowledge Hub"}
               />
             </li>
           ))}
@@ -357,7 +483,7 @@ function MobileNavAuthLink({ onClose }: { onClose: () => void }) {
         if (cancelled) return;
         if (!result.ok) {
           setSignedIn(false);
-          if (result.status === 401 || result.status === 403) clearLegacyPortalSession();
+          if (result.status === 401) clearLegacyPortalSession();
           return;
         }
         syncLegacyPortalSession(result.user, true, { silent: true });

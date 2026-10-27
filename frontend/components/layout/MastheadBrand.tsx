@@ -34,8 +34,11 @@ function AutodeskWordmark({ className }: { className?: string }) {
 export function MastheadBrand({ name, logo }: MastheadBrandProps) {
   const pathname = usePathname();
   const showAutodesk = pathname === "/autodesk" || pathname.startsWith("/autodesk/");
-  // Exact /adobe only — not /adobe-photoshop etc.
-  const showAdobe = pathname === "/adobe" || pathname === "/adobe/";
+  // /adobe hub + nested replicas (e.g. brand-visibility) — not flat /adobe-photoshop
+  const showAdobe =
+    pathname === "/adobe" ||
+    pathname === "/adobe/" ||
+    (pathname.startsWith("/adobe/") && !pathname.startsWith("/adobe-"));
   const showPartner = showAutodesk || showAdobe;
 
   return (

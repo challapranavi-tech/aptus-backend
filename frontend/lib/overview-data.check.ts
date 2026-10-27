@@ -4,7 +4,12 @@
  * Run: npx --yes tsx lib/overview-data.check.ts
  */
 import assert from "node:assert/strict";
-import { countActiveLicenses } from "./overview-data";
+import {
+  countActiveLicenses,
+  daysUntilRenewal,
+  formatRenewalReminderLabel,
+  getUpcomingRenewalReminders,
+} from "./overview-data";
 import type { PortalOrder } from "@/types/orders";
 import type { SubscriptionItem } from "@/types/subscriptions";
 
@@ -50,5 +55,34 @@ assert.equal(
   "keyed subscriptions win when higher",
 );
 assert.equal(countActiveLicenses([], [sub({ status: "Expired" })]), 0);
+
+assert.equal(formatRenewalReminderLabel(0), "Expires today");
+assert.equal(formatRenewalReminderLabel(1), "Expires in 1 day");
+assert.equal(formatRenewalReminderLabel(14), "Expires in 14 days");
+
+const now = Date.UTC(2026, 7, 16);
+assert.equal(daysUntilRenewal("2026-09-16", now), 31);
+assert.equal(daysUntilRenewal("2026-09-15", now), 30);
+
+const reminders = getUpcomingRenewalReminders(
+  [
+    sub({
+      productName: "AutoCAD",
+      renewalDateIso: "2026-09-01",
+      status: "Expiring Soon",
+    }),
+    sub({
+      productName: "Revit",
+      renewalDateIso: "2027-01-01",
+      status: "Active",
+    }),
+  ],
+  90,
+  5,
+  now,
+);
+assert.equal(reminders.length, 1);
+assert.equal(reminders[0]?.productName, "AutoCAD");
+assert.equal(reminders[0]?.daysLeft, 16);
 
 console.log("overview-data.check: ok");

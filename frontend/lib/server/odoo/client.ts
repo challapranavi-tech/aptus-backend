@@ -1,5 +1,7 @@
-import { getOdooConfig, isOdooConfigured } from "../config";
+import { getOdooConfig, isOdooConfigured, normalizeOdooBaseUrl } from "../config";
 import { logger } from "../logger";
+
+export { normalizeOdooBaseUrl };
 
 export class OdooNotConfiguredError extends Error {
   constructor() {
@@ -18,13 +20,6 @@ type RpcResponse<T> = {
     data?: { message?: string };
   };
 };
-
-/** Strip /odoo or /web paths editors often paste from the browser login URL. */
-export function normalizeOdooBaseUrl(raw: string): string {
-  let u = raw.trim().replace(/\/+$/, "");
-  u = u.replace(/\/(?:odoo|web)(?:\/.*)?$/i, "");
-  return u.replace(/\/+$/, "");
-}
 
 let rpcId = 0;
 function nextId() {
@@ -117,9 +112,15 @@ export class OdooClient {
     }
 
     if (json.error) {
+      const data = json.error.data as
+        | { message?: string; name?: string; debug?: string; arguments?: unknown[] }
+        | undefined;
       const msg =
-        json.error.data?.message ?? json.error.message ?? "Unknown Odoo RPC error";
-      throw new Error(msg);
+        data?.message ?? json.error.message ?? "Unknown Odoo RPC error";
+      const detail = [data?.name, Array.isArray(data?.arguments) ? data.arguments.join(", ") : ""]
+        .filter(Boolean)
+        .join(" | ");
+      throw new Error(detail ? `${msg} (${detail})` : msg);
     }
 
     return json.result as T;

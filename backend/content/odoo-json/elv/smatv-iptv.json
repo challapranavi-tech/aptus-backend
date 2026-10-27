@@ -3,60 +3,88 @@
     "id": "hero",
     "visible": true,
     "family": "elv",
-    "bannerTitle": "SMATV/IPTV Solutions",
-    "bannerTagline": "Comprehensive television and entertainment systems for hotels, offices, and residential communities",
-    "title": "Delivering High-Quality Digital Entertainment",
-    "paragraphs": [
-      "In today’s hospitality and institutional environments, high-quality in-room entertainment is paramount. More and more organizations are upgrading their distribution networks with advanced SMATV/IPTV Solutions to maximize content delivery and guest experience.",
-      "Whether you’re installing satellite TV in a multi-dwelling unit (MDU) or deploying interactive television in a five-star hotel, these technologies dramatically improve the way you receive, manage, and present digital media content.",
-      "Experience superior video quality and seamless content control with our comprehensive solutions for headend reception, network distribution, and personalized guest services across any commercial venue.",
-      "From centralized satellite master antenna television (SMATV) systems and Fiber Optic distribution to customized IPTV portals and integrated billing systems, we provide end-to-end solutions that ensure every channel is clear, engaging, and utterly reliable."
+    "bannerTitle": "Smart SMATV & IPTV Solutions",
+    "bannerTagline": "TV and on-demand content, managed from one headend.",
+    "bannerBackgroundImages": [
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/09/Lucid_Origin_Create_a_visually_striking_image_representing_SMA_2-683x1024.jpg",
+        "alt": "SMATV and IPTV entertainment systems"
+      },
+      {
+        "src": "/images/smatv-iptv.jpg",
+        "alt": "IP television and content distribution"
+      },
+      {
+        "src": "/images/Leonardo_Phoenix_10_Create_a_visually_appealing_image_for_Conf_0-673x1024.jpg",
+        "alt": "Connected hospitality entertainment spaces"
+      },
+      {
+        "src": "/images/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Netwo_2-673x1024.jpg",
+        "alt": "Structured television and fiber distribution"
+      },
+      {
+        "src": "/images/Home-Automation-1024x683.webp",
+        "alt": "In-room entertainment and interactive TV"
+      }
     ],
-    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/09/Lucid_Origin_Create_a_visually_striking_image_representing_SMA_2-683x1024.jpg",
-    "imageAlt": "SMATV/IPTV Solutions",
+    "title": "Smart SMATV & IPTV Solutions",
+    "paragraphs": [
+      "Guests and residents expect television that just works. SMATV and IPTV deliver live channels and in-room content from one managed headend. Line-ups, quality, and access stay consistent across every screen. We design the path from satellite or IP source through to the room."
+    ],
+    "imageSrc": "/images/smatv-system.jpg",
+    "layout": "two-column",
     "ctaLabel": "Request a Quote",
-    "ctaHref": "#form"
+    "ctaHref": "#form",
+    "ctaPlacement": "end",
+    "imageAlt": "SMATV and IPTV content distribution system"
   },
   "cardSections": [
     {
-      "id": "features",
+      "id": "smatv-deliver",
       "visible": true,
-      "variant": "icon-cards",
+      "variant": "product-cards",
+      "gridColumns": 3,
       "title": {
-        "before": "Powerful Features"
+        "before": "What We Deliver"
       },
-      "subheading": "Comprehensive solutions tailored to meet your business communication needs",
-      "align": "center",
+      "subheading": "SMATV, IPTV, headend, and interactive television — designed for property entertainment, not general networking.",
+      "align": "left",
       "items": [
         {
           "title": "SMATV Systems",
-          "body": "Centralized satellite reception with digital signal distribution to multiple channels and programming.",
-          "icon": "satellite-dish"
+          "body": "Distribute satellite and terrestrial television channels efficiently through a centralized headend and structured TV distribution network.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/09/Lucid_Origin_Create_a_visually_striking_image_representing_SMA_2-683x1024.jpg",
+          "imageAlt": "SMATV systems"
         },
         {
-          "title": "IPTV Streaming",
-          "body": "Internet Protocol Television with on-demand content, live streaming, and interactive channel guides.",
-          "icon": "wifi"
+          "title": "IPTV Solutions",
+          "body": "Deliver live television, digital content, and on-demand channels over IPTV with flexible channel packages and centralized management.",
+          "imageSrc": "/images/smatv-iptv.jpg",
+          "imageAlt": "IPTV solutions"
         },
         {
-          "title": "HD Digital Channels",
-          "body": "High-definition channel lineup with customizable packages and regional programming options.",
-          "icon": "tv"
+          "title": "Headend & Channel Processing",
+          "body": "Capture, encode, and manage satellite, terrestrial, and local content sources while keeping signal quality consistent to every TV.",
+          "imageSrc": "/images/smatv-headend.jpg",
+          "imageAlt": "Television headend and channel processing"
         },
         {
-          "title": "User Management",
-          "body": "Individual channel access controls, parental locks, and personalized viewing preferences.",
-          "icon": "user-friends"
+          "title": "In-Room Entertainment",
+          "body": "Deliver a consistent, high-quality viewing experience in hotel rooms, apartments, wards, and residences from one television platform.",
+          "imageSrc": "/images/smatv-inroom.jpg",
+          "imageAlt": "In-room television entertainment"
         },
         {
-          "title": "Analytics & Reporting",
-          "body": "Viewing statistics, channel popularity analysis, and usage reports for better content management decisions.",
-          "icon": "chart-bar"
+          "title": "Interactive TV",
+          "body": "Turn the television into a guest or resident interface with digital menus, property information, welcome channels, and interactive services.",
+          "imageSrc": "/images/smatv-interactive.jpg",
+          "imageAlt": "Interactive TV for guests and residents"
         },
         {
-          "title": "24/7 Technical Support",
-          "body": "Dedicated helpdesk and on-site technician support for system maintenance and troubleshooting.",
-          "icon": "headset"
+          "title": "Channel & Content Management",
+          "body": "Manage channel line-ups, content rights, user access, and IPTV settings from a centralized television administration platform.",
+          "imageSrc": "/images/smatv-manage.jpg",
+          "imageAlt": "Television channel and content management"
         }
       ]
     },
@@ -127,40 +155,31 @@
   ],
   "testimonials": {
     "visible": true,
-    "variant": "software-quotes",
+    "variant": "software-quotes-marquee",
     "title": {
-      "before": "Client Success",
-      "accent": "Stories"
+      "before": "What Our Clients Say"
     },
     "subheading": "Hear from satisfied customers who have transformed their entertainment experience",
     "items": [
       {
-        "quote": "“The new television system has completely revolutionized how we entertain our guests. The channel selection is excellent and the picture quality is outstanding.”",
+        "quote": "The new television system has completely revolutionized how we entertain our guests. The channel selection is excellent and the picture quality is outstanding.",
         "author": "Mohammed Al Farsi",
         "role": "Design Manager"
       },
       {
-        "quote": "“We implemented the premium entertainment system throughout our properties and couldn’t be happier. Guests love the variety of channels available.”",
+        "quote": "We implemented the premium entertainment system throughout our properties and couldn’t be happier. Guests love the variety of channels available.",
         "author": "Mariam Al Said",
         "role": "Facilities Manager"
       },
       {
-        "quote": "“The technical support team was incredibly helpful during the installation process. They made sure everything was set up perfectly.”",
+        "quote": "The technical support team was incredibly helpful during the installation process. They made sure everything was set up perfectly.",
         "author": "Khalid Al Balushi",
         "role": "Owner"
       }
     ]
   },
-  "contactCta": {
-    "heading": "Have questions? We can help",
-    "showForm": true,
-    "submitLabel": "Submit Now",
-    "formVariant": "simple",
-    "layout": "light",
-    "category": "elv",
-    "productName": "SMATV/IPTV Solutions"
-  },
   "midCta": {
+    "placement": "bottom",
     "heading": "Ready to Upgrade Your Entertainment Systems?",
     "description": "Contact our experts today for a free consultation and customized solution proposal.",
     "actionLabel": "Get Your Quote Now",
@@ -172,24 +191,16 @@
     "variant": "alliances",
     "logos": [
       {
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/WatchNet.png",
-        "alt": "WatchNet"
+        "src": "/images/brands/lemco.png",
+        "alt": "Lemco"
       },
       {
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Tyco.png",
-        "alt": "Tyco"
+        "src": "/images/brands/triax.png",
+        "alt": "Triax"
       },
       {
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Suprema.png",
-        "alt": "suprema"
-      },
-      {
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Hikvision.png",
-        "alt": "Hikvision"
-      },
-      {
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/ZKTeco.png",
-        "alt": "ZKT"
+        "src": "/images/brands/televes.svg",
+        "alt": "Televes"
       }
     ]
   }

@@ -8,14 +8,13 @@
 import { cache } from "react";
 import type { Page, SiteConfig } from "@/types";
 import type { CaseStudiesPageContent } from "@/types/case-studies-page";
-import { SITE_NAVIGATION } from "./site-nav";
-import { filterSiteNavigation } from "./autodesk-subnav";
+import { SITE_CONFIG } from "./site-config";
 
 const DEFAULT_API = "http://localhost:3001";
 // Cold /api/cms/home can take ~13 s (Odoo auth + page + draft fallback) and
 // first-hit Next compile adds more. 15 s aborted that race; metadata + page
 // both call getHomePage so React cache() keeps it to one fetch per request.
-const API_TIMEOUT_MS = 30_000;
+const API_TIMEOUT_MS = 90_000;
 
 function apiBase(): string {
   return (process.env.APTUS_API_URL ?? DEFAULT_API).replace(/\/$/, "");
@@ -48,17 +47,7 @@ function apiEnabled(): boolean {
 }
 
 function fallbackSiteConfig(): SiteConfig {
-  return {
-    name: "Aptus Infotech",
-    logo: { src: "/logo.svg", alt: "Aptus Infotech" },
-    navigation: filterSiteNavigation(SITE_NAVIGATION),
-    topBar: { phone: "", email: "", socialLinks: [] },
-    footer: {
-      logo: { src: "/logo.svg", alt: "Aptus Infotech" },
-      tagline: "",
-      columns: [],
-    },
-  };
+  return SITE_CONFIG;
 }
 
 async function apiGet<T>(path: string): Promise<T | null> {
@@ -96,31 +85,78 @@ async function apiGet<T>(path: string): Promise<T | null> {
 }
 
 export const getSiteConfig = cache(async (): Promise<SiteConfig> => {
-  try {
-    const config = await apiGet<SiteConfig>("/api/cms/site-config");
-    return config ?? fallbackSiteConfig();
-  } catch (err) {
-    // Chrome must still render if CMS is down.
-    console.error(err);
-    return fallbackSiteConfig();
-  }
+  // Nav / footer / top bar are code-owned (see site-nav.ts). Skipping the
+  // frontend→backend hop removes a blocking RTT from every page SSR.
+  return fallbackSiteConfig();
 });
 
 export const getHomePage = cache(async (): Promise<Page | null> => {
+  // Prefer committed frontend home.json so Vercel frontend deploys show the
+  // redesign without depending on a separate backend/Odoo seed.
+  const { buildLocalHomePage } = await import("@/lib/build-local-home-page");
+  const local = buildLocalHomePage();
+  if (local?.sections.length) return local;
+
   return apiGet<Page>("/api/cms/home");
 });
 
 export const getPageBySlug = cache(async (slug: string): Promise<Page | null> => {
+  // Committed frontend JSON for Our Story — do not wait on backend/Odoo (same as home).
+  if (slug === "our-story") {
+    const { buildLocalOurStoryPage } = await import("@/lib/build-local-our-story-page");
+    const local = buildLocalOurStoryPage();
+    if (local?.sections.length) return local;
+  }
+
+  if (slug === "our-team") {
+    const { buildLocalOurTeamPage } = await import("@/lib/build-local-our-team-page");
+    const local = buildLocalOurTeamPage();
+    if (local?.sections.length) return local;
+  }
+
+  if (slug === "aptus-policy") {
+    const { buildLocalAptusPolicyPage } = await import("@/lib/build-local-aptus-policy-page");
+    const local = buildLocalAptusPolicyPage();
+    if (local?.sections.length) return local;
+  }
+
+  if (slug === "aptus-infotech-iso-certifications") {
+    const { buildLocalIsoPage } = await import("@/lib/build-local-iso-page");
+    const local = buildLocalIsoPage();
+    if (local?.sections.length) return local;
+  }
+
+  if (slug === "faq") {
+    const { buildLocalFaqPage } = await import("@/lib/build-local-faq-page");
+    const local = buildLocalFaqPage();
+    if (local?.sections.length) return local;
+  }
+
+  const { isLocalElvSlug, buildLocalElvPage } = await import("@/lib/build-local-elv-page");
+  if (isLocalElvSlug(slug)) {
+    const local = buildLocalElvPage(slug);
+    if (local?.sections.length) return local;
+  }
+
   return apiGet<Page>(`/api/cms/pages/${encodeURIComponent(slug)}`);
 });
 
 export async function getAllPageSlugs(): Promise<string[]> {
+  const { ELV_LOCAL_PAGE_SLUGS } = await import("@/lib/build-local-elv-page");
   try {
     const data = await apiGet<{ slugs: string[] }>("/api/cms/slugs");
-    return data?.slugs ?? [];
+    return [
+      ...new Set([
+        ...(data?.slugs ?? []),
+        ...ELV_LOCAL_PAGE_SLUGS,
+        "aptus-infotech-iso-certifications",
+        "our-team",
+        "faq",
+      ]),
+    ];
   } catch (err) {
     console.error(err);
-    return [];
+    return [...ELV_LOCAL_PAGE_SLUGS, "aptus-infotech-iso-certifications", "our-team", "faq"];
   }
 }
 
@@ -140,6 +176,10 @@ export async function getAllPages(): Promise<Page[]> {
 
 export const loadCaseStudiesPageContent = cache(
   async (): Promise<CaseStudiesPageContent | null> => {
+    const { buildLocalCaseStudiesPageContent } = await import("@/lib/build-local-case-studies-page");
+    const local = buildLocalCaseStudiesPageContent();
+    if (local?.keyProjects?.items?.length) return local;
+
     return apiGet<CaseStudiesPageContent>("/api/cms/case-studies");
   },
 );

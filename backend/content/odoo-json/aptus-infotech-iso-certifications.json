@@ -37,23 +37,23 @@
     {
       "heading": "Quality Management System",
       "headingAccent": "ISO 9001:2015",
-      "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/07/1-721x1024.png",
+      "imageSrc": "/images/iso/iso-9001-2026.jpg",
       "imageAlt": "ISO 9001:2015 Certificate",
-      "downloadHref": "https://aptusinfotech.com/wp-content/uploads/2025/07/APTUS-CERT-9001-COPY-1.pdf"
+      "downloadHref": "/files/iso/iso-9001-2026.pdf"
     },
     {
       "heading": "Occupational Health & Safety Management System",
       "headingAccent": "ISO 45001:2018",
-      "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/07/2-721x1024.png",
+      "imageSrc": "/images/iso/iso-45001-2026.jpg",
       "imageAlt": "ISO 45001:2018 Certificate",
-      "downloadHref": "https://aptusinfotech.com/wp-content/uploads/2025/07/APTUS-CERT-45001-COPY.pdf"
+      "downloadHref": "/files/iso/iso-45001-2026.pdf"
     },
     {
       "heading": "Environmental Management System",
       "headingAccent": "ISO 14001:2015",
-      "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/07/3-721x1024.png",
+      "imageSrc": "/images/iso/iso-14001-2026.jpg",
       "imageAlt": "ISO 14001:2015 Certificate",
-      "downloadHref": "https://aptusinfotech.com/wp-content/uploads/2025/07/APTUS-CERT-14001-COPY.pdf"
+      "downloadHref": "/files/iso/iso-14001-2026.pdf"
     }
   ],
   "text": {
@@ -62,11 +62,5 @@
     "paragraphs": [
       "Aptus Infotech is dedicated to upholding top-tier international standards in quality (ISO 9001:2015), environmental management (ISO 14001:2015), and occupational health & safety (ISO 45001:2018), with processes rigorously certified and globally recognized. This ensures enhanced customer satisfaction, improved efficiency, reduced environmental impact, regulatory compliance, better workplace safety, and a stronger reputation for businesses partnering with us."
     ]
-  },
-  "contactCta": {
-    "heading": "Have questions? We can help",
-    "showForm": true,
-    "submitLabel": "Submit Now",
-    "layout": "light"
   }
 }

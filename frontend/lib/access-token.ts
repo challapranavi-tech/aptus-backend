@@ -172,6 +172,27 @@ export function clearLegacyPortalSession(): void {
   }
 }
 
+/** Optimistic portal chrome from the last successful session (may be stale). */
+export function readLegacyPortalSessionUser(): LegacySessionUser | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw =
+      window.localStorage.getItem(LEGACY_SESSION_KEY) ||
+      window.sessionStorage.getItem(LEGACY_SESSION_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as LegacySessionUser & {
+      userId?: string;
+      expiresAt?: number;
+    };
+    if (parsed.expiresAt && Date.now() > parsed.expiresAt) return null;
+    const id = parsed.id || parsed.userId;
+    if (!id || !parsed.email) return null;
+    return { ...parsed, id };
+  } catch {
+    return null;
+  }
+}
+
 export function getAccessToken(): string | null {
   const shared = readSharedAccessToken();
   if (shared) return shared;

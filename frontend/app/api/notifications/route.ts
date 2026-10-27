@@ -33,7 +33,7 @@ export async function GET(request: NextRequest) {
 
   if (!isDemoMode()) {
     try {
-      derived = await fetchPartnerNotifications(partnerId, 100);
+      derived = await fetchPartnerNotifications(partnerId, 100, profile.email);
     } catch (error) {
       const message = error instanceof Error ? error.message : "Failed to load notifications";
       return jsonError(message, 500);

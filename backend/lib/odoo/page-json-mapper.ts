@@ -81,9 +81,10 @@ interface RawText {
   title?: RawTitle;
   paragraphs?: string[];
   bullets?: string[];
+  items?: { title?: string; description?: string }[];
   imageSrc?: string;
   imageAlt?: string;
-  imagePosition?: "left" | "right" | "below";
+  imagePosition?: "left" | "right" | "below" | "above";
   variant?: "default" | "culture-panel" | "policy-panel";
 }
 // Card sections — used by software/product inner pages for feature grids
@@ -118,6 +119,8 @@ interface RawMidCta {
   subheading?: string;
   actionLabel?: string;
   actionHref?: string;
+  /** `mid` (default): above product cards. `bottom`: just before the contact CTA. */
+  placement?: "mid" | "bottom";
 }
 interface RawSoftwareInnerHero {
   id?: string;
@@ -126,6 +129,8 @@ interface RawSoftwareInnerHero {
   subnavLinks?: { label: string; href: string }[];
   bannerTitle?: string;
   bannerTagline?: string;
+  bannerSupport?: string;
+  bannerBackgroundImages?: { src: string; alt?: string }[];
   pageTitle?: string;
   title?: string;
   paragraphs?: string[];
@@ -136,6 +141,8 @@ interface RawSoftwareInnerHero {
   layout?: "default" | "two-column";
   topBannerImage?: string;
   mediaInline?: boolean;
+  /** Heading shown above an inline product image. */
+  imageHeading?: string;
   titleLevel?: "h1" | "h2";
   introRows?: {
     paragraphs?: string[];
@@ -143,6 +150,12 @@ interface RawSoftwareInnerHero {
     imageAlt?: string;
     imagePosition?: "left" | "right";
   }[];
+  bodySections?: {
+    heading?: string;
+    paragraphs?: string[];
+  }[];
+  /** Where Request a Quote sits when bodySections exist. Default: after intro. */
+  ctaPlacement?: "after-intro" | "end";
 }
 interface RawTestimonialItem {
   id?: string;
@@ -153,7 +166,7 @@ interface RawTestimonialItem {
 }
 interface RawTestimonials {
   visible?: boolean;
-  variant?: "default" | "software-quotes";
+  variant?: "default" | "software-quotes" | "software-quotes-marquee";
   title?: RawTitle;
   subheading?: string;
   items?: RawTestimonialItem[];
@@ -206,7 +219,7 @@ interface RawIntroRow {
   bullets?: string[];
   imageSrc?: string;
   imageAlt?: string;
-  imagePosition?: "left" | "right" | "below";
+  imagePosition?: "left" | "right" | "below" | "above";
   headingAsH1?: boolean;
   variant?: "default" | "boxed" | "panel";
   downloadHref?: string;
@@ -227,6 +240,62 @@ interface RawPartnerships {
   headingAccent?: string;
   variant?: "default" | "alliances" | "alliances-grid";
   logos?: { id?: string; src?: string; alt?: string }[];
+  /** Default: after testimonials. `before-testimonials` places logo band above quotes. */
+  placement?: "after-testimonials" | "before-testimonials";
+}
+interface RawStoryValue {
+  id?: string;
+  title?: string;
+  description?: string;
+  icon?: string;
+  iconSrc?: string;
+  tone?: "navy" | "sky" | "green";
+}
+interface RawStoryMilestone {
+  id?: string;
+  year?: string;
+  title?: string;
+  description?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  tone?: "navy" | "sky" | "green" | "purple" | "pink" | "teal" | "blue" | "orange" | "red";
+}
+interface RawStoryHighlight {
+  id?: string;
+  title?: string;
+  description?: string;
+  icon?: string;
+  href?: string;
+}
+interface RawStoryHero {
+  eyebrow?: string;
+  titleBefore?: string;
+  titleAccent?: string;
+  description?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  images?: { src?: string; alt?: string }[];
+  values?: RawStoryValue[];
+}
+interface RawStoryJourney {
+  origin?: string;
+  originParagraphs?: string[];
+  today?: string;
+  milestones?: RawStoryMilestone[];
+}
+interface RawStoryHighlights {
+  items?: RawStoryHighlight[];
+}
+interface RawStoryTenet {
+  id?: string;
+  title?: string;
+  description?: string;
+}
+interface RawStoryTenets {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  items?: RawStoryTenet[];
 }
 interface RawPageJson {
   banner?: RawBanner;
@@ -234,6 +303,10 @@ interface RawPageJson {
   featureRows?: RawIntroRow[];
   flipCards?: RawFlipCards;
   partnerships?: RawPartnerships;
+  storyHero?: RawStoryHero;
+  storyJourney?: RawStoryJourney;
+  storyHighlights?: RawStoryHighlights;
+  storyTenets?: RawStoryTenets;
   hero?: RawHero;
   intro?: RawText;
   text?: RawText;
@@ -245,6 +318,11 @@ interface RawPageJson {
   lists?: RawList[];
   faq?: RawFaq;
   team?: RawTeam;
+  join?: RawText & {
+    subheading?: string;
+    actionLabel?: string;
+    actionHref?: string;
+  };
   certifications?: RawCertifications;
   contactInfo?: RawContactInfo;
   showKeyEnablers?: boolean;
@@ -295,6 +373,7 @@ function innerProductFallbackImage(slug: string): string | undefined {
 // software-inner-hero (mirrors frontend's SOFTWARE_HUB_SLUGS).
 const NON_PRODUCT_SLUGS = new Set([
   "software",
+  "software-solutions",
   "autodesk",
   "adobe",
   "microsoft",
@@ -514,6 +593,94 @@ export function mapPageJson(
   const sections: Section[] = [];
   const order = { n: 0 };
 
+  const storyHero = data.storyHero;
+  const storyJourney = data.storyJourney;
+  const storyHighlights = data.storyHighlights;
+  const storyTenets = data.storyTenets;
+  if (storyHero || storyJourney || storyHighlights || storyTenets) {
+    sections.push({
+      id: "our-story",
+      type: "our-story",
+      order: ++order.n,
+      data: {
+        type: "our-story",
+        hero: storyHero
+          ? {
+              eyebrow: storyHero.eyebrow,
+              titleBefore: storyHero.titleBefore,
+              titleAccent: storyHero.titleAccent,
+              description: storyHero.description,
+              media: usableImg(storyHero.imageSrc, storyHero.imageAlt),
+              images: (() => {
+                const fromList =
+                  storyHero.images
+                    ?.map((img) => usableImg(img.src, img.alt))
+                    .filter((img): img is NonNullable<typeof img> => Boolean(img)) ?? [];
+                if (fromList.length) return fromList;
+                const single = usableImg(storyHero.imageSrc, storyHero.imageAlt);
+                return single ? [single] : undefined;
+              })(),
+              values: storyHero.values
+                ?.filter((v) => v.title)
+                .map((v, i) => ({
+                  id: v.id ?? `value-${i}`,
+                  title: v.title!,
+                  description: v.description,
+                  icon: v.icon,
+                  iconSrc: v.iconSrc,
+                  tone: v.tone,
+                })),
+            }
+          : undefined,
+        journey: storyJourney
+          ? {
+              origin: storyJourney.origin,
+              originParagraphs: storyJourney.originParagraphs?.filter(Boolean),
+              today: storyJourney.today,
+              milestones: storyJourney.milestones
+                ?.filter((m) => m.year && m.title)
+                .map((m, i) => ({
+                  id: m.id ?? `milestone-${i}`,
+                  year: m.year!,
+                  title: m.title!,
+                  description: m.description,
+                  imageSrc: m.imageSrc,
+                  imageAlt: m.imageAlt,
+                  tone: m.tone,
+                })),
+            }
+          : undefined,
+        highlights: storyHighlights?.items?.length
+          ? {
+              items: storyHighlights.items
+                .filter((item) => item.title)
+                .map((item, i) => ({
+                  id: item.id ?? `highlight-${i}`,
+                  title: item.title!,
+                  description: item.description,
+                  icon: item.icon,
+                  href: item.href,
+                })),
+            }
+          : undefined,
+        tenets: storyTenets
+          ? {
+              eyebrow: storyTenets.eyebrow,
+              title: storyTenets.title,
+              description: storyTenets.description,
+              items: storyTenets.items
+                ?.filter((item) => item.title)
+                .map((item, i) => ({
+                  id: item.id ?? `tenet-${i}`,
+                  title: item.title!,
+                  description: item.description,
+                })),
+            }
+          : undefined,
+      },
+    });
+  }
+
   const banner = data.banner;
   if (banner?.imageSrc) {
     sections.push({
@@ -551,6 +718,10 @@ export function mapPageJson(
         type: "software-inner-hero",
         bannerTitle: innerHero.bannerTitle,
         bannerTagline: innerHero.bannerTagline,
+        bannerSupport: innerHero.bannerSupport,
+        bannerBackgroundImages: innerHero.bannerBackgroundImages
+          ?.filter((img) => Boolean(img.src))
+          .map((img) => ({ src: img.src, alt: img.alt ?? "" })),
         pageTitle: innerHero.pageTitle,
         title: innerHero.title,
         paragraphs: innerHero.paragraphs,
@@ -567,12 +738,20 @@ export function mapPageJson(
             : undefined,
         layout: innerHero.layout,
         mediaInline: innerHero.mediaInline,
+        imageHeading: innerHero.imageHeading,
         titleLevel: innerHero.titleLevel,
         introRows: innerHero.introRows?.map((row) => ({
           paragraphs: row.paragraphs,
           media: usableImg(row.imageSrc, row.imageAlt),
           imagePosition: row.imagePosition ?? "left",
         })),
+        bodySections: innerHero.bodySections
+          ?.filter((section) => section.heading || section.paragraphs?.length)
+          .map((section) => ({
+            heading: section.heading,
+            paragraphs: section.paragraphs,
+          })),
+        ctaPlacement: innerHero.ctaPlacement,
       },
     });
   }
@@ -660,6 +839,31 @@ export function mapPageJson(
       }
       sections.push(mapFeatureRowSection(row, `page-feature-row-${order.n}`, ++order.n));
     }
+  }
+
+  // Mid quote CTA above Key Features / product cards (not after them),
+  // unless `placement: "bottom"` — then it renders just before the contact CTA.
+  const midCta = data.midCta;
+  const pushMidCta = () => {
+    if (!midCta?.heading) return;
+    sections.push({
+      id: "page-mid-cta",
+      type: "cta",
+      order: ++order.n,
+      data: {
+        type: "cta",
+        heading: midCta.heading,
+        description: midCta.subheading ?? midCta.description,
+        action: {
+          label: midCta.actionLabel ?? "Get Your Quote Now",
+          href: midCta.actionHref ?? "#form",
+        },
+        layout: "software-mid",
+      },
+    });
+  };
+  if (midCta?.placement !== "bottom") {
+    pushMidCta();
   }
 
   mapCardSections(data, sections, order);
@@ -786,63 +990,105 @@ export function mapPageJson(
     });
   }
 
-  const team = data.team;
-  if (team && team.visible !== false && (team.eyebrow || joinTitle(team.title) || team.members?.length)) {
-    sections.push({
-      id: "page-team",
-      type: "team",
-      order: ++order.n,
-      presentation: parsePresentation(team.presentation),
-      data: {
+  const pushTeam = () => {
+    const team = data.team;
+    if (team && team.visible !== false && (team.eyebrow || joinTitle(team.title) || team.members?.length)) {
+      sections.push({
+        id: "page-team",
         type: "team",
-        eyebrow: team.eyebrow,
-        heading: joinTitle(team.title),
-        variant: team.variant,
-        members: team.members?.map((m, i) => ({
-          id: m.id ?? `member-${i}`,
-          name: m.name,
-          role: m.role,
-          bio: m.bio,
-          avatar: usableImg(m.imageSrc, m.imageAlt ?? m.name),
-        })),
-      },
-    });
+        order: ++order.n,
+        presentation: parsePresentation(team.presentation),
+        data: {
+          type: "team",
+          eyebrow: team.eyebrow,
+          heading: joinTitle(team.title),
+          variant: team.variant,
+          members: team.members?.map((m, i) => ({
+            id: m.id ?? `member-${i}`,
+            name: m.name,
+            role: m.role,
+            bio: m.bio,
+            avatar: usableImg(m.imageSrc, m.imageAlt ?? m.name),
+          })),
+        },
+      });
+    }
+  };
+
+  const pushTextBlocks = () => {
+    for (const block of [data.intro, data.text].filter(Boolean)) {
+      if (!block || block.visible === false) continue;
+      if (isPolicyPanel && (block === data.intro || block === data.text)) continue;
+      if (isWhyPanel && block === data.text) continue;
+      if (isIsoPanel && (block === data.intro || block === data.text)) continue;
+      if (isCareerPanel && block === data.intro) continue;
+      const hasContent =
+        block.eyebrow ||
+        joinTitle(block.title) ||
+        block.paragraphs?.length ||
+        block.bullets?.length ||
+        block.imageSrc;
+      if (!hasContent) continue;
+
+      const culturePanel = block.variant === "culture-panel";
+
+      sections.push({
+        id: `page-text-${order}`,
+        type: "rich-text",
+        order: ++order.n,
+        presentation: parsePresentation(block.presentation),
+        data: {
+          type: "rich-text",
+          eyebrow: block.eyebrow,
+          heading: block.title?.before,
+          headingAccent: block.title?.accent
+            ? [block.title.accent, block.title.after].filter(Boolean).join(" ") || block.title.accent
+            : block.title?.after,
+          paragraphs: block.paragraphs,
+          bullets: block.bullets,
+          items: block.items
+            ?.filter((item) => item.title || item.description)
+            .map((item) => ({
+              title: item.title,
+              description: item.description,
+            })),
+          media: usableImg(block.imageSrc, block.imageAlt),
+          imagePosition: block.imagePosition,
+          variant: block.variant,
+          background: culturePanel ? "white" : order.n % 2 === 0 ? "light" : "white",
+        },
+      });
+    }
+  };
+
+  // Our Team: culture copy first, then Management Profile cards.
+  const cultureFirst =
+    options?.slug === "our-team" || data.text?.variant === "culture-panel";
+  if (cultureFirst) {
+    pushTextBlocks();
+    pushTeam();
+  } else {
+    pushTeam();
+    pushTextBlocks();
   }
 
-  for (const block of [data.intro, data.text].filter(Boolean)) {
-    if (!block || block.visible === false) continue;
-    if (isPolicyPanel && (block === data.intro || block === data.text)) continue;
-    if (isWhyPanel && block === data.text) continue;
-    if (isIsoPanel && (block === data.intro || block === data.text)) continue;
-    if (isCareerPanel && block === data.intro) continue;
-    const hasContent =
-      block.eyebrow ||
-      joinTitle(block.title) ||
-      block.paragraphs?.length ||
-      block.bullets?.length ||
-      block.imageSrc;
-    if (!hasContent) continue;
-
-    const culturePanel = block.variant === "culture-panel";
-
+  const join = data.join;
+  if (join && join.visible !== false && (joinTitle(join.title) || join.paragraphs?.length || join.subheading)) {
     sections.push({
-      id: `page-text-${order}`,
+      id: "page-join-team",
       type: "rich-text",
       order: ++order.n,
-      presentation: parsePresentation(block.presentation),
       data: {
         type: "rich-text",
-        eyebrow: block.eyebrow,
-        heading: block.title?.before,
-        headingAccent: block.title?.accent
-          ? [block.title.accent, block.title.after].filter(Boolean).join(" ") || block.title.accent
-          : block.title?.after,
-        paragraphs: block.paragraphs,
-        bullets: block.bullets,
-        media: usableImg(block.imageSrc, block.imageAlt),
-        imagePosition: block.imagePosition,
-        variant: block.variant,
-        background: culturePanel ? "white" : order.n % 2 === 0 ? "light" : "white",
+        heading: join.title?.before ?? "Join",
+        headingAccent: join.title?.accent ?? "Our Team",
+        subheading: join.subheading,
+        paragraphs: join.paragraphs,
+        variant: "join-panel",
+        action:
+          join.actionLabel && join.actionHref
+            ? { label: join.actionLabel, href: join.actionHref }
+            : { label: "View Open Roles", href: "/careers" },
       },
     });
   }
@@ -993,27 +1239,9 @@ export function mapPageJson(
     });
   }
 
-  const midCta = data.midCta;
-  if (midCta?.heading) {
-    sections.push({
-      id: "page-mid-cta",
-      type: "cta",
-      order: ++order.n,
-      data: {
-        type: "cta",
-        heading: midCta.heading,
-        description: midCta.subheading ?? midCta.description,
-        action: {
-          label: midCta.actionLabel ?? "Get Your Quote Now",
-          href: midCta.actionHref ?? "#form",
-        },
-        layout: "software-mid",
-      },
-    });
-  }
-
-  const testimonials = data.testimonials;
-  if (testimonials && testimonials.visible !== false && testimonials.items?.length) {
+  const pushTestimonials = () => {
+    const testimonials = data.testimonials;
+    if (!(testimonials && testimonials.visible !== false && testimonials.items?.length)) return;
     sections.push({
       id: "page-testimonials",
       type: "testimonials",
@@ -1022,7 +1250,11 @@ export function mapPageJson(
         type: "testimonials",
         heading: joinTitle(testimonials.title),
         subheading: testimonials.subheading,
-        variant: testimonials.variant ?? (options?.slug && (isInnerProductSlug(options.slug) || isElvHubSlug(options.slug)) ? "software-quotes" : "default"),
+        variant:
+          testimonials.variant ??
+          (options?.slug && (isInnerProductSlug(options.slug) || isElvHubSlug(options.slug))
+            ? "software-quotes"
+            : "default"),
         items: testimonials.items.map((it, i) => ({
           id: it.id ?? `testimonial-${i}`,
           quote: it.quote,
@@ -1032,7 +1264,7 @@ export function mapPageJson(
         })),
       },
     });
-  }
+  };
 
   if (data.showPartnerships) {
     sections.push({
@@ -1052,8 +1284,9 @@ export function mapPageJson(
     });
   }
 
-  const partnerships = data.partnerships;
-  if (partnerships?.logos?.length) {
+  const pushPartnerships = () => {
+    const partnerships = data.partnerships;
+    if (!partnerships?.logos?.length) return;
     const items: LogoItem[] = partnerships.logos
       .map((logo, i) => {
         const src = logo.src;
@@ -1066,25 +1299,58 @@ export function mapPageJson(
       })
       .filter((x): x is LogoItem => !!x);
 
-    if (items.length) {
-      sections.push({
-        id: "page-partnerships",
+    if (!items.length) return;
+    sections.push({
+      id: "page-partnerships",
+      type: "logo-grid",
+      order: ++order.n,
+      data: {
         type: "logo-grid",
-        order: ++order.n,
-        data: {
-          type: "logo-grid",
-          heading: partnerships.heading,
-          headingAccent: partnerships.headingAccent,
-          variant: partnerships.variant ?? "default",
-          items,
-        },
-      });
-    }
+        heading: partnerships.heading,
+        headingAccent: partnerships.headingAccent,
+        variant: partnerships.variant ?? "default",
+        items,
+      },
+    });
+  };
+
+  const partnershipsBeforeTestimonials =
+    data.partnerships?.placement === "before-testimonials";
+  if (partnershipsBeforeTestimonials) {
+    pushPartnerships();
+    pushTestimonials();
+  } else {
+    pushTestimonials();
+    pushPartnerships();
   }
 
-  // CTA — explicit `contactCta` object and/or legacy `showContactCta` flag
+  if (midCta?.placement === "bottom") {
+    pushMidCta();
+  }
+
+  // CTA — explicit `contactCta` object and/or legacy `showContactCta` flag.
+  // About Us / Our Story segment pages never show the light "Request a Quote" band.
+  const ABOUT_NO_QUOTE_SLUGS = new Set([
+    "our-story",
+    "our-team",
+    "aptus-policy",
+    "aptus-infotech-iso-certifications",
+    "why-aptus-infotech",
+    "winning-together",
+  ]);
   const cta = data.contactCta;
-  if (cta || data.showContactCta) {
+  const slug = options?.slug ?? "";
+  const isAboutNoQuote = ABOUT_NO_QUOTE_SLUGS.has(slug);
+  const ctaIsLightQuote =
+    (cta?.layout ?? "light") === "light" &&
+    (cta?.formVariant ?? "simple") === "simple" &&
+    cta?.formVariant !== "career" &&
+    cta?.formVariant !== "contact";
+  if (
+    slug !== "our-team" &&
+    (cta || data.showContactCta) &&
+    !(isAboutNoQuote && (ctaIsLightQuote || !cta))
+  ) {
     sections.push({
       id: "page-cta",
       type: "cta",
@@ -1149,4 +1415,59 @@ const _pi = _types.indexOf("logo-grid");
 const _ci = _types.lastIndexOf("cta");
 if (!(_ti >= 0 && _pi > _ti && _ci > _pi)) {
   throw new Error("partnerships logo-grid must render after testimonials and before contact CTA");
+}
+
+{
+  const _story = mapPageJson(
+    JSON.stringify({
+      storyHero: {
+        eyebrow: "OUR STORY",
+        titleBefore: "Powered by",
+        titleAccent: "performance",
+        description: "d",
+        values: [{ id: "trust", title: "Trust", tone: "navy" }],
+      },
+      storyJourney: {
+        origin: "o",
+        today: "t",
+        milestones: [{ id: "m1", year: "2000", title: "Start", tone: "navy" }],
+      },
+      storyHighlights: {
+        items: [{ id: "h1", title: "Gold Partner" }],
+      },
+    }),
+    { slug: "our-story" },
+  );
+  const _storySection = _story?.find((s) => s.type === "our-story");
+  if (!_storySection || _storySection.data.type !== "our-story" || !_storySection.data.hero?.titleAccent) {
+    throw new Error("our-story JSON must map to our-story section with hero accent");
+  }
+}
+
+{
+  const _teamPage = mapPageJson(
+    JSON.stringify({
+      text: {
+        variant: "culture-panel",
+        title: { before: "Our core strength is", accent: "our team" },
+        paragraphs: ["p"],
+      },
+      team: {
+        variant: "leadership",
+        title: { before: "Management", accent: "Profile" },
+        members: [{ id: "a", name: "A" }],
+      },
+      showContactCta: true,
+    }),
+    { slug: "our-team" },
+  );
+  const _teamTypes = _teamPage?.map((s) => s.type) ?? [];
+  const _cultureAt = _teamTypes.indexOf("rich-text");
+  const _leadAt = _teamTypes.indexOf("team");
+  if (!(_cultureAt >= 0 && _leadAt > _cultureAt)) {
+    throw new Error("our-team must render culture copy before management profiles");
+  }
+  if (_teamTypes.includes("cta")) {
+    throw new Error("our-team must not render a Request a Quote band");
+  }
 }

@@ -17,6 +17,16 @@ const nextConfig: NextConfig = {
         destination: "/computers-structures",
         permanent: true,
       },
+      {
+        source: "/aptus-case-studies",
+        destination: "/customer-stories",
+        permanent: true,
+      },
+      {
+        source: "/aptus-solar",
+        destination: "https://www.aptussolartech.com/",
+        permanent: false,
+      },
     ];
   },
   images: {

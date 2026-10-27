@@ -32,6 +32,18 @@ assert.equal(
   "Quote Ref: RQ-2026-000001, Client Message: Need licenses, Product: Revit, QTY: 2, Category: Software, Source: Website – Request Quote",
 );
 
+const linked = buildCrmLeadValues({
+  firstName: "Ada",
+  lastName: "Lovelace",
+  company: "Analytical Engines",
+  email: "ada@example.com",
+  phone: "+968 1234 5678",
+  product: "Revit",
+  quoteRef: "RQ-2026-000002",
+  partnerId: 42,
+});
+assert.equal(linked.partner_id, 42);
+
 process.env.ODOO_QUOTE_REF_FIELD = "x_studio_quote_ref";
 const withField = buildCrmLeadValues({
   firstName: "Ada",
@@ -55,6 +67,64 @@ const contact = buildCrmLeadValues({
   product: "Others",
 });
 assert.equal(contact.name, "Website contact – Sam Lee");
+
+const savedTalkStage = process.env.ODOO_CRM_TALK_TO_EXPERT_STAGE_ID;
+const savedTalkTeam = process.env.ODOO_CRM_TALK_TO_EXPERT_TEAM_ID;
+const savedSoftTeam = process.env.ODOO_CRM_SOFTWARE_TEAM_ID;
+const savedCrmTeam = process.env.ODOO_CRM_TEAM_ID;
+delete process.env.ODOO_CRM_TALK_TO_EXPERT_STAGE_ID;
+delete process.env.ODOO_CRM_TALK_TO_EXPERT_TEAM_ID;
+delete process.env.ODOO_CRM_SOFTWARE_TEAM_ID;
+delete process.env.ODOO_CRM_TEAM_ID;
+
+const expert = buildCrmLeadValues({
+  firstName: "Noor",
+  lastName: "Al Said",
+  company: "",
+  email: "noor@example.com",
+  phone: "+96891234567",
+  contactName: "Noor Al Said",
+  channel: "talk-to-expert",
+  message: "Lead captured from Talk to an Expert chatbot.",
+});
+assert.equal(expert.name, "Talk to an Expert – Noor Al Said");
+assert.equal(expert.contact_name, "Noor Al Said");
+assert.equal(expert.partner_name, "");
+assert.equal(expert.email_from, "noor@example.com");
+assert.equal(expert.type, "opportunity");
+assert.match(String(expert.description), /Source: Website – Talk to an Expert/);
+assert.equal(expert.company_id, undefined);
+assert.equal(expert.team_id, undefined);
+assert.equal(expert.stage_id, undefined);
+
+process.env.ODOO_CRM_TALK_TO_EXPERT_STAGE_ID = "42";
+process.env.ODOO_CRM_TALK_TO_EXPERT_TEAM_ID = "7";
+const expertStaged = buildCrmLeadValues({
+  firstName: "Noor",
+  lastName: "Al Said",
+  company: "",
+  email: "noor@example.com",
+  phone: "+96891234567",
+  contactName: "Noor Al Said",
+  channel: "talk-to-expert",
+});
+assert.equal(expertStaged.stage_id, 42);
+assert.equal(expertStaged.team_id, 7);
+delete process.env.ODOO_CRM_TALK_TO_EXPERT_STAGE_ID;
+delete process.env.ODOO_CRM_TALK_TO_EXPERT_TEAM_ID;
+
+if (savedTalkStage !== undefined) {
+  process.env.ODOO_CRM_TALK_TO_EXPERT_STAGE_ID = savedTalkStage;
+}
+if (savedTalkTeam !== undefined) {
+  process.env.ODOO_CRM_TALK_TO_EXPERT_TEAM_ID = savedTalkTeam;
+}
+if (savedSoftTeam !== undefined) {
+  process.env.ODOO_CRM_SOFTWARE_TEAM_ID = savedSoftTeam;
+}
+if (savedCrmTeam !== undefined) {
+  process.env.ODOO_CRM_TEAM_ID = savedCrmTeam;
+}
 
 // Multi-company routing: category decides company_id, no frontend input involved.
 process.env.ODOO_SOFTWARE_COMPANY_ID = "1";
@@ -205,6 +275,69 @@ const elvValuesWithTeam = buildCrmLeadValues({
   quoteRef: "RQ-2026-000099",
 });
 assert.equal(elvValuesWithTeam.team_id, 42, "ELV lead should carry team_id=42");
+
+// Individual Request Quote → no company name, no Tax ID / CR in Odoo payload.
+const individualLead = buildCrmLeadValues({
+  firstName: "Ada",
+  lastName: "Lovelace",
+  company: "Individual",
+  email: "ada@example.com",
+  phone: "+96891234567",
+  product: "Revit",
+  qty: "1",
+  category: "software",
+  categoryLabel: "Software",
+  quoteRef: "RQ-2026-000200",
+  customerType: "individual",
+  contactName: "Ada Lovelace",
+  profession: "Engineer",
+  // Even if tax fields are wrongly passed, they must not appear for individuals.
+  vatId: "TAXSHOULDNOTAPPEAR",
+  crNumber: "9999999999",
+});
+assert.equal(individualLead.partner_name, "");
+assert.equal(individualLead.contact_name, "Ada Lovelace");
+assert.match(String(individualLead.description), /Customer Type: Individual/);
+assert.match(String(individualLead.description), /Profession: Engineer/);
+assert.equal(String(individualLead.description).includes("Tax ID:"), false);
+assert.equal(String(individualLead.description).includes("CR Number:"), false);
+
+const companyLead = buildCrmLeadValues({
+  firstName: "Ada",
+  lastName: "Lovelace",
+  company: "Analytical Engines",
+  email: "ada@example.com",
+  phone: "+96891234567",
+  product: "Revit",
+  qty: "1",
+  category: "software",
+  categoryLabel: "Software",
+  quoteRef: "RQ-2026-000201",
+  customerType: "company",
+  contactName: "Ada Lovelace",
+  vatId: "OM123456789",
+  crNumber: "1012345",
+});
+assert.equal(companyLead.partner_name, "Analytical Engines");
+assert.match(String(companyLead.description), /Customer Type: Company/);
+assert.match(String(companyLead.description), /Tax ID: OM123456789/);
+assert.match(String(companyLead.description), /CR Number: 1012345/);
+
+process.env.ODOO_CRM_CUSTOMER_TYPE_FIELD = "x_studio_customer_type";
+const typedFieldLead = buildCrmLeadValues({
+  firstName: "Ada",
+  lastName: "Lovelace",
+  company: "",
+  email: "ada@example.com",
+  phone: "+96891234567",
+  product: "Revit",
+  qty: "1",
+  category: "software",
+  customerType: "individual",
+  contactName: "Ada Lovelace",
+});
+assert.equal(typedFieldLead.x_studio_customer_type, "individual");
+delete process.env.ODOO_CRM_CUSTOMER_TYPE_FIELD;
 
 // Clean up
 [

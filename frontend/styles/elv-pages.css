@@ -3,6 +3,17 @@
  * Scoped to .aptus-elv-page so software pages stay unchanged.
  */
 
+@keyframes aptus-elv-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @layer utilities {
   /* ponytail: live elementor-container = 1300px + 10px inline padding */
   .aptus-elv-page .aptus-live-container {
@@ -46,8 +57,14 @@
 
   @media (min-width: 1024px) {
     .aptus-elv-page .aptus-software-inner-hero__grid {
-      gap: 1rem;
-      grid-template-columns: 22.64% 43.69% minmax(0, 1fr);
+      gap: 1.5rem;
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .aptus-elv-page .aptus-software-inner-hero__grid--two-column,
+    .aptus-elv-page .aptus-software-inner-hero__grid--no-nav,
+    .aptus-elv-page .aptus-software-inner-hero__grid--nav-collapsed {
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 
@@ -55,11 +72,29 @@
     font-size: var(--text-4xl);
     font-weight: 600;
     line-height: 1.25;
+    animation: aptus-elv-fade-up 0.65s ease both;
   }
 
   .aptus-elv-page .aptus-software-inner-hero__text {
     color: var(--e-global-color-accent);
-    line-height: 1.6;
+    line-height: 1.55;
+    max-width: 46rem;
+    animation: aptus-elv-fade-up 0.7s ease both;
+    animation-delay: 0.08s;
+  }
+
+  .aptus-elv-page .aptus-software-inner-hero__body-heading {
+    animation: aptus-elv-fade-up 0.7s ease both;
+    animation-delay: 0.12s;
+  }
+
+  .aptus-elv-page .aptus-software-page-banner__title,
+  .aptus-elv-page .aptus-software-page-banner__tagline {
+    animation: aptus-elv-fade-up 0.7s ease both;
+  }
+
+  .aptus-elv-page .aptus-software-page-banner__tagline {
+    animation-delay: 0.1s;
   }
 
   /* post-70 5f6f45f9: image sits lower so it clears the floating banner CTA */
@@ -126,8 +161,15 @@
     padding-block: 2rem;
   }
 
-  .aptus-elv-page [data-section="testimonials"] .aptus-software-section-title--lg {
+  .aptus-elv-page [data-section="testimonials"][data-variant="software-quotes"] .aptus-software-section-title--lg {
     color: var(--e-global-color-accent);
+  }
+
+  .aptus-elv-page [data-section="testimonials"][data-variant="software-quotes-marquee"] .aptus-software-section-title,
+  .aptus-elv-page [data-section="testimonials"][data-variant="software-quotes-marquee"] .aptus-software-section-title--lg,
+  .aptus-elv-page [data-section="testimonials"][data-variant="software-quotes-marquee"] .aptus-software-section-lead {
+    color: #fff;
+    text-align: center;
   }
 
   .aptus-elv-page [data-section="features"]#why-elv,
@@ -140,7 +182,7 @@
   }
 
   .aptus-elv-page .aptus-software-mid-band__inner {
-    padding: 2.5rem 1rem 1.5rem;
+    padding: 1.15rem 1rem;
   }
 
   .aptus-elv-page [data-section="cta"][data-layout="light"] {
@@ -182,5 +224,121 @@
   .aptus-elv-page [data-id="why-elv"] .aptus-software-icon-grid,
   .aptus-elv-page [data-id="why-choose"] .aptus-software-value-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.aptus-elv-page .aptus-software-inner-hero__nav {
+  display: none;
+}
+
+.aptus-elv-page .aptus-software-product-card,
+.aptus-elv-page .aptus-software-value-card,
+.aptus-elv-page .aptus-software-icon-card {
+  transition:
+    transform 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+.aptus-elv-page .aptus-software-product-card:hover,
+.aptus-elv-page .aptus-software-value-card:hover,
+.aptus-elv-page .aptus-software-icon-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 36px rgba(15, 40, 70, 0.16);
+}
+
+.aptus-elv-page .aptus-software-product-media img,
+.aptus-elv-page .aptus-software-icon-card img {
+  transition: transform 0.45s ease;
+}
+
+.aptus-elv-page .aptus-software-product-card:hover .aptus-software-product-media img,
+.aptus-elv-page .aptus-software-icon-card:hover img {
+  transform: scale(1.06);
+}
+
+.aptus-elv-page .aptus-software-btn {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.aptus-elv-page .aptus-software-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(15, 40, 70, 0.18);
+}
+
+.aptus-elv-page [data-section="features"] .aptus-software-product-card,
+.aptus-elv-page [data-section="features"] .aptus-software-value-card,
+.aptus-elv-page [data-section="features"] .aptus-software-icon-card {
+  animation: aptus-elv-fade-up 0.55s ease both;
+}
+
+.aptus-elv-page [data-section="features"] .aptus-software-product-card:nth-child(2),
+.aptus-elv-page [data-section="features"] .aptus-software-value-card:nth-child(2),
+.aptus-elv-page [data-section="features"] .aptus-software-icon-card:nth-child(2) {
+  animation-delay: 0.06s;
+}
+
+.aptus-elv-page [data-section="features"] .aptus-software-product-card:nth-child(3),
+.aptus-elv-page [data-section="features"] .aptus-software-value-card:nth-child(3),
+.aptus-elv-page [data-section="features"] .aptus-software-icon-card:nth-child(3) {
+  animation-delay: 0.12s;
+}
+
+.aptus-elv-page [data-section="features"] .aptus-software-product-card:nth-child(4),
+.aptus-elv-page [data-section="features"] .aptus-software-value-card:nth-child(4),
+.aptus-elv-page [data-section="features"] .aptus-software-icon-card:nth-child(4) {
+  animation-delay: 0.18s;
+}
+
+.aptus-elv-page [data-section="features"] .aptus-software-product-card:nth-child(n + 5),
+.aptus-elv-page [data-section="features"] .aptus-software-value-card:nth-child(n + 5),
+.aptus-elv-page [data-section="features"] .aptus-software-icon-card:nth-child(n + 5) {
+  animation-delay: 0.22s;
+}
+
+@media (min-width: 768px) {
+  .aptus-elv-page .aptus-software-inner-hero__grid--no-nav,
+  .aptus-elv-page .aptus-software-inner-hero__grid--no-nav.aptus-software-inner-hero__grid--two-column,
+  .aptus-elv-page .aptus-software-inner-hero__grid--no-nav.aptus-software-inner-hero__grid--inline-media,
+  .aptus-elv-page .aptus-software-inner-hero__grid--no-nav.aptus-software-inner-hero__grid--nav-collapsed {
+    align-items: start;
+    gap: 2rem;
+    grid-template-columns: minmax(0, 1.15fr) minmax(240px, 0.85fr) !important;
+  }
+}
+
+.aptus-elv-page .aptus-software-inner-hero__media {
+  animation: aptus-elv-fade-up 0.75s ease both;
+  animation-delay: 0.12s;
+  margin-top: 0;
+}
+
+.aptus-elv-page .aptus-software-inner-hero__media img {
+  border-radius: 12px;
+  box-shadow: 0 14px 36px rgba(15, 40, 70, 0.14);
+  max-height: min(420px, 70vh);
+  object-fit: cover;
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aptus-elv-page .aptus-software-inner-hero__title,
+  .aptus-elv-page .aptus-software-inner-hero__text,
+  .aptus-elv-page .aptus-software-inner-hero__body-heading,
+  .aptus-elv-page .aptus-software-page-banner__title,
+  .aptus-elv-page .aptus-software-page-banner__tagline,
+  .aptus-elv-page [data-section="features"] .aptus-software-product-card,
+  .aptus-elv-page [data-section="features"] .aptus-software-value-card,
+  .aptus-elv-page [data-section="features"] .aptus-software-icon-card {
+    animation: none;
+  }
+
+  .aptus-elv-page .aptus-software-product-card:hover,
+  .aptus-elv-page .aptus-software-value-card:hover,
+  .aptus-elv-page .aptus-software-icon-card:hover,
+  .aptus-elv-page .aptus-software-btn:hover,
+  .aptus-elv-page .aptus-software-product-card:hover .aptus-software-product-media img {
+    transform: none;
   }
 }

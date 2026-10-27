@@ -1,17 +1,13 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { ExploreProductsLink } from "@/components/software/ExploreProductsLink";
 import styles from "@/styles/adobe/adobe.module.css";
-import { AdobeLink } from "./DeadLink";
-import { ADOBE_ROUTES } from "./routes";
 
 interface Slide {
   eyebrow: string;
   title: string;
   body: string[];
-  /** Omit to hide hero CTA (e.g. removed Free trial). */
-  ctaLabel?: string;
-  href?: string;
   bgVideo: string;
   bgPoster: string;
 }
@@ -24,8 +20,6 @@ const SLIDES: Slide[] = [
       'Photoshop, Illustrator, Premiere, and much more. Work with the tools behind the world\'s most iconic creative content.',
       'Save 50% on Creative Cloud Pro for the first three months. New subscribers only.',
     ],
-    ctaLabel: 'Explore Creative Cloud',
-    href: ADOBE_ROUTES.business,
     bgVideo: 'https://www.adobe.com/upp/media_12b79042476ff5306e627654877c58085eacf9cf0.mp4',
     bgPoster: 'https://www.adobe.com/upp-shared/media_15d0c67d468c6ab860bd67d3af2d0998c15f45bbc.webp?width=2000&format=webply&optimize=medium',
   },
@@ -36,8 +30,6 @@ const SLIDES: Slide[] = [
       'Generate and edit images, video, audio, and designs using top AI models from Adobe, Google, OpenAI, and more.',
       'Get unlimited generations on select models for the first year. And save on our biggest Firefly plans until August 26.',
     ],
-    ctaLabel: 'Explore Firefly',
-    href: ADOBE_ROUTES.business,
     bgVideo: 'https://www.adobe.com/upp/media_1b79b8d240c8d6ea3dd5235f681a2bea24f0c5582.mp4',
     bgPoster: 'https://www.adobe.com/upp-shared/media_180a8327664c8013005414b32d539cb95ce16ef7a.webp?width=2000&format=webply&optimize=medium',
   },
@@ -47,8 +39,6 @@ const SLIDES: Slide[] = [
     body: [
       'Create, edit, share and sign documents with trusted PDF tools. Use AI to make easy edits, get answers, share information, and create polished content.',
     ],
-    ctaLabel: 'Explore Acrobat',
-    href: ADOBE_ROUTES.acrobat,
     bgVideo: 'https://www.adobe.com/upp/media_1a42397066428d422823ffd54e7a66ec4998a3fd8.mp4',
     bgPoster: 'https://www.adobe.com/upp-shared/media_13dac5079e7f5c35eb785e3e282b020d3859f4c5a.webp?width=2000&format=webply&optimize=medium',
   },
@@ -58,8 +48,6 @@ const SLIDES: Slide[] = [
     body: [
       'Unify data, content, and workflows with Adobe AI to move faster, personalize at scale, and prove impact across your business.',
     ],
-    ctaLabel: 'Explore Adobe for Business',
-    href: ADOBE_ROUTES.business,
     bgVideo: 'https://www.adobe.com/upp/media_1fa8617c753dadad2b5de772c544a1091570c94b4.mp4',
     bgPoster: 'https://www.adobe.com/upp-shared/media_117290bb35cebd4038b07dd09d84f6b7bb026c5e9.webp?width=2000&format=webply&optimize=medium',
   },
@@ -69,8 +57,6 @@ const SLIDES: Slide[] = [
     body: [
       'Save over 60% on Creative Cloud with valid school credentials.',
     ],
-    ctaLabel: 'Explore education offers',
-    href: ADOBE_ROUTES.business,
     bgVideo: 'https://www.adobe.com/upp/media_172ab3221a924e6451f0eeae9224a41c84f93724e.mp4',
     bgPoster: 'https://www.adobe.com/upp-shared/media_1172a3221a924e6451f0eeae9224a41c84f93724e.webp?width=2000&format=webply&optimize=medium',
   },
@@ -174,16 +160,14 @@ export function HeroSection() {
               <div className={styles.rmBody}>
                 {s.body.map((b, j) => <p key={j}>{b}</p>)}
               </div>
-              {s.ctaLabel && s.href ? (
-                <div className={styles.rmCtas}>
-                  <AdobeLink
-                    href={s.href}
-                    className={`${styles.btnPrimary} ${styles.btnOutlineWhite}`}
-                  >
-                    {s.ctaLabel}
-                  </AdobeLink>
-                </div>
-              ) : null}
+              <div className={styles.rmCtas}>
+                <ExploreProductsLink
+                  brandId="adobe"
+                  className={`${styles.btnPrimary} ${styles.btnOutlineWhite}`}
+                >
+                  Explore products
+                </ExploreProductsLink>
+              </div>
             </div>
           </div>
         </div>

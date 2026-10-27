@@ -1,5 +1,12 @@
 import { AUTODESK_SUBNAV_LINKS } from "@/data/autodesk-subnav";
-import { SITE_NAVIGATION } from "@/data/site-nav";
+import { findNavItemByLabel, SITE_NAVIGATION } from "@/data/site-nav";
+import {
+  mergeSoftwareLinks,
+  PDF_ADOBE_LEVEL_PRODUCTS,
+  PDF_MICROSOFT_BUNDLE_PRODUCTS,
+  PDF_ORACLE_BUNDLE_PRODUCTS,
+  PDF_WATER_INFRASTRUCTURE_PRODUCTS,
+} from "@/data/pdf-software-catalog";
 
 export type SoftwareSubNavLink = { label: string; href: string };
 
@@ -13,22 +20,53 @@ function flattenChildren(children: { label: string; href?: string; children?: { 
 }
 
 function linksFromCategory(label: string): SoftwareSubNavLink[] {
-  const software = SITE_NAVIGATION.find((item) => item.label === "Software");
+  const software = findNavItemByLabel(SITE_NAVIGATION, "Software");
   const category = software?.children?.find((c) => c.label === label);
   return category?.children ? flattenChildren(category.children) : [];
 }
 
 function linksFromTopNav(label: string): SoftwareSubNavLink[] {
-  const item = SITE_NAVIGATION.find((nav) => nav.label === label);
+  const item = findNavItemByLabel(SITE_NAVIGATION, label);
   return item?.children ? flattenChildren(item.children) : [];
 }
 
-export const ADOBE_SUBNAV_LINKS = linksFromCategory("Adobe");
-export const MICROSOFT_SUBNAV_LINKS = linksFromCategory("Microsoft");
-export const MULTIMEDIA_SUBNAV_LINKS = linksFromCategory("Multimedia");
-export const ORACLE_SUBNAV_LINKS = linksFromCategory("Oracle");
-export const EDMS_SUBNAV_LINKS = linksFromCategory("EDMS");
-export const ELECTRICAL_SOFTWARE_SUBNAV_LINKS = linksFromCategory("Electrical Software");
+/** Top-level Software categories for the /software-solutions hub sidebar (ELV-style). */
+function linksFromSoftwareHub(): SoftwareSubNavLink[] {
+  const software = findNavItemByLabel(SITE_NAVIGATION, "Software");
+  if (!software?.children?.length) return [];
+
+  const links: SoftwareSubNavLink[] = [];
+  for (const category of software.children) {
+    const href =
+      category.href && category.href !== "#"
+        ? category.href
+        : category.children?.find((child) => child.href && child.href !== "#")?.href;
+    if (!href) continue;
+    links.push({ label: category.label, href });
+  }
+  return links;
+}
+
+export const ADOBE_SUBNAV_LINKS: SoftwareSubNavLink[] = PDF_ADOBE_LEVEL_PRODUCTS;
+export const MICROSOFT_SUBNAV_LINKS: SoftwareSubNavLink[] = PDF_MICROSOFT_BUNDLE_PRODUCTS;
+export const ORACLE_SUBNAV_LINKS: SoftwareSubNavLink[] = PDF_ORACLE_BUNDLE_PRODUCTS;
+export const MULTIMEDIA_SUBNAV_LINKS: SoftwareSubNavLink[] = [
+  { label: "Bluebeam", href: "/bluebeam" },
+  { label: "Corona", href: "/chaos-corona" },
+  { label: "Enscape", href: "/enscape" },
+  { label: "Lumion", href: "/luminon" },
+  { label: "Nitro", href: "/nitro" },
+  { label: "Sketchup", href: "/sketchup" },
+  { label: "Twinmotion", href: "/twinmotion" },
+  { label: "V-Ray", href: "/v-ray" },
+];
+export const EDMS_SUBNAV_LINKS: SoftwareSubNavLink[] = [
+  { label: "Autodesk Construction Cloud", href: "/construction-cloud" },
+  { label: "Aconex", href: "/aconex" },
+  { label: "Odoo", href: "/odoo" },
+  { label: "SpectroNova", href: "/spectronova" },
+];
+export const ELECTRICAL_SOFTWARE_SUBNAV_LINKS: SoftwareSubNavLink[] = [{ label: "Etap", href: "/etap" }];
 
 /** Live sidebar on Educational Software pages (post-2091 ANSYS). */
 export const EDUCATIONAL_SUBNAV_LINKS: SoftwareSubNavLink[] = [
@@ -38,6 +76,7 @@ export const EDUCATIONAL_SUBNAV_LINKS: SoftwareSubNavLink[] = [
   { label: "ANSYS", href: "/ansys" },
 ];
 export const ELV_SUBNAV_LINKS = linksFromTopNav("ELV Solutions");
+export const SOFTWARE_HUB_SUBNAV_LINKS = linksFromSoftwareHub();
 
 /** Live sidebar on Quantity Takeoff product pages. */
 export const QUANTITY_TAKEOFF_SUBNAV_LINKS: SoftwareSubNavLink[] = [
@@ -59,12 +98,8 @@ export const ANTIVIRUS_SUBNAV_LINKS: SoftwareSubNavLink[] = [
 ];
 
 /** Live sidebar on Water Infrastructure product pages (post-3188 InfoDrainage et al.). */
-export const WATER_INFRASTRUCTURE_SUBNAV_LINKS: SoftwareSubNavLink[] = [
-  { label: "InfoDrainage", href: "/infodrainage" },
-  { label: "InfoWater Pro", href: "/infowater-pro" },
-  { label: "InfoWorks ICM", href: "/infoworks-icm" },
-  { label: "InfoWorks WS Pro", href: "/infoworks-ws-pro" },
-];
+export const WATER_INFRASTRUCTURE_SUBNAV_LINKS: SoftwareSubNavLink[] =
+  PDF_WATER_INFRASTRUCTURE_PRODUCTS;
 
 /** Live sidebar on Cyber Security product pages (post-2786 Fortinet et al.). */
 export const CYBER_SECURITY_SUBNAV_LINKS: SoftwareSubNavLink[] = [
@@ -92,6 +127,8 @@ export const CUBICOST_GROUP_SUBNAV_LINKS: SoftwareSubNavLink[] = [
 ];
 
 export const SOFTWARE_SUBNAV_BY_FAMILY: Record<string, SoftwareSubNavLink[]> = {
+  software: SOFTWARE_HUB_SUBNAV_LINKS,
+  "software-solutions": SOFTWARE_HUB_SUBNAV_LINKS,
   autodesk: [...AUTODESK_SUBNAV_LINKS],
   adobe: ADOBE_SUBNAV_LINKS,
   microsoft: MICROSOFT_SUBNAV_LINKS,

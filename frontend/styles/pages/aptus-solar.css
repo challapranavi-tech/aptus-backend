@@ -1,0 +1,110 @@
+/* Aptus Solar hub — template shell until full content is added */
+
+.aptus-solar-page {
+  background: #f7fafc;
+  color: #0d2748;
+}
+
+.aptus-solar-hero {
+  background: linear-gradient(135deg, #0d2748 0%, #1352a3 55%, #1a6bb5 100%);
+  color: #fff;
+  padding: clamp(4rem, 10vw, 7rem) clamp(1.25rem, 4vw, 2rem);
+}
+
+.aptus-solar-hero__inner {
+  max-width: 44rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.aptus-solar-hero__eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.aptus-solar-hero__title {
+  margin: 0 0 1rem;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.aptus-solar-hero__lead {
+  margin: 0 auto 1.75rem;
+  max-width: 36rem;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  opacity: 0.92;
+}
+
+.aptus-solar-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.aptus-solar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.aptus-solar-btn--primary {
+  background: #67db85;
+  color: #0b1220;
+}
+
+.aptus-solar-btn--primary:hover {
+  background: #7ee59a;
+}
+
+.aptus-solar-btn--secondary {
+  background: transparent;
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+}
+
+.aptus-solar-btn--secondary:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.aptus-solar-placeholder {
+  padding: clamp(3rem, 8vw, 5rem) clamp(1.25rem, 4vw, 2rem);
+}
+
+.aptus-solar-placeholder__inner {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  border-radius: 1rem;
+  background: #fff;
+  border: 1px dashed rgba(19, 82, 163, 0.28);
+  text-align: center;
+}
+
+.aptus-solar-placeholder__inner h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.aptus-solar-placeholder__inner p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #3a4658;
+}

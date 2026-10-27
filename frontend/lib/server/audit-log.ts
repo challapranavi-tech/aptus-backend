@@ -29,6 +29,7 @@ export type AuditAction =
   | "refund.request"
   | "refund.process"
   | "refund.reject"
+  | "cart.crm_synced"
   | "security.rate_limited";
 
 export type AuditEntry = {

@@ -1,41 +1,39 @@
 import { Container, CmsImage } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import type { RichText as RichTextData } from "@/types";
+import Link from "next/link";
 
 interface RichTextProps {
   data: RichTextData;
 }
 
-/** Prefer "Our core strength is" / "our team" even if CMS still stores the old split. */
-function cultureSubtitleLines(heading?: string, accent?: string): string[] {
-  const full = [heading, accent].filter(Boolean).join(" ").replace(/\s+/g, " ").trim();
-  if (!full) return [];
-  const match = full.match(/^(our\s+core\s+strength\s+is)\s+(.+)$/i);
-  if (match) return [match[1], match[2]];
-  return [heading, accent].filter(Boolean) as string[];
-}
-
 export function RichText({ data }: RichTextProps) {
   const isCulturePanel = data.variant === "culture-panel";
+  const isJoinPanel = data.variant === "join-panel";
   const below = data.imagePosition === "below";
-  const imageRight = !below && data.imagePosition !== "left";
+  const above = data.imagePosition === "above";
+  const imageRight = !below && !above && data.imagePosition !== "left";
   const hasMedia = Boolean(data.media);
-  const cultureLines = isCulturePanel ? cultureSubtitleLines(data.heading, data.headingAccent) : [];
+  const cultureItems = isCulturePanel
+    ? data.items?.filter((item) => item.title || item.description)
+    : undefined;
 
   const mediaBlock =
     hasMedia && data.media ? (
       <div
         className={cn(
-          isCulturePanel ? "pt-8" : "overflow-hidden rounded-2xl shadow-[var(--shadow-lg)]",
+          isCulturePanel
+            ? "aptus-team-culture-photo"
+            : "overflow-hidden rounded-2xl shadow-[var(--shadow-lg)]",
           below && !isCulturePanel && "mt-10",
         )}
       >
         <CmsImage
           src={data.media.src}
           alt={data.media.alt || data.heading || ""}
-          width={data.media.width ?? (isCulturePanel ? 1068 : 640)}
-          height={data.media.height ?? (isCulturePanel ? 388 : 480)}
-          className="h-auto w-full object-contain"
+          width={data.media.width ?? (isCulturePanel ? 1600 : 640)}
+          height={data.media.height ?? (isCulturePanel ? 900 : 480)}
+          className={isCulturePanel ? "aptus-team-culture-photo__img" : "h-auto w-full object-contain"}
           sizes="(max-width: 1024px) 100vw, 960px"
         />
       </div>
@@ -43,27 +41,68 @@ export function RichText({ data }: RichTextProps) {
 
   if (isCulturePanel) {
     return (
-      <section className="bg-white pb-16 pt-0" data-section="rich-text" data-variant="culture-panel">
+      <section className="bg-white pb-2 pt-0" data-section="rich-text" data-variant="culture-panel">
         <Container>
-          <div className="aptus-tint-panel my-4 p-4 sm:p-6">
-            {data.eyebrow && <h2 className="aptus-team-watermark">{data.eyebrow}</h2>}
-            {cultureLines.length > 0 && (
-              <div className="aptus-team-culture-subtitle mt-4 font-semibold uppercase">
-                {cultureLines.map((line) => (
-                  <p key={line}>{line}</p>
+          <div className="aptus-tint-panel mb-0 mt-4 overflow-hidden p-4 sm:p-8">
+            {(above || (!below && hasMedia)) && mediaBlock}
+            {data.eyebrow && <p className="aptus-team-watermark">{data.eyebrow}</p>}
+            {(data.heading || data.headingAccent) && (
+              <h2 className="aptus-team-culture-heading">
+                {data.heading}
+                {data.heading && data.headingAccent ? " " : null}
+                {data.headingAccent ? <span>{data.headingAccent}</span> : null}
+              </h2>
+            )}
+            {cultureItems && cultureItems.length > 0 ? (
+              <div className="aptus-team-culture-grid">
+                {cultureItems.map((item) => (
+                  <article key={item.title ?? item.description} className="aptus-team-culture-card">
+                    {item.title ? <h3>{item.title}</h3> : null}
+                    {item.description ? <p>{item.description}</p> : null}
+                  </article>
                 ))}
               </div>
+            ) : (
+              data.paragraphs?.map((p, i) => (
+                <p
+                  key={i}
+                  className={cn("leading-[1.8] text-black", i === 0 ? "mt-4" : "mt-5")}
+                  style={{ fontSize: "var(--text-base)" }}
+                >
+                  {p}
+                </p>
+              ))
             )}
-            {data.paragraphs?.map((p, i) => (
-              <p
-                key={i}
-                className={cn("leading-[1.8] text-black", i === 0 ? "mt-4" : "mt-5")}
-                style={{ fontSize: 'var(--text-base)' }}
-              >
-                {p}
+            {below && mediaBlock}
+          </div>
+        </Container>
+      </section>
+    );
+  }
+
+  if (isJoinPanel) {
+    return (
+      <section className="aptus-team-join" data-section="rich-text" data-variant="join-panel">
+        <Container>
+          <div className="aptus-team-join__inner">
+            {(data.heading || data.headingAccent) && (
+              <h2 className="aptus-team-join__heading">
+                {data.heading}
+                {data.heading && data.headingAccent ? " " : null}
+                {data.headingAccent ? <span>{data.headingAccent}</span> : null}
+              </h2>
+            )}
+            {data.subheading ? <p className="aptus-team-join__tagline">{data.subheading}</p> : null}
+            {data.paragraphs?.map((paragraph) => (
+              <p key={paragraph} className="aptus-team-join__copy">
+                {paragraph}
               </p>
             ))}
-            {below && mediaBlock}
+            {data.action?.href && data.action.label ? (
+              <Link href={data.action.href} className="aptus-team-join__cta">
+                {data.action.label}
+              </Link>
+            ) : null}
           </div>
         </Container>
       </section>

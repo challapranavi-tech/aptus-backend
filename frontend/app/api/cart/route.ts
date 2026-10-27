@@ -14,10 +14,15 @@ export async function GET(request: NextRequest) {
   const claims = await getSessionFromRequestOrRefresh(request);
   if (!claims) return jsonError("Not authenticated", 401);
 
-  const profile = await resolveProfile(claims);
+  let profile: Awaited<ReturnType<typeof resolveProfile>> = null;
+  try {
+    profile = await resolveProfile(claims);
+  } catch {
+    profile = null;
+  }
   const cart = await getStoredPortalCart(claims.sub);
   if (cart?.items.length) {
-    await maybeSendCartReminderForActor(claims.sub, profile?.partnerId ?? cart.partnerId);
+    void maybeSendCartReminderForActor(claims.sub, profile?.partnerId ?? cart.partnerId);
   }
 
   const fresh = await getStoredPortalCart(claims.sub);
@@ -45,7 +50,12 @@ export async function PUT(request: NextRequest) {
     return jsonError(validation.error, 400);
   }
 
-  const profile = await resolveProfile(claims);
+  let profile: Awaited<ReturnType<typeof resolveProfile>> = null;
+  try {
+    profile = await resolveProfile(claims);
+  } catch {
+    profile = null;
+  }
   // Read before saving: an empty cart deletes the record, taking crmLeadId with it.
   const previous = await getStoredPortalCart(claims.sub);
   const saved = await saveStoredPortalCart(claims.sub, {
@@ -55,7 +65,7 @@ export async function PUT(request: NextRequest) {
 
   // Soft-fail inside — never block cart persistence.
   if (saved?.items.length && profile?.partnerId) {
-    await syncCartCrmJourney({ actorId: claims.sub, profile, cart: saved });
+    void syncCartCrmJourney({ actorId: claims.sub, profile, cart: saved });
   } else if (!saved && previous?.items.length) {
     await closeCartCrmJourney({
       actorId: claims.sub,

@@ -26,8 +26,16 @@ function backfillImages(
     item.imageAlt ??= loc.imageAlt;
   }
 
-  if (!content.partnerships?.logos?.length && local.partnerships?.logos?.length) {
-    content.partnerships = local.partnerships;
+  if (!content.keyProjects?.items?.length && local.keyProjects?.items?.length) {
+    content.keyProjects = local.keyProjects;
+  } else if (content.keyProjects?.items?.length && local.keyProjects?.items?.length) {
+    const byTitle = new Map(local.keyProjects.items.map((item) => [item.title, item]));
+    for (const item of content.keyProjects.items) {
+      const loc = byTitle.get(item.title);
+      if (!loc?.imageSrc || item.imageSrc) continue;
+      item.imageSrc = loc.imageSrc;
+      item.imageAlt ??= loc.imageAlt;
+    }
   }
 
   return content;
@@ -61,10 +69,6 @@ export function loadCaseStudiesPageContent(
         title: { accent: "x" },
         items: [{ title: "Al Nadha Hospital", description: "", pdfHref: "#" }],
       },
-      painPoints: { title: { accent: "x" }, items: [], closingParagraph: "" },
-      whyChoose: { title: { accent: "x" }, items: [] },
-      transformCta: { title: { accent: "x" }, subtitle: "", ctaLabel: "", ctaHref: "#" },
-      testimonials: { eyebrow: "", title: { accent: "x" }, items: [] },
     },
     {
       hero: { title: { accent: "x" }, subtitle: "" },
@@ -79,10 +83,6 @@ export function loadCaseStudiesPageContent(
           },
         ],
       },
-      painPoints: { title: { accent: "x" }, items: [], closingParagraph: "" },
-      whyChoose: { title: { accent: "x" }, items: [] },
-      transformCta: { title: { accent: "x" }, subtitle: "", ctaLabel: "", ctaHref: "#" },
-      testimonials: { eyebrow: "", title: { accent: "x" }, items: [] },
     },
   );
   if (sample.caseStudies.items[0]?.imageSrc !== "/images/Al-Nahda.jpg") {

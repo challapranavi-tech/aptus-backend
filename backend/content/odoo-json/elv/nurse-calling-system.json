@@ -3,80 +3,88 @@
     "id": "hero",
     "visible": true,
     "family": "elv",
-    "bannerTitle": "Nurse Calling System",
-    "bannerTagline": "Advanced communication solutions for healthcare facilities",
-    "title": "Ensuring Immediate Patient Care and Safety",
-    "paragraphs": [
-      "In today’s healthcare environment, prompt patient response is paramount. More and more medical facilities are upgrading their communication infrastructure with advanced Nurse Calling Systems to maximize care efficiency and patient satisfaction.",
-      "Whether you’re installing a simple call bell in a clinic room or deploying a fully integrated system across a large hospital wing, these technologies dramatically improve the way you notify, respond to, and document patient needs.",
-      "Experience superior communication and seamless staff coordination with our comprehensive solutions for bedside calling, mobile alerts, and centralized reporting across any medical facility.",
-      "From patient bedside stations and waterproof pull cords to wireless staff pagers and management analytics software, we provide end-to-end solutions that ensure every call is heard, answered, and utterly effective."
+    "bannerTitle": "Advanced Nurse Calling Systems",
+    "bannerTagline": "Every patient call reaches the right team, fast.",
+    "bannerBackgroundImages": [
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/nurse.jpg",
+        "alt": "Nurse calling system for healthcare facilities"
+      },
+      {
+        "src": "/images/Leonardo_Phoenix_10_a_cinematic_photo_of_a_bustling_lobby_with_3.jpg",
+        "alt": "Healthcare facility communication and response"
+      },
+      {
+        "src": "/images/Thermal_Scanner-1024x1020.png",
+        "alt": "Patient safety and screening at healthcare entry"
+      },
+      {
+        "src": "/images/Access-Control-System-1-1024x1020.png",
+        "alt": "Secure staff and patient area communication"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/nurse-call-system.jpg",
+        "alt": "Integrated nurse call communication"
+      }
     ],
-    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/nurse.jpg",
-    "imageAlt": "Nurse Calling System",
+    "title": "Advanced Nurse Calling Systems",
+    "paragraphs": [
+      "When a patient calls, the right team should see it immediately. Bedside buttons, staff alerts, and a central desk keep requests visible. Wards stay quieter because calls are routed, not shouted down a corridor. We size the network to your floors, rooms, and response process."
+    ],
+    "imageSrc": "/images/ncs-bedside.jpg",
+    "layout": "two-column",
     "ctaLabel": "Request a Quote",
-    "ctaHref": "#form"
+    "ctaHref": "#form",
+    "ctaPlacement": "end",
+    "imageAlt": "Nurse calling system at the patient bedside"
   },
   "cardSections": [
     {
-      "id": "features",
+      "id": "ncs-deliver",
       "visible": true,
-      "variant": "icon-cards",
+      "variant": "product-cards",
+      "gridColumns": 3,
       "title": {
-        "before": "Key System Features"
+        "before": "What We Deliver"
       },
-      "subheading": "Explore the comprehensive functionality of our nurse call solutions",
-      "align": "center",
+      "subheading": "Patient calling, staff alerts, and centralized monitoring for faster, safer care.",
+      "align": "left",
       "items": [
         {
-          "title": "Patient Emergency Alerts",
-          "body": "Immediate notification system for patients requiring urgent assistance with visual, audible, and vibration-based alerts.",
-          "icon": "bell"
+          "title": "Patient Bedside Calling",
+          "body": "Intuitive bedside call stations allow patients to request assistance quickly and conveniently, with clear indication of call status.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/nurse.jpg",
+          "imageAlt": "Patient bedside calling stations"
         },
         {
-          "title": "Wireless Staff Pagers",
-          "body": "Reliable wireless communication devices ensuring staff are always reachable regardless of location within the facility.",
-          "icon": "mobile-alt"
+          "title": "Emergency & Assistance Calls",
+          "body": "Support urgent communication with dedicated emergency buttons, pull cords, and specialized call points designed for patient safety.",
+          "imageSrc": "/images/ncs-emergency.jpg",
+          "imageAlt": "Emergency and assistance call points"
         },
         {
-          "title": "Central Monitoring Station",
-          "body": "Real-time dashboard displaying active calls, response times, and system status for complete situational awareness.",
-          "icon": "tv"
+          "title": "Staff Communication",
+          "body": "Deliver alerts directly to nurses and care teams through room displays, wireless devices, pagers, or mobile communication platforms.",
+          "imageSrc": "/images/ncs-staff.jpg",
+          "imageAlt": "Staff communication and nurse alerts"
         },
         {
-          "title": "Performance Analytics",
-          "body": "Detailed reporting and analytics tools to track response times, identify bottlenecks, and optimize staff allocation.",
-          "icon": "chart-line"
+          "title": "Centralized Monitoring",
+          "body": "Give healthcare teams a clear overview of active calls, room status, and response activity through centralized monitoring and management interfaces.",
+          "imageSrc": "/images/ncs-monitoring.jpg",
+          "imageAlt": "Centralized nurse call monitoring"
         },
         {
-          "title": "Integrated Security",
-          "body": "Seamless integration with hospital security systems including access control and surveillance for comprehensive safety management.",
-          "icon": "shield-alt"
+          "title": "Visual & Audible Alerts",
+          "body": "Combine visual indicators and audible notifications to ensure calls are clearly identified across patient rooms, corridors, and nursing stations.",
+          "imageSrc": "/images/ncs-alerts.jpg",
+          "imageAlt": "Visual and audible nurse call alerts"
         },
         {
-          "title": "System Integration",
-          "body": "Compatibility with existing hospital infrastructure including EHR systems, nurse stations, and other medical equipment.",
-          "icon": "plug"
-        },
-        {
-          "title": "Faster Response Times",
-          "body": "Immediate notification system for patients requiring urgent assistance with visual, audible, and vibration-based alerts.",
-          "icon": "stopwatch"
-        },
-        {
-          "title": "Enhanced Patient Safety",
-          "body": "Reliable wireless communication devices ensuring staff are always reachable regardless of location within the facility.",
-          "icon": "user-nurse"
-        },
-        {
-          "title": "Improved Staff Efficiency",
-          "body": "Real-time dashboard displaying active calls, response times, and system status for complete situational awareness.",
-          "icon": "users"
-        },
-        {
-          "title": "HIPAA Compliant",
-          "body": "All communications are encrypted and meet strict HIPAA requirements for patient privacy protection.",
-          "icon": "hospital"
+          "title": "Reporting & Analytics",
+          "body": "Track call activity and response patterns to support operational visibility, workflow improvements, and better resource planning.",
+          "imageSrc": "/images/ncs-analytics.jpg",
+          "imageAlt": "Nurse call reporting and analytics"
         }
       ]
     },
@@ -115,41 +123,31 @@
   ],
   "testimonials": {
     "visible": true,
-    "variant": "software-quotes",
+    "variant": "software-quotes-marquee",
     "title": {
-      "before": "What Our",
-      "accent": "Clients Say"
+      "before": "What Our Clients Say"
     },
     "subheading": "Hear from healthcare providers who have transformed their operations with our solutions",
     "items": [
       {
-        "quote": "“The implementation of Aptus Infotech’s nurse call system has dramatically improved our response times and patient satisfaction scores across multiple departments.”",
+        "quote": "The implementation of Aptus Infotech’s nurse call system has dramatically improved our response times and patient satisfaction scores across multiple departments.",
         "author": "Sarah Johnson",
         "role": "Director of Nursing"
       },
       {
-        "quote": "“Their system seamlessly integrated with our existing EHR platform, creating a unified communication ecosystem that has reduced errors and improved documentation accuracy.”",
+        "quote": "Their system seamlessly integrated with our existing EHR platform, creating a unified communication ecosystem that has reduced errors and improved documentation accuracy.",
         "author": "Michael Chen",
         "role": "CEO,"
       },
       {
-        "quote": "“We were particularly impressed with the system’s reliability during critical situations and the excellent training provided to our staff.”",
+        "quote": "We were particularly impressed with the system’s reliability during critical situations and the excellent training provided to our staff.",
         "author": "Jessica Williams",
         "role": "Operations Manager"
       }
     ]
   },
-  "contactCta": {
-    "heading": "Have questions? We can help",
-    "description": "Our experts can help you to implement the right Nurse Calling system as per your Requirements.",
-    "showForm": true,
-    "submitLabel": "Submit Now",
-    "formVariant": "simple",
-    "layout": "light",
-    "category": "elv",
-    "productName": "Nurse Calling System"
-  },
   "midCta": {
+    "placement": "bottom",
     "heading": "Ready to Enhance Your Healthcare Communications?",
     "description": "Contact our healthcare technology specialists to discuss how our nurse call system can improve patient safety and staff efficiency in your facility.",
     "actionLabel": "Get Your Quote Now",

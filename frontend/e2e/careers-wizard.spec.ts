@@ -89,6 +89,11 @@ test("careers wizard: resume hints → submit → success", async ({ page }) => 
     mimeType: "image/jpeg",
     buffer: jpegBuffer(),
   });
+  await uploadLabeled(page, /^Payslip/, {
+    name: "payslip.pdf",
+    mimeType: "application/pdf",
+    buffer: pdfBuffer(),
+  });
   await page.getByRole("button", { name: "Continue" }).click();
 
   // Step 4 — review + submit

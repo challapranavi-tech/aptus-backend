@@ -16,6 +16,7 @@ export { CTA } from "./CTA";
 export { SoftwareLandingHero } from "./SoftwareLandingHero";
 export { SoftwareInnerHero } from "./SoftwareInnerHero";
 export { EtapStackedSections, SoftwareStackedSections } from "./SoftwareStackedSections";
+export { OurStory } from "./OurStory";
 export { Testimonials } from "./Testimonials";
 export {
   SectionRenderer,

@@ -3,18 +3,18 @@
     "id": "hero",
     "visible": true,
     "family": "autodesk",
-    "bannerTitle": "Autodesk BIM Collaborate Pro",
+    "bannerTitle": "Forma Design Collaboration",
     "bannerTagline": "The cloud-based collaboration platform that connects design and construction teams for better project outcomes",
     "mediaInline": false,
     "title": "Transform How Your Teams Collaborate",
     "paragraphs": [
-      "Autodesk BIM Collaborate Pro is a cloud-based construction collaboration platform designed to connect design and construction teams, enabling real-time project coordination, review, and data management.",
-      "By providing a centralized common data environment (CDE), BIM Collaborate Pro breaks down silos between disciplines, giving all stakeholders access to the latest models, drawings, and project documents.",
+      "Forma Design Collaboration is a cloud-based construction collaboration platform designed to connect design and construction teams, enabling real-time project coordination, review, and data management.",
+      "By providing a centralized common data environment (CDE), Forma Design Collaboration breaks down silos between disciplines, giving all stakeholders access to the latest models, drawings, and project documents.",
       "Its advanced coordination, clash detection, and communication tools help teams identify and resolve issues early, reducing costly rework and improving overall project efficiency.",
-      "Integrated with the Autodesk Construction Cloud, BIM Collaborate Pro ensures seamless workflows from design to construction and handover, supporting better decision-making, consistent data management, and successful project delivery across every stage of the construction lifecycle."
+      "Integrated with the Autodesk Construction Cloud, Forma Design Collaboration ensures seamless workflows from design to construction and handover, supporting better decision-making, consistent data management, and successful project delivery across every stage of the construction lifecycle."
     ],
     "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Bim.png",
-    "imageAlt": "Autodesk BIM Collaborate Pro",
+    "imageAlt": "Forma Design Collaboration",
     "ctaLabel": "Request a Quote",
     "ctaHref": "#Form"
   },
@@ -27,7 +27,7 @@
       "title": {
         "before": "Powerful Features"
       },
-      "subheading": "Discover the capabilities that make BIM Collaborate Pro the industry standard",
+      "subheading": "Discover the capabilities that make Forma Design Collaboration the industry standard",
       "align": "center",
       "items": [
         {
@@ -70,7 +70,7 @@
       "title": {
         "before": "Key Benefits"
       },
-      "subheading": "Why leading firms choose BIM Collaborate Pro",
+      "subheading": "Why leading firms choose Forma Design Collaboration",
       "align": "center",
       "gridColumns": 4,
       "items": [
@@ -102,7 +102,7 @@
       "variant": "icon-cards",
       "anchorId": "why-choose",
       "title": {
-        "before": "Why Choose Autodesk BIM Collaborate Pro?"
+        "before": "Why Choose Forma Design Collaboration?"
       },
       "align": "center",
       "gridColumns": 4,
@@ -132,7 +132,7 @@
   ],
   "midCta": {
     "heading": "Ready to Transform Your Project Collaboration?",
-    "subheading": "Start your free trial of Autodesk BIM Collaborate Pro today and experience the future of BIM collaboration.",
+    "subheading": "Start your free trial of Forma Design Collaboration today and experience the future of BIM collaboration.",
     "actionLabel": "Get Your Quote Now",
     "actionHref": "#form"
   },
@@ -142,10 +142,10 @@
     "title": {
       "before": "What Our Clients Say"
     },
-    "subheading": "Hear from professionals who have transformed their projects with BIM Collaborate Pro",
+    "subheading": "Hear from professionals who have transformed their projects with Forma Design Collaboration",
     "items": [
       {
-        "quote": "BIM Collaborate Pro has transformed how our teams work together. We’ve reduced coordination issues by 70% and accelerated our design review process significantly.",
+        "quote": "Forma Design Collaboration has transformed how our teams work together. We’ve reduced coordination issues by 70% and accelerated our design review process significantly.",
         "author": "David Thompson",
         "role": "BIM Manager, Sterling Engineering"
       },
@@ -250,6 +250,6 @@
     "formVariant": "simple",
     "layout": "light",
     "category": "software",
-    "productName": "Autodesk BIM Collaborate Pro"
+    "productName": "Forma Design Collaboration"
   }
 }

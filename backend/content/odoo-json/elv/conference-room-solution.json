@@ -3,60 +3,88 @@
     "id": "hero",
     "visible": true,
     "family": "elv",
-    "bannerTitle": "Conference Room Solutions",
-    "bannerTagline": "Transform your meeting spaces with intelligent audiovisual technology",
-    "title": "Intelligent Audiovisual Solutions for Modern Meeting Spaces",
-    "paragraphs": [
-      "In today’s dynamic workplace, productive meetings are paramount. More and more organizations are upgrading their meeting spaces with advanced Conference Room Solutions to maximize efficiency and collaboration.",
-      "Whether you’re setting up huddle rooms for quick stand-ups or large boardrooms for executive decisions, these technologies dramatically improve the way teams connect, present, and innovate.",
-      "Experience superior meeting quality and seamless functionality with our comprehensive solutions for video conferencing, wireless presentation, and integrated control across any meeting space.",
-      "From high-definition displays and automated camera tracking to intuitive one-touch control systems, we provide end-to-end solutions that ensure every meeting is productive, engaging, and utterly effortless."
+    "bannerTitle": "Intelligent Conference Room Solutions",
+    "bannerTagline": "Connect. Collaborate. Communicate.",
+    "bannerBackgroundImages": [
+      {
+        "src": "/images/Leonardo_Phoenix_10_Create_a_visually_appealing_image_for_Conf_0-673x1024.jpg",
+        "alt": "Intelligent conference room collaboration"
+      },
+      {
+        "src": "/images/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Audio_3-673x1024.jpg",
+        "alt": "Professional conference room audio and video"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Conference-Room-Solutions-768x512.webp",
+        "alt": "Connected conference and meeting spaces"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/brnd-7.jpg",
+        "alt": "Enterprise meeting room technology"
+      },
+      {
+        "src": "/images/LDA-audio-tech-rajcmtw0bg2fln77lwpbcob33b83lps3021uv2lw8e.png",
+        "alt": "Professional audio for meeting rooms"
+      }
     ],
-    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_Create_a_visually_appealing_image_for_Conf_0-673x1024.jpg",
-    "imageAlt": "Conference Room Solutions",
+    "title": "Intelligent Conference Room Solutions",
+    "paragraphs": [
+      "A meeting room should start the same way every time. Displays, cameras, and microphones sit behind one-touch join for huddle spaces and boardrooms. Hybrid calls stay clear for people in the room and on the line. We keep the experience consistent across every space you add."
+    ],
+    "imageSrc": "/images/Leonardo_Phoenix_10_Create_a_visually_appealing_image_for_Conf_0-673x1024.jpg",
+    "layout": "two-column",
     "ctaLabel": "Request a Quote",
-    "ctaHref": "#form"
+    "ctaHref": "#form",
+    "ctaPlacement": "end",
+    "imageAlt": "Intelligent conference room collaboration setup"
   },
   "cardSections": [
     {
-      "id": "features",
+      "id": "conference-deliver",
       "visible": true,
-      "variant": "icon-cards",
+      "variant": "product-cards",
+      "gridColumns": 3,
       "title": {
-        "before": "Key Features"
+        "before": "What We Deliver"
       },
-      "subheading": "Comprehensive audiovisual solutions designed for modern workplaces",
-      "align": "center",
+      "subheading": "Meeting-room systems only — huddle rooms, boardrooms, wireless share, and one-touch control.",
+      "align": "left",
       "items": [
         {
-          "title": "Video Conferencing Systems",
-          "body": "Enterprise-grade video conferencing solutions with HD cameras, microphones, and seamless integration with popular platforms likeZoom, Teams, and Webex.",
-          "icon": "video"
+          "title": "Huddle Room Systems",
+          "body": "Compact, ready-to-use meeting kits for small collaborative rooms — camera, display, and one-touch join without a full AV build.",
+          "imageSrc": "/images/conf-huddle.jpg",
+          "imageAlt": "Huddle room conference systems"
         },
         {
-          "title": "Interactive Displays",
-          "body": "Large-format touchscreens and interactive whiteboards for collaborative presentations, brainstorming sessions, and digital signage applications.",
-          "icon": "tv"
-        },
-        {
-          "title": "Audio Systems",
-          "body": "Crystal-clear sound systems including ceiling-mounted speakers, wireless microphones, and acoustic treatments for optimal voice clarity and intelligibility.",
-          "icon": "volume-up"
+          "title": "Boardroom Conferencing",
+          "body": "Executive boardroom setups for presentations and hybrid meetings, designed around table layout, seating, and decision-making rooms.",
+          "imageSrc": "/images/conf-boardroom.jpg",
+          "imageAlt": "Executive boardroom conferencing"
         },
         {
           "title": "Wireless Presentation",
-          "body": "Seamlessly share content from any device with wireless presentation systems, eliminating cables and simplifying meeting setup.",
-          "icon": "laptop"
+          "body": "Share from laptops, tablets, and phones instantly so presenters start the meeting without cables or adapter hunting.",
+          "imageSrc": "/images/conf-wireless.jpg",
+          "imageAlt": "Wireless presentation in meeting rooms"
         },
         {
-          "title": "Integrated Control Systems",
-          "body": "Centralized control panels and mobile apps for managing lighting, temperature, blinds, and audiovisual equipment with one-touch simplicity.",
-          "icon": "cogs"
+          "title": "One-Touch Meeting Start",
+          "body": "Join scheduled calls and power the room with a single tap — calendar-aware rooms that are ready when people walk in.",
+          "imageSrc": "/images/conf-huddle.jpg",
+          "imageAlt": "One-touch conference room start"
         },
         {
-          "title": "Remote Management",
-          "body": "Proactive monitoring and remote support capabilities ensure your conference rooms are always ready for use and minimize downtime.",
-          "icon": "wifi"
+          "title": "Hybrid Meeting Rooms",
+          "body": "Make remote and in-room participants equal with room systems tuned for Microsoft Teams, Zoom, and similar meeting platforms.",
+          "imageSrc": "/images/conf-hybrid.jpg",
+          "imageAlt": "Hybrid meeting rooms"
+        },
+        {
+          "title": "Room Control Panels",
+          "body": "Simple touch panels to start the meeting, switch sources, and control the conference display — without a separate building-automation project.",
+          "imageSrc": "/images/conf-control.jpg",
+          "imageAlt": "Conference room control panels"
         }
       ]
     },
@@ -127,41 +155,31 @@
   ],
   "testimonials": {
     "visible": true,
-    "variant": "software-quotes",
+    "variant": "software-quotes-marquee",
     "title": {
-      "before": "What Our",
-      "accent": "Clients Say"
+      "before": "What Our Clients Say"
     },
     "subheading": "Success stories from businesses using AutoCAD through Aptus Infotech",
     "items": [
       {
-        "quote": "“The new conference room system has completely transformed how we conduct client meetings. The video quality is exceptional and the ease of use is impressive.”",
+        "quote": "The new conference room system has completely transformed how we conduct client meetings. The video quality is exceptional and the ease of use is impressive.",
         "author": "Mohammed Al Farsi",
         "role": "IT Director"
       },
       {
-        "quote": "“We installed the executive boardroom solution and couldn’t be happier. The audio quality during video calls is crystal clear and the system is incredibly reliable.”",
+        "quote": "We installed the executive boardroom solution and couldn’t be happier. The audio quality during video calls is crystal clear and the system is incredibly reliable.",
         "author": "Sarah Johnson",
         "role": "Facilities Manager"
       },
       {
-        "quote": "“The training room solution has made our internal workshops much more effective. The interactive displays and easy content sharing have improved engagement significantly.”",
+        "quote": "The training room solution has made our internal workshops much more effective. The interactive displays and easy content sharing have improved engagement significantly.",
         "author": "Ahmed Hassan",
         "role": "Operations Manager"
       }
     ]
   },
-  "contactCta": {
-    "heading": "Have questions? We can help",
-    "description": "Our experts can help you to implement the right security system for your business.",
-    "showForm": true,
-    "submitLabel": "Submit Now",
-    "formVariant": "simple",
-    "layout": "light",
-    "category": "elv",
-    "productName": "Conference Room Solutions"
-  },
   "midCta": {
+    "placement": "bottom",
     "heading": "Ready to Transform Your Meeting Experience?",
     "description": "Contact our AV specialists today for a free consultation and customized solution proposal.",
     "actionLabel": "Get Your Quote Now",

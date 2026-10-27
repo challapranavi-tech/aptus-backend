@@ -58,8 +58,11 @@ export async function POST(request: NextRequest) {
       ip,
       metadata: { reason: "lookup_error", error: message },
     });
+    const isConfig = /UPSTASH|ODOO_|not configured|Authentication failed/i.test(message);
     return jsonError(
-      "Unable to verify account right now. Please try again.",
+      isConfig
+        ? "Sign-in is not fully configured on this server. Add Odoo and Upstash Redis environment variables, then try again."
+        : "Unable to verify account right now. Please try again.",
       503,
       "LOGIN_UNAVAILABLE",
     );
@@ -111,8 +114,8 @@ export async function POST(request: NextRequest) {
       ip,
     });
 
-    // Event 13 — best-effort, never blocks login on failure.
-    await maybeSendNewDeviceLoginAlert(actorId, result.profile.email, result.profile.name, ip);
+    // Event 13 — best-effort; do not hold up the sign-in response.
+    void maybeSendNewDeviceLoginAlert(actorId, result.profile.email, result.profile.name, ip);
 
     return authJsonResponse(
       {

@@ -13,5 +13,5 @@ export async function GET(request: NextRequest) {
   }
 
   const result = await processAllCartReminders();
-  return jsonOk(result);
+  return jsonOk({ ...result, ok: true });
 }

@@ -7,7 +7,9 @@ import {
   formatPaymentFailedInternalEmail,
   formatPurchaseApprovedEmail,
   formatPurchaseDeclinedEmail,
+  formatPurchaseRequestSubmittedEmail,
 } from "./order-notification";
+import { getOrderDisplayStatus } from "@/lib/order-status";
 import { sendPortalEmail } from "./mail-service";
 import { logger } from "./logger";
 import {
@@ -344,6 +346,81 @@ export async function notifyOrderRejectedIfNeeded(
 }
 
 /**
+ * Customer email when CRM is moved to Payment Verification / Portal Purchase.
+ * Deduped with bank-transfer upload via purchase_submitted.
+ */
+export async function notifyPaymentVerificationPendingIfNeeded(
+  order: PortalOrder,
+  triggeredBy?: string,
+): Promise<{ notified: boolean; emailSent: boolean }> {
+  if (getOrderDisplayStatus(order) !== "Payment Verification Pending") {
+    return { notified: false, emailSent: false };
+  }
+
+  if (!(await claimOrderEmail(order, "purchase_submitted"))) {
+    return { notified: false, emailSent: false };
+  }
+
+  const customer = await resolveOrderCustomer(order);
+  if (!customer) {
+    return { notified: false, emailSent: false };
+  }
+
+  const emailContent = formatPurchaseRequestSubmittedEmail({
+    customerName: customer.name,
+    reference: order.reference,
+    products: order.items.map((item) => item.productName),
+    duration: order.duration,
+    portalUrl: getPortalBaseUrl(),
+  });
+
+  const emailResult = await sendPortalEmail({
+    to: customer.email,
+    subject: emailContent.subject,
+    body: emailContent.body,
+  });
+
+  const notification = await createPortalNotification({
+    partnerId: order.partnerId,
+    actorId: customer.actorId,
+    title: "Payment Verification Pending",
+    detail: `Your order ${order.reference} is awaiting payment verification (2-3 business days).`,
+    status: "Payment Verification Pending",
+    type: "purchase_submitted",
+    reference: order.reference,
+  });
+
+  writeAudit({
+    action: "notification.platform",
+    actorId: triggeredBy ?? customer.actorId,
+    targetId: order.id,
+    metadata: {
+      reference: order.reference,
+      notificationId: notification.id,
+      partnerId: order.partnerId,
+      type: "purchase_submitted",
+    },
+  });
+
+  if (emailResult.sent) {
+    writeAudit({
+      action: "notification.email",
+      actorId: triggeredBy ?? customer.actorId,
+      targetId: order.id,
+      metadata: {
+        subject: emailContent.subject,
+        to: customer.email,
+        channel: emailResult.channel,
+        reference: order.reference,
+        type: "purchase_submitted",
+      },
+    });
+  }
+
+  return { notified: true, emailSent: emailResult.sent };
+}
+
+/**
  * Pull-sync notifier: when the portal reads latest Odoo state, fire any pending
  * customer emails/notifications (approved-for-payment, purchased, rejected).
  */
@@ -352,6 +429,9 @@ export async function maybeNotifyWorkflowFromOdoo(
   triggeredBy?: string,
 ): Promise<void> {
   for (const order of orders) {
+    if (getOrderDisplayStatus(order) === "Payment Verification Pending") {
+      await notifyPaymentVerificationPendingIfNeeded(order, triggeredBy);
+    }
     if (order.status === "Approved" && order.paymentStatus !== "paid" && order.paymentStatus !== "failed") {
       await notifyOrderApprovedIfNeeded(order, triggeredBy);
     }
@@ -360,6 +440,7 @@ export async function maybeNotifyWorkflowFromOdoo(
       order.paymentStatus === "paid" ||
       order.status === "Completed" ||
       stage.includes("payment confirmation") ||
+      stage.includes("payment verified") ||
       stage.includes("license issued") ||
       stage.includes("won")
     ) {

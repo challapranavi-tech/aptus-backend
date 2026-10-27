@@ -12,6 +12,8 @@ export type SendEmailInput = {
   to: string | string[];
   subject: string;
   body: string;
+  /** Optional HTML alternative (tables, line breaks). Text body remains the fallback. */
+  html?: string;
   replyTo?: string;
   attachments?: SendEmailAttachment[];
 };
@@ -81,6 +83,7 @@ async function sendViaResend(input: SendEmailInput): Promise<SendEmailResult> {
       to: Array.isArray(input.to) ? input.to : [input.to],
       subject: input.subject,
       text: input.body,
+      ...(input.html ? { html: input.html } : {}),
       reply_to: input.replyTo,
       attachments: input.attachments?.map((a) => ({
         filename: a.filename,
@@ -120,6 +123,7 @@ async function sendViaSmtp(input: SendEmailInput): Promise<SendEmailResult> {
     to: recipients,
     subject: input.subject,
     text: input.body,
+    ...(input.html ? { html: input.html } : {}),
     replyTo: input.replyTo,
     attachments: input.attachments?.map((attachment) => ({
       filename: attachment.filename,
@@ -136,15 +140,17 @@ async function sendViaOdoo(input: SendEmailInput): Promise<SendEmailResult> {
   if (!client) return { sent: false, channel: "none", error: "Odoo not configured" };
 
   const recipients = Array.isArray(input.to) ? input.to.join(", ") : input.to;
-  const bodyHtml = input.body
-    .split("\n")
-    .map((line) => line.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"))
-    .join("<br/>");
+  const bodyHtml =
+    input.html ??
+    `<p>${input.body
+      .split("\n")
+      .map((line) => line.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"))
+      .join("<br/>")}</p>`;
 
   try {
     await client.create("mail.mail", {
       subject: input.subject,
-      body_html: `<p>${bodyHtml}</p>`,
+      body_html: bodyHtml,
       email_to: recipients,
       auto_delete: false,
     });

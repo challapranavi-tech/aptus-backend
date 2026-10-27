@@ -3,18 +3,45 @@
     "id": "hero",
     "visible": true,
     "family": "elv",
-    "bannerTitle": "Telephone Systems",
-    "bannerTagline": "Professional communication solutions for modern businesses",
-    "title": "Modern Telecommunications Solutions",
-    "paragraphs": [
-      "IP PBX Telephone Systems in Muscat, Oman provides a comprehensive support to your business. Employees and team can seamlessly communicate with each other over Voice over IP Telephone (VoIP) or through traditional PABX phone systems.",
-      "PBX Telephone Systems or IP-based telephone systems allows business in Oman to reduce overhead cost by forming private internal network within the office space. It also improves efficiency and internal communications. With work from home becoming a popular option.",
-      "VoIP telephone systems allows businesses to adapt employees who are now working from home. Mitel IP telephony diverse range of solutions ensures end-to-end communications streamlining video conferencing, online meetings, screen-sharing and even remote call center."
+    "bannerTitle": "Intelligent Communication Systems",
+    "bannerTagline": "Voice, video, and messaging that stay with your team — in office or remote.",
+    "bannerBackgroundImages": [
+      {
+        "src": "/images/Leonardo_Phoenix_10_Create_a_visually_appealing_image_for_Conf_0-673x1024.jpg",
+        "alt": "Business collaboration and voice systems"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/IPTV-Network-Television.jpg",
+        "alt": "IP telephony and network communications"
+      },
+      {
+        "src": "/images/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Audio_3-673x1024.jpg",
+        "alt": "Professional audio and communication technology"
+      },
+      {
+        "src": "/images/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Netwo_2-673x1024.jpg",
+        "alt": "Enterprise network infrastructure for telephony"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Conference-Room-Solutions-768x512.webp",
+        "alt": "Connected workplace communication"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/brnd-7.jpg",
+        "alt": "Modern business telephony and meeting technology"
+      }
     ],
-    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/voip-benefits-01.jpg",
-    "imageAlt": "Telephone Systems",
+    "title": "Modern Telecommunications Solutions",
+    "imageSrc": "/images/voip-benefits-01.jpg",
+    "imageAlt": "Business telephony and VoIP communication systems",
+    "mediaInline": false,
+    "layout": "two-column",
     "ctaLabel": "Request a Quote",
-    "ctaHref": "#form"
+    "ctaHref": "#form",
+    "ctaPlacement": "end",
+    "paragraphs": [
+      "Calls, meetings, and mobile users belong on one reliable network. IP telephony keeps extensions, routing, and reporting in a single place. Teams stay reachable in the office or remote without a separate phone island. We size the system to how you work today and how you will grow."
+    ]
   },
   "cardSections": [
     {
@@ -38,9 +65,9 @@
           "icon": "database"
         },
         {
-          "title": "Video Conferencing",
-          "body": "Integrated HD video conferencing with screen sharing, virtual backgrounds, and meeting recording options.",
-          "icon": "video"
+          "title": "IP Extensions & Call Routing",
+          "body": "Flexible extensions, auto-attendants, and intelligent call routing so every inbound and internal call reaches the right person.",
+          "icon": "phone-alt"
         },
         {
           "title": "Mobile Integration",
@@ -126,44 +153,34 @@
   ],
   "testimonials": {
     "visible": true,
-    "variant": "software-quotes",
+    "variant": "software-quotes-marquee",
     "title": {
-      "before": "Client Success",
-      "accent": "Stories"
+      "before": "What Our Clients Say"
     },
     "subheading": "Hear from satisfied customers who have transformed their business communications",
     "items": [
       {
-        "quote": "“The new telephone system has completely revolutionized how we conduct client meetings. The image quality is exceptional and the sound clarity is remarkable.”",
+        "quote": "The new telephone system has completely revolutionized how we conduct client meetings. The image quality is exceptional and the sound clarity is remarkable.",
         "author": "Mohammed Al Farsi",
         "role": "IT Director",
         "company": "Corporate Office"
       },
       {
-        "quote": "“We implemented the premium audio enhancement system in our boardroom and couldn’t be happier. The difference in voice clarity during conference calls is night and day.”",
+        "quote": "We implemented the premium audio enhancement system in our boardroom and couldn’t be happier. The difference in voice clarity during conference calls is night and day.",
         "author": "Sarah Johnson",
         "role": "Facilities Manager",
         "company": "Retail Chain"
       },
       {
-        "quote": "“The room booking system integrated perfectly with our existing calendar software. Now scheduling meetings is much easier and more efficient.”",
+        "quote": "The room booking system integrated perfectly with our existing calendar software. Now scheduling meetings is much easier and more efficient.",
         "author": "Ahmed Hassan",
         "role": "Operations Manager",
         "company": "Logistics Company"
       }
     ]
   },
-  "contactCta": {
-    "heading": "Have questions? We can help",
-    "description": "Our experts can help you to implement the right commuication system for your business.",
-    "showForm": true,
-    "submitLabel": "Submit Now",
-    "formVariant": "simple",
-    "layout": "light",
-    "category": "elv",
-    "productName": "Telephone Systems"
-  },
   "midCta": {
+    "placement": "bottom",
     "heading": "Ready to Upgrade Your Communication System?",
     "description": "Contact our experts today for a free consultation and customized solution proposal.",
     "actionLabel": "Get Your Quote Now",
@@ -175,24 +192,28 @@
     "variant": "alliances",
     "logos": [
       {
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/WatchNet.png",
-        "alt": "WatchNet"
+        "src": "/images/brands/cisco.svg",
+        "alt": "Cisco"
       },
       {
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Tyco.png",
-        "alt": "Tyco"
+        "src": "/images/brands/avaya.svg",
+        "alt": "Avaya"
       },
       {
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Suprema.png",
-        "alt": "Suprema"
+        "src": "/images/zycoo-rajd0gjreyq3y3ei0sski8hp6g1p7pvyvilbdiee0e.png",
+        "alt": "Zycoo"
       },
       {
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Hikvision.png",
-        "alt": "Hikvision"
+        "src": "/images/Fanvil.png",
+        "alt": "Fanvil"
       },
       {
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/ZKTeco.png",
-        "alt": "ZKTeco"
+        "src": "/images/brands/mitel.jpg",
+        "alt": "Mitel"
+      },
+      {
+        "src": "/images/brands/3cx.png",
+        "alt": "3CX"
       }
     ]
   }

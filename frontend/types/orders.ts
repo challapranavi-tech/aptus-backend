@@ -27,6 +27,8 @@ export type OrderLineItem = {
   packageId?: string;
   /** Selected level id (levels-kind products, e.g. Level 1–5). */
   levelId?: string;
+  /** Existing license serial — required when renewing renewal-kind products. */
+  serialNumber?: string;
 };
 
 export type PortalOrder = {

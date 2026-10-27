@@ -1,0 +1,80 @@
+{
+  "title": "FAQs",
+  "items": [
+    {
+      "id": "technology-solutions",
+      "question": "What technology solutions does Aptus Infotech provide?",
+      "answer": "Aptus Infotech provides integrated ELV and software solutions for businesses, covering areas such as security systems, networking, structured cabling, access control, surveillance, AV, automation, cybersecurity, business software and engineering applications."
+    },
+    {
+      "id": "recommend-solution",
+      "question": "Can Aptus recommend the right solution based on our business requirements?",
+      "answer": "Yes. Our team first understands your business, site requirements, existing infrastructure and operational needs before recommending the most suitable technology, products and software."
+    },
+    {
+      "id": "products-and-installation",
+      "question": "Do you provide both products and installation services?",
+      "answer": "Yes. We provide end-to-end support, including solution consultation, product supply, installation, configuration, implementation and ongoing technical support."
+    },
+    {
+      "id": "elv-solutions",
+      "question": "What ELV solutions does Aptus provide?",
+      "answer": "Our ELV solutions include CCTV and video surveillance, access control, gate automation, structured cabling, networking, data centre infrastructure, audio-visual solutions, IP PBX, UPS, GRMS, smart home solutions and other integrated systems."
+    },
+    {
+      "id": "software-solutions",
+      "question": "What software solutions does Aptus provide?",
+      "answer": "We provide software solutions across design and engineering, business productivity, creative applications, cybersecurity, quantity takeoff, structural engineering, multimedia and educational software, including solutions from leading technology brands."
+    },
+    {
+      "id": "integrate-existing",
+      "question": "Can you integrate different ELV systems with our existing infrastructure?",
+      "answer": "Yes. We can assess your existing infrastructure and design solutions that integrate with your current systems, helping improve connectivity, security, efficiency and scalability."
+    },
+    {
+      "id": "after-support",
+      "question": "Do you provide support after installation or software purchase?",
+      "answer": "Yes. Our relationship does not end after the sale. We provide technical assistance, maintenance, troubleshooting, software support and renewal assistance to help keep your systems running effectively."
+    },
+    {
+      "id": "upgrade-infrastructure",
+      "question": "Can Aptus help us upgrade our existing technology infrastructure?",
+      "answer": "Yes. Whether you need to upgrade your network, security systems, software or other technology infrastructure, we can assess your current environment and recommend practical upgrade options."
+    },
+    {
+      "id": "annual-maintenance",
+      "question": "Do you provide annual maintenance and support for ELV systems?",
+      "answer": "Yes. We can provide ongoing maintenance and support to help keep ELV systems reliable, secure and operational while reducing unexpected downtime."
+    },
+    {
+      "id": "new-office",
+      "question": "Can Aptus provide a complete technology solution for a new office or project?",
+      "answer": "Yes. We can support new projects with solutions covering networking, structured cabling, security, access control, AV, communication systems, software and other technology requirements, helping you manage multiple requirements through one technology partner."
+    },
+    {
+      "id": "select-products",
+      "question": "How can Aptus help us select the right software or ELV products?",
+      "answer": "We evaluate your requirements, budget, existing infrastructure and future needs before recommending suitable solutions. Our objective is to help you select technology that delivers long-term value rather than simply supplying products."
+    },
+    {
+      "id": "renewals-and-maintenance",
+      "question": "Do you provide software licence renewals and ELV system maintenance?",
+      "answer": "Yes. We support both software licence renewals and ongoing ELV maintenance, helping customers manage their technology requirements beyond the initial purchase."
+    },
+    {
+      "id": "project-sizes",
+      "question": "Can you provide solutions for both small and large projects?",
+      "answer": "Yes. We support technology requirements across different project sizes, from individual software requirements and small office installations to larger enterprise and infrastructure projects."
+    },
+    {
+      "id": "why-aptus",
+      "question": "Why should I choose Aptus for my technology requirements?",
+      "answer": "Aptus brings software and ELV expertise together under one roof, allowing customers to work with a single technology partner for consultation, products, implementation and ongoing support."
+    },
+    {
+      "id": "complete-requirement",
+      "question": "Can Aptus manage our complete technology requirement?",
+      "answer": "Yes. From software licences and cybersecurity to networking, security, structured cabling, AV and automation, Aptus can help design, implement and support the technology infrastructure your business needs."
+    }
+  ]
+}

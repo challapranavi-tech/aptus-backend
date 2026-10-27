@@ -193,11 +193,5 @@
         "alt": "AKCP"
       }
     ]
-  },
-  "contactCta": {
-    "heading": "Have questions? We can help",
-    "showForm": true,
-    "submitLabel": "Submit Now",
-    "layout": "light"
   }
 }

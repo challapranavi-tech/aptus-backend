@@ -8,15 +8,14 @@
  * these functions, then injected as typed input fields.
  */
 
-import { normalizePhone } from "@/lib/phone";
-import { lineConfigSummary } from "@/lib/portal-cart-checkout";
+import { getProductConfig } from "@/data/product-options";
+import { lookupPortalSku } from "@/data/software-purchase-catalog";
+import {
+  purchaseTypeLabel,
+  resolveLineLevel,
+  resolveLinePackage,
+} from "@/lib/portal-cart-checkout";
 import type { ClientProfile } from "./types";
-
-/** Collapse "+968+968…" so emails never show a doubled dial code. */
-function displayPhone(raw?: string | null): string {
-  const value = raw?.trim();
-  return value ? normalizePhone(value) : "—";
-}
 
 export type OrderLineItem = {
   category: string;
@@ -27,6 +26,7 @@ export type OrderLineItem = {
   purchaseType?: "new" | "renew";
   packageId?: string;
   levelId?: string;
+  serialNumber?: string;
 };
 
 export type ProductOrderPayload = {
@@ -50,11 +50,137 @@ function durationLabel(duration: ProductOrderPayload["duration"]): string {
   return duration === "3year" ? "3 Years" : "Annual";
 }
 
-function formatOrderProductLine(
+type InternalProductRow = {
+  product: string;
+  category: string;
+  quantity: number;
+  licenseType: string;
+  term: string;
+  packageLabel: string;
+  partNumber: string;
+  serialNumber: string;
+  guidePrice: string;
+};
+
+function toInternalProductRow(
   item: OrderLineItem,
   fallbackDuration: ProductOrderPayload["duration"],
-): string {
-  return `  - ${item.category} / ${item.productName} × ${item.quantity} (${lineConfigSummary(item, fallbackDuration)})`;
+  extras?: { guidePrice?: string },
+): InternalProductRow {
+  const duration = item.duration ?? fallbackDuration;
+  const sku = lookupPortalSku(
+    item.productName,
+    duration,
+    item.purchaseType === "renew" ? "renew" : "new",
+  );
+  const config = getProductConfig(item.productName);
+  let licenseType = purchaseTypeLabel(item.purchaseType);
+  const term = durationLabel(duration);
+  let packageLabel = "";
+
+  if (config.kind === "bundle") {
+    licenseType = "Bundle";
+  } else if (config.kind === "levels") {
+    licenseType = resolveLineLevel(item, config)?.label ?? "Level 1";
+    packageLabel = resolveLinePackage(item, config)?.label ?? "";
+  } else {
+    packageLabel = resolveLinePackage(item, config)?.label ?? "";
+  }
+
+  return {
+    product: item.productName,
+    category: item.category,
+    quantity: item.quantity,
+    licenseType,
+    term,
+    packageLabel,
+    partNumber: sku?.partNumber ?? "—",
+    serialNumber: item.serialNumber?.trim() || "—",
+    guidePrice: extras?.guidePrice ?? "",
+  };
+}
+
+function formatInternalProductRowsText(rows: InternalProductRow[]): string {
+  return rows
+    .map((row, index) =>
+      [
+        `  ${index + 1}. ${row.product}`,
+        row.category ? `     Category: ${row.category}` : "",
+        `     Quantity: ${row.quantity}`,
+        `     License type: ${row.licenseType}`,
+        `     Term: ${row.term}`,
+        row.packageLabel ? `     Package: ${row.packageLabel}` : "",
+        `     Part number: ${row.partNumber}`,
+        `     Serial number: ${row.serialNumber}`,
+        row.guidePrice ? `     Guide price: ${row.guidePrice}` : "",
+      ]
+        .filter(Boolean)
+        .join("\n"),
+    )
+    .join("\n\n");
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function formatInternalProductRowsHtml(rows: InternalProductRow[]): string {
+  const showPackage = rows.some((row) => row.packageLabel);
+  const showGuide = rows.some((row) => row.guidePrice);
+  const headers = [
+    "Product",
+    "Category",
+    "Quantity",
+    "License type",
+    "Term",
+    ...(showPackage ? ["Package"] : []),
+    "Part number",
+    "Serial number",
+    ...(showGuide ? ["Guide price"] : []),
+  ];
+  const th = (value: string) =>
+    `<th style="border:1px solid #d0d5dd;padding:8px 10px;text-align:left;background:#f2f4f7;font-weight:600;white-space:nowrap;">${escapeHtml(value)}</th>`;
+  const td = (value: string) =>
+    `<td style="border:1px solid #d0d5dd;padding:8px 10px;vertical-align:top;">${escapeHtml(value)}</td>`;
+
+  const body = rows
+    .map((row) => {
+      const values = [
+        row.product,
+        row.category || "—",
+        String(row.quantity),
+        row.licenseType,
+        row.term,
+        ...(showPackage ? [row.packageLabel || "—"] : []),
+        row.partNumber,
+        row.serialNumber,
+        ...(showGuide ? [row.guidePrice || "—"] : []),
+      ];
+      return `<tr>${values.map(td).join("")}</tr>`;
+    })
+    .join("");
+
+  return `<table role="presentation" style="border-collapse:collapse;border:1px solid #d0d5dd;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.4;width:100%;max-width:760px;margin:8px 0 16px 0;">
+  <thead><tr>${headers.map(th).join("")}</tr></thead>
+  <tbody>${body}</tbody>
+</table>`;
+}
+
+function wrapInternalEmailHtml(textBody: string, productsText: string, productsHtml: string): string {
+  const placeholder = "__APTUS_PRODUCT_TABLE__";
+  const withPlaceholder =
+    productsText && textBody.includes(productsText)
+      ? textBody.replace(productsText, placeholder)
+      : textBody;
+  const escaped = escapeHtml(withPlaceholder).replace(/\n/g, "<br/>");
+  return `<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#1d2939;line-height:1.5">${escaped.replace(
+    placeholder,
+    productsHtml,
+  )}</div>`;
 }
 
 // ─── SCENARIO: New User Registration ─────────────────────────────────────────
@@ -395,24 +521,23 @@ export function formatCartAddedSalesEmail(input: {
   estimatedTotal: number | null;
   addedAt: string;
   crmReference?: string;
-}): { subject: string; body: string } {
-  const productLines = input.items.map((item) => {
+}): { subject: string; body: string; html: string } {
+  const rows = input.items.map((item) => {
     const priced = input.linePrices.find((row) => row.productName === item.productName);
-    const priceNote =
+    const guidePrice =
       priced && priced.unitPrice > 0
-        ? ` — guide ${priced.unitPrice.toFixed(3)} OMR × ${item.quantity} = ${priced.lineTotal.toFixed(3)} OMR`
+        ? `${priced.unitPrice.toFixed(3)} OMR × ${item.quantity} = ${priced.lineTotal.toFixed(3)} OMR`
         : "";
-    return `${formatOrderProductLine(item, input.duration)}${priceNote}`;
+    return toInternalProductRow(item, input.duration, { guidePrice });
   });
+  const productsText = formatInternalProductRowsText(rows);
 
   const totalNote =
     input.estimatedTotal != null && input.estimatedTotal > 0
       ? `Estimated Value: ${input.estimatedTotal.toFixed(3)} OMR`
       : "Estimated Value: —";
 
-  return {
-    subject: `New Abandoned Cart Lead - Customer Follow-up Required`,
-    body: [
+  const body = [
       "Hello Sales Team,",
       "",
       "A customer has added one or more software products to their shopping cart but has not completed the purchase.",
@@ -422,10 +547,10 @@ export function formatCartAddedSalesEmail(input: {
       "Lead Details",
       `Customer Name: ${input.customer.name}`,
       `Customer Email: ${input.customer.email}`,
-      `Phone: ${displayPhone(input.customer.phone)}`,
+      `Phone: ${input.customer.phone || "—"}`,
       `Company: ${input.customer.company || "—"}`,
-      `Products Added:`,
-      ...productLines,
+      "Products Added:",
+      productsText,
       totalNote,
       `Date & Time: ${input.addedAt}`,
       input.crmReference ? `CRM Reference: ${input.crmReference}` : "",
@@ -443,7 +568,12 @@ export function formatCartAddedSalesEmail(input: {
       "Aptus Infotech",
     ]
       .filter(Boolean)
-      .join("\n"),
+      .join("\n");
+
+  return {
+    subject: `New Abandoned Cart Lead - Customer Follow-up Required`,
+    body,
+    html: wrapInternalEmailHtml(body, productsText, formatInternalProductRowsHtml(rows)),
   };
 }
 
@@ -517,10 +647,9 @@ export function formatOrderNotificationEmail(
   profile: ClientProfile,
   order: ProductOrderPayload,
   reference: string,
-): { subject: string; body: string } {
-  const productLines = order.items.map((item) =>
-    formatOrderProductLine(item, order.duration),
-  );
+): { subject: string; body: string; html: string } {
+  const rows = order.items.map((item) => toInternalProductRow(item, order.duration));
+  const productsText = formatInternalProductRowsText(rows);
 
   const transactionId =
     order.payment?.paymentIntentId ?? "—";
@@ -529,9 +658,7 @@ export function formatOrderNotificationEmail(
       ? `${order.payment.amountPaid.toFixed(3)} OMR`
       : "—";
 
-  return {
-    subject: `Action Required: Verify Customer Payment for Order ${reference}`,
-    body: [
+  const body = [
       "Dear Sales Team,",
       "",
       "A new software order has been placed through the Aptus Infotech website and is awaiting payment verification.",
@@ -544,9 +671,9 @@ export function formatOrderNotificationEmail(
       `Customer Name: ${profile.name}`,
       `Company: ${profile.company || order.contact.company || "—"}`,
       `Customer Email: ${profile.email}`,
-      `Customer Phone: ${displayPhone(profile.phone || order.contact.phone)}`,
+      `Customer Phone: ${profile.phone || order.contact.phone || "—"}`,
       "Products Purchased:",
-      ...productLines,
+      productsText,
       `Order Value: ${orderAmount}`,
       `Payment Method: ${order.payment?.paymentMethod ?? "—"}`,
       `Transaction/Reference ID: ${transactionId}`,
@@ -570,7 +697,12 @@ export function formatOrderNotificationEmail(
       "Aptus Infotech",
     ]
       .filter(Boolean)
-      .join("\n"),
+      .join("\n");
+
+  return {
+    subject: `Action Required: Verify Customer Payment for Order ${reference}`,
+    body,
+    html: wrapInternalEmailHtml(body, productsText, formatInternalProductRowsHtml(rows)),
   };
 }
 
@@ -610,7 +742,7 @@ export function formatPurchaseApprovedEmail(input: {
       "Product(s):",
       ...productLines,
       "",
-      `Track your order: ${input.portalUrl}/portal/products`,
+      `Track your order: ${input.portalUrl}/software-solutions`,
       "",
       "Need Assistance?",
       "Support Email: info@aptusinfotech.com",
@@ -779,7 +911,7 @@ export function formatBankTransferCustomerEmail(input: {
       "Estimated Processing Time: Your license details will be shared within 2–3 business days after successful payment verification.",
       "",
       "You will receive another email as soon as your payment is verified and your licenses are available.",
-      `Track your order: ${input.portalUrl}/portal/products`,
+      `Track your order: ${input.portalUrl}/software-solutions`,
       "",
       "If you have any questions, reply to this email or contact our support team.",
       "",
@@ -800,15 +932,15 @@ export function formatBankTransferAdminEmail(input: {
   phone: string;
   reference: string;
   bankTransferReference: string;
-  products: string[];
+  items: OrderLineItem[];
+  duration: ProductOrderPayload["duration"];
   totalAmount: string;
   odooLink?: string | null;
-}): { subject: string; body: string } {
-  const productLines = input.products.map((product) => `  - ${product}`);
+}): { subject: string; body: string; html: string } {
+  const rows = input.items.map((item) => toInternalProductRow(item, input.duration));
+  const productsText = formatInternalProductRowsText(rows);
 
-  return {
-    subject: `Action Required: Verify Customer Payment for Order ${input.bankTransferReference}`,
-    body: [
+  const body = [
       "Dear Sales Team,",
       "",
       "A customer has submitted a bank transfer payment proof for review.",
@@ -822,10 +954,10 @@ export function formatBankTransferAdminEmail(input: {
       `  Name: ${input.customerName}`,
       `  Company: ${input.company || "—"}`,
       `  Email: ${input.email}`,
-      `  Phone: ${displayPhone(input.phone)}`,
+      `  Phone: ${input.phone || "—"}`,
       "",
-      "Products",
-      ...productLines,
+      "Products Purchased:",
+      productsText,
       `Total Amount: ${input.totalAmount}`,
       "",
       "The uploaded payment proof is attached to this email and to the Odoo sale order.",
@@ -846,7 +978,12 @@ export function formatBankTransferAdminEmail(input: {
       "Aptus Infotech",
     ]
       .filter(Boolean)
-      .join("\n"),
+      .join("\n");
+
+  return {
+    subject: `Action Required: Verify Customer Payment for Order ${input.bankTransferReference}`,
+    body,
+    html: wrapInternalEmailHtml(body, productsText, formatInternalProductRowsHtml(rows)),
   };
 }
 
@@ -919,7 +1056,7 @@ export function formatOrderApprovedEmail(input: {
       ...productLines,
       "",
       'Please sign in to the Aptus Customer Portal and click "Make Payment" to complete your purchase.',
-      `${input.portalUrl}/portal/products`,
+      `${input.portalUrl}/software-solutions`,
       "",
       "If you have any questions, reply to this email or contact your Aptus account manager.",
       "",
@@ -987,7 +1124,7 @@ export function formatPurchaseDeclinedEmail(input: {
       ...productLines,
       ...reasonBlock,
       "If you believe this is a mistake or need help placing a new request, reply to this email or contact your Aptus account manager.",
-      `Portal: ${input.portalUrl}/portal/products`,
+      `Portal: ${input.portalUrl}/software-solutions`,
       "",
       "Thank you for choosing Aptus Infotech.",
     ].join("\n"),
@@ -1024,7 +1161,7 @@ export function formatSubscriptionRequestEmail(input: {
       `  Name: ${input.customerName}`,
       `  Company: ${input.company || "—"}`,
       `  Email: ${input.email}`,
-      `  Phone: ${displayPhone(input.phone)}`,
+      `  Phone: ${input.phone || "—"}`,
       "",
       "Subscription",
       `  Product: ${input.productName}`,
@@ -1196,7 +1333,7 @@ export function formatRefundRequestedEmail(input: {
       `Product: ${input.productName}`,
       "",
       "Our team will review your request and get back to you. Processing typically takes 5–7 business days once approved.",
-      `Track your request: ${input.portalUrl}/portal/products`,
+      `Track your request: ${input.portalUrl}/software-solutions`,
       "",
       "Thank you for your patience.",
     ].join("\n"),

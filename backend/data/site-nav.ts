@@ -3,17 +3,14 @@ import type { NavigationItem } from "@/types";
 /** Main site navigation — synced from https://aptusinfotech.com/ (see aptus-web/scripts/generate-site-nav.mjs). */
 
 export const SITE_NAVIGATION: NavigationItem[] = [
-  { label: "Home", href: "/" },
   {
     label: "About Us",
-    href: "/about-us",
+    href: "/our-story",
     children: [
-      { label: "Our Team", href: "/our-team" },
       { label: "Our Story", href: "/our-story" },
-      { label: "Aptus Policy", href: "/aptus-policy" },
-      { label: "Why Aptus Infotech", href: "/why-aptus-infotech" },
-      { label: "Winning together", href: "/winning-together" },
-      { label: "Aptus Infotech ISO Certifications", href: "/aptus-infotech-iso-certifications" },
+      { label: "Our Team", href: "/our-team" },
+      { label: "Our Policies & Terms", href: "/aptus-policy" },
+      { label: "ISO Certifications", href: "/aptus-infotech-iso-certifications" },
       { label: "Careers", href: "/careers" },
       { label: "Contact Us", href: "/contact-us" },
     ],
@@ -32,7 +29,7 @@ export const SITE_NAVIGATION: NavigationItem[] = [
           { label: "Civil 3D", href: "/civil-3d" },
           { label: "AEC Collection", href: "/aec-collection" },
           { label: "AutoCAD LT", href: "/autocad-lt" },
-          { label: "BIM Collaborate Pro", href: "/bim-collaborate-pro" },
+          { label: "Forma Design Collaboration", href: "/bim-collaborate-pro" },
           { label: "Autodesk Docs", href: "/autodesk-docs" },
           { label: "Autodesk Build", href: "/autodesk-build" },
           { label: "Autodesk Takeoff", href: "/autodesk-takeoff" },
@@ -145,25 +142,29 @@ export const SITE_NAVIGATION: NavigationItem[] = [
     label: "ELV Solutions",
     href: "/elv-solutions",
     children: [
-      { label: "Access Control System", href: "/access-control-system" },
-      { label: "Thermal Scanners", href: "/thermal-scanners" },
       { label: "CCTV", href: "/cctv-camera" },
+      { label: "Access Control System", href: "/access-control-system" },
       { label: "Gate Automation", href: "/gate-automation" },
-      { label: "Smart Homes", href: "/home-automation" },
       { label: "Audio/Video Solutions", href: "/audio-video-solutions" },
+      { label: "Smart Homes", href: "/home-automation" },
       { label: "Telephone Systems", href: "/telephone-systems" },
       { label: "Network and Structured Cabling Solutions", href: "/network-and-structured-cabling-solutions" },
+      { label: "Thermal Scanners", href: "/thermal-scanners" },
       { label: "UPS", href: "/ups" },
       { label: "Guest Room Management", href: "/guest-room-management" },
       { label: "Nurse Calling System", href: "/nurse-calling-system" },
-      { label: "SMATV/ IPTV", href: "/smatv-iptv" },
-      { label: "Queue Management", href: "/rsi-queue-management" },
-      { label: "Data Center Solutions", href: "/data-center-solutions" },
+      { label: "Conference Room Solution", href: "/conference-room-solution" },
+      { label: "SMATV/IPTV", href: "/smatv-iptv" },
       { label: "Switching and Routing", href: "/switching-and-routing" },
-      { label: "Conference room solution", href: "/conference-room-solution" },
+      { label: "Data Center Solutions", href: "/data-center-solutions" },
+      { label: "Queue Management", href: "/rsi-queue-management" },
     ],
   },
-  { label: "Aptus Case Studies", href: "/aptus-case-studies" },
+  {
+    label: "Aptus Solar",
+    href: "https://www.aptussolartech.com/",
+  },
+  { label: "Solutions in Action", href: "/customer-stories" },
 ];
 
 // ponytail: self-check — live Software menu has 11 top-level categories

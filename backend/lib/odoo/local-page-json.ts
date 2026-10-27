@@ -81,14 +81,76 @@ export function isLocalPageJsonInDev(): boolean {
 }
 
 /**
- * Build home from content/odoo-json/home.json (homepage schema, not page-json).
- * Dev fallback when Odoo lacks x_homepage_sections_json.
+ * Raw `content/odoo-json/home.json` (homepage schema, not page-json).
+ * Used so committed homepage content can override stale Odoo JSON.
  */
-export function buildLocalHomePage(): Page | null {
+export function loadLocalHomeJson(): string | null {
   const file = path.join(JSON_ROOT, "home.json");
   if (!fs.existsSync(file)) return null;
+  return fs.readFileSync(file, "utf8");
+}
 
-  const raw = fs.readFileSync(file, "utf8");
+/**
+ * When true (default), committed home.json wins over Odoo `x_homepage_sections_json`.
+ * Set USE_LOCAL_HOME_JSON=false to force Odoo as homepage source.
+ */
+export function preferLocalHomeJson(): boolean {
+  return process.env.USE_LOCAL_HOME_JSON !== "false";
+}
+
+/**
+ * When true (default), committed our-story.json wins over Odoo page JSON.
+ * Set USE_LOCAL_OUR_STORY_JSON=false to force Odoo as source.
+ */
+export function preferLocalOurStoryJson(): boolean {
+  return process.env.USE_LOCAL_OUR_STORY_JSON !== "false";
+}
+
+/**
+ * When true (default), committed our-team.json wins over Odoo page JSON.
+ * Set USE_LOCAL_OUR_TEAM_JSON=false to force Odoo as source.
+ */
+export function preferLocalOurTeamJson(): boolean {
+  return process.env.USE_LOCAL_OUR_TEAM_JSON !== "false";
+}
+
+const ELV_LOCAL_FIRST_SLUGS = new Set([
+  "elv-solutions",
+  "cctv-camera",
+  "access-control-system",
+  "gate-automation",
+  "audio-video-solutions",
+  "home-automation",
+  "telephone-systems",
+  "network-and-structured-cabling-solutions",
+  "thermal-scanners",
+  "ups",
+  "guest-room-management",
+  "nurse-calling-system",
+  "conference-room-solution",
+  "smatv-iptv",
+  "switching-and-routing",
+  "data-center-solutions",
+  "rsi-queue-management",
+]);
+
+/**
+ * When true (default), committed ELV odoo-json wins over Odoo page JSON
+ * so product-page edits go live without re-seeding. Set
+ * USE_LOCAL_ELV_JSON=false to force Odoo as source.
+ */
+export function preferLocalElvPageJson(slug: string): boolean {
+  if (process.env.USE_LOCAL_ELV_JSON === "false") return false;
+  return ELV_LOCAL_FIRST_SLUGS.has(slug);
+}
+
+/**
+ * Build home from content/odoo-json/home.json (homepage schema, not page-json).
+ */
+export function buildLocalHomePage(): Page | null {
+  const raw = loadLocalHomeJson();
+  if (!raw) return null;
+
   const sections = mapHomepageJson(raw);
   if (!sections?.length) return null;
 

@@ -54,6 +54,15 @@ assert.equal(
   getOrderDisplayStatus(
     order({
       paymentStatus: "pending",
+      crmStage: "Payment Verification",
+    }),
+  ),
+  "Payment Verification Pending",
+);
+assert.equal(
+  getOrderDisplayStatus(
+    order({
+      paymentStatus: "pending",
       crmStage: "Payment Confirmation",
     }),
   ),

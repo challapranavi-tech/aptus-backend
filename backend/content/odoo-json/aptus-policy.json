@@ -1,217 +1,701 @@
 {
-  "banner": {
-    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/sld.jpg",
-    "imageAlt": "Aptus Policy"
-  },
-  "intro": {
-    "id": "modus",
-    "visible": true,
-    "variant": "policy-panel",
-    "title": {
-      "accent": "Modus Operandi"
-    },
-    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/Infographic_5_29_NEW_1-20200130123030-1024x455.jpg",
-    "imageAlt": "Infographic",
-    "imagePosition": "below"
-  },
-  "featureRows": [
-    {
-      "heading": "Company",
-      "headingAccent": "Qualification",
-      "paragraphs": [
-        "Aptus Infotech as a leading business organization in Oman, interacts and transacts with a variety of business organizations and governments in different jurisdictions. By maintaining the highest level of corporate integrity through open, honest and fair dealings, Aptus earns trust for its products and services from all stakeholders and every person with whom Aptus comes in contact."
-      ],
-      "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/qualifi.jpg",
-      "imageAlt": "Qualification",
-      "imagePosition": "right"
-    },
-    {
-      "paragraphs": [
-        "Aptus obtains and conducts business legally and ethically. The quality of our products and the efficiency of our services at the most competitive prices are our greatest tools in marketing our business."
-      ],
-      "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/quali2.jpg",
-      "imageAlt": "Quality",
-      "imagePosition": "left"
-    },
-    {
-      "paragraphs": [
-        "Aptus always adheres to high quality principle, focusing on constant quality management, and regular staff training, to improve our staff's management ability and skill levels."
-      ],
-      "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/quali3.jpg",
-      "imageAlt": "Quality Management",
-      "imagePosition": "right"
-    }
-  ],
-  "text": {
-    "id": "privacy",
-    "visible": true,
-    "presentation": {
-      "alignment": "center"
-    },
-    "title": {
-      "before": "Policy on Privacy and",
-      "accent": "Confidentiality"
-    },
-    "paragraphs": [
-      "One of the biggest concerns in the present information technology era is protection of confidential and personal information that is collected and disseminated. Aptus understands that protection of all confidential information is essential. Aptus is committed to protect business and personal information of confidential nature obtained from clients, associates and employees. This information will solely be used to contact you about our services and products."
-    ]
-  },
-  "partnerships": {
-    "heading": "Winning together with",
-    "headingAccent": "Strategic Alliances",
-    "variant": "alliances",
-    "logos": [
+  "legalPolicies": {
+    "title": "Our Policies & Terms",
+    "sections": [
       {
-        "id": "partner-0",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/APC.png",
-        "alt": "APC"
+        "id": "overview",
+        "number": "",
+        "title": "Our Policies & Terms",
+        "paragraphs": [
+          "Welcome to Aptus Infotech.",
+          "Our Policies & Terms govern your access to and use of the Aptus Infotech website, online store, customer account, products, services, software licenses, subscriptions and related services.",
+          "For the purposes of these policies, \"Aptus Infotech,\" \"Aptus,\" \"we,\" \"our,\" or \"us\" refers to Aptus Infotech and the applicable legal entity operating the website and providing the relevant products or services.",
+          "By using our website or services—including creating an account, submitting an enquiry, requesting a quotation, placing an order, making a payment, or purchasing a product or licence—you confirm that you have had the opportunity to review and understand our policies and agree to the terms that apply to your use of our services.",
+          "Our policies are designed to provide clarity and ensure a transparent experience for you at every stage of your interaction with Aptus Infotech. If you have any questions or need clarification about any policy or term, we encourage you to contact us before proceeding.",
+          "If you do not agree with these policies, we kindly request that you refrain from using our website or services."
+        ]
       },
       {
-        "id": "partner-1",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Vertiv.png",
-        "alt": "Vertiv"
+        "id": "scope",
+        "number": "1",
+        "title": "Scope and Application",
+        "paragraphs": [
+          "These policies apply to:"
+        ],
+        "bullets": [
+          "Visitors to the Aptus Infotech website;",
+          "Registered customers and users;",
+          "Individuals and businesses purchasing products or services;",
+          "Customers requesting quotations;",
+          "Customers purchasing software licenses or subscriptions;",
+          "Customers purchasing ELV products and related solutions;",
+          "Customers renewing software licenses or subscriptions;",
+          "Users submitting enquiries, support requests or other forms through the website."
+        ],
+        "closingParagraphs": [
+          "Certain products or services may also be subject to additional terms provided by Aptus or by the relevant manufacturer, publisher, software provider or technology partner.",
+          "Where specific product or service terms conflict with these general policies, the specific terms applicable to that product or service will apply to the extent permitted by applicable law."
+        ]
       },
       {
-        "id": "partner-2",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Norden.png",
-        "alt": "Norden"
+        "id": "website-terms",
+        "number": "2",
+        "title": "Website Terms & Conditions",
+        "subsections": [
+          {
+            "id": "website-use",
+            "number": "2.1",
+            "title": "Use of the Website",
+            "paragraphs": [
+              "You may use this website only for lawful purposes and in accordance with these policies.",
+              "You agree not to:"
+            ],
+            "bullets": [
+              "Use the website for fraudulent, unlawful or unauthorized purposes;",
+              "Attempt to gain unauthorized access to our systems, accounts or networks;",
+              "Introduce malicious software, viruses or other harmful code;",
+              "Interfere with the operation, security or availability of the website;",
+              "Copy, reproduce or commercially exploit website content without permission;",
+              "Submit false, misleading or unauthorized information;",
+              "Use another person's account or credentials without authorization;",
+              "Attempt to circumvent security or access controls."
+            ],
+            "closingParagraphs": [
+              "Aptus reserves the right to restrict or suspend access where reasonably necessary to protect the website, our customers, our systems or our legitimate business interests."
+            ]
+          }
+        ]
       },
       {
-        "id": "partner-3",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Suprema.png",
-        "alt": "Suprema"
+        "id": "products-services",
+        "number": "3",
+        "title": "Products and Services",
+        "paragraphs": [
+          "Aptus provides technology products, software, licenses, subscriptions, ELV products, solutions, professional services and related support.",
+          "Product availability, specifications, compatibility, pricing and delivery timelines may vary.",
+          "Product information displayed on the website is provided for general information and may be updated from time to time.",
+          "Customers should verify technical requirements, compatibility, licensing requirements and other relevant specifications before completing a purchase where applicable.",
+          "Where a product is supplied by a third-party manufacturer or publisher, the manufacturer's or publisher's applicable terms, warranty and licensing conditions may also apply."
+        ]
       },
       {
-        "id": "partner-4",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Tyco.png",
-        "alt": "Tyco"
+        "id": "orders",
+        "number": "4",
+        "title": "Orders and Purchases",
+        "paragraphs": [
+          "An order submitted through the website constitutes a request to purchase the selected product or service.",
+          "Submission of an order does not necessarily constitute acceptance by Aptus.",
+          "An order may be subject to:"
+        ],
+        "bullets": [
+          "Product availability;",
+          "Confirmation of pricing;",
+          "Verification of customer information;",
+          "Payment verification;",
+          "Verification of licensing requirements;",
+          "Manufacturer or distributor confirmation;",
+          "Credit or commercial approval, where applicable."
+        ],
+        "closingParagraphs": [
+          "Aptus reserves the right to contact the customer for additional information before confirming an order.",
+          "Once an order has been accepted and payment has been verified, Aptus will process the order in accordance with the applicable product or service terms."
+        ]
       },
       {
-        "id": "partner-5",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/FERMAX-1.png",
-        "alt": "FERMAX 1"
+        "id": "pricing",
+        "number": "5",
+        "title": "Pricing, Quotations and Taxes",
+        "paragraphs": [
+          "Prices displayed on the website are subject to change without prior notice, except where otherwise required by applicable law or where an order has already been formally accepted.",
+          "Unless specifically stated otherwise, prices may be subject to applicable taxes, duties, delivery charges or other applicable fees.",
+          "For products or services requiring a quotation, the quotation issued by Aptus will specify the applicable pricing, validity period, taxes, delivery terms and other relevant commercial conditions.",
+          "A quotation expires on the date specified in the quotation.",
+          "Aptus reserves the right to correct genuine pricing, typographical or technical errors. Where such an error materially affects an order, Aptus will contact the customer before proceeding."
+        ]
       },
       {
-        "id": "partner-6",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Microsens.png",
-        "alt": "Microsens"
+        "id": "payment",
+        "number": "6",
+        "title": "Payment Policy",
+        "paragraphs": [
+          "Aptus may offer one or more payment methods, including bank transfer and other electronic payment methods made available through the website."
+        ],
+        "subsections": [
+          {
+            "id": "bank-transfer",
+            "number": "6.1",
+            "title": "Bank Transfer",
+            "paragraphs": [
+              "Where bank transfer is selected:"
+            ],
+            "numberedList": [
+              "The customer places the order or submits the applicable payment request.",
+              "Payment is made to the bank account details provided by Aptus.",
+              "The customer may be required to provide proof of payment.",
+              "Aptus verifies receipt of the payment.",
+              "The order is processed after payment verification."
+            ],
+            "closingParagraphs": [
+              "A payment marked as submitted or initiated does not constitute payment verification.",
+              "Orders will be processed once Aptus confirms receipt and verification of the applicable payment."
+            ]
+          },
+          {
+            "id": "payment-verification",
+            "number": "6.2",
+            "title": "Payment Verification",
+            "paragraphs": [
+              "For software licences and other digital products, fulfilment may begin only after payment has been successfully verified.",
+              "Unless otherwise stated on the product page or order confirmation, software licence details or activation information may be provided within 2–3 business days after payment verification, subject to availability and confirmation from the relevant software provider."
+            ]
+          }
+        ]
       },
       {
-        "id": "partner-7",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/LS-Cables.png",
-        "alt": "LS Cables"
+        "id": "software-licences",
+        "number": "7",
+        "title": "Software Licences and Subscriptions",
+        "paragraphs": [
+          "Software products sold or supplied through Aptus may be subject to the licence agreement, subscription terms and usage restrictions of the applicable software publisher or manufacturer.",
+          "Aptus may act as an authorised reseller, partner, distributor or service provider for certain software products.",
+          "A software purchase generally provides the customer with a licence or subscription right and does not transfer ownership of the underlying software intellectual property.",
+          "Customers are responsible for complying with the applicable publisher's licence terms.",
+          "This may include restrictions relating to:"
+        ],
+        "bullets": [
+          "Number of users;",
+          "Number of devices;",
+          "Duration of the licence;",
+          "Permitted business use;",
+          "Geographic restrictions;",
+          "Transfer or reassignment;",
+          "Installation and activation;",
+          "Account registration;",
+          "Subscription renewal;",
+          "Cancellation;",
+          "Use of additional services."
+        ],
+        "closingParagraphs": [
+          "Aptus does not grant rights beyond those provided by the applicable software publisher.",
+          "Where third-party licensing terms apply, customers should review those terms before purchasing or activating the software."
+        ]
       },
       {
-        "id": "partner-8",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Logitech.png",
-        "alt": "Logitech"
+        "id": "third-party-software",
+        "number": "8",
+        "title": "Third-Party Software and Technology Partners",
+        "paragraphs": [
+          "Aptus may provide products or licences from third-party manufacturers, publishers and technology partners, including software and technology brands displayed on the website.",
+          "Third-party products may be governed by separate terms, licence agreements, privacy policies, warranties and support arrangements.",
+          "Aptus will provide reasonable assistance in relation to products purchased through Aptus; however, certain technical support, warranty claims, licensing decisions or service availability may be controlled by the relevant manufacturer or publisher.",
+          "Where applicable, customers may be required to communicate directly with the third-party provider for certain technical or licensing matters."
+        ]
       },
       {
-        "id": "partner-9",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Honeywell.png",
-        "alt": "Honeywell"
+        "id": "licence-activation",
+        "number": "9",
+        "title": "Licence Activation and Delivery",
+        "paragraphs": [
+          "Digital products, software licences, subscription details, activation codes, serial numbers or licence information may be delivered electronically through:"
+        ],
+        "bullets": [
+          "Customer account;",
+          "Registered email address;",
+          "Other electronic communication channels;",
+          "Third-party software provider systems."
+        ],
+        "closingParagraphs": [
+          "Customers are responsible for providing accurate contact and account information.",
+          "Aptus is not responsible for delays caused by incorrect customer information, failure to access the registered email address, third-party provider systems or circumstances outside Aptus's reasonable control."
+        ]
       },
       {
-        "id": "partner-10",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Hikvision.png",
-        "alt": "Hikvision"
+        "id": "licence-renewals",
+        "number": "10",
+        "title": "Licence Renewals and Expiry",
+        "paragraphs": [
+          "Customers are responsible for monitoring the expiry dates of their software licences and subscriptions.",
+          "Where available, Aptus may send renewal reminders before licence expiry.",
+          "Reminder communications may be sent at intervals such as:",
+          "90, 30, 14, 7, 3 and 1 day before expiry.",
+          "These reminders are provided as a customer convenience and do not transfer responsibility for renewal from the customer.",
+          "A licence or subscription may expire automatically if it is not renewed in accordance with the applicable provider's terms.",
+          "Renewal pricing and availability may change based on the applicable publisher, product, subscription plan or commercial terms."
+        ]
       },
       {
-        "id": "partner-11",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Fanvil.png",
-        "alt": "Fanvil"
+        "id": "cancellation",
+        "number": "11",
+        "title": "Cancellation Policy",
+        "paragraphs": [
+          "Customers may request cancellation of an order by contacting Aptus as soon as possible.",
+          "Cancellation requests are subject to the status of the order.",
+          "For physical products, cancellation may not be possible once the product has been dispatched.",
+          "For software licences, subscriptions, activation codes or other digital products, cancellation may not be possible once the licence has been issued, activated, assigned or provisioned, subject always to applicable law and the terms of the relevant software provider.",
+          "Where an order has not yet been processed, Aptus will make reasonable efforts to accommodate a cancellation request."
+        ]
       },
       {
-        "id": "partner-12",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/FAAC.png",
-        "alt": "FAAC"
+        "id": "refunds",
+        "number": "12",
+        "title": "Refund Policy",
+        "paragraphs": [
+          "Refunds will be handled in accordance with applicable Oman law, the nature of the product or service and any applicable manufacturer or publisher terms."
+        ],
+        "subsections": [
+          {
+            "id": "refunds-physical",
+            "number": "12.1",
+            "title": "Physical Products",
+            "paragraphs": [
+              "Where a physical product is defective, damaged, incorrect or otherwise eligible for return under applicable law, customers should contact Aptus promptly with the order details and relevant evidence.",
+              "Aptus may request photographs, videos, serial numbers, delivery documentation or other information necessary to assess the issue.",
+              "Where a return is approved, the product may be inspected before the applicable remedy is processed."
+            ]
+          },
+          {
+            "id": "refunds-software",
+            "number": "12.2",
+            "title": "Software and Digital Products",
+            "paragraphs": [
+              "Software licences, subscriptions, activation codes and digital products may have restrictions on cancellation or refund once issued, activated or provisioned.",
+              "Any refund request will be assessed against:"
+            ],
+            "bullets": [
+              "The applicable software publisher's terms;",
+              "Whether the licence has been issued;",
+              "Whether the licence has been activated;",
+              "Whether the subscription has commenced;",
+              "Applicable consumer protection requirements;",
+              "The specific circumstances of the request."
+            ],
+            "closingParagraphs": [
+              "Nothing in this section is intended to remove or restrict any mandatory rights available to consumers under applicable Oman law."
+            ]
+          }
+        ]
       },
       {
-        "id": "partner-13",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Extron.png",
-        "alt": "Extron"
+        "id": "delivery",
+        "number": "13",
+        "title": "Delivery and Fulfilment",
+        "paragraphs": [
+          "Delivery terms depend on the type of product purchased.",
+          "Digital Products",
+          "Digital licences, subscriptions, activation information or other electronic products may be delivered electronically following successful payment verification and order processing.",
+          "Physical Products",
+          "Physical products may be delivered using Aptus or an appointed logistics or delivery provider.",
+          "Estimated delivery dates are indicative unless a specific delivery commitment has been expressly confirmed in writing.",
+          "Delivery may be affected by:"
+        ],
+        "bullets": [
+          "Product availability;",
+          "Supplier or manufacturer lead times;",
+          "Customs or regulatory requirements;",
+          "Address accuracy;",
+          "Courier delays;",
+          "Force majeure events;",
+          "Other circumstances outside Aptus's reasonable control."
+        ],
+        "closingParagraphs": [
+          "Customers are responsible for providing a complete and accurate delivery address and contact information."
+        ]
       },
       {
-        "id": "partner-14",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/EATON.png",
-        "alt": "EATON"
+        "id": "accounts",
+        "number": "14",
+        "title": "Customer Accounts",
+        "paragraphs": [
+          "Certain website features may require customers to create an account.",
+          "Customers are responsible for:"
+        ],
+        "bullets": [
+          "Providing accurate information;",
+          "Maintaining the confidentiality of login credentials;",
+          "Keeping account information up to date;",
+          "Informing Aptus of suspected unauthorised access;",
+          "Ensuring that account information is not knowingly shared with unauthorised persons."
+        ],
+        "closingParagraphs": [
+          "Customers should use strong passwords and take reasonable precautions to protect their accounts.",
+          "Aptus may suspend or restrict an account where there is reasonable concern regarding security, fraud, misuse or violation of these policies."
+        ]
       },
       {
-        "id": "partner-15",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/BFT.png",
-        "alt": "BFT"
+        "id": "privacy",
+        "number": "15",
+        "title": "Privacy Policy",
+        "paragraphs": [
+          "Aptus respects the privacy of individuals and processes personal data in accordance with applicable laws and regulations.",
+          "Oman's Personal Data Protection Law is established under Royal Decree No. 6/2022, with Executive Regulations issued under Ministerial Decision No. 34/2024."
+        ],
+        "subsections": [
+          {
+            "id": "privacy-collect",
+            "number": "15.1",
+            "title": "Information We May Collect",
+            "paragraphs": [
+              "Depending on how you use the website, we may collect information such as:"
+            ],
+            "bullets": [
+              "Name;",
+              "Company name;",
+              "Email address;",
+              "Telephone number;",
+              "Billing information;",
+              "Delivery information;",
+              "VAT or commercial registration information where applicable;",
+              "Account credentials;",
+              "Order and transaction information;",
+              "Product and licence information;",
+              "Support requests;",
+              "Enquiry information;",
+              "Communications with Aptus;",
+              "Website usage information;",
+              "Device and technical information;",
+              "Information submitted through forms."
+            ],
+            "closingParagraphs": [
+              "We aim to collect only information reasonably necessary for the relevant purpose."
+            ]
+          },
+          {
+            "id": "privacy-use",
+            "number": "15.2",
+            "title": "How We Use Personal Data",
+            "paragraphs": [
+              "Personal data may be used to:"
+            ],
+            "bullets": [
+              "Create and manage customer accounts;",
+              "Process orders;",
+              "Verify payments;",
+              "Deliver products and services;",
+              "Provide software licences and subscriptions;",
+              "Process renewals;",
+              "Provide customer support;",
+              "Respond to enquiries;",
+              "Issue invoices and commercial documentation;",
+              "Communicate about orders and services;",
+              "Send service-related notifications;",
+              "Improve our website and services;",
+              "Protect our systems against fraud or misuse;",
+              "Meet applicable legal and regulatory obligations."
+            ]
+          },
+          {
+            "id": "privacy-consent",
+            "number": "15.3",
+            "title": "Legal Basis and Consent",
+            "paragraphs": [
+              "Where required by applicable law, Aptus will obtain the necessary consent or rely on another lawful basis for processing personal data.",
+              "Where consent is used as the basis for processing, you may have the right to withdraw that consent subject to applicable law and any consequences associated with doing so.",
+              "Certain information may need to be retained or processed where required for contractual, legal, regulatory, accounting, security or legitimate business purposes."
+            ]
+          },
+          {
+            "id": "privacy-sharing",
+            "number": "15.4",
+            "title": "Sharing Personal Data",
+            "paragraphs": [
+              "Aptus may share relevant information with trusted third parties where necessary to provide products or services or fulfil legitimate business and legal requirements.",
+              "These may include:"
+            ],
+            "bullets": [
+              "Software publishers;",
+              "Manufacturers;",
+              "Distributors;",
+              "Payment service providers;",
+              "Banks and financial institutions;",
+              "Delivery and logistics providers;",
+              "IT and hosting providers;",
+              "Customer support providers;",
+              "Professional advisers;",
+              "Government or regulatory authorities where legally required."
+            ],
+            "closingParagraphs": [
+              "Aptus does not sell personal data to third parties for their independent commercial use.",
+              "Where personal data is processed by third-party service providers, Aptus will take reasonable steps to ensure appropriate contractual and security safeguards are in place as required by applicable law."
+            ]
+          }
+        ]
       },
       {
-        "id": "partner-16",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/ZKTeco.png",
-        "alt": "ZKTeco"
+        "id": "data-rights",
+        "number": "16",
+        "title": "Personal Data Rights",
+        "paragraphs": [
+          "Subject to applicable law, individuals may have rights relating to their personal data, which may include rights to:"
+        ],
+        "bullets": [
+          "Obtain information about processing;",
+          "Request access to personal data;",
+          "Request correction or updating of inaccurate information;",
+          "Request deletion where legally applicable;",
+          "Withdraw consent where consent is the basis for processing;",
+          "Exercise other rights provided under applicable law."
+        ],
+        "closingParagraphs": [
+          "Requests may be submitted through the contact details provided at the end of this page.",
+          "Aptus may need to verify the identity of the requester before processing a request.",
+          "Applicable legal exceptions, retention requirements and other restrictions may apply."
+        ]
       },
       {
-        "id": "partner-17",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Yealink.png",
-        "alt": "Yealink"
+        "id": "data-security",
+        "number": "17",
+        "title": "Data Security",
+        "paragraphs": [
+          "Aptus takes reasonable technical and organisational measures designed to protect personal data against unauthorised access, alteration, disclosure, loss or misuse.",
+          "However, no internet transmission, website, electronic storage system or digital communication method can be guaranteed to be completely secure.",
+          "Customers should also take reasonable steps to protect their accounts, passwords, devices and personal information.",
+          "Where applicable law requires notification of a personal data breach, Aptus will follow the applicable legal requirements."
+        ]
       },
       {
-        "id": "partner-18",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/WatchNet.png",
-        "alt": "WatchNet"
+        "id": "data-retention",
+        "number": "18",
+        "title": "Data Retention",
+        "paragraphs": [
+          "Aptus retains personal data only for as long as reasonably necessary for the purpose for which it was collected, or for the period required by applicable law, contractual obligations, accounting requirements, dispute resolution or legitimate business purposes.",
+          "When information is no longer required, Aptus may securely delete, anonymise or otherwise dispose of it in accordance with applicable requirements."
+        ]
       },
       {
-        "id": "partner-19",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/URMET.png",
-        "alt": "URMET"
+        "id": "cookies",
+        "number": "19",
+        "title": "Cookies Policy",
+        "paragraphs": [
+          "The Aptus website may use cookies and similar technologies.",
+          "Cookies may be used to:"
+        ],
+        "bullets": [
+          "Enable essential website functionality;",
+          "Maintain login sessions;",
+          "Remember preferences;",
+          "Improve website performance;",
+          "Understand website usage;",
+          "Analyse traffic;",
+          "Improve customer experience;",
+          "Support relevant communications or marketing where applicable."
+        ],
+        "closingParagraphs": [
+          "Where required, Aptus will seek appropriate consent for non-essential cookies.",
+          "You may be able to manage or disable cookies through your browser settings. Disabling certain cookies may affect website functionality.",
+          "Third-party services integrated into the website may also use their own cookies or similar technologies and will be subject to their respective policies."
+        ]
       },
       {
-        "id": "partner-20",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/TOA.png",
-        "alt": "TOA"
+        "id": "marketing",
+        "number": "20",
+        "title": "Marketing Communications",
+        "paragraphs": [
+          "Where permitted by applicable law, Aptus may send customers information about:"
+        ],
+        "bullets": [
+          "Products;",
+          "Software renewals;",
+          "Promotions;",
+          "Services;",
+          "Events;",
+          "Technology updates;",
+          "Relevant business communications."
+        ],
+        "closingParagraphs": [
+          "Customers may unsubscribe from marketing communications by using the unsubscribe mechanism provided or by contacting Aptus.",
+          "Transactional and service-related communications, such as order confirmations, payment notifications, licence information and important account notices, may continue where necessary to fulfil the relevant service."
+        ]
       },
       {
-        "id": "partner-21",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Schneider.png",
-        "alt": "Schneider"
+        "id": "ip",
+        "number": "21",
+        "title": "Intellectual Property",
+        "paragraphs": [
+          "All website content, including but not limited to:"
+        ],
+        "bullets": [
+          "Text;",
+          "Graphics;",
+          "Logos;",
+          "Images;",
+          "Videos;",
+          "Icons;",
+          "Website design;",
+          "Layout;",
+          "Product descriptions;",
+          "Original materials;",
+          "Software and code;"
+        ],
+        "closingParagraphs": [
+          "is owned by Aptus or used under licence or with permission, unless otherwise stated.",
+          "Nothing on the website grants you ownership of Aptus's intellectual property.",
+          "You may not reproduce, modify, distribute, publish, create derivative works from or commercially exploit Aptus website content without prior written permission, except where permitted by applicable law.",
+          "Third-party trademarks, logos and product names remain the property of their respective owners."
+        ]
       },
       {
-        "id": "partner-22",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/PELCO.png",
-        "alt": "PELCO"
+        "id": "third-party-websites",
+        "number": "22",
+        "title": "Third-Party Websites and Services",
+        "paragraphs": [
+          "The Aptus website may contain links to third-party websites or services.",
+          "These websites are operated independently of Aptus and may have their own terms, privacy policies and security practices.",
+          "Aptus is not responsible for the content, availability, security or privacy practices of third-party websites.",
+          "Customers should review the relevant third-party terms before using those services."
+        ]
       },
       {
-        "id": "partner-23",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Panduit.png",
-        "alt": "Panduit"
+        "id": "warranties",
+        "number": "23",
+        "title": "Product Warranties",
+        "paragraphs": [
+          "Where applicable, physical products may be covered by the manufacturer's warranty or an Aptus warranty expressly stated at the time of purchase.",
+          "Warranty coverage may vary by product and manufacturer.",
+          "Software products are generally governed by the applicable publisher's licence and support terms.",
+          "Aptus does not provide warranties beyond those expressly provided by Aptus or the applicable manufacturer, except where a warranty or consumer right is required by applicable law."
+        ]
       },
       {
-        "id": "partner-24",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Nice.png",
-        "alt": "Nice"
+        "id": "liability",
+        "number": "24",
+        "title": "Limitation of Liability",
+        "paragraphs": [
+          "To the extent permitted by applicable law, Aptus will not be responsible for indirect, incidental, special or consequential losses arising from the use of the website, products or services.",
+          "This may include loss of profits, business interruption, loss of data or loss of anticipated business opportunities.",
+          "Nothing in these policies excludes or limits liability where such exclusion or limitation is prohibited by applicable law.",
+          "Aptus's liability, where legally permissible, will be limited to the extent provided by applicable law and the specific contractual terms applicable to the relevant product or service."
+        ]
       },
       {
-        "id": "partner-25",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Opterna.png",
-        "alt": "Opterna"
+        "id": "acceptable-use",
+        "number": "25",
+        "title": "Acceptable Use and Security",
+        "paragraphs": [
+          "Customers must not use the website or Aptus services to:"
+        ],
+        "bullets": [
+          "Commit or facilitate unlawful activity;",
+          "Attempt unauthorised access;",
+          "Interfere with website infrastructure;",
+          "Introduce malicious software;",
+          "Circumvent licensing controls;",
+          "Use software licences in violation of applicable licence terms;",
+          "Misrepresent their identity;",
+          "Engage in fraudulent transactions;",
+          "Attempt to obtain products or services through deceptive means."
+        ],
+        "closingParagraphs": [
+          "Aptus may investigate suspected misuse and take appropriate action, including restricting access or cancelling transactions where permitted by law."
+        ]
       },
       {
-        "id": "partner-26",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Axis.png",
-        "alt": "Axis"
+        "id": "support",
+        "number": "26",
+        "title": "Customer Support and Complaints",
+        "paragraphs": [
+          "Customers are encouraged to contact Aptus directly regarding any question, complaint, order issue, product concern or service issue.",
+          "When contacting us, customers should provide:"
+        ],
+        "bullets": [
+          "Name;",
+          "Order number, where applicable;",
+          "Product or service details;",
+          "Date of purchase;",
+          "Description of the issue;",
+          "Supporting documents or evidence where relevant."
+        ],
+        "closingParagraphs": [
+          "Aptus will review complaints and seek to resolve legitimate concerns in accordance with applicable law and the relevant contractual terms.",
+          "Nothing in this section limits any rights a consumer may have under applicable Oman consumer protection laws.",
+          "Oman's Consumer Protection Law is promulgated under Royal Decree No. 66/2014, with Executive Regulations under Decision No. 77/2017."
+        ]
       },
       {
-        "id": "partner-27",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Avigilon.png",
-        "alt": "Avigilon"
+        "id": "electronic-communications",
+        "number": "27",
+        "title": "Electronic Communications",
+        "paragraphs": [
+          "By using the Aptus website or providing your contact details, you agree that Aptus may communicate with you electronically for purposes related to your account, enquiry, order, payment, licence, subscription, support request or other service.",
+          "Electronic communications may include email, SMS, website notifications or other electronic channels made available by Aptus.",
+          "Electronic records may be retained as evidence of communications and transactions, subject to applicable law."
+        ]
       },
       {
-        "id": "partner-28",
-        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/AKCP.png",
-        "alt": "AKCP"
+        "id": "force-majeure",
+        "number": "28",
+        "title": "Force Majeure",
+        "paragraphs": [
+          "Aptus will not be responsible for delays or failure to perform obligations where caused by circumstances beyond its reasonable control.",
+          "Such circumstances may include:"
+        ],
+        "bullets": [
+          "Natural disasters;",
+          "Fire;",
+          "Flood;",
+          "Epidemics or pandemics;",
+          "War;",
+          "Civil unrest;",
+          "Government action;",
+          "Regulatory restrictions;",
+          "Cybersecurity incidents;",
+          "Internet or telecommunications failures;",
+          "Power outages;",
+          "Supplier or manufacturer disruptions;",
+          "Transportation disruptions;",
+          "Other events beyond reasonable control."
+        ],
+        "closingParagraphs": [
+          "Aptus will make reasonable efforts to resume performance as soon as practicable."
+        ]
+      },
+      {
+        "id": "changes",
+        "number": "29",
+        "title": "Changes to Products and Policies",
+        "paragraphs": [
+          "Aptus may update website content, products, services, pricing, features and these policies from time to time.",
+          "Changes will become effective when published on the website unless a different effective date is stated.",
+          "The latest version will be identified by the Last Updated date at the beginning of this page.",
+          "Customers should review this page periodically for material changes."
+        ]
+      },
+      {
+        "id": "governing-law",
+        "number": "30",
+        "title": "Governing Law and Jurisdiction",
+        "paragraphs": [
+          "These policies and the use of the Aptus website are intended to be governed by the laws applicable in the Sultanate of Oman, unless otherwise required by applicable law or expressly agreed in a separate written agreement.",
+          "Subject to any mandatory consumer rights or other applicable legal requirements, disputes arising in connection with these policies or the use of the website shall be subject to the jurisdiction of the competent courts of the Sultanate of Oman.",
+          "Nothing in these policies is intended to restrict any mandatory rights or remedies available to consumers under applicable law."
+        ]
+      },
+      {
+        "id": "severability",
+        "number": "31",
+        "title": "Severability",
+        "paragraphs": [
+          "If any provision of these policies is found to be invalid, unlawful or unenforceable, the remaining provisions will continue to apply to the extent permitted by law.",
+          "The invalid provision will be interpreted or modified to the minimum extent necessary to make it enforceable while preserving its intended purpose, where legally permissible."
+        ]
+      },
+      {
+        "id": "no-waiver",
+        "number": "32",
+        "title": "No Waiver",
+        "paragraphs": [
+          "Failure by Aptus to enforce any provision of these policies does not constitute a waiver of our right to enforce that provision or any other provision in the future."
+        ]
+      },
+      {
+        "id": "entire-agreement",
+        "number": "33",
+        "title": "Entire Agreement",
+        "paragraphs": [
+          "These policies, together with any applicable quotation, order confirmation, product-specific terms, software licence agreement, subscription terms or other written agreement issued by Aptus, constitute the applicable terms governing the relevant transaction or use of the website.",
+          "Where a separate written agreement applies, its specific terms will govern to the extent of any conflict.",
+          "Aptus Infotech reserves the right to amend these policies from time to time to reflect changes in applicable law, regulatory requirements, business operations, technology or services."
+        ]
       }
     ]
-  },
-  "contactCta": {
-    "heading": "Have questions? We can help",
-    "showForm": true,
-    "submitLabel": "Submit Now",
-    "layout": "light"
   }
 }

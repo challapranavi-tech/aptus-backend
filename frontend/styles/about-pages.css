@@ -226,6 +226,84 @@
     font-weight: 600;
     line-height: 1.2;
     text-align: center;
+    margin: 0;
+  }
+
+  .page-team [data-variant="culture-panel"] {
+    padding-bottom: 0;
+  }
+
+  .page-team [data-section="team-title"] {
+    padding-top: 0.35rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .aptus-team-join {
+    padding: 0.5rem 0 4rem;
+    background: linear-gradient(165deg, #0d2748 0%, #1352a3 55%, #0b1f3a 100%);
+  }
+
+  .aptus-team-join__inner {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 2.25rem 1.25rem 2.4rem;
+    text-align: center;
+    animation: aptus-team-fade-up 0.7s ease both;
+  }
+
+  .aptus-team-join__heading {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.7rem, 3.6vw, 2.35rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+  }
+
+  .aptus-team-join__heading span {
+    color: #67db85;
+  }
+
+  .aptus-team-join__tagline {
+    margin: 0.85rem auto 0;
+    max-width: 34rem;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.4;
+    text-wrap: balance;
+  }
+
+  .aptus-team-join__copy {
+    margin: 1rem auto 0;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.98rem;
+    font-weight: 500;
+    line-height: 1.7;
+  }
+
+  .aptus-team-join__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1.6rem;
+    padding: 0.85rem 1.45rem;
+    border-radius: 999px;
+    background: #67db85;
+    color: #0b1f3a;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+
+  .aptus-team-join__cta:hover {
+    background: #7ee39a;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.24);
   }
 
   .aptus-team-member-name {
@@ -256,6 +334,158 @@
     line-height: 1;
     text-align: center;
     text-transform: uppercase;
+    animation: aptus-team-fade-up 0.7s ease both;
+  }
+
+  @keyframes aptus-team-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .aptus-team-culture-photo {
+    overflow: hidden;
+    width: auto;
+    margin: -1rem -1rem 1.5rem;
+    border-radius: 1.05rem;
+    box-shadow: 0 12px 28px rgba(11, 31, 58, 0.14);
+    animation: aptus-team-fade-up 0.75s ease both;
+  }
+
+  @media (min-width: 640px) {
+    .aptus-team-culture-photo {
+      margin: -2rem -2rem 1.75rem;
+    }
+  }
+
+  .aptus-team-culture-photo__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    transform: none;
+    transition: transform 0.9s ease;
+  }
+
+  .aptus-team-culture-photo:hover .aptus-team-culture-photo__img {
+    transform: scale(1.1);
+  }
+
+  .aptus-team-culture-heading {
+    margin: 0.35rem auto 1.75rem;
+    max-width: 36rem;
+    color: #0b1f3a;
+    font-size: clamp(1.55rem, 3.4vw, 2.15rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+    text-align: center;
+    text-wrap: balance;
+    animation: aptus-team-fade-up 0.75s ease 0.08s both;
+  }
+
+  .aptus-team-culture-heading span {
+    color: var(--color-brand-blue, #1352a3);
+  }
+
+  .aptus-team-culture-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 640px) {
+    .aptus-team-culture-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .aptus-team-culture-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .aptus-team-culture-card {
+    height: 100%;
+    padding: 1.25rem 1.2rem 1.35rem;
+    border-radius: 1rem;
+    background: linear-gradient(180deg, #ffffff 0%, #f7fafc 100%);
+    border: 1px solid rgba(19, 82, 163, 0.12);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      0 8px 20px rgba(11, 31, 58, 0.05);
+    animation: aptus-team-fade-up 0.7s ease both;
+    transition:
+      transform 0.22s ease,
+      box-shadow 0.22s ease,
+      border-color 0.22s ease;
+  }
+
+  .aptus-team-culture-card:nth-child(1) { animation-delay: 0.12s; }
+  .aptus-team-culture-card:nth-child(2) { animation-delay: 0.18s; }
+  .aptus-team-culture-card:nth-child(3) { animation-delay: 0.24s; }
+  .aptus-team-culture-card:nth-child(4) { animation-delay: 0.3s; }
+  .aptus-team-culture-card:nth-child(5) { animation-delay: 0.36s; }
+  .aptus-team-culture-card:nth-child(6) { animation-delay: 0.42s; }
+
+  .aptus-team-culture-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(19, 82, 163, 0.28);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      0 14px 28px rgba(19, 82, 163, 0.14);
+  }
+
+  .aptus-team-culture-card h3 {
+    margin: 0;
+    color: var(--color-brand-blue, #1352a3);
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+  }
+
+  .aptus-team-culture-card h3::before {
+    content: "";
+    display: block;
+    width: 2.25rem;
+    height: 3px;
+    margin: 0 0 0.7rem;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #1352a3, #67db85);
+    transition: width 0.22s ease;
+  }
+
+  .aptus-team-culture-card:hover h3::before {
+    width: 3.15rem;
+  }
+
+  .aptus-team-culture-card p {
+    margin: 0.55rem 0 0;
+    color: #3d4a5c;
+    font-size: 0.925rem;
+    font-weight: 500;
+    line-height: 1.55;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .aptus-team-watermark,
+    .aptus-team-culture-photo,
+    .aptus-team-culture-heading,
+    .aptus-team-culture-card {
+      animation: none;
+    }
+
+    .aptus-team-culture-photo__img,
+    .aptus-team-culture-card {
+      transition: none;
+    }
   }
 
   .aptus-team-culture-subtitle {
@@ -437,132 +667,245 @@
     text-align: center;
   }
 
-  /* ISO Certifications — post-3375 */
+  /* ISO Certifications — match About Us card language */
+  .page-iso {
+    background: #f7f9fc;
+  }
+
+  .aptus-iso-section {
+    padding: 1.5rem 0 2.5rem;
+  }
+
+  .aptus-iso-hero {
+    margin: 0 0 1.5rem;
+  }
+
   .aptus-iso-hero-title {
-    color: var(--color-brand-blue);
-    font-size: var(--text-5xl);
-    font-weight: 600;
+    margin: 0;
+    color: #0b1f3a;
+    font-size: clamp(1.85rem, 4vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
     line-height: 1.15;
     text-align: center;
+    text-wrap: balance;
   }
 
   .aptus-iso-subtitle {
-    color: #000;
-    font-size: var(--text-base);
+    margin: 1rem 0 0;
+    color: #3d4a5c;
+    font-size: 1.02rem;
     font-weight: 400;
-    line-height: 1.5;
-    margin-top: 1rem;
+    line-height: 1.65;
     text-align: start;
+    text-wrap: pretty;
   }
 
-  .aptus-iso-intro-heading,
-  .aptus-iso-core-heading {
-    color: var(--color-brand-blue);
-    font-size: var(--text-3xl);
-    font-weight: 600;
-    line-height: 1.2;
-    text-align: center;
+  .aptus-iso-intro-panel {
+    margin: 0 0 1.5rem;
+    padding: 0;
+    border-radius: 0;
+    background-color: transparent;
+  }
+
+  .page-iso .aptus-iso-intro-heading,
+  .page-iso .aptus-iso-core-heading {
+    margin: 0;
+    color: var(--color-brand-blue, #1352a3);
+    font-size: clamp(1.35rem, 2.8vw, 1.85rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    text-align: start;
+    text-wrap: balance;
   }
 
   .aptus-iso-intro-text {
-    color: #000;
-    font-size: var(--text-base);
+    margin: 0.85rem 0 0;
+    color: #3d4a5c;
+    font-size: 0.98rem;
     font-weight: 400;
-    line-height: 1.6;
+    line-height: 1.65;
     text-align: start;
   }
 
+  .aptus-iso-core {
+    margin: 0 0 1.5rem;
+  }
+
+  .aptus-iso-core-list {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: 1fr;
+    list-style: none;
+    margin: 1.15rem 0 0;
+    padding: 0;
+  }
+
+  @media (min-width: 768px) {
+    .aptus-iso-core-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
   .aptus-iso-core-item {
-    color: #000;
-    font-size: var(--text-base);
-    font-weight: 400;
-    line-height: 1.6;
-    margin-top: 0.25rem;
+    margin: 0;
+    padding: 1rem 1.05rem;
+    border: 1px solid rgba(19, 82, 163, 0.12);
+    border-radius: 0.9rem;
+    background: linear-gradient(180deg, #ffffff 0%, #f7fafc 100%);
+    box-shadow: 0 8px 18px rgba(11, 31, 58, 0.05);
+    color: #0b1f3a;
+    font-size: 0.92rem;
+    font-weight: 500;
+    line-height: 1.45;
     text-align: start;
   }
 
   .aptus-iso-cert-grid {
     display: grid;
-    gap: 2rem;
+    gap: 1.25rem;
     grid-template-columns: 1fr;
+    margin: 0;
+  }
+
+  @media (min-width: 720px) {
+    .aptus-iso-cert-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .aptus-iso-cert-grid {
+      align-items: stretch;
+      gap: 1.5rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
   }
 
   .aptus-iso-cert-card {
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 0 0 2rem;
+    min-width: 0;
+    padding: 1.2rem 1.15rem 1.35rem;
+    border: 1px solid rgba(19, 82, 163, 0.12);
+    border-radius: 1.05rem;
+    background: linear-gradient(180deg, #ffffff 0%, #f7fafc 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      0 10px 24px rgba(11, 31, 58, 0.06);
     text-align: center;
+    transition:
+      transform 0.22s ease,
+      box-shadow 0.22s ease,
+      border-color 0.22s ease;
   }
 
-  @media (min-width: 640px) {
-    .aptus-iso-cert-card {
-      padding-inline: 1rem;
-    }
+  .aptus-iso-cert-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(19, 82, 163, 0.28);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 1),
+      0 16px 32px rgba(19, 82, 163, 0.14);
   }
 
-  @media (min-width: 1024px) {
-    .aptus-iso-cert-card {
-      padding-inline: 2rem;
-    }
+  .aptus-iso-cert-card__header {
+    margin-bottom: 1rem;
   }
 
-  @media (min-width: 1024px) {
-    .aptus-iso-cert-grid {
-      align-items: stretch;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      grid-template-rows: auto auto auto;
-    }
-
-    /* Subgrid keeps heading / image / button rows level across columns */
-    .aptus-iso-cert-card {
-      display: grid;
-      grid-row: span 3;
-      grid-template-rows: subgrid;
-      padding-bottom: 0;
-    }
+  .aptus-iso-cert-badge {
+    display: inline-block;
+    margin: 0 0 0.55rem;
+    padding: 0.28rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(19, 82, 163, 0.1);
+    color: var(--color-brand-blue, #1352a3);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.3;
   }
 
   .aptus-iso-cert-heading {
-    color: var(--color-brand-blue);
-    font-size: var(--text-base);
-    font-weight: 600;
-    line-height: 1.5625rem;
+    margin: 0;
+    color: #0b1f3a;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.35;
     text-align: center;
+    text-wrap: balance;
   }
 
   .aptus-iso-cert-media {
-    margin-top: 1rem;
+    overflow: hidden;
+    margin: 0;
+    border: 1px solid #d7e3ef;
+    border-radius: 0.75rem;
+    background: #fff;
+  }
+
+  .aptus-iso-cert-media__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
   }
 
   .aptus-iso-cert-action {
-    margin-top: 1.5rem;
+    margin-top: auto;
+    padding-top: 1.15rem;
   }
 
   .aptus-iso-download-btn {
-    background-color: var(--color-brand-blue);
-    border-radius: 0.25rem;
+    background-color: var(--color-brand-blue, #1352a3);
+    border-radius: 999px;
     color: #ffffff !important;
-    display: inline-block;
-    font-size: var(--text-sm);
-    font-weight: 500;
-    padding: 0.625rem 1.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.88rem;
+    font-weight: 600;
+    padding: 0.7rem 1.35rem;
     text-decoration: none !important;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease;
   }
 
   .aptus-iso-download-btn:hover,
   .aptus-iso-download-btn:focus-visible {
-    background-color: var(--color-brand-blue-dark);
+    background-color: var(--color-brand-blue-dark, #0d3f7e);
     color: #ffffff !important;
   }
 
+  .aptus-iso-footer {
+    margin: 1.5rem 0 0;
+    padding: 0;
+  }
+
   .aptus-iso-footer-text {
-    color: #000;
-    font-size: var(--text-base);
+    margin: 0;
+    color: #3d4a5c;
+    font-size: 0.98rem;
     font-weight: 400;
-    line-height: 1.6;
+    line-height: 1.65;
     text-align: start;
+    text-wrap: pretty;
+  }
+
+  .aptus-iso-footer-text + .aptus-iso-footer-text {
+    margin-top: 0.75rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .aptus-iso-cert-card,
+    .aptus-iso-download-btn {
+      transition: none;
+    }
+
+    .aptus-iso-cert-card:hover {
+      transform: none;
+    }
   }
 
   /* Career — post-3441 */
@@ -695,29 +1038,9 @@
   }
 }
 
-/* Our Story — collapse stacked section padding (same pattern as .page-home) */
+/* Our Story — dedicated layout in pages/our-story.css */
 @layer pages {
-  .page-our-story [data-section="banner"] {
-    margin-bottom: 0;
-  }
-
-  .page-our-story [data-section="feature-row"],
-  .page-our-story [data-section="flip-cards"],
-  .page-our-story [data-section="logo-grid"] {
-    padding-block: 0.75rem;
-  }
-
-  .page-our-story [data-section="feature-row"] + [data-section="flip-cards"],
-  .page-our-story [data-section="flip-cards"] + [data-section="logo-grid"],
-  .page-our-story [data-section="logo-grid"] + [data-section="cta"] {
-    padding-top: 0.25rem;
-  }
-
-  .page-our-story .aptus-alliances-heading {
-    margin-bottom: 0.75rem;
-  }
-
-  .page-our-story .aptus-alliance-marquee {
-    margin-top: 0.25rem;
+  .page-our-story [data-section="our-story"] {
+    margin: 0;
   }
 }

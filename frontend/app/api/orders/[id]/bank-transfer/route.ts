@@ -290,6 +290,7 @@ export async function POST(request: NextRequest, context: RouteContext) {
             quantity: item.quantity,
           })),
           existingLeadId: order.leadId,
+          expectedRevenue: totalAmount ?? pricing?.subscriptionFee ?? pricing?.total,
         }).catch((error: unknown) => {
           throw Object.assign(error instanceof Error ? error : new Error(String(error)), {
             failedOperation: "promote_lead" as const,
@@ -484,9 +485,6 @@ export async function POST(request: NextRequest, context: RouteContext) {
   // Best-effort from here on: the proof is recorded in Odoo, so notification
   // failures are logged but never turned into an error for the customer.
   try {
-    const productLines = updated.items.map(
-      (item) => `${item.category} — ${item.productName} × ${item.quantity}`,
-    );
     const totalAmountLabel =
       totalAmount != null ? formatOmanAmount(totalAmount) : "To be confirmed";
     const portalUrl = getPortalBaseUrl();
@@ -517,7 +515,8 @@ export async function POST(request: NextRequest, context: RouteContext) {
       phone: profile.phone,
       reference: updated.reference,
       bankTransferReference,
-      products: productLines,
+      items: updated.items,
+      duration: updated.duration,
       totalAmount: totalAmountLabel,
       odooLink: saleOrderId ? getOdooSaleOrderLink(saleOrderId) : null,
     });
@@ -540,6 +539,7 @@ export async function POST(request: NextRequest, context: RouteContext) {
             to: getOrderNotificationEmail(),
             subject: adminEmail.subject,
             body: adminEmail.body,
+            html: adminEmail.html,
             replyTo: profile.email,
             attachments: proofBuffer
               ? [{ filename: stored.fileName, content: proofBuffer, contentType: stored.contentType }]

@@ -1,0 +1,245 @@
+{
+  "title": "Blog",
+  "items": [
+    {
+      "id": "autocad-2027-redefining-how-you-create-collaborate-and-deliver",
+      "category": "Software",
+      "brand": "Autodesk",
+      "title": "AutoCAD 2027: Redefining How You Create, Collaborate, and Deliver",
+      "summary": "Explore the latest AutoCAD release and its focus on intelligent design workflows. AI assistance, geometry cleanup and connected collaboration help teams work faster. A useful product update for customers evaluating new AutoCAD capabilities.",
+      "href": "https://www.autodesk.com/blogs/autocad/autocad-2027/"
+    },
+    {
+      "id": "what-s-new-in-revit-2027-a-smarter-more-connected-way-to-work",
+      "category": "Software",
+      "brand": "Autodesk",
+      "title": "What’s New in Revit 2027: A Smarter, More Connected Way to Work",
+      "summary": "Revit 2027 brings Autodesk AI directly into the modeling environment. The update also strengthens cloud-connected workflows, model analysis and coordination. Useful for architecture, MEP and structural design teams.",
+      "href": "https://www.autodesk.com/blogs/aec/2026/04/07/whats-new-in-revit-2027/"
+    },
+    {
+      "id": "what-s-new-in-revit-2027-1",
+      "category": "Software",
+      "brand": "Autodesk",
+      "title": "What’s New in Revit 2027.1",
+      "summary": "Revit 2027.1 adds improvements across architecture, structure and MEP workflows. The release focuses on better control, documentation and connected model coordination. A strong update article for existing Revit users considering an upgrade.",
+      "href": "https://www.autodesk.com/blogs/aec/2026/06/16/whats-new-in-revit-2027-1/"
+    },
+    {
+      "id": "what-s-new-in-revit-2027-2",
+      "category": "Software",
+      "brand": "Autodesk",
+      "title": "What’s New in Revit 2027.2",
+      "summary": "The latest Revit update focuses on faster and more predictable BIM workflows. It expands connections with Autodesk Forma and improves everyday production tasks. Useful for customers looking at the newest Revit capabilities.",
+      "href": "https://www.autodesk.com/blogs/aec/2026/07/22/whats-new-in-revit-2027-2/"
+    },
+    {
+      "id": "introducing-the-revit-public-mcp-server",
+      "category": "Software",
+      "brand": "Autodesk",
+      "title": "Introducing the Revit Public MCP Server",
+      "summary": "Autodesk is connecting Revit models with AI assistants through a supported MCP server. The approach enables AI tools to interact with structured Revit model information. A forward-looking article for customers interested in AI-enabled design workflows.",
+      "href": "https://www.autodesk.com/blogs/aec/2026/06/17/revit-public-mcp-server/"
+    },
+    {
+      "id": "microsoft-365-business-with-copilot-the-new-standard-for-small-business",
+      "category": "Business Technology",
+      "brand": "Microsoft",
+      "title": "Microsoft 365 Business with Copilot: The New Standard for Small Business",
+      "summary": "Microsoft explains how Copilot can be integrated directly into everyday business applications. Teams can use AI within familiar tools such as Word, Excel, PowerPoint and Outlook. A strong article for businesses exploring practical AI productivity.",
+      "href": "https://www.microsoft.com/en-us/copilot/blog/2026/05/28/introducing-microsoft-365-business-with-copilot-the-new-standard-for-small-business/"
+    },
+    {
+      "id": "acrobat-studio-a-trusted-platform-for-business-intelligence-and-creativity",
+      "category": "Software",
+      "brand": "Adobe",
+      "title": "Acrobat Studio: A Trusted Platform for Business Intelligence and Creativity",
+      "summary": "Adobe combines PDF workflows, AI assistance, collaboration and content creation in Acrobat Studio. The article focuses on productivity while keeping document security and governance in view. Relevant for businesses managing large volumes of digital documents.",
+      "href": "https://business.adobe.com/blog/acrobat-studio-a-trusted-platform-for-business-intelligence-and-creativity"
+    },
+    {
+      "id": "adobe-s-new-productivity-agent-redefining-how-we-understand-create-and-share",
+      "category": "Software",
+      "brand": "Adobe",
+      "title": "Adobe’s New Productivity Agent: Redefining How We Understand, Create and Share",
+      "summary": "Adobe introduces an AI productivity agent designed to reduce repetitive document and content tasks. It can help users understand information and turn it into useful business outputs. A strong thought-leadership piece for AI and workplace productivity.",
+      "href": "https://blog.adobe.com/en/publish/2026/05/06/adobes-new-productivity-agent-redefining-how-we-understand-create-share"
+    },
+    {
+      "id": "show-up-sharper-faster-with-new-acrobat-ai",
+      "category": "Software",
+      "brand": "Adobe",
+      "title": "Show Up Sharper, Faster with New Acrobat AI",
+      "summary": "Adobe highlights new AI features that turn dense documents into visual and audio experiences. Users can extract insights and create polished outputs faster. Useful for customers looking to modernize document-heavy workflows.",
+      "href": "https://blog.adobe.com/en/publish/2026/09/09/show-up-sharper-faster-with-new-acrobat-ai"
+    },
+    {
+      "id": "adobe-acrobat-ai-assistant-for-enterprise-a-commitment-to-security",
+      "category": "Software",
+      "brand": "Adobe",
+      "title": "Adobe Acrobat AI Assistant for Enterprise: A Commitment to Security",
+      "summary": "Adobe explains how AI-powered document assistance can operate with enterprise security controls. The article covers privacy, governance and responsible AI considerations. Relevant for organizations handling sensitive business documents.",
+      "href": "https://business.adobe.com/blog/adobe-acrobat-ai-assistant-enterprise-our-commitment-data-governance-security"
+    },
+    {
+      "id": "meet-firefly-graph-reusable-creative-workflows-with-generative-ai",
+      "category": "Software",
+      "brand": "Adobe",
+      "title": "Meet Firefly Graph: Reusable Creative Workflows with Generative AI",
+      "summary": "Adobe introduces a visual environment for building AI-powered creative workflows. It brings professional creative capabilities and AI models into governed workflows. A good insight for marketing, design and creative teams.",
+      "href": "https://business.adobe.com/blog/meet-firefly-graph"
+    },
+    {
+      "id": "will-ai-enhance-the-design-process",
+      "category": "Design & Visualization",
+      "brand": "Trimble SketchUp",
+      "title": "Will AI Enhance the Design Process?",
+      "summary": "The article explores how AI can reduce repetitive work in architecture and design. SketchUp highlights AI-assisted modeling, rendering and workflow support. Useful for designers looking at practical ways to increase creative productivity.",
+      "href": "https://sketchup.trimble.com/en/blog/article/will-ai-enhance-the-design-process"
+    },
+    {
+      "id": "ai-in-architecture-keeping-human-creativity-at-the-center",
+      "category": "Design & Visualization",
+      "brand": "Trimble SketchUp",
+      "title": "AI in Architecture: Keeping Human Creativity at the Center",
+      "summary": "The article looks at how AI is entering architectural design while keeping human judgment central. It discusses AI-assisted 3D modeling and design workflows. A good thought-leadership article for architects and visualization professionals.",
+      "href": "https://sketchup.trimble.com/en/blog/article/ai-in-architecture-human-creativity"
+    },
+    {
+      "id": "new-oracle-aconex-capabilities-improve-project-transparency-and-control",
+      "category": "Business Technology",
+      "brand": "Oracle",
+      "title": "New Oracle Aconex Capabilities Improve Project Transparency and Control",
+      "summary": "Oracle introduces enhancements for document reviews, inspections and test-plan workflows. The focus is on traceability, collaboration and reducing project risk. Relevant for organizations managing complex project documentation.",
+      "href": "https://www.oracle.com/news/announcement/new-oracle-aconex-capabilities-improve-project-transparency-and-control-2026-04-13/"
+    },
+    {
+      "id": "oracle-transforms-construction-safety-management-with-ai",
+      "category": "Business Technology",
+      "brand": "Oracle",
+      "title": "Oracle Transforms Construction Safety Management with AI",
+      "summary": "Oracle introduces AI-enabled predictive safety capabilities for project teams. The solution uses project and safety data to help identify risks before incidents occur. A strong example of AI being applied to operational decision-making.",
+      "href": "https://www.oracle.com/news/announcement/oracle-transforms-construction-safety-management-with-ai-2026-03-05/"
+    },
+    {
+      "id": "oracle-primavera-cloud-achieves-fedramp-in-process-designation",
+      "category": "Business Technology",
+      "brand": "Oracle",
+      "title": "Oracle Primavera Cloud Achieves FedRAMP 'In Process' Designation",
+      "summary": "Oracle highlights the continued development of secure cloud-based project management. The article focuses on collaboration and modern project delivery for complex organizations. Useful for customers evaluating cloud project-management platforms.",
+      "href": "https://www.oracle.com/news/announcement/oracle-primavera-cloud-achieves-fedramp-in-process-designation-2026-01-21/"
+    },
+    {
+      "id": "hosted-pbx-the-complete-enterprise-guide",
+      "category": "ELV / Communications",
+      "brand": "Mitel",
+      "title": "Hosted PBX: The Complete Enterprise Guide",
+      "summary": "Mitel explains how hosted PBX works and how it compares with other communication models. It covers scalability, security, remote work and enterprise requirements. Highly relevant for businesses evaluating modern IP telephony.",
+      "href": "https://www.mitel.com/articles/hosted-pbx"
+    },
+    {
+      "id": "hosted-pbx-vs-on-premises-pbx-what-control-really-costs-you",
+      "category": "ELV / Communications",
+      "brand": "Mitel",
+      "title": "Hosted PBX vs On-Premises PBX: What Control Really Costs You",
+      "summary": "This comparison explores the operational differences between hosted and on-premises PBX. It looks at cost, control, scalability, resilience and integrations. Useful for customers planning a communications-system upgrade.",
+      "href": "https://www.mitel.com/articles/hosted-pbx-vs-premises-pbx-what-control-really-costs-you"
+    },
+    {
+      "id": "benefits-of-hosted-pbx-for-remote-hybrid-work",
+      "category": "ELV / Communications",
+      "brand": "Mitel",
+      "title": "Benefits of Hosted PBX for Remote & Hybrid Work",
+      "summary": "Hosted PBX can keep business numbers and communication features available across locations. The article discusses centralized administration, scalability and secure remote calling. A practical topic for multi-site and hybrid organizations.",
+      "href": "https://www.mitel.com/articles/benefits-hosted-pbx-remote-hybrid-work"
+    },
+    {
+      "id": "hosted-pbx-migration-best-practices",
+      "category": "ELV / Communications",
+      "brand": "Mitel",
+      "title": "Hosted PBX Migration Best Practices",
+      "summary": "Mitel provides a practical framework for moving from legacy PBX to hosted communications. It covers network readiness, security, number porting, phased rollout and compliance. A valuable resource for customers planning a telephony migration.",
+      "href": "https://www.mitel.com/article/hosted-pbx-migration-best-practices-10-step-guide-doesnt-break-whats-already-working"
+    },
+    {
+      "id": "what-is-physical-access-control-a-guide-to-securing-your-facility",
+      "category": "ELV / Security",
+      "brand": "Axis Communications",
+      "title": "What Is Physical Access Control? A Guide to Securing Your Facility",
+      "summary": "The article explains the core components and purpose of physical access control systems. It covers how modern facilities can improve security beyond traditional locks and keys. A strong educational resource for Aptus access-control customers.",
+      "href": "https://newsroom.axis.com/blog/physical-access-control"
+    },
+    {
+      "id": "cloud-video-surveillance-explained",
+      "category": "ELV / Security",
+      "brand": "Axis Communications",
+      "title": "Cloud Video Surveillance Explained",
+      "summary": "Cloud surveillance can simplify remote access and scaling across multiple sites. The article also explains trade-offs such as bandwidth and recurring service costs. Useful for customers considering modern surveillance architectures.",
+      "href": "https://newsroom.axis.com/en-us/blog/cloud-video-surveillance"
+    },
+    {
+      "id": "what-are-the-cybersecurity-issues-in-video-surveillance",
+      "category": "ELV / Security",
+      "brand": "Axis Communications",
+      "title": "What Are the Cybersecurity Issues in Video Surveillance?",
+      "summary": "Modern IP cameras are network-connected devices and therefore part of an organization's cyber risk surface. The article discusses vulnerabilities and practical security considerations. An excellent bridge between Aptus ELV and cybersecurity offerings.",
+      "href": "https://newsroom.axis.com/en-ca/blog/what-are-the-cybersecurity-issues-in-video-surveillance"
+    },
+    {
+      "id": "fortiendpoint-expands-security-for-the-ai-era",
+      "category": "Cybersecurity",
+      "brand": "Fortinet",
+      "title": "FortiEndpoint Expands Security for the AI Era",
+      "summary": "Fortinet explores how AI adoption is changing endpoint security requirements. The article covers endpoint protection, data loss prevention, zero-trust access and AI governance. Relevant for organizations securing modern workforces.",
+      "href": "https://www.fortinet.com/blog/security-operations/fortiendpoint-expands-security-for-the-ai-era"
+    },
+    {
+      "id": "fortios-8-0-redefining-secure-networking-in-the-ai-and-quantum-era",
+      "category": "Cybersecurity",
+      "brand": "Fortinet",
+      "title": "FortiOS 8.0: Redefining Secure Networking in the AI and Quantum Era",
+      "summary": "Fortinet discusses unified networking and security for hybrid and modern environments. The article covers visibility, SASE, SD-WAN and IT/OT security. A useful technology update for customers evaluating network-security platforms.",
+      "href": "https://www.fortinet.com/blog/security-architecture/fortios-8-redefining-secure-networking-in-the-ai-and-quantum-era"
+    },
+    {
+      "id": "fortiaigate-optimizing-and-protecting-ai-workloads",
+      "category": "Cybersecurity",
+      "brand": "Fortinet",
+      "title": "FortiAIGate: Optimizing and Protecting AI Workloads",
+      "summary": "AI adoption introduces new risks such as prompt injection, data leakage and model manipulation. Fortinet explains how runtime security can protect enterprise AI deployments. A strong thought-leadership topic for businesses adopting AI.",
+      "href": "https://www.fortinet.com/blog/security-operations/fortiaigate-optimizing-and-protecting-ai-workloads"
+    },
+    {
+      "id": "while-ot-security-is-maturing-risk-is-not-slowing-down",
+      "category": "Cybersecurity",
+      "brand": "Fortinet",
+      "title": "While OT Security Is Maturing, Risk Is Not Slowing Down",
+      "summary": "Connected operational technology environments are expanding the cyberattack surface. The article discusses visibility, segmentation, secure remote access and incident response. Particularly relevant for industrial and infrastructure customers.",
+      "href": "https://www.fortinet.com/blog/operational-technology/while-ot-security-is-maturing-risk-is-not-slowing-down"
+    },
+    {
+      "id": "the-state-of-ransomware-2026",
+      "category": "Cybersecurity",
+      "brand": "Sophos",
+      "title": "The State of Ransomware 2026",
+      "summary": "Sophos presents current research on how ransomware attacks begin and what recovery can cost. The report highlights encryption rates, recovery costs and challenges for smaller organizations. A strong cybersecurity resource for business decision-makers.",
+      "href": "https://www.sophos.com/en-us/content/state-of-ransomware"
+    },
+    {
+      "id": "stopping-real-world-attacks-lessons-from-the-2026-cyber-frontline",
+      "category": "Cybersecurity",
+      "brand": "Sophos",
+      "title": "Stopping Real-World Attacks: Lessons from the 2026 Cyber Frontline",
+      "summary": "Sophos shares lessons from real-world attacks and the importance of strong ransomware defenses. The article emphasizes visibility, behavioral protection and rapid response. Useful for customers evaluating endpoint and managed detection solutions.",
+      "href": "https://www.sophos.com/en-us/blog/stopping-real-world-attacks-lessons-for-business-leaders-from-the-2026-cyber-frontline"
+    },
+    {
+      "id": "5-common-ups-battery-mistakes-and-how-to-avoid-them",
+      "category": "Infrastructure / UPS",
+      "brand": "Vertiv",
+      "title": "5 Common UPS Battery Mistakes and How to Avoid Them",
+      "summary": "UPS reliability depends heavily on battery condition, temperature and maintenance. Vertiv explains common mistakes that can shorten battery life and increase downtime risk. A practical resource for customers using UPS and critical power systems.",
+      "href": "https://www.vertiv.com/en-us/about/news-and-events/articles/blog-posts/5-common-ups-battery-mistakes-and-how-to-avoid-them/"
+    }
+  ]
+}

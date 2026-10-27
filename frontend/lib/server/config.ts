@@ -16,16 +16,20 @@ export type OdooConfig = {
   user: string;
 };
 
+/** Strip /odoo or /web paths editors often paste from the browser login URL. */
+export function normalizeOdooBaseUrl(raw: string): string {
+  let u = raw.trim().replace(/\/+$/, "");
+  u = u.replace(/\/(?:odoo|web)(?:\/.*)?$/i, "");
+  return u.replace(/\/+$/, "");
+}
+
 export function getOdooConfig(): OdooConfig {
   // ODOO_BASE_URL is the portal module name; fall back to Aptus backend's ODOO_URL.
   return {
-    baseUrl: (process.env.ODOO_BASE_URL ?? process.env.ODOO_URL ?? "").replace(
-      /\/$/,
-      "",
-    ),
-    apiKey: process.env.ODOO_API_KEY ?? "",
-    db: process.env.ODOO_DB ?? "",
-    user: process.env.ODOO_USER ?? "",
+    baseUrl: normalizeOdooBaseUrl(process.env.ODOO_BASE_URL ?? process.env.ODOO_URL ?? ""),
+    apiKey: (process.env.ODOO_API_KEY ?? "").trim(),
+    db: (process.env.ODOO_DB ?? "").trim(),
+    user: (process.env.ODOO_USER ?? "").trim(),
   };
 }
 

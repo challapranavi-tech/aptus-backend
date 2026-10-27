@@ -7,7 +7,7 @@
   --sh-font: ArtifaktElement, "Artifakt Element", Arial, sans-serif;
 
   background: #000;
-  padding: 72px 0 80px;
+  padding: 22px 0 24px;
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 650ms var(--sh-ease), transform 650ms var(--sh-ease);
@@ -30,14 +30,14 @@
   line-height: 1.15;
   letter-spacing: -0.02em;
   color: #fff;
-  margin: 0 0 36px;
+  margin: 0 0 12px;
   font-family: ArtifaktLegend, var(--sh-font);
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: 16px;
 }
 
 .card {
@@ -45,12 +45,12 @@
   position: relative;
   border-radius: 10px;
   overflow: hidden;
-  text-decoration: none;
   color: #fff;
   border: 2px solid transparent;
-  aspect-ratio: 906 / 680;
+  aspect-ratio: 16 / 10;
   background: #111;
   isolation: isolate;
+  cursor: default;
   transition:
     border-color var(--sh-dur) var(--sh-ease),
     box-shadow var(--sh-dur) var(--sh-ease),
@@ -69,16 +69,13 @@
     opacity 500ms var(--sh-ease) calc(var(--i, 0) * 90ms);
 }
 
-.card:hover,
-.card:focus-visible {
-  border-color: var(--sh-yellow);
-  outline: none;
-  box-shadow: 0 0 0 1px var(--sh-yellow), 0 12px 32px rgba(0, 0, 0, 0.45);
+.card:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
   transform: translateY(-2px);
 }
 
-.sectionIn .card:hover,
-.sectionIn .card:focus-visible {
+.sectionIn .card:hover {
   transform: translateY(-2px);
 }
 
@@ -92,8 +89,7 @@
   transition: transform 400ms var(--sh-ease);
 }
 
-.card:hover .cardImage,
-.card:focus-visible .cardImage {
+.card:hover .cardImage {
   transform: scale(1.04);
 }
 
@@ -112,8 +108,7 @@
   z-index: 1;
 }
 
-.card:hover .scrim,
-.card:focus-visible .scrim {
+.card:hover .scrim {
   opacity: 0.9;
 }
 
@@ -121,10 +116,10 @@
   position: absolute;
   inset: auto 0 0;
   z-index: 2;
-  padding: 28px 28px 32px;
+  padding: 18px 18px 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
 }
 
 .cardTitle {
@@ -149,41 +144,16 @@
   overflow: hidden;
 }
 
-.cta {
+.actions {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 4px 0 0;
-  font-size: 0.9375rem;
-  font-weight: 700;
-  color: #fff;
-  font-family: var(--sh-font);
-  transition: transform 200ms ease;
-}
-
-.card:hover .cta,
-.card:focus-visible .cta {
-  transform: translateX(3px);
-}
-
-.ctaArrow {
-  width: 22px;
-  height: 22px;
-  flex-shrink: 0;
-  opacity: 0.85;
-  transition: opacity 200ms ease;
-}
-
-.card:hover .ctaArrow,
-.card:focus-visible .ctaArrow {
-  opacity: 1;
+  justify-content: center;
+  margin-top: 12px;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .section,
   .card,
-  .cardImage,
-  .cta {
+  .cardImage {
     transition: none !important;
   }
 
@@ -193,37 +163,40 @@
     transform: none !important;
   }
 
-  .card:hover .cardImage,
-  .card:focus-visible .cardImage {
+  .card:hover .cardImage {
     transform: none;
   }
 }
 
 @media (max-width: 1024px) {
   .section {
-    padding: 56px 0 64px;
+    padding: 18px 0 20px;
   }
 }
 
 @media (max-width: 768px) {
   .section {
-    padding: 48px 0 56px;
+    padding: 16px 0 18px;
   }
 
   .title {
-    margin-bottom: 28px;
+    margin-bottom: 12px;
   }
 
   .grid {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 14px;
   }
 
   .card {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 10;
   }
 
   .cardBody {
-    padding: 20px 20px 24px;
+    padding: 16px 16px 18px;
+  }
+
+  .actions {
+    margin-top: 12px;
   }
 }

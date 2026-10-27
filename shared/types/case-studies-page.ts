@@ -7,8 +7,17 @@ export type AccentTitleContent = {
 export type CaseStudyItemContent = {
   title: string;
   description: string;
-  pdfHref: string;
+  industry?: string;
+  pdfHref?: string;
   readMoreLabel?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+};
+
+export type KeyProjectItemContent = {
+  title: string;
+  description: string;
+  industry?: string;
   imageSrc?: string;
   imageAlt?: string;
 };
@@ -30,26 +39,31 @@ export type CaseStudiesPageContent = {
     title: AccentTitleContent;
     items: CaseStudyItemContent[];
   };
-  painPoints: {
+  keyProjects?: {
+    visible?: boolean;
+    title: AccentTitleContent;
+    items: KeyProjectItemContent[];
+  };
+  painPoints?: {
     visible?: boolean;
     title: AccentTitleContent;
     items: { title: string; description: string }[];
     closingParagraph: string;
   };
-  whyChoose: {
+  whyChoose?: {
     visible?: boolean;
     eyebrow?: string;
     title: AccentTitleContent;
     items: { title: string; description: string }[];
   };
-  transformCta: {
+  transformCta?: {
     visible?: boolean;
     title: AccentTitleContent;
     subtitle: string;
     ctaLabel: string;
     ctaHref: string;
   };
-  testimonials: {
+  testimonials?: {
     visible?: boolean;
     eyebrow: string;
     title: AccentTitleContent;

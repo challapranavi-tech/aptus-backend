@@ -14,6 +14,7 @@ import { syncPortalCartWithServer } from "@/lib/portal-cart";
 import { invalidatePortalSharedFetch } from "@/lib/portal-shared-fetch";
 import { safeNextPath } from "@/lib/safe-next-path";
 import { AuthCardFoot } from "@/components/auth/AuthCardFoot";
+import Link from "next/link";
 
 type LoginPrefill = {
   email: string;
@@ -155,20 +156,8 @@ export function CustomerLoginForm() {
         if (data.user && typeof data.user === "object") {
           syncLegacyPortalSession(data.user as LegacySessionUser, remember);
         }
-        // Confirm /me accepts the new token before leaving login (catches JWT/Upstash misconfig).
         invalidateAuthMeCache();
-        const me = await fetchAuthMeShared();
-        if (!me.ok) {
-          clearAccessToken();
-          clearLegacyPortalSession();
-        setMessage(
-          me.status === 401 || me.status === 403
-            ? "Your password was accepted but the session could not start. This usually means a stale cookie — clear this site's cookies and sign in again."
-            : "Sign-in could not load your profile. Please try again.",
-        );
-          return;
-        }
-        await syncPortalCartWithServer();
+        void syncPortalCartWithServer();
         // Hard nav so a cached middleware redirect cannot bounce back to /login.
         window.location.assign(safeNextPath(window.location.search));
         return;
@@ -274,8 +263,8 @@ export function CustomerLoginForm() {
       <div className="aptus-auth-card__head">
         <h2>Sign in to your portal</h2>
         <p>
-          Sign in with your registered email and password. New customers are guided to registration
-          automatically.
+          Sign in with your registered email and password. New here?{" "}
+          <Link href="/register">Create an account</Link>.
         </p>
       </div>
 
