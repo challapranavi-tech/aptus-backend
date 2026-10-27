@@ -337,6 +337,21 @@ html {
   transform: scale(1);
 }
 
+/* Active + hover: keep blue pill so white hover text stays visible */
+.aptus-masthead__link.is-active:hover,
+.aptus-masthead__link.is-active:focus-visible,
+.aptus-masthead__dropdown:hover > .aptus-masthead__link.is-active,
+.aptus-masthead__dropdown:focus-within > .aptus-masthead__link.is-active {
+  color: #fff !important;
+}
+
+.aptus-masthead__link.is-active:hover::before,
+.aptus-masthead__link.is-active:focus-visible::before,
+.aptus-masthead__dropdown:hover > .aptus-masthead__link.is-active::before,
+.aptus-masthead__dropdown:focus-within > .aptus-masthead__link.is-active::before {
+  background-color: #1352a3;
+}
+
 .aptus-masthead__chevron {
   flex-shrink: 0;
   height: 10px;

@@ -61,8 +61,6 @@ main [data-section] .aptus-cta-light-heading,
 main [data-section] .aptus-software-form-heading,
 main [data-section] .aptus-contact-form-title,
 main [data-section] .aptus-iso-hero-title,
-main [data-section] .aptus-iso-intro-heading,
-main [data-section] .aptus-iso-core-heading,
 main [data-section] .aptus-iso-cert-heading,
 main [data-section] .aptus-alliances-heading,
 main [data-section] .aptus-team-section-title,
@@ -104,6 +102,15 @@ main [data-section] .aptus-form-submit,
 .page-aptus-policy .aptus-legal__intro p,
 .page-aptus-policy .aptus-legal__footer {
   text-align: left;
+}
+
+/* ISO body headings share the container left edge with cards */
+.page-iso [data-section="iso-panel"] .aptus-iso-intro-heading,
+.page-iso [data-section="iso-panel"] .aptus-iso-core-heading,
+.page-iso [data-section="iso-panel"] .aptus-iso-subtitle,
+.page-iso [data-section="iso-panel"] .aptus-iso-intro-text,
+.page-iso [data-section="iso-panel"] .aptus-iso-footer-text {
+  text-align: start;
 }
 
 .page-faq .aptus-faq__question,

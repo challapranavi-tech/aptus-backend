@@ -107,6 +107,14 @@ describe("POST /api/careers/apply", () => {
     expect(mocks.createApplicant).not.toHaveBeenCalled();
   });
 
+  it("returns 400 when payslip is missing", async () => {
+    const res = await POST(req(buildCareersForm({ latestPayslip: null })));
+    expect(res.status).toBe(400);
+    const body = await res.json();
+    expect(body.errors.latestPayslip).toMatch(/required/i);
+    expect(mocks.createApplicant).not.toHaveBeenCalled();
+  });
+
   it("rejects spoofed executable disguised as PDF (magic bytes)", async () => {
     const form = buildCareersForm({
       resume: fileFrom("cv.pdf", exeBytes(), "application/pdf"),

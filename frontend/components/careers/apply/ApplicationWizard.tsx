@@ -35,7 +35,7 @@ import { SelectField, TextAreaField, TextField } from "./fields";
  * 4-step flow:
  *   1. basics     – Resume + personal info
  *   2. experience – Orgs, qualifications, CTC, passport
- *   3. documents  – Passport, photo, optional employment docs
+ *   3. documents  – Passport, photo, payslip, optional employment docs
  *   4. review     – Summary + submit
  *
  * UI-only state (first/last name, country code, dynamic orgs) is mapped onto
@@ -765,13 +765,14 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
       if (!files.passportCopy) errs.passportCopy = "Passport copy is required.";
       const photoErr = validateImageFile(files.photograph, "Photograph", true);
       if (photoErr) errs.photograph = photoErr;
+      if (!files.latestPayslip) errs.latestPayslip = "Payslip is required.";
 
       const checks: Array<[string, File | null]> = [
         ["passportCopy", files.passportCopy],
         ["photograph", files.photograph],
+        ["latestPayslip", files.latestPayslip],
         ["appointmentLetter", files.appointmentLetter],
         ["relievingLetter", files.relievingLetter],
-        ["latestPayslip", files.latestPayslip],
       ];
       checks.forEach(([key, f]) => {
         if (f && f.size > MAX_UPLOAD_BYTES)
@@ -1659,7 +1660,7 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
               />
             </div>
 
-            <div style={{ marginBottom: "1.5rem" }}>
+            <div style={{ marginBottom: "1rem" }}>
               <FileDropzone
                 accept={IMAGE_ACCEPT}
                 label="Passport-size Photograph *"
@@ -1677,6 +1678,26 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
               />
             </div>
 
+            <div style={{ marginBottom: "1.5rem" }}>
+              <FileDropzone
+                accept={`${DOC_ACCEPT},${IMAGE_ACCEPT}`}
+                label="Payslip *"
+                files={files.latestPayslip ? [files.latestPayslip] : []}
+                error={errors.latestPayslip}
+                onChange={(list) => {
+                  const latestPayslip = list[0] ?? null;
+                  setFiles((p) => ({ ...p, latestPayslip }));
+                  checkTotalAfterChange({ latestPayslip });
+                  clearFileError("latestPayslip");
+                }}
+                validate={(f) =>
+                  f.size > MAX_UPLOAD_BYTES
+                    ? "Each file must be under 0.8 MB (800 KB)."
+                    : null
+                }
+              />
+            </div>
+
             <DocSectionHeader title="Optional Documents" color="#ede9fe" />
             <p
               className="aptus-apply__hint"
@@ -1689,7 +1710,6 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
               [
                 ["appointmentLetter", "Appointment Letter"],
                 ["relievingLetter", "Relieving Letter"],
-                ["latestPayslip", "Latest Payslip"],
               ] as Array<[keyof FileState, string]>
             ).map(([key, label]) => (
               <div key={key} style={{ marginBottom: "0.75rem" }}>
@@ -1881,6 +1901,7 @@ function ReviewStep({
           <Row label="Resume" value={fileName(files.resume)} />
           <Row label="Passport Copy" value={fileName(files.passportCopy)} />
           <Row label="Photograph" value={fileName(files.photograph)} />
+          <Row label="Payslip" value={fileName(files.latestPayslip)} />
           <Row
             label="Appointment Letter"
             value={fileName(files.appointmentLetter)}
@@ -1889,7 +1910,6 @@ function ReviewStep({
             label="Relieving Letter"
             value={fileName(files.relievingLetter)}
           />
-          <Row label="Latest Payslip" value={fileName(files.latestPayslip)} />
         </dl>
       </div>
     </>

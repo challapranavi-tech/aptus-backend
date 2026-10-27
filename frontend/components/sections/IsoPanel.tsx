@@ -14,18 +14,12 @@ function CertCard({
   downloadHref,
 }: IsoPanelData["certificates"][number]) {
   return (
-    <div className="aptus-iso-cert-card">
+    <article className="aptus-iso-cert-card">
       {(heading || headingAccent) && (
-        <h3 className="aptus-iso-cert-heading">
-          {heading}
-          {heading && headingAccent && (
-            <>
-              <br />
-              {headingAccent}
-            </>
-          )}
-          {!heading && headingAccent}
-        </h3>
+        <header className="aptus-iso-cert-card__header">
+          {headingAccent && <p className="aptus-iso-cert-badge">{headingAccent}</p>}
+          {heading && <h3 className="aptus-iso-cert-heading">{heading}</h3>}
+        </header>
       )}
       {media && (
         <div className="aptus-iso-cert-media">
@@ -34,35 +28,44 @@ function CertCard({
             alt={media.alt}
             width={721}
             height={1024}
-            className="mx-auto h-auto w-full max-w-[721px] object-contain"
-            sizes="(max-width: 768px) 100vw, 33vw"
+            className="aptus-iso-cert-media__img"
+            sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 33vw"
           />
         </div>
       )}
       {downloadHref && (
         <div className="aptus-iso-cert-action">
-          <Link href={downloadHref} className="aptus-iso-download-btn" target="_blank" rel="noopener noreferrer">
-            Download
+          <Link
+            href={downloadHref}
+            className="aptus-iso-download-btn"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Download certificate
           </Link>
         </div>
       )}
-    </div>
+    </article>
   );
 }
 
-/** ISO Certifications page — post-3375 layout. */
+/** ISO Certifications page — aligned with About Us card language. */
 export function IsoPanel({ data }: IsoPanelProps) {
   return (
-    <section className="bg-white pb-10 pt-6" data-section="iso-panel">
+    <section className="aptus-iso-section" data-section="iso-panel">
       <Container>
-        {data.title && <h1 className="aptus-iso-hero-title">{data.title}</h1>}
-        {data.subtitle && <p className="aptus-iso-subtitle">{data.subtitle}</p>}
+        <header className="aptus-iso-hero">
+          {data.title && <h1 className="aptus-iso-hero-title">{data.title}</h1>}
+          {data.subtitle && <p className="aptus-iso-subtitle">{data.subtitle}</p>}
+        </header>
 
         {(data.introHeading || data.introParagraphs?.length) && (
-          <div className="mt-6">
-            {data.introHeading && <h2 className="aptus-iso-intro-heading">{data.introHeading}</h2>}
+          <div className="aptus-tint-panel aptus-iso-intro-panel">
+            {data.introHeading && (
+              <h2 className="aptus-iso-intro-heading">{data.introHeading}</h2>
+            )}
             {data.introParagraphs?.map((p, i) => (
-              <p key={i} className={cn("aptus-iso-intro-text", i === 0 ? "mt-3" : "mt-2")}>
+              <p key={i} className={cn("aptus-iso-intro-text", i > 0 && "mt-3")}>
                 {p}
               </p>
             ))}
@@ -70,29 +73,39 @@ export function IsoPanel({ data }: IsoPanelProps) {
         )}
 
         {(data.coreHeading || data.coreItems?.length) && (
-          <div className="mt-8">
-            {data.coreHeading && <h2 className="aptus-iso-core-heading">{data.coreHeading}</h2>}
-            {data.coreItems?.map((item, i) => (
-              <p key={i} className="aptus-iso-core-item">
-                {item}
-              </p>
-            ))}
+          <div className="aptus-iso-core">
+            {data.coreHeading && (
+              <h2 className="aptus-iso-core-heading">{data.coreHeading}</h2>
+            )}
+            {data.coreItems && data.coreItems.length > 0 && (
+              <ul className="aptus-iso-core-list">
+                {data.coreItems.map((item) => (
+                  <li key={item} className="aptus-iso-core-item">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         )}
 
         {data.certificates.length > 0 && (
-          <div className="aptus-iso-cert-grid mt-8">
+          <div className="aptus-iso-cert-grid">
             {data.certificates.map((cert, i) => (
-              <CertCard key={i} {...cert} />
+              <CertCard key={`${cert.headingAccent ?? cert.heading ?? i}`} {...cert} />
             ))}
           </div>
         )}
 
-        {data.footerParagraphs?.map((p, i) => (
-          <p key={i} className={cn("aptus-iso-footer-text", i === 0 ? "mt-8" : "mt-3")}>
-            {p}
-          </p>
-        ))}
+        {data.footerParagraphs && data.footerParagraphs.length > 0 && (
+          <div className="aptus-iso-footer">
+            {data.footerParagraphs.map((p, i) => (
+              <p key={i} className="aptus-iso-footer-text">
+                {p}
+              </p>
+            ))}
+          </div>
+        )}
       </Container>
     </section>
   );

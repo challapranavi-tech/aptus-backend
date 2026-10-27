@@ -86,6 +86,7 @@ export function buildCareersForm(options?: {
   resume?: File | null;
   passportCopy?: File | null;
   photograph?: File | null;
+  latestPayslip?: File | null;
   educationDoc0?: File | null;
   extraFiles?: Array<[string, File]>;
   extraFields?: Record<string, string>;
@@ -112,6 +113,11 @@ export function buildCareersForm(options?: {
       ? null
       : (options?.photograph ??
         fileFrom("photo.jpg", jpegBytes(), "image/jpeg"));
+  const payslip =
+    options?.latestPayslip === null
+      ? null
+      : (options?.latestPayslip ??
+        fileFrom("payslip.pdf", pdfBytes(), "application/pdf"));
   const edu0 =
     options?.educationDoc0 === null
       ? null
@@ -121,6 +127,7 @@ export function buildCareersForm(options?: {
   if (resume) form.set("resume", resume, resume.name);
   if (passport) form.set("passportCopy", passport, passport.name);
   if (photo) form.set("photograph", photo, photo.name);
+  if (payslip) form.set("latestPayslip", payslip, payslip.name);
   if (edu0) form.set("educationDoc_0", edu0, edu0.name);
 
   for (const [key, file] of options?.extraFiles ?? []) {

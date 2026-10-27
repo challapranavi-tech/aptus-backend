@@ -9,9 +9,7 @@ export const SITE_NAVIGATION: NavigationItem[] = [
     children: [
       { label: "Our Story", href: "/our-story" },
       { label: "Our Team", href: "/our-team" },
-      { label: "Our Policies", href: "/aptus-policy" },
       { label: "ISO Certifications", href: "/aptus-infotech-iso-certifications" },
-      { label: "Careers", href: "/careers" },
       { label: "Contact Us", href: "/contact-us" },
     ],
   },
@@ -94,6 +92,7 @@ export const SITE_NAVIGATION: NavigationItem[] = [
       { label: "Gallery", href: "/gallery" },
     ],
   },
+  { label: "Careers", href: "/careers" },
 ];
 
 /** Find a nav item by label at any depth. */

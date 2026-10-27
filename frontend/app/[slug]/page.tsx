@@ -169,6 +169,7 @@ export default async function DynamicPage({ params }: PageProps) {
           normalized === "our-story" && "page-our-story",
           normalized === "aptus-policy" && "page-aptus-policy",
           normalized === "our-team" && "page-team",
+          normalized === "aptus-infotech-iso-certifications" && "page-iso",
           normalized === "faq" && "page-faq",
         )}
       >

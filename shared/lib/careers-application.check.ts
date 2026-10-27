@@ -175,11 +175,15 @@ assert.ok(
   "compound dangerous extension rejected",
 );
 assert.ok(
+  validateFile(null, [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS], "Payslip", true),
+  "missing required payslip flagged",
+);
+assert.ok(
   validateFile(
     { name: "slip.png", size: 1024, type: "image/png" },
     [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS],
-    "Latest payslip",
-    false,
+    "Payslip",
+    true,
   ),
   "image MIME rejected when mimeOk defaults to docs-only",
 );
@@ -187,8 +191,8 @@ assert.equal(
   validateFile(
     { name: "slip.png", size: 1024, type: "image/png" },
     [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS],
-    "Latest payslip",
-    false,
+    "Payslip",
+    true,
     DOC_OR_IMAGE_MIME_OK,
   ),
   null,
