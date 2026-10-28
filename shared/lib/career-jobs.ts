@@ -110,6 +110,14 @@ export interface KeyResponsibilitiesSplit {
   after: string;
 }
 
+/** Short title-like lines (e.g. Required Skills) — not bullet wrap continuations. */
+function looksLikeSectionHeading(line: string): boolean {
+  if (KEY_HEADING_LINE.test(line)) return true;
+  // Sentence punctuation ⇒ wrapped body text, not a heading.
+  if (/[.,;!?]/.test(line)) return false;
+  return line.length > 0 && line.length <= 60 && /^[A-Z]/.test(line);
+}
+
 /** Pull the "Key Responsibilities" line and its bullets out of stripped job text. */
 export function splitKeyResponsibilities(text: string): KeyResponsibilitiesSplit | null {
   const lines = text.split("\n");
@@ -118,10 +126,25 @@ export function splitKeyResponsibilities(text: string): KeyResponsibilitiesSplit
   const items: string[] = [];
   let i = idx + 1;
   while (i < lines.length) {
-    const match = lines[i].trim().match(KEY_BULLET);
-    if (!match) break;
-    items.push(match[1]);
-    i++;
+    const trimmed = lines[i].trim();
+    if (!trimmed) {
+      i++;
+      continue;
+    }
+    const match = trimmed.match(KEY_BULLET);
+    if (match) {
+      items.push(match[1]);
+      i++;
+      continue;
+    }
+    // Odoo hard-wraps mid-bullet ("Purchase,\nInventory…") — keep appending until
+    // the next bullet or a real section heading, otherwise SPLIT_PATH drops the rest.
+    if (items.length > 0 && !looksLikeSectionHeading(trimmed)) {
+      items[items.length - 1] += ` ${trimmed}`;
+      i++;
+      continue;
+    }
+    break;
   }
   return {
     before: lines.slice(0, idx).join("\n").trim(),
@@ -130,11 +153,11 @@ export function splitKeyResponsibilities(text: string): KeyResponsibilitiesSplit
   };
 }
 
-/** Wrap a Key Responsibilities heading (and its list) so the detail page can highlight it. */
+/** Mark the Key Responsibilities heading (and keep its list) — styled larger/bold via CSS. */
 export function highlightKeyResponsibilitiesHtml(html: string): string {
   if (!/key(?:\s|&nbsp;)+responsibilities/i.test(html)) return html;
   return html.replace(KEY_HTML_BLOCK, (_full, _tag: string, list?: string) => {
-    return `<div class="aptus-jobdetail__key-block"><p class="aptus-jobdetail__key">Key Responsibilities</p>${list ?? ""}</div>`;
+    return `<p class="aptus-jobdetail__key">Key Responsibilities</p>${list ?? ""}`;
   });
 }
 
