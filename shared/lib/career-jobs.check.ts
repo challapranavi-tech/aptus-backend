@@ -1,152 +1,210 @@
 /**
- * Runnable self-check for career-jobs filter helpers.
- * Run: npx --yes tsx shared/lib/career-jobs.check.ts
+ * Job listing types + filter helpers (shared by jobs API and careers UI).
  */
-import assert from "node:assert/strict";
-import {
-  filterJobs,
-  highlightKeyResponsibilitiesHtml,
-  normalizeCareerJob,
-  pickHrJobDescriptionHtml,
-  slugifyJobTitle,
-  splitKeyResponsibilities,
-  type CareerJob,
-} from "./career-jobs";
+import { sanitizeJobHtml } from "./sanitize-job-html";
+import { stripJobHtml } from "./strip-job-html";
 
-const jobs: CareerJob[] = [
-  {
-    id: "1",
-    slug: "eng-1",
-    title: "Software Engineer",
-    department: "Engineering",
-    location: "Muscat",
-    jobType: "Full-time",
-    description: "Build products",
-    responsibilities: [],
-    requirements: [],
-  },
-  {
-    id: "2",
-    slug: "hr-2",
-    title: "HR Specialist",
-    department: "People",
-    location: "Dubai",
-    jobType: "Full-time",
-    description: "People ops",
-    responsibilities: [],
-    requirements: [],
-  },
-  {
-    id: "3",
-    slug: "eng-3",
-    title: "Senior Engineer",
-    department: "Engineering",
-    location: "Muscat",
-    jobType: "Full-time",
-    description: "Lead delivery",
-    responsibilities: [],
-    requirements: [],
-  },
-];
+export const JOB_PAGE_SIZE = 12;
 
-const page1 = filterJobs(jobs, { department: "Engineering", pageSize: 1, page: 1 });
-assert.equal(page1.total, 2);
-assert.equal(page1.jobs.length, 1);
-assert.equal(page1.jobs[0].title, "Software Engineer");
+// ponytail: only full-time roles for now — no job-type facet/filter.
+// Upgrade path: reintroduce a jobType field + filter when other types exist.
+export const DEFAULT_JOB_TYPE = "Full-time";
 
-const page2 = filterJobs(jobs, { department: "Engineering", pageSize: 1, page: 2 });
-assert.equal(page2.jobs[0].title, "Senior Engineer");
+export interface CareerJob {
+  id: string;
+  slug: string;
+  title: string;
+  department: string;
+  location: string;
+  jobType: string;
+  /** Plain text for cards / search (HTML stripped). */
+  description: string;
+  /** Sanitized HTML for the job detail page (from Odoo description fields). */
+  descriptionHtml?: string;
+  responsibilities: string[];
+  requirements: string[];
+  publishedAt?: string;
+}
 
-const search = filterJobs(jobs, { q: "dubai" });
-assert.equal(search.total, 1);
-assert.equal(search.jobs[0].department, "People");
+export interface JobFilters {
+  q?: string;
+  department?: string;
+  location?: string;
+  page?: number;
+  pageSize?: number;
+}
 
-const empty = filterJobs(jobs, { q: "zzz-no-match" });
-assert.equal(empty.total, 0);
+export interface JobListResult {
+  jobs: CareerJob[];
+  total: number;
+  page: number;
+  pageSize: number;
+  departments: string[];
+  locations: string[];
+}
 
-assert.equal(slugifyJobTitle("Software Engineer!", 9), "software-engineer-9");
+export function slugifyJobTitle(title: string, id: string | number): string {
+  const base = title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 80);
+  return `${base || "job"}-${id}`;
+}
 
-const bloated = normalizeCareerJob({
-  ...jobs[0],
-  description: "Lead role.\n\n\n                        Next line\n\nEnd.",
-});
-assert.ok(!/\n{2,}/.test(bloated.description), "normalizeCareerJob collapses blank lines");
+/** True when the string still has markup worth rendering as HTML. */
+function looksLikeHtml(value: string): boolean {
+  return /<\/?[a-zA-Z][^>]*>/.test(value);
+}
 
-const real =
-  "We are looking for a Software Programmer to design, develop, test, and maintain high-quality software applications.";
-const demo =
-  "Valid work permit for Belgium. Lead the entire sales cycle. Google Adwords experience.";
-assert.equal(
-  pickHrJobDescriptionHtml(demo, real),
-  real,
-  "Recruitment description wins over website demo HTML",
-);
-assert.equal(
-  pickHrJobDescriptionHtml(demo, ""),
-  demo,
-  "website used when internal description empty",
-);
-assert.equal(pickHrJobDescriptionHtml(false, false), "");
+/** Normalize job text from API — collapses blank-line bloat even if a stale backend lags. */
+export function normalizeCareerJob(job: CareerJob): CareerJob {
+  // Only keep descriptionHtml when the payload is actually markup. Promoting
+  // already-stripped plain text into descriptionHtml forces the detail page
+  // into the HTML container (no white-space: pre-line) → one wall of text.
+  const rawHtml =
+    typeof job.descriptionHtml === "string" &&
+    job.descriptionHtml.trim() &&
+    looksLikeHtml(job.descriptionHtml)
+      ? job.descriptionHtml
+      : typeof job.description === "string" && looksLikeHtml(job.description)
+        ? job.description
+        : "";
+  const descriptionHtml = rawHtml ? sanitizeJobHtml(rawHtml) : "";
+  return {
+    ...job,
+    description:
+      typeof job.description === "string"
+        ? stripJobHtml(job.description)
+        : stripJobHtml(descriptionHtml),
+    descriptionHtml: descriptionHtml || undefined,
+  };
+}
 
-const htmlJob = normalizeCareerJob({
-  ...jobs[0],
-  description: "<p>Build <strong>products</strong></p><script>x()</script>",
-  descriptionHtml: "<p>Build <strong>products</strong></p><script>x()</script>",
-});
-assert.ok(htmlJob.descriptionHtml?.includes("<strong>"), "keeps formatting tags");
-assert.ok(!htmlJob.descriptionHtml?.includes("<script"), "strips script tags");
-assert.ok(htmlJob.description.includes("Build"), "plain description still set");
+/**
+ * Pick the job body editors actually maintain on hr.job.
+ * Recruitment form edits land in `description`. `website_description` often
+ * still holds Odoo's sample Software Programmer HTML (Belgium / sales-cycle demo)
+ * and must not shadow a real Description when both are set.
+ */
+export function pickHrJobDescriptionHtml(
+  websiteDescription: string | false | undefined,
+  description: string | false | undefined,
+): string {
+  const internal =
+    typeof description === "string" ? description.trim() : "";
+  const website =
+    typeof websiteDescription === "string" ? websiteDescription.trim() : "";
+  return internal || website || "";
+}
 
-const plainOnly = normalizeCareerJob({
-  ...jobs[0],
-  description: "Job Summary\n• Plan projects\n• Ship code",
-  descriptionHtml: undefined,
-});
-assert.equal(
-  plainOnly.descriptionHtml,
-  undefined,
-  "plain description must not become descriptionHtml",
-);
-assert.ok(plainOnly.description.includes("• Plan"), "plain bullets preserved");
+const KEY_HEADING_LINE = /^key(?:\s|&nbsp;)+responsibilities\s*:?\s*$/i;
+const KEY_BULLET = /^[•\u2022]\s+(.+)$/;
+// Heading tag (optionally wrapped in strong/b/span) plus a following list, if any.
+const KEY_HTML_BLOCK =
+  /<(p|div|h[1-6]|strong|b|span)>\s*(?:<(?:strong|b|span)>\s*)?key(?:\s|&nbsp;)+responsibilities\s*:?\s*(?:<\/(?:strong|b|span)>\s*)?<\/\1>\s*(<(ul|ol)>[\s\S]*?<\/\3>)?/i;
 
-const split = splitKeyResponsibilities(
-  "We are looking for a Software Programmer.\n" +
-    "Key Responsibilities\n" +
-    "• Design, develop, and test applications.\n" +
-    "• Write clean code.\n" +
-    "Required Skills\n" +
-    "• Bachelor's degree.",
-);
-assert.equal(split?.before, "We are looking for a Software Programmer.");
-assert.deepEqual(split?.items, [
-  "Design, develop, and test applications.",
-  "Write clean code.",
-]);
-assert.equal(split?.after, "Required Skills\n• Bachelor's degree.");
-assert.equal(splitKeyResponsibilities("No section here"), null);
+export interface KeyResponsibilitiesSplit {
+  before: string;
+  items: string[];
+  after: string;
+}
 
-// Live fallback path: Odoo hard-wraps mid-bullet with a capital letter.
-const wrapped = splitKeyResponsibilities(
-  "Job Purpose\nIntro text.\nKey Responsibilities\n" +
-    "• Configure and support Odoo modules including CRM, Sales, Purchase,\n" +
-    "Inventory, Accounting, Projects, and Website.\n" +
-    "• Understand business requirements.\n" +
-    "Required Skills\n" +
-    "• Good understanding of Odoo.",
-);
-assert.deepEqual(wrapped?.items, [
-  "Configure and support Odoo modules including CRM, Sales, Purchase, Inventory, Accounting, Projects, and Website.",
-  "Understand business requirements.",
-]);
-assert.equal(wrapped?.after, "Required Skills\n• Good understanding of Odoo.");
+/** Short title-like lines (e.g. Required Skills) — not bullet wrap continuations. */
+function looksLikeSectionHeading(line: string): boolean {
+  if (KEY_HEADING_LINE.test(line)) return true;
+  // Sentence punctuation ⇒ wrapped body text, not a heading.
+  if (/[.,;!?]/.test(line)) return false;
+  return line.length > 0 && line.length <= 60 && /^[A-Z]/.test(line);
+}
 
-const marked = highlightKeyResponsibilitiesHtml(
-  "<p>Intro</p><p><strong>Key Responsibilities</strong></p><ul><li>Design</li></ul><p>Required</p>",
-);
-assert.ok(marked.includes('class="aptus-jobdetail__key-block"'), "wraps the section");
-assert.ok(marked.includes("Key Responsibilities"), "keeps the heading");
-assert.ok(marked.includes("<ul><li>Design</li></ul>"), "keeps the list inside the highlight");
-assert.ok(marked.startsWith("<p>Intro</p>"), "leaves the intro in place");
-assert.ok(marked.endsWith("<p>Required</p>"), "leaves the following section in place");
+/** Pull the "Key Responsibilities" line and its bullets out of stripped job text. */
+export function splitKeyResponsibilities(text: string): KeyResponsibilitiesSplit | null {
+  const lines = text.split("\n");
+  const idx = lines.findIndex((line) => KEY_HEADING_LINE.test(line.trim()));
+  if (idx < 0) return null;
+  const items: string[] = [];
+  let i = idx + 1;
+  while (i < lines.length) {
+    const trimmed = lines[i].trim();
+    if (!trimmed) {
+      i++;
+      continue;
+    }
+    const match = trimmed.match(KEY_BULLET);
+    if (match) {
+      items.push(match[1]);
+      i++;
+      continue;
+    }
+    // Odoo hard-wraps mid-bullet ("Purchase,\nInventory…") — keep appending until
+    // the next bullet or a real section heading, otherwise SPLIT_PATH drops the rest.
+    if (items.length > 0 && !looksLikeSectionHeading(trimmed)) {
+      items[items.length - 1] += ` ${trimmed}`;
+      i++;
+      continue;
+    }
+    break;
+  }
+  return {
+    before: lines.slice(0, idx).join("\n").trim(),
+    items,
+    after: lines.slice(i).join("\n").trim(),
+  };
+}
 
-console.log("career-jobs self-check passed");
+/** Mark the Key Responsibilities heading (and keep its list) — styled larger/bold via CSS. */
+export function highlightKeyResponsibilitiesHtml(html: string): string {
+  if (!/key(?:\s|&nbsp;)+responsibilities/i.test(html)) return html;
+  return html.replace(KEY_HTML_BLOCK, (_full, _tag: string, list?: string) => {
+    return `<p class="aptus-jobdetail__key">Key Responsibilities</p>${list ?? ""}`;
+  });
+}
+
+export function filterJobs(
+  jobs: CareerJob[],
+  filters: JobFilters,
+): JobListResult {
+  const q = (filters.q ?? "").trim().toLowerCase();
+  const department = (filters.department ?? "").trim().toLowerCase();
+  const location = (filters.location ?? "").trim().toLowerCase();
+  const pageSize = Math.min(Math.max(filters.pageSize ?? JOB_PAGE_SIZE, 1), 48);
+  const page = Math.max(filters.page ?? 1, 1);
+
+  const departments = uniqueSorted(jobs.map((j) => j.department));
+  const locations = uniqueSorted(jobs.map((j) => j.location));
+
+  let filtered = jobs;
+  if (q) {
+    filtered = filtered.filter(
+      (j) =>
+        j.title.toLowerCase().includes(q) ||
+        j.department.toLowerCase().includes(q) ||
+        j.location.toLowerCase().includes(q) ||
+        j.description.toLowerCase().includes(q),
+    );
+  }
+  if (department) {
+    filtered = filtered.filter((j) => j.department.toLowerCase() === department);
+  }
+  if (location) {
+    filtered = filtered.filter((j) => j.location.toLowerCase() === location);
+  }
+
+  const total = filtered.length;
+  const start = (page - 1) * pageSize;
+  return {
+    jobs: filtered.slice(start, start + pageSize),
+    total,
+    page,
+    pageSize,
+    departments,
+    locations,
+  };
+}
+
+function uniqueSorted(values: string[]): string[] {
+  return [...new Set(values.filter(Boolean))].sort((a, b) =>
+    a.localeCompare(b),
+  );
+}
