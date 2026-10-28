@@ -52,15 +52,25 @@ export function slugifyJobTitle(title: string, id: string | number): string {
   return `${base || "job"}-${id}`;
 }
 
+/** True when the string still has markup worth rendering as HTML. */
+function looksLikeHtml(value: string): boolean {
+  return /<\/?[a-zA-Z][^>]*>/.test(value);
+}
+
 /** Normalize job text from API — collapses blank-line bloat even if a stale backend lags. */
 export function normalizeCareerJob(job: CareerJob): CareerJob {
+  // Only keep descriptionHtml when the payload is actually markup. Promoting
+  // already-stripped plain text into descriptionHtml forces the detail page
+  // into the HTML container (no white-space: pre-line) → one wall of text.
   const rawHtml =
-    typeof job.descriptionHtml === "string" && job.descriptionHtml.trim()
+    typeof job.descriptionHtml === "string" &&
+    job.descriptionHtml.trim() &&
+    looksLikeHtml(job.descriptionHtml)
       ? job.descriptionHtml
-      : typeof job.description === "string"
+      : typeof job.description === "string" && looksLikeHtml(job.description)
         ? job.description
         : "";
-  const descriptionHtml = sanitizeJobHtml(rawHtml);
+  const descriptionHtml = rawHtml ? sanitizeJobHtml(rawHtml) : "";
   return {
     ...job,
     description:
