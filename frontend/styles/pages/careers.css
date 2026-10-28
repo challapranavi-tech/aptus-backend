@@ -362,11 +362,14 @@
 .aptus-jobdetail__html {
   color: #475467;
   line-height: 1.65;
+  /* Fallback when Odoo/API hands plain text (newlines) instead of tags. */
+  white-space: pre-line;
 }
 .aptus-jobdetail__html p,
 .aptus-jobdetail__html ul,
 .aptus-jobdetail__html ol {
   margin: 0 0 0.75rem;
+  white-space: normal;
 }
 .aptus-jobdetail__html ul,
 .aptus-jobdetail__html ol {
@@ -374,6 +377,7 @@
 }
 .aptus-jobdetail__html li {
   margin: 0.25rem 0;
+  white-space: normal;
 }
 .aptus-jobdetail__html h1,
 .aptus-jobdetail__html h2,
