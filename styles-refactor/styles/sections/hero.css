@@ -1,0 +1,18 @@
+/* Hero sections — layout only; content from CMS */
+.aptus-hero {
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 7rem 0 0;
+}
+.aptus-hero__inner {
+  margin: 0 auto;
+  max-width: 800px;
+  text-align: center;
+}
+.aptus-hero__title {
+  color: #fff;
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+}

@@ -1,0 +1,3722 @@
+{
+  "summary": {
+    "auditedAt": "2026-06-30T08:36:20.001Z",
+    "totalPages": 40,
+    "pagesWithIssues": 32,
+    "pagesClean": 8,
+    "issueFrequency": {
+      "FEATURES_EXTRA_CARDS": 25,
+      "FEATURES_COUNT": 25,
+      "MAPPER_MISSING_MID_CTA": 7,
+      "MISSING_DOWNLOADS": 5,
+      "BENEFITS_COUNT": 1,
+      "MISSING_MID_CTA": 2,
+      "MISSING_TESTIMONIALS": 3,
+      "MISSING_PARTNERSHIPS": 3,
+      "HERO_IMAGE_MISMATCH": 1
+    }
+  },
+  "reports": [
+    {
+      "slug": "3ds-max",
+      "family": "autodesk",
+      "type": "inner",
+      "route": "/3ds-max",
+      "jsonFile": "content\\odoo-json\\autodesk\\3ds-max.json",
+      "issueCount": 2,
+      "issues": [
+        "FEATURES_EXTRA_CARDS: Rendering, VR & Real-time, Extensibility",
+        "FEATURES_COUNT live=3 json=6"
+      ],
+      "live": {
+        "structure": [
+          "banner:3ds Max software for 3D modeling",
+          "features:\"Powerful Features\"(3)",
+          "benefits:\"Key Benefits\"(4)",
+          "why-aptus:\"Why Choose Aptus Infotech for Autodesk 3Ds Max?\"(4)",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Create Stunning 3D Content with 3ds Max",
+          "Powerful Features",
+          "Advanced Modeling",
+          "Animation & Rigging",
+          "Materials & Texturing",
+          "Rendering",
+          "VR & Real-time",
+          "Extensibility",
+          "Key Benefits",
+          "Time Savings",
+          "Quality Enhancement",
+          "Team Collaboration",
+          "Innovation Enablement",
+          "Why Choose Aptus Infotech for Autodesk 3Ds Max?",
+          "Official Autodesk Gold Partner",
+          "Technical Support",
+          "Local Presence",
+          "Expert Training",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:6",
+          "features:benefits:icon-cards:4",
+          "features:why-aptus:value-cards:4",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Powerful Features",
+            "count": 6,
+            "titles": [
+              "Advanced Modeling",
+              "Animation & Rigging",
+              "Materials & Texturing",
+              "Rendering",
+              "VR & Real-time",
+              "Extensibility"
+            ],
+            "missingImages": 0
+          },
+          "benefits": {
+            "title": "Key Benefits",
+            "count": 4,
+            "titles": [
+              "Time Savings",
+              "Quality Enhancement",
+              "Team Collaboration",
+              "Innovation Enablement"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech for Autodesk 3Ds Max?",
+            "count": 4,
+            "titles": [
+              "Official Autodesk Gold Partner",
+              "Technical Support",
+              "Local Presence",
+              "Expert Training"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "aconex",
+      "family": "edms",
+      "type": "inner",
+      "route": "/aconex",
+      "jsonFile": "content\\odoo-json\\edms\\aconex.json",
+      "issueCount": 2,
+      "issues": [
+        "FEATURES_EXTRA_CARDS: Project Scheduling & Progress Tracking, Communication Hub, Mobile Accessibility, Reduced Project Delays, Cost Savings, Enhanced Safety, Improved Stakeholder Alignment, Certified Specialists, Customized Workflows, Dedicated Support Team, Future-Ready Technology, Saad Al Hashmi, Ibad Farooq, Sadia Al Balushi",
+        "FEATURES_COUNT live=3 json=17"
+      ],
+      "live": {
+        "structure": [
+          "features:\"Key Features of Oracle Aconex\"(3)",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Oracle Aconex",
+          "Transform Construction Project Management with Oracle Aconex",
+          "Key Features of Oracle Aconex",
+          "Document Control & Collaboration",
+          "Risk Management & Safety",
+          "Quality Assurance & Punch Lists",
+          "Project Scheduling & Progress Tracking",
+          "Communication Hub",
+          "Mobile Accessibility",
+          "Benefits for Construction Teams",
+          "Reduced Project Delays",
+          "Cost Savings",
+          "Enhanced Safety",
+          "Improved Stakeholder Alignment",
+          "Why Choose Oracle Aconex Through Aptus Infotech?",
+          "Certified Specialists",
+          "Customized Workflows",
+          "Dedicated Support Team",
+          "Future-Ready Technology",
+          "Ready to Transform Your Construction Projects?",
+          "What Our Clients Say",
+          "Saad Al Hashmi",
+          "Ibad Farooq",
+          "Sadia Al Balushi",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:17",
+          "midCta",
+          "testimonials:3",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Key Features of Oracle Aconex",
+            "count": 17,
+            "titles": [
+              "Document Control & Collaboration",
+              "Risk Management & Safety",
+              "Quality Assurance & Punch Lists",
+              "Project Scheduling & Progress Tracking",
+              "Communication Hub",
+              "Mobile Accessibility",
+              "Reduced Project Delays",
+              "Cost Savings",
+              "Enhanced Safety",
+              "Improved Stakeholder Alignment",
+              "Certified Specialists",
+              "Customized Workflows",
+              "Dedicated Support Team",
+              "Future-Ready Technology",
+              "Saad Al Hashmi",
+              "Ibad Farooq",
+              "Sadia Al Balushi"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "aconex",
+      "family": "oracle",
+      "type": "inner",
+      "route": "/aconex",
+      "jsonFile": "content\\odoo-json\\oracle\\aconex.json",
+      "issueCount": 2,
+      "issues": [
+        "FEATURES_EXTRA_CARDS: Project Scheduling & Progress Tracking, Communication Hub, Mobile Accessibility, Reduced Project Delays, Cost Savings, Enhanced Safety, Improved Stakeholder Alignment, Certified Specialists, Customized Workflows, Dedicated Support Team, Future-Ready Technology, Saad Al Hashmi, Ibad Farooq, Sadia Al Balushi",
+        "FEATURES_COUNT live=3 json=17"
+      ],
+      "live": {
+        "structure": [
+          "features:\"Key Features of Oracle Aconex\"(3)",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Oracle Aconex",
+          "Transform Construction Project Management with Oracle Aconex",
+          "Key Features of Oracle Aconex",
+          "Document Control & Collaboration",
+          "Risk Management & Safety",
+          "Quality Assurance & Punch Lists",
+          "Project Scheduling & Progress Tracking",
+          "Communication Hub",
+          "Mobile Accessibility",
+          "Benefits for Construction Teams",
+          "Reduced Project Delays",
+          "Cost Savings",
+          "Enhanced Safety",
+          "Improved Stakeholder Alignment",
+          "Why Choose Oracle Aconex Through Aptus Infotech?",
+          "Certified Specialists",
+          "Customized Workflows",
+          "Dedicated Support Team",
+          "Future-Ready Technology",
+          "Ready to Transform Your Construction Projects?",
+          "What Our Clients Say",
+          "Saad Al Hashmi",
+          "Ibad Farooq",
+          "Sadia Al Balushi",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:17",
+          "midCta",
+          "testimonials:3",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Key Features of Oracle Aconex",
+            "count": 17,
+            "titles": [
+              "Document Control & Collaboration",
+              "Risk Management & Safety",
+              "Quality Assurance & Punch Lists",
+              "Project Scheduling & Progress Tracking",
+              "Communication Hub",
+              "Mobile Accessibility",
+              "Reduced Project Delays",
+              "Cost Savings",
+              "Enhanced Safety",
+              "Improved Stakeholder Alignment",
+              "Certified Specialists",
+              "Customized Workflows",
+              "Dedicated Support Team",
+              "Future-Ready Technology",
+              "Saad Al Hashmi",
+              "Ibad Farooq",
+              "Sadia Al Balushi"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "adobe",
+      "family": "adobe",
+      "type": "hub",
+      "route": "/adobe",
+      "jsonFile": "content\\odoo-json\\adobe.json",
+      "issueCount": 1,
+      "issues": [
+        "MAPPER_MISSING_MID_CTA"
+      ],
+      "live": {
+        "structure": [
+          "midCta"
+        ],
+        "sectionH2s": [
+          "Adobe Solutions Partner in Oman",
+          "Aptus Infotech - Your trusted provider of genuine Adobe software with premium support and training",
+          "Offers Best Rates in the Market",
+          "Popular Adobe Products",
+          "Adobe Photoshop",
+          "Adobe Illustrator",
+          "Adobe InDesign",
+          "Adobe After Effects",
+          "Adobe Premiere Pro",
+          "Adobe Acrobat Pro",
+          "Adobe Audition",
+          "Adobe XD",
+          "Why Choose Aptus Infotech",
+          "Gold Partner Status",
+          "Genuine Products",
+          "Competitive Pricing",
+          "Expert Team",
+          "Ready to Get Started?",
+          "Request a Quote"
+        ]
+      },
+      "json": {
+        "structure": [
+          "hero:software-landing",
+          "features:products:product-cards:8",
+          "features:why-aptus:value-cards:4",
+          "midCta",
+          "contactCta"
+        ],
+        "cards": {
+          "products": {
+            "title": "Popular Adobe Products",
+            "count": 8,
+            "titles": [
+              "Adobe Photoshop",
+              "Adobe Illustrator",
+              "Adobe InDesign",
+              "Adobe After Effects",
+              "Adobe Premiere Pro",
+              "Adobe Acrobat Pro",
+              "Adobe Audition",
+              "Adobe XD"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech",
+            "count": 4,
+            "titles": [
+              "Gold Partner Status",
+              "Genuine Products",
+              "Competitive Pricing",
+              "Expert Team"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "adobe-acrobat-pro",
+      "family": "adobe",
+      "type": "inner",
+      "route": "/adobe-acrobat-pro",
+      "jsonFile": "content\\odoo-json\\adobe\\adobe-acrobat-pro.json",
+      "issueCount": 0,
+      "issues": [],
+      "live": {
+        "structure": [
+          "banner:Adobe Acrobat Pro DC",
+          "why-aptus:\"Why Choose Aptus Infotech for Adobe Acrobat Pro?\"(4)",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Create, Edit & Secure PDF Documents",
+          "Powerful PDF Management Tools",
+          "Create & Edit PDFs",
+          "Digital Signatures",
+          "Advanced Security",
+          "Annotation & Markup",
+          "Cross-Platform Access",
+          "Form Creation & Data Collection",
+          "Why Choose Adobe Acrobat Pro?",
+          "Industry Standard",
+          "Seamless Integration",
+          "Enhanced Security",
+          "Collaboration Power",
+          "Why Choose Aptus Infotech for Adobe Acrobat Pro?",
+          "Official Partner",
+          "Technical Support",
+          "Local Presence",
+          "Expert Training",
+          "Ready to Transform Your Document Workflow?",
+          "What Our Clients Say",
+          "Yusuf Al Hashmi",
+          "Mariam Al Said",
+          "Khalid Al Balushi",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:6",
+          "features:benefits:icon-cards:4",
+          "features:why-aptus:value-cards:4",
+          "midCta",
+          "testimonials:3",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Powerful PDF Management Tools",
+            "count": 6,
+            "titles": [
+              "Create & Edit PDFs",
+              "Digital Signatures",
+              "Advanced Security",
+              "Annotation & Markup",
+              "Cross-Platform Access",
+              "Form Creation & Data Collection"
+            ],
+            "missingImages": 0
+          },
+          "benefits": {
+            "title": "Why Choose Adobe Acrobat Pro?",
+            "count": 4,
+            "titles": [
+              "Industry Standard",
+              "Seamless Integration",
+              "Enhanced Security",
+              "Collaboration Power"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech for Adobe Acrobat Pro?",
+            "count": 4,
+            "titles": [
+              "Official Partner",
+              "Technical Support",
+              "Local Presence",
+              "Expert Training"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "adobe-business-creative-solutions",
+      "family": "adobe",
+      "type": "inner",
+      "route": "/adobe-business-creative-solutions",
+      "jsonFile": "content\\odoo-json\\adobe\\adobe-business-creative-solutions.json",
+      "issueCount": 0,
+      "issues": [],
+      "live": {
+        "structure": [
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Adobe Business & Creative Solutions",
+          "Empowering Creativity and Digital Transformation",
+          "Adobe Business & Creative Solutions empower professionals and businesses to:",
+          "Why Choose Aptus Infotech",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:capabilities:bullet-list:6",
+          "features:solutions:icon-cards:5",
+          "features:why-aptus:value-cards:4",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "capabilities": {
+            "title": "Adobe Business & Creative Solutions empower professionals and businesses to:",
+            "count": 6,
+            "titles": [
+              "Create World-Class Digital Content (Creative Cloud)",
+              "Streamline Document Workflows (Adobe Acrobat)",
+              "Foster Seamless Collaboration",
+              "Drive Digital Experiences",
+              "Enhance Brand Consistency and Marketing",
+              "Stay Ahead with Innovation"
+            ],
+            "missingImages": 0
+          },
+          "solutions": {
+            "title": "",
+            "count": 5,
+            "titles": [
+              "Creative Cloud for Teams",
+              "Adobe Express",
+              "Adobe Acrobat Pro",
+              "Adobe Stock",
+              "Enterprise Solutions"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech",
+            "count": 4,
+            "titles": [
+              "Tailored Solutions for Your Business",
+              "Scalable for Every Business Size",
+              "Expert Installation and Ongoing Support",
+              "Powered by Cutting-Edge Technology"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "adobe-illustrator",
+      "family": "adobe",
+      "type": "inner",
+      "route": "/adobe-illustrator",
+      "jsonFile": "content\\odoo-json\\adobe\\adobe-illustrator.json",
+      "issueCount": 2,
+      "issues": [
+        "FEATURES_EXTRA_CARDS: Type Engine, Scalability, Cloud Integration",
+        "FEATURES_COUNT live=3 json=6"
+      ],
+      "live": {
+        "structure": [
+          "banner:Adobe Illustrator",
+          "features:\"Powerful Features\"(3)",
+          "why-aptus:\"Why Choose Aptus Infotech for Adobe Illustrator?\"(4)",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Create Stunning Vector Art",
+          "Powerful Features",
+          "Precision Drawing Tools",
+          "Layer Management",
+          "Color & Gradient Control",
+          "Type Engine",
+          "Scalability",
+          "Cloud Integration",
+          "Benefits for Every User",
+          "Graphic Designers",
+          "Digital Illustrators",
+          "Data Visualization",
+          "UI/UX Designers",
+          "Why Choose Aptus Infotech for Adobe Illustrator?",
+          "Official Partner",
+          "Technical Support",
+          "Local Presence",
+          "Expert Training",
+          "Ready to Create Amazing Vector Art?",
+          "What Our Clients Say",
+          "Sarah Johnson",
+          "Michael Chen",
+          "Khalid Al Farsi",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:6",
+          "features:benefits:icon-cards:4",
+          "features:why-aptus:value-cards:4",
+          "midCta",
+          "testimonials:3",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Powerful Features",
+            "count": 6,
+            "titles": [
+              "Precision Drawing Tools",
+              "Layer Management",
+              "Color & Gradient Control",
+              "Type Engine",
+              "Scalability",
+              "Cloud Integration"
+            ],
+            "missingImages": 0
+          },
+          "benefits": {
+            "title": "Benefits for Every User",
+            "count": 4,
+            "titles": [
+              "Graphic Designers",
+              "Digital Illustrators",
+              "Data Visualization",
+              "UI/UX Designers"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech for Adobe Illustrator?",
+            "count": 4,
+            "titles": [
+              "Official Partner",
+              "Technical Support",
+              "Local Presence",
+              "Expert Training"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "adobe-photoshop",
+      "family": "adobe",
+      "type": "inner",
+      "route": "/adobe-photoshop",
+      "jsonFile": "content\\odoo-json\\adobe\\adobe-photoshop.json",
+      "issueCount": 2,
+      "issues": [
+        "FEATURES_EXTRA_CARDS: Content-Aware Tools, Advanced Adjustments, Creative Cloud Integration",
+        "FEATURES_COUNT live=3 json=6"
+      ],
+      "live": {
+        "structure": [
+          "banner:Adobe Photoshop",
+          "features:\"Powerful Features\"(3)",
+          "why-aptus:\"Why Choose Aptus Infotech for Adobe Photoshop?\"(4)",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Professional Image Editing",
+          "Powerful Features",
+          "Advanced Layers",
+          "AI-Powered Tools",
+          "Digital Painting",
+          "Content-Aware Tools",
+          "Advanced Adjustments",
+          "Creative Cloud Integration",
+          "Benefits for Every Creator",
+          "For Photographers",
+          "For Designers",
+          "For Artists",
+          "For Content Creators",
+          "Why Choose Aptus Infotech for Adobe Photoshop?",
+          "Official Partner",
+          "Technical Support",
+          "Local Presence",
+          "Expert Training",
+          "Start Creating Today",
+          "What Our Clients Say",
+          "Alex Morgan",
+          "Jamie Chen",
+          "Samantha Rodriguez",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:6",
+          "features:benefits:icon-cards:4",
+          "features:why-aptus:value-cards:4",
+          "midCta",
+          "testimonials:3",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Powerful Features",
+            "count": 6,
+            "titles": [
+              "Advanced Layers",
+              "AI-Powered Tools",
+              "Digital Painting",
+              "Content-Aware Tools",
+              "Advanced Adjustments",
+              "Creative Cloud Integration"
+            ],
+            "missingImages": 0
+          },
+          "benefits": {
+            "title": "Benefits for Every Creator",
+            "count": 4,
+            "titles": [
+              "For Photographers",
+              "For Designers",
+              "For Artists",
+              "For Content Creators"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech for Adobe Photoshop?",
+            "count": 4,
+            "titles": [
+              "Official Partner",
+              "Technical Support",
+              "Local Presence",
+              "Expert Training"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "adobe-premiere-pro",
+      "family": "adobe",
+      "type": "inner",
+      "route": "/adobe-premiere-pro",
+      "jsonFile": "content\\odoo-json\\adobe\\adobe-premiere-pro.json",
+      "issueCount": 0,
+      "issues": [],
+      "live": {
+        "structure": [
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Adobe Premiere Pro",
+          "The Industry Standard for Professional Video Editing",
+          "Adobe Premiere Pro empowers video professionals to:",
+          "Why Choose Aptus Infotech",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:capabilities:bullet-list:8",
+          "features:solutions:icon-cards:5",
+          "features:why-aptus:value-cards:4",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "capabilities": {
+            "title": "Adobe Premiere Pro empowers video professionals to:",
+            "count": 8,
+            "titles": [
+              "Perform Non-Linear Video Editing",
+              "Support Diverse Formats and Resolutions",
+              "Master Color Correction and Grading",
+              "Refine Audio with Precision",
+              "Create Dynamic Graphics and Titles",
+              "Streamline Multi-Camera Editing",
+              "Collaborate Effectively with Team Projects",
+              "Integrate Flawlessly with Creative Cloud"
+            ],
+            "missingImages": 0
+          },
+          "solutions": {
+            "title": "",
+            "count": 5,
+            "titles": [
+              "2D/3D Design",
+              "Automated Drafting",
+              "Enhanced Productivity",
+              "Industry Standard",
+              "AEC Solutions"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech",
+            "count": 4,
+            "titles": [
+              "Tailored Solutions for Your Business",
+              "Scalable for Every Business Size",
+              "Expert Installation and Ongoing Support",
+              "Powered by Cutting-Edge Technology"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "aec-collection",
+      "family": "autodesk",
+      "type": "inner",
+      "route": "/aec-collection",
+      "jsonFile": "content\\odoo-json\\autodesk\\aec-collection.json",
+      "issueCount": 2,
+      "issues": [
+        "FEATURES_EXTRA_CARDS: 3ds Max, InfraWorks, Advance Steel, Robot Structural Analysis, FormIt, ReCap Pro, Vehicle Tracking, Structural Bridge Design, Fabrication CADmep, Insight, Arnold, Maya, Autodesk Docs, Dynamo Studio, Autodesk Rendering (A360), Autodesk Drive",
+        "FEATURES_COUNT live=4 json=20"
+      ],
+      "live": {
+        "structure": [
+          "banner:Autodesk AEC Collection",
+          "features:\"Software Included in AEC Collection\"(4)",
+          "benefits:\"Benefits of the AEC Collection\"(4)",
+          "why-aptus:\"Why Choose Aptus Infotech for AutoCAD?\"(4)",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Autodesk AEC Collection",
+          "Software Included in AEC Collection",
+          "AutoCAD",
+          "Revit",
+          "Civil 3D",
+          "Navisworks",
+          "3ds Max",
+          "InfraWorks",
+          "Advance Steel",
+          "Robot Structural Analysis",
+          "FormIt",
+          "ReCap Pro",
+          "Vehicle Tracking",
+          "Structural Bridge Design",
+          "Fabrication CADmep",
+          "Insight",
+          "Arnold",
+          "Maya",
+          "Autodesk Docs",
+          "Dynamo Studio",
+          "Autodesk Rendering (A360)",
+          "Autodesk Drive",
+          "Benefits of the AEC Collection",
+          "Comprehensive Toolset",
+          "Interoperability",
+          "Enhanced Collaboration",
+          "Cost Effective",
+          "Why Choose Aptus Infotech for AutoCAD?",
+          "Official Autodesk Gold Partner",
+          "Technical Support",
+          "Local Presence",
+          "Expert Training",
+          "Ready to Transform Your Workflow?",
+          "What Our Clients Say",
+          "Yusuf Al Hashmi",
+          "Mariam Al Said",
+          "Khalid Al Balushi",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:product-cards:20",
+          "features:benefits:icon-cards:4",
+          "features:why-aptus:value-cards:4",
+          "midCta",
+          "testimonials:3",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Software Included in AEC Collection",
+            "count": 20,
+            "titles": [
+              "AutoCAD",
+              "Revit",
+              "Civil 3D",
+              "Navisworks",
+              "3ds Max",
+              "InfraWorks",
+              "Advance Steel",
+              "Robot Structural Analysis",
+              "FormIt",
+              "ReCap Pro",
+              "Vehicle Tracking",
+              "Structural Bridge Design",
+              "Fabrication CADmep",
+              "Insight",
+              "Arnold",
+              "Maya",
+              "Autodesk Docs",
+              "Dynamo Studio",
+              "Autodesk Rendering (A360)",
+              "Autodesk Drive"
+            ],
+            "missingImages": 0
+          },
+          "benefits": {
+            "title": "Benefits of the AEC Collection",
+            "count": 4,
+            "titles": [
+              "Comprehensive Toolset",
+              "Interoperability",
+              "Enhanced Collaboration",
+              "Cost Effective"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech for AutoCAD?",
+            "count": 4,
+            "titles": [
+              "Official Autodesk Gold Partner",
+              "Technical Support",
+              "Local Presence",
+              "Expert Training"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "autocad",
+      "family": "autodesk",
+      "type": "inner",
+      "route": "/autocad",
+      "jsonFile": "content\\odoo-json\\overrides\\autodesk\\autocad.json",
+      "issueCount": 3,
+      "issues": [
+        "MISSING_DOWNLOADS",
+        "FEATURES_EXTRA_CARDS: Automation & Customization, Cloud Connectivity, Mobile & Web Apps",
+        "FEATURES_COUNT live=3 json=6"
+      ],
+      "live": {
+        "structure": [
+          "banner:Professional Design with AutoCAD",
+          "features:\"Key Features of AutoCAD Software\"(3)",
+          "benefits:\"Benefits of Using AutoCAD for Engineers & Designers\"(4)",
+          "why-aptus:\"Why Choose Aptus Infotech forAutoCAD Software?\"(4)",
+          "testimonials",
+          "partnerships",
+          "contactForm",
+          "downloads"
+        ],
+        "sectionH2s": [
+          "Leading Structural Engineering Software",
+          "Key Features of AutoCAD Software",
+          "2D Drafting & Drawing",
+          "3D Modeling & Visualization",
+          "Collaboration Tools",
+          "Automation & Customization",
+          "Cloud Connectivity",
+          "Mobile & Web Apps",
+          "Benefits of Using AutoCAD for Engineers & Designers",
+          "Affordable Pricing",
+          "Time Efficiency",
+          "User-Friendly",
+          "Reliable Performance",
+          "Why Choose Aptus Infotech forAutoCAD Software?",
+          "Official Autodesk Gold Partner",
+          "Technical Support",
+          "Local Presence",
+          "Expert Training",
+          "What Our Clients Say",
+          "Yusuf Al Hashmi",
+          "Mariam Al Said",
+          "Khalid Al Balushi",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:6",
+          "features:benefits:icon-cards:4",
+          "features:why-aptus:value-cards:4",
+          "testimonials:3",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Key Features of AutoCAD Software",
+            "count": 6,
+            "titles": [
+              "2D Drafting & Drawing",
+              "3D Modeling & Visualization",
+              "Collaboration Tools",
+              "Automation & Customization",
+              "Cloud Connectivity",
+              "Mobile & Web Apps"
+            ],
+            "missingImages": 0
+          },
+          "benefits": {
+            "title": "Benefits of Using AutoCAD for Engineers & Designers",
+            "count": 4,
+            "titles": [
+              "Affordable Pricing",
+              "Time Efficiency",
+              "User-Friendly",
+              "Reliable Performance"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech forAutoCAD Software?",
+            "count": 4,
+            "titles": [
+              "Official Autodesk Gold Partner",
+              "Technical Support",
+              "Local Presence",
+              "Expert Training"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "autocad-lt",
+      "family": "autodesk",
+      "type": "inner",
+      "route": "/autocad-lt",
+      "jsonFile": "content\\odoo-json\\autodesk\\autocad-lt.json",
+      "issueCount": 2,
+      "issues": [
+        "FEATURES_EXTRA_CARDS: Intuitive Interface, Data Extraction, Cloud Connectivity",
+        "FEATURES_COUNT live=3 json=6"
+      ],
+      "live": {
+        "structure": [
+          "banner:Autocad LT",
+          "features:\"Powerful Features\"(3)",
+          "benefits:\"Key Benefits\"(4)",
+          "why-aptus:\"Why Choose Aptus Infotech for AutoCAD LT?\"(4)",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Precision 2D Drafting for Every Project",
+          "Powerful Features",
+          "Precise Drawing Tools",
+          "DWG File Format Support",
+          "Layer Management",
+          "Intuitive Interface",
+          "Data Extraction",
+          "Cloud Connectivity",
+          "Key Benefits",
+          "Affordable Pricing",
+          "Time Efficiency",
+          "User-Friendly",
+          "Reliable Performance",
+          "Why Choose Aptus Infotech for AutoCAD LT?",
+          "Official Autodesk Gold Partner",
+          "Technical Support",
+          "Local Presence",
+          "Expert Training",
+          "Ready to Start Your Design Journey?",
+          "What Our Clients Say",
+          "Jennifer Rodriguez",
+          "Michael Chen",
+          "Sarah Johnson",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:6",
+          "features:benefits:icon-cards:4",
+          "features:why-aptus:value-cards:4",
+          "midCta",
+          "testimonials:3",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Powerful Features",
+            "count": 6,
+            "titles": [
+              "Precise Drawing Tools",
+              "DWG File Format Support",
+              "Layer Management",
+              "Intuitive Interface",
+              "Data Extraction",
+              "Cloud Connectivity"
+            ],
+            "missingImages": 0
+          },
+          "benefits": {
+            "title": "Key Benefits",
+            "count": 4,
+            "titles": [
+              "Affordable Pricing",
+              "Time Efficiency",
+              "User-Friendly",
+              "Reliable Performance"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech for AutoCAD LT?",
+            "count": 4,
+            "titles": [
+              "Official Autodesk Gold Partner",
+              "Technical Support",
+              "Local Presence",
+              "Expert Training"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "autodesk",
+      "family": "autodesk",
+      "type": "hub",
+      "route": "/autodesk",
+      "jsonFile": "content\\odoo-json\\overrides\\autodesk.json",
+      "issueCount": 2,
+      "issues": [
+        "MISSING_DOWNLOADS",
+        "MAPPER_MISSING_MID_CTA"
+      ],
+      "live": {
+        "structure": [
+          "banner:Autodesk Gold Partner in Oman",
+          "midCta",
+          "downloads"
+        ],
+        "sectionH2s": [
+          "Aptus Infotech - Your trusted provider of genuine Autodesk software with premium support and training",
+          "Offers Best Rates in the Market",
+          "Popular Autodesk Products",
+          "AutoCAD",
+          "Revit",
+          "3ds Max",
+          "Autodesk Docs",
+          "Navisworks",
+          "InfraWorks",
+          "Civil 3D",
+          "BIM Collaborate Pro",
+          "Why Choose Aptus Infotech",
+          "Gold Partner Status",
+          "Genuine Products",
+          "Competitive Pricing",
+          "Expert Team",
+          "Ready to Get Started?",
+          "Request a Quote"
+        ]
+      },
+      "json": {
+        "structure": [
+          "hero:software-landing",
+          "features:products:product-cards:8",
+          "features:why-choose:value-cards:4",
+          "midCta",
+          "contactCta"
+        ],
+        "cards": {
+          "products": {
+            "title": "Popular Autodesk Products",
+            "count": 8,
+            "titles": [
+              "AutoCAD",
+              "Revit",
+              "3ds Max",
+              "Autodesk Docs",
+              "Navisworks",
+              "InfraWorks",
+              "Civil 3D",
+              "BIM Collaborate Pro"
+            ],
+            "missingImages": 0
+          },
+          "why-choose": {
+            "title": "Why Choose Aptus Infotech",
+            "count": 4,
+            "titles": [
+              "Gold Partner Status",
+              "Genuine Products",
+              "Competitive Pricing",
+              "Expert Team"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "autodesk-build",
+      "family": "autodesk",
+      "type": "inner",
+      "route": "/autodesk-build",
+      "jsonFile": "content\\odoo-json\\autodesk\\autodesk-build.json",
+      "issueCount": 3,
+      "issues": [
+        "MISSING_DOWNLOADS",
+        "FEATURES_EXTRA_CARDS: Mobile Field App, Reporting & Analytics, Seamless Integration",
+        "FEATURES_COUNT live=3 json=6"
+      ],
+      "live": {
+        "structure": [
+          "banner:Autodesk Build",
+          "features:\"Powerful Features\"(3)",
+          "benefits:\"Key Benefits\"(4)",
+          "why-aptus:\"Why Choose Aptus Infotech for Autodesk Build?\"(4)",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm",
+          "downloads"
+        ],
+        "sectionH2s": [
+          "Transform Your Field Operations",
+          "Powerful Features",
+          "Quality Management",
+          "Safety Management",
+          "Commissioning",
+          "Mobile Field App",
+          "Reporting & Analytics",
+          "Seamless Integration",
+          "Key Benefits",
+          "Improved Quality",
+          "Enhanced Safety",
+          "Faster Commissioning",
+          "Better Collaboration",
+          "Why Choose Aptus Infotech for Autodesk Build?",
+          "Official Autodesk Gold Partner",
+          "Technical Support",
+          "Local Presence",
+          "Expert Training",
+          "Ready to Transform Your Hotel Operations?",
+          "What Our Clients Say",
+          "Ahmad Al Hashmi",
+          "Mariam Al Bakhshi",
+          "Shoaib Al Balushi",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:6",
+          "features:benefits:icon-cards:4",
+          "features:why-aptus:value-cards:4",
+          "midCta",
+          "testimonials:3",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Powerful Features",
+            "count": 6,
+            "titles": [
+              "Quality Management",
+              "Safety Management",
+              "Commissioning",
+              "Mobile Field App",
+              "Reporting & Analytics",
+              "Seamless Integration"
+            ],
+            "missingImages": 0
+          },
+          "benefits": {
+            "title": "Key Benefits",
+            "count": 4,
+            "titles": [
+              "Improved Quality",
+              "Enhanced Safety",
+              "Faster Commissioning",
+              "Better Collaboration"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech for Autodesk Build?",
+            "count": 4,
+            "titles": [
+              "Official Autodesk Gold Partner",
+              "Technical Support",
+              "Local Presence",
+              "Expert Training"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "autodesk-docs",
+      "family": "autodesk",
+      "type": "inner",
+      "route": "/autodesk-docs",
+      "jsonFile": "content\\odoo-json\\autodesk\\autodesk-docs.json",
+      "issueCount": 3,
+      "issues": [
+        "MISSING_DOWNLOADS",
+        "FEATURES_EXTRA_CARDS: Version Control, Cross-Platform Accessibility, Advanced Security, Save Time & Reduce Errors, Enhance Team Collaboration, Improve Searchability, Ensure Compliance, Official Autodesk Gold Partner, Technical Support, Local Presence, Expert Training, Alex Johnson, Sarah Williams, Michael Chen",
+        "FEATURES_COUNT live=3 json=17"
+      ],
+      "live": {
+        "structure": [
+          "features:\"Powerful Features\"(3)",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm",
+          "downloads"
+        ],
+        "sectionH2s": [
+          "Autodesk Docs",
+          "Streamline Collaboration with Powerful Documentation Tools",
+          "Powerful Features",
+          "Rich Text Editor",
+          "Real-Time Collaboration",
+          "Centralized Document Management",
+          "Version Control",
+          "Cross-Platform Accessibility",
+          "Advanced Security",
+          "Benefits for Teams",
+          "Save Time & Reduce Errors",
+          "Enhance Team Collaboration",
+          "Improve Searchability",
+          "Ensure Compliance",
+          "Why Choose Autodesk Docs?",
+          "Official Autodesk Gold Partner",
+          "Technical Support",
+          "Local Presence",
+          "Expert Training",
+          "Ready to Transform Your Documentation Process?",
+          "What Our Clients Say",
+          "Alex Johnson",
+          "Sarah Williams",
+          "Michael Chen",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:17",
+          "midCta",
+          "testimonials:3",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Powerful Features",
+            "count": 17,
+            "titles": [
+              "Rich Text Editor",
+              "Real-Time Collaboration",
+              "Centralized Document Management",
+              "Version Control",
+              "Cross-Platform Accessibility",
+              "Advanced Security",
+              "Save Time & Reduce Errors",
+              "Enhance Team Collaboration",
+              "Improve Searchability",
+              "Ensure Compliance",
+              "Official Autodesk Gold Partner",
+              "Technical Support",
+              "Local Presence",
+              "Expert Training",
+              "Alex Johnson",
+              "Sarah Williams",
+              "Michael Chen"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "autodesk-takeoff",
+      "family": "autodesk",
+      "type": "inner",
+      "route": "/autodesk-takeoff",
+      "jsonFile": "content\\odoo-json\\autodesk\\autodesk-takeoff.json",
+      "issueCount": 2,
+      "issues": [
+        "FEATURES_EXTRA_CARDS: Integrated Calculations, Export Capabilities, Mobile Accessibility",
+        "FEATURES_COUNT live=3 json=6"
+      ],
+      "live": {
+        "structure": [
+          "features:\"Key Features\"(3)",
+          "benefits:\"Key Benefits\"(4)",
+          "why-aptus:\"Why Choose Aptus Infotech for Autodesk Takeoff?\"(4)",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm",
+          "downloads"
+        ],
+        "sectionH2s": [
+          "Autodesk Takeoff",
+          "Professional Design with AutoCAD",
+          "Key Features",
+          "Precise Measurement Tools",
+          "Automated Counting",
+          "Cloud-Based Collaboration",
+          "Integrated Calculations",
+          "Export Capabilities",
+          "Mobile Accessibility",
+          "Key Benefits",
+          "Save Time",
+          "Increase Accuracy",
+          "Enhance Collaboration",
+          "Improve Profitability",
+          "Why Choose Aptus Infotech for Autodesk Takeoff?",
+          "Official Autodesk Gold Partner",
+          "Technical Support",
+          "Local Presence",
+          "Expert Training",
+          "Ready to Transform Your Estimating Process?",
+          "What Our Clients Say",
+          "John Smith",
+          "Sarah Johnson",
+          "Michael Chen",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:6",
+          "features:benefits:icon-cards:4",
+          "features:why-aptus:value-cards:4",
+          "midCta",
+          "testimonials:3",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Key Features",
+            "count": 6,
+            "titles": [
+              "Precise Measurement Tools",
+              "Automated Counting",
+              "Cloud-Based Collaboration",
+              "Integrated Calculations",
+              "Export Capabilities",
+              "Mobile Accessibility"
+            ],
+            "missingImages": 0
+          },
+          "benefits": {
+            "title": "Key Benefits",
+            "count": 4,
+            "titles": [
+              "Save Time",
+              "Increase Accuracy",
+              "Enhance Collaboration",
+              "Improve Profitability"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech for Autodesk Takeoff?",
+            "count": 4,
+            "titles": [
+              "Official Autodesk Gold Partner",
+              "Technical Support",
+              "Local Presence",
+              "Expert Training"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "bim-collaborate-pro",
+      "family": "autodesk",
+      "type": "inner",
+      "route": "/bim-collaborate-pro",
+      "jsonFile": "content\\odoo-json\\autodesk\\bim-collaborate-pro.json",
+      "issueCount": 3,
+      "issues": [
+        "FEATURES_EXTRA_CARDS: Document Management, Design Review, Reporting & Analytics",
+        "FEATURES_COUNT live=3 json=6",
+        "BENEFITS_COUNT live=4 json=11"
+      ],
+      "live": {
+        "structure": [
+          "banner:Autodesk BIM Collaborate Pro",
+          "features:\"Powerful Features\"(3)",
+          "benefits:\"Key Benefits\"(4)",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Transform How Your Teams Collaborate",
+          "Powerful Features",
+          "Cloud-Based Collaboration",
+          "Model Coordination",
+          "Issue Tracking",
+          "Document Management",
+          "Design Review",
+          "Reporting & Analytics",
+          "Key Benefits",
+          "Improved Collaboration",
+          "Reduced Rework",
+          "Faster Decision Making",
+          "Enhanced Data Security",
+          "Why Choose Autodesk BIM Collaborate Pro?",
+          "Official Autodesk Gold Partner",
+          "Technical Support",
+          "Local Presence",
+          "Expert Training",
+          "Ready to Transform Your Project Collaboration?",
+          "What Our Clients Say",
+          "David Thompson",
+          "Lisa Chen",
+          "Michael Roberts",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:6",
+          "features:benefits:icon-cards:11",
+          "midCta",
+          "testimonials:3",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Powerful Features",
+            "count": 6,
+            "titles": [
+              "Cloud-Based Collaboration",
+              "Model Coordination",
+              "Issue Tracking",
+              "Document Management",
+              "Design Review",
+              "Reporting & Analytics"
+            ],
+            "missingImages": 0
+          },
+          "benefits": {
+            "title": "Key Benefits",
+            "count": 11,
+            "titles": [
+              "Improved Collaboration",
+              "Reduced Rework",
+              "Faster Decision Making",
+              "Enhanced Data Security",
+              "Official Autodesk Gold Partner",
+              "Technical Support",
+              "Local Presence",
+              "Expert Training",
+              "David Thompson",
+              "Lisa Chen",
+              "Michael Roberts"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "bluebeam",
+      "family": "multimedia",
+      "type": "inner",
+      "route": "/bluebeam",
+      "jsonFile": "content\\odoo-json\\multimedia\\bluebeam.json",
+      "issueCount": 2,
+      "issues": [
+        "FEATURES_EXTRA_CARDS: Punch & Tracking, Form Creation, Cross-Platform Access",
+        "FEATURES_COUNT live=3 json=6"
+      ],
+      "live": {
+        "structure": [
+          "banner:Bluebeam Revu",
+          "features:\"Powerful Features\"(3)",
+          "benefits:\"Key Benefits\"(4)",
+          "why-aptus:\"Why Choose Aptus Infotech for Bluebeam?\"(4)",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Transform Your Document Workflow",
+          "Powerful Features",
+          "Advanced Markup Tools",
+          "Real-Time Collaboration",
+          "OCR & Search",
+          "Punch & Tracking",
+          "Form Creation",
+          "Cross-Platform Access",
+          "Key Benefits",
+          "Increased Productivity",
+          "Improved Collaboration",
+          "Cost Savings",
+          "Better Quality Control",
+          "Why Choose Aptus Infotech for Bluebeam?",
+          "Official Bluebeam Partner",
+          "Technical Support",
+          "Local Presence",
+          "Expert Training",
+          "Ready to Transform Your Document Workflow?",
+          "What Our Clients Say",
+          "Sarah Johnson",
+          "Michael Chen",
+          "Emily Rodriguez",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:6",
+          "features:benefits:icon-cards:4",
+          "features:why-aptus:value-cards:4",
+          "midCta",
+          "testimonials:3",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Powerful Features",
+            "count": 6,
+            "titles": [
+              "Advanced Markup Tools",
+              "Real-Time Collaboration",
+              "OCR & Search",
+              "Punch & Tracking",
+              "Form Creation",
+              "Cross-Platform Access"
+            ],
+            "missingImages": 0
+          },
+          "benefits": {
+            "title": "Key Benefits",
+            "count": 4,
+            "titles": [
+              "Increased Productivity",
+              "Improved Collaboration",
+              "Cost Savings",
+              "Better Quality Control"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech for Bluebeam?",
+            "count": 4,
+            "titles": [
+              "Official Bluebeam Partner",
+              "Technical Support",
+              "Local Presence",
+              "Expert Training"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "chaos-corona",
+      "family": "multimedia",
+      "type": "inner",
+      "route": "/chaos-corona",
+      "jsonFile": "content\\odoo-json\\multimedia\\chaos-corona.json",
+      "issueCount": 2,
+      "issues": [
+        "FEATURES_EXTRA_CARDS: Seamless Integration, Intuitive Controls, Cloud Rendering",
+        "FEATURES_COUNT live=3 json=6"
+      ],
+      "live": {
+        "structure": [
+          "banner:Chaos Corona",
+          "features:\"Powerful Features\"(3)",
+          "benefits:\"Key Benefits\"(4)",
+          "why-aptus:\"Why Choose Aptus Infotech for Chaos Corona?\"(4)",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Render Faster, Create Better",
+          "Powerful Features",
+          "Lightning-Fast Rendering",
+          "Physically-Based Materials",
+          "Advanced Lighting",
+          "Seamless Integration",
+          "Intuitive Controls",
+          "Cloud Rendering",
+          "Key Benefits",
+          "Save Time",
+          "Superior Quality",
+          "Cost-Effective",
+          "Easy to Learn",
+          "Why Choose Aptus Infotech for Chaos Corona?",
+          "Official Partner",
+          "Technical Support",
+          "Local Presence",
+          "Expert Training",
+          "Ready to Create Stunning Renders?",
+          "What Our Clients Say",
+          "Ahmad Al Hashmi",
+          "Mariam Al Shoaib",
+          "Khalida Ali",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:6",
+          "features:benefits:icon-cards:4",
+          "features:why-aptus:value-cards:4",
+          "midCta",
+          "testimonials:3",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Powerful Features",
+            "count": 6,
+            "titles": [
+              "Lightning-Fast Rendering",
+              "Physically-Based Materials",
+              "Advanced Lighting",
+              "Seamless Integration",
+              "Intuitive Controls",
+              "Cloud Rendering"
+            ],
+            "missingImages": 0
+          },
+          "benefits": {
+            "title": "Key Benefits",
+            "count": 4,
+            "titles": [
+              "Save Time",
+              "Superior Quality",
+              "Cost-Effective",
+              "Easy to Learn"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech for Chaos Corona?",
+            "count": 4,
+            "titles": [
+              "Official Partner",
+              "Technical Support",
+              "Local Presence",
+              "Expert Training"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "civil-3d",
+      "family": "autodesk",
+      "type": "inner",
+      "route": "/civil-3d",
+      "jsonFile": "content\\odoo-json\\autodesk\\civil-3d.json",
+      "issueCount": 2,
+      "issues": [
+        "FEATURES_EXTRA_CARDS: Survey & Data Processing, Quantity Takeoff, Automated Documentation",
+        "FEATURES_COUNT live=3 json=6"
+      ],
+      "live": {
+        "structure": [
+          "banner:Autodesk Civil 3D",
+          "features:\"Powerful Features\"(3)",
+          "benefits:\"Key Benefits\"(4)",
+          "why-aptus:\"Why Choose Aptus Infotech for Civil 3D?\"(4)",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Design Smarter, Faster, and More Accurately",
+          "Powerful Features",
+          "Corridor Modeling",
+          "Parcel & Grading",
+          "Hydrology & Hydraulics",
+          "Survey & Data Processing",
+          "Quantity Takeoff",
+          "Automated Documentation",
+          "Key Benefits",
+          "Increased Productivity",
+          "Design Consistency",
+          "Better Collaboration",
+          "Accurate Analysis",
+          "Why Choose Aptus Infotech for Civil 3D?",
+          "Official Autodesk Gold Partner",
+          "Technical Support",
+          "Local Presence",
+          "Expert Training",
+          "Ready to Transform Your Civil Engineering Workflow?",
+          "What Our Clients Say",
+          "Robert Chen",
+          "Samantha Williams",
+          "Michael Torres",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:6",
+          "features:benefits:icon-cards:4",
+          "features:why-aptus:value-cards:4",
+          "midCta",
+          "testimonials:3",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Powerful Features",
+            "count": 6,
+            "titles": [
+              "Corridor Modeling",
+              "Parcel & Grading",
+              "Hydrology & Hydraulics",
+              "Survey & Data Processing",
+              "Quantity Takeoff",
+              "Automated Documentation"
+            ],
+            "missingImages": 0
+          },
+          "benefits": {
+            "title": "Key Benefits",
+            "count": 4,
+            "titles": [
+              "Increased Productivity",
+              "Design Consistency",
+              "Better Collaboration",
+              "Accurate Analysis"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech for Civil 3D?",
+            "count": 4,
+            "titles": [
+              "Official Autodesk Gold Partner",
+              "Technical Support",
+              "Local Presence",
+              "Expert Training"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "construction-cloud",
+      "family": "edms",
+      "type": "inner",
+      "route": "/construction-cloud",
+      "jsonFile": "content\\odoo-json\\edms\\construction-cloud.json",
+      "issueCount": 2,
+      "issues": [
+        "FEATURES_EXTRA_CARDS: Field Documentation, Team Coordination, Mobile Accessibility, Faster Project Delivery, Cost Savings, Improved Collaboration, Enhanced Safety, Certified Specialists, Customized Workflows, Dedicated Support Team, Future-Ready Technology, Mohammed Al Farsi, Mariam Al Said, Ahmed Hassan",
+        "FEATURES_COUNT live=3 json=17"
+      ],
+      "live": {
+        "structure": [
+          "features:\"Key Features of Autodesk Construction Cloud\"(3)",
+          "why-aptus:\"Why Choose Aptus Infotech for Autodesk Construction Cloud?\"(4)",
+          "midCta",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Autodesk Construction Cloud",
+          "Transform Your Construction Projects with Integrated Tools",
+          "Key Features of Autodesk Construction Cloud",
+          "Design Collaboration",
+          "Project Scheduling",
+          "Cost Management",
+          "Field Documentation",
+          "Team Coordination",
+          "Mobile Accessibility",
+          "Benefits for Construction Teams",
+          "Faster Project Delivery",
+          "Cost Savings",
+          "Improved Collaboration",
+          "Enhanced Safety",
+          "Why Choose Aptus Infotech for Autodesk Construction Cloud?",
+          "Certified Specialists",
+          "Customized Workflows",
+          "Dedicated Support Team",
+          "Future-Ready Technology",
+          "Ready to Transform Your Construction Projects?",
+          "Client Success Stories",
+          "Mohammed Al Farsi",
+          "Mariam Al Said",
+          "Ahmed Hassan",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:17",
+          "features:why-aptus:value-cards:7",
+          "midCta",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Key Features of Autodesk Construction Cloud",
+            "count": 17,
+            "titles": [
+              "Design Collaboration",
+              "Project Scheduling",
+              "Cost Management",
+              "Field Documentation",
+              "Team Coordination",
+              "Mobile Accessibility",
+              "Faster Project Delivery",
+              "Cost Savings",
+              "Improved Collaboration",
+              "Enhanced Safety",
+              "Certified Specialists",
+              "Customized Workflows",
+              "Dedicated Support Team",
+              "Future-Ready Technology",
+              "Mohammed Al Farsi",
+              "Mariam Al Said",
+              "Ahmed Hassan"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech for Autodesk Construction Cloud?",
+            "count": 7,
+            "titles": [
+              "Certified Specialists",
+              "Customized Workflows",
+              "Dedicated Support Team",
+              "Future-Ready Technology",
+              "Mohammed Al Farsi",
+              "Mariam Al Said",
+              "Ahmed Hassan"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "enscape",
+      "family": "multimedia",
+      "type": "inner",
+      "route": "/enscape",
+      "jsonFile": "content\\odoo-json\\multimedia\\enscape.json",
+      "issueCount": 2,
+      "issues": [
+        "FEATURES_EXTRA_CARDS: Seamless Integration, Realistic Lighting, Collaboration",
+        "FEATURES_COUNT live=3 json=6"
+      ],
+      "live": {
+        "structure": [
+          "banner:Chaos Enscape",
+          "features:\"Powerful Features\"(3)",
+          "benefits:\"Key Benefits\"(4)",
+          "why-aptus:\"Why Choose Aptus Infotech for Chaos Enscape??\"(4)",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Design in Real-Time",
+          "Powerful Features",
+          "Real-Time Rendering",
+          "Virtual Reality",
+          "Video Creation",
+          "Seamless Integration",
+          "Realistic Lighting",
+          "Collaboration",
+          "Key Benefits",
+          "Save Time",
+          "Improve Communication",
+          "Enhance Design",
+          "Easy to Learn",
+          "Why Choose Aptus Infotech for Chaos Enscape??",
+          "Official Partner",
+          "Technical Support",
+          "Local Presence",
+          "Expert Training",
+          "Ready to Visualize in Real-Time?",
+          "What Our Clients Say",
+          "Emma Richardson",
+          "James Wilson",
+          "Sofia Martinez",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:6",
+          "features:benefits:icon-cards:4",
+          "features:why-aptus:value-cards:4",
+          "midCta",
+          "testimonials:3",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Powerful Features",
+            "count": 6,
+            "titles": [
+              "Real-Time Rendering",
+              "Virtual Reality",
+              "Video Creation",
+              "Seamless Integration",
+              "Realistic Lighting",
+              "Collaboration"
+            ],
+            "missingImages": 0
+          },
+          "benefits": {
+            "title": "Key Benefits",
+            "count": 4,
+            "titles": [
+              "Save Time",
+              "Improve Communication",
+              "Enhance Design",
+              "Easy to Learn"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech for Chaos Enscape??",
+            "count": 4,
+            "titles": [
+              "Official Partner",
+              "Technical Support",
+              "Local Presence",
+              "Expert Training"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "etap",
+      "family": "educational",
+      "type": "inner",
+      "route": "/etap",
+      "jsonFile": "content\\odoo-json\\educational\\etap.json",
+      "issueCount": 0,
+      "issues": [],
+      "live": {
+        "structure": [
+          "banner:ETAP",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Comprehensive Electrical Power System Analysis, Design, and Operation",
+          "ETAP empowers electrical engineers and power professionals to:",
+          "Why Choose Aptus Infotech",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:capabilities:bullet-list:10",
+          "features:solutions:icon-cards:5",
+          "features:why-aptus:value-cards:4",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "capabilities": {
+            "title": "ETAP empowers electrical engineers and power professionals to:",
+            "count": 10,
+            "titles": [
+              "Model and Design Power Systems",
+              "Perform Comprehensive Electrical Analysis",
+              "Short Circuit Analysis",
+              "Arc Flash Analysis",
+              "Protection Coordination",
+              "Motor Starting Analysis",
+              "Transient Stability Analysis",
+              "Optimize System Performance and Reliability",
+              "Facilitate Digital Twin Creation",
+              "Ensure Compliance and Safety"
+            ],
+            "missingImages": 0
+          },
+          "solutions": {
+            "title": "",
+            "count": 5,
+            "titles": [
+              "Power System Analysis",
+              "Arc Flash Study",
+              "Short-Circuit Analysis",
+              "Protection & Coordination",
+              "Electrical Engineering"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech",
+            "count": 4,
+            "titles": [
+              "Tailored Solutions for Your Business",
+              "Scalable for Every Business Size",
+              "Expert Installation and Ongoing Support",
+              "Powered by Cutting-Edge Technology"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "luminon",
+      "family": "multimedia",
+      "type": "inner",
+      "route": "/luminon",
+      "jsonFile": "content\\odoo-json\\multimedia\\luminon.json",
+      "issueCount": 2,
+      "issues": [
+        "FEATURES_EXTRA_CARDS: Seamless Integration, 360° Panoramas, Video Creation",
+        "FEATURES_COUNT live=3 json=6"
+      ],
+      "live": {
+        "structure": [
+          "banner:Lumion",
+          "features:\"Powerful Features\"(3)",
+          "benefits:\"Key Benefits\"(4)",
+          "why-aptus:\"Why Choose Aptus Infotech for Lumion?\"(4)",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Transform Your Designs into Stunning Visuals",
+          "Powerful Features",
+          "Real-Time Rendering",
+          "Stunning Visual Effects",
+          "Extensive Content Library",
+          "Seamless Integration",
+          "360° Panoramas",
+          "Video Creation",
+          "Key Benefits",
+          "Save Time",
+          "Superior Quality",
+          "Better Communication",
+          "Easy to Learn",
+          "Why Choose Aptus Infotech for Lumion?",
+          "Official Partner",
+          "Technical Support",
+          "Local Presence",
+          "Expert Training",
+          "Ready to Create Stunning Visuals?",
+          "What Our Clients Say",
+          "Robert Anderson",
+          "Lisa Chen",
+          "Michael Torres",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:6",
+          "features:benefits:icon-cards:4",
+          "features:why-aptus:value-cards:4",
+          "midCta",
+          "testimonials:3",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Powerful Features",
+            "count": 6,
+            "titles": [
+              "Real-Time Rendering",
+              "Stunning Visual Effects",
+              "Extensive Content Library",
+              "Seamless Integration",
+              "360° Panoramas",
+              "Video Creation"
+            ],
+            "missingImages": 0
+          },
+          "benefits": {
+            "title": "Key Benefits",
+            "count": 4,
+            "titles": [
+              "Save Time",
+              "Superior Quality",
+              "Better Communication",
+              "Easy to Learn"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech for Lumion?",
+            "count": 4,
+            "titles": [
+              "Official Partner",
+              "Technical Support",
+              "Local Presence",
+              "Expert Training"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "microsoft",
+      "family": "microsoft",
+      "type": "hub",
+      "route": "/microsoft",
+      "jsonFile": "content\\odoo-json\\microsoft.json",
+      "issueCount": 2,
+      "issues": [
+        "MISSING_MID_CTA",
+        "MAPPER_MISSING_MID_CTA"
+      ],
+      "live": {
+        "structure": [
+          "why-aptus:\"Why Choose Aptus Infotech for Microsoft 365\"(4)",
+          "midCta"
+        ],
+        "sectionH2s": [
+          "Microsoft Solutions Partner in Oman",
+          "Aptus Infotech - Your trusted provider of Microsoft 365 Apps, Business solutions, and Power BI with premium support",
+          "Offers Best Rates in the Market",
+          "Our Core Microsoft 365 Solutions",
+          "Microsoft 365 Apps",
+          "Microsoft 365 Business",
+          "Microsoft Power BI",
+          "Additional Microsoft Solutions",
+          "Microsoft Teams",
+          "Microsoft SharePoint",
+          "Microsoft Azure",
+          "Microsoft SQL Server",
+          "Windows 10",
+          "Windows Server",
+          "Why Choose Aptus Infotech for Microsoft 365",
+          "Gold Partner Status",
+          "Genuine Products",
+          "Competitive Pricing",
+          "Expert Team",
+          "Ready to Get Started?"
+        ]
+      },
+      "json": {
+        "structure": [
+          "hero:software-landing",
+          "features:products-core:product-cards:3",
+          "features:products-additional:product-cards:10",
+          "contactCta"
+        ],
+        "cards": {
+          "products-core": {
+            "title": "Our Core Microsoft 365 Solutions",
+            "count": 3,
+            "titles": [
+              "Microsoft 365 Apps",
+              "Microsoft 365 Business",
+              "Microsoft Power BI"
+            ],
+            "missingImages": 0
+          },
+          "products-additional": {
+            "title": "Additional Microsoft Solutions",
+            "count": 10,
+            "titles": [
+              "Microsoft Teams",
+              "Microsoft SharePoint",
+              "Microsoft Azure",
+              "Microsoft SQL Server",
+              "Windows 10",
+              "Windows Server",
+              "Gold Partner Status",
+              "Genuine Products",
+              "Competitive Pricing",
+              "Expert Team"
+            ],
+            "missingImages": 4
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "microsoft-365-apps",
+      "family": "microsoft",
+      "type": "inner",
+      "route": "/microsoft-365-apps",
+      "jsonFile": "content\\odoo-json\\microsoft\\microsoft-365-apps.json",
+      "issueCount": 0,
+      "issues": [],
+      "live": {
+        "structure": [
+          "banner:Microsoft 365 Apps",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "The Core Productivity Suite for Modern Workplaces",
+          "Microsoft 365 Apps empower individuals and organizations to:",
+          "Why Choose Aptus Infotech",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:capabilities:bullet-list:7",
+          "features:solutions:icon-cards:5",
+          "features:why-aptus:value-cards:4",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "capabilities": {
+            "title": "Microsoft 365 Apps empower individuals and organizations to:",
+            "count": 7,
+            "titles": [
+              "Utilize Industry-Standard Productivity Tools",
+              "Enable Seamless Cloud Integration and Storage",
+              "Foster Real-time Collaboration and Co-authoring",
+              "Enhance Communication and Teamwork (with Microsoft Teams)",
+              "Benefit from Advanced Security and Compliance Features",
+              "Receive Continuous Updates and New Features",
+              "Access Across Multiple Devices"
+            ],
+            "missingImages": 0
+          },
+          "solutions": {
+            "title": "",
+            "count": 5,
+            "titles": [
+              "Productivity Software",
+              "Cloud-based Collaboration",
+              "Business Email & Calendar",
+              "Data Security",
+              "Real-Time Co-authoring"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech",
+            "count": 4,
+            "titles": [
+              "Tailored Solutions for Your Business",
+              "Scalable for Every Business Size",
+              "Expert Installation and Ongoing Support",
+              "Powered by Cutting-Edge Technology"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "microsoft-365-business",
+      "family": "microsoft",
+      "type": "inner",
+      "route": "/microsoft-365-business",
+      "jsonFile": "content\\odoo-json\\microsoft\\microsoft-365-business.json",
+      "issueCount": 0,
+      "issues": [],
+      "live": {
+        "structure": [
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Microsoft 365 Business",
+          "Comprehensive Productivity, Collaboration, and Security for SMBs",
+          "Microsoft 365 Business empowers organizations to:",
+          "Why Choose Aptus Infotech",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:capabilities:bullet-list:7",
+          "features:solutions:icon-cards:5",
+          "features:why-aptus:value-cards:4",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "capabilities": {
+            "title": "Microsoft 365 Business empowers organizations to:",
+            "count": 7,
+            "titles": [
+              "Access Essential Productivity Apps",
+              "Enable Professional Cloud Communication",
+              "oster Seamless Collaboration and Teamwork",
+              "Enhance Security and Protect Data",
+              "Simplify Device and Data Management",
+              "Support Remote Work and Business Continuity",
+              "Streamline IT Operations"
+            ],
+            "missingImages": 0
+          },
+          "solutions": {
+            "title": "",
+            "count": 5,
+            "titles": [
+              "SMB Solutions",
+              "Business-Class Email",
+              "Cloud Collaboration",
+              "Data & Device Security",
+              "Productivity Suite"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech",
+            "count": 4,
+            "titles": [
+              "Tailored Solutions for Your Business",
+              "Scalable for Every Business Size",
+              "Expert Installation and Ongoing Support",
+              "Powered by Cutting-Edge Technology"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "microsoft-visio",
+      "family": "microsoft",
+      "type": "inner",
+      "route": "/microsoft-visio",
+      "jsonFile": "content\\odoo-json\\microsoft\\microsoft-visio.json",
+      "issueCount": 2,
+      "issues": [
+        "FEATURES_EXTRA_CARDS: Real-time Collaboration, Cloud Integration, Developer Tools",
+        "FEATURES_COUNT live=3 json=6"
+      ],
+      "live": {
+        "structure": [
+          "banner:Microsoft Visio Subscription in Oman - A",
+          "features:\"Powerful Features\"(3)",
+          "benefits:\"Key Benefits\"(4)",
+          "why-aptus:\"Why Choose Aptus Infotech for Microsoft Visio??\"(4)",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Diagrams Made Simple",
+          "Powerful Features",
+          "Extensive Templates",
+          "Rich Shape Libraries",
+          "Data Linking",
+          "Real-time Collaboration",
+          "Cloud Integration",
+          "Developer Tools",
+          "Key Benefits",
+          "Easy to Learn",
+          "Time-Saving",
+          "Enhanced Communication",
+          "Enterprise Security",
+          "Why Choose Aptus Infotech for Microsoft Visio??",
+          "Official Partner",
+          "Technical Support",
+          "Local Presence",
+          "Expert Training",
+          "Ready to Create Professional Diagrams?",
+          "What Our Clients Say",
+          "Robert Chen",
+          "Jennifer Williams",
+          "Michael Torres",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:6",
+          "features:benefits:icon-cards:4",
+          "features:why-aptus:value-cards:4",
+          "midCta",
+          "testimonials:3",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Powerful Features",
+            "count": 6,
+            "titles": [
+              "Extensive Templates",
+              "Rich Shape Libraries",
+              "Data Linking",
+              "Real-time Collaboration",
+              "Cloud Integration",
+              "Developer Tools"
+            ],
+            "missingImages": 0
+          },
+          "benefits": {
+            "title": "Key Benefits",
+            "count": 4,
+            "titles": [
+              "Easy to Learn",
+              "Time-Saving",
+              "Enhanced Communication",
+              "Enterprise Security"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech for Microsoft Visio??",
+            "count": 4,
+            "titles": [
+              "Official Partner",
+              "Technical Support",
+              "Local Presence",
+              "Expert Training"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "multimedia-software-solutions",
+      "family": "multimedia",
+      "type": "hub",
+      "route": "/multimedia-software-solutions",
+      "jsonFile": "content\\odoo-json\\multimedia-software-solutions.json",
+      "issueCount": 3,
+      "issues": [
+        "MISSING_TESTIMONIALS",
+        "MISSING_PARTNERSHIPS",
+        "MAPPER_MISSING_MID_CTA"
+      ],
+      "live": {
+        "structure": [
+          "banner:Professional Multimedia Software Solutio",
+          "why-aptus:\"Why Choose Aptus Infotech for Multimedia Software?\"(4)",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Our Software Collection",
+          "Bluebeam",
+          "Chaos Corona",
+          "Enscape",
+          "Lumion",
+          "Nitro PDF",
+          "SketchUp",
+          "Twinmotion",
+          "V-Ray",
+          "Why Choose Our Software Collection",
+          "Industry-Leading Tools",
+          "Seamless Integration",
+          "Expert Training & Support",
+          "Regular Updates",
+          "Why Choose Aptus Infotech for Multimedia Software?",
+          "Official Partner",
+          "Technical Support",
+          "Local Presence",
+          "Expert Training",
+          "Ready to Transform Your Workflow?",
+          "What Our Clients Say",
+          "David Chen",
+          "Zara Al Said",
+          "Michael Torres",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "hero:software-landing",
+          "features:products:product-cards:2",
+          "midCta",
+          "contactCta"
+        ],
+        "cards": {
+          "products": {
+            "title": "Popular multimedia Products",
+            "count": 2,
+            "titles": [
+              "Twinmotion",
+              "V-Ray"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "navisworks",
+      "family": "autodesk",
+      "type": "inner",
+      "route": "/navisworks",
+      "jsonFile": "content\\odoo-json\\autodesk\\navisworks.json",
+      "issueCount": 3,
+      "issues": [
+        "MISSING_DOWNLOADS",
+        "FEATURES_EXTRA_CARDS: Real-Time Collaboration, Advanced Visualization, Quantification & Estimation",
+        "FEATURES_COUNT live=3 json=6"
+      ],
+      "live": {
+        "structure": [
+          "features:\"Powerful Features\"(3)",
+          "benefits:\"Key Benefits\"(4)",
+          "why-aptus:\"Why Choose Aptus Infotech for Navisworks?\"(4)",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm",
+          "downloads"
+        ],
+        "sectionH2s": [
+          "Leading Structural Engineering Software",
+          "Coordinate, Simulate, and Quantify for Conflict-Free Projects",
+          "Powerful Features",
+          "Clash Detection",
+          "Model Coordination",
+          "4D Simulation",
+          "Real-Time Collaboration",
+          "Advanced Visualization",
+          "Quantification & Estimation",
+          "Key Benefits",
+          "Cost Savings",
+          "Time Efficiency",
+          "Improved Collaboration",
+          "Risk Mitigation",
+          "Why Choose Aptus Infotech for Navisworks?",
+          "Official Autodesk Gold Partner",
+          "Technical Support",
+          "Local Presence",
+          "Expert Training",
+          "Ready to Streamline Your Construction Workflow?",
+          "What Our Clients Say",
+          "John Smith",
+          "Sarah Johnson",
+          "Michael Chen",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:6",
+          "features:benefits:icon-cards:4",
+          "features:why-aptus:value-cards:4",
+          "midCta",
+          "testimonials:3",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Powerful Features",
+            "count": 6,
+            "titles": [
+              "Clash Detection",
+              "Model Coordination",
+              "4D Simulation",
+              "Real-Time Collaboration",
+              "Advanced Visualization",
+              "Quantification & Estimation"
+            ],
+            "missingImages": 0
+          },
+          "benefits": {
+            "title": "Key Benefits",
+            "count": 4,
+            "titles": [
+              "Cost Savings",
+              "Time Efficiency",
+              "Improved Collaboration",
+              "Risk Mitigation"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech for Navisworks?",
+            "count": 4,
+            "titles": [
+              "Official Autodesk Gold Partner",
+              "Technical Support",
+              "Local Presence",
+              "Expert Training"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "nitro",
+      "family": "multimedia",
+      "type": "inner",
+      "route": "/nitro",
+      "jsonFile": "content\\odoo-json\\multimedia\\nitro.json",
+      "issueCount": 2,
+      "issues": [
+        "FEATURES_EXTRA_CARDS: Secure & Protect, Optimize & Compress, Cloud Integration",
+        "FEATURES_COUNT live=3 json=6"
+      ],
+      "live": {
+        "structure": [
+          "banner:Nitro PDF",
+          "features:\"Powerful Features\"(3)",
+          "benefits:\"Key Benefits\"(4)",
+          "why-aptus:\"Why Choose Aptus Infotech for Nitro PDF?\"(4)",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Work Smarter with PDF",
+          "Powerful Features",
+          "Create & Convert",
+          "Edit & Review",
+          "eSign Documents",
+          "Secure & Protect",
+          "Optimize & Compress",
+          "Cloud Integration",
+          "Key Benefits",
+          "Save Time",
+          "Cost-Effective",
+          "Enhance Collaboration",
+          "Work Anywhere",
+          "Why Choose Aptus Infotech for Nitro PDF?",
+          "Official Partner",
+          "Technical Support",
+          "Local Presence",
+          "Expert Training",
+          "Ready to Transform Your PDF Workflow?",
+          "What Our Clients Say",
+          "Rehan Al Hashmi",
+          "Sara Al Sayyed",
+          "Khalid Al Balushi",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:6",
+          "features:benefits:icon-cards:4",
+          "features:why-aptus:value-cards:4",
+          "midCta",
+          "testimonials:3",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Powerful Features",
+            "count": 6,
+            "titles": [
+              "Create & Convert",
+              "Edit & Review",
+              "eSign Documents",
+              "Secure & Protect",
+              "Optimize & Compress",
+              "Cloud Integration"
+            ],
+            "missingImages": 0
+          },
+          "benefits": {
+            "title": "Key Benefits",
+            "count": 4,
+            "titles": [
+              "Save Time",
+              "Cost-Effective",
+              "Enhance Collaboration",
+              "Work Anywhere"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech for Nitro PDF?",
+            "count": 4,
+            "titles": [
+              "Official Partner",
+              "Technical Support",
+              "Local Presence",
+              "Expert Training"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "odoo",
+      "family": "edms",
+      "type": "inner",
+      "route": "/odoo",
+      "jsonFile": "content\\odoo-json\\edms\\odoo.json",
+      "issueCount": 2,
+      "issues": [
+        "FEATURES_EXTRA_CARDS: Human Resources, Project Management, Mobile & Web Apps, Financial Management, Digital Marketing Tools",
+        "FEATURES_COUNT live=3 json=8"
+      ],
+      "live": {
+        "structure": [
+          "banner:Best Odoo ERP Solutions to Improve Sales",
+          "features:\"Key Features of Odoo\"(3)",
+          "why-aptus:\"Why Choose Aptus Infotech for Your Odoo Implementation?\"(4)",
+          "midCta",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Transform Your Business Operations with Odoo",
+          "Key Features of Odoo",
+          "Customer Relationship Management",
+          "Sales & CRM",
+          "Inventory & Procurement",
+          "Human Resources",
+          "Project Management",
+          "Mobile & Web Apps",
+          "Financial Management",
+          "Digital Marketing Tools",
+          "Benefits of Choosing Odoo",
+          "Seamless Integration",
+          "Scalability",
+          "Cost Efficiency",
+          "Security & Compliance",
+          "Why Choose Aptus Infotech for Your Odoo Implementation?",
+          "Certified Experts",
+          "Customized Solutions",
+          "Dedicated Support",
+          "Future-Ready Technology",
+          "Ready to Transform Your Business Operations?",
+          "Client Success Stories",
+          "Mohammed Al Farsi",
+          "Sarah Johnson",
+          "Ahmed Hassan",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:8",
+          "features:why-aptus:value-cards:7",
+          "midCta",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Key Features of Odoo",
+            "count": 8,
+            "titles": [
+              "Customer Relationship Management",
+              "Sales & CRM",
+              "Inventory & Procurement",
+              "Human Resources",
+              "Project Management",
+              "Mobile & Web Apps",
+              "Financial Management",
+              "Digital Marketing Tools"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech for Your Odoo Implementation?",
+            "count": 7,
+            "titles": [
+              "Certified Experts",
+              "Customized Solutions",
+              "Dedicated Support",
+              "Future-Ready Technology",
+              "Mohammed Al Farsi",
+              "Sarah Johnson",
+              "Ahmed Hassan"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "oracle-primavera-p6",
+      "family": "oracle",
+      "type": "inner",
+      "route": "/oracle-primavera-p6",
+      "jsonFile": "content\\odoo-json\\oracle\\oracle-primavera-p6.json",
+      "issueCount": 0,
+      "issues": [],
+      "live": {
+        "structure": [
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Oracle Primavera P6 Professional Project Management",
+          "Mastering Complex Projects",
+          "Primavera P6 Professional Project Management empowers organizations and project teams to:",
+          "Why Choose Aptus Infotech",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:capabilities:bullet-list:8",
+          "features:solutions:icon-cards:5",
+          "features:why-aptus:value-cards:4",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "capabilities": {
+            "title": "Primavera P6 Professional Project Management empowers organizations and project teams to:",
+            "count": 8,
+            "titles": [
+              "Develop Detailed Project Schedules",
+              "Optimize Resource Management",
+              "Gain Robust Cost Control and Budgeting",
+              "Manage Multiple Projects and Programs",
+              "Identify and Mitigate Project Risks",
+              "Track Performance and Generate Reports",
+              "Foster Collaboration and Communication",
+              "Ensure Scalability for Complex Endeavors"
+            ],
+            "missingImages": 0
+          },
+          "solutions": {
+            "title": "",
+            "count": 5,
+            "titles": [
+              "Project Management",
+              "Project Scheduling",
+              "Resource Management",
+              "Critical Path Method",
+              "Risk Analysis"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech",
+            "count": 4,
+            "titles": [
+              "Tailored Solutions for Your Business",
+              "Scalable for Every Business Size",
+              "Expert Installation and Ongoing Support",
+              "Powered by Cutting-Edge Technology"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "power-bi",
+      "family": "microsoft",
+      "type": "inner",
+      "route": "/power-bi",
+      "jsonFile": "content\\odoo-json\\microsoft\\power-bi.json",
+      "issueCount": 0,
+      "issues": [],
+      "live": {
+        "structure": [
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Microsoft Power BI",
+          "Transform Data into Actionable Insights",
+          "Microsoft Power BI empowers businesses and individuals to:",
+          "Why Choose Aptus Infotech",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:capabilities:bullet-list:7",
+          "features:solutions:icon-cards:5",
+          "features:why-aptus:value-cards:4",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "capabilities": {
+            "title": "Microsoft Power BI empowers businesses and individuals to:",
+            "count": 7,
+            "titles": [
+              "Connect to Diverse Data Sources",
+              "Transform and Model Data",
+              "Create Interactive Dashboards and Reports",
+              "Discover Insights with AI and Natural Language",
+              "Share and Collaborate Securely",
+              "Access Insights Anywhere, Anytime",
+              "Integrate with the Microsoft Ecosystem"
+            ],
+            "missingImages": 0
+          },
+          "solutions": {
+            "title": "",
+            "count": 5,
+            "titles": [
+              "3D Modeling",
+              "Conceptual Design",
+              "Architectural Visualization",
+              "2D Documentation",
+              "3D Warehouse"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech",
+            "count": 4,
+            "titles": [
+              "Tailored Solutions for Your Business",
+              "Scalable for Every Business Size",
+              "Expert Installation and Ongoing Support",
+              "Powered by Cutting-Edge Technology"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "revit",
+      "family": "autodesk",
+      "type": "inner",
+      "route": "/revit",
+      "jsonFile": "content\\odoo-json\\autodesk\\revit.json",
+      "issueCount": 2,
+      "issues": [
+        "FEATURES_EXTRA_CARDS: Visualization & Rendering, Analysis & Simulation, Documentation & Output",
+        "FEATURES_COUNT live=3 json=6"
+      ],
+      "live": {
+        "structure": [
+          "features:\"Powerful Features\"(3)",
+          "benefits:\"Key Benefits\"(4)",
+          "why-aptus:\"Why Choose Aptus Infotech for Revit?\"(4)",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Autodesk Revit",
+          "The Foundational BIM Software for Design and Construction",
+          "Powerful Features",
+          "Parametric Modeling",
+          "Multi-Discipline Collaboration",
+          "4D Scheduling",
+          "Visualization & Rendering",
+          "Analysis & Simulation",
+          "Documentation & Output",
+          "Key Benefits",
+          "Time Savings",
+          "Error Reduction",
+          "Enhanced Collaboration",
+          "Innovation Enablement",
+          "Why Choose Aptus Infotech for Revit?",
+          "Official Autodesk Gold Partner",
+          "Technical Support",
+          "Local Presence",
+          "Expert Training",
+          "Ready to Transform Your Design Workflow?",
+          "What Our Clients Say",
+          "Laik Al Hashmi",
+          "Sadia Al Said",
+          "Naran Al Balushi",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:6",
+          "features:benefits:icon-cards:4",
+          "features:why-aptus:value-cards:4",
+          "midCta",
+          "testimonials:3",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Powerful Features",
+            "count": 6,
+            "titles": [
+              "Parametric Modeling",
+              "Multi-Discipline Collaboration",
+              "4D Scheduling",
+              "Visualization & Rendering",
+              "Analysis & Simulation",
+              "Documentation & Output"
+            ],
+            "missingImages": 0
+          },
+          "benefits": {
+            "title": "Key Benefits",
+            "count": 4,
+            "titles": [
+              "Time Savings",
+              "Error Reduction",
+              "Enhanced Collaboration",
+              "Innovation Enablement"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech for Revit?",
+            "count": 4,
+            "titles": [
+              "Official Autodesk Gold Partner",
+              "Technical Support",
+              "Local Presence",
+              "Expert Training"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "sketchup",
+      "family": "multimedia",
+      "type": "hub",
+      "route": "/sketchup",
+      "jsonFile": "content\\odoo-json\\multimedia\\sketchup.json",
+      "issueCount": 5,
+      "issues": [
+        "MISSING_TESTIMONIALS",
+        "MISSING_PARTNERSHIPS",
+        "MISSING_MID_CTA",
+        "MAPPER_MISSING_MID_CTA",
+        "HERO_IMAGE_MISMATCH manifest≠json"
+      ],
+      "live": {
+        "structure": [
+          "banner:SketchUp",
+          "features:\"Powerful Features\"(3)",
+          "benefits:\"Key Benefits\"(4)",
+          "why-aptus:\"Why Choose Aptus Infotech for SketchUp?\"(4)",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Think in 3D. Create in 3D.",
+          "Powerful Features",
+          "Intuitive Modeling",
+          "3D Warehouse",
+          "Materials & Styles",
+          "Advanced Tools",
+          "Extension Warehouse",
+          "Cloud Collaboration",
+          "Key Benefits",
+          "Easy to Learn",
+          "Fast & Efficient",
+          "Affordable",
+          "Vibrant Community",
+          "Why Choose Aptus Infotech for SketchUp?",
+          "Official Partner",
+          "Technical Support",
+          "Local Presence",
+          "Expert Training",
+          "Ready to Start Creating in 3D?",
+          "What Our Clients Say",
+          "David Chen",
+          "Sarah",
+          "Michael Torres",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:6",
+          "features:benefits:icon-cards:4",
+          "features:why-aptus:value-cards:4",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Key Features of SketchUp",
+            "count": 6,
+            "titles": [
+              "Intuitive Modeling",
+              "3D Warehouse",
+              "Materials & Styles",
+              "Advanced Tools",
+              "Extension Warehouse",
+              "Cloud Collaboration"
+            ],
+            "missingImages": 0
+          },
+          "benefits": {
+            "title": "Benefits of Using SketchUp",
+            "count": 4,
+            "titles": [
+              "Easy to Learn",
+              "Fast & Efficient",
+              "Affordable",
+              "Vibrant Community"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech for SketchUp?",
+            "count": 4,
+            "titles": [
+              "Official Partner",
+              "Technical Support",
+              "Local Presence",
+              "Expert Training"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "software-solutions",
+      "family": "software",
+      "type": "hub",
+      "route": "/software-solutions",
+      "jsonFile": "content\\odoo-json\\software-solutions.json",
+      "issueCount": 3,
+      "issues": [
+        "MISSING_TESTIMONIALS",
+        "MISSING_PARTNERSHIPS",
+        "MAPPER_MISSING_MID_CTA"
+      ],
+      "live": {
+        "structure": [
+          "banner:Premium Software Solutions for Modern Bu",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Your Premier Software Solutions Provider",
+          "Our Software Solutions",
+          "Autodesk",
+          "Electrical Software",
+          "Adobe",
+          "Oracle",
+          "Microsoft",
+          "Multimedia",
+          "Quantity Takeoff",
+          "Structural Software",
+          "Cyber Security Solutions",
+          "Educational Software",
+          "Educational Documents Management",
+          "Our Process",
+          "Consultation",
+          "Licensing",
+          "Implementation",
+          "Training",
+          "Support",
+          "Why Choose Aptus Infotech",
+          "Authorized Partners",
+          "Expert Consultation",
+          "Implementation Support",
+          "Training & Support",
+          "Ready to Transform Your Business?",
+          "What Our Clients Say",
+          "Ahmed Hassan",
+          "Sara Al Said",
+          "Inayat Al Balushi",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "hero:software-landing",
+          "midCta",
+          "contactCta"
+        ],
+        "cards": {}
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "spectronova",
+      "family": "edms",
+      "type": "inner",
+      "route": "/spectronova",
+      "jsonFile": "content\\odoo-json\\edms\\spectronova.json",
+      "issueCount": 2,
+      "issues": [
+        "FEATURES_EXTRA_CARDS: Tendering, Bid & Subcontract Management, Centralized Document Hub, Intelligent Workflow Automation (BPM), Reduced Project Delays, Significant Cost Savings, Enhanced Safety Compliance, Improved Stakeholder Alignment, Certified Specialists, Customized Workflows, Dedicated Support Team, Future-Ready Technology, Bilal Al Qasmi, Safiya Al Said, Linda John",
+        "FEATURES_COUNT live=3 json=17"
+      ],
+      "live": {
+        "structure": [
+          "banner:SpectroNova",
+          "features:\"Key Features of SpectroNova\"(3)",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Transform Project Management with SpectroNova",
+          "Key Features of SpectroNova",
+          "Advanced Planning & Scheduling",
+          "Resource & Financial Management",
+          "Issue, Risk & Change Management",
+          "Tendering, Bid & Subcontract Management",
+          "Centralized Document Hub",
+          "Intelligent Workflow Automation (BPM)",
+          "Benefits for Your Organization",
+          "Reduced Project Delays",
+          "Significant Cost Savings",
+          "Enhanced Safety Compliance",
+          "Improved Stakeholder Alignment",
+          "Why Choose SpectroNova Through Aptus Infotech?",
+          "Certified Specialists",
+          "Customized Workflows",
+          "Dedicated Support Team",
+          "Future-Ready Technology",
+          "Ready to Transform Your Projects?",
+          "What Our Clients Say",
+          "Bilal Al Qasmi",
+          "Safiya Al Said",
+          "Linda John",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:17",
+          "midCta",
+          "testimonials:3",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Key Features of SpectroNova",
+            "count": 17,
+            "titles": [
+              "Advanced Planning & Scheduling",
+              "Resource & Financial Management",
+              "Issue, Risk & Change Management",
+              "Tendering, Bid & Subcontract Management",
+              "Centralized Document Hub",
+              "Intelligent Workflow Automation (BPM)",
+              "Reduced Project Delays",
+              "Significant Cost Savings",
+              "Enhanced Safety Compliance",
+              "Improved Stakeholder Alignment",
+              "Certified Specialists",
+              "Customized Workflows",
+              "Dedicated Support Team",
+              "Future-Ready Technology",
+              "Bilal Al Qasmi",
+              "Safiya Al Said",
+              "Linda John"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "twinmotion",
+      "family": "multimedia",
+      "type": "inner",
+      "route": "/twinmotion",
+      "jsonFile": "content\\odoo-json\\multimedia\\twinmotion.json",
+      "issueCount": 2,
+      "issues": [
+        "FEATURES_EXTRA_CARDS: Rich Asset Library, Immersive VR, Environmental Controls",
+        "FEATURES_COUNT live=3 json=6"
+      ],
+      "live": {
+        "structure": [
+          "banner:Twinmotion: Real-Time Visualization for ",
+          "features:\"Powerful Features\"(3)",
+          "benefits:\"Key Benefits\"(4)",
+          "why-aptus:\"Why Choose Aptus Infotech for Twinmotion?\"(4)",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Create Stunning Visualizations in Real-Time",
+          "Powerful Features",
+          "Real-Time Rendering",
+          "Easy Cloud Sharing",
+          "One-Click Synchronization",
+          "Rich Asset Library",
+          "Immersive VR",
+          "Environmental Controls",
+          "Key Benefits",
+          "Lightning Fast",
+          "Easy to Learn",
+          "Broad Compatibility",
+          "Stunning Visuals",
+          "Why Choose Aptus Infotech for Twinmotion?",
+          "Official Partner",
+          "Technical Support",
+          "Local Presence",
+          "Expert Training",
+          "Ready to Transform Your Visualizations?",
+          "What Our Clients Say",
+          "Emma Rodriguez",
+          "David Chen",
+          "Michael Torres",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:features:icon-cards:6",
+          "features:benefits:icon-cards:4",
+          "features:why-aptus:value-cards:4",
+          "midCta",
+          "testimonials:3",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "features": {
+            "title": "Powerful Features",
+            "count": 6,
+            "titles": [
+              "Real-Time Rendering",
+              "Easy Cloud Sharing",
+              "One-Click Synchronization",
+              "Rich Asset Library",
+              "Immersive VR",
+              "Environmental Controls"
+            ],
+            "missingImages": 0
+          },
+          "benefits": {
+            "title": "Key Benefits",
+            "count": 4,
+            "titles": [
+              "Lightning Fast",
+              "Easy to Learn",
+              "Broad Compatibility",
+              "Stunning Visuals"
+            ],
+            "missingImages": 0
+          },
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech for Twinmotion?",
+            "count": 4,
+            "titles": [
+              "Official Partner",
+              "Technical Support",
+              "Local Presence",
+              "Expert Training"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    },
+    {
+      "slug": "v-ray",
+      "family": "multimedia",
+      "type": "inner",
+      "route": "/v-ray",
+      "jsonFile": "content\\odoo-json\\multimedia\\v-ray.json",
+      "issueCount": 1,
+      "issues": [
+        "MAPPER_MISSING_MID_CTA"
+      ],
+      "live": {
+        "structure": [
+          "banner:Chaos V-Ray for SketchUp",
+          "why-aptus:\"Why Choose Aptus Infotech for V-Ray for SketchUp?\"(4)",
+          "midCta",
+          "testimonials",
+          "partnerships",
+          "contactForm"
+        ],
+        "sectionH2s": [
+          "Unleash Photorealistic Power in SketchUp",
+          "Powerful Rendering Features",
+          "Global Illumination",
+          "Physically-Based Materials",
+          "Interactive Rendering",
+          "Advanced Camera Controls",
+          "Cloud Collaboration",
+          "Extension Support",
+          "Benefits for Healthcare Facilities",
+          "Faster Response Times",
+          "Enhanced Patient Safety",
+          "Improved Staff Efficiency",
+          "HIPAA Compliant",
+          "Why Choose Aptus Infotech for V-Ray for SketchUp?",
+          "Official Partner",
+          "Technical Support",
+          "Local Presence",
+          "Expert Training",
+          "Ready to Transform Your SketchUp Workflow?",
+          "What Our Clients Say",
+          "Obaid Al Hashmi",
+          "Michael Torres",
+          "David Chen",
+          "Winning together with Strategic Alliances",
+          "Have questions? We can help"
+        ]
+      },
+      "json": {
+        "structure": [
+          "software-inner-hero",
+          "features:why-aptus:value-cards:4",
+          "midCta",
+          "testimonials:3",
+          "partnerships:15",
+          "contactCta"
+        ],
+        "cards": {
+          "why-aptus": {
+            "title": "Why Choose Aptus Infotech for V-Ray for SketchUp?",
+            "count": 4,
+            "titles": [
+              "Official Partner",
+              "Technical Support",
+              "Local Presence",
+              "Expert Training"
+            ],
+            "missingImages": 0
+          }
+        }
+      },
+      "mapped": {
+        "structure": []
+      }
+    }
+  ]
+}

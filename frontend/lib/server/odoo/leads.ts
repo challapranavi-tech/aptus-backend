@@ -1,0 +1,810 @@
+import { cartLineUnitPrice } from "@/lib/portal-cart-checkout";
+import { logger } from "../logger";
+import { getOdooClient, type OdooClient } from "./client";
+import { persistCrmLeadNotes } from "./crm-lead-notes";
+import { formatCustomerMessageForOdoo } from "@/lib/portal-customer-message";
+import {
+  getPartnerOdooContextForCrm,
+  getRelatedPartnerIds,
+  resolveNewPipelineStageId,
+  resolvePipelineStageIdByHints,
+  type CrmRoutingKind,
+} from "./partner-context";
+import { subscriptionRequestLeadName } from "./subscription-requests";
+
+export function subscriptionLeadName(productName: string): string {
+  return `Portal subscription: ${productName.trim()}`;
+}
+
+type LeadNameItem = string | { productName: string; quantity?: number };
+
+function leadNameLabel(item: LeadNameItem): string {
+  if (typeof item === "string") return item.trim();
+  const name = item.productName.trim();
+  if (!name) return "";
+  const qty = Math.min(999, Math.max(1, Math.floor(item.quantity ?? 1)));
+  return qty > 1 ? `${name} ×${qty}` : name;
+}
+
+/** CRM opportunity title for a portal software order (qty encoded when > 1). */
+export function productOrderLeadName(items: LeadNameItem[]): string {
+  const labels = items.map(leadNameLabel).filter(Boolean);
+  const preview = labels.slice(0, 3).join(", ");
+  const suffix = labels.length > 3 ? ` +${labels.length - 3} more` : "";
+  return `Portal software order: ${preview}${suffix}`;
+}
+
+type PricedLeadItem = {
+  productName: string;
+  quantity: number;
+  duration?: "1year" | "3year";
+  purchaseType?: "new" | "renew";
+  packageId?: string;
+  levelId?: string;
+};
+
+/** Catalog subtotal for CRM Estimated Revenue (expected_revenue). */
+export function estimatedRevenueFromItems(
+  items: PricedLeadItem[],
+  duration: "1year" | "3year" = "1year",
+): number {
+  let total = 0;
+  for (const item of items) {
+    const qty = Math.min(999, Math.max(1, Math.floor(item.quantity || 1)));
+    const unit = cartLineUnitPrice(
+      {
+        category: "",
+        productName: item.productName,
+        quantity: qty,
+        duration: item.duration ?? duration,
+        purchaseType: item.purchaseType,
+        packageId: item.packageId,
+        levelId: item.levelId,
+      },
+      duration,
+    );
+    if (unit > 0) total += unit * qty;
+  }
+  return Math.round(total * 1000) / 1000;
+}
+
+/**
+ * Reverse of productOrderLeadName — recovers per-line quantities from the CRM title.
+ * "Portal software order: Prokon ×4" → [{ productName: "Prokon", quantity: 4 }]
+ */
+export function parseProductOrderLeadItems(
+  leadName: string,
+): Array<{ productName: string; quantity: number }> {
+  const raw = leadName
+    .replace(/^Portal software order:\s*/i, "")
+    .replace(/\s*\+\d+\s*more\s*$/i, "")
+    .trim();
+  if (!raw) return [];
+
+  return raw
+    .split(",")
+    .map((part) => {
+      const chunk = part.trim();
+      if (!chunk) return null;
+      const match = chunk.match(/^(.*?)\s*[×x]\s*(\d+)\s*$/);
+      if (match) {
+        return {
+          productName: match[1].trim(),
+          quantity: Math.min(999, Math.max(1, Number(match[2]) || 1)),
+        };
+      }
+      return { productName: chunk, quantity: 1 };
+    })
+    .filter((item): item is { productName: string; quantity: number } => Boolean(item?.productName));
+}
+
+const CART_LEAD_PREFIX = "Added to Cart";
+
+export function cartLeadName(productNames: string[]): string {
+  const preview = productNames.slice(0, 3).join(", ");
+  const suffix = productNames.length > 3 ? ` +${productNames.length - 3} more` : "";
+  return `${CART_LEAD_PREFIX}: ${preview}${suffix}`;
+}
+
+async function createPortalCrmLead(
+  client: OdooClient,
+  input: {
+    partnerId: number;
+    name: string;
+    description: string;
+    routing?: CrmRoutingKind;
+    expectedRevenue?: number;
+  },
+): Promise<number> {
+  const ctx = await getPartnerOdooContextForCrm(input.partnerId, input.routing ?? "default");
+  const stageId = ctx.teamId ? await resolveNewPipelineStageId(client, ctx.teamId) : null;
+
+  const values: Record<string, unknown> = {
+    partner_id: input.partnerId,
+    name: input.name,
+    description: input.description,
+    // Opportunities appear in CRM → Pipeline (/odoo/crm) for the sales team.
+    type: "opportunity",
+    probability: 10,
+  };
+  if (input.expectedRevenue != null && input.expectedRevenue > 0) {
+    values.expected_revenue = input.expectedRevenue;
+  }
+  if (ctx.email) values.email_from = ctx.email;
+  if (ctx.name) values.contact_name = ctx.name;
+  if (ctx.companyId) values.company_id = ctx.companyId;
+  if (ctx.teamId) values.team_id = ctx.teamId;
+  if (stageId) values.stage_id = stageId;
+
+  logger.info("Creating Odoo CRM opportunity", {
+    action: "crm.lead.create",
+    partnerId: input.partnerId,
+    name: input.name,
+    type: values.type,
+    companyId: ctx.companyId ?? null,
+    teamId: ctx.teamId ?? null,
+    stageId: stageId ?? null,
+  });
+
+  const leadId = await client.create("crm.lead", values);
+
+  if (input.description.trim()) {
+    await persistCrmLeadNotes(client, leadId, input.description, "crm.lead.create", "replace", {
+      skipChatter: true,
+    });
+  }
+
+  const created = await client.read<{
+    id: number;
+    type: string;
+    active: boolean;
+    stage_id: [number, string] | false;
+    team_id: [number, string] | false;
+    company_id: [number, string] | false;
+  }>("crm.lead", [leadId], ["type", "active", "stage_id", "team_id", "company_id"]);
+
+  logger.info("Odoo CRM opportunity created", {
+    action: "crm.lead.create",
+    leadId,
+    partnerId: input.partnerId,
+    type: created[0]?.type ?? values.type,
+    active: created[0]?.active ?? true,
+    stageId: Array.isArray(created[0]?.stage_id) ? created[0].stage_id[0] : stageId,
+    stageName: Array.isArray(created[0]?.stage_id) ? created[0].stage_id[1] : null,
+    teamId: Array.isArray(created[0]?.team_id) ? created[0].team_id[0] : ctx.teamId,
+    companyId: Array.isArray(created[0]?.company_id) ? created[0].company_id[0] : ctx.companyId,
+  });
+
+  const actualStageId = Array.isArray(created[0]?.stage_id) ? created[0].stage_id[0] : null;
+  const actualStageName = Array.isArray(created[0]?.stage_id)
+    ? created[0].stage_id[1].toLowerCase()
+    : "";
+  if (stageId && actualStageId && actualStageId !== stageId && actualStageName.includes("won")) {
+    logger.warn("CRM lead landed in Won instead of New — resetting to New stage", {
+      action: "crm.lead.create",
+      leadId,
+      expectedStageId: stageId,
+      actualStageId,
+    });
+    await client.write("crm.lead", [leadId], { stage_id: stageId, probability: 10, active: true });
+  }
+
+  return leadId;
+}
+
+export async function createProductOrderLead(input: {
+  partnerId: number;
+  items: Array<{ productName: string; quantity: number }>;
+  description: string;
+  expectedRevenue?: number;
+}): Promise<number> {
+  const client = getOdooClient();
+  if (!client) throw new Error("Odoo is not configured");
+
+  return createPortalCrmLead(client, {
+    partnerId: input.partnerId,
+    name: productOrderLeadName(input.items),
+    description: input.description,
+    routing: "software",
+    expectedRevenue: input.expectedRevenue ?? estimatedRevenueFromItems(input.items),
+  });
+}
+
+async function resolveCartStageId(
+  client: OdooClient,
+  teamId?: number,
+): Promise<number | null> {
+  // Prefer an explicit "Added to Cart" stage when the software pipeline has one.
+  return (
+    (await resolvePipelineStageIdByHints(client, ["added to cart"], teamId)) ??
+    (await resolveNewPipelineStageId(client, teamId))
+  );
+}
+
+/**
+ * Stage after payment proof: Portal Purchase (awaiting finance verification).
+ * Falls back to the legacy "Portal Software Order" name. Never Won.
+ * Null means leave the lead where it is rather than dropping it back to New.
+ */
+async function resolvePortalPurchaseStageId(
+  client: OdooClient,
+  teamId?: number,
+): Promise<number | null> {
+  return resolvePipelineStageIdByHints(
+    client,
+    ["payment verification", "portal purchase", "portal software order"],
+    teamId,
+  );
+}
+
+/** Finance verified payment — license not issued yet. */
+async function resolvePaymentConfirmationStageId(
+  client: OdooClient,
+  teamId?: number,
+): Promise<number | null> {
+  return resolvePipelineStageIdByHints(
+    client,
+    ["payment confirmation", "payment verified"],
+    teamId,
+  );
+}
+
+/** Software team issued the license. Prefer dedicated stage; Won is last resort. */
+async function resolveLicenseIssuedStageId(
+  client: OdooClient,
+  teamId?: number,
+): Promise<number | null> {
+  return (
+    (await resolvePipelineStageIdByHints(client, ["license issued"], teamId)) ??
+    (await resolvePipelineStageIdByHints(client, ["won"], teamId))
+  );
+}
+
+export type PurchaseCrmStage =
+  | "portal_purchase"
+  | "payment_confirmation"
+  | "license_issued";
+
+/** Advance the single purchase CRM opportunity to the next workflow stage. */
+export async function advancePurchaseCrmLeadStage(input: {
+  leadId: number;
+  stage: PurchaseCrmStage;
+  probability?: number;
+}): Promise<boolean> {
+  const client = getOdooClient();
+  if (!client) return false;
+
+  const rows = await client.read<{
+    team_id: [number, string] | false;
+    active: boolean;
+    stage_id: [number, string] | false;
+  }>("crm.lead", [input.leadId], ["team_id", "active", "stage_id"]);
+  const lead = rows[0];
+  if (!lead?.active) return false;
+
+  const teamId = Array.isArray(lead.team_id) ? lead.team_id[0] : undefined;
+  const stageId =
+    input.stage === "portal_purchase"
+      ? await resolvePortalPurchaseStageId(client, teamId)
+      : input.stage === "payment_confirmation"
+        ? await resolvePaymentConfirmationStageId(client, teamId)
+        : await resolveLicenseIssuedStageId(client, teamId);
+
+  if (!stageId) {
+    logger.warn("Purchase CRM stage not found in pipeline — leaving lead unchanged", {
+      action: "crm.lead.advance_stage",
+      leadId: input.leadId,
+      stage: input.stage,
+    });
+    return false;
+  }
+
+  const currentId = Array.isArray(lead.stage_id) ? lead.stage_id[0] : null;
+  if (currentId === stageId) return true;
+
+  const probability =
+    input.probability ??
+    (input.stage === "portal_purchase" ? 30 : input.stage === "payment_confirmation" ? 70 : 100);
+
+  await client.write("crm.lead", [input.leadId], {
+    stage_id: stageId,
+    probability,
+    active: true,
+    type: "opportunity",
+  });
+
+  logger.info("Advanced purchase CRM opportunity stage", {
+    action: "crm.lead.advance_stage",
+    leadId: input.leadId,
+    stage: input.stage,
+    stageId,
+  });
+  return true;
+}
+
+/** True while the cart CRM opportunity is still in the Added to Cart journey. */
+export async function isCartCrmLeadInAddedToCartStage(leadId: number): Promise<boolean> {
+  const client = getOdooClient();
+  if (!client) return false;
+
+  const rows = await client.read<{
+    name: string;
+    active: boolean;
+    stage_id: [number, string] | false;
+  }>("crm.lead", [leadId], ["name", "active", "stage_id"]);
+  const lead = rows[0];
+  if (!lead?.active || !lead.name?.startsWith(CART_LEAD_PREFIX)) return false;
+
+  const stage = Array.isArray(lead.stage_id) ? lead.stage_id[1].toLowerCase() : "";
+  if (stage.includes("won") || stage.includes("lost")) return false;
+  if (!stage) return true;
+  return stage.includes("added to cart") || stage.includes("new");
+}
+
+/** Open cart-journey opportunity for this partner (one record per purchase journey). */
+export async function findOpenCartLead(partnerId: number): Promise<number | null> {
+  const client = getOdooClient();
+  if (!client) return null;
+
+  const partnerIds = await getRelatedPartnerIds(partnerId);
+  const rows = await client.searchRead<{ id: number; name: string; stage_id: [number, string] | false }>(
+    "crm.lead",
+    [
+      ["partner_id", "in", partnerIds],
+      ["type", "=", "opportunity"],
+      ["active", "=", true],
+      ["name", "ilike", CART_LEAD_PREFIX],
+    ],
+    ["id", "name", "stage_id"],
+    5,
+  );
+
+  // A Won/Lost cart lead belongs to a finished journey — start a fresh record instead of reopening it.
+  const open = rows.find((row) => {
+    const stage = Array.isArray(row.stage_id) ? row.stage_id[1].toLowerCase() : "";
+    return !stage.includes("won") && !stage.includes("lost");
+  });
+  return open?.id ?? null;
+}
+
+/** Create or refresh the single CRM opportunity for an in-progress cart. */
+export async function upsertCartCrmLead(input: {
+  partnerId: number;
+  productNames: string[];
+  description: string;
+  existingLeadId?: number;
+  expectedRevenue?: number;
+}): Promise<number> {
+  const client = getOdooClient();
+  if (!client) throw new Error("Odoo is not configured");
+
+  const ctx = await getPartnerOdooContextForCrm(input.partnerId, "software");
+  const stageId = await resolveCartStageId(client, ctx.teamId);
+  const name = cartLeadName(input.productNames);
+
+  let leadId = input.existingLeadId;
+  if (leadId) {
+    const existing = await client.read<{
+      id: number;
+      active: boolean;
+      stage_id: [number, string] | false;
+    }>("crm.lead", [leadId], ["id", "active", "stage_id"]);
+    const stage = Array.isArray(existing[0]?.stage_id)
+      ? existing[0].stage_id[1].toLowerCase()
+      : "";
+    // Never rename a closed opportunity back into the cart journey.
+    if (!existing[0]?.active || stage.includes("won") || stage.includes("lost")) {
+      leadId = undefined;
+    }
+  }
+  if (!leadId) {
+    leadId = (await findOpenCartLead(input.partnerId)) ?? undefined;
+  }
+
+  if (leadId) {
+    const values: Record<string, unknown> = {
+      name,
+      description: input.description,
+      probability: 10,
+      active: true,
+      type: "opportunity",
+    };
+    if (ctx.email) values.email_from = ctx.email;
+    if (ctx.name) values.contact_name = ctx.name;
+    if (ctx.companyId) values.company_id = ctx.companyId;
+    if (ctx.teamId) values.team_id = ctx.teamId;
+    if (stageId) values.stage_id = stageId;
+    if (input.expectedRevenue != null && input.expectedRevenue > 0) {
+      values.expected_revenue = input.expectedRevenue;
+    }
+
+    await client.write("crm.lead", [leadId], values);
+    if (input.description.trim()) {
+      await persistCrmLeadNotes(client, leadId, input.description, "crm.lead.cart_upsert", "replace", {
+        skipChatter: true,
+      });
+    }
+    logger.info("Updated cart CRM opportunity", {
+      action: "crm.lead.cart_upsert",
+      leadId,
+      partnerId: input.partnerId,
+    });
+    return leadId;
+  }
+
+  const values: Record<string, unknown> = {
+    partner_id: input.partnerId,
+    name,
+    description: input.description,
+    type: "opportunity",
+    probability: 10,
+  };
+  if (ctx.email) values.email_from = ctx.email;
+  if (ctx.name) values.contact_name = ctx.name;
+  if (ctx.companyId) values.company_id = ctx.companyId;
+  if (ctx.teamId) values.team_id = ctx.teamId;
+  if (stageId) values.stage_id = stageId;
+  if (input.expectedRevenue != null && input.expectedRevenue > 0) {
+    values.expected_revenue = input.expectedRevenue;
+  }
+
+  leadId = await client.create("crm.lead", values);
+  if (input.description.trim()) {
+    await persistCrmLeadNotes(client, leadId, input.description, "crm.lead.cart_create", "replace", {
+      skipChatter: true,
+    });
+  }
+
+  logger.info("Created cart CRM opportunity", {
+    action: "crm.lead.cart_create",
+    leadId,
+    partnerId: input.partnerId,
+    stageId: stageId ?? null,
+  });
+  return leadId;
+}
+
+/**
+ * Close the cart opportunity once the customer empties their cart, so sales are not left
+ * chasing products that were removed. Marks Lost rather than archiving, matching how
+ * cancellations are handled, so the card stays visible in the pipeline.
+ */
+export async function closeCartCrmLead(input: {
+  partnerId: number;
+  existingLeadId?: number;
+}): Promise<boolean> {
+  const client = getOdooClient();
+  if (!client) return false;
+
+  const leadId = input.existingLeadId ?? (await findOpenCartLead(input.partnerId));
+  if (!leadId) return false;
+
+  // A lead promoted to a portal software order has been renamed and no longer belongs to
+  // the cart journey — clearing the cart after checkout must never mark that order Lost.
+  const rows = await client.read<{ name: string; active: boolean }>(
+    "crm.lead",
+    [leadId],
+    ["name", "active"],
+  );
+  const lead = rows[0];
+  if (!lead?.active || !lead.name?.startsWith(CART_LEAD_PREFIX)) return false;
+
+  await markLeadLost(client, leadId);
+  logger.info("Closed abandoned cart CRM opportunity", {
+    action: "crm.lead.cart_close",
+    leadId,
+    partnerId: input.partnerId,
+  });
+  return true;
+}
+
+/**
+ * Promote the cart CRM record to a portal software order (same lead — no second opportunity).
+ * Falls back to creating a new order lead when no cart lead exists.
+ */
+export async function promoteCartLeadToProductOrder(input: {
+  partnerId: number;
+  items: Array<{ productName: string; quantity: number }>;
+  /** Omit to keep the notes the cart journey already wrote (checkout details). */
+  description?: string;
+  existingLeadId?: number;
+  expectedRevenue?: number;
+}): Promise<number> {
+  const client = getOdooClient();
+  if (!client) throw new Error("Odoo is not configured");
+
+  let leadId = input.existingLeadId;
+  if (!leadId) {
+    leadId = (await findOpenCartLead(input.partnerId)) ?? undefined;
+  }
+
+  if (!leadId) {
+    return createProductOrderLead({
+      partnerId: input.partnerId,
+      items: input.items,
+      description: input.description ?? "",
+      expectedRevenue: input.expectedRevenue,
+    });
+  }
+
+  const ctx = await getPartnerOdooContextForCrm(input.partnerId, "software");
+  const stageId = await resolvePortalPurchaseStageId(client, ctx.teamId);
+  const name = productOrderLeadName(input.items);
+
+  const expectedRevenue = input.expectedRevenue ?? estimatedRevenueFromItems(input.items);
+  const values: Record<string, unknown> = {
+    name,
+    probability: 30,
+    active: true,
+    type: "opportunity",
+  };
+  if (input.description?.trim()) values.description = input.description;
+  if (ctx.email) values.email_from = ctx.email;
+  if (ctx.name) values.contact_name = ctx.name;
+  if (ctx.companyId) values.company_id = ctx.companyId;
+  if (ctx.teamId) values.team_id = ctx.teamId;
+  if (stageId) values.stage_id = stageId;
+  if (expectedRevenue > 0) values.expected_revenue = expectedRevenue;
+
+  await client.write("crm.lead", [leadId], values);
+  if (input.description?.trim()) {
+    await persistCrmLeadNotes(
+      client,
+      leadId,
+      input.description,
+      "crm.lead.cart_promote",
+      "replace",
+      { skipChatter: true },
+    );
+  }
+
+  logger.info("Promoted cart CRM opportunity to Portal Purchase", {
+    action: "crm.lead.cart_promote",
+    leadId,
+    partnerId: input.partnerId,
+    stageId: stageId ?? null,
+  });
+  return leadId;
+}
+
+export async function postOrderPaymentMessageToLead(input: {
+  leadId: number;
+  orderReference: string;
+  message: string;
+  paymentMethod?: string;
+  amountPaid?: number;
+}): Promise<void> {
+  const trimmed = input.message.trim();
+  if (!trimmed) return;
+
+  const client = getOdooClient();
+  if (!client) return;
+
+  const plainLines = [
+    "Customer payment message",
+    `Order: ${input.orderReference}`,
+    formatCustomerMessageForOdoo(trimmed),
+  ];
+  if (input.paymentMethod) {
+    plainLines.push(`Payment method: ${input.paymentMethod}`);
+  }
+  if (input.amountPaid != null) {
+    plainLines.push(`Amount paid: OMR ${input.amountPaid.toFixed(3)}`);
+  }
+
+  await persistCrmLeadNotes(
+    client,
+    input.leadId,
+    plainLines.join("\n"),
+    "crm.lead.payment_message",
+    "append",
+  );
+}
+
+export async function createSubscriptionLead(input: {
+  partnerId: number;
+  productName: string;
+  notes?: string;
+}): Promise<number> {
+  const client = getOdooClient();
+  if (!client) throw new Error("Odoo is not configured");
+
+  return createPortalCrmLead(client, {
+    partnerId: input.partnerId,
+    name: subscriptionLeadName(input.productName),
+    description: input.notes ?? "",
+    routing: "elv",
+  });
+}
+
+export async function findSubscriptionLeads(
+  partnerId: number,
+  productName: string,
+): Promise<number[]> {
+  const client = getOdooClient();
+  if (!client) return [];
+
+  const partnerIds = await getRelatedPartnerIds(partnerId);
+  const leadName = subscriptionLeadName(productName);
+
+  const rows = await client.searchRead<{ id: number }>(
+    "crm.lead",
+    [
+      ["name", "ilike", leadName],
+      ["partner_id", "in", partnerIds],
+      ["active", "=", true],
+    ],
+    ["id"],
+    20,
+  );
+
+  return rows.map((row) => row.id);
+}
+
+/** CRM opportunities tied to a portal subscription (initial + cancellation request leads). */
+export async function findSubscriptionOpportunityLeads(
+  partnerId: number,
+  productName: string,
+): Promise<number[]> {
+  const client = getOdooClient();
+  if (!client) return [];
+
+  const partnerIds = await getRelatedPartnerIds(partnerId);
+  const leadNames = [
+    subscriptionLeadName(productName),
+    subscriptionRequestLeadName("cancel", productName),
+  ];
+
+  const rows = await client.searchRead<{ id: number }>(
+    "crm.lead",
+    [
+      ["name", "in", leadNames],
+      ["partner_id", "in", partnerIds],
+      ["active", "=", true],
+    ],
+    ["id"],
+    20,
+  );
+
+  return rows.map((row) => row.id);
+}
+
+async function findLostStageId(client: OdooClient, teamId?: number): Promise<number | null> {
+  const domain: unknown[] = [
+    ["name", "ilike", "lost"],
+    ["is_won", "=", false],
+  ];
+  if (teamId) {
+    domain.unshift("|", ["team_ids", "=", false], ["team_ids", "in", [teamId]]);
+  }
+
+  const stages = await client.searchRead<{ id: number; name: string; sequence: number }>(
+    "crm.stage",
+    domain,
+    ["id", "name", "sequence"],
+    10,
+  );
+  if (!stages.length) return null;
+
+  const exact = stages.find((stage) => stage.name.toLowerCase() === "lost");
+  const picked = exact ?? stages.sort((a, b) => b.sequence - a.sequence)[0];
+  return picked?.id ?? null;
+}
+
+async function markLeadLost(client: OdooClient, leadId: number): Promise<void> {
+  const rows = await client.read<{
+    team_id: [number, string] | false;
+    active: boolean;
+  }>("crm.lead", [leadId], ["team_id", "active"]);
+  const lead = rows[0];
+  if (!lead) throw new Error(`CRM lead ${leadId} not found`);
+
+  const teamId = Array.isArray(lead.team_id) ? lead.team_id[0] : undefined;
+  const lostStageId = await findLostStageId(client, teamId);
+
+  // Prefer moving to the LOST pipeline stage so the card appears in CRM kanban.
+  // Odoo's action_set_lost archives the record (active=false), which hides it from
+  // stage columns like the LOST column in your pipeline.
+  if (lostStageId) {
+    await client.write("crm.lead", [leadId], {
+      stage_id: lostStageId,
+      probability: 0,
+      active: true,
+    });
+    return;
+  }
+
+  try {
+    await client.call("crm.lead", "action_set_lost", [[leadId]]);
+    return;
+  } catch {
+    /* fall back to direct archive below */
+  }
+
+  await client.write("crm.lead", [leadId], { probability: 0, active: false });
+}
+
+export async function cancelSubscriptionLeads(leadIds: number[]): Promise<number> {
+  if (!leadIds.length) return 0;
+
+  const client = getOdooClient();
+  if (!client) throw new Error("Odoo is not configured");
+
+  let cancelled = 0;
+  for (const leadId of leadIds) {
+    await markLeadLost(client, leadId);
+    cancelled += 1;
+  }
+
+  return cancelled;
+}
+
+const PRODUCT_LEAD_LABELS: Record<string, string> = {
+  contact: "Contact inquiry",
+  demo: "Demo request",
+  quote: "Quote request",
+  download: "Brochure download",
+};
+
+/** Public marketing lead from Autodesk product pages (no portal auth). */
+export async function createAutodeskProductLead(input: {
+  leadType: string;
+  productName: string;
+  productSlug: string;
+  name: string;
+  email: string;
+  phone?: string;
+  company?: string;
+  message?: string;
+}): Promise<number> {
+  const client = getOdooClient();
+  if (!client) throw new Error("Odoo is not configured");
+
+  const { resolveCrmRouting, resolveNewPipelineStageId } = await import("./partner-context");
+  const routing = resolveCrmRouting("software");
+  const stageId = routing.teamId
+    ? await resolveNewPipelineStageId(client, routing.teamId)
+    : null;
+
+  const leadKind = PRODUCT_LEAD_LABELS[input.leadType] ?? "Product inquiry";
+  const description = [
+    `Source: Autodesk product page`,
+    `Product: ${input.productName} (/${input.productSlug})`,
+    `Request type: ${leadKind}`,
+    input.company ? `Company: ${input.company}` : null,
+    input.phone ? `Phone: ${input.phone}` : null,
+    input.message?.trim() ? `Message:\n${input.message.trim()}` : null,
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const values: Record<string, unknown> = {
+    name: `Autodesk ${leadKind}: ${input.productName}`,
+    contact_name: input.name.trim(),
+    email_from: input.email.trim(),
+    description,
+    type: "opportunity",
+    probability: 10,
+  };
+
+  if (input.phone?.trim()) values.phone = input.phone.trim();
+  if (routing.companyId) values.company_id = routing.companyId;
+  if (routing.teamId) values.team_id = routing.teamId;
+  if (stageId) values.stage_id = stageId;
+
+  logger.info("Creating Autodesk product CRM lead", {
+    action: "crm.lead.autodesk_product",
+    productSlug: input.productSlug,
+    leadType: input.leadType,
+  });
+
+  const leadId = await client.create("crm.lead", values);
+
+  if (description.trim()) {
+    await persistCrmLeadNotes(client, leadId, description, "crm.lead.autodesk_product", "replace", {
+      skipChatter: true,
+    });
+  }
+
+  return leadId;
+}

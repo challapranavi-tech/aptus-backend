@@ -1,0 +1,16 @@
+/**
+ * Page: Professional Audio Video Solutions | Aptus Infotech
+ * Route: /audio-video-solutions
+ * Source: LIVE WEBSITE/ELV\Professional Audio Video Solutions _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-professional-audio-video-solutions-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 26 inline styles detected — migrate to utilities */
+}

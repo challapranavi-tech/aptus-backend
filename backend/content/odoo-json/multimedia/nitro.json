@@ -1,0 +1,257 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "multimedia",
+    "bannerTitle": "Nitro PDF",
+    "bannerTagline": "The complete PDF productivity solution for businesses and professionals",
+    "mediaInline": false,
+    "title": "Work Smarter with PDF",
+    "paragraphs": [
+      "Nitro PDF is the complete PDF productivity solution designed to streamline your document workflow. Create, convert, edit, sign, and share PDFs with ease, all within a single, intuitive application.",
+      "Built for business professionals, Nitro PDF offers powerful features that rival Adobe Acrobat at a fraction of the cost. With seamless integration with Microsoft Office and cloud storage services, Nitro PDF fits perfectly into your existing workflow.",
+      "Whether you’re creating contracts, collaborating on reports, or securing sensitive documents, Nitro PDF provides the tools you need to work more efficiently and productively."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/nitro-1-e1759821706606-rcuhc79ynis5zsqbybm01w3ij9hqw5sq5nwkbezi5c.png",
+    "imageAlt": "Nitro PDF",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "gridColumns": 3,
+      "title": {
+        "before": "Powerful Features"
+      },
+      "subheading": "Discover why businesses worldwide choose Nitro PDF",
+      "align": "center",
+      "items": [
+        {
+          "title": "Create & Convert",
+          "body": "Create PDFs from over 300 file formats with a single click. Convert PDFs to Word, Excel, PowerPoint, and more while preserving formatting and layout.",
+          "icon": "file-pdf",
+          "imageAlt": "Create & Convert"
+        },
+        {
+          "title": "Edit & Review",
+          "body": "Edit text, images, and pages directly in your PDF. Add comments, annotations, and markups for collaborative review and feedback.",
+          "icon": "edit",
+          "imageAlt": "Edit & Review"
+        },
+        {
+          "title": "eSign Documents",
+          "body": "Request and add legally binding electronic signatures to documents. Track signing status and manage signed documents securely.",
+          "icon": "signature",
+          "imageAlt": "eSign Documents"
+        },
+        {
+          "title": "Secure & Protect",
+          "body": "Protect sensitive information with password encryption, redaction tools, and permission controls. Ensure document compliance and security.",
+          "icon": "shield-alt",
+          "imageAlt": "Secure & Protect"
+        },
+        {
+          "title": "Optimize & Compress",
+          "body": "Reduce file size without compromising quality. Optimize PDFs for web, print, or specific devices to improve sharing and storage efficiency.",
+          "icon": "check-circle",
+          "imageAlt": "Optimize & Compress"
+        },
+        {
+          "title": "Cloud Integration",
+          "body": "Seamlessly connect with cloud storage services like Dropbox, Google Drive, OneDrive, and Box. Access and share documents from anywhere.",
+          "icon": "cloud-upload-alt",
+          "imageAlt": "Cloud Integration"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Key Benefits"
+      },
+      "subheading": "Why businesses and professionals choose Nitro PDF",
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Save Time",
+          "body": "Streamline your document workflow with powerful tools that reduce manual tasks and automate repetitive processes.",
+          "icon": "stopwatch"
+        },
+        {
+          "title": "Cost-Effective",
+          "body": "Get all the PDF features you need at a fraction of the cost of other solutions. Reduce software licensing expenses without sacrificing quality.",
+          "icon": "dollar-sign"
+        },
+        {
+          "title": "Enhance Collaboration",
+          "body": "Improve team collaboration with real-time commenting, review tools, and seamless document sharing capabilities.",
+          "icon": "users"
+        },
+        {
+          "title": "Work Anywhere",
+          "body": "Access and edit PDFs on any device with our cloud integration and mobile apps. Stay productive whether you’re in the office or on the go.",
+          "icon": "mobile-alt"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Nitro PDF?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Official Partner",
+          "body": "As an authorized partner, we provide access to genuine Nitro PDf.",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset"
+        },
+        {
+          "title": "Local Presence",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "mobile-alt"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Transform Your PDF Workflow?",
+    "subheading": "Get a free quotation for Nitro PDF today and experience the future of document productivity.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Hear from businesses that have transformed their workflow with Nitro PDF",
+    "items": [
+      {
+        "quote": "Nitro PDF has completely transformed how our legal team handles documents. The editing tools and eSignature capabilities have streamlined our contract workflow, saving us countless hours each month.",
+        "author": "Rehan Al Hashmi",
+        "role": "Legal Director, Global Law Firm"
+      },
+      {
+        "quote": "We switched from Adobe Acrobat to Nitro PDF and haven’t looked back. The performance is significantly faster, and the cost savings have been substantial. Our team is more productive than ever.",
+        "author": "Sara Al Sayyed",
+        "role": "IT Manager, Financial Services"
+      },
+      {
+        "quote": "The cloud integration and mobile apps have been game-changers for our remote workforce. Our team can now access, edit, and sign documents from anywhere, improving collaboration and efficiency.",
+        "author": "Khalid Al Balushi",
+        "role": "Operations Director, Healthcare Provider"
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/planswift.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Prokon.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/sophos.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/spectronova.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/aconex.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/etap.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/fortinet.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/kaspersky.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft.png",
+        "alt": "Microsoft"
+      },
+      {
+        "id": "lumion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/lumion.png",
+        "alt": "lumion"
+      },
+      {
+        "id": "paloalto",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/paloalto.png",
+        "alt": "paloalto"
+      },
+      {
+        "id": "vray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/v.ray_.png",
+        "alt": "v.ray"
+      },
+      {
+        "id": "twinmotion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png",
+        "alt": "twinmotion"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

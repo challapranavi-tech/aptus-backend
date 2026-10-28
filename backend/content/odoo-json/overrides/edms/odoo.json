@@ -1,0 +1,261 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "edms",
+    "bannerTitle": "Best Odoo ERP Solutions to Improve Sales, Finance & Operations",
+    "bannerTagline": "Complete business management with the world's most powerful open-source ERP system",
+    "mediaInline": false,
+    "title": "Transform Your Business Operations with Odoo",
+    "paragraphs": [
+      "In the modern competitive landscape, running a successful business requires more than just disconnected tools—it demands a seamless, unified system. Odoo is the world's leading open-source Enterprise Resource Planning (ERP) suite, providing a comprehensive collection of integrated business applications that cover every need from sales and inventory to accounting and manufacturing.",
+      "By working within a data-rich, interconnected environment, Odoo empowers you to manage your entire operation with precision, where a sales order automatically updates Inventory, Accounting, and CRM records. This dramatically improves how you track performance, automate workflows, and make informed decisions across the whole company.",
+      "From creating a beautiful, integrated eCommerce store and optimizing your Warehouse Management to streamlining Project Management and ensuring financial compliance, Odoo provides the fundamental software foundation that ensures your entire business runs cohesively, efficiently, and profitably."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/09/odoo-1024x1024.webp",
+    "imageAlt": "Odoo",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Key Features of",
+        "accent": "Odoo"
+      },
+      "subheading": "Discover the capabilities that make Odoo the industry standard",
+      "align": "center",
+      "items": [
+        {
+          "title": "Customer Relationship Management",
+          "body": "Manage contacts, track interactions, automate follow-ups, and gain deep insights into customer behavior to drive sales and retention.",
+          "icon": "chart-pie"
+        },
+        {
+          "title": "Sales & CRM",
+          "body": "Track opportunities, manage quotes and orders, forecast revenue, and optimize your sales pipeline with automated workflows.",
+          "icon": "shopping-cart"
+        },
+        {
+          "title": "Inventory & Procurement",
+          "body": "Optimize stock levels, track products across locations, manage warehouse operations, and streamline procurement processes.",
+          "icon": "boxes"
+        },
+        {
+          "title": "Human Resources",
+          "body": "Employee records, payroll processing, recruitment, performance evaluation, and leave management.",
+          "icon": "users"
+        },
+        {
+          "title": "Project Management",
+          "body": "Task assignment, time tracking, milestone planning, resource allocation, and project costing.",
+          "icon": "project-diagram"
+        },
+        {
+          "title": "Mobile & Web Apps",
+          "body": "Access Odoo anytime, anywhere with native mobile applications for iOS and Android devices.",
+          "icon": "mobile-alt"
+        },
+        {
+          "title": "Financial Management",
+          "body": "Handle invoicing, payments, expenses, payroll, and financial reporting with integrated tools that simplify accounting.",
+          "icon": "users"
+        },
+        {
+          "title": "Digital Marketing Tools",
+          "body": "Create email campaigns, manage social media, run ads, and analyze campaign performance with integrated marketing automation.",
+          "icon": "bullhorn"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Benefits of Choosing",
+        "accent": "Odoo"
+      },
+      "subheading": "Why businesses worldwide trust Odoo for their ERP needs",
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Seamless Integration",
+          "body": "Immediate notification system for patients requiring urgent assistance with visual, audible, and vibration-based alerts.",
+          "icon": "reply-all"
+        },
+        {
+          "title": "Scalability",
+          "body": "Reliable wireless communication devices ensuring staff are always reachable regardless of location within the facility.",
+          "icon": "arrows-alt"
+        },
+        {
+          "title": "Cost Efficiency",
+          "body": "Real-time dashboard displaying active calls, response times, and system status for complete situational awareness.",
+          "icon": "dollar-sign"
+        },
+        {
+          "title": "Security & Compliance",
+          "body": "All communications are encrypted and meet strict HIPAA requirements for patient privacy protection.",
+          "icon": "shield-alt"
+        }
+      ]
+    },
+    {
+      "id": "why-choose",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for Your Odoo Implementation?"
+      },
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Certified Experts",
+          "body": "Our team consists of certified Odoo developers and consultants with extensive industry experience.",
+          "icon": "certificate"
+        },
+        {
+          "title": "Customized Solutions",
+          "body": "We tailor Odoo to fit your specific business requirements rather than forcing you into generic templates.",
+          "icon": "screwdriver"
+        },
+        {
+          "title": "Dedicated Support",
+          "body": "24/7 technical assistance and regular system maintenance to ensure optimal performance.",
+          "icon": "headset"
+        },
+        {
+          "title": "Future-Ready Technology",
+          "body": "We implement Odoo with scalability in mind, ensuring your system can adapt to future technological advancements.",
+          "icon": "reply-all"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Transform Your Business Operations?",
+    "subheading": "Contact our Odoo specialists today for a free consultation and customized solution proposal.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "Client Success Stories"
+    },
+    "subheading": "Hear from satisfied customers who have transformed their business with Odoo",
+    "items": [
+      {
+        "quote": "The Odoo implementation has completely revolutionized how we manage our supply chain. The integration capabilities have connected all our departments seamlessly.",
+        "author": "Mohammed Al Farsi",
+        "role": "Operations Director, Manufacturing Company"
+      },
+      {
+        "quote": "We implemented Odoo across our entire organization and couldn't be happier with the results. The reporting tools have provided insights we never had before.",
+        "author": "Sarah Johnson",
+        "role": "Finance Manager, Retail Chain"
+      },
+      {
+        "quote": "The flexibility of Odoo allowed us to customize the system to match our unique workflow requirements perfectly. Our productivity has increased significantly.",
+        "author": "Ahmed Hassan",
+        "role": "IT Director, Logistics Firm"
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/planswift.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Prokon.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/sophos.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/spectronova.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/aconex.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/etap.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/fortinet.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/kaspersky.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft.png",
+        "alt": "Microsoft"
+      },
+      {
+        "id": "lumion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/lumion.png",
+        "alt": "lumion"
+      },
+      {
+        "id": "paloalto",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/paloalto.png",
+        "alt": "paloalto"
+      },
+      {
+        "id": "vray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/v.ray_.png",
+        "alt": "v.ray"
+      },
+      {
+        "id": "twinmotion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png",
+        "alt": "twinmotion"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

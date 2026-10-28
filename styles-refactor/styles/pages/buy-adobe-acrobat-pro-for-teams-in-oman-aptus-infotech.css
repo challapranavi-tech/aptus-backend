@@ -1,0 +1,16 @@
+/**
+ * Page: Buy Adobe Acrobat Pro for Teams in Oman | Aptus Infotech
+ * Route: /adobe-acrobat-pro
+ * Source: LIVE WEBSITE/software\adobe\Buy Adobe Acrobat Pro for Teams in Oman _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-buy-adobe-acrobat-pro-for-teams-in-oman-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 41 inline styles detected — migrate to utilities */
+}

@@ -1,0 +1,92 @@
+/**
+ * Page: Get to Know Our Team | Aptus Infotech
+ * Route: /our-team
+ * Source: post-1230.css (Elementor page ID 1230)
+ * UNIQUE ONLY — shared navbar/footer/forms in components/
+ */
+@layer pages {
+  .page-team .team-hero img {
+    width: 100%;
+  }
+
+  .page-team .team-intro {
+    padding: 2rem 0;
+    max-width: var(--content-max);
+    margin-inline: auto;
+  }
+
+  .page-team .team-intro__title {
+    text-align: start;
+    font-size: var(--text-4xl);
+    font-weight: 600;
+  }
+
+  .page-team .team-grid {
+    padding: 0 0 4rem;
+    max-width: var(--content-max);
+    margin-inline: auto;
+  }
+
+  /* Leadership / employee cards — post-1230 f4992b7 pattern */
+  .page-team .team-member-card {
+    background-color: var(--color-surface-muted);
+    border-radius: var(--radius-card);
+    margin: 1rem 0 2rem;
+    padding: 1rem;
+    transition: background var(--duration-normal), border-radius var(--duration-normal),
+      box-shadow var(--duration-normal);
+  }
+
+  .page-team .team-member-card__name {
+    font-size: var(--text-xl);
+    font-weight: 600;
+  }
+
+  .page-team .team-member-card__role {
+    color: #878080;
+  }
+
+  .page-team .team-member-card__bio {
+    font-weight: 400;
+    color: var(--color-text);
+    max-width: 98.229%;
+  }
+
+  .page-team .team-member-card__photo {
+    margin-top: 5rem;
+    margin-left: 1rem;
+  }
+
+  .page-team .team-member-card__photo img {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Large watermark number block — ponytail: 4.0625rem has no exact token; var(--text-6xl)=3.75rem is closest */
+  .page-team .team-stat__number {
+    text-align: start;
+    font-size: var(--text-6xl);
+    font-weight: 600;
+    color: #1352a345;
+  }
+
+  .page-team .team-stat__label {
+    text-align: start;
+    font-size: var(--text-3xl);
+    font-weight: 400;
+    line-height: 1rem;
+    color: var(--primary-color);
+  }
+
+  @media (min-width: 768px) {
+    .page-team .team-member-card__col--text { width: 50%; }
+    .page-team .team-member-card__col--photo { width: 50%; }
+  }
+
+  @media (max-width: 767px) {
+    .page-team .team-intro,
+    .page-team .team-grid {
+      padding-block: 2rem;
+    }
+  }
+}

@@ -1,0 +1,86 @@
+# dependencies
+node_modules/
+package-lock.json
+.pnp
+.pnp.*
+
+# next.js
+.next/
+out/
+
+# production
+build/
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*
+.pnpm-debug.log*
+yarn-error.log*
+
+# key/credential material — belt-and-suspenders alongside the .env rules below
+*.key
+id_rsa*
+credentials.json
+
+# playwright
+frontend/test-results/
+frontend/playwright-report/
+frontend/blob-report/
+frontend/playwright/.cache/
+
+# env files — never commit secrets (keep checked-in *.example templates only)
+.env
+.env.*
+.env.local
+.env.production
+.env.*.local
+env.local
+env.production
+git.envfile
+.git.envfile
+backend/.env.local
+backend/.env.production
+backend/.env.*.local
+backend/env.local
+backend/env.production
+frontend/.env.local
+frontend/.env.production
+frontend/.env.*.local
+frontend/env.local
+frontend/env.production
+!**/.env.example
+!**/.env.*.example
+# Override: production example may hold live values — keep local only.
+.env.production.example
+**/.env.production.example
+
+# local scratch / backups
+.data/
+*.bak
+*.zip
+careers-description-fix-files.zip
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# temp scratch files
+tmp-*
+scripts/.tmp*
+
+# archived career applications — contains applicant PII, never commit
+backend/data/applications/
+data/applications/
+backend/data/crm-pending/
+data/crm-pending/
+
+# reference / download folders — not source code (root only; keep frontend/public/assets)
+/assets/
+/assets.zip
+LIVE WEBSITE/
+LIVE WEBSITE.zip
+aptus old.zip
+_zip_extract/
+_wayback/
+/categorized_assets/

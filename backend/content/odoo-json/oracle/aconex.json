@@ -1,0 +1,250 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "oracle",
+    "bannerTitle": "Oracle Aconex",
+    "bannerTagline": "The World’s Leading Construction Project Management Platform",
+    "mediaInline": false,
+    "title": "Transform Construction Project Management with Oracle Aconex",
+    "paragraphs": [
+      "Oracle Aconex is a powerful cloud-based construction project management platform that streamlines communication, documentation, and workflow coordination across the entire project lifecycle. Designed to improve team collaboration and centralize all project data in a secure common data environment (CDE), it enhances efficiency for construction, engineering, and infrastructure projects.",
+      "With strong features for document control, quality tracking, risk management, and digital collaboration, Oracle Aconex supports smoother project delivery, helps reduce delays, improves compliance, and ensures projects are completed safely, on time, and within budget while aligning with local construction industry standards and best practices."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/imgi_8_photo-1581094794329-c8112a89af12-683x1024.png",
+    "imageAlt": "Oracle Aconex",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Key Features of",
+        "accent": "Oracle Aconex"
+      },
+      "subheading": "Comprehensive tools designed specifically for the construction industry",
+      "align": "center",
+      "gridColumns": 3,
+      "items": [
+        {
+          "title": "Document Control & Collaboration",
+          "body": "Centralized document management with version control, markup tools, and real-time collaboration for all project stakeholders.",
+          "icon": "file"
+        },
+        {
+          "title": "Risk Management & Safety",
+          "body": "Integrated risk register, hazard identification, inspection tracking, and safety management tools to ensure compliance and worker safety.",
+          "icon": "exclamation-triangle"
+        },
+        {
+          "title": "Quality Assurance & Punch Lists",
+          "body": "Defect tracking, non-conformance reports, and punch list management with automated workflows and resolution tracking.",
+          "icon": "list-alt"
+        },
+        {
+          "title": "Project Scheduling & Progress Tracking",
+          "body": "Gantt chart visualization, progress monitoring, and schedule analysis tools with real-time updates and alerts.",
+          "icon": "calendar-alt"
+        },
+        {
+          "title": "Communication Hub",
+          "body": "Integrated messaging, meeting minutes, and action item tracking to keep all stakeholders aligned and informed.",
+          "icon": "comments"
+        },
+        {
+          "title": "Mobile Accessibility",
+          "body": "Native mobile apps for iOS and Android with offline capability, allowing field teams to work efficiently anywhere.",
+          "icon": "mobile-alt"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Benefits for Construction Teams"
+      },
+      "subheading": "How Oracle Aconex transforms project delivery",
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Reduced Project Delays",
+          "body": "Improve communication and streamline workflows across all stakeholders to minimize costly delays and disruptions.",
+          "icon": "stopwatch"
+        },
+        {
+          "title": "Cost Savings",
+          "body": "Minimize rework, optimize resource allocation, and maintain strict budget control throughout the project lifecycle.",
+          "icon": "save"
+        },
+        {
+          "title": "Enhanced Safety",
+          "body": "Digital safety plans, hazard reporting, and compliance tracking to ensure worker safety and regulatory adherence.",
+          "icon": "shield-alt"
+        },
+        {
+          "title": "Improved Stakeholder Alignment",
+          "body": "Centralized platform connecting owners, contractors, designers, and suppliers with real-time access to project information.",
+          "icon": "users"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Why Choose Oracle Aconex Through Aptus Infotech?"
+      },
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Certified Specialists",
+          "body": "Our team consists of certified Oracle Aconex experts with extensive experience in construction technology deployment.",
+          "icon": "certificate"
+        },
+        {
+          "title": "Customized Workflows",
+          "body": "We configure the platform to match your existing processes rather than forcing you into generic templates.",
+          "icon": "screwdriver"
+        },
+        {
+          "title": "Dedicated Support Team",
+          "body": "24/7 technical assistance and regular system maintenance to ensure optimal performance during critical project phases.",
+          "icon": "headset"
+        },
+        {
+          "title": "Future-Ready Technology",
+          "body": "We implement solutions that scale with your business growth and adapt to emerging technologies in the construction industry.",
+          "icon": "sync"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Transform Your Construction Projects?",
+    "subheading": "Contact our Oracle specialists today for a free consultation and customized solution proposal.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Success stories from businesses using AutoCAD through Aptus Infotech",
+    "items": [
+      {
+        "quote": "The Oracle Aconex has revolutionized how we manage our multi-story residential developments. The integration between design and field operations is seamless.",
+        "author": "Saad Al Hashmi",
+        "role": "Project Director, Residential Developer"
+      },
+      {
+        "quote": "We implemented Oracle Aconex across our commercial construction division and couldn’t be happier with the results. The scheduling tools have saved us countless hours.",
+        "author": "Ibad Farooq",
+        "role": "Operations Manager, Commercial Contractor"
+      },
+      {
+        "quote": "The ability to track progress in real-time using the mobile app has significantly reduced our project completion times and improved quality control.",
+        "author": "Sadia Al Balushi",
+        "role": "IT Director, Civil Engineering Firm"
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/planswift.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Prokon.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/sophos.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/spectronova.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/aconex.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/etap.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/fortinet.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/kaspersky.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft.png",
+        "alt": "Microsoft"
+      },
+      {
+        "id": "lumion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/lumion.png",
+        "alt": "lumion"
+      },
+      {
+        "id": "paloalto",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/paloalto.png",
+        "alt": "paloalto"
+      },
+      {
+        "id": "vray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/v.ray_.png",
+        "alt": "v.ray"
+      },
+      {
+        "id": "twinmotion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png",
+        "alt": "twinmotion"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

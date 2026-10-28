@@ -1,0 +1,247 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Smarter Access. Stronger Security. Seamless Entry.",
+    "bannerTagline": "Secure, effortless entry for homes, offices, and high-traffic sites.",
+    "bannerBackgroundImages": [
+      {
+        "src": "/images/Gate.jpg",
+        "alt": "Automated gate systems for secure entry"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Leonardo_Phoenix_10_A_modern_residential_gated_entrance_with_a_2-1-e1746969471326.jpg",
+        "alt": "Modern residential gated entrance"
+      },
+      {
+        "src": "/images/Access-Control-System-1-1024x1020.png",
+        "alt": "Gate access control and credential readers"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Access-Control-System-1300.png",
+        "alt": "Integrated gate and access security"
+      },
+      {
+        "src": "/images/Home-Automation-1024x683.webp",
+        "alt": "Smart facility entry and gate control"
+      }
+    ],
+    "title": "Smarter Entry Starts at the Gate",
+    "paragraphs": [
+      "The gate is the first control point for people and vehicles. Sliding, swing, and barrier systems open for authorized users and stay closed to everyone else. We pair motors, sensors, and credentials with the way your site actually moves. The result is faster entry for the right traffic and a tighter perimeter."
+    ],
+    "imageSrc": "/images/Gate.jpg",
+    "layout": "two-column",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form",
+    "ctaPlacement": "end",
+    "imageAlt": "Automated gate systems for secure entry"
+  },
+  "cardSections": [
+    {
+      "id": "gate-types",
+      "visible": true,
+      "variant": "product-cards",
+      "gridColumns": 5,
+      "title": {
+        "before": "Types of Gate Automation"
+      },
+      "subheading": "Entry solutions for homes, commercial sites, and high-traffic facilities — from sliding and swing gates to barriers and controlled access.",
+      "align": "left",
+      "items": [
+        {
+          "title": "Sliding Gates",
+          "body": "Space-efficient automated sliding gates for driveways and compounds where swing clearance is limited.",
+          "imageSrc": "/images/Gate.jpg",
+          "imageAlt": "Automated sliding gate system"
+        },
+        {
+          "title": "Swing Gates",
+          "body": "Single or double swing gate automation for residential and commercial entrances with smooth, quiet operation.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/Leonardo_Phoenix_10_A_modern_residential_gated_entrance_with_a_2-1-e1746969471326.jpg",
+          "imageAlt": "Automated swing gate entrance"
+        },
+        {
+          "title": "Vehicle Barriers",
+          "body": "Boom barriers and rising bollards for parking, campuses, and high-traffic sites with controlled vehicle flow.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/Access-Control-System-1300.png",
+          "imageAlt": "Vehicle barrier and boom gate automation"
+        },
+        {
+          "title": "Access-Controlled Gates",
+          "body": "Card, biometric, and mobile credentials integrated with gate motors for authorized people and vehicle entry.",
+          "imageSrc": "/images/Access-Control-System-1-1024x1020.png",
+          "imageAlt": "Access-controlled automated gate"
+        },
+        {
+          "title": "Remote & Visitor Entry",
+          "body": "App-based open/close, temporary visitor access, and monitoring so every movement is managed with visibility.",
+          "imageSrc": "/images/Home-Automation-1024x683.webp",
+          "imageAlt": "Remote and visitor gate entry control"
+        }
+      ]
+    },
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Powerful Features"
+      },
+      "subheading": "Discover the advanced capabilities of our gate automation systems",
+      "align": "left",
+      "items": [
+        {
+          "title": "Enhanced Security",
+          "body": "Integrated access control systems with biometric recognition, card readers, and remote monitoring for maximum protection.",
+          "icon": "shield-alt"
+        },
+        {
+          "title": "Automatic Operation",
+          "body": "Smooth, quiet operation with motorized drives and sensors that detect obstacles and prevent damage.",
+          "icon": "biking"
+        },
+        {
+          "title": "Remote Access Control",
+          "body": "Manage access permissions remotely via smartphone app or web interface from anywhere in the world.",
+          "icon": "wifi"
+        },
+        {
+          "title": "Backup Power Systems",
+          "body": "Built-in battery backup systems ensure continued operation during power outages for uninterrupted security.",
+          "icon": "robot"
+        },
+        {
+          "title": "Integrated CCTV Monitoring",
+          "body": "Synchronized video surveillance with gate operations for complete visual verification of all entries and exits.",
+          "icon": "video"
+        },
+        {
+          "title": "Mobile App Integration",
+          "body": "Control and monitor your gate system through intuitive mobile applications available for iOS and Android devices.",
+          "icon": "mobile-alt"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Benefits of Gate Automation"
+      },
+      "subheading": "Why upgrade to automated gate systems?",
+      "align": "center",
+      "items": [
+        {
+          "title": "Increased Security",
+          "body": "Restrict unauthorized access with integrated authentication methods and real-time alerts for suspicious activity.",
+          "icon": "lock"
+        },
+        {
+          "title": "Convenience & Accessibility",
+          "body": "Automated entry and exit for authorized users without manual intervention, improving efficiency and user experience.",
+          "icon": "user-check"
+        },
+        {
+          "title": "Property Value Enhancement",
+          "body": "Modern gate automation systems increase curb appeal and can significantly boost property value.",
+          "icon": "chart-line"
+        },
+        {
+          "title": "Cost Savings",
+          "body": "Reduce labor costs associated with manual gate operation and minimize maintenance expenses with durable, reliable systems.",
+          "icon": "hand-holding-usd"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech",
+        "accent": "for Gate Automation?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Authorized Partners",
+          "body": "We are certified partners with leading gate automation manufacturers including FAAC, BFT, and others.",
+          "icon": "certificate"
+        },
+        {
+          "title": "Professional Installation",
+          "body": "Our team of certified technicians ensures precise installation according to manufacturer specifications and local regulations.",
+          "icon": "screwdriver"
+        },
+        {
+          "title": "24/7 Technical Support",
+          "body": "Comprehensive after-sales service including maintenance contracts, emergency repairs, and technical assistance.",
+          "icon": "headset"
+        },
+        {
+          "title": "System Integration",
+          "body": "Seamless integration with existing security systems including CCTV, intercoms, and access control platforms.",
+          "icon": "reply-all"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes-marquee",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Hear from satisfied customers who have upgraded their security with our gate automation solutions",
+    "items": [
+      {
+        "quote": "Aptus Infotech installed our new automated sliding gates last month. The system works flawlessly and has completely transformed how we manage visitor access at our corporate headquarters.",
+        "author": "Mohammed Al Farsi",
+        "role": "Facilities Manager"
+      },
+      {
+        "quote": "The gate automation system installed by Aptus has made our residential community much safer. We now have controlled access and can monitor all entries and exits remotely.",
+        "author": "Sarah Johnson",
+        "role": "Community Association"
+      },
+      {
+        "quote": "We needed a secure solution for our industrial facility. Aptus delivered a robust gate automation system that integrates perfectly with our existing security infrastructure.",
+        "author": "Ahmed Hassan",
+        "role": "Security Director"
+      }
+    ]
+  },
+  "midCta": {
+    "placement": "bottom",
+    "heading": "Ready to Secure Your Property?",
+    "description": "Contact our gate automation experts today for a free site survey and customized solution proposal.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/ZKTeco.png",
+        "alt": "ZKT"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/FAAC.png",
+        "alt": "FAAC"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/BFT.png",
+        "alt": "BFT"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Nice.png",
+        "alt": "Nice"
+      }
+    ]
+  }
+}

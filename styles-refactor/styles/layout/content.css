@@ -1,0 +1,23 @@
+/**
+ * CMS content styling — Odoo headless body HTML
+ * Separate from layout shell for Next.js page templates.
+ */
+.aptus-cms-content {
+  max-width: var(--content-max);
+  margin-inline: auto;
+}
+
+.aptus-cms-content img {
+  max-width: 100%;
+  height: auto;
+}
+
+.aptus-cms-content h2 {
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
+}
+
+.aptus-cms-content p {
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text-muted);
+}

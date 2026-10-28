@@ -1,0 +1,16 @@
+/**
+ * Page: Smart Home Automation Systems | Aptus Infotech
+ * Route: /home-automation
+ * Source: LIVE WEBSITE/ELV\Smart Home Automation Systems _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-smart-home-automation-systems-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 17 inline styles detected — migrate to utilities */
+}

@@ -1,0 +1,16 @@
+/**
+ * Page: AutoCAD Subscription in Oman | Aptus Infotech Gold Partner
+ * Route: /autocad
+ * Source: LIVE WEBSITE/software\autodesk\AutoCAD Subscription in Oman _ Aptus Infotech Gold Partner.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, testimonials, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-autocad-subscription-in-oman-aptus-infotech-gold-partner {
+    /* page root scope */
+  }
+
+
+  /* 41 inline styles detected — migrate to utilities */
+}

@@ -1,0 +1,139 @@
+{
+  "hero": {
+    "id": "hero",
+    "visible": true,
+    "variant": "software-landing",
+    "title": { "accent": "Autodesk Gold Partner in Oman" },
+    "tagline": "Aptus Infotech - Your trusted provider of genuine Autodesk software with premium support and training",
+    "highlight": "Offers Best Rates in the Market",
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Unlock-the-Power-of-Autodesk.png",
+    "imageAlt": "Autodesk",
+    "actions": [
+      { "label": "Request a Quote", "href": "#Form", "tone": "blue" },
+      { "label": "Renew Subscription", "href": "#Form", "tone": "green" },
+      { "label": "Browse Products", "href": "#products", "tone": "sky" }
+    ]
+  },
+  "cardSections": [
+    {
+      "id": "products",
+      "anchorId": "products",
+      "visible": true,
+      "variant": "product-cards",
+      "title": { "before": "Popular Autodesk Products" },
+      "subheading": "As an Autodesk Gold Partner, we offer the complete range of Autodesk software solutions for all industries.",
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "AutoCAD",
+          "body": "Professional 2D and 3D CAD software for drafting, modeling, and documentation.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autocad.png",
+          "imageAlt": "AutoCAD",
+          "href": "/autocad",
+          "actionLabel": "Request a Quote"
+        },
+        {
+          "title": "Revit",
+          "body": "Building Information Modeling (BIM) software for architects, engineers, and construction professionals.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Revit.png",
+          "imageAlt": "Revit",
+          "href": "/revit",
+          "actionLabel": "Request a Quote"
+        },
+        {
+          "title": "3ds Max",
+          "body": "3D modeling, animation, and rendering software for games, film, and motion graphics.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/3d-max.png",
+          "imageAlt": "3ds Max",
+          "href": "/3ds-max",
+          "actionLabel": "Request a Quote"
+        },
+        {
+          "title": "Autodesk Docs",
+          "body": "Cloud-based document management solution for architecture, engineering, and construction projects.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/autodesk-docs.png",
+          "imageAlt": "Autodesk Docs",
+          "href": "/autodesk-docs",
+          "actionLabel": "Request a Quote"
+        },
+        {
+          "title": "Navisworks",
+          "body": "3D design review and coordination software for construction projects.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Navisworks.png",
+          "imageAlt": "Navisworks",
+          "href": "/navisworks",
+          "actionLabel": "Request a Quote"
+        },
+        {
+          "title": "InfraWorks",
+          "body": "Civil infrastructure design software for creating, visualizing, and analyzing infrastructure models.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Infraworks.png",
+          "imageAlt": "InfraWorks",
+          "href": "/infoworks-ws-pro",
+          "actionLabel": "Request a Quote"
+        },
+        {
+          "title": "Civil 3D",
+          "body": "Civil engineering design and documentation software for BIM workflows.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Civil-3d-1.png",
+          "imageAlt": "Civil 3D",
+          "href": "/civil-3d",
+          "actionLabel": "Request a Quote"
+        },
+        {
+          "title": "Forma Design Collaboration",
+          "body": "Cloud-based design collaboration and coordination software for BIM projects and teams.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Bim.png",
+          "imageAlt": "Forma Design Collaboration",
+          "href": "/bim-collaborate-pro",
+          "actionLabel": "Request a Quote"
+        }
+      ]
+    },
+    {
+      "id": "why-choose",
+      "visible": true,
+      "variant": "value-cards",
+      "title": { "before": "Why Choose Aptus Infotech" },
+      "subheading": "As Oman’s Autodesk Gold Partner, we deliver exceptional value and service",
+      "align": "center",
+      "items": [
+        {
+          "title": "Gold Partner Status",
+          "body": "Our Gold Partner status represents the highest level of expertise and commitment to Autodesk solutions.",
+          "icon": "medal"
+        },
+        {
+          "title": "Genuine Products",
+          "body": "All our Autodesk products are 100% genuine with full manufacturer support and updates.",
+          "icon": "check-circle"
+        },
+        {
+          "title": "Competitive Pricing",
+          "body": "We offer the most competitive prices for Autodesk software in the Omani market.",
+          "icon": "hand-holding-usd"
+        },
+        {
+          "title": "Expert Team",
+          "body": "Our certified professionals provide expert advice and support for all Autodesk products.",
+          "icon": "user-friends"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Get Started?",
+    "description": "As Oman’s Autodesk Gold Partner, we’re ready to provide you with the best solutions and support",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#Form"
+  },
+  "contactCta": {
+    "heading": "Request a Quote",
+    "description": "Fill out the form below and our team will get back to you shortly",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "software-quote",
+    "layout": "light"
+  }
+}

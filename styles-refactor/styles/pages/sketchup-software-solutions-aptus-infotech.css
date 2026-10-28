@@ -1,0 +1,16 @@
+/**
+ * Page: SketchUp Software Solutions | Aptus Infotech
+ * Route: /sketchup
+ * Source: LIVE WEBSITE/software\multimedia\SketchUp Software Solutions _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-sketchup-software-solutions-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 39 inline styles detected — migrate to utilities */
+}

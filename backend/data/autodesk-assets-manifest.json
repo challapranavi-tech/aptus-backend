@@ -1,0 +1,1066 @@
+{
+  "generatedAt": "2026-06-30T07:29:20.532Z",
+  "source": "LIVE WEBSITE\\software\\autodesk",
+  "iconCount": 61,
+  "icons": [
+    "bolt",
+    "box-open",
+    "building",
+    "calculator",
+    "calendar-alt",
+    "chart-area",
+    "chart-bar",
+    "chart-line",
+    "check-circle",
+    "clock",
+    "cloud",
+    "cloud-download-alt",
+    "cloud-upload-alt",
+    "comments",
+    "cube",
+    "cubes",
+    "database",
+    "dollar-sign",
+    "dot-circle",
+    "drafting-compass",
+    "exchange-alt",
+    "eye",
+    "file",
+    "file-export",
+    "film",
+    "hand-holding-usd",
+    "handshake",
+    "head-side-virus",
+    "headset",
+    "layer-group",
+    "lightbulb",
+    "list",
+    "lock",
+    "map-marked-alt",
+    "map-marker",
+    "medal",
+    "mobile-alt",
+    "mouse-pointer",
+    "paint-brush",
+    "pencil-alt",
+    "play-circle",
+    "plug",
+    "project-diagram",
+    "reply-all",
+    "road",
+    "robot",
+    "ruler-combined",
+    "save",
+    "search",
+    "search-dollar",
+    "shield-alt",
+    "star",
+    "stopwatch",
+    "stroopwafel",
+    "sync",
+    "tools",
+    "undo",
+    "user-friends",
+    "user-nurse",
+    "users",
+    "vr-cardboard"
+  ],
+  "pages": [
+    {
+      "route": "/autocad-lt",
+      "slug": "autocad-lt",
+      "postId": "2035",
+      "styleFiles": [
+        "styles\\live\\autodesk\\autocad-lt.css",
+        "styles\\live\\autodesk\\kit-9-globals.css"
+      ],
+      "images": {
+        "Autodesk_autocad_LT": {
+          "local": "/images/software/autodesk/autocad-lt/Autocad_LT-1024x1024.png",
+          "source": "https://aptusinfotech.com/wp-content/uploads/2025/06/Autocad_LT-1024x1024.png",
+          "how": "downloaded"
+        },
+        "Autodesk": {
+          "local": "/images/software/autodesk/autocad-lt/Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD LT _ 2D CAD for Design & Documentation _ Aptus Infotech_files\\Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+          "how": "cached"
+        },
+        "etap": {
+          "local": "/images/software/autodesk/autocad-lt/etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD LT _ 2D CAD for Design & Documentation _ Aptus Infotech_files\\etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+          "how": "cached"
+        },
+        "fortinet": {
+          "local": "/images/software/autodesk/autocad-lt/fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD LT _ 2D CAD for Design & Documentation _ Aptus Infotech_files\\fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+          "how": "cached"
+        },
+        "kaspersky": {
+          "local": "/images/software/autodesk/autocad-lt/kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD LT _ 2D CAD for Design & Documentation _ Aptus Infotech_files\\kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+          "how": "cached"
+        },
+        "Microsoft": {
+          "local": "/images/software/autodesk/autocad-lt/Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD LT _ 2D CAD for Design & Documentation _ Aptus Infotech_files\\Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+          "how": "cached"
+        },
+        "planswift": {
+          "local": "/images/software/autodesk/autocad-lt/planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD LT _ 2D CAD for Design & Documentation _ Aptus Infotech_files\\planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+          "how": "cached"
+        },
+        "Prokon": {
+          "local": "/images/software/autodesk/autocad-lt/Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD LT _ 2D CAD for Design & Documentation _ Aptus Infotech_files\\Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+          "how": "cached"
+        },
+        "Sketchup": {
+          "local": "/images/software/autodesk/autocad-lt/Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD LT _ 2D CAD for Design & Documentation _ Aptus Infotech_files\\Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+          "how": "cached"
+        },
+        "sophos": {
+          "local": "/images/software/autodesk/autocad-lt/sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD LT _ 2D CAD for Design & Documentation _ Aptus Infotech_files\\sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+          "how": "cached"
+        },
+        "spectronova": {
+          "local": "/images/software/autodesk/autocad-lt/spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD LT _ 2D CAD for Design & Documentation _ Aptus Infotech_files\\spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+          "how": "cached"
+        },
+        "aconex": {
+          "local": "/images/software/autodesk/autocad-lt/aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD LT _ 2D CAD for Design & Documentation _ Aptus Infotech_files\\aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+          "how": "copied"
+        }
+      }
+    },
+    {
+      "route": "/autocad",
+      "slug": "autocad",
+      "postId": "2030",
+      "styleFiles": [
+        "styles\\live\\autodesk\\autocad.css"
+      ],
+      "images": {
+        "AutoCAD": {
+          "local": "/images/software/autodesk/autocad/imgi_8_photo-1581094794329-c8112a89af12-683x1024.png",
+          "source": "https://aptusinfotech.com/wp-content/uploads/2025/08/imgi_8_photo-1581094794329-c8112a89af12-683x1024.png",
+          "how": "downloaded"
+        },
+        "Microsoft": {
+          "local": "/images/software/autodesk/autocad/Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD Subscription in Oman _ Aptus Infotech Gold Partner_files\\Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+          "how": "cached"
+        },
+        "lumion": {
+          "local": "/images/software/autodesk/autocad/lumion-rartyoocjr36ywx0w7505x2trlrpogolkosxnsvhwu.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD Subscription in Oman _ Aptus Infotech Gold Partner_files\\lumion-rartyoocjr36ywx0w7505x2trlrpogolkosxnsvhwu.png",
+          "how": "cached"
+        },
+        "paloalto": {
+          "local": "/images/software/autodesk/autocad/paloalto-rartyrhv4971xqsxfqcvved7jrdtbjzsl2re3mrbe6.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD Subscription in Oman _ Aptus Infotech Gold Partner_files\\paloalto-rartyrhv4971xqsxfqcvved7jrdtbjzsl2re3mrbe6.png",
+          "how": "cached"
+        },
+        "v.ray": {
+          "local": "/images/software/autodesk/autocad/v.ray_-rartysfpb38c9crka8rifw4o5596j93ix7evkwpx7y.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD Subscription in Oman _ Aptus Infotech Gold Partner_files\\v.ray_-rartysfpb38c9crka8rifw4o5596j93ix7evkwpx7y.png",
+          "how": "cached"
+        },
+        "twinmotion": {
+          "local": "/images/software/autodesk/autocad/twinmotion-rartyubdorawwkotz9krkvnlbwzwynazlgpujgn4vi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD Subscription in Oman _ Aptus Infotech Gold Partner_files\\twinmotion-rartyubdorawwkotz9krkvnlbwzwynazlgpujgn4vi.png",
+          "how": "cached"
+        },
+        "planswift": {
+          "local": "/images/software/autodesk/autocad/planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD Subscription in Oman _ Aptus Infotech Gold Partner_files\\planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+          "how": "cached"
+        },
+        "Prokon": {
+          "local": "/images/software/autodesk/autocad/Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD Subscription in Oman _ Aptus Infotech Gold Partner_files\\Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+          "how": "cached"
+        },
+        "Sketchup": {
+          "local": "/images/software/autodesk/autocad/Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD Subscription in Oman _ Aptus Infotech Gold Partner_files\\Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+          "how": "cached"
+        },
+        "sophos": {
+          "local": "/images/software/autodesk/autocad/sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD Subscription in Oman _ Aptus Infotech Gold Partner_files\\sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+          "how": "cached"
+        },
+        "spectronova": {
+          "local": "/images/software/autodesk/autocad/spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD Subscription in Oman _ Aptus Infotech Gold Partner_files\\spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+          "how": "cached"
+        },
+        "aconex": {
+          "local": "/images/software/autodesk/autocad/aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD Subscription in Oman _ Aptus Infotech Gold Partner_files\\aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+          "how": "copied"
+        },
+        "Autodesk": {
+          "local": "/images/software/autodesk/autocad/Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD Subscription in Oman _ Aptus Infotech Gold Partner_files\\Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+          "how": "copied"
+        },
+        "etap": {
+          "local": "/images/software/autodesk/autocad/etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD Subscription in Oman _ Aptus Infotech Gold Partner_files\\etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+          "how": "copied"
+        },
+        "fortinet": {
+          "local": "/images/software/autodesk/autocad/fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD Subscription in Oman _ Aptus Infotech Gold Partner_files\\fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+          "how": "copied"
+        },
+        "kaspersky": {
+          "local": "/images/software/autodesk/autocad/kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\AutoCAD Subscription in Oman _ Aptus Infotech Gold Partner_files\\kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+          "how": "copied"
+        }
+      }
+    },
+    {
+      "route": "/3ds-max",
+      "slug": "3ds-max",
+      "postId": "2031",
+      "styleFiles": [
+        "styles\\live\\autodesk\\3ds-max.css"
+      ],
+      "images": {
+        "3ds Max": {
+          "local": "/images/software/autodesk/3ds-max/3d-683x1024.png",
+          "source": "https://aptusinfotech.com/wp-content/uploads/2025/08/3d-683x1024.png",
+          "how": "downloaded"
+        },
+        "Microsoft": {
+          "local": "/images/software/autodesk/3ds-max/Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk 3ds Max Subscription _ Official Partner Aptus Infotech_files\\Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+          "how": "cached"
+        },
+        "lumion": {
+          "local": "/images/software/autodesk/3ds-max/lumion-rartyoocjr36ywx0w7505x2trlrpogolkosxnsvhwu.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk 3ds Max Subscription _ Official Partner Aptus Infotech_files\\lumion-rartyoocjr36ywx0w7505x2trlrpogolkosxnsvhwu.png",
+          "how": "cached"
+        },
+        "paloalto": {
+          "local": "/images/software/autodesk/3ds-max/paloalto-rartyrhv4971xqsxfqcvved7jrdtbjzsl2re3mrbe6.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk 3ds Max Subscription _ Official Partner Aptus Infotech_files\\paloalto-rartyrhv4971xqsxfqcvved7jrdtbjzsl2re3mrbe6.png",
+          "how": "cached"
+        },
+        "v.ray": {
+          "local": "/images/software/autodesk/3ds-max/v.ray_-rartysfpb38c9crka8rifw4o5596j93ix7evkwpx7y.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk 3ds Max Subscription _ Official Partner Aptus Infotech_files\\v.ray_-rartysfpb38c9crka8rifw4o5596j93ix7evkwpx7y.png",
+          "how": "cached"
+        },
+        "twinmotion": {
+          "local": "/images/software/autodesk/3ds-max/twinmotion-rartyubdorawwkotz9krkvnlbwzwynazlgpujgn4vi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk 3ds Max Subscription _ Official Partner Aptus Infotech_files\\twinmotion-rartyubdorawwkotz9krkvnlbwzwynazlgpujgn4vi.png",
+          "how": "cached"
+        },
+        "planswift": {
+          "local": "/images/software/autodesk/3ds-max/planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk 3ds Max Subscription _ Official Partner Aptus Infotech_files\\planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+          "how": "cached"
+        },
+        "Prokon": {
+          "local": "/images/software/autodesk/3ds-max/Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk 3ds Max Subscription _ Official Partner Aptus Infotech_files\\Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+          "how": "cached"
+        },
+        "Sketchup": {
+          "local": "/images/software/autodesk/3ds-max/Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk 3ds Max Subscription _ Official Partner Aptus Infotech_files\\Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+          "how": "cached"
+        },
+        "sophos": {
+          "local": "/images/software/autodesk/3ds-max/sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk 3ds Max Subscription _ Official Partner Aptus Infotech_files\\sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+          "how": "cached"
+        },
+        "spectronova": {
+          "local": "/images/software/autodesk/3ds-max/spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk 3ds Max Subscription _ Official Partner Aptus Infotech_files\\spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+          "how": "cached"
+        },
+        "aconex": {
+          "local": "/images/software/autodesk/3ds-max/aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk 3ds Max Subscription _ Official Partner Aptus Infotech_files\\aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+          "how": "copied"
+        },
+        "Autodesk": {
+          "local": "/images/software/autodesk/3ds-max/Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk 3ds Max Subscription _ Official Partner Aptus Infotech_files\\Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+          "how": "copied"
+        },
+        "etap": {
+          "local": "/images/software/autodesk/3ds-max/etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk 3ds Max Subscription _ Official Partner Aptus Infotech_files\\etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+          "how": "copied"
+        },
+        "fortinet": {
+          "local": "/images/software/autodesk/3ds-max/fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk 3ds Max Subscription _ Official Partner Aptus Infotech_files\\fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+          "how": "copied"
+        },
+        "kaspersky": {
+          "local": "/images/software/autodesk/3ds-max/kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk 3ds Max Subscription _ Official Partner Aptus Infotech_files\\kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+          "how": "copied"
+        }
+      }
+    },
+    {
+      "route": "/aec-collection",
+      "slug": "aec-collection",
+      "postId": "2034",
+      "styleFiles": [
+        "styles\\live\\autodesk\\aec-collection.css"
+      ],
+      "images": {
+        "AutoCAD": {
+          "local": "/images/software/autodesk/aec-collection/imgi_8_photo-1581094794329-c8112a89af12-683x1024.png",
+          "source": "https://aptusinfotech.com/wp-content/uploads/2025/08/imgi_8_photo-1581094794329-c8112a89af12-683x1024.png",
+          "how": "downloaded"
+        },
+        "Autocad": {
+          "local": "/images/software/autodesk/aec-collection/Autocad.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\Autocad.png",
+          "how": "copied"
+        },
+        "Revit": {
+          "local": "/images/software/autodesk/aec-collection/Revit.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\Revit.png",
+          "how": "copied"
+        },
+        "Civil-3d-1": {
+          "local": "/images/software/autodesk/aec-collection/Civil-3d-1.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\Civil-3d-1.png",
+          "how": "copied"
+        },
+        "Navisworks": {
+          "local": "/images/software/autodesk/aec-collection/Navisworks.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\Navisworks.png",
+          "how": "copied"
+        },
+        "3Dmax": {
+          "local": "/images/software/autodesk/aec-collection/3Dmax.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\3Dmax.png",
+          "how": "copied"
+        },
+        "InfraWorks": {
+          "local": "/images/software/autodesk/aec-collection/infraworks-1.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\infraworks-1.png",
+          "how": "copied"
+        },
+        "Advance-steel": {
+          "local": "/images/software/autodesk/aec-collection/Advance-steel.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\Advance-steel.png",
+          "how": "copied"
+        },
+        "Robot-Structural-Analysis": {
+          "local": "/images/software/autodesk/aec-collection/Robot-Structural-Analysis.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\Robot-Structural-Analysis.png",
+          "how": "copied"
+        },
+        "FormIt": {
+          "local": "/images/software/autodesk/aec-collection/FormIt.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\FormIt.png",
+          "how": "copied"
+        },
+        "ReCap-Pro": {
+          "local": "/images/software/autodesk/aec-collection/ReCap-Pro.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\ReCap-Pro.png",
+          "how": "copied"
+        },
+        "Vehicle-Tracking": {
+          "local": "/images/software/autodesk/aec-collection/Vehicle-Tracking.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\Vehicle-Tracking.png",
+          "how": "copied"
+        },
+        "Structural-Bridge-Design": {
+          "local": "/images/software/autodesk/aec-collection/Structural-Bridge-Design.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\Structural-Bridge-Design.png",
+          "how": "copied"
+        },
+        "Fabrication-CADmep": {
+          "local": "/images/software/autodesk/aec-collection/Fabrication-CADmep.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\Fabrication-CADmep.png",
+          "how": "copied"
+        },
+        "infraworks": {
+          "local": "/images/software/autodesk/aec-collection/infraworks.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\infraworks.png",
+          "how": "copied"
+        },
+        "Arnold​": {
+          "local": "/images/software/autodesk/aec-collection/Arnold_.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\Arnold_.png",
+          "how": "cached"
+        },
+        "Maya": {
+          "local": "/images/software/autodesk/aec-collection/Maya.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\Maya.png",
+          "how": "copied"
+        },
+        "Autodesk-Doc": {
+          "local": "/images/software/autodesk/aec-collection/Autodesk-Doc.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\Autodesk-Doc.png",
+          "how": "copied"
+        },
+        "Dynamo-Studio": {
+          "local": "/images/software/autodesk/aec-collection/Dynamo-Studio.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\Dynamo-Studio.png",
+          "how": "copied"
+        },
+        "autodesk-drive": {
+          "local": "/images/software/autodesk/aec-collection/autodesk-drive.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\autodesk-drive.png",
+          "how": "copied"
+        },
+        "Microsoft": {
+          "local": "/images/software/autodesk/aec-collection/Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+          "how": "cached"
+        },
+        "lumion": {
+          "local": "/images/software/autodesk/aec-collection/lumion-rartyoocjr36ywx0w7505x2trlrpogolkosxnsvhwu.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\lumion-rartyoocjr36ywx0w7505x2trlrpogolkosxnsvhwu.png",
+          "how": "cached"
+        },
+        "paloalto": {
+          "local": "/images/software/autodesk/aec-collection/paloalto-rartyrhv4971xqsxfqcvved7jrdtbjzsl2re3mrbe6.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\paloalto-rartyrhv4971xqsxfqcvved7jrdtbjzsl2re3mrbe6.png",
+          "how": "cached"
+        },
+        "v.ray": {
+          "local": "/images/software/autodesk/aec-collection/v.ray_-rartysfpb38c9crka8rifw4o5596j93ix7evkwpx7y.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\v.ray_-rartysfpb38c9crka8rifw4o5596j93ix7evkwpx7y.png",
+          "how": "cached"
+        },
+        "twinmotion": {
+          "local": "/images/software/autodesk/aec-collection/twinmotion-rartyubdorawwkotz9krkvnlbwzwynazlgpujgn4vi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\twinmotion-rartyubdorawwkotz9krkvnlbwzwynazlgpujgn4vi.png",
+          "how": "cached"
+        },
+        "planswift": {
+          "local": "/images/software/autodesk/aec-collection/planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+          "how": "cached"
+        },
+        "Prokon": {
+          "local": "/images/software/autodesk/aec-collection/Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+          "how": "cached"
+        },
+        "Sketchup": {
+          "local": "/images/software/autodesk/aec-collection/Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+          "how": "cached"
+        },
+        "sophos": {
+          "local": "/images/software/autodesk/aec-collection/sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+          "how": "cached"
+        },
+        "spectronova": {
+          "local": "/images/software/autodesk/aec-collection/spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+          "how": "cached"
+        },
+        "aconex": {
+          "local": "/images/software/autodesk/aec-collection/aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+          "how": "copied"
+        },
+        "Autodesk": {
+          "local": "/images/software/autodesk/aec-collection/Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+          "how": "copied"
+        },
+        "etap": {
+          "local": "/images/software/autodesk/aec-collection/etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+          "how": "copied"
+        },
+        "fortinet": {
+          "local": "/images/software/autodesk/aec-collection/fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+          "how": "copied"
+        },
+        "kaspersky": {
+          "local": "/images/software/autodesk/aec-collection/kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk AEC _ Aptus Infotech_files\\kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+          "how": "copied"
+        }
+      }
+    },
+    {
+      "route": "/autodesk-build",
+      "slug": "autodesk-build",
+      "postId": "2038",
+      "styleFiles": [
+        "styles\\live\\autodesk\\autodesk-build.css"
+      ],
+      "images": {
+        "Autodesk_Build": {
+          "local": "/images/software/autodesk/autodesk-build/Autodesk_Build-1024x1024.png",
+          "source": "https://aptusinfotech.com/wp-content/uploads/2025/06/Autodesk_Build-1024x1024.png",
+          "how": "downloaded"
+        },
+        "Autodesk": {
+          "local": "/images/software/autodesk/autodesk-build/Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Build for Connected Construction _ Aptus Infotech Oman_files\\Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+          "how": "cached"
+        },
+        "etap": {
+          "local": "/images/software/autodesk/autodesk-build/etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Build for Connected Construction _ Aptus Infotech Oman_files\\etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+          "how": "cached"
+        },
+        "fortinet": {
+          "local": "/images/software/autodesk/autodesk-build/fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Build for Connected Construction _ Aptus Infotech Oman_files\\fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+          "how": "cached"
+        },
+        "kaspersky": {
+          "local": "/images/software/autodesk/autodesk-build/kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Build for Connected Construction _ Aptus Infotech Oman_files\\kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+          "how": "cached"
+        },
+        "Microsoft": {
+          "local": "/images/software/autodesk/autodesk-build/Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Build for Connected Construction _ Aptus Infotech Oman_files\\Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+          "how": "cached"
+        },
+        "planswift": {
+          "local": "/images/software/autodesk/autodesk-build/planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Build for Connected Construction _ Aptus Infotech Oman_files\\planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+          "how": "cached"
+        },
+        "Prokon": {
+          "local": "/images/software/autodesk/autodesk-build/Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Build for Connected Construction _ Aptus Infotech Oman_files\\Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+          "how": "cached"
+        },
+        "Sketchup": {
+          "local": "/images/software/autodesk/autodesk-build/Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Build for Connected Construction _ Aptus Infotech Oman_files\\Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+          "how": "cached"
+        },
+        "sophos": {
+          "local": "/images/software/autodesk/autodesk-build/sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Build for Connected Construction _ Aptus Infotech Oman_files\\sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+          "how": "cached"
+        },
+        "spectronova": {
+          "local": "/images/software/autodesk/autodesk-build/spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Build for Connected Construction _ Aptus Infotech Oman_files\\spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+          "how": "cached"
+        },
+        "aconex": {
+          "local": "/images/software/autodesk/autodesk-build/aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Build for Connected Construction _ Aptus Infotech Oman_files\\aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+          "how": "copied"
+        }
+      }
+    },
+    {
+      "route": "/civil-3d",
+      "slug": "civil-3d",
+      "postId": "2033",
+      "styleFiles": [
+        "styles\\live\\autodesk\\civil-3d.css"
+      ],
+      "images": {
+        "autodesk_civil_3d": {
+          "local": "/images/software/autodesk/civil-3d/autodesk_civil_3d.png",
+          "source": "https://aptusinfotech.com/wp-content/uploads/2025/05/autodesk_civil_3d.png",
+          "how": "downloaded"
+        },
+        "Autodesk": {
+          "local": "/images/software/autodesk/civil-3d/Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Civil _ Civil Engineering Software _ Aptus Infotech Muscat_files\\Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+          "how": "cached"
+        },
+        "etap": {
+          "local": "/images/software/autodesk/civil-3d/etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Civil _ Civil Engineering Software _ Aptus Infotech Muscat_files\\etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+          "how": "cached"
+        },
+        "fortinet": {
+          "local": "/images/software/autodesk/civil-3d/fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Civil _ Civil Engineering Software _ Aptus Infotech Muscat_files\\fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+          "how": "cached"
+        },
+        "kaspersky": {
+          "local": "/images/software/autodesk/civil-3d/kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Civil _ Civil Engineering Software _ Aptus Infotech Muscat_files\\kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+          "how": "cached"
+        },
+        "Microsoft": {
+          "local": "/images/software/autodesk/civil-3d/Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Civil _ Civil Engineering Software _ Aptus Infotech Muscat_files\\Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+          "how": "cached"
+        },
+        "planswift": {
+          "local": "/images/software/autodesk/civil-3d/planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Civil _ Civil Engineering Software _ Aptus Infotech Muscat_files\\planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+          "how": "cached"
+        },
+        "Prokon": {
+          "local": "/images/software/autodesk/civil-3d/Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Civil _ Civil Engineering Software _ Aptus Infotech Muscat_files\\Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+          "how": "cached"
+        },
+        "Sketchup": {
+          "local": "/images/software/autodesk/civil-3d/Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Civil _ Civil Engineering Software _ Aptus Infotech Muscat_files\\Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+          "how": "cached"
+        },
+        "sophos": {
+          "local": "/images/software/autodesk/civil-3d/sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Civil _ Civil Engineering Software _ Aptus Infotech Muscat_files\\sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+          "how": "cached"
+        },
+        "spectronova": {
+          "local": "/images/software/autodesk/civil-3d/spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Civil _ Civil Engineering Software _ Aptus Infotech Muscat_files\\spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+          "how": "cached"
+        },
+        "aconex": {
+          "local": "/images/software/autodesk/civil-3d/aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Civil _ Civil Engineering Software _ Aptus Infotech Muscat_files\\aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+          "how": "copied"
+        }
+      }
+    },
+    {
+      "route": "/autodesk-docs",
+      "slug": "autodesk-docs",
+      "postId": "2037",
+      "styleFiles": [
+        "styles\\live\\autodesk\\autodesk-docs.css"
+      ],
+      "images": {
+        "Autodesk_Doc": {
+          "local": "/images/software/autodesk/autodesk-docs/Autodesk_Doc-1024x1024.png",
+          "source": "https://aptusinfotech.com/wp-content/uploads/2025/06/Autodesk_Doc-1024x1024.png",
+          "how": "downloaded"
+        },
+        "Autodesk": {
+          "local": "/images/software/autodesk/autodesk-docs/Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Docs for Centralized Project Documents _ Aptus Infotech_files\\Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+          "how": "cached"
+        },
+        "etap": {
+          "local": "/images/software/autodesk/autodesk-docs/etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Docs for Centralized Project Documents _ Aptus Infotech_files\\etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+          "how": "cached"
+        },
+        "fortinet": {
+          "local": "/images/software/autodesk/autodesk-docs/fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Docs for Centralized Project Documents _ Aptus Infotech_files\\fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+          "how": "cached"
+        },
+        "kaspersky": {
+          "local": "/images/software/autodesk/autodesk-docs/kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Docs for Centralized Project Documents _ Aptus Infotech_files\\kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+          "how": "cached"
+        },
+        "Microsoft": {
+          "local": "/images/software/autodesk/autodesk-docs/Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Docs for Centralized Project Documents _ Aptus Infotech_files\\Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+          "how": "cached"
+        },
+        "planswift": {
+          "local": "/images/software/autodesk/autodesk-docs/planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Docs for Centralized Project Documents _ Aptus Infotech_files\\planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+          "how": "cached"
+        },
+        "Prokon": {
+          "local": "/images/software/autodesk/autodesk-docs/Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Docs for Centralized Project Documents _ Aptus Infotech_files\\Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+          "how": "cached"
+        },
+        "Sketchup": {
+          "local": "/images/software/autodesk/autodesk-docs/Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Docs for Centralized Project Documents _ Aptus Infotech_files\\Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+          "how": "cached"
+        },
+        "sophos": {
+          "local": "/images/software/autodesk/autodesk-docs/sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Docs for Centralized Project Documents _ Aptus Infotech_files\\sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+          "how": "cached"
+        },
+        "spectronova": {
+          "local": "/images/software/autodesk/autodesk-docs/spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Docs for Centralized Project Documents _ Aptus Infotech_files\\spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+          "how": "cached"
+        },
+        "aconex": {
+          "local": "/images/software/autodesk/autodesk-docs/aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Docs for Centralized Project Documents _ Aptus Infotech_files\\aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+          "how": "copied"
+        }
+      }
+    },
+    {
+      "route": "/autodesk",
+      "slug": "autodesk-hub",
+      "postId": "4163",
+      "styleFiles": [
+        "styles\\live\\autodesk\\autodesk-hub.css"
+      ],
+      "images": {
+        "Autocad": {
+          "local": "/images/software/autodesk/autodesk-hub/Autocad-r9svf0dlhp2uxt714kb6ckxiddkpte4c1l7y1yv2p2.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Gold Partner in Oman _ Aptus Infotech_files\\Autocad-r9svf0dlhp2uxt714kb6ckxiddkpte4c1l7y1yv2p2.png",
+          "how": "copied"
+        },
+        "Revit": {
+          "local": "/images/software/autodesk/autodesk-hub/Revit.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Gold Partner in Oman _ Aptus Infotech_files\\Revit.png",
+          "how": "copied"
+        },
+        "3d-max": {
+          "local": "/images/software/autodesk/autodesk-hub/3d-max.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Gold Partner in Oman _ Aptus Infotech_files\\3d-max.png",
+          "how": "copied"
+        },
+        "autodesk-docs": {
+          "local": "/images/software/autodesk/autodesk-hub/autodesk-docs.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Gold Partner in Oman _ Aptus Infotech_files\\autodesk-docs.png",
+          "how": "copied"
+        },
+        "Navisworks": {
+          "local": "/images/software/autodesk/autodesk-hub/Navisworks.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Gold Partner in Oman _ Aptus Infotech_files\\Navisworks.png",
+          "how": "copied"
+        },
+        "Infraworks": {
+          "local": "/images/software/autodesk/autodesk-hub/Infraworks.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Gold Partner in Oman _ Aptus Infotech_files\\Infraworks.png",
+          "how": "copied"
+        },
+        "Civil-3d-1": {
+          "local": "/images/software/autodesk/autodesk-hub/Civil-3d-1.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Gold Partner in Oman _ Aptus Infotech_files\\Civil-3d-1.png",
+          "how": "copied"
+        },
+        "Bim": {
+          "local": "/images/software/autodesk/autodesk-hub/Bim.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Gold Partner in Oman _ Aptus Infotech_files\\Bim.png",
+          "how": "copied"
+        }
+      }
+    },
+    {
+      "route": "/revit",
+      "slug": "revit",
+      "postId": "2032",
+      "styleFiles": [
+        "styles\\live\\autodesk\\revit.css"
+      ],
+      "images": {
+        "Autodesk_revit": {
+          "local": "/images/software/autodesk/revit/Revit-2-1024x1024.png",
+          "source": "https://aptusinfotech.com/wp-content/uploads/2025/06/Revit-2-1024x1024.png",
+          "how": "downloaded"
+        },
+        "Microsoft": {
+          "local": "/images/software/autodesk/revit/Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Revit BIM Software in Muscat _ Aptus Infotech_files\\Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+          "how": "cached"
+        },
+        "lumion": {
+          "local": "/images/software/autodesk/revit/lumion-rartyoocjr36ywx0w7505x2trlrpogolkosxnsvhwu.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Revit BIM Software in Muscat _ Aptus Infotech_files\\lumion-rartyoocjr36ywx0w7505x2trlrpogolkosxnsvhwu.png",
+          "how": "cached"
+        },
+        "paloalto": {
+          "local": "/images/software/autodesk/revit/paloalto-rartyrhv4971xqsxfqcvved7jrdtbjzsl2re3mrbe6.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Revit BIM Software in Muscat _ Aptus Infotech_files\\paloalto-rartyrhv4971xqsxfqcvved7jrdtbjzsl2re3mrbe6.png",
+          "how": "cached"
+        },
+        "v.ray": {
+          "local": "/images/software/autodesk/revit/v.ray_-rartysfpb38c9crka8rifw4o5596j93ix7evkwpx7y.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Revit BIM Software in Muscat _ Aptus Infotech_files\\v.ray_-rartysfpb38c9crka8rifw4o5596j93ix7evkwpx7y.png",
+          "how": "cached"
+        },
+        "twinmotion": {
+          "local": "/images/software/autodesk/revit/twinmotion-rartyubdorawwkotz9krkvnlbwzwynazlgpujgn4vi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Revit BIM Software in Muscat _ Aptus Infotech_files\\twinmotion-rartyubdorawwkotz9krkvnlbwzwynazlgpujgn4vi.png",
+          "how": "cached"
+        },
+        "planswift": {
+          "local": "/images/software/autodesk/revit/planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Revit BIM Software in Muscat _ Aptus Infotech_files\\planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+          "how": "cached"
+        },
+        "Prokon": {
+          "local": "/images/software/autodesk/revit/Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Revit BIM Software in Muscat _ Aptus Infotech_files\\Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+          "how": "cached"
+        },
+        "Sketchup": {
+          "local": "/images/software/autodesk/revit/Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Revit BIM Software in Muscat _ Aptus Infotech_files\\Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+          "how": "cached"
+        },
+        "sophos": {
+          "local": "/images/software/autodesk/revit/sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Revit BIM Software in Muscat _ Aptus Infotech_files\\sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+          "how": "cached"
+        },
+        "spectronova": {
+          "local": "/images/software/autodesk/revit/spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Revit BIM Software in Muscat _ Aptus Infotech_files\\spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+          "how": "cached"
+        },
+        "aconex": {
+          "local": "/images/software/autodesk/revit/aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Revit BIM Software in Muscat _ Aptus Infotech_files\\aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+          "how": "copied"
+        },
+        "Autodesk": {
+          "local": "/images/software/autodesk/revit/Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Revit BIM Software in Muscat _ Aptus Infotech_files\\Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+          "how": "copied"
+        },
+        "etap": {
+          "local": "/images/software/autodesk/revit/etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Revit BIM Software in Muscat _ Aptus Infotech_files\\etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+          "how": "copied"
+        },
+        "fortinet": {
+          "local": "/images/software/autodesk/revit/fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Revit BIM Software in Muscat _ Aptus Infotech_files\\fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+          "how": "copied"
+        },
+        "kaspersky": {
+          "local": "/images/software/autodesk/revit/kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Revit BIM Software in Muscat _ Aptus Infotech_files\\kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+          "how": "copied"
+        }
+      }
+    },
+    {
+      "route": "/autodesk-takeoff",
+      "slug": "autodesk-takeoff",
+      "postId": "2039",
+      "styleFiles": [
+        "styles\\live\\autodesk\\autodesk-takeoff.css"
+      ],
+      "images": {
+        "Autodesk_takeoff": {
+          "local": "/images/software/autodesk/autodesk-takeoff/Autodesk_takeoff-1024x1024.png",
+          "source": "https://aptusinfotech.com/wp-content/uploads/2025/06/Autodesk_takeoff-1024x1024.png",
+          "how": "downloaded"
+        },
+        "Autodesk": {
+          "local": "/images/software/autodesk/autodesk-takeoff/Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Takeoff for Accurate Estimating _ Aptus Infotech Oman_files\\Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+          "how": "cached"
+        },
+        "etap": {
+          "local": "/images/software/autodesk/autodesk-takeoff/etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Takeoff for Accurate Estimating _ Aptus Infotech Oman_files\\etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+          "how": "cached"
+        },
+        "fortinet": {
+          "local": "/images/software/autodesk/autodesk-takeoff/fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Takeoff for Accurate Estimating _ Aptus Infotech Oman_files\\fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+          "how": "cached"
+        },
+        "kaspersky": {
+          "local": "/images/software/autodesk/autodesk-takeoff/kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Takeoff for Accurate Estimating _ Aptus Infotech Oman_files\\kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+          "how": "cached"
+        },
+        "Microsoft": {
+          "local": "/images/software/autodesk/autodesk-takeoff/Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Takeoff for Accurate Estimating _ Aptus Infotech Oman_files\\Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+          "how": "cached"
+        },
+        "planswift": {
+          "local": "/images/software/autodesk/autodesk-takeoff/planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Takeoff for Accurate Estimating _ Aptus Infotech Oman_files\\planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+          "how": "cached"
+        },
+        "Prokon": {
+          "local": "/images/software/autodesk/autodesk-takeoff/Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Takeoff for Accurate Estimating _ Aptus Infotech Oman_files\\Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+          "how": "cached"
+        },
+        "Sketchup": {
+          "local": "/images/software/autodesk/autodesk-takeoff/Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Takeoff for Accurate Estimating _ Aptus Infotech Oman_files\\Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+          "how": "cached"
+        },
+        "sophos": {
+          "local": "/images/software/autodesk/autodesk-takeoff/sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Takeoff for Accurate Estimating _ Aptus Infotech Oman_files\\sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+          "how": "cached"
+        },
+        "spectronova": {
+          "local": "/images/software/autodesk/autodesk-takeoff/spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Takeoff for Accurate Estimating _ Aptus Infotech Oman_files\\spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+          "how": "cached"
+        },
+        "aconex": {
+          "local": "/images/software/autodesk/autodesk-takeoff/aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Autodesk Takeoff for Accurate Estimating _ Aptus Infotech Oman_files\\aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+          "how": "copied"
+        }
+      }
+    },
+    {
+      "route": "/bim-collaborate-pro",
+      "slug": "bim-collaborate-pro",
+      "postId": "2036",
+      "styleFiles": [
+        "styles\\live\\autodesk\\bim-collaborate-pro.css"
+      ],
+      "images": {
+        "Bim": {
+          "local": "/images/software/autodesk/bim-collaborate-pro/Bim.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\BIM Collaborate Pro in Oman _ Aptus Infotech_files\\Bim.png",
+          "how": "copied"
+        },
+        "Autodesk": {
+          "local": "/images/software/autodesk/bim-collaborate-pro/Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\BIM Collaborate Pro in Oman _ Aptus Infotech_files\\Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+          "how": "cached"
+        },
+        "etap": {
+          "local": "/images/software/autodesk/bim-collaborate-pro/etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\BIM Collaborate Pro in Oman _ Aptus Infotech_files\\etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+          "how": "cached"
+        },
+        "fortinet": {
+          "local": "/images/software/autodesk/bim-collaborate-pro/fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\BIM Collaborate Pro in Oman _ Aptus Infotech_files\\fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+          "how": "cached"
+        },
+        "kaspersky": {
+          "local": "/images/software/autodesk/bim-collaborate-pro/kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\BIM Collaborate Pro in Oman _ Aptus Infotech_files\\kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+          "how": "cached"
+        },
+        "Microsoft": {
+          "local": "/images/software/autodesk/bim-collaborate-pro/Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\BIM Collaborate Pro in Oman _ Aptus Infotech_files\\Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+          "how": "cached"
+        },
+        "planswift": {
+          "local": "/images/software/autodesk/bim-collaborate-pro/planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\BIM Collaborate Pro in Oman _ Aptus Infotech_files\\planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+          "how": "cached"
+        },
+        "Prokon": {
+          "local": "/images/software/autodesk/bim-collaborate-pro/Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\BIM Collaborate Pro in Oman _ Aptus Infotech_files\\Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+          "how": "cached"
+        },
+        "Sketchup": {
+          "local": "/images/software/autodesk/bim-collaborate-pro/Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\BIM Collaborate Pro in Oman _ Aptus Infotech_files\\Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+          "how": "cached"
+        },
+        "sophos": {
+          "local": "/images/software/autodesk/bim-collaborate-pro/sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\BIM Collaborate Pro in Oman _ Aptus Infotech_files\\sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+          "how": "cached"
+        },
+        "spectronova": {
+          "local": "/images/software/autodesk/bim-collaborate-pro/spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\BIM Collaborate Pro in Oman _ Aptus Infotech_files\\spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+          "how": "cached"
+        },
+        "aconex": {
+          "local": "/images/software/autodesk/bim-collaborate-pro/aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\BIM Collaborate Pro in Oman _ Aptus Infotech_files\\aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+          "how": "copied"
+        }
+      }
+    },
+    {
+      "route": "/navisworks",
+      "slug": "navisworks",
+      "postId": "2040",
+      "styleFiles": [
+        "styles\\live\\autodesk\\navisworks.css"
+      ],
+      "images": {
+        "Autodesk_Naviworks": {
+          "local": "/images/software/autodesk/navisworks/Autodesk_Naviworks-scaled-e1754202609709-1024x761.png",
+          "source": "https://aptusinfotech.com/wp-content/uploads/2025/06/Autodesk_Naviworks-scaled-e1754202609709-1024x761.png",
+          "how": "downloaded"
+        },
+        "Autodesk": {
+          "local": "/images/software/autodesk/navisworks/Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Navisworks for Construction Coordination & BIM _ Aptus Infotech_files\\Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+          "how": "cached"
+        },
+        "etap": {
+          "local": "/images/software/autodesk/navisworks/etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Navisworks for Construction Coordination & BIM _ Aptus Infotech_files\\etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+          "how": "cached"
+        },
+        "fortinet": {
+          "local": "/images/software/autodesk/navisworks/fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Navisworks for Construction Coordination & BIM _ Aptus Infotech_files\\fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+          "how": "cached"
+        },
+        "kaspersky": {
+          "local": "/images/software/autodesk/navisworks/kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Navisworks for Construction Coordination & BIM _ Aptus Infotech_files\\kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+          "how": "cached"
+        },
+        "Microsoft": {
+          "local": "/images/software/autodesk/navisworks/Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Navisworks for Construction Coordination & BIM _ Aptus Infotech_files\\Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+          "how": "cached"
+        },
+        "planswift": {
+          "local": "/images/software/autodesk/navisworks/planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Navisworks for Construction Coordination & BIM _ Aptus Infotech_files\\planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+          "how": "cached"
+        },
+        "Prokon": {
+          "local": "/images/software/autodesk/navisworks/Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Navisworks for Construction Coordination & BIM _ Aptus Infotech_files\\Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+          "how": "cached"
+        },
+        "Sketchup": {
+          "local": "/images/software/autodesk/navisworks/Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Navisworks for Construction Coordination & BIM _ Aptus Infotech_files\\Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+          "how": "cached"
+        },
+        "sophos": {
+          "local": "/images/software/autodesk/navisworks/sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Navisworks for Construction Coordination & BIM _ Aptus Infotech_files\\sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+          "how": "cached"
+        },
+        "spectronova": {
+          "local": "/images/software/autodesk/navisworks/spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Navisworks for Construction Coordination & BIM _ Aptus Infotech_files\\spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+          "how": "cached"
+        },
+        "aconex": {
+          "local": "/images/software/autodesk/navisworks/aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+          "source": "c:\\Users\\Win 11 Pro\\Desktop\\Aptus\\LIVE WEBSITE\\software\\autodesk\\Navisworks for Construction Coordination & BIM _ Aptus Infotech_files\\aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+          "how": "copied"
+        }
+      }
+    }
+  ]
+}

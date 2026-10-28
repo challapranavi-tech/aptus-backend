@@ -1,0 +1,16 @@
+/**
+ * Page: Autodesk Takeoff for Accurate Estimating | Aptus Infotech Oman
+ * Route: /autodesk-takeoff
+ * Source: LIVE WEBSITE/software\autodesk\Autodesk Takeoff for Accurate Estimating _ Aptus Infotech Oman.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, cta, testimonials, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-autodesk-takeoff-for-accurate-estimating-aptus-infotech-oman {
+    /* page root scope */
+  }
+
+
+  /* 35 inline styles detected — migrate to utilities */
+}

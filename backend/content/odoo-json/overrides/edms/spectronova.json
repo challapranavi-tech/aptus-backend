@@ -1,0 +1,200 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "edms",
+    "bannerTitle": "SpectroNova",
+    "bannerTagline": "A Comprehensive Project Management Information System (PMIS) for End-to-End Project Lifecycle Management",
+    "mediaInline": false,
+    "title": "Transform Project Management with SpectroNova",
+    "paragraphs": [
+      "SpectroNova, powered by Aptus Infotech, is an advanced and integrated Project Management Information System (PMIS) meticulously designed to empower organizations in effectively managing, tracking, and controlling complex projects, programs, and portfolios.",
+      "Building on over 25 years of industry experience, SpectroNova provides a robust, centralized platform that offers real-time visibility and control across every phase of a project lifecycle, from initial capital planning and project delivery to cost control and facilities management."
+    ],
+    "imageSrc": "/images/imgi_8_photo-1581094794329-c8112a89af12-683x1024.png",
+    "imageAlt": "SpectroNova",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Key Features of",
+        "accent": "SpectroNova"
+      },
+      "subheading": "Comprehensive tools designed specifically for end-to-end project lifecycle management",
+      "align": "center",
+      "items": [
+        {
+          "title": "Advanced Planning & Scheduling",
+          "body": "Develop comprehensive project schedules with a built-in powerful scheduling tool that integrates with industry standards like Primavera P6 and MS Project. Track tasks, milestones, and dependencies with precision.",
+          "icon": "code-branch"
+        },
+        {
+          "title": "Resource & Financial Management",
+          "body": "Efficiently manage project resources, control costs, track earned value, and gain deep financial insights to ensure projects remain on budget and optimize profitability.",
+          "icon": "chart-pie"
+        },
+        {
+          "title": "Issue, Risk & Change Management",
+          "body": "Proactively identify, track, and mitigate project risks. Manage changes effectively through customizable processes, ensuring smooth execution and minimizing disruptions.",
+          "icon": "exclamation-triangle"
+        },
+        {
+          "title": "Tendering, Bid & Subcontract Management",
+          "body": "Streamline procurement processes, manage bids, pre-qualify suppliers, and oversee subcontractor performance and payments within the system.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Centralized Document Hub",
+          "body": "Act as a single source of truth for all project documentation, including 2D/3D designs, drawings, contracts, and correspondence. Store, search, retrieve, and archive unlimited sizes and formats of documents with high security and 99% uptime.",
+          "icon": "file-alt"
+        },
+        {
+          "title": "Intelligent Workflow Automation (BPM)",
+          "body": "Implement built-in Business Process Management (BPM) tools to define, automate, and re-engineer workflows. This enables digital collaboration for stakeholder approvals, RFI routing, transmittals, and other construction documents.",
+          "icon": "cogs"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Benefits for Your Organization"
+      },
+      "subheading": "How SpectroNova transforms project delivery and organizational efficiency",
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Reduced Project Delays",
+          "body": "Improve communication and streamline workflows across all stakeholders to minimize costly delays and disruptions.",
+          "icon": "stopwatch"
+        },
+        {
+          "title": "Significant Cost Savings",
+          "body": "Minimize rework, optimize resource allocation, and maintain strict budget control throughout the project lifecycle.",
+          "icon": "dollar-sign"
+        },
+        {
+          "title": "Enhanced Safety Compliance",
+          "body": "Digital safety plans, hazard reporting, and compliance tracking to ensure worker safety and regulatory adherence.",
+          "icon": "shield-alt"
+        },
+        {
+          "title": "Improved Stakeholder Alignment",
+          "body": "Centralized platform connecting owners, contractors, designers, and suppliers with real-time access to project information.",
+          "icon": "users"
+        }
+      ]
+    },
+    {
+      "id": "why-choose",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Why Choose SpectroNova Through Aptus Infotech?"
+      },
+      "subheading": "As an experienced technology partner, we provide comprehensive implementation and support services for organizations looking to transform their project management capabilities.",
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Certified Specialists",
+          "body": "Our team consists of certified project management experts with extensive experience in implementing enterprise-level solutions.",
+          "icon": "certificate"
+        },
+        {
+          "title": "Customized Workflows",
+          "body": "We configure the platform to match your existing business processes rather than forcing you into generic templates.",
+          "icon": "tools"
+        },
+        {
+          "title": "Dedicated Support Team",
+          "body": "24/7 technical assistance and regular system maintenance to ensure optimal performance during critical project phases.",
+          "icon": "headset"
+        },
+        {
+          "title": "Future-Ready Technology",
+          "body": "We implement solutions that scale with your business growth and adapt to emerging technologies in the project management landscape.",
+          "icon": "sync-alt"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Transform Your Projects?",
+    "subheading": "Contact our specialists today for a free consultation and customized solution proposal.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#Form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Hear from satisfied clients who have transformed their project management capabilities",
+    "items": [
+      {
+        "quote": "The SpectroNova has revolutionized how we manage our multi-story residential developments. The integration between design and field operations is seamless.",
+        "author": "Bilal Al Qasmi",
+        "role": "Project Director, Residential Developer"
+      },
+      {
+        "quote": "We implemented SpectroNova across our commercial construction division and couldn't be happier with the results. The scheduling tools have saved us countless hours.",
+        "author": "Safiya Al Said",
+        "role": "Operations Manager, Commercial Contractor"
+      },
+      {
+        "quote": "The ability to track progress in real-time using the mobile app has significantly reduced our project completion times and improved quality control.",
+        "author": "Linda John",
+        "role": "IT Director, Civil Engineering Firm"
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "watchnet",
+        "src": "/images/WatchNet-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "WatchNet"
+      },
+      {
+        "id": "tyco",
+        "src": "/images/Tyco-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "Tyco"
+      },
+      {
+        "id": "suprema",
+        "src": "/images/Suprema-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "Suprema"
+      },
+      {
+        "id": "hikvision",
+        "src": "/images/Hikvision-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "Hikvision"
+      },
+      {
+        "id": "zkteco",
+        "src": "/images/ZKTeco-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "ZKTeco"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

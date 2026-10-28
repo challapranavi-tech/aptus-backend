@@ -1,0 +1,223 @@
+/* Explore Autodesk by industry — landscape cards + yellow hover (reference) */
+
+.section {
+  --ind-yellow: #ffff00;
+  --ind-radius: 10px;
+  --ind-gap: 20px;
+  --ind-card-w: clamp(220px, 22vw, 280px);
+  --ind-ease: cubic-bezier(0.2, 0, 0, 1);
+  --ind-dur: 280ms;
+
+  background: #000;
+  padding: 20px 0 22px;
+  color: #fff;
+}
+
+.inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 48px);
+}
+
+.headRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.headCopy {
+  min-width: 0;
+  max-width: 40rem;
+}
+
+.title {
+  margin: 0;
+  font-family: ArtifaktLegend, ArtifaktElement, Arial, sans-serif;
+  font-size: clamp(1.5rem, 1.3rem + 0.8vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.lead {
+  margin: 0.4rem 0 0;
+  font-family: ArtifaktElement, Arial, sans-serif;
+  font-size: clamp(0.9rem, 0.85rem + 0.2vw, 1rem);
+  font-weight: 400;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.navBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: #111;
+  cursor: pointer;
+  transition: background var(--ind-dur) var(--ind-ease), opacity var(--ind-dur) var(--ind-ease),
+    transform var(--ind-dur) var(--ind-ease);
+}
+
+.navBtn:hover:not(:disabled) {
+  transform: scale(1.04);
+}
+
+.navBtn:focus-visible {
+  outline: 2px solid var(--ind-yellow);
+  outline-offset: 2px;
+}
+
+.navBtnDisabled,
+.navBtn:disabled {
+  background: rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.55);
+  cursor: default;
+  opacity: 1;
+}
+
+.scroller {
+  display: flex;
+  gap: var(--ind-gap);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 2px 8px;
+}
+
+.scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  position: relative;
+  flex: 0 0 var(--ind-card-w);
+  width: var(--ind-card-w);
+  aspect-ratio: 4 / 3;
+  border-radius: var(--ind-radius);
+  overflow: hidden;
+  scroll-snap-align: start;
+  color: #fff;
+  display: block;
+  border: 2px solid transparent;
+  background: #1a1a1a;
+  isolation: isolate;
+  cursor: default;
+  transition: border-color var(--ind-dur) var(--ind-ease), transform var(--ind-dur) var(--ind-ease),
+    box-shadow var(--ind-dur) var(--ind-ease);
+}
+
+.media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 400ms var(--ind-ease);
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.05) 35%,
+    rgba(0, 0, 0, 0.55) 72%,
+    rgba(0, 0, 0, 0.78) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity var(--ind-dur) var(--ind-ease);
+}
+
+.label {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  z-index: 2;
+  font-family: ArtifaktElement, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #fff;
+  max-width: calc(100% - 32px);
+}
+
+.card:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  transform: translateY(-2px);
+}
+
+.card:hover .media {
+  transform: scale(1.04);
+}
+
+.card:hover .scrim {
+  opacity: 0.85;
+}
+
+@media (max-width: 768px) {
+  .section {
+    --ind-card-w: min(72vw, 260px);
+    padding: 16px 0 18px;
+  }
+
+  .headRow {
+    margin-bottom: 12px;
+  }
+
+  .title {
+    font-size: 1.375rem;
+  }
+
+  .navBtn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .label {
+    font-size: 0.9375rem;
+    left: 14px;
+    bottom: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    --ind-card-w: 78vw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .media,
+  .navBtn {
+    transition: none;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+
+  .card:hover .media {
+    transform: none;
+  }
+}

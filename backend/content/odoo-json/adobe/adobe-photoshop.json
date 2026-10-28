@@ -1,0 +1,257 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "adobe",
+    "bannerTitle": "Adobe Photoshop",
+    "bannerTagline": "The world’s best imaging and graphic design software is at the core of just about every creative project",
+    "mediaInline": false,
+    "title": "Professional Image Editing",
+    "paragraphs": [
+      "Adobe Photoshop is the definitive, industry-standard software for digital image editing and graphic design. Used globally by millions of photographers, designers, and artists, Photoshop empowers you to transform photos, craft sophisticated artwork, and bring any visual concept to life with unparalleled precision and creative freedom.",
+      "The core of Photoshop is its powerful, non-destructive architecture. By utilizing Layers, Masks, and Adjustment Layers, you can experiment, iterate, and refine every detail of your composition without permanently altering the original pixels, ensuring a flexible and efficient workflow. From basic cropping and color correction to advanced photo compositing, Photoshop offers a toolset as vast as your imagination.",
+      "Whether you are perfecting a raw photograph, designing marketing collateral, or creating an intricate digital painting, Photoshop provides the reliable, professional environment you need. Integrate seamlessly with the entire Adobe Creative Cloud ecosystem to ensure your creative vision is not just captured, but completely realized."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Adobe-Photoshop.png",
+    "imageAlt": "Adobe Photoshop",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "gridColumns": 3,
+      "title": {
+        "before": "Powerful Features"
+      },
+      "subheading": "Discover the capabilities that make AutoCAD the industry standard",
+      "align": "center",
+      "items": [
+        {
+          "title": "Advanced Layers",
+          "body": "Work non-destructively with layers, layer masks, and adjustment layers to achieve professional results.",
+          "icon": "layer-group",
+          "imageAlt": "Advanced Layers"
+        },
+        {
+          "title": "AI-Powered Tools",
+          "body": "Leverage Adobe Sensei AI for features like Select Subject, Content-Aware Fill, and Neural Filters.",
+          "icon": "magic",
+          "imageAlt": "AI-Powered Tools"
+        },
+        {
+          "title": "Digital Painting",
+          "body": "Create stunning digital art with customizable brushes, mixer brushes, and realistic painting tools.",
+          "icon": "paint-brush",
+          "imageAlt": "Digital Painting"
+        },
+        {
+          "title": "Content-Aware Tools",
+          "body": "Remove unwanted elements, scale objects, and fill gaps intelligently with Content-Aware technology.",
+          "icon": "robot",
+          "imageAlt": "Content-Aware Tools"
+        },
+        {
+          "title": "Advanced Adjustments",
+          "body": "Perfect your images with curves, levels, color balance, and professional color grading tools.",
+          "icon": "circle",
+          "imageAlt": "Advanced Adjustments"
+        },
+        {
+          "title": "Creative Cloud Integration",
+          "body": "Seamlessly work across Adobe applications and access your assets anywhere with Creative Cloud.",
+          "icon": "cloud",
+          "imageAlt": "Creative Cloud Integration"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Benefits for Every Creator"
+      },
+      "subheading": "Why professionals and hobbyists choose Photoshop",
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "For Photographers",
+          "body": "Edit and enhance your photos with professional tools for retouching, color correction, and compositing.",
+          "icon": "camera"
+        },
+        {
+          "title": "For Designers",
+          "body": "Create graphics, layouts, and visual elements with precision and creative control.",
+          "icon": "pencil-ruler"
+        },
+        {
+          "title": "For Artists",
+          "body": "Express your creativity with digital painting tools that simulate traditional media and enable new techniques.",
+          "icon": "palette"
+        },
+        {
+          "title": "For Content Creators",
+          "body": "Design eye-catching visuals for social media, web, and video with versatile export options.",
+          "icon": "film"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Adobe Photoshop?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Official Partner",
+          "body": "As an authorized partner, we provide access to genuine Adobe products.",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset"
+        },
+        {
+          "title": "Local Presence",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "mobile-alt"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Start Creating Today",
+    "subheading": "Join millions of creative professionals who use Photoshop to bring their ideas to life.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Success stories from businesses using AutoCAD through Aptus Infotech",
+    "items": [
+      {
+        "quote": "Photoshop has transformed my photography workflow. The new AI-powered selection tools save me hours of editing time on every project.",
+        "author": "Alex Morgan",
+        "role": "Professional, Photographer"
+      },
+      {
+        "quote": "As a graphic designer, Photoshop is my most essential tool. The layer system and advanced compositing features allow me to create anything I can imagine.",
+        "author": "Jamie Chen",
+        "role": "Creative Director, Design Studio"
+      },
+      {
+        "quote": "The digital painting tools in Photoshop have revolutionized my art process. I can now create detailed illustrations that rival traditional media with the flexibility of digital.",
+        "author": "Samantha Rodriguez",
+        "role": "Creative Head, Digital Artist & Illustrator"
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/planswift.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Prokon.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/sophos.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/spectronova.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/aconex.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/etap.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/fortinet.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/kaspersky.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft.png",
+        "alt": "Microsoft"
+      },
+      {
+        "id": "lumion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/lumion.png",
+        "alt": "lumion"
+      },
+      {
+        "id": "paloalto",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/paloalto.png",
+        "alt": "paloalto"
+      },
+      {
+        "id": "vray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/v.ray_.png",
+        "alt": "v.ray"
+      },
+      {
+        "id": "twinmotion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png",
+        "alt": "twinmotion"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

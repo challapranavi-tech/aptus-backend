@@ -1,0 +1,92 @@
+@theme {
+  /* Elementor kit-9 + Hello Elementor reset */
+  --color-brand-navy:       #000000;
+  --color-brand-navy-dark:  #000000;
+  --color-brand-navy-mid:   #333333;
+  --color-brand-blue:       #1352a3;
+  --color-brand-blue-dark:  #13934b;
+  --color-brand-green:      #13934b;
+  --color-brand-green-dark: #13934b;
+  --color-brand-green-light:#67db85;
+  --color-brand-orange:     #1352a3;
+  --color-brand-orange-hover: #13934b;
+  --color-brand-light:      #24648c0f;
+  --color-brand-topbar:     #248bcc;
+
+  --color-background:           #ffffff;
+  --color-foreground:           #333333;
+  /* base.css headings — without this, h1–h6 inherit body grey and darken software heroes */
+  --color-heading:              #000000;
+  --color-muted:                #24648c0f;
+  --color-muted-foreground:     #695b5b;
+  --color-border:               #e4ebe6;
+  --color-input:                #13934b0f;
+  --color-ring:                 #1352a3;
+
+  --color-primary:              #1352a3;
+  --color-primary-foreground:   #ffffff;
+  --color-primary-hover:        #13934b;
+
+  --color-secondary:            #67db85;
+  --color-secondary-foreground: #000000;
+  --color-secondary-hover:      #67db85;
+
+  --color-accent:               #000000;
+  --color-accent-foreground:    #ffffff;
+
+  --color-destructive:          #ef4444;
+  --color-destructive-foreground: #ffffff;
+  --color-success:              #13934b;
+  --color-warning:              #f59e0b;
+
+  --font-sans:    var(--font-body);
+  --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+
+  /* Fluid type: scales ~320–1280px; desktop sizes match prior fixed rem values */
+  --text-xs:   0.75rem;   --text-xs--line-height:   1rem;
+  --text-sm:   0.875rem;  --text-sm--line-height:   1.25rem;
+  --text-base: 1rem;      --text-base--line-height: 1.5rem;
+  --text-lg:   1.125rem;  --text-lg--line-height:   1.75rem;
+  --text-xl:   clamp(1.125rem, 0.5vw + 1rem, 1.25rem);   --text-xl--line-height:   1.75rem;
+  --text-2xl:  clamp(1.25rem, 0.8vw + 1.05rem, 1.5rem);  --text-2xl--line-height:  2rem;
+  --text-3xl:  clamp(1.5rem, 1.2vw + 1.15rem, 1.875rem); --text-3xl--line-height:  2.25rem;
+  --text-4xl:  clamp(1.75rem, 1.6vw + 1.2rem, 2.25rem);  --text-4xl--line-height:  1.2;
+  --text-5xl:  clamp(1.875rem, 2vw + 1.25rem, 2.5rem);   --text-5xl--line-height:  1.2;
+  --text-6xl:  clamp(2.5rem, 3vw + 1.5rem, 3.75rem);     --text-6xl--line-height:  1.05;
+
+  /* One section-density knob — utilities (.section-padding) and .aptus-section share it. */
+  --spacing-section:    1.75rem;
+  --spacing-section-lg: 2rem;
+  --section-padding:    var(--spacing-section);
+
+  /* Breakpoints align with Tailwind defaults: sm 640, md 768, lg 1024, xl 1280, 2xl/xxl 1536 */
+  --breakpoint-xxl: 96rem;
+
+  --container-sm:  640px;
+  --container-md:  768px;
+  --container-lg:  1024px;
+  --container-xl:  1280px;
+  --container-2xl:  1400px;
+  --container-site: 1300px;
+  --container-narrow: 800px;
+  --container-form: 750px;
+
+  --radius-sm: 0.1875rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.625rem;
+  --radius-xl: 1.25rem;
+  --radius-full: 9999px;
+
+  --shadow-sm:  0 1px 3px 0 rgb(0 0 0 / 0.08);
+  --shadow-md:  0 4px 12px -2px rgb(0 0 0 / 0.12);
+  --shadow-lg:  0 10px 28px -4px rgb(0 0 0 / 0.16);
+  --shadow-card: 0 18px 25px 0 rgb(0 0 0 / 0.12);
+  --shadow-icon-card: 0 0 10px rgb(0 0 0 / 0.5);
+
+  --ease-out-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:     cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast:   150ms;
+  --duration-normal: 300ms;
+  --duration-slow:   1500ms;
+}

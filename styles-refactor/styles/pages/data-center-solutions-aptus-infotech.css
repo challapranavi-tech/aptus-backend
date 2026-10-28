@@ -1,0 +1,16 @@
+/**
+ * Page: Data Center Solutions | Aptus Infotech
+ * Route: /data-center-solutions
+ * Source: LIVE WEBSITE/ELV\Data Center Solutions _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-data-center-solutions-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 28 inline styles detected — migrate to utilities */
+}

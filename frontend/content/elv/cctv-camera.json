@@ -1,0 +1,182 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Complete Visibility. Total Protection.",
+    "bannerTagline": "4K cameras, centralized monitoring, and 24/7 support across Oman.",
+    "bannerSupport": "Trusted brands. Custom-designed systems. 24/7 support.",
+    "bannerBackgroundImages": [
+      {
+        "src": "/images/CCTV-Cameras.jpg",
+        "alt": "CCTV camera systems for enterprise surveillance"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/CCTV_banner.png",
+        "alt": "CCTV surveillance control and monitoring"
+      },
+      {
+        "src": "/images/Access-Control-System-1-1024x1020.png",
+        "alt": "Integrated security and access monitoring"
+      },
+      {
+        "src": "/images/Thermal_Scanner-1024x1020.png",
+        "alt": "Thermal and advanced imaging security cameras"
+      },
+      {
+        "src": "/images/Gate.jpg",
+        "alt": "Perimeter and entry point video surveillance"
+      }
+    ],
+    "title": "Surveillance That Strengthens Security",
+    "paragraphs": [
+      "See every access point clearly — from a shop entrance to a multi-building campus. Cameras, recording, and remote viewing sit in one system so staff can watch live and review events later. We match camera types to light, weather, and coverage needs. Support stays available after handover so the system keeps performing."
+    ],
+    "imageSrc": "/images/CCTV-Cameras.jpg",
+    "layout": "two-column",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form",
+    "imageAlt": "CCTV camera systems for enterprise surveillance"
+  },
+  "cardSections": [
+    {
+      "id": "camera-types",
+      "visible": true,
+      "variant": "product-cards",
+      "gridColumns": 5,
+      "title": {
+        "before": "CCTV Camera Types"
+      },
+      "subheading": "Labeled solutions for every coverage need — from close-range interiors to long-range perimeter protection.",
+      "align": "left",
+      "items": [
+        {
+          "title": "Dome Cameras",
+          "body": "Discrete 360° coverage with vandal-resistant housings — ideal for interiors, corridors, and public spaces.",
+          "imageSrc": "/images/dome-150x150.png",
+          "imageAlt": "Dome CCTV camera"
+        },
+        {
+          "title": "Turret Cameras",
+          "body": "4K clarity with advanced night vision and wide dynamic range for demanding indoor and outdoor zones.",
+          "imageSrc": "/images/CCTV-Cameras.jpg",
+          "imageAlt": "Turret CCTV camera"
+        },
+        {
+          "title": "Bullet Cameras",
+          "body": "Long-distance viewing with adjustable zoom and weatherproof construction for building exteriors and yards.",
+          "imageSrc": "/images/Bullet-Cameras-150x150.png",
+          "imageAlt": "Bullet CCTV camera"
+        },
+        {
+          "title": "PTZ Cameras",
+          "body": "Remote pan-tilt-zoom control with patrol routes for active monitoring of large sites and open areas.",
+          "imageSrc": "/images/PTZ-Cameras-150x150.png",
+          "imageAlt": "PTZ CCTV camera"
+        },
+        {
+          "title": "Thermal Cameras",
+          "body": "Perimeter intrusion and fire detection with clear imaging in complete darkness and harsh conditions.",
+          "imageSrc": "/images/thermal-camera-150x150.png",
+          "imageAlt": "Thermal CCTV camera"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus",
+        "accent": "CCTV Surveillance Needs?"
+      },
+      "align": "left",
+      "items": [
+        {
+          "title": "Industry Expertise",
+          "body": "Our team includes certified security technicians with deep knowledge of CCTV installation and maintenance for various sectors.",
+          "icon": "users"
+        },
+        {
+          "title": "24/7 Support",
+          "body": "Round-the-clock technical support and proactive monitoring to ensure optimal system performance at all times.",
+          "icon": "headset"
+        },
+        {
+          "title": "Customized Solutions",
+          "body": "We design systems specifically for your security needs rather than offering generic packages.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Proactive Maintenance",
+          "body": "Regular system audits and predictive maintenance to prevent issues before they impact your security.",
+          "icon": "reply-all"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes-marquee",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Hear from businesses that have enhanced their security with our CCTV solutions",
+    "items": [
+      {
+        "quote": "The installation of Aptus Infotech’s CCTV system has dramatically improved our operational efficiency across multiple departments.",
+        "author": "Sarah Johnson",
+        "role": "Director of Operations"
+      },
+      {
+        "quote": "Their system seamlessly integrated with our existing infrastructure, resulting in 40% reduction in operational costs and improved disaster recovery capabilities.",
+        "author": "Michael Chen",
+        "role": "CEO"
+      },
+      {
+        "quote": "We were particularly impressed with the system’s reliability during critical situations and the excellent training provided to our staff.",
+        "author": "Jessica Williams",
+        "role": "Operations Manager"
+      }
+    ]
+  },
+  "midCta": {
+    "placement": "bottom",
+    "heading": "Ready to Strengthen Your Surveillance?",
+    "description": "Contact our CCTV technology specialists to discuss how our surveillance solutions can enhance security, streamline monitoring, and ensure peace of mind across your facility.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "partnerships": {
+    "placement": "before-testimonials",
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Avigilon.png",
+        "alt": "Avigilon"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Milesight-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "Milesight"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Norden-300x180.png",
+        "alt": "Norden"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/PELCO.png",
+        "alt": "PELCO"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Hikvision.png",
+        "alt": "Hikvision"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Dahua-rajc6eniwnl2qx20ib4zabi5fy6843kx2rpg00yiy6.png",
+        "alt": "Dahua"
+      }
+    ]
+  }
+}

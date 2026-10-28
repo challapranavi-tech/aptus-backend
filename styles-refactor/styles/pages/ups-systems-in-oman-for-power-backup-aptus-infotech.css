@@ -1,0 +1,16 @@
+/**
+ * Page: UPS Systems in Oman for Power Backup | Aptus Infotech
+ * Route: /ups
+ * Source: LIVE WEBSITE/ELV\UPS Systems in Oman for Power Backup _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-ups-systems-in-oman-for-power-backup-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 28 inline styles detected — migrate to utilities */
+}

@@ -1,0 +1,16 @@
+/**
+ * Page: Autodesk Gold Partner in Oman | Aptus Infotech
+ * Route: /autodesk
+ * Source: LIVE WEBSITE/software\autodesk\Autodesk Gold Partner in Oman _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-autodesk-gold-partner-in-oman-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 11 inline styles detected — migrate to utilities */
+}

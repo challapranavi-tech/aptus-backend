@@ -1,0 +1,2276 @@
+[
+  {
+    "slug": "access-control-system",
+    "route": "/access-control-system",
+    "isHub": false,
+    "htmlFile": "Access Control Systems in Oman _ Aptus Info Tech.html",
+    "liveSections": [
+      {
+        "id": "banner+hero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "count": 10,
+        "titles": [
+          "Biometric Authentication",
+          "Smart Card Systems",
+          "Mobile Access",
+          "Time-Based Permissions",
+          "Centralized Management",
+          "Detailed Audit Trails",
+          "Enhanced Security",
+          "Improved Efficiency",
+          "Cost Savings",
+          "Visitor Management"
+        ]
+      },
+      {
+        "id": "why-aptus",
+        "count": 4,
+        "titles": [
+          "Certified Professionals",
+          "End-to-End Services",
+          "Technical Support",
+          "Local Presence"
+        ]
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "liveH2s": [
+      "Advanced Access Control Solutions for Secure Environments",
+      "Powerful Features",
+      "Biometric Authentication",
+      "Smart Card Systems",
+      "Mobile Access",
+      "Time-Based Permissions",
+      "Centralized Management",
+      "Detailed Audit Trails",
+      "Benefits of Our Access Control Systems",
+      "Enhanced Security",
+      "Improved Efficiency",
+      "Cost Savings",
+      "Visitor Management",
+      "Why Choose Aptus Infotech for Your Access Control Needs?",
+      "Certified Professionals",
+      "End-to-End Services",
+      "Technical Support",
+      "Local Presence",
+      "Ready to Secure Your Premises?",
+      "Client Success Stories",
+      "Mohammed Al Farsi",
+      "Sarah Johnson",
+      "Ahmed Hassan",
+      "Winning together with Strategic Alliances",
+      "Have questions? We can help"
+    ],
+    "jsonSections": [
+      {
+        "id": "softwareInnerHero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "variant": "icon-cards",
+        "count": 10,
+        "titles": [
+          "Biometric Authentication",
+          "Smart Card Systems",
+          "Mobile Access",
+          "Time-Based Permissions",
+          "Centralized Management",
+          "Detailed Audit Trails",
+          "Enhanced Security",
+          "Improved Efficiency",
+          "Cost Savings",
+          "Visitor Management"
+        ],
+        "title": {
+          "before": "Key Features"
+        }
+      },
+      {
+        "id": "why-aptus",
+        "variant": "value-cards",
+        "count": 4,
+        "titles": [
+          "Certified Professionals",
+          "End-to-End Services",
+          "Technical Support",
+          "Local Presence"
+        ],
+        "title": {
+          "before": "Why Choose Aptus Infotech for",
+          "accent": "Your Access Control Needs?"
+        }
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "issues": [
+      {
+        "severity": "high",
+        "msg": "Missing section in JSON: banner+hero"
+      },
+      {
+        "severity": "medium",
+        "msg": "Hero intro paragraphs empty in JSON (live has body copy)"
+      }
+    ],
+    "issueCount": 2
+  },
+  {
+    "slug": "audio-video-solutions",
+    "route": "/audio-video-solutions",
+    "isHub": false,
+    "htmlFile": "Professional Audio Video Solutions _ Aptus Infotech.html",
+    "liveSections": [
+      {
+        "id": "banner+hero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "count": 9,
+        "titles": [
+          "Video Conferencing Systems",
+          "Audio Enhancement Systems",
+          "Content Sharing & Collaboration",
+          "Surveillance & Monitoring",
+          "Room Booking & Scheduling",
+          "Enhanced Communication",
+          "Increased Productivity",
+          "Remote Accessibility",
+          "Cost Efficiency"
+        ]
+      },
+      {
+        "id": "why-aptus",
+        "count": 4,
+        "titles": [
+          "Certified Professionals",
+          "End-to-End Services",
+          "24/7 Technical Support",
+          "Future-Ready Technology"
+        ]
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "liveH2s": [
+      "Enhance Communication with Advanced Audio/Video Technology",
+      "Powerful Features",
+      "Video Conferencing Systems",
+      "Audio Enhancement Systems",
+      "Content Sharing & Collaboration",
+      "Surveillance & Monitoring",
+      "Room Booking & Scheduling",
+      "Benefits of Our Audio/Video Solutions",
+      "Enhanced Communication",
+      "Increased Productivity",
+      "Remote Accessibility",
+      "Cost Efficiency",
+      "Why Choose Aptus Infotech for AutoCAD?",
+      "Certified Professionals",
+      "End-to-End Services",
+      "24/7 Technical Support",
+      "Future-Ready Technology",
+      "Ready to Transform Your Meetings?",
+      "Client Success Stories",
+      "Mohammed Al Farsi",
+      "Sarah Johnson",
+      "Ahmed Hassan",
+      "Winning together with Strategic Alliances",
+      "Have questions? We can help"
+    ],
+    "jsonSections": [
+      {
+        "id": "softwareInnerHero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "variant": "icon-cards",
+        "count": 9,
+        "titles": [
+          "Video Conferencing Systems",
+          "Audio Enhancement Systems",
+          "Content Sharing & Collaboration",
+          "Surveillance & Monitoring",
+          "Room Booking & Scheduling",
+          "Enhanced Communication",
+          "Increased Productivity",
+          "Remote Accessibility",
+          "Cost Efficiency"
+        ],
+        "title": {
+          "before": "Key Features"
+        }
+      },
+      {
+        "id": "why-aptus",
+        "variant": "value-cards",
+        "count": 4,
+        "titles": [
+          "Certified Professionals",
+          "End-to-End Services",
+          "24/7 Technical Support",
+          "Future-Ready Technology"
+        ],
+        "title": {
+          "before": "Why Choose Aptus",
+          "accent": "Infotech for AutoCAD?"
+        }
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "issues": [
+      {
+        "severity": "high",
+        "msg": "Missing section in JSON: banner+hero"
+      }
+    ],
+    "issueCount": 1
+  },
+  {
+    "slug": "cctv-camera",
+    "route": "/cctv-camera",
+    "isHub": false,
+    "htmlFile": "Advanced CCTV Surveillance Systems _ Aptus Infotech.html",
+    "liveSections": [
+      {
+        "id": "banner+hero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "count": 5,
+        "titles": [
+          "High-Resolution Cameras",
+          "Smart Motion Detection",
+          "Night Vision Technology",
+          "Remote Access & Monitoring",
+          "Cloud Storage & Backup"
+        ]
+      },
+      {
+        "id": "why-aptus",
+        "count": 4,
+        "titles": [
+          "Industry Expertise",
+          "24/7 Support",
+          "Customized Solutions",
+          "Proactive Maintenance"
+        ]
+      },
+      {
+        "id": "testimonials",
+        "type": "quotes"
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "liveH2s": [
+      "CCTV Surveillance Solutions",
+      "CCTV Solutions",
+      "Key CCTV System Features",
+      "High-Resolution Cameras",
+      "Smart Motion Detection",
+      "Night Vision Technology",
+      "Remote Access & Monitoring",
+      "Cloud Storage & Backup",
+      "Some famous Types of CCTV Solutions",
+      "Dome Cameras",
+      "Bullet Cameras",
+      "PTZ Cameras",
+      "Thermal Cameras",
+      "Why Choose Aptus Infotech for AutoCAD?",
+      "Industry Expertise",
+      "24/7 Support",
+      "Customized Solutions",
+      "Proactive Maintenance",
+      "Ready to Transform Your Hotel Operations?",
+      "What Our Clients Say",
+      "Sarah Johnson",
+      "Michael Chen",
+      "Jessica Williams",
+      "Winning together with Strategic Alliances",
+      "Have questions? We can help"
+    ],
+    "jsonSections": [
+      {
+        "id": "softwareInnerHero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "variant": "icon-cards",
+        "count": 5,
+        "titles": [
+          "High-Resolution Cameras",
+          "Smart Motion Detection",
+          "Night Vision Technology",
+          "Remote Access & Monitoring",
+          "Cloud Storage & Backup"
+        ],
+        "title": {
+          "before": "Key Features"
+        }
+      },
+      {
+        "id": "why-aptus",
+        "variant": "value-cards",
+        "count": 4,
+        "titles": [
+          "Industry Expertise",
+          "24/7 Support",
+          "Customized Solutions",
+          "Proactive Maintenance"
+        ],
+        "title": {
+          "before": "Why Choose Aptus",
+          "accent": "Infotech for AutoCAD?"
+        }
+      },
+      {
+        "id": "testimonials",
+        "type": "quotes",
+        "count": 3
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "issues": [
+      {
+        "severity": "high",
+        "msg": "Missing section in JSON: banner+hero"
+      }
+    ],
+    "issueCount": 1
+  },
+  {
+    "slug": "conference-room-solution",
+    "route": "/conference-room-solution",
+    "isHub": false,
+    "htmlFile": "Conference room solution - Aptus Infotech.html",
+    "liveSections": [
+      {
+        "id": "banner+hero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "count": 10,
+        "titles": [
+          "Video Conferencing Systems",
+          "Interactive Displays",
+          "Audio Systems",
+          "Wireless Presentation",
+          "Integrated Control Systems",
+          "Remote Management",
+          "Enhanced Collaboration",
+          "Time Efficiency",
+          "Global Connectivity",
+          "Professional Image"
+        ]
+      },
+      {
+        "id": "why-aptus",
+        "count": 4,
+        "titles": [
+          "Certified Professionals",
+          "End-to-End Services",
+          "24/7 Technical Support",
+          "Local Presence"
+        ]
+      },
+      {
+        "id": "testimonials",
+        "type": "quotes"
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "liveH2s": [
+      "Intelligent Audiovisual Solutions for Modern Meeting Spaces",
+      "Key Features",
+      "Video Conferencing Systems",
+      "Interactive Displays",
+      "Audio Systems",
+      "Wireless Presentation",
+      "Integrated Control Systems",
+      "Remote Management",
+      "Benefits of Our Solutions",
+      "Enhanced Collaboration",
+      "Time Efficiency",
+      "Global Connectivity",
+      "Professional Image",
+      "Why Choose Aptus Infotech for Your Conference Room Needs?",
+      "Certified Professionals",
+      "End-to-End Services",
+      "24/7 Technical Support",
+      "Local Presence",
+      "Ready to Transform Your Meeting Experience?",
+      "What Our Clients Say",
+      "Mohammed Al Farsi",
+      "Sarah Johnson",
+      "Ahmed Hassan",
+      "Winning together with Strategic Alliances",
+      "Have questions? We can help"
+    ],
+    "jsonSections": [
+      {
+        "id": "softwareInnerHero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "variant": "icon-cards",
+        "count": 10,
+        "titles": [
+          "Video Conferencing Systems",
+          "Interactive Displays",
+          "Audio Systems",
+          "Wireless Presentation",
+          "Integrated Control Systems",
+          "Remote Management",
+          "Enhanced Collaboration",
+          "Time Efficiency",
+          "Global Connectivity",
+          "Professional Image"
+        ],
+        "title": {
+          "before": "Key Features"
+        }
+      },
+      {
+        "id": "why-aptus",
+        "variant": "value-cards",
+        "count": 4,
+        "titles": [
+          "Certified Professionals",
+          "End-to-End Services",
+          "24/7 Technical Support",
+          "Local Presence"
+        ],
+        "title": {
+          "before": "Why Choose Aptus Infotech for",
+          "accent": "Your Conference Room Needs?"
+        }
+      },
+      {
+        "id": "testimonials",
+        "type": "quotes",
+        "count": 3
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "issues": [
+      {
+        "severity": "high",
+        "msg": "Missing section in JSON: banner+hero"
+      }
+    ],
+    "issueCount": 1
+  },
+  {
+    "slug": "data-center-solutions",
+    "route": "/data-center-solutions",
+    "isHub": false,
+    "htmlFile": "Data Center Solutions _ Aptus Infotech.html",
+    "liveSections": [
+      {
+        "id": "banner+hero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "count": 6,
+        "titles": [
+          "Virtualization & Containerization",
+          "Cloud Integration Services",
+          "Advanced Security Measures",
+          "High-Speed Networking",
+          "Scalable Storage Solutions",
+          "Redundant Power & Cooling"
+        ]
+      },
+      {
+        "id": "why-aptus",
+        "count": 4,
+        "titles": [
+          "Certified Expertise",
+          "24/7 Support",
+          "Customized Solutions",
+          "Proactive Maintenance"
+        ]
+      },
+      {
+        "id": "testimonials",
+        "type": "quotes"
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "liveH2s": [
+      "Data Center Solutions",
+      "Powering Your Digital Future",
+      "Comprehensive Features",
+      "Virtualization & Containerization",
+      "Cloud Integration Services",
+      "Advanced Security Measures",
+      "High-Speed Networking",
+      "Scalable Storage Solutions",
+      "Redundant Power & Cooling",
+      "Why Choose Aptus Infotech?",
+      "Certified Expertise",
+      "24/7 Support",
+      "Customized Solutions",
+      "Proactive Maintenance",
+      "What Our Clients Say",
+      "Sarah Johnson",
+      "Michael Chen",
+      "Jessica Williams",
+      "Winning together with Strategic Alliances",
+      "Have questions? We can help"
+    ],
+    "jsonSections": [
+      {
+        "id": "softwareInnerHero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "variant": "icon-cards",
+        "count": 6,
+        "titles": [
+          "Virtualization & Containerization",
+          "Cloud Integration Services",
+          "Advanced Security Measures",
+          "High-Speed Networking",
+          "Scalable Storage Solutions",
+          "Redundant Power & Cooling"
+        ],
+        "title": {
+          "before": "Key Features"
+        }
+      },
+      {
+        "id": "why-aptus",
+        "variant": "value-cards",
+        "count": 4,
+        "titles": [
+          "Certified Expertise",
+          "24/7 Support",
+          "Customized Solutions",
+          "Proactive Maintenance"
+        ],
+        "title": {
+          "before": "Why Choose",
+          "accent": "Aptus Infotech?"
+        }
+      },
+      {
+        "id": "testimonials",
+        "type": "quotes",
+        "count": 3
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "issues": [
+      {
+        "severity": "high",
+        "msg": "Missing section in JSON: banner+hero"
+      }
+    ],
+    "issueCount": 1
+  },
+  {
+    "slug": "elv-solutions",
+    "route": "/elv-solutions",
+    "isHub": true,
+    "htmlFile": "ELV Solutions in Oman _ Aptus Infotech.html",
+    "liveSections": [
+      {
+        "id": "banner+hero",
+        "type": "hero"
+      },
+      {
+        "id": "services",
+        "count": 15,
+        "titles": [
+          "Access Control System",
+          "Thermal Scanners",
+          "CCTV",
+          "Gate Automation",
+          "Smart Homes",
+          "Audio/Video Solutions",
+          "Network & Structured Cabling",
+          "UPS",
+          "Guest Room Management",
+          "Nurse Calling System",
+          "SMATV/IPTV",
+          "Queue Management",
+          "Data Center Solutions",
+          "Switching and Routing",
+          "Conference Room Solution"
+        ]
+      },
+      {
+        "id": "why-elv",
+        "count": 4,
+        "titles": [
+          "Expertise",
+          "Integration",
+          "Reliability",
+          "Support"
+        ]
+      },
+      {
+        "id": "why-aptus",
+        "count": 4,
+        "titles": [
+          "Customized Solutions",
+          "Quality Assurance",
+          "Timely Delivery",
+          "Competitive Pricing"
+        ]
+      },
+      {
+        "id": "mid-cta",
+        "type": "cta"
+      },
+      {
+        "id": "testimonials",
+        "type": "quotes"
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "liveH2s": [
+      "Comprehensive ELV Solutions",
+      "Your Trusted ELV Solutions Partner",
+      "Our Services",
+      "Access Control System",
+      "Thermal Scanners",
+      "CCTV",
+      "Gate Automation",
+      "Smart Homes",
+      "Audio/Video Solutions",
+      "Network & Structured Cabling",
+      "UPS",
+      "Guest Room Management",
+      "Nurse Calling System",
+      "SMATV/IPTV",
+      "Queue Management",
+      "Data Center Solutions",
+      "Switching and Routing",
+      "Conference Room Solution",
+      "Why Choose ELV Solutions",
+      "Expertise",
+      "Integration",
+      "Reliability",
+      "Support",
+      "Why Choose Aptus Infotech for ELV?",
+      "Customized Solutions",
+      "Quality Assurance",
+      "Timely Delivery",
+      "Competitive Pricing",
+      "Ready to Transform Your Building?",
+      "What Our Clients Say",
+      "Yusuf Al Hashmi",
+      "Mariam Al Said",
+      "Khalid Al Balushi",
+      "Winning together with Strategic Alliances",
+      "Have questions? We can help"
+    ],
+    "jsonSections": [
+      {
+        "id": "softwareInnerHero",
+        "type": "hero"
+      },
+      {
+        "id": "services",
+        "variant": "icon-cards",
+        "count": 15,
+        "titles": [
+          "Access Control System",
+          "Thermal Scanners",
+          "CCTV",
+          "Gate Automation",
+          "Smart Homes",
+          "Audio/Video Solutions",
+          "Network & Structured Cabling",
+          "UPS",
+          "Guest Room Management",
+          "Nurse Calling System",
+          "SMATV/IPTV",
+          "Queue Management",
+          "Data Center Solutions",
+          "Switching and Routing",
+          "Conference Room Solution"
+        ],
+        "title": {
+          "before": "Our",
+          "accent": "Services"
+        }
+      },
+      {
+        "id": "why-elv",
+        "variant": "value-cards",
+        "count": 4,
+        "titles": [
+          "Expertise",
+          "Integration",
+          "Reliability",
+          "Support"
+        ],
+        "title": {
+          "before": "Why Choose",
+          "accent": "ELV Solutions"
+        }
+      },
+      {
+        "id": "why-aptus",
+        "variant": "value-cards",
+        "count": 4,
+        "titles": [
+          "Customized Solutions",
+          "Quality Assurance",
+          "Timely Delivery",
+          "Competitive Pricing"
+        ],
+        "title": {
+          "before": "Why Choose Aptus Infotech for",
+          "accent": "ELV?"
+        }
+      },
+      {
+        "id": "mid-cta",
+        "type": "cta"
+      },
+      {
+        "id": "testimonials",
+        "type": "quotes",
+        "count": 3
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "issues": [
+      {
+        "severity": "high",
+        "msg": "Missing section in JSON: banner+hero"
+      }
+    ],
+    "issueCount": 1
+  },
+  {
+    "slug": "gate-automation",
+    "route": "/gate-automation",
+    "isHub": false,
+    "htmlFile": "Smart Gate Automation Solutions _ Aptus Infotech.html",
+    "liveSections": [
+      {
+        "id": "banner+hero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "count": 10,
+        "titles": [
+          "Enhanced Security",
+          "Automatic Operation",
+          "Remote Access Control",
+          "Backup Power Systems",
+          "Integrated CCTV Monitoring",
+          "Mobile App Integration",
+          "Increased Security",
+          "Convenience & Accessibility",
+          "Property Value Enhancement",
+          "Cost Savings"
+        ]
+      },
+      {
+        "id": "why-aptus",
+        "count": 4,
+        "titles": [
+          "Authorized Partners",
+          "Professional Installation",
+          "24/7 Technical Support",
+          "System Integration"
+        ]
+      },
+      {
+        "id": "testimonials",
+        "type": "quotes"
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "liveH2s": [
+      "Gate Automation Solutions",
+      "Secure Your Property with Advanced Gate Automation",
+      "Powerful Features",
+      "Enhanced Security",
+      "Automatic Operation",
+      "Remote Access Control",
+      "Backup Power Systems",
+      "Integrated CCTV Monitoring",
+      "Mobile App Integration",
+      "Benefits of Gate Automation",
+      "Increased Security",
+      "Convenience & Accessibility",
+      "Property Value Enhancement",
+      "Cost Savings",
+      "Why Choose Aptus Infotech for Gate Automation?",
+      "Authorized Partners",
+      "Professional Installation",
+      "24/7 Technical Support",
+      "System Integration",
+      "Ready to Secure Your Property?",
+      "What Our Clients Say",
+      "Mohammed Al Farsi",
+      "Sarah Johnson",
+      "Ahmed Hassan",
+      "Winning together with Strategic Alliances",
+      "Have questions? We can help"
+    ],
+    "jsonSections": [
+      {
+        "id": "softwareInnerHero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "variant": "icon-cards",
+        "count": 10,
+        "titles": [
+          "Enhanced Security",
+          "Automatic Operation",
+          "Remote Access Control",
+          "Backup Power Systems",
+          "Integrated CCTV Monitoring",
+          "Mobile App Integration",
+          "Increased Security",
+          "Convenience & Accessibility",
+          "Property Value Enhancement",
+          "Cost Savings"
+        ],
+        "title": {
+          "before": "Key Features"
+        }
+      },
+      {
+        "id": "why-aptus",
+        "variant": "value-cards",
+        "count": 4,
+        "titles": [
+          "Authorized Partners",
+          "Professional Installation",
+          "24/7 Technical Support",
+          "System Integration"
+        ],
+        "title": {
+          "before": "Why Choose Aptus Infotech",
+          "accent": "for Gate Automation?"
+        }
+      },
+      {
+        "id": "testimonials",
+        "type": "quotes",
+        "count": 3
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "issues": [
+      {
+        "severity": "high",
+        "msg": "Missing section in JSON: banner+hero"
+      }
+    ],
+    "issueCount": 1
+  },
+  {
+    "slug": "guest-room-management",
+    "route": "/guest-room-management",
+    "isHub": false,
+    "htmlFile": "Smart Guest Room Management Systems in Muscat _ Aptus Info.html",
+    "liveSections": [
+      {
+        "id": "banner+hero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "count": 10,
+        "titles": [
+          "Room Status Tracking",
+          "Automated Billing",
+          "Reservation Management",
+          "Service Request System",
+          "Analytics & Reporting",
+          "Multilingual Interface",
+          "Increased Revenue",
+          "Enhanced Guest Experience",
+          "Improved Staff Efficiency",
+          "Enhanced Security"
+        ]
+      },
+      {
+        "id": "why-aptus",
+        "count": 4,
+        "titles": [
+          "Hospitality Expertise",
+          "24/7 Support",
+          "Customized Solutions",
+          "Proactive Maintenance"
+        ]
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "liveH2s": [
+      "Guestroom Management System",
+      "Modern Guest Room Management Solutions",
+      "Key System Features",
+      "Room Status Tracking",
+      "Automated Billing",
+      "Reservation Management",
+      "Service Request System",
+      "Analytics & Reporting",
+      "Multilingual Interface",
+      "Benefits for Hotels & Resorts",
+      "Increased Revenue",
+      "Enhanced Guest Experience",
+      "Improved Staff Efficiency",
+      "Enhanced Security",
+      "Why Choose Aptus Infotech?",
+      "Hospitality Expertise",
+      "24/7 Support",
+      "Customized Solutions",
+      "Proactive Maintenance",
+      "Ready to Transform Your Hotel Operations?",
+      "Client Success Stories",
+      "Sarah Johnson",
+      "Michael Chen",
+      "Jessica Williams",
+      "Winning together with Strategic Alliances",
+      "Have questions? We can help"
+    ],
+    "jsonSections": [
+      {
+        "id": "softwareInnerHero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "variant": "icon-cards",
+        "count": 10,
+        "titles": [
+          "Room Status Tracking",
+          "Automated Billing",
+          "Reservation Management",
+          "Service Request System",
+          "Analytics & Reporting",
+          "Multilingual Interface",
+          "Increased Revenue",
+          "Enhanced Guest Experience",
+          "Improved Staff Efficiency",
+          "Enhanced Security"
+        ],
+        "title": {
+          "before": "Key Features"
+        }
+      },
+      {
+        "id": "why-aptus",
+        "variant": "value-cards",
+        "count": 4,
+        "titles": [
+          "Hospitality Expertise",
+          "24/7 Support",
+          "Customized Solutions",
+          "Proactive Maintenance"
+        ],
+        "title": {
+          "before": "Why Choose",
+          "accent": "Aptus Infotech?"
+        }
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "issues": [
+      {
+        "severity": "high",
+        "msg": "Missing section in JSON: banner+hero"
+      }
+    ],
+    "issueCount": 1
+  },
+  {
+    "slug": "home-automation",
+    "route": "/home-automation",
+    "isHub": false,
+    "htmlFile": "Smart Home Automation Systems _ Aptus Infotech.html",
+    "liveSections": [
+      {
+        "id": "banner+hero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "count": 10,
+        "titles": [
+          "Voice Control",
+          "Automated Lighting",
+          "Climate Control",
+          "Security Integration",
+          "Energy Management",
+          "Entertainment Systems",
+          "Convenience & Comfort",
+          "Energy Efficiency",
+          "Enhanced Security",
+          "Cost Savings"
+        ]
+      },
+      {
+        "id": "why-aptus",
+        "count": 4,
+        "titles": [
+          "Certified Professionals",
+          "End-to-End Services",
+          "24/7 Technical Support",
+          "Future-Ready Technology"
+        ]
+      },
+      {
+        "id": "testimonials",
+        "type": "quotes"
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "liveH2s": [
+      "Experience the Future of Living",
+      "Powerful Features",
+      "Voice Control",
+      "Automated Lighting",
+      "Climate Control",
+      "Security Integration",
+      "Energy Management",
+      "Entertainment Systems",
+      "Benefits of Smart Home Technology",
+      "Convenience & Comfort",
+      "Energy Efficiency",
+      "Enhanced Security",
+      "Cost Savings",
+      "Why Choose Aptus Infotech for Your Smart Home?",
+      "Certified Professionals",
+      "End-to-End Services",
+      "24/7 Technical Support",
+      "Future-Ready Technology",
+      "Ready to Transform Your Living Experience?",
+      "What Our Clients Say",
+      "Mohammed Al Farsi",
+      "Sarah Johnson",
+      "Ahmed Hassan",
+      "Winning together with Strategic Alliances",
+      "Have questions? We can help"
+    ],
+    "jsonSections": [
+      {
+        "id": "softwareInnerHero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "variant": "icon-cards",
+        "count": 10,
+        "titles": [
+          "Voice Control",
+          "Automated Lighting",
+          "Climate Control",
+          "Security Integration",
+          "Energy Management",
+          "Entertainment Systems",
+          "Convenience & Comfort",
+          "Energy Efficiency",
+          "Enhanced Security",
+          "Cost Savings"
+        ],
+        "title": {
+          "before": "Key Features"
+        }
+      },
+      {
+        "id": "why-aptus",
+        "variant": "value-cards",
+        "count": 4,
+        "titles": [
+          "Certified Professionals",
+          "End-to-End Services",
+          "24/7 Technical Support",
+          "Future-Ready Technology"
+        ],
+        "title": {
+          "before": "Why Choose Aptus Infotech",
+          "accent": "for Your Smart Home?"
+        }
+      },
+      {
+        "id": "testimonials",
+        "type": "quotes",
+        "count": 3
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "issues": [
+      {
+        "severity": "high",
+        "msg": "Missing section in JSON: banner+hero"
+      }
+    ],
+    "issueCount": 1
+  },
+  {
+    "slug": "network-and-structured-cabling-solutions",
+    "route": "/network-and-structured-cabling-solutions",
+    "isHub": false,
+    "htmlFile": "Network & Structured Cabling Solutions in Oman _ Aptus Infotech.html",
+    "liveSections": [
+      {
+        "id": "banner+hero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "count": 10,
+        "titles": [
+          "Structured Cabling",
+          "Wireless Networks",
+          "Data Center Setup",
+          "Network Switches & Routers",
+          "Network Security",
+          "Network Monitoring",
+          "Improved Performance",
+          "Future-Proof Investment",
+          "Reduced Downtime",
+          "Cost Efficiency"
+        ]
+      },
+      {
+        "id": "why-aptus",
+        "count": 4,
+        "titles": [
+          "Certified Professionals",
+          "End-to-End Services",
+          "24/7 Technical Support",
+          "Local Presence"
+        ]
+      },
+      {
+        "id": "testimonials",
+        "type": "quotes"
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "liveH2s": [
+      "Network Infrastructure Solutions",
+      "Powerful Features",
+      "Structured Cabling",
+      "Wireless Networks",
+      "Data Center Setup",
+      "Network Switches & Routers",
+      "Network Security",
+      "Network Monitoring",
+      "Benefits of Professional Cabling",
+      "Improved Performance",
+      "Future-Proof Investment",
+      "Reduced Downtime",
+      "Cost Efficiency",
+      "Why Choose Aptus Infotech for Your Network Needs?",
+      "Certified Professionals",
+      "End-to-End Services",
+      "24/7 Technical Support",
+      "Local Presence",
+      "Ready to Upgrade Your Network Infrastructure?",
+      "What Our Clients Say",
+      "Mohammed Al Farsi",
+      "Sarah Johnson",
+      "Ahmed Hassan",
+      "Winning together with Strategic Alliances",
+      "Have questions? We can help"
+    ],
+    "jsonSections": [
+      {
+        "id": "softwareInnerHero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "variant": "icon-cards",
+        "count": 10,
+        "titles": [
+          "Structured Cabling",
+          "Wireless Networks",
+          "Data Center Setup",
+          "Network Switches & Routers",
+          "Network Security",
+          "Network Monitoring",
+          "Improved Performance",
+          "Future-Proof Investment",
+          "Reduced Downtime",
+          "Cost Efficiency"
+        ],
+        "title": {
+          "before": "Key Features"
+        }
+      },
+      {
+        "id": "why-aptus",
+        "variant": "value-cards",
+        "count": 4,
+        "titles": [
+          "Certified Professionals",
+          "End-to-End Services",
+          "24/7 Technical Support",
+          "Local Presence"
+        ],
+        "title": {
+          "before": "Why Choose Aptus Infotech",
+          "accent": "for Your Network Needs?"
+        }
+      },
+      {
+        "id": "testimonials",
+        "type": "quotes",
+        "count": 3
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "issues": [
+      {
+        "severity": "high",
+        "msg": "Missing section in JSON: banner+hero"
+      }
+    ],
+    "issueCount": 1
+  },
+  {
+    "slug": "nurse-calling-system",
+    "route": "/nurse-calling-system",
+    "isHub": false,
+    "htmlFile": "Advanced Nurse Calling Systems in Oman _ Aptus Infotech.html",
+    "liveSections": [
+      {
+        "id": "banner+hero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "count": 10,
+        "titles": [
+          "Patient Emergency Alerts",
+          "Wireless Staff Pagers",
+          "Central Monitoring Station",
+          "Performance Analytics",
+          "Integrated Security",
+          "System Integration",
+          "Faster Response Times",
+          "Enhanced Patient Safety",
+          "Improved Staff Efficiency",
+          "HIPAA Compliant"
+        ]
+      },
+      {
+        "id": "why-aptus",
+        "count": 4,
+        "titles": [
+          "Clinical Expertise",
+          "24/7 Support",
+          "Customized Solutions",
+          "Proactive Maintenance"
+        ]
+      },
+      {
+        "id": "testimonials",
+        "type": "quotes"
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "liveH2s": [
+      "Ensuring Immediate Patient Care and Safety",
+      "Key System Features",
+      "Patient Emergency Alerts",
+      "Wireless Staff Pagers",
+      "Central Monitoring Station",
+      "Performance Analytics",
+      "Integrated Security",
+      "System Integration",
+      "Benefits for Healthcare Facilities",
+      "Faster Response Times",
+      "Enhanced Patient Safety",
+      "Improved Staff Efficiency",
+      "HIPAA Compliant",
+      "Why Choose Aptus Infotech?",
+      "Clinical Expertise",
+      "24/7 Support",
+      "Customized Solutions",
+      "Proactive Maintenance",
+      "Ready to Enhance Your Healthcare Communications?",
+      "What Our Clients Say",
+      "Sarah Johnson",
+      "Michael Chen",
+      "Jessica Williams",
+      "Winning together with Strategic Alliances",
+      "Have questions? We can help"
+    ],
+    "jsonSections": [
+      {
+        "id": "softwareInnerHero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "variant": "icon-cards",
+        "count": 10,
+        "titles": [
+          "Patient Emergency Alerts",
+          "Wireless Staff Pagers",
+          "Central Monitoring Station",
+          "Performance Analytics",
+          "Integrated Security",
+          "System Integration",
+          "Faster Response Times",
+          "Enhanced Patient Safety",
+          "Improved Staff Efficiency",
+          "HIPAA Compliant"
+        ],
+        "title": {
+          "before": "Key Features"
+        }
+      },
+      {
+        "id": "why-aptus",
+        "variant": "value-cards",
+        "count": 4,
+        "titles": [
+          "Clinical Expertise",
+          "24/7 Support",
+          "Customized Solutions",
+          "Proactive Maintenance"
+        ],
+        "title": {
+          "before": "Why Choose",
+          "accent": "Aptus Infotech?"
+        }
+      },
+      {
+        "id": "testimonials",
+        "type": "quotes",
+        "count": 3
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "issues": [
+      {
+        "severity": "high",
+        "msg": "Missing section in JSON: banner+hero"
+      }
+    ],
+    "issueCount": 1
+  },
+  {
+    "slug": "rsi-queue-management",
+    "route": "/rsi-queue-management",
+    "isHub": false,
+    "htmlFile": "RSI Queue Management Systems in Muscat _ Aptus Infotech.html",
+    "liveSections": [
+      {
+        "id": "banner+hero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "count": 10,
+        "titles": [
+          "Virtual Queuing",
+          "Appointment Scheduling",
+          "Digital Signage",
+          "Real-time Analytics",
+          "Multi-channel Notifications",
+          "Customizable Workflows",
+          "Enhanced Customer Experience",
+          "Improved Operational Efficiency",
+          "Data-Driven Decisions",
+          "Enhanced Safety & Hygiene"
+        ]
+      },
+      {
+        "id": "why-aptus",
+        "count": 4,
+        "titles": [
+          "Customized Solutions",
+          "Comprehensive Training",
+          "24/7 Technical Support",
+          "Continuous Updates"
+        ]
+      },
+      {
+        "id": "testimonials",
+        "type": "quotes"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "liveH2s": [
+      "Queue Management Solutions",
+      "Optimizing Customer Flow and Experience",
+      "Powerful Features",
+      "Virtual Queuing",
+      "Appointment Scheduling",
+      "Digital Signage",
+      "Real-time Analytics",
+      "Multi-channel Notifications",
+      "Customizable Workflows",
+      "Key Benefits",
+      "Enhanced Customer Experience",
+      "Improved Operational Efficiency",
+      "Data-Driven Decisions",
+      "Enhanced Safety & Hygiene",
+      "Why Choose Aptus Infotech?",
+      "Customized Solutions",
+      "Comprehensive Training",
+      "24/7 Technical Support",
+      "Continuous Updates",
+      "Ready to Transform Your Customer Experience?",
+      "What Our Clients Say",
+      "Dr. Ahmed Al Balushi",
+      "Fatima Al Habsi",
+      "Khalid Al Mawali",
+      "Have questions? We can help"
+    ],
+    "jsonSections": [
+      {
+        "id": "softwareInnerHero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "variant": "icon-cards",
+        "count": 10,
+        "titles": [
+          "Virtual Queuing",
+          "Appointment Scheduling",
+          "Digital Signage",
+          "Real-time Analytics",
+          "Multi-channel Notifications",
+          "Customizable Workflows",
+          "Enhanced Customer Experience",
+          "Improved Operational Efficiency",
+          "Data-Driven Decisions",
+          "Enhanced Safety & Hygiene"
+        ],
+        "title": {
+          "before": "Key Features"
+        }
+      },
+      {
+        "id": "why-aptus",
+        "variant": "value-cards",
+        "count": 4,
+        "titles": [
+          "Customized Solutions",
+          "Comprehensive Training",
+          "24/7 Technical Support",
+          "Continuous Updates"
+        ],
+        "title": {
+          "before": "Why Choose",
+          "accent": "Aptus Infotech?"
+        }
+      },
+      {
+        "id": "testimonials",
+        "type": "quotes",
+        "count": 3
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "issues": [
+      {
+        "severity": "high",
+        "msg": "Missing section in JSON: banner+hero"
+      }
+    ],
+    "issueCount": 1
+  },
+  {
+    "slug": "smatv-iptv",
+    "route": "/smatv-iptv",
+    "isHub": false,
+    "htmlFile": "SMATV & IPTV Systems in Oman _ Aptus Infotech.html",
+    "liveSections": [
+      {
+        "id": "banner+hero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "count": 10,
+        "titles": [
+          "SMATV Systems",
+          "IPTV Streaming",
+          "HD Digital Channels",
+          "User Management",
+          "Analytics & Reporting",
+          "24/7 Technical Support",
+          "Cost Efficiency",
+          "Enhanced Guest Experience",
+          "Global Channel Access",
+          "Improved Property Value"
+        ]
+      },
+      {
+        "id": "why-aptus",
+        "count": 4,
+        "titles": [
+          "Certified Professionals",
+          "End-to-End Service",
+          "24/7 Technical Support",
+          "Future-Ready Technology"
+        ]
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "liveH2s": [
+      "SMATV/IPTV Solutions",
+      "Delivering High-Quality Digital Entertainment",
+      "Powerful Features",
+      "SMATV Systems",
+      "IPTV Streaming",
+      "HD Digital Channels",
+      "User Management",
+      "Analytics & Reporting",
+      "24/7 Technical Support",
+      "Benefits of Our Television Systems",
+      "Cost Efficiency",
+      "Enhanced Guest Experience",
+      "Global Channel Access",
+      "Improved Property Value",
+      "Why Choose Aptus Infotech?",
+      "Certified Professionals",
+      "End-to-End Service",
+      "24/7 Technical Support",
+      "Future-Ready Technology",
+      "Ready to Upgrade Your Entertainment Systems?",
+      "Client Success Stories",
+      "Mohammed Al Farsi",
+      "Mariam Al Said",
+      "Khalid Al Balushi",
+      "Winning together with Strategic Alliances",
+      "Have questions? We can help"
+    ],
+    "jsonSections": [
+      {
+        "id": "softwareInnerHero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "variant": "icon-cards",
+        "count": 10,
+        "titles": [
+          "SMATV Systems",
+          "IPTV Streaming",
+          "HD Digital Channels",
+          "User Management",
+          "Analytics & Reporting",
+          "24/7 Technical Support",
+          "Cost Efficiency",
+          "Enhanced Guest Experience",
+          "Global Channel Access",
+          "Improved Property Value"
+        ],
+        "title": {
+          "before": "Key Features"
+        }
+      },
+      {
+        "id": "why-aptus",
+        "variant": "value-cards",
+        "count": 4,
+        "titles": [
+          "Certified Professionals",
+          "End-to-End Service",
+          "24/7 Technical Support",
+          "Future-Ready Technology"
+        ],
+        "title": {
+          "before": "Why Choose",
+          "accent": "Aptus Infotech?"
+        }
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "issues": [
+      {
+        "severity": "high",
+        "msg": "Missing section in JSON: banner+hero"
+      }
+    ],
+    "issueCount": 1
+  },
+  {
+    "slug": "switching-and-routing",
+    "route": "/switching-and-routing",
+    "isHub": false,
+    "htmlFile": "Complete Switching and Routing Solutions _ Aptus Infotech.html",
+    "liveSections": [
+      {
+        "id": "banner+hero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "count": 6,
+        "titles": [
+          "Layer 2 Switching",
+          "Dynamic Routing Protocols",
+          "Security Integration",
+          "WAN Optimization",
+          "Cloud Connectivity",
+          "User Authentication"
+        ]
+      },
+      {
+        "id": "why-aptus",
+        "count": 4,
+        "titles": [
+          "Certified Expertise",
+          "24/7 Support",
+          "Customized Solutions",
+          "Proactive Maintenance"
+        ]
+      },
+      {
+        "id": "testimonials",
+        "type": "quotes"
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "liveH2s": [
+      "Switching and Routing",
+      "Complete Network Infrastructure Solutions",
+      "Key Networking Technologies",
+      "Layer 2 Switching",
+      "Dynamic Routing Protocols",
+      "Security Integration",
+      "WAN Optimization",
+      "Cloud Connectivity",
+      "User Authentication",
+      "Why Choose Aptus Infotech for AutoCAD?",
+      "Certified Expertise",
+      "24/7 Support",
+      "Customized Solutions",
+      "Proactive Maintenance",
+      "What Our Clients Say",
+      "Sarah Johnson",
+      "Michael Chen",
+      "Jessica Williams",
+      "Winning together with Strategic Alliances",
+      "Have questions? We can help"
+    ],
+    "jsonSections": [
+      {
+        "id": "softwareInnerHero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "variant": "icon-cards",
+        "count": 6,
+        "titles": [
+          "Layer 2 Switching",
+          "Dynamic Routing Protocols",
+          "Security Integration",
+          "WAN Optimization",
+          "Cloud Connectivity",
+          "User Authentication"
+        ],
+        "title": {
+          "before": "Key Networking Technologies"
+        }
+      },
+      {
+        "id": "why-aptus",
+        "variant": "value-cards",
+        "count": 4,
+        "titles": [
+          "Certified Expertise",
+          "24/7 Support",
+          "Customized Solutions",
+          "Proactive Maintenance"
+        ],
+        "title": {
+          "before": "Why Choose Aptus",
+          "accent": "Infotech for AutoCAD?"
+        }
+      },
+      {
+        "id": "testimonials",
+        "type": "quotes",
+        "count": 3
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "issues": [
+      {
+        "severity": "high",
+        "msg": "Missing section in JSON: banner+hero"
+      }
+    ],
+    "issueCount": 1
+  },
+  {
+    "slug": "telephone-systems",
+    "route": "/telephone-systems",
+    "isHub": false,
+    "htmlFile": "Telephone Systems - aptusinfotech.com.html",
+    "liveSections": [
+      {
+        "id": "banner+hero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "count": 5,
+        "titles": [
+          "Call Analytics & Reporting",
+          "Cost Efficiency",
+          "Enhanced Collaboration",
+          "Scalability",
+          "Security & Reliability"
+        ]
+      },
+      {
+        "id": "why-aptus",
+        "count": 4,
+        "titles": [
+          "Certified Professionals",
+          "End-to-End Service",
+          "24/7 Technical Support",
+          "Future-Ready Technology"
+        ]
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "liveH2s": [
+      "Telephone Systems",
+      "Modern Telecommunications Solutions",
+      "Powerful Features",
+      "Voice over IP (VoIP)",
+      "PBX Systems",
+      "Video Conferencing",
+      "Mobile Integration",
+      "Unified Communications",
+      "Call Analytics & Reporting",
+      "Benefits of Our Telephone Systems",
+      "Cost Efficiency",
+      "Enhanced Collaboration",
+      "Scalability",
+      "Security & Reliability",
+      "Why Choose Aptus Infotech?",
+      "Certified Professionals",
+      "End-to-End Service",
+      "24/7 Technical Support",
+      "Future-Ready Technology",
+      "Ready to Upgrade Your Communication System?",
+      "Client Success Stories",
+      "Mohammed Al Farsi",
+      "Sarah Johnson",
+      "Ahmed Hassan",
+      "Winning together with Strategic Alliances",
+      "Have questions? We can help"
+    ],
+    "jsonSections": [
+      {
+        "id": "softwareInnerHero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "variant": "icon-cards",
+        "count": 5,
+        "titles": [
+          "Call Analytics & Reporting",
+          "Cost Efficiency",
+          "Enhanced Collaboration",
+          "Scalability",
+          "Security & Reliability"
+        ],
+        "title": {
+          "before": "Key Features"
+        }
+      },
+      {
+        "id": "why-aptus",
+        "variant": "value-cards",
+        "count": 4,
+        "titles": [
+          "Certified Professionals",
+          "End-to-End Service",
+          "24/7 Technical Support",
+          "Future-Ready Technology"
+        ],
+        "title": {
+          "before": "Why Choose",
+          "accent": "Aptus Infotech?"
+        }
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "issues": [
+      {
+        "severity": "high",
+        "msg": "Missing section in JSON: banner+hero"
+      }
+    ],
+    "issueCount": 1
+  },
+  {
+    "slug": "thermal-scanners",
+    "route": "/thermal-scanners",
+    "isHub": false,
+    "htmlFile": "Thermal Scanners for Safe Entry Solutions _ Aptus Infotech.html",
+    "liveSections": [
+      {
+        "id": "banner+hero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "count": 10,
+        "titles": [
+          "Precise Temperature Measurement",
+          "High-Resolution Imaging",
+          "Portable Design",
+          "Data Storage & Analysis",
+          "Wireless Connectivity",
+          "Health & Safety Compliance",
+          "Non-Contact Health Screening",
+          "Industrial Maintenance",
+          "Building Diagnostics",
+          "Energy Efficiency"
+        ]
+      },
+      {
+        "id": "why-aptus",
+        "count": 4,
+        "titles": [
+          "Certified Technicians",
+          "Turnkey Solutions",
+          "Priority Support",
+          "Regular Updates"
+        ]
+      },
+      {
+        "id": "testimonials",
+        "type": "quotes"
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "liveH2s": [
+      "Advanced Thermal Imaging Technology",
+      "Key Features",
+      "Precise Temperature Measurement",
+      "High-Resolution Imaging",
+      "Portable Design",
+      "Data Storage & Analysis",
+      "Wireless Connectivity",
+      "Health & Safety Compliance",
+      "Benefits of Thermal Scanning Technology",
+      "Non-Contact Health Screening",
+      "Industrial Maintenance",
+      "Building Diagnostics",
+      "Energy Efficiency",
+      "Why Choose Aptus Infotech for Thermal Scanning?",
+      "Certified Technicians",
+      "Turnkey Solutions",
+      "Priority Support",
+      "Regular Updates",
+      "Ready to Enhance Your Safety Protocols?",
+      "What Our Clients Say",
+      "Mohammed Al Farsi",
+      "Sarah Johnson",
+      "Ahmed Hassan",
+      "Winning together with Strategic Alliances",
+      "Have questions? We can help"
+    ],
+    "jsonSections": [
+      {
+        "id": "softwareInnerHero",
+        "type": "hero"
+      },
+      {
+        "id": "features",
+        "variant": "icon-cards",
+        "count": 10,
+        "titles": [
+          "Precise Temperature Measurement",
+          "High-Resolution Imaging",
+          "Portable Design",
+          "Data Storage & Analysis",
+          "Wireless Connectivity",
+          "Health & Safety Compliance",
+          "Non-Contact Health Screening",
+          "Industrial Maintenance",
+          "Building Diagnostics",
+          "Energy Efficiency"
+        ],
+        "title": {
+          "before": "Key Features"
+        }
+      },
+      {
+        "id": "why-aptus",
+        "variant": "value-cards",
+        "count": 4,
+        "titles": [
+          "Certified Technicians",
+          "Turnkey Solutions",
+          "Priority Support",
+          "Regular Updates"
+        ],
+        "title": {
+          "before": "Why Choose Aptus Infotech",
+          "accent": "for Thermal Scanning?"
+        }
+      },
+      {
+        "id": "testimonials",
+        "type": "quotes",
+        "count": 3
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "issues": [
+      {
+        "severity": "high",
+        "msg": "Missing section in JSON: banner+hero"
+      }
+    ],
+    "issueCount": 1
+  },
+  {
+    "slug": "ups",
+    "route": "/ups",
+    "isHub": false,
+    "htmlFile": "UPS Systems in Oman for Power Backup _ Aptus Infotech.html",
+    "liveSections": [
+      {
+        "id": "banner+hero",
+        "type": "hero"
+      },
+      {
+        "id": "why-aptus",
+        "count": 4,
+        "titles": [
+          "Expert Engineering",
+          "24/7 Support",
+          "Customized Solutions",
+          "Proactive Maintenance"
+        ]
+      },
+      {
+        "id": "testimonials",
+        "type": "quotes"
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "liveH2s": [
+      "Backup power supply",
+      "Powerful Features",
+      "Extended Battery Life",
+      "Pure Sine Wave Output",
+      "Advanced Microprocessor Control",
+      "Real-Time Monitoring",
+      "Multiple Outlet Configurations",
+      "Automatic Self-Testing",
+      "Benefits of Our UPS Solutions",
+      "Data Protection",
+      "Business Continuity",
+      "Cost Savings",
+      "Maintenance-Free Operation",
+      "Why Choose Aptus Infotech?",
+      "Expert Engineering",
+      "24/7 Support",
+      "Customized Solutions",
+      "Proactive Maintenance",
+      "Ready to Ensure Your Business Continuity?",
+      "What Our Clients Say",
+      "Sarah Johnson",
+      "Michael Chen",
+      "Jessica Williams",
+      "Winning together with Strategic Alliances",
+      "Have questions? We can help"
+    ],
+    "jsonSections": [
+      {
+        "id": "softwareInnerHero",
+        "type": "hero"
+      },
+      {
+        "id": "why-aptus",
+        "variant": "value-cards",
+        "count": 4,
+        "titles": [
+          "Expert Engineering",
+          "24/7 Support",
+          "Customized Solutions",
+          "Proactive Maintenance"
+        ],
+        "title": {
+          "before": "Why Choose",
+          "accent": "Aptus Infotech?"
+        }
+      },
+      {
+        "id": "testimonials",
+        "type": "quotes",
+        "count": 3
+      },
+      {
+        "id": "partnerships",
+        "type": "logo-grid"
+      },
+      {
+        "id": "contact-cta",
+        "type": "form"
+      }
+    ],
+    "issues": [
+      {
+        "severity": "high",
+        "msg": "Missing section in JSON: banner+hero"
+      }
+    ],
+    "issueCount": 1
+  }
+]

@@ -1,0 +1,16 @@
+/**
+ * Page: Telephone&nbsp;Systems - aptusinfotech.com
+ * Route: /telephone-systems
+ * Source: LIVE WEBSITE/ELV\Telephone Systems - aptusinfotech.com.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-telephone-systems-aptusinfotech-com {
+    /* page root scope */
+  }
+
+
+  /* 26 inline styles detected — migrate to utilities */
+}

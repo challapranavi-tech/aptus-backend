@@ -1,0 +1,1384 @@
+/* Software pages — extracted from live Elementor post-4163 (/autodesk), post-2030 (/autocad) */
+
+@layer utilities {
+  /* ── Hub landing hero (post-4432 adobe, post-4488 microsoft, post-4163 autodesk) ── */
+  .aptus-software-hero {
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: clamp(2.5rem, 6vw, 4rem) 0 0;
+    position: relative;
+  }
+
+  .aptus-software-hero::before {
+    background-color: #000;
+    content: "";
+    inset: 0;
+    opacity: 0.55;
+    position: absolute;
+    z-index: 0;
+  }
+
+  /* post-4163 hub hero: background image only, no Elementor overlay */
+  .aptus-software-page--autodesk-hub .aptus-software-hero::before {
+    display: none;
+  }
+
+  .aptus-software-page--adobe-hub .aptus-software-hero::before {
+    opacity: 0.67;
+  }
+
+  .aptus-software-page--microsoft-hub .aptus-software-hero::before {
+    opacity: 0.47;
+  }
+
+  .aptus-software-hero__inner {
+    margin: 0 auto;
+    max-width: 800px;
+    padding-inline: var(--content-pad-x, clamp(1rem, 4vw, 1.5rem));
+    position: relative;
+    text-align: start;
+    z-index: 1;
+  }
+
+  .aptus-software-hero-title {
+    color: #fff;
+    font-size: var(--text-5xl);
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .aptus-software-hero-tagline {
+    color: #fff;
+    font-size: var(--text-sm);
+    font-weight: 300;
+    letter-spacing: -0.1px;
+    line-height: 1.625;
+    margin-top: 1rem;
+    text-align: start;
+  }
+
+  .aptus-software-hero-highlight {
+    color: #fff;
+    font-size: var(--text-4xl);
+    font-weight: 600;
+    line-height: 1.2;
+    margin-top: 1rem;
+  }
+
+  .aptus-software-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 2rem;
+    padding-bottom: 3rem;
+  }
+
+  .aptus-software-hero-actions .aptus-software-btn {
+    min-width: min(220px, 100%);
+    width: auto;
+  }
+
+  .aptus-software-page--microsoft-hub .aptus-software-hero-actions {
+    padding-bottom: 2rem;
+  }
+
+  @media (min-width: 640px) and (max-width: 767px) {
+    .aptus-software-hero-actions {
+      gap: 0.5rem;
+    }
+
+    .aptus-software-hero-actions .aptus-software-btn {
+      font-size: var(--text-xs);
+      padding-inline: 0.5rem;
+    }
+  }
+
+  .aptus-software-btn {
+    border-radius: 3px;
+    color: #fff;
+    display: inline-flex;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    justify-content: center;
+    line-height: 1;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 1.5s ease;
+    width: 100%;
+  }
+
+  .aptus-software-btn:hover,
+  .aptus-software-btn:focus-visible {
+    color: #fff;
+    opacity: 1;
+  }
+
+  .aptus-software-btn-blue:hover,
+  .aptus-software-btn-blue:focus-visible {
+    background-color: #13934b;
+    color: #fff;
+  }
+
+  .aptus-software-btn-blue {
+    background-color: #1352a3;
+  }
+
+  .aptus-software-btn-green {
+    background-color: #13934b;
+  }
+
+  .aptus-software-btn-sky {
+    background-color: #248bcc;
+  }
+
+  .aptus-software-btn-lg {
+    border-radius: 5px;
+    font-size: clamp(1.125rem, 2.5vw, var(--text-3xl));
+    font-weight: 500;
+    padding: 0.75rem clamp(1rem, 3vw, 1.5rem);
+    width: auto;
+  }
+
+  /* ── Section headings (post-4163 f3dfbf0 / 03f0bb9) ── */
+  .aptus-software-section-title {
+    color: #000;
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .aptus-autodesk-page .aptus-software-section-title,
+  .aptus-autodesk-page .aptus-software-section-lead,
+  .aptus-software-page .aptus-software-section-title,
+  .aptus-software-page .aptus-software-section-lead {
+    color: #000;
+  }
+
+  .aptus-software-section-title--lg {
+    font-size: var(--text-4xl);
+  }
+
+  .aptus-software-section-heading {
+    margin-bottom: 1.5rem;
+  }
+
+  .aptus-software-section-lead {
+    color: #000;
+    font-size: var(--text-base);
+    font-weight: 400;
+    line-height: 1.5;
+    margin-top: 0.75rem;
+    text-align: start;
+  }
+
+  .aptus-software-value-lead {
+    color: #463c3c;
+    font-size: var(--text-xl);
+    font-weight: 400;
+    line-height: 1.4;
+    margin-top: 0.75rem;
+    text-align: start;
+  }
+
+  /* ── Product cards (post-4163 f459747) ── */
+  .aptus-software-product-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(0 0 0 / 0.5);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 5px;
+    min-width: 0;
+    overflow: hidden;
+    padding: 0.5rem 0.5rem 1rem;
+    text-align: start;
+  }
+
+  .aptus-software-product-media {
+    align-items: center;
+    display: flex;
+    height: clamp(5.5rem, 22vw, 8.5rem);
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 70%;
+    overflow: hidden;
+  }
+
+  .aptus-software-product-title {
+    color: #1352a3;
+    font-size: var(--text-base);
+    font-weight: 600;
+    margin-top: 0.25rem;
+    padding: 0 2px;
+    text-align: center;
+  }
+
+  .aptus-software-product-body {
+    color: #695b5b;
+    flex: 1;
+    font-size: var(--text-base);
+    line-height: 1.5;
+    margin-top: -0.5625rem;
+    padding: 0 2px;
+  }
+
+  .aptus-software-product-body--list {
+    list-style: disc inside;
+    text-align: left;
+  }
+
+  /* ── Value / icon cards (post-4163 d134606 / post-2030 80409a9) ── */
+  .aptus-software-value-card,
+  .aptus-software-icon-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(0 0 0 / 0.5);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 5px;
+    min-height: 100%;
+    padding: 1rem 0.5rem 1.25rem;
+    text-align: center;
+  }
+
+  .aptus-software-value-icon {
+    color: #1352a3;
+    height: 3.125rem;
+    margin: 0 auto;
+    width: 3.125rem;
+  }
+
+  .aptus-software-value-title {
+    color: #000;
+    font-size: var(--text-base);
+    font-weight: 600;
+    margin-top: 0.5rem;
+    padding: 0 2px;
+  }
+
+  .aptus-software-value-body {
+    color: #695b5b;
+    font-size: var(--text-sm);
+    line-height: 1.5;
+    margin-top: -0.5625rem;
+    padding: 0 2px;
+    text-align: start;
+  }
+
+  .aptus-software-icon-card__icon {
+    color: #1352a3;
+    height: 6.25rem;
+    margin: 0 auto;
+    width: 6.25rem;
+  }
+
+  .aptus-software-icon-card__title {
+    color: #000;
+    font-size: var(--text-base);
+    font-weight: 600;
+    margin-top: 0.5rem;
+    padding: 0 2px;
+  }
+
+  .aptus-software-icon-card__body {
+    color: #695b5b;
+    flex: 1 1 auto;
+    font-size: var(--text-sm);
+    line-height: 1.5;
+    margin-top: -0.35rem;
+    padding: 0 2px;
+    text-align: start;
+  }
+
+  .aptus-software-icon-card .aptus-software-btn {
+    align-self: stretch;
+    flex-shrink: 0;
+    margin-top: auto;
+    width: auto;
+  }
+
+  .aptus-software-benefits-band {
+    background-color: #24648c0f;
+  }
+
+  .aptus-software-benefits-band .aptus-software-icon-grid {
+    max-width: 1000px;
+  }
+
+  @media (min-width: 768px) {
+    .aptus-software-benefits-band .aptus-software-icon-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .aptus-software-benefits-band .aptus-software-icon-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .aptus-software-benefits-band .aptus-software-icon-card__body {
+    font-size: var(--text-sm);
+  }
+
+  .aptus-software-benefits-band .aptus-software-icon-card__icon {
+    height: 3.125rem;
+    width: 3.125rem;
+  }
+
+  /* ── Mid CTA band (post-4163 3cc82e1) ── */
+  .aptus-software-mid-band {
+    background-color: #248bcc;
+    padding: 0;
+  }
+
+  .aptus-software-mid-band__inner {
+    padding: 1.15rem clamp(1rem, 3vw, 1.5rem) 1.15rem;
+  }
+
+  .aptus-software-mid-title {
+    color: #fff;
+    font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+    font-weight: 600;
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  .aptus-software-mid-lead {
+    color: #fff;
+    font-size: var(--text-base);
+    line-height: 1.5;
+    margin-top: 0.5rem;
+    text-align: start;
+  }
+
+  .aptus-software-mid-band .aptus-software-btn-blue {
+    background-color: #fff;
+    color: #1352a3;
+    width: auto;
+    padding: 0.55rem 1.25rem;
+  }
+
+  .aptus-software-mid-band__cta {
+    margin-top: 0.85rem;
+  }
+
+  .aptus-software-mid-band .aptus-software-btn-blue:hover,
+  .aptus-software-mid-band .aptus-software-btn-blue:focus-visible {
+    background-color: #f3f4f6;
+    color: #1352a3;
+  }
+
+  .aptus-software-section[data-id="why-aptus"] .aptus-software-section-title {
+    color: #1352a3;
+  }
+
+  .aptus-software-form-heading,
+  .aptus-software-page .aptus-cta-light-heading {
+    color: #1352a3;
+    font-size: var(--text-4xl);
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .aptus-software-form-lead {
+    color: #1352a3;
+    font-size: var(--text-base);
+    line-height: 1.5;
+    margin-top: 1rem;
+    text-align: start;
+  }
+
+  /* ── Inner product page banner (post-2031–2040 gradient; adobe/microsoft solid) ── */
+  .aptus-software-page-banner {
+    background-image: linear-gradient(
+      180deg,
+      #000 0%,
+      var(--aptus-banner-gradient-end, #2962f2) 100%
+    );
+    background-position: center;
+    background-size: cover;
+    position: relative;
+  }
+
+  .aptus-software-page-banner--solid,
+  .aptus-software-page--adobe .aptus-software-page-banner {
+    background-image: none;
+    background-color: var(--aptus-banner-solid, #33abfb);
+  }
+
+  .aptus-software-page--autodesk .aptus-software-page-banner,
+  .aptus-software-page--multimedia .aptus-software-page-banner,
+  .aptus-software-page--oracle .aptus-software-page-banner,
+  .aptus-software-page--edms .aptus-software-page-banner,
+  .aptus-software-page--educational .aptus-software-page-banner,
+  .aptus-software-page--microsoft .aptus-software-page-banner {
+    background-image: linear-gradient(
+      180deg,
+      #000 0%,
+      var(--aptus-banner-gradient-end, #2962f2) 100%
+    );
+    background-color: transparent;
+  }
+
+  .aptus-elv-page .aptus-software-page-banner {
+    background-image: var(
+      --aptus-banner-bg-image,
+      linear-gradient(180deg, #000 0%, var(--aptus-banner-gradient-end, #2f29f2) 100%)
+    );
+  }
+
+  .aptus-software-page-banner::before {
+    background-color: #000;
+    content: "";
+    inset: 0;
+    opacity: 0.7;
+    position: absolute;
+    z-index: 0;
+  }
+
+  .aptus-software-page-banner--slides {
+    background-image: none;
+    background-color: #0a1220;
+    min-height: clamp(16rem, 42vw, 22rem);
+    overflow: hidden;
+  }
+
+  .aptus-software-page-banner--slides::before {
+    display: none;
+  }
+
+  .aptus-software-page-banner__slides {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .aptus-software-page-banner__slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: scale(1.05);
+    transition: opacity 1.15s ease;
+  }
+
+  .aptus-software-page-banner__slide.is-active {
+    opacity: 1;
+    z-index: 1;
+  }
+
+  .aptus-software-page-banner__slide.has-motion.is-active {
+    animation: aptus-banner-kenburns 5.2s ease-out forwards;
+  }
+
+  @keyframes aptus-banner-kenburns {
+    from {
+      transform: scale(1.05);
+    }
+    to {
+      transform: scale(1.14);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .aptus-software-page-banner__slide.has-motion.is-active {
+      animation: none;
+    }
+  }
+
+  .aptus-software-page-banner__veil {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background:
+      linear-gradient(180deg, rgba(6, 12, 24, 0.55) 0%, rgba(6, 12, 24, 0.72) 48%, rgba(6, 12, 24, 0.88) 100%),
+      radial-gradient(ellipse 70% 55% at 50% 35%, rgba(19, 82, 163, 0.22), transparent 70%);
+    pointer-events: none;
+  }
+
+  .aptus-software-page-banner .aptus-live-container {
+    padding-bottom: 3rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .aptus-software-page-banner__inner {
+    position: relative;
+    text-align: center;
+    z-index: 1;
+  }
+
+  .aptus-software-page-banner__title {
+    color: #fff;
+    font-size: var(--text-5xl);
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0;
+    padding-top: clamp(2.5rem, 8vw, 4rem);
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .aptus-software-page--adobe .aptus-software-page-banner__title,
+  .aptus-software-page--microsoft .aptus-software-page-banner__title,
+  .aptus-software-page--multimedia .aptus-software-page-banner__title,
+  .aptus-software-page--oracle .aptus-software-page-banner__title,
+  .aptus-software-page--edms .aptus-software-page-banner__title,
+  .aptus-software-page--educational .aptus-software-page-banner__title {
+    font-size: var(--text-5xl);
+  }
+
+  .aptus-software-container {
+    padding-inline: var(--content-pad-x, clamp(1rem, 4vw, 1.5rem));
+  }
+
+  .aptus-software-page-banner__tagline {
+    color: #fff;
+    font-size: var(--text-lg);
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0.75rem auto 0;
+    max-width: 56rem;
+    padding-bottom: 0;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .aptus-software-page-banner__support {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: var(--text-base);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1.5;
+    margin: 0.65rem auto 0;
+    max-width: 56rem;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  .aptus-software-page-banner__action-wrap {
+    margin: 2rem 0 0;
+    text-align: center;
+  }
+
+  .aptus-software-inner-hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 1.25rem;
+    text-align: center;
+  }
+
+  .aptus-software-inner-hero__cta .aptus-software-btn {
+    width: auto;
+  }
+
+  /* ── Inner product 3-col band (post-2030 26f09b2) ── */
+  .aptus-software-inner-hero {
+    background: #fff;
+    padding: 2rem 0;
+  }
+
+  .aptus-software-inner-hero--with-banner {
+    padding-top: 2rem;
+  }
+
+  .aptus-software-inner-hero__grid {
+    align-items: start;
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+    max-width: 1300px;
+    margin-inline: auto;
+  }
+
+  .aptus-software-inner-hero__nav,
+  .aptus-software-inner-hero__copy,
+  .aptus-software-inner-hero__media {
+    min-width: 0;
+  }
+
+  @media (min-width: 768px) {
+    .aptus-software-inner-hero__grid--two-column {
+      grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .aptus-software-inner-hero__grid {
+      gap: 1rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .aptus-software-inner-hero__grid--two-column {
+      grid-template-columns: minmax(200px, 260px) minmax(0, 1fr);
+    }
+
+    .aptus-software-inner-hero__grid--nav-collapsed,
+    .aptus-software-inner-hero__grid--nav-collapsed.aptus-software-inner-hero__grid--two-column {
+      grid-template-columns: auto minmax(0, 1fr);
+    }
+  }
+
+  .aptus-software-inner-hero__title {
+    color: #000;
+    font-size: var(--text-4xl);
+    font-weight: 600;
+    line-height: 1.25;
+    margin: 0 0 1rem;
+    text-align: center;
+  }
+
+  .aptus-software-inner-hero__body-section {
+    margin-top: 1.75rem;
+  }
+
+  .aptus-software-inner-hero__body-heading {
+    color: #0b1f3a;
+    font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    margin: 0 0 0.85rem;
+    text-align: start;
+  }
+
+  .aptus-software-inner-hero__subtitle {
+    color: #000;
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    line-height: 1.25;
+    margin: 0 0 1rem;
+    text-align: center;
+  }
+
+  .aptus-software-inner-hero__panel {
+    background: #f8f9fa;
+    border-radius: 20px;
+    padding: 1.5rem;
+  }
+
+  .aptus-software-inner-hero__panel--intro-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-top: 0;
+  }
+
+  .aptus-software-inner-hero__panel-row {
+    align-items: center;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
+    .aptus-software-inner-hero__panel-row {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .aptus-software-inner-hero__panel-row--media-right .aptus-software-inner-hero__panel-row__media {
+      order: 2;
+    }
+  }
+
+  .aptus-software-inner-hero__panel-row__media {
+    display: flex;
+    justify-content: center;
+  }
+
+  .aptus-software-inner-hero__panel-row__media img {
+    height: auto;
+    max-width: 150px;
+    object-fit: contain;
+    width: auto;
+  }
+
+  .aptus-software-inner-hero__panel-row:not(.aptus-software-inner-hero__panel-row--media-right)
+    .aptus-software-inner-hero__panel-row__media
+    img {
+    max-height: 180px;
+    max-width: 220px;
+  }
+
+  .aptus-software-inner-hero__panel-row__copy .aptus-software-inner-hero__text:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (min-width: 768px) {
+    .aptus-software-inner-hero__grid--inline-media {
+      grid-template-columns: minmax(180px, 1fr) minmax(0, 2fr);
+    }
+  }
+
+  .aptus-software-inner-hero__media--inline {
+    justify-content: flex-start;
+    margin-top: 1rem;
+  }
+
+  .aptus-software-inner-hero__media--inline img {
+    max-height: 120px;
+    width: auto;
+  }
+
+  .aptus-software-bullet-panel {
+    background: #f8f9fa;
+    margin-top: 1rem;
+    padding: 1.5rem 1.75rem;
+  }
+
+  .aptus-software-bullet-list {
+    color: #695b5b;
+    font-size: var(--text-base);
+    line-height: 1.6;
+    list-style: disc;
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+
+  .aptus-software-bullet-list li + li {
+    margin-top: 0.75rem;
+  }
+
+  .aptus-software-bullet-list strong {
+    color: #000;
+    font-weight: 600;
+  }
+
+  .aptus-software-page--adobe .aptus-software-inner-hero__title,
+  .aptus-software-page--microsoft .aptus-software-inner-hero__title {
+    font-size: var(--text-4xl);
+  }
+
+  .aptus-software-inner-hero__text {
+    color: #000;
+    font-size: var(--text-base);
+    line-height: 1.6;
+    margin: 0 0 1rem;
+    text-align: start;
+  }
+
+  .aptus-software-inner-hero__media {
+    align-self: start;
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+  }
+
+  .aptus-software-inner-hero__media img {
+    height: auto;
+    max-height: 800px;
+    max-width: 100%;
+    object-fit: contain;
+    width: auto;
+  }
+
+  .aptus-software-page--autodesk .aptus-software-inner-hero__media img,
+  .aptus-software-page--aconex .aptus-software-inner-hero__media img {
+    height: auto;
+    max-height: 395px;
+    max-width: 100%;
+    width: auto;
+  }
+
+  .aptus-software-page--construction-cloud .aptus-software-inner-hero__media img {
+    height: auto;
+    max-height: 228px;
+    max-width: min(221px, 100%);
+    width: auto;
+  }
+
+  .aptus-software-page--odoo .aptus-software-inner-hero__media img {
+    height: auto;
+    max-height: 280px;
+    max-width: min(280px, 100%);
+    width: auto;
+  }
+
+  .aptus-software-page--spectronova .aptus-software-inner-hero__media img {
+    height: auto;
+    max-height: 395px;
+    max-width: min(263px, 100%);
+    width: auto;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .aptus-software-inner-hero__grid--two-column {
+      grid-template-columns: minmax(160px, 220px) minmax(0, 1fr);
+    }
+
+    .aptus-software-inner-hero__grid--inline-media {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .aptus-software-inner-hero__media img {
+      height: auto;
+      max-height: min(280px, 50vw);
+      max-width: 100%;
+      width: auto;
+    }
+
+    .aptus-software-page--autodesk .aptus-software-inner-hero__media img,
+    .aptus-software-page--aconex .aptus-software-inner-hero__media img,
+    .aptus-software-page--construction-cloud .aptus-software-inner-hero__media img,
+    .aptus-software-page--odoo .aptus-software-inner-hero__media img,
+    .aptus-software-page--spectronova .aptus-software-inner-hero__media img {
+      height: auto;
+      max-height: min(280px, 55vw);
+      max-width: min(100%, 280px);
+      width: auto;
+    }
+
+    .aptus-software-page-banner__tagline {
+      line-height: 1.4;
+    }
+
+    .aptus-software-page-banner__action-wrap {
+      margin-top: 1.5rem;
+    }
+
+    .aptus-software-btn-lg {
+      font-size: var(--text-xl);
+      padding: 0.625rem 1.25rem;
+    }
+  }
+
+  /* ── Testimonial quotes (post-2030 15a67d8) ── */
+  .aptus-software-quote-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(0 0 0 / 0.5);
+    margin: 5px;
+    padding: 2rem 1rem 1.5rem;
+    text-align: start;
+  }
+
+  .aptus-software-quote-card__quote {
+    color: #695b5b;
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0 0.5rem;
+  }
+
+  .aptus-software-quote-card__author {
+    color: #000;
+    font-size: var(--text-xl);
+    font-weight: 600;
+    margin: 1.25rem 0 0;
+  }
+
+  .aptus-software-quote-card__role {
+    color: #000;
+    font-size: var(--text-sm);
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 0.35rem 0 0;
+  }
+
+  .aptus-software-quote-grid {
+    display: grid;
+    gap: 2rem;
+    margin-top: 2.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .aptus-software-quote-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .aptus-software-quote-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  /* Dark scrolling client quotes (software catalog + product pages) */
+  [data-variant="software-quotes-marquee"],
+  .aptus-software-quotes--marquee {
+    background: #0b1220;
+    color: #fff;
+    overflow: hidden;
+    padding-bottom: 2.75rem;
+    padding-top: 2.5rem;
+  }
+
+  [data-variant="software-quotes-marquee"] .aptus-software-section-title,
+  [data-variant="software-quotes-marquee"] .aptus-software-section-lead,
+  .aptus-software-quotes--marquee .aptus-software-section-title,
+  .aptus-software-quotes--marquee .aptus-software-section-lead {
+    color: #fff;
+    text-align: center;
+  }
+
+  [data-variant="software-quotes-marquee"] .aptus-software-section-lead,
+  .aptus-software-quotes--marquee .aptus-software-section-lead {
+    opacity: 0.82;
+  }
+
+  .aptus-software-quotes__marquee {
+    -webkit-overflow-scrolling: touch;
+    margin-top: 2rem;
+    mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    width: 100%;
+  }
+
+  .aptus-software-quotes__marquee::-webkit-scrollbar {
+    display: none;
+  }
+
+  .aptus-software-quotes__track {
+    animation: aptus-software-quotes-marquee 42s linear infinite;
+    display: flex;
+    gap: 1.25rem;
+    padding: 0.35rem 1rem 0.85rem;
+    width: max-content;
+  }
+
+  .aptus-software-quotes__marquee:hover .aptus-software-quotes__track {
+    animation-play-state: paused;
+  }
+
+  [data-variant="software-quotes-marquee"] .aptus-software-quote-card,
+  .aptus-software-quotes--marquee .aptus-software-quote-card {
+    background: #141b2d;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+    color: #fff;
+    flex: 0 0 min(22rem, 82vw);
+    margin: 0;
+    min-height: 14.5rem;
+  }
+
+  [data-variant="software-quotes-marquee"] .aptus-software-quote-card__quote,
+  .aptus-software-quotes--marquee .aptus-software-quote-card__quote {
+    color: rgba(255, 255, 255, 0.88);
+    text-align: start;
+  }
+
+  [data-variant="software-quotes-marquee"] .aptus-software-quote-card__author,
+  [data-variant="software-quotes-marquee"] .aptus-software-quote-card__role,
+  .aptus-software-quotes--marquee .aptus-software-quote-card__author,
+  .aptus-software-quotes--marquee .aptus-software-quote-card__role {
+    color: #fff;
+    text-align: center;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .aptus-software-quotes__track {
+      animation: none;
+    }
+  }
+
+  @keyframes aptus-software-quotes-marquee {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* ── Section bands (live uses 2rem, not site section-padding) ── */
+  .aptus-software-section {
+    padding: 2rem 0;
+  }
+
+  .aptus-software-products-section {
+    padding-top: 2rem;
+  }
+
+  .aptus-software-section--why-choose {
+    padding-top: 0;
+  }
+
+  /* ponytail: live elementor-container = 1300px + 10px inline padding */
+  .aptus-live-container {
+    margin-inline: auto;
+    max-width: 1300px;
+    padding-inline: var(--content-pad-x, clamp(1rem, 4vw, 1.5rem));
+    width: 100%;
+  }
+
+  .aptus-software-product-grid {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  @media (min-width: 400px) {
+    .aptus-software-product-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 640px) {
+    .aptus-software-product-grid--3 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .aptus-software-product-grid--4 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .aptus-software-product-grid--5 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .aptus-software-product-grid--3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .aptus-software-product-grid--4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .aptus-software-product-grid--5 {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+
+  .aptus-software-icon-grid {
+    align-items: stretch;
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    margin-inline: auto;
+    max-width: 800px;
+  }
+
+  @media (min-width: 640px) {
+    .aptus-software-icon-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  /* Tablet+: keep 3-up in one row (avoids 2+1 orphan on medium) */
+  @media (min-width: 768px) {
+    .aptus-software-icon-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .aptus-software-icon-grid--4 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: none;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .aptus-software-icon-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .aptus-software-icon-grid--3 {
+      max-width: none;
+    }
+
+    .aptus-software-icon-grid--4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      max-width: none;
+    }
+
+    .aptus-software-icon-grid--5 {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      max-width: none;
+    }
+  }
+
+  .aptus-software-value-grid {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  @media (min-width: 640px) {
+    .aptus-software-value-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 768px) {
+    .aptus-software-value-grid--3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .aptus-software-value-grid--4 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .aptus-software-value-grid--5 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .aptus-software-value-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .aptus-software-value-grid--3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .aptus-software-value-grid--5 {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 639.98px) {
+    .aptus-software-value-card,
+    .aptus-software-icon-card {
+      margin: 0;
+      padding: 1rem 0.85rem 1.15rem;
+    }
+
+    .aptus-software-value-body,
+    .aptus-software-icon-card__body {
+      font-size: 0.8125rem;
+      margin-top: 0.25rem;
+    }
+
+    .aptus-software-value-icon {
+      height: 2.5rem;
+      width: 2.5rem;
+    }
+  }
+
+  .aptus-software-product-media img {
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    width: auto;
+  }
+
+  /* ETAP — live post-2688: 25% nav | 75% content band */
+  .aptus-etap-body {
+    padding: 2.5rem 0;
+  }
+
+  .aptus-etap-grid {
+    align-items: start;
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 1024px) {
+    .aptus-etap-grid {
+      gap: 1rem;
+      grid-template-columns: 25.219% 74.781%;
+    }
+  }
+
+  .aptus-etap-page-title {
+    color: #000;
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0 0 1rem;
+  }
+
+  .aptus-etap-stack > [data-section="feature-row"] {
+    padding: 0;
+  }
+
+  .aptus-etap-stack > [data-section="feature-row"] .mx-auto {
+    margin-inline: 0;
+    max-width: none;
+    padding-inline: 0;
+  }
+
+  .aptus-etap-stack [data-variant="boxed"].aptus-tint-panel,
+  .aptus-etap-stack .aptus-tint-panel {
+    background-color: #24648c0f;
+    border-radius: 20px;
+    margin: 1rem 0 2rem;
+    padding: 1rem;
+  }
+
+  .aptus-etap-stack [data-section="feature-row"] h2 {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    line-height: 24px;
+  }
+
+  .aptus-etap-stack [data-section="feature-row"] p,
+  .aptus-etap-stack [data-section="feature-row"] li {
+    color: #000;
+    font-size: var(--text-base);
+    line-height: 1.6;
+  }
+
+  .aptus-etap-stack [data-section="feature-row"]:not([data-variant="boxed"]) h2 {
+    font-size: var(--text-2xl);
+    margin-top: 4rem;
+  }
+
+  .aptus-etap-stack [data-section="feature-row"]:not([data-variant="boxed"]) ul {
+    line-height: 34px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .aptus-etap-stack [data-section="feature-row"]:not([data-variant="boxed"]) li {
+    margin-bottom: 0.25rem;
+  }
+
+  .aptus-etap-stack [data-section="feature-row"]:not([data-variant="boxed"]) li span:first-child {
+    display: none;
+  }
+
+  .aptus-etap-stack [data-section="feature-row"]:not([data-variant="boxed"]) li::before {
+    content: "✅ ";
+  }
+
+  .aptus-etap-stack [data-section="feature-row"] img {
+    display: block;
+    height: auto;
+    margin-inline: auto;
+    width: 24%;
+  }
+
+  .aptus-etap-stack [data-section="feature-row"] .rounded-2xl {
+    border-radius: 0;
+    box-shadow: none;
+    margin-top: 0;
+    overflow: visible;
+  }
+
+  .aptus-etap-stack > [data-section="features"] {
+    padding: 0;
+  }
+
+  .aptus-etap-stack > [data-section="features"] .aptus-live-container {
+    padding-inline: 0;
+  }
+
+  .aptus-etap-stack [data-section="feature-row"][data-variant="panel"] .aptus-tint-panel {
+    background-color: #f8f9fa;
+    border-radius: 0;
+    margin-bottom: 1rem;
+  }
+
+  .aptus-etap-stack [data-id="capabilities"] .aptus-software-icon-card,
+  .aptus-etap-stack [data-variant="icon-cards"] .aptus-software-icon-card {
+    background: transparent;
+    box-shadow: none;
+    margin: 0;
+    padding: 0.5rem 0;
+  }
+
+  /* Icon class sits on the svg; auto height follows viewBox (~448px) without explicit size */
+  .aptus-etap-stack [data-id="capabilities"] svg.aptus-software-icon-card__icon,
+  .aptus-etap-stack [data-variant="icon-cards"] svg.aptus-software-icon-card__icon {
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+
+  .aptus-etap-stack [data-id="capabilities"] .aptus-software-icon-card__title,
+  .aptus-etap-stack [data-variant="icon-cards"] .aptus-software-icon-card__title {
+    color: #248bcc;
+    font-size: var(--text-base);
+    font-weight: 600;
+    margin-top: 0.35rem;
+  }
+
+  .aptus-etap-stack [data-id="capabilities"] .aptus-software-icon-grid,
+  .aptus-etap-stack [data-variant="icon-cards"] .aptus-software-icon-grid,
+  .aptus-software-icon-grid--5 {
+    max-width: none;
+  }
+
+  @media (min-width: 640px) {
+    .aptus-etap-stack [data-id="capabilities"] .aptus-software-icon-grid,
+    .aptus-etap-stack [data-variant="icon-cards"] .aptus-software-icon-grid,
+    .aptus-software-icon-grid--5 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 768px) {
+    .aptus-etap-stack [data-id="capabilities"] .aptus-software-icon-grid,
+    .aptus-etap-stack [data-variant="icon-cards"] .aptus-software-icon-grid,
+    .aptus-software-icon-grid--5 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .aptus-etap-stack [data-id="capabilities"] .aptus-software-icon-grid,
+    .aptus-etap-stack [data-variant="icon-cards"] .aptus-software-icon-grid,
+    .aptus-software-icon-grid--5 {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+
+  .aptus-etap-stack [data-variant="bullet-list"] .aptus-live-container {
+    background: #f8f9fa;
+    padding: 1.5rem;
+  }
+
+  .aptus-etap-stack [data-variant="bullet-list"] .aptus-software-section-heading {
+    text-align: left;
+  }
+
+  .aptus-etap-stack [data-variant="bullet-list"] .aptus-software-section-title {
+    font-size: var(--text-2xl);
+    line-height: 1.2;
+  }
+
+  .aptus-etap-stack [data-variant="bullet-list"] .aptus-software-bullet-panel {
+    background: transparent;
+    margin-top: 1rem;
+    padding: 0;
+  }
+
+  .aptus-software-checklist {
+    line-height: 34px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .aptus-software-checklist li::before {
+    content: "✅ ";
+  }
+
+  .aptus-etap-stack [data-variant="checklist"] .aptus-software-section-heading {
+    text-align: left;
+  }
+
+  .aptus-etap-stack [data-variant="checklist"] .aptus-software-section-title {
+    font-size: var(--text-2xl);
+    line-height: 1.2;
+  }
+
+  .aptus-etap-stack [data-variant="checklist"] .aptus-software-checklist strong {
+    color: #000;
+    font-weight: 600;
+  }
+
+  /* Software band density: keep --spacing-section-lg (2rem). Duplicate override removed from here;
+   * canonical rule lives in software-product-pages.css. */
+}

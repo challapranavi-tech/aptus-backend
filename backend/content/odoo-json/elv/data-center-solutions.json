@@ -1,0 +1,238 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Advanced Data Center Solutions",
+    "bannerTagline": "Compute, storage, and networking built to stay online.",
+    "bannerSupport": "Compute · Storage · Networking · Virtualization · Continuity",
+    "bannerBackgroundImages": [
+      {
+        "src": "/images/Leonardo_Phoenix_10_a_cinematic_photograph_of_a_futuristic_dat_0-673x1024.jpg",
+        "alt": "Enterprise data center server hall"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Data-Centers-Teaser-scaled.webp",
+        "alt": "Data center infrastructure and facilities"
+      },
+      {
+        "src": "/images/switch-monitor.jpg",
+        "alt": "Data center operations and infrastructure management"
+      },
+      {
+        "src": "/images/switch-managed.jpg",
+        "alt": "Server racks and data center cabinets"
+      },
+      {
+        "src": "/images/unnamed.jpg",
+        "alt": "High-speed data center networking"
+      }
+    ],
+    "title": "Advanced Data Center Solutions",
+    "paragraphs": [
+      "Business systems need a room that stays online as workloads grow. Compute, storage, and networking are designed as one environment, not a pile of racks. Backup and monitoring sit in the same plan so recovery is clear. We build for a compact room or a full hall."
+    ],
+    "imageSrc": "/images/Leonardo_Phoenix_10_a_cinematic_photograph_of_a_futuristic_dat_0-673x1024.jpg",
+    "layout": "two-column",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form",
+    "ctaPlacement": "end",
+    "imageAlt": "Enterprise data center server hall"
+  },
+  "cardSections": [
+    {
+      "id": "dc-deliver",
+      "visible": true,
+      "variant": "product-cards",
+      "gridColumns": 3,
+      "title": {
+        "before": "What We Deliver"
+      },
+      "subheading": "Complete data center infrastructure — compute, storage, networking, virtualization, continuity, and management.",
+      "align": "left",
+      "items": [
+        {
+          "title": "Compute Infrastructure",
+          "body": "Deploy powerful and scalable server platforms designed to support business-critical applications, virtualization, and enterprise workloads.",
+          "imageSrc": "/images/Leonardo_Phoenix_10_a_cinematic_photograph_of_a_futuristic_dat_0-673x1024.jpg",
+          "imageAlt": "Compute infrastructure and server platforms"
+        },
+        {
+          "title": "Storage Solutions",
+          "body": "Secure and efficiently manage critical data with high-performance storage platforms designed for scalability, availability, and reliability.",
+          "imageSrc": "/images/net-cabling.jpg",
+          "imageAlt": "Data center storage and rack infrastructure"
+        },
+        {
+          "title": "Data Center Networking",
+          "body": "Connect servers, storage, applications, and users through high-speed network infrastructure designed for demanding data center environments.",
+          "imageSrc": "/images/unnamed.jpg",
+          "imageAlt": "High-speed data center networking"
+        },
+        {
+          "title": "Virtualization & Hyper-Converged Infrastructure",
+          "body": "Simplify infrastructure management by integrating compute, storage, and networking into flexible platforms that can scale with your requirements.",
+          "imageSrc": "/images/switch-managed.jpg",
+          "imageAlt": "Virtualization and hyper-converged infrastructure"
+        },
+        {
+          "title": "Backup & Disaster Recovery",
+          "body": "Strengthen business continuity with infrastructure designed to protect critical data, support recovery, and minimize operational disruption.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Data-Centers-Teaser-scaled.webp",
+          "imageAlt": "Backup and disaster recovery infrastructure"
+        },
+        {
+          "title": "Infrastructure Monitoring & Management",
+          "body": "Gain greater visibility into infrastructure performance, capacity, and availability through centralized monitoring and management solutions.",
+          "imageSrc": "/images/switch-monitor.jpg",
+          "imageAlt": "Infrastructure monitoring and management"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Infrastructure Built for Performance and Resilience"
+      },
+      "subheading": "Data center environments designed to perform, adapt, and protect critical operations.",
+      "align": "center",
+      "items": [
+        {
+          "title": "Scalable",
+          "body": "Expand infrastructure as business requirements and workloads grow.",
+          "icon": "chart-line"
+        },
+        {
+          "title": "Highly Available",
+          "body": "Minimize disruption with resilient infrastructure and redundancy.",
+          "icon": "stopwatch"
+        },
+        {
+          "title": "High Performance",
+          "body": "Support demanding applications, databases, virtualization, and cloud workloads.",
+          "icon": "database"
+        },
+        {
+          "title": "Secure",
+          "body": "Protect critical systems and data through integrated infrastructure and security measures.",
+          "icon": "shield-alt"
+        },
+        {
+          "title": "Efficient",
+          "body": "Optimize resources, power consumption, and infrastructure management.",
+          "icon": "power-off"
+        },
+        {
+          "title": "Future-Ready",
+          "body": "Create an adaptable foundation for evolving technologies and digital transformation.",
+          "icon": "cloud"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech",
+        "accent": "for Data Center Solutions?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Certified Expertise",
+          "body": "Our team designs and integrates compute, storage, networking, and virtualization around your workloads — not a generic package.",
+          "icon": "certificate"
+        },
+        {
+          "title": "24/7 Support",
+          "body": "Round-the-clock technical support and proactive monitoring to keep critical infrastructure available.",
+          "icon": "headset"
+        },
+        {
+          "title": "Customized Solutions",
+          "body": "From compact deployments to enterprise-scale facilities, we build around your technical requirements and business objectives.",
+          "icon": "code-branch"
+        },
+        {
+          "title": "Proactive Maintenance",
+          "body": "Regular audits and predictive maintenance to find issues before they interrupt business operations.",
+          "icon": "screwdriver"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes-marquee",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Hear from organizations that built resilient infrastructure with Aptus",
+    "items": [
+      {
+        "quote": "Aptus consolidated our compute, storage, and networking into a single data center design. Workloads are faster, failover is clearer, and we finally have room to grow.",
+        "author": "Mohammed Al Farsi",
+        "role": "IT Director"
+      },
+      {
+        "quote": "The hyper-converged platform simplified how we run applications and recover from incidents. One environment, one management view.",
+        "author": "Sarah Johnson",
+        "role": "Infrastructure Manager"
+      },
+      {
+        "quote": "Their backup and disaster recovery plan kept us operational during a site outage. Recovery worked exactly as designed.",
+        "author": "Ahmed Hassan",
+        "role": "Operations Manager"
+      }
+    ]
+  },
+  "midCta": {
+    "placement": "bottom",
+    "heading": "Ready to Build Your Data Center Foundation?",
+    "description": "Contact our infrastructure specialists today for a consultation and a data center solution engineered for performance, availability, and growth.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "src": "/images/Vertiv.png",
+        "alt": "Vertiv"
+      },
+      {
+        "src": "/images/AKCP.png",
+        "alt": "AKCP"
+      },
+      {
+        "src": "/images/Logitech.png",
+        "alt": "Logitech"
+      },
+      {
+        "src": "/images/brands/iflytek.png",
+        "alt": "iFLYTEK"
+      },
+      {
+        "src": "/images/brands/maxhub.svg",
+        "alt": "MAXHUB"
+      },
+      {
+        "src": "/images/brands/telenet.png",
+        "alt": "Telenet"
+      },
+      {
+        "src": "/images/kstar.png",
+        "alt": "KSTAR"
+      },
+      {
+        "src": "/images/excel-rajdgq57oqzqv5rw1bx55mpv9hvdf5gqs10tcwa4by.png",
+        "alt": "Excel"
+      }
+    ]
+  }
+}

@@ -1,0 +1,269 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Enterprise Switching & Routing Solutions",
+    "bannerTagline": "A faster, cleaner network core for every site.",
+    "bannerSupport": "Enterprise Switching · Intelligent Routing · High-Speed Connectivity",
+    "bannerBackgroundImages": [
+      {
+        "src": "/images/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Netwo_2-673x1024.jpg",
+        "alt": "Enterprise switching and network racks"
+      },
+      {
+        "src": "/images/net-enterprise.jpg",
+        "alt": "Network switch ports and fiber connectivity"
+      },
+      {
+        "src": "/images/Leonardo_Phoenix_10_a_cinematic_photograph_of_a_futuristic_dat_0-673x1024.jpg",
+        "alt": "Data centre switching and routing infrastructure"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/unnamed.jpg",
+        "alt": "Enterprise switching and routing equipment"
+      },
+      {
+        "src": "/images/net-cabling.jpg",
+        "alt": "Structured network cabinets and switch connectivity"
+      }
+    ],
+    "title": "Enterprise Switching & Routing Solutions",
+    "paragraphs": [
+      "Applications, phones, and cameras all need a reliable network core. Switches and routers send traffic to the right place across floors and sites. Access, distribution, and core layers are planned so VLANs and PoE stay easy to manage. We build the fabric you can grow without ripping it out."
+    ],
+    "imageSrc": "/images/switch-managed.jpg",
+    "layout": "two-column",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form",
+    "ctaPlacement": "end",
+    "imageAlt": "Enterprise switching and routing equipment"
+  },
+  "cardSections": [
+    {
+      "id": "switch-types",
+      "visible": true,
+      "variant": "product-cards",
+      "gridColumns": 3,
+      "title": {
+        "before": "Types of Switches"
+      },
+      "subheading": "Access, core, distribution, PoE, Layer 3, and managed switches — selected for the role each layer plays in your network.",
+      "align": "left",
+      "items": [
+        {
+          "title": "Access Switches",
+          "body": "Connect computers, access points, IP phones, cameras, and other edge devices to the LAN with reliable port density and consistent performance.",
+          "imageSrc": "/images/net-enterprise.jpg",
+          "imageAlt": "Access layer network switch"
+        },
+        {
+          "title": "Core Switches",
+          "body": "High-capacity backbone switches that move traffic between distribution layers, data centres, and critical systems at the heart of the network.",
+          "imageSrc": "/images/Leonardo_Phoenix_10_a_cinematic_photograph_of_a_futuristic_dat_0-673x1024.jpg",
+          "imageAlt": "Core switching in a data centre"
+        },
+        {
+          "title": "Distribution Switches",
+          "body": "Aggregate access-layer traffic, apply policy, and uplink to the core so every floor, wing, or building stays organized and scalable.",
+          "imageSrc": "/images/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Netwo_2-673x1024.jpg",
+          "imageAlt": "Distribution layer switching and aggregation"
+        },
+        {
+          "title": "PoE Switches",
+          "body": "Power over Ethernet switches that deliver data and power to access points, IP phones, cameras, and other PoE devices from one cable.",
+          "imageSrc": "/images/switch-poe.jpg",
+          "imageAlt": "PoE switch connecting powered network devices"
+        },
+        {
+          "title": "Layer 3 Switches",
+          "body": "Switches with routing capability to move traffic between VLANs and network segments without sending every hop to a separate router.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/unnamed.jpg",
+          "imageAlt": "Layer 3 switching and inter-VLAN routing"
+        },
+        {
+          "title": "Managed Switches",
+          "body": "Fully managed platforms for VLANs, QoS, monitoring, and centralized control — so IT teams can see, secure, and tune the switching fabric.",
+          "imageSrc": "/images/switch-managed.jpg",
+          "imageAlt": "Managed enterprise switch infrastructure"
+        }
+      ]
+    },
+    {
+      "id": "switching-deliver",
+      "visible": true,
+      "variant": "product-cards",
+      "gridColumns": 3,
+      "title": {
+        "before": "What We Deliver"
+      },
+      "subheading": "Switching, routing, segmentation, and centralized management — the core of your network, not cabling or Wi-Fi.",
+      "align": "left",
+      "items": [
+        {
+          "title": "Enterprise Switching",
+          "body": "Build a high-performance Local Area Network (LAN) with reliable switches designed to efficiently connect computers, servers, access points, IP phones, security systems, and other network devices.",
+          "imageSrc": "/images/net-enterprise.jpg",
+          "imageAlt": "Enterprise LAN switching"
+        },
+        {
+          "title": "Intelligent Routing",
+          "body": "Connect offices, branches, data centres, and external networks with intelligent routing solutions that determine efficient paths for data and support reliable connectivity.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/unnamed.jpg",
+          "imageAlt": "Intelligent enterprise routing"
+        },
+        {
+          "title": "High-Speed Connectivity",
+          "body": "Support demanding applications, cloud services, video collaboration, and large volumes of network traffic with high-performance switching and routing infrastructure.",
+          "imageSrc": "/images/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Netwo_2-673x1024.jpg",
+          "imageAlt": "High-speed switching and fiber uplinks"
+        },
+        {
+          "title": "Network Segmentation",
+          "body": "Improve network performance and security by logically separating users, applications, departments, and critical systems through technologies such as VLANs and access controls.",
+          "imageSrc": "/images/net-cabling.jpg",
+          "imageAlt": "Network segmentation and VLAN infrastructure"
+        },
+        {
+          "title": "Secure Network Access",
+          "body": "Strengthen your network infrastructure with integrated security capabilities, access policies, and controlled communication between network segments.",
+          "imageSrc": "/images/Leonardo_Phoenix_10_a_cinematic_photograph_of_a_futuristic_dat_0-673x1024.jpg",
+          "imageAlt": "Secure network access and controlled segments"
+        },
+        {
+          "title": "Centralized Network Management",
+          "body": "Gain greater visibility and control through centralized monitoring and management, helping IT teams identify issues, optimize performance, and maintain network availability.",
+          "imageSrc": "/images/switch-monitor.jpg",
+          "imageAlt": "Centralized switching and routing management"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Benefits of Our Switching & Routing Solutions"
+      },
+      "subheading": "Why invest in a professionally designed network core?",
+      "align": "center",
+      "items": [
+        {
+          "title": "Reliable Connectivity",
+          "body": "Keep users, applications, and locations connected with a switching and routing fabric designed for uptime.",
+          "icon": "wifi"
+        },
+        {
+          "title": "High Performance",
+          "body": "Move data efficiently across the LAN and between sites so cloud, voice, and collaboration stay responsive.",
+          "icon": "stopwatch"
+        },
+        {
+          "title": "Stronger Security",
+          "body": "Segment traffic, apply access policies, and control communication between users, systems, and locations.",
+          "icon": "shield-alt"
+        },
+        {
+          "title": "Ready to Scale",
+          "body": "Grow from a single office to multi-site and data-centre environments without rebuilding the network core.",
+          "icon": "chart-line"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech",
+        "accent": "for Switching and Routing?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Certified Expertise",
+          "body": "Our team holds industry certifications from leading vendors including Cisco, Juniper, and Aruba.",
+          "icon": "certificate"
+        },
+        {
+          "title": "24/7 Support",
+          "body": "Round-the-clock technical support and proactive monitoring to keep the network core available.",
+          "icon": "headset"
+        },
+        {
+          "title": "Customized Solutions",
+          "body": "We design switching and routing around your sites, traffic, and security policies — not a generic package.",
+          "icon": "code-branch"
+        },
+        {
+          "title": "Proactive Maintenance",
+          "body": "Regular audits and predictive maintenance to find issues before they interrupt business operations.",
+          "icon": "screwdriver"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes-marquee",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Hear from businesses that have strengthened their network core with Aptus",
+    "items": [
+      {
+        "quote": "Aptus redesigned our switching core and branch routing. Traffic is faster, VLANs are clean, and we finally have visibility across every site.",
+        "author": "Mohammed Al Farsi",
+        "role": "IT Director"
+      },
+      {
+        "quote": "The new access and PoE switches simplified how we connect phones, cameras, and wireless. One fabric, one management view.",
+        "author": "Sarah Johnson",
+        "role": "Network Manager"
+      },
+      {
+        "quote": "Their routing design kept our offices and data centre connected during a link failure. Failover worked exactly as planned.",
+        "author": "Ahmed Hassan",
+        "role": "Operations Manager"
+      }
+    ]
+  },
+  "midCta": {
+    "placement": "bottom",
+    "heading": "Ready to Upgrade Your Network Core?",
+    "description": "Contact our networking specialists today for a consultation and a switching and routing solution built for your environment.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "src": "/images/brands/cisco.svg",
+        "alt": "Cisco"
+      },
+      {
+        "src": "/images/brands/aruba.svg",
+        "alt": "Aruba"
+      },
+      {
+        "src": "/images/brands/microsens.png",
+        "alt": "Microsens"
+      },
+      {
+        "src": "/images/brands/huawei-header.png",
+        "alt": "Huawei"
+      },
+      {
+        "src": "/images/brands/nokia.svg",
+        "alt": "Nokia"
+      },
+      {
+        "src": "/images/brands/planet-s.png",
+        "alt": "PLANET Networking & Communication"
+      }
+    ]
+  }
+}

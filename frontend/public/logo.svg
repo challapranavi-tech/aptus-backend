@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 52" fill="none">
+  <!-- Icon mark -->
+  <rect width="44" height="44" x="0" y="4" rx="6" fill="#f47920"/>
+  <path d="M22 10 L34 36 H28 L22 22 L16 36 H10 Z" fill="white"/>
+  <rect x="14" y="28" width="16" height="3" rx="1.5" fill="white" opacity="0.6"/>
+  <!-- Wordmark -->
+  <text x="54" y="22" font-family="system-ui, -apple-system, sans-serif" font-size="17" font-weight="700" fill="#0e2b52" letter-spacing="-0.3">APTUS</text>
+  <text x="54" y="40" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="500" fill="#5a6a7e" letter-spacing="0.5">INFOTECH</text>
+</svg>

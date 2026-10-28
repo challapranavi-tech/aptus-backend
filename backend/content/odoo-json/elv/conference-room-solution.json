@@ -1,0 +1,215 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Intelligent Conference Room Solutions",
+    "bannerTagline": "Connect. Collaborate. Communicate.",
+    "bannerBackgroundImages": [
+      {
+        "src": "/images/Leonardo_Phoenix_10_Create_a_visually_appealing_image_for_Conf_0-673x1024.jpg",
+        "alt": "Intelligent conference room collaboration"
+      },
+      {
+        "src": "/images/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Audio_3-673x1024.jpg",
+        "alt": "Professional conference room audio and video"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Conference-Room-Solutions-768x512.webp",
+        "alt": "Connected conference and meeting spaces"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/brnd-7.jpg",
+        "alt": "Enterprise meeting room technology"
+      },
+      {
+        "src": "/images/LDA-audio-tech-rajcmtw0bg2fln77lwpbcob33b83lps3021uv2lw8e.png",
+        "alt": "Professional audio for meeting rooms"
+      }
+    ],
+    "title": "Intelligent Conference Room Solutions",
+    "paragraphs": [
+      "A meeting room should start the same way every time. Displays, cameras, and microphones sit behind one-touch join for huddle spaces and boardrooms. Hybrid calls stay clear for people in the room and on the line. We keep the experience consistent across every space you add."
+    ],
+    "imageSrc": "/images/Leonardo_Phoenix_10_Create_a_visually_appealing_image_for_Conf_0-673x1024.jpg",
+    "layout": "two-column",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form",
+    "ctaPlacement": "end",
+    "imageAlt": "Intelligent conference room collaboration setup"
+  },
+  "cardSections": [
+    {
+      "id": "conference-deliver",
+      "visible": true,
+      "variant": "product-cards",
+      "gridColumns": 3,
+      "title": {
+        "before": "What We Deliver"
+      },
+      "subheading": "Meeting-room systems only — huddle rooms, boardrooms, wireless share, and one-touch control.",
+      "align": "left",
+      "items": [
+        {
+          "title": "Huddle Room Systems",
+          "body": "Compact, ready-to-use meeting kits for small collaborative rooms — camera, display, and one-touch join without a full AV build.",
+          "imageSrc": "/images/conf-huddle.jpg",
+          "imageAlt": "Huddle room conference systems"
+        },
+        {
+          "title": "Boardroom Conferencing",
+          "body": "Executive boardroom setups for presentations and hybrid meetings, designed around table layout, seating, and decision-making rooms.",
+          "imageSrc": "/images/conf-boardroom.jpg",
+          "imageAlt": "Executive boardroom conferencing"
+        },
+        {
+          "title": "Wireless Presentation",
+          "body": "Share from laptops, tablets, and phones instantly so presenters start the meeting without cables or adapter hunting.",
+          "imageSrc": "/images/conf-wireless.jpg",
+          "imageAlt": "Wireless presentation in meeting rooms"
+        },
+        {
+          "title": "One-Touch Meeting Start",
+          "body": "Join scheduled calls and power the room with a single tap — calendar-aware rooms that are ready when people walk in.",
+          "imageSrc": "/images/conf-huddle.jpg",
+          "imageAlt": "One-touch conference room start"
+        },
+        {
+          "title": "Hybrid Meeting Rooms",
+          "body": "Make remote and in-room participants equal with room systems tuned for Microsoft Teams, Zoom, and similar meeting platforms.",
+          "imageSrc": "/images/conf-hybrid.jpg",
+          "imageAlt": "Hybrid meeting rooms"
+        },
+        {
+          "title": "Room Control Panels",
+          "body": "Simple touch panels to start the meeting, switch sources, and control the conference display — without a separate building-automation project.",
+          "imageSrc": "/images/conf-control.jpg",
+          "imageAlt": "Conference room control panels"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Benefits of Our Solutions"
+      },
+      "subheading": "Why invest in professional conference room technology?",
+      "align": "center",
+      "items": [
+        {
+          "title": "Enhanced Collaboration",
+          "body": "Bring teams together seamlessly whether they’re in the same room or across the globe with high-quality video and audio connections.",
+          "icon": "users"
+        },
+        {
+          "title": "Time Efficiency",
+          "body": "Quick setup and reliable performance mean less time wasted on technical issues and more time spent on productive discussions.",
+          "icon": "stopwatch"
+        },
+        {
+          "title": "Global Connectivity",
+          "body": "Connect effortlessly with colleagues, partners, and clients worldwide without compromising on quality or security.",
+          "icon": "globe"
+        },
+        {
+          "title": "Professional Image",
+          "body": "Impress clients and stakeholders with modern, sophisticated meeting environments that reflect your company’s professionalism.",
+          "icon": "paint-brush"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Your Conference Room Needs?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Certified Professionals",
+          "body": "As an authorized partner, we provide access to genuine Autodesk products.",
+          "icon": "certificate"
+        },
+        {
+          "title": "End-to-End Services",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "screwdriver"
+        },
+        {
+          "title": "24/7 Technical Support",
+          "body": "Comprehensive after-sales service with emergency response and proactive maintenance.",
+          "icon": "headset"
+        },
+        {
+          "title": "Local Presence",
+          "body": "With offices throughout Oman, we provide personalized service and quick response times.",
+          "icon": "handshake"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes-marquee",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Success stories from businesses using AutoCAD through Aptus Infotech",
+    "items": [
+      {
+        "quote": "The new conference room system has completely transformed how we conduct client meetings. The video quality is exceptional and the ease of use is impressive.",
+        "author": "Mohammed Al Farsi",
+        "role": "IT Director"
+      },
+      {
+        "quote": "We installed the executive boardroom solution and couldn’t be happier. The audio quality during video calls is crystal clear and the system is incredibly reliable.",
+        "author": "Sarah Johnson",
+        "role": "Facilities Manager"
+      },
+      {
+        "quote": "The training room solution has made our internal workshops much more effective. The interactive displays and easy content sharing have improved engagement significantly.",
+        "author": "Ahmed Hassan",
+        "role": "Operations Manager"
+      }
+    ]
+  },
+  "midCta": {
+    "placement": "bottom",
+    "heading": "Ready to Transform Your Meeting Experience?",
+    "description": "Contact our AV specialists today for a free consultation and customized solution proposal.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/WatchNet.png",
+        "alt": "WatchNet"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Tyco.png",
+        "alt": "Tyco"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Suprema.png",
+        "alt": "suprema"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Hikvision.png",
+        "alt": "Hikvision"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/ZKTeco.png",
+        "alt": "ZKT"
+      }
+    ]
+  }
+}

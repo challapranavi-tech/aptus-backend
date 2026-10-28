@@ -1,0 +1,16 @@
+/**
+ * Page: Autodesk 3ds Max Subscription | Official Partner Aptus Infotech
+ * Route: /3ds-max
+ * Source: LIVE WEBSITE/software\autodesk\Autodesk 3ds Max Subscription _ Official Partner Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-autodesk-3ds-max-subscription-official-partner-aptus-infotec {
+    /* page root scope */
+  }
+
+
+  /* 39 inline styles detected — migrate to utilities */
+}

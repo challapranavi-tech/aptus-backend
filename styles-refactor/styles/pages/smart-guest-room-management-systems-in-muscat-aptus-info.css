@@ -1,0 +1,16 @@
+/**
+ * Page: Smart Guest Room Management Systems in Muscat | Aptus Info
+ * Route: /guest-room-management
+ * Source: LIVE WEBSITE/ELV\Smart Guest Room Management Systems in Muscat _ Aptus Info.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-smart-guest-room-management-systems-in-muscat-aptus-info {
+    /* page root scope */
+  }
+
+
+  /* 13 inline styles detected — migrate to utilities */
+}

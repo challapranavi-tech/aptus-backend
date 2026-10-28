@@ -1,0 +1,280 @@
+<t t-name="website.elv-cctv-camera">
+    <t t-call="website.layout">
+        <div id="wrap" class="oe_structure oe_empty">
+            <section class="s_embed_code pt0 pb0 o_colored_level" data-snippet="s_embed_code" data-name="ELV cctv-camera">
+                <div class="s_embed_code_embedded o_not_editable container-fluid"><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+.aptus-elv-page { font-family: 'Poppins', sans-serif; color: #1a1a2e; background: #fff; overflow-x: hidden; }
+.aptus-elv-page .container { max-width: 1200px; width: 90%; margin: 0 auto; }
+.aptus-elv-page h2 { font-size: 34px; color: #1a1a2e; margin: 0 0 10px; }
+.aptus-elv-page p { line-height: 1.7; color: #475569; }
+
+.elv-banner { position: relative; padding: 90px 0; text-align: center; color: #fff; background-size: cover; background-position: center; }
+.elv-banner::before { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, rgba(10,22,55,.88), rgba(19,82,163,.78)); }
+.elv-banner .container { position: relative; z-index: 1; }
+.elv-banner h1 { font-size: 40px; margin: 0 0 14px; color: #fff; }
+.elv-banner p { color: #e6eefb; max-width: 720px; margin: 0 auto 26px; font-size: 18px; }
+
+.elv-btn { display: inline-block; background: #1352a3; color: #fff; border: none; padding: 14px 34px; border-radius: 40px; font-size: 16px; font-weight: 600; cursor: pointer; text-decoration: none; transition: .3s; }
+.elv-btn:hover { background: #0e3d7a; transform: translateY(-2px); }
+.elv-btn--light { background: #fff; color: #1352a3; }
+
+.elv-hero { padding: 60px 0; }
+.elv-hero .container { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+.elv-hero-sidebar { flex: 0 0 220px; }
+.elv-hero-sidebar ul { list-style: none; margin: 0; padding: 0; }
+.elv-hero-sidebar a { display: block; padding: 10px 14px; color: #334155; text-decoration: none; border-radius: 8px; font-size: 14px; line-height: 1.4; transition: .2s; }
+.elv-hero-sidebar a:hover, .elv-hero-sidebar a.is-active { background: #1352a3; color: #fff; }
+.elv-hero-text { flex: 1 1 320px; }
+.elv-hero-text h2 { color: #1352a3; }
+.elv-hero-media { flex: 1 1 360px; text-align: center; }
+.elv-hero-media img { max-width: 100%; border-radius: 18px; }
+
+.elv-section { padding: 60px 0; }
+.elv-section--band { background: #f1f5fb; }
+.elv-section-head { text-align: center; max-width: 760px; margin: 0 auto 40px; }
+.elv-section-head h2 span { color: #38b6ff; }
+.elv-section-sub { color: #64748b; margin-top: 8px; }
+
+.elv-card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.elv-card-grid--value { grid-template-columns: repeat(4, 1fr); }
+.elv-card-grid--product { grid-template-columns: repeat(4, 1fr); }
+.elv-card { background: #fff; border: 1px solid #e6ecf5; border-radius: 16px; padding: 28px 24px; text-align: center; box-shadow: 0 6px 18px rgba(15,40,90,.05); transition: .3s; }
+.elv-card:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(15,40,90,.12); }
+.elv-card h3 { font-size: 18px; color: #1a1a2e; margin: 14px 0 8px; }
+.elv-card p { font-size: 14px; }
+.elv-card--value { background: #fff; }
+.elv-card-icon { display: flex; justify-content: center; }
+.elv-icon { width: 46px; height: 46px; color: #1352a3; }
+.elv-card-img img { max-height: 120px; width: auto; object-fit: contain; }
+
+.elv-midcta { background: linear-gradient(120deg, #1352a3, #0a1637); color: #fff; padding: 60px 0; text-align: center; }
+.elv-midcta h2 { color: #fff; }
+.elv-midcta p { color: #dbe6f7; max-width: 680px; margin: 0 auto 26px; }
+
+.elv-quote-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.elv-quote { background: #fff; border-radius: 16px; padding: 28px; box-shadow: 0 6px 18px rgba(15,40,90,.06); }
+.elv-quote-text { font-style: italic; color: #334155; }
+.elv-quote-author { font-weight: 700; color: #1352a3; margin-top: 14px; }
+.elv-quote-role { font-size: 13px; color: #64748b; }
+
+.elv-alliances { padding: 60px 0; text-align: center; }
+.elv-alliances h2 span { color: #38b6ff; }
+.elv-alliance-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; margin-top: 34px; }
+.elv-alliance { width: 120px; height: 80px; background: #fff; border-radius: 12px; display: flex; align-items: center; justify-content: center; padding: 12px; box-shadow: 0 5px 15px rgba(0,0,0,.07); }
+.elv-alliance img { max-width: 100%; max-height: 54px; }
+
+.elv-contact { background: #003049; color: #fff; padding: 60px 0; text-align: center; }
+.elv-contact--light { background: #e8f7f2; color: #1a1a2e; }
+.elv-contact--light h2 { color: #1a1a2e; }
+.elv-contact--light .elv-form-group label { color: #334155; }
+.elv-contact h2 { color: #fff; margin-bottom: 28px; }
+.elv-form { max-width: 800px; margin: 0 auto; }
+.elv-form-row { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 20px; }
+.elv-form-group { flex: 1; text-align: left; }
+.elv-form-group label { display: block; margin-bottom: 8px; font-weight: 500; }
+.elv-form-group input, .elv-form-group textarea { width: 100%; padding: 12px 15px; border: none; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 14px; }
+
+@media (max-width: 900px) {
+  .elv-card-grid, .elv-card-grid--value, .elv-card-grid--product, .elv-quote-grid { grid-template-columns: 1fr; }
+  .elv-banner h1 { font-size: 30px; }
+  .elv-hero-sidebar { flex: 1 1 100%; }
+}
+</style>
+<div class="aptus-elv-page aptus-elv-page--cctv-camera">
+        <section class="elv-banner" style="background-image:url('https://aptusinfotech.com/wp-content/uploads/2025/05/CCTV_banner.png');">
+            <div class="container">
+                <h1>CCTV Surveillance Solutions</h1>
+                <p>Comprehensive video surveillance systems for enhanced security and monitoring</p>
+                <a class="elv-btn elv-btn--light" href="#Form">Request a Quote</a>
+            </div>
+        </section>
+        <section class="elv-hero">
+            <div class="container">
+                <aside class="elv-hero-sidebar" aria-label="ELV Solutions">
+                    <ul>
+                        <li><a href="/access-control-system">Access Control System</a></li>
+                        <li><a href="/thermal-scanners">Thermal Scanners</a></li>
+                        <li><a href="/cctv-camera" class="is-active">CCTV</a></li>
+                        <li><a href="/gate-automation">Gate Automation</a></li>
+                        <li><a href="/home-automation">Smart Homes</a></li>
+                        <li><a href="/audio-video-solutions">Audio/Video Solutions</a></li>
+                        <li><a href="/telephone-systems">Telephone Systems</a></li>
+                        <li><a href="/network-and-structured-cabling-solutions">Network and Structured Cabling</a></li>
+                        <li><a href="/ups">UPS</a></li>
+                        <li><a href="/smatv-iptv">SMATV/ IPTV</a></li>
+                        <li><a href="/guest-room-management">Guest Room Management</a></li>
+                        <li><a href="/nurse-calling-system">Nurse Call System</a></li>
+                        <li><a href="/rsi-queue-management">Queue Management System</a></li>
+                        <li><a href="/data-center-solutions">Data Center Solutions</a></li>
+                        <li><a href="/conference-room-solution">Conference room solution</a></li>
+                        <li><a href="/switching-and-routing">Switching and Routing</a></li>
+                    </ul>
+                </aside>
+                <div class="elv-hero-text">
+                    <h2>CCTV Solutions</h2>
+                <p>In today’s complex world, continuous monitoring and visual verification are paramount. More and more organizations are upgrading their premises with advanced CCTV Solutions to maximize security and deter unauthorized activity.</p>
+                <p>Whether you’re installing cameras at a single entry point or deploying a fully networked system across a massive industrial complex, these technologies dramatically improve the way you observe, record, and analyze events in real-time.</p>
+                <p>Experience superior clarity and seamless coverage with our comprehensive solutions for high-definition IP cameras, network video recorders (NVRs), and video management software (VMS) across any environment.</p>
+                <p>From 4K dome and turret cameras with night vision to centralized analytics platforms and secure remote viewing applications, we provide end-to-end solutions that ensure every area is visible, documented, and utterly protected.</p>
+                    <a class="elv-btn" href="#Form">Request a Quote</a>
+                </div>
+                <div class="elv-hero-media">
+                    <img src="https://aptusinfotech.com/wp-content/uploads/2025/05/CCTV-Cameras.jpg" alt="CCTV Surveillance Solutions" loading="lazy"/>
+                </div>
+            </div>
+        </section>
+        <section class="elv-section">
+            <div class="container">
+                <div class="elv-section-head">
+                    <h2>Key CCTV System Features</h2>
+                    <p class="elv-section-sub">Explore the comprehensive functionality of our surveillance solutions</p>
+                </div>
+                <div class="elv-card-grid">
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 576 512" fill="currentColor" aria-hidden="true"><path d="M336.2 64H47.8C21.4 64 0 85.4 0 111.8v288.4C0 426.6 21.4 448 47.8 448h288.4c26.4 0 47.8-21.4 47.8-47.8V111.8c0-26.4-21.4-47.8-47.8-47.8zm189.4 37.7L416 177.3v157.4l109.6 75.5c21.2 14.6 50.4-.3 50.4-25.8V127.5c0-25.4-29.1-40.4-50.4-25.8z"/></svg></div>
+              <h3>High-Resolution Cameras</h3>
+              <p>Ultra-clear imaging with HD and 4K resolution for detailed identification and evidence collection.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 576 512" fill="currentColor" aria-hidden="true"><path d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"/></svg></div>
+              <h3>Smart Motion Detection</h3>
+              <p>Advanced algorithms detect movement and unusual activity, reducing false alarms and focusing on relevant events.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M279.135 512c78.756 0 150.982-35.804 198.844-94.775 28.27-34.831-2.558-85.722-46.249-77.401-82.348 15.683-158.272-47.268-158.272-130.792 0-48.424 26.06-92.292 67.434-115.836 38.745-22.05 28.999-80.788-15.022-88.919A257.936 257.936 0 0 0 279.135 0c-141.36 0-256 114.575-256 256 0 141.36 114.576 256 256 256zm0-464c12.985 0 25.689 1.201 38.016 3.478-54.76 31.163-91.693 90.042-91.693 157.554 0 113.848 103.641 199.2 215.252 177.944C402.574 433.964 344.366 464 279.135 464c-114.875 0-208-93.125-208-208s93.125-208 208-208z"/></svg></div>
+              <h3>Night Vision Technology</h3>
+              <p>Infrared and thermal imaging for clear visibility in complete darkness, ensuring continuous security coverage.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 320 512" fill="currentColor" aria-hidden="true"><path d="M272 0H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h224c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zM160 480c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm112-108c0 6.6-5.4 12-12 12H60c-6.6 0-12-5.4-12-12V60c0-6.6 5.4-12 12-12h200c6.6 0 12 5.4 12 12v312z"/></svg></div>
+              <h3>Remote Access &amp; Monitoring</h3>
+              <p>Secure mobile and web access to view live feeds, review recordings, and manage settings from anywhere.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 640 512" fill="currentColor" aria-hidden="true"><path d="M537.6 226.6c4.1-10.7 6.4-22.4 6.4-34.6 0-53-43-96-96-96-19.7 0-38.1 6-53.3 16.2C367 64.2 315.3 32 256 32c-88.4 0-160 71.6-160 160 0 2.7.1 5.4.2 8.1C40.2 219.8 0 273.2 0 336c0 79.5 64.5 144 144 144h368c70.7 0 128-57.3 128-128 0-61.9-44-113.6-102.4-125.4zM393.4 288H328v112c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16V288h-65.4c-14.3 0-21.4-17.2-11.3-27.3l105.4-105.4c6.2-6.2 16.4-6.2 22.6 0l105.4 105.4c10.1 10.1 2.9 27.3-11.3 27.3z"/></svg></div>
+              <h3>Cloud Storage &amp; Backup</h3>
+              <p>Secure cloud storage with automatic backups and easy retrieval of historical footage when needed.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"></div>
+              <h3>Dome Cameras</h3>
+              <p>360-degree coverageVandal-resistant housingWeatherproof designCompact desktop design</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"></div>
+              <h3>Bullet Cameras</h3>
+              <p>Adjustable zoom lensesLong-distance viewingWeatherproof constructionHot-swappable batteries and components</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"></div>
+              <h3>PTZ Cameras</h3>
+              <p>Remote pan-tilt-zoom controlPre-programmed patrol routesAdvanced analytics and reportingFull system redundancy and failover</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"></div>
+              <h3>Thermal Cameras</h3>
+              <p>Temperature difference detectionPerimeter intrusion detectionFire detection capabilitiesNo-light required operation</p>
+            </div>
+                </div>
+            </div>
+        </section>
+        <section class="elv-section">
+            <div class="container">
+                <div class="elv-section-head">
+                    <h2>Why Choose Aptus <span>Infotech for AutoCAD?</span></h2>
+                    
+                </div>
+                <div class="elv-card-grid elv-card-grid--value">
+            <div class="elv-card elv-card--value">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 640 512" fill="currentColor" aria-hidden="true"><path d="M96 224c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm448 0c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm32 32h-64c-17.6 0-33.5 7.1-45.1 18.6 40.3 22.1 68.9 62 75.1 109.4h66c17.7 0 32-14.3 32-32v-32c0-35.3-28.7-64-64-64zm-256 0c61.9 0 112-50.1 112-112S381.9 32 320 32 208 82.1 208 144s50.1 112 112 112zm76.8 32h-8.3c-20.8 10-43.9 16-68.5 16s-47.6-6-68.5-16h-8.3C179.6 288 128 339.6 128 403.2V432c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48v-28.8c0-63.6-51.6-115.2-115.2-115.2zm-223.7-13.4C161.5 263.1 145.6 256 128 256H64c-35.3 0-64 28.7-64 64v32c0 17.7 14.3 32 32 32h65.9c6.3-47.4 34.9-87.3 75.2-109.4z"/></svg></div>
+              <h3>Industry Expertise</h3>
+              <p>Our team includes certified security technicians with deep knowledge of CCTV installation and maintenance for various sectors.</p>
+            </div>
+            <div class="elv-card elv-card--value">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M192 208c0-17.67-14.33-32-32-32h-16c-35.35 0-64 28.65-64 64v48c0 35.35 28.65 64 64 64h16c17.67 0 32-14.33 32-32V208zm176 144c35.35 0 64-28.65 64-64v-48c0-35.35-28.65-64-64-64h-16c-17.67 0-32 14.33-32 32v112c0 17.67 14.33 32 32 32h16zM256 0C113.18 0 4.58 118.83 0 256v16c0 8.84 7.16 16 16 16h16c8.84 0 16-7.16 16-16v-16c0-114.69 93.31-208 208-208s208 93.31 208 208h-.12c.08 2.43.12 165.72.12 165.72 0 23.35-18.93 42.28-42.28 42.28H320c0-26.51-21.49-48-48-48h-32c-26.51 0-48 21.49-48 48s21.49 48 48 48h181.72c49.86 0 90.28-40.42 90.28-90.28V256C507.42 118.83 398.82 0 256 0z"/></svg></div>
+              <h3>24/7 Support</h3>
+              <p>Round-the-clock technical support and proactive monitoring to ensure optimal system performance at all times.</p>
+            </div>
+            <div class="elv-card elv-card--value">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 640 512" fill="currentColor" aria-hidden="true"><path d="M434.7 64h-85.9c-8 0-15.7 3-21.6 8.4l-98.3 90c-.1.1-.2.3-.3.4-16.6 15.6-16.3 40.5-2.1 56 12.7 13.9 39.4 17.6 56.1 2.7.1-.1.3-.1.4-.2l79.9-73.2c6.5-5.9 16.7-5.5 22.6 1 6 6.5 5.5 16.6-1 22.6l-26.1 23.9L504 313.8c2.9 2.4 5.5 5 7.9 7.7V128l-54.6-54.6c-5.9-6-14.1-9.4-22.6-9.4zM544 128.2v223.9c0 17.7 14.3 32 32 32h64V128.2h-96zm48 223.9c-8.8 0-16-7.2-16-16s7.2-16 16-16 16 7.2 16 16-7.2 16-16 16zM0 384h64c17.7 0 32-14.3 32-32V128.2H0V384zm48-63.9c8.8 0 16 7.2 16 16s-7.2 16-16 16-16-7.2-16-16c0-8.9 7.2-16 16-16zm435.9 18.6L334.6 217.5l-30 27.5c-29.7 27.1-75.2 24.5-101.7-4.4-26.9-29.4-24.8-74.9 4.4-101.7L289.1 64h-83.8c-8.5 0-16.6 3.4-22.6 9.4L128 128v223.9h18.3l90.5 81.9c27.4 22.3 67.7 18.1 90-9.3l.2-.2 17.9 15.5c15.9 13 39.4 10.5 52.3-5.4l31.4-38.6 5.4 4.4c13.7 11.1 33.9 9.1 45-4.7l9.5-11.7c11.2-13.8 9.1-33.9-4.6-45.1z"/></svg></div>
+              <h3>Customized Solutions</h3>
+              <p>We design systems specifically for your security needs rather than offering generic packages.</p>
+            </div>
+            <div class="elv-card elv-card--value">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 576 512" fill="currentColor" aria-hidden="true"><path d="M136.309 189.836L312.313 37.851C327.72 24.546 352 35.348 352 56.015v82.763c129.182 10.231 224 52.212 224 183.548 0 61.441-39.582 122.309-83.333 154.132-13.653 9.931-33.111-2.533-28.077-18.631 38.512-123.162-3.922-169.482-112.59-182.015v84.175c0 20.701-24.3 31.453-39.687 18.164L136.309 226.164c-11.071-9.561-11.086-26.753 0-36.328zm-128 36.328L184.313 378.15C199.7 391.439 224 380.687 224 359.986v-15.818l-108.606-93.785A55.96 55.96 0 0 1 96 207.998a55.953 55.953 0 0 1 19.393-42.38L224 71.832V56.015c0-20.667-24.28-31.469-39.687-18.164L8.309 189.836c-11.086 9.575-11.071 26.767 0 36.328z"/></svg></div>
+              <h3>Proactive Maintenance</h3>
+              <p>Regular system audits and predictive maintenance to prevent issues before they impact your security.</p>
+            </div>
+                </div>
+            </div>
+        </section>
+        <section class="elv-midcta">
+            <div class="container">
+                <h2>Ready to Transform Your Hotel Operations?</h2>
+                <p>Contact our CCTV technology specialists to discuss how our surveillance solutions can enhance security, streamline monitoring, and ensure peace of mind across your facility.</p>
+                <a class="elv-btn elv-btn--light" href="#Form">Get Your Quote Now</a>
+            </div>
+        </section>
+        <section class="elv-section elv-section--band">
+            <div class="container">
+                <div class="elv-section-head">
+                    <h2>What Our <span>Clients Say</span></h2>
+                    <p class="elv-section-sub">Hear from businesses that have enhanced their security with our CCTV solutions</p>
+                </div>
+                <div class="elv-quote-grid">
+            <div class="elv-quote">
+                <p class="elv-quote-text">“The installation of Aptus Infotech’s CCTV system has dramatically improved our operational efficiency across multiple departments.”</p>
+                <div class="elv-quote-author">Sarah Johnson</div>
+                <div class="elv-quote-role">Director of Operations</div>
+            </div>
+            <div class="elv-quote">
+                <p class="elv-quote-text">“Their system seamlessly integrated with our existing infrastructure, resulting in 40% reduction in operational costs and improved disaster recovery capabilities.”</p>
+                <div class="elv-quote-author">Michael Chen</div>
+                <div class="elv-quote-role">CEO</div>
+            </div>
+            <div class="elv-quote">
+                <p class="elv-quote-text">“We were particularly impressed with the system’s reliability during critical situations and the excellent training provided to our staff.”</p>
+                <div class="elv-quote-author">Jessica Williams</div>
+                <div class="elv-quote-role">Operations Manager</div>
+            </div>
+                </div>
+            </div>
+        </section>
+        <section class="elv-alliances">
+            <div class="container">
+                <h2>Winning together with <span>Strategic Alliances</span></h2>
+                <div class="elv-alliance-grid">
+                <div class="elv-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Hikvision.png" alt="Hikvision" loading="lazy"/></div>
+                <div class="elv-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Norden-300x180.png" alt="Norden" loading="lazy"/></div>
+                <div class="elv-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/PELCO.png" alt="PELCO" loading="lazy"/></div>
+                <div class="elv-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Dahua-rajc6eniwnl2qx20ib4zabi5fy6843kx2rpg00yiy6.png" alt="Dahua" loading="lazy"/></div>
+                <div class="elv-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/WatchNet.png" alt="WatchNet" loading="lazy"/></div>
+                <div class="elv-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/BOSCH-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png" alt="BOSCH" loading="lazy"/></div>
+                <div class="elv-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Milesight-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png" alt="Milesight" loading="lazy"/></div>
+                <div class="elv-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Avigilon.png" alt="Avigilon" loading="lazy"/></div>
+                </div>
+            </div>
+        </section>
+        <section class="elv-contact elv-contact--light" id="Form">
+            <div class="container">
+                <h2>Have questions? We can help</h2>
+                <form class="elv-form" action="/contactus" method="post">
+                    <div class="elv-form-row">
+                        <div class="elv-form-group"><label>First Name *</label><input type="text" name="first_name" required="required"/></div>
+                        <div class="elv-form-group"><label>Last Name *</label><input type="text" name="last_name" required="required"/></div>
+                    </div>
+                    <div class="elv-form-row">
+                        <div class="elv-form-group"><label>Email *</label><input type="email" name="email" placeholder="name@mail.com" required="required"/></div>
+                        <div class="elv-form-group"><label>Phone *</label><input type="tel" name="phone" placeholder="e.g, +968 0000 0000" required="required"/></div>
+                    </div>
+                    <div class="elv-form-group"><label>Message</label><textarea name="message" rows="4" placeholder="Message"/></div>
+                    <button type="submit" class="elv-btn">Submit Now</button>
+                </form>
+            </div>
+        </section>
+</div></div>
+            </section>
+        </div>
+    </t>
+</t>

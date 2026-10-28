@@ -1,0 +1,16 @@
+/**
+ * Page: Network & Structured Cabling Solutions in Oman | Aptus Infotech
+ * Route: /network-and-structured-cabling-solutions
+ * Source: LIVE WEBSITE/ELV\Network & Structured Cabling Solutions in Oman _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, testimonials, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-network-structured-cabling-solutions-in-oman-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 23 inline styles detected — migrate to utilities */
+}

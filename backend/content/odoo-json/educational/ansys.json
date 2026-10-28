@@ -1,0 +1,210 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "educational",
+    "subnavLinks": [
+      { "label": "Matlab", "href": "/matlab" },
+      { "label": "Turnitin", "href": "/turnitin" },
+      { "label": "IBM SPSS Software", "href": "/ibm-spss-software" },
+      { "label": "ANSYS", "href": "/ansys" }
+    ],
+    "bannerTitle": "ANSYS Engineering Simulation Software",
+    "bannerTagline": "Empowering Innovation Through Comprehensive Engineering Simulation",
+    "mediaInline": false,
+    "title": "Transform Engineering Design with ANSYS",
+    "paragraphs": [
+      "ANSYS is a leading engineering simulation software solution that empowers engineers and designers to virtually test, analyze, and validate their products with high accuracy.",
+      "With powerful digital engineering tools, advanced simulation capabilities, and industry-focused product design solutions, ANSYS enables teams to replicate real-world conditions, improve performance, and optimize product development.",
+      "Widely used across automotive, aerospace, electronics, and healthcare sectors, ANSYS helps accelerate innovation, reduce development costs, enhance product reliability, and support smarter decision-making throughout the engineering lifecycle."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/ansys-e1754114536571.png",
+    "imageAlt": "ansys",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "gridColumns": 3,
+      "title": {
+        "before": "Powerful Features"
+      },
+      "subheading": "Comprehensive tools for advanced engineering analysis and design optimization",
+      "align": "center",
+      "items": [
+        {
+          "title": "Structural Analysis (FEA)",
+          "body": "Predict how products and components will react under various loads, stresses, and environmental conditions. Optimize designs for strength, durability, vibration, and fatigue life, ensuring structural integrity.",
+          "icon": "building"
+        },
+        {
+          "title": "Fluid Dynamics (CFD)",
+          "body": "Analyze fluid flow, heat transfer, and related phenomena for complex systems. Optimize aerodynamic performance, cooling efficiency, mixing processes, and fluid system designs.",
+          "icon": "water"
+        },
+        {
+          "title": "Electromagnetics & Electronics",
+          "body": "Simulate the behavior of electronic components, circuits, and electromagnetic fields. Optimize antenna performance, signal integrity, power delivery, and thermal management in electronic devices.",
+          "icon": "bolt"
+        },
+        {
+          "title": "Multiphysics Interactions",
+          "body": "Understand and predict the combined behavior of products under multiple interacting physics (e.g., fluid-structure interaction, thermal-stress coupling). This enables comprehensive design validation for complex systems.",
+          "icon": "robot"
+        },
+        {
+          "title": "Design Exploration & Optimization",
+          "body": "Rapidly iterate on designs, evaluate performance alternatives, and identify optimal solutions without the need for expensive and time-consuming physical prototypes.",
+          "icon": "search"
+        },
+        {
+          "title": "Digital Twins",
+          "body": "Create high-fidelity virtual replicas of physical assets to monitor their performance, predict maintenance needs, and optimize operations throughout their lifecycle.",
+          "icon": "database"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Benefits for Engineers and Industries"
+      },
+      "subheading": "How ANSYS transforms product development and organizational efficiency",
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Reduced Time to Market",
+          "body": "Accelerate innovation cycles by virtually testing designs before physical prototyping, getting products to market faster.",
+          "icon": "stopwatch"
+        },
+        {
+          "title": "Significant Cost Savings",
+          "body": "Reduce material waste, minimize prototype expenses, and avoid costly redesigns through accurate simulation predictions.",
+          "icon": "dollar-sign"
+        },
+        {
+          "title": "Enhanced Product Quality",
+          "body": "Identify and resolve potential issues early in the design cycle, resulting in higher-quality, more reliable products.",
+          "icon": "shield-alt"
+        },
+        {
+          "title": "Improved Cross-Disciplinary Collaboration",
+          "body": "Unified platform that allows mechanical, electrical, and fluids engineers to collaborate seamlessly on shared models.",
+          "icon": "users"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose ANSYS Through AptusInfotech?"
+      },
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Certified  Specialists",
+          "body": "Our team consists of certified ANSYS experts with extensive experience in implementing enterprise-level solutions across diverse industries.",
+          "icon": "certificate"
+        },
+        {
+          "title": "Customized Workflows",
+          "body": "We configure the platform to match your existing business processes rather than forcing you into generic templates.",
+          "icon": "tools"
+        },
+        {
+          "title": "Dedicated Support Team",
+          "body": "24/7 technical assistance and regular system maintenance to ensure optimal performance during critical project phases.",
+          "icon": "headset"
+        },
+        {
+          "title": "Future-Ready Technology",
+          "body": "We implement solutions that scale with your business growth and adapt to emerging technologies in the engineering landscape.",
+          "icon": "sync"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Transform Your Engineering Projects?",
+    "subheading": "Contact our specialists today for a free consultation and customized solution proposal.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Success stories from businesses using AutoCAD through Aptus Infotech",
+    "items": [
+      {
+        "quote": "The ANSYS has revolutionized how we manage our multi-story residential developments. The integration between design and field operations is seamless.",
+        "author": "Shahi Al Hashmi",
+        "role": "Project Director",
+        "company": "Residential Developer"
+      },
+      {
+        "quote": "We implemented ANSYS across our commercial construction division and couldn't be happier with the results. The scheduling tools have saved us countless hours.",
+        "author": "Fatima  Al Said",
+        "role": "Operations Manager",
+        "company": "Commercial Contractor"
+      },
+      {
+        "quote": "The ability to track progress in real-time using the mobile app has significantly reduced our project completion times and improved quality control.",
+        "author": "Ahmad Al Balushi",
+        "role": "IT Director",
+        "company": "Civil Engineering Firm"
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "watchnet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/WatchNet-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "WatchNet"
+      },
+      {
+        "id": "tyco",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Tyco-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "Tyco"
+      },
+      {
+        "id": "suprema",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Suprema-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "suprema"
+      },
+      {
+        "id": "hikvision",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Hikvision-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "Hikvision"
+      },
+      {
+        "id": "zkteco",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/ZKTeco-r5nfokpcdg2kwdyf7lfk27ni1uggug5f4v3bng3n8u.png",
+        "alt": "ZKT"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

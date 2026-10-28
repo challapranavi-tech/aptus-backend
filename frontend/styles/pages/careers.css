@@ -1,0 +1,962 @@
+/* Careers — job listing, detail and application wizard.
+ * Reuses design tokens from tokens.css / theme.css. */
+
+ .aptus-careers {
+  --careers-blue: var(--color-brand-blue, #1352a3);
+  --careers-sky: #248bcc;
+  --careers-green: #13934b;
+  --careers-border: var(--color-border, #e4ebe6);
+  --careers-muted: #667085;
+  --careers-surface: #f6f9fc;
+  background: #fff;
+}
+
+/* ── Hero ─────────────────────────────────────────────────────────────── */
+.aptus-careers-hero {
+  background: linear-gradient(135deg, #eef4fb 0%, #f4fbf6 100%);
+  padding: clamp(2.5rem, 6vw, 4.5rem) 0 clamp(2rem, 4vw, 3rem);
+}
+.aptus-careers-hero h1 {
+  color: var(--careers-blue);
+  font-size: var(--text-4xl, 2.25rem);
+  font-weight: 600;
+  line-height: 1.15;
+}
+.aptus-careers-hero p {
+  color: #334155;
+  font-size: var(--text-lg, 1.125rem);
+  margin-top: 0.75rem;
+  max-width: 42rem;
+}
+
+/* ── Toolbar (search + filters) ───────────────────────────────────────── */
+.aptus-careers-toolbar {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+@media (min-width: 900px) {
+  .aptus-careers-toolbar {
+    grid-template-columns: 1fr auto auto auto;
+    align-items: center;
+  }
+}
+.aptus-careers-search {
+  position: relative;
+}
+.aptus-careers-search input {
+  width: 100%;
+  height: 3rem;
+  padding: 0 1rem 0 2.75rem;
+  border: 1px solid var(--careers-border);
+  border-radius: 999px;
+  background: #fff;
+  font-size: 1rem;
+  color: #0f172a;
+}
+.aptus-careers-search input:focus {
+  outline: 2px solid var(--careers-sky);
+  outline-offset: 1px;
+}
+.aptus-careers-search svg {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.1rem;
+  height: 1.1rem;
+  color: var(--careers-muted);
+}
+.aptus-careers-select {
+  height: 3rem;
+  padding: 0 2.25rem 0 1rem;
+  border: 1px solid var(--careers-border);
+  border-radius: 12px;
+  background: #fff
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23667085'%3E%3Cpath fill-rule='evenodd' d='M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z' clip-rule='evenodd'/%3E%3C/svg%3E")
+    no-repeat right 0.75rem center/1.1rem;
+  appearance: none;
+  font-size: 0.95rem;
+  color: #0f172a;
+  min-width: 10rem;
+}
+.aptus-careers-filterbtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 3rem;
+  padding: 0 1.1rem;
+  border: 1px solid var(--careers-border);
+  border-radius: 12px;
+  background: #fff;
+  font-weight: 500;
+  color: var(--careers-blue);
+}
+.aptus-careers-count {
+  color: var(--careers-muted);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+/* Active filter chips */
+.aptus-careers-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.aptus-careers-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: #eef4fb;
+  color: var(--careers-blue);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* ── Grid + cards ─────────────────────────────────────────────────────── */
+.aptus-careers-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+  .aptus-careers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .aptus-careers-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.aptus-job-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.25rem;
+  border: 1px solid var(--careers-border);
+  border-radius: var(--radius-card, 20px);
+  background: #fff;
+  transition:
+    box-shadow var(--duration-normal, 300ms) ease,
+    transform var(--duration-normal, 300ms) ease,
+    border-color var(--duration-normal, 300ms) ease;
+}
+.aptus-job-card:hover,
+.aptus-job-card:focus-within {
+  box-shadow: 0 18px 30px rgb(19 82 163 / 0.12);
+  transform: translateY(-2px);
+  border-color: #cfe0f3;
+}
+.aptus-job-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.aptus-job-card__tag {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  background: var(--color-surface-muted-green, #13934b14);
+  color: var(--careers-green);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.aptus-job-card__id {
+  flex-shrink: 0;
+  color: var(--careers-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+.aptus-job-card__title {
+  margin-top: 0.75rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #0f172a;
+}
+.aptus-job-card__title a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.aptus-job-card__title a {
+  color: inherit;
+}
+.aptus-job-card { position: relative; }
+.aptus-job-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  margin-top: 0.6rem;
+  color: var(--careers-muted);
+  font-size: 0.9rem;
+}
+.aptus-job-card__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.aptus-job-card__desc {
+  margin-top: 0.75rem;
+  color: #475467;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.aptus-job-card__cta {
+  margin-top: auto;
+  padding-top: 1rem;
+  color: var(--careers-blue);
+  font-weight: 600;
+  font-size: 0.92rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Skeletons */
+.aptus-job-skeleton {
+  border: 1px solid var(--careers-border);
+  border-radius: var(--radius-card, 20px);
+  padding: 1.25rem;
+  background: #fff;
+}
+.aptus-skel {
+  border-radius: 8px;
+  background: linear-gradient(90deg, #eef2f6 25%, #f6f9fc 37%, #eef2f6 63%);
+  background-size: 400% 100%;
+  animation: aptus-skel 1.4s ease infinite;
+}
+@keyframes aptus-skel {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+/* Empty state */
+.aptus-careers-empty {
+  text-align: center;
+  padding: 3.5rem 1rem;
+  color: var(--careers-muted);
+}
+.aptus-careers-empty svg {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 1rem;
+  color: #cbd5e1;
+}
+.aptus-careers-empty h3 {
+  color: #0f172a;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+/* Load more */
+.aptus-careers-more {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0 1rem;
+}
+
+/* ── Mobile filter drawer ─────────────────────────────────────────────── */
+.aptus-careers-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgb(15 23 42 / 0.45);
+  z-index: 60;
+}
+.aptus-careers-drawer {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: min(88vw, 360px);
+  background: #fff;
+  z-index: 61;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: -10px 0 30px rgb(0 0 0 / 0.15);
+  animation: aptus-drawer-in var(--duration-normal, 300ms) ease;
+}
+@keyframes aptus-drawer-in {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+.aptus-careers-drawer label {
+  display: block;
+  font-weight: 600;
+  color: var(--careers-blue);
+  margin-bottom: 0.35rem;
+}
+.aptus-careers-drawer .aptus-careers-select {
+  width: 100%;
+}
+
+/* ── Job detail ───────────────────────────────────────────────────────── */
+.aptus-jobdetail {
+  padding: clamp(1.25rem, 3vw, 2.25rem) 0 3rem;
+}
+.aptus-jobdetail__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--careers-blue);
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+}
+.aptus-jobdetail__layout {
+  display: grid;
+  gap: 2rem;
+}
+@media (min-width: 960px) {
+  .aptus-jobdetail__layout {
+    grid-template-columns: 1fr 320px;
+    align-items: start;
+  }
+}
+.aptus-jobdetail__title {
+  color: var(--careers-blue);
+  font-size: clamp(1.6rem, 4vw, 2.25rem);
+  font-weight: 600;
+  line-height: 1.2;
+}
+.aptus-jobdetail__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin-top: 0.9rem;
+  color: var(--careers-muted);
+}
+.aptus-jobdetail__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.aptus-jobdetail__section {
+  margin-top: 1.5rem;
+}
+.aptus-jobdetail__section h2 {
+  color: #0f172a;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+.aptus-jobdetail__section p {
+  color: #475467;
+  line-height: 1.65;
+  margin: 0;
+  /* Newlines from stripJobHtml; blank-line collapse is enforced in shared/lib/strip-job-html.ts */
+  white-space: pre-line;
+}
+.aptus-jobdetail__html {
+  color: #475467;
+  line-height: 1.65;
+  /* Fallback when Odoo/API hands plain text (newlines) instead of tags. */
+  white-space: pre-line;
+}
+.aptus-jobdetail__html p,
+.aptus-jobdetail__html ul,
+.aptus-jobdetail__html ol {
+  margin: 0 0 0.75rem;
+  white-space: normal;
+}
+.aptus-jobdetail__html ul,
+.aptus-jobdetail__html ol {
+  padding-left: 1.25rem;
+}
+.aptus-jobdetail__html li {
+  margin: 0.25rem 0;
+  white-space: normal;
+}
+.aptus-jobdetail__html h1,
+.aptus-jobdetail__html h2,
+.aptus-jobdetail__html h3,
+.aptus-jobdetail__html h4 {
+  color: #0f172a;
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 1rem 0 0.4rem;
+}
+.aptus-jobdetail__html a {
+  color: var(--careers-green, #0d9488);
+  text-decoration: underline;
+}
+.aptus-jobdetail__key-block {
+  margin-top: 1.15rem;
+  padding: 1rem 1.15rem 1.1rem;
+  background: #f3faf5;
+  border: 1px solid #cfe8d6;
+  border-left: 4px solid var(--careers-green);
+  border-radius: 14px;
+  white-space: normal;
+}
+.aptus-jobdetail__section p + .aptus-jobdetail__key-block,
+.aptus-jobdetail__key-block + p {
+  margin-top: 0.85rem;
+}
+.aptus-jobdetail__key-block .aptus-jobdetail__key,
+.aptus-jobdetail__html .aptus-jobdetail__key {
+  color: var(--careers-blue);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0 0 0.7rem;
+}
+.aptus-jobdetail__html .aptus-jobdetail__key-block ul,
+.aptus-jobdetail__html .aptus-jobdetail__key-block ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.aptus-jobdetail__html .aptus-jobdetail__key-block li {
+  position: relative;
+  padding-left: 1.6rem;
+  margin: 0.35rem 0;
+}
+.aptus-jobdetail__html .aptus-jobdetail__key-block li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--careers-green);
+}
+.aptus-jobdetail__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+.aptus-jobdetail__list li {
+  position: relative;
+  padding-left: 1.6rem;
+  color: #475467;
+  line-height: 1.6;
+}
+.aptus-jobdetail__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--careers-green);
+}
+.aptus-jobdetail__aside {
+  position: sticky;
+  top: 96px;
+  border: 1px solid var(--careers-border);
+  border-radius: var(--radius-card, 20px);
+  padding: 1.5rem;
+  background: var(--careers-surface);
+}
+.aptus-jobdetail__apply-bar {
+  position: fixed;
+  inset: auto 0 0 0;
+  padding: 0.75rem 1rem;
+  background: #fff;
+  border-top: 1px solid var(--careers-border);
+  box-shadow: 0 -6px 20px rgb(0 0 0 / 0.08);
+  z-index: 40;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+}
+@media (min-width: 960px) {
+  .aptus-jobdetail__apply-bar {
+    display: none;
+  }
+}
+
+/* ── Application wizard ───────────────────────────────────────────────── */
+.aptus-apply {
+  padding: clamp(1.5rem, 4vw, 3rem) 0 4rem;
+}
+.aptus-apply__steps {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+  scrollbar-width: none;
+}
+.aptus-apply__steps::-webkit-scrollbar { display: none; }
+.aptus-apply__step {
+  flex: 1 0 auto;
+  min-width: 96px;
+  padding: 0.6rem 0.75rem;
+  border-radius: 12px;
+  border: 1px solid var(--careers-border);
+  background: #fff;
+  color: var(--careers-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+}
+.aptus-apply__step[data-state="active"] {
+  border-color: var(--careers-blue);
+  background: #eef4fb;
+  color: var(--careers-blue);
+}
+.aptus-apply__step[data-state="done"] {
+  border-color: var(--careers-green);
+  color: var(--careers-green);
+}
+.aptus-apply__step small {
+  display: block;
+  font-size: 0.72rem;
+  opacity: 0.8;
+}
+.aptus-apply__progress {
+  height: 6px;
+  border-radius: 999px;
+  background: #e6edf5;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+.aptus-apply__progress > div {
+  height: 100%;
+  background: var(--careers-blue);
+  transition: width var(--duration-normal, 300ms) ease;
+}
+.aptus-apply__panel {
+  border: 1px solid var(--careers-border);
+  border-radius: var(--radius-card, 20px);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: #fff;
+}
+.aptus-apply__panel h2 {
+  color: var(--careers-blue);
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+.aptus-apply__panel > p.aptus-apply__hint {
+  color: var(--careers-muted);
+  margin-top: 0.25rem;
+  margin-bottom: 1.25rem;
+}
+.aptus-apply__grid {
+  display: grid;
+  gap: 1rem;
+  align-items: start;
+}
+.aptus-apply__grid > * {
+  min-width: 0;
+}
+@media (min-width: 640px) {
+  .aptus-apply__grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .aptus-apply__grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  /* Label + year pairs: main field flexes, year stays a fixed narrow column */
+  .aptus-apply__grid--year {
+    grid-template-columns: minmax(0, 1fr) 7.5rem;
+  }
+}
+.aptus-apply__phone {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+.aptus-apply__phone select {
+  width: auto;
+  max-width: 11.5rem;
+  flex-shrink: 0;
+}
+.aptus-apply__phone input {
+  flex: 1;
+  min-width: 0;
+}
+.aptus-apply__date {
+  position: relative;
+  display: block;
+}
+.aptus-apply__date > input[type="text"] {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding-right: 2.75rem;
+}
+.aptus-apply__date-cal {
+  position: absolute;
+  top: 50%;
+  right: 0.55rem;
+  transform: translateY(-50%);
+  width: 2rem;
+  height: 2rem;
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  cursor: pointer;
+}
+.aptus-apply__date-cal:hover {
+  color: var(--aptus-blue, #24648c);
+}
+.aptus-apply__date-cal-icon {
+  display: flex;
+  pointer-events: none;
+}
+/* Icon hit-target only — never stretch like .aptus-field input { width: 100% } */
+.aptus-apply__date-cal input[type="date"] {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  margin: 0;
+  padding: 0 !important;
+  border: 0 !important;
+  opacity: 0;
+  cursor: pointer;
+}
+.aptus-apply__group {
+  border: 1px solid var(--careers-border);
+  border-radius: 14px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+.aptus-apply__group > legend,
+.aptus-apply__group > h3 {
+  font-weight: 600;
+  color: #0f172a;
+  padding: 0 0.4rem;
+  font-size: 1rem;
+}
+
+/* Fields */
+.aptus-field {
+  position: relative;
+}
+.aptus-field > label {
+  display: block;
+  font-weight: 500;
+  color: #0f172a;
+  margin-bottom: 0.35rem;
+  font-size: 0.92rem;
+  min-height: 1.35rem;
+  line-height: 1.35rem;
+  padding-right: 0.25rem;
+}
+.aptus-field .aptus-field__help {
+  color: var(--careers-muted);
+  font-size: 0.8rem;
+  margin-top: 0.35rem;
+  margin-bottom: 0;
+  min-height: 0;
+}
+.aptus-field input,
+.aptus-field select,
+.aptus-field textarea {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid var(--careers-border);
+  border-radius: 12px;
+  padding: 0.7rem 0.85rem;
+  font-size: 0.95rem;
+  color: #0f172a;
+  background: #fff;
+}
+.aptus-field input:focus,
+.aptus-field select:focus,
+.aptus-field textarea:focus {
+  outline: 2px solid var(--careers-sky);
+  outline-offset: 1px;
+}
+.aptus-field[data-invalid="true"] input,
+.aptus-field[data-invalid="true"] select,
+.aptus-field[data-invalid="true"] textarea {
+  border-color: #dc2626;
+}
+.aptus-field__error {
+  color: #dc2626;
+  font-size: 0.82rem;
+  margin-top: 0.3rem;
+}
+.aptus-field__badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background: #fff7e6;
+  color: #b45309;
+  font-size: 0.68rem;
+  font-weight: 600;
+  line-height: 1.2;
+  max-width: 45%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+
+/* Nationality toggle */
+.aptus-toggle {
+  display: inline-flex;
+  border: 1px solid var(--careers-border);
+  border-radius: 999px;
+  padding: 0.25rem;
+  gap: 0.25rem;
+}
+.aptus-toggle button {
+  border: 0;
+  background: transparent;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  font-weight: 500;
+  color: var(--careers-muted);
+  cursor: pointer;
+}
+.aptus-toggle button[aria-pressed="true"] {
+  background: var(--careers-blue);
+  color: #fff;
+}
+
+/* Dropzone */
+.aptus-dropzone {
+  border: 2px dashed #c7d6e8;
+  border-radius: 14px;
+  padding: 1.5rem;
+  text-align: center;
+  background: var(--careers-surface);
+  cursor: pointer;
+  transition: border-color 150ms ease, background 150ms ease;
+}
+.aptus-dropzone[data-drag="true"] {
+  border-color: var(--careers-sky);
+  background: #eef6fd;
+}
+.aptus-dropzone svg {
+  width: 2rem;
+  height: 2rem;
+  color: var(--careers-sky);
+  margin: 0 auto 0.5rem;
+}
+.aptus-dropzone__hint {
+  color: var(--careers-muted);
+  font-size: 0.82rem;
+  margin-top: 0.35rem;
+}
+.aptus-filecard {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid var(--careers-border);
+  border-radius: 12px;
+  padding: 0.6rem 0.75rem;
+  margin-top: 0.5rem;
+  background: #fff;
+}
+.aptus-filecard img {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.aptus-filecard__name {
+  font-size: 0.88rem;
+  color: #0f172a;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+.aptus-filecard__size {
+  color: var(--careers-muted);
+  font-size: 0.78rem;
+}
+.aptus-filecard__remove {
+  border: 0;
+  background: #fef2f2;
+  color: #dc2626;
+  border-radius: 8px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  flex: none;
+}
+.aptus-fileprogress {
+  height: 5px;
+  border-radius: 999px;
+  background: #e6edf5;
+  overflow: hidden;
+  margin-top: 0.4rem;
+}
+.aptus-fileprogress > div {
+  height: 100%;
+  background: var(--careers-green);
+}
+
+/* Repeatable entries */
+.aptus-repeat-entry {
+  position: relative;
+  border: 1px solid var(--careers-border);
+  border-radius: 14px;
+  padding: 1rem;
+  margin-top: 0.75rem;
+}
+.aptus-repeat-remove {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  border: 0;
+  background: #fef2f2;
+  color: #dc2626;
+  border-radius: 8px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+.aptus-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+  padding: 0.55rem 1rem;
+  border: 1px dashed var(--careers-blue);
+  border-radius: 12px;
+  color: var(--careers-blue);
+  font-weight: 500;
+  background: #fff;
+  cursor: pointer;
+}
+
+/* Wizard footer nav */
+.aptus-apply__nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+/* Review */
+.aptus-review-group {
+  border: 1px solid var(--careers-border);
+  border-radius: 14px;
+  padding: 1rem 1.15rem;
+  margin-top: 1rem;
+}
+.aptus-review-group__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+.aptus-review-group__head h3 {
+  font-weight: 600;
+  color: #0f172a;
+}
+.aptus-review-group__head button {
+  color: var(--careers-blue);
+  font-weight: 500;
+  font-size: 0.88rem;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.aptus-review-row {
+  display: grid;
+  grid-template-columns: 40% 1fr;
+  gap: 0.5rem;
+  padding: 0.3rem 0;
+  border-top: 1px dashed #eef2f6;
+  font-size: 0.9rem;
+}
+.aptus-review-row dt { color: var(--careers-muted); }
+.aptus-review-row dd { color: #0f172a; margin: 0; }
+
+/* Success / error banners */
+.aptus-apply__result {
+  text-align: center;
+  padding: 2.5rem 1rem;
+}
+.aptus-apply__result svg {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 1rem;
+}
+.aptus-banner {
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+.aptus-banner--error {
+  background: #fef2f2;
+  color: #b91c1c;
+}
+.aptus-banner--success {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+/* Panel step transition (subtle) */
+.aptus-apply__panel {
+  animation: aptus-panel-in var(--duration-normal, 300ms) var(--ease-out-expo, ease);
+}
+@keyframes aptus-panel-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Accessibility: visible focus states for custom controls ───────────── */
+.aptus-job-card__title a:focus-visible,
+.aptus-job-card__cta:focus-visible,
+.aptus-careers-chip button:focus-visible,
+.aptus-careers-filterbtn:focus-visible,
+.aptus-apply__step:focus-visible,
+.aptus-toggle button:focus-visible,
+.aptus-add-btn:focus-visible,
+.aptus-repeat-remove:focus-visible,
+.aptus-filecard__remove:focus-visible,
+.aptus-review-group__head button:focus-visible,
+.aptus-jobdetail__back:focus-visible,
+.aptus-dropzone:focus-visible {
+  outline: 2px solid var(--careers-sky, #248bcc);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* ── Respect reduced-motion preference ─────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .aptus-job-card,
+  .aptus-dropzone,
+  .aptus-apply__progress > div {
+    transition: none;
+  }
+  .aptus-job-card:hover,
+  .aptus-job-card:focus-within {
+    transform: none;
+  }
+  .aptus-skel {
+    animation: none;
+  }
+  .aptus-careers-drawer,
+  .aptus-apply__panel {
+    animation: none;
+  }
+}

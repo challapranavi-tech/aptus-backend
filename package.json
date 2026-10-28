@@ -1,0 +1,50 @@
+{
+  "name": "aptus",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently -n backend,frontend -c blue,green \"npm run dev -w backend\" \"npm run dev -w frontend\"",
+    "dev:frontend": "npm run dev -w frontend",
+    "dev:backend": "npm run dev -w backend",
+    "build": "npm run build -w backend && npm run build -w frontend",
+    "build:frontend": "npm run build -w frontend",
+    "build:backend": "npm run build -w backend",
+    "start:frontend": "npm run start -w frontend",
+    "start:backend": "npm run start -w backend",
+    "lint": "npm run lint -w frontend && npm run lint -w backend",
+    "test:checks": "node scripts/run-checks.mjs",
+    "test:integration": "npm run test:integration -w backend",
+    "test:e2e": "npm run test:e2e -w frontend",
+    "test": "npm run test:checks && npm run test:integration",
+    "test:all": "npm test && npm run test:e2e",
+    "web": "npm --prefix aptus-web/aptus-web",
+    "cms:export-all-json": "npm --prefix aptus-web/aptus-web run cms:export-all-json",
+    "cms:seed-homepage": "npm --prefix aptus-web/aptus-web run cms:seed-homepage",
+    "cms:seed-elv": "npm --prefix aptus-web/aptus-web run cms:seed-elv",
+    "cms:seed-software": "npm --prefix aptus-web/aptus-web run cms:seed-software",
+    "cms:seed-case-studies": "npm --prefix aptus-web/aptus-web run cms:seed-case-studies",
+    "cms:seed-about-pages": "npm --prefix aptus-web/aptus-web run cms:seed-about-pages",
+    "cms:seed-software-pages": "npm --prefix aptus-web/aptus-web run cms:seed-software-pages",
+    "cms:seed-adobe-full": "npm --prefix aptus-web/aptus-web run cms:seed-adobe-full",
+    "cms:seed-autodesk-inner-pages": "npm --prefix aptus-web/aptus-web run cms:seed-autodesk-inner-pages",
+    "cms:seed-oracle-pages": "npm --prefix aptus-web/aptus-web run cms:seed-oracle-pages",
+    "cms:seed-microsoft-pages": "npm --prefix aptus-web/aptus-web run cms:seed-microsoft-pages",
+    "cms:seed-etap": "npm --prefix aptus-web/aptus-web run cms:seed-etap",
+    "extract:case-studies-live": "npm --prefix aptus-web/aptus-web run extract:case-studies-live"
+  },
+  "engines": {
+    "node": ">=20.11.0",
+    "npm": ">=10.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "tsx": "^4.20.3"
+  },
+  "dependencies": {
+    "@opennextjs/cloudflare": "^1.20.2"
+  }
+}

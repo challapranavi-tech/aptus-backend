@@ -1,0 +1,16 @@
+/**
+ * Page: Winning Together | Aptus Infotech’s Collaborative Approach
+ * Route: /winning-together
+ * Source: LIVE WEBSITE/about us\Winning Together _ Aptus Infotech’s Collaborative Approach.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-winning-together-aptus-infotech-s-collaborative-approach {
+    /* page root scope */
+  }
+
+
+  /* 11 inline styles detected — migrate to utilities */
+}

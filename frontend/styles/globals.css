@@ -1,0 +1,279 @@
+/**
+ * Aptus global styles — entry point.
+ *
+ * Layer order:
+ *   1. Tailwind + design tokens
+ *   2. Base / utilities / animations
+ *   3. Layout + components + sections
+ *   4. Page-specific (about, software)
+ *
+ * Page CSS: import per-route in app/[slug]/page.tsx from styles/pages/
+ */
+@import "tailwindcss";
+
+@import "./tokens.css";
+@import "./theme.css";
+@import "./base.css";
+@import "./animations.css";
+@import "./utilities.css";
+
+@import "./layout/content.css";
+
+@import "./components/navbar.css";
+@import "./components/footer.css";
+@import "./components/expert-chat.css";
+@import "./components/buttons.css";
+@import "./components/cards.css";
+@import "./components/forms.css";
+@import "./components/modals.css";
+
+@import "./sections/hero.css";
+@import "./sections/features.css";
+@import "./sections/testimonials.css";
+@import "./sections/cta.css";
+
+@import "./about-pages.css";
+@import "./software-pages.css";
+@import "./software-product-pages.css";
+@import "./elv-product-pages.css";
+@import "./elv-pages.css";
+@import "./components/side-link-nav.css";
+
+/*
+ * Content alignment policy (site-wide):
+ *   - Headings, section titles, eyebrows, icons, buttons → center
+ *   - Body copy / descriptions / paragraphs → left (start)
+ * Does not change layout, spacing, or responsiveness.
+ * ponytail: no broad `p { start }` — that fought Tailwind `.text-center` on attributions.
+ */
+main [data-section] {
+  text-align: start;
+}
+
+main [data-section] :is(h1, h2, h3, h4, h5, h6),
+main [data-section] .eyebrow,
+main [data-section] .section-eyebrow,
+main [data-section] .aptus-page-heading,
+main [data-section] .aptus-section-heading,
+main [data-section] .aptus-software-section-title,
+main [data-section] .aptus-software-mid-title,
+main [data-section] .aptus-cta-light-heading,
+main [data-section] .aptus-software-form-heading,
+main [data-section] .aptus-contact-form-title,
+main [data-section] .aptus-iso-hero-title,
+main [data-section] .aptus-iso-cert-heading,
+main [data-section] .aptus-alliances-heading,
+main [data-section] .aptus-team-section-title,
+main [data-section] .aptus-team-member-name,
+main [data-section] .aptus-team-watermark,
+main [data-section] .aptus-policy-modus-title,
+main [data-section] .aptus-policy-section-title,
+main [data-section] .aptus-policy-privacy-title,
+main [data-section] .aptus-why-privacy-title,
+main [data-section] .aptus-career-hero-title,
+main [data-section] .aptus-software-value-title,
+main [data-section] .aptus-software-icon-card__title,
+main [data-section] .aptus-software-product-title,
+main [data-section] .home-services__eyebrow,
+main [data-section] .home-services__title,
+main [data-section] .home-feature-row__eyebrow,
+main [data-section] .home-feature-row__title,
+main [data-section] .btn-section,
+main [data-section] .aptus-software-btn,
+main [data-section] .aptus-iso-download-btn,
+main [data-section] .aptus-form-submit,
+.aptus-software-page :is(h1, h2, h3, h4, h5, h6),
+.aptus-software-page .aptus-software-section-title,
+.aptus-software-page .aptus-software-mid-title,
+.aptus-software-page .aptus-software-value-title,
+.aptus-software-page .aptus-software-icon-card__title,
+.aptus-software-page .aptus-software-form-heading,
+.aptus-software-page .aptus-software-btn {
+  text-align: center;
+}
+
+.page-aptus-policy [data-section="legal-policies"] :is(h1, h2, h3, h4, h5, h6),
+.page-aptus-policy .aptus-legal__title,
+.page-aptus-policy .aptus-legal__heading,
+.page-aptus-policy .aptus-legal__subheading,
+.page-aptus-policy .aptus-legal__nav-label,
+.page-aptus-policy .aptus-legal__p,
+.page-aptus-policy .aptus-legal__list,
+.page-aptus-policy .aptus-legal__intro p,
+.page-aptus-policy .aptus-legal__footer {
+  text-align: left;
+}
+
+/* ISO body headings share the container left edge with cards */
+.page-iso [data-section="iso-panel"] .aptus-iso-intro-heading,
+.page-iso [data-section="iso-panel"] .aptus-iso-core-heading,
+.page-iso [data-section="iso-panel"] .aptus-iso-subtitle,
+.page-iso [data-section="iso-panel"] .aptus-iso-intro-text,
+.page-iso [data-section="iso-panel"] .aptus-iso-footer-text {
+  text-align: start;
+}
+
+.page-faq .aptus-faq__question,
+.page-faq .aptus-faq__answer,
+.page-blog .aptus-blog__title,
+.page-blog .aptus-blog__brand,
+.page-blog .aptus-blog__name,
+.page-blog .aptus-blog__intro {
+  text-align: start;
+}
+
+/* Body / leads beat parent `.text-center` wrappers */
+main [data-section] .text-start,
+main [data-section] .aptus-iso-intro-text,
+main [data-section] .aptus-iso-subtitle,
+main [data-section] .aptus-iso-core-item,
+main [data-section] .aptus-iso-footer-text,
+main [data-section] .aptus-flip-box__front-desc,
+main [data-section] .aptus-policy-privacy-text,
+main [data-section] .aptus-policy-row-text,
+main [data-section] .aptus-contact-form-subtitle,
+main [data-section] .aptus-software-value-body,
+main [data-section] .aptus-software-icon-card__body,
+main [data-section] .aptus-software-product-body,
+main [data-section] .aptus-software-section-lead,
+main [data-section] .aptus-software-value-lead,
+main [data-section] .aptus-software-mid-lead,
+main [data-section] .aptus-software-form-lead,
+main [data-section] .home-services__subtitle,
+main [data-section] .home-feature-row__body,
+main [data-section] .aptus-team-member-bio,
+main [data-section] .aptus-team-member-role,
+main [data-section] .aptus-hero__tagline,
+.aptus-software-page .aptus-software-value-body,
+.aptus-software-page .aptus-software-icon-card__body,
+.aptus-software-page .aptus-software-section-lead,
+.aptus-software-page .aptus-software-mid-lead,
+.aptus-software-page .aptus-software-form-lead {
+  text-align: start;
+}
+
+/* Icons stay visually centered in their slot */
+main [data-section] .aptus-software-value-icon,
+main [data-section] .aptus-software-icon-card__icon,
+.aptus-software-page .aptus-software-value-icon,
+.aptus-software-page .aptus-software-icon-card__icon {
+  display: block;
+  margin-inline: auto;
+}
+
+/* Decorative title underlines stay centered under titles */
+main [data-section] .mx-auto.mt-4.block.h-1,
+main [data-section] span.mx-auto.mt-4.block {
+  margin-inline: auto;
+}
+
+/* Shared media / table safety net across breakpoints */
+img,
+video,
+svg {
+  max-width: 100%;
+}
+
+/* Next/Image fill uses absolute + height:100%; don't force height:auto on those */
+img:not([data-nimg="fill"]),
+video {
+  height: auto;
+}
+
+iframe,
+embed,
+object {
+  max-width: 100%;
+}
+
+table {
+  max-width: 100%;
+}
+
+/* Site-wide: nothing should blow past the viewport */
+html,
+body,
+#__next,
+main,
+.aptus-site {
+  max-width: 100%;
+}
+
+main,
+[data-section],
+.aptus-live-container,
+.aptus-software-container,
+.aptus-cms-content {
+  min-width: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  max-width: 100%;
+}
+
+pre,
+code {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* ISO download CTA — beat link `color: inherit` / layer order */
+main [data-section="iso-panel"] a.aptus-iso-download-btn,
+main [data-section] a.aptus-iso-download-btn {
+  color: #ffffff !important;
+}
+
+@media (max-width: 1023px) {
+  .aptus-table-scroll,
+  [data-section] table,
+  .rich-text table,
+  article table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Inner product pages: stack nav / copy / media instead of a cramped 3-col */
+  .aptus-software-inner-hero__grid,
+  .aptus-etap-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .aptus-software-hero-actions .aptus-software-btn {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .aptus-form-card,
+  .aptus-software-mid-band__inner {
+    padding-inline: 1rem;
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    padding-bottom: 4.5rem; /* room for WhatsApp FAB */
+  }
+
+  h1, h2, h3 {
+    overflow-wrap: anywhere;
+  }
+
+  .aptus-software-btn,
+  .aptus-software-btn-lg {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .aptus-software-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .aptus-software-hero-actions .aptus-software-btn {
+    width: 100%;
+  }
+}

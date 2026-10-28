@@ -1,0 +1,16 @@
+/**
+ * Page: Autodesk Build for Connected Construction | Aptus Infotech Oman
+ * Route: /autodesk-build
+ * Source: LIVE WEBSITE/software\autodesk\Autodesk Build for Connected Construction _ Aptus Infotech Oman.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, testimonials, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-autodesk-build-for-connected-construction-aptus-infotech-oma {
+    /* page root scope */
+  }
+
+
+  /* 35 inline styles detected — migrate to utilities */
+}

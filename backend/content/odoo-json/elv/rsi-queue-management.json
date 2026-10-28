@@ -1,0 +1,200 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Queue Management Solutions",
+    "bannerTagline": "Shorter waits. Clearer flow. Happier visitors.",
+    "bannerSupport": "Virtual Queuing · Self-Service Kiosks · Digital Signage · Analytics",
+    "bannerBackgroundImages": [
+      {
+        "src": "/images/Leonardo_Phoenix_10_a_cinematic_photo_of_a_bustling_lobby_with_3.jpg",
+        "alt": "Queue management kiosk and customer waiting area"
+      },
+      {
+        "src": "/images/ncs-monitoring.jpg",
+        "alt": "Service desk and visitor check-in environment"
+      },
+      {
+        "src": "/images/av-signage.jpg",
+        "alt": "Mobile check-in and virtual queuing"
+      },
+      {
+        "src": "/images/ups-monitoring.jpg",
+        "alt": "Real-time queue analytics and staff dashboards"
+      },
+      {
+        "src": "/images/Leonardo_Phoenix_10_Create_a_visually_appealing_image_for_Conf_0-673x1024.jpg",
+        "alt": "Digital display for visitor information"
+      }
+    ],
+    "title": "Queue Management Solutions",
+    "paragraphs": [
+      "Waiting should feel organized, not crowded. Visitors check in at a kiosk or on their phone and are called to the right counter. Screens and alerts keep people informed while staff watch demand live. We fit the flow to banks, clinics, and public service halls."
+    ],
+    "imageSrc": "/images/Leonardo_Phoenix_10_a_cinematic_photo_of_a_bustling_lobby_with_3.jpg",
+    "layout": "two-column",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form",
+    "ctaPlacement": "end",
+    "imageAlt": "Queue management kiosk and visitor waiting area"
+  },
+  "cardSections": [
+    {
+      "id": "queue-deliver",
+      "visible": true,
+      "variant": "product-cards",
+      "gridColumns": 3,
+      "title": {
+        "before": "What We Deliver"
+      },
+      "subheading": "Virtual queuing, kiosks, signage, appointments, notifications, and analytics — a connected customer-flow ecosystem.",
+      "align": "left",
+      "items": [
+        {
+          "title": "Virtual Queuing",
+          "body": "Let visitors join the queue remotely through mobile applications or digital channels, then allocate them to the right service point without crowding the waiting area.",
+          "imageSrc": "/images/av-signage.jpg",
+          "imageAlt": "Virtual queuing and mobile check-in"
+        },
+        {
+          "title": "Self-Service Kiosks",
+          "body": "Customers can check in, select a service, and receive a ticket at self-service kiosks — reducing reception bottlenecks from the moment they arrive.",
+          "imageSrc": "/images/Leonardo_Phoenix_10_a_cinematic_photo_of_a_bustling_lobby_with_3.jpg",
+          "imageAlt": "Self-service queue management kiosk"
+        },
+        {
+          "title": "Digital Signage",
+          "body": "Dynamic display systems keep visitors informed with queue status, service points, and personalized updates throughout their journey.",
+          "imageSrc": "/images/Leonardo_Phoenix_10_Create_a_visually_appealing_image_for_Conf_0-673x1024.jpg",
+          "imageAlt": "Digital signage for visitor information"
+        },
+        {
+          "title": "Appointment Management",
+          "body": "Give customers a scheduled visit and give staff a planned workload — so service capacity stays organized from booking through completion.",
+          "imageSrc": "/images/ncs-analytics.jpg",
+          "imageAlt": "Appointment management for service visits"
+        },
+        {
+          "title": "Customer Notifications",
+          "body": "Personalized notifications keep visitors informed as their turn approaches, reducing uncertainty and improving the waiting experience.",
+          "imageSrc": "/images/ncs-monitoring.jpg",
+          "imageAlt": "Customer notifications and informed waiting"
+        },
+        {
+          "title": "Real-Time Analytics",
+          "body": "Intuitive dashboards give staff real-time insight into demand, workloads, and performance so they can improve operational efficiency.",
+          "imageSrc": "/images/ups-monitoring.jpg",
+          "imageAlt": "Real-time queue analytics dashboard"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Benefits of Our Queue Management Solutions"
+      },
+      "subheading": "Smarter customer flow from arrival to service completion.",
+      "align": "center",
+      "items": [
+        {
+          "title": "Shorter Waits",
+          "body": "Reduce waiting times and keep service moving with intelligent queue allocation.",
+          "icon": "stopwatch"
+        },
+        {
+          "title": "Organized Customer Flow",
+          "body": "Direct every visitor to the right service point from check-in through completion.",
+          "icon": "users"
+        },
+        {
+          "title": "Informed Visitors",
+          "body": "Digital displays and personalized notifications reduce uncertainty in the waiting journey.",
+          "icon": "bell"
+        },
+        {
+          "title": "Operational Insight",
+          "body": "Real-time dashboards help staff monitor demand, manage workloads, and improve efficiency.",
+          "icon": "chart-line"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech",
+        "accent": "for Queue Management?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Customized Solutions",
+          "body": "We design queue management around your service types, volumes, and visitor journey — not a generic package.",
+          "icon": "certificate"
+        },
+        {
+          "title": "End-to-End Delivery",
+          "body": "From kiosks and displays to virtual queues and analytics, we integrate the complete customer-flow ecosystem.",
+          "icon": "screwdriver"
+        },
+        {
+          "title": "24/7 Technical Support",
+          "body": "Our support team is available to keep check-in, notifications, and service operations running.",
+          "icon": "headset"
+        },
+        {
+          "title": "Built to Scale",
+          "body": "From a single branch to high-volume public service centers, the same platform can grow with your operations.",
+          "icon": "chart-line"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes-marquee",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Hear from organizations that turned waiting into a smarter customer experience",
+    "items": [
+      {
+        "quote": "Aptus transformed our patient flow. Visitors check in at the kiosk, wait without crowding, and our staff finally have a clear view of demand.",
+        "author": "Dr. Ahmed Al Balushi",
+        "role": "Administrator"
+      },
+      {
+        "quote": "Virtual queuing changed how our bank serves customers. People wait comfortably and get notified when their turn is near.",
+        "author": "Fatima Al Habsi",
+        "role": "Branch Manager"
+      },
+      {
+        "quote": "The analytics helped us balance counters during peak hours. Complaints about waiting times have almost disappeared.",
+        "author": "Khalid Al Mawali",
+        "role": "Operations Director"
+      }
+    ]
+  },
+  "midCta": {
+    "placement": "bottom",
+    "heading": "Ready to Transform Waiting into a Smarter Experience?",
+    "description": "Contact our queue management specialists today for a consultation and a solution tailored to your service environment.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "src": "/images/brands/qnap.svg",
+        "alt": "QNAP"
+      }
+    ]
+  }
+}

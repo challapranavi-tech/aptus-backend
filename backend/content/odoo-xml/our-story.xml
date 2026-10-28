@@ -1,0 +1,311 @@
+<t t-name="website.our-story">
+    <t t-call="website.layout">
+        <div id="wrap" class="oe_structure oe_empty">
+            <section class="s_embed_code pt0 pb0 o_colored_level" data-snippet="s_embed_code" data-name="Our Story Content">
+                <div class="s_embed_code_embedded o_not_editable container-fluid"><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>.aptus-our-story {
+            font-family: 'Poppins', sans-serif;
+            color: #1a1a2e;
+        }
+        .aptus-our-story .container {
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto;
+        }
+        .aptus-our-story .page-banner {
+            width: 100%;
+            margin-bottom: 50px;
+        }
+        .aptus-our-story .page-banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .aptus-our-story .performance-spotlight {
+            text-align: center;
+            margin: 10px 0 40px;
+        }
+        .aptus-our-story .performance-spotlight .badge {
+            display: inline-block;
+            color: #1352a3;
+            font-weight: 600;
+            font-size: 18px;
+            letter-spacing: 0.5px;
+        }
+        .aptus-our-story .pursuit-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        .aptus-our-story .pursuit-image {
+            flex: 1;
+            text-align: center;
+        }
+        .aptus-our-story .pursuit-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .aptus-our-story .pursuit-content {
+            flex: 1;
+        }
+        .aptus-our-story .pursuit-content h1 {
+            font-size: 36px;
+            color: #1e293b;
+            margin-bottom: 20px;
+        }
+        .aptus-our-story .pursuit-content p {
+            color: #475569;
+            line-height: 1.8;
+        }
+        .aptus-our-story .mv-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 30px 0 50px;
+        }
+        .aptus-our-story .mv-card {
+            flex: 1;
+            min-width: 260px;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8edf3 100%);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .aptus-our-story .mv-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        .aptus-our-story .mv-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+        .aptus-our-story .mv-card h3 {
+            font-size: 28px;
+            color: #1352a3;
+            margin-bottom: 20px;
+        }
+        .aptus-our-story .mv-card p {
+            color: #475569;
+            line-height: 1.6;
+        }
+        .aptus-our-story .alliances-section {
+            background: #f8fafc;
+            padding: 60px 0;
+            text-align: center;
+            margin: 50px 0;
+            border-radius: 20px;
+        }
+        .aptus-our-story .alliances-section h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: #1a1a2e;
+        }
+        .aptus-our-story .alliances-section h2 span {
+            color: #38b6ff;
+        }
+        .aptus-our-story .alliances-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+        .aptus-our-story .alliance-logo {
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            width: 110px;
+            height: 80px;
+        }
+        .aptus-our-story .alliance-logo img {
+            max-width: 80px;
+            max-height: 50px;
+            object-fit: contain;
+        }
+        .aptus-our-story .contact-form-section {
+            background: #003049;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            border-radius: 20px;
+            margin-bottom: 50px;
+        }
+        .aptus-our-story .contact-form-section h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        .aptus-our-story .contact-form-section .subtitle {
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        .aptus-our-story .contact-form {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .aptus-our-story .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .aptus-our-story .form-group {
+            flex: 1;
+            min-width: 220px;
+            text-align: left;
+        }
+        .aptus-our-story .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .aptus-our-story .form-group input,
+        .aptus-our-story .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+        }
+        .aptus-our-story .submit-btn {
+            background: #1352a3;
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .aptus-our-story .pursuit-content h1,
+            .aptus-our-story .alliances-section h2,
+            .aptus-our-story .contact-form-section h2 {
+                font-size: 28px;
+            }
+        }</style>
+<div class="aptus-our-story">
+    <div class="page-banner">
+        <img src="https://aptusinfotech.com/wp-content/uploads/2025/05/about_banner-e1746943143932.jpg" alt="Our Story" loading="lazy"/>
+    </div>
+    <div class="container">
+        <div class="pursuit-grid">
+            <div class="pursuit-image">
+                <img src="https://aptusinfotech.com/wp-content/uploads/2025/05/award.jpg" alt="Rajesh Malaviya Award" loading="lazy"/>
+            </div>
+            <div class="pursuit-content">
+                <h1>Our Pursuit</h1>
+                <p>Aptus Infotech is the premier System Integrator &amp; Software Consultant providing consulting services, training, To the large and medium businesses. Our experience of working with different domains has given us extensive industry insight and helped us in mastering our competencies. We do a comprehensive analysis of your industry- its size, tasks you want to carry out, your challenges and subsequently map out a plan by recommending new elements to provide the right solutions that are cost effective and correspond to your business goals and IT strategy. We help streamline your business operations with wisely considered software solutions.</p>
+            </div>
+        </div>
+        <div class="performance-spotlight">
+            <span class="badge">We are powered by performance</span>
+        </div>
+        <div class="mv-grid">
+            <div class="mv-card">
+                <div class="mv-icon">&#9881;</div>
+                <h3>Mission</h3>
+                <p>To provide expert services at fair prices, help you overcome your problems and eliminate the risks involved by providing effective measures and turn your project into success.</p>
+            </div>
+            <div class="mv-card">
+                <div class="mv-icon">&#127919;</div>
+                <h3>Vision</h3>
+                <p>Our vision is to be recognized &amp; respected in global IT market as a professional solution provider with constant innovation to make &quot;IT&quot; better for its clients by being their strategic business partner.</p>
+            </div>
+        </div>
+    </div>
+    <section class="alliances-section">
+        <div class="container">
+            <h2>Winning together with <span>Strategic Alliances</span></h2>
+        <div class="alliances-grid">
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/APC.png" alt="APC" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Vertiv.png" alt="Vertiv" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Norden.png" alt="Norden" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Norden-2.png" alt="Norden 2" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Suprema.png" alt="Suprema" loading="lazy"/></div>
+        </div>
+        <div class="alliances-grid">
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Tyco.png" alt="Tyco" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/FERMAX-1.png" alt="FERMAX 1" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Microsens.png" alt="Microsens" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/LS-Cables.png" alt="LS Cables" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Logitech.png" alt="Logitech" loading="lazy"/></div>
+        </div>
+        <div class="alliances-grid">
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Honeywell.png" alt="Honeywell" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Hikvision.png" alt="Hikvision" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Fanvil.png" alt="Fanvil" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/FAAC.png" alt="FAAC" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Extron.png" alt="Extron" loading="lazy"/></div>
+        </div>
+        <div class="alliances-grid">
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/EATON.png" alt="EATON" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/BFT.png" alt="BFT" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/ZKTeco.png" alt="ZKTeco" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Yealink.png" alt="Yealink" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/WatchNet.png" alt="WatchNet" loading="lazy"/></div>
+        </div>
+        <div class="alliances-grid">
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/URMET.png" alt="URMET" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/TOA.png" alt="TOA" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Schneider.png" alt="Schneider" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/PELCO.png" alt="PELCO" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Panduit.png" alt="Panduit" loading="lazy"/></div>
+        </div>
+        <div class="alliances-grid">
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Nice.png" alt="Nice" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Opterna.png" alt="Opterna" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Axis.png" alt="Axis" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Avigilon.png" alt="Avigilon" loading="lazy"/></div>
+            <div class="alliance-logo"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/AKCP.png" alt="AKCP" loading="lazy"/></div>
+        </div>
+        </div>
+    </section>
+    <section class="contact-form-section">
+        <div class="container">
+            <h2>Have questions? We can help</h2>
+            <div class="subtitle">Our experts can help you find the right solutions for your business.</div>
+            <form class="contact-form" action="/contactus" method="post">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>First Name *</label>
+                        <input type="text" name="first_name" required="required"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name *</label>
+                        <input type="text" name="last_name" required="required"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" name="email" placeholder="name@mail.com" required="required"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone *</label>
+                        <input type="tel" name="phone" placeholder="e.g, +968 0000 0000" required="required"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea name="message" rows="4" placeholder="Message"/>
+                </div>
+                <button type="submit" class="submit-btn">Submit Now</button>
+            </form>
+        </div>
+    </section>
+</div></div>
+            </section>
+        </div>
+    </t>
+</t>

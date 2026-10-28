@@ -1,0 +1,16 @@
+/**
+ * Page: RSI Queue Management Systems in Muscat | Aptus Infotech
+ * Route: /rsi-queue-management
+ * Source: LIVE WEBSITE/ELV\RSI Queue Management Systems in Muscat _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-rsi-queue-management-systems-in-muscat-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 11 inline styles detected — migrate to utilities */
+}

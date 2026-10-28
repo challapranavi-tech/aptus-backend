@@ -1,0 +1,233 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "cyber-security",
+    "subnavLinks": [
+      { "label": "Antivirus and Data Security", "href": "/antivirus-and-data-security" },
+      { "label": "Fortinet", "href": "/fortinet" },
+      { "label": "Sophos", "href": "/sophos" },
+      { "label": "SonicWall Next-Gen Firewall", "href": "/sonicwall-next-gen-firewall" },
+      { "label": "Kaspersky", "href": "/kaspersky" }
+    ],
+    "bannerTitle": "Fortinet - Enterprise Cybersecurity Solutions",
+    "bannerTagline": "Protect your digital assets with Fortinet's industry-leading security fabric platform that delivers broad, integrated, and automated protection.",
+    "title": "Security-Driven Networking",
+    "paragraphs": [
+      "Fortinet is a global leader in broad, integrated, and automated cybersecurity solutions. Our Security Fabric platform delivers convergence of networking and security, enabling organizations to achieve better security outcomes while simplifying operations.",
+      "With over 500,000 customers worldwide, Fortinet provides comprehensive protection across the entire digital attack surface, from network to endpoint, cloud, and IoT environments.",
+      "Our solutions are powered by FortiOS, the industry's only operating system designed to converge networking and security, enabling organizations to achieve better security outcomes while simplifying operations."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/09/Leonardo_Phoenix_10_Create_a_detailed_image_that_represents_Se_2-673x1024.jpg",
+    "imageAlt": "Cyber-security",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "gridColumns": 4,
+      "title": {
+        "before": "Powerful Features of Fortinet"
+      },
+      "subheading": "Broad, integrated, and automated cybersecurity platform",
+      "align": "center",
+      "items": [
+        {
+          "title": "Broad Protection",
+          "body": "Coverage across the entire digital attack surface including network, endpoint, application, cloud, and access.",
+          "icon": "network-wired"
+        },
+        {
+          "title": "Integrated Platform",
+          "body": "Seamless integration between security products enables sharing of threat intelligence and coordinated response.",
+          "icon": "link"
+        },
+        {
+          "title": "Automated Operations",
+          "body": "AI-driven automation reduces complexity and improves security team efficiency across the entire infrastructure.",
+          "icon": "user-cog"
+        },
+        {
+          "title": "Threat Intelligence",
+          "body": "FortiGuard Labs provides real-time, actionable intelligence to protect against the latest threats.",
+          "icon": "shield-alt"
+        }
+      ]
+    },
+    {
+      "id": "why-fortinet",
+      "visible": true,
+      "variant": "icon-cards",
+      "gridColumns": 4,
+      "title": {
+        "before": "Why Choose Fortinet?"
+      },
+      "subheading": "Key benefits that make Fortinet the preferred choice",
+      "align": "center",
+      "items": [
+        {
+          "title": "Industry Performance",
+          "body": "Consistently rated #1 in performance and security effectiveness by independent testing organizations.",
+          "icon": "tachometer-alt"
+        },
+        {
+          "title": "Integrated Platform",
+          "body": "Single-vendor approach eliminates complexity and provides seamless integration across all security products.",
+          "icon": "puzzle-piece"
+        },
+        {
+          "title": "Scalable Solutions",
+          "body": "Products scale from small businesses to large enterprises and service providers with consistent security.",
+          "icon": "chart-line"
+        },
+        {
+          "title": "Training & Certification",
+          "body": "Comprehensive training programs and industry-recognized certifications for security professionals.",
+          "icon": "graduation-cap"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for AutoCAD?"
+      },
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Official Partner",
+          "body": "As an authorized partner, we provide access to genuine products.",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset"
+        },
+        {
+          "title": "Local Presence",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "mobile-alt"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Transform Your Security?",
+    "subheading": "Experience the power of Fortinet's Security Fabric. Contact us today for a personalized security assessment and see how we can protect your organization.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#Form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Hear from organizations that trust Fortinet for their security",
+    "items": [
+      {
+        "quote": "Fortinet's Security Fabric has transformed our security operations. The integration between products and automated threat response has significantly improved our security posture while reducing operational costs.",
+        "author": "James Wilson",
+        "role": "CISO",
+        "company": "Global Financial Institution"
+      },
+      {
+        "quote": "The performance of FortiGate firewalls is unmatched. We've been able to consolidate multiple security devices into a single platform without compromising on security or network speed.",
+        "author": "Lisa Anderson",
+        "role": "Network Director",
+        "company": "Healthcare Provider"
+      },
+      {
+        "quote": "Fortinet's cloud security solutions have enabled us to securely migrate our workloads to the cloud while maintaining consistent security policies across our hybrid environment.",
+        "author": "David Chen",
+        "role": "CTO",
+        "company": "Technology Company"
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances-grid",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+        "alt": "Microsoft"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Request a Quote",
+    "description": "Tell us what you need and our sales team will get back to you shortly.",
+    "showForm": true,
+    "submitLabel": "Submit Request",
+    "formVariant": "software-quote",
+    "layout": "light",
+    "actionLabel": "Request a Quote",
+    "actionHref": "#form",
+    "anchorId": "Form"
+  }
+}

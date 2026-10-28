@@ -1,0 +1,8 @@
+/* Feature rows + flip cards */
+.aptus-features-grid {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+@media (min-width: 1024px) {
+  .aptus-features-grid { grid-template-columns: repeat(3, 1fr); }
+}

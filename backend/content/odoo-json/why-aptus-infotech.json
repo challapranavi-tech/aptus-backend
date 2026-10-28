@@ -1,0 +1,211 @@
+{
+  "banner": {
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/mediaanner.jpg",
+    "imageAlt": "Why Aptus Infotech"
+  },
+  "hero": {
+    "id": "page-title",
+    "visible": true,
+    "variant": "why-panel",
+    "title": {
+      "accent": "Why Aptus Infotech"
+    }
+  },
+  "featureRows": [
+    {
+      "variant": "panel",
+      "heading": "Our Values",
+      "bullets": [
+        "Passionate about Clients success.",
+        "Proactive and responsible.",
+        "An uncompromising integrity in everything we do"
+      ],
+      "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/it-solutions-banner-768x300.jpg",
+      "imageAlt": "Our Values",
+      "imagePosition": "right"
+    },
+    {
+      "variant": "panel",
+      "heading": "Our Experties",
+      "bullets": [
+        "We have developed a diverse range of expertise to better serve our customers:",
+        "We are proficient network designers,",
+        "We have certified ELV implemtation team",
+        "Providing complete solar solutions (Aptus Solar Tech)",
+        "Experienced software sales and support team"
+      ],
+      "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/quali3.jpg",
+      "imageAlt": "Our Expertise",
+      "imagePosition": "right"
+    }
+  ],
+  "text": {
+    "id": "privacy",
+    "visible": true,
+    "presentation": {
+      "alignment": "center"
+    },
+    "title": {
+      "before": "Policy on Privacy and",
+      "accent": "Confidentiality"
+    },
+    "paragraphs": [
+      "One of the biggest concerns in the present information technology era is protection of confidential and personal information that is collected and disseminated. Aptus understands that protection of all confidential information is essential. Aptus is committed to protect business and personal information of confidential nature obtained from clients, associates and employees. This information will solely be used to contact you about our services and products."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/logo45.png",
+    "imageAlt": "Privacy Policy",
+    "imagePosition": "below"
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "partner-0",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/APC.png",
+        "alt": "APC"
+      },
+      {
+        "id": "partner-1",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Vertiv.png",
+        "alt": "Vertiv"
+      },
+      {
+        "id": "partner-2",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Norden.png",
+        "alt": "Norden"
+      },
+      {
+        "id": "partner-3",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Suprema.png",
+        "alt": "Suprema"
+      },
+      {
+        "id": "partner-4",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Tyco.png",
+        "alt": "Tyco"
+      },
+      {
+        "id": "partner-5",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/FERMAX-1.png",
+        "alt": "FERMAX 1"
+      },
+      {
+        "id": "partner-6",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Microsens.png",
+        "alt": "Microsens"
+      },
+      {
+        "id": "partner-7",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/LS-Cables.png",
+        "alt": "LS Cables"
+      },
+      {
+        "id": "partner-8",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Logitech.png",
+        "alt": "Logitech"
+      },
+      {
+        "id": "partner-9",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Honeywell.png",
+        "alt": "Honeywell"
+      },
+      {
+        "id": "partner-10",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Hikvision.png",
+        "alt": "Hikvision"
+      },
+      {
+        "id": "partner-11",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Fanvil.png",
+        "alt": "Fanvil"
+      },
+      {
+        "id": "partner-12",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/FAAC.png",
+        "alt": "FAAC"
+      },
+      {
+        "id": "partner-13",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Extron.png",
+        "alt": "Extron"
+      },
+      {
+        "id": "partner-14",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/EATON.png",
+        "alt": "EATON"
+      },
+      {
+        "id": "partner-15",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/BFT.png",
+        "alt": "BFT"
+      },
+      {
+        "id": "partner-16",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/ZKTeco.png",
+        "alt": "ZKTeco"
+      },
+      {
+        "id": "partner-17",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Yealink.png",
+        "alt": "Yealink"
+      },
+      {
+        "id": "partner-18",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/WatchNet.png",
+        "alt": "WatchNet"
+      },
+      {
+        "id": "partner-19",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/URMET.png",
+        "alt": "URMET"
+      },
+      {
+        "id": "partner-20",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/TOA.png",
+        "alt": "TOA"
+      },
+      {
+        "id": "partner-21",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Schneider.png",
+        "alt": "Schneider"
+      },
+      {
+        "id": "partner-22",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/PELCO.png",
+        "alt": "PELCO"
+      },
+      {
+        "id": "partner-23",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Panduit.png",
+        "alt": "Panduit"
+      },
+      {
+        "id": "partner-24",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Nice.png",
+        "alt": "Nice"
+      },
+      {
+        "id": "partner-25",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Opterna.png",
+        "alt": "Opterna"
+      },
+      {
+        "id": "partner-26",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Axis.png",
+        "alt": "Axis"
+      },
+      {
+        "id": "partner-27",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/Avigilon.png",
+        "alt": "Avigilon"
+      },
+      {
+        "id": "partner-28",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/AKCP.png",
+        "alt": "AKCP"
+      }
+    ]
+  }
+}

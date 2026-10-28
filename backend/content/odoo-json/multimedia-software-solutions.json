@@ -1,0 +1,295 @@
+{
+  "hero": {
+    "id": "hero",
+    "visible": true,
+    "variant": "software-landing",
+    "title": {
+      "before": "Professional Multimedia",
+      "accent": "Software Solutions"
+    },
+    "tagline": "Discover the industry’s leading tools for 3D modeling, rendering, visualization, and document management. Transform your creative workflow with our curated selection of professional software.",
+    "imageSrc": "linear-gradient(180deg, #000000 0%, #67DB85 100%)",
+    "imageAlt": "multimedia",
+    "actions": [
+      {
+        "label": "Explore Software",
+        "href": "#Software",
+        "tone": "blue"
+      }
+    ]
+  },
+  "cardSections": [
+    {
+      "id": "software-collection",
+      "anchorId": "Software",
+      "visible": true,
+      "variant": "product-cards",
+      "title": {
+        "before": "Our Software Collection"
+      },
+      "subheading": "Professional tools for every stage of your design and visualization workflow",
+      "align": "center",
+      "gridColumns": 3,
+      "items": [
+        {
+          "title": "Bluebeam",
+          "body": "Bluebeam Revu is a PDF-based solution for AEC workflows that lets you generate, collaborate, mark up and manage 2D and 3D PDFs. Streamline your document management and improve project collaboration.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/Bluebeam-1-e1754300037714-1024x227.png",
+          "imageAlt": "Bluebeam",
+          "href": "/bluebeam",
+          "actionLabel": "Request a Quote",
+          "actionHref": "#Form"
+        },
+        {
+          "title": "Chaos Corona",
+          "body": "Chaos Corona delivers fast, reliable, and physically based rendering for 3ds Max, Cinema 4D, and other applications. Create photorealistic images and animations with minimal setup time.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/Choas-corona-e1754300746370.png",
+          "imageAlt": "Chaos Corona",
+          "href": "/chaos-corona",
+          "actionLabel": "Request a Quote",
+          "actionHref": "#Form"
+        },
+        {
+          "title": "Enscape",
+          "body": "Enscape is a real-time rendering and VR plugin for Revit, SketchUp, Rhino, ArchiCAD, and Vectorworks. Instantly create stunning visualizations and explore your designs in virtual reality.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/Enscape-e1754300467363.png",
+          "imageAlt": "Enscape",
+          "href": "/enscape",
+          "actionLabel": "Request a Quote",
+          "actionHref": "#Form"
+        },
+        {
+          "title": "Lumion",
+          "body": "Lumion is 3D rendering software that makes it possible to create beautiful videos, images, and 360° panoramas quickly and easily. Bring your architectural designs to life with stunning realism.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/Lumion-e1754115055637.png",
+          "imageAlt": "Lumion",
+          "href": "/luminon",
+          "actionLabel": "Request a Quote",
+          "actionHref": "#Form"
+        },
+        {
+          "title": "Nitro PDF",
+          "body": "Nitro PDF Pro is a complete PDF productivity solution designed to streamline your document workflow. Create, convert, edit, sign, and share PDFs with powerful tools and intuitive features.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/Nitro-e1754300268468.png",
+          "imageAlt": "Nitro PDF",
+          "href": "/nitro",
+          "actionLabel": "Request a Quote",
+          "actionHref": "#Form"
+        },
+        {
+          "title": "SketchUp",
+          "body": "SketchUp is the world’s most popular 3D modeling software for architects, engineers, construction professionals, and designers. Create 3D models quickly with its intuitive interface and powerful tools.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/Sketchup-e1759831191828.png",
+          "imageAlt": "SketchUp",
+          "href": "/sketchup",
+          "actionLabel": "Request a Quote",
+          "actionHref": "#Form"
+        },
+        {
+          "title": "Twinmotion",
+          "body": "Twinmotion is real-time 3D visualization software that allows you to create high-quality images, panoramas, and VR videos in seconds. Powered by Unreal Engine for stunning photorealistic results.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png",
+          "imageAlt": "Twinmotion",
+          "href": "/twinmotion",
+          "actionLabel": "Request a Quote",
+          "actionHref": "#Form"
+        },
+        {
+          "title": "V-Ray",
+          "body": "V-Ray is a professional rendering software known for its versatility and ability to handle any project, from real-time view development to final frame rendering. Create photorealistic images with unmatched quality.",
+          "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/05/V-ray-e1754299498907.png",
+          "imageAlt": "V-Ray",
+          "href": "/v-ray",
+          "actionLabel": "Request a Quote",
+          "actionHref": "#Form"
+        }
+      ]
+    },
+    {
+      "id": "why-collection",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Why Choose Our Software Collection"
+      },
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Industry-Leading Tools",
+          "body": "We only offer the most trusted and widely used software in the industry, ensuring you have access to the best tools for your projects.",
+          "icon": "star"
+        },
+        {
+          "title": "Seamless Integration",
+          "body": "Our software solutions work together seamlessly, creating a complete workflow from design to visualization to documentation.",
+          "icon": "puzzle-piece"
+        },
+        {
+          "title": "Expert Training & Support",
+          "body": "Get access to comprehensive training resources and expert support to help you master each software and maximize your productivity.",
+          "icon": "graduation-cap"
+        },
+        {
+          "title": "Regular Updates",
+          "body": "All our software solutions receive regular updates with new features, performance improvements, and compatibility enhancements.",
+          "icon": "sync-alt"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Multimedia Software?"
+      },
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Official Partner",
+          "body": "As an authorized partner, we provide access to genuine products.",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset"
+        },
+        {
+          "title": "Local Presence",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "mobile-alt"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Transform Your Workflow?",
+    "subheading": "Explore our complete collection of professional multimedia software and find the perfect tools for your projects.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Hear from professionals who have transformed their workflow with our software",
+    "items": [
+      {
+        "quote": "The software bundle from Multimedia Hub has completely transformed our design workflow. Using SketchUp for modeling, Twinmotion for real-time visualization, and V-Ray for final rendering has cut our project time in half while improving quality.",
+        "author": "David Chen",
+        "role": "Architect, Urban Design Studio"
+      },
+      {
+        "quote": "As an interior designer, having access to Enscape for real-time visualization and Lumion for high-quality rendering has been a game-changer. Our clients can now walk through their spaces before construction even begins.",
+        "author": "Zara Al Said",
+        "role": "Interior Designer, Luxe Spaces"
+      },
+      {
+        "quote": "Bluebeam has revolutionized how we handle project documentation, and integrating it with our 3D modeling and rendering tools has created a seamless workflow from design to construction. I can’t imagine working without these tools now.",
+        "author": "Michael Torres",
+        "role": "Project Manager, ConstructPro"
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/planswift.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Prokon.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/sophos.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/spectronova.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/aconex.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/etap.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/fortinet.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/kaspersky.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft.png",
+        "alt": "Microsoft"
+      },
+      {
+        "id": "lumion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/lumion.png",
+        "alt": "lumion"
+      },
+      {
+        "id": "paloalto",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/paloalto.png",
+        "alt": "paloalto"
+      },
+      {
+        "id": "vray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/v.ray_.png",
+        "alt": "v.ray"
+      },
+      {
+        "id": "twinmotion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png",
+        "alt": "twinmotion"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

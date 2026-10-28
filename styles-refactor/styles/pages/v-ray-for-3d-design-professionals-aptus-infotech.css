@@ -1,0 +1,16 @@
+/**
+ * Page: V-Ray for 3D Design Professionals | Aptus Infotech
+ * Route: /v-ray
+ * Source: LIVE WEBSITE/software\multimedia\V-Ray for 3D Design Professionals _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-v-ray-for-3d-design-professionals-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 39 inline styles detected — migrate to utilities */
+}

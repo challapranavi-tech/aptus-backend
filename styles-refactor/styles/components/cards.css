@@ -1,0 +1,18 @@
+/* Cards — flip boxes, alliance logos, feature cards */
+.aptus-card {
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+}
+
+.aptus-alliance-card {
+  align-items: center;
+  background: #fff;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  justify-content: center;
+  min-height: 6rem;
+  padding: var(--spacing-md);
+}

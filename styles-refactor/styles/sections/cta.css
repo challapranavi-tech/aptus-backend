@@ -1,0 +1,12 @@
+/* CTA bands */
+.aptus-cta {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding-block: var(--spacing-2xl);
+  text-align: center;
+}
+.aptus-cta__title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+}

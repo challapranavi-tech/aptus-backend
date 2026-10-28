@@ -1,0 +1,16 @@
+/**
+ * Page: Software Solutions | Aptus Infotech
+ * Route: /software-solutions
+ * Source: LIVE WEBSITE/software\Software Solutions _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-software-solutions-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 38 inline styles detected — migrate to utilities */
+}

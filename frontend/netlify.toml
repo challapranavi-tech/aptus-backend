@@ -1,0 +1,10 @@
+[build]
+  base = "frontend"
+  command = "npm run build"
+  publish = "frontend/.next"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Netlify Next.js runtime plugin handles SSR when using @netlify/plugin-nextjs.
+# Set APTUS_API_URL in Netlify UI → Site settings → Environment variables.

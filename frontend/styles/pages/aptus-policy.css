@@ -1,0 +1,260 @@
+/**
+ * Page: Aptus Policy / Legal & Policies (/aptus-policy)
+ * Sidebar + content layout (documentation style).
+ */
+@layer pages {
+  .page-aptus-policy {
+    --legal-bg: #0c0c0c;
+    --legal-side: #141414;
+    --legal-ink: #ffffff;
+    --legal-muted: #c4c4c4;
+    --legal-nav: #8d8d8d;
+    --legal-accent: #2ec8ff;
+    --legal-line: rgba(255, 255, 255, 0.08);
+    background: var(--legal-bg);
+    color: var(--legal-muted);
+  }
+
+  .page-aptus-policy .aptus-legal__layout {
+    display: grid;
+    grid-template-columns: minmax(14rem, 18.5rem) minmax(0, 1fr);
+    min-height: 70vh;
+    align-items: start;
+  }
+
+  .page-aptus-policy .aptus-legal__nav {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    min-height: 100%;
+    padding: clamp(1.75rem, 3vw, 2.5rem) 1.25rem clamp(2rem, 4vw, 3rem) 0;
+    background: var(--legal-side);
+    border-right: 1px solid var(--legal-line);
+  }
+
+  .page-aptus-policy .aptus-legal__nav-label {
+    margin: 0 0 0.85rem 1.35rem;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .page-aptus-policy .aptus-legal__nav-list {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .page-aptus-policy .aptus-legal__nav-list::before {
+    content: "";
+    position: absolute;
+    top: 0.35rem;
+    bottom: 0.35rem;
+    left: 0.42rem;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.16);
+  }
+
+  .page-aptus-policy .aptus-legal__nav-link {
+    position: relative;
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.55rem 0.85rem 0.55rem 0;
+    border: 0;
+    background: transparent;
+    color: var(--legal-nav);
+    font-size: 0.86rem;
+    font-weight: 500;
+    line-height: 1.3;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .page-aptus-policy .aptus-legal__nav-link:hover {
+    color: #e8e8e8;
+  }
+
+  .page-aptus-policy .aptus-legal__nav-link.is-active {
+    color: var(--legal-accent);
+    font-weight: 700;
+  }
+
+  .page-aptus-policy .aptus-legal__nav-dot {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    width: 0.85rem;
+    height: 0.85rem;
+    margin-top: 0.2rem;
+    border-radius: 999px;
+    background: transparent;
+  }
+
+  .page-aptus-policy .aptus-legal__nav-link.is-active .aptus-legal__nav-dot {
+    background: var(--legal-accent);
+    box-shadow: 0 0 0 4px rgba(46, 200, 255, 0.18);
+  }
+
+  .page-aptus-policy .aptus-legal__main {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding: clamp(1.25rem, 3vw, 2.15rem) clamp(1.15rem, 3.5vw, 2.75rem) clamp(1.75rem, 4vw, 2.75rem);
+    background: var(--legal-bg);
+  }
+
+  .page-aptus-policy .aptus-legal__hero {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .page-aptus-policy .aptus-legal__title {
+    margin: 0;
+    color: var(--legal-ink);
+    font-size: clamp(1.55rem, 3.2vw, 2.15rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+  }
+
+  .page-aptus-policy .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .page-aptus-policy .aptus-legal__intro,
+  .page-aptus-policy .aptus-legal__section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .page-aptus-policy .aptus-legal__intro p,
+  .page-aptus-policy .aptus-legal__p,
+  .page-aptus-policy .aptus-legal__footer {
+    margin: 0;
+    color: var(--legal-muted);
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.6;
+    text-align: left;
+  }
+
+  .page-aptus-policy .aptus-legal__section {
+    padding-bottom: 1.1rem;
+    border-bottom: 1px solid var(--legal-line);
+    scroll-margin-top: 1.5rem;
+  }
+
+  .page-aptus-policy .aptus-legal__section:last-of-type {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .page-aptus-policy .aptus-legal__block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .page-aptus-policy .aptus-legal__heading {
+    margin: 0 0 0.1rem;
+    color: var(--legal-ink);
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+  }
+
+  .page-aptus-policy .aptus-legal__subheading {
+    margin: 0.35rem 0 0;
+    color: var(--legal-ink);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+  }
+
+  .page-aptus-policy .aptus-legal__list {
+    margin: 0;
+    padding: 0 0 0 1.2rem;
+    color: var(--legal-muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    text-align: left;
+  }
+
+  .page-aptus-policy .aptus-legal__list--numbered {
+    list-style: decimal;
+  }
+
+  .page-aptus-policy .aptus-legal__list li + li {
+    margin-top: 0.35rem;
+  }
+
+  .page-aptus-policy .aptus-legal__footer {
+    margin-top: 0.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--legal-line);
+    color: #8d8d8d;
+    font-size: 0.82rem;
+  }
+
+  @media (max-width: 860px) {
+    .page-aptus-policy .aptus-legal__layout {
+      grid-template-columns: 1fr;
+    }
+
+    .page-aptus-policy .aptus-legal__nav {
+      position: static;
+      padding: 1.25rem 1rem 0.5rem;
+      border-right: 0;
+      border-bottom: 1px solid var(--legal-line);
+    }
+
+    .page-aptus-policy .aptus-legal__nav-list {
+      display: flex;
+      gap: 0.35rem;
+      overflow-x: auto;
+      padding-bottom: 0.75rem;
+    }
+
+    .page-aptus-policy .aptus-legal__nav-list::before {
+      display: none;
+    }
+
+    .page-aptus-policy .aptus-legal__nav-link {
+      width: auto;
+      flex-shrink: 0;
+      padding: 0.45rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      white-space: nowrap;
+    }
+
+    .page-aptus-policy .aptus-legal__nav-link.is-active {
+      background: rgba(46, 200, 255, 0.12);
+    }
+
+    .page-aptus-policy .aptus-legal__nav-dot {
+      display: none;
+    }
+
+    .page-aptus-policy .aptus-legal__main {
+      padding: 1.5rem 1.15rem 2.5rem;
+    }
+  }
+}

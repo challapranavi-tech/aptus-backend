@@ -1,0 +1,226 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "oracle",
+    "bannerTagline": "Mastering Complex Projects",
+    "topBannerImage": "https://aptusinfotech.com/wp-content/uploads/2025/05/Oracle_Primavara-e1754205079914-768x240.jpg",
+    "mediaInline": true,
+    "title": "Oracle Primavera P6 Professional Project Management",
+    "paragraphs": [
+      "Oracle Primavera P6 Professional Project Management is the industry’s leading, most robust, and easy-to-use solution for prioritizing, planning, managing, and executing projects, programs, and portfolios. Widely adopted across project-intensive industries such as construction, engineering, aerospace, defense, utilities, oil & gas, and manufacturing, Primavera P6 provides the essential tools to ensure projects are delivered on time and within budget."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/08/Oracle-Primavera.png",
+    "imageAlt": "Oracle Primavera P6 Professional Project Management",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "capabilities",
+      "visible": true,
+      "variant": "bullet-list",
+      "title": {
+        "before": "Primavera P6 Professional Project Management empowers organizations and project teams to:"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Develop Detailed Project Schedules",
+          "body": "Create comprehensive project schedules with granular control over activities, durations, dependencies, and constraints. Utilize critical path method (CPM) analysis to identify crucial tasks and manage project timelines effectively.",
+          "icon": "check"
+        },
+        {
+          "title": "Optimize Resource Management",
+          "body": "Efficiently allocate and manage project resources (personnel, equipment, materials) across multiple projects. Identify resource bottlenecks, level workloads, and ensure optimal utilization to prevent delays and cost overruns.",
+          "icon": "check"
+        },
+        {
+          "title": "Gain Robust Cost Control and Budgeting",
+          "body": "Track, manage, and analyze project costs against budgets with powerful cost control features. Monitor earned value, forecast expenditures, and ensure financial discipline throughout the project lifecycle.",
+          "icon": "check"
+        },
+        {
+          "title": "Manage Multiple Projects and Programs",
+          "body": "Oversee numerous projects simultaneously, even across different departments or business units. Consolidate data for a clear view of overall program performance and portfolio health.",
+          "icon": "check"
+        },
+        {
+          "title": "Identify and Mitigate Project Risks",
+          "body": "Incorporate risk management processes into the project plan, helping to identify potential issues, assess their impact, and develop mitigation strategies to minimize disruptions and ensure project success.",
+          "icon": "check"
+        },
+        {
+          "title": "Track Performance and Generate Reports",
+          "body": "Monitor project progress against baselines, analyze performance trends, and generate comprehensive reports (e.g., Gantt charts, resource usage reports, earned value reports) to communicate status to stakeholders.",
+          "icon": "check"
+        },
+        {
+          "title": "Foster Collaboration and Communication",
+          "body": "While P6 Professional is a desktop application, its data can be shared and integrated, allowing project teams to work together effectively, share updates, and ensure alignment on project goals.",
+          "icon": "check"
+        },
+        {
+          "title": "Ensure Scalability for Complex Endeavors",
+          "body": "Handle projects of any size and complexity, from small initiatives to mega-projects with thousands of activities, making it an indispensable tool for organizations with demanding project portfolios.",
+          "icon": "check"
+        }
+      ]
+    },
+    {
+      "id": "solutions",
+      "visible": true,
+      "variant": "icon-cards",
+      "align": "center",
+      "gridColumns": 5,
+      "items": [
+        {
+          "title": "Project Management",
+          "body": "",
+          "icon": "project-diagram"
+        },
+        {
+          "title": "Project Scheduling",
+          "body": "",
+          "icon": "clock"
+        },
+        {
+          "title": "Resource Management",
+          "body": "",
+          "icon": "sourcetree"
+        },
+        {
+          "title": "Critical Path Method",
+          "body": "",
+          "icon": "industry"
+        },
+        {
+          "title": "Risk Analysis",
+          "body": "",
+          "icon": "asterisk"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech"
+      },
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Tailored Solutions for Your Business",
+          "body": "",
+          "icon": "check-circle"
+        },
+        {
+          "title": "Scalable for Every Business Size",
+          "body": "",
+          "icon": "check-circle"
+        },
+        {
+          "title": "Expert Installation and Ongoing Support",
+          "body": "",
+          "icon": "check-circle"
+        },
+        {
+          "title": "Powered by Cutting-Edge Technology",
+          "body": "",
+          "icon": "check-circle"
+        }
+      ]
+    }
+  ],
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/planswift.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Prokon.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/sophos.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/spectronova.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/aconex.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/etap.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/fortinet.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/kaspersky.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft.png",
+        "alt": "Microsoft"
+      },
+      {
+        "id": "lumion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/lumion.png",
+        "alt": "lumion"
+      },
+      {
+        "id": "paloalto",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/paloalto.png",
+        "alt": "paloalto"
+      },
+      {
+        "id": "vray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/v.ray_.png",
+        "alt": "v.ray"
+      },
+      {
+        "id": "twinmotion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png",
+        "alt": "twinmotion"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

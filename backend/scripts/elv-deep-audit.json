@@ -1,0 +1,747 @@
+[
+  {
+    "slug": "telephone-systems",
+    "route": "/telephone-systems",
+    "isHub": false,
+    "issueCount": 13,
+    "issues": [
+      {
+        "cat": "structure",
+        "msg": "Features section title: JSON=\"Key Features\" live=\"Voice over IP (VoIP)\""
+      },
+      {
+        "cat": "content",
+        "msg": "Features card count: JSON=6 live=5"
+      },
+      {
+        "cat": "content",
+        "msg": "Features card 1 title: JSON=\"Voice over IP (VoIP)\" live=\"Call Analytics & Reporting\""
+      },
+      {
+        "cat": "content",
+        "msg": "Features \"Call Analytics & Reporting\" body text differs"
+      },
+      {
+        "cat": "content",
+        "msg": "Features card 2 title: JSON=\"PBX Systems\" live=\"Cost Efficiency\""
+      },
+      {
+        "cat": "content",
+        "msg": "Features \"Cost Efficiency\" body text differs"
+      },
+      {
+        "cat": "content",
+        "msg": "Features card 3 title: JSON=\"Video Conferencing\" live=\"Enhanced Collaboration\""
+      },
+      {
+        "cat": "content",
+        "msg": "Features \"Enhanced Collaboration\" body text differs"
+      },
+      {
+        "cat": "content",
+        "msg": "Features card 4 title: JSON=\"Mobile Integration\" live=\"Scalability\""
+      },
+      {
+        "cat": "content",
+        "msg": "Features \"Scalability\" body text differs"
+      },
+      {
+        "cat": "content",
+        "msg": "Features card 5 title: JSON=\"Unified Communications\" live=\"Security & Reliability\""
+      },
+      {
+        "cat": "content",
+        "msg": "Features \"Security & Reliability\" body text differs"
+      },
+      {
+        "cat": "content",
+        "msg": "Features missing cards: Cost Efficiency, Enhanced Collaboration, Scalability, Security & Reliability"
+      }
+    ],
+    "liveStructure": {
+      "sections": [
+        "banner",
+        "hero+nav",
+        "features(5)",
+        "why-aptus(4)",
+        "mid-cta",
+        "testimonials",
+        "partnerships",
+        "contact-form"
+      ]
+    },
+    "jsonStructure": {
+      "sections": [
+        "softwareInnerHero",
+        "features(6)",
+        "benefits(4)",
+        "why-aptus(4)",
+        "midCta",
+        "testimonials(3)",
+        "partnerships",
+        "contactCta"
+      ]
+    }
+  },
+  {
+    "slug": "audio-video-solutions",
+    "route": "/audio-video-solutions",
+    "isHub": false,
+    "issueCount": 4,
+    "issues": [
+      {
+        "cat": "structure",
+        "msg": "Features section title: JSON=\"Key Features\" live=\"Powerful Features\""
+      },
+      {
+        "cat": "content",
+        "msg": "Features card count: JSON=5 live=9"
+      },
+      {
+        "cat": "content",
+        "msg": "Features missing cards: Enhanced Communication, Increased Productivity, Remote Accessibility, Cost Efficiency"
+      },
+      {
+        "cat": "content",
+        "msg": "JSON contains AutoCAD/Revit copy on non-AutoCAD page"
+      }
+    ],
+    "liveStructure": {
+      "sections": [
+        "banner",
+        "hero+nav",
+        "features(9)",
+        "why-aptus(4)",
+        "mid-cta",
+        "testimonials",
+        "partnerships",
+        "contact-form"
+      ]
+    },
+    "jsonStructure": {
+      "sections": [
+        "softwareInnerHero",
+        "features(5)",
+        "benefits(4)",
+        "why-aptus(4)",
+        "midCta",
+        "testimonials(3)",
+        "partnerships",
+        "contactCta"
+      ]
+    }
+  },
+  {
+    "slug": "home-automation",
+    "route": "/home-automation",
+    "isHub": false,
+    "issueCount": 4,
+    "issues": [
+      {
+        "cat": "structure",
+        "msg": "Features section title: JSON=\"Key Features\" live=\"Powerful Features\""
+      },
+      {
+        "cat": "content",
+        "msg": "Features card count: JSON=6 live=10"
+      },
+      {
+        "cat": "content",
+        "msg": "Features missing cards: Convenience & Comfort, Energy Efficiency, Enhanced Security, Cost Savings"
+      },
+      {
+        "cat": "content",
+        "msg": "JSON contains AutoCAD/Revit copy on non-AutoCAD page"
+      }
+    ],
+    "liveStructure": {
+      "sections": [
+        "banner",
+        "hero+nav",
+        "features(10)",
+        "why-aptus(4)",
+        "mid-cta",
+        "testimonials",
+        "partnerships",
+        "contact-form"
+      ]
+    },
+    "jsonStructure": {
+      "sections": [
+        "softwareInnerHero",
+        "features(6)",
+        "benefits(4)",
+        "why-aptus(4)",
+        "midCta",
+        "testimonials(3)",
+        "partnerships",
+        "contactCta"
+      ]
+    }
+  },
+  {
+    "slug": "ups",
+    "route": "/ups",
+    "isHub": false,
+    "issueCount": 4,
+    "issues": [
+      {
+        "cat": "structure",
+        "msg": "Features section title: JSON=\"Key Features\" live=\"Extended Battery Life\""
+      },
+      {
+        "cat": "content",
+        "msg": "Features card count: JSON=6 live=10"
+      },
+      {
+        "cat": "content",
+        "msg": "Features missing cards: Data Protection, Business Continuity, Cost Savings, Maintenance-Free Operation"
+      },
+      {
+        "cat": "content",
+        "msg": "JSON contains AutoCAD/Revit copy on non-AutoCAD page"
+      }
+    ],
+    "liveStructure": {
+      "sections": [
+        "banner",
+        "hero+nav",
+        "features(10)",
+        "why-aptus(4)",
+        "mid-cta",
+        "testimonials",
+        "partnerships",
+        "contact-form"
+      ]
+    },
+    "jsonStructure": {
+      "sections": [
+        "softwareInnerHero",
+        "features(6)",
+        "benefits(4)",
+        "why-aptus(4)",
+        "midCta",
+        "testimonials(3)",
+        "partnerships",
+        "contactCta"
+      ]
+    }
+  },
+  {
+    "slug": "access-control-system",
+    "route": "/access-control-system",
+    "isHub": false,
+    "issueCount": 3,
+    "issues": [
+      {
+        "cat": "structure",
+        "msg": "Features section title: JSON=\"Key Features\" live=\"Powerful Features\""
+      },
+      {
+        "cat": "content",
+        "msg": "Features card count: JSON=6 live=10"
+      },
+      {
+        "cat": "content",
+        "msg": "Features missing cards: Enhanced Security, Improved Efficiency, Cost Savings, Visitor Management"
+      }
+    ],
+    "liveStructure": {
+      "sections": [
+        "banner",
+        "hero+nav",
+        "features(10)",
+        "why-aptus(4)",
+        "mid-cta",
+        "testimonials",
+        "partnerships",
+        "contact-form"
+      ]
+    },
+    "jsonStructure": {
+      "sections": [
+        "softwareInnerHero",
+        "features(6)",
+        "benefits(4)",
+        "why-aptus(4)",
+        "midCta",
+        "testimonials(3)",
+        "partnerships",
+        "contactCta"
+      ]
+    }
+  },
+  {
+    "slug": "cctv-camera",
+    "route": "/cctv-camera",
+    "isHub": false,
+    "issueCount": 3,
+    "issues": [
+      {
+        "cat": "structure",
+        "msg": "Features section title: JSON=\"Key Features\" live=\"Key CCTV System Features\""
+      },
+      {
+        "cat": "content",
+        "msg": "Features card count: JSON=9 live=5"
+      },
+      {
+        "cat": "content",
+        "msg": "JSON contains AutoCAD/Revit copy on non-AutoCAD page"
+      }
+    ],
+    "liveStructure": {
+      "sections": [
+        "banner",
+        "hero+nav",
+        "features(5)",
+        "why-aptus(4)",
+        "mid-cta",
+        "testimonials",
+        "partnerships",
+        "contact-form"
+      ]
+    },
+    "jsonStructure": {
+      "sections": [
+        "softwareInnerHero",
+        "features(9)",
+        "why-aptus(4)",
+        "midCta",
+        "testimonials(3)",
+        "partnerships",
+        "contactCta"
+      ]
+    }
+  },
+  {
+    "slug": "conference-room-solution",
+    "route": "/conference-room-solution",
+    "isHub": false,
+    "issueCount": 3,
+    "issues": [
+      {
+        "cat": "content",
+        "msg": "Features card count: JSON=6 live=10"
+      },
+      {
+        "cat": "content",
+        "msg": "Features missing cards: Enhanced Collaboration, Time Efficiency, Global Connectivity, Professional Image"
+      },
+      {
+        "cat": "content",
+        "msg": "JSON contains AutoCAD/Revit copy on non-AutoCAD page"
+      }
+    ],
+    "liveStructure": {
+      "sections": [
+        "banner",
+        "hero+nav",
+        "features(10)",
+        "why-aptus(4)",
+        "mid-cta",
+        "testimonials",
+        "partnerships",
+        "contact-form"
+      ]
+    },
+    "jsonStructure": {
+      "sections": [
+        "softwareInnerHero",
+        "features(6)",
+        "benefits(4)",
+        "why-aptus(4)",
+        "midCta",
+        "testimonials(3)",
+        "partnerships",
+        "contactCta"
+      ]
+    }
+  },
+  {
+    "slug": "gate-automation",
+    "route": "/gate-automation",
+    "isHub": false,
+    "issueCount": 3,
+    "issues": [
+      {
+        "cat": "structure",
+        "msg": "Features section title: JSON=\"Key Features\" live=\"Enhanced Security\""
+      },
+      {
+        "cat": "content",
+        "msg": "Features card count: JSON=6 live=10"
+      },
+      {
+        "cat": "content",
+        "msg": "Features missing cards: Increased Security, Convenience & Accessibility, Property Value Enhancement, Cost Savings"
+      }
+    ],
+    "liveStructure": {
+      "sections": [
+        "banner",
+        "hero+nav",
+        "features(10)",
+        "why-aptus(4)",
+        "mid-cta",
+        "testimonials",
+        "partnerships",
+        "contact-form"
+      ]
+    },
+    "jsonStructure": {
+      "sections": [
+        "softwareInnerHero",
+        "features(6)",
+        "benefits(4)",
+        "why-aptus(4)",
+        "midCta",
+        "testimonials(3)",
+        "partnerships",
+        "contactCta"
+      ]
+    }
+  },
+  {
+    "slug": "network-and-structured-cabling-solutions",
+    "route": "/network-and-structured-cabling-solutions",
+    "isHub": false,
+    "issueCount": 3,
+    "issues": [
+      {
+        "cat": "structure",
+        "msg": "Features section title: JSON=\"Key Features\" live=\"Powerful Features\""
+      },
+      {
+        "cat": "content",
+        "msg": "Features card count: JSON=6 live=10"
+      },
+      {
+        "cat": "content",
+        "msg": "Features missing cards: Improved Performance, Future-Proof Investment, Reduced Downtime, Cost Efficiency"
+      }
+    ],
+    "liveStructure": {
+      "sections": [
+        "banner",
+        "hero+nav",
+        "features(10)",
+        "why-aptus(4)",
+        "mid-cta",
+        "testimonials",
+        "partnerships",
+        "contact-form"
+      ]
+    },
+    "jsonStructure": {
+      "sections": [
+        "softwareInnerHero",
+        "features(6)",
+        "benefits(4)",
+        "why-aptus(4)",
+        "midCta",
+        "testimonials(3)",
+        "partnerships",
+        "contactCta"
+      ]
+    }
+  },
+  {
+    "slug": "smatv-iptv",
+    "route": "/smatv-iptv",
+    "isHub": false,
+    "issueCount": 3,
+    "issues": [
+      {
+        "cat": "structure",
+        "msg": "Features section title: JSON=\"Key Features\" live=\"Powerful Features\""
+      },
+      {
+        "cat": "content",
+        "msg": "Features card count: JSON=6 live=10"
+      },
+      {
+        "cat": "content",
+        "msg": "Features missing cards: Cost Efficiency, Enhanced Guest Experience, Global Channel Access, Improved Property Value"
+      }
+    ],
+    "liveStructure": {
+      "sections": [
+        "banner",
+        "hero+nav",
+        "features(10)",
+        "why-aptus(4)",
+        "mid-cta",
+        "testimonials",
+        "partnerships",
+        "contact-form"
+      ]
+    },
+    "jsonStructure": {
+      "sections": [
+        "softwareInnerHero",
+        "features(6)",
+        "benefits(4)",
+        "why-aptus(4)",
+        "midCta",
+        "testimonials(3)",
+        "partnerships",
+        "contactCta"
+      ]
+    }
+  },
+  {
+    "slug": "elv-solutions",
+    "route": "/elv-solutions",
+    "isHub": true,
+    "issueCount": 2,
+    "issues": [
+      {
+        "cat": "structure",
+        "msg": "Features section title: JSON=\"Our Services\" live=\"Access Control System\""
+      },
+      {
+        "cat": "content",
+        "msg": "JSON contains AutoCAD/Revit copy on non-AutoCAD page"
+      }
+    ],
+    "liveStructure": {
+      "sections": [
+        "banner",
+        "hero+nav",
+        "services(15)",
+        "why-elv(4)",
+        "why-aptus(4)",
+        "mid-cta",
+        "testimonials",
+        "partnerships",
+        "contact-form"
+      ]
+    },
+    "jsonStructure": {
+      "sections": [
+        "softwareInnerHero",
+        "services(15)",
+        "why-elv(4)",
+        "why-aptus(4)",
+        "midCta",
+        "testimonials(3)",
+        "partnerships",
+        "contactCta"
+      ]
+    }
+  },
+  {
+    "slug": "switching-and-routing",
+    "route": "/switching-and-routing",
+    "isHub": false,
+    "issueCount": 2,
+    "issues": [
+      {
+        "cat": "structure",
+        "msg": "Features section title: JSON=\"Key Features\" live=\"Layer 2 Switching\""
+      },
+      {
+        "cat": "content",
+        "msg": "JSON contains AutoCAD/Revit copy on non-AutoCAD page"
+      }
+    ],
+    "liveStructure": {
+      "sections": [
+        "banner",
+        "hero+nav",
+        "features(6)",
+        "why-aptus(4)",
+        "testimonials",
+        "partnerships",
+        "contact-form"
+      ]
+    },
+    "jsonStructure": {
+      "sections": [
+        "softwareInnerHero",
+        "features(6)",
+        "why-aptus(4)",
+        "testimonials(3)",
+        "partnerships",
+        "contactCta"
+      ]
+    }
+  },
+  {
+    "slug": "thermal-scanners",
+    "route": "/thermal-scanners",
+    "isHub": false,
+    "issueCount": 2,
+    "issues": [
+      {
+        "cat": "content",
+        "msg": "Features card count: JSON=6 live=10"
+      },
+      {
+        "cat": "content",
+        "msg": "Features missing cards: Non-Contact Health Screening, Industrial Maintenance, Building Diagnostics, Energy Efficiency"
+      }
+    ],
+    "liveStructure": {
+      "sections": [
+        "banner",
+        "hero+nav",
+        "features(10)",
+        "why-aptus(4)",
+        "mid-cta",
+        "testimonials",
+        "partnerships",
+        "contact-form"
+      ]
+    },
+    "jsonStructure": {
+      "sections": [
+        "softwareInnerHero",
+        "features(6)",
+        "benefits(4)",
+        "why-aptus(4)",
+        "midCta",
+        "testimonials(3)",
+        "partnerships",
+        "contactCta"
+      ]
+    }
+  },
+  {
+    "slug": "data-center-solutions",
+    "route": "/data-center-solutions",
+    "isHub": false,
+    "issueCount": 1,
+    "issues": [
+      {
+        "cat": "structure",
+        "msg": "Features section title: JSON=\"Key Features\" live=\"Comprehensive Features\""
+      }
+    ],
+    "liveStructure": {
+      "sections": [
+        "banner",
+        "hero+nav",
+        "features(6)",
+        "why-aptus(4)",
+        "testimonials",
+        "partnerships",
+        "contact-form"
+      ]
+    },
+    "jsonStructure": {
+      "sections": [
+        "softwareInnerHero",
+        "features(6)",
+        "why-aptus(4)",
+        "testimonials(3)",
+        "partnerships",
+        "contactCta"
+      ]
+    }
+  },
+  {
+    "slug": "guest-room-management",
+    "route": "/guest-room-management",
+    "isHub": false,
+    "issueCount": 1,
+    "issues": [
+      {
+        "cat": "structure",
+        "msg": "Features section title: JSON=\"Key Features\" live=\"Key System Features\""
+      }
+    ],
+    "liveStructure": {
+      "sections": [
+        "banner",
+        "hero+nav",
+        "features(10)",
+        "why-aptus(4)",
+        "mid-cta",
+        "testimonials",
+        "partnerships",
+        "contact-form"
+      ]
+    },
+    "jsonStructure": {
+      "sections": [
+        "softwareInnerHero",
+        "features(10)",
+        "why-aptus(4)",
+        "midCta",
+        "testimonials(3)",
+        "partnerships",
+        "contactCta"
+      ]
+    }
+  },
+  {
+    "slug": "nurse-calling-system",
+    "route": "/nurse-calling-system",
+    "isHub": false,
+    "issueCount": 1,
+    "issues": [
+      {
+        "cat": "structure",
+        "msg": "Features section title: JSON=\"Key Features\" live=\"Key System Features\""
+      }
+    ],
+    "liveStructure": {
+      "sections": [
+        "banner",
+        "hero+nav",
+        "features(10)",
+        "why-aptus(4)",
+        "mid-cta",
+        "testimonials",
+        "partnerships",
+        "contact-form"
+      ]
+    },
+    "jsonStructure": {
+      "sections": [
+        "softwareInnerHero",
+        "features(10)",
+        "why-aptus(4)",
+        "midCta",
+        "testimonials(3)",
+        "partnerships",
+        "contactCta"
+      ]
+    }
+  },
+  {
+    "slug": "rsi-queue-management",
+    "route": "/rsi-queue-management",
+    "isHub": false,
+    "issueCount": 1,
+    "issues": [
+      {
+        "cat": "structure",
+        "msg": "Features section title: JSON=\"Key Features\" live=\"Powerful Features\""
+      }
+    ],
+    "liveStructure": {
+      "sections": [
+        "banner",
+        "hero+nav",
+        "features(10)",
+        "why-aptus(4)",
+        "mid-cta",
+        "testimonials",
+        "contact-form"
+      ]
+    },
+    "jsonStructure": {
+      "sections": [
+        "softwareInnerHero",
+        "features(10)",
+        "why-aptus(4)",
+        "midCta",
+        "testimonials(3)",
+        "contactCta"
+      ]
+    }
+  }
+]

@@ -1,0 +1,257 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "microsoft",
+    "bannerTitle": "Microsoft Visio Subscription in Oman - Aptus Infotech",
+    "bannerTagline": "Professional diagramming software that simplifies complexity",
+    "mediaInline": false,
+    "title": "Diagrams Made Simple",
+    "paragraphs": [
+      "Microsoft Visio is a powerful diagramming solution that helps you visualize complex information with professional-looking diagrams. Create flowcharts, network diagrams, org charts, floor plans, and more with ease.",
+      "With its intuitive interface and extensive library of shapes and templates, Visio makes it simple to transform data and ideas into clear, compelling visuals. Whether you’re mapping IT infrastructure, documenting business processes, or planning office layouts, Visio has the tools you need.",
+      "Seamlessly integrate with other Microsoft applications and collaborate with your team in real-time. Visio brings clarity to complexity, helping you communicate ideas more effectively."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/2025/10/Microsoft_Visio.png",
+    "imageAlt": "Microsoft Visio Subscription in Oman - Aptus Infotech",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "gridColumns": 3,
+      "title": {
+        "before": "Powerful Features"
+      },
+      "subheading": "Discover why professionals choose Visio for their diagramming needs",
+      "align": "center",
+      "items": [
+        {
+          "title": "Extensive Templates",
+          "body": "Get started quickly with dozens of built-in templates for flowcharts, network diagrams, floor plans, and more. Customize them to match your specific needs.",
+          "icon": "project-diagram",
+          "imageAlt": "Extensive Templates"
+        },
+        {
+          "title": "Rich Shape Libraries",
+          "body": "Access thousands of industry-standard shapes and stencils. Create professional diagrams with shapes that are specifically designed for your field.",
+          "icon": "shapes",
+          "imageAlt": "Rich Shape Libraries"
+        },
+        {
+          "title": "Data Linking",
+          "body": "Connect your diagrams to real-time data sources. Visualize complex information and automatically update diagrams when underlying data changes.",
+          "icon": "database",
+          "imageAlt": "Data Linking"
+        },
+        {
+          "title": "Real-time Collaboration",
+          "body": "Work together with your team simultaneously. Co-author diagrams, share feedback, and track changes with built-in collaboration tools.",
+          "icon": "users",
+          "imageAlt": "Real-time Collaboration"
+        },
+        {
+          "title": "Cloud Integration",
+          "body": "Save your diagrams to the cloud with OneDrive integration. Access your work from anywhere and share it with stakeholders easily.",
+          "icon": "cloud-upload-alt",
+          "imageAlt": "Cloud Integration"
+        },
+        {
+          "title": "Developer Tools",
+          "body": "Extend Visio’s functionality with custom solutions. Build add-ins and automate workflows with the Visio SDK and APIs.",
+          "icon": "code-branch",
+          "imageAlt": "Developer Tools"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "anchorId": "benefits",
+      "title": {
+        "before": "Key Benefits"
+      },
+      "subheading": "Why organizations choose Microsoft Visio",
+      "align": "center",
+      "gridColumns": 4,
+      "items": [
+        {
+          "title": "Easy to Learn",
+          "body": "Create professional diagrams with minimal training. Visio’s familiar Microsoft interface makes it accessible to users of all skill levels.",
+          "icon": "graduation-cap"
+        },
+        {
+          "title": "Time-Saving",
+          "body": "Quickly transform complex information into clear visuals. Automated tools and templates help you create diagrams in minutes, not hours.",
+          "icon": "stopwatch"
+        },
+        {
+          "title": "Enhanced Communication",
+          "body": "Improve understanding and decision-making with visual representations of complex data and processes.",
+          "icon": "chart-line"
+        },
+        {
+          "title": "Enterprise Security",
+          "body": "Protect your sensitive diagrams with Microsoft’s enterprise-grade security and compliance features.",
+          "icon": "shield-alt"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Microsoft Visio??"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Official Partner",
+          "body": "As an authorized partner, we provide access to genuine Microsoft products.",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset"
+        },
+        {
+          "title": "Local Presence",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "mobile-alt"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Create Professional Diagrams?",
+    "subheading": "Get free quotation of Microsoft Visio today and start visualizing your ideas.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Hear from professionals who have transformed their workflow with Visio",
+    "items": [
+      {
+        "quote": "Microsoft Visio has revolutionized how we document and communicate our business processes. The data linking feature alone has saved our team countless hours of manual updates.",
+        "author": "Robert Chen",
+        "role": "IT Director, Global Tech Solutions"
+      },
+      {
+        "quote": "As a facilities manager, Visio is indispensable for creating and maintaining our building layouts. The integration with Microsoft 365 makes sharing and collaborating with other departments seamless.",
+        "author": "Jennifer Williams",
+        "role": "Facilities Manager, Metro Healthcare"
+      },
+      {
+        "quote": "I’ve tried many diagramming tools, but nothing compares to Visio’s combination of power and ease of use. It’s the perfect tool for both quick conceptual work and detailed technical diagrams.",
+        "author": "Michael Torres",
+        "role": "Business Analyst, Innovate Consulting"
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/planswift.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Prokon.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Sketchup.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/sophos.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/spectronova.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/aconex.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Autodesk.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/etap.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/fortinet.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/kaspersky.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Microsoft.png",
+        "alt": "Microsoft"
+      },
+      {
+        "id": "lumion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/lumion.png",
+        "alt": "lumion"
+      },
+      {
+        "id": "paloalto",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/paloalto.png",
+        "alt": "paloalto"
+      },
+      {
+        "id": "vray",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/v.ray_.png",
+        "alt": "v.ray"
+      },
+      {
+        "id": "twinmotion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/twinmotion.png",
+        "alt": "twinmotion"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light"
+  }
+}

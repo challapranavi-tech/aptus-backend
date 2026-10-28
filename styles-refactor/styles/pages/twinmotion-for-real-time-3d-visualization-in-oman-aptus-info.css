@@ -1,0 +1,16 @@
+/**
+ * Page: Twinmotion for Real-Time 3D Visualization in Oman | Aptus Infotech
+ * Route: /twinmotion
+ * Source: LIVE WEBSITE/software\multimedia\Twinmotion for Real-Time 3D Visualization in Oman _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-twinmotion-for-real-time-3d-visualization-in-oman-aptus-info {
+    /* page root scope */
+  }
+
+
+  /* 45 inline styles detected — migrate to utilities */
+}

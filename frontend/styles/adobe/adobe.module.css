@@ -1,0 +1,2175 @@
+﻿/* Adobe homepage Ã¢Â€Â” tokens + section styles (CSS modules: local classes only) */
+
+.adobePage {
+  --adobe-font-heading: "Adobe Clean Display", adobe-clean-display, "Arial Black", sans-serif;
+  --adobe-font-body: "Adobe Clean", adobe-clean, "Trebuchet MS", sans-serif;
+
+  --fs-12: 0.75rem;
+  --fs-14: 0.875rem;
+  --fs-16: 1rem;
+  --fs-18: 1.125rem;
+  --fs-20: 1.25rem;
+  --fs-24: 1.5rem;
+  --fs-28: 1.75rem;
+  --fs-32: 2rem;
+  --fs-36: 2.25rem;
+  --fs-40: 2.5rem;
+  --fs-48: 3rem;
+  --fs-56: 3.5rem;
+
+  --sp-8: 0.5rem;
+  --sp-12: 0.75rem;
+  --sp-16: 1rem;
+  --sp-20: 1.25rem;
+  --sp-24: 1.5rem;
+  --sp-32: 2rem;
+  --sp-40: 2.5rem;
+  --sp-48: 3rem;
+  --sp-64: 4rem;
+  --sp-80: 5rem;
+  --sp-96: 6rem;
+
+  --gray-50: #f8f8f8;
+  --gray-100: #e9e9e9;
+  --gray-600: #717171;
+  --gray-700: #505050;
+  --gray-900: #131313;
+
+  --radius-16: 1rem;
+  --radius-24: 1.5rem;
+
+  font-family: var(--adobe-font-body);
+  color: var(--gray-900);
+  background: #fff;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Normal-flow sections; garage door only on CTA (live adobe.com) */
+.section,
+.sectionFlow {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+
+.sectionFlow {
+  background: #fff;
+  z-index: 2;
+}
+
+@keyframes garageDoorGrow {
+  /* ponytail: clip+scale only Ã¢Â€Â” translateY pulled CTA up over News mid-scroll */
+  from {
+    clip-path: inset(0 0 calc(100% - var(--gd-reveal-from, 28vh)) 0);
+    transform: scaleY(0.94);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    transform: scaleY(1);
+  }
+}
+
+@keyframes parallaxMoveUpFast {
+  from { transform: translateY(0); }
+  to { transform: translateY(var(--parallax-move-up-to, -35vh)); }
+}
+
+@keyframes parallaxFadeToDark {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@supports (animation-timeline: view()) {
+  .parallaxGarageDoorReveal {
+    --gd-reveal-from: 28vh;
+    position: relative;
+    z-index: 1;
+    transform-origin: top center;
+    animation-name: garageDoorGrow;
+    animation-timing-function: cubic-bezier(0.42, 0, 0, 1);
+    animation-fill-mode: forwards;
+    animation-timeline: view();
+    /* start after CTA has entered Ã¢Â€Â” don't eat News while it's still on screen */
+    animation-range: entry 35% cover 70%;
+  }
+}
+
+/* Live: hero.parallax-move-up-fast Ã¢Â€Â” sticky + root scroll timeline */
+@supports (animation-timeline: scroll()) {
+  .parallaxMoveUpFast {
+    --parallax-move-up-to: -35vh;
+    position: sticky;
+    top: 0;
+    z-index: 0;
+    animation-name: parallaxMoveUpFast;
+    animation-timeline: scroll(root block);
+    animation-range: 0 80vh;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    will-change: transform;
+  }
+
+  .parallaxMoveUpFast::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #000;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 4;
+    animation-name: parallaxFadeToDark;
+    animation-timeline: scroll(root block);
+    animation-range: 0 80vh;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parallaxGarageDoorReveal,
+  .parallaxMoveUpFast,
+  .parallaxMoveUpFast::after {
+    animation: none !important;
+  }
+
+  .parallaxMoveUpFast {
+    position: relative;
+  }
+}
+
+.sectionBackground,
+.sectionBackground > * {
+  position: absolute;
+  inset: 0;
+}
+
+.sectionBackground {
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.sectionBackground img,
+.sectionBackground video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Responsive content gutter (adobe --grid-padding pattern) */
+.gridPad {
+  --grid-max-width: 1280px;
+  --grid-margin: 24px;
+  --grid-padding: max(var(--grid-margin), calc((100% - var(--grid-max-width)) / 2));
+  padding-inline: var(--grid-padding);
+}
+
+@media (min-width: 768px) {
+  .gridPad {
+    --grid-margin: 48px;
+  }
+}
+
+.adobePage * {
+  box-sizing: border-box;
+}
+
+.adobePage h1,
+.adobePage h2,
+.adobePage h3,
+.adobePage h4 {
+  font-family: var(--adobe-font-heading);
+  margin: 0;
+  font-weight: 900;
+  color: inherit;
+}
+
+.adobePage p {
+  margin: 0;
+}
+
+.adobePage a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Card-as-link: keep block layout when wrapping with <Link> */
+.adobePage a.baseCard,
+.adobePage a.newsItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.adobePage a.featuredMediaSection {
+  display: block;
+}
+
+.adobePage a.exploreCard {
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- TYPOGRAPHY CLASSES --------------------------------------------- */
+.heading2 {
+  font-size: var(--fs-32);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-weight: 900;
+}
+
+.heading5 {
+  font-size: var(--fs-18);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+
+.eyebrow {
+  font-size: var(--fs-14);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.bodyLg {
+  font-size: var(--fs-18);
+  line-height: 1.5;
+}
+
+.bodyMd {
+  font-size: var(--fs-16);
+  line-height: 1.5;
+}
+
+/* --- BUTTON STYLES -------------------------------------------------- */
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 24px;
+  border-radius: 20px;
+  font-size: var(--fs-16);
+  font-weight: 700;
+  cursor: pointer;
+  border: 2px solid transparent;
+  font-family: var(--adobe-font-body);
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.btnOutlineWhite {
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  border-color: #fff;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: background 0.15s, color 0.15s, transform 0.15s;
+}
+.btnOutlineWhite:hover {
+  background: #fff;
+  color: #000;
+  transform: translateY(-1px);
+}
+
+.btnOutlineWhiteLg {
+  padding: 13px 28px;
+  font-size: var(--fs-18);
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  border-color: #fff;
+  border-radius: 24px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: background 0.15s, color 0.15s, transform 0.15s;
+}
+.btnOutlineWhiteLg:hover {
+  background: #fff;
+  color: #000;
+  transform: translateY(-1px);
+}
+
+.btnWhite {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+  border-radius: 999px;
+  padding: 14px 28px;
+  font-size: var(--fs-16);
+  font-weight: 700;
+}
+
+.btnWhite:hover {
+  background: var(--gray-100);
+  transform: translateY(-1px);
+}
+
+.standaloneLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-14);
+  font-weight: 700;
+  color: var(--gray-900);
+  text-decoration: none;
+}
+.standaloneLink::after {
+  content: 'Ã¢Â€Âº';
+  font-size: var(--fs-16);
+}
+.standaloneLink:hover {
+  text-decoration: underline;
+}
+
+/* ====================================================================
+   SECTION 1: HERO / ROUTER MARQUEE
+   ==================================================================== */
+.heroSection {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 520px;
+  max-height: min(900px, calc(100svh - 72px));
+  height: auto;
+  overflow: hidden;
+  background: #000;
+  position: relative;
+  top: 0;
+  z-index: 0;
+}
+
+@supports (animation-timeline: scroll()) {
+  .heroSection.parallaxMoveUpFast {
+    position: sticky;
+  }
+}
+
+/* Slide */
+.rmSlide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+
+.rmSlide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.rmBackground {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #000;
+}
+
+/* Soft full-bleed fill behind the sharp video (avoids hard letterbox) */
+.rmBgBleed {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  filter: blur(28px) saturate(1.05) brightness(0.55);
+  transform: scale(1.12);
+  pointer-events: none;
+}
+
+/* Full frame visible Ã¢Â€Â” no stretch, no aggressive crop */
+.rmBgVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+}
+
+.rmOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.72) 0%,
+    rgba(0,0,0,0.48) 45%,
+    rgba(0,0,0,0) 80%
+  );
+}
+
+.rmContentWrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0 48px 160px;
+}
+
+.rmContent {
+  max-width: 640px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-24);
+}
+
+.rmEyebrow {
+  font-size: var(--fs-16);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  margin: 0;
+  color: rgba(255,255,255,0.88);
+}
+
+.rmTitle {
+  font-size: clamp(var(--fs-40), 5vw, var(--fs-56));
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 900;
+  color: #fff;
+  margin: 0;
+}
+
+.rmBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-12);
+}
+
+.rmBody p {
+  font-size: var(--fs-18);
+  line-height: 1.5;
+  color: rgba(255,255,255,0.9);
+  margin: 0;
+}
+
+.rmBody a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.rmCtas {
+  display: flex;
+  gap: var(--sp-12);
+  margin-top: var(--sp-8);
+}
+
+/* Controls: tabs + play/pause as one horizontally centered group */
+.rmControls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  padding: 0 48px 32px;
+  pointer-events: none;
+}
+
+.rmControlsInner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  pointer-events: auto;
+  max-width: 100%;
+}
+
+.rmPausePlay {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.44);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.11);
+  backdrop-filter: blur(12px);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: #fff;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.rmPausePlay:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.rmCards {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.rmCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 16px 18px;
+  border-radius: 10px;
+  backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0.44);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.11);
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  text-align: left;
+  width: 176px;
+  min-height: 96px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s;
+}
+
+.rmCard:hover {
+  background: rgba(0, 0, 0, 0.58);
+}
+
+.rmCard.activeCard {
+  background: #fff;
+  color: var(--gray-900);
+  backdrop-filter: blur(156px);
+  box-shadow: none;
+}
+
+.rmCard.activeCard:hover {
+  background: #fff;
+}
+
+.rmCardIcon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.rmCardLabel {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: var(--fs-14);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.rmCardChevron {
+  flex-shrink: 0;
+  font-size: 1.1em;
+  font-weight: 400;
+  line-height: 1;
+  opacity: 0.85;
+}
+
+.rmCardProgress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255,255,255,0.2);
+  overflow: hidden;
+}
+
+.rmCard.activeCard .rmCardProgress {
+  background: rgba(0,0,0,0.12);
+}
+
+.rmCardProgressBar {
+  height: 100%;
+  width: 0%;
+  background: #fff;
+  transition: width linear;
+}
+
+.rmCard.activeCard .rmCardProgressBar {
+  background: var(--gray-900);
+  animation: progressFill 5s linear forwards;
+}
+
+@keyframes progressFill {
+  from { width: 0% }
+  to { width: 100% }
+}
+
+/* ====================================================================
+   SECTION 2: "EVERYTHING YOU NEED" INTRO
+   ==================================================================== */
+.introSection {
+  background: #fff;
+  padding: var(--sp-80) var(--sp-48);
+  text-align: center;
+  border-radius: 24px 24px 0 0;
+  margin-top: -24px;
+  position: relative;
+  z-index: 2;
+}
+
+.introSection .heading2 {
+  max-width: 800px;
+  margin: 0 auto var(--sp-16);
+}
+
+.introSection .bodyLg {
+  max-width: 680px;
+  margin: 0 auto;
+  color: var(--gray-700);
+}
+
+/* ====================================================================
+   SECTION 3: ELASTIC CAROUSEL (product category cards)
+   Live: width expands ~260Ã¢Â†Â’420 via flex-grow; height fixed; siblings compress.
+   No transform:scale().
+   ==================================================================== */
+.carouselSection {
+  background: #fff;
+  padding: 0 0 var(--sp-48);
+  overflow: clip;
+  position: relative;
+  z-index: 2;
+}
+
+.elasticCarousel {
+  --elastic-item-w: 280px;
+  --elastic-item-hover-w: 420px;
+  --elastic-h: 560px;
+  --elastic-gap: 1rem;
+  --elastic-easing: cubic-bezier(0.42, 0, 0, 1);
+
+  position: relative;
+  height: var(--elastic-h);
+  max-width: 1600px;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.elasticCarouselContainer {
+  display: flex;
+  align-items: stretch; /* equal height; hover must NOT change height */
+  justify-content: center;
+  gap: var(--elastic-gap);
+  height: 100%;
+  width: 100%;
+  padding: 0 48px;
+  box-sizing: border-box;
+  transition: gap 0.45s var(--elastic-easing);
+}
+
+.elasticCarouselContainer:has(.elasticCarouselItem:hover),
+.elasticCarouselContainer:has(.elasticCarouselItem:focus-visible) {
+  gap: 0.5rem; /* siblings pack in slightly while one expands */
+}
+
+.elasticCarouselItem {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: var(--elastic-item-w);
+  height: 100%;
+  border-radius: 16px;
+  background: var(--gray-50);
+  text-decoration: none;
+  color: var(--gray-900);
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+  transition:
+    flex-grow 0.5s var(--elastic-easing),
+    max-width 0.5s var(--elastic-easing),
+    background 0.45s ease,
+    color 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+.elasticCarouselItem:hover,
+.elasticCarouselItem:focus-visible {
+  flex-grow: 2.5;
+  max-width: var(--elastic-item-hover-w);
+  z-index: 2;
+  background: #000;
+  color: #fff;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.22),
+    0 4px 12px rgba(0, 0, 0, 0.12);
+  outline: none;
+}
+
+.elasticCarouselItem:hover .elasticItemHeader .eyebrow,
+.elasticCarouselItem:focus-visible .elasticItemHeader .eyebrow,
+.elasticCarouselItem:hover .elasticItemFooter h3,
+.elasticCarouselItem:focus-visible .elasticItemFooter h3 {
+  color: #fff;
+}
+
+.elasticCarouselItem:hover .elasticItemFooter p,
+.elasticCarouselItem:focus-visible .elasticItemFooter p {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.elasticCarouselItem:hover .elasticItemArrow,
+.elasticCarouselItem:focus-visible .elasticItemArrow {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Scroll-driven entrance animations */
+@supports (animation-timeline: view()) {
+  @media (min-width: 768px) {
+    .elasticCarouselContainer {
+      animation-name: elasticCarouselSlideIn;
+      animation-timing-function: var(--elastic-easing);
+      animation-fill-mode: forwards;
+      animation-timeline: view();
+      animation-range: entry 20% exit 100%;
+    }
+  }
+
+  .parallaxFadeUp {
+    animation-name: enableParallaxFadeUp;
+    animation-timeline: view(block 40% 10%);
+    animation-timing-function: cubic-bezier(0.42, 0, 0, 1);
+    animation-fill-mode: forwards;
+    animation-range: entry 0% entry 50%;
+  }
+
+  .parallaxScaleDownGrid {
+    animation-name: scaleDownOnScroll;
+    animation-timeline: view();
+    animation-range: entry 0% cover 45%;
+    animation-timing-function: cubic-bezier(0.42, 0, 0, 1);
+    animation-fill-mode: forwards;
+    transform-origin: center top;
+  }
+
+  .parallaxStaggerLtr .staggerItem {
+    animation-name: enableParallaxFadeUp;
+    animation-timeline: view(block 55% 10%);
+    animation-timing-function: cubic-bezier(0.42, 0, 0, 1);
+    animation-fill-mode: forwards;
+    animation-delay: calc(var(--stagger-index, 0) * 90ms);
+  }
+}
+
+@keyframes elasticCarouselSlideIn {
+  from { margin-left: 200px; opacity: 0; }
+  to   { margin-left: 0;     opacity: 1; }
+}
+
+@keyframes enableParallaxFadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes scaleDownOnScroll {
+  from { transform: scale(1); }
+  to   { transform: scale(0.94); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .elasticCarouselContainer,
+  .parallaxFadeUp,
+  .parallaxScaleDownGrid,
+  .parallaxStaggerLtr .staggerItem,
+  .parallaxGarageDoorReveal { animation: none !important; }
+
+  .elasticCarouselItem { transition: none; }
+
+  .elasticCarouselItem:hover,
+  .elasticCarouselItem:focus-visible {
+    flex-grow: 1;
+    max-width: var(--elastic-item-w);
+  }
+}
+
+/* ---- Card internals ---- */
+.elasticItemHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 20px 0;
+  flex-shrink: 0;
+}
+
+.elasticItemHeader img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.elasticItemHeader .eyebrow {
+  color: var(--gray-700);
+  text-transform: none;
+  font-size: var(--fs-14);
+  font-weight: 700;
+  letter-spacing: 0;
+  margin: 0;
+  transition: color 0.45s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Wider hover card Ã¢Â†Â’ cover shows more of the landscape demo horizontally */
+.elasticItemMedia {
+  width: calc(100% - 28px);
+  margin: 12px 14px 0;
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #111;
+  position: relative;
+}
+
+.elasticItemMedia video,
+.elasticItemMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+.elasticItemFooter {
+  position: relative;
+  padding: 14px 20px 20px;
+  flex-shrink: 0;
+  padding-right: 50px;
+}
+
+.elasticItemFooter h3 {
+  font-size: var(--fs-16);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin: 0 0 5px;
+  transition: color 0.45s ease;
+}
+
+.elasticItemFooter p {
+  font-size: var(--fs-14);
+  color: var(--gray-600);
+  line-height: 1.45;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  line-clamp: 3;
+  overflow: hidden;
+  transition: color 0.45s ease;
+}
+
+.elasticItemArrow {
+  position: absolute;
+  right: 16px;
+  bottom: 18px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #fff;
+  color: #000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.elasticItemArrow svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ---- Tablet ---- */
+@media (max-width: 1279px) and (min-width: 768px) {
+  .elasticCarousel {
+    --elastic-item-w: 240px;
+    --elastic-item-hover-w: 360px;
+    --elastic-h: 520px;
+    --elastic-gap: 0.75rem;
+  }
+
+  .elasticCarouselContainer {
+    padding: 0 32px;
+  }
+}
+
+/* ---- Mobile: scroll strip, no width expand ---- */
+@media (max-width: 767px) {
+  .elasticCarousel {
+    height: auto;
+    overflow: visible;
+  }
+
+  .elasticCarouselContainer {
+    width: 100%;
+    height: auto;
+    padding: 0 20px 4px;
+    gap: 12px;
+    overflow-x: auto;
+    overflow-y: visible;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    justify-content: flex-start;
+    align-items: stretch;
+    animation: none !important;
+  }
+
+  .elasticCarouselContainer::-webkit-scrollbar { display: none; }
+
+  .elasticCarouselContainer:has(.elasticCarouselItem:hover) {
+    gap: 12px;
+  }
+
+  .elasticCarouselItem {
+    flex: 0 0 min(82vw, 294px);
+    width: min(82vw, 294px);
+    max-width: min(82vw, 294px);
+    height: 480px;
+  }
+
+  .elasticCarouselItem:hover,
+  .elasticCarouselItem:focus-visible {
+    flex-grow: 0;
+    max-width: min(82vw, 294px);
+    background: var(--gray-50);
+    color: var(--gray-900);
+    box-shadow: none;
+  }
+
+  .elasticCarouselItem:hover .elasticItemHeader .eyebrow,
+  .elasticCarouselItem:hover .elasticItemFooter h3 { color: inherit; }
+  .elasticCarouselItem:hover .elasticItemFooter p  { color: var(--gray-600); }
+  .elasticCarouselItem:hover .elasticItemArrow     { opacity: 0; }
+}
+
+/* ====================================================================
+   SECTION 4: "EXPLORE WHAT'S NEW" HEADING
+   ==================================================================== */
+/* ====================================================================
+   SECTION 5: FEATURES AND RELEASES
+   ==================================================================== */
+.sectionHeading {
+  background: #fff;
+  padding: var(--sp-64) 48px var(--sp-40);
+  text-align: center;
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.sectionHeading .eyebrow {
+  color: var(--gray-600);
+  margin-bottom: var(--sp-12);
+  display: block;
+}
+
+.sectionHeading .heading2 {
+  margin-bottom: var(--sp-16);
+}
+
+.sectionHeading .bodyLg {
+  color: var(--gray-700);
+  margin: 0;
+}
+
+/* Brand Visibility copy Ã¢Â€Â” sits below the featured media */
+.featuresHeader {
+  background: #fff;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-32);
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--sp-32) 48px var(--sp-40);
+  position: relative;
+  z-index: 2;
+}
+
+.featuresHeaderText {
+  flex: 1;
+  min-width: 0;
+  max-width: 52rem;
+}
+
+.featuresHeaderText .heading2 {
+  font-size: clamp(var(--fs-28), 2.4vw, var(--fs-36));
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin-bottom: var(--sp-12);
+}
+
+.featuresHeaderText .bodyLg {
+  color: var(--gray-700);
+  margin: 0;
+}
+
+.featuresHeader .standaloneLink {
+  flex-shrink: 0;
+  margin-top: 0.35em;
+  white-space: nowrap;
+}
+
+/* ====================================================================
+   SECTION 5b: FEATURED BRAND VISIBILITY MEDIA CARD
+   ==================================================================== */
+.featuredMediaSection {
+  background: #fff;
+  padding: 0 48px;
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.featuredMediaCard {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-24);
+  aspect-ratio: 2.2 / 1;
+  background: #002d62;
+  transition: transform 0.45s cubic-bezier(0.42, 0, 0, 1);
+}
+
+.featuredMediaCard:hover {
+  transform: translateY(-2px);
+}
+
+.featuredMediaImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.45s cubic-bezier(0.42, 0, 0, 1);
+}
+
+.featuredMediaCard:hover .featuredMediaImg {
+  transform: scale(1.03);
+}
+
+.featuredMediaIcon {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  z-index: 1;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.25));
+}
+
+/* ====================================================================
+   SECTION 6: THREE-UP BASE CARDS
+   ==================================================================== */
+.threeUpSection {
+  background: #fff;
+  padding: 0 48px var(--sp-64);
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.threeUpGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.baseCard {
+  border-radius: var(--radius-16);
+  background: transparent;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.45s cubic-bezier(0.42, 0, 0, 1);
+}
+
+.baseCardMedia {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-16);
+  background: #000;
+}
+
+/* Only the hero media Ã¢Â€Â” not the product icon overlay */
+.baseCardMediaImg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.45s cubic-bezier(0.42, 0, 0, 1);
+}
+
+.baseCard:hover {
+  transform: translateY(-2px);
+}
+
+.baseCard:hover .baseCardMediaImg {
+  transform: scale(1.06);
+}
+
+.baseCardIcon {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.baseCardContent {
+  padding: 24px 4px 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.baseCardContent h3 {
+  font-size: var(--fs-20);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  margin-bottom: var(--sp-12);
+}
+
+.baseCardContent .bodyMd {
+  color: var(--gray-700);
+  margin-bottom: var(--sp-16);
+  flex: 1;
+}
+
+/* ====================================================================
+   SECTION 8: TESTIMONIAL CAROUSEL
+   Live: white page chrome + peek slides. Must stay UNDER .newsPanel.
+   ==================================================================== */
+.testimonialSection {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: stretch;
+  background: #fff;
+  padding: var(--sp-24) 0 0;
+  overflow: hidden;
+  /* no sticky / no garage-door Ã¢Â€Â” News sheet covers this as it scrolls */
+}
+
+.testimonialFrame {
+  --peek: clamp(40px, 5.5vw, 72px);
+  --gap: 16px;
+  --slide: calc(100cqw - 2 * var(--peek));
+  container-type: inline-size;
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  /* fixed slide height Ã¢Â€Â” avoid 100svh overlap into News */
+  min-height: 0;
+  height: clamp(520px, 72vh, 780px);
+  padding-block: 12px 56px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.testimonialTrack {
+  --i: 0;
+  display: flex;
+  align-items: stretch;
+  gap: var(--gap);
+  height: 100%;
+  min-height: 0;
+  padding-inline: var(--peek);
+  box-sizing: content-box;
+  will-change: transform;
+  transition: transform 0.55s cubic-bezier(0.42, 0, 0, 1);
+  transform: translate3d(calc(var(--i) * (var(--slide) + var(--gap)) * -1), 0, 0);
+}
+
+.testimonialSlide {
+  position: relative;
+  flex: 0 0 var(--slide);
+  width: var(--slide);
+  height: 100%;
+  border-radius: 32px;
+  overflow: hidden;
+  background: #111;
+}
+
+.testimonialBg,
+.testimonialBg > * {
+  position: absolute;
+  inset: 0;
+}
+
+.testimonialBg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.testimonialOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.72) 0%,
+    rgba(0, 0, 0, 0.4) 45%,
+    rgba(0, 0, 0, 0.1) 80%
+  );
+}
+
+.testimonialContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(40px, 6vw, 80px);
+  max-width: 640px;
+  color: #fff;
+  gap: var(--sp-20);
+  height: 100%;
+}
+
+.testimonialContent h3 {
+  font-size: clamp(var(--fs-24), 3vw, var(--fs-40));
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.testimonialAttrib {
+  margin: 0;
+  font-size: var(--fs-16);
+  line-height: 1.4;
+}
+
+.testimonialName {
+  font-weight: 700;
+}
+
+.testimonialRole {
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.testimonialArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-900);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.testimonialArrow:hover {
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+}
+
+.testimonialArrowPrev {
+  left: max(8px, calc(var(--peek) - 24px));
+}
+
+.testimonialArrowNext {
+  right: max(8px, calc(var(--peek) - 24px));
+}
+
+.testimonialDots {
+  position: absolute;
+  left: 50%;
+  bottom: 36px;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.testimonialDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.testimonialDotActive {
+  background: #fff;
+  transform: scale(1.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonialTrack {
+    transition: none;
+  }
+}
+
+/* ====================================================================
+   SECTION 10: NEWS Ã¢Â€Â” stays above testimonials AND above CTA mid-scroll
+   ==================================================================== */
+.newsPanel {
+  position: relative;
+  z-index: 3;
+  margin-top: -40px;
+  background: #fff;
+  border-radius: 40px;
+  padding-block: var(--sp-64) var(--sp-80);
+  box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.06);
+}
+
+.newsSection {
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  max-width: var(--grid-max-width, 1280px);
+  margin: 0 auto;
+  position: relative;
+  width: 100%;
+}
+
+.newsHeadline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.newsHeadlineSpacer {
+  /* keeps 3-col alignment for the label row */
+  min-height: 0;
+}
+
+.newsHeadlineIcon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.newsHeadline h2 {
+  margin: 0;
+  font-size: var(--fs-16);
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--gray-900);
+  font-family: var(--adobe-font-body);
+  line-height: 1.2;
+}
+
+.newsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 48px;
+  row-gap: var(--sp-24);
+  align-items: start;
+}
+
+.newsItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-12);
+  min-width: 0;
+  height: 100%;
+}
+
+.newsItem h3 {
+  font-size: var(--fs-20);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+  font-family: var(--adobe-font-heading);
+  color: var(--gray-900);
+  margin: 0;
+}
+
+.newsItem .bodyMd {
+  color: var(--gray-700);
+  line-height: 1.5;
+  flex: 1;
+  margin: 0;
+}
+
+.newsItem .standaloneLink {
+  margin-top: auto;
+  padding-top: var(--sp-16);
+}
+
+/* ====================================================================
+   SECTION 12: DARK HERO / CTA
+   ==================================================================== */
+.darkHeroSection {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #111;
+  text-align: center;
+  border-radius: 40px 40px 0 0;
+  min-height: 100svh;
+  min-height: 100dvh;
+}
+
+.darkHeroOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+}
+
+.darkHeroContent {
+  position: relative;
+  z-index: 2;
+  padding-block: var(--sp-96);
+  max-width: 720px;
+  width: 100%;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.darkHeroContent .heading2 {
+  font-size: clamp(var(--fs-40), 5vw, var(--fs-56));
+  margin-bottom: var(--sp-24);
+}
+
+.darkHeroContent .bodyLg {
+  margin-bottom: var(--sp-32);
+  color: rgba(255, 255, 255, 0.88);
+}
+
+/* ====================================================================
+   SECTION 13: PRODUCT GRID (dark, 3x3)
+   ==================================================================== */
+.productGridSection {
+  position: relative;
+  background: #000;
+  padding: var(--sp-64) 0;
+}
+
+.productGridInner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.exploreCard {
+  border-radius: var(--radius-16);
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  aspect-ratio: 1;
+  display: flex;
+}
+
+.exploreCardLink {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 28px;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  color: #fff;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.exploreCardLink:hover {
+  opacity: 0.9;
+}
+
+.exploreCardBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.exploreCardBg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.exploreCardGradient {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.75) 0%,
+    rgba(0,0,0,0.1) 60%,
+    rgba(0,0,0,0) 100%
+  );
+}
+
+.exploreCardContent {
+  position: relative;
+  z-index: 2;
+}
+
+.exploreCardIcon {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.exploreCardContent h3 {
+  font-size: var(--fs-18);
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #fff;
+}
+
+.exploreCardContent p {
+  font-size: var(--fs-14);
+  color: rgba(255,255,255,0.8);
+  line-height: 1.4;
+}
+
+/* ====================================================================
+   ==================================================================== */
+@media (max-width: 1200px) {
+  .rmContentWrapper {
+    padding: 0 32px 130px;
+  }
+  .rmControls {
+    padding: 0 32px 24px;
+  }
+  .rmCard {
+    width: 150px;
+    min-height: 88px;
+    padding: 12px 14px 16px;
+  }
+  .sectionHeading,
+  .featuresHeader,
+  .featuredMediaSection,
+  .threeUpSection {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+  .introSection {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+  .gridPad {
+    --grid-margin: 32px;
+  }
+  .elasticCarouselContainer {
+    padding: 0 32px;
+  }
+  .testimonialFrame {
+    --peek: clamp(28px, 4vw, 48px);
+  }
+  .testimonialContent {
+    padding: 48px;
+  }
+}
+
+@media (max-width: 960px) {
+  .heroSection {
+    aspect-ratio: 4 / 3;
+    min-height: 480px;
+    max-height: min(700px, calc(100svh - 64px));
+  }
+
+  .rmTitle {
+    font-size: var(--fs-36);
+  }
+
+  .rmContentWrapper {
+    padding: 0 32px 140px;
+  }
+
+  .rmControls {
+    padding: 0 24px 24px;
+  }
+
+  .rmControlsInner {
+    gap: 10px;
+  }
+
+  .rmCards {
+    gap: 8px;
+  }
+
+  .rmCard {
+    width: 128px;
+    min-height: 80px;
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .rmCardLabel {
+    font-size: var(--fs-12);
+  }
+
+  .rmPausePlay {
+    width: 40px;
+    height: 40px;
+  }
+
+  .featuresHeader {
+    flex-direction: column;
+    gap: var(--sp-16);
+  }
+
+  .threeUpGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .newsGrid {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+    row-gap: var(--sp-32);
+  }
+
+  .newsHeadlineSpacer {
+    display: none;
+  }
+
+  .productGridInner {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Carousel shrinks via CSS vars in its own tablet breakpoint */
+
+  .testimonialContent {
+    padding: 40px 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .heroSection {
+    aspect-ratio: 3 / 4;
+    min-height: 560px;
+    max-height: min(800px, calc(100svh - 56px));
+  }
+
+  .rmContentWrapper {
+    padding: 0 20px 150px;
+  }
+
+  .rmTitle {
+    font-size: var(--fs-32);
+  }
+
+  .rmControls {
+    padding: 0 16px 16px;
+  }
+
+  .rmControlsInner {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .rmCards {
+    flex: 1;
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .rmCards::-webkit-scrollbar {
+    display: none;
+  }
+
+  .rmCard {
+    width: 132px;
+    min-width: 132px;
+    min-height: 76px;
+    padding: 10px 12px 14px;
+  }
+
+  .rmPausePlay {
+    width: 40px;
+    height: 40px;
+  }
+
+  .introSection {
+    padding: var(--sp-48) 20px;
+    border-radius: 16px 16px 0 0;
+    margin-top: -16px;
+  }
+
+  .introSection .heading2 {
+    font-size: var(--fs-32);
+  }
+
+  .elasticCarouselContainer {
+    padding: 0 20px;
+  }
+
+  .elasticCarouselItem {
+    flex: 0 0 85vw;
+  }
+
+  .sectionHeading {
+    padding: var(--sp-48) 20px var(--sp-32);
+  }
+
+  .featuresHeader {
+    padding: var(--sp-24) 20px var(--sp-32);
+    flex-direction: column;
+    gap: var(--sp-16);
+  }
+
+  .featuredMediaSection,
+  .threeUpSection {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .gridPad {
+    --grid-margin: 20px;
+  }
+
+  .featuredMediaCard {
+    aspect-ratio: 16 / 9;
+  }
+
+  .featuredMediaIcon {
+    top: 14px;
+    left: 14px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .productGridSection {
+    padding-block: var(--sp-48);
+  }
+
+  .productGridInner {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonialFrame {
+    --peek: 20px;
+    --gap: 12px;
+    height: clamp(420px, 70vh, 640px);
+    padding-block: 12px 48px;
+  }
+
+  .testimonialTrack {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .testimonialContent {
+    padding: 32px 24px;
+  }
+
+  .testimonialContent h3 {
+    font-size: var(--fs-24);
+  }
+
+  .testimonialArrow {
+    width: 40px;
+    height: 40px;
+  }
+
+  .testimonialArrowPrev { left: 4px; }
+  .testimonialArrowNext { right: 4px; }
+
+  .darkHeroContent {
+    padding-block: var(--sp-64);
+  }
+
+  .darkHeroContent .heading2 {
+    font-size: var(--fs-32);
+  }
+
+  .newsPanel {
+    border-radius: 28px;
+    padding-block: var(--sp-48) var(--sp-64);
+  }
+
+  .darkHeroSection {
+    border-radius: 28px 28px 0 0;
+    min-height: auto;
+  }
+}
+
+/* —— Adobe Brand Visibility destination (/adobe/brand-visibility) —— */
+
+.bvHero {
+  background: #002d62;
+  color: #fff;
+  padding: clamp(48px, 7vw, 88px) clamp(20px, 5vw, 64px);
+}
+
+.bvHeroInner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(28px, 5vw, 56px);
+  align-items: center;
+}
+
+.bvHeroIcon {
+  width: 44px;
+  height: 44px;
+  margin-bottom: 14px;
+  display: block;
+  filter: brightness(0) invert(1);
+}
+
+.bvEyebrow {
+  font-size: var(--fs-14);
+  font-weight: 700;
+  margin: 0 0 12px;
+  opacity: 0.9;
+}
+
+.bvTitle {
+  font-family: var(--adobe-font-heading);
+  font-size: clamp(1.85rem, 3.6vw, 2.85rem);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 18px;
+}
+
+.bvLead {
+  font-size: var(--fs-18);
+  line-height: 1.5;
+  margin: 0 0 28px;
+  opacity: 0.94;
+}
+
+.bvCtas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.bvWatchBtn {
+  background: transparent;
+  color: #fff;
+  border-color: #fff;
+  gap: 8px;
+}
+
+.bvWatchBtn:hover {
+  background: #fff;
+  color: #002d62;
+}
+
+.bvHeroMedia {
+  position: relative;
+  border: 0;
+  padding: 0;
+  border-radius: var(--radius-24);
+  overflow: hidden;
+  cursor: pointer;
+  background: #001a3a;
+  aspect-ratio: 16 / 10;
+  display: block;
+  width: 100%;
+}
+
+.bvHeroMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bvPlayBadge {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  color: #002d62;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+
+.bvVideoSection,
+.bvSection,
+.bvAbout {
+  padding: clamp(48px, 6vw, 80px) clamp(20px, 5vw, 64px);
+}
+
+.bvVideoSection { background: #0a0a0a; color: #fff; }
+.bvSection { background: #fff; color: #131313; }
+.bvSection:nth-of-type(even) { background: #f8f8f8; }
+.bvAbout { background: #f8f8f8; color: #131313; }
+
+.bvSectionInner {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.bvVideoSection .bvSectionInner {
+  max-width: 1080px;
+}
+
+.bvSectionHeading {
+  font-family: var(--adobe-font-heading);
+  font-size: clamp(1.6rem, 2.8vw, 2.25rem);
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 14px;
+}
+
+.bvSectionBody {
+  font-size: var(--fs-18);
+  line-height: 1.5;
+  margin: 0 0 20px;
+  opacity: 0.92;
+}
+
+.bvList {
+  margin: 0;
+  padding: 0 0 0 1.2em;
+  display: grid;
+  gap: 12px;
+}
+
+.bvList li {
+  font-size: var(--fs-16);
+  line-height: 1.5;
+}
+
+.bvVideoFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-16);
+  overflow: hidden;
+  background: #000;
+  margin-top: 8px;
+}
+
+.bvVideoFrame iframe,
+.bvModalVideo iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.bvFooterCta {
+  background: #002d62;
+  color: #fff;
+  padding: clamp(64px, 9vw, 112px) clamp(20px, 5vw, 64px);
+  text-align: center;
+}
+
+.bvFooterCtaInner {
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.bvFooterCta .bvSectionBody {
+  margin-bottom: 28px;
+}
+
+.bvModal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.72);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.bvModalPanel {
+  width: min(960px, 100%);
+  background: #111;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+}
+
+.bvModalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  color: #fff;
+}
+
+.bvModalTitle {
+  margin: 0;
+  font-size: var(--fs-18);
+  font-weight: 700;
+}
+
+.bvModalClose {
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.bvModalVideo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+@media (max-width: 900px) {
+  .bvHeroInner {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bvSectionInnerWide {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.bvGallerySection {
+  padding: clamp(48px, 6vw, 80px) clamp(20px, 5vw, 64px);
+  background: #fff;
+  color: #131313;
+}
+
+.bvGallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.bvGalleryItem {
+  margin: 0;
+  border-radius: var(--radius-16);
+  overflow: hidden;
+  background: #111;
+}
+
+.bvGalleryItem img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.bvGalleryItem figcaption {
+  padding: 10px 12px;
+  font-size: var(--fs-14);
+  font-weight: 600;
+  background: #f3f3f3;
+}
+
+.bvSplit {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 48px);
+  align-items: center;
+}
+
+.bvSplitReverse {
+  direction: rtl;
+}
+
+.bvSplitReverse > * {
+  direction: ltr;
+}
+
+.bvSplitMedia {
+  border-radius: var(--radius-24);
+  overflow: hidden;
+  background: #111;
+  aspect-ratio: 16 / 11;
+}
+
+.bvSplitMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bvSectionAlt {
+  background: #f8f8f8;
+}
+
+.bvAbout {
+  padding: clamp(48px, 6vw, 80px) clamp(20px, 5vw, 64px);
+  background: #fff;
+}
+
+@media (max-width: 900px) {
+  .bvGallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .bvSplit,
+  .bvSplitReverse {
+    grid-template-columns: 1fr;
+    direction: ltr;
+  }
+}

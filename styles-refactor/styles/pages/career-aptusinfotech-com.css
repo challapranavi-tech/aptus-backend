@@ -1,0 +1,16 @@
+/**
+ * Page: Career - aptusinfotech.com
+ * Route: /career
+ * Source: LIVE WEBSITE/about us\Career - aptusinfotech.com.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-career-aptusinfotech-com {
+    /* page root scope */
+  }
+
+
+  /* 11 inline styles detected — migrate to utilities */
+}

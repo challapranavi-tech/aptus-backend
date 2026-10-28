@@ -1,0 +1,260 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "water-infrastructure",
+    "subnavLinks": [
+      {
+        "label": "InfoDrainage",
+        "href": "/infodrainage"
+      },
+      {
+        "label": "InfoWater Pro",
+        "href": "/infowater-pro"
+      },
+      {
+        "label": "InfoWorks ICM",
+        "href": "/infoworks-icm"
+      },
+      {
+        "label": "InfoWorks WS Pro",
+        "href": "/infoworks-ws-pro"
+      }
+    ],
+    "bannerTitle": "Autodesk InfoWorks ICM",
+    "bannerTagline": "Advanced integrated catchment modeling software for water and wastewater infrastructure planning and management",
+    "title": "Comprehensive Catchment Modeling for Water Infrastructure",
+    "paragraphs": [
+      "Autodesk InfoWorks ICM is the industry-leading integrated catchment modeling software that enables water utilities, engineering firms, and government agencies to simulate and analyze the complete water cycle within a single platform.",
+      "With InfoWorks ICM, you can model rainfall-runoff, river flow, urban drainage, and wastewater systems in an integrated environment. The software combines 1D and 2D hydraulic modeling capabilities with advanced water quality analysis to provide a complete picture of water infrastructure performance.",
+      "From master planning and system design to operational management and flood risk assessment, InfoWorks ICM provides the tools you need to make informed decisions about water infrastructure investments and operations."
+    ],
+    "imageSrc": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Infoworks-icm-2-e1759038439492-rcep92lx6ewg3f8yxudc0373d3e31juo0p19859dv0.png",
+    "imageAlt": "Autodesk InfoWorks ICM",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#Form"
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "gridColumns": 3,
+      "title": {
+        "before": "Powerful Features"
+      },
+      "subheading": "Discover how InfoWorks ICM transforms water infrastructure modeling",
+      "align": "center",
+      "items": [
+        {
+          "title": "Integrated 1D/2D Modeling",
+          "body": "Simulate both pipe networks (1D) and surface flooding (2D) in a single model to accurately predict flood behavior and identify at-risk areas.",
+          "icon": "water"
+        },
+        {
+          "title": "Rainfall-Runoff Modeling",
+          "body": "Model the complete rainfall-runoff process using multiple methods including SCS, Green-Ampt, and SWMM to understand how rainfall becomes runoff in your catchment.",
+          "icon": "cloud-rain"
+        },
+        {
+          "title": "Water Quality Analysis",
+          "body": "Analyze water quality parameters including pollutants, sediments, and nutrients to assess environmental impact and treatment requirements.",
+          "icon": "flask"
+        },
+        {
+          "title": "GIS Integration",
+          "body": "Leverage geospatial data and mapping capabilities to visualize models, analyze spatial relationships, and communicate results effectively.",
+          "icon": "map-marked-alt"
+        },
+        {
+          "title": "Real-Time Control",
+          "body": "Model and optimize real-time control strategies for pumps, gates, and other control structures to improve system performance and resilience.",
+          "icon": "chart-line"
+        },
+        {
+          "title": "Scenario Analysis",
+          "body": "Evaluate multiple scenarios including climate change, urbanization, and infrastructure improvements to develop robust long-term strategies.",
+          "icon": "cogs"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "gridColumns": 4,
+      "title": {
+        "before": "Key Benefits"
+      },
+      "subheading": "Why water professionals choose InfoWorks ICM",
+      "align": "center",
+      "items": [
+        {
+          "title": "Integrated Approach",
+          "body": "Model the complete water cycle in a single platform, eliminating the need for multiple software and ensuring data consistency across all components.",
+          "icon": "puzzle-piece"
+        },
+        {
+          "title": "Accurate Predictions",
+          "body": "Make more accurate predictions of system behavior with advanced hydraulic engines and comprehensive modeling capabilities.",
+          "icon": "dot-circle"
+        },
+        {
+          "title": "Time Savings",
+          "body": "Reduce modeling time by up to 50% with efficient workflows, automated processes, and powerful computing capabilities.",
+          "icon": "clock"
+        },
+        {
+          "title": "Risk Reduction",
+          "body": "Identify and mitigate flood risks, system failures, and water quality issues before they become costly problems.",
+          "icon": "shield-virus"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "gridColumns": 4,
+      "title": {
+        "before": "Why Choose Aptus Infotech for",
+        "accent": "Autodesk InfoWorks ICM?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Official Autodesk Gold Partner",
+          "body": "As an authorized partner, we provide access to genuine Autodesk products.",
+          "icon": "medal"
+        },
+        {
+          "title": "Technical Support",
+          "body": "Our support team is available to assist with installation, troubleshooting, and usage questions.",
+          "icon": "headset"
+        },
+        {
+          "title": "Local Presence",
+          "body": "With offices in Oman, we provide personalized service and quick response times.",
+          "icon": "handshake"
+        },
+        {
+          "title": "Expert Training",
+          "body": "Certified trainers deliver comprehensive training programs tailored to your industry needs.",
+          "icon": "mobile-alt"
+        }
+      ]
+    }
+  ],
+  "midCta": {
+    "heading": "Ready to Transform Your Water Infrastructure Modeling?",
+    "subheading": "Get a free trial of Autodesk InfoWorks ICM today and experience the future of integrated catchment modeling.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#Form"
+  },
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Hear from professionals who have transformed their water projects with InfoWorks ICM",
+    "items": [
+      {
+        "quote": "InfoWorks ICM has transformed how we approach water infrastructure planning. The integrated 1D/2D modeling capabilities have helped us identify flood risks we never would have found with traditional methods.",
+        "author": "Robert Thompson",
+        "role": "Water Resources Director",
+        "company": "Metro Water Authority"
+      },
+      {
+        "quote": "The AutoCAD toolsets from Aptus have revolutionized our workflow. The specialized tools for architecture have significantly improved our productivity and design quality.",
+        "author": "Emily Chen",
+        "role": "Principal Engineer",
+        "company": "Aqua Engineering Consultants"
+      },
+      {
+        "quote": "As a small engineering firm, we needed affordable yet powerful CAD software. Aptus recommended AutoCAD LT, which perfectly meets our needs without breaking the budget.",
+        "author": "Michael Rodriguez",
+        "role": "Planning Manager",
+        "company": "Regional Water District"
+      }
+    ]
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances-grid",
+    "logos": [
+      {
+        "id": "planswift",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/planswift-rarquilozhjdi3ujvpnqm82lsamv4rdq5i6zz36sfi.png",
+        "alt": "planswift"
+      },
+      {
+        "id": "prokon",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Prokon-rarqukhdd5ly5brtkqgzr7liz2dlk5l6trhyxn4032.png",
+        "alt": "Prokon"
+      },
+      {
+        "id": "sketchup",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Sketchup-rarqumd1qtoisjp39ra8w74g5u4bzjsni0sxw717qm.png",
+        "alt": "Sketchup"
+      },
+      {
+        "id": "sophos",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/sophos-rarqunavxnpt45nq49ovgovwr7zp78wdu5gfdgztke.png",
+        "alt": "sophos"
+      },
+      {
+        "id": "spectronova",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/spectronova-rarquo8q4hr3frmcys3i16ndclv2ey046a3wuqyfe6.png",
+        "alt": "spectronova"
+      },
+      {
+        "id": "aconex",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/aconex-rarqup6kbbsdrdkztai4loetxzqfmn3uierec0x17y.png",
+        "alt": "aconex"
+      },
+      {
+        "id": "autodesk",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Autodesk-rarquq4ei5to2zjmnswr666ajdlsuc7kujevtavn1q.png",
+        "alt": "Autodesk"
+      },
+      {
+        "id": "etap",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/etap-rarqur28ozuyeli9ibbdqnxr4rh621bb6o2daku8vi.png",
+        "alt": "etap"
+      },
+      {
+        "id": "fortinet",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/fortinet-rarqus02vtw8q7gwctq0b5p7q5cj9qf1ispurusupa.png",
+        "alt": "fortinet"
+      },
+      {
+        "id": "kaspersky",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/kaspersky-rarqutvr9hytdfe61uj9g584wx39p4mi720tqeq2cu.png",
+        "alt": "kaspersky"
+      },
+      {
+        "id": "microsoft",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Microsoft-rarquutlgc03p1cswcxw0mzliaymwtq8j6ob7ooo6m.png",
+        "alt": "Microsoft"
+      },
+      {
+        "id": "lumion",
+        "src": "https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/lumion-rartyoocjr36ywx0w7505x2trlrpogolkosxnsvhwu.png",
+        "alt": "lumion"
+      }
+    ]
+  },
+  "contactCta": {
+    "heading": "Have questions? We can help",
+    "description": "Our experts can help you to implement the right security system for your business.",
+    "showForm": true,
+    "submitLabel": "Submit Now",
+    "formVariant": "simple",
+    "layout": "light",
+    "anchorId": "Form",
+    "category": "software",
+    "productName": "Autodesk InfoWorks ICM"
+  }
+}

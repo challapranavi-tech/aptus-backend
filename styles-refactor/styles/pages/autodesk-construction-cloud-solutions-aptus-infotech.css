@@ -1,0 +1,16 @@
+/**
+ * Page: Autodesk Construction Cloud Solutions | Aptus Infotech
+ * Route: /construction-cloud
+ * Source: LIVE WEBSITE/software\EDMS\Autodesk Construction Cloud Solutions _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-autodesk-construction-cloud-solutions-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 11 inline styles detected — migrate to utilities */
+}

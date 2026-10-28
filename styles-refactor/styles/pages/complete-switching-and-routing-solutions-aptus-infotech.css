@@ -1,0 +1,16 @@
+/**
+ * Page: Complete Switching and Routing Solutions | Aptus Infotech
+ * Route: /switching-and-routing
+ * Source: LIVE WEBSITE/ELV\Complete Switching and Routing Solutions _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-complete-switching-and-routing-solutions-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 27 inline styles detected — migrate to utilities */
+}

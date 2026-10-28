@@ -1,0 +1,16 @@
+/**
+ * Page: BIM Collaborate Pro in Oman | Aptus Infotech
+ * Route: /bim-collaborate-pro
+ * Source: LIVE WEBSITE/software\autodesk\BIM Collaborate Pro in Oman _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, cta, testimonials, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-bim-collaborate-pro-in-oman-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 35 inline styles detected — migrate to utilities */
+}

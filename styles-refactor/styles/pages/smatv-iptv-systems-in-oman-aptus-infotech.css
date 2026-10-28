@@ -1,0 +1,16 @@
+/**
+ * Page: SMATV & IPTV Systems in Oman | Aptus Infotech
+ * Route: /smatv-iptv
+ * Source: LIVE WEBSITE/ELV\SMATV & IPTV Systems in Oman _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-smatv-iptv-systems-in-oman-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 28 inline styles detected — migrate to utilities */
+}

@@ -1,0 +1,265 @@
+<t t-name="website.iso-certification">
+    <t t-call="website.layout">
+        <div id="wrap" class="oe_structure oe_empty">
+            <section class="s_embed_code pt0 pb0 o_colored_level" data-snippet="s_embed_code" data-name="ISO Certifications Content">
+                <div class="s_embed_code_embedded o_not_editable container-fluid"><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+.aptus-page { font-family: 'Poppins', sans-serif; color: #1a1a2e; }
+.aptus-page {
+            font-family: 'Poppins', sans-serif;
+            background: #ffffff;
+            color: #1a1a2e;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        
+        /* ========== PAGE STYLES ========== */
+        .page-header {
+            background: linear-gradient(135deg, #0b2b3b 0%, #1352a3 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .page-header h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        .page-header p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Section Styles */
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-title h2 {
+            font-size: 36px;
+            color: #1a1a2e;
+        }
+        .section-title h2 span {
+            color: #1352a3;
+        }
+        .section-title .badge {
+            color: #1352a3;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .intro-text {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 50px;
+            color: #475569;
+            line-height: 1.7;
+        }
+
+        /* Certifications List */
+        .certs-list {
+            background: #f8fafc;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        .certs-list h3 {
+            font-size: 24px;
+            color: #1352a3;
+            margin-bottom: 20px;
+        }
+        .certs-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .cert-item {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 40px;
+            font-weight: 500;
+            color: #1e293b;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        /* Certifications Grid */
+        .certs-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            margin: 50px 0;
+        }
+        .cert-card {
+            flex: 1;
+            min-width: 280px;
+            max-width: 350px;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: 0.3s;
+            text-align: center;
+            padding: 30px;
+        }
+        .cert-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+        .cert-card h3 {
+            font-size: 22px;
+            color: #1352a3;
+            margin-bottom: 15px;
+        }
+        .cert-card .cert-standard {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 20px;
+        }
+        .cert-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .btn-download {
+            display: inline-block;
+            background: #1352a3;
+            color: white;
+            padding: 10px 30px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+            margin-top: 15px;
+        }
+        .btn-download:hover {
+            background: #0e3d7a;
+            transform: scale(1.02);
+        }
+
+        /* Bottom Text */
+        .bottom-text {
+            background: #f8fafc;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 50px 0;
+            text-align: center;
+            color: #475569;
+            line-height: 1.7;
+        }
+
+        
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 900px) {
+            /* Mobile submenu fix */
+            .page-header h1 { font-size: 32px; }
+            .section-title h2 { font-size: 28px; }
+            .certs-list { padding: 25px; }
+            .cert-item { font-size: 12px; padding: 10px 18px; }
+        }
+</style>
+<div class="aptus-page aptus-page--aptus-infotech-iso-certifications">
+<div class="page-header">
+    <div class="container">
+        <h1>Our Certifications</h1>
+        <p>ORIENTAL ORYX INTERNATIONAL L.L.C (APTUS INFOTECH) proudly adheres to the highest international standards. Our commitment to quality, environmental responsibility, and occupational health &amp; safety is validated by these esteemed certifications.</p>
+    </div>
+</div><div class="container">
+    <div class="section-title">
+        <div class="badge">Excellence Through Standards</div>
+        <h2>Achieving Excellence Through <span>Recognized Standards</span></h2>
+    </div>
+    <div class="intro-text">
+        <p>At Aptus Infotech, we are committed to upholding the highest international standards in quality, environmental management, and occupational health &amp; safety. Our accreditations demonstrate our dedication to excellence and our capability to provide reliable, globally recognized services.</p>
+    </div>
+
+    <div class="certs-list">
+        <h3>Our Core Certifications</h3>
+        <div class="certs-items">
+            <div class="cert-item">ISO 9001:2015 – Quality Management System (QMS) Certification</div>
+            <div class="cert-item">ISO 14001:2015 – Environmental Management System (EMS) Certification</div>
+            <div class="cert-item">ISO 45001:2018 – Occupational Health &amp; Safety (OH&amp;S) Management System Certification</div>
+        </div>
+    </div>
+
+    <div class="certs-grid">
+        <div class="cert-card">
+            <h3>Quality Management System</h3>
+            <div class="cert-standard">ISO 9001:2015</div>
+            <img src="https://aptusinfotech.com/wp-content/uploads/2025/07/1-721x1024.png" alt="ISO 9001:2015 Certificate" loading="lazy"/>
+            <a href="https://aptusinfotech.com/wp-content/uploads/2025/07/APTUS-CERT-9001-COPY-1.pdf" class="btn-download" target="_blank">Download Certificate</a>
+        </div>
+
+        <div class="cert-card">
+            <h3>Occupational Health &amp; Safety</h3>
+            <div class="cert-standard">ISO 45001:2018</div>
+            <img src="https://aptusinfotech.com/wp-content/uploads/2025/07/2-721x1024.png" alt="ISO 45001:2018 Certificate" loading="lazy"/>
+            <a href="https://aptusinfotech.com/wp-content/uploads/2025/07/APTUS-CERT-45001-COPY.pdf" class="btn-download" target="_blank">Download Certificate</a>
+        </div>
+
+        <div class="cert-card">
+            <h3>Environmental Management System</h3>
+            <div class="cert-standard">ISO 14001:2015</div>
+            <img src="https://aptusinfotech.com/wp-content/uploads/2025/07/3-721x1024.png" alt="ISO 14001:2015 Certificate" loading="lazy"/>
+            <a href="https://aptusinfotech.com/wp-content/uploads/2025/07/APTUS-CERT-14001-COPY.pdf" class="btn-download" target="_blank">Download Certificate</a>
+        </div>
+    </div>
+
+    <div class="bottom-text">
+        <p>Aptus Infotech is dedicated to upholding top-tier international standards in quality (ISO 9001:2015), environmental management (ISO 14001:2015), and occupational health &amp; safety (ISO 45001:2018), with processes rigorously certified and globally recognized. This ensures enhanced customer satisfaction, improved efficiency, reduced environmental impact, regulatory compliance, better workplace safety, and a stronger reputation for businesses partnering with us.</p>
+    </div>
+</div>
+
+    <section class="contact-form-section">
+        <div class="container">
+            <h2>Have questions? We can help</h2>
+            <div class="subtitle">Our experts can help you find the right solutions for your business.</div>
+            <form class="contact-form" action="/contactus" method="post">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>First Name *</label>
+                        <input type="text" name="first_name" required="required"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name *</label>
+                        <input type="text" name="last_name" required="required"/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" name="email" placeholder="name@mail.com" required="required"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone *</label>
+                        <input type="tel" name="phone" placeholder="e.g, +968 0000 0000" required="required"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea name="message" rows="4" placeholder="Message"/>
+                </div>
+                <button type="submit" class="submit-btn">Submit Now</button>
+            </form>
+        </div>
+    </section>
+</div></div>
+            </section>
+        </div>
+    </t>
+</t>

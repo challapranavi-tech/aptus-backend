@@ -1,0 +1,16 @@
+/**
+ * Page: Enscape Real-Time Rendering | Aptus Infotech
+ * Route: /enscape
+ * Source: LIVE WEBSITE/software\multimedia\Enscape Real-Time Rendering _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-enscape-real-time-rendering-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 37 inline styles detected — migrate to utilities */
+}

@@ -1,0 +1,34 @@
+/* Layout + brand utilities */
+.aptus-container {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: var(--spacing-md);
+}
+
+.aptus-section {
+  padding-block: var(--section-padding);
+}
+
+.aptus-tint-panel {
+  background-color: var(--color-surface-muted);
+  border-radius: var(--radius-card);
+}
+
+.aptus-divider {
+  display: block;
+  width: 3rem;
+  height: 3px;
+  background-color: var(--accent-green);
+  border-radius: 2px;
+}
+
+/* Inline style replacements (common Elementor data-settings) */
+.aptus-bg-cover {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.aptus-text-center { text-align: center; }
+.aptus-text-white { color: #fff; }

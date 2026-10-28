@@ -1,0 +1,16 @@
+/**
+ * Page: Smart Gate Automation Solutions | Aptus Infotech
+ * Route: /gate-automation
+ * Source: LIVE WEBSITE/ELV\Smart Gate Automation Solutions _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-smart-gate-automation-solutions-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 23 inline styles detected — migrate to utilities */
+}

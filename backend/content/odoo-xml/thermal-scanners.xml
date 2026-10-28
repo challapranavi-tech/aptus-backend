@@ -1,0 +1,289 @@
+<t t-name="website.elv-thermal-scanners">
+    <t t-call="website.layout">
+        <div id="wrap" class="oe_structure oe_empty">
+            <section class="s_embed_code pt0 pb0 o_colored_level" data-snippet="s_embed_code" data-name="ELV thermal-scanners">
+                <div class="s_embed_code_embedded o_not_editable container-fluid"><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+.aptus-elv-page { font-family: 'Poppins', sans-serif; color: #1a1a2e; background: #fff; overflow-x: hidden; }
+.aptus-elv-page .container { max-width: 1200px; width: 90%; margin: 0 auto; }
+.aptus-elv-page h2 { font-size: 34px; color: #1a1a2e; margin: 0 0 10px; }
+.aptus-elv-page p { line-height: 1.7; color: #475569; }
+
+.elv-banner { position: relative; padding: 90px 0; text-align: center; color: #fff; background-size: cover; background-position: center; }
+.elv-banner::before { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, rgba(10,22,55,.88), rgba(19,82,163,.78)); }
+.elv-banner .container { position: relative; z-index: 1; }
+.elv-banner h1 { font-size: 40px; margin: 0 0 14px; color: #fff; }
+.elv-banner p { color: #e6eefb; max-width: 720px; margin: 0 auto 26px; font-size: 18px; }
+
+.elv-btn { display: inline-block; background: #1352a3; color: #fff; border: none; padding: 14px 34px; border-radius: 40px; font-size: 16px; font-weight: 600; cursor: pointer; text-decoration: none; transition: .3s; }
+.elv-btn:hover { background: #0e3d7a; transform: translateY(-2px); }
+.elv-btn--light { background: #fff; color: #1352a3; }
+
+.elv-hero { padding: 60px 0; }
+.elv-hero .container { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; }
+.elv-hero-sidebar { flex: 0 0 220px; }
+.elv-hero-sidebar ul { list-style: none; margin: 0; padding: 0; }
+.elv-hero-sidebar a { display: block; padding: 10px 14px; color: #334155; text-decoration: none; border-radius: 8px; font-size: 14px; line-height: 1.4; transition: .2s; }
+.elv-hero-sidebar a:hover, .elv-hero-sidebar a.is-active { background: #1352a3; color: #fff; }
+.elv-hero-text { flex: 1 1 320px; }
+.elv-hero-text h2 { color: #1352a3; }
+.elv-hero-media { flex: 1 1 360px; text-align: center; }
+.elv-hero-media img { max-width: 100%; border-radius: 18px; }
+
+.elv-section { padding: 60px 0; }
+.elv-section--band { background: #f1f5fb; }
+.elv-section-head { text-align: center; max-width: 760px; margin: 0 auto 40px; }
+.elv-section-head h2 span { color: #38b6ff; }
+.elv-section-sub { color: #64748b; margin-top: 8px; }
+
+.elv-card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.elv-card-grid--value { grid-template-columns: repeat(4, 1fr); }
+.elv-card-grid--product { grid-template-columns: repeat(4, 1fr); }
+.elv-card { background: #fff; border: 1px solid #e6ecf5; border-radius: 16px; padding: 28px 24px; text-align: center; box-shadow: 0 6px 18px rgba(15,40,90,.05); transition: .3s; }
+.elv-card:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(15,40,90,.12); }
+.elv-card h3 { font-size: 18px; color: #1a1a2e; margin: 14px 0 8px; }
+.elv-card p { font-size: 14px; }
+.elv-card--value { background: #fff; }
+.elv-card-icon { display: flex; justify-content: center; }
+.elv-icon { width: 46px; height: 46px; color: #1352a3; }
+.elv-card-img img { max-height: 120px; width: auto; object-fit: contain; }
+
+.elv-midcta { background: linear-gradient(120deg, #1352a3, #0a1637); color: #fff; padding: 60px 0; text-align: center; }
+.elv-midcta h2 { color: #fff; }
+.elv-midcta p { color: #dbe6f7; max-width: 680px; margin: 0 auto 26px; }
+
+.elv-quote-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.elv-quote { background: #fff; border-radius: 16px; padding: 28px; box-shadow: 0 6px 18px rgba(15,40,90,.06); }
+.elv-quote-text { font-style: italic; color: #334155; }
+.elv-quote-author { font-weight: 700; color: #1352a3; margin-top: 14px; }
+.elv-quote-role { font-size: 13px; color: #64748b; }
+
+.elv-alliances { padding: 60px 0; text-align: center; }
+.elv-alliances h2 span { color: #38b6ff; }
+.elv-alliance-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; margin-top: 34px; }
+.elv-alliance { width: 120px; height: 80px; background: #fff; border-radius: 12px; display: flex; align-items: center; justify-content: center; padding: 12px; box-shadow: 0 5px 15px rgba(0,0,0,.07); }
+.elv-alliance img { max-width: 100%; max-height: 54px; }
+
+.elv-contact { background: #003049; color: #fff; padding: 60px 0; text-align: center; }
+.elv-contact--light { background: #e8f7f2; color: #1a1a2e; }
+.elv-contact--light h2 { color: #1a1a2e; }
+.elv-contact--light .elv-form-group label { color: #334155; }
+.elv-contact h2 { color: #fff; margin-bottom: 28px; }
+.elv-form { max-width: 800px; margin: 0 auto; }
+.elv-form-row { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 20px; }
+.elv-form-group { flex: 1; text-align: left; }
+.elv-form-group label { display: block; margin-bottom: 8px; font-weight: 500; }
+.elv-form-group input, .elv-form-group textarea { width: 100%; padding: 12px 15px; border: none; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 14px; }
+
+@media (max-width: 900px) {
+  .elv-card-grid, .elv-card-grid--value, .elv-card-grid--product, .elv-quote-grid { grid-template-columns: 1fr; }
+  .elv-banner h1 { font-size: 30px; }
+  .elv-hero-sidebar { flex: 1 1 100%; }
+}
+</style>
+<div class="aptus-elv-page aptus-elv-page--thermal-scanners">
+        <section class="elv-banner" style="background-image:url('https://aptusinfotech.com/wp-content/uploads/2025/05/Thermal-Scanner.png');">
+            <div class="container">
+                <h1>Thermal Scanner Solutions</h1>
+                <p>Non-contact temperature measurement for enhanced safety and efficiency</p>
+                <a class="elv-btn elv-btn--light" href="#Form">Request a Quote</a>
+            </div>
+        </section>
+        <section class="elv-hero">
+            <div class="container">
+                <aside class="elv-hero-sidebar" aria-label="ELV Solutions">
+                    <ul>
+                        <li><a href="/access-control-system">Access Control System</a></li>
+                        <li><a href="/thermal-scanners" class="is-active">Thermal Scanners</a></li>
+                        <li><a href="/cctv-camera">CCTV</a></li>
+                        <li><a href="/gate-automation">Gate Automation</a></li>
+                        <li><a href="/home-automation">Smart Homes</a></li>
+                        <li><a href="/audio-video-solutions">Audio/Video Solutions</a></li>
+                        <li><a href="/telephone-systems">Telephone Systems</a></li>
+                        <li><a href="/network-and-structured-cabling-solutions">Network and Structured Cabling</a></li>
+                        <li><a href="/ups">UPS</a></li>
+                        <li><a href="/smatv-iptv">SMATV/ IPTV</a></li>
+                        <li><a href="/guest-room-management">Guest Room Management</a></li>
+                        <li><a href="/nurse-calling-system">Nurse Call System</a></li>
+                        <li><a href="/rsi-queue-management">Queue Management System</a></li>
+                        <li><a href="/data-center-solutions">Data Center Solutions</a></li>
+                        <li><a href="/conference-room-solution">Conference room solution</a></li>
+                        <li><a href="/switching-and-routing">Switching and Routing</a></li>
+                    </ul>
+                </aside>
+                <div class="elv-hero-text">
+                    <h2>Advanced Thermal Imaging Technology</h2>
+                <p>In today’s public health-conscious environment, rapid, non-contact temperature screening is paramount. More and more organizations are implementing advanced Thermal Scanner Solutions to maximize safety and monitor entry compliance.</p>
+                <p>Whether you’re setting up a simple entry point at a corporate lobby or deploying multiple screening stations across an airport or factory, these technologies dramatically improve the way you screen, identify, and manage the health status of incoming individuals.</p>
+                <p>Experience superior accuracy and seamless integration with our comprehensive solutions for contactless thermal cameras, facial recognition integration, and real-time alert systems across any high-traffic area.</p>
+                <p>From high-precision thermal cameras and integrated metal detection to automatic access barriers and centralized data logging platforms, we provide end-to-end solutions that ensure every entry point is fast, safe, and utterly reliable.</p>
+                    <a class="elv-btn" href="#Form">Request a Quote</a>
+                </div>
+                <div class="elv-hero-media">
+                    <img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Thermal_Scanner-1024x1020.png" alt="Thermal Scanner Solutions" loading="lazy"/>
+                </div>
+            </div>
+        </section>
+        <section class="elv-section">
+            <div class="container">
+                <div class="elv-section-head">
+                    <h2>Key Features</h2>
+                    <p class="elv-section-sub">Comprehensive thermal imaging technology for diverse applications</p>
+                </div>
+                <div class="elv-card-grid">
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 256 512" fill="currentColor" aria-hidden="true"><path d="M192 384c0 35.346-28.654 64-64 64s-64-28.654-64-64c0-23.685 12.876-44.349 32-55.417V224c0-17.673 14.327-32 32-32s32 14.327 32 32v104.583c19.124 11.068 32 31.732 32 55.417zm32-84.653c19.912 22.563 32 52.194 32 84.653 0 70.696-57.303 128-128 128-.299 0-.609-.001-.909-.003C56.789 511.509-.357 453.636.002 383.333.166 351.135 12.225 321.755 32 299.347V96c0-53.019 42.981-96 96-96s96 42.981 96 96v203.347zM208 384c0-34.339-19.37-52.19-32-66.502V96c0-26.467-21.533-48-48-48S80 69.533 80 96v221.498c-12.732 14.428-31.825 32.1-31.999 66.08-.224 43.876 35.563 80.116 79.423 80.42L128 464c44.112 0 80-35.888 80-80z"/></svg></div>
+              <h3>Precise Temperature Measurement</h3>
+              <p>Accurate thermal imaging with ±0.5°C sensitivity for reliable fever detection and temperature mapping.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 576 512" fill="currentColor" aria-hidden="true"><path d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"/></svg></div>
+              <h3>High-Resolution Imaging</h3>
+              <p>Clear thermal imagery with up to 320×240 pixel resolution for detailed heat pattern visualization.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 320 512" fill="currentColor" aria-hidden="true"><path d="M272 0H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h224c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zM160 480c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm112-108c0 6.6-5.4 12-12 12H60c-6.6 0-12-5.4-12-12V60c0-6.6 5.4-12 12-12h200c6.6 0 12 5.4 12 12v312z"/></svg></div>
+              <h3>Portable Design</h3>
+              <p>Lightweight, handheld units perfect for field use with long battery life and rugged construction.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M16 288c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h112v-64zm489-183L407.1 7c-4.5-4.5-10.6-7-17-7H384v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-153 31V0H152c-13.3 0-24 10.7-24 24v264h128v-65.2c0-14.3 17.3-21.4 27.4-11.3L379 308c6.6 6.7 6.6 17.4 0 24l-95.7 96.4c-10.1 10.1-27.4 3-27.4-11.3V352H128v136c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H376c-13.2 0-24-10.8-24-24z"/></svg></div>
+              <h3>Data Storage &amp; Analysis</h3>
+              <p>Built-in memory and export functions for documentation and trend analysis of thermal patterns.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 640 512" fill="currentColor" aria-hidden="true"><path d="M634.91 154.88C457.74-8.99 182.19-8.93 5.09 154.88c-6.66 6.16-6.79 16.59-.35 22.98l34.24 33.97c6.14 6.1 16.02 6.23 22.4.38 145.92-133.68 371.3-133.71 517.25 0 6.38 5.85 16.26 5.71 22.4-.38l34.24-33.97c6.43-6.39 6.3-16.82-.36-22.98zM320 352c-35.35 0-64 28.65-64 64s28.65 64 64 64 64-28.65 64-64-28.65-64-64-64zm202.67-83.59c-115.26-101.93-290.21-101.82-405.34 0-6.9 6.1-7.12 16.69-.57 23.15l34.44 33.99c6 5.92 15.66 6.32 22.05.8 83.95-72.57 209.74-72.41 293.49 0 6.39 5.52 16.05 5.13 22.05-.8l34.44-33.99c6.56-6.46 6.33-17.06-.56-23.15z"/></svg></div>
+              <h3>Wireless Connectivity</h3>
+              <p>Bluetooth and Wi-Fi enabled for instant data transfer and cloud-based analysis platforms.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M466.5 83.7l-192-80a48.15 48.15 0 0 0-36.9 0l-192 80C27.7 91.1 16 108.6 16 128c0 198.5 114.5 335.7 221.5 380.3 11.8 4.9 25.1 4.9 36.9 0C360.1 472.6 496 349.3 496 128c0-19.4-11.7-36.9-29.5-44.3zM256.1 446.3l-.1-381 175.9 73.3c-3.3 151.4-82.1 261.1-175.8 307.7z"/></svg></div>
+              <h3>Health &amp; Safety Compliance</h3>
+              <p>Meets international standards for medical and workplace safety applications.</p>
+            </div>
+                </div>
+            </div>
+        </section>
+        <section class="elv-section elv-section--band">
+            <div class="container">
+                <div class="elv-section-head">
+                    <h2>Benefits of Thermal Scanning Technology</h2>
+                    <p class="elv-section-sub">Why invest in professional thermal imaging solutions</p>
+                </div>
+                <div class="elv-card-grid elv-card-grid--value">
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M50.75 333.25c-12 12-18.75 28.28-18.75 45.26V424L0 480l32 32 56-32h45.49c16.97 0 33.25-6.74 45.25-18.74l126.64-126.62-128-128L50.75 333.25zM483.88 28.12c-37.47-37.5-98.28-37.5-135.75 0l-77.09 77.09-13.1-13.1c-9.44-9.44-24.65-9.31-33.94 0l-40.97 40.97c-9.37 9.37-9.37 24.57 0 33.94l161.94 161.94c9.44 9.44 24.65 9.31 33.94 0L419.88 288c9.37-9.37 9.37-24.57 0-33.94l-13.1-13.1 77.09-77.09c37.51-37.48 37.51-98.26.01-135.75z"/></svg></div>
+              <h3>Non-Contact Health Screening</h3>
+              <p>Rapid, accurate temperature measurements without physical contact for safe mass screening.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M475.115 163.781L336 252.309v-68.28c0-18.916-20.931-30.399-36.885-20.248L160 252.309V56c0-13.255-10.745-24-24-24H24C10.745 32 0 42.745 0 56v400c0 13.255 10.745 24 24 24h464c13.255 0 24-10.745 24-24V184.029c0-18.917-20.931-30.399-36.885-20.248z"/></svg></div>
+              <h3>Industrial Maintenance</h3>
+              <p>Identify hotspots and anomalies in electrical systems, HVAC components, and building envelopes before failures occur.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 576 512" fill="currentColor" aria-hidden="true"><path d="M571.31 193.94l-22.63-22.63c-6.25-6.25-16.38-6.25-22.63 0l-11.31 11.31-28.9-28.9c5.63-21.31.36-44.9-16.35-61.61l-45.25-45.25c-62.48-62.48-163.79-62.48-226.28 0l90.51 45.25v18.75c0 16.97 6.74 33.25 18.75 45.25l49.14 49.14c16.71 16.71 40.3 21.98 61.61 16.35l28.9 28.9-11.31 11.31c-6.25 6.25-6.25 16.38 0 22.63l22.63 22.63c6.25 6.25 16.38 6.25 22.63 0l90.51-90.51c6.23-6.24 6.23-16.37-.02-22.62zm-286.72-15.2c-3.7-3.7-6.84-7.79-9.85-11.95L19.64 404.96c-25.57 23.88-26.26 64.19-1.53 88.93s65.05 24.05 88.93-1.53l238.13-255.07c-3.96-2.91-7.9-5.87-11.44-9.41l-49.14-49.14z"/></svg></div>
+              <h3>Building Diagnostics</h3>
+              <p>Detect insulation gaps, moisture issues, and structural problems with thermal imaging technology.</p>
+            </div>
+            <div class="elv-card">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M128 244v-40c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v40c0 6.627-5.373 12-12 12h-40c-6.627 0-12-5.373-12-12zm140 12h40c6.627 0 12-5.373 12-12v-40c0-6.627-5.373-12-12-12h-40c-6.627 0-12 5.373-12 12v40c0 6.627 5.373 12 12 12zm-76 84v-40c0-6.627-5.373-12-12-12h-40c-6.627 0-12 5.373-12 12v40c0 6.627 5.373 12 12 12h40c6.627 0 12-5.373 12-12zm76 12h40c6.627 0 12-5.373 12-12v-40c0-6.627-5.373-12-12-12h-40c-6.627 0-12 5.373-12 12v40c0 6.627 5.373 12 12 12zm180 124v36H0v-36c0-6.627 5.373-12 12-12h19.5V85.035C31.5 73.418 42.245 64 55.5 64H144V24c0-13.255 10.745-24 24-24h112c13.255 0 24 10.745 24 24v40h88.5c13.255 0 24 9.418 24 21.035V464H436c6.627 0 12 5.373 12 12zM79.5 463H192v-67c0-6.627 5.373-12 12-12h40c6.627 0 12 5.373 12 12v67h112.5V112H304v24c0 13.255-10.745 24-24 24H168c-13.255 0-24-10.745-24-24v-24H79.5v351zM266 64h-26V38a6 6 0 0 0-6-6h-20a6 6 0 0 0-6 6v26h-26a6 6 0 0 0-6 6v20a6 6 0 0 0 6 6h26v26a6 6 0 0 0 6 6h20a6 6 0 0 0 6-6V96h26a6 6 0 0 0 6-6V70a6 6 0 0 0-6-6z"/></svg></div>
+              <h3>Energy Efficiency</h3>
+              <p>Find heat loss areas and optimize energy consumption through targeted insulation improvements.</p>
+            </div>
+                </div>
+            </div>
+        </section>
+        <section class="elv-section">
+            <div class="container">
+                <div class="elv-section-head">
+                    <h2>Why Choose Aptus Infotech <span>for Thermal Scanning?</span></h2>
+                    
+                </div>
+                <div class="elv-card-grid elv-card-grid--value">
+            <div class="elv-card elv-card--value">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M223.75 130.75L154.62 15.54A31.997 31.997 0 0 0 127.18 0H16.03C3.08 0-4.5 14.57 2.92 25.18l111.27 158.96c29.72-27.77 67.52-46.83 109.56-53.39zM495.97 0H384.82c-11.24 0-21.66 5.9-27.44 15.54l-69.13 115.21c42.04 6.56 79.84 25.62 109.56 53.38L509.08 25.18C516.5 14.57 508.92 0 495.97 0zM256 160c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm92.52 157.26l-37.93 36.96 8.97 52.22c1.6 9.36-8.26 16.51-16.65 12.09L256 393.88l-46.9 24.65c-8.4 4.45-18.25-2.74-16.65-12.09l8.97-52.22-37.93-36.96c-6.82-6.64-3.05-18.23 6.35-19.59l52.43-7.64 23.43-47.52c2.11-4.28 6.19-6.39 10.28-6.39 4.11 0 8.22 2.14 10.33 6.39l23.43 47.52 52.43 7.64c9.4 1.36 13.17 12.95 6.35 19.59z"/></svg></div>
+              <h3>Certified Technicians</h3>
+              <p>Our team is trained and certified by FLIR, FLUKE, and other leading thermal imaging manufacturers.</p>
+            </div>
+            <div class="elv-card elv-card--value">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M448 0L320 96v62.06l-83.03 83.03c6.79 4.25 13.27 9.06 19.07 14.87 5.8 5.8 10.62 12.28 14.87 19.07L353.94 192H416l96-128-64-64zM128 278.59L10.92 395.67c-14.55 14.55-14.55 38.15 0 52.71l52.7 52.7c14.56 14.56 38.15 14.56 52.71 0L233.41 384c29.11-29.11 29.11-76.3 0-105.41s-76.3-29.11-105.41 0z"/></svg></div>
+              <h3>Turnkey Solutions</h3>
+              <p>We handle everything from consultation to installation, calibration, and maintenance.</p>
+            </div>
+            <div class="elv-card elv-card--value">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 640 512" fill="currentColor" aria-hidden="true"><path d="M434.7 64h-85.9c-8 0-15.7 3-21.6 8.4l-98.3 90c-.1.1-.2.3-.3.4-16.6 15.6-16.3 40.5-2.1 56 12.7 13.9 39.4 17.6 56.1 2.7.1-.1.3-.1.4-.2l79.9-73.2c6.5-5.9 16.7-5.5 22.6 1 6 6.5 5.5 16.6-1 22.6l-26.1 23.9L504 313.8c2.9 2.4 5.5 5 7.9 7.7V128l-54.6-54.6c-5.9-6-14.1-9.4-22.6-9.4zM544 128.2v223.9c0 17.7 14.3 32 32 32h64V128.2h-96zm48 223.9c-8.8 0-16-7.2-16-16s7.2-16 16-16 16 7.2 16 16-7.2 16-16 16zM0 384h64c17.7 0 32-14.3 32-32V128.2H0V384zm48-63.9c8.8 0 16 7.2 16 16s-7.2 16-16 16-16-7.2-16-16c0-8.9 7.2-16 16-16zm435.9 18.6L334.6 217.5l-30 27.5c-29.7 27.1-75.2 24.5-101.7-4.4-26.9-29.4-24.8-74.9 4.4-101.7L289.1 64h-83.8c-8.5 0-16.6 3.4-22.6 9.4L128 128v223.9h18.3l90.5 81.9c27.4 22.3 67.7 18.1 90-9.3l.2-.2 17.9 15.5c15.9 13 39.4 10.5 52.3-5.4l31.4-38.6 5.4 4.4c13.7 11.1 33.9 9.1 45-4.7l9.5-11.7c11.2-13.8 9.1-33.9-4.6-45.1z"/></svg></div>
+              <h3>Priority Support</h3>
+              <p>Comprehensive after-sales service with emergency response and regular calibration checks.</p>
+            </div>
+            <div class="elv-card elv-card--value">
+              <div class="elv-card-icon"><svg class="elv-icon" viewBox="0 0 320 512" fill="currentColor" aria-hidden="true"><path d="M272 0H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h224c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zM160 480c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm112-108c0 6.6-5.4 12-12 12H60c-6.6 0-12-5.4-12-12V60c0-6.6 5.4-12 12-12h200c6.6 0 12 5.4 12 12v312z"/></svg></div>
+              <h3>Regular Updates</h3>
+              <p>Stay current with firmware updates and new feature enhancements for maximum performance.</p>
+            </div>
+                </div>
+            </div>
+        </section>
+        <section class="elv-midcta">
+            <div class="container">
+                <h2>Ready to Enhance Your Safety Protocols?</h2>
+                <p>Contact our thermal imaging specialists today for a free demonstration and customized solution proposal.</p>
+                <a class="elv-btn elv-btn--light" href="#Form">Get Your Quote Now</a>
+            </div>
+        </section>
+        <section class="elv-section elv-section--band">
+            <div class="container">
+                <div class="elv-section-head">
+                    <h2>What Our <span>Clients Say</span></h2>
+                    <p class="elv-section-sub">Hear from satisfied customers who have implemented our thermal scanning solutions</p>
+                </div>
+                <div class="elv-quote-grid">
+            <div class="elv-quote">
+                <p class="elv-quote-text">“The thermal scanner has become essential for our facility operations. The ability to quickly identify overheating equipment has prevented costly downtime and improved our preventive maintenance schedule.”</p>
+                <div class="elv-quote-author">Mohammed Al Farsi</div>
+                <div class="elv-quote-role">Facility Manager</div>
+            </div>
+            <div class="elv-quote">
+                <p class="elv-quote-text">“We installed the advanced thermal imaging system for our health screening checkpoint and couldn’t be happier. The accuracy and speed have made our entry process much more efficient.”</p>
+                <div class="elv-quote-author">Sarah Johnson</div>
+                <div class="elv-quote-role">HR Director</div>
+            </div>
+            <div class="elv-quote">
+                <p class="elv-quote-text">“The thermal diagnostic tool helped us locate hidden moisture damage in our building envelope before it became a major issue. This proactive approach saved us significant repair costs.”</p>
+                <div class="elv-quote-author">Ahmed Hassan</div>
+                <div class="elv-quote-role">Property Manager</div>
+            </div>
+                </div>
+            </div>
+        </section>
+        <section class="elv-alliances">
+            <div class="container">
+                <h2>Winning together with <span>Strategic Alliances</span></h2>
+                <div class="elv-alliance-grid">
+                <div class="elv-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/elementor/thumbs/Norden-1-r5nfokpczdgnl8p7u170zh46h1y8curhfe0g7wpii0.png" alt="Norden" loading="lazy"/></div>
+                <div class="elv-alliance"><img src="https://aptusinfotech.com/wp-content/uploads/2025/05/Avigilon.png" alt="Avigilon" loading="lazy"/></div>
+                </div>
+            </div>
+        </section>
+        <section class="elv-contact elv-contact--light" id="Form">
+            <div class="container">
+                <h2>Have questions? We can help</h2>
+                <form class="elv-form" action="/contactus" method="post">
+                    <div class="elv-form-row">
+                        <div class="elv-form-group"><label>First Name *</label><input type="text" name="first_name" required="required"/></div>
+                        <div class="elv-form-group"><label>Last Name *</label><input type="text" name="last_name" required="required"/></div>
+                    </div>
+                    <div class="elv-form-row">
+                        <div class="elv-form-group"><label>Email *</label><input type="email" name="email" placeholder="name@mail.com" required="required"/></div>
+                        <div class="elv-form-group"><label>Phone *</label><input type="tel" name="phone" placeholder="e.g, +968 0000 0000" required="required"/></div>
+                    </div>
+                    <div class="elv-form-group"><label>Message</label><textarea name="message" rows="4" placeholder="Message"/></div>
+                    <button type="submit" class="elv-btn">Submit Now</button>
+                </form>
+            </div>
+        </section>
+</div></div>
+            </section>
+        </div>
+    </t>
+</t>

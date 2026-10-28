@@ -1,0 +1,149 @@
+/* Discover Autodesk — full uncropped background image, copy on the right */
+
+.section {
+  --da-yellow: #ffff00;
+  --da-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  overflow: hidden;
+  background: #000;
+  line-height: 0; /* collapse gap under img */
+}
+
+/* Image dictates section height — full frame, never cropped */
+.bg {
+  position: relative;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: min(26vh, 13.5rem);
+  object-fit: cover;
+  object-position: center;
+  max-width: none;
+  pointer-events: none;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 42%,
+    rgba(0, 0, 0, 0.25) 68%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+}
+
+.content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding: clamp(16px, 2.5vh, 24px) clamp(24px, 6vw, 80px);
+  gap: clamp(12px, 2vh, 20px);
+  line-height: normal;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 700ms var(--da-ease), transform 700ms var(--da-ease);
+  pointer-events: none;
+}
+
+.content[data-revealed] {
+  opacity: 1;
+  transform: none;
+}
+
+.title,
+.credit {
+  pointer-events: auto;
+  max-width: min(42%, 520px);
+  width: 100%;
+}
+
+.title {
+  margin: 0;
+  font-family: ArtifaktLegend, ArtifaktElement, Arial, sans-serif;
+  font-weight: 700;
+  color: #fff;
+  font-size: clamp(2rem, 1.55rem + 1.8vw, 3.25rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.credit {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.creditDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--da-yellow);
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+.creditText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.creditTitle {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #fff;
+  font-family: ArtifaktElement, Arial, sans-serif;
+}
+
+.creditCaption {
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: ArtifaktElement, Arial, sans-serif;
+}
+
+@media (max-width: 900px) {
+  .scrim {
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      transparent 35%,
+      rgba(0, 0, 0, 0.55) 70%,
+      rgba(0, 0, 0, 0.82) 100%
+    );
+  }
+
+  .content {
+    justify-content: flex-end;
+    align-items: stretch;
+    padding: 16px clamp(16px, 4vw, 28px) 18px;
+    gap: 12px;
+  }
+
+  .title,
+  .credit {
+    max-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

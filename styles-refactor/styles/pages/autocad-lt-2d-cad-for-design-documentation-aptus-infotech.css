@@ -1,0 +1,16 @@
+/**
+ * Page: AutoCAD LT | 2D CAD for Design & Documentation | Aptus Infotech
+ * Route: /autocad-lt
+ * Source: LIVE WEBSITE/software\autodesk\AutoCAD LT _ 2D CAD for Design & Documentation _ Aptus Infotech.html
+ *
+ * SHARED (import via globals): navbar, footer, hero, features, cards, forms, team, maps
+ * UNIQUE (this file only): page sections
+ */
+@layer pages {
+  .page-autocad-lt-2d-cad-for-design-documentation-aptus-infotech {
+    /* page root scope */
+  }
+
+
+  /* 41 inline styles detected — migrate to utilities */
+}

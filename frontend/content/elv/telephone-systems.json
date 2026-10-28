@@ -1,0 +1,220 @@
+{
+  "softwareInnerHero": {
+    "id": "hero",
+    "visible": true,
+    "family": "elv",
+    "bannerTitle": "Intelligent Communication Systems",
+    "bannerTagline": "Voice, video, and messaging that stay with your team — in office or remote.",
+    "bannerBackgroundImages": [
+      {
+        "src": "/images/Leonardo_Phoenix_10_Create_a_visually_appealing_image_for_Conf_0-673x1024.jpg",
+        "alt": "Business collaboration and voice systems"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/IPTV-Network-Television.jpg",
+        "alt": "IP telephony and network communications"
+      },
+      {
+        "src": "/images/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Audio_3-673x1024.jpg",
+        "alt": "Professional audio and communication technology"
+      },
+      {
+        "src": "/images/Leonardo_Phoenix_10_Create_a_visually_striking_image_for_Netwo_2-673x1024.jpg",
+        "alt": "Enterprise network infrastructure for telephony"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/08/Conference-Room-Solutions-768x512.webp",
+        "alt": "Connected workplace communication"
+      },
+      {
+        "src": "https://aptusinfotech.com/wp-content/uploads/2025/05/brnd-7.jpg",
+        "alt": "Modern business telephony and meeting technology"
+      }
+    ],
+    "title": "Modern Telecommunications Solutions",
+    "imageSrc": "/images/voip-benefits-01.jpg",
+    "imageAlt": "Business telephony and VoIP communication systems",
+    "mediaInline": false,
+    "layout": "two-column",
+    "ctaLabel": "Request a Quote",
+    "ctaHref": "#form",
+    "ctaPlacement": "end",
+    "paragraphs": [
+      "Calls, meetings, and mobile users belong on one reliable network. IP telephony keeps extensions, routing, and reporting in a single place. Teams stay reachable in the office or remote without a separate phone island. We size the system to how you work today and how you will grow."
+    ]
+  },
+  "cardSections": [
+    {
+      "id": "features",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Powerful Features"
+      },
+      "subheading": "Why choose our solutions for your business communications",
+      "align": "center",
+      "items": [
+        {
+          "title": "Voice over IP (VoIP)",
+          "body": "Cloud-based telephony with high-definition audio, video conferencing, and seamless integration with other business apps.",
+          "icon": "phone-alt"
+        },
+        {
+          "title": "PBX Systems",
+          "body": "Private branch exchange systems with automated attendants, call routing, and voicemail capabilities.",
+          "icon": "database"
+        },
+        {
+          "title": "IP Extensions & Call Routing",
+          "body": "Flexible extensions, auto-attendants, and intelligent call routing so every inbound and internal call reaches the right person.",
+          "icon": "phone-alt"
+        },
+        {
+          "title": "Mobile Integration",
+          "body": "Seamless integration with mobile devices for remote work, with apps for iOS and Android platforms.",
+          "icon": "mobile-alt"
+        },
+        {
+          "title": "Unified Communications",
+          "body": "Combine voice, video, messaging, and collaboration tools in one platform for streamlined workflows.",
+          "icon": "headset"
+        },
+        {
+          "title": "Call Analytics & Reporting",
+          "body": "Detailed call analytics, reporting tools, and performance metrics to optimize your communication strategy.",
+          "icon": "chart-line"
+        }
+      ]
+    },
+    {
+      "id": "benefits",
+      "visible": true,
+      "variant": "icon-cards",
+      "title": {
+        "before": "Benefits of Our Telephone Systems"
+      },
+      "subheading": "Why choose our solutions for your business communications",
+      "align": "center",
+      "items": [
+        {
+          "title": "Cost Efficiency",
+          "body": "Reduce communication expenses with affordable monthly plans and eliminate hardware maintenance costs.",
+          "icon": "dollar-sign"
+        },
+        {
+          "title": "Enhanced Collaboration",
+          "body": "Improve team productivity with clear audio quality, conference calling, and integrated messaging features.",
+          "icon": "users"
+        },
+        {
+          "title": "Scalability",
+          "body": "Easily scale up or down based on your business needs without additional infrastructure investments.",
+          "icon": "globe"
+        },
+        {
+          "title": "Security & Reliability",
+          "body": "Enterprise-grade security protocols and redundant systems ensure uninterrupted service and data protection.",
+          "icon": "shield-alt"
+        }
+      ]
+    },
+    {
+      "id": "why-aptus",
+      "visible": true,
+      "variant": "value-cards",
+      "title": {
+        "before": "Why Choose",
+        "accent": "Aptus Infotech?"
+      },
+      "align": "center",
+      "items": [
+        {
+          "title": "Certified Professionals",
+          "body": "Our technicians are certified by major manufacturers including Cisco, Avaya, and Poly.",
+          "icon": "certificate"
+        },
+        {
+          "title": "End-to-End Service",
+          "body": "We handle everything from consultation to installation, training, and ongoing support.",
+          "icon": "screwdriver"
+        },
+        {
+          "title": "24/7 Technical Support",
+          "body": "Comprehensive after-sales service with emergency response and proactive system monitoring.",
+          "icon": "headset"
+        },
+        {
+          "title": "Future-Ready Technology",
+          "body": "We implement scalable systems that accommodate future technological advancements.",
+          "icon": "reply-all"
+        }
+      ]
+    }
+  ],
+  "testimonials": {
+    "visible": true,
+    "variant": "software-quotes-marquee",
+    "title": {
+      "before": "What Our Clients Say"
+    },
+    "subheading": "Hear from satisfied customers who have transformed their business communications",
+    "items": [
+      {
+        "quote": "The new telephone system has completely revolutionized how we conduct client meetings. The image quality is exceptional and the sound clarity is remarkable.",
+        "author": "Mohammed Al Farsi",
+        "role": "IT Director",
+        "company": "Corporate Office"
+      },
+      {
+        "quote": "We implemented the premium audio enhancement system in our boardroom and couldn’t be happier. The difference in voice clarity during conference calls is night and day.",
+        "author": "Sarah Johnson",
+        "role": "Facilities Manager",
+        "company": "Retail Chain"
+      },
+      {
+        "quote": "The room booking system integrated perfectly with our existing calendar software. Now scheduling meetings is much easier and more efficient.",
+        "author": "Ahmed Hassan",
+        "role": "Operations Manager",
+        "company": "Logistics Company"
+      }
+    ]
+  },
+  "midCta": {
+    "placement": "bottom",
+    "heading": "Ready to Upgrade Your Communication System?",
+    "description": "Contact our experts today for a free consultation and customized solution proposal.",
+    "actionLabel": "Get Your Quote Now",
+    "actionHref": "#form"
+  },
+  "partnerships": {
+    "heading": "Winning together with",
+    "headingAccent": "Strategic Alliances",
+    "variant": "alliances",
+    "logos": [
+      {
+        "src": "/images/brands/cisco.svg",
+        "alt": "Cisco"
+      },
+      {
+        "src": "/images/brands/avaya.svg",
+        "alt": "Avaya"
+      },
+      {
+        "src": "/images/zycoo-rajd0gjreyq3y3ei0sski8hp6g1p7pvyvilbdiee0e.png",
+        "alt": "Zycoo"
+      },
+      {
+        "src": "/images/Fanvil.png",
+        "alt": "Fanvil"
+      },
+      {
+        "src": "/images/brands/mitel.jpg",
+        "alt": "Mitel"
+      },
+      {
+        "src": "/images/brands/3cx.png",
+        "alt": "3CX"
+      }
+    ]
+  }
+}
