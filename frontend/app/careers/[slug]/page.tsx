@@ -41,8 +41,8 @@ function JobAbout({
 }) {
   const html = descriptionHtml ? highlightKeyResponsibilitiesHtml(descriptionHtml) : "";
   const split = splitKeyResponsibilities(description);
-  const keyBlock = html.match(/<div class="aptus-jobdetail__key-block">([\s\S]*?)<\/div>/i);
-  const htmlHasList = !!keyBlock && /<(ul|ol)/i.test(keyBlock[1]);
+  const htmlHasList =
+    html.includes('class="aptus-jobdetail__key"') && /<(ul|ol)/i.test(html);
   if (html && (htmlHasList || !split)) {
     return (
       <div
@@ -55,16 +55,14 @@ function JobAbout({
     return (
       <>
         {split.before ? <p>{split.before}</p> : null}
-        <div className="aptus-jobdetail__key-block">
-          <p className="aptus-jobdetail__key">Key Responsibilities</p>
-          {split.items.length > 0 && (
-            <ul className="aptus-jobdetail__list">
-              {split.items.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ul>
-          )}
-        </div>
+        <p className="aptus-jobdetail__key">Key Responsibilities</p>
+        {split.items.length > 0 && (
+          <ul className="aptus-jobdetail__list">
+            {split.items.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
+        )}
         {split.after ? <p>{split.after}</p> : null}
       </>
     );
