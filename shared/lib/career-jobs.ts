@@ -98,43 +98,67 @@ export function pickHrJobDescriptionHtml(
   return internal || website || "";
 }
 
-const SECTION_HEADING =
-  /^(?:key\s+responsibilities|(?:[\w&/+-]|\s){0,48}?qualifications?)\s*:?$/i;
+const KEY_HEADING_LINE = /^key(?:\s|&nbsp;)+responsibilities\s*:?\s*$/i;
+const KEY_BULLET = /^[•\u2022]\s+(.+)$/;
+// Heading tag (optionally wrapped in strong/b/span) plus a following list, if any.
+const KEY_HTML_BLOCK =
+  /<(p|div|h[1-6]|strong|b|span)>\s*(?:<(?:strong|b|span)>\s*)?key(?:\s|&nbsp;)+responsibilities\s*:?\s*(?:<\/(?:strong|b|span)>\s*)?<\/\1>\s*(<(ul|ol)>[\s\S]*?<\/\3>)?/i;
 
-/** True for a standalone "Key Responsibilities" or "…Qualifications" heading. */
-export function isJobSectionHeading(label: string): boolean {
-  const text = label.replace(/&nbsp;/gi, " ").replace(/\s+/g, " ").trim();
-  if (!text || text.length > 60 || /[.!?]/.test(text)) return false;
-  return SECTION_HEADING.test(text);
+export interface KeyResponsibilitiesSplit {
+  before: string;
+  items: string[];
+  after: string;
 }
 
-function escapeHtml(value: string): string {
-  return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+/** Short title-like lines (e.g. Required Skills) — not bullet wrap continuations. */
+function looksLikeSectionHeading(line: string): boolean {
+  if (KEY_HEADING_LINE.test(line)) return true;
+  // Sentence punctuation ⇒ wrapped body text, not a heading.
+  if (/[.,;!?]/.test(line)) return false;
+  return line.length > 0 && line.length <= 60 && /^[A-Z]/.test(line);
 }
 
-/** Bold those headings in sanitized job HTML. Leaves the surrounding copy alone. */
-export function boldJobSectionHeadingsHtml(html: string): string {
-  return html.replace(
-    /<(p|div|h[1-6]|li|span|strong|b)>\s*(?:<(?:strong|b|span)>\s*)?([^<]+?)\s*(?:<\/(?:strong|b|span)>\s*)?<\/\1>/gi,
-    (full, tag: string, text: string) => {
-      if (!isJobSectionHeading(text)) return full;
-      const label = text.replace(/&nbsp;/gi, " ").replace(/\s+/g, " ").trim();
-      if (tag === "strong" || tag === "b") return `<strong>${label}</strong>`;
-      return `<${tag}><strong>${label}</strong></${tag}>`;
-    },
-  );
+/** Pull the "Key Responsibilities" line and its bullets out of stripped job text. */
+export function splitKeyResponsibilities(text: string): KeyResponsibilitiesSplit | null {
+  const lines = text.split("\n");
+  const idx = lines.findIndex((line) => KEY_HEADING_LINE.test(line.trim()));
+  if (idx < 0) return null;
+  const items: string[] = [];
+  let i = idx + 1;
+  while (i < lines.length) {
+    const trimmed = lines[i].trim();
+    if (!trimmed) {
+      i++;
+      continue;
+    }
+    const match = trimmed.match(KEY_BULLET);
+    if (match) {
+      items.push(match[1]);
+      i++;
+      continue;
+    }
+    // Odoo hard-wraps mid-bullet ("Purchase,\nInventory…") — keep appending until
+    // the next bullet or a real section heading, otherwise SPLIT_PATH drops the rest.
+    if (items.length > 0 && !looksLikeSectionHeading(trimmed)) {
+      items[items.length - 1] += ` ${trimmed}`;
+      i++;
+      continue;
+    }
+    break;
+  }
+  return {
+    before: lines.slice(0, idx).join("\n").trim(),
+    items,
+    after: lines.slice(i).join("\n").trim(),
+  };
 }
 
-/** Bold those headings in stripped plain text, escaped for innerHTML. */
-export function boldJobSectionHeadingsText(text: string): string {
-  return text
-    .split("\n")
-    .map((line) => {
-      const label = line.replace(/\s+/g, " ").trim();
-      if (!isJobSectionHeading(label)) return escapeHtml(line);
-      return `<strong>${escapeHtml(label)}</strong>`;
-    })
-    .join("\n");
+/** Wrap a Key Responsibilities heading (and its list) so the detail page can highlight it. */
+export function highlightKeyResponsibilitiesHtml(html: string): string {
+  if (!/key(?:\s|&nbsp;)+responsibilities/i.test(html)) return html;
+  return html.replace(KEY_HTML_BLOCK, (_full, _tag: string, list?: string) => {
+    return `<div class="aptus-jobdetail__key-block"><p class="aptus-jobdetail__key">Key Responsibilities</p>${list ?? ""}</div>`;
+  });
 }
 
 export function filterJobs(
