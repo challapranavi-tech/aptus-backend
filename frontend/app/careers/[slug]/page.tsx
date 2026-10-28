@@ -39,11 +39,12 @@ function JobAbout({
   description: string;
   descriptionHtml?: string;
 }) {
-  const html = descriptionHtml ? highlightKeyResponsibilitiesHtml(descriptionHtml) : "";
-  const split = splitKeyResponsibilities(description);
-  const keyBlock = html.match(/<div class="aptus-jobdetail__key-block">([\s\S]*?)<\/div>/i);
-  const htmlHasList = !!keyBlock && /<(ul|ol)/i.test(keyBlock[1]);
-  if (html && (htmlHasList || !split)) {
+  // Prefer HTML whenever present (incl. rebuilt from plain live API payloads).
+  // SPLIT_PATH is only for truly plain descriptions with no descriptionHtml.
+  const html = descriptionHtml
+    ? highlightKeyResponsibilitiesHtml(descriptionHtml)
+    : "";
+  if (html) {
     return (
       <div
         className="aptus-jobdetail__html"
@@ -51,20 +52,19 @@ function JobAbout({
       />
     );
   }
+  const split = splitKeyResponsibilities(description);
   if (split) {
     return (
       <>
         {split.before ? <p>{split.before}</p> : null}
-        <div className="aptus-jobdetail__key-block">
-          <p className="aptus-jobdetail__key">Key Responsibilities</p>
-          {split.items.length > 0 && (
-            <ul className="aptus-jobdetail__list">
-              {split.items.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ul>
-          )}
-        </div>
+        <p className="aptus-jobdetail__key">Key Responsibilities</p>
+        {split.items.length > 0 && (
+          <ul className="aptus-jobdetail__list">
+            {split.items.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
+        )}
         {split.after ? <p>{split.after}</p> : null}
       </>
     );
@@ -105,10 +105,6 @@ export default async function JobDetailPage({ params }: PageProps) {
                 <span>
                   <MetaIcon path="M20 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
                   {job.jobType}
-                </span>
-                <span>
-                  <MetaIcon path="M3 21h18M5 21V7l7-4 7 4v14" />
-                  {job.department}
                 </span>
               </div>
 

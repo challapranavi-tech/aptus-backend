@@ -35,7 +35,7 @@ import { SelectField, TextAreaField, TextField } from "./fields";
  * 4-step flow:
  *   1. basics     – Resume + personal info
  *   2. experience – Orgs, qualifications, CTC, passport
- *   3. documents  – Passport, photo, payslip, optional employment docs
+ *   3. documents  – Photo, passport, payslip, employment docs (all optional)
  *   4. review     – Summary + submit
  *
  * UI-only state (first/last name, country code, dynamic orgs) is mapped onto
@@ -44,7 +44,7 @@ import { SelectField, TextAreaField, TextField } from "./fields";
 const STEPS = [
   { key: "basics", label: "Your Details", sub: "Resume & personal info" },
   { key: "experience", label: "Experience", sub: "Work history & details" },
-  { key: "documents", label: "Documents", sub: "Upload required files" },
+  { key: "documents", label: "Documents", sub: "Upload supporting files" },
   { key: "review", label: "Review", sub: "Submit application" },
 ] as const;
 
@@ -464,31 +464,6 @@ function OrgBlock({
   );
 }
 
-function DocSectionHeader({
-  title,
-  color,
-}: {
-  title: string;
-  color: string;
-}) {
-  return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "0.6rem",
-        padding: "0.6rem 1rem",
-        borderRadius: "0.5rem",
-        background: color,
-        marginBottom: "1rem",
-        marginTop: "1.5rem",
-      }}
-    >
-      <strong style={{ fontSize: "1rem", letterSpacing: "0.01em" }}>{title}</strong>
-    </div>
-  );
-}
-
 export function ApplicationWizard({ job }: { job: CareerJob }) {
   const [step, setStep] = useState(0);
   const [maxStep, setMaxStep] = useState(0);
@@ -757,15 +732,15 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
           if (yErr) errs[`educationEntries.${i}.year`] = yErr;
         }
       });
-      if (!files.educationDocs[0])
-        errs.educationDoc_0 = "Supporting document is required.";
+      files.educationDocs.forEach((f, i) => {
+        if (f && f.size > MAX_UPLOAD_BYTES)
+          errs[`educationDoc_${i}`] = "Each file must be under 0.8 MB (800 KB).";
+      });
     }
 
     if (STEPS[index].key === "documents") {
-      if (!files.passportCopy) errs.passportCopy = "Passport copy is required.";
-      const photoErr = validateImageFile(files.photograph, "Photograph", true);
+      const photoErr = validateImageFile(files.photograph, "Photograph", false);
       if (photoErr) errs.photograph = photoErr;
-      if (!files.latestPayslip) errs.latestPayslip = "Payslip is required.";
 
       const checks: Array<[string, File | null]> = [
         ["passportCopy", files.passportCopy],
@@ -1454,8 +1429,7 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
             <fieldset className="aptus-apply__group">
               <legend>Academic Details</legend>
               <p className="aptus-apply__hint">
-                Add at least one qualification. A supporting document is required
-                for the first entry.
+                Add at least one qualification. Supporting documents are optional.
               </p>
               {values.educationEntries.map((e, i) => (
                 <div key={i} className="aptus-repeat-entry">
@@ -1498,17 +1472,13 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
                   </div>
                   <FileDropzone
                     accept={`${DOC_ACCEPT},${IMAGE_ACCEPT}`}
-                    label={
-                      i === 0
-                        ? "Supporting document"
-                        : "Supporting document (optional)"
-                    }
+                    label="Supporting document"
                     files={
                       files.educationDocs[i]
                         ? [files.educationDocs[i] as File]
                         : []
                     }
-                    error={i === 0 ? errors.educationDoc_0 : undefined}
+                    error={errors[`educationDoc_${i}`]}
                     onChange={(list) => {
                       const updated = files.educationDocs.map((d, idx) =>
                         idx === i ? list[0] ?? null : d,
@@ -1517,6 +1487,11 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
                       checkTotalAfterChange({ educationDocs: updated });
                       clearFileError(`educationDoc_${i}`);
                     }}
+                    validate={(f) =>
+                      f.size > MAX_UPLOAD_BYTES
+                        ? "Each file must be under 0.8 MB (800 KB)."
+                        : null
+                    }
                   />
                 </div>
               ))}
@@ -1635,35 +1610,13 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
           <>
             <h2>Documents</h2>
             <p className="aptus-apply__hint">
-              Max 0.8 MB (800 KB) per file.
+              Max 0.8 MB (800 KB) per file. All uploads are optional.
             </p>
 
-            <DocSectionHeader title="Required Documents" color="#fef3c7" />
-
-            <div style={{ marginBottom: "1rem" }}>
-              <FileDropzone
-                accept={`${DOC_ACCEPT},${IMAGE_ACCEPT}`}
-                label="Passport Copy *"
-                files={files.passportCopy ? [files.passportCopy] : []}
-                error={errors.passportCopy}
-                onChange={(list) => {
-                  const passportCopy = list[0] ?? null;
-                  setFiles((p) => ({ ...p, passportCopy }));
-                  checkTotalAfterChange({ passportCopy });
-                  clearFileError("passportCopy");
-                }}
-                validate={(f) =>
-                  f.size > MAX_UPLOAD_BYTES
-                    ? "Each file must be under 0.8 MB (800 KB)."
-                    : null
-                }
-              />
-            </div>
-
-            <div style={{ marginBottom: "1rem" }}>
+            <div style={{ marginBottom: "0.75rem" }}>
               <FileDropzone
                 accept={IMAGE_ACCEPT}
-                label="Passport-size Photograph *"
+                label="Passport-size Photograph"
                 preview
                 hint="JPG, PNG or WEBP · up to 0.8 MB (800 KB)"
                 files={files.photograph ? [files.photograph] : []}
@@ -1674,40 +1627,14 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
                   checkTotalAfterChange({ photograph });
                   clearFileError("photograph");
                 }}
-                validate={(f) => validateImageFile(f, "Photograph", true)}
+                validate={(f) => validateImageFile(f, "Photograph", false)}
               />
             </div>
-
-            <div style={{ marginBottom: "1.5rem" }}>
-              <FileDropzone
-                accept={`${DOC_ACCEPT},${IMAGE_ACCEPT}`}
-                label="Payslip *"
-                files={files.latestPayslip ? [files.latestPayslip] : []}
-                error={errors.latestPayslip}
-                onChange={(list) => {
-                  const latestPayslip = list[0] ?? null;
-                  setFiles((p) => ({ ...p, latestPayslip }));
-                  checkTotalAfterChange({ latestPayslip });
-                  clearFileError("latestPayslip");
-                }}
-                validate={(f) =>
-                  f.size > MAX_UPLOAD_BYTES
-                    ? "Each file must be under 0.8 MB (800 KB)."
-                    : null
-                }
-              />
-            </div>
-
-            <DocSectionHeader title="Optional Documents" color="#ede9fe" />
-            <p
-              className="aptus-apply__hint"
-              style={{ marginTop: "-0.5rem", marginBottom: "1rem" }}
-            >
-              These speed up your review but are not required.
-            </p>
 
             {(
               [
+                ["passportCopy", "Passport Copy"],
+                ["latestPayslip", "Payslip"],
                 ["appointmentLetter", "Appointment Letter"],
                 ["relievingLetter", "Relieving Letter"],
               ] as Array<[keyof FileState, string]>

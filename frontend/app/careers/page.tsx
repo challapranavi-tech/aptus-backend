@@ -44,7 +44,6 @@ export default async function CareersPage({ searchParams }: PageProps) {
   const filters = {
     q: first(sp.q),
     department: first(sp.department),
-    location: first(sp.location),
   };
 
   const [initial, careerPage] = await Promise.all([

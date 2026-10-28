@@ -57,11 +57,74 @@ function looksLikeHtml(value: string): boolean {
   return /<\/?[a-zA-Z][^>]*>/.test(value);
 }
 
+function escapeHtmlText(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+/**
+ * Rebuild structured HTML from stripped Odoo plain text.
+ * Live backend often omits descriptionHtml — without this, the detail page
+ * cannot match localhost (lists/headings).
+ */
+export function plainJobDescriptionToHtml(text: string): string {
+  const lines = text.split("\n").map((l) => l.trim());
+  const parts: string[] = [];
+  let bullets: string[] = [];
+
+  const flushBullets = () => {
+    if (!bullets.length) return;
+    parts.push(
+      `<ul>${bullets.map((b) => `<li>${escapeHtmlText(b)}</li>`).join("")}</ul>`,
+    );
+    bullets = [];
+  };
+
+  for (const line of lines) {
+    if (!line) continue;
+    const bullet = line.match(KEY_BULLET);
+    if (bullet) {
+      bullets.push(bullet[1]);
+      continue;
+    }
+    // Mid-bullet wrap continuation (Odoo hard-wraps after commas).
+    if (bullets.length && !looksLikeSectionHeading(line)) {
+      bullets[bullets.length - 1] += ` ${line}`;
+      continue;
+    }
+    flushBullets();
+    if (KEY_HEADING_LINE.test(line)) {
+      parts.push(`<p class="aptus-jobdetail__key">Key Responsibilities</p>`);
+    } else if (looksLikeSectionHeading(line)) {
+      parts.push(`<p><strong>${escapeHtmlText(line)}</strong></p>`);
+    } else {
+      // Soft-wrap join when previous body <p> didn't end a sentence
+      // ("Project\nEngineer – ELV…") — mirrors stripJobHtml lowercase join.
+      const last = parts[parts.length - 1];
+      const body =
+        last &&
+        last.startsWith("<p>") &&
+        !last.startsWith("<p><strong>") &&
+        !last.includes("aptus-jobdetail__key")
+          ? last.slice(3, -4)
+          : "";
+      if (body && !/[.!?]$/.test(body.trim())) {
+        parts[parts.length - 1] =
+          `<p>${body} ${escapeHtmlText(line)}</p>`;
+      } else {
+        parts.push(`<p>${escapeHtmlText(line)}</p>`);
+      }
+    }
+  }
+  flushBullets();
+  return parts.join("");
+}
+
 /** Normalize job text from API — collapses blank-line bloat even if a stale backend lags. */
 export function normalizeCareerJob(job: CareerJob): CareerJob {
-  // Only keep descriptionHtml when the payload is actually markup. Promoting
-  // already-stripped plain text into descriptionHtml forces the detail page
-  // into the HTML container (no white-space: pre-line) → one wall of text.
   const rawHtml =
     typeof job.descriptionHtml === "string" &&
     job.descriptionHtml.trim() &&
@@ -70,13 +133,18 @@ export function normalizeCareerJob(job: CareerJob): CareerJob {
       : typeof job.description === "string" && looksLikeHtml(job.description)
         ? job.description
         : "";
-  const descriptionHtml = rawHtml ? sanitizeJobHtml(rawHtml) : "";
+  let descriptionHtml = rawHtml ? sanitizeJobHtml(rawHtml) : "";
+  const description =
+    typeof job.description === "string"
+      ? stripJobHtml(job.description)
+      : stripJobHtml(descriptionHtml);
+  // Live API may only send plain description — rebuild markup so detail CSS applies.
+  if (!descriptionHtml && description.trim()) {
+    descriptionHtml = sanitizeJobHtml(plainJobDescriptionToHtml(description));
+  }
   return {
     ...job,
-    description:
-      typeof job.description === "string"
-        ? stripJobHtml(job.description)
-        : stripJobHtml(descriptionHtml),
+    description,
     descriptionHtml: descriptionHtml || undefined,
   };
 }
@@ -110,6 +178,22 @@ export interface KeyResponsibilitiesSplit {
   after: string;
 }
 
+/** Short title-like lines (e.g. Required Skills) — not bullet/body wrap continuations. */
+function looksLikeSectionHeading(line: string): boolean {
+  if (KEY_HEADING_LINE.test(line)) return true;
+  // Sentence punctuation ⇒ wrapped body text, not a heading.
+  if (/[.,;!?]/.test(line)) return false;
+  if (!line || line.length > 60 || !/^[A-Z]/.test(line)) return false;
+  const words = line.split(/\s+/).filter(Boolean);
+  // "We are seeking a motivated…" is body; real headings stay short.
+  if (words.length === 0 || words.length > 6) return false;
+  // Title Case (or &): body soft-wraps are mostly lowercase glue words.
+  const titled = words.filter(
+    (w) => /^[A-Z]/.test(w) || w === "&" || w === "/",
+  );
+  return titled.length >= Math.ceil(words.length / 2);
+}
+
 /** Pull the "Key Responsibilities" line and its bullets out of stripped job text. */
 export function splitKeyResponsibilities(text: string): KeyResponsibilitiesSplit | null {
   const lines = text.split("\n");
@@ -118,10 +202,25 @@ export function splitKeyResponsibilities(text: string): KeyResponsibilitiesSplit
   const items: string[] = [];
   let i = idx + 1;
   while (i < lines.length) {
-    const match = lines[i].trim().match(KEY_BULLET);
-    if (!match) break;
-    items.push(match[1]);
-    i++;
+    const trimmed = lines[i].trim();
+    if (!trimmed) {
+      i++;
+      continue;
+    }
+    const match = trimmed.match(KEY_BULLET);
+    if (match) {
+      items.push(match[1]);
+      i++;
+      continue;
+    }
+    // Odoo hard-wraps mid-bullet ("Purchase,\nInventory…") — keep appending until
+    // the next bullet or a real section heading, otherwise SPLIT_PATH drops the rest.
+    if (items.length > 0 && !looksLikeSectionHeading(trimmed)) {
+      items[items.length - 1] += ` ${trimmed}`;
+      i++;
+      continue;
+    }
+    break;
   }
   return {
     before: lines.slice(0, idx).join("\n").trim(),
@@ -130,11 +229,11 @@ export function splitKeyResponsibilities(text: string): KeyResponsibilitiesSplit
   };
 }
 
-/** Wrap a Key Responsibilities heading (and its list) so the detail page can highlight it. */
+/** Mark the Key Responsibilities heading (and keep its list) — styled larger/bold via CSS. */
 export function highlightKeyResponsibilitiesHtml(html: string): string {
   if (!/key(?:\s|&nbsp;)+responsibilities/i.test(html)) return html;
   return html.replace(KEY_HTML_BLOCK, (_full, _tag: string, list?: string) => {
-    return `<div class="aptus-jobdetail__key-block"><p class="aptus-jobdetail__key">Key Responsibilities</p>${list ?? ""}</div>`;
+    return `<p class="aptus-jobdetail__key">Key Responsibilities</p>${list ?? ""}`;
   });
 }
 
