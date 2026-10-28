@@ -4,12 +4,12 @@
  */
 import assert from "node:assert/strict";
 import {
-  boldJobSectionHeadingsHtml,
-  boldJobSectionHeadingsText,
   filterJobs,
+  highlightKeyResponsibilitiesHtml,
   normalizeCareerJob,
   pickHrJobDescriptionHtml,
   slugifyJobTitle,
+  splitKeyResponsibilities,
   type CareerJob,
 } from "./career-jobs";
 
@@ -109,28 +109,44 @@ assert.equal(
 );
 assert.ok(plainOnly.description.includes("• Plan"), "plain bullets preserved");
 
-const plain = boldJobSectionHeadingsText(
+const split = splitKeyResponsibilities(
   "We are looking for a Software Programmer.\n" +
     "Key Responsibilities\n" +
     "• Design, develop, and test applications.\n" +
-    "Required Skills & Qualifications\n" +
+    "• Write clean code.\n" +
+    "Required Skills\n" +
     "• Bachelor's degree.",
 );
-assert.ok(plain.includes("<strong>Key Responsibilities</strong>"));
-assert.ok(plain.includes("<strong>Required Skills &amp; Qualifications</strong>"));
-assert.ok(plain.includes("• Design, develop, and test applications."));
-assert.ok(!plain.includes("aptus-jobdetail__key-block"));
+assert.equal(split?.before, "We are looking for a Software Programmer.");
+assert.deepEqual(split?.items, [
+  "Design, develop, and test applications.",
+  "Write clean code.",
+]);
+assert.equal(split?.after, "Required Skills\n• Bachelor's degree.");
+assert.equal(splitKeyResponsibilities("No section here"), null);
 
-const marked = boldJobSectionHeadingsHtml(
-  "<p>Intro</p><p>Key Responsibilities</p><ul><li>Design</li></ul><p>Qualifications</p><p>Meet the qualifications for this role today.</p>",
+// Live fallback path: Odoo hard-wraps mid-bullet with a capital letter.
+const wrapped = splitKeyResponsibilities(
+  "Job Purpose\nIntro text.\nKey Responsibilities\n" +
+    "• Configure and support Odoo modules including CRM, Sales, Purchase,\n" +
+    "Inventory, Accounting, Projects, and Website.\n" +
+    "• Understand business requirements.\n" +
+    "Required Skills\n" +
+    "• Good understanding of Odoo.",
 );
-assert.ok(marked.includes("<p><strong>Key Responsibilities</strong></p>"));
-assert.ok(marked.includes("<p><strong>Qualifications</strong></p>"));
-assert.ok(marked.includes("<ul><li>Design</li></ul>"));
-assert.ok(
-  marked.includes("<p>Meet the qualifications for this role today.</p>"),
-  "does not bold qualifications mentioned inside a sentence",
+assert.deepEqual(wrapped?.items, [
+  "Configure and support Odoo modules including CRM, Sales, Purchase, Inventory, Accounting, Projects, and Website.",
+  "Understand business requirements.",
+]);
+assert.equal(wrapped?.after, "Required Skills\n• Good understanding of Odoo.");
+
+const marked = highlightKeyResponsibilitiesHtml(
+  "<p>Intro</p><p><strong>Key Responsibilities</strong></p><ul><li>Design</li></ul><p>Required</p>",
 );
-assert.ok(!marked.includes("aptus-jobdetail__key-block"));
+assert.ok(marked.includes('class="aptus-jobdetail__key-block"'), "wraps the section");
+assert.ok(marked.includes("Key Responsibilities"), "keeps the heading");
+assert.ok(marked.includes("<ul><li>Design</li></ul>"), "keeps the list inside the highlight");
+assert.ok(marked.startsWith("<p>Intro</p>"), "leaves the intro in place");
+assert.ok(marked.endsWith("<p>Required</p>"), "leaves the following section in place");
 
 console.log("career-jobs self-check passed");
