@@ -95,4 +95,16 @@ assert.ok(htmlJob.descriptionHtml?.includes("<strong>"), "keeps formatting tags"
 assert.ok(!htmlJob.descriptionHtml?.includes("<script"), "strips script tags");
 assert.ok(htmlJob.description.includes("Build"), "plain description still set");
 
+const plainOnly = normalizeCareerJob({
+  ...jobs[0],
+  description: "Job Summary\n• Plan projects\n• Ship code",
+  descriptionHtml: undefined,
+});
+assert.equal(
+  plainOnly.descriptionHtml,
+  undefined,
+  "plain description must not become descriptionHtml",
+);
+assert.ok(plainOnly.description.includes("• Plan"), "plain bullets preserved");
+
 console.log("career-jobs self-check passed");
