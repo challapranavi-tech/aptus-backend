@@ -135,19 +135,19 @@ export async function POST(req: NextRequest) {
     passportCopy,
     [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS],
     "Passport copy",
-    true, // passport copy is mandatory for all candidates
+    false,
     DOC_OR_IMAGE_MIME_OK,
   );
   if (passportErr) errors.passportCopy = passportErr;
 
-  const photoErr = validateImageFile(photograph, "Passport-size photograph", true);
+  const photoErr = validateImageFile(photograph, "Passport-size photograph", false);
   if (photoErr) errors.photograph = photoErr;
 
   const payslipErr = validateFile(
     latestPayslip,
     [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS],
     "Payslip",
-    true,
+    false,
     DOC_OR_IMAGE_MIME_OK,
   );
   if (payslipErr) errors.latestPayslip = payslipErr;
@@ -167,26 +167,15 @@ export async function POST(req: NextRequest) {
     if (e) errors[key] = e;
   }
 
-  // Education supporting docs: first is mandatory; extras optional.
+  // Education supporting docs are all optional.
   const eduDocs: Array<{ file: File; label: string }> = [];
-  const edu0 = filesFor(form, "educationDoc_0")[0] ?? null;
-  const edu0Err = validateFile(
-    edu0,
-    [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS],
-    "Supporting document",
-    true,
-    DOC_OR_IMAGE_MIME_OK,
-  );
-  if (edu0Err) errors.educationDoc_0 = edu0Err;
-  else if (edu0) eduDocs.push({ file: edu0, label: "Education supporting document 1" });
-
-  for (let i = 1; i < 10; i++) {
+  for (let i = 0; i < 10; i++) {
     const f = filesFor(form, `educationDoc_${i}`)[0];
     if (!f) continue;
     const e = validateFile(
       f,
       [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS],
-      `Education document ${i + 1}`,
+      i === 0 ? "Supporting document" : `Education document ${i + 1}`,
       false,
       DOC_OR_IMAGE_MIME_OK,
     );
