@@ -98,6 +98,46 @@ export function pickHrJobDescriptionHtml(
   return internal || website || "";
 }
 
+const KEY_HEADING_LINE = /^key(?:\s|&nbsp;)+responsibilities\s*:?\s*$/i;
+const KEY_BULLET = /^[•\u2022]\s+(.+)$/;
+// Heading tag (optionally wrapped in strong/b/span) plus a following list, if any.
+const KEY_HTML_BLOCK =
+  /<(p|div|h[1-6]|strong|b|span)>\s*(?:<(?:strong|b|span)>\s*)?key(?:\s|&nbsp;)+responsibilities\s*:?\s*(?:<\/(?:strong|b|span)>\s*)?<\/\1>\s*(<(ul|ol)>[\s\S]*?<\/\3>)?/i;
+
+export interface KeyResponsibilitiesSplit {
+  before: string;
+  items: string[];
+  after: string;
+}
+
+/** Pull the "Key Responsibilities" line and its bullets out of stripped job text. */
+export function splitKeyResponsibilities(text: string): KeyResponsibilitiesSplit | null {
+  const lines = text.split("\n");
+  const idx = lines.findIndex((line) => KEY_HEADING_LINE.test(line.trim()));
+  if (idx < 0) return null;
+  const items: string[] = [];
+  let i = idx + 1;
+  while (i < lines.length) {
+    const match = lines[i].trim().match(KEY_BULLET);
+    if (!match) break;
+    items.push(match[1]);
+    i++;
+  }
+  return {
+    before: lines.slice(0, idx).join("\n").trim(),
+    items,
+    after: lines.slice(i).join("\n").trim(),
+  };
+}
+
+/** Wrap a Key Responsibilities heading (and its list) so the detail page can highlight it. */
+export function highlightKeyResponsibilitiesHtml(html: string): string {
+  if (!/key(?:\s|&nbsp;)+responsibilities/i.test(html)) return html;
+  return html.replace(KEY_HTML_BLOCK, (_full, _tag: string, list?: string) => {
+    return `<div class="aptus-jobdetail__key-block"><p class="aptus-jobdetail__key">Key Responsibilities</p>${list ?? ""}</div>`;
+  });
+}
+
 export function filterJobs(
   jobs: CareerJob[],
   filters: JobFilters,

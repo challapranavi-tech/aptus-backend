@@ -1,6 +1,10 @@
 import { BackToJobs } from "@/components/careers/BackToJobs";
 import { Button, Container } from "@/components/ui";
 import { getAllJobSlugs, getJob } from "@/data/jobs";
+import {
+  highlightKeyResponsibilitiesHtml,
+  splitKeyResponsibilities,
+} from "@shared/lib/career-jobs";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "@/styles/pages/careers.css";
@@ -26,6 +30,46 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     // so a job with no description can't throw during metadata generation (→ 500).
     description: typeof job.description === "string" ? job.description.slice(0, 160) : "",
   };
+}
+
+function JobAbout({
+  description,
+  descriptionHtml,
+}: {
+  description: string;
+  descriptionHtml?: string;
+}) {
+  const html = descriptionHtml ? highlightKeyResponsibilitiesHtml(descriptionHtml) : "";
+  const split = splitKeyResponsibilities(description);
+  const keyBlock = html.match(/<div class="aptus-jobdetail__key-block">([\s\S]*?)<\/div>/i);
+  const htmlHasList = !!keyBlock && /<(ul|ol)/i.test(keyBlock[1]);
+  if (html && (htmlHasList || !split)) {
+    return (
+      <div
+        className="aptus-jobdetail__html"
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
+    );
+  }
+  if (split) {
+    return (
+      <>
+        {split.before ? <p>{split.before}</p> : null}
+        <div className="aptus-jobdetail__key-block">
+          <p className="aptus-jobdetail__key">Key Responsibilities</p>
+          {split.items.length > 0 && (
+            <ul className="aptus-jobdetail__list">
+              {split.items.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+        {split.after ? <p>{split.after}</p> : null}
+      </>
+    );
+  }
+  return <p>{description}</p>;
 }
 
 function MetaIcon({ path }: { path: string }) {
@@ -71,14 +115,10 @@ export default async function JobDetailPage({ params }: PageProps) {
               {(job.descriptionHtml || job.description) && (
                 <div className="aptus-jobdetail__section">
                   <h2>About the role</h2>
-                  {job.descriptionHtml ? (
-                    <div
-                      className="aptus-jobdetail__html"
-                      dangerouslySetInnerHTML={{ __html: job.descriptionHtml }}
-                    />
-                  ) : (
-                    <p>{job.description}</p>
-                  )}
+                  <JobAbout
+                    description={job.description}
+                    descriptionHtml={job.descriptionHtml}
+                  />
                 </div>
               )}
 
