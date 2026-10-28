@@ -153,11 +153,11 @@ export function splitKeyResponsibilities(text: string): KeyResponsibilitiesSplit
   };
 }
 
-/** Wrap a Key Responsibilities heading (and its list) so the detail page can highlight it. */
+/** Mark the Key Responsibilities heading (and keep its list) — styled larger/bold via CSS. */
 export function highlightKeyResponsibilitiesHtml(html: string): string {
   if (!/key(?:\s|&nbsp;)+responsibilities/i.test(html)) return html;
   return html.replace(KEY_HTML_BLOCK, (_full, _tag: string, list?: string) => {
-    return `<div class="aptus-jobdetail__key-block"><p class="aptus-jobdetail__key">Key Responsibilities</p>${list ?? ""}</div>`;
+    return `<p class="aptus-jobdetail__key">Key Responsibilities</p>${list ?? ""}`;
   });
 }
 
