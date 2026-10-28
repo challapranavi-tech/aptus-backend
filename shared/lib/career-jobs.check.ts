@@ -5,9 +5,11 @@
 import assert from "node:assert/strict";
 import {
   filterJobs,
+  highlightKeyResponsibilitiesHtml,
   normalizeCareerJob,
   pickHrJobDescriptionHtml,
   slugifyJobTitle,
+  splitKeyResponsibilities,
   type CareerJob,
 } from "./career-jobs";
 
@@ -106,5 +108,30 @@ assert.equal(
   "plain description must not become descriptionHtml",
 );
 assert.ok(plainOnly.description.includes("• Plan"), "plain bullets preserved");
+
+const split = splitKeyResponsibilities(
+  "We are looking for a Software Programmer.\n" +
+    "Key Responsibilities\n" +
+    "• Design, develop, and test applications.\n" +
+    "• Write clean code.\n" +
+    "Required Skills\n" +
+    "• Bachelor's degree.",
+);
+assert.equal(split?.before, "We are looking for a Software Programmer.");
+assert.deepEqual(split?.items, [
+  "Design, develop, and test applications.",
+  "Write clean code.",
+]);
+assert.equal(split?.after, "Required Skills\n• Bachelor's degree.");
+assert.equal(splitKeyResponsibilities("No section here"), null);
+
+const marked = highlightKeyResponsibilitiesHtml(
+  "<p>Intro</p><p><strong>Key Responsibilities</strong></p><ul><li>Design</li></ul><p>Required</p>",
+);
+assert.ok(marked.includes('class="aptus-jobdetail__key-block"'), "wraps the section");
+assert.ok(marked.includes("Key Responsibilities"), "keeps the heading");
+assert.ok(marked.includes("<ul><li>Design</li></ul>"), "keeps the list inside the highlight");
+assert.ok(marked.startsWith("<p>Intro</p>"), "leaves the intro in place");
+assert.ok(marked.endsWith("<p>Required</p>"), "leaves the following section in place");
 
 console.log("career-jobs self-check passed");
