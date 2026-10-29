@@ -85,7 +85,6 @@ function EmptyState({ searching }: { searching: boolean }) {
 interface InitialFilters {
   q?: string;
   department?: string;
-  location?: string;
 }
 
 interface Props {
@@ -96,13 +95,11 @@ interface Props {
 export function CareersListing({ initial, initialFilters }: Props) {
   const [q, setQ] = useState(initialFilters?.q ?? "");
   const [department, setDepartment] = useState(initialFilters?.department ?? "");
-  const [location, setLocation] = useState(initialFilters?.location ?? "");
   const [page, setPage] = useState(1);
 
   const [jobs, setJobs] = useState<CareerJob[]>(initial?.jobs ?? []);
   const [total, setTotal] = useState(initial?.total ?? 0);
   const [departments, setDepartments] = useState<string[]>(initial?.departments ?? []);
-  const [locations, setLocations] = useState<string[]>(initial?.locations ?? []);
   const [loading, setLoading] = useState(initial === null);
   const [loadingMore, setLoadingMore] = useState(false);
   const [failed, setFailed] = useState(false);
@@ -116,7 +113,6 @@ export function CareersListing({ initial, initialFilters }: Props) {
       const sp = new URLSearchParams();
       if (q) sp.set("q", q);
       if (department) sp.set("department", department);
-      if (location) sp.set("location", location);
       sp.set("page", String(opts.page));
       sp.set("pageSize", String(JOB_PAGE_SIZE));
 
@@ -133,7 +129,6 @@ export function CareersListing({ initial, initialFilters }: Props) {
         // Never keep SSR leftovers when the live API responds — Odoo is source of truth.
         setTotal(data.total);
         setDepartments(data.departments);
-        setLocations(data.locations);
         setJobs((prev) => (opts.append ? [...prev, ...jobs] : jobs));
       } catch {
         // No mock/fallback jobs — show empty openings state when the backend is unreachable.
@@ -142,14 +137,13 @@ export function CareersListing({ initial, initialFilters }: Props) {
           setJobs([]);
           setTotal(0);
           setDepartments([]);
-          setLocations([]);
         }
       } finally {
         setLoading(false);
         setLoadingMore(false);
       }
     },
-    [q, department, location],
+    [q, department],
   );
 
   // Always refresh once on mount so a stale SSR empty list cannot hide new Odoo jobs.
@@ -171,7 +165,6 @@ export function CareersListing({ initial, initialFilters }: Props) {
       const sp = new URLSearchParams();
       if (q) sp.set("q", q);
       if (department) sp.set("department", department);
-      if (location) sp.set("location", location);
       const qs = sp.toString();
       window.history.replaceState(null, "", qs ? `/careers?${qs}` : "/careers");
 
@@ -181,7 +174,7 @@ export function CareersListing({ initial, initialFilters }: Props) {
     return () => {
       if (debounce.current) clearTimeout(debounce.current);
     };
-  }, [q, department, location, fetchJobs]);
+  }, [q, department, fetchJobs]);
 
   const loadMore = () => {
     const nextPage = page + 1;
@@ -189,40 +182,26 @@ export function CareersListing({ initial, initialFilters }: Props) {
     fetchJobs({ page: nextPage, append: true });
   };
 
-  const hasFilters = Boolean(q || department || location);
+  const hasFilters = Boolean(q || department);
   const canLoadMore = jobs.length < total;
 
   const clearAll = () => {
     setQ("");
     setDepartment("");
-    setLocation("");
   };
 
   const filterControls = (
-    <>
-      <select
-        className="aptus-careers-select"
-        value={department}
-        onChange={(e) => setDepartment(e.target.value)}
-        aria-label="Filter by department"
-      >
-        <option value="">All departments</option>
-        {departments.map((d) => (
-          <option key={d} value={d}>{d}</option>
-        ))}
-      </select>
-      <select
-        className="aptus-careers-select"
-        value={location}
-        onChange={(e) => setLocation(e.target.value)}
-        aria-label="Filter by location"
-      >
-        <option value="">All locations</option>
-        {locations.map((l) => (
-          <option key={l} value={l}>{l}</option>
-        ))}
-      </select>
-    </>
+    <select
+      className="aptus-careers-select"
+      value={department}
+      onChange={(e) => setDepartment(e.target.value)}
+      aria-label="Filter by department"
+    >
+      <option value="">All departments</option>
+      {departments.map((d) => (
+        <option key={d} value={d}>{d}</option>
+      ))}
+    </select>
   );
 
   return (
@@ -265,7 +244,6 @@ export function CareersListing({ initial, initialFilters }: Props) {
         <div className="aptus-careers-chips">
           {q && <FilterChip label={`“${q}”`} onClear={() => setQ("")} />}
           {department && <FilterChip label={department} onClear={() => setDepartment("")} />}
-          {location && <FilterChip label={location} onClear={() => setLocation("")} />}
           <button type="button" className="aptus-careers-chip" onClick={clearAll}>
             Clear all
           </button>
@@ -349,20 +327,6 @@ export function CareersListing({ initial, initialFilters }: Props) {
                 <option value="">All departments</option>
                 {departments.map((d) => (
                   <option key={d} value={d}>{d}</option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label htmlFor="drawer-loc">Location</label>
-              <select
-                id="drawer-loc"
-                className="aptus-careers-select"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-              >
-                <option value="">All locations</option>
-                {locations.map((l) => (
-                  <option key={l} value={l}>{l}</option>
                 ))}
               </select>
             </div>

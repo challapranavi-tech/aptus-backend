@@ -174,9 +174,10 @@ assert.ok(
   ),
   "compound dangerous extension rejected",
 );
-assert.ok(
-  validateFile(null, [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS], "Payslip", true),
-  "missing required payslip flagged",
+assert.equal(
+  validateFile(null, [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS], "Payslip", false),
+  null,
+  "missing optional payslip allowed",
 );
 assert.ok(
   validateFile(

@@ -49,6 +49,15 @@ export function sanitizeJobHtml(html: string): string {
       return `<a href="${safe}" rel="noopener noreferrer" target="_blank">`;
     }
 
+    // Keep the Key Responsibilities marker class used by careers detail CSS.
+    if (name === "p") {
+      const clsMatch = attrs.match(/\sclass\s*=\s*("([^"]*)"|'([^']*)')/i);
+      const cls = (clsMatch?.[2] ?? clsMatch?.[3] ?? "").trim();
+      if (cls === "aptus-jobdetail__key") {
+        return `<p class="aptus-jobdetail__key">`;
+      }
+    }
+
     return `<${name}>`;
   });
 
