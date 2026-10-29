@@ -8,7 +8,7 @@
  * Callers treat CRM create as best-effort after the sales email is sent.
  */
 import type { ContactCategory } from "@shared/lib/contact-request";
-import { normalizeOdooBaseUrl, type OdooRpcSession } from "./rpc";
+import { normalizeOdooBaseUrl, type OdooDomain, type OdooRpcSession } from "./rpc";
 
 export type { ContactCategory };
 
@@ -436,7 +436,7 @@ type CrmStagePlacement = {
  * request `team_id` or search_read fails with Invalid field.
  */
 async function searchCrmStagePlacement(
-  domain: unknown[],
+  domain: OdooDomain,
 ): Promise<CrmStagePlacement | undefined> {
   return withAuthRetry(async (session) => {
     const { searchRead } = await import("./rpc");
