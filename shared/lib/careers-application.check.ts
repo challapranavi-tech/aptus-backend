@@ -180,6 +180,10 @@ assert.equal(
   "missing optional payslip allowed",
 );
 assert.ok(
+  validateFile(null, [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS], "Payslip", true),
+  "missing required payslip flagged",
+);
+assert.ok(
   validateFile(
     { name: "slip.png", size: 1024, type: "image/png" },
     [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS],
