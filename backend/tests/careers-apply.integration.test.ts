@@ -107,10 +107,20 @@ describe("POST /api/careers/apply", () => {
     expect(mocks.createApplicant).not.toHaveBeenCalled();
   });
 
-  it("accepts applications without optional document uploads", async () => {
+  it("accepts fresher applications without optional document uploads", async () => {
     const res = await POST(
       req(
         buildCareersForm({
+          fields: {
+            experienceType: "Fresher",
+            currentOrg: JSON.stringify({
+              name: "Not Applicable",
+              designation: "Not Applicable",
+              duration: "Not Applicable",
+              totalYears: "0",
+            }),
+            totalYearsExperience: "0",
+          },
           passportCopy: null,
           latestPayslip: null,
           photograph: null,
@@ -120,6 +130,21 @@ describe("POST /api/careers/apply", () => {
     );
     expect(res.status).toBe(200);
     expect(mocks.createApplicant).toHaveBeenCalled();
+  });
+
+  it("rejects experienced applications without a payslip", async () => {
+    const res = await POST(
+      req(
+        buildCareersForm({
+          fields: { experienceType: "Experienced" },
+          latestPayslip: null,
+        }),
+      ),
+    );
+    expect(res.status).toBe(400);
+    const body = await res.json();
+    expect(body.errors.latestPayslip).toBeTruthy();
+    expect(mocks.createApplicant).not.toHaveBeenCalled();
   });
 
   it("rejects spoofed executable disguised as PDF (magic bytes)", async () => {

@@ -25,6 +25,7 @@ import {
   DOC_OR_IMAGE_MIME_OK,
   IMAGE_EXTENSIONS,
   RESUME_EXTENSIONS,
+  isPayslipRequired,
   parseApplicationFields,
   rejectUnknownFormKeys,
   sanitizeFilename,
@@ -143,11 +144,18 @@ export async function POST(req: NextRequest) {
   const photoErr = validateImageFile(photograph, "Passport-size photograph", false);
   if (photoErr) errors.photograph = photoErr;
 
+  // Payslip required for Experienced; optional for Fresher (and when type missing —
+  // experienceType itself is already flagged by parseApplicationFields).
+  const experienceType =
+    (parsed.ok ? parsed.data.experienceType : null) ??
+    (typeof form.get("experienceType") === "string"
+      ? (form.get("experienceType") as string)
+      : "");
   const payslipErr = validateFile(
     latestPayslip,
     [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS],
     "Payslip",
-    false,
+    isPayslipRequired(experienceType),
     DOC_OR_IMAGE_MIME_OK,
   );
   if (payslipErr) errors.latestPayslip = payslipErr;
@@ -470,6 +478,7 @@ function applicationRows(f: ApplicationFields): Array<[string, string]> {
     ["Name of Candidate", f.candidateName],
     ["Email", f.email],
     ["Phone", f.phone],
+    ["Experience", f.experienceType],
     ["Total Years of Experience", f.totalYearsExperience],
     ["Date of Birth", f.dateOfBirth],
     org("Current Organization", f.currentOrg),

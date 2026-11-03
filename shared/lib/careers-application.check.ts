@@ -11,6 +11,7 @@ import {
   MAX_UPLOAD_BYTES,
   RESUME_EXTENSIONS,
   emptyApplicationFields,
+  isPayslipRequired,
   parseApplicationFields,
   rejectUnknownFormKeys,
   validateBasic,
@@ -44,6 +45,7 @@ const filled = emptyApplicationFields({
   applicationDate: "2026-07-13",
   appliedDesignation: "Engineer",
   candidateName: "Jane Doe",
+  experienceType: "Experienced",
   totalYearsExperience: "5",
   dateOfBirth: "1995-01-01",
   currentOrg: { name: "Acme", designation: "Dev", duration: "2020-2024", totalYears: "4" },
@@ -183,6 +185,41 @@ assert.ok(
   validateFile(null, [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS], "Payslip", true),
   "missing required payslip flagged",
 );
+assert.equal(isPayslipRequired("Fresher"), false, "fresher payslip optional");
+assert.equal(isPayslipRequired("Experienced"), true, "experienced payslip required");
+
+// Experienced without current org fails; Fresher skips org requirement.
+assert.ok(
+  validatePreInterview({
+    ...filled,
+    currentOrg: { name: "", designation: "", duration: "", totalYears: "" },
+  })["Current Organization.name"],
+  "experienced empty current org flagged",
+);
+const fresher = {
+  ...filled,
+  experienceType: "Fresher",
+  currentOrg: { name: "", designation: "", duration: "", totalYears: "" },
+  previousOrg1: { name: "", designation: "", duration: "", totalYears: "" },
+  previousOrg2: { name: "", designation: "", duration: "", totalYears: "" },
+};
+assert.equal(
+  validatePreInterview(fresher)["Current Organization.name"],
+  undefined,
+  "fresher skips current org validation",
+);
+const fresherParsed = parseApplicationFields({
+  ...fresher,
+  currentOrg: JSON.stringify(fresher.currentOrg),
+  previousOrg1: JSON.stringify(fresher.previousOrg1),
+  previousOrg2: JSON.stringify(fresher.previousOrg2),
+  certifications: JSON.stringify(fresher.certifications),
+  educationEntries: JSON.stringify(fresher.educationEntries),
+});
+assert.equal(fresherParsed.ok, true, "fresher parses without org data");
+if (fresherParsed.ok) {
+  assert.equal(fresherParsed.data.currentOrg.name, "Not Applicable");
+}
 assert.ok(
   validateFile(
     { name: "slip.png", size: 1024, type: "image/png" },

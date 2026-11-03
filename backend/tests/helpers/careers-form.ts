@@ -44,6 +44,7 @@ export function validCareersFields(overrides: Record<string, string> = {}) {
     applicationDate: "2026-07-13",
     appliedDesignation: "Engineer",
     candidateName: "Jane Doe",
+    experienceType: "Experienced",
     totalYearsExperience: "5",
     dateOfBirth: "1995-01-01",
     currentOrg: org("Acme", "Dev", "2020-2024", "4"),

@@ -6,7 +6,11 @@ import { Button } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import {
   DOC_ACCEPT,
+  DOC_EXTENSIONS,
+  DOC_OR_IMAGE_MIME_OK,
+  EXPERIENCE_TYPE_OPTIONS,
   IMAGE_ACCEPT,
+  IMAGE_EXTENSIONS,
   MAX_TOTAL_ATTACHMENT_BYTES,
   MAX_UPLOAD_BYTES,
   NA_HELPER,
@@ -14,6 +18,8 @@ import {
   RESUME_ACCEPT,
   RESUME_EXTENSIONS,
   emptyApplicationFields,
+  isExperiencedApplicant,
+  isPayslipRequired,
   validateFile,
   validateImageFile,
   type ApplicationFields,
@@ -35,7 +41,7 @@ import { SelectField, TextAreaField, TextField } from "./fields";
  * 4-step flow:
  *   1. basics     – Resume + personal info
  *   2. experience – Orgs, qualifications, CTC, passport
- *   3. documents  – Photo, passport, payslip, employment docs (all optional)
+ *   3. documents  – Photo, passport, payslip (required if Experienced), employment docs
  *   4. review     – Summary + submit
  *
  * UI-only state (first/last name, country code, dynamic orgs) is mapped onto
@@ -399,7 +405,6 @@ function OrgBlock({
         </span>
         {label}
       </legend>
-      <p className="aptus-field__help">{NA_HELPER}</p>
 
       {onRemove && (
         <button
@@ -672,6 +677,16 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
       );
       if (appDateErr) errs.applicationDate = appDateErr;
 
+      if (!values.experienceType.trim())
+        errs.experienceType = "Experience is required.";
+      else if (
+        !EXPERIENCE_TYPE_OPTIONS.includes(
+          values.experienceType as (typeof EXPERIENCE_TYPE_OPTIONS)[number],
+        )
+      ) {
+        errs.experienceType = "Select a valid experience option.";
+      }
+
       if (!values.passportNumber.trim())
         errs.passportNumber = "Passport number is required.";
       else if (!/^[A-Z0-9]{6,15}$/i.test(values.passportNumber.trim())) {
@@ -691,17 +706,20 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
       );
       if (yearsErr) errs.totalYearsExperience = yearsErr;
 
-      orgs.forEach((org) => {
-        const pfx = `org_${org.id}`;
-        const nameErr = meaningfulTextError(org.name, "Organization name");
-        if (nameErr) errs[`${pfx}-name`] = nameErr;
-        const desErr = meaningfulTextError(org.designation, "Designation");
-        if (desErr) errs[`${pfx}-designation`] = desErr;
-        const durErr = meaningfulTextError(org.duration, "Duration");
-        if (durErr) errs[`${pfx}-duration`] = durErr;
-        const totErr = meaningfulTextError(org.totalYears, "Total years");
-        if (totErr) errs[`${pfx}-totalYears`] = totErr;
-      });
+      // Current Organization (and any previous slots) only when Experienced.
+      if (isExperiencedApplicant(values.experienceType)) {
+        orgs.forEach((org) => {
+          const pfx = `org_${org.id}`;
+          const nameErr = meaningfulTextError(org.name, "Organization name");
+          if (nameErr) errs[`${pfx}-name`] = nameErr;
+          const desErr = meaningfulTextError(org.designation, "Designation");
+          if (desErr) errs[`${pfx}-designation`] = desErr;
+          const durErr = meaningfulTextError(org.duration, "Duration");
+          if (durErr) errs[`${pfx}-duration`] = durErr;
+          const totErr = meaningfulTextError(org.totalYears, "Total years");
+          if (totErr) errs[`${pfx}-totalYears`] = totErr;
+        });
+      }
 
       if (!values.noticePeriod) errs.noticePeriod = "Please select a notice period.";
       else if (
@@ -741,6 +759,15 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
     if (STEPS[index].key === "documents") {
       const photoErr = validateImageFile(files.photograph, "Photograph", false);
       if (photoErr) errs.photograph = photoErr;
+
+      const payslipErr = validateFile(
+        files.latestPayslip,
+        [...DOC_EXTENSIONS, ...IMAGE_EXTENSIONS],
+        "Payslip",
+        isPayslipRequired(values.experienceType),
+        DOC_OR_IMAGE_MIME_OK,
+      );
+      if (payslipErr) errs.latestPayslip = payslipErr;
 
       const checks: Array<[string, File | null]> = [
         ["passportCopy", files.passportCopy],
@@ -974,22 +1001,31 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
     body.append("phone", phoneE164);
 
     // API expects exactly three org slots; pad extras with Not Applicable.
+    // Fresher: orgs are hidden — send NA for all three.
+    const experienced = isExperiencedApplicant(values.experienceType);
     body.append(
       "currentOrg",
-      JSON.stringify(tenureOnly(orgs[0] ?? emptyOrg())),
+      JSON.stringify(
+        experienced ? tenureOnly(orgs[0] ?? emptyOrg()) : naOrg(),
+      ),
     );
     body.append(
       "previousOrg1",
-      JSON.stringify(orgs[1] ? tenureOnly(orgs[1]) : naOrg()),
+      JSON.stringify(
+        experienced && orgs[1] ? tenureOnly(orgs[1]) : naOrg(),
+      ),
     );
     body.append(
       "previousOrg2",
-      JSON.stringify(orgs[2] ? tenureOnly(orgs[2]) : naOrg()),
+      JSON.stringify(
+        experienced && orgs[2] ? tenureOnly(orgs[2]) : naOrg(),
+      ),
     );
 
     const flat: Array<keyof ApplicationFields> = [
       "email",
       "appliedDesignation",
+      "experienceType",
       "totalYearsExperience",
       "reportsTo",
       "teamSize",
@@ -1401,30 +1437,56 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
           <>
             <h2>Professional Experience</h2>
             <p className="aptus-apply__hint">
-              Add your current role. Use &quot;Not Applicable&quot; if you&apos;re
-              a fresher. Click <strong>+ Add Organization</strong> only if you
-              have previous experience to add.
+              Select whether you are a fresher or experienced. Experienced
+              applicants must add their current organization; click{" "}
+              <strong>+ Add Organization</strong> only for previous roles.
             </p>
 
-            {orgs.map((org, i) => (
-              <OrgBlock
-                key={org.id}
-                index={i}
-                org={org}
-                errors={errors}
-                onChange={(patch) => updateOrg(i, patch)}
-                onRemove={i > 0 ? () => removeOrg(i) : undefined}
-              />
-            ))}
+            <SelectField
+              id="experienceType"
+              label="Experience"
+              required
+              options={EXPERIENCE_TYPE_OPTIONS}
+              value={values.experienceType}
+              error={errors.experienceType}
+              onChange={(v) => {
+                setValue("experienceType", v);
+                // Drop org field errors when switching away from Experienced.
+                if (!isExperiencedApplicant(v)) {
+                  setErrors((p) => {
+                    const next = { ...p };
+                    for (const k of Object.keys(next)) {
+                      if (k.startsWith("org_")) delete next[k];
+                    }
+                    return next;
+                  });
+                }
+              }}
+            />
 
-            <button
-              type="button"
-              className="aptus-add-btn"
-              onClick={addOrg}
-              style={{ marginBottom: "1.5rem" }}
-            >
-              + Add Organization
-            </button>
+            {isExperiencedApplicant(values.experienceType) && (
+              <>
+                {orgs.map((org, i) => (
+                  <OrgBlock
+                    key={org.id}
+                    index={i}
+                    org={org}
+                    errors={errors}
+                    onChange={(patch) => updateOrg(i, patch)}
+                    onRemove={i > 0 ? () => removeOrg(i) : undefined}
+                  />
+                ))}
+
+                <button
+                  type="button"
+                  className="aptus-add-btn"
+                  onClick={addOrg}
+                  style={{ marginBottom: "1.5rem" }}
+                >
+                  + Add Organization
+                </button>
+              </>
+            )}
 
             <fieldset className="aptus-apply__group">
               <legend>Academic Details</legend>
@@ -1610,7 +1672,10 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
           <>
             <h2>Documents</h2>
             <p className="aptus-apply__hint">
-              Max 0.8 MB (800 KB) per file. All uploads are optional.
+              Max 0.8 MB (800 KB) per file.
+              {isPayslipRequired(values.experienceType)
+                ? " Payslip is required for experienced applicants; other uploads are optional."
+                : " All uploads are optional."}
             </p>
 
             <div style={{ marginBottom: "0.75rem" }}>
@@ -1633,16 +1698,21 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
 
             {(
               [
-                ["passportCopy", "Passport Copy"],
-                ["latestPayslip", "Payslip"],
-                ["appointmentLetter", "Appointment Letter"],
-                ["relievingLetter", "Relieving Letter"],
-              ] as Array<[keyof FileState, string]>
-            ).map(([key, label]) => (
+                ["passportCopy", "Passport Copy", false],
+                [
+                  "latestPayslip",
+                  "Payslip",
+                  isPayslipRequired(values.experienceType),
+                ],
+                ["appointmentLetter", "Appointment Letter", false],
+                ["relievingLetter", "Relieving Letter", false],
+              ] as Array<[keyof FileState, string, boolean]>
+            ).map(([key, label, required]) => (
               <div key={key} style={{ marginBottom: "0.75rem" }}>
                 <FileDropzone
                   accept={`${DOC_ACCEPT},${IMAGE_ACCEPT}`}
                   label={label}
+                  required={required}
                   files={
                     (files[key] as File | null) ? [files[key] as File] : []
                   }
@@ -1786,15 +1856,19 @@ function ReviewStep({
           </button>
         </div>
         <dl>
-          {orgs.map((org, i) => (
-            <Row
-              key={org.id}
-              label={
-                i === 0 ? "Current Organization" : `Previous Organization ${i}`
-              }
-              value={`${org.name} — ${org.designation} (${org.duration})`}
-            />
-          ))}
+          <Row label="Experience" value={values.experienceType} />
+          {isExperiencedApplicant(values.experienceType) &&
+            orgs.map((org, i) => (
+              <Row
+                key={org.id}
+                label={
+                  i === 0
+                    ? "Current Organization"
+                    : `Previous Organization ${i}`
+                }
+                value={`${org.name} — ${org.designation} (${org.duration})`}
+              />
+            ))}
           <Row label="Total Experience" value={values.totalYearsExperience} />
           <Row label="Reports To" value={values.reportsTo} />
           <Row label="Team Size" value={values.teamSize} />

@@ -44,6 +44,7 @@ const filled = emptyApplicationFields({
   applicationDate: "2026-07-13",
   appliedDesignation: "Engineer",
   candidateName: "Jane Doe",
+  experienceType: "Experienced",
   totalYearsExperience: "5",
   dateOfBirth: "1995-01-01",
   currentOrg: { name: "Acme", designation: "Dev", duration: "2020-2024", totalYears: "4" },

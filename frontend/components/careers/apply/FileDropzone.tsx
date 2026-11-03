@@ -51,6 +51,7 @@ interface FileDropzoneProps {
   hint?: string;
   multiple?: boolean;
   preview?: boolean;
+  required?: boolean;
   error?: string;
   files: File[];
   onChange: (files: File[]) => void;
@@ -65,6 +66,7 @@ export function FileDropzone({
   hint,
   multiple = false,
   preview = false,
+  required = false,
   error,
   files,
   onChange,
@@ -116,7 +118,12 @@ export function FileDropzone({
 
   return (
     <div className="aptus-field" data-invalid={(shownError || shownSizeAlert) ? "true" : undefined}>
-      {label && <label htmlFor={inputId}>{label}</label>}
+      {label && (
+        <label htmlFor={inputId}>
+          {label}
+          {required && <span aria-hidden="true"> *</span>}
+        </label>
+      )}
       {shownSizeAlert && (
         <div
           role="alert"

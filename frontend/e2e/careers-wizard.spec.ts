@@ -53,6 +53,7 @@ test("careers wizard: resume hints → submit → success", async ({ page }) => 
   await expect(
     page.getByRole("heading", { name: "Professional Experience" }),
   ).toBeVisible();
+  await page.locator("#experienceType").selectOption("Experienced");
   await page.getByLabel("Organization Name").fill("Analytical Engines");
   await page.getByLabel("Designation / Role").fill("Engineer");
   await page.getByLabel("Duration").fill("2020-2024");

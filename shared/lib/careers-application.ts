@@ -45,6 +45,30 @@ export const NOTICE_PERIOD_OPTIONS = [
   "90 days",
 ] as const;
 
+/** Fresher / Experienced — drives Current Organization + Payslip rules. */
+export const EXPERIENCE_TYPE_OPTIONS = ["Fresher", "Experienced"] as const;
+export type ExperienceType = (typeof EXPERIENCE_TYPE_OPTIONS)[number];
+
+export function isExperiencedApplicant(
+  value: string | null | undefined,
+): boolean {
+  return value === "Experienced";
+}
+
+export function isPayslipRequired(
+  experienceType: string | null | undefined,
+): boolean {
+  return isExperiencedApplicant(experienceType);
+}
+
+/** Filled when experienceType is Fresher (orgs are hidden / not collected). */
+export const NA_ORG: OrgTenure = {
+  name: "Not Applicable",
+  designation: "Not Applicable",
+  duration: "Not Applicable",
+  totalYears: "0",
+};
+
 export const NA_HELPER =
   "Type 'Not Applicable' if this information is not applicable.";
 
@@ -75,6 +99,8 @@ export interface ApplicationFields {
   applicationDate: string;
   appliedDesignation: string;
   candidateName: string;
+  /** Fresher | Experienced — FormData key; UI label is "Experience". */
+  experienceType: string;
   totalYearsExperience: string;
   dateOfBirth: string;
   currentOrg: OrgTenure;
@@ -127,6 +153,7 @@ export function emptyApplicationFields(
     applicationDate: todayISODate(),
     appliedDesignation: "",
     candidateName: "",
+    experienceType: "",
     totalYearsExperience: "",
     dateOfBirth: "",
     currentOrg: { ...EMPTY_ORG },
@@ -166,6 +193,7 @@ export const CAREER_FORM_KEYS = [
   "applicationDate",
   "appliedDesignation",
   "candidateName",
+  "experienceType",
   "totalYearsExperience",
   "dateOfBirth",
   "currentOrg",
@@ -481,6 +509,17 @@ export function validatePreInterview(
   req("currentCtc", "Current CTC");
   req("expectedCtc", "Expected CTC");
 
+  // security: allowlist — reject anything outside the known experience types.
+  if (!fields.experienceType || !fields.experienceType.trim()) {
+    errors.experienceType = "Experience is required.";
+  } else if (
+    !EXPERIENCE_TYPE_OPTIONS.includes(
+      fields.experienceType as (typeof EXPERIENCE_TYPE_OPTIONS)[number],
+    )
+  ) {
+    errors.experienceType = "Select a valid experience option.";
+  }
+
   // security: allowlist — reject anything outside the known notice periods.
   if (!fields.noticePeriod || !fields.noticePeriod.trim()) {
     errors.noticePeriod = "Notice Period is required.";
@@ -537,15 +576,19 @@ export function validatePreInterview(
   }
 
   // ── Org blocks ──────────────────────────────────────────────────────────────
-  const c = parseOrg(fields.currentOrg ?? EMPTY_ORG, "Current Organization");
-  Object.assign(errors, c.errors);
-  const p1 = parseOrg(
-    fields.previousOrg1 ?? EMPTY_ORG,
-    "Immediate Previous Organization",
-  );
-  Object.assign(errors, p1.errors);
-  const p2 = parseOrg(fields.previousOrg2 ?? EMPTY_ORG, "Previous Organization");
-  Object.assign(errors, p2.errors);
+  // Fresher: Current Organization is hidden — do not require it.
+  // Experienced: same required validation as other fields.
+  if (isExperiencedApplicant(fields.experienceType)) {
+    const c = parseOrg(fields.currentOrg ?? EMPTY_ORG, "Current Organization");
+    Object.assign(errors, c.errors);
+    const p1 = parseOrg(
+      fields.previousOrg1 ?? EMPTY_ORG,
+      "Immediate Previous Organization",
+    );
+    Object.assign(errors, p1.errors);
+    const p2 = parseOrg(fields.previousOrg2 ?? EMPTY_ORG, "Previous Organization");
+    Object.assign(errors, p2.errors);
+  }
 
   const certs = parseNamedYearList(fields.certifications ?? [], "certifications");
   Object.assign(errors, certs.errors);
@@ -666,12 +709,23 @@ export function parseApplicationFields(
   const rawOf = (k: string): unknown =>
     input instanceof FormData ? input.get(k) : (input as Record<string, unknown>)[k];
 
-  const c = parseOrg(rawOf("currentOrg") ?? "{}", "Current Organization");
-  Object.assign(errors, c.errors);
-  const p1 = parseOrg(rawOf("previousOrg1") ?? "{}", "Immediate Previous Organization");
-  Object.assign(errors, p1.errors);
-  const p2 = parseOrg(rawOf("previousOrg2") ?? "{}", "Previous Organization");
-  Object.assign(errors, p2.errors);
+  const experienceType = sanitizeText(get("experienceType"));
+  const experienced = isExperiencedApplicant(experienceType);
+
+  // Fresher: coerce orgs to NA (UI hides them). Experienced: full parseOrg rules.
+  let c: { org?: OrgTenure; errors: Record<string, string> };
+  let p1: { org?: OrgTenure; errors: Record<string, string> };
+  let p2: { org?: OrgTenure; errors: Record<string, string> };
+  if (experienced) {
+    c = parseOrg(rawOf("currentOrg") ?? "{}", "Current Organization");
+    p1 = parseOrg(rawOf("previousOrg1") ?? "{}", "Immediate Previous Organization");
+    p2 = parseOrg(rawOf("previousOrg2") ?? "{}", "Previous Organization");
+    Object.assign(errors, c.errors, p1.errors, p2.errors);
+  } else {
+    c = { org: { ...NA_ORG }, errors: {} };
+    p1 = { org: { ...NA_ORG }, errors: {} };
+    p2 = { org: { ...NA_ORG }, errors: {} };
+  }
   const certs = parseNamedYearList(rawOf("certifications") ?? "[]", "certifications");
   Object.assign(errors, certs.errors);
   const edu = parseEducationList(rawOf("educationEntries") ?? "[]");
@@ -684,6 +738,7 @@ export function parseApplicationFields(
     applicationDate: sanitizeText(get("applicationDate") || todayISODate()),
     appliedDesignation: sanitizeText(get("appliedDesignation") || get("position")),
     candidateName: sanitizeText(get("candidateName") || get("fullName")),
+    experienceType,
     totalYearsExperience: sanitizeText(get("totalYearsExperience") || get("experience")),
     dateOfBirth: sanitizeText(get("dateOfBirth")),
     currentOrg: c.org ?? { ...EMPTY_ORG },
