@@ -45,7 +45,33 @@ export const NOTICE_PERIOD_OPTIONS = [
   "90 days",
 ] as const;
 
-/** Fresher / Experienced — drives Current Organization + Payslip rules. */
+/** Currencies for Current / Expected CTC dropdowns. */
+export const CTC_CURRENCY_OPTIONS = [
+  "OMR",
+  "AED",
+  "SAR",
+  "QAR",
+  "BHD",
+  "KWD",
+  "USD",
+  "EUR",
+  "INR",
+] as const;
+export type CtcCurrency = (typeof CTC_CURRENCY_OPTIONS)[number];
+export const DEFAULT_CTC_CURRENCY: CtcCurrency = "OMR";
+
+/** Compose amount + currency for storage / email / Odoo ("OMR 1200"). */
+export function formatCtcAmount(
+  amount: string,
+  currency: string = DEFAULT_CTC_CURRENCY,
+): string {
+  const n = amount.trim();
+  if (!n) return "";
+  const cur = currency.trim().toUpperCase() || DEFAULT_CTC_CURRENCY;
+  return `${cur} ${n}`;
+}
+
+/** Fresher / Experienced — drives org / team / payslip rules. */
 export const EXPERIENCE_TYPE_OPTIONS = ["Fresher", "Experienced"] as const;
 export type ExperienceType = (typeof EXPERIENCE_TYPE_OPTIONS)[number];
 
@@ -68,6 +94,16 @@ export const NA_ORG: OrgTenure = {
   duration: "Not Applicable",
   totalYears: "0",
 };
+
+/** Fresher defaults for Present Team / employment fields hidden in the UI. */
+export const FRESHER_TEAM_DEFAULTS = {
+  reportsTo: "Not Applicable",
+  teamSize: "0",
+  currentCtc: "Not Applicable",
+  totalYearsExperience: "0",
+  /** Allowlist value — fresher has no notice period to serve. */
+  noticePeriod: "Immediate",
+} as const;
 
 export const NA_HELPER =
   "Type 'Not Applicable' if this information is not applicable.";
@@ -491,22 +527,20 @@ export function validatePreInterview(
     if (err) errors[key] = err;
   };
 
+  const experienced = isExperiencedApplicant(fields.experienceType);
+
   req("applicationDate", "Date of Application");
   req("appliedDesignation", "Applied Designation");
   req("candidateName", "Name of the Candidate");
   const nameErr = personNameError(fields.candidateName ?? "", "Name of the Candidate");
   if (nameErr && !errors.candidateName) errors.candidateName = nameErr;
-  req("totalYearsExperience", "Total Years of Experience");
   req("dateOfBirth", "Date of Birth");
   req("professionalQualification", "Professional Qualification");
   req("professionalQualificationYear", "Professional Qualification Year");
   req("graduation", "Graduation");
   req("graduationYear", "Graduation Year");
-  req("reportsTo", "Reports To");
-  req("teamSize", "Team Size");
   req("currentLocation", "Current Location");
   // familyDetails & drivingLicense are optional.
-  req("currentCtc", "Current CTC");
   req("expectedCtc", "Expected CTC");
 
   // security: allowlist — reject anything outside the known experience types.
@@ -520,15 +554,23 @@ export function validatePreInterview(
     errors.experienceType = "Select a valid experience option.";
   }
 
-  // security: allowlist — reject anything outside the known notice periods.
-  if (!fields.noticePeriod || !fields.noticePeriod.trim()) {
-    errors.noticePeriod = "Notice Period is required.";
-  } else if (
-    !NOTICE_PERIOD_OPTIONS.includes(
-      fields.noticePeriod as (typeof NOTICE_PERIOD_OPTIONS)[number],
-    )
-  ) {
-    errors.noticePeriod = "Select a valid notice period.";
+  // Fresher: Present Team / employment fields are hidden — do not require them.
+  if (experienced) {
+    req("totalYearsExperience", "Total Years of Experience");
+    req("reportsTo", "Reports To");
+    req("teamSize", "Team Size");
+    req("currentCtc", "Current CTC");
+
+    // security: allowlist — reject anything outside the known notice periods.
+    if (!fields.noticePeriod || !fields.noticePeriod.trim()) {
+      errors.noticePeriod = "Notice Period is required.";
+    } else if (
+      !NOTICE_PERIOD_OPTIONS.includes(
+        fields.noticePeriod as (typeof NOTICE_PERIOD_OPTIONS)[number],
+      )
+    ) {
+      errors.noticePeriod = "Select a valid notice period.";
+    }
   }
 
   req("passportNumber", "Passport Number");
@@ -578,7 +620,7 @@ export function validatePreInterview(
   // ── Org blocks ──────────────────────────────────────────────────────────────
   // Fresher: Current Organization is hidden — do not require it.
   // Experienced: same required validation as other fields.
-  if (isExperiencedApplicant(fields.experienceType)) {
+  if (experienced) {
     const c = parseOrg(fields.currentOrg ?? EMPTY_ORG, "Current Organization");
     Object.assign(errors, c.errors);
     const p1 = parseOrg(
@@ -594,10 +636,15 @@ export function validatePreInterview(
   Object.assign(errors, certs.errors);
 
   // ── Format checks (fire even when the field is non-empty) ──────────────────
-  if (fields.teamSize && !/^\d{1,4}$/.test(String(fields.teamSize).trim())) {
+  if (
+    experienced &&
+    fields.teamSize &&
+    !/^\d{1,4}$/.test(String(fields.teamSize).trim())
+  ) {
     errors.teamSize = "Team size must be a number (e.g. 5).";
   }
   if (
+    experienced &&
     fields.totalYearsExperience &&
     !/^[\w\s.+-]{1,40}$/.test(String(fields.totalYearsExperience).trim())
   ) {
@@ -712,7 +759,7 @@ export function parseApplicationFields(
   const experienceType = sanitizeText(get("experienceType"));
   const experienced = isExperiencedApplicant(experienceType);
 
-  // Fresher: coerce orgs to NA (UI hides them). Experienced: full parseOrg rules.
+  // Fresher: coerce orgs + employment fields to NA (UI hides them). Experienced: full rules.
   let c: { org?: OrgTenure; errors: Record<string, string> };
   let p1: { org?: OrgTenure; errors: Record<string, string> };
   let p2: { org?: OrgTenure; errors: Record<string, string> };
@@ -731,6 +778,22 @@ export function parseApplicationFields(
   const edu = parseEducationList(rawOf("educationEntries") ?? "[]");
   Object.assign(errors, edu.errors);
 
+  const totalYearsExperience = experienced
+    ? sanitizeText(get("totalYearsExperience") || get("experience"))
+    : FRESHER_TEAM_DEFAULTS.totalYearsExperience;
+  const reportsTo = experienced
+    ? sanitizeText(get("reportsTo"))
+    : FRESHER_TEAM_DEFAULTS.reportsTo;
+  const teamSize = experienced
+    ? sanitizeText(get("teamSize"))
+    : FRESHER_TEAM_DEFAULTS.teamSize;
+  const currentCtc = experienced
+    ? sanitizeText(get("currentCtc"))
+    : FRESHER_TEAM_DEFAULTS.currentCtc;
+  const noticePeriod = experienced
+    ? sanitizeText(get("noticePeriod"))
+    : FRESHER_TEAM_DEFAULTS.noticePeriod;
+
   const draft: ApplicationFields = emptyApplicationFields({
     fullName: basic.ok ? basic.data.fullName : get("fullName"),
     email: basic.ok ? basic.data.email : get("email"),
@@ -739,7 +802,7 @@ export function parseApplicationFields(
     appliedDesignation: sanitizeText(get("appliedDesignation") || get("position")),
     candidateName: sanitizeText(get("candidateName") || get("fullName")),
     experienceType,
-    totalYearsExperience: sanitizeText(get("totalYearsExperience") || get("experience")),
+    totalYearsExperience,
     dateOfBirth: sanitizeText(get("dateOfBirth")),
     currentOrg: c.org ?? { ...EMPTY_ORG },
     previousOrg1: p1.org ?? { ...EMPTY_ORG },
@@ -749,13 +812,13 @@ export function parseApplicationFields(
     graduation: sanitizeText(get("graduation")),
     graduationYear: sanitizeText(get("graduationYear")),
     certifications: certs.list.length ? certs.list : [{ name: "", year: "" }],
-    reportsTo: sanitizeText(get("reportsTo")),
-    teamSize: sanitizeText(get("teamSize")),
+    reportsTo,
+    teamSize,
     currentLocation: sanitizeText(get("currentLocation") || get("location")),
     familyDetails: sanitizeText(get("familyDetails"), "multiline"),
-    currentCtc: sanitizeText(get("currentCtc")),
+    currentCtc,
     expectedCtc: sanitizeText(get("expectedCtc")),
-    noticePeriod: sanitizeText(get("noticePeriod")),
+    noticePeriod,
     passportNumber: sanitizeText(get("passportNumber")),
     passportValidity: sanitizeText(get("passportValidity")),
     drivingLicense: sanitizeText(get("drivingLicense")),
@@ -763,7 +826,7 @@ export function parseApplicationFields(
       ? edu.list
       : [{ name: "", institution: "", year: "" }],
     position: sanitizeText(get("position") || get("appliedDesignation")),
-    experience: sanitizeText(get("experience") || get("totalYearsExperience")),
+    experience: totalYearsExperience,
     location: sanitizeText(get("location") || get("currentLocation")),
     coverMessage: sanitizeText(get("coverMessage"), "multiline") || undefined,
     jobSlug: sanitizeText(get("jobSlug")) || undefined,

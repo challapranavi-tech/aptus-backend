@@ -550,6 +550,26 @@
   flex: 1;
   min-width: 0;
 }
+.aptus-apply__ctc {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+.aptus-apply__ctc select {
+  width: auto;
+  max-width: 5.75rem;
+  flex-shrink: 0;
+}
+.aptus-apply__ctc input {
+  flex: 1;
+  min-width: 0;
+}
+.aptus-field input:disabled,
+.aptus-field input[readonly] {
+  background: #f8fafc;
+  color: #475569;
+  cursor: default;
+}
 .aptus-apply__date {
   position: relative;
   display: block;

@@ -11,6 +11,7 @@ import {
   MAX_UPLOAD_BYTES,
   RESUME_EXTENSIONS,
   emptyApplicationFields,
+  formatCtcAmount,
   isPayslipRequired,
   parseApplicationFields,
   rejectUnknownFormKeys,
@@ -20,6 +21,10 @@ import {
   validateFile,
   validatePreInterview,
 } from "./careers-application";
+
+assert.equal(formatCtcAmount("1200", "OMR"), "OMR 1200");
+assert.equal(formatCtcAmount(" 500 ", "aed"), "AED 500");
+assert.equal(formatCtcAmount(""), "");
 import { extractResumeHints } from "./resume-parse";
 
 const basicOk = validateBasic({
@@ -202,14 +207,39 @@ const fresher = {
   currentOrg: { name: "", designation: "", duration: "", totalYears: "" },
   previousOrg1: { name: "", designation: "", duration: "", totalYears: "" },
   previousOrg2: { name: "", designation: "", duration: "", totalYears: "" },
+  reportsTo: "",
+  teamSize: "",
+  currentCtc: "",
+  totalYearsExperience: "",
+  noticePeriod: "",
 };
+assert.deepEqual(
+  validatePreInterview(fresher),
+  {},
+  "fresher pre-interview passes without employment fields",
+);
+const fresherErrors = validatePreInterview(fresher);
 assert.equal(
-  validatePreInterview(fresher)["Current Organization.name"],
+  fresherErrors["Current Organization.name"],
   undefined,
   "fresher skips current org validation",
 );
+assert.equal(fresherErrors.reportsTo, undefined, "fresher skips reportsTo");
+assert.equal(fresherErrors.teamSize, undefined, "fresher skips teamSize");
+assert.equal(fresherErrors.currentCtc, undefined, "fresher skips currentCtc");
+assert.equal(
+  fresherErrors.totalYearsExperience,
+  undefined,
+  "fresher skips totalYearsExperience",
+);
+assert.equal(fresherErrors.noticePeriod, undefined, "fresher skips noticePeriod");
 const fresherParsed = parseApplicationFields({
   ...fresher,
+  reportsTo: "",
+  teamSize: "",
+  currentCtc: "",
+  totalYearsExperience: "",
+  noticePeriod: "",
   currentOrg: JSON.stringify(fresher.currentOrg),
   previousOrg1: JSON.stringify(fresher.previousOrg1),
   previousOrg2: JSON.stringify(fresher.previousOrg2),
@@ -219,6 +249,11 @@ const fresherParsed = parseApplicationFields({
 assert.equal(fresherParsed.ok, true, "fresher parses without org data");
 if (fresherParsed.ok) {
   assert.equal(fresherParsed.data.currentOrg.name, "Not Applicable");
+  assert.equal(fresherParsed.data.reportsTo, "Not Applicable");
+  assert.equal(fresherParsed.data.teamSize, "0");
+  assert.equal(fresherParsed.data.currentCtc, "Not Applicable");
+  assert.equal(fresherParsed.data.totalYearsExperience, "0");
+  assert.equal(fresherParsed.data.noticePeriod, "Immediate");
 }
 assert.ok(
   validateFile(

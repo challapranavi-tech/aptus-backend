@@ -17,7 +17,11 @@ import {
   NOTICE_PERIOD_OPTIONS,
   RESUME_ACCEPT,
   RESUME_EXTENSIONS,
+  CTC_CURRENCY_OPTIONS,
+  DEFAULT_CTC_CURRENCY,
   emptyApplicationFields,
+  formatCtcAmount,
+  FRESHER_TEAM_DEFAULTS,
   isExperiencedApplicant,
   isPayslipRequired,
   validateFile,
@@ -35,7 +39,7 @@ import {
   APPLY_STEP_ERROR_HEADING,
   formatApplySubmitErrors,
 } from "./apply-alerts";
-import { SelectField, TextAreaField, TextField } from "./fields";
+import { CtcField, SelectField, TextAreaField, TextField } from "./fields";
 
 /**
  * 4-step flow:
@@ -253,6 +257,7 @@ function DateField({
   error,
   onChange,
   autoFilled,
+  readOnly,
 }: {
   id: string;
   label: string;
@@ -262,6 +267,8 @@ function DateField({
   error?: string;
   onChange: (v: string) => void;
   autoFilled?: boolean;
+  /** Fixed system date (e.g. Date of Application) — no typing / calendar. */
+  readOnly?: boolean;
 }) {
   const display = toDMY(value);
   const isoForPicker = (() => {
@@ -301,31 +308,37 @@ function DateField({
           autoComplete="bday"
           maxLength={10}
           value={display}
+          readOnly={readOnly}
           aria-invalid={error ? true : undefined}
-          onChange={(e) => onChange(formatTyped(e.target.value))}
+          onChange={(e) => {
+            if (readOnly) return;
+            onChange(formatTyped(e.target.value));
+          }}
         />
-        <label className="aptus-apply__date-cal" title="Open calendar">
-          <span className="aptus-apply__date-cal-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
-              <rect x="3" y="5" width="18" height="16" rx="2" />
-              <path d="M3 10h18M8 3v4M16 3v4" />
-            </svg>
-          </span>
-          <input
-            type="date"
-            aria-label={`${label} calendar`}
-            value={isoForPicker}
-            onChange={(e) => {
-              const raw = e.target.value;
-              if (!raw) {
-                onChange("");
-                return;
-              }
-              const [y, m, d] = raw.split("-");
-              onChange(`${d}-${m}-${y}`);
-            }}
-          />
-        </label>
+        {!readOnly && (
+          <label className="aptus-apply__date-cal" title="Open calendar">
+            <span className="aptus-apply__date-cal-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="3" y="5" width="18" height="16" rx="2" />
+                <path d="M3 10h18M8 3v4M16 3v4" />
+              </svg>
+            </span>
+            <input
+              type="date"
+              aria-label={`${label} calendar`}
+              value={isoForPicker}
+              onChange={(e) => {
+                const raw = e.target.value;
+                if (!raw) {
+                  onChange("");
+                  return;
+                }
+                const [y, m, d] = raw.split("-");
+                onChange(`${d}-${m}-${y}`);
+              }}
+            />
+          </label>
+        )}
       </div>
       {help && <p className="aptus-field__help">{help}</p>}
       {error && (
@@ -487,6 +500,9 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
   const [lastName, setLastName] = useState("");
   const [countryCode, setCountryCode] = useState("+968");
   const [orgs, setOrgs] = useState<OrgEntry[]>([emptyOrg()]);
+  const [currentCtcCurrency, setCurrentCtcCurrency] = useState(DEFAULT_CTC_CURRENCY);
+  const [expectedCtcCurrency, setExpectedCtcCurrency] =
+    useState(DEFAULT_CTC_CURRENCY);
 
   const [files, setFiles] = useState<FileState>(EMPTY_FILES);
   const [autoFilled, setAutoFilled] = useState<Set<string>>(new Set());
@@ -700,14 +716,14 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
       );
       if (passportErr) errs.passportValidity = passportErr;
 
-      const yearsErr = meaningfulTextError(
-        values.totalYearsExperience,
-        "Total years of experience",
-      );
-      if (yearsErr) errs.totalYearsExperience = yearsErr;
-
-      // Current Organization (and any previous slots) only when Experienced.
+      // Current Organization + Present Team fields only when Experienced.
       if (isExperiencedApplicant(values.experienceType)) {
+        const yearsErr = meaningfulTextError(
+          values.totalYearsExperience,
+          "Total years of experience",
+        );
+        if (yearsErr) errs.totalYearsExperience = yearsErr;
+
         orgs.forEach((org) => {
           const pfx = `org_${org.id}`;
           const nameErr = meaningfulTextError(org.name, "Organization name");
@@ -719,26 +735,26 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
           const totErr = meaningfulTextError(org.totalYears, "Total years");
           if (totErr) errs[`${pfx}-totalYears`] = totErr;
         });
+
+        if (!values.noticePeriod) errs.noticePeriod = "Please select a notice period.";
+        else if (
+          !NOTICE_PERIOD_OPTIONS.includes(
+            values.noticePeriod as (typeof NOTICE_PERIOD_OPTIONS)[number],
+          )
+        ) {
+          errs.noticePeriod = "Select a valid notice period.";
+        }
+        const curCtcErr = meaningfulTextError(values.currentCtc, "Current CTC");
+        if (curCtcErr) errs.currentCtc = curCtcErr;
+        const reportsErr = meaningfulTextError(values.reportsTo, "Reports To");
+        if (reportsErr) errs.reportsTo = reportsErr;
+        if (!values.teamSize.trim()) errs.teamSize = "Team Size is required.";
+        else if (!/^\d{1,4}$/.test(values.teamSize.trim()))
+          errs.teamSize = "Enter a valid team size.";
       }
 
-      if (!values.noticePeriod) errs.noticePeriod = "Please select a notice period.";
-      else if (
-        !NOTICE_PERIOD_OPTIONS.includes(
-          values.noticePeriod as (typeof NOTICE_PERIOD_OPTIONS)[number],
-        )
-      ) {
-        errs.noticePeriod = "Select a valid notice period.";
-      }
-      const curCtcErr = meaningfulTextError(values.currentCtc, "Current CTC");
-      if (curCtcErr) errs.currentCtc = curCtcErr;
       const expCtcErr = meaningfulTextError(values.expectedCtc, "Expected CTC");
       if (expCtcErr) errs.expectedCtc = expCtcErr;
-
-      const reportsErr = meaningfulTextError(values.reportsTo, "Reports To");
-      if (reportsErr) errs.reportsTo = reportsErr;
-      if (!values.teamSize.trim()) errs.teamSize = "Team Size is required.";
-      else if (!/^\d{1,4}$/.test(values.teamSize.trim()))
-        errs.teamSize = "Enter a valid team size.";
 
       values.educationEntries.forEach((e, i) => {
         if (i === 0 || e.name || e.institution || e.year) {
@@ -1022,6 +1038,22 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
       ),
     );
 
+    // Fresher: coerce hidden Present Team fields (same idea as org NA).
+    const totalYearsExperience = experienced
+      ? values.totalYearsExperience
+      : FRESHER_TEAM_DEFAULTS.totalYearsExperience;
+    const reportsTo = experienced
+      ? values.reportsTo
+      : FRESHER_TEAM_DEFAULTS.reportsTo;
+    const teamSize = experienced ? values.teamSize : FRESHER_TEAM_DEFAULTS.teamSize;
+    const currentCtc = experienced
+      ? formatCtcAmount(values.currentCtc, currentCtcCurrency)
+      : FRESHER_TEAM_DEFAULTS.currentCtc;
+    const expectedCtc = formatCtcAmount(values.expectedCtc, expectedCtcCurrency);
+    const noticePeriod = experienced
+      ? values.noticePeriod
+      : FRESHER_TEAM_DEFAULTS.noticePeriod;
+
     const flat: Array<keyof ApplicationFields> = [
       "email",
       "appliedDesignation",
@@ -1043,12 +1075,32 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
       "jobId",
     ];
     for (const k of flat) {
-      if (k === "experience") {
-        body.append(k, values.totalYearsExperience);
+      if (k === "experience" || k === "totalYearsExperience") {
+        body.append(k, totalYearsExperience);
         continue;
       }
       if (k === "location") {
         body.append(k, values.currentLocation);
+        continue;
+      }
+      if (k === "reportsTo") {
+        body.append(k, reportsTo);
+        continue;
+      }
+      if (k === "teamSize") {
+        body.append(k, teamSize);
+        continue;
+      }
+      if (k === "currentCtc") {
+        body.append(k, currentCtc);
+        continue;
+      }
+      if (k === "expectedCtc") {
+        body.append(k, expectedCtc);
+        continue;
+      }
+      if (k === "noticePeriod") {
+        body.append(k, noticePeriod);
         continue;
       }
       body.append(k, String(values[k] ?? ""));
@@ -1451,13 +1503,18 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
               error={errors.experienceType}
               onChange={(v) => {
                 setValue("experienceType", v);
-                // Drop org field errors when switching away from Experienced.
+                // Drop org / team field errors when switching away from Experienced.
                 if (!isExperiencedApplicant(v)) {
                   setErrors((p) => {
                     const next = { ...p };
                     for (const k of Object.keys(next)) {
                       if (k.startsWith("org_")) delete next[k];
                     }
+                    delete next.reportsTo;
+                    delete next.teamSize;
+                    delete next.currentCtc;
+                    delete next.totalYearsExperience;
+                    delete next.noticePeriod;
                     return next;
                   });
                 }
@@ -1562,109 +1619,168 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
               </button>
             </fieldset>
 
-            <fieldset className="aptus-apply__group">
-              <legend>Present Team Structure</legend>
-              <p className="aptus-field__help">{NA_HELPER}</p>
-              <div className="aptus-apply__grid aptus-apply__grid--2">
-                <TextField
-                  id="reportsTo"
-                  label="Reports To"
-                  required
-                  value={values.reportsTo}
-                  error={errors.reportsTo}
-                  onChange={(v) => setValue("reportsTo", v)}
+            <DateField
+              id="applicationDate"
+              label="Date of Application"
+              required
+              readOnly
+              help="Fixed to today's date."
+              value={toDMY(values.applicationDate)}
+              error={errors.applicationDate}
+              onChange={(v) => setValue("applicationDate", v)}
+            />
+
+            {isExperiencedApplicant(values.experienceType) ? (
+              <fieldset className="aptus-apply__group">
+                <legend>Present Team Structure</legend>
+                <p className="aptus-field__help">{NA_HELPER}</p>
+                <div className="aptus-apply__grid aptus-apply__grid--2">
+                  <TextField
+                    id="reportsTo"
+                    label="Reports To"
+                    required
+                    value={values.reportsTo}
+                    error={errors.reportsTo}
+                    onChange={(v) => setValue("reportsTo", v)}
+                  />
+                  <TextField
+                    id="teamSize"
+                    label="Team Size"
+                    inputMode="numeric"
+                    required
+                    value={values.teamSize}
+                    error={errors.teamSize}
+                    onChange={(v) => setValue("teamSize", v)}
+                  />
+                  <TextField
+                    id="totalYearsExperience"
+                    label="Total Years of Experience"
+                    inputMode="numeric"
+                    required
+                    placeholder="e.g. 5 or 2.5"
+                    value={values.totalYearsExperience}
+                    autoFilled={autoFilled.has("totalYearsExperience")}
+                    error={errors.totalYearsExperience}
+                    onChange={(v) => setValue("totalYearsExperience", v)}
+                  />
+                  <SelectField
+                    id="noticePeriod"
+                    label="Notice Period"
+                    required
+                    options={NOTICE_PERIOD_OPTIONS}
+                    value={values.noticePeriod}
+                    error={errors.noticePeriod}
+                    onChange={(v) => setValue("noticePeriod", v)}
+                  />
+                  <CtcField
+                    id="currentCtc"
+                    label="Current CTC"
+                    required
+                    amount={values.currentCtc}
+                    currency={currentCtcCurrency}
+                    currencies={CTC_CURRENCY_OPTIONS}
+                    error={errors.currentCtc}
+                    onAmountChange={(v) => setValue("currentCtc", v)}
+                    onCurrencyChange={setCurrentCtcCurrency}
+                  />
+                  <CtcField
+                    id="expectedCtc"
+                    label="Expected CTC"
+                    required
+                    amount={values.expectedCtc}
+                    currency={expectedCtcCurrency}
+                    currencies={CTC_CURRENCY_OPTIONS}
+                    error={errors.expectedCtc}
+                    onAmountChange={(v) => setValue("expectedCtc", v)}
+                    onCurrencyChange={setExpectedCtcCurrency}
+                  />
+                  <TextField
+                    id="passportNumber"
+                    label="Passport Number"
+                    required
+                    placeholder="e.g. A12345678"
+                    help="6–15 uppercase letters and digits, no spaces (ICAO standard)."
+                    value={values.passportNumber}
+                    error={errors.passportNumber}
+                    onChange={(v) => setValue("passportNumber", v.toUpperCase())}
+                  />
+                  <DateField
+                    id="passportValidity"
+                    label="Passport Validity"
+                    required
+                    value={values.passportValidity}
+                    error={errors.passportValidity}
+                    onChange={(v) => setValue("passportValidity", v)}
+                  />
+                  <TextAreaField
+                    id="familyDetails"
+                    label="Family Details (optional)"
+                    value={values.familyDetails}
+                    error={errors.familyDetails}
+                    onChange={(v) => setValue("familyDetails", v)}
+                  />
+                  <TextField
+                    id="drivingLicense"
+                    label="Driving License"
+                    placeholder="Optional"
+                    value={values.drivingLicense}
+                    error={errors.drivingLicense}
+                    onChange={(v) => setValue("drivingLicense", v)}
+                  />
+                </div>
+              </fieldset>
+            ) : (
+              <fieldset className="aptus-apply__group">
+                <legend>Application Details</legend>
+                <div className="aptus-apply__grid aptus-apply__grid--2">
+                  <TextField
+                    id="passportNumber"
+                    label="Passport Number"
+                    required
+                    placeholder="e.g. A12345678"
+                    help="6–15 uppercase letters and digits, no spaces (ICAO standard)."
+                    value={values.passportNumber}
+                    error={errors.passportNumber}
+                    onChange={(v) => setValue("passportNumber", v.toUpperCase())}
+                  />
+                  <DateField
+                    id="passportValidity"
+                    label="Passport Validity"
+                    required
+                    value={values.passportValidity}
+                    error={errors.passportValidity}
+                    onChange={(v) => setValue("passportValidity", v)}
+                  />
+                  <CtcField
+                    id="expectedCtc"
+                    label="Expected CTC"
+                    required
+                    amount={values.expectedCtc}
+                    currency={expectedCtcCurrency}
+                    currencies={CTC_CURRENCY_OPTIONS}
+                    error={errors.expectedCtc}
+                    onAmountChange={(v) => setValue("expectedCtc", v)}
+                    onCurrencyChange={setExpectedCtcCurrency}
+                  />
+                  <TextField
+                    id="drivingLicense"
+                    label="Driving License"
+                    placeholder="Optional"
+                    value={values.drivingLicense}
+                    error={errors.drivingLicense}
+                    onChange={(v) => setValue("drivingLicense", v)}
+                  />
+                </div>
+                <TextAreaField
+                  id="familyDetails"
+                  label="Family Details (optional)"
+                  className="mt-4"
+                  value={values.familyDetails}
+                  error={errors.familyDetails}
+                  onChange={(v) => setValue("familyDetails", v)}
                 />
-                <DateField
-                  id="applicationDate"
-                  label="Date of Application"
-                  required
-                  value={toDMY(values.applicationDate)}
-                  error={errors.applicationDate}
-                  onChange={(v) => setValue("applicationDate", v)}
-                />
-                <TextField
-                  id="teamSize"
-                  label="Team Size"
-                  inputMode="numeric"
-                  required
-                  value={values.teamSize}
-                  error={errors.teamSize}
-                  onChange={(v) => setValue("teamSize", v)}
-                />
-                <TextField
-                  id="totalYearsExperience"
-                  label="Total Years of Experience"
-                  inputMode="numeric"
-                  required
-                  placeholder="e.g. 5 or 2.5"
-                  value={values.totalYearsExperience}
-                  autoFilled={autoFilled.has("totalYearsExperience")}
-                  error={errors.totalYearsExperience}
-                  onChange={(v) => setValue("totalYearsExperience", v)}
-                />
-                <TextField
-                  id="currentCtc"
-                  label="Current CTC (OMR)"
-                  inputMode="numeric"
-                  required
-                  value={values.currentCtc}
-                  error={errors.currentCtc}
-                  onChange={(v) => setValue("currentCtc", v)}
-                />
-                <TextField
-                  id="expectedCtc"
-                  label="Expected CTC (OMR)"
-                  inputMode="numeric"
-                  required
-                  value={values.expectedCtc}
-                  error={errors.expectedCtc}
-                  onChange={(v) => setValue("expectedCtc", v)}
-                />
-                <TextField
-                  id="passportNumber"
-                  label="Passport Number"
-                  required
-                  placeholder="e.g. A12345678"
-                  help="6–15 uppercase letters and digits, no spaces (ICAO standard)."
-                  value={values.passportNumber}
-                  error={errors.passportNumber}
-                  onChange={(v) => setValue("passportNumber", v.toUpperCase())}
-                />
-                <DateField
-                  id="passportValidity"
-                  label="Passport Validity"
-                  required
-                  value={values.passportValidity}
-                  error={errors.passportValidity}
-                  onChange={(v) => setValue("passportValidity", v)}
-                />
-                <SelectField
-                  id="noticePeriod"
-                  label="Notice Period"
-                  required
-                  options={NOTICE_PERIOD_OPTIONS}
-                  value={values.noticePeriod}
-                  error={errors.noticePeriod}
-                  onChange={(v) => setValue("noticePeriod", v)}
-                />
-                <TextField
-                  id="drivingLicense"
-                  label="Driving License"
-                  placeholder="Optional"
-                  value={values.drivingLicense}
-                  error={errors.drivingLicense}
-                  onChange={(v) => setValue("drivingLicense", v)}
-                />
-              </div>
-              <TextAreaField
-                id="familyDetails"
-                label="Family Details (optional)"
-                className="mt-4"
-                value={values.familyDetails}
-                error={errors.familyDetails}
-                onChange={(v) => setValue("familyDetails", v)}
-              />
-            </fieldset>
+              </fieldset>
+            )}
           </>
         )}
 
@@ -1743,6 +1859,8 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
             orgs={orgs}
             values={values}
             files={files}
+            currentCtcCurrency={currentCtcCurrency}
+            expectedCtcCurrency={expectedCtcCurrency}
             onEdit={goTo}
           />
         )}
@@ -1809,6 +1927,8 @@ function ReviewStep({
   orgs,
   values,
   files,
+  currentCtcCurrency,
+  expectedCtcCurrency,
   onEdit,
 }: {
   firstName: string;
@@ -1817,6 +1937,8 @@ function ReviewStep({
   orgs: OrgEntry[];
   values: ApplicationFields;
   files: FileState;
+  currentCtcCurrency: string;
+  expectedCtcCurrency: string;
   onEdit: (step: number) => void;
 }) {
   const fileName = (f: File | null) => (f ? f.name : "—");
@@ -1869,16 +1991,32 @@ function ReviewStep({
                 value={`${org.name} — ${org.designation} (${org.duration})`}
               />
             ))}
-          <Row label="Total Experience" value={values.totalYearsExperience} />
-          <Row label="Reports To" value={values.reportsTo} />
-          <Row label="Team Size" value={values.teamSize} />
-          <Row label="Notice Period" value={values.noticePeriod} />
-          <Row
-            label="Current / Expected CTC (OMR)"
-            value={`${values.currentCtc} / ${values.expectedCtc}`}
-          />
+          <Row label="Date of Application" value={toDMY(values.applicationDate)} />
+          {isExperiencedApplicant(values.experienceType) ? (
+            <>
+              <Row label="Reports To" value={values.reportsTo} />
+              <Row label="Team Size" value={values.teamSize} />
+              <Row label="Total Experience" value={values.totalYearsExperience} />
+              <Row label="Notice Period" value={values.noticePeriod} />
+              <Row
+                label="Current CTC"
+                value={formatCtcAmount(values.currentCtc, currentCtcCurrency)}
+              />
+              <Row
+                label="Expected CTC"
+                value={formatCtcAmount(values.expectedCtc, expectedCtcCurrency)}
+              />
+            </>
+          ) : (
+            <Row
+              label="Expected CTC"
+              value={formatCtcAmount(values.expectedCtc, expectedCtcCurrency)}
+            />
+          )}
           <Row label="Passport Number" value={values.passportNumber} />
           <Row label="Passport Validity" value={values.passportValidity} />
+          <Row label="Driving License" value={values.drivingLicense} />
+          <Row label="Family Details" value={values.familyDetails} />
         </dl>
       </div>
 

@@ -205,3 +205,64 @@ export function SelectField({
     </FieldWrap>
   );
 }
+
+interface CtcFieldProps {
+  id: string;
+  label: string;
+  amount: string;
+  currency: string;
+  currencies: readonly string[];
+  onAmountChange: (v: string) => void;
+  onCurrencyChange: (v: string) => void;
+  error?: string;
+  required?: boolean;
+  className?: string;
+}
+
+/** Amount input + currency select (shared Current / Expected CTC control). */
+export function CtcField({
+  id,
+  label,
+  amount,
+  currency,
+  currencies,
+  onAmountChange,
+  onCurrencyChange,
+  error,
+  required,
+  className,
+}: CtcFieldProps) {
+  return (
+    <FieldWrap
+      label={label}
+      htmlFor={id}
+      error={error}
+      required={required}
+      className={className}
+    >
+      <div className="aptus-apply__ctc">
+        <select
+          id={`${id}-currency`}
+          aria-label={`${label} currency`}
+          value={currency}
+          onChange={(e) => onCurrencyChange(e.target.value)}
+        >
+          {currencies.map((c) => (
+            <option key={c} value={c}>
+              {c}
+            </option>
+          ))}
+        </select>
+        <input
+          id={id}
+          type="text"
+          inputMode="decimal"
+          placeholder="Amount"
+          value={amount}
+          aria-invalid={error ? true : undefined}
+          onChange={(e) => onAmountChange(e.target.value)}
+        />
+      </div>
+    </FieldWrap>
+  );
+}
