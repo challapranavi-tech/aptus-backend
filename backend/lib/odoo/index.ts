@@ -35,6 +35,7 @@ export {
 export {
   createCrmLead,
   buildCrmLeadValues,
+  companyIdForCategory,
   attachFilesToCrmLead,
   crmLeadFormUrl,
   crmTeamConfig,

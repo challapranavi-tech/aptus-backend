@@ -1,6 +1,7 @@
 "use client";
 
 import { publicApiBase } from "@/lib/api-base";
+import { trimFieldOnBlur, trimFormStrings } from "@/lib/form-text";
 import { normalizePhone } from "@/lib/phone";
 import { cn } from "@/lib/utils";
 import { validateQuoteContactFields } from "@shared/lib/contact-request";
@@ -81,7 +82,16 @@ export function ContactLeadForm({
     if (submittingRef.current) return;
 
     const form = e.currentTarget;
-    const payload = Object.fromEntries(new FormData(form).entries());
+    // Trim uncontrolled fields in the DOM so FormData matches what we validate.
+    for (const el of form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(
+      "input:not([type=hidden]):not([type=file]):not([type=checkbox]):not([type=radio]), textarea",
+    )) {
+      const next = el.value.trim();
+      if (next !== el.value) el.value = next;
+    }
+    const payload = trimFormStrings(
+      Object.fromEntries(new FormData(form).entries()) as Record<string, unknown>,
+    ) as Record<string, FormDataEntryValue>;
     if (typeof payload.phone === "string") {
       payload.phone = normalizePhone(payload.phone);
     }
@@ -206,6 +216,7 @@ export function ContactLeadForm({
               placeholder="First Name"
               required
               aria-invalid={errors.first_name ? true : undefined}
+              onBlur={trimFieldOnBlur}
               onChange={() => clearField("first_name")}
               className={cn(inputClassName, inputError("first_name"))}
             />
@@ -219,6 +230,7 @@ export function ContactLeadForm({
               placeholder="Last Name"
               required
               aria-invalid={errors.last_name ? true : undefined}
+              onBlur={trimFieldOnBlur}
               onChange={() => clearField("last_name")}
               className={cn(inputClassName, inputError("last_name"))}
             />
@@ -232,6 +244,7 @@ export function ContactLeadForm({
               placeholder="City"
               required
               aria-invalid={errors.city ? true : undefined}
+              onBlur={trimFieldOnBlur}
               onChange={() => clearField("city")}
               className={cn(inputClassName, inputError("city"))}
             />
@@ -245,6 +258,7 @@ export function ContactLeadForm({
               placeholder="STATE/PROVINCE"
               required
               aria-invalid={errors.country ? true : undefined}
+              onBlur={trimFieldOnBlur}
               onChange={() => clearField("country")}
               className={cn(inputClassName, inputError("country"))}
             />
@@ -258,6 +272,7 @@ export function ContactLeadForm({
               placeholder="EMAIL ADDRESS"
               required
               aria-invalid={errors.email ? true : undefined}
+              onBlur={trimFieldOnBlur}
               onChange={() => clearField("email")}
               className={cn(inputClassName, inputError("email"))}
             />
@@ -271,6 +286,7 @@ export function ContactLeadForm({
               placeholder="Phone Number"
               required
               aria-invalid={errors.phone ? true : undefined}
+              onBlur={trimFieldOnBlur}
               onChange={() => clearField("phone")}
               className={cn(inputClassName, inputError("phone"))}
             />
@@ -284,6 +300,7 @@ export function ContactLeadForm({
               placeholder="Your Query"
               required
               aria-invalid={errors.message ? true : undefined}
+              onBlur={trimFieldOnBlur}
               onChange={() => clearField("message")}
               className={cn(inputClassName, inputError("message"))}
             />
@@ -322,6 +339,7 @@ export function ContactLeadForm({
               name="first_name"
               required
               aria-invalid={errors.first_name ? true : undefined}
+              onBlur={trimFieldOnBlur}
               onChange={() => clearField("first_name")}
               className={cn(inputClassName, inputError("first_name"))}
             />
@@ -334,6 +352,7 @@ export function ContactLeadForm({
               name="last_name"
               required
               aria-invalid={errors.last_name ? true : undefined}
+              onBlur={trimFieldOnBlur}
               onChange={() => clearField("last_name")}
               className={cn(inputClassName, inputError("last_name"))}
             />
@@ -346,6 +365,7 @@ export function ContactLeadForm({
               name="city"
               required
               aria-invalid={errors.city ? true : undefined}
+              onBlur={trimFieldOnBlur}
               onChange={() => clearField("city")}
               className={cn(inputClassName, inputError("city"))}
             />
@@ -358,6 +378,7 @@ export function ContactLeadForm({
               name="state"
               required
               aria-invalid={errors.state || errors.country ? true : undefined}
+              onBlur={trimFieldOnBlur}
               onChange={() => {
                 clearField("state");
                 clearField("country");
@@ -376,6 +397,7 @@ export function ContactLeadForm({
               name="email"
               required
               aria-invalid={errors.email ? true : undefined}
+              onBlur={trimFieldOnBlur}
               onChange={() => clearField("email")}
               className={cn(inputClassName, inputError("email"))}
             />
@@ -388,6 +410,7 @@ export function ContactLeadForm({
               name="phone"
               required
               aria-invalid={errors.phone ? true : undefined}
+              onBlur={trimFieldOnBlur}
               onChange={() => clearField("phone")}
               className={cn(inputClassName, inputError("phone"))}
             />
@@ -401,6 +424,7 @@ export function ContactLeadForm({
             rows={4}
             required
             aria-invalid={errors.message ? true : undefined}
+            onBlur={trimFieldOnBlur}
             onChange={() => clearField("message")}
             className={cn(inputClassName, inputError("message"))}
           />
@@ -440,6 +464,7 @@ export function ContactLeadForm({
             autoComplete="given-name"
             required
             aria-invalid={errors.first_name ? true : undefined}
+            onBlur={trimFieldOnBlur}
             onChange={() => clearField("first_name")}
             className={cn(inputClassName, inputError("first_name"))}
           />
@@ -453,6 +478,7 @@ export function ContactLeadForm({
             autoComplete="family-name"
             required
             aria-invalid={errors.last_name ? true : undefined}
+            onBlur={trimFieldOnBlur}
             onChange={() => clearField("last_name")}
             className={cn(inputClassName, inputError("last_name"))}
           />
@@ -467,6 +493,7 @@ export function ContactLeadForm({
             placeholder="name@mail.com"
             required
             aria-invalid={errors.email ? true : undefined}
+            onBlur={trimFieldOnBlur}
             onChange={() => clearField("email")}
             className={cn(inputClassName, inputError("email"))}
           />
@@ -481,6 +508,7 @@ export function ContactLeadForm({
             placeholder="e.g,+ 968 0000 0000"
             required
             aria-invalid={errors.phone ? true : undefined}
+            onBlur={trimFieldOnBlur}
             onChange={() => clearField("phone")}
             className={cn(inputClassName, inputError("phone"))}
           />
@@ -498,6 +526,7 @@ export function ContactLeadForm({
             defaultValue={1}
             required
             aria-invalid={errors.qty ? true : undefined}
+            onBlur={trimFieldOnBlur}
             onChange={() => clearField("qty")}
             className={cn(inputClassName, inputError("qty"))}
           />
@@ -512,6 +541,7 @@ export function ContactLeadForm({
             placeholder="Company Name"
             required
             aria-invalid={errors.company ? true : undefined}
+            onBlur={trimFieldOnBlur}
             onChange={() => clearField("company")}
             className={cn(inputClassName, inputError("company"))}
           />
@@ -524,6 +554,7 @@ export function ContactLeadForm({
           name="message"
           rows={4}
           placeholder="Message"
+          onBlur={trimFieldOnBlur}
           className={inputClassName}
         />
       </label>

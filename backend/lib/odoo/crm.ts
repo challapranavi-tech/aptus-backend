@@ -58,9 +58,8 @@ export type CrmLeadInput = {
 };
 
 /**
- * Multi-company routing: Software pages → SOFTWARE company, ELV/Infrastructure
- * pages → INFRA company. Page/category decides this server-side — never a
- * frontend field — so a lead can't be filed under the wrong company by mistake.
+ * Product type → Odoo company. software → SOFTWARE, elv → INFRA, solar → SOLAR.
+ * The Request Quote Product Type is the only input (see resolveContactRouting).
  *
  * Exhaustive + fail-loud on purpose: an unrecognized category (typo, a new
  * ContactCategory added without updating this map, env var not set) must
@@ -69,12 +68,13 @@ export type CrmLeadInput = {
  * reportCrmLeadFailure on any throw here, so this can't misfile a lead
  * without anyone noticing — it just skips company_id and pages ops instead.
  */
-function companyIdForCategory(category?: ContactCategory): number | undefined {
+export function companyIdForCategory(category?: ContactCategory): number | undefined {
   if (category === undefined) return undefined;
 
   const envVar: Record<ContactCategory, string> = {
     software: "ODOO_SOFTWARE_COMPANY_ID",
     elv: "ODOO_ELV_COMPANY_ID",
+    solar: "ODOO_SOLAR_COMPANY_ID",
   };
   const varName = envVar[category];
   if (!varName) {
@@ -92,16 +92,25 @@ function companyIdForCategory(category?: ContactCategory): number | undefined {
   return id;
 }
 
+/** Sales team name created when that company has no team yet. */
+export const CRM_TEAM_NAME: Record<ContactCategory, string> = {
+  software: "Software Sales Team",
+  elv: "ELV Sales Team",
+  solar: "Solar Sales Team",
+};
+
 /**
- * Resolve the Odoo sales-team ID and stage ID for a given category.
- * Separate from companyIdForCategory: company_id must be exact (fail loud),
- * but team/stage are just pipeline placement — safe to leave unset and let
- * Odoo assign its default team.
+ * Sales team + stage for a product type.
+ * company_id is recomputed from the team (then the partner). A quote with
+ * no team is filed under the partner's company — that is how ELV quotes
+ * landed on Smart Grid while the Software pipeline was open. createCrmLead
+ * fills a team on the target company when these env vars are empty.
  *
  * Priority:
- *   1. Category-specific env  (ODOO_CRM_SOFTWARE_TEAM_ID / ODOO_CRM_ELV_TEAM_ID)
- *   2. Legacy catch-all env   (ODOO_CRM_TEAM_ID) — pre-category-routing deployments
- *   3. Unset → Odoo assigns the default team
+ *   1. Category-specific env
+ *   2. Legacy catch-all env (ODOO_CRM_TEAM_ID) — only if it belongs to the
+ *      target company; createCrmLead drops it otherwise
+ *   3. Unset → lookup / create CRM_TEAM_NAME on that company
  */
 export function crmTeamConfig(category?: ContactCategory): {
   teamId: number | undefined;
@@ -112,26 +121,109 @@ export function crmTeamConfig(category?: ContactCategory): {
     return Number.isInteger(n) && n > 0 ? n : undefined;
   }
 
-  if (category === "elv") {
-    return {
-      teamId:
-        positiveInt(process.env.ODOO_CRM_ELV_TEAM_ID) ??
-        positiveInt(process.env.ODOO_CRM_TEAM_ID),
-      stageId:
-        positiveInt(process.env.ODOO_CRM_ELV_STAGE_ID) ??
-        positiveInt(process.env.ODOO_CRM_STAGE_ID),
-    };
-  }
+  const specific =
+    category === "elv"
+      ? {
+          team: process.env.ODOO_CRM_ELV_TEAM_ID,
+          stage: process.env.ODOO_CRM_ELV_STAGE_ID,
+        }
+      : category === "solar"
+        ? {
+            team: process.env.ODOO_CRM_SOLAR_TEAM_ID,
+            stage: process.env.ODOO_CRM_SOLAR_STAGE_ID,
+          }
+        : {
+            team: process.env.ODOO_CRM_SOFTWARE_TEAM_ID,
+            stage: process.env.ODOO_CRM_SOFTWARE_STAGE_ID,
+          };
 
-  // "software" or undefined — default path
   return {
-    teamId:
-      positiveInt(process.env.ODOO_CRM_SOFTWARE_TEAM_ID) ??
-      positiveInt(process.env.ODOO_CRM_TEAM_ID),
+    teamId: positiveInt(specific.team) ?? positiveInt(process.env.ODOO_CRM_TEAM_ID),
     stageId:
-      positiveInt(process.env.ODOO_CRM_SOFTWARE_STAGE_ID) ??
-      positiveInt(process.env.ODOO_CRM_STAGE_ID),
+      positiveInt(specific.stage) ?? positiveInt(process.env.ODOO_CRM_STAGE_ID),
   };
+}
+
+function m2oId(value: [number, string] | false | undefined): number | undefined {
+  return Array.isArray(value) ? value[0] : undefined;
+}
+
+/**
+ * Team whose company_id is exactly `companyId`.
+ * ponytail: process-lifetime cache. A team renamed in Odoo is picked up on restart.
+ */
+const teamByCompany = new Map<number, number>();
+
+async function teamOnCompany(
+  category: ContactCategory,
+  companyId: number,
+  preferred?: number,
+): Promise<number> {
+  return withAuthRetry(async (session) => {
+    const { searchRead, read, create } = await import("./rpc");
+
+    if (preferred && preferred > 0) {
+      const rows = await read<{
+        id: number;
+        company_id: [number, string] | false;
+      }>(session, "crm.team", [preferred], ["id", "company_id"]);
+      if (m2oId(rows[0]?.company_id) === companyId) return preferred;
+    }
+
+    const cached = teamByCompany.get(companyId);
+    if (cached) return cached;
+
+    const teams = await searchRead<{ id: number; name: string }>(
+      session,
+      "crm.team",
+      [["company_id", "=", companyId]],
+      { fields: ["id", "name"], limit: 20 },
+    );
+    const wanted = CRM_TEAM_NAME[category];
+    const existing =
+      teams.find((team) => team.name === wanted)?.id ?? teams[0]?.id;
+    const id =
+      existing ??
+      (await create(session, "crm.team", {
+        name: wanted,
+        company_id: companyId,
+      }));
+    teamByCompany.set(companyId, id);
+    return id;
+  });
+}
+
+/**
+ * Write company + team again after create. Odoo recomputes company_id from
+ * user_id, then team_id, then partner_id, so the create values alone do not stick.
+ */
+async function pinLeadCompany(
+  leadId: number,
+  companyId: number,
+  teamId: number,
+): Promise<void> {
+  await withAuthRetry(async (session) => {
+    const { executeKw } = await import("./rpc");
+    // Current company has to be the target one. A mixed allowed list hides the row.
+    const context = { allowed_company_ids: [companyId] };
+    const patch: Record<string, unknown> = {
+      company_id: companyId,
+      team_id: teamId,
+    };
+    if (process.env.ODOO_CRM_UNASSIGN !== "0") patch.user_id = false;
+    await executeKw(session, "crm.lead", "write", [[leadId], patch], { context });
+    const rows = await executeKw<
+      { company_id: [number, string] | false; team_id: [number, string] | false }[]
+    >(session, "crm.lead", "read", [[leadId], ["company_id", "team_id"]], { context });
+    const row = rows[0];
+    if (m2oId(row?.company_id) !== companyId || m2oId(row?.team_id) !== teamId) {
+      throw new Error(
+        `crm.lead #${leadId} company/team did not stick ` +
+          `(company=${JSON.stringify(row?.company_id)} team=${JSON.stringify(row?.team_id)}, ` +
+          `wanted company=${companyId} team=${teamId})`,
+      );
+    }
+  });
 }
 
 /** Default Odoo CRM stage name for Talk to Expert website leads. */
@@ -354,6 +446,10 @@ export function buildCrmLeadValues(
     // Non-empty partner_name → Company customer.
     partner_name: isTalkToExpert || isIndividual ? "" : companyName,
     phone: input.phone.trim(),
+    // Contacts tab "Job Position". Only individuals submit a profession.
+    ...(isIndividual && !isTalkToExpert && input.profession?.trim()
+      ? { function: input.profession.trim() }
+      : {}),
     description,
     // Talk to Expert + quotes both land in CRM Pipeline (opportunities).
     // The "Website cold calling leads" column is a Pipeline stage — type=lead
@@ -379,8 +475,7 @@ export function buildCrmLeadValues(
     values[customerTypeField] = isCompany ? "company" : "individual";
   }
 
-  // Software pages → SOFTWARE company; ELV/Infrastructure pages → INFRA company.
-  // Talk to Expert → Software company + dedicated "Website cold calling leads" stage.
+  // Product type → company. Talk to Expert stays on the Software company.
   if (isTalkToExpert) {
     const softwareCompany = Number(process.env.ODOO_SOFTWARE_COMPANY_ID);
     if (Number.isInteger(softwareCompany) && softwareCompany > 0) {
@@ -404,6 +499,484 @@ export function buildCrmLeadValues(
   if (unassign && !isTalkToExpert) values.user_id = false;
 
   return values;
+}
+
+/** Email Odoo will accept on res.partner. "anagha r" is not an email. */
+export function usableQuoteEmail(email: string): string {
+  const trimmed = email.trim();
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed) ? trimmed : "";
+}
+
+function normName(value: string): string {
+  return value.trim().replace(/\s+/g, " ").toLowerCase();
+}
+
+function normId(value: string): string {
+  return value.replace(/[\s-]/g, "").toLowerCase();
+}
+
+/** Last 6–8 digits. Short numbers never match (too many collisions). */
+export function phonesMatch(a: string, b: string): boolean {
+  const da = a.replace(/\D/g, "");
+  const db = b.replace(/\D/g, "");
+  if (da.length < 6 || db.length < 6) return false;
+  const n = Math.min(8, da.length, db.length);
+  return da.slice(-n) === db.slice(-n);
+}
+
+function idsConflict(current: string, incoming: string): boolean {
+  const a = normId(current);
+  const b = normId(incoming);
+  return Boolean(a && b && a !== b);
+}
+
+function lowestId<T extends { id: number }>(rows: T[]): T | undefined {
+  return rows.reduce<T | undefined>(
+    (best, row) => (!best || row.id < best.id ? row : best),
+    undefined,
+  );
+}
+
+/** Snapshot of res.partner used to reuse a customer instead of creating one. */
+export type QuotePartnerRow = {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  vat: string;
+  companyRegistry: string;
+  isCompany: boolean;
+  parentId?: number;
+  job: string;
+};
+
+export type QuotePartnerQuery = {
+  vat: string;
+  cr: string;
+  name: string;
+  phone: string;
+};
+
+/**
+ * Prefer Tax ID, then CR, then company name.
+ * A name hit is rejected when the existing Tax ID or CR disagrees.
+ * ponytail: several companies sharing a name → oldest id. Upgrade = require Tax ID or CR.
+ */
+export function chooseCompanyPartner(
+  rows: QuotePartnerRow[],
+  query: QuotePartnerQuery,
+): QuotePartnerRow | undefined {
+  const companies = rows.filter((row) => row.isCompany);
+  const byVat = query.vat
+    ? companies.filter((row) => normId(row.vat) === normId(query.vat))
+    : [];
+  if (byVat.length) return lowestId(byVat);
+  const byCr = query.cr
+    ? companies.filter(
+        (row) => normId(row.companyRegistry) === normId(query.cr),
+      )
+    : [];
+  if (byCr.length) return lowestId(byCr);
+  const byName = companies.filter(
+    (row) =>
+      normName(row.name) === normName(query.name) &&
+      query.name.trim() &&
+      !idsConflict(row.vat, query.vat) &&
+      !idsConflict(row.companyRegistry, query.cr),
+  );
+  const byPhone = byName.filter((row) => phonesMatch(row.phone, query.phone));
+  if (byPhone.length) return lowestId(byPhone);
+  return lowestId(byName);
+}
+
+export function choosePersonPartner(
+  rows: QuotePartnerRow[],
+  query: { name: string; email: string; phone: string; parentId?: number },
+): QuotePartnerRow | undefined {
+  const people = rows.filter((row) => !row.isCompany);
+  const email = usableQuoteEmail(query.email).toLowerCase();
+  if (email) {
+    const hits = people.filter((row) => row.email.trim().toLowerCase() === email);
+    // Don't attach a quote to a contact that already belongs to a different company.
+    const eligible = query.parentId
+      ? hits.filter((row) => !row.parentId || row.parentId === query.parentId)
+      : hits;
+    const underParent = query.parentId
+      ? eligible.filter((row) => row.parentId === query.parentId)
+      : eligible;
+    const pool = underParent.length ? underParent : eligible;
+    const picked = lowestId(pool);
+    if (picked) return picked;
+  }
+  if (query.parentId && query.name.trim()) {
+    const hits = people.filter(
+      (row) =>
+        row.parentId === query.parentId &&
+        normName(row.name) === normName(query.name),
+    );
+    const byPhone = hits.filter((row) => phonesMatch(row.phone, query.phone));
+    return lowestId(byPhone.length ? byPhone : hits);
+  }
+  // No company parent: name alone is too common. Require phone or we already matched email.
+  if (!query.parentId && query.name.trim()) {
+    const hits = people.filter(
+      (row) => !row.parentId && normName(row.name) === normName(query.name),
+    );
+    return lowestId(hits.filter((row) => phonesMatch(row.phone, query.phone)));
+  }
+  return undefined;
+}
+
+/** Fill only blank partner fields. Never overwrite a Tax ID or CR already on file. */
+export function partnerFieldPatch(
+  current: Pick<QuotePartnerRow, "email" | "phone" | "vat" | "companyRegistry" | "job">,
+  desired: { email: string; phone: string; vat: string; companyRegistry: string; job: string },
+): Record<string, string> {
+  const patch: Record<string, string> = {};
+  const email = usableQuoteEmail(desired.email);
+  if (!current.email.trim() && email) patch.email = email;
+  if (!current.phone.trim() && desired.phone.trim()) patch.phone = desired.phone.trim();
+  if (!current.vat.trim() && desired.vat.trim()) patch.vat = desired.vat.trim();
+  if (!current.companyRegistry.trim() && desired.companyRegistry.trim()) {
+    patch.company_registry = desired.companyRegistry.trim();
+  }
+  if (!current.job.trim() && desired.job.trim()) patch.function = desired.job.trim();
+  return patch;
+}
+
+type PartnerRaw = {
+  id: number;
+  name: string | false;
+  email: string | false;
+  phone: string | false;
+  vat: string | false;
+  company_registry?: string | false;
+  is_company: boolean;
+  parent_id: [number, string] | false;
+  function: string | false;
+};
+
+function odooStr(value: unknown): string {
+  return typeof value === "string" ? value.trim() : "";
+}
+
+function toPartnerRow(row: PartnerRaw): QuotePartnerRow {
+  return {
+    id: row.id,
+    name: odooStr(row.name),
+    email: odooStr(row.email),
+    phone: odooStr(row.phone),
+    vat: odooStr(row.vat),
+    companyRegistry: odooStr(row.company_registry),
+    isCompany: Boolean(row.is_company),
+    parentId: Array.isArray(row.parent_id) ? row.parent_id[0] : undefined,
+    job: odooStr(row.function),
+  };
+}
+
+// ponytail: one failed read flips this off for the process. Upgrade = drop the probe when every DB has company_registry.
+let companyRegistryField = true;
+
+const PARTNER_BASE_FIELDS = [
+  "id",
+  "name",
+  "email",
+  "phone",
+  "vat",
+  "is_company",
+  "parent_id",
+  "function",
+] as const;
+
+function partnerFields(): string[] {
+  return companyRegistryField
+    ? [...PARTNER_BASE_FIELDS, "company_registry"]
+    : [...PARTNER_BASE_FIELDS];
+}
+
+async function searchPartners(
+  session: OdooRpcSession,
+  domain: OdooDomain,
+): Promise<QuotePartnerRow[]> {
+  const { searchRead } = await import("./rpc");
+  const { OdooRpcError } = await import("./rpc");
+  try {
+    const rows = await searchRead<PartnerRaw>(session, "res.partner", domain, {
+      fields: partnerFields(),
+      limit: 8,
+    });
+    return rows.map(toPartnerRow);
+  } catch (err) {
+    const missing =
+      err instanceof OdooRpcError &&
+      /Invalid field 'company_registry'/.test(err.message);
+    if (!missing) throw err;
+    companyRegistryField = false;
+    const domainUsesRegistry = domain.some(
+      (item) => Array.isArray(item) && item[0] === "company_registry",
+    );
+    if (domainUsesRegistry) return [];
+    const rows = await searchRead<PartnerRaw>(session, "res.partner", domain, {
+      fields: partnerFields(),
+      limit: 8,
+    });
+    return rows.map(toPartnerRow);
+  }
+}
+
+async function savePartner(
+  session: OdooRpcSession,
+  values: Record<string, unknown>,
+  existingId?: number,
+): Promise<number> {
+  const { create, write } = await import("./rpc");
+  const payload = { ...values };
+  if (!companyRegistryField) delete payload.company_registry;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      if (existingId) {
+        if (Object.keys(payload).length) await write(session, "res.partner", existingId, payload);
+        return existingId;
+      }
+      const id = await create(session, "res.partner", payload);
+      if (!id) throw new Error("Odoo returned no res.partner id");
+      return id;
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      if (payload.company_registry && /company_registry|Invalid field/i.test(message)) {
+        companyRegistryField = false;
+        delete payload.company_registry;
+        continue;
+      }
+      // Odoo rejects some Tax ID formats. Keep the partner; Tax ID stays in the lead notes.
+      if (payload.vat && /vat/i.test(message)) {
+        delete payload.vat;
+        continue;
+      }
+      throw err;
+    }
+  }
+  throw new Error("res.partner save failed");
+}
+
+function rememberPartner(bucket: QuotePartnerRow[], rows: QuotePartnerRow[]) {
+  for (const row of rows) {
+    if (!bucket.some((existing) => existing.id === row.id)) bucket.push(row);
+  }
+}
+
+export type LinkedQuotePartner = {
+  partnerId: number;
+  email: string;
+  phone: string;
+};
+
+/**
+ * Find or create the company + contact for a Request Quote and return the
+ * contact to store on crm.lead.partner_id.
+ * Without partner_id, New Quotation defaults to "Create a new customer" and
+ * the new record misses Tax ID / CR (those are not crm.lead columns).
+ */
+export async function linkQuotePartner(
+  input: CrmLeadInput,
+): Promise<LinkedQuotePartner | undefined> {
+  if (input.channel === "talk-to-expert") return undefined;
+
+  const isIndividual = input.customerType === "individual";
+  const isCompany = input.customerType === "company";
+  const contactName =
+    (input.contactName ?? "").trim() ||
+    [input.firstName, input.lastName]
+      .map((part) => part.trim())
+      .filter(Boolean)
+      .join(" ");
+  const companyName = isIndividual
+    ? ""
+    : input.company.trim() === "Individual"
+      ? ""
+      : input.company.trim();
+  if (!companyName && !contactName) return undefined;
+
+  const phone = input.phone.trim();
+  const email = usableQuoteEmail(input.email);
+  const vat = isCompany ? (input.vatId ?? "").trim() : "";
+  const cr = isCompany ? (input.crNumber ?? "").trim() : "";
+  const job = isIndividual ? (input.profession ?? "").trim() : "";
+  const linkCompany = Boolean(companyName) && !isIndividual;
+
+  return withAuthRetry(async (session) => {
+    const found: QuotePartnerRow[] = [];
+    if (input.partnerId && input.partnerId > 0) {
+      rememberPartner(
+        found,
+        await searchPartners(session, [["id", "=", input.partnerId]]),
+      );
+    }
+    if (email) {
+      rememberPartner(
+        found,
+        await searchPartners(session, [["email", "=ilike", email]]),
+      );
+    }
+
+    let company: QuotePartnerRow | undefined;
+    if (linkCompany) {
+      if (vat) {
+        rememberPartner(
+          found,
+          await searchPartners(session, [["is_company", "=", true], ["vat", "ilike", normId(vat)]]),
+        );
+      }
+      if (cr && companyRegistryField) {
+        rememberPartner(
+          found,
+          await searchPartners(session, [
+            ["is_company", "=", true],
+            ["company_registry", "ilike", normId(cr)],
+          ]),
+        );
+      }
+      rememberPartner(
+        found,
+        await searchPartners(session, [
+          ["is_company", "=", true],
+          ["name", "=ilike", companyName],
+        ]),
+      );
+      company = chooseCompanyPartner(found, {
+        vat,
+        cr,
+        name: companyName,
+        phone,
+      });
+      if (!company) {
+        const id = await savePartner(session, {
+          name: companyName,
+          is_company: true,
+          company_type: "company",
+          // Shared contact: a Software customer can also buy ELV or Solar.
+          // A company-locked partner cannot be linked to another company's lead.
+          company_id: false,
+          ...(phone ? { phone } : {}),
+          ...(vat ? { vat } : {}),
+          ...(cr && companyRegistryField ? { company_registry: cr } : {}),
+        });
+        company = {
+          id,
+          name: companyName,
+          email: "",
+          phone,
+          vat,
+          companyRegistry: cr,
+          isCompany: true,
+          job: "",
+        };
+      } else {
+        const patch = partnerFieldPatch(company, {
+          email: "",
+          phone,
+          vat,
+          companyRegistry: cr,
+          job: "",
+        });
+        await savePartner(session, patch, company.id);
+        company = {
+          ...company,
+          phone: company.phone || phone,
+          vat: company.vat || vat,
+          companyRegistry: company.companyRegistry || cr,
+        };
+      }
+    }
+
+    if (!contactName) {
+      if (!company) return undefined;
+      return { partnerId: company.id, email: company.email, phone: company.phone || phone };
+    }
+
+    if (company) {
+      rememberPartner(
+        found,
+        await searchPartners(session, [
+          ["parent_id", "=", company.id],
+          ["name", "=ilike", contactName],
+        ]),
+      );
+    } else if (phone) {
+      const tail = phone.replace(/\D/g, "").slice(-8);
+      rememberPartner(
+        found,
+        await searchPartners(session, [
+          ["is_company", "=", false],
+          ["name", "=ilike", contactName],
+          ...(tail.length >= 6 ? [["phone", "ilike", tail] as [string, string, string]] : []),
+        ]),
+      );
+    }
+
+    let person = choosePersonPartner(found, {
+      name: contactName,
+      email,
+      phone,
+      parentId: company?.id,
+    });
+    if (!person) {
+      const id = await savePartner(session, {
+        name: contactName,
+        is_company: false,
+        company_type: "person",
+        type: "contact",
+        company_id: false,
+        ...(company ? { parent_id: company.id } : {}),
+        ...(phone ? { phone } : {}),
+        ...(email ? { email } : {}),
+        ...(job ? { function: job } : {}),
+      });
+      person = {
+        id,
+        name: contactName,
+        email,
+        phone,
+        vat: "",
+        companyRegistry: "",
+        isCompany: false,
+        parentId: company?.id,
+        job,
+      };
+    } else {
+      const patch = partnerFieldPatch(person, {
+        email,
+        phone,
+        vat: "",
+        companyRegistry: "",
+        job,
+      });
+      await savePartner(session, patch, person.id);
+      person = {
+        ...person,
+        email: person.email || email,
+        phone: person.phone || phone,
+        job: person.job || job,
+      };
+    }
+
+    // A matching person with no company yet should sit under the quote's company
+    // so quotations show "Company, Contact" and share its Tax ID / CR.
+    if (company && !person.parentId) {
+      await savePartner(session, { parent_id: company.id }, person.id);
+      person = { ...person, parentId: company.id };
+    }
+
+    console.info(
+      `[crm] quote partner #${person.id}` +
+        (company ? ` company #${company.id}` : ""),
+    );
+    return {
+      partnerId: person.id,
+      email: person.email,
+      phone: person.phone || phone,
+    };
+  });
 }
 
 /** Find an existing portal/customer partner by email (for linking Request Quote leads). */
@@ -554,7 +1127,7 @@ export async function createCrmLead(input: CrmLeadInput): Promise<number> {
     invalidateOdooServiceSession,
     isOdooConfigured,
   } = await import("./client");
-  const { create, OdooRpcError } = await import("./rpc");
+  const { OdooRpcError } = await import("./rpc");
 
   if (!isOdooConfigured()) {
     throw new Error("Odoo is not configured");
@@ -564,7 +1137,19 @@ export async function createCrmLead(input: CrmLeadInput): Promise<number> {
     session: OdooRpcSession,
     values: Record<string, unknown>,
   ) => {
-    const leadId = await create(session, "crm.lead", values);
+    const { executeKw } = await import("./rpc");
+    const companyId = values.company_id;
+    const context =
+      typeof companyId === "number"
+        ? { allowed_company_ids: [companyId] }
+        : undefined;
+    const leadId = await executeKw<number>(
+      session,
+      "crm.lead",
+      "create",
+      [values],
+      context ? { context } : {},
+    );
     if (!leadId) throw new Error("Odoo returned no crm.lead id after create");
     return leadId;
   };
@@ -582,7 +1167,41 @@ export async function createCrmLead(input: CrmLeadInput): Promise<number> {
     }
   };
 
-  const values = buildCrmLeadValues(input);
+  // Link the existing company/contact first. An empty partner_id makes
+  // New Quotation ask to create a new customer, which drops Tax ID and CR.
+  let leadInput = input;
+  if (input.channel !== "talk-to-expert") {
+    try {
+      const linked = await linkQuotePartner(input);
+      if (linked) {
+        leadInput = {
+          ...input,
+          partnerId: linked.partnerId,
+          email: input.email.trim() || linked.email,
+          phone: input.phone.trim() || linked.phone,
+        };
+      }
+    } catch (err) {
+      console.warn(
+        "[crm] quote partner link failed:",
+        err instanceof Error ? err.message : err,
+      );
+    }
+  }
+
+  const values = buildCrmLeadValues(leadInput);
+
+  // Team company must match the product-type company, or Odoo recomputes
+  // company_id onto the partner (ELV quotes were sticking to SGI).
+  const quoteCompany = values.company_id;
+  if (
+    input.channel !== "talk-to-expert" &&
+    input.category &&
+    typeof quoteCompany === "number"
+  ) {
+    const preferred = typeof values.team_id === "number" ? values.team_id : undefined;
+    values.team_id = await teamOnCompany(input.category, quoteCompany, preferred);
+  }
 
   // Talk to Expert: always bind Pipeline stage + matching sales team.
   if (input.channel === "talk-to-expert") {
@@ -595,33 +1214,85 @@ export async function createCrmLead(input: CrmLeadInput): Promise<number> {
     );
   }
 
-  try {
-    const leadId = await run(values);
-    // Odoo may recompute stage on create — force the intended column.
-    if (input.channel === "talk-to-expert" && values.stage_id) {
-      try {
-        await withAuthRetry(async (session) => {
-          const { write } = await import("./rpc");
-          const patch: Record<string, unknown> = {
-            stage_id: values.stage_id,
-          };
-          if (values.team_id) patch.team_id = values.team_id;
-          await write(session, "crm.lead", leadId, patch);
-        });
-      } catch (err) {
-        console.warn(
-          "[crm] Talk to Expert stage re-write failed:",
-          err instanceof Error ? err.message : err,
-        );
-      }
+  const pin = async (leadId: number) => {
+    if (
+      input.channel === "talk-to-expert" ||
+      !input.category ||
+      typeof values.company_id !== "number" ||
+      typeof values.team_id !== "number"
+    ) {
+      return;
     }
-    return leadId;
+    await pinLeadCompany(leadId, values.company_id, values.team_id);
+  };
+
+  let leadId: number;
+  try {
+    leadId = await run(values);
   } catch (err) {
-    // Some DBs reject user_id: false — retry without it.
-    if (!("user_id" in values)) throw err;
-    const { user_id: _uid, ...rest } = values;
-    return run(rest);
+    const message = err instanceof Error ? err.message : String(err);
+    let payload = values;
+    if (
+      "partner_id" in values &&
+      /company inconsistenc|company crossover|belongs to another company|res\.partner/i.test(
+        message,
+      )
+    ) {
+      // Contact is locked to a different company. The lead still has the
+      // contact fields; Odoo will not accept that partner on this company.
+      console.warn(
+        "[crm] partner company does not match this product type; lead created without partner_id",
+      );
+      const { partner_id: _partner, ...rest } = values;
+      payload = rest;
+    }
+    try {
+      if (payload === values) {
+        // Some DBs reject user_id: false — retry without it.
+        if (!("user_id" in values)) throw err;
+        const { user_id: _uid, ...rest } = values;
+        leadId = await run(rest);
+      } else {
+        leadId = await run(payload);
+      }
+    } catch (err2) {
+      if (!("user_id" in payload)) throw err2;
+      const { user_id: _uid, ...rest } = payload;
+      leadId = await run(rest);
+    }
   }
+
+  await pin(leadId);
+  // Odoo may recompute stage on create — force the intended column.
+  if (input.channel === "talk-to-expert" && values.stage_id) {
+    try {
+      await withAuthRetry(async (session) => {
+        const { executeKw } = await import("./rpc");
+        const patch: Record<string, unknown> = {
+          stage_id: values.stage_id,
+        };
+        if (values.team_id) patch.team_id = values.team_id;
+        const companyId = values.company_id;
+        const context =
+          typeof companyId === "number"
+            ? { allowed_company_ids: [companyId] }
+            : undefined;
+        await executeKw(
+          session,
+          "crm.lead",
+          "write",
+          [[leadId], patch],
+          context ? { context } : {},
+        );
+      });
+    } catch (err) {
+      console.warn(
+        "[crm] Talk to Expert stage re-write failed:",
+        err instanceof Error ? err.message : err,
+      );
+    }
+  }
+  return leadId;
 }
 
 export type CrmLeadAttachment = {
@@ -634,6 +1305,7 @@ export type CrmLeadAttachment = {
 export async function attachFilesToCrmLead(
   leadId: number,
   attachments: CrmLeadAttachment[],
+  companyId?: number,
 ): Promise<void> {
   if (!attachments.length) return;
 
@@ -642,24 +1314,37 @@ export async function attachFilesToCrmLead(
     invalidateOdooServiceSession,
     isOdooConfigured,
   } = await import("./client");
-  const { create, OdooRpcError } = await import("./rpc");
+  const { executeKw, OdooRpcError } = await import("./rpc");
 
   if (!isOdooConfigured()) {
     throw new Error("Odoo is not configured");
   }
 
+  const context =
+    companyId && companyId > 0
+      ? { allowed_company_ids: [companyId] }
+      : undefined;
+
   const uploadOne = async (
     session: OdooRpcSession,
     file: CrmLeadAttachment,
   ) => {
-    await create(session, "ir.attachment", {
-      name: file.filename,
-      res_model: "crm.lead",
-      res_id: leadId,
-      type: "binary",
-      datas: file.content.toString("base64"),
-      mimetype: file.contentType ?? "application/octet-stream",
-    });
+    await executeKw(
+      session,
+      "ir.attachment",
+      "create",
+      [
+        {
+          name: file.filename,
+          res_model: "crm.lead",
+          res_id: leadId,
+          type: "binary",
+          datas: file.content.toString("base64"),
+          mimetype: file.contentType ?? "application/octet-stream",
+        },
+      ],
+      context ? { context } : {},
+    );
   };
 
   for (const file of attachments) {

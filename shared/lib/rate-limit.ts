@@ -28,8 +28,12 @@ export const RATE_LIMITS = {
   publicRead: { limit: 120, windowMs: 60_000 } satisfies RateLimitPolicy,
   /** Form / upload POSTs by IP. */
   publicWrite: { limit: 8, windowMs: 15 * 60_000 } satisfies RateLimitPolicy,
-  /** Same forms keyed by submitted email (when present). */
-  publicWriteIdentity: { limit: 3, windowMs: 15 * 60_000 } satisfies RateLimitPolicy,
+  /**
+   * Same forms keyed by submitted email (when present).
+   * Allow several Request Quote submissions per window (multi-product browsing)
+   * while still blocking scripted spam from one inbox.
+   */
+  publicWriteIdentity: { limit: 12, windowMs: 15 * 60_000 } satisfies RateLimitPolicy,
   /** Token-protected webhooks by IP (failed auth still burns this). */
   authWriteIp: { limit: 60, windowMs: 60_000 } satisfies RateLimitPolicy,
   /** Token-protected webhooks by auth identity. */

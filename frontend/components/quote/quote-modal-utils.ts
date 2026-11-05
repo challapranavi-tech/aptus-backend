@@ -129,7 +129,7 @@ function productsForFamily(family: string): string[] {
 }
 
 export type QuoteModalContext = {
-  category: "software" | "elv";
+  category: "software" | "elv" | "solar";
   family: string;
   productLabel: string;
   products: string[];
@@ -194,7 +194,12 @@ export function quoteContextForFamily(
   const products = productsForFamily(family);
   const defaultProduct = slug ? defaultProductForSlug(family, slug) : undefined;
   return {
-    category: family === "elv" ? "elv" : "software",
+    category:
+      family === "elv"
+        ? "elv"
+        : family === "solar" || family === "aptus-solar"
+          ? "solar"
+          : "software",
     family,
     productLabel: "Products",
     products,
@@ -381,6 +386,8 @@ if (process.env.NODE_ENV === "development") {
 
   const expertElv = quoteContextForFamily("elv");
   console.assert(expertElv.category === "elv");
+  console.assert(quoteContextForFamily("solar").category === "solar");
+  console.assert(quoteContextForFamily("aptus-solar").category === "solar");
   console.assert(expertElv.products.every((p) => !p.toLowerCase().includes("photoshop")));
   console.assert(expertElv.products.includes("CCTV Surveillance Solutions"));
 }

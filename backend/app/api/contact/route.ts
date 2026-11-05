@@ -10,6 +10,7 @@ import { requireJsonContentType, validationError } from "@/lib/api-validate";
 import { isMailConfigured, sendEmail, type MailAttachment } from "@/lib/mail";
 import {
   attachFilesToCrmLead,
+  companyIdForCategory,
   createCrmLead,
   crmLeadFormUrl,
   findPartnerIdByEmail,
@@ -115,6 +116,7 @@ function buildSalesEmail(opts: {
             `Phone Number: ${data.phone_local}`,
             `Country Code: ${data.country_code}`,
             `Full Phone: ${data.phone}`,
+            `Email ID: ${data.email}`,
             `Software Products: ${data.product}`,
             `Quantity: ${data.qty}`,
             `Attachment: ${attachmentName || "—"}`,
@@ -285,9 +287,14 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  const productType =
+    raw && typeof raw === "object" && !Array.isArray(raw)
+      ? String((raw as Record<string, unknown>).product_type ?? "")
+      : "";
   const routing = resolveContactRouting({
     product,
     categoryHint: category,
+    productType,
   });
   const displayName =
     name || [first_name, last_name].filter(Boolean).join(" ");
@@ -378,13 +385,18 @@ export async function POST(req: NextRequest) {
       );
       if (mailAttachment && leadId) {
         try {
-          await attachFilesToCrmLead(leadId, [
-            {
-              filename: mailAttachment.filename,
-              content: mailAttachment.content,
-              contentType: mailAttachment.contentType,
-            },
-          ]);
+          const companyId = companyIdForCategory(routing.category);
+          await attachFilesToCrmLead(
+            leadId,
+            [
+              {
+                filename: mailAttachment.filename,
+                content: mailAttachment.content,
+                contentType: mailAttachment.contentType,
+              },
+            ],
+            companyId,
+          );
         } catch (attachErr) {
           console.error(
             `[contact] CRM attachment failed lead=#${leadId}:`,

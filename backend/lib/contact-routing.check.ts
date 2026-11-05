@@ -49,6 +49,41 @@ assert.equal(
   "Infra",
 );
 
+assert.equal(
+  resolveContactRouting({
+    product: "Access Control Systems",
+    categoryHint: "software",
+    productType: "elv",
+  }).category,
+  "elv",
+  "Product Type ELV overrides a software page hint",
+);
+assert.equal(
+  resolveContactRouting({
+    product: "Sketchup",
+    categoryHint: "software",
+    productType: "solar",
+  }).category,
+  "solar",
+);
+assert.equal(
+  resolveContactRouting({
+    product: "Residential Solar Systems",
+    productType: "solar",
+  }).categoryLabel,
+  "Solar",
+);
+
+process.env.SOLAR_SALES_EMAIL = "solar@example.com";
+assert.equal(
+  resolveContactRouting({
+    product: "Residential Solar Systems",
+    productType: "solar",
+  }).to,
+  "solar@example.com",
+);
+delete process.env.SOLAR_SALES_EMAIL;
+
 delete process.env.SOFTWARE_SALES_EMAIL;
 assert.equal(
   resolveContactRouting({ product: "Revit" }).to,

@@ -79,6 +79,7 @@ export function buildLocalOurStoryPage(): Page | null {
             title: item.title,
             description: item.description,
             icon: item.icon,
+            ...("href" in item && item.href ? { href: item.href } : {}),
           })),
         }
       : undefined,

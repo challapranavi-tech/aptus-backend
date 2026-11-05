@@ -8,10 +8,11 @@ import {
   resolveQuoteProductType,
   type QuoteProductType,
 } from "@/components/quote/quote-interest";
-import { fetchAuthMeShared } from "@/lib/auth-me-client";
+import { peekAuthMeOptional } from "@/lib/auth-me-client";
 import { publicApiBase } from "@/lib/api-base";
 import { normalizePhone } from "@/lib/phone";
 import { cn } from "@/lib/utils";
+import { trimFormStrings } from "@/lib/form-text";
 import type { ClientProfile } from "@/types/profile";
 import {
   COUNTRY_CALLING_CODES,
@@ -49,8 +50,8 @@ type Status = "idle" | "submitting" | "success" | "error";
 type SoftwareQuoteFormProps = {
   submitLabel?: string;
   className?: string;
-  /** Routes the lead (software vs ELV inbox). */
-  category?: "software" | "elv";
+  /** Page default. The Product Type dropdown is what the quote submits. */
+  category?: "software" | "elv" | "solar";
   /** Quote/page family — used to pick the matching Products list. */
   family?: string;
   /** Dropdown label, e.g. "Products". */
@@ -202,11 +203,12 @@ export function SoftwareQuoteForm({
         ? [catalog.defaultProduct]
         : [];
 
+  // Optional prefill only — Request Quote never requires login.
   useEffect(() => {
     let cancelled = false;
 
     void (async () => {
-      const result = await fetchAuthMeShared();
+      const result = await peekAuthMeOptional();
       if (cancelled || !result.ok) return;
       if (prefilledUserId.current === result.user.id) return;
 
@@ -228,12 +230,14 @@ export function SoftwareQuoteForm({
     };
   }, []);
 
-  useEffect(() => {
+  function selectCustomerType(next: CustomerType) {
+    if (next === customerType) return;
+    setCustomerType(next);
     setErrors({});
     setMessage("");
     setStatus("idle");
     setQuoteRef("");
-  }, [customerType]);
+  }
 
   function clearField(nameKey: string) {
     if (!errors[nameKey]) return;
@@ -295,12 +299,19 @@ export function SoftwareQuoteForm({
     if (status === "submitting") return;
 
     const form = e.currentTarget;
+    const trimmedName = name.trim();
+    const trimmedEmail = email.trim();
+    const trimmedCompany = company.trim();
+    if (trimmedName !== name) setName(trimmedName);
+    if (trimmedEmail !== email) setEmail(trimmedEmail);
+    if (trimmedCompany !== company) setCompany(trimmedCompany);
+
     const formData = new FormData(form);
     formData.set("customer_type", customerType);
-    formData.set("name", name);
-    formData.set("email", email);
+    formData.set("name", trimmedName);
+    formData.set("email", trimmedEmail);
     if (customerType === "company") {
-      formData.set("company", company);
+      formData.set("company", trimmedCompany);
       formData.set("vat_id", vatId);
       formData.set("cr_number", crNumber);
     }
@@ -316,6 +327,7 @@ export function SoftwareQuoteForm({
     formData.forEach((value, key) => {
       if (typeof value === "string") payload[key] = value;
     });
+    Object.assign(payload, trimFormStrings(payload));
 
     const fieldErrors = validateQuoteContactFields(payload);
     if (attachmentError) {
@@ -361,7 +373,7 @@ export function SoftwareQuoteForm({
         );
         form.reset();
         if (prefilledUserId.current) {
-          const again = await fetchAuthMeShared();
+          const again = await peekAuthMeOptional();
           if (again.ok) {
             const defaults = profileToQuoteDefaults(again.user);
             setCustomerType(defaults.customerType);
@@ -410,6 +422,17 @@ export function SoftwareQuoteForm({
         } else if (typeof data.error === "string" && data.error) {
           msg = data.error;
         }
+        if (res.status === 429) {
+          const retry =
+            typeof data.retryAfter === "number" && data.retryAfter > 0
+              ? ` Try again in about ${Math.ceil(data.retryAfter / 60)} min.`
+              : " Please wait a few minutes and try again.";
+          const base =
+            typeof data.error === "string" && data.error
+              ? data.error
+              : "Too many quote requests from this email.";
+          msg = `${base}${retry}`;
+        }
       } catch {
         /* keep default */
       }
@@ -453,7 +476,7 @@ export function SoftwareQuoteForm({
               customerType === "individual" &&
                 "aptus-quote-customer-type__btn--active",
             )}
-            onClick={() => setCustomerType("individual")}
+            onClick={() => selectCustomerType("individual")}
           >
             Individual
           </button>
@@ -466,7 +489,7 @@ export function SoftwareQuoteForm({
               customerType === "company" &&
                 "aptus-quote-customer-type__btn--active",
             )}
-            onClick={() => setCustomerType("company")}
+            onClick={() => selectCustomerType("company")}
           >
             Company
           </button>
@@ -476,7 +499,6 @@ export function SoftwareQuoteForm({
       <div className="mt-5 grid gap-5 sm:grid-cols-2">
         {customerType === "company" ? (
           <>
-            <input type="hidden" name="email" value={email} />
             <label className="aptus-form-label">
               Company Name *
               <input
@@ -486,6 +508,7 @@ export function SoftwareQuoteForm({
                 required
                 value={company}
                 aria-invalid={errors.company ? true : undefined}
+                onBlur={() => setCompany((v) => v.trim())}
                 onChange={(e) => {
                   setCompany(e.target.value);
                   clearField("company");
@@ -506,6 +529,7 @@ export function SoftwareQuoteForm({
                 required
                 value={name}
                 aria-invalid={errors.name ? true : undefined}
+                onBlur={() => setName((v) => v.trim())}
                 onChange={(e) => {
                   setName(e.target.value);
                   clearField("name");
@@ -568,6 +592,7 @@ export function SoftwareQuoteForm({
                 required
                 value={name}
                 aria-invalid={errors.name ? true : undefined}
+                onBlur={() => setName((v) => v.trim())}
                 onChange={(e) => {
                   setName(e.target.value);
                   clearField("name");
@@ -630,6 +655,7 @@ export function SoftwareQuoteForm({
                 value={email}
                 placeholder="name@example.com"
                 aria-invalid={errors.email ? true : undefined}
+                onBlur={() => setEmail((v) => v.trim())}
                 onChange={(e) => {
                   setEmail(e.target.value);
                   clearField("email");
@@ -657,6 +683,7 @@ export function SoftwareQuoteForm({
         )}
 
         {customerType === "company" && (
+          <>
           <label className="aptus-form-label">
             Phone Number *
             <span className="mt-0 flex gap-2">
@@ -698,6 +725,29 @@ export function SoftwareQuoteForm({
             </span>
             <FieldError message={errors.phone_local || errors.country_code} />
           </label>
+          <label className="aptus-form-label">
+            Email ID *
+            <input
+              type="email"
+              name="email"
+              autoComplete="email"
+              required
+              value={email}
+              placeholder="name@example.com"
+              aria-invalid={errors.email ? true : undefined}
+              onBlur={() => setEmail((v) => v.trim())}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                clearField("email");
+              }}
+              className={cn(
+                "aptus-form-input mt-0 w-full px-4 py-3",
+                inputError("email"),
+              )}
+            />
+            <FieldError message={errors.email} />
+          </label>
+          </>
         )}
 
         <div>

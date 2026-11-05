@@ -88,8 +88,7 @@ export const SITE_NAVIGATION: NavigationItem[] = [
       { label: "Solutions in Action", href: "/customer-stories" },
       { label: "Knowledge Base", href: "/software-solutions" },
       { label: "FAQ", href: "/faq" },
-      { label: "Events", href: "/events" },
-      { label: "Gallery", href: "/gallery" },
+      // Events + Gallery hidden from the Knowledge Hub menu (pages may still exist).
     ],
   },
   { label: "Careers", href: "/careers" },

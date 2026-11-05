@@ -83,7 +83,7 @@ export const ALL_CONTACT_PRODUCTS = [
   ...ELV_PRODUCTS,
 ] as const;
 
-export type ContactCategory = "software" | "elv";
+export type ContactCategory = "software" | "elv" | "solar";
 export type CustomerType = "individual" | "company";
 
 export const PRODUCT_PLACEHOLDER = "Select Products";
@@ -232,7 +232,7 @@ const legacyContactSchema: ObjectSchema<{
       type: "string",
       required: false,
       max: 20,
-      allow: ["software", "elv", ""],
+      allow: ["software", "elv", "solar", ""],
       label: "Category",
     },
   },
@@ -364,6 +364,11 @@ export function validateQuoteContactFields(
       errors.tax_id = "Tax ID must contain a maximum of 12 characters.";
     }
 
+    const email = str("email");
+    if (!email) errors.email = "Please enter a valid email address.";
+    else if (!EMAIL_RE.test(email))
+      errors.email = "Please enter a valid email address.";
+
     const crDigits = str("cr_number").replace(/\D/g, "");
     if (!crDigits) errors.cr_number = "Please enter a valid CR Number.";
     else if (crDigits.length > CR_NUMBER_MAX_DIGITS) {
@@ -421,19 +426,20 @@ function hasKeyword(product: string, keywords: readonly string[]): boolean {
 }
 
 /**
- * Resolve software vs ELV from an explicit hidden-field hint, else catalog /
- * keyword match on the product name. Defaults to software.
+ * Resolve software / ELV / solar from an explicit hint (product type wins
+ * when the caller passes it), else catalog / keyword match. Defaults to software.
  */
 export function detectContactCategory(
   product: string,
   categoryHint?: string | null,
 ): ContactCategory {
   const hint = (categoryHint ?? "").trim().toLowerCase();
-  if (hint === "elv" || hint === "software") return hint;
+  if (hint === "elv" || hint === "software" || hint === "solar") return hint;
 
   const name = product.trim();
   if (!name || name === "Others") return "software";
 
+  if (hasKeyword(name, ["solar"])) return "solar";
   if (inCatalog(name, ELV_PRODUCTS) || hasKeyword(name, ELV_KEYWORDS)) return "elv";
   if (
     inCatalog(name, CONTACT_PRODUCTS) ||
@@ -513,7 +519,9 @@ function preprocessContactBody(input: unknown): unknown {
 
     const categoryRaw = trimRaw(raw, "category").toLowerCase();
     const category =
-      categoryRaw === "elv" || categoryRaw === "software" ? categoryRaw : "";
+      categoryRaw === "elv" || categoryRaw === "software" || categoryRaw === "solar"
+        ? categoryRaw
+        : "";
 
     return {
       customer_type,
@@ -653,7 +661,9 @@ function validateTypedQuote(
       qty: data.qty.trim(),
       message: (data.message || "").trim(),
       category:
-        data.category === "elv" || data.category === "software"
+        data.category === "elv" ||
+        data.category === "software" ||
+        data.category === "solar"
           ? data.category
           : "",
       profession:

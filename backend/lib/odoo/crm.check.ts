@@ -3,7 +3,16 @@
  * Run: npx --yes tsx backend/lib/odoo/crm.check.ts
  */
 import assert from "node:assert/strict";
-import { buildCrmLeadValues, crmTeamConfig, REQUEST_QUOTE_SEQUENCE } from "./crm";
+import {
+  buildCrmLeadValues,
+  chooseCompanyPartner,
+  choosePersonPartner,
+  crmTeamConfig,
+  partnerFieldPatch,
+  REQUEST_QUOTE_SEQUENCE,
+  usableQuoteEmail,
+  type QuotePartnerRow,
+} from "./crm";
 
 assert.equal(REQUEST_QUOTE_SEQUENCE, "request.quote");
 
@@ -126,9 +135,10 @@ if (savedCrmTeam !== undefined) {
   process.env.ODOO_CRM_TEAM_ID = savedCrmTeam;
 }
 
-// Multi-company routing: category decides company_id, no frontend input involved.
+// Multi-company routing: product type decides company_id.
 process.env.ODOO_SOFTWARE_COMPANY_ID = "1";
 process.env.ODOO_ELV_COMPANY_ID = "2";
+process.env.ODOO_SOLAR_COMPANY_ID = "4";
 
 const softwareLead = buildCrmLeadValues({
   firstName: "Ada",
@@ -152,8 +162,20 @@ const elvLead = buildCrmLeadValues({
 });
 assert.equal(elvLead.company_id, 2);
 
+const solarLead = buildCrmLeadValues({
+  firstName: "Ada",
+  lastName: "Lovelace",
+  company: "Co",
+  email: "ada@example.com",
+  phone: "+968111",
+  product: "Residential Solar Systems",
+  category: "solar",
+});
+assert.equal(solarLead.company_id, 4);
+
 delete process.env.ODOO_SOFTWARE_COMPANY_ID;
 delete process.env.ODOO_ELV_COMPANY_ID;
+delete process.env.ODOO_SOLAR_COMPANY_ID;
 
 // Fail-loud, not silent-default: missing env var must throw, never fall
 // through to SOFTWARE (the exact "silent misfile" risk this guards against).
@@ -209,6 +231,8 @@ delete process.env.ODOO_CRM_SOFTWARE_TEAM_ID;
 delete process.env.ODOO_CRM_SOFTWARE_STAGE_ID;
 delete process.env.ODOO_CRM_ELV_TEAM_ID;
 delete process.env.ODOO_CRM_ELV_STAGE_ID;
+delete process.env.ODOO_CRM_SOLAR_TEAM_ID;
+delete process.env.ODOO_CRM_SOLAR_STAGE_ID;
 
 const noEnv = crmTeamConfig("software");
 assert.equal(noEnv.teamId, undefined);
@@ -224,6 +248,11 @@ assert.equal(softwareTeam.teamId, 10, "software team should use ODOO_CRM_SOFTWAR
 
 const elvTeam = crmTeamConfig("elv");
 assert.equal(elvTeam.teamId, 20, "elv team should use ODOO_CRM_ELV_TEAM_ID");
+
+process.env.ODOO_CRM_SOLAR_TEAM_ID = "30";
+const solarTeam = crmTeamConfig("solar");
+assert.equal(solarTeam.teamId, 30, "solar team should use ODOO_CRM_SOLAR_TEAM_ID");
+delete process.env.ODOO_CRM_SOLAR_TEAM_ID;
 
 // Falls back to legacy ODOO_CRM_TEAM_ID when category-specific var absent
 delete process.env.ODOO_CRM_SOFTWARE_TEAM_ID;
@@ -297,6 +326,7 @@ const individualLead = buildCrmLeadValues({
 });
 assert.equal(individualLead.partner_name, "");
 assert.equal(individualLead.contact_name, "Ada Lovelace");
+assert.equal(individualLead.function, "Engineer");
 assert.match(String(individualLead.description), /Customer Type: Individual/);
 assert.match(String(individualLead.description), /Profession: Engineer/);
 assert.equal(String(individualLead.description).includes("Tax ID:"), false);
@@ -341,10 +371,127 @@ delete process.env.ODOO_CRM_CUSTOMER_TYPE_FIELD;
 
 // Clean up
 [
-  "ODOO_SOFTWARE_COMPANY_ID", "ODOO_ELV_COMPANY_ID",
+  "ODOO_SOFTWARE_COMPANY_ID", "ODOO_ELV_COMPANY_ID", "ODOO_SOLAR_COMPANY_ID",
   "ODOO_CRM_TEAM_ID", "ODOO_CRM_STAGE_ID",
   "ODOO_CRM_SOFTWARE_TEAM_ID", "ODOO_CRM_SOFTWARE_STAGE_ID",
   "ODOO_CRM_ELV_TEAM_ID", "ODOO_CRM_ELV_STAGE_ID",
+  "ODOO_CRM_SOLAR_TEAM_ID", "ODOO_CRM_SOLAR_STAGE_ID",
 ].forEach((k) => delete process.env[k]);
+
+assert.equal(usableQuoteEmail("anagha r"), "");
+assert.equal(usableQuoteEmail("ada@example.com"), "ada@example.com");
+
+function partner(partial: Partial<QuotePartnerRow> & Pick<QuotePartnerRow, "id" | "name">): QuotePartnerRow {
+  return {
+    email: "",
+    phone: "",
+    vat: "",
+    companyRegistry: "",
+    isCompany: false,
+    job: "",
+    ...partial,
+  };
+}
+
+const aptus = partner({
+  id: 5,
+  name: "Aptus Test",
+  phone: "+96890235112",
+  companyRegistry: "1234567890",
+  isCompany: true,
+});
+const otherCo = partner({
+  id: 9,
+  name: "Other Co",
+  vat: "123456789000",
+  isCompany: true,
+});
+assert.equal(
+  chooseCompanyPartner([otherCo, aptus], {
+    vat: "",
+    cr: "1234567890",
+    name: "Someone Else",
+    phone: "",
+  })?.id,
+  5,
+);
+assert.equal(
+  chooseCompanyPartner([otherCo, aptus], {
+    vat: "123456789000",
+    cr: "",
+    name: "Nope",
+    phone: "",
+  })?.id,
+  9,
+);
+assert.equal(
+  chooseCompanyPartner([partner({ ...aptus, vat: "KEEP" })], {
+    vat: "DIFF",
+    cr: "",
+    name: "Aptus Test",
+    phone: "",
+  }),
+  undefined,
+);
+assert.equal(
+  chooseCompanyPartner(
+    [partner({ ...aptus, id: 8, phone: "" }), aptus],
+    { vat: "", cr: "", name: "aptus test", phone: "+968 9023 5112" },
+  )?.id,
+  5,
+);
+
+const anagha = partner({
+  id: 6,
+  name: "Anagha R",
+  phone: "+96890235112",
+  parentId: 5,
+});
+assert.equal(
+  choosePersonPartner(
+    [anagha, partner({ ...anagha, id: 7, parentId: 8 })],
+    { name: "Anagha R", email: "", phone: "", parentId: 5 },
+  )?.id,
+  6,
+);
+const ada = partner({
+  id: 2,
+  name: "Ada Lovelace",
+  email: "ada@example.com",
+  phone: "+96891234567",
+});
+assert.equal(
+  choosePersonPartner([ada], { name: "Ada Lovelace", email: "", phone: "" }),
+  undefined,
+);
+assert.equal(
+  choosePersonPartner([ada], {
+    name: "Other",
+    email: "ada@example.com",
+    phone: "",
+  })?.id,
+  2,
+);
+assert.equal(
+  choosePersonPartner(
+    [partner({ ...anagha, id: 11, parentId: 8, email: "ada@example.com" })],
+    { name: "Anagha R", email: "ada@example.com", phone: "", parentId: 5 },
+  ),
+  undefined,
+);
+assert.deepEqual(
+  partnerFieldPatch(
+    { email: "", phone: "+1", vat: "", companyRegistry: "", job: "" },
+    { email: "a@b.co", phone: "+2", vat: "V", companyRegistry: "C", job: "Engineer" },
+  ),
+  { email: "a@b.co", vat: "V", company_registry: "C", function: "Engineer" },
+);
+assert.deepEqual(
+  partnerFieldPatch(
+    { email: "keep@b.co", phone: "+1", vat: "KEEP", companyRegistry: "1", job: "Eng" },
+    { email: "new@b.co", phone: "+2", vat: "NEW", companyRegistry: "2", job: "Other" },
+  ),
+  {},
+);
 
 console.log("crm.check: ok");

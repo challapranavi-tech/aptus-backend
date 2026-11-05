@@ -209,6 +209,7 @@ const companyOk = parseContactRequest({
   customer_type: "company",
   name: "Ada Lovelace",
   company: "Analytical Engines",
+  email: "Ada@Example.com",
   country_code: "+971",
   phone_local: "501234567",
   tax_id: "123456789012",
@@ -220,13 +221,28 @@ assert.equal(companyOk.ok, true);
 if (companyOk.ok) {
   assert.equal(companyOk.data.tax_id, "123456789012");
   assert.equal(companyOk.data.cr_number, "1234567890");
+  assert.equal(companyOk.data.email, "ada@example.com");
   assert.equal(companyOk.data.customer_type, "company");
 }
+assert.equal(
+  validateQuoteContactFields({
+    customer_type: "company",
+    name: "Ada Lovelace",
+    company: "Analytical Engines",
+    country_code: "+971",
+    phone_local: "501234567",
+    cr_number: "1234567890",
+    product: "Civil 3D",
+    qty: "5",
+  }).email,
+  "Please enter a valid email address.",
+);
 
 const companyWithoutVat = parseContactRequest({
   customer_type: "company",
   name: "Ada Lovelace",
   company: "Analytical Engines",
+  email: "ada@example.com",
   country_code: "+971",
   phone_local: "501234567",
   cr_number: "1234567890",
@@ -288,6 +304,8 @@ assert.equal(detectContactCategory("Revit", null), "software");
 assert.equal(detectContactCategory("CCTV Surveillance Solutions", null), "elv");
 assert.equal(detectContactCategory("Revit", "elv"), "elv");
 assert.equal(detectContactCategory("Access Control Systems", "software"), "software");
+assert.equal(detectContactCategory("Residential Solar Systems", null), "solar");
+assert.equal(detectContactCategory("Revit", "solar"), "solar");
 
 // Career fields — full validation lives in careers-application / apply routes.
 assert.equal(

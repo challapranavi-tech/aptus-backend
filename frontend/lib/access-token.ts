@@ -11,15 +11,30 @@ type SharedPortalRefresh = {
   accessToken: string | null;
   expiresAt: number;
   promise: Promise<string | null> | null;
+  /**
+   * After REFRESH_MISSING / invalid refresh, skip further /api/auth/refresh calls
+   * until login sets a new access token. Guests (and quote forms) must not spam 401s.
+   */
+  refreshUnavailable: boolean;
 };
 
 function getSharedPortalRefresh(): SharedPortalRefresh {
   if (typeof window === "undefined") {
-    return { accessToken: null, expiresAt: 0, promise: null };
+    return {
+      accessToken: null,
+      expiresAt: 0,
+      promise: null,
+      refreshUnavailable: false,
+    };
   }
   const w = window as Window & { __aptusPortalRefresh?: SharedPortalRefresh };
   if (!w.__aptusPortalRefresh) {
-    w.__aptusPortalRefresh = { accessToken: null, expiresAt: 0, promise: null };
+    w.__aptusPortalRefresh = {
+      accessToken: null,
+      expiresAt: 0,
+      promise: null,
+      refreshUnavailable: false,
+    };
   }
   return w.__aptusPortalRefresh;
 }
@@ -36,6 +51,7 @@ function writeSharedAccessToken(token: string, expiresInSec: number): void {
   const shared = getSharedPortalRefresh();
   shared.accessToken = token;
   shared.expiresAt = Date.now() + expiresInSec * 1000 - 30_000;
+  shared.refreshUnavailable = false;
   accessToken = token;
   expiresAt = shared.expiresAt;
 }
@@ -206,6 +222,7 @@ export async function refreshAccessToken(): Promise<string | null> {
   const shared = getSharedPortalRefresh();
   const cached = readSharedAccessToken();
   if (cached) return cached;
+  if (shared.refreshUnavailable) return null;
 
   if (shared.promise) return shared.promise;
 
@@ -222,6 +239,8 @@ export async function refreshAccessToken(): Promise<string | null> {
         if (response.status === 401 || response.status === 403) {
           clearAccessToken();
           clearLegacyPortalSession();
+          // Guest / expired cookie: stop retrying refresh on every authFetch.
+          shared.refreshUnavailable = true;
         } else {
           clearAccessToken();
         }
@@ -245,6 +264,8 @@ export async function refreshAccessToken(): Promise<string | null> {
 export async function getValidAccessToken(): Promise<string | null> {
   const current = getAccessToken();
   if (current) return current;
+  const shared = getSharedPortalRefresh();
+  if (shared.refreshUnavailable) return null;
   return refreshAccessToken();
 }
 
