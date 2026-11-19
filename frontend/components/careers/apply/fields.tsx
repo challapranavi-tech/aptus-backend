@@ -1,7 +1,15 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import {
+  CTC_CURRENCY_OPTIONS,
+  type CtcCurrency,
+} from "@shared/lib/careers-application";
 import type { ReactNode } from "react";
+
+function isCtcCurrency(value: string): value is CtcCurrency {
+  return (CTC_CURRENCY_OPTIONS as readonly string[]).includes(value);
+}
 
 function AutoFillBadge() {
   return (
@@ -210,10 +218,10 @@ interface CtcFieldProps {
   id: string;
   label: string;
   amount: string;
-  currency: string;
-  currencies: readonly string[];
+  currency: CtcCurrency;
+  currencies: readonly CtcCurrency[];
   onAmountChange: (v: string) => void;
-  onCurrencyChange: (v: string) => void;
+  onCurrencyChange: (v: CtcCurrency) => void;
   error?: string;
   required?: boolean;
   className?: string;
@@ -245,7 +253,10 @@ export function CtcField({
           id={`${id}-currency`}
           aria-label={`${label} currency`}
           value={currency}
-          onChange={(e) => onCurrencyChange(e.target.value)}
+          onChange={(e) => {
+            const next = e.target.value;
+            if (isCtcCurrency(next)) onCurrencyChange(next);
+          }}
         >
           {currencies.map((c) => (
             <option key={c} value={c}>
