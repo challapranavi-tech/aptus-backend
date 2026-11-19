@@ -1,5 +1,6 @@
 import { ProductDetailPanel } from "@/components/portal/ProductDetailPanel";
 import { allFullCatalogProductSlugs, lookupFullCatalogProductBySlug } from "@/data/software-full-catalog";
+import { withArabicMeta } from "@/lib/arabic-meta";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "@/styles/software-catalog.css";
@@ -16,11 +17,11 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const found = lookupFullCatalogProductBySlug(slug);
-  if (!found) return { title: "Product not found" };
-  return {
+  if (!found) return withArabicMeta({ title: "Product not found" });
+  return withArabicMeta({
     title: found.product.name,
     description: `${found.product.name} — ${found.brand.label} licenses from Aptus Infotech.`,
-  };
+  });
 }
 
 export default async function SoftwareProductDetailPage({ params }: PageProps) {

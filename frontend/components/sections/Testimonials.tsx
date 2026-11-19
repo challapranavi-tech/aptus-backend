@@ -1,5 +1,7 @@
 "use client";
 
+import { useLocale } from "@/context/LocaleProvider";
+import { copyForLocale } from "@/locales/shared-ar";
 import { Container } from "@/components/ui";
 import { useGSAPContext } from "@/hooks/useGSAPContext";
 import { gsap } from "@/lib/gsap";
@@ -29,7 +31,22 @@ function roleLine(role?: string, company?: string): string | undefined {
   return role || company || undefined;
 }
 
-export function Testimonials({ data, marquee = false }: TestimonialsProps) {
+export function Testimonials({ data: source, marquee = false }: TestimonialsProps) {
+  const { locale } = useLocale();
+  const tx = (value?: string) => (value ? copyForLocale(locale, value) : value);
+  const data: TestimonialsData = {
+    ...source,
+    eyebrow: tx(source.eyebrow),
+    heading: tx(source.heading),
+    subheading: tx(source.subheading),
+    scrollHint: tx(source.scrollHint),
+    items: (source.items ?? []).map((item) => ({
+      ...item,
+      quote: tx(item.quote) ?? item.quote,
+      role: tx(item.role),
+      company: tx(item.company),
+    })),
+  };
   const sectionRef = useRef<HTMLElement>(null);
   const isSoftwareQuotes = data.variant === "software-quotes" && !marquee;
   const isSoftwareQuotesMarquee =

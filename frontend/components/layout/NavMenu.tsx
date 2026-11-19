@@ -24,14 +24,48 @@ interface NavMenuProps {
   items: NavigationItem[];
 }
 
-function NavLabel({ item, keepLabel = false }: { item: NavigationItem; keepLabel?: boolean }) {
+function NavLabel({ item }: { item: NavigationItem }) {
   const { locale } = useLocale();
-  if (keepLabel) return <>{item.label}</>;
   return <>{translateNavLabel(locale, item.href, item.label)}</>;
 }
 
 const VIEWPORT_PAD = 12;
 const DESKTOP_MQ = "(min-width: 1025px)";
+const scrollBound = new WeakSet<HTMLElement>();
+
+/** Software / ELV lists scroll, which clips a side flyout. Pin that flyout to the viewport. */
+function placeUnclippedFlyout(dropdown: HTMLElement, panel: HTMLElement) {
+  const trigger = dropdown.getBoundingClientRect();
+  const width = panel.offsetWidth || 240;
+  const rtl = document.documentElement.dir === "rtl";
+  const openLeft = !rtl && trigger.left - width >= VIEWPORT_PAD;
+  const left = openLeft ? trigger.left - width : trigger.right;
+
+  panel.style.position = "fixed";
+  panel.style.right = "auto";
+  panel.style.bottom = "auto";
+  panel.style.transform = "none";
+  panel.style.left = `${Math.max(VIEWPORT_PAD, left)}px`;
+  panel.style.top = `${Math.max(VIEWPORT_PAD, trigger.top)}px`;
+
+  const rect = panel.getBoundingClientRect();
+  if (rect.bottom > window.innerHeight - VIEWPORT_PAD) {
+    panel.style.top = `${Math.max(VIEWPORT_PAD, rect.top - (rect.bottom - (window.innerHeight - VIEWPORT_PAD)))}px`;
+  }
+}
+
+function bindFlyoutScroll(clipper: HTMLElement) {
+  if (scrollBound.has(clipper)) return;
+  scrollBound.add(clipper);
+  clipper.addEventListener(
+    "scroll",
+    () => {
+      const open = clipper.querySelector<HTMLElement>(":scope > .aptus-masthead__dropdown--nested:hover");
+      if (open) positionFlyout(open);
+    },
+    { passive: true },
+  );
+}
 
 /** Match SmartMenus collision behavior — flip/shift flyouts inside the viewport. */
 function positionFlyout(dropdown: HTMLElement) {
@@ -41,6 +75,19 @@ function positionFlyout(dropdown: HTMLElement) {
   panel.classList.remove("is-flip-x");
   panel.style.removeProperty("top");
   panel.style.removeProperty("bottom");
+  panel.style.removeProperty("left");
+  panel.style.removeProperty("right");
+  panel.style.removeProperty("position");
+  panel.style.removeProperty("transform");
+
+  const clipper = dropdown.parentElement?.closest<HTMLElement>(
+    ".aptus-masthead__dropdown-panel--software, .aptus-masthead__dropdown-panel--elv",
+  );
+  if (clipper) {
+    bindFlyoutScroll(clipper);
+    placeUnclippedFlyout(dropdown, panel);
+    return;
+  }
 
   const nested = dropdown.classList.contains("aptus-masthead__dropdown--nested");
   // Last main item (Products & Services): nested flyouts always open to the left
@@ -173,7 +220,6 @@ function NavDropdownItem({
   menuVariant,
   expandMode = "side",
   pathname,
-  keepLabel = false,
 }: {
   item: NavigationItem;
   onClose?: () => void;
@@ -182,7 +228,6 @@ function NavDropdownItem({
   /** side = horizontal flyout; vertical = accordion under the parent (Products & Services). */
   expandMode?: "side" | "vertical";
   pathname: string;
-  keepLabel?: boolean;
 }) {
   const hasChildren = item.children && item.children.length > 0;
   const isSoftware =
@@ -237,7 +282,7 @@ function NavDropdownItem({
             aria-controls={panelId}
             onClick={onClose}
           >
-            <NavLabel item={item} keepLabel={keepLabel} />
+            <NavLabel item={item} />
             <NavChevron direction={chevronDirection} />
           </NavHref>
         ) : (
@@ -246,7 +291,7 @@ function NavDropdownItem({
             aria-haspopup="menu"
             aria-controls={panelId}
           >
-            <NavLabel item={item} keepLabel={keepLabel} />
+            <NavLabel item={item} />
             <NavChevron direction={chevronDirection} />
           </span>
         )}
@@ -260,7 +305,6 @@ function NavDropdownItem({
               menuVariant={effectiveVariant}
               expandMode={childExpandMode}
               pathname={pathname}
-              keepLabel={keepLabel}
             />
           ))}
         </ul>
@@ -273,7 +317,7 @@ function NavDropdownItem({
   return (
     <li>
       <NavHref href={item.href} className={`${linkClass}${active ? " is-active" : ""}`} onClick={onClose}>
-        <NavLabel item={item} keepLabel={keepLabel} />
+        <NavLabel item={item} />
       </NavHref>
     </li>
   );
@@ -370,7 +414,6 @@ function DropdownItem({
             }
             expandMode="side"
             pathname={pathname}
-            keepLabel={item.label === "Knowledge Hub"}
           />
         ))}
       </ul>
@@ -383,13 +426,11 @@ function MobileMenuItem({
   pathname,
   onClose,
   depth = 0,
-  keepLabel = false,
 }: {
   item: NavigationItem;
   pathname: string;
   onClose: () => void;
   depth?: number;
-  keepLabel?: boolean;
 }) {
   const hasChildren = Boolean(item.children?.length);
   const childActive = hasChildren && isItemActive(item, pathname);
@@ -411,7 +452,7 @@ function MobileMenuItem({
         data-depth={depth}
         onClick={onClose}
       >
-        <NavLabel item={item} keepLabel={keepLabel} />
+        <NavLabel item={item} />
       </NavHref>
     );
   }
@@ -428,7 +469,7 @@ function MobileMenuItem({
             )}
             onClick={onClose}
           >
-            <NavLabel item={item} keepLabel={keepLabel} />
+            <NavLabel item={item} />
           </NavHref>
         ) : (
           <button
@@ -437,7 +478,7 @@ function MobileMenuItem({
             onClick={() => setOpen((o) => !o)}
             aria-expanded={open}
           >
-            <NavLabel item={item} keepLabel={keepLabel} />
+            <NavLabel item={item} />
           </button>
         )}
         {item.label === "Knowledge Hub" ? null : (
@@ -461,7 +502,6 @@ function MobileMenuItem({
                 pathname={pathname}
                 onClose={onClose}
                 depth={depth + 1}
-                keepLabel={keepLabel || item.label === "Knowledge Hub"}
               />
             </li>
           ))}

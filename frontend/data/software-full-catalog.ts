@@ -1,5 +1,6 @@
 import { AUTODESK_SUBNAV_LINKS } from "@/data/autodesk-subnav";
 import { findNavItemByLabel, SITE_NAVIGATION } from "@/data/site-nav";
+import { SOFTWARE_SOLUTION_PAGES } from "@/data/software-solution-pages";
 import {
   mergeSoftwareLinks,
   PDF_ADOBE_LEVEL_PRODUCTS,
@@ -92,6 +93,10 @@ const BRAND_PRODUCT_LINKS: Record<string, SoftwareSubNavLink[]> = {
   Prokon: STRUCTURAL_SUBNAV_LINKS.filter((l) => l.href === "/prokon"),
   Lumion: MULTIMEDIA_SUBNAV_LINKS.filter((l) => l.href === "/luminon"),
   "V-Ray": MULTIMEDIA_SUBNAV_LINKS.filter((l) => l.href === "/v-ray"),
+  Chaos: [
+    { label: "Corona", href: "/chaos-corona" },
+    { label: "V-Ray", href: "/v-ray" },
+  ],
   Sketchup: MULTIMEDIA_SUBNAV_LINKS.filter((l) => l.href === "/sketchup"),
   Bluebeam: MULTIMEDIA_SUBNAV_LINKS.filter((l) => l.href === "/bluebeam"),
   Twinmotion: MULTIMEDIA_SUBNAV_LINKS.filter((l) => l.href === "/twinmotion"),
@@ -137,12 +142,51 @@ const BRAND_HINTS: Record<string, string> = {
  * Full software catalog — one category per brand in the Software nav menu.
  * Used by the unified /software-solutions product listing.
  */
+/** Portfolio brand name → existing catalog key, when the menu label changed. */
+const CATALOG_LABEL: Record<string, string> = {
+  RIB: "CostX",
+  PlanSwift: "Planswift",
+  MathWorks: "Mathwork",
+  "Red Hat": "RedHAT",
+  PROKON: "Prokon",
+  ETAP: "Etap",
+  "Palo Alto Networks": "Palo Alto",
+  "Dassault Systèmes": "Solidworks",
+  Broadcom: "Symantec",
+  Trimble: "Sketchup",
+  "Epic Games": "Twinmotion",
+  IBM: "SPSS",
+};
+
+type NavNode = { label: string; href?: string; children?: NavNode[] };
+
+/** Brands sit on solution pages. The catalog is still one entry per brand, then the four shortcuts. */
+const MENU_SHORTCUTS = new Set(["Adobe", "Autodesk", "Microsoft", "Oracle"]);
+
+function softwareBrandItems(items: NavNode[]): NavNode[] {
+  const brands: NavNode[] = [];
+  const seen = new Set<string>();
+  function add(item: NavNode) {
+    if (seen.has(item.label)) return;
+    seen.add(item.label);
+    brands.push(item);
+  }
+  for (const page of SOFTWARE_SOLUTION_PAGES) {
+    for (const brand of page.brands) add(brand);
+  }
+  for (const item of items) {
+    if (MENU_SHORTCUTS.has(item.label)) add(item);
+  }
+  return brands;
+}
+
 export function buildSoftwareFullCatalog(): SoftwarePurchaseCategory[] {
   const software = findNavItemByLabel(SITE_NAVIGATION, "Software");
   if (!software?.children?.length) return [];
 
-  return software.children.map((brand) => {
-    const links = BRAND_PRODUCT_LINKS[brand.label];
+  return softwareBrandItems(software.children).map((brand) => {
+    const catalogLabel = CATALOG_LABEL[brand.label] ?? brand.label;
+    const links = BRAND_PRODUCT_LINKS[catalogLabel];
     const products = links?.length
       ? linksToProducts(links)
       : brand.href && brand.href !== "#"
@@ -152,7 +196,7 @@ export function buildSoftwareFullCatalog(): SoftwarePurchaseCategory[] {
     return {
       id: slugify(brand.label),
       label: brand.label,
-      hint: BRAND_HINTS[brand.label] ?? "Software licenses and subscriptions",
+      hint: BRAND_HINTS[catalogLabel] ?? "Software licenses and subscriptions",
       href: brand.href,
       products,
     };
@@ -160,6 +204,10 @@ export function buildSoftwareFullCatalog(): SoftwarePurchaseCategory[] {
 }
 
 export const SOFTWARE_FULL_CATALOG = buildSoftwareFullCatalog();
+
+if (SOFTWARE_FULL_CATALOG.length !== 32 || !SOFTWARE_FULL_CATALOG.some((brand) => brand.label === "RIB") || !SOFTWARE_FULL_CATALOG.some((brand) => brand.label === "Autodesk")) {
+  throw new Error(`Software catalog must keep 32 brands including RIB and Autodesk, got ${SOFTWARE_FULL_CATALOG.length}`);
+}
 
 export function lookupFullCatalogProductBySlug(
   slug: string,

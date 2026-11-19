@@ -5,6 +5,7 @@ import {
   highlightKeyResponsibilitiesHtml,
   splitKeyResponsibilities,
 } from "@shared/lib/career-jobs";
+import { withArabicMeta } from "@/lib/arabic-meta";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import "@/styles/pages/careers.css";
@@ -23,13 +24,13 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const job = await getJob(slug);
-  if (!job) return { title: "Job not found" };
-  return {
+  if (!job) return withArabicMeta({ title: "Job not found" });
+  return withArabicMeta({
     title: `${job.title} — Careers at Aptus Infotech`,
     // Odoo returns `false` for empty text fields — guard the type before slicing
     // so a job with no description can't throw during metadata generation (→ 500).
     description: typeof job.description === "string" ? job.description.slice(0, 160) : "",
-  };
+  });
 }
 
 function JobAbout({

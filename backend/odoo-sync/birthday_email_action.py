@@ -21,11 +21,16 @@ else:
     # ponytail: one pass over employees with a birthday; fine at this headcount.
     # Upgrade path is a stored month/day field if the directory gets large.
     employees = model.search([('active', '=', True), ('birthday', '!=', False)])
+    # Include the two previous days so a missed run still sends that birthday.
+    recent = [today - datetime.timedelta(days=offset) for offset in (0, 1, 2)]
     for employee in employees:
         birthday = employee.birthday
         if not birthday:
             continue
-        due = birthday.month == today.month and birthday.day == today.day
+        due = any(
+            birthday.month == day.month and birthday.day == day.day
+            for day in recent
+        )
         if (
             not due
             and birthday.month == 2

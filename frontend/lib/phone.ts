@@ -50,7 +50,8 @@ export function toLocalPhoneDigits(
     if (rest.length < Math.min(localLength, 6)) break;
     digits = rest;
   }
-  return digits;
+  // Cap at the country local length so Oman stays 8, India 10, etc.
+  return digits.slice(0, localLength);
 }
 
 /** Compose a single E.164 value from dial code + local/full user input. */

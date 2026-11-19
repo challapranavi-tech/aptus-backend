@@ -1,4 +1,5 @@
 import type { Locale } from "@/lib/locale";
+import { arabicCorrection } from "@/locales/shared-ar";
 import { translateToArabic } from "@/lib/translate-text";
 import type { Page } from "@/types";
 
@@ -178,12 +179,21 @@ export async function localizePage(
   if (hits.length === 0) return clone;
 
   const unique = [...new Set(hits.map((h) => h.value))];
-  const protectedList = unique.map((text) => protectBrands(text));
+  const map = new Map<string, string>();
+  const pending: string[] = [];
+  for (const original of unique) {
+    const reviewed = arabicCorrection(original);
+    if (reviewed !== undefined) {
+      map.set(original, reviewed);
+      continue;
+    }
+    pending.push(original);
+  }
+  const protectedList = pending.map((text) => protectBrands(text));
   const translatedMasked = await translateToArabic(
     protectedList.map((p) => p.masked),
   );
-  const map = new Map<string, string>();
-  unique.forEach((original, i) => {
+  pending.forEach((original, i) => {
     map.set(
       original,
       restoreBrands(translatedMasked[i] ?? original, protectedList[i].tokens),

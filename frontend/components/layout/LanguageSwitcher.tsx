@@ -17,6 +17,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
       className={cn("aptus-lang-switch", className)}
       role="group"
       aria-label={t.common.language}
+      data-no-translate=""
     >
       <button
         type="button"

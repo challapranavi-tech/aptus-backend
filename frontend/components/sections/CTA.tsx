@@ -4,6 +4,8 @@ import { CareerApplicationForm } from "@/components/sections/CareerApplicationFo
 import { ContactLeadForm } from "@/components/contact/ContactLeadForm";
 import { SoftwareQuoteForm } from "@/components/quote/SoftwareQuoteForm";
 import { quoteContextFromPathname } from "@/components/quote/quote-modal-utils";
+import { useLocale } from "@/context/LocaleProvider";
+import { copyForLocale } from "@/locales/shared-ar";
 import { Container } from "@/components/ui";
 import { useGSAPContext } from "@/hooks/useGSAPContext";
 import { gsap } from "@/lib/gsap";
@@ -97,6 +99,8 @@ function CtaForm({ data }: { data: CTAData }) {
 }
 
 export function CTA({ data }: CTAProps) {
+  const { locale } = useLocale();
+  const tx = (value: string) => copyForLocale(locale, value);
   const sectionRef = useRef<HTMLElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
   const isLight = data.layout === "light";
@@ -144,7 +148,7 @@ export function CTA({ data }: CTAProps) {
   // After removing top "Request a Quote" buttons, pages without a mid-band CTA
   // would have no quote entry point — render a bottom Request Quote button instead.
   if (isLight) {
-    const quoteLabel =
+    const quoteLabel = tx(
       data.formVariant === "software-quote" ||
       data.heading?.trim().toLowerCase() === "request a quote"
         ? "Request a Quote"
@@ -152,20 +156,23 @@ export function CTA({ data }: CTAProps) {
             data.action.label !== "Contact Us" &&
             data.action.label.trim()
           ? data.action.label
-          : "Request a Quote";
+          : "Request a Quote",
+    );
     const quoteHref =
       data.action?.href?.startsWith("#") ||
       data.action?.href?.toLowerCase().includes("popup")
         ? (data.action.href as string)
         : "#form";
-    const heading =
+    const heading = tx(
       data.heading?.trim().toLowerCase() === "have questions? we can help"
         ? "Request a Quote"
-        : (data.heading ?? "Request a Quote");
-    const description =
+        : (data.heading ?? "Request a Quote"),
+    );
+    const description = tx(
       data.description?.toLowerCase().includes("fill out the form")
         ? "Tell us what you need and our sales team will get back to you shortly."
-        : data.description;
+        : (data.description ?? ""),
+    );
 
     return (
       <section
@@ -226,18 +233,18 @@ export function CTA({ data }: CTAProps) {
           >
             {data.heading && (
               <h2 data-cta-animate className="aptus-software-mid-title">
-                {data.heading}
+                {tx(data.heading ?? "")}
               </h2>
             )}
             {data.description && (
               <p data-cta-animate className="aptus-software-mid-lead">
-                {data.description}
+                {tx(data.description ?? "")}
               </p>
             )}
             {data.action && (
               <div data-cta-animate className="aptus-software-mid-band__cta">
                 <Link href={data.action.href} className="aptus-software-btn aptus-software-btn-blue">
-                  {data.action.label}
+                  {tx(data.action.label)}
                 </Link>
               </div>
             )}
@@ -274,7 +281,7 @@ export function CTA({ data }: CTAProps) {
           {data.heading &&
             (isContactPage ? (
               <h1 data-cta-animate className="aptus-contact-form-title">
-                {data.heading}
+                {tx(data.heading ?? "")}
               </h1>
             ) : (
               <h2
@@ -295,7 +302,7 @@ export function CTA({ data }: CTAProps) {
                   ? { fontSize: 'var(--text-3xl)', fontWeight: 600 }
                   : undefined}
               >
-                {data.heading}
+                {tx(data.heading ?? "")}
               </h2>
             ))}
           {data.description && (
@@ -316,7 +323,7 @@ export function CTA({ data }: CTAProps) {
                       : "text-white/75",
               )}
             >
-              {data.description}
+              {tx(data.description ?? "")}
             </p>
           )}
 
@@ -329,7 +336,7 @@ export function CTA({ data }: CTAProps) {
                   href={data.action.href}
                   className={isSoftwareMid ? "aptus-software-btn aptus-software-btn-blue" : "btn-section"}
                 >
-                  {data.action.label}
+                  {tx(data.action.label)}
                 </Link>
               </div>
             )

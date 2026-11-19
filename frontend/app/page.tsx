@@ -5,6 +5,7 @@ import { localizePage } from "@/lib/localize-page";
 import { getRequestLocale } from "@/lib/request-locale";
 import { getMessages } from "@/locales/messages";
 import "@/styles/pages/home.css";
+import { withArabicMeta } from "@/lib/arabic-meta";
 import { buildPageMetadata } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Suspense } from "react";
@@ -12,10 +13,10 @@ import { Suspense } from "react";
 export async function generateMetadata(): Promise<Metadata> {
   try {
     const page = await getHomePage();
-    if (!page) return { title: "Home" };
-    return buildPageMetadata(page);
+    if (!page) return withArabicMeta({ title: "Home" });
+    return withArabicMeta(buildPageMetadata(page));
   } catch {
-    return { title: "Home" };
+    return withArabicMeta({ title: "Home" });
   }
 }
 

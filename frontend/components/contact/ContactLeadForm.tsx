@@ -1,5 +1,7 @@
 "use client";
 
+import { useLocale } from "@/context/LocaleProvider";
+import { copyForLocale } from "@/locales/shared-ar";
 import { publicApiBase } from "@/lib/api-base";
 import { trimFieldOnBlur, trimFormStrings } from "@/lib/form-text";
 import { normalizePhone } from "@/lib/phone";
@@ -34,10 +36,11 @@ type ContactLeadFormProps = {
 };
 
 function FieldError({ message }: { message?: string }) {
+  const { locale } = useLocale();
   if (!message) return null;
   return (
     <span className="mt-1 block text-sm font-medium text-red-600" role="alert">
-      {message}
+      {copyForLocale(locale, message)}
     </span>
   );
 }
@@ -56,6 +59,8 @@ export function ContactLeadForm({
   category,
   productName,
 }: ContactLeadFormProps) {
+  const { locale } = useLocale();
+  const tx = (value: string) => copyForLocale(locale, value);
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -175,7 +180,7 @@ export function ContactLeadForm({
           className="mt-5 rounded-xl bg-green-600/10 px-4 py-3 text-center text-base font-semibold text-green-800"
           role="status"
         >
-          {message}
+          {tx(message)}
         </p>
       )}
       {status === "error" && message && (
@@ -183,7 +188,7 @@ export function ContactLeadForm({
           className="mt-5 rounded-xl bg-red-600/10 px-4 py-3 text-center text-base font-semibold text-red-700"
           role="alert"
         >
-          {message}
+          {tx(message)}
         </p>
       )}
     </>
@@ -195,7 +200,7 @@ export function ContactLeadForm({
       className={submitClassName}
       disabled={status === "submitting"}
     >
-      {status === "submitting" ? "Submitting…" : submitLabel}
+      {status === "submitting" ? tx("Submitting…") : tx(submitLabel)}
     </button>
   );
 
@@ -209,11 +214,11 @@ export function ContactLeadForm({
       >
         <div className="grid gap-[20px] sm:grid-cols-2 sm:gap-[30px]">
           <label className={labelClassName}>
-            First Name
+            {tx("First Name")}
             <input
               type="text"
               name="first_name"
-              placeholder="First Name"
+              placeholder={tx("First Name")}
               required
               aria-invalid={errors.first_name ? true : undefined}
               onBlur={trimFieldOnBlur}
@@ -223,11 +228,11 @@ export function ContactLeadForm({
             <FieldError message={errors.first_name} />
           </label>
           <label className={labelClassName}>
-            Last Name
+            {tx("Last Name")}
             <input
               type="text"
               name="last_name"
-              placeholder="Last Name"
+              placeholder={tx("Last Name")}
               required
               aria-invalid={errors.last_name ? true : undefined}
               onBlur={trimFieldOnBlur}
@@ -237,11 +242,11 @@ export function ContactLeadForm({
             <FieldError message={errors.last_name} />
           </label>
           <label className={labelClassName}>
-            City
+            {tx("City")}
             <input
               type="text"
               name="city"
-              placeholder="City"
+              placeholder={tx("City")}
               required
               aria-invalid={errors.city ? true : undefined}
               onBlur={trimFieldOnBlur}
@@ -251,11 +256,11 @@ export function ContactLeadForm({
             <FieldError message={errors.city} />
           </label>
           <label className={labelClassName}>
-            Country
+            {tx("Country")}
             <input
               type="text"
               name="country"
-              placeholder="STATE/PROVINCE"
+              placeholder={tx("STATE/PROVINCE")}
               required
               aria-invalid={errors.country ? true : undefined}
               onBlur={trimFieldOnBlur}
@@ -265,11 +270,11 @@ export function ContactLeadForm({
             <FieldError message={errors.country} />
           </label>
           <label className={labelClassName}>
-            Email Address
+            {tx("Email Address")}
             <input
               type="email"
               name="email"
-              placeholder="EMAIL ADDRESS"
+              placeholder={tx("EMAIL ADDRESS")}
               required
               aria-invalid={errors.email ? true : undefined}
               onBlur={trimFieldOnBlur}
@@ -279,11 +284,11 @@ export function ContactLeadForm({
             <FieldError message={errors.email} />
           </label>
           <label className={labelClassName}>
-            Phone Number
+            {tx("Phone Number")}
             <input
               type="tel"
               name="phone"
-              placeholder="Phone Number"
+              placeholder={tx("Phone Number")}
               required
               aria-invalid={errors.phone ? true : undefined}
               onBlur={trimFieldOnBlur}
@@ -293,11 +298,11 @@ export function ContactLeadForm({
             <FieldError message={errors.phone} />
           </label>
           <label className={`${labelClassName} sm:col-span-2`}>
-            How can we help you?
+            {tx("How can we help you?")}
             <textarea
               name="message"
               rows={4}
-              placeholder="Your Query"
+              placeholder={tx("Your Query")}
               required
               aria-invalid={errors.message ? true : undefined}
               onBlur={trimFieldOnBlur}
@@ -307,7 +312,7 @@ export function ContactLeadForm({
             <FieldError message={errors.message} />
           </label>
           <label className={labelClassName}>
-            How did you hear about us?
+            {tx("How did you hear about us?")}
             <HeardFromSelect
               variant="career"
               className={cn(inputClassName, inputError("heard_from"))}
@@ -333,7 +338,7 @@ export function ContactLeadForm({
       >
         <div className="grid gap-4 sm:grid-cols-2">
           <label className={labelClassName}>
-            First Name *
+            {tx("First Name *")}
             <input
               type="text"
               name="first_name"
@@ -346,7 +351,7 @@ export function ContactLeadForm({
             <FieldError message={errors.first_name} />
           </label>
           <label className={labelClassName}>
-            Last Name *
+            {tx("Last Name *")}
             <input
               type="text"
               name="last_name"
@@ -359,7 +364,7 @@ export function ContactLeadForm({
             <FieldError message={errors.last_name} />
           </label>
           <label className={labelClassName}>
-            City *
+            {tx("City *")}
             <input
               type="text"
               name="city"
@@ -372,7 +377,7 @@ export function ContactLeadForm({
             <FieldError message={errors.city} />
           </label>
           <label className={labelClassName}>
-            State/Province *
+            {tx("State/Province *")}
             <input
               type="text"
               name="state"
@@ -391,7 +396,7 @@ export function ContactLeadForm({
             <FieldError message={errors.state || errors.country} />
           </label>
           <label className={labelClassName}>
-            Email *
+            {tx("Email *")}
             <input
               type="email"
               name="email"
@@ -404,7 +409,7 @@ export function ContactLeadForm({
             <FieldError message={errors.email} />
           </label>
           <label className={labelClassName}>
-            Phone *
+            {tx("Phone *")}
             <input
               type="tel"
               name="phone"
@@ -418,7 +423,7 @@ export function ContactLeadForm({
           </label>
         </div>
         <label className={`mt-4 ${labelClassName}`}>
-          How can we help you? *
+          {tx("How can we help you? *")}
           <textarea
             name="message"
             rows={4}
@@ -431,7 +436,7 @@ export function ContactLeadForm({
           <FieldError message={errors.message} />
         </label>
         <label className={`mt-4 ${labelClassName}`}>
-          How did you hear about us? *
+          {tx("How did you hear about us? *")}
           <HeardFromSelect
             className={cn(inputClassName, inputError("heard_from"))}
             aria-invalid={errors.heard_from ? true : undefined}
@@ -457,7 +462,7 @@ export function ContactLeadForm({
       {productName ? <input type="hidden" name="product" value={productName} /> : null}
       <div className="grid gap-5 sm:grid-cols-2">
         <label className={labelClassName}>
-          First Name *
+          {tx("First Name *")}
           <input
             type="text"
             name="first_name"
@@ -471,7 +476,7 @@ export function ContactLeadForm({
           <FieldError message={errors.first_name} />
         </label>
         <label className={labelClassName}>
-          Last Name *
+          {tx("Last Name *")}
           <input
             type="text"
             name="last_name"
@@ -485,7 +490,7 @@ export function ContactLeadForm({
           <FieldError message={errors.last_name} />
         </label>
         <label className={labelClassName}>
-          Email *
+          {tx("Email *")}
           <input
             type="email"
             name="email"
@@ -500,7 +505,7 @@ export function ContactLeadForm({
           <FieldError message={errors.email} />
         </label>
         <label className={labelClassName}>
-          Phone *
+          {tx("Phone *")}
           <input
             type="tel"
             name="phone"
@@ -515,7 +520,7 @@ export function ContactLeadForm({
           <FieldError message={errors.phone} />
         </label>
         <label className={labelClassName}>
-          QTY *
+          {tx("QTY *")}
           <input
             type="number"
             name="qty"
@@ -533,12 +538,12 @@ export function ContactLeadForm({
           <FieldError message={errors.qty} />
         </label>
         <label className={labelClassName}>
-          Company *
+          {tx("Company *")}
           <input
             type="text"
             name="company"
             autoComplete="organization"
-            placeholder="Company Name"
+            placeholder={tx("Company Name")}
             required
             aria-invalid={errors.company ? true : undefined}
             onBlur={trimFieldOnBlur}
@@ -549,11 +554,11 @@ export function ContactLeadForm({
         </label>
       </div>
       <label className={`mt-5 block ${labelClassName}`}>
-        Message
+        {tx("Message")}
         <textarea
           name="message"
           rows={4}
-          placeholder="Message"
+          placeholder={tx("Message")}
           onBlur={trimFieldOnBlur}
           className={inputClassName}
         />

@@ -1,3 +1,4 @@
+import { T } from "@/components/i18n/T";
 import { Container, CmsImage } from "@/components/ui";
 import { cn } from "@/lib/utils";
 import type { LogoGrid as LogoGridData } from "@/types";
@@ -26,13 +27,17 @@ export function LogoGrid({ data }: LogoGridProps) {
       <Container>
         {(data.eyebrow || data.heading || data.headingAccent) && (
           <div className={cn(isAlliances || isAlliancesGrid ? "mb-0" : "mb-10 text-center")}>
-            {data.eyebrow && <p className="eyebrow mb-3 text-center">{data.eyebrow}</p>}
+            {data.eyebrow && (
+              <p className="eyebrow mb-3 text-center">
+                <T text={data.eyebrow} />
+              </p>
+            )}
             {(data.heading || data.headingAccent) && (
               <h2
                 className={cn(isAlliances || isAlliancesGrid ? "aptus-alliances-heading" : "text-brand-navy")}
                 style={!(isAlliances || isAlliancesGrid) ? { fontSize: "var(--text-4xl)", fontWeight: 600 } : undefined}
               >
-                {data.heading}
+                <T text={data.heading} />
                 {data.heading && data.headingAccent && " "}
                 {data.headingAccent && (
                   <span
@@ -42,7 +47,7 @@ export function LogoGrid({ data }: LogoGridProps) {
                         : "text-[#38b6ff]"
                     }
                   >
-                    {data.headingAccent}
+                    <T text={data.headingAccent} />
                   </span>
                 )}
               </h2>

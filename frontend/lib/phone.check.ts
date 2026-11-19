@@ -20,6 +20,9 @@ assert.equal(toLocalPhoneDigits("96891234567", "+968", 8), "91234567");
 assert.equal(toLocalPhoneDigits("+96891234567", "+968", 8), "91234567");
 assert.equal(toLocalPhoneDigits("91234567", "+968", 8), "91234567");
 assert.equal(toLocalPhoneDigits("+968+96891234567", "+968", 8), "91234567");
+// Cap at country local length after dial-code strip (Oman 8 / India 10).
+assert.equal(toLocalPhoneDigits("1234567890", "+968", 8), "12345678");
+assert.equal(toLocalPhoneDigits("968123456789", "+968", 8), "12345678");
 // India: valid local starting with 91 must not strip when length matches.
 assert.equal(toLocalPhoneDigits("9123456789", "+91", 10), "9123456789");
 assert.equal(toLocalPhoneDigits("919123456789", "+91", 10), "9123456789");

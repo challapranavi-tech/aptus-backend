@@ -9,8 +9,9 @@ import {
   parseLocale,
   type Locale,
 } from "@/lib/locale";
+import { stopArabicDom, watchArabicDom } from "@/lib/arabic-dom";
 import { getMessages, type MessageTree } from "@/locales/messages";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   createContext,
   useCallback,
@@ -61,7 +62,16 @@ export function LocaleProvider({
   initialLocale?: Locale;
 }) {
   const router = useRouter();
+  const pathname = usePathname();
   const [locale, setLocaleState] = useState<Locale>(initialLocale);
+
+  useEffect(() => {
+    if (locale !== "ar") {
+      stopArabicDom();
+      return;
+    }
+    return watchArabicDom();
+  }, [locale, pathname]);
 
   useEffect(() => {
     applyDocumentLocale(locale);

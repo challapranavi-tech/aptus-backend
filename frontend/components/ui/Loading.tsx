@@ -1,3 +1,7 @@
+"use client";
+
+import { useLocale } from "@/context/LocaleProvider";
+import { copyForLocale } from "@/locales/shared-ar";
 import { cn } from "@/lib/utils";
 
 interface LoadingProps {
@@ -19,10 +23,12 @@ export function Loading({
   className,
   fullScreen = false,
 }: LoadingProps) {
+  const { locale } = useLocale();
+  const text = copyForLocale(locale, label);
   const spinner = (
     <div
       role="status"
-      aria-label={label}
+      aria-label={text}
       className={cn("flex flex-col items-center gap-3", className)}
     >
       <div
@@ -31,7 +37,7 @@ export function Loading({
           sizeClasses[size],
         )}
       />
-      <span className="sr-only">{label}</span>
+      <span className="sr-only">{text}</span>
     </div>
   );
 

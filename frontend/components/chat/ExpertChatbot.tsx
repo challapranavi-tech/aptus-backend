@@ -6,6 +6,8 @@ import {
   quoteContextFromPathname,
   type QuoteModalContext,
 } from "@/components/quote/quote-modal-utils";
+import { useLocale } from "@/context/LocaleProvider";
+import { copyForLocale } from "@/locales/shared-ar";
 import { normalizePhone } from "@/lib/phone";
 import { usePathname } from "next/navigation";
 import { FormEvent, useEffect, useId, useMemo, useRef, useState } from "react";
@@ -97,6 +99,8 @@ export function ExpertChatbot({
   open: boolean;
   onClose: () => void;
 }) {
+  const { locale } = useLocale();
+  const tx = (value: string) => copyForLocale(locale, value);
   const titleId = useId();
   const pathname = usePathname() ?? "/";
   const { openQuote } = useQuoteModal();
@@ -307,7 +311,7 @@ export function ExpertChatbot({
             </span>
             <div>
               <h2 id={titleId} className="aptus-expert-chat__title">
-                Talk to an Expert
+                {tx("Talk to an Expert")}
               </h2>
               <p className="aptus-expert-chat__status">Aptus Infotech · Online</p>
             </div>
@@ -316,7 +320,7 @@ export function ExpertChatbot({
             type="button"
             className="aptus-expert-chat__close"
             onClick={onClose}
-            aria-label="Close chat"
+            aria-label={tx("Close chat")}
           >
             ×
           </button>
@@ -437,14 +441,14 @@ export function ExpertChatbot({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  WhatsApp
+                  {tx("WhatsApp")}
                 </a>
                 <button
                   type="button"
                   className="aptus-expert-chat__action aptus-expert-chat__action--primary"
                   onClick={() => openQuote(productContext)}
                 >
-                  Request a Quote
+                  {tx("Request a Quote")}
                 </button>
               </div>
             </>

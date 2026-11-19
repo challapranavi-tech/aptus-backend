@@ -68,6 +68,8 @@ next-env.d.ts
 # temp scratch files
 tmp-*
 scripts/.tmp*
+__pycache__/
+*.py[cod]
 
 # archived career applications — contains applicant PII, never commit
 backend/data/applications/

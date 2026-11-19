@@ -11,6 +11,8 @@ const QUOTE_MODAL_LABELS = new Set([
   "Request Quote",
   "Renew Subscription",
   "Get Your Quote Now",
+  "طلب عرض سعر",
+  "احصل على عرض السعر الآن",
 ]);
 
 /**
@@ -18,8 +20,9 @@ const QUOTE_MODAL_LABELS = new Set([
  * "Get Your Quote Now" and Renew Subscription visible.
  */
 export function isTopRequestQuoteCta(label?: string | null): boolean {
-  const t = (label ?? "").replace(/\s+/g, " ").trim().toLowerCase();
-  return t === "request a quote" || t === "request quote";
+  const t = (label ?? "").replace(/\s+/g, " ").trim();
+  const lower = t.toLowerCase();
+  return lower === "request a quote" || lower === "request quote" || t === "طلب عرض سعر";
 }
 
 /** Slug → ELV product name (matches contactCta.productName in content JSON). */

@@ -31,6 +31,10 @@ import { AutodeskFreeTrialLink } from "@/components/shared/AutodeskFreeTrialLink
 import { ProductPurchaseOptions } from "@/components/portal/ProductPurchaseOptions";
 import { RenewalSerialNumberField } from "@/components/portal/RenewalSerialNumberField";
 import { SoftwareBrandFilterDropdown } from "@/components/software/SoftwareBrandFilterDropdown";
+import {
+  portfolioSolutionTypes,
+  searchCatalogProducts,
+} from "@/data/product-portfolio";
 import type { ProductConfig } from "@/data/product-options";
 import { scheduleScrollToSoftwareCatalog, SOFTWARE_CATALOG_ANCHOR_ID } from "@/lib/scroll-to-software-catalog";
 import { parseCatalogBrandIds } from "@/lib/software-catalog-links";
@@ -98,7 +102,30 @@ function CatalogOptionHints({ config }: { config: ProductConfig }) {
   );
 }
 
-export function SoftwareCatalogPanel() {
+function productFilterId(brandId: string, productName: string): string {
+  return `${brandId}::${productName}`;
+}
+
+function cardsForFilters(
+  catalog: readonly SoftwarePurchaseCategory[],
+  filters: { brandIds: string[] | null; solutionTypes: string[] | null; query: string },
+) {
+  const hits = searchCatalogProducts(catalog, filters);
+  return hits.flatMap((hit) => {
+    const brand = catalog.find((item) => item.id === hit.brandId);
+    if (!brand) return [];
+    const existing = brand.products.find(
+      (product) => product.name === hit.productName && product.href === hit.href,
+    );
+    const product: SoftwarePurchaseProduct = existing ?? {
+      name: hit.productName,
+      href: hit.href,
+    };
+    return [{ brand, product }];
+  });
+}
+
+export function SoftwareCatalogPanel({ solutionType }: { solutionType?: string }) {
   const { openQuote } = useQuoteModal();
   const searchParams = useSearchParams();
   const catalog = SOFTWARE_FULL_CATALOG;
@@ -118,7 +145,14 @@ export function SoftwareCatalogPanel() {
   const [message, setMessage] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const [brandFilterOpen, setBrandFilterOpen] = useState(false);
+  const [solutionFilterOpen, setSolutionFilterOpen] = useState(false);
+  const [productFilterOpen, setProductFilterOpen] = useState(false);
+  const [selectedProductIds, setSelectedProductIds] = useState<string[] | null>(null);
+  const [selectedSolutionTypes, setSelectedSolutionTypes] = useState<string[] | null>(() =>
+    solutionType ? [solutionType] : null,
+  );
   const [showAllProducts, setShowAllProducts] = useState(false);
+  const solutionTypes = useMemo(() => portfolioSolutionTypes(), []);
   const [cardDrafts, setCardDrafts] = useState<Record<SelectionKey, Selection>>({});
 
   useEffect(() => {
@@ -133,7 +167,7 @@ export function SoftwareCatalogPanel() {
 
   useEffect(() => {
     setShowAllProducts(false);
-  }, [selectedBrandIds, query]);
+  }, [selectedBrandIds, selectedSolutionTypes, selectedProductIds, query]);
 
   function applyCartState(cart: ReturnType<typeof readPortalCart>) {
     setCartDuration(cart.duration);
@@ -204,26 +238,33 @@ export function SoftwareCatalogPanel() {
     return () => clearTimeout(timer);
   }, [cartDuration, selections, hydrated, user]);
 
-  const flatProducts = useMemo(() => {
-    const rows: Array<{
-      brand: SoftwarePurchaseCategory;
-      product: SoftwarePurchaseProduct;
-    }> = [];
-    for (const brand of catalog) {
-      if (selectedBrandIds !== null && !selectedBrandIds.includes(brand.id)) continue;
-      for (const product of brand.products) {
-        rows.push({ brand, product });
-      }
-    }
-    const q = query.trim().toLowerCase();
-    if (!q) return rows;
-    return rows.filter(
-      ({ brand, product }) =>
-        product.name.toLowerCase().includes(q) || brand.label.toLowerCase().includes(q),
-    );
-  }, [catalog, selectedBrandIds, query]);
+  const solutionCards = useMemo(
+    () =>
+      solutionType
+        ? cardsForFilters(catalog, { brandIds: null, solutionTypes: [solutionType], query: "" })
+        : [],
+    [catalog, solutionType],
+  );
 
-  const isDefaultView = selectedBrandIds === null && !query.trim();
+  const flatProducts = useMemo(() => {
+    if (!solutionType) {
+      return cardsForFilters(catalog, {
+        brandIds: selectedBrandIds,
+        solutionTypes: selectedSolutionTypes,
+        query,
+      });
+    }
+    const needle = query.trim().toLowerCase();
+    return solutionCards.filter(({ brand, product }) => {
+      if (selectedBrandIds && !selectedBrandIds.includes(brand.id)) return false;
+      if (selectedProductIds && !selectedProductIds.includes(productFilterId(brand.id, product.name))) return false;
+      if (!needle) return true;
+      return `${product.name} ${brand.label}`.toLowerCase().includes(needle);
+    });
+  }, [catalog, query, selectedBrandIds, selectedProductIds, selectedSolutionTypes, solutionCards, solutionType]);
+
+  const isDefaultView =
+    !solutionType && selectedBrandIds === null && selectedSolutionTypes === null && !query.trim();
 
   const visibleProducts = useMemo(() => {
     if (showAllProducts || !isDefaultView) return flatProducts;
@@ -308,14 +349,115 @@ export function SoftwareCatalogPanel() {
         : selectedBrandIds.length === 1
           ? (catalog.find((brand) => brand.id === selectedBrandIds[0])?.label ?? "1 brand")
           : `${selectedBrandIds.length} brands`;
+  const solutionBrandOptions = useMemo(() => {
+    const seen = new Set<string>();
+    const options: { id: string; label: string }[] = [];
+    for (const { brand } of solutionCards) {
+      if (seen.has(brand.id)) continue;
+      seen.add(brand.id);
+      options.push({ id: brand.id, label: brand.label });
+    }
+    return options.sort((a, b) => a.label.localeCompare(b.label));
+  }, [solutionCards]);
+
+  const solutionProductOptions = useMemo(() => {
+    const seen = new Set<string>();
+    const options: { id: string; label: string }[] = [];
+    for (const { brand, product } of solutionCards) {
+      if (selectedBrandIds && !selectedBrandIds.includes(brand.id)) continue;
+      const id = productFilterId(brand.id, product.name);
+      if (seen.has(id)) continue;
+      seen.add(id);
+      options.push({ id, label: product.name });
+    }
+    return options.sort((a, b) => a.label.localeCompare(b.label));
+  }, [selectedBrandIds, solutionCards]);
+
+  function onSolutionBrandsChange(ids: string[] | null) {
+    setSelectedBrandIds(ids);
+    setSelectedProductIds((current) => {
+      if (!current) return null;
+      const allowed = new Set(
+        solutionCards
+          .filter(({ brand }) => ids === null || ids.includes(brand.id))
+          .map(({ brand, product }) => productFilterId(brand.id, product.name)),
+      );
+      const next = current.filter((id) => allowed.has(id));
+      if (next.length === 0 || next.length === allowed.size) return null;
+      return next;
+    });
+  }
+
+  const activeProductLabel =
+    selectedProductIds === null
+      ? "All products"
+      : selectedProductIds.length === 0
+        ? "No products"
+        : selectedProductIds.length === 1
+          ? (solutionProductOptions.find((option) => option.id === selectedProductIds[0])?.label ?? "1 product")
+          : `${selectedProductIds.length} products`;
+  const activeSolutionLabel =
+    selectedSolutionTypes === null
+      ? "All solutions"
+      : selectedSolutionTypes.length === 0
+        ? "No solutions"
+        : selectedSolutionTypes.length === 1
+          ? selectedSolutionTypes[0]!
+          : `${selectedSolutionTypes.length} solutions`;
 
   return (
     <section
       id={SOFTWARE_CATALOG_ANCHOR_ID}
-      className="aptus-software-catalog"
+      className={`aptus-software-catalog${solutionType ? " aptus-software-catalog--solution" : ""}`}
       aria-label="Software products"
     >
       <div className="aptus-software-catalog__inner">
+        {solutionType ? (
+          <div className="aptus-portal-products__toolbar aptus-software-catalog__toolbar">
+            <label className="aptus-portal-products__search aptus-software-catalog__search">
+              <input
+                type="search"
+                placeholder="Search products or brands"
+                aria-label="Search products or brands"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+            </label>
+            <div className="aptus-software-catalog__filters">
+              <SoftwareBrandFilterDropdown
+                open={brandFilterOpen}
+                options={solutionBrandOptions}
+                selectedIds={selectedBrandIds}
+                activeLabel={activeBrandLabel}
+                fieldLabel="Brand"
+                allLabel="All brands"
+                menuLabel="Filter by brand"
+                keepLabels
+                onOpenChange={(open) => {
+                  setBrandFilterOpen(open);
+                  if (open) setProductFilterOpen(false);
+                }}
+                onChange={onSolutionBrandsChange}
+              />
+              <SoftwareBrandFilterDropdown
+                open={productFilterOpen}
+                options={solutionProductOptions}
+                selectedIds={selectedProductIds}
+                activeLabel={activeProductLabel}
+                fieldLabel="Product"
+                allLabel="All products"
+                menuLabel="Filter by product"
+                keepLabels
+                onOpenChange={(open) => {
+                  setProductFilterOpen(open);
+                  if (open) setBrandFilterOpen(false);
+                }}
+                onChange={setSelectedProductIds}
+              />
+            </div>
+          </div>
+        ) : (
+          <>
         <div className="aptus-software-catalog__header">
           <h2 className="aptus-software-catalog__title">Browse all software</h2>
           <p className="aptus-software-catalog__subtitle">
@@ -328,21 +470,46 @@ export function SoftwareCatalogPanel() {
           <label className="aptus-portal-products__search aptus-software-catalog__search">
             <input
               type="search"
-              placeholder="Search products or brands"
-              aria-label="Search products"
+              placeholder="Search products, brands, or solutions"
+              aria-label="Search products, brands, or solutions"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
           </label>
-          <SoftwareBrandFilterDropdown
-            open={brandFilterOpen}
-            brands={catalog}
-            selectedBrandIds={selectedBrandIds}
-            activeLabel={activeBrandLabel}
-            onOpenChange={setBrandFilterOpen}
-            onChange={setSelectedBrandIds}
-          />
+          <div className="aptus-software-catalog__filters">
+            <SoftwareBrandFilterDropdown
+              open={solutionFilterOpen}
+              options={solutionTypes.map((label) => ({ id: label, label }))}
+              selectedIds={selectedSolutionTypes}
+              activeLabel={activeSolutionLabel}
+              fieldLabel="Solution type"
+              allLabel="All solutions"
+              menuLabel="Filter by solution type"
+              onOpenChange={(open) => {
+                setSolutionFilterOpen(open);
+                if (open) setBrandFilterOpen(false);
+              }}
+              onChange={setSelectedSolutionTypes}
+            />
+            <SoftwareBrandFilterDropdown
+              open={brandFilterOpen}
+              options={catalog.map((brand) => ({ id: brand.id, label: brand.label }))}
+              selectedIds={selectedBrandIds}
+              activeLabel={activeBrandLabel}
+              fieldLabel="Brand"
+              allLabel="All brands"
+              menuLabel="Filter by brand"
+              keepLabels
+              onOpenChange={(open) => {
+                setBrandFilterOpen(open);
+                if (open) setSolutionFilterOpen(false);
+              }}
+              onChange={setSelectedBrandIds}
+            />
+          </div>
         </div>
+          </>
+        )}
 
         {message ? (
           <p
@@ -360,6 +527,9 @@ export function SoftwareCatalogPanel() {
           </p>
         ) : null}
 
+        {visibleProducts.length === 0 ? (
+          <p className="aptus-software-catalog__subtitle">No products match these filters.</p>
+        ) : (
         <div className="aptus-portal-products__grid">
           {visibleProducts.map(({ brand, product }, index) => {
             const meta = getProductCardMeta(product, brand.label);
@@ -375,16 +545,23 @@ export function SoftwareCatalogPanel() {
               : undefined;
             const tone = TONE_CYCLE[index % TONE_CYCLE.length];
             const imageSrc = getPurchaseProductImage(product.href);
+            const listedInCatalog = brand.products.some(
+              (item) => item.name === product.name && item.href === product.href,
+            );
 
             return (
               <article
-                key={`${brand.id}-${product.href}`}
+                key={`${brand.id}-${product.href}-${product.name}`}
                 className={`aptus-portal-products__card aptus-software-catalog__card aptus-software-catalog__card--${tone}`}
               >
                 <div className="aptus-software-catalog__card-head">
                   <div className="aptus-software-catalog__card-meta">
-                    <p className="aptus-portal-products__name">{product.name}</p>
-                    <p className="aptus-portal-products__cat">{brand.label}</p>
+                    <p className="aptus-portal-products__name" data-no-translate="">
+                      {product.name}
+                    </p>
+                    <p className="aptus-portal-products__cat" data-no-translate="">
+                      {brand.label}
+                    </p>
                   </div>
                   {imageSrc ? (
                     <div className="aptus-software-catalog__thumb aptus-software-catalog__thumb--corner">
@@ -395,6 +572,7 @@ export function SoftwareCatalogPanel() {
                     <div
                       className={`aptus-software-catalog__corner-icon aptus-portal-products__icon aptus-portal-products__icon--${tone}`}
                       aria-hidden
+                      data-no-translate=""
                     >
                       {meta.initials}
                     </div>
@@ -434,13 +612,13 @@ export function SoftwareCatalogPanel() {
                 )}
 
                 <div className="aptus-portal-products__foot">
-                  <span className="aptus-portal-products__price">
-                    {purchasable && unit
-                      ? config.kind === "renewal"
+                  {purchasable && unit ? (
+                    <span className="aptus-portal-products__price">
+                      {config.kind === "renewal"
                         ? `${formatOmanAmount(unit)}/year`
-                        : formatOmanAmount(unit)
-                      : "Quote on request"}
-                  </span>
+                        : formatOmanAmount(unit)}
+                    </span>
+                  ) : null}
                   <div className="aptus-portal-products__actions">
                     {purchasable ? (
                       <>
@@ -469,7 +647,10 @@ export function SoftwareCatalogPanel() {
                     >
                       Request Quote
                     </button>
-                    <Link href={productDetailHref(product)} className="aptus-overview-compact__link">
+                    <Link
+                      href={listedInCatalog ? productDetailHref(product) : product.href}
+                      className="aptus-overview-compact__link"
+                    >
                       Details
                     </Link>
                   </div>
@@ -478,6 +659,7 @@ export function SoftwareCatalogPanel() {
             );
           })}
         </div>
+        )}
 
         {hiddenProductCount > 0 ? (
           <div className="aptus-software-catalog__view-more-wrap">

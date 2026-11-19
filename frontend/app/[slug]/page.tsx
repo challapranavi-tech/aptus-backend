@@ -6,6 +6,7 @@ import { isAutodeskHiddenSlug } from "@/data/autodesk-subnav";
 import { getSoftwarePageScope, usesStackedSoftwareLayout } from "@/data/software-page-scope";
 import { getAllPageSlugs, getPageBySlug, loadCaseStudiesPageContent } from "@/data";
 import { localizePage } from "@/lib/localize-page";
+import { withArabicMeta } from "@/lib/arabic-meta";
 import { getRequestLocale } from "@/lib/request-locale";
 import { cn, buildPageMetadata, formatSlug } from "@/lib/utils";
 import "@/styles/case-studies-pages.css";
@@ -87,29 +88,29 @@ export async function generateMetadata({
   const { slug } = await params;
   const normalized = formatSlug(slug);
   if (isCaseStudiesSlug(normalized)) {
-    return { title: "Solutions in Action" };
+    return withArabicMeta({ title: "Solutions in Action" });
   }
   if (normalized === "our-story") {
-    return { title: "Our Story | Aptus Infotech" };
+    return withArabicMeta({ title: "Our Story | Aptus Infotech" });
   }
   if (normalized === "aptus-policy") {
-    return { title: "Our Policies & Terms | Aptus Infotech" };
+    return withArabicMeta({ title: "Our Policies & Terms | Aptus Infotech" });
   }
   if (normalized === "aptus-infotech-iso-certifications") {
-    return { title: "Aptus Infotech ISO Certifications | Aptus Infotech" };
+    return withArabicMeta({ title: "Aptus Infotech ISO Certifications | Aptus Infotech" });
   }
   if (normalized === "our-team") {
-    return { title: "Our Team | Aptus Infotech" };
+    return withArabicMeta({ title: "Our Team | Aptus Infotech" });
   }
   if (normalized === "faq") {
-    return { title: "FAQs | Aptus Infotech" };
+    return withArabicMeta({ title: "FAQs | Aptus Infotech" });
   }
   try {
     const page = await getPageBySlug(normalized);
-    if (!page) return { title: slug };
-    return buildPageMetadata(page);
+    if (!page) return withArabicMeta({ title: slug });
+    return withArabicMeta(buildPageMetadata(page));
   } catch {
-    return { title: slug };
+    return withArabicMeta({ title: slug });
   }
 }
 

@@ -1,3 +1,4 @@
+import { T } from "@/components/i18n/T";
 import { BannerBackgroundSlides } from "@/components/sections/BannerBackgroundSlides";
 import { CollapsibleSoftwareInnerHeroGrid } from "@/components/layout/CollapsibleSoftwareInnerHeroGrid";
 import { AutodeskFreeTrialLink } from "@/components/shared/AutodeskFreeTrialLink";
@@ -38,7 +39,7 @@ export function SoftwareInnerHero({ data }: SoftwareInnerHeroProps) {
   const requestQuoteCta = (
     <div className="aptus-software-inner-hero__cta">
       <Link href={quoteAction.href} className="aptus-software-btn aptus-software-btn-blue">
-        {quoteAction.label}
+        <T text={quoteAction.label} />
       </Link>
       {showFreeTrial ? <AutodeskFreeTrialLink variant="marketing" /> : null}
       {secondaryAction && (
@@ -46,7 +47,7 @@ export function SoftwareInnerHero({ data }: SoftwareInnerHeroProps) {
           href={secondaryAction.href}
           className="aptus-software-btn aptus-software-btn-blue"
         >
-          {secondaryAction.label}
+          <T text={secondaryAction.label} />
         </Link>
       )}
     </div>
@@ -204,7 +205,7 @@ export function SoftwareInnerHero({ data }: SoftwareInnerHeroProps) {
                     href={bannerAction.href}
                     className="aptus-software-btn aptus-software-btn-blue aptus-software-btn-lg"
                   >
-                    {bannerAction.label}
+                    <T text={bannerAction.label} />
                   </Link>
                 </div>
               )}

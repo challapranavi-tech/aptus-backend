@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useQuoteModal } from "@/components/quote/QuoteModalProvider";
 import { quoteContextForPortalProduct } from "@/components/quote/quote-modal-utils";
@@ -67,6 +68,7 @@ type ProductDetailPanelProps = {
 };
 
 export function ProductDetailPanel({ product, category }: ProductDetailPanelProps) {
+  const router = useRouter();
   const { openQuote } = useQuoteModal();
   const productsHref = softwareCatalogHref(category.id);
   const purchasable = isPortalPurchasableProduct(product.href);
@@ -213,12 +215,20 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
 
   return (
     <div className="aptus-product-detail">
-      <Link href={productsHref} className="aptus-product-detail__back">
+      <button
+        type="button"
+        className="aptus-product-detail__back"
+        onClick={() => {
+          // Return to the listing that opened this page (solution page, filtered catalog, etc.)
+          if (window.history.length > 1) router.back();
+          else router.push(productsHref);
+        }}
+      >
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
           <path d="M19 12H5M11 18l-6-6 6-6" />
         </svg>
         Back to products
-      </Link>
+      </button>
 
       <nav className="aptus-product-detail__breadcrumb" aria-label="Breadcrumb">
         <Link href="/">Home</Link>
@@ -304,19 +314,13 @@ export function ProductDetailPanel({ product, category }: ProductDetailPanelProp
             </ul>
 
             <div className="aptus-product-detail__purchase">
-              {purchasable ? (
-                <>
-                  <p className="aptus-product-detail__price">
-                    {unit
-                      ? config.kind === "renewal"
-                        ? `${formatOmanAmount(unit)}/${duration === "3year" ? "3yr" : "year"}`
-                        : formatOmanAmount(unit)
-                      : "Quote on request"}
-                  </p>
-                </>
-              ) : (
-                <p className="aptus-product-detail__price">Quote on request</p>
-              )}
+              {purchasable && unit ? (
+                <p className="aptus-product-detail__price">
+                  {config.kind === "renewal"
+                    ? `${formatOmanAmount(unit)}/${duration === "3year" ? "3yr" : "year"}`
+                    : formatOmanAmount(unit)}
+                </p>
+              ) : null}
               <p className="aptus-product-detail__price-note">
                 {config.kind === "bundle"
                   ? "Single bundle · Perpetual or one-time license"

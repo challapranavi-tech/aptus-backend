@@ -1,4 +1,5 @@
 import type { Locale } from "@/lib/locale";
+import { sharedArabic } from "./shared-ar";
 
 /** Flat message catalog for chrome / forms / portal shell. */
 export type MessageTree = {
@@ -139,6 +140,11 @@ export const arMessages: MessageTree = {
     "لا يوجد محتوى لهذه الصفحة. اربط نظام إدارة المحتوى لعرض المحتوى.",
   nav: {
     "/": "الرئيسية",
+    "About Us": "من نحن",
+    "Products and Solutions": "المنتجات والحلول",
+    "Knowledge Hub": "مركز المعرفة",
+    "Knowledge Base": "قاعدة المعرفة",
+    "ISO Certifications": "شهادات الأيزو",
     "/our-story": "قصتنا",
     "/our-team": "فريقنا",
     "/aptus-policy": "سياساتنا",
@@ -170,7 +176,7 @@ export const arMessages: MessageTree = {
       "الشبكات والكابلات المنظمة",
     "/thermal-scanners": "أجهزة الفحص الحراري",
     "/ups": "أنظمة UPS",
-    "/guest-room-management": "إدارة غرف الضيوف",
+    "/guest-room-management": "إدارة غرف النزلاء",
     "/nurse-calling-system": "نظام استدعاء الممرضات",
     "/conference-room-solution": "حلول غرف الاجتماعات",
     "/smatv-iptv": "SMATV/IPTV",
@@ -189,13 +195,20 @@ export function getMessages(locale: Locale): MessageTree {
   return messagesByLocale[locale] ?? enMessages;
 }
 
-/** Translate a nav label; fall back to the English source label. */
+/**
+ * Translate a nav label. The English label wins over the href so two items
+ * that share a URL (About Us / Our Story, Knowledge Base / Software) stay distinct.
+ */
 export function translateNavLabel(
   locale: Locale,
   href: string | undefined,
   fallback: string,
 ): string {
+  if (locale !== "ar") return fallback;
+  const nav = getMessages("ar").nav;
+  const byLabel = nav[fallback];
+  if (byLabel) return byLabel;
   if (!href) return fallback;
   const key = /^https?:\/\//i.test(href) ? href : href.startsWith("/") ? href : `/${href}`;
-  return getMessages(locale).nav[key] ?? fallback;
+  return nav[key] ?? sharedArabic(fallback) ?? fallback;
 }

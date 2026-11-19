@@ -51,6 +51,7 @@ vi.mock("@/lib/careers/jobs", () => ({
 }));
 
 import { POST } from "@/app/api/careers/apply/route";
+import { applicantReference } from "@/lib/odoo";
 
 function req(form: FormData, ip = "203.0.113.10") {
   return new NextRequest("http://localhost:3001/api/careers/apply", {
@@ -91,9 +92,22 @@ describe("POST /api/careers/apply", () => {
 
   it("accepts a valid application (Odoo + mail + archive)", async () => {
     const res = await POST(req(buildCareersForm()));
+    const reference = applicantReference(99, "Engineer");
     expect(res.status).toBe(200);
-    await expect(res.json()).resolves.toEqual({ ok: true });
+    await expect(res.json()).resolves.toEqual({ ok: true, reference });
     expect(mocks.createApplicant).toHaveBeenCalledOnce();
+    const confirmation = mocks.sendEmail.mock.calls.find(
+      (call) => call[0]?.to !== "hr@test.example",
+    )?.[0];
+    expect(confirmation?.subject).toBe(`Application received — ${reference}`);
+    expect(confirmation?.text).toContain(
+      `Your applicant reference is ${reference}.`,
+    );
+    expect(confirmation?.text).toContain(
+      "You will receive a response within 7 working days.",
+    );
+    // Job id is 42; the mailed number is the applicant record (99).
+    expect(confirmation?.text).not.toContain(applicantReference(42, "Engineer"));
     expect(mocks.archiveApplication).toHaveBeenCalledOnce();
     expect(mocks.sendEmail).toHaveBeenCalled();
   });
@@ -208,7 +222,12 @@ describe("POST /api/careers/apply", () => {
     await expect(res.json()).resolves.toEqual({
       ok: true,
       warning: "email_pending",
+      reference: applicantReference(99, "Engineer"),
     });
+    const confirmation = mocks.sendEmail.mock.calls[1]?.[0];
+    expect(confirmation?.subject).toBe(
+      `Application received — ${applicantReference(99, "Engineer")}`,
+    );
   });
 
   it("returns 400 for invalid jobId", async () => {

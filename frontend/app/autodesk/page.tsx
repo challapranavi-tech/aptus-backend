@@ -1,12 +1,15 @@
 import { AutodeskPageView } from "@/components/autodesk";
+import { withArabicMeta } from "@/lib/arabic-meta";
 import type { Metadata } from "next";
 import "@/styles/autodesk/fonts.css";
 
-export const metadata: Metadata = {
-  title: "Autodesk",
-  description:
-    "Explore Autodesk design and make software — AutoCAD, Revit, Fusion, Maya, and more. Aptus Infotech is your trusted Autodesk partner.",
-};
+export function generateMetadata(): Promise<Metadata> {
+  return withArabicMeta({
+    title: "Autodesk",
+    description:
+      "Explore Autodesk design and make software — AutoCAD, Revit, Fusion, Maya, and more. Aptus Infotech is your trusted Autodesk partner.",
+  });
+}
 
 /**
  * Dedicated /autodesk route — takes precedence over [slug] CMS hub.

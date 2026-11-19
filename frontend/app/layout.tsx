@@ -12,6 +12,7 @@ import {
   localeHtmlLang,
   type Locale,
 } from "@/lib/locale";
+import { withArabicMeta } from "@/lib/arabic-meta";
 import { getRequestLocale } from "@/lib/request-locale";
 import type { Metadata, Viewport } from "next";
 
@@ -29,7 +30,8 @@ const notoArabic = Noto_Sans_Arabic({
   display: "swap",
 });
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  return withArabicMeta({
   title: {
     default: "Aptus Infotech | Trusted IT & Engineering Software Partner",
     template: "%s | Aptus Infotech",
@@ -52,7 +54,8 @@ export const metadata: Metadata = {
     ],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
-};
+});
+}
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -71,8 +74,12 @@ export default async function RootLayout({
       lang={localeHtmlLang(locale)}
       dir={localeDir(locale)}
       className={`${poppins.variable} ${notoArabic.variable}`}
+      suppressHydrationWarning
     >
-      <body className="flex min-h-screen flex-col antialiased">
+      <body
+        className="flex min-h-screen flex-col antialiased"
+        suppressHydrationWarning
+      >
         <LocaleProvider initialLocale={locale}>
           <GSAPProvider>
             <QuoteModalProvider>

@@ -1,3 +1,4 @@
+import { SOFTWARE_SOLUTION_PAGES, softwareSolutionHref } from "@/data/software-solution-pages";
 import type { NavigationItem } from "@/types";
 
 /** Main site navigation — synced from https://aptusinfotech.com/ (see aptus-web/scripts/generate-site-nav.mjs). */
@@ -20,37 +21,14 @@ export const SITE_NAVIGATION: NavigationItem[] = [
         label: "Software",
         href: "/software-solutions",
         children: [
-          { label: "Autodesk", href: "/autodesk" },
           { label: "Adobe", href: "/adobe" },
+          { label: "Autodesk", href: "/autodesk" },
           { label: "Microsoft", href: "/microsoft" },
           { label: "Oracle", href: "/oracle-primavera-p6" },
-          { label: "CostX", href: "/rib-costx" },
-          { label: "Cubicost", href: "/cubicost-bm-qs" },
-          { label: "Planswift", href: "/plainswift" },
-          { label: "SpectroNova", href: "/spectronova" },
-          { label: "CSI", href: "/computers-structures" },
-          { label: "Bentley", href: "/bentley" },
-          { label: "Turnitin", href: "/turnitin" },
-          { label: "Mathwork", href: "/matlab" },
-          { label: "Nitro", href: "/nitro" },
-          { label: "Fortinet", href: "/fortinet" },
-          { label: "Sophos", href: "/sophos" },
-          { label: "Kaspersky", href: "/kaspersky" },
-          { label: "Symantec", href: "/antivirus-and-data-security" },
-          { label: "Palo Alto", href: "/palo-alto" },
-          { label: "RedHAT", href: "/redhat" },
-          { label: "Etap", href: "/etap" },
-          { label: "Prokon", href: "/prokon" },
-          { label: "Lumion", href: "/luminon" },
-          { label: "V-Ray", href: "/v-ray" },
-          { label: "Sketchup", href: "/sketchup" },
-          { label: "Bluebeam", href: "/bluebeam" },
-          { label: "Twinmotion", href: "/twinmotion" },
-          { label: "Solidworks", href: "/solidworks" },
-          { label: "SPSS", href: "/ibm-spss-software" },
-          { label: "Corona", href: "/chaos-corona" },
-          { label: "D5 Render", href: "/d5-render" },
-          { label: "Quorum", href: "/quorum" },
+          ...SOFTWARE_SOLUTION_PAGES.map((page) => ({
+            label: page.label,
+            href: softwareSolutionHref(page.slug),
+          })),
         ],
       },
       {
@@ -109,7 +87,7 @@ export function findNavItemByLabel(
   return undefined;
 }
 
-const SOFTWARE_BRAND_COUNT = 31;
+const SOFTWARE_SHORTCUTS = ["Adobe", "Autodesk", "Microsoft", "Oracle"];
 
 // ponytail: self-check — Software + ELV + Aptus Solar under Products and Solutions
 const products = SITE_NAVIGATION.find((item) => item.label === "Products and Solutions");
@@ -121,8 +99,16 @@ if (!products?.children || products.children.length !== 3) {
     "SITE_NAVIGATION Products and Solutions must contain Software, ELV Solutions, and Aptus Solar",
   );
 }
-if (!software?.children || software.children.length !== SOFTWARE_BRAND_COUNT) {
-  throw new Error(`SITE_NAVIGATION Software menu must contain exactly ${SOFTWARE_BRAND_COUNT} brands`);
+const softwareTop = software?.children ?? [];
+const softwareSolutions = softwareTop.filter((item) => !SOFTWARE_SHORTCUTS.includes(item.label));
+if (softwareTop.slice(0, SOFTWARE_SHORTCUTS.length).map((item) => item.label).join("|") !== SOFTWARE_SHORTCUTS.join("|")) {
+  throw new Error("SITE_NAVIGATION Software menu must list Adobe, Autodesk, Microsoft, and Oracle first");
+}
+if (softwareSolutions.map((item) => item.label).join("|") !== SOFTWARE_SOLUTION_PAGES.map((page) => page.label).join("|")) {
+  throw new Error("SITE_NAVIGATION Software solution pages are out of order");
+}
+if (softwareSolutions.some((item) => item.children?.length || item.href !== softwareSolutionHref(SOFTWARE_SOLUTION_PAGES.find((page) => page.label === item.label)?.slug ?? ""))) {
+  throw new Error("SITE_NAVIGATION Software solutions must link to their pages, with no inner menu");
 }
 if (!elv?.children?.length) {
   throw new Error("SITE_NAVIGATION ELV Solutions menu missing under Products and Solutions");

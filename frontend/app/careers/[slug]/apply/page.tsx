@@ -1,6 +1,7 @@
 import { ApplicationWizard } from "@/components/careers/apply/ApplicationWizard";
 import { Container } from "@/components/ui";
 import { getJob } from "@/data/jobs";
+import { withArabicMeta } from "@/lib/arabic-meta";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -13,10 +14,10 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const job = await getJob(slug);
-  return {
+  return withArabicMeta({
     title: job ? `Apply — ${job.title}` : "Apply",
     robots: { index: false, follow: false },
-  };
+  });
 }
 
 export default async function ApplyPage({ params }: PageProps) {

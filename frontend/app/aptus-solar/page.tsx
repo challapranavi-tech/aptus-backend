@@ -1,12 +1,16 @@
+import { T } from "@/components/i18n/T";
+import { withArabicMeta } from "@/lib/arabic-meta";
 import type { Metadata } from "next";
 import Link from "next/link";
 import "@/styles/pages/aptus-solar.css";
 
-export const metadata: Metadata = {
-  title: "Aptus Solar",
-  description:
-    "Complete solar solutions from Aptus Solar Tech — design, supply, and installation support for businesses in Oman.",
-};
+export function generateMetadata(): Promise<Metadata> {
+  return withArabicMeta({
+    title: "Aptus Solar",
+    description:
+      "Complete solar solutions from Aptus Solar Tech — design, supply, and installation support for businesses in Oman.",
+  });
+}
 
 /**
  * Placeholder hub for /aptus-solar.
@@ -27,10 +31,10 @@ export default function AptusSolarPage() {
           </p>
           <div className="aptus-solar-hero__actions">
             <Link href="#form" className="aptus-solar-btn aptus-solar-btn--primary">
-              Request a Quote
+              <T text="Request a Quote" />
             </Link>
             <Link href="#talk-to-expert" className="aptus-solar-btn aptus-solar-btn--secondary">
-              Talk to an Expert
+              <T text="Talk to an Expert" />
             </Link>
           </div>
         </div>

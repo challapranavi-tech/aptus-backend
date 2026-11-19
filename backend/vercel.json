@@ -6,6 +6,10 @@
     {
       "path": "/api/crm/retry",
       "schedule": "0 0 * * *"
+    },
+    {
+      "path": "/api/cron/recruitment-stages",
+      "schedule": "30 4 * * *"
     }
   ]
 }

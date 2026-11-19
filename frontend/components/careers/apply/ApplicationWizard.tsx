@@ -513,6 +513,7 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
   >("idle");
   const [progress, setProgress] = useState(0);
   const [submitError, setSubmitError] = useState("");
+  const [applicantRef, setApplicantRef] = useState("");
   const [showSummary, setShowSummary] = useState(false);
 
   // Drop the submit banner once the applicant has cleared every field error
@@ -1150,6 +1151,14 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
     xhr.onload = () => {
       submittingRef.current = false;
       if (xhr.status >= 200 && xhr.status < 300) {
+        try {
+          const data = JSON.parse(xhr.responseText) as { reference?: unknown };
+          if (typeof data.reference === "string" && data.reference) {
+            setApplicantRef(data.reference);
+          }
+        } catch {
+          /* confirmation email still carries the reference */
+        }
         setSubmitState("success");
         scrollTop();
         return;
@@ -1224,6 +1233,13 @@ export function ApplicationWizard({ job }: { job: CareerJob }) {
           application for <strong>{job.title}</strong> has been received. Our HR
           team will review it and reach out at <strong>{values.email}</strong>.
         </p>
+        {applicantRef ? (
+          <p className="aptus-apply__hint">
+            Your applicant reference is <strong>{applicantRef}</strong>. The
+            same number is in the confirmation email. Quote it if you contact
+            us about this application.
+          </p>
+        ) : null}
         <div className="mt-4 flex justify-center gap-3">
           <Button href="/careers" variant="secondary">
             Browse more roles

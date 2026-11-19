@@ -36,6 +36,12 @@
     transform: scaleX(-1);
   }
 
+  /* Phone and email stay in the written order inside Arabic pages. */
+  html[dir="rtl"] :is(a[href^="tel:"], a[href^="mailto:"]) {
+    direction: ltr;
+    unicode-bidi: isolate;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     color: var(--color-heading);
     font-family: var(--font-display);

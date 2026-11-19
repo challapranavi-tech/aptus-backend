@@ -1,10 +1,13 @@
+import { withArabicMeta } from "@/lib/arabic-meta";
 import { Suspense } from "react";
 import { CustomerLoginForm } from "@/components/auth/CustomerLoginForm";
 import { LoginStatusBanner } from "@/components/auth/LoginStatusBanner";
 
-export const metadata = {
-  title: "Customer Login | Aptus Infotech",
-};
+export function generateMetadata() {
+  return withArabicMeta({
+    title: "Customer Login | Aptus Infotech",
+  });
+}
 
 export default function LoginPage() {
   return (

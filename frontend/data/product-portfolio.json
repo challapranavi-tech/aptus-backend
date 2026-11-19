@@ -1,0 +1,347 @@
+[
+  {
+    "brand": "Autodesk",
+    "product": "AutoCAD",
+    "solution": "Engineering & Construction"
+  },
+  {
+    "brand": "Autodesk",
+    "product": "Civil 3D",
+    "solution": "Engineering & Construction"
+  },
+  {
+    "brand": "Autodesk",
+    "product": "AEC Collection",
+    "solution": "Engineering & Construction"
+  },
+  {
+    "brand": "Autodesk",
+    "product": "Product Design & Manufacturing Collection",
+    "solution": "Engineering & Construction"
+  },
+  {
+    "brand": "Autodesk",
+    "product": "AutoCAD LT",
+    "solution": "Engineering & Construction"
+  },
+  {
+    "brand": "Autodesk",
+    "product": "Revit LT",
+    "solution": "Engineering & Construction"
+  },
+  {
+    "brand": "Autodesk",
+    "product": "3ds Max",
+    "solution": "Engineering & Construction"
+  },
+  {
+    "brand": "Autodesk",
+    "product": "Autodesk Forma",
+    "solution": "Engineering & Construction"
+  },
+  {
+    "brand": "Autodesk",
+    "product": "Forma Build",
+    "solution": "Engineering & Construction"
+  },
+  {
+    "brand": "Autodesk",
+    "product": "Forma Takeoff",
+    "solution": "Engineering & Construction"
+  },
+  {
+    "brand": "Autodesk",
+    "product": "Forma Data Management",
+    "solution": "Engineering & Construction"
+  },
+  {
+    "brand": "Autodesk",
+    "product": "Forma Design Collaboration",
+    "solution": "Engineering & Construction"
+  },
+  {
+    "brand": "Autodesk",
+    "product": "Fabrication CAMduct",
+    "solution": "Engineering & Construction"
+  },
+  {
+    "brand": "Autodesk",
+    "product": "InfraWorks",
+    "solution": "Engineering & Construction"
+  },
+  {
+    "brand": "Autodesk",
+    "product": "Inventor Professional",
+    "solution": "Engineering & Construction"
+  },
+  {
+    "brand": "Autodesk",
+    "product": "Navisworks Manage",
+    "solution": "Engineering & Construction"
+  },
+  {
+    "brand": "Autodesk",
+    "product": "Navisworks Simulate",
+    "solution": "Engineering & Construction"
+  },
+  {
+    "brand": "Autodesk",
+    "product": "Revit",
+    "solution": "Engineering & Construction"
+  },
+  {
+    "brand": "Autodesk",
+    "product": "InfoDrainage",
+    "solution": "Engineering & Construction"
+  },
+  {
+    "brand": "Autodesk",
+    "product": "InfoWater",
+    "solution": "Engineering & Construction"
+  },
+  {
+    "brand": "Adobe",
+    "product": "Creative Cloud",
+    "solution": "Creative & Document Management, Education"
+  },
+  {
+    "brand": "Adobe",
+    "product": "Acrobat Pro",
+    "solution": "Creative & Document Management"
+  },
+  {
+    "brand": "Adobe",
+    "product": "Illustrator",
+    "solution": "Creative & Document Management"
+  },
+  {
+    "brand": "Adobe",
+    "product": "Photoshop",
+    "solution": "Creative & Document Management"
+  },
+  {
+    "brand": "Adobe",
+    "product": "Premiere Pro",
+    "solution": "Creative & Document Management"
+  },
+  {
+    "brand": "Microsoft",
+    "product": "Microsoft 365",
+    "solution": "IT Infrastructure & Cloud, Project Management"
+  },
+  {
+    "brand": "Microsoft",
+    "product": "Microsoft Project",
+    "solution": "IT Infrastructure & Cloud"
+  },
+  {
+    "brand": "Microsoft",
+    "product": "Power BI",
+    "solution": "Data & Analytics"
+  },
+  {
+    "brand": "Microsoft",
+    "product": "Teams",
+    "solution": "IT Infrastructure & Cloud"
+  },
+  {
+    "brand": "Microsoft",
+    "product": "SharePoint",
+    "solution": "IT Infrastructure & Cloud"
+  },
+  {
+    "brand": "Microsoft",
+    "product": "Azure",
+    "solution": "IT Infrastructure & Cloud"
+  },
+  {
+    "brand": "Microsoft",
+    "product": "SQL Server",
+    "solution": "Data & Analytics"
+  },
+  {
+    "brand": "Microsoft",
+    "product": "Windows 10",
+    "solution": "IT Infrastructure & Cloud"
+  },
+  {
+    "brand": "Microsoft",
+    "product": "Windows Server",
+    "solution": "IT Infrastructure & Cloud"
+  },
+  {
+    "brand": "Oracle",
+    "product": "Primavera P6 PPM",
+    "solution": "Project Management"
+  },
+  {
+    "brand": "Oracle",
+    "product": "Primavera P6 EPPM",
+    "solution": "Project Management"
+  },
+  {
+    "brand": "Oracle",
+    "product": "Aconex",
+    "solution": "Project Management"
+  },
+  {
+    "brand": "RIB",
+    "product": "CostX",
+    "solution": "Engineering & Construction"
+  },
+  {
+    "brand": "Cubicost",
+    "product": "Cubicost",
+    "solution": "Engineering & Construction"
+  },
+  {
+    "brand": "PlanSwift",
+    "product": "PlanSwift",
+    "solution": "Engineering & Construction"
+  },
+  {
+    "brand": "CSI",
+    "product": "Safe",
+    "solution": "Structural Engineering & Analysis"
+  },
+  {
+    "brand": "CSI",
+    "product": "SAP",
+    "solution": "Structural Engineering & Analysis"
+  },
+  {
+    "brand": "CSI",
+    "product": "CSI Bridge",
+    "solution": "Structural Engineering & Analysis"
+  },
+  {
+    "brand": "CSI",
+    "product": "ETABS",
+    "solution": "Structural Engineering & Analysis"
+  },
+  {
+    "brand": "PROKON",
+    "product": "PROKON",
+    "solution": "Structural Engineering & Analysis"
+  },
+  {
+    "brand": "CYPE",
+    "product": "CYPE",
+    "solution": "Structural Engineering & Analysis"
+  },
+  {
+    "brand": "Turnitin",
+    "product": "Turnitin",
+    "solution": "Education Solution"
+  },
+  {
+    "brand": "MathWorks",
+    "product": "MATLAB",
+    "solution": "Education Solution"
+  },
+  {
+    "brand": "IBM",
+    "product": "SPSS",
+    "solution": "Education Solution"
+  },
+  {
+    "brand": "ANSYS",
+    "product": "ANSYS",
+    "solution": "Education Solution"
+  },
+  {
+    "brand": "MSC Software",
+    "product": "Adams",
+    "solution": "Education Solution"
+  },
+  {
+    "brand": "Nitro",
+    "product": "Nitro PDF",
+    "solution": "PDF & Document Productivity"
+  },
+  {
+    "brand": "Bluebeam",
+    "product": "Bluebeam Revu",
+    "solution": "PDF & Construction Collaboration"
+  },
+  {
+    "brand": "Chaos",
+    "product": "Corona",
+    "solution": "Creative & Document Management"
+  },
+  {
+    "brand": "Enscape",
+    "product": "Enscape",
+    "solution": "Engineering & Construction, Multimedia"
+  },
+  {
+    "brand": "Lumion",
+    "product": "Lumion",
+    "solution": "Engineering & Construction, Multimedia"
+  },
+  {
+    "brand": "Trimble",
+    "product": "SketchUp",
+    "solution": "Engineering & Construction, Multimedia"
+  },
+  {
+    "brand": "Epic Games",
+    "product": "Twinmotion",
+    "solution": "Engineering & Construction, Multimedia"
+  },
+  {
+    "brand": "Chaos",
+    "product": "V-Ray",
+    "solution": "Engineering & Construction, Multimedia"
+  },
+  {
+    "brand": "Fortinet",
+    "product": "Fortinet",
+    "solution": " Cybersecurity"
+  },
+  {
+    "brand": "Kaspersky",
+    "product": "Kaspersky",
+    "solution": " Cybersecurity"
+  },
+  {
+    "brand": "Broadcom",
+    "product": "Symantec",
+    "solution": " Cybersecurity"
+  },
+  {
+    "brand": "Palo Alto Networks",
+    "product": "Palo Alto Networks",
+    "solution": " Cybersecurity"
+  },
+  {
+    "brand": "Red Hat",
+    "product": "Red Hat Enterprise Linux",
+    "solution": "IT Infrastructure & Cloud"
+  },
+  {
+    "brand": "ETAP",
+    "product": "ETAP",
+    "solution": "Electrical Engineering & Power Systems"
+  },
+  {
+    "brand": "Dassault Systèmes",
+    "product": "SOLIDWORKS",
+    "solution": "Education Solution"
+  },
+  {
+    "brand": "D5 Render",
+    "product": "D5 Render",
+    "solution": "Engineering & Construction, Multimedia"
+  },
+  {
+    "brand": "Quorum",
+    "product": "Quorum Disaster Recovery",
+    "solution": " Cybersecurity"
+  },
+  {
+    "brand": "SpectroNova",
+    "product": "SpectroNova",
+    "solution": "EDMS & Document Management"
+  }
+]

@@ -1,6 +1,9 @@
 import { PortalDashboardShell } from "@/components/portal/PortalDashboardShell";
+import { withArabicMeta } from "@/lib/arabic-meta";
 
-export const metadata = { title: "Shopping Cart | Aptus Customer Portal" };
+export function generateMetadata() {
+  return withArabicMeta({ title: "Shopping Cart | Aptus Customer Portal" });
+}
 
 export default function CartPage() {
   return <PortalDashboardShell section="cart" />;

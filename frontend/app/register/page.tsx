@@ -51,10 +51,19 @@ function validateEmail(value: string): string | null {
   return null;
 }
 
-function validatePhone(value: string): string | null {
+function validatePhone(value: string, countryCode: string): string | null {
   if (!value.trim()) return "Mobile number is required.";
   if (/\s/.test(value)) return "Mobile number must not contain spaces.";
-  if (!/^\d{6,15}$/.test(value.replace(/^\+/, ""))) return "Enter a valid mobile number (digits only).";
+  const digits = value.replace(/\D/g, "");
+  if (!digits) return "Mobile number is required.";
+  const rule = COUNTRY_CODES.find((c) => c.code === countryCode);
+  if (rule) {
+    if (digits.length !== rule.digits) {
+      return `${rule.country} numbers must be exactly ${rule.digits} digits.`;
+    }
+    return null;
+  }
+  if (!/^\d{6,15}$/.test(digits)) return "Enter a valid mobile number (digits only).";
   return null;
 }
 
@@ -74,8 +83,8 @@ function validateCr(value: string): string | null {
   return null;
 }
 
-function validateIdentifier(isCompany: boolean, value: string): string | null {
-  return isCompany ? validateCr(value) : validatePhone(value);
+function validateIdentifier(isCompany: boolean, value: string, countryCode: string): string | null {
+  return isCompany ? validateCr(value) : validatePhone(value, countryCode);
 }
 
 function PasswordInput({
@@ -166,13 +175,21 @@ function PhoneWithCountryCode({
   onBlur?: () => void;
   readOnly?: boolean;
 }) {
-  const localLength = COUNTRY_CODES.find((c) => c.code === countryCode)?.digits;
+  const selected = COUNTRY_CODES.find((c) => c.code === countryCode);
+  const localLength = selected?.digits;
   return (
     <div>
       <div className="aptus-register-phone">
         <select
           value={countryCode}
-          onChange={(e) => onCountryCodeChange(e.target.value)}
+          onChange={(e) => {
+            const next = e.target.value;
+            const nextLen = COUNTRY_CODES.find((c) => c.code === next)?.digits;
+            onCountryCodeChange(next);
+            if (nextLen != null && phoneValue.length > nextLen) {
+              onPhoneChange(phoneValue.slice(0, nextLen));
+            }
+          }}
           disabled={readOnly}
           className="form-control aptus-register-phone__code"
           aria-label="Country code"
@@ -186,10 +203,12 @@ function PhoneWithCountryCode({
         <input
           className={`form-control aptus-register-phone__number${error ? " is-invalid" : ""}`}
           type="tel"
+          inputMode="numeric"
           required
           readOnly={readOnly}
           aria-readonly={readOnly}
-          placeholder="Enter number"
+          maxLength={localLength}
+          placeholder={localLength ? `${localLength}-digit number` : "Enter number"}
           value={phoneValue}
           onChange={(e) => {
             const val = toLocalPhoneDigits(e.target.value, countryCode, localLength);
@@ -200,6 +219,11 @@ function PhoneWithCountryCode({
       </div>
       {error && (
         <small className="aptus-field__error" role="alert">{error}</small>
+      )}
+      {selected && !error && !readOnly && (
+        <small className="aptus-field__help">
+          Enter exactly {selected.digits} digits for {selected.country}
+        </small>
       )}
     </div>
   );
@@ -288,7 +312,7 @@ function RegisterWizard() {
     const fnErr = validateName(firstName, "First name");
     const lnErr = validateName(lastName, "Last name");
     const eErr = validateEmail(email);
-    const pErr = validatePhone(phone);
+    const pErr = validatePhone(phone, countryCode);
     const pwErr = validatePassword(password);
     const crErr = isCompany ? validateCr(crNumber) : null;
     const coErr = isCompany && !companyName.trim() ? "Company name is required." : null;
@@ -308,7 +332,7 @@ function RegisterWizard() {
     e.preventDefault();
     resetError();
 
-    const iErr = validateIdentifier(isCompany, identifier);
+    const iErr = validateIdentifier(isCompany, identifier, countryCode);
     setIdentifierError(iErr ?? "");
     if (iErr) return;
 
@@ -627,11 +651,16 @@ function RegisterWizard() {
                         countryCode={countryCode}
                         onPhoneChange={(v) => {
                           setIdentifier(v);
-                          if (identifierError) setIdentifierError(validatePhone(v) ?? "");
+                          if (identifierError) setIdentifierError(validatePhone(v, countryCode) ?? "");
                         }}
-                        onCountryCodeChange={setCountryCode}
+                        onCountryCodeChange={(code) => {
+                          setCountryCode(code);
+                          const len = COUNTRY_CODES.find((c) => c.code === code)?.digits;
+                          const next = len != null ? identifier.slice(0, len) : identifier;
+                          if (identifierError) setIdentifierError(validatePhone(next, code) ?? "");
+                        }}
                         error={identifierError}
-                        onBlur={() => setIdentifierError(validatePhone(identifier) ?? "")}
+                        onBlur={() => setIdentifierError(validatePhone(identifier, countryCode) ?? "")}
                       />
                     )}
                   </div>
@@ -824,10 +853,15 @@ function RegisterWizard() {
                           <PhoneWithCountryCode
                             phoneValue={phone}
                             countryCode={countryCode}
-                            onPhoneChange={(v) => { setPhone(v); if (phoneError) setPhoneError(validatePhone(v) ?? ""); }}
-                            onCountryCodeChange={setCountryCode}
+                            onPhoneChange={(v) => { setPhone(v); if (phoneError) setPhoneError(validatePhone(v, countryCode) ?? ""); }}
+                            onCountryCodeChange={(code) => {
+                              setCountryCode(code);
+                              const len = COUNTRY_CODES.find((c) => c.code === code)?.digits;
+                              const next = len != null ? phone.slice(0, len) : phone;
+                              if (phoneError) setPhoneError(validatePhone(next, code) ?? "");
+                            }}
                             error={phoneError}
-                            onBlur={() => setPhoneError(validatePhone(phone) ?? "")}
+                            onBlur={() => setPhoneError(validatePhone(phone, countryCode) ?? "")}
                           />
                         </div>
                       </div>
@@ -852,10 +886,10 @@ function RegisterWizard() {
                           <PhoneWithCountryCode
                             phoneValue={phone}
                             countryCode={countryCode}
-                            onPhoneChange={(v) => { setPhone(v); if (phoneError) setPhoneError(validatePhone(v) ?? ""); }}
+                            onPhoneChange={(v) => { setPhone(v); if (phoneError) setPhoneError(validatePhone(v, countryCode) ?? ""); }}
                             onCountryCodeChange={setCountryCode}
                             error={phoneError}
-                            onBlur={() => setPhoneError(validatePhone(phone) ?? "")}
+                            onBlur={() => setPhoneError(validatePhone(phone, countryCode) ?? "")}
                             readOnly={true}
                           />
                         </div>

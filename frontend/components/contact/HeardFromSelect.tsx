@@ -1,3 +1,8 @@
+"use client";
+
+import { useLocale } from "@/context/LocaleProvider";
+import { copyForLocale } from "@/locales/shared-ar";
+
 type HeardFromSelectProps = {
   required?: boolean;
   className: string;
@@ -13,6 +18,8 @@ export function HeardFromSelect({
   "aria-invalid": ariaInvalid,
   onChange,
 }: HeardFromSelectProps) {
+  const { locale } = useLocale();
+  const tx = (value: string) => copyForLocale(locale, value);
   if (variant === "career") {
     return (
       <select
@@ -23,10 +30,10 @@ export function HeardFromSelect({
         aria-invalid={ariaInvalid}
         onChange={onChange}
       >
-        <option value="Media">Media</option>
-        <option value="Referals">Referals</option>
-        <option value="Social Media">Social Media</option>
-        <option value="Events">Events</option>
+        <option value="Media">{tx("Media")}</option>
+        <option value="Referals">{tx("Referals")}</option>
+        <option value="Social Media">{tx("Social Media")}</option>
+        <option value="Events">{tx("Events")}</option>
       </select>
     );
   }
@@ -41,15 +48,15 @@ export function HeardFromSelect({
       onChange={onChange}
     >
       <option value="" disabled>
-        Select an option
+        {tx("Select an option")}
       </option>
-      <option value="Search Engine">Search Engine</option>
-      <option value="Social Media">Social Media</option>
-      <option value="Referrals">Referrals</option>
-      <option value="Events">Events</option>
-      <option value="LinkedIn">LinkedIn</option>
-      <option value="Media">Media</option>
-      <option value="Other">Other</option>
+      <option value="Search Engine">{tx("Search Engine")}</option>
+      <option value="Social Media">{tx("Social Media")}</option>
+      <option value="Referrals">{tx("Referrals")}</option>
+      <option value="Events">{tx("Events")}</option>
+      <option value="LinkedIn">{tx("LinkedIn")}</option>
+      <option value="Media">{tx("Media")}</option>
+      <option value="Other">{tx("Other")}</option>
     </select>
   );
 }

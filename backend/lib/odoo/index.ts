@@ -26,6 +26,8 @@ export {
 export {
   createApplicant,
   buildApplicantValues,
+  applicantReference,
+  jobAbbreviation,
   applicantStageIdFromEnv,
   parseSalaryExpected,
   type ApplicantInput,

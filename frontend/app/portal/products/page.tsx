@@ -1,6 +1,9 @@
+import { withArabicMeta } from "@/lib/arabic-meta";
 import { redirect } from "next/navigation";
 
-export const metadata = { title: "Products | Aptus Customer Portal" };
+export function generateMetadata() {
+  return withArabicMeta({ title: "Products | Aptus Customer Portal" });
+}
 
 /** Unified product catalog lives on the public software products page. */
 export default function ProductsPage() {

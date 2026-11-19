@@ -2,6 +2,7 @@ import { archiveApplication } from "@/lib/application-archive";
 import { corsPreflight, jsonCors, withCors } from "@/lib/api-cors";
 import { getPublishedJobById } from "@/lib/careers/jobs";
 import {
+  applicantReference,
   createApplicant,
   isOdooConfigured,
   odooConfigFromEnv,
@@ -370,6 +371,7 @@ export async function POST(req: NextRequest) {
   let odooNoteHtml = "";
   let odooNoteText = "";
   let odooSynced = false;
+  let reference = "";
 
   try {
     const applicantId = await createApplicant(
@@ -384,11 +386,12 @@ export async function POST(req: NextRequest) {
       attachments,
     );
     odooSynced = true;
+    reference = applicantReference(applicantId, fields.appliedDesignation);
     const base = odooConfigFromEnv().url;
     const link = `${base}/web#model=hr.applicant&id=${applicantId}&view_type=form`;
-    odooNoteHtml = `<p style="font-family:Arial,sans-serif;font-size:13px;color:#047857">Synced to Odoo Recruitment — <a href="${escapeHtml(link)}">applicant #${applicantId}</a>.</p>`;
-    odooNoteText = `\n\nSynced to Odoo Recruitment: applicant #${applicantId} (${link})`;
-    console.info("[careers/apply] created hr.applicant", applicantId);
+    odooNoteHtml = `<p style="font-family:Arial,sans-serif;font-size:13px;color:#047857">Applicant reference: <strong>${escapeHtml(reference)}</strong>. Synced to Odoo Recruitment — <a href="${escapeHtml(link)}">applicant #${applicantId}</a>.</p>`;
+    odooNoteText = `\n\nApplicant reference: ${reference}\nSynced to Odoo Recruitment: applicant #${applicantId} (${link})`;
+    console.info("[careers/apply] created hr.applicant", applicantId, reference);
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     console.error("[careers/apply] Odoo hr.applicant create failed:", msg);
@@ -421,11 +424,28 @@ export async function POST(req: NextRequest) {
   const hrResult = await sendEmail({
     to: hrEmail(),
     replyTo: fields.email,
-    subject: `Career Application — ${fields.candidateName} (${fields.appliedDesignation})`,
+    subject: `Career Application — ${reference} — ${fields.candidateName} (${fields.appliedDesignation})`,
     text: text + odooNoteText,
     html: html + odooNoteHtml,
     attachments,
   });
+
+  // Applicant confirmation carries their reference. Best-effort, including when
+  // the HR copy fails — the application is already stored.
+  const confirmResult = await sendEmail({
+    to: fields.email,
+    replyTo: hrEmail(),
+    subject: `Application received — ${reference}`,
+    text: buildConfirmationText(fields, reference),
+    html: buildConfirmationHtml(fields, reference),
+  });
+  if (!confirmResult.ok) {
+    console.warn(
+      "[careers/apply] applicant confirmation failed (application still accepted):",
+      confirmResult.error,
+    );
+  }
+
   if (!hrResult.ok) {
     console.error("[careers/apply] HR email failed:", hrResult.error);
     // Odoo already has the applicant — accept to avoid duplicate Odoo records on retry.
@@ -438,6 +458,7 @@ export async function POST(req: NextRequest) {
       return jsonCors(req, {
         ok: true,
         warning: "email_pending",
+        reference,
       });
     }
     return jsonCors(
@@ -447,22 +468,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Applicant confirmation is best-effort — don't fail the submission if it bounces.
-  const confirmResult = await sendEmail({
-    to: fields.email,
-    replyTo: hrEmail(),
-    subject: `Application received — ${fields.appliedDesignation}`,
-    text: buildConfirmationText(fields),
-    html: buildConfirmationHtml(fields),
-  });
-  if (!confirmResult.ok) {
-    console.warn(
-      "[careers/apply] applicant confirmation failed (application still accepted):",
-      confirmResult.error,
-    );
-  }
-
-  return jsonCors(req, { ok: true });
+  return jsonCors(req, { ok: true, reference });
 }
 
 function applicationRows(f: ApplicationFields): Array<[string, string]> {
@@ -547,7 +553,7 @@ function buildEmailText(f: ApplicationFields): string {
     .join("\n");
 }
 
-function buildConfirmationHtml(f: ApplicationFields): string {
+function buildConfirmationHtml(f: ApplicationFields, reference: string): string {
   return `
     <p style="font-family:Arial,sans-serif;font-size:14px;color:#0f172a">
       Dear ${escapeHtml(f.candidateName)},
@@ -555,7 +561,11 @@ function buildConfirmationHtml(f: ApplicationFields): string {
     <p style="font-family:Arial,sans-serif;font-size:14px;color:#0f172a">
       Thank you for applying for the
       <strong>${escapeHtml(f.appliedDesignation)}</strong> position at Aptus Infotech.
-      We have received your application and will review it shortly.
+      We have received your application. You will receive a response within 7 working days.
+    </p>
+    <p style="font-family:Arial,sans-serif;font-size:14px;color:#0f172a">
+      Your applicant reference is <strong>${escapeHtml(reference)}</strong>.
+      Please quote this reference in any follow-up about your application.
     </p>
     <p style="font-family:Arial,sans-serif;font-size:13px;color:#475569">
       If you have questions, you can reply to this email.
@@ -565,12 +575,15 @@ function buildConfirmationHtml(f: ApplicationFields): string {
     </p>`;
 }
 
-function buildConfirmationText(f: ApplicationFields): string {
+function buildConfirmationText(f: ApplicationFields, reference: string): string {
   return [
     `Dear ${f.candidateName},`,
     "",
     `Thank you for applying for the ${f.appliedDesignation} position at Aptus Infotech.`,
-    "We have received your application and will review it shortly.",
+    "We have received your application. You will receive a response within 7 working days.",
+    "",
+    `Your applicant reference is ${reference}.`,
+    "Please quote this reference in any follow-up about your application.",
     "",
     "Best regards,",
     "Aptus Infotech HR",

@@ -10,15 +10,18 @@ import {
   SOFTWARE_PARTNERSHIPS,
   SOFTWARE_TESTIMONIALS,
 } from "@/data/software-solutions-page";
+import { withArabicMeta } from "@/lib/arabic-meta";
 import type { Metadata } from "next";
 import "@/styles/software-catalog.css";
 import "@/styles/software-pages.css";
 
-export const metadata: Metadata = {
-  title: "Software Solutions",
-  description:
-    "Premium software solutions from Autodesk, Adobe, Microsoft, Oracle, and more — with licensing, implementation, and support from Aptus Infotech.",
-};
+export function generateMetadata(): Promise<Metadata> {
+  return withArabicMeta({
+    title: "Software Solutions",
+    description:
+      "Premium software solutions from Autodesk, Adobe, Microsoft, Oracle, and more — with licensing, implementation, and support from Aptus Infotech.",
+  });
+}
 
 export default function SoftwareSolutionsPage() {
   return (

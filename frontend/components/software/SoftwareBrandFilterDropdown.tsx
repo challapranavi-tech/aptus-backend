@@ -1,30 +1,47 @@
 "use client";
 
 import { useEffect, useId, useRef } from "react";
-import type { SoftwarePurchaseCategory } from "@/lib/order-pricing";
+
+export type CatalogFilterOption = {
+  id: string;
+  label: string;
+};
 
 interface SoftwareBrandFilterDropdownProps {
   open: boolean;
-  brands: SoftwarePurchaseCategory[];
-  /** null = all brands; [] = none; non-empty = specific selection */
-  selectedBrandIds: string[] | null;
+  options: CatalogFilterOption[];
+  /** null = all options; [] = none; non-empty = specific selection */
+  selectedIds: string[] | null;
   activeLabel: string;
+  fieldLabel: string;
+  allLabel: string;
+  menuLabel: string;
+  /** Brand and product option labels stay in English when the page is Arabic. */
+  keepLabels?: boolean;
   onOpenChange: (open: boolean) => void;
-  onChange: (brandIds: string[] | null) => void;
+  onChange: (ids: string[] | null) => void;
 }
 
 export function SoftwareBrandFilterDropdown({
   open,
-  brands,
-  selectedBrandIds,
+  options,
+  selectedIds,
   activeLabel,
+  fieldLabel,
+  allLabel,
+  menuLabel,
+  keepLabels = false,
   onOpenChange,
   onChange,
 }: SoftwareBrandFilterDropdownProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const listId = useId();
-  const allSelected = selectedBrandIds === null;
-  const noneSelected = selectedBrandIds !== null && selectedBrandIds.length === 0;
+  const allSelected = selectedIds === null;
+  const noneSelected = selectedIds !== null && selectedIds.length === 0;
+  const valueIsName =
+    keepLabels &&
+    selectedIds?.length === 1 &&
+    options.some((option) => option.label === activeLabel);
 
   useEffect(() => {
     if (!open) return;
@@ -52,19 +69,19 @@ export function SoftwareBrandFilterDropdown({
     onChange(checked ? null : []);
   }
 
-  function toggleBrand(brandId: string) {
+  function toggleOption(optionId: string) {
     if (allSelected) {
-      onChange(brands.map((brand) => brand.id).filter((id) => id !== brandId));
+      onChange(options.map((option) => option.id).filter((id) => id !== optionId));
       return;
     }
     if (noneSelected) {
-      onChange([brandId]);
+      onChange([optionId]);
       return;
     }
-    const next = selectedBrandIds.includes(brandId)
-      ? selectedBrandIds.filter((id) => id !== brandId)
-      : [...selectedBrandIds, brandId];
-    onChange(next.length === brands.length ? null : next);
+    const next = selectedIds.includes(optionId)
+      ? selectedIds.filter((id) => id !== optionId)
+      : [...selectedIds, optionId];
+    onChange(next.length === options.length ? null : next);
   }
 
   return (
@@ -77,8 +94,13 @@ export function SoftwareBrandFilterDropdown({
         aria-controls={listId}
         onClick={() => onOpenChange(!open)}
       >
-        <span className="aptus-brand-filter-tile__label">Brand</span>
-        <span className="aptus-brand-filter-tile__value">{activeLabel}</span>
+        <span className="aptus-brand-filter-tile__label">{fieldLabel}</span>
+        <span
+          className="aptus-brand-filter-tile__value"
+          {...(valueIsName ? { "data-no-translate": "" } : {})}
+        >
+          {activeLabel}
+        </span>
       </button>
 
       {open ? (
@@ -86,7 +108,7 @@ export function SoftwareBrandFilterDropdown({
           id={listId}
           className="aptus-brand-filter__panel"
           role="listbox"
-          aria-label="Filter by brand"
+          aria-label={menuLabel}
           aria-multiselectable="true"
         >
           <label className="aptus-brand-filter-option">
@@ -95,17 +117,17 @@ export function SoftwareBrandFilterDropdown({
               checked={allSelected}
               onChange={(event) => toggleAll(event.target.checked)}
             />
-            <span>All brands</span>
+            <span>{allLabel}</span>
           </label>
 
-          {brands.map((brand) => (
-            <label key={brand.id} className="aptus-brand-filter-option">
+          {options.map((option) => (
+            <label key={option.id} className="aptus-brand-filter-option">
               <input
                 type="checkbox"
-                checked={allSelected || (selectedBrandIds?.includes(brand.id) ?? false)}
-                onChange={() => toggleBrand(brand.id)}
+                checked={allSelected || (selectedIds?.includes(option.id) ?? false)}
+                onChange={() => toggleOption(option.id)}
               />
-              <span>{brand.label}</span>
+              <span {...(keepLabels ? { "data-no-translate": "" } : {})}>{option.label}</span>
             </label>
           ))}
         </div>

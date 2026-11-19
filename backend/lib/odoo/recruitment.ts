@@ -62,6 +62,54 @@ export function parseSalaryExpected(raw: string | undefined): number | undefined
   return Number.isFinite(n) ? n : undefined;
 }
 
+const JOB_ABBR_SKIP = new Set([
+  "a",
+  "an",
+  "and",
+  "at",
+  "for",
+  "in",
+  "of",
+  "on",
+  "the",
+  "to",
+  "with",
+]);
+
+/** Sales Executive → SE. A one-word title uses its first two letters. */
+export function jobAbbreviation(title: string): string {
+  const words = title
+    .split(/[^A-Za-z0-9]+/)
+    .filter((word) => word && !JOB_ABBR_SKIP.has(word.toLowerCase()));
+  if (!words.length) return "APP";
+  if (words.length === 1) return words[0].slice(0, 2).toUpperCase();
+  return words
+    .map((word) =>
+      word.length <= 3 && word === word.toUpperCase()
+        ? word
+        : word[0].toUpperCase(),
+    )
+    .join("")
+    .slice(0, 6);
+}
+
+/**
+ * Applicant reference for one application. The letters are the role
+ * (Sales Executive → SE); the number is that person's hr.applicant id.
+ * SE-2026-99 and SE-2026-100 are two different applications.
+ */
+export function applicantReference(
+  applicantId: number,
+  jobTitle: string,
+  now = new Date(),
+): string {
+  if (!Number.isInteger(applicantId) || applicantId <= 0) {
+    throw new Error("applicant id required for reference");
+  }
+  const year = now.getUTCFullYear();
+  return `${jobAbbreviation(jobTitle)}-${year}-${applicantId}`;
+}
+
 /** Parse ODOO_APPLICANT_STAGE_ID into a positive integer, or undefined. */
 export function applicantStageIdFromEnv(): number | undefined {
   const n = Number(process.env.ODOO_APPLICANT_STAGE_ID?.trim());

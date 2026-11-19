@@ -4,6 +4,7 @@ import { SocialIcon } from "@/components/SocialIcon";
 import { Container } from "@/components/ui";
 import { useLocale } from "@/context/LocaleProvider";
 import { translateNavLabel } from "@/locales/messages";
+import { copyForLocale } from "@/locales/shared-ar";
 import { resolveCmsImageSrc } from "@/lib/utils";
 import type { SiteConfig } from "@/types";
 import Image from "next/image";
@@ -54,12 +55,12 @@ export function FooterClient({
               <div className="aptus-footer-map relative aspect-[5/3] w-full max-w-[18rem] overflow-hidden rounded-md sm:max-w-none lg:aspect-[5/3]">
                 <iframe
                   src={footer.mapEmbedUrl}
-                  title="Office location map"
+                  title={copyForLocale(locale, "Office location map")}
                   className="absolute inset-0 h-full w-full"
                   style={{ border: 0 }}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  aria-label="Aptus Infotech office location"
+                  aria-label={copyForLocale(locale, "Aptus Infotech office location")}
                 />
               </div>
             </div>
@@ -75,7 +76,7 @@ export function FooterClient({
                   >
                     {/quick links/i.test(column.title)
                       ? t.footer.quickLinks
-                      : column.title}
+                      : copyForLocale(locale, column.title)}
                   </h3>
                 )}
                 <ul className="space-y-1">
@@ -174,7 +175,7 @@ export function FooterClient({
                         <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
                         <circle cx="12" cy="10" r="3" />
                       </svg>
-                      {footer.address}
+                      {copyForLocale(locale, footer.address)}
                     </li>
                   )}
                 </ul>
@@ -198,7 +199,7 @@ export function FooterClient({
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={s.label ?? s.platform}
+                  aria-label={copyForLocale(locale, s.label ?? s.platform)}
                   className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-blue text-white transition-all hover:bg-brand-blue-dark"
                 >
                   <SocialIcon platform={s.platform} size={10} />
@@ -213,7 +214,7 @@ export function FooterClient({
         <div className="aptus-footer-copyright border-t py-2.5">
           <Container>
             <p className="text-center" style={{ fontSize: "0.75rem" }}>
-              {footer.copyright}
+              {copyForLocale(locale, footer.copyright)}
             </p>
           </Container>
         </div>

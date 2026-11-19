@@ -1,13 +1,16 @@
 import { SoftwareBrandsExplorer } from "@/components/software/SoftwareBrandsExplorer";
+import { withArabicMeta } from "@/lib/arabic-meta";
 import type { Metadata } from "next";
 import "@/styles/software-catalog.css";
 import "@/styles/software-pages.css";
 
-export const metadata: Metadata = {
-  title: "Explore Software Brands",
-  description:
-    "Browse Aptus Infotech software brands — Autodesk, Adobe, Microsoft, Oracle, and more — then open the catalogue with your filters applied.",
-};
+export function generateMetadata(): Promise<Metadata> {
+  return withArabicMeta({
+    title: "Explore Software Brands",
+    description:
+      "Browse Aptus Infotech software brands — Autodesk, Adobe, Microsoft, Oracle, and more — then open the catalogue with your filters applied.",
+  });
+}
 
 export default function SoftwareBrandsPage() {
   return (

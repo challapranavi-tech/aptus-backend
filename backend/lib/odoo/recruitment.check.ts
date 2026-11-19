@@ -4,8 +4,10 @@
  */
 import assert from "node:assert/strict";
 import {
+  applicantReference,
   applicantStageIdFromEnv,
   buildApplicantValues,
+  jobAbbreviation,
   parseSalaryExpected,
 } from "./recruitment";
 
@@ -44,6 +46,16 @@ assert.ok(
   !("stage_id" in
     buildApplicantValues({ candidateName: "A", email: "a@b.c", jobId: 1 }, 0)),
 );
+
+assert.equal(jobAbbreviation("Sales Executive"), "SE");
+assert.equal(jobAbbreviation("HR Manager"), "HRM");
+assert.equal(jobAbbreviation("Engineer"), "EN");
+assert.equal(jobAbbreviation("  "), "APP");
+const when = new Date("2026-11-17T08:00:00Z");
+assert.equal(applicantReference(99, "Sales Executive", when), "SE-2026-99");
+assert.equal(applicantReference(100, "Accountant", when), "AC-2026-100");
+assert.throws(() => applicantReference(0, "Sales Executive"), /applicant id required/);
+assert.throws(() => applicantReference(42.5, "Sales Executive"), /applicant id required/);
 
 assert.equal(parseSalaryExpected("OMR 1,200"), 1200);
 assert.equal(parseSalaryExpected("500"), 500);

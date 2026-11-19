@@ -1,14 +1,18 @@
 "use client";
 
+import { useLocale } from "@/context/LocaleProvider";
+import { copyForLocale } from "@/locales/shared-ar";
 import Link from "next/link";
 
 export function HeaderSupportLink() {
+  const { locale } = useLocale();
+  const label = copyForLocale(locale, "Support");
   return (
     <Link
       href="/contact-us"
       className="aptus-header-support"
-      aria-label="Support"
-      title="Support"
+      aria-label={label}
+      title={label}
     >
       <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden focusable="false">
         <path

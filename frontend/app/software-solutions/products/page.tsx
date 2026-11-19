@@ -1,21 +1,27 @@
+import { T } from "@/components/i18n/T";
 import { Suspense } from "react";
 import { SoftwareCatalogPanel } from "@/components/software/SoftwareCatalogPanel";
 import { SoftwareCatalogHashScroll } from "@/components/software/SoftwareCatalogHashScroll";
+import { withArabicMeta } from "@/lib/arabic-meta";
 import type { Metadata } from "next";
 import "@/styles/software-catalog.css";
 import "@/styles/software-pages.css";
 
-export const metadata: Metadata = {
-  title: "Browse Software Products",
-  description:
-    "Explore premium software from Autodesk, Adobe, Microsoft, Oracle, and more. Purchase online or request a quote from Aptus Infotech.",
-};
+export function generateMetadata(): Promise<Metadata> {
+  return withArabicMeta({
+    title: "Browse Software Products",
+    description:
+      "Explore premium software from Autodesk, Adobe, Microsoft, Oracle, and more. Purchase online or request a quote from Aptus Infotech.",
+  });
+}
 
 function CatalogFallback() {
   return (
     <section className="aptus-software-catalog" aria-busy="true">
       <div className="aptus-software-catalog__inner">
-        <p className="aptus-software-catalog__subtitle">Loading products…</p>
+        <p className="aptus-software-catalog__subtitle">
+          <T text="Loading products…" />
+        </p>
       </div>
     </section>
   );

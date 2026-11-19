@@ -11,6 +11,8 @@ import {
 import { peekAuthMeOptional } from "@/lib/auth-me-client";
 import { publicApiBase } from "@/lib/api-base";
 import { normalizePhone } from "@/lib/phone";
+import { useLocale } from "@/context/LocaleProvider";
+import { copyForLocale } from "@/locales/shared-ar";
 import { cn } from "@/lib/utils";
 import { trimFormStrings } from "@/lib/form-text";
 import type { ClientProfile } from "@/types/profile";
@@ -66,10 +68,11 @@ type SoftwareQuoteFormProps = {
 >;
 
 function FieldError({ message }: { message?: string }) {
+  const { locale } = useLocale();
   if (!message) return null;
   return (
     <span className="mt-1 block text-sm font-medium text-red-600" role="alert">
-      {message}
+      {copyForLocale(locale, message)}
     </span>
   );
 }
@@ -163,6 +166,8 @@ export function SoftwareQuoteForm({
   defaultProduct,
   ...formProps
 }: SoftwareQuoteFormProps) {
+  const { locale } = useLocale();
+  const tx = (value: string) => copyForLocale(locale, value);
   const [customerType, setCustomerType] = useState<CustomerType>("individual");
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
@@ -851,7 +856,7 @@ export function SoftwareQuoteForm({
           className="mt-5 whitespace-pre-line rounded-xl bg-green-600/10 px-4 py-3 text-center text-base font-semibold text-green-800"
           role="status"
         >
-          {message}
+          {tx(message)}
         </p>
       )}
       {status === "error" && message && (
@@ -859,7 +864,7 @@ export function SoftwareQuoteForm({
           className="mt-5 rounded-xl bg-red-600/10 px-4 py-3 text-center text-base font-semibold text-red-700"
           role="alert"
         >
-          {message}
+          {tx(message)}
         </p>
       )}
 
@@ -869,7 +874,7 @@ export function SoftwareQuoteForm({
           className="aptus-form-submit"
           disabled={status === "submitting"}
         >
-          {status === "submitting" ? "Submitting…" : submitLabel}
+          {status === "submitting" ? tx("Submitting…") : tx(submitLabel)}
         </button>
       </div>
     </form>

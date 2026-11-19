@@ -3,6 +3,7 @@ import { Container } from "@/components/ui";
 import { getPageBySlug } from "@/data/cms";
 import { getJobList } from "@/data/jobs";
 import type { CareerPanel, Page, Section } from "@/types";
+import { withArabicMeta } from "@/lib/arabic-meta";
 import type { Metadata } from "next";
 import "@/styles/pages/careers.css";
 
@@ -10,11 +11,13 @@ const FALLBACK_TITLE = "Join Our Team at Aptus Infotech";
 const FALLBACK_INTRO =
   "We're always looking for passionate, driven people. Browse our open roles and find where you fit in.";
 
-export const metadata: Metadata = {
-  title: "Careers at Aptus Infotech",
-  description:
-    "Explore open roles at Aptus Infotech and join a team that values creativity, collaboration and continuous growth.",
-};
+export function generateMetadata(): Promise<Metadata> {
+  return withArabicMeta({
+    title: "Careers at Aptus Infotech",
+    description:
+      "Explore open roles at Aptus Infotech and join a team that values creativity, collaboration and continuous growth.",
+  });
+}
 
 interface PageProps {
   searchParams: Promise<Record<string, string | string[] | undefined>>;

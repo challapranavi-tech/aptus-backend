@@ -406,6 +406,13 @@ html {
   visibility: visible;
 }
 
+/* translateY() would trap the fixed side flyouts inside the scrolling Software / ELV lists */
+.aptus-masthead__dropdown:hover > .aptus-masthead__dropdown-panel--products,
+.aptus-masthead__dropdown:focus-within > .aptus-masthead__dropdown-panel--products {
+  transform: none;
+  transition-property: opacity, visibility;
+}
+
 /* After a link click, keep panels closed until the pointer leaves the menu */
 .aptus-masthead__menu.is-locked .aptus-masthead__dropdown-panel {
   opacity: 0 !important;
@@ -428,7 +435,7 @@ html {
   font-weight: 400;
   letter-spacing: 0;
   padding: 10px 18px !important;
-  text-align: left;
+  text-align: start;
   text-decoration: none !important;
   width: 100%;
 }
@@ -481,6 +488,30 @@ html {
 .aptus-masthead__dropdown--products .aptus-masthead__dropdown--nested:hover > .aptus-masthead__dropdown-panel--nested,
 .aptus-masthead__dropdown--products .aptus-masthead__dropdown--nested:focus-within > .aptus-masthead__dropdown-panel--nested {
   transform: translateX(0);
+}
+
+/* none, not translateX(0): a transform here traps the fixed brand flyout */
+.aptus-masthead__dropdown--products .aptus-masthead__dropdown--nested:hover > .aptus-masthead__dropdown-panel--software,
+.aptus-masthead__dropdown--products .aptus-masthead__dropdown--nested:focus-within > .aptus-masthead__dropdown-panel--software,
+.aptus-masthead__dropdown--products .aptus-masthead__dropdown--nested:hover > .aptus-masthead__dropdown-panel--elv,
+.aptus-masthead__dropdown--products .aptus-masthead__dropdown--nested:focus-within > .aptus-masthead__dropdown-panel--elv {
+  transform: none;
+  transition-property: opacity, visibility;
+}
+
+/* Arabic: Products sits on the inline-start side, so its flyouts open into the page. */
+html[dir="rtl"] .aptus-masthead__dropdown-panel--products {
+  left: 0;
+  right: auto;
+}
+
+html[dir="rtl"] .aptus-masthead__dropdown--products .aptus-masthead__dropdown--nested > .aptus-masthead__dropdown-panel--nested,
+html[dir="rtl"] .aptus-masthead__dropdown--products .aptus-masthead__dropdown--nested > .aptus-masthead__dropdown-panel--nested.is-flip-x {
+  left: 100%;
+  margin-left: -1px;
+  margin-right: 0;
+  right: auto;
+  transform: translateX(4px);
 }
 
 .aptus-masthead__dropdown-panel--hub.aptus-masthead__dropdown-panel--nested {
@@ -667,7 +698,7 @@ html {
   min-width: 0;
   padding-block: 12px !important;
   padding-inline: 1rem 0.5rem !important;
-  text-align: left;
+  text-align: start;
   white-space: normal;
   width: auto;
 }
